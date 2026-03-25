@@ -1,235 +1,318 @@
 """
 collector.py — Pulls all data from NIAP APIs, CC Portal, and CCTL labs.
-Returns a single dict representing today's full snapshot.
+
+Features:
+  - Exponential-backoff retry on every HTTP call
+  - Structured logging throughout
+  - Sanity-check validation before accepting a snapshot
 """
 
-import requests
+import logging
+import time
 import feedparser
+import requests
 from bs4 import BeautifulSoup
 from datetime import datetime, timezone
+
 import config
 
+log = logging.getLogger(__name__)
+
 HEADERS = {
-      "User-Agent": (
-                "CCPulse/1.0 (automated monitoring tool; "
-                "contact your-email@example.com)"
-      )
+    "User-Agent": (
+        "CCPulse/2.0 (automated monitoring tool; "
+        "contact your-email@example.com)"
+    )
 }
 
 SESSION = requests.Session()
 SESSION.headers.update(HEADERS)
 
-# ── Helpers ──────────────────────────────────────────────────────────────────
+
+# ── Retry helper ──────────────────────────────────────────────────────────────
+
+def _fetch_with_retry(fn, url, **kwargs):
+    """Call fn(url, **kwargs), retrying up to config.RETRY_ATTEMPTS times
+    with exponential backoff.  Returns None on permanent failure."""
+    last_exc = None
+    for attempt in range(config.RETRY_ATTEMPTS):
+        try:
+            return fn(url, **kwargs)
+        except Exception as exc:
+            last_exc = exc
+            delay = config.RETRY_BACKOFF_BASE ** attempt
+            log.warning(
+                "Attempt %d/%d failed for %s: %s — retrying in %ss",
+                attempt + 1, config.RETRY_ATTEMPTS, url, exc, delay,
+            )
+            time.sleep(delay)
+    log.error("All %d attempts failed for %s: %s", config.RETRY_ATTEMPTS, url, last_exc)
+    return None
+
+
+# ── Low-level fetch helpers ───────────────────────────────────────────────────
+
+def _do_get_json(url, params=None):
+    r = SESSION.get(url, params=params, timeout=30)
+    r.raise_for_status()
+    return r.json()
+
+
+def _do_get_html(url):
+    r = SESSION.get(url, timeout=30)
+    r.raise_for_status()
+    return BeautifulSoup(r.text, "lxml")
+
 
 def get_json(url, params=None):
-      try:
-                r = SESSION.get(url, params=params, timeout=30)
-                r.raise_for_status()
-                return r.json()
-except Exception as e:
-        print(f"  [WARN] JSON fetch failed for {url}: {e}")
-        return None
+    result = _fetch_with_retry(_do_get_json, url, params=params)
+    if result is None:
+        log.warning("get_json returning None for %s", url)
+    return result
+
 
 def get_html(url):
-      try:
-                r = SESSION.get(url, timeout=30)
-                r.raise_for_status()
-                return BeautifulSoup(r.text, "lxml")
-except Exception as e:
-        print(f"  [WARN] HTML fetch failed for {url}: {e}")
-        return None
+    result = _fetch_with_retry(_do_get_html, url)
+    if result is None:
+        log.warning("get_html returning None for %s", url)
+    return result
+
 
 def get_rss(url):
-      try:
-                feed = feedparser.parse(url)
-                return [
-                    {
-                        "title":    e.get("title", ""),
-                        "link":     e.get("link", ""),
-                        "summary":  e.get("summary", ""),
-                        "published": e.get("published", ""),
-                        "id":       e.get("id", e.get("link", "")),
-                    }
-                    for e in feed.entries
-                ]
-except Exception as e:
-        print(f"  [WARN] RSS fetch failed for {url}: {e}")
-        return []
+    def _parse(u, **kw):
+        feed = feedparser.parse(u)
+        if feed.get("bozo") and not feed.entries:
+            raise ValueError(f"feedparser bozo error: {feed.get('bozo_exception')}")
+        return [
+            {
+                "title":     e.get("title", ""),
+                "link":      e.get("link", ""),
+                "summary":   e.get("summary", ""),
+                "published": e.get("published", ""),
+                "id":        e.get("id", e.get("link", "")),
+            }
+            for e in feed.entries
+        ]
+
+    result = _fetch_with_retry(_parse, url)
+    return result if result is not None else []
+
 
 # ── NIAP ─────────────────────────────────────────────────────────────────────
 
 def collect_niap():
-      print("[NIAP] Collecting...")
-      base = config.NIAP_BASE
-      eps  = config.NIAP_ENDPOINTS
-      data = {}
+    log.info("[NIAP] Collecting...")
+    base = config.NIAP_BASE
+    eps  = config.NIAP_ENDPOINTS
+    data = {}
 
-    # PCL
-      print("  PCL...")
-      pcl = get_json(base + eps["pcl"])
-      data["pcl"] = pcl or []
+    log.info("  PCL...")
+    pcl = get_json(base + eps["pcl"])
+    data["pcl"] = pcl or []
 
-    # Protection Profiles
-      print("  Protection Profiles...")
-      pps = get_json(base + eps["pps"])
-      data["pps"] = pps or []
+    log.info("  Protection Profiles...")
+    pps = get_json(base + eps["pps"])
+    data["pps"] = pps or []
 
-    # Technical Decisions
-      print("  Technical Decisions...")
-      tds = get_json(base + eps["tds"])
-      data["tds"] = tds or []
+    log.info("  Technical Decisions...")
+    tds = get_json(base + eps["tds"])
+    data["tds"] = tds or []
 
-    # CCTL Directory
-      print("  CCTL Directory...")
-      cctls_raw = get_json(base + eps["cctls"])
-      data["cctls"] = (
-          cctls_raw.get("results", {}).get("cctls", [])
-          if cctls_raw else []
-      )
+    log.info("  CCTL Directory...")
+    cctls_raw = get_json(base + eps["cctls"])
+    data["cctls"] = (
+        cctls_raw.get("results", {}).get("cctls", [])
+        if cctls_raw else []
+    )
 
-    # Events
-      print("  Events...")
-      ev_curr = get_json(base + eps["events_curr"])
-      ev_prev = get_json(base + eps["events_prev"])
-      curr = ev_curr.get("results", []) if ev_curr else []
-      prev = ev_prev.get("results", []) if ev_prev else []
-      data["events"] = curr + prev
+    log.info("  Events...")
+    ev_curr = get_json(base + eps["events_curr"])
+    ev_prev = get_json(base + eps["events_prev"])
+    curr = ev_curr.get("results", []) if ev_curr else []
+    prev = ev_prev.get("results", []) if ev_prev else []
+    data["events"] = curr + prev
 
-    # News / Announcements
-      print("  News & Announcements...")
-      news_raw = get_json(base + eps["news"])
-      data["news"] = news_raw.get("results", []) if news_raw else []
+    log.info("  News & Announcements...")
+    news_raw = get_json(base + eps["news"])
+    data["news"] = news_raw.get("results", []) if news_raw else []
 
-    print(f"  [NIAP] PCL:{len(data['pcl'])} PPs:{len(data['pps'])} "
-                    f"TDs:{len(data['tds'])} Events:{len(data['events'])} "
-                    f"News:{len(data['news'])}")
+    log.info(
+        "[NIAP] PCL:%d PPs:%d TDs:%d Events:%d News:%d",
+        len(data["pcl"]), len(data["pps"]), len(data["tds"]),
+        len(data["events"]), len(data["news"]),
+    )
     return data
 
-# ── CC PORTAL ────────────────────────────────────────────────────────────────
+
+# ── CC Portal ────────────────────────────────────────────────────────────────
 
 def parsecc_news(soup):
-      items = []
-      if not soup:
-                return items
-            content = soup.find("div", {"id": "main"}) or soup.find("div", class_="main") or soup
+    items = []
+    if not soup:
+        return items
+    content = (
+        soup.find("div", {"id": "main"})
+        or soup.find("div", class_="main")
+        or soup
+    )
     for tag in content.find_all(["p", "li"]):
-              text = tag.get_text(strip=True)
-              link = tag.find("a")
-              href = link["href"] if link and link.get("href") else ""
-              if len(text) > 20:
-                            items.append({"text": text, "link": href})
-                    return items
+        text = tag.get_text(strip=True)
+        link = tag.find("a")
+        href = link["href"] if link and link.get("href") else ""
+        if len(text) > 20:
+            items.append({"text": text, "link": href})
+    return items
+
 
 def parsecc_pps(soup):
-      rows = []
+    rows = []
     if not soup:
-              return rows
+        return rows
     table = soup.find("table")
     if not table:
-              return rows
+        return rows
     headers = [th.get_text(strip=True) for th in table.find_all("th")]
     for tr in table.find_all("tr")[1:]:
-              cells = [td.get_text(strip=True) for td in tr.find_all("td")]
+        cells = [td.get_text(strip=True) for td in tr.find_all("td")]
         if cells:
-                      row = dict(zip(headers, cells))
-                      link = tr.find("a")
-                      row["_link"] = link["href"] if link and link.get("href") else ""
-                      rows.append(row)
-              return rows
+            row = dict(zip(headers, cells))
+            link = tr.find("a")
+            row["_link"] = link["href"] if link and link.get("href") else ""
+            rows.append(row)
+    return rows
+
 
 def parsecc_products(soup):
-      rows = []
+    rows = []
     if not soup:
-              return rows
+        return rows
     table = soup.find("table")
     if not table:
-              return rows
+        return rows
     headers = [th.get_text(strip=True) for th in table.find_all("th")]
     for tr in table.find_all("tr")[1:]:
-              cells = [td.get_text(strip=True) for td in tr.find_all("td")]
+        cells = [td.get_text(strip=True) for td in tr.find_all("td")]
         if cells:
-                      row = dict(zip(headers, cells))
-                      rows.append(row)
-              return rows
+            rows.append(dict(zip(headers, cells)))
+    return rows
+
 
 def parsecc_communities(soup):
-      items = []
+    items = []
     if not soup:
-              return items
+        return items
     content = soup.find("div", {"id": "main"}) or soup
     for a in content.find_all("a"):
-              text = a.get_text(strip=True)
+        text = a.get_text(strip=True)
         href = a.get("href", "")
         if text:
-                      items.append({"name": text, "link": href})
-              return items
+            items.append({"name": text, "link": href})
+    return items
+
 
 def collect_cc_portal():
-      print("[CC Portal] Collecting...")
+    log.info("[CC Portal] Collecting...")
     base  = config.CC_PORTAL_BASE
     pages = config.CC_PORTAL_PAGES
     data  = {}
 
-    print("  News...")
+    log.info("  News...")
     data["news"] = parsecc_news(get_html(base + pages["news"]))
-    print("  Protection Profiles...")
+    log.info("  Protection Profiles...")
     data["pps"] = parsecc_pps(get_html(base + pages["pps"]))
-    print("  Certified Products...")
+    log.info("  Certified Products...")
     data["products"] = parsecc_products(get_html(base + pages["products"]))
-    print("  Technical Communities...")
+    log.info("  Technical Communities...")
     data["communities"] = parsecc_communities(get_html(base + pages["communities"]))
-    print("  Publications...")
+    log.info("  Publications...")
     data["publications"] = parsecc_news(get_html(base + pages["publications"]))
-    print("  PP RSS Feed...")
+    log.info("  PP RSS Feed...")
     data["pp_rss"] = get_rss(config.CC_PORTAL_RSS)
 
-    print(f"  [CC Portal] News:{len(data['news'])} "
-                    f"PPs:{len(data['pps'])} Products:{len(data['products'])}")
+    log.info(
+        "[CC Portal] News:%d PPs:%d Products:%d",
+        len(data["news"]), len(data["pps"]), len(data["products"]),
+    )
     return data
+
 
 # ── CCTL Labs ────────────────────────────────────────────────────────────────
 
 def scrapelab_items(url):
-      """Generic scraper — extracts headlines/links from a lab's news/blog page."""
+    """Generic scraper — extracts headlines/links from a lab page."""
     soup = get_html(url)
     if not soup:
-              return []
+        return []
     items = []
     for tag in soup.find_all(["h2", "h3", "h4", "article"]):
-              a = tag.find("a") if tag.name != "a" else tag
+        a = tag.find("a") if tag.name != "a" else tag
         if a and a.get_text(strip=True):
-                      items.append({
-                                        "title":    a.get_text(strip=True),
-                                        "link":     a.get("href", ""),
-                                        "published": "",
-                                        "id":       a.get("href", a.get_text(strip=True)),
-                      })
-              return items[:20]  # cap at 20 most recent
+            items.append({
+                "title":     a.get_text(strip=True),
+                "link":      a.get("href", ""),
+                "published": "",
+                "id":        a.get("href", a.get_text(strip=True)),
+            })
+    return items[:20]
+
 
 def collect_cctl_labs():
-      print("[CCTL Labs] Collecting...")
+    log.info("[CCTL Labs] Collecting...")
     results = {}
     for lab in config.CCTL_LABS:
-              name = lab["name"]
-        print(f"  {name}...")
+        name = lab["name"]
+        log.info("  %s...", name)
         if lab["rss"]:
-                      items = get_rss(lab["rss"])
-elif lab["scrape"] and lab["url"]:
+            items = get_rss(lab["rss"])
+        elif lab["scrape"] and lab["url"]:
             items = scrapelab_items(lab["url"])
-else:
+        else:
             items = []
         results[name] = items
-        print(f"    -> {len(items)} items")
+        log.info("    -> %d items", len(items))
     return results
 
-# ── Master Snapshot ───────────────────────────────────────────────────────────
+
+# ── Sanity validation ─────────────────────────────────────────────────────────
+
+class SanityError(RuntimeError):
+    """Raised when collected data looks like a fetch failure."""
+
+
+def validate_snapshot(snapshot):
+    """Raise SanityError if critical collections look suspiciously empty.
+
+    This prevents a network blip from writing a near-empty snapshot and
+    producing thousands of false 'removed' diff events the next day.
+    """
+    pcl_count = len(snapshot.get("niap", {}).get("pcl", []))
+    pps_count = len(snapshot.get("niap", {}).get("pps", []))
+
+    if pcl_count < config.SANITY_MIN_PCL:
+        raise SanityError(
+            f"NIAP PCL returned only {pcl_count} products "
+            f"(minimum expected: {config.SANITY_MIN_PCL}). "
+            "Snapshot rejected — possible fetch failure."
+        )
+    if pps_count < config.SANITY_MIN_PPS:
+        raise SanityError(
+            f"NIAP PPs returned only {pps_count} entries "
+            f"(minimum expected: {config.SANITY_MIN_PPS}). "
+            "Snapshot rejected — possible fetch failure."
+        )
+    log.info("[Validation] Sanity checks passed (PCL:%d PPs:%d).", pcl_count, pps_count)
+
+
+# ── Master snapshot ───────────────────────────────────────────────────────────
 
 def collect_all():
-      """Collect everything and return as a single timestamped snapshot dict."""
+    """Collect everything, validate, and return a timestamped snapshot dict."""
     snapshot = {
-              "collected_at": datetime.now(timezone.utc).isoformat(),
-              "niap":         collect_niap(),
-              "cc_portal":    collect_cc_portal(),
-              "cctl_labs":    collect_cctl_labs(),
+        "schema_version": config.SNAPSHOT_SCHEMA_VERSION,
+        "collected_at":   datetime.now(timezone.utc).isoformat(),
+        "niap":           collect_niap(),
+        "cc_portal":      collect_cc_portal(),
+        "cctl_labs":      collect_cctl_labs(),
     }
+    validate_snapshot(snapshot)   # raises SanityError on bad data
     return snapshot
