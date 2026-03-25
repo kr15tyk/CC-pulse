@@ -1,0 +1,61 @@
+name: CC Pulse — Daily Run
+
+on:
+  schedule:
+    # Daily at 06:00 UTC (adjust to your preferred time)
+    - cron: "0 6 * * *"
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: "Run mode"
+        required: false
+        default: "daily"
+        type: choice
+        options:
+          - daily
+          - weekly
+          - bootstrap
+
+jobs:
+  pulse:
+    name: Pulse Check
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write   # needed to commit snapshots and dashboard back to repo
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run CC Pulse
+        env:
+          CC_EMAIL_PASSWORD: ${{ secrets.CC_EMAIL_PASSWORD }}
+        run: |
+          MODE="${{ github.event.inputs.mode || 'daily' }}"
+          if [ "$MODE" = "weekly" ]; then
+            python main.py --weekly
+          elif [ "$MODE" = "bootstrap" ]; then
+            python main.py --bootstrap
+          else
+            python main.py
+          fi
+
+      - name: Commit snapshots and dashboard
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "chore: CC Pulse auto-update [skip ci]"
+          file_pattern: "snapshots/ dashboard/"
+          commit_user_name: "cc-pulse-bot"
+          commit_user_email: "cc-pulse-bot@users.noreply.github.com"
+          skip_dirty_check: false
