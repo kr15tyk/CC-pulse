@@ -1,116 +1,120 @@
 # =============================================================
 # CC PULSE — CONFIGURATION
 # Edit this file to match your environment.
+# For local dev, copy .env.example to .env and set secrets there.
 # =============================================================
 
-# --- EMAIL SETTINGS ---
-EMAIL_SMTP_HOST     = "smtp.gmail.com"          # or smtp.office365.com
-EMAIL_SMTP_PORT     = 587
-EMAIL_USERNAME      = "your-sender@gmail.com"   # sender address
-EMAIL_PASSWORD      = ""                         # use env var CC_EMAIL_PASSWORD
-EMAIL_FROM          = "CC Pulse <your-sender@gmail.com>"
+import os
+
+# ── Schema ────────────────────────────────────────────────────────────────────
+SNAPSHOT_SCHEMA_VERSION = 2
+
+# ── Logging ───────────────────────────────────────────────────────────────────
+# One of: DEBUG, INFO, WARNING, ERROR
+LOG_LEVEL = os.environ.get("CC_LOG_LEVEL", "INFO")
+
+# ── Email Settings ────────────────────────────────────────────────────────────
+EMAIL_SMTP_HOST     = os.environ.get("CC_SMTP_HOST", "smtp.gmail.com")
+EMAIL_SMTP_PORT     = int(os.environ.get("CC_SMTP_PORT", "587"))
+EMAIL_USERNAME      = os.environ.get("CC_EMAIL_USERNAME", "your-sender@gmail.com")
+EMAIL_PASSWORD      = os.environ.get("CC_EMAIL_PASSWORD", "")
+EMAIL_FROM          = os.environ.get("CC_EMAIL_FROM", "CC Pulse <your-sender@gmail.com>")
 EMAIL_RECIPIENTS    = [
-      "you@example.com",
-      "colleague@example.com",
+    r.strip()
+    for r in os.environ.get("CC_EMAIL_RECIPIENTS", "you@example.com").split(",")
+    if r.strip()
 ]
 EMAIL_SUBJECT       = "Weekly CC Pulse — {date}"
 
-# --- DASHBOARD ---
+# ── Notifications (Slack / Teams webhook) ─────────────────────────────────────
+# Set CC_SLACK_WEBHOOK_URL in your environment or GitHub secret.
+# Leave blank to disable webhook notifications.
+SLACK_WEBHOOK_URL   = os.environ.get("CC_SLACK_WEBHOOK_URL", "")
+
+# ── Dashboard ─────────────────────────────────────────────────────────────────
 DASHBOARD_DIR       = "dashboard"
-DASHBOARD_FILENAME  = "cc_dashboard.html"       # overwritten daily
+DASHBOARD_FILENAME  = "cc_dashboard.html"
+DASHBOARD_RSS       = "cc_feed.xml"          # written alongside the HTML
 
-# --- SNAPSHOTS ---
-SNAPSHOT_DIR        = "snapshots"               # one JSON file per day
+# ── Snapshots ─────────────────────────────────────────────────────────────────
+SNAPSHOT_DIR        = "snapshots"            # daily JSON snapshots
+DIFF_DIR            = "snapshots/diffs"      # daily diff JSONs (for weekly merge)
 
-# --- NIAP API BASE ---
+# ── Retry Settings ────────────────────────────────────────────────────────────
+RETRY_ATTEMPTS      = 4
+RETRY_BACKOFF_BASE  = 2      # seconds; actual delay = base ** attempt
+
+# ── Sanity Check Thresholds ───────────────────────────────────────────────────
+# If a collection returns fewer items than these minimums, it is treated as a
+# fetch failure and the snapshot is rejected.
+SANITY_MIN_PCL      = 50     # NIAP PCL usually has 300+ products
+SANITY_MIN_PPS      = 10     # NIAP PPs usually has 50+
+
+# ── NIAP API ──────────────────────────────────────────────────────────────────
 NIAP_BASE           = "https://www.niap-ccevs.org"
 NIAP_ENDPOINTS = {
-      "pcl":          "/api/project/product/pcl_products_all/",
-      "pps":          "/api/protection-profile/public_pps_all/",
-      "tds":          "/api/technical-decision/frontend_tds/",
-      "cctls":        "/api/cctl/directory/frontend_cctls/?status=Certified&limit=100&offset=0",
-      "events_curr":  "/api/publish/announcements/get_events_frontend/?limit=200&offset=0&current=true",
-      "events_prev":  "/api/publish/announcements/get_events_frontend/?limit=200&offset=0&previous=true",
-      "news":         "/api/publish/announcements/get_news_frontend/?limit=500&offset=0",
+    "pcl":          "/api/project/product/pcl_products_all/",
+    "pps":          "/api/protection-profile/public_pps_all/",
+    "tds":          "/api/technical-decision/frontend_tds/",
+    "cctls":        "/api/cctl/directory/frontend_cctls/?status=Certified&limit=100&offset=0",
+    "events_curr":  "/api/publish/announcements/get_events_frontend/?limit=200&offset=0&current=true",
+    "events_prev":  "/api/publish/announcements/get_events_frontend/?limit=200&offset=0&previous=true",
+    "news":         "/api/publish/announcements/get_news_frontend/?limit=500&offset=0",
 }
 
-# --- CC PORTAL ---
+# ── CC Portal ─────────────────────────────────────────────────────────────────
 CC_PORTAL_BASE      = "https://www.commoncriteriaportal.org"
 CC_PORTAL_PAGES = {
-      "news":         "/news/index.cfm",
-      "pps":          "/pps/index.cfm",
-      "products":     "/products/index.cfm",
-      "communities":  "/communities/index.cfm",
-      "publications": "/cc/index.cfm",
+    "news":         "/news/index.cfm",
+    "pps":          "/pps/index.cfm",
+    "products":     "/products/index.cfm",
+    "communities":  "/communities/index.cfm",
+    "publications": "/cc/index.cfm",
 }
 CC_PORTAL_RSS       = "https://www.commoncriteriaportal.org/rss/pps.xml"
 
-# --- CCTL LAB FEEDS ---
-# Labs with RSS: pull feed. Labs without: scrape the URL.
+# ── CCTL Lab Feeds ────────────────────────────────────────────────────────────
 CCTL_LABS = [
-      {
-                "name":     "atsec information security",
-                "rss":      "https://www.atsec.com/feed/",
-                "url":      "https://www.atsec.com/blog/",
-                "scrape":   False,
-      },
-      {
-                "name":     "Lightship Security",
-                "rss":      "https://lightshipsec.com/feed/",
-                "url":      "https://lightshipsec.com/blog/",
-                "scrape":   False,
-      },
-      {
-                "name":     "Advanced Data Security",
-                "rss":      "https://adseclab.com/feed/",
-                "url":      "https://adseclab.com/",
-                "scrape":   False,
-      },
-      {
-                "name":     "Acumen Security (Intertek)",
-                "rss":      None,
-                "url":      "https://www.intertek.com/iot/cybersecurity/",
-                "scrape":   True,
-      },
-      {
-                "name":     "Booz Allen Hamilton CCTL",
-                "rss":      None,
-                "url":      "https://www.boozallen.com/insights.html",
-                "scrape":   True,
-      },
-      {
-                "name":     "DEKRA Cybersecurity",
-                "rss":      None,
-                "url":      "https://www.dekra.com/en/common-criteria/",
-                "scrape":   True,
-      },
-      {
-                "name":     "Gossamer Security Solutions",
-                "rss":      None,
-                "url":      "https://gossamericsec.com/",
-                "scrape":   True,
-      },
-      {
-                "name":     "Leidos CCTL",
-                "rss":      None,
-                "url":      "https://www.leidos.com/",
-                "scrape":   True,
-      },
+    {"name": "atsec information security",  "rss": "https://www.atsec.com/feed/",           "url": "https://www.atsec.com/blog/",                           "scrape": False},
+    {"name": "Lightship Security",          "rss": "https://lightshipsec.com/feed/",        "url": "https://lightshipsec.com/blog/",                        "scrape": False},
+    {"name": "Advanced Data Security",      "rss": "https://adseclab.com/feed/",            "url": "https://adseclab.com/",                                 "scrape": False},
+    {"name": "Acumen Security (Intertek)",  "rss": None,                                    "url": "https://www.intertek.com/iot/cybersecurity/",            "scrape": True},
+    {"name": "Booz Allen Hamilton CCTL",    "rss": None,                                    "url": "https://www.boozallen.com/insights.html",               "scrape": True},
+    {"name": "DEKRA Cybersecurity",         "rss": None,                                    "url": "https://www.dekra.com/en/common-criteria/",             "scrape": True},
+    {"name": "Gossamer Security Solutions", "rss": None,                                    "url": "https://gossamericsec.com/",                            "scrape": True},
+    {"name": "Leidos CCTL",                 "rss": None,                                    "url": "https://www.leidos.com/",                               "scrape": True},
 ]
 
-# --- PRODUCT FILTERS ---
-# Cisco NDcPP: vendor name contains "Cisco", PP short name contains "CPP_ND"
+# ── Product Filters ───────────────────────────────────────────────────────────
 CISCO_VENDOR_KEYWORDS   = ["cisco"]
 NDCPP_PP_KEYWORDS       = ["CPP_ND"]
 
-# --- NEWS CATEGORY KEYWORDS ---
+# ── News Category Keywords ────────────────────────────────────────────────────
 NEWS_CATEGORY_KEYWORDS = {
-      "LABGRAM":      ["labgram"],
-      "VALGRAM":      ["valgram"],
-      "POLICY":       ["policy", "policies"],
-      "PUBLICATION":  ["publication", "published", "progress report"],
-      "EVENT":        ["event", "conference", "workshop", "webinar"],
-      "CISA":         ["cisa", "emergency directive", "vulnerability"],
-      "PP UPDATE":    ["pp-module", "protection profile", "cpp_", "pp_"],
-      "NEWS":         [],   # catch-all
+    "LABGRAM":      ["labgram"],
+    "VALGRAM":      ["valgram"],
+    "POLICY":       ["policy", "policies"],
+    "PUBLICATION":  ["publication", "published", "progress report"],
+    "EVENT":        ["event", "conference", "workshop", "webinar"],
+    "CISA":         ["cisa", "emergency directive", "vulnerability"],
+    "PP UPDATE":    ["pp-module", "protection profile", "cpp_", "pp_"],
+    "NEWS":         [],   # catch-all
 }
+
+# ── Watch Keywords (high-priority alert terms) ────────────────────────────────
+# Any TD title, PP name, or news item containing one of these strings (case-
+# insensitive) will be flagged at the top of the dashboard and email, and
+# trigger an immediate Slack/webhook notification.
+WATCH_KEYWORDS = [
+    "FIPS 186-4",
+    "FIPS 186-5",
+    "NDcPP",
+    "CPP_ND",
+    "TLS 1.3",
+    "SSH",
+    "PP-Module_VPN",
+    "PP-Module_WLAN",
+    "labgram",
+    "valgram",
+    "emergency",
+]
