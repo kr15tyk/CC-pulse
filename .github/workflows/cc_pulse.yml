@@ -1,8 +1,9 @@
 name: CC Pulse — Daily Run
 
+# ── Triggers ──────────────────────────────────────────────────────────────────
 on:
   schedule:
-    # Daily at 06:00 UTC (adjust to your preferred time)
+    # Daily at 06:00 UTC (adjust as needed)
     - cron: "0 6 * * *"
   workflow_dispatch:
     inputs:
@@ -16,46 +17,61 @@ on:
           - weekly
           - bootstrap
 
+# ── Permissions (minimal — only what is needed) ───────────────────────────────
+permissions:
+  contents: write   # required to commit snapshots/ and dashboard/ back to repo
+  actions: read
+
 jobs:
   pulse:
     name: Pulse Check
     runs-on: ubuntu-latest
-    permissions:
-      contents: write   # needed to commit snapshots and dashboard back to repo
 
     steps:
+      # ── Checkout ─────────────────────────────────────────────────────────
       - name: Checkout repository
-        uses: actions/checkout@v4
+        # Pinned to commit SHA — avoids supply-chain risk from floating tags
+        # actions/checkout v4.1.7
+        uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332
         with:
           fetch-depth: 0
 
+      # ── Python setup ──────────────────────────────────────────────────────
       - name: Set up Python
-        uses: actions/setup-python@v5
+        # actions/setup-python v5.1.0
+        uses: actions/setup-python@82c7e631bb3cdc910f68e0081d67478d79c6982d
         with:
           python-version: "3.11"
           cache: pip
 
+      # ── Install dependencies ──────────────────────────────────────────────
       - name: Install dependencies
         run: pip install -r requirements.txt
 
+      # ── Run CC Pulse ──────────────────────────────────────────────────────
       - name: Run CC Pulse
         env:
-          CC_EMAIL_PASSWORD: ${{ secrets.CC_EMAIL_PASSWORD }}
+          CC_EMAIL_PASSWORD:    ${{ secrets.CC_EMAIL_PASSWORD }}
+          CC_SLACK_WEBHOOK_URL: ${{ secrets.CC_SLACK_WEBHOOK_URL }}
+          CC_EMAIL_USERNAME:    ${{ secrets.CC_EMAIL_USERNAME }}
+          CC_EMAIL_RECIPIENTS:  ${{ secrets.CC_EMAIL_RECIPIENTS }}
+          CC_LOG_LEVEL:         INFO
         run: |
           MODE="${{ github.event.inputs.mode || 'daily' }}"
-          if [ "$MODE" = "weekly" ]; then
-            python main.py --weekly
-          elif [ "$MODE" = "bootstrap" ]; then
-            python main.py --bootstrap
-          else
-            python main.py
-          fi
+          case "$MODE" in
+            weekly)    python main.py --weekly ;;
+            bootstrap) python main.py --bootstrap ;;
+            *)         python main.py ;;
+          esac
 
+      # ── Commit generated files back to repo ──────────────────────────────
       - name: Commit snapshots and dashboard
-        uses: stefanzweifel/git-auto-commit-action@v5
+        # stefanzweifel/git-auto-commit-action v5.0.1
+        uses: stefanzweifel/git-auto-commit-action@8621497c8c39c72f3e2a999a26b4ca1b5590a76
         with:
           commit_message: "chore: CC Pulse auto-update [skip ci]"
+          # Only commit the generated directories — never commit secrets or config
           file_pattern: "snapshots/ dashboard/"
-          commit_user_name: "cc-pulse-bot"
+          commit_user_name:  "cc-pulse-bot"
           commit_user_email: "cc-pulse-bot@users.noreply.github.com"
-          skip_dirty_check: false
+          skip_dirty_check:  false
