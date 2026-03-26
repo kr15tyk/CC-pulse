@@ -19,7 +19,7 @@ on:
 
 # ── Permissions (minimal — only what is needed) ───────────────────────────────
 permissions:
-  contents: write   # required to commit snapshots/ and dashboard/ back to repo
+  contents: write  # required to commit snapshots/ and dashboard/ back to repo
   actions: read
 
 jobs:
@@ -36,7 +36,7 @@ jobs:
         with:
           fetch-depth: 0
 
-      # ── Python setup ──────────────────────────────────────────────────────
+      # ── Python setup ─────────────────────────────────────────────────────
       - name: Set up Python
         # actions/setup-python v5.1.0
         uses: actions/setup-python@82c7e631bb3cdc910f68e0081d67478d79c6982d
@@ -51,11 +51,12 @@ jobs:
       # ── Run CC Pulse ──────────────────────────────────────────────────────
       - name: Run CC Pulse
         env:
-          CC_EMAIL_PASSWORD:    ${{ secrets.CC_EMAIL_PASSWORD }}
-          CC_SLACK_WEBHOOK_URL: ${{ secrets.CC_SLACK_WEBHOOK_URL }}
-          CC_EMAIL_USERNAME:    ${{ secrets.CC_EMAIL_USERNAME }}
-          CC_EMAIL_RECIPIENTS:  ${{ secrets.CC_EMAIL_RECIPIENTS }}
-          CC_LOG_LEVEL:         INFO
+          CC_EMAIL_PASSWORD: ${{ secrets.CC_EMAIL_PASSWORD }}
+          CC_WEBEX_BOT_TOKEN: ${{ secrets.CC_WEBEX_BOT_TOKEN }}
+          CC_WEBEX_ROOM_ID: ${{ secrets.CC_WEBEX_ROOM_ID }}
+          CC_EMAIL_USERNAME: ${{ secrets.CC_EMAIL_USERNAME }}
+          CC_EMAIL_RECIPIENTS: ${{ secrets.CC_EMAIL_RECIPIENTS }}
+          CC_LOG_LEVEL: INFO
         run: |
           MODE="${{ github.event.inputs.mode || 'daily' }}"
           case "$MODE" in
@@ -64,7 +65,7 @@ jobs:
             *)         python main.py ;;
           esac
 
-      # ── Commit generated files back to repo ──────────────────────────────
+      # ── Commit generated files back to repo ───────────────────────────────
       - name: Commit snapshots and dashboard
         # stefanzweifel/git-auto-commit-action v5.0.1
         uses: stefanzweifel/git-auto-commit-action@8621497c8c39c72f3e2a999a26b4ca1b5590a76
@@ -72,6 +73,6 @@ jobs:
           commit_message: "chore: CC Pulse auto-update [skip ci]"
           # Only commit the generated directories — never commit secrets or config
           file_pattern: "snapshots/ dashboard/"
-          commit_user_name:  "cc-pulse-bot"
+          commit_user_name: "cc-pulse-bot"
           commit_user_email: "cc-pulse-bot@users.noreply.github.com"
-          skip_dirty_check:  false
+          skip_dirty_check: false
