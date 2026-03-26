@@ -3,7 +3,7 @@ emailer.py — Builds and sends the weekly CC Pulse email digest.
 
 Features:
   - Keyword alert section at top of email
-  - Slack / Teams webhook notification for immediate alerts
+  - Webex Space notification for immediate keyword alerts
   - Structured logging
 """
 
@@ -22,44 +22,52 @@ import config
 log = logging.getLogger(__name__)
 
 
-# ── Slack / webhook notification ──────────────────────────────────────────────
+# ── Webex notification ──────────────────────────────────────────────────────────
+def send_webex_alert(alerts: list[dict]) -> None:
+    """POST a compact Webex message for high-priority keyword alerts.
 
-def send_slack_alert(alerts: list[dict]) -> None:
-    """POST a compact Slack message for high-priority keyword alerts.
-
-    Works with any incoming-webhook endpoint (Slack, Teams, Discord, etc.)
-    that accepts a JSON body with a "text" field.
+    Requires config.WEBEX_BOT_TOKEN and config.WEBEX_ROOM_ID to be set.
+    Silently skips if either value is absent.
     """
-    webhook_url = config.SLACK_WEBHOOK_URL
-    if not webhook_url:
-        log.debug("[Slack] No webhook URL configured — skipping.")
+    token = config.WEBEX_BOT_TOKEN
+    room_id = config.WEBEX_ROOM_ID
+
+    if not token or not room_id:
+        log.debug("[Webex] Bot token or Room ID not configured — skipping.")
         return
+
     if not alerts:
         return
 
-    lines = ["*CC Pulse Alert* — keyword match(es) detected:"]
-    for a in alerts[:10]:   # cap at 10 to avoid overly long messages
+    lines = ["**CC Pulse Alert** — keyword match(es) detected:"]
+    for a in alerts[:10]:  # cap at 10 to avoid overly long messages
         kws = ", ".join(a.get("matched_keywords", []))
-        lines.append(f"  • *[{a['source']}]* {a['title']} — _{kws}_")
+        lines.append(f"- **[{a['source']}]** {a['title']} — _{kws}_")
     if len(alerts) > 10:
-        lines.append(f"  _...and {len(alerts) - 10} more. Check the dashboard._")
+        lines.append(f"_...and {len(alerts) - 10} more. Check the dashboard._")
 
-    payload = json.dumps({"text": "\n".join(lines)}).encode("utf-8")
+    payload = json.dumps({
+        "roomId": room_id,
+        "markdown": "\n".join(lines),
+    }).encode("utf-8")
+
     req = urllib.request.Request(
-        webhook_url,
+        "https://webexapis.com/v1/messages",
         data=payload,
-        headers={"Content-Type": "application/json"},
+        headers={
+            "Content-Type": "application/json",
+            "Authorization": f"Bearer {token}",
+        },
         method="POST",
     )
     try:
         with urllib.request.urlopen(req, timeout=10) as resp:
-            log.info("[Slack] Alert sent (HTTP %d).", resp.status)
+            log.info("[Webex] Alert sent (HTTP %d).", resp.status)
     except urllib.error.URLError as exc:
-        log.warning("[Slack] Failed to send webhook: %s", exc)
+        log.warning("[Webex] Failed to send message: %s", exc)
 
 
-# ── Email HTML helpers ────────────────────────────────────────────────────────
-
+# ── Email HTML helpers ──────────────────────────────────────────────────────────
 def _row(label: str, content: str, color: str = "#155724", bg: str = "#d4edda") -> str:
     return (
         f'<tr style="border-bottom:1px solid #eee">'
@@ -81,14 +89,13 @@ def _section(title: str, rows: list[str]) -> str:
     )
 
 
-# ── Email builder ─────────────────────────────────────────────────────────────
-
+# ── Email builder ───────────────────────────────────────────────────────────────
 def build_email_html(weekly_diff: dict) -> str:
-    now   = datetime.now(timezone.utc)
-    date  = now.strftime("%B %d, %Y")
+    now = datetime.now(timezone.utc)
+    date = now.strftime("%B %d, %Y")
     parts: list[str] = []
 
-    # ── Keyword alerts section (top, red) ─────────────────────────────────
+    # ── Keyword alerts section (top, red) ────────────────────────────────
     alerts = weekly_diff.get("alerts", [])
     if alerts:
         alert_rows = []
@@ -107,7 +114,7 @@ def build_email_html(weekly_diff: dict) -> str:
             + _section("High-Priority Matches", alert_rows)
         )
 
-    # ── NIAP PPs ──────────────────────────────────────────────────────────
+    # ── NIAP PPs ─────────────────────────────────────────────────────────
     pp = weekly_diff.get("niap", {}).get("pps", {})
     rows: list[str] = []
     for p in pp.get("added", []):
@@ -115,12 +122,10 @@ def build_email_html(weekly_diff: dict) -> str:
     for p in pp.get("removed", []):
         rows.append(_row("REMOVED", f"<b>{p.get('pp_short_name','')}</b>", "#721c24", "#f8d7da"))
     for p in pp.get("sunset_changes", []):
-        rows.append(_row("SUNSET",
-                         f"<b>{p.get('pp_short_name','')}</b> - Sunset: {p.get('new_sunset','')[:10]}",
-                         "#856404", "#fff3cd"))
+        rows.append(_row("SUNSET", f"<b>{p.get('pp_short_name','')}</b> - Sunset: {p.get('new_sunset','')[:10]}", "#856404", "#fff3cd"))
     parts.append(_section("NIAP - Protection Profiles", rows))
 
-    # ── NIAP TDs ──────────────────────────────────────────────────────────
+    # ── NIAP TDs ─────────────────────────────────────────────────────────
     td = weekly_diff.get("niap", {}).get("tds", {})
     rows = []
     for t in td.get("added", []):
@@ -129,7 +134,7 @@ def build_email_html(weekly_diff: dict) -> str:
         rows.append(_row("REMOVED", f"<b>{t.get('identifier','')}</b>", "#721c24", "#f8d7da"))
     parts.append(_section("NIAP - Technical Decisions", rows))
 
-    # ── Cisco NDcPP ───────────────────────────────────────────────────────
+    # ── Cisco NDcPP ──────────────────────────────────────────────────────
     cn = weekly_diff.get("niap", {}).get("cisco_ndcpp", {})
     rows = []
     for p in cn.get("added", []):
@@ -140,31 +145,30 @@ def build_email_html(weekly_diff: dict) -> str:
         rows.append(_row("REMOVED", f"<b>{p.get('product_name','')}</b>", "#721c24", "#f8d7da"))
     parts.append(_section("Cisco NDcPP PCL Changes", rows))
 
-    # ── NIAP News ─────────────────────────────────────────────────────────
+    # ── NIAP News ────────────────────────────────────────────────────────
     news = weekly_diff.get("niap", {}).get("news", {})
     rows = []
     for item in news.get("added", []):
-        cat  = item.get("_category", "NEWS")
+        cat = item.get("_category", "NEWS")
         link = item.get("url", "")
         title = item.get("title", "")
-        txt  = f'<a href="{link}">{title}</a>' if link else title
+        txt = f'<a href="{link}">{title}</a>' if link else title
         rows.append(_row(cat, txt, "#1a4a8a", "#e2eafc"))
     parts.append(_section("NIAP - News and Announcements", rows))
 
-    # ── CCTL Labs ─────────────────────────────────────────────────────────
+    # ── CCTL Labs ────────────────────────────────────────────────────────
     labs = weekly_diff.get("cctl_labs", {})
     rows = []
     for lab, items in labs.items():
         for item in items[:5]:
-            link  = item.get("link", "")
+            link = item.get("link", "")
             title = item.get("title", "")
-            txt   = f'<a href="{link}">{title}</a>' if link else title
+            txt = f'<a href="{link}">{title}</a>' if link else title
             rows.append(_row(lab[:18], txt, "#1a4a8a", "#e2eafc"))
     parts.append(_section("CCTL Lab Intel", rows))
 
     body = "".join(parts) or "<p>No changes detected this week.</p>"
     generated = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
-
     return (
         '<html><body style="font-family:-apple-system,BlinkMacSystemFont,sans-serif;'
         'max-width:720px;margin:0 auto;color:#1a1a2e">'
@@ -182,8 +186,7 @@ def build_email_html(weekly_diff: dict) -> str:
     )
 
 
-# ── Send ──────────────────────────────────────────────────────────────────────
-
+# ── Send ────────────────────────────────────────────────────────────────────────
 def send_weekly_email(weekly_diff: dict) -> None:
     """Build and send the weekly HTML email digest."""
     password = os.environ.get("CC_EMAIL_PASSWORD", config.EMAIL_PASSWORD)
@@ -191,14 +194,14 @@ def send_weekly_email(weekly_diff: dict) -> None:
         log.warning("[Email] No password set - skipping email send.")
         return
 
-    html     = build_email_html(weekly_diff)
+    html = build_email_html(weekly_diff)
     date_str = datetime.now(timezone.utc).strftime("%Y-%m-%d")
-    subject  = config.EMAIL_SUBJECT.format(date=date_str)
+    subject = config.EMAIL_SUBJECT.format(date=date_str)
 
     msg = MIMEMultipart("alternative")
     msg["Subject"] = subject
-    msg["From"]    = config.EMAIL_FROM
-    msg["To"]      = ", ".join(config.EMAIL_RECIPIENTS)
+    msg["From"] = config.EMAIL_FROM
+    msg["To"] = ", ".join(config.EMAIL_RECIPIENTS)
     msg.attach(MIMEText(html, "html"))
 
     log.info("[Email] Sending '%s' to %s...", subject, config.EMAIL_RECIPIENTS)
