@@ -5,13 +5,13 @@ Features:
   - Structured logging (respects config.LOG_LEVEL)
   - Daily diff JSON saved to snapshots/diffs/ (decouples weekly from re-diffing)
   - Weekly job merges pre-computed daily diff files (fast, no re-diff)
-  - Slack/webhook alert fired immediately after daily diff if alerts found
+  - Webex alert fired immediately after daily diff if keyword alerts found
   - Graceful handling of SanityError (rejects bad snapshot, does not overwrite)
 
 Usage:
-    python main.py              # Daily pulse check
-    python main.py --weekly     # Send weekly email from stored daily diffs
-    python main.py --bootstrap  # Collect initial snapshot (no diff)
+    python main.py             # Daily pulse check
+    python main.py --weekly    # Send weekly email from stored daily diffs
+    python main.py --bootstrap # Collect initial snapshot (no diff)
 """
 
 import argparse
@@ -24,8 +24,7 @@ from datetime import datetime, timezone
 
 import config
 
-# ── Logging setup ─────────────────────────────────────────────────────────────
-
+# ── Logging setup ────────────────────────────────────────────────────────────
 def _setup_logging() -> None:
     level = getattr(logging, config.LOG_LEVEL.upper(), logging.INFO)
     logging.basicConfig(
@@ -37,11 +36,9 @@ def _setup_logging() -> None:
     for noisy in ("urllib3", "requests", "feedparser"):
         logging.getLogger(noisy).setLevel(logging.WARNING)
 
-
 log = logging.getLogger("cc_pulse.main")
 
-# ── Lazy imports (after logging is configured) ────────────────────────────────
-
+# ── Lazy imports (after logging is configured) ───────────────────────────────
 def _imports():
     import collector
     import differ
@@ -49,15 +46,12 @@ def _imports():
     import emailer
     return collector, differ, dashboard, emailer
 
-
-# ── Path helpers ──────────────────────────────────────────────────────────────
-
+# ── Path helpers ─────────────────────────────────────────────────────────────
 def snapshot_path(dt=None) -> str:
     if dt is None:
         dt = datetime.now(timezone.utc)
     os.makedirs(config.SNAPSHOT_DIR, exist_ok=True)
     return os.path.join(config.SNAPSHOT_DIR, dt.strftime("%Y-%m-%d") + ".json")
-
 
 def diff_path(dt=None) -> str:
     if dt is None:
@@ -65,31 +59,26 @@ def diff_path(dt=None) -> str:
     os.makedirs(config.DIFF_DIR, exist_ok=True)
     return os.path.join(config.DIFF_DIR, dt.strftime("%Y-%m-%d") + "_diff.json")
 
-
 def _load_json(path: str) -> dict:
     with open(path, "r", encoding="utf-8") as f:
         return json.load(f)
-
 
 def _save_json(obj: dict, path: str) -> None:
     with open(path, "w", encoding="utf-8") as f:
         json.dump(obj, f, indent=2, default=str)
     log.info("Saved: %s", path)
 
-
 def _latest_prior_snapshot() -> str | None:
     """Return the most recent snapshot file that is NOT today's."""
-    today   = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+    today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
     pattern = os.path.join(config.SNAPSHOT_DIR, "*.json")
-    files   = sorted(glob.glob(pattern), reverse=True)
+    files = sorted(glob.glob(pattern), reverse=True)
     for f in files:
         if today not in os.path.basename(f):
             return f
     return None
 
-
-# ── Run modes ─────────────────────────────────────────────────────────────────
-
+# ── Run modes ────────────────────────────────────────────────────────────────
 def run_daily() -> None:
     """Collect, diff, dashboard, alert."""
     _setup_logging()
@@ -127,11 +116,11 @@ def run_daily() -> None:
     # 4. Render dashboard (HTML + RSS)
     dashboard.render_dashboard(diff)
 
-    # 5. Fire Slack alert if keyword matches found
+    # 5. Fire Webex alert if keyword matches found
     alerts = diff.get("alerts", [])
     if alerts:
-        log.warning("%d keyword alert(s) — firing webhook...", len(alerts))
-        emailer.send_slack_alert(alerts)
+        log.warning("%d keyword alert(s) — firing Webex notification...", len(alerts))
+        emailer.send_webex_alert(alerts)
     else:
         log.info("No keyword alerts.")
 
@@ -144,10 +133,8 @@ def run_weekly() -> None:
     _, differ, _, emailer = _imports()
 
     log.info("Building weekly digest from stored daily diffs...")
-
     pattern = os.path.join(config.DIFF_DIR, "*_diff.json")
-    files   = sorted(glob.glob(pattern))
-
+    files = sorted(glob.glob(pattern))
     if not files:
         log.error("No daily diff files found in %s.", config.DIFF_DIR)
         log.error("Run the daily job at least once first.")
@@ -155,17 +142,17 @@ def run_weekly() -> None:
 
     # Use at most the last 7 daily diffs
     window = files[-7:]
-    log.info("Merging %d daily diff(s): %s ... %s",
-             len(window),
-             os.path.basename(window[0]),
-             os.path.basename(window[-1]))
-
-    diffs  = [_load_json(f) for f in window]
+    log.info(
+        "Merging %d daily diff(s): %s ... %s",
+        len(window),
+        os.path.basename(window[0]),
+        os.path.basename(window[-1]),
+    )
+    diffs = [_load_json(f) for f in window]
     weekly = differ.merge_weekly_diffs(diffs)
 
     emailer.send_weekly_email(weekly)
-    emailer.send_slack_alert(weekly.get("alerts", []))
-
+    emailer.send_webex_alert(weekly.get("alerts", []))
     log.info("Weekly digest sent.")
 
 
@@ -187,16 +174,19 @@ def run_bootstrap() -> None:
     log.info("Run the daily job tomorrow to get your first diff.")
 
 
-# ── Entry point ───────────────────────────────────────────────────────────────
-
+# ── Entry point ──────────────────────────────────────────────────────────────
 def main() -> None:
     parser = argparse.ArgumentParser(
         description="CC Pulse — Common Criteria monitoring engine"
     )
-    parser.add_argument("--weekly",    action="store_true",
-                        help="Send weekly email digest from stored daily diffs")
-    parser.add_argument("--bootstrap", action="store_true",
-                        help="Collect initial snapshot only (no diff)")
+    parser.add_argument(
+        "--weekly", action="store_true",
+        help="Send weekly email digest from stored daily diffs"
+    )
+    parser.add_argument(
+        "--bootstrap", action="store_true",
+        help="Collect initial snapshot only (no diff)"
+    )
     args = parser.parse_args()
 
     if args.bootstrap:
@@ -205,7 +195,6 @@ def main() -> None:
         run_weekly()
     else:
         run_daily()
-
 
 if __name__ == "__main__":
     main()
