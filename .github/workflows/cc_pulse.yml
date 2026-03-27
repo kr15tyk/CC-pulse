@@ -3,93 +3,94 @@ name: CC Pulse — Daily & Weekly Run
 # ── Triggers ──────────────────────────────────────────────────────────────────
 on:
   schedule:
-      # Daily pulse at 06:00 UTC
-          - cron: "0 6 * * *"
-              # Weekly email digest every Monday at 07:00 UTC (fix #6)
-                  - cron: "0 7 * * 1"
-                    workflow_dispatch:
-                        inputs:
-                              mode:
-                                      description: "Run mode"
-                                              required: false
-                                                      default: "daily"
-                                                              type: choice
-                                                                      options:
-                                                                                - daily
-                                                                                          - weekly
-                                                                                                    - bootstrap
-                                                                                                    
-                                                                                                    # ── Permissions (minimal — only what is needed) ────────────────────────────────
-                                                                                                    permissions:
-                                                                                                      contents: write  # required to commit snapshots/ and dashboard/ back to repo
-                                                                                                        actions: read
-                                                                                                        
-                                                                                                        jobs:
-                                                                                                          pulse:
-                                                                                                              name: Pulse Check
-                                                                                                                  runs-on: ubuntu-latest
-                                                                                                                      steps:
-                                                                                                                            # ── Checkout ─────────────────────────────────────────────────────────────
-                                                                                                                                  - name: Checkout repository
-                                                                                                                                          # Pinned to commit SHA — avoids supply-chain risk from floating tags
-                                                                                                                                                  # actions/checkout v4.1.7
-                                                                                                                                                          uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332
-                                                                                                                                                                  with:
-                                                                                                                                                                            fetch-depth: 0
-                                                                                                                                                                            
-                                                                                                                                                                                  # ── Python setup ──────────────────────────────────────────────────────────
-                                                                                                                                                                                        - name: Set up Python
-                                                                                                                                                                                                # actions/setup-python v5.1.0
-                                                                                                                                                                                                        uses: actions/setup-python@82c7e631bb3cdc910f68e0081d67478d79c6982d
-                                                                                                                                                                                                                with:
-                                                                                                                                                                                                                          python-version: "3.11"
-                                                                                                                                                                                                                                    cache: pip
-                                                                                                                                                                                                                                    
-                                                                                                                                                                                                                                          # ── Install dependencies ──────────────────────────────────────────────────
-                                                                                                                                                                                                                                                - name: Install dependencies
-                                                                                                                                                                                                                                                        run: pip install -r requirements.txt
-                                                                                                                                                                                                                                                        
-                                                                                                                                                                                                                                                              # ── Determine run mode ────────────────────────────────────────────────────
-                                                                                                                                                                                                                                                                    # Scheduled Monday runs are weekly; all other scheduled runs are daily.
-                                                                                                                                                                                                                                                                          # Manual dispatch uses the mode input.
-                                                                                                                                                                                                                                                                                - name: Determine run mode
-                                                                                                                                                                                                                                                                                        id: mode
-                                                                                                                                                                                                                                                                                                run: |
-                                                                                                                                                                                                                                                                                                          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
-                                                                                                                                                                                                                                                                                                                      echo "mode=${{ github.event.inputs.mode || 'daily' }}" >> "$GITHUB_OUTPUT"
-                                                                                                                                                                                                                                                                                                                                elif [ "${{ github.event.schedule }}" = "0 7 * * 1" ]; then
-                                                                                                                                                                                                                                                                                                                                            echo "mode=weekly" >> "$GITHUB_OUTPUT"
-                                                                                                                                                                                                                                                                                                                                                      else
-                                                                                                                                                                                                                                                                                                                                                                  echo "mode=daily" >> "$GITHUB_OUTPUT"
-                                                                                                                                                                                                                                                                                                                                                                            fi
-                                                                                                                                                                                                                                                                                                                                                                            
-                                                                                                                                                                                                                                                                                                                                                                                  # ── Run CC Pulse ──────────────────────────────────────────────────────────
-                                                                                                                                                                                                                                                                                                                                                                                        - name: Run CC Pulse
-                                                                                                                                                                                                                                                                                                                                                                                                env:
-                                                                                                                                                                                                                                                                                                                                                                                                          CC_EMAIL_PASSWORD:   ${{ secrets.CC_EMAIL_PASSWORD }}
-                                                                                                                                                                                                                                                                                                                                                                                                                    CC_WEBEX_BOT_TOKEN:  ${{ secrets.CC_WEBEX_BOT_TOKEN }}
-                                                                                                                                                                                                                                                                                                                                                                                                                              CC_WEBEX_ROOM_ID:    ${{ secrets.CC_WEBEX_ROOM_ID }}
-                                                                                                                                                                                                                                                                                                                                                                                                                                        CC_EMAIL_USERNAME:   ${{ secrets.CC_EMAIL_USERNAME }}
-                                                                                                                                                                                                                                                                                                                                                                                                                                                  CC_EMAIL_RECIPIENTS: ${{ secrets.CC_EMAIL_RECIPIENTS }}
-                                                                                                                                                                                                                                                                                                                                                                                                                                                            CC_SMTP_HOST:        ${{ secrets.CC_SMTP_HOST }}
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                      CC_LOG_LEVEL: INFO
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                              run: |
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        MODE="${{ steps.mode.outputs.mode }}"
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  echo "Running in mode: $MODE"
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            case "$MODE" in
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        weekly)    python main.py --weekly ;;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    bootstrap) python main.py --bootstrap ;;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                *)         python main.py ;;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          esac
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                # ── Commit generated files back to repo ───────────────────────────────────
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      - name: Commit snapshots and dashboard
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              # stefanzweifel/git-auto-commit-action v5.0.1
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      uses: stefanzweifel/git-auto-commit-action@8621497c8c39c72f3e2a999a26b4ca1b5590a76
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              with:
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        commit_message: "chore: CC Pulse auto-update [skip ci]"
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  # Only commit generated directories — never commit secrets or config
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            file_pattern: "snapshots/ dashboard/"
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      commit_user_name: "cc-pulse-bot"
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                commit_user_email: "cc-pulse-bot@users.noreply.github.com"
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          skip_dirty_check: false
+    # Daily pulse at 06:00 UTC
+    - cron: "0 6 * * *"
+    # Weekly email digest every Monday at 07:00 UTC (fix #6)
+    - cron: "0 7 * * 1"
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: "Run mode"
+        required: false
+        default: "daily"
+        type: choice
+        options:
+          - daily
+          - weekly
+          - bootstrap
+
+# ── Permissions (minimal — only what is needed) ───────────────────────────────
+permissions:
+  contents: write  # required to commit snapshots/ and dashboard/ back to repo
+  actions: read
+
+jobs:
+  pulse:
+    name: Pulse Check
+    runs-on: ubuntu-latest
+
+    steps:
+      # ── Checkout ─────────────────────────────────────────────────────────────
+      - name: Checkout repository
+        # Pinned to commit SHA — avoids supply-chain risk from floating tags
+        # actions/checkout v4.1.7
+        uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332
+        with:
+          fetch-depth: 0
+
+      # ── Python setup ─────────────────────────────────────────────────────────
+      - name: Set up Python
+        # actions/setup-python v5.1.0
+        uses: actions/setup-python@82c7e631bb3cdc910f68e0081d67478d79c6982d
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      # ── Install dependencies ──────────────────────────────────────────────────
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      # ── Determine run mode ────────────────────────────────────────────────────
+      # Scheduled Monday runs are weekly; all other scheduled runs are daily.
+      # Manual dispatch uses the mode input.
+      - name: Determine run mode
+        id: mode
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "mode=${{ github.event.inputs.mode || 'daily' }}" >> "$GITHUB_OUTPUT"
+          elif [ "${{ github.event.schedule }}" = "0 7 * * 1" ]; then
+            echo "mode=weekly" >> "$GITHUB_OUTPUT"
+          else
+            echo "mode=daily" >> "$GITHUB_OUTPUT"
+          fi
+
+      # ── Run CC Pulse ──────────────────────────────────────────────────────────
+      - name: Run CC Pulse
+        env:
+          CC_EMAIL_PASSWORD:   ${{ secrets.CC_EMAIL_PASSWORD }}
+          CC_WEBEX_BOT_TOKEN:  ${{ secrets.CC_WEBEX_BOT_TOKEN }}
+          CC_WEBEX_ROOM_ID:    ${{ secrets.CC_WEBEX_ROOM_ID }}
+          CC_EMAIL_USERNAME:   ${{ secrets.CC_EMAIL_USERNAME }}
+          CC_EMAIL_RECIPIENTS: ${{ secrets.CC_EMAIL_RECIPIENTS }}
+          CC_SMTP_HOST:        ${{ secrets.CC_SMTP_HOST }}
+          CC_LOG_LEVEL: INFO
+        run: |
+          MODE="${{ steps.mode.outputs.mode }}"
+          echo "Running in mode: $MODE"
+          case "$MODE" in
+            weekly)    python main.py --weekly ;;
+            bootstrap) python main.py --bootstrap ;;
+            *)         python main.py ;;
+          esac
+
+      # ── Commit generated files back to repo ───────────────────────────────────
+      - name: Commit snapshots and dashboard
+        # stefanzweifel/git-auto-commit-action v5.0.1
+        uses: stefanzweifel/git-auto-commit-action@8621497c8c39c72f3e2a999a26b4ca1b5590a76
+        with:
+          commit_message: "chore: CC Pulse auto-update [skip ci]"
+          # Only commit generated directories — never commit secrets or config
+          file_pattern: "snapshots/ dashboard/"
+          commit_user_name: "cc-pulse-bot"
+          commit_user_email: "cc-pulse-bot@users.noreply.github.com"
+          skip_dirty_check: false
