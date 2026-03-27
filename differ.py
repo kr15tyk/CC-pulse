@@ -137,6 +137,22 @@ def flag_alerts(diff: Snapshot) -> list[dict[str, Any]]:
               if change.get("changed"):
                             _add("CC Crypto Doc", "updated", doc_name)
 
+        # NIST page changes (news, fips, cmvp_mip, pqc, crypto_standards)
+        for page_key, page_diff in diff.get("nist", {}).get("pages", {}).items():
+                      for item in page_diff.get("added", []):
+                                        _add(f"NIST: {page_key}", "publication", item.get("text", ""))
+
+        # NIST document header changes (new PDF version detected)
+        for doc_name, change in diff.get("nist", {}).get("doc_headers", {}).items():
+                      if change.get("changed"):
+                                        _add("NIST Doc", "updated", doc_name)
+
+        # NIST RSS feed new items
+        for feed_name, items in diff.get("nist", {}).get("feeds", {}).items():
+                      for item in items:
+                                        _add(f"NIST Feed: {feed_name}", "news", item.get("title", ""))
+                        
+
     if alerts:
         log.warning("[Alerts] %d keyword match(es) found!", len(alerts))
 
@@ -295,6 +311,8 @@ def compute_diff(old_snapshot: Snapshot, new_snapshot: Snapshot) -> Snapshot:
     new_cs = new_snapshot.get("csfc", {})
     old_cc = old_snapshot.get("cc_crypto", {})
       new_cc = new_snapshot.get("cc_crypto", {})
+        old_ni = old_snapshot.get("nist", {})
+        new_ni = new_snapshot.get("nist", {})
 
     diff: Snapshot = {
         "period_start": old_snapshot.get("collected_at", ""),
@@ -315,6 +333,7 @@ def compute_diff(old_snapshot: Snapshot, new_snapshot: Snapshot) -> Snapshot:
         "cctl_labs": diff_cctl_labs(old_l, new_l),
               "csfc":      diff_csfc(old_cs, new_cs),
               "cc_crypto":  diff_cc_crypto(old_cc, new_cc),
+                  "nist":      diff_nist(old_ni, new_ni),
     }
 
     diff["alerts"] = flag_alerts(diff)
@@ -419,6 +438,31 @@ def merge_weekly_diffs(diffs: list[Snapshot]) -> Snapshot:
                       if "cc_crypto" not in weekly:
                                         weekly["cc_crypto"] = {"pages": {}, "doc_headers": {}}
             weekly["cc_crypto"]["doc_headers"][doc_name] = doc_data
+
+        # Merge NIST page items
+        for page_key, page_diff in d.get("nist", {}).get("pages", {}).items():
+                      if "nist" not in weekly:
+                                        weekly["nist"] = {"pages": {}, "doc_headers": {}, "feeds": {}}
+            if isinstance(page_diff, dict) and "added" in page_diff:
+                              if page_key not in weekly["nist"]["pages"]:
+                                                    weekly["nist"]["pages"][page_key] = {"added": []}
+                weekly["nist"]["pages"][page_key]["added"] = merge_lists(
+                                      weekly["nist"]["pages"][page_key]["added"],
+                                      page_diff["added"])
+
+        # Merge NIST document header changes
+        for doc_name, doc_data in d.get("nist", {}).get("doc_headers", {}).items():
+                      if "nist" not in weekly:
+                                        weekly["nist"] = {"pages": {}, "doc_headers": {}, "feeds": {}}
+            weekly["nist"]["doc_headers"][doc_name] = doc_data
+
+        # Merge NIST feed items
+        for feed_name, items in d.get("nist", {}).get("feeds", {}).items():
+                      if "nist" not in weekly:
+                                        weekly["nist"] = {"pages": {}, "doc_headers": {}, "feeds": {}}
+            weekly["nist"]["feeds"][feed_name] = merge_lists(
+                              weekly["nist"]["feeds"].get(feed_name, []),
+                              items)
 
     return weekly
 
@@ -554,5 +598,85 @@ def diff_cc_crypto(old_cc: Snapshot, new_cc: Snapshot) -> Snapshot:
     log.info(
               "[CC Crypto Diff] page-items-added:%d doc-changes:%d",
               page_changes, doc_changes,
+    )
+    return result
+
+
+# ── NIST CSRC diff ────────────────────────────────────────────────────────────
+
+def diff_nist(old_nist: Snapshot, new_nist: Snapshot) -> Snapshot:
+      """Diff two NIST CSRC snapshots.
+          Returns a dict with three sections:
+                  pages        — per-page text items added or removed
+                                         (news, fips, cmvp_mip, pqc, crypto_standards)
+                                                 doc_headers  — NIST PDFs whose Last-Modified / ETag / Content-Length
+                                                                        changed, indicating a new/revised document
+                                                                                feeds        — new RSS / blog items from NIST feeds
+                                                                                    """
+    result: Snapshot = {
+              "pages": {},
+              "doc_headers": {},
+              "feeds": {},
+    }
+
+    # ── 1. Page text diffs ──────────────────────────────────────────────────
+    old_pages = old_nist.get("pages", {})
+    new_pages = new_nist.get("pages", {})
+    for page_key in set(old_pages) | set(new_pages):
+              old_items = old_pages.get(page_key, [])
+        new_items = new_pages.get(page_key, [])
+        old_texts = {i["text"][:120] for i in old_items}
+        new_texts = {i["text"][:120] for i in new_items}
+        added   = [i for i in new_items if i["text"][:120] not in old_texts]
+        removed = [i for i in old_items if i["text"][:120] not in new_texts]
+        if added or removed:
+                      result["pages"][page_key] = {"added": added, "removed": removed}
+
+    # ── 2. Document header diffs ────────────────────────────────────────────
+    old_docs = old_nist.get("doc_headers", {})
+    new_docs = new_nist.get("doc_headers", {})
+    for doc_name in set(old_docs) | set(new_docs):
+              old_h = old_docs.get(doc_name, {})
+        new_h = new_docs.get(doc_name, {})
+        changed = (
+                      old_h.get("last_modified") != new_h.get("last_modified")
+                      or old_h.get("etag")         != new_h.get("etag")
+                      or old_h.get("content_length") != new_h.get("content_length")
+        )
+        if changed and (old_h or new_h):
+                      result["doc_headers"][doc_name] = {
+                                        "changed": True,
+                                        "old_last_modified":  old_h.get("last_modified", ""),
+                                        "new_last_modified":  new_h.get("last_modified", ""),
+                                        "old_etag":           old_h.get("etag", ""),
+                                        "new_etag":           new_h.get("etag", ""),
+                                        "old_content_length": old_h.get("content_length", ""),
+                                        "new_content_length": new_h.get("content_length", ""),
+                                        "url": new_h.get("url", old_h.get("url", "")),
+                      }
+
+    # ── 3. Feed item diffs ──────────────────────────────────────────────────
+    old_feeds = old_nist.get("feeds", {})
+    new_feeds = new_nist.get("feeds", {})
+    for feed_name in set(old_feeds) | set(new_feeds):
+              old_items = old_feeds.get(feed_name, [])
+        new_items = new_feeds.get(feed_name, [])
+        old_ids = {
+                      i.get("id", i.get("title", i.get("link", "")))
+                      for i in old_items
+        }
+        added = [
+                      i for i in new_items
+                      if i.get("id", i.get("title", i.get("link", ""))) not in old_ids
+        ]
+        if added:
+                      result["feeds"][feed_name] = added
+
+    doc_changes  = len(result["doc_headers"])
+    page_changes = sum(len(v.get("added", [])) for v in result["pages"].values())
+    feed_new     = sum(len(v) for v in result["feeds"].values())
+    log.info(
+              "[NIST Diff] page-items-added:%d doc-changes:%d feed-new:%d",
+              page_changes, doc_changes, feed_new,
     )
     return result
