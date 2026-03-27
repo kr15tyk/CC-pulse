@@ -102,6 +102,7 @@ NEWS_CATEGORY_KEYWORDS = {
       "PP UPDATE":   ["pp-module", "protection profile", "cpp_", "pp_"],
       "CSFC":        ["csfc", "csfC", "commercial solutions for classified"],
           "CRYPTO":      ["ccdb-018", "crypto catalog", "cryptograph", "fcs_", "cavp", "cmvp", "key establishment", "digital signature"],
+              "NIST":         ["nist", "fips 140", "fips 203", "fips 204", "fips 205", "sp 800", "cmvp", "cavp", "post-quantum", "pqc", "ml-kem", "ml-dsa", "slh-dsa", "csrc"],
       "NEWS":        [],  # catch-all
 }
 
@@ -144,6 +145,22 @@ WATCH_KEYWORDS = [
     "FCS_RBG",
     "CAVP",
     "CMVP",
+          # ── NIST/CSRC watch terms ────────────────────────────────────────────────
+          "FIPS 140-3",
+          "FIPS 203",
+          "FIPS 204",
+          "FIPS 205",
+          "SP 800-131A",
+          "SP 800-57",
+          "NIST IR 8547",
+          "post-quantum cryptography",
+          "PQC migration",
+          "ML-KEM",
+          "ML-DSA",
+          "SLH-DSA",
+          "algorithm transition",
+          "CMVP validated",
+          "modules in process",
 ]
 
 # =============================================================
@@ -315,3 +332,116 @@ CC_CRYPTO_NEWS_KEYWORDS = [
 # If the publications page returns fewer items than this it is likely a fetch
 # failure — warn but do not abort (same pattern as SANITY_MIN_CSFC_APL).
 SANITY_MIN_CC_CRYPTO_PUBS = 5
+
+# =============================================================
+# NIST CSRC Monitoring (Option B)
+#
+# Monitors NIST's Computer Security Resource Center for changes
+# relevant to CC/CSfC practitioners:
+#   1. CSRC News page — all NIST cyber publication announcements
+#   2. NIST Cybersecurity RSS feed — filtered news stream
+#   3. CMVP "Modules In Process" list — FIPS 140-3 validation pipeline
+#      (directly relevant to CSfC component approvals)
+#   4. PQC project page — post-quantum standardization milestones
+#   5. FIPS publications page — new/revised crypto standards
+#   6. HTTP header poll of key PDFs:
+#        FIPS 140-3, SP 800-131A (algorithm transitions),
+#        SP 800-57 Part 1 (key management), NIST IR 8547 (PQC migration)
+# =============================================================
+
+NIST_CSRC_BASE = "https://csrc.nist.gov"
+NIST_BASE = "https://www.nist.gov"
+
+# ── NIST CSRC pages to scrape for change detection ─────────────────────────
+NIST_CSRC_PAGES = {
+          # Chronological news feed — new publication/draft announcements land here
+    "news":              "/news",
+          # FIPS standards listing — watch for new drafts or final FIPS
+          "fips":              "/publications/fips",
+          # CMVP Modules In Process — FIPS 140-3 validation pipeline (HTML table)
+          "cmvp_mip":          "/projects/cryptographic-module-validation-program/modules-in-process/modules-in-process-list",
+          # PQC project overview — ongoing standardization milestone page
+          "pqc":               "/projects/post-quantum-cryptography",
+          # Cryptographic Standards and Guidelines — algorithm suite overview
+          "crypto_standards":  "/projects/cryptographic-standards-and-guidelines",
+}
+
+# ── NIST PDF documents to HTTP-HEAD-poll for version changes ────────────────
+# Key = human-readable label; Value = direct PDF URL.
+# Last-Modified / ETag / Content-Length changes indicate a new revision.
+NIST_CRYPTO_DOCS = {
+          # FIPS 140-3 Security Requirements for Cryptographic Modules (Mar 2019)
+    "FIPS 140-3": (
+                  "https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.140-3.pdf"
+    ),
+          # SP 800-131A Rev 2 — Transitioning Cryptographic Algorithms and Key Sizes
+          "SP 800-131A Rev 2": (
+                        "https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-131Ar2.pdf"
+          ),
+          # SP 800-57 Part 1 Rev 5 — Key Management Recommendation
+          "SP 800-57 Part 1 Rev 5": (
+                        "https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-57pt1r5.pdf"
+          ),
+          # NIST IR 8547 — Transition to Post-Quantum Cryptography Standards
+          "NIST IR 8547": (
+                        "https://nvlpubs.nist.gov/nistpubs/ir/2024/NIST.IR.8547.ipd.pdf"
+          ),
+          # FIPS 203 — ML-KEM (Module-Lattice Key Encapsulation, Aug 2024)
+          "FIPS 203 ML-KEM": (
+                        "https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.203.pdf"
+          ),
+          # FIPS 204 — ML-DSA (Module-Lattice Digital Signature, Aug 2024)
+          "FIPS 204 ML-DSA": (
+                        "https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.204.pdf"
+          ),
+          # FIPS 205 — SLH-DSA (Stateless Hash-Based Digital Signature, Aug 2024)
+          "FIPS 205 SLH-DSA": (
+                        "https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.205.pdf"
+          ),
+}
+
+# ── NIST RSS / news feeds ────────────────────────────────────────────────────
+NIST_FEEDS = [
+          {
+                        "name": "NIST Cybersecurity News",
+                        "rss": "https://www.nist.gov/news-events/cybersecurity/rss.xml",
+                        "scrape": False,
+          },
+          {
+                        "name": "NIST Information Technology News",
+                        "rss": "https://www.nist.gov/news-events/information%20technology/rss.xml",
+                        "scrape": False,
+          },
+          {
+                        "name": "NIST Cybersecurity Insights Blog",
+                        "rss": "https://www.nist.gov/blogs/cybersecurity-insights/rss.xml",
+                        "scrape": False,
+          },
+]
+
+# ── Keywords for routing NIST news into the NIST category ───────────────────
+NIST_NEWS_KEYWORDS = [
+          "nist",
+          "fips 140",
+          "fips 186",
+          "fips 197",
+          "fips 203",
+          "fips 204",
+          "fips 205",
+          "sp 800",
+          "cmvp",
+          "cavp",
+          "post-quantum",
+          "pqc",
+          "ml-kem",
+          "ml-dsa",
+          "slh-dsa",
+          "algorithm transition",
+          "key management",
+          "cryptographic module",
+          "csrc",
+]
+
+# ── Sanity minimum for NIST CSRC news scrape ────────────────────────────────
+# The CSRC /news page consistently shows 1000+ items; warn if suspiciously low.
+SANITY_MIN_NIST_NEWS = 10
