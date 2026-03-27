@@ -101,6 +101,7 @@ NEWS_CATEGORY_KEYWORDS = {
       "CISA":        ["cisa", "emergency directive", "vulnerability"],
       "PP UPDATE":   ["pp-module", "protection profile", "cpp_", "pp_"],
       "CSFC":        ["csfc", "csfC", "commercial solutions for classified"],
+          "CRYPTO":      ["ccdb-018", "crypto catalog", "cryptograph", "fcs_", "cavp", "cmvp", "key establishment", "digital signature"],
       "NEWS":        [],  # catch-all
 }
 
@@ -132,6 +133,17 @@ WATCH_KEYWORDS = [
       "CP-DAR",
       "CP-MDM",
       "NSA CSfC",
+    # ── CC Crypto Catalog watch terms ─────────────────────────────────────
+    "CCDB-018",
+    "Crypto Catalog",
+    "crypto catalog",
+    "cryptography working group",
+    "Specification of Functional Requirements for Cryptography",
+    "FCS_CKM",
+    "FCS_COP",
+    "FCS_RBG",
+    "CAVP",
+    "CMVP",
 ]
 
 # =============================================================
@@ -217,3 +229,89 @@ CSFC_APL_COMPONENT_KEYWORDS = {
 # If the collector returns fewer APL entries than this, treat it as a
 # fetch failure and reject the snapshot.
 SANITY_MIN_CSFC_APL = 5  # NSA APL typically lists dozens of components
+
+# =============================================================
+# CC Crypto Catalog & Working Group Monitoring
+#
+# The "CC Crypto Catalog" (formally: Specification of Functional
+# Requirements for Cryptography, CCDB-018) is a CCRA Supporting
+# Document published by the Common Criteria Development Board
+# (CCDB) Cryptography Working Group.  It defines the approved
+# cryptographic algorithms and parameters for use in CC-evaluated
+# products.  New releases or errata require vendors and labs to
+# update their Security Targets / Protection Profiles.
+#
+# Sources monitored:
+#   1. PDF header poll — detect silent version bumps via
+#      Last-Modified / ETag / Content-Length changes.
+#   2. CC Portal publications page (/cc/index.cfm) — new CCDB-018
+#      revisions or errata entries appear here first.
+#   3. CC Portal news page (/news/index.cfm) — release announcements
+#      from the CCDB / Management Committee.
+#   4. CC Portal communities page (/communities/index.cfm) — any
+#      new working-group charters or spin-off groups.
+#   5. NIAP news endpoint — NIAP often posts labgrams/valgrams that
+#      reference crypto catalog changes (already collected via
+#      NIAP_ENDPOINTS["news"]; keywords route them here).
+# =============================================================
+
+CC_CRYPTO_BASE = "https://www.commoncriteriaportal.org"
+
+# ── Crypto Catalog PDF documents to header-poll ──────────────────────────────
+# Key  = human-readable name shown in dashboard / alerts
+# Value = direct URL to the PDF
+# Add new entries as the CCDB publishes revised versions or errata.
+CC_CRYPTO_DOCS = {
+          # Current release: CCDB-018 v1.0 (31 Jan 2025)
+          "CCDB-018 v1.0 Crypto Catalog (Jan 2025)": (
+                        "https://www.commoncriteriaportal.org/files/ccfiles/"
+                        "CCDB-018-v1.0-2025-Jan-31-Final-"
+                        "Specification_of_Functional_Requirements_for_Cryptography.pdf"
+          ),
+          # Assurance Continuity SD (frequently updated alongside crypto rules)
+          "CCDB-014 v3.1 Assurance Continuity (Feb 2024)": (
+                        "https://www.commoncriteriaportal.org/files/ccfiles/"
+                        "CCDB-014-v3.1-2024-February-29.pdf"
+          ),
+          # CC:2022 Part 2 — Security Functional Requirements (crypto SFRs live here)
+          "CC:2022 Part 2 Security Functional Requirements": (
+                        "https://www.commoncriteriaportal.org/files/ccfiles/CC2022PART2R1.pdf"
+          ),
+}
+
+# ── CC Portal pages to scrape for Crypto Catalog / working group changes ──────
+# Scraped for new text/link entries between runs; any change triggers a diff.
+CC_CRYPTO_PAGES = {
+          # Publications — new CCDB-018 versions / errata first appear here
+          "publications":  "/cc/index.cfm",
+          # News — CCDB / Management Committee release announcements
+          "news":          "/news/index.cfm",
+          # Communities — working group charters, new groups
+          "communities":   "/communities/index.cfm",
+}
+
+# ── Keywords for routing news items into the CRYPTO category ─────────────────
+# Extend NEWS_CATEGORY_KEYWORDS with this entry (merged at runtime by
+# collector.py so the existing categorize_news() function picks them up).
+CC_CRYPTO_NEWS_KEYWORDS = [
+          "ccdb-018",
+          "crypto catalog",
+          "cryptography",
+          "cryptographic",
+          "specification of functional requirements for cryptography",
+          "ccdb working group",
+          "crypto working group",
+          "fcs_",          # CC SFR family prefix for all crypto requirements
+          "algorithm",
+          "key establishment",
+          "key generation",
+          "digital signature",
+          "hash function",
+          "random bit generator",
+          "rbg",
+]
+
+# ── Sanity minimum for Crypto Catalog page scrape ────────────────────────────
+# If the publications page returns fewer items than this it is likely a fetch
+# failure — warn but do not abort (same pattern as SANITY_MIN_CSFC_APL).
+SANITY_MIN_CC_CRYPTO_PUBS = 5
