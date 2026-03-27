@@ -2,7 +2,7 @@
 
 > Real-Time Certification Intelligence & Differential Analytics
 >
-> **CC Pulse** is an automated monitoring engine designed to track the "heartbeat" of the Common Criteria (CC) and NIAP ecosystems. Engineered for security researchers specializing in NDcPP v4.0 and FIPS 186-4 transitions, it eliminates the manual overhead of monitoring disparate government portals and lab feeds.
+> **CC Pulse** is an automated monitoring engine designed to track the "heartbeat" of the Common Criteria (CC) and NIAP ecosystems. Engineered for security researchers specializing in Network Devices, NDcPP, CSfC, and their security requirements, it eliminates the manual overhead of monitoring disparate government portals and lab feeds.
 >
 > ---
 >
@@ -44,9 +44,9 @@
 >
 > This repository is pre-configured to prioritize high-impact security research data:
 >
-> ### 1. NDcPP v4.0 & FIPS 186-4 Tracking
+> ### 1. NDcPP v4.0 Tracking
 >
-> Monitors RFIs and Technical Decisions (TDs) mapped to the Network Device collaborative Protection Profile, flagging any FIPS 186-4 requirement shifts immediately for impact analysis.
+> Monitors RFIs and Technical Decisions (TDs) mapped to the Network Device collaborative Protection Profile, flagging any requirement shifts immediately for impact analysis.
 >
 > ### 2. Infrastructure Sentry
 >
