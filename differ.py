@@ -127,6 +127,16 @@ def flag_alerts(diff: Snapshot) -> list[dict[str, Any]]:
               if change.get("changed"):
                             _add("CSfC CP", "updated", cp_name)
 
+    # CC Crypto Catalog page changes (publications / news / communities)
+    for page_key, page_diff in diff.get("cc_crypto", {}).get("pages", {}).items():
+              for item in page_diff.get("added", []):
+                            _add(f"CC Crypto: {page_key}", "publication", item.get("text", ""))
+
+    # CC Crypto document header changes (new PDF version detected)
+    for doc_name, change in diff.get("cc_crypto", {}).get("doc_headers", {}).items():
+              if change.get("changed"):
+                            _add("CC Crypto Doc", "updated", doc_name)
+
     if alerts:
         log.warning("[Alerts] %d keyword match(es) found!", len(alerts))
 
@@ -283,6 +293,8 @@ def compute_diff(old_snapshot: Snapshot, new_snapshot: Snapshot) -> Snapshot:
     new_l = new_snapshot.get("cctl_labs", {})
       old_cs = old_snapshot.get("csfc", {})
     new_cs = new_snapshot.get("csfc", {})
+    old_cc = old_snapshot.get("cc_crypto", {})
+      new_cc = new_snapshot.get("cc_crypto", {})
 
     diff: Snapshot = {
         "period_start": old_snapshot.get("collected_at", ""),
@@ -302,6 +314,7 @@ def compute_diff(old_snapshot: Snapshot, new_snapshot: Snapshot) -> Snapshot:
         },
         "cctl_labs": diff_cctl_labs(old_l, new_l),
               "csfc":      diff_csfc(old_cs, new_cs),
+              "cc_crypto":  diff_cc_crypto(old_cc, new_cc),
     }
 
     diff["alerts"] = flag_alerts(diff)
@@ -391,6 +404,22 @@ def merge_weekly_diffs(diffs: list[Snapshot]) -> Snapshot:
                                         weekly["csfc"] = {"feeds": {}, "pages": {}, "capability_packages": {}}
             weekly["csfc"]["capability_packages"][cp_name] = cp_data
 
+        # Merge CC Crypto page items
+        for page_key, page_diff in d.get("cc_crypto", {}).get("pages", {}).items():
+                      if "cc_crypto" not in weekly:
+                                        weekly["cc_crypto"] = {"pages": {}, "doc_headers": {}}
+                                    if isinstance(page_diff, dict) and "added" in page_diff:
+                                                      if page_key not in weekly["cc_crypto"]["pages"]:
+                                                                            weekly["cc_crypto"]["pages"][page_key] = {"added": []}
+                                                                        weekly["cc_crypto"]["pages"][page_key]["added"] = merge_lists(
+                                                                                              weekly["cc_crypto"]["pages"][page_key]["added"],
+                                                                                              page_diff["added"])
+        # Merge CC Crypto document header changes
+        for doc_name, doc_data in d.get("cc_crypto", {}).get("doc_headers", {}).items():
+                      if "cc_crypto" not in weekly:
+                                        weekly["cc_crypto"] = {"pages": {}, "doc_headers": {}}
+            weekly["cc_crypto"]["doc_headers"][doc_name] = doc_data
+
     return weekly
 
 # ── CSfC diff ────────────────────────────────────────────────────────────────
@@ -465,5 +494,65 @@ def diff_csfc(old_csfc: Snapshot, new_csfc: Snapshot) -> Snapshot:
     log.info(
               "[CSfC Diff] page-items-added:%d CP-changes:%d feed-new:%d",
               page_changes, cp_changes, feed_new,
+    )
+    return result
+
+# ── CC Crypto Catalog diff ───────────────────────────────────────────────────
+
+def diff_cc_crypto(old_cc: Snapshot, new_cc: Snapshot) -> Snapshot:
+      """Diff two CC Crypto Catalog snapshots.
+
+          Returns a dict with two sections:
+                pages       — per-page text items added or removed (publications, news,
+                                    communities)
+                                          doc_headers — documents whose Last-Modified / ETag / Content-Length
+                                                              changed, indicating a new version of the PDF was published
+                                                                  """
+    result: Snapshot = {
+              "pages": {},
+              "doc_headers": {},
+    }
+
+    # ── 1. Page text diffs ───────────────────────────────────────────────────
+    old_pages = old_cc.get("pages", {})
+    new_pages = new_cc.get("pages", {})
+    for page_key in set(old_pages) | set(new_pages):
+              old_items = old_pages.get(page_key, [])
+        new_items = new_pages.get(page_key, [])
+        old_texts = {i["text"][:120] for i in old_items}
+        new_texts = {i["text"][:120] for i in new_items}
+        added   = [i for i in new_items if i["text"][:120] not in old_texts]
+        removed = [i for i in old_items if i["text"][:120] not in new_texts]
+        if added or removed:
+                      result["pages"][page_key] = {"added": added, "removed": removed}
+
+    # ── 2. Document header diffs ─────────────────────────────────────────────
+    old_docs = old_cc.get("doc_headers", {})
+    new_docs = new_cc.get("doc_headers", {})
+    for doc_name in set(old_docs) | set(new_docs):
+              old_h = old_docs.get(doc_name, {})
+        new_h = new_docs.get(doc_name, {})
+        changed = (
+                      old_h.get("last_modified") != new_h.get("last_modified")
+                      or old_h.get("etag") != new_h.get("etag")
+                      or old_h.get("content_length") != new_h.get("content_length")
+        )
+        if changed and (old_h or new_h):
+                      result["doc_headers"][doc_name] = {
+                                        "changed": True,
+                                        "old_last_modified": old_h.get("last_modified", ""),
+                                        "new_last_modified": new_h.get("last_modified", ""),
+                                        "old_etag":          old_h.get("etag", ""),
+                                        "new_etag":          new_h.get("etag", ""),
+                                        "old_content_length":old_h.get("content_length", ""),
+                                        "new_content_length":new_h.get("content_length", ""),
+                                        "url":               new_h.get("url", old_h.get("url", "")),
+                      }
+
+    doc_changes  = len(result["doc_headers"])
+    page_changes = sum(len(v.get("added", [])) for v in result["pages"].values())
+    log.info(
+              "[CC Crypto Diff] page-items-added:%d doc-changes:%d",
+              page_changes, doc_changes,
     )
     return result
