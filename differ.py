@@ -113,6 +113,20 @@ def flag_alerts(diff: Snapshot) -> list[dict[str, Any]]:
         for item in items:
             _add(f"Lab: {lab}", "post", item.get("title", ""))
 
+      # CSfC feeds
+      for feed_name, items in diff.get("csfc", {}).get("feeds", {}).items():
+                for item in items:
+                              _add(f"CSfC Feed: {feed_name}", "advisory", item.get("title", ""))
+
+    # CSfC APL page changes
+    for item in diff.get("csfc", {}).get("pages", {}).get("apl", {}).get("added", []):
+              _add("CSfC APL", "new", item.get("text", ""))
+
+    # CSfC Capability Package header changes
+    for cp_name, change in diff.get("csfc", {}).get("capability_packages", {}).items():
+              if change.get("changed"):
+                            _add("CSfC CP", "updated", cp_name)
+
     if alerts:
         log.warning("[Alerts] %d keyword match(es) found!", len(alerts))
 
@@ -267,6 +281,8 @@ def compute_diff(old_snapshot: Snapshot, new_snapshot: Snapshot) -> Snapshot:
     new_c = new_snapshot.get("cc_portal", {})
     old_l = old_snapshot.get("cctl_labs", {})
     new_l = new_snapshot.get("cctl_labs", {})
+      old_cs = old_snapshot.get("csfc", {})
+    new_cs = new_snapshot.get("csfc", {})
 
     diff: Snapshot = {
         "period_start": old_snapshot.get("collected_at", ""),
@@ -285,6 +301,7 @@ def compute_diff(old_snapshot: Snapshot, new_snapshot: Snapshot) -> Snapshot:
             "products": diff_cc_products(old_c.get("products", []), new_c.get("products", [])),
         },
         "cctl_labs": diff_cctl_labs(old_l, new_l),
+              "csfc":      diff_csfc(old_cs, new_cs),
     }
 
     diff["alerts"] = flag_alerts(diff)
@@ -352,4 +369,101 @@ def merge_weekly_diffs(diffs: list[Snapshot]) -> Snapshot:
         weekly["alerts"] = merge_lists(
             weekly.get("alerts", []), d.get("alerts", []))
 
+        # Merge CSfC feed items
+        for feed_name, items in d.get("csfc", {}).get("feeds", {}).items():
+                      if "csfc" not in weekly:
+                                        weekly["csfc"] = {"feeds": {}, "pages": {}, "capability_packages": {}}
+                                    weekly["csfc"]["feeds"][feed_name] = merge_lists(
+                                                      weekly["csfc"]["feeds"].get(feed_name, []), items)
+        # Merge CSfC APL page items
+        for page_key, page_diff in d.get("csfc", {}).get("pages", {}).items():
+                      if "csfc" not in weekly:
+                                        weekly["csfc"] = {"feeds": {}, "pages": {}, "capability_packages": {}}
+                                    if isinstance(page_diff, dict) and "added" in page_diff:
+                                                      if page_key not in weekly["csfc"]["pages"]:
+                                                                            weekly["csfc"]["pages"][page_key] = {"added": []}
+                                                                        weekly["csfc"]["pages"][page_key]["added"] = merge_lists(
+                                                                                              weekly["csfc"]["pages"][page_key]["added"],
+                                                                                              page_diff["added"])
+        # Merge CSfC CP header changes
+        for cp_name, cp_data in d.get("csfc", {}).get("capability_packages", {}).items():
+                      if "csfc" not in weekly:
+                                        weekly["csfc"] = {"feeds": {}, "pages": {}, "capability_packages": {}}
+            weekly["csfc"]["capability_packages"][cp_name] = cp_data
+
     return weekly
+
+# ── CSfC diff ────────────────────────────────────────────────────────────────
+
+def diff_csfc(old_csfc: Snapshot, new_csfc: Snapshot) -> Snapshot:
+      """Diff two CSfC snapshots.
+
+          Returns a dict with three sections:
+                pages            — per-page text items added or removed
+                      capability_packages — CP PDFs whose Last-Modified / ETag header changed
+                            feeds            — new RSS / scraped items from NSA / CISA / DISA feeds
+                                """
+    result: Snapshot = {
+              "pages": {},
+              "capability_packages": {},
+              "feeds": {},
+    }
+
+    # ── 1. Page text diffs ───────────────────────────────────────────────────
+    old_pages = old_csfc.get("pages", {})
+    new_pages = new_csfc.get("pages", {})
+    for page_key in set(old_pages) | set(new_pages):
+              old_items = old_pages.get(page_key, [])
+        new_items = new_pages.get(page_key, [])
+        old_texts = {i["text"][:120] for i in old_items}
+        new_texts = {i["text"][:120] for i in new_items}
+        added   = [i for i in new_items if i["text"][:120] not in old_texts]
+        removed = [i for i in old_items if i["text"][:120] not in new_texts]
+        if added or removed:
+                      result["pages"][page_key] = {"added": added, "removed": removed}
+
+    # ── 2. Capability Package header diffs ───────────────────────────────────
+    old_cps = old_csfc.get("capability_package_headers", {})
+    new_cps = new_csfc.get("capability_package_headers", {})
+    for cp_name in set(old_cps) | set(new_cps):
+              old_h = old_cps.get(cp_name, {})
+        new_h = new_cps.get(cp_name, {})
+        changed = (
+                      old_h.get("last_modified") != new_h.get("last_modified")
+                      or old_h.get("etag") != new_h.get("etag")
+                      or old_h.get("content_length") != new_h.get("content_length")
+        )
+        if changed and (old_h or new_h):
+                      result["capability_packages"][cp_name] = {
+                                        "changed": True,
+                                        "old_last_modified": old_h.get("last_modified", ""),
+                                        "new_last_modified": new_h.get("last_modified", ""),
+                                        "old_etag":          old_h.get("etag", ""),
+                                        "new_etag":          new_h.get("etag", ""),
+                                        "old_content_length":old_h.get("content_length", ""),
+                                        "new_content_length":new_h.get("content_length", ""),
+                                        "url":               new_h.get("url", old_h.get("url", "")),
+                      }
+
+    # ── 3. Feed item diffs ───────────────────────────────────────────────────
+    old_feeds = old_csfc.get("feeds", {})
+    new_feeds = new_csfc.get("feeds", {})
+    for feed_name in set(old_feeds) | set(new_feeds):
+              old_items = old_feeds.get(feed_name, [])
+        new_items = new_feeds.get(feed_name, [])
+        old_ids = {i.get("id", i.get("title", i.get("link", ""))) for i in old_items}
+        added = [
+                      i for i in new_items
+                      if i.get("id", i.get("title", i.get("link", ""))) not in old_ids
+        ]
+        if added:
+                      result["feeds"][feed_name] = added
+
+    cp_changes = len(result["capability_packages"])
+    page_changes = sum(len(v.get("added", [])) for v in result["pages"].values())
+    feed_new = sum(len(v) for v in result["feeds"].values())
+    log.info(
+              "[CSfC Diff] page-items-added:%d CP-changes:%d feed-new:%d",
+              page_changes, cp_changes, feed_new,
+    )
+    return result
