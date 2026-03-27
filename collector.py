@@ -308,7 +308,19 @@ def validate_snapshot(snapshot):
                                   csfc_apl_count,
                                   config.SANITY_MIN_CSFC_APL,
                     )
-        log.info("[Validation] Sanity checks passed (PCL:%d PPs:%d CSfC-APL:%d).", pcl_count, pps_count, csfc_apl_count)
+          # CC Crypto Catalog publications page sanity check (warn only)
+    crypto_pubs_count = len(snapshot.get("cc_crypto", {}).get("pages", {}).get("publications", []))
+    if crypto_pubs_count < config.SANITY_MIN_CC_CRYPTO_PUBS:
+              log.warning(
+                            "CC Crypto publications page returned only %d items (minimum expected: %d). "
+                            "CC Portal may be down — snapshot kept but flagged.",
+                            crypto_pubs_count,
+                            config.SANITY_MIN_CC_CRYPTO_PUBS,
+              )
+          log.info(
+                    "[Validation] Sanity checks passed (PCL:%d PPs:%d CSfC-APL:%d CryptoPubs:%d).",
+                    pcl_count, pps_count, csfc_apl_count, crypto_pubs_count,
+          )
 
 
 # ── Master snapshot ───────────────────────────────────────────────────────────
@@ -322,6 +334,7 @@ def collect_all():
         "cc_portal":      collect_cc_portal(),
         "cctl_labs":      collect_cctl_labs(),
               "csfc":      collect_csfc(),
+              "cc_crypto": collect_cc_crypto(),
     }
     validate_snapshot(snapshot)   # raises SanityError on bad data
     return snapshot
@@ -423,5 +436,96 @@ else:
               "[CSfC] APL items:%d CPs polled:%d",
               apl_count,
               cp_count,
+    )
+    return data
+
+# ── CC Crypto Catalog & Working Group ────────────────────────────────────────
+
+def _scrape_cc_crypto_page(path: str) -> list:
+      """Scrape a CC Portal page and return text/link items.
+          Reuses the same BeautifulSoup extraction pattern as _scrape_csfc_page
+              but targets the CC Portal base URL instead of the NSA base URL."""
+    url = config.CC_CRYPTO_BASE + path
+    soup = get_html(url)
+    if not soup:
+              return []
+    items = []
+    content = (
+              soup.find("div", {"id": "main"})
+              or soup.find("div", {"id": "content"})
+              or soup.find("main")
+              or soup
+    )
+    for tag in content.find_all(["p", "li", "h2", "h3", "h4", "td"]):
+              text = tag.get_text(separator=" ", strip=True)
+        link = tag.find("a")
+        href = link["href"] if link and link.get("href") else ""
+        if len(text) > 10:
+                      items.append({"text": text[:500], "link": href})
+              # Deduplicate on first 120 chars
+    seen: set = set()
+    unique = []
+    for item in items:
+              key = item["text"][:120]
+        if key not in seen:
+                      seen.add(key)
+                      unique.append(item)
+              return unique
+
+
+def _poll_crypto_doc_headers() -> dict:
+      """HEAD-poll each CC Crypto Catalog PDF for Last-Modified / ETag changes.
+          Returns a dict keyed by document name with HTTP header metadata."""
+    results = {}
+    for name, url in config.CC_CRYPTO_DOCS.items():
+              log.info("  [CC Crypto] HEAD %s ...", name)
+        try:
+                      r = SESSION.head(url, timeout=20, allow_redirects=True)
+                      results[name] = {
+                                        "url": url,
+                                        "status_code": r.status_code,
+                                        "last_modified": r.headers.get("Last-Modified", ""),
+                                        "etag": r.headers.get("ETag", ""),
+                                        "content_length": r.headers.get("Content-Length", ""),
+                      }
+except Exception as exc:
+            log.warning("  [CC Crypto] HEAD failed for %s: %s", name, exc)
+            results[name] = {
+                              "url": url,
+                              "status_code": None,
+                              "last_modified": "",
+                              "etag": "",
+                              "content_length": "",
+            }
+    return results
+
+
+def collect_cc_crypto() -> dict:
+      """Collect CC Crypto Catalog and working group monitoring data:
+          - CC Portal page snapshots (publications, news, communities)
+              - HTTP header polling of crypto-related PDFs (CCDB-018, CC:2022 Part 2, etc.)
+                  """
+    log.info("[CC Crypto] Collecting...")
+    data: dict = {
+              "pages": {},
+              "doc_headers": {},
+    }
+
+    # 1. Scrape CC Portal pages for crypto catalog / working group content
+    for page_key, path in config.CC_CRYPTO_PAGES.items():
+              log.info("  [CC Crypto] Scraping page: %s (%s)...", page_key, path)
+        data["pages"][page_key] = _scrape_cc_crypto_page(path)
+        log.info("  -> %d items", len(data["pages"][page_key]))
+
+    # 2. HEAD-poll Crypto Catalog PDF documents
+    log.info("  [CC Crypto] Polling document headers...")
+    data["doc_headers"] = _poll_crypto_doc_headers()
+
+    pubs_count = len(data["pages"].get("publications", []))
+    docs_polled = len(data["doc_headers"])
+    log.info(
+              "[CC Crypto] publications-items:%d docs-polled:%d",
+              pubs_count,
+              docs_polled,
     )
     return data
