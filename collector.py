@@ -317,9 +317,18 @@ def validate_snapshot(snapshot):
                             crypto_pubs_count,
                             config.SANITY_MIN_CC_CRYPTO_PUBS,
               )
+              # NIST CSRC news page sanity check (warn only — external site)
+          nist_news_count = len(snapshot.get("nist", {}).get("pages", {}).get("news", []))
+        if nist_news_count < config.SANITY_MIN_NIST_NEWS:
+                      log.warning(
+                                                    "NIST CSRC news page returned only %d items (minimum expected: %d). "
+                                                    "NIST CSRC may be down or blocking — snapshot kept but flagged.",
+                                                    nist_news_count,
+                                                    config.SANITY_MIN_NIST_NEWS,
+                      )
           log.info(
-                    "[Validation] Sanity checks passed (PCL:%d PPs:%d CSfC-APL:%d CryptoPubs:%d).",
-                    pcl_count, pps_count, csfc_apl_count, crypto_pubs_count,
+                                "[Validation] Sanity checks passed (PCL:%d PPs:%d CSfC-APL:%d CryptoPubs:%d NISTNews:%d).",
+                        pcl_count, pps_count, csfc_apl_count, crypto_pubs_count, nist_news_count,
           )
 
 
@@ -335,6 +344,7 @@ def collect_all():
         "cctl_labs":      collect_cctl_labs(),
               "csfc":      collect_csfc(),
               "cc_crypto": collect_cc_crypto(),
+                  "nist":      collect_nist(),
     }
     validate_snapshot(snapshot)   # raises SanityError on bad data
     return snapshot
@@ -526,6 +536,128 @@ def collect_cc_crypto() -> dict:
     log.info(
               "[CC Crypto] publications-items:%d docs-polled:%d",
               pubs_count,
+              docs_polled,
+    )
+    return data
+
+
+# ── NIST CSRC Monitoring ──────────────────────────────────────────────────────
+
+def _scrape_nist_page(path: str) -> list:
+      """Scrape a NIST CSRC page and return a list of text/link items.
+          Targets the CSRC base URL. Falls back gracefully if the page structure
+              differs across CSRC sub-pages (news list, FIPS table, CMVP MIP table, etc.)
+                  """
+    url = config.NIST_CSRC_BASE + path
+    soup = get_html(url)
+    if not soup:
+              return []
+    items = []
+    content = (
+              soup.find("div", {"id": "main-content"})
+              or soup.find("main")
+              or soup.find("div", {"class": "container"})
+              or soup
+    )
+    # CMVP MIP page uses a table — extract rows
+    table = content.find("table") if content else None
+    if table:
+              headers = [th.get_text(strip=True) for th in table.find_all("th")]
+        for tr in table.find_all("tr")[1:]:
+                      cells = [td.get_text(strip=True) for td in tr.find_all("td")]
+                      if cells:
+                                        text = " | ".join(cells[:4])  # Module | Vendor | Standard | Status
+                link = tr.find("a")
+                href = link["href"] if link and link.get("href") else ""
+                if text.strip():
+                                      items.append({"text": text[:400], "link": href})
+else:
+        # News / project pages: extract headlines, paragraphs, list items
+          for tag in content.find_all(["h2", "h3", "h4", "p", "li", "td"]):
+                        text = tag.get_text(separator=" ", strip=True)
+                        link = tag.find("a")
+                        href = link["href"] if link and link.get("href") else ""
+                        if len(text) > 20:
+                                          items.append({"text": text[:400], "link": href})
+                              # Deduplicate on first 120 chars
+                              seen: set = set()
+    unique = []
+    for item in items:
+              key = item["text"][:120]
+        if key not in seen:
+                      seen.add(key)
+            unique.append(item)
+    return unique
+
+
+def _poll_nist_doc_headers() -> dict:
+      """HEAD-poll each NIST crypto PDF for Last-Modified / ETag changes.
+          Returns a dict keyed by document name with HTTP header metadata."""
+    results = {}
+    for name, url in config.NIST_CRYPTO_DOCS.items():
+              log.info("  [NIST Docs] HEAD %s ...", name)
+        try:
+                      r = SESSION.head(url, timeout=20, allow_redirects=True)
+            results[name] = {
+                              "url": url,
+                              "status_code": r.status_code,
+                              "last_modified": r.headers.get("Last-Modified", ""),
+                              "etag": r.headers.get("ETag", ""),
+                              "content_length": r.headers.get("Content-Length", ""),
+            }
+except Exception as exc:
+            log.warning("  [NIST Docs] HEAD failed for %s: %s", name, exc)
+            results[name] = {
+                              "url": url,
+                              "status_code": None,
+                              "last_modified": "",
+                              "etag": "",
+                              "content_length": "",
+            }
+    return results
+
+
+def collect_nist() -> dict:
+      """Collect NIST CSRC monitoring data:
+          - CSRC page snapshots (news, FIPS, CMVP MIP, PQC project, crypto standards)
+              - HTTP header polling of key NIST crypto PDFs
+                  - NIST cybersecurity RSS feeds
+                      """
+    log.info("[NIST] Collecting...")
+    data: dict = {
+              "pages": {},
+              "doc_headers": {},
+              "feeds": {},
+    }
+
+    # 1. Scrape NIST CSRC pages
+    for page_key, path in config.NIST_CSRC_PAGES.items():
+              log.info("  [NIST] Scraping page: %s (%s)...", page_key, path)
+        data["pages"][page_key] = _scrape_nist_page(path)
+        log.info("  -> %d items", len(data["pages"][page_key]))
+
+    # 2. HEAD-poll NIST crypto PDF documents
+    log.info("  [NIST] Polling document headers...")
+    data["doc_headers"] = _poll_nist_doc_headers()
+
+    # 3. RSS / news feeds
+    for feed in config.NIST_FEEDS:
+              name = feed["name"]
+        log.info("  [NIST] Feed: %s...", name)
+        if feed.get("rss"):
+                      items = get_rss(feed["rss"])
+elif feed.get("scrape") and feed.get("url"):
+            items = scrapelab_items(feed["url"])
+else:
+            items = []
+        data["feeds"][name] = items
+        log.info("  -> %d items", len(items))
+
+    news_count = len(data["pages"].get("news", []))
+    docs_polled = len(data["doc_headers"])
+    log.info(
+              "[NIST] news-items:%d docs-polled:%d",
+              news_count,
               docs_polled,
     )
     return data
