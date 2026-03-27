@@ -1,14 +1,20 @@
 """
-collector.py — Pulls all data from NIAP APIs, CC Portal, and CCTL labs.
+collector.py — Pulls all data from NIAP APIs, CC Portal, CCTL labs,
+              CSfC pages, CC Crypto Catalog, and NIST CSRC.
 
 Features:
   - Exponential-backoff retry on every HTTP call
+  - Partial-GET content-hash fallback for PDF polling (fix #10)
+  - Parallel domain collection via ThreadPoolExecutor (fix #16)
   - Structured logging throughout
   - Sanity-check validation before accepting a snapshot
 """
 
+import hashlib
 import logging
 import time
+from concurrent.futures import ThreadPoolExecutor, as_completed
+
 import feedparser
 import requests
 from bs4 import BeautifulSoup
@@ -30,10 +36,9 @@ SESSION.headers.update(HEADERS)
 
 
 # ── Retry helper ──────────────────────────────────────────────────────────────
-
 def _fetch_with_retry(fn, url, **kwargs):
     """Call fn(url, **kwargs), retrying up to config.RETRY_ATTEMPTS times
-    with exponential backoff.  Returns None on permanent failure."""
+    with exponential backoff. Returns None on permanent failure."""
     last_exc = None
     for attempt in range(config.RETRY_ATTEMPTS):
         try:
@@ -51,18 +56,15 @@ def _fetch_with_retry(fn, url, **kwargs):
 
 
 # ── Low-level fetch helpers ───────────────────────────────────────────────────
-
 def _do_get_json(url, params=None):
     r = SESSION.get(url, params=params, timeout=30)
     r.raise_for_status()
     return r.json()
 
-
 def _do_get_html(url):
     r = SESSION.get(url, timeout=30)
     r.raise_for_status()
     return BeautifulSoup(r.text, "lxml")
-
 
 def get_json(url, params=None):
     result = _fetch_with_retry(_do_get_json, url, params=params)
@@ -70,13 +72,11 @@ def get_json(url, params=None):
         log.warning("get_json returning None for %s", url)
     return result
 
-
 def get_html(url):
     result = _fetch_with_retry(_do_get_html, url)
     if result is None:
         log.warning("get_html returning None for %s", url)
     return result
-
 
 def get_rss(url):
     def _parse(u, **kw):
@@ -93,13 +93,86 @@ def get_rss(url):
             }
             for e in feed.entries
         ]
-
     result = _fetch_with_retry(_parse, url)
     return result if result is not None else []
 
 
-# ── NIAP ─────────────────────────────────────────────────────────────────────
+# ── Partial-GET content-hash fallback (fix #10) ───────────────────────────────
+def _partial_get_hash(url: str, nbytes: int = 2048) -> str:
+    """Fetch the first `nbytes` bytes of a URL and return an MD5 hex-digest.
 
+    Used as a fallback when a server does not return useful Last-Modified /
+    ETag headers (common for NSA and NIST PDF servers behind CDNs/WAFs).
+    If the partial GET fails, returns an empty string so the diff logic
+    still works without crashing.
+    """
+    try:
+        r = SESSION.get(
+            url,
+            headers={"Range": f"bytes=0-{nbytes - 1}"},
+            timeout=20,
+            allow_redirects=True,
+            stream=True,
+        )
+        # Accept both 206 Partial Content and 200 OK (server may ignore Range)
+        if r.status_code in (200, 206):
+            chunk = b""
+            for block in r.iter_content(chunk_size=nbytes):
+                chunk += block
+                if len(chunk) >= nbytes:
+                    break
+            return hashlib.md5(chunk).hexdigest()
+        return ""
+    except Exception as exc:
+        log.debug("_partial_get_hash failed for %s: %s", url, exc)
+        return ""
+
+
+def _poll_doc_headers(doc_dict: dict, domain_tag: str) -> dict:
+    """Generic HEAD-poll helper for any dict of {name: url} documents.
+
+    Strategy (fix #10):
+      1. Try HTTP HEAD for Last-Modified, ETag, Content-Length.
+      2. If ALL three are empty (server doesn't serve them), fall back to
+         a partial GET of the first 2 KB and store an MD5 of that prefix.
+    Returns a dict keyed by document name.
+    """
+    results = {}
+    for name, url in doc_dict.items():
+        log.info("  [%s] HEAD %s ...", domain_tag, name)
+        entry: dict = {
+            "url":            url,
+            "status_code":    None,
+            "last_modified":  "",
+            "etag":           "",
+            "content_length": "",
+            "partial_hash":   "",  # populated only as fallback
+        }
+        try:
+            r = SESSION.head(url, timeout=20, allow_redirects=True)
+            entry["status_code"]    = r.status_code
+            entry["last_modified"]  = r.headers.get("Last-Modified", "")
+            entry["etag"]           = r.headers.get("ETag", "")
+            entry["content_length"] = r.headers.get("Content-Length", "")
+
+            # Fallback: if server returns no useful change-detection headers
+            if not any([entry["last_modified"], entry["etag"], entry["content_length"]]):
+                log.debug(
+                    "  [%s] No useful headers for %s — using partial GET hash.",
+                    domain_tag, name
+                )
+                entry["partial_hash"] = _partial_get_hash(url)
+
+        except Exception as exc:
+            log.warning("  [%s] HEAD failed for %s: %s", domain_tag, name, exc)
+            # Still attempt partial GET as a last resort
+            entry["partial_hash"] = _partial_get_hash(url)
+
+        results[name] = entry
+    return results
+
+
+# ── NIAP ──────────────────────────────────────────────────────────────────────
 def collect_niap():
     log.info("[NIAP] Collecting...")
     base = config.NIAP_BASE
@@ -121,8 +194,7 @@ def collect_niap():
     log.info("  CCTL Directory...")
     cctls_raw = get_json(base + eps["cctls"])
     data["cctls"] = (
-        cctls_raw.get("results", {}).get("cctls", [])
-        if cctls_raw else []
+        cctls_raw.get("results", {}).get("cctls", []) if cctls_raw else []
     )
 
     log.info("  Events...")
@@ -144,8 +216,7 @@ def collect_niap():
     return data
 
 
-# ── CC Portal ────────────────────────────────────────────────────────────────
-
+# ── CC Portal ─────────────────────────────────────────────────────────────────
 def parsecc_news(soup):
     items = []
     if not soup:
@@ -162,7 +233,6 @@ def parsecc_news(soup):
         if len(text) > 20:
             items.append({"text": text, "link": href})
     return items
-
 
 def parsecc_pps(soup):
     rows = []
@@ -181,7 +251,6 @@ def parsecc_pps(soup):
             rows.append(row)
     return rows
 
-
 def parsecc_products(soup):
     rows = []
     if not soup:
@@ -196,7 +265,6 @@ def parsecc_products(soup):
             rows.append(dict(zip(headers, cells)))
     return rows
 
-
 def parsecc_communities(soup):
     items = []
     if not soup:
@@ -208,7 +276,6 @@ def parsecc_communities(soup):
         if text:
             items.append({"name": text, "link": href})
     return items
-
 
 def collect_cc_portal():
     log.info("[CC Portal] Collecting...")
@@ -236,8 +303,7 @@ def collect_cc_portal():
     return data
 
 
-# ── CCTL Labs ────────────────────────────────────────────────────────────────
-
+# ── CCTL Labs ─────────────────────────────────────────────────────────────────
 def scrapelab_items(url):
     """Generic scraper — extracts headlines/links from a lab page."""
     soup = get_html(url)
@@ -254,7 +320,6 @@ def scrapelab_items(url):
                 "id":        a.get("href", a.get_text(strip=True)),
             })
     return items[:20]
-
 
 def collect_cctl_labs():
     log.info("[CCTL Labs] Collecting...")
@@ -274,10 +339,8 @@ def collect_cctl_labs():
 
 
 # ── Sanity validation ─────────────────────────────────────────────────────────
-
 class SanityError(RuntimeError):
     """Raised when collected data looks like a fetch failure."""
-
 
 def validate_snapshot(snapshot):
     """Raise SanityError if critical collections look suspiciously empty.
@@ -300,364 +363,305 @@ def validate_snapshot(snapshot):
             f"(minimum expected: {config.SANITY_MIN_PPS}). "
             "Snapshot rejected — possible fetch failure."
         )
-          csfc_apl_count = len(snapshot.get("csfc", {}).get("pages", {}).get("apl", []))
-          if csfc_apl_count < config.SANITY_MIN_CSFC_APL:
-                    log.warning(
-                                  "CSfC APL returned only %d items (minimum expected: %d). "
-                                  "NSA site may be down or blocking — snapshot kept but flagged.",
-                                  csfc_apl_count,
-                                  config.SANITY_MIN_CSFC_APL,
-                    )
-          # CC Crypto Catalog publications page sanity check (warn only)
-    crypto_pubs_count = len(snapshot.get("cc_crypto", {}).get("pages", {}).get("publications", []))
+
+    # Warn-only checks — external sites that may legitimately be slow/blocked
+    csfc_apl_count = len(snapshot.get("csfc", {}).get("pages", {}).get("apl", []))
+    if csfc_apl_count < config.SANITY_MIN_CSFC_APL:
+        log.warning(
+            "CSfC APL returned only %d items (minimum expected: %d). "
+            "NSA site may be down or blocking — snapshot kept but flagged.",
+            csfc_apl_count, config.SANITY_MIN_CSFC_APL,
+        )
+
+    crypto_pubs_count = len(
+        snapshot.get("cc_crypto", {}).get("pages", {}).get("publications", [])
+    )
     if crypto_pubs_count < config.SANITY_MIN_CC_CRYPTO_PUBS:
-              log.warning(
-                            "CC Crypto publications page returned only %d items (minimum expected: %d). "
-                            "CC Portal may be down — snapshot kept but flagged.",
-                            crypto_pubs_count,
-                            config.SANITY_MIN_CC_CRYPTO_PUBS,
-              )
-              # NIST CSRC news page sanity check (warn only — external site)
-          nist_news_count = len(snapshot.get("nist", {}).get("pages", {}).get("news", []))
-        if nist_news_count < config.SANITY_MIN_NIST_NEWS:
-                      log.warning(
-                                                    "NIST CSRC news page returned only %d items (minimum expected: %d). "
-                                                    "NIST CSRC may be down or blocking — snapshot kept but flagged.",
-                                                    nist_news_count,
-                                                    config.SANITY_MIN_NIST_NEWS,
-                      )
-          log.info(
-                                "[Validation] Sanity checks passed (PCL:%d PPs:%d CSfC-APL:%d CryptoPubs:%d NISTNews:%d).",
-                        pcl_count, pps_count, csfc_apl_count, crypto_pubs_count, nist_news_count,
-          )
+        log.warning(
+            "CC Crypto publications page returned only %d items (minimum expected: %d). "
+            "CC Portal may be down — snapshot kept but flagged.",
+            crypto_pubs_count, config.SANITY_MIN_CC_CRYPTO_PUBS,
+        )
+
+    nist_news_count = len(
+        snapshot.get("nist", {}).get("pages", {}).get("news", [])
+    )
+    if nist_news_count < config.SANITY_MIN_NIST_NEWS:
+        log.warning(
+            "NIST CSRC news page returned only %d items (minimum expected: %d). "
+            "NIST CSRC may be down or blocking — snapshot kept but flagged.",
+            nist_news_count, config.SANITY_MIN_NIST_NEWS,
+        )
+
+    log.info(
+        "[Validation] Sanity checks passed "
+        "(PCL:%d PPs:%d CSfC-APL:%d CryptoPubs:%d NISTNews:%d).",
+        pcl_count, pps_count, csfc_apl_count, crypto_pubs_count, nist_news_count,
+    )
 
 
-# ── Master snapshot ───────────────────────────────────────────────────────────
-
+# ── Master snapshot — parallel collection (fix #16) ──────────────────────────
 def collect_all():
-    """Collect everything, validate, and return a timestamped snapshot dict."""
+    """Collect all domains concurrently, validate, and return a timestamped
+    snapshot dict.
+
+    The five top-level collector functions are dispatched in parallel via
+    ThreadPoolExecutor (I/O-bound, safe for concurrent HTTP). Each runs
+    independently; failures in one domain do not block others.
+    """
+    log.info("[Collect] Starting parallel collection across all domains...")
+
+    domain_collectors = {
+        "niap":      collect_niap,
+        "cc_portal": collect_cc_portal,
+        "cctl_labs": collect_cctl_labs,
+        "csfc":      collect_csfc,
+        "cc_crypto": collect_cc_crypto,
+        "nist":      collect_nist,
+    }
+
+    results: dict = {}
+    errors:  dict = {}
+
+    with ThreadPoolExecutor(max_workers=6, thread_name_prefix="cc_pulse") as executor:
+        future_to_domain = {
+            executor.submit(fn): domain
+            for domain, fn in domain_collectors.items()
+        }
+        for future in as_completed(future_to_domain):
+            domain = future_to_domain[future]
+            try:
+                results[domain] = future.result()
+                log.info("[Collect] %s — done.", domain)
+            except Exception as exc:
+                log.error("[Collect] %s — FAILED: %s", domain, exc, exc_info=True)
+                errors[domain] = str(exc)
+                results[domain] = {}  # empty fallback so snapshot stays structurally valid
+
+    if errors:
+        log.warning(
+            "[Collect] %d domain(s) failed during parallel collection: %s",
+            len(errors), list(errors.keys())
+        )
+
     snapshot = {
         "schema_version": config.SNAPSHOT_SCHEMA_VERSION,
         "collected_at":   datetime.now(timezone.utc).isoformat(),
-        "niap":           collect_niap(),
-        "cc_portal":      collect_cc_portal(),
-        "cctl_labs":      collect_cctl_labs(),
-              "csfc":      collect_csfc(),
-              "cc_crypto": collect_cc_crypto(),
-                  "nist":      collect_nist(),
+        "niap":           results.get("niap",      {}),
+        "cc_portal":      results.get("cc_portal", {}),
+        "cctl_labs":      results.get("cctl_labs", {}),
+        "csfc":           results.get("csfc",      {}),
+        "cc_crypto":      results.get("cc_crypto", {}),
+        "nist":           results.get("nist",      {}),
     }
-    validate_snapshot(snapshot)   # raises SanityError on bad data
+
+    validate_snapshot(snapshot)  # raises SanityError on bad NIAP data
     return snapshot
 
-# ── CSfC (Commercial Solutions for Classified) ──────────────────────────────
 
-def _poll_cp_headers() -> dict:
-      """HEAD-poll each Capability Package PDF for Last-Modified / ETag changes.
-          Returns a dict keyed by CP name with header metadata."""
-      results = {}
-      for name, url in config.CSFC_CAPABILITY_PACKAGES.items():
-                log.info("  [CSfC CP] HEAD %s ...", name)
-                try:
-                              r = SESSION.head(url, timeout=20, allow_redirects=True)
-                              results[name] = {
-                                                "url": url,
-                                                "status_code": r.status_code,
-                                                "last_modified": r.headers.get("Last-Modified", ""),
-                                                "etag": r.headers.get("ETag", ""),
-                                                "content_length": r.headers.get("Content-Length", ""),
-                              }
-except Exception as exc:
-            log.warning("  [CSfC CP] HEAD failed for %s: %s", name, exc)
-            results[name] = {"url": url, "status_code": None,
-                                                          "last_modified": "", "etag": "", "content_length": ""}
-    return results
-
-
+# ── CSfC (Commercial Solutions for Classified) ────────────────────────────────
 def _scrape_csfc_page(path: str) -> list:
-      """Scrape a single NSA CSfC page and return a list of text/link items."""
-      url = config.CSFC_BASE + path
-      soup = get_html(url)
-      if not soup:
-                return []
-            items = []
+    """Scrape a single NSA CSfC page and return a list of text/link items."""
+    url  = config.CSFC_BASE + path
+    soup = get_html(url)
+    if not soup:
+        return []
+    items = []
     content = (
-              soup.find("div", {"id": "ContentPane"})
-              or soup.find("main")
-              or soup.find("div", class_="field-items")
-              or soup
+        soup.find("div", {"id": "ContentPane"})
+        or soup.find("main")
+        or soup.find("div", class_="field-items")
+        or soup
     )
-    # Grab all paragraph and list-item text + links
     for tag in content.find_all(["p", "li", "h2", "h3", "h4"]):
-              text = tag.get_text(separator=" ", strip=True)
-              link = tag.find("a")
-              href = link["href"] if link and link.get("href") else ""
-              if len(text) > 15:
-                            items.append({"text": text[:400], "link": href})
-                    # Deduplicate by text prefix
-    seen: set = set()
-    unique = []
+        text = tag.get_text(separator=" ", strip=True)
+        link = tag.find("a")
+        href = link["href"] if link and link.get("href") else ""
+        if len(text) > 15:
+            items.append({"text": text[:400], "href": href})
+    # Deduplicate by text prefix
+    seen:   set = set()
+    unique: list = []
     for item in items:
-              key = item["text"][:80]
-              if key not in seen:
-                            seen.add(key)
-                            unique.append(item)
-                    return unique
-
+        key = item["text"][:80]
+        if key not in seen:
+            seen.add(key)
+            unique.append(item)
+    return unique
 
 def collect_csfc() -> dict:
-      """Collect all CSfC monitoring data:
-          - NSA CSfC page snapshots (home, APL, capability packages, FAQ, etc.)
-              - HTTP header polling of Capability Package PDFs
-                  - CSfC-tagged RSS / news feeds
-                      """
+    """Collect all CSfC monitoring data:
+      - NSA CSfC page snapshots (home, APL, capability packages, FAQ, etc.)
+      - HTTP header polling of Capability Package PDFs (with partial-GET fallback)
+      - CSfC-tagged RSS / news feeds
+    """
     log.info("[CSfC] Collecting...")
     data: dict = {
-              "pages": {},
-              "capability_package_headers": {},
-              "feeds": {},
+        "pages":                     {},
+        "capability_package_headers":{},
+        "feeds":                     {},
     }
 
     # 1. Scrape CSfC pages
     for page_key, path in config.CSFC_PAGES.items():
-              log.info("  [CSfC] Scraping page: %s (%s)...", page_key, path)
+        log.info("  [CSfC] Scraping page: %s (%s)...", page_key, path)
         data["pages"][page_key] = _scrape_csfc_page(path)
-        log.info("  -> %d items", len(data["pages"][page_key]))
+        log.info("    -> %d items", len(data["pages"][page_key]))
 
-    # 2. HEAD-poll Capability Package PDFs
+    # 2. HEAD-poll Capability Package PDFs (with partial-GET fallback)
     log.info("  [CSfC] Polling Capability Package PDF headers...")
-    data["capability_package_headers"] = _poll_cp_headers()
+    data["capability_package_headers"] = _poll_doc_headers(
+        config.CSFC_CAPABILITY_PACKAGES, "CSfC CP"
+    )
 
     # 3. RSS / news feeds
     for feed in config.CSFC_FEEDS:
-              name = feed["name"]
+        name = feed["name"]
         log.info("  [CSfC] Feed: %s...", name)
         if feed.get("rss"):
-                      items = get_rss(feed["rss"])
-elif feed.get("scrape") and feed.get("url"):
+            items = get_rss(feed["rss"])
+        elif feed.get("scrape") and feed.get("url"):
             items = scrapelab_items(feed["url"])
-else:
+        else:
             items = []
         data["feeds"][name] = items
-        log.info("  -> %d items", len(items))
+        log.info("    -> %d items", len(items))
 
     apl_count = len(data["pages"].get("apl", []))
-    cp_count = len(data["capability_package_headers"])
-    log.info(
-              "[CSfC] APL items:%d CPs polled:%d",
-              apl_count,
-              cp_count,
-    )
+    cp_count  = len(data["capability_package_headers"])
+    log.info("[CSfC] APL items:%d CPs polled:%d", apl_count, cp_count)
     return data
 
-# ── CC Crypto Catalog & Working Group ────────────────────────────────────────
 
+# ── CC Crypto Catalog & Working Group ─────────────────────────────────────────
 def _scrape_cc_crypto_page(path: str) -> list:
-      """Scrape a CC Portal page and return text/link items.
-          Reuses the same BeautifulSoup extraction pattern as _scrape_csfc_page
-              but targets the CC Portal base URL instead of the NSA base URL."""
-    url = config.CC_CRYPTO_BASE + path
+    """Scrape a CC Portal page and return text/link items."""
+    url  = config.CC_CRYPTO_BASE + path
     soup = get_html(url)
     if not soup:
-              return []
+        return []
     items = []
     content = (
-              soup.find("div", {"id": "main"})
-              or soup.find("div", {"id": "content"})
-              or soup.find("main")
-              or soup
+        soup.find("div", {"id": "main"})
+        or soup.find("div", {"id": "content"})
+        or soup.find("main")
+        or soup
     )
     for tag in content.find_all(["p", "li", "h2", "h3", "h4", "td"]):
-              text = tag.get_text(separator=" ", strip=True)
+        text = tag.get_text(separator=" ", strip=True)
         link = tag.find("a")
         href = link["href"] if link and link.get("href") else ""
         if len(text) > 10:
-                      items.append({"text": text[:500], "link": href})
-              # Deduplicate on first 120 chars
-    seen: set = set()
-    unique = []
+            items.append({"text": text[:500], "href": href})
+    seen:   set = set()
+    unique: list = []
     for item in items:
-              key = item["text"][:120]
+        key = item["text"][:120]
         if key not in seen:
-                      seen.add(key)
-                      unique.append(item)
-              return unique
-
-
-def _poll_crypto_doc_headers() -> dict:
-      """HEAD-poll each CC Crypto Catalog PDF for Last-Modified / ETag changes.
-          Returns a dict keyed by document name with HTTP header metadata."""
-    results = {}
-    for name, url in config.CC_CRYPTO_DOCS.items():
-              log.info("  [CC Crypto] HEAD %s ...", name)
-        try:
-                      r = SESSION.head(url, timeout=20, allow_redirects=True)
-                      results[name] = {
-                                        "url": url,
-                                        "status_code": r.status_code,
-                                        "last_modified": r.headers.get("Last-Modified", ""),
-                                        "etag": r.headers.get("ETag", ""),
-                                        "content_length": r.headers.get("Content-Length", ""),
-                      }
-except Exception as exc:
-            log.warning("  [CC Crypto] HEAD failed for %s: %s", name, exc)
-            results[name] = {
-                              "url": url,
-                              "status_code": None,
-                              "last_modified": "",
-                              "etag": "",
-                              "content_length": "",
-            }
-    return results
-
+            seen.add(key)
+            unique.append(item)
+    return unique
 
 def collect_cc_crypto() -> dict:
-      """Collect CC Crypto Catalog and working group monitoring data:
-          - CC Portal page snapshots (publications, news, communities)
-              - HTTP header polling of crypto-related PDFs (CCDB-018, CC:2022 Part 2, etc.)
-                  """
+    """Collect CC Crypto Catalog and working group monitoring data:
+      - CC Portal page snapshots (publications, news, communities)
+      - HTTP header polling of crypto PDFs (with partial-GET fallback)
+    """
     log.info("[CC Crypto] Collecting...")
     data: dict = {
-              "pages": {},
-              "doc_headers": {},
+        "pages":       {},
+        "doc_headers": {},
     }
 
-    # 1. Scrape CC Portal pages for crypto catalog / working group content
     for page_key, path in config.CC_CRYPTO_PAGES.items():
-              log.info("  [CC Crypto] Scraping page: %s (%s)...", page_key, path)
+        log.info("  [CC Crypto] Scraping page: %s (%s)...", page_key, path)
         data["pages"][page_key] = _scrape_cc_crypto_page(path)
-        log.info("  -> %d items", len(data["pages"][page_key]))
+        log.info("    -> %d items", len(data["pages"][page_key]))
 
-    # 2. HEAD-poll Crypto Catalog PDF documents
     log.info("  [CC Crypto] Polling document headers...")
-    data["doc_headers"] = _poll_crypto_doc_headers()
+    data["doc_headers"] = _poll_doc_headers(config.CC_CRYPTO_DOCS, "CC Crypto")
 
-    pubs_count = len(data["pages"].get("publications", []))
+    pubs_count  = len(data["pages"].get("publications", []))
     docs_polled = len(data["doc_headers"])
-    log.info(
-              "[CC Crypto] publications-items:%d docs-polled:%d",
-              pubs_count,
-              docs_polled,
-    )
+    log.info("[CC Crypto] publications-items:%d docs-polled:%d", pubs_count, docs_polled)
     return data
 
 
 # ── NIST CSRC Monitoring ──────────────────────────────────────────────────────
-
 def _scrape_nist_page(path: str) -> list:
-      """Scrape a NIST CSRC page and return a list of text/link items.
-          Targets the CSRC base URL. Falls back gracefully if the page structure
-              differs across CSRC sub-pages (news list, FIPS table, CMVP MIP table, etc.)
-                  """
-    url = config.NIST_CSRC_BASE + path
+    """Scrape a NIST CSRC page and return a list of text/link items."""
+    url  = config.NIST_CSRC_BASE + path
     soup = get_html(url)
     if not soup:
-              return []
+        return []
     items = []
     content = (
-              soup.find("div", {"id": "main-content"})
-              or soup.find("main")
-              or soup.find("div", {"class": "container"})
-              or soup
+        soup.find("div", {"id": "main-content"})
+        or soup.find("main")
+        or soup.find("div", {"class": "container"})
+        or soup
     )
-    # CMVP MIP page uses a table — extract rows
+    # CMVP MIP page uses a table — extract rows as pipe-separated text
     table = content.find("table") if content else None
     if table:
-              headers = [th.get_text(strip=True) for th in table.find_all("th")]
         for tr in table.find_all("tr")[1:]:
-                      cells = [td.get_text(strip=True) for td in tr.find_all("td")]
-                      if cells:
-                                        text = " | ".join(cells[:4])  # Module | Vendor | Standard | Status
+            cells = [td.get_text(strip=True) for td in tr.find_all("td")]
+            if cells:
+                text = " | ".join(cells[:4])
                 link = tr.find("a")
                 href = link["href"] if link and link.get("href") else ""
                 if text.strip():
-                                      items.append({"text": text[:400], "link": href})
-else:
-        # News / project pages: extract headlines, paragraphs, list items
-          for tag in content.find_all(["h2", "h3", "h4", "p", "li", "td"]):
-                        text = tag.get_text(separator=" ", strip=True)
-                        link = tag.find("a")
-                        href = link["href"] if link and link.get("href") else ""
-                        if len(text) > 20:
-                                          items.append({"text": text[:400], "link": href})
-                              # Deduplicate on first 120 chars
-                              seen: set = set()
-    unique = []
+                    items.append({"text": text[:400], "href": href})
+    else:
+        for tag in content.find_all(["h2", "h3", "h4", "p", "li", "td"]):
+            text = tag.get_text(separator=" ", strip=True)
+            link = tag.find("a")
+            href = link["href"] if link and link.get("href") else ""
+            if len(text) > 20:
+                items.append({"text": text[:400], "href": href})
+    seen:   set = set()
+    unique: list = []
     for item in items:
-              key = item["text"][:120]
+        key = item["text"][:120]
         if key not in seen:
-                      seen.add(key)
+            seen.add(key)
             unique.append(item)
     return unique
 
-
-def _poll_nist_doc_headers() -> dict:
-      """HEAD-poll each NIST crypto PDF for Last-Modified / ETag changes.
-          Returns a dict keyed by document name with HTTP header metadata."""
-    results = {}
-    for name, url in config.NIST_CRYPTO_DOCS.items():
-              log.info("  [NIST Docs] HEAD %s ...", name)
-        try:
-                      r = SESSION.head(url, timeout=20, allow_redirects=True)
-            results[name] = {
-                              "url": url,
-                              "status_code": r.status_code,
-                              "last_modified": r.headers.get("Last-Modified", ""),
-                              "etag": r.headers.get("ETag", ""),
-                              "content_length": r.headers.get("Content-Length", ""),
-            }
-except Exception as exc:
-            log.warning("  [NIST Docs] HEAD failed for %s: %s", name, exc)
-            results[name] = {
-                              "url": url,
-                              "status_code": None,
-                              "last_modified": "",
-                              "etag": "",
-                              "content_length": "",
-            }
-    return results
-
-
 def collect_nist() -> dict:
-      """Collect NIST CSRC monitoring data:
-          - CSRC page snapshots (news, FIPS, CMVP MIP, PQC project, crypto standards)
-              - HTTP header polling of key NIST crypto PDFs
-                  - NIST cybersecurity RSS feeds
-                      """
+    """Collect NIST CSRC monitoring data:
+      - CSRC page snapshots (news, FIPS, CMVP MIP, PQC project, crypto standards)
+      - HTTP header polling of key NIST crypto PDFs (with partial-GET fallback)
+      - NIST cybersecurity RSS feeds
+    """
     log.info("[NIST] Collecting...")
     data: dict = {
-              "pages": {},
-              "doc_headers": {},
-              "feeds": {},
+        "pages":       {},
+        "doc_headers": {},
+        "feeds":       {},
     }
 
-    # 1. Scrape NIST CSRC pages
     for page_key, path in config.NIST_CSRC_PAGES.items():
-              log.info("  [NIST] Scraping page: %s (%s)...", page_key, path)
+        log.info("  [NIST] Scraping page: %s (%s)...", page_key, path)
         data["pages"][page_key] = _scrape_nist_page(path)
-        log.info("  -> %d items", len(data["pages"][page_key]))
+        log.info("    -> %d items", len(data["pages"][page_key]))
 
-    # 2. HEAD-poll NIST crypto PDF documents
     log.info("  [NIST] Polling document headers...")
-    data["doc_headers"] = _poll_nist_doc_headers()
+    data["doc_headers"] = _poll_doc_headers(config.NIST_CRYPTO_DOCS, "NIST Docs")
 
-    # 3. RSS / news feeds
     for feed in config.NIST_FEEDS:
-              name = feed["name"]
+        name = feed["name"]
         log.info("  [NIST] Feed: %s...", name)
         if feed.get("rss"):
-                      items = get_rss(feed["rss"])
-elif feed.get("scrape") and feed.get("url"):
+            items = get_rss(feed["rss"])
+        elif feed.get("scrape") and feed.get("url"):
             items = scrapelab_items(feed["url"])
-else:
+        else:
             items = []
         data["feeds"][name] = items
-        log.info("  -> %d items", len(items))
+        log.info("    -> %d items", len(items))
 
-    news_count = len(data["pages"].get("news", []))
+    news_count  = len(data["pages"].get("news", []))
     docs_polled = len(data["doc_headers"])
-    log.info(
-              "[NIST] news-items:%d docs-polled:%d",
-              news_count,
-              docs_polled,
-    )
+    log.info("[NIST] news-items:%d docs-polled:%d", news_count, docs_polled)
     return data
