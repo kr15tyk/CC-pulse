@@ -1,0 +1,47 @@
+# .github/dependabot.yml
+# Dependabot configuration for CC Pulse (fix #13)
+#
+# Monitors two package ecosystems:
+#   1. pip  — Python dependencies in requirements.txt
+#   2. github-actions — Actions used in cc_pulse.yml
+#
+# Security-only updates keep the commit noise low; both targets use
+# the same weekly schedule so PRs arrive together.
+
+version: 2
+
+updates:
+  # ── Python (pip) ────────────────────────────────────────────────────────────
+  - package-ecosystem: "pip"
+    directory: "/"          # requirements.txt lives in the repo root
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "08:00"
+      timezone: "America/New_York"
+    open-pull-requests-limit: 5
+    labels:
+      - "dependencies"
+      - "python"
+    # Group all pip updates into one PR to reduce noise
+    groups:
+      python-deps:
+        patterns:
+          - "*"
+    # Ignore major-version bumps to keep the upgrade surface small
+    ignore:
+      - dependency-name: "*"
+        update-types: ["version-update:semver-major"]
+
+  # ── GitHub Actions ───────────────────────────────────────────────────────────
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "08:00"
+      timezone: "America/New_York"
+    open-pull-requests-limit: 5
+    labels:
+      - "dependencies"
+      - "github-actions"
