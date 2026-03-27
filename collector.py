@@ -300,7 +300,15 @@ def validate_snapshot(snapshot):
             f"(minimum expected: {config.SANITY_MIN_PPS}). "
             "Snapshot rejected — possible fetch failure."
         )
-    log.info("[Validation] Sanity checks passed (PCL:%d PPs:%d).", pcl_count, pps_count)
+          csfc_apl_count = len(snapshot.get("csfc", {}).get("pages", {}).get("apl", []))
+          if csfc_apl_count < config.SANITY_MIN_CSFC_APL:
+                    log.warning(
+                                  "CSfC APL returned only %d items (minimum expected: %d). "
+                                  "NSA site may be down or blocking — snapshot kept but flagged.",
+                                  csfc_apl_count,
+                                  config.SANITY_MIN_CSFC_APL,
+                    )
+        log.info("[Validation] Sanity checks passed (PCL:%d PPs:%d CSfC-APL:%d).", pcl_count, pps_count, csfc_apl_count)
 
 
 # ── Master snapshot ───────────────────────────────────────────────────────────
@@ -313,6 +321,107 @@ def collect_all():
         "niap":           collect_niap(),
         "cc_portal":      collect_cc_portal(),
         "cctl_labs":      collect_cctl_labs(),
+              "csfc":      collect_csfc(),
     }
     validate_snapshot(snapshot)   # raises SanityError on bad data
     return snapshot
+
+# ── CSfC (Commercial Solutions for Classified) ──────────────────────────────
+
+def _poll_cp_headers() -> dict:
+      """HEAD-poll each Capability Package PDF for Last-Modified / ETag changes.
+          Returns a dict keyed by CP name with header metadata."""
+      results = {}
+      for name, url in config.CSFC_CAPABILITY_PACKAGES.items():
+                log.info("  [CSfC CP] HEAD %s ...", name)
+                try:
+                              r = SESSION.head(url, timeout=20, allow_redirects=True)
+                              results[name] = {
+                                                "url": url,
+                                                "status_code": r.status_code,
+                                                "last_modified": r.headers.get("Last-Modified", ""),
+                                                "etag": r.headers.get("ETag", ""),
+                                                "content_length": r.headers.get("Content-Length", ""),
+                              }
+except Exception as exc:
+            log.warning("  [CSfC CP] HEAD failed for %s: %s", name, exc)
+            results[name] = {"url": url, "status_code": None,
+                                                          "last_modified": "", "etag": "", "content_length": ""}
+    return results
+
+
+def _scrape_csfc_page(path: str) -> list:
+      """Scrape a single NSA CSfC page and return a list of text/link items."""
+      url = config.CSFC_BASE + path
+      soup = get_html(url)
+      if not soup:
+                return []
+            items = []
+    content = (
+              soup.find("div", {"id": "ContentPane"})
+              or soup.find("main")
+              or soup.find("div", class_="field-items")
+              or soup
+    )
+    # Grab all paragraph and list-item text + links
+    for tag in content.find_all(["p", "li", "h2", "h3", "h4"]):
+              text = tag.get_text(separator=" ", strip=True)
+              link = tag.find("a")
+              href = link["href"] if link and link.get("href") else ""
+              if len(text) > 15:
+                            items.append({"text": text[:400], "link": href})
+                    # Deduplicate by text prefix
+    seen: set = set()
+    unique = []
+    for item in items:
+              key = item["text"][:80]
+              if key not in seen:
+                            seen.add(key)
+                            unique.append(item)
+                    return unique
+
+
+def collect_csfc() -> dict:
+      """Collect all CSfC monitoring data:
+          - NSA CSfC page snapshots (home, APL, capability packages, FAQ, etc.)
+              - HTTP header polling of Capability Package PDFs
+                  - CSfC-tagged RSS / news feeds
+                      """
+    log.info("[CSfC] Collecting...")
+    data: dict = {
+              "pages": {},
+              "capability_package_headers": {},
+              "feeds": {},
+    }
+
+    # 1. Scrape CSfC pages
+    for page_key, path in config.CSFC_PAGES.items():
+              log.info("  [CSfC] Scraping page: %s (%s)...", page_key, path)
+        data["pages"][page_key] = _scrape_csfc_page(path)
+        log.info("  -> %d items", len(data["pages"][page_key]))
+
+    # 2. HEAD-poll Capability Package PDFs
+    log.info("  [CSfC] Polling Capability Package PDF headers...")
+    data["capability_package_headers"] = _poll_cp_headers()
+
+    # 3. RSS / news feeds
+    for feed in config.CSFC_FEEDS:
+              name = feed["name"]
+        log.info("  [CSfC] Feed: %s...", name)
+        if feed.get("rss"):
+                      items = get_rss(feed["rss"])
+elif feed.get("scrape") and feed.get("url"):
+            items = scrapelab_items(feed["url"])
+else:
+            items = []
+        data["feeds"][name] = items
+        log.info("  -> %d items", len(items))
+
+    apl_count = len(data["pages"].get("apl", []))
+    cp_count = len(data["capability_package_headers"])
+    log.info(
+              "[CSfC] APL items:%d CPs polled:%d",
+              apl_count,
+              cp_count,
+    )
+    return data
