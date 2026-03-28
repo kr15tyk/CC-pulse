@@ -154,8 +154,9 @@ def run_daily() -> None:
 
     # 2. Load prior snapshot for diff
     prior_path = _latest_prior_snapshot()
-    if prior_path is None:
-        log.warning("No prior snapshot found — diff will be empty (first run).")
+    first_run = prior_path is None
+    if first_run:
+        log.warning("No prior snapshot found — diff will be empty (first run). Alerts suppressed.")
         old_snap = _empty_snapshot()
     else:
         log.info("Diffing against: %s", prior_path)
@@ -163,6 +164,11 @@ def run_daily() -> None:
 
     # 3. Compute diff and save it
     diff = differ.compute_diff(old_snap, new_snap)
+    # Suppress alerts on first run — every item looks "new" vs empty baseline,
+    # producing hundreds of false positives. Real alerts start from run #2 onward.
+    if first_run:
+        log.warning("First run: clearing %d false-positive alerts from diff.", len(diff.get("alerts", [])))
+        diff["alerts"] = []
     _save_json(diff, diff_path())
 
     # 4. Rotate old snapshots
