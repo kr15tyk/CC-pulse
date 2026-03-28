@@ -35,7 +35,7 @@ WEBEX_BOT_TOKEN = os.environ.get("CC_WEBEX_BOT_TOKEN", "")
 WEBEX_ROOM_ID   = os.environ.get("CC_WEBEX_ROOM_ID",   "")
 
 # ── Dashboard ──────────────────────────────────────────────────────────────
-DASHBOARD_DIR      = "dashboard"
+DASHBOARD_DIR      = "docs"
 DASHBOARD_FILENAME = "cc_dashboard.html"
 DASHBOARD_RSS      = "cc_feed.xml"  # written alongside the HTML
 
