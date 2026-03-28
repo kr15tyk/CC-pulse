@@ -21,7 +21,7 @@ on:
 
 # ── Permissions (minimal — only what is needed) ───────────────────────────────
 permissions:
-  contents: write  # required to commit snapshots/ and dashboard/ back to repo
+  contents: write  # required to commit snapshots/ and docs/ back to repo
   actions: read
 
 jobs:
@@ -90,7 +90,7 @@ jobs:
         with:
           commit_message: "chore: CC Pulse auto-update [skip ci]"
           # Only commit generated directories — never commit secrets or config
-          file_pattern: "snapshots/ dashboard/"
+          file_pattern: "snapshots/ docs/"
           commit_user_name: "cc-pulse-bot"
           commit_user_email: "cc-pulse-bot@users.noreply.github.com"
           skip_dirty_check: false
