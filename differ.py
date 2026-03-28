@@ -59,7 +59,7 @@ def categorize_news(title: str) -> str:
     return "NEWS"
 
 def is_cisco_ndcpp(product: dict[str, Any]) -> bool:
-    vendor = product.get("vendor_id_name", "").lower()
+    vendor = (product.get("vendor_id_name") or "").lower()
     if not any(kw in vendor for kw in config.CISCO_VENDOR_KEYWORDS):
         return False
     pps = product.get("protection_profiles", [])
