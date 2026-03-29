@@ -1,5 +1,5 @@
 """
-differ.py — Compares two snapshots and returns a structured diff.
+differ.py -- Compares two snapshots and returns a structured diff.
 
 Features:
   - Schema version compatibility check
@@ -24,7 +24,7 @@ Snapshot = dict[str, Any]
 Records  = list[dict[str, Any]]
 
 
-# ── Schema compatibility ───────────────────────────────────────────────────────
+# -- Schema compatibility -------------------------------------------------------
 class SchemaVersionError(RuntimeError):
     pass
 
@@ -34,12 +34,12 @@ def check_schema_compat(old: Snapshot, new: Snapshot) -> None:
     new_v = new.get("schema_version", 1)
     if old_v != new_v:
         log.warning(
-            "Schema version mismatch: old=%s new=%s — diff may be inaccurate.",
+            "Schema version mismatch: old=%s new=%s -- diff may be inaccurate.",
             old_v, new_v,
         )
 
 
-# ── Helpers ───────────────────────────────────────────────────────────────────
+# -- Helpers -------------------------------------------------------------------
 def _ids(records: Records, key: str) -> set[str]:
     return {str(r[key]) for r in records if key in r}
 
@@ -72,10 +72,10 @@ def _headers_changed(old_h: dict, new_h: dict) -> bool:
     """Return True if any change-detection field differs between two header dicts.
 
     Checks in order of reliability:
-      1. ETag — most authoritative when present
-      2. Last-Modified — widely supported
-      3. Content-Length — rough version signal (can change without content change)
-      4. partial_hash — MD5 of first 2 KB; populated only when 1-3 are all absent
+      1. ETag -- most authoritative when present
+      2. Last-Modified -- widely supported
+      3. Content-Length -- rough version signal (can change without content change)
+      4. partial_hash -- MD5 of first 2 KB; populated only when 1-3 are all absent
     """
     for field in ("etag", "last_modified", "content_length", "partial_hash"):
         old_val = old_h.get(field, "")
@@ -87,7 +87,7 @@ def _headers_changed(old_h: dict, new_h: dict) -> bool:
     return False
 
 
-# ── Keyword alert scanner ─────────────────────────────────────────────────────
+# -- Keyword alert scanner -----------------------------------------------------
 def scan_watch_keywords(text: str) -> list[str]:
     """Return any WATCH_KEYWORDS found (case-insensitive) in text."""
     tl = text.lower()
@@ -118,6 +118,11 @@ def flag_alerts(diff: Snapshot) -> list[dict[str, Any]]:
     # NIAP TDs
     for t in diff.get("niap", {}).get("tds", {}).get("added", []):
         _add("NIAP TD", "new", t.get("title", "") + " " + t.get("identifier", ""))
+
+    # NIAP PCL -- All certified products
+    for p in diff.get("niap", {}).get("pcl_all", {}).get("added", []):
+        _add("NIAP PCL", "new_cert",
+             p.get("vendor_id_name", "") + " " + p.get("product_name", ""))
 
     # NIAP News
     for item in diff.get("niap", {}).get("news", {}).get("added", []):
@@ -172,7 +177,7 @@ def flag_alerts(diff: Snapshot) -> list[dict[str, Any]]:
     return alerts
 
 
-# ── NIAP diffs ────────────────────────────────────────────────────────────────
+# -- NIAP diffs ----------------------------------------------------------------
 def diff_niap_pps(old_pps: Records, new_pps: Records) -> dict[str, Any]:
     old_map = byid(old_pps, "pp_id")
     new_map = byid(new_pps, "pp_id")
@@ -228,6 +233,21 @@ def diff_niap_pcl_cisco(old_pcl: Records, new_pcl: Records) -> dict[str, Any]:
     ]
     return {"added": added, "removed": removed, "newly_archived": newly_archived}
 
+def diff_niap_pcl_all(old_pcl: Records, new_pcl: Records) -> dict[str, Any]:
+    """Diff the full NIAP PCL across all tech types."""
+    old_all = {str(p["product_id"]): p for p in old_pcl}
+    new_all = {str(p["product_id"]): p for p in new_pcl}
+    added     = [new_all[i] for i in set(new_all) - set(old_all)]
+    removed   = [old_all[i] for i in set(old_all) - set(new_all)]
+    newly_archived = [
+        new_all[pid]
+        for pid in set(old_all) & set(new_all)
+        if (old_all[pid].get("status_sort") == "Certified"
+            and new_all[pid].get("status_sort") == "Archived")
+    ]
+    return {"added": added, "removed": removed, "newly_archived": newly_archived}
+
+
 def diff_niap_news(old_news: Records, new_news: Records) -> dict[str, Any]:
     old_ids = _ids(old_news, "id")
     new_ids = _ids(new_news, "id")
@@ -257,7 +277,7 @@ def diff_niap_cctls(old_cctls: Records, new_cctls: Records) -> dict[str, Any]:
     return {"added": added, "removed": removed, "status_changes": status_changes}
 
 
-# ── CC Portal diffs ───────────────────────────────────────────────────────────
+# -- CC Portal diffs -----------------------------------------------------------
 def diff_cc_news(old_items: Records, new_items: Records) -> dict[str, Any]:
     old_texts = {i["text"][:80] for i in old_items}
     return {"added": [i for i in new_items if i["text"][:80] not in old_texts]}
@@ -277,7 +297,7 @@ def diff_cc_products(old_products: Records, new_products: Records) -> dict[str, 
     return {"added": [r for r in new_products if key(r) not in old_keys]}
 
 
-# ── CCTL lab diffs ────────────────────────────────────────────────────────────
+# -- CCTL lab diffs ------------------------------------------------------------
 def diff_cctl_labs(
     old_labs: dict[str, Records],
     new_labs: dict[str, Records],
@@ -294,7 +314,7 @@ def diff_cctl_labs(
     return result
 
 
-# ── Generic header diff helper ────────────────────────────────────────────────
+# -- Generic header diff helper ------------------------------------------------
 def _diff_doc_headers(old_docs: dict, new_docs: dict) -> dict:
     """Diff two {name: header_dict} mappings using _headers_changed().
 
@@ -322,7 +342,7 @@ def _diff_doc_headers(old_docs: dict, new_docs: dict) -> dict:
     return result
 
 
-# ── Generic page text diff helper ─────────────────────────────────────────────
+# -- Generic page text diff helper ---------------------------------------------
 def _diff_pages(old_pages: dict, new_pages: dict) -> dict:
     """Diff two {page_key: [items]} dicts by text prefix."""
     result = {}
@@ -338,7 +358,7 @@ def _diff_pages(old_pages: dict, new_pages: dict) -> dict:
     return result
 
 
-# ── Generic feed diff helper ───────────────────────────────────────────────────
+# -- Generic feed diff helper ---------------------------------------------------
 def _diff_feeds(old_feeds: dict, new_feeds: dict, categorize: bool = False) -> dict:
     """Diff two {feed_name: [items]} dicts by id/title/link key.
 
@@ -365,7 +385,7 @@ def _diff_feeds(old_feeds: dict, new_feeds: dict, categorize: bool = False) -> d
     return result
 
 
-# ── Master diff ───────────────────────────────────────────────────────────────
+# -- Master diff ---------------------------------------------------------------
 def compute_diff(old_snapshot: Snapshot, new_snapshot: Snapshot) -> Snapshot:
     """Compare two full snapshots, scan for keyword alerts, return diff."""
     check_schema_compat(old_snapshot, new_snapshot)
@@ -390,6 +410,7 @@ def compute_diff(old_snapshot: Snapshot, new_snapshot: Snapshot) -> Snapshot:
             "pps":          diff_niap_pps(old_n.get("pps", []),     new_n.get("pps", [])),
             "tds":          diff_niap_tds(old_n.get("tds", []),     new_n.get("tds", [])),
             "cisco_ndcpp":  diff_niap_pcl_cisco(old_n.get("pcl", []), new_n.get("pcl", [])),
+            "pcl_all":      diff_niap_pcl_all(old_n.get("pcl", []),   new_n.get("pcl", [])),
             "news":         diff_niap_news(old_n.get("news", []),   new_n.get("news", [])),
             "events":       diff_niap_events(old_n.get("events", []), new_n.get("events", [])),
             "cctls":        diff_niap_cctls(old_n.get("cctls", []), new_n.get("cctls", [])),
@@ -414,7 +435,7 @@ def compute_diff(old_snapshot: Snapshot, new_snapshot: Snapshot) -> Snapshot:
     return diff
 
 
-# ── Weekly merge ──────────────────────────────────────────────────────────────
+# -- Weekly merge --------------------------------------------------------------
 def merge_weekly_diffs(diffs: list[Snapshot]) -> Snapshot:
     """Merge a list of daily diffs into one weekly summary.
 
@@ -429,7 +450,7 @@ def merge_weekly_diffs(diffs: list[Snapshot]) -> Snapshot:
 
     def merge_lists(*lists, key_fn=None):
         """Merge one or more lists, deduplicating by key_fn(item).
-        Default key: str(item)[:120] — override for smarter dedup.
+        Default key: str(item)[:120] -- override for smarter dedup.
         """
         seen:   set  = set()
         merged: list = []
@@ -500,7 +521,7 @@ def merge_weekly_diffs(diffs: list[Snapshot]) -> Snapshot:
             weekly["cctl_labs"][lab] = merge_lists(
                 weekly["cctl_labs"].get(lab, []), items)
 
-        # Alerts — use source+title key to avoid duplicating same event (fix #11)
+        # Alerts -- use source+title key to avoid duplicating same event (fix #11)
         weekly["alerts"] = merge_lists(
             weekly["alerts"], d.get("alerts", []), key_fn=alert_key)
 
@@ -543,7 +564,7 @@ def merge_weekly_diffs(diffs: list[Snapshot]) -> Snapshot:
     return weekly
 
 
-# ── CSfC diff ─────────────────────────────────────────────────────────────────
+# -- CSfC diff -----------------------------------------------------------------
 def diff_csfc(old_csfc: Snapshot, new_csfc: Snapshot) -> Snapshot:
     """Diff two CSfC snapshots."""
     pages = _diff_pages(old_csfc.get("pages", {}), new_csfc.get("pages", {}))
@@ -567,7 +588,7 @@ def diff_csfc(old_csfc: Snapshot, new_csfc: Snapshot) -> Snapshot:
     return {"pages": pages, "capability_packages": cap_packages, "feeds": feeds}
 
 
-# ── CC Crypto Catalog diff ────────────────────────────────────────────────────
+# -- CC Crypto Catalog diff ----------------------------------------------------
 def diff_cc_crypto(old_cc: Snapshot, new_cc: Snapshot) -> Snapshot:
     """Diff two CC Crypto Catalog snapshots."""
     pages       = _diff_pages(old_cc.get("pages", {}), new_cc.get("pages", {}))
@@ -579,7 +600,7 @@ def diff_cc_crypto(old_cc: Snapshot, new_cc: Snapshot) -> Snapshot:
     return {"pages": pages, "doc_headers": doc_headers}
 
 
-# ── NIST CSRC diff ────────────────────────────────────────────────────────────
+# -- NIST CSRC diff ------------------------------------------------------------
 def diff_nist(old_nist: Snapshot, new_nist: Snapshot) -> Snapshot:
     """Diff two NIST CSRC snapshots."""
     pages       = _diff_pages(old_nist.get("pages", {}), new_nist.get("pages", {}))
@@ -598,3 +619,4 @@ def diff_nist(old_nist: Snapshot, new_nist: Snapshot) -> Snapshot:
         page_changes, doc_changes, feed_new,
     )
     return {"pages": pages, "doc_headers": doc_headers, "feeds": feeds}
+
