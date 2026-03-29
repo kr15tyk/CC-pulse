@@ -167,7 +167,14 @@ def run_daily() -> None:
     # Suppress alerts on first run — every item looks "new" vs empty baseline,
     # producing hundreds of false positives. Real alerts start from run #2 onward.
     if first_run:
-        log.warning("First run: clearing %d false-positive alerts from diff.", len(diff.get("alerts", [])))
+        log.warning("First run: suppressing all changes from diff (baseline snapshot, not a real diff).")
+        # Clear all change lists — on first run every item looks "new" vs empty baseline.
+        # The dashboard should show 0 changes and 0 alerts. Real diffs start from run #2.
+        for section in ("niap", "cc_portal", "csfc", "cc_crypto", "nist"):
+            if section in diff and isinstance(diff[section], dict):
+                for key in diff[section]:
+                    if isinstance(diff[section][key], list):
+                        diff[section][key] = []
         diff["alerts"] = []
     _save_json(diff, diff_path())
 
@@ -265,3 +272,4 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
+
