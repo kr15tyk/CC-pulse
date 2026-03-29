@@ -148,6 +148,7 @@ a:hover { text-decoration: underline; }
 .item-link { color: var(--blue); flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .item-meta { font-size: 0.7rem; color: var(--muted); white-space: nowrap; flex-shrink: 0; }
 .no-change { color: var(--muted); font-size: 0.8rem; padding: 0.25rem 0; }
+.item-sub { font-size: 0.72rem; color: var(--muted); padding: 1px 0 4px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 
 /* CCTL lab rows */
 .lab-row { margin-bottom: 0.5rem; }
@@ -206,6 +207,10 @@ footer { margin-top: 2rem; padding: 1rem 0; border-top: 1px solid var(--border);
   <div class="stat"><a href="#sec-nist">
     <div class="stat-num {% if nist_total_stat > 0 %}active-num{% endif %}">{{ nist_total_stat }}</div>
     <div class="stat-lbl">NIST Doc Updates</div>
+  </a></div>
+  <div class="stat"><a href="#sec-cc-portal">
+    <div class="stat-num {% if cc_portal_total_stat > 0 %}active-num{% endif %}">{{ cc_portal_total_stat }}</div>
+    <div class="stat-lbl">CC Portal</div>
   </a></div>
   <div class="stat"><a href="#sec-niap-pp">
     <div class="stat-num {% if alert_total > 0 %}alert-num{% endif %}">{{ alert_total }}</div>
@@ -285,18 +290,24 @@ footer { margin-top: 2rem; padding: 1rem 0; border-top: 1px solid var(--border);
     <div class="sub-hdr sub-new">New TDs ({{ diff.niap.tds.added | length }})</div>
     {% for td in diff.niap.tds.added %}
     <div class="item-row">
-      <span class="item-link">{{ td.identifier }}</span>
-      <span class="item-meta">{{ td.pp_short_name }} &middot; {{ td.status }}</span>
+      <span class="item-link">{{ td.identifier }} &mdash; {{ td.title }}</span>
+      <span class="item-meta">{% if td.publication_date %}{{ td.publication_date[:10] }}{% endif %}</span>
     </div>
+    {% if td.protection_profile %}
+    <div class="item-sub">Applies to: {% for pp in td.protection_profile[:3] %}{{ pp.pp_short_name }}{% if not loop.last %}, {% endif %}{% endfor %}{% if td.protection_profile | length > 3 %} +{{ (td.protection_profile | length) - 3 }} more{% endif %}</div>
+    {% endif %}
     {% endfor %}
     {% endif %}
     {% if diff.niap.tds.removed %}
     <div class="sub-hdr sub-removed">Removed TDs ({{ diff.niap.tds.removed | length }})</div>
     {% for td in diff.niap.tds.removed %}
     <div class="item-row">
-      <span class="item-link">{{ td.identifier }}</span>
-      <span class="item-meta">{{ td.pp_short_name }} &middot; {{ td.status }}</span>
+      <span class="item-link">{{ td.identifier }} &mdash; {{ td.title }}</span>
+      <span class="item-meta">{% if td.removed_on %}Removed: {{ td.removed_on[:10] }}{% endif %}</span>
     </div>
+    {% if td.protection_profile %}
+    <div class="item-sub">Was for: {% for pp in td.protection_profile[:3] %}{{ pp.pp_short_name }}{% if not loop.last %}, {% endif %}{% endfor %}</div>
+    {% endif %}
     {% endfor %}
     {% endif %}
     {% if niap_td_total == 0 %}<p class="no-change">No changes detected.</p>{% endif %}
@@ -306,26 +317,29 @@ footer { margin-top: 2rem; padding: 1rem 0; border-top: 1px solid var(--border);
 <!-- Cisco NDcPP -->
 <div class="card {% if cisco_total > 0 %}card-new{% endif %}" id="sec-cisco">
   <div class="card-hdr" onclick="toggleCard(this)">
-    <span>Cisco NDcPP Evaluations</span>
+    <span>Cisco NDcPP Certifications</span>
     <span class="card-count">{{ cisco_total }} change{% if cisco_total != 1 %}s{% endif %}</span>
     <span class="toggle-icon">{% if cisco_total == 0 %}&#9658;{% else %}&#9660;{% endif %}</span>
   </div>
   <div class="card-body {% if cisco_total == 0 %}collapsed{% endif %}">
     {% if diff.niap.cisco_ndcpp.added %}
-    <div class="sub-hdr sub-new">New ({{ diff.niap.cisco_ndcpp.added | length }})</div>
+    <div class="sub-hdr sub-new">New Certifications ({{ diff.niap.cisco_ndcpp.added | length }})</div>
     {% for item in diff.niap.cisco_ndcpp.added %}
     <div class="item-row">
-      <span class="item-link">{{ item.vendor }} - {{ item.product }}</span>
-      <span class="item-meta">{{ item.status }} &middot; {{ item.comp_date }}</span>
+      <span class="item-link">{{ item.vendor_id_name }} &mdash; {{ item.product_name }}</span>
+      <span class="item-meta">{% if item.certification_date %}{{ item.certification_date[:10] }}{% endif %}</span>
     </div>
+    {% if item.protection_profiles %}
+    <div class="item-sub">{{ item.protection_profiles | map(attribute='pp_short_name') | join(', ') }}</div>
+    {% endif %}
     {% endfor %}
     {% endif %}
     {% if diff.niap.cisco_ndcpp.removed %}
     <div class="sub-hdr sub-removed">Removed ({{ diff.niap.cisco_ndcpp.removed | length }})</div>
     {% for item in diff.niap.cisco_ndcpp.removed %}
     <div class="item-row">
-      <span class="item-link">{{ item.vendor }} - {{ item.product }}</span>
-      <span class="item-meta">{{ item.status }}</span>
+      <span class="item-link">{{ item.vendor_id_name }} &mdash; {{ item.product_name }}</span>
+      <span class="item-meta">{{ item.status_sort }}</span>
     </div>
     {% endfor %}
     {% endif %}
@@ -333,9 +347,12 @@ footer { margin-top: 2rem; padding: 1rem 0; border-top: 1px solid var(--border);
     <div class="sub-hdr sub-updated">Newly Archived ({{ diff.niap.cisco_ndcpp.newly_archived | length }})</div>
     {% for item in diff.niap.cisco_ndcpp.newly_archived %}
     <div class="item-row">
-      <span class="item-link">{{ item.vendor }} - {{ item.product }}</span>
-      <span class="item-meta">{{ item.status }}</span>
+      <span class="item-link">{{ item.vendor_id_name }} &mdash; {{ item.product_name }}</span>
+      <span class="item-meta">Archived</span>
     </div>
+    {% if item.protection_profiles %}
+    <div class="item-sub">{{ item.protection_profiles | map(attribute='pp_short_name') | join(', ') }}</div>
+    {% endif %}
     {% endfor %}
     {% endif %}
     {% if cisco_total == 0 %}<p class="no-change">No changes detected.</p>{% endif %}
@@ -343,18 +360,18 @@ footer { margin-top: 2rem; padding: 1rem 0; border-top: 1px solid var(--border);
 </div>
 
 <!-- NIAP News -->
-<div class="card {% if niap_news_total > 0 %}card-new{% endif %}" id="sec-niap-news">
+<div class="card {% if niap_news_total > 0 or diff.niap.events.added %}card-new{% endif %}" id="sec-niap-news">
   <div class="card-hdr" onclick="toggleCard(this)">
-    <span>NIAP News</span>
+    <span>NIAP News &amp; Announcements</span>
     <span class="card-count">{{ niap_news_total }} new item{% if niap_news_total != 1 %}s{% endif %}</span>
     <span class="sparkline">
       {% for v in sparklines.niap_news %}
       <span class="sp-bar" style="height:{{ v }}%" title="{{ v }}%"></span>
       {% endfor %}
     </span>
-    <span class="toggle-icon">{% if niap_news_total == 0 %}&#9658;{% else %}&#9660;{% endif %}</span>
+    <span class="toggle-icon">{% if niap_news_total == 0 and not diff.niap.events.added %}&#9658;{% else %}&#9660;{% endif %}</span>
   </div>
-  <div class="card-body {% if niap_news_total == 0 %}collapsed{% endif %}">
+  <div class="card-body {% if niap_news_total == 0 and not diff.niap.events.added %}collapsed{% endif %}">
     {% if diff.niap.news.added %}
     {% for item in diff.niap.news.added %}
     <div class="item-row">
@@ -363,7 +380,55 @@ footer { margin-top: 2rem; padding: 1rem 0; border-top: 1px solid var(--border);
     </div>
     {% endfor %}
     {% endif %}
-    {% if niap_news_total == 0 %}<p class="no-change">No new items.</p>{% endif %}
+    {% if diff.niap.events.added %}
+    <div class="sub-hdr sub-new">Events ({{ diff.niap.events.added | length }})</div>
+    {% for ev in diff.niap.events.added %}
+    <div class="item-row">
+      <span class="item-link">{{ ev.title or ev.name or ev }}</span>
+      <span class="item-meta">{{ ev.date or ev.start_date or '' }}</span>
+    </div>
+    {% endfor %}
+    {% endif %}
+    {% if niap_news_total == 0 and not diff.niap.events.added %}<p class="no-change">No new items.</p>{% endif %}
+  </div>
+</div>
+
+<!-- NIAP CCTL Registry -->
+<div class="card {% if cctl_registry_total > 0 %}card-updated{% endif %}" id="sec-cctl-registry">
+  <div class="card-hdr" onclick="toggleCard(this)">
+    <span>NIAP CCTL Registry</span>
+    <span class="card-count">{{ cctl_registry_total }} change{% if cctl_registry_total != 1 %}s{% endif %}</span>
+    <span class="toggle-icon">{% if cctl_registry_total == 0 %}&#9658;{% else %}&#9660;{% endif %}</span>
+  </div>
+  <div class="card-body {% if cctl_registry_total == 0 %}collapsed{% endif %}">
+    {% if diff.niap.cctls.added %}
+    <div class="sub-hdr sub-new">New Labs ({{ diff.niap.cctls.added | length }})</div>
+    {% for lab in diff.niap.cctls.added %}
+    <div class="item-row">
+      <a class="item-link" href="{{ lab.cctl_url or '#' }}" target="_blank">{{ lab.cctl_name }}</a>
+      <span class="item-meta">{{ lab.city }}{% if lab.state_id %}, {{ lab.state_id }}{% endif %}</span>
+    </div>
+    {% endfor %}
+    {% endif %}
+    {% if diff.niap.cctls.removed %}
+    <div class="sub-hdr sub-removed">Removed Labs ({{ diff.niap.cctls.removed | length }})</div>
+    {% for lab in diff.niap.cctls.removed %}
+    <div class="item-row">
+      <a class="item-link" href="{{ lab.cctl_url or '#' }}" target="_blank">{{ lab.cctl_name }}</a>
+      <span class="item-meta">{{ lab.city }}{% if lab.state_id %}, {{ lab.state_id }}{% endif %}</span>
+    </div>
+    {% endfor %}
+    {% endif %}
+    {% if diff.niap.cctls.status_changes %}
+    <div class="sub-hdr sub-updated">Status Changes ({{ diff.niap.cctls.status_changes | length }})</div>
+    {% for lab in diff.niap.cctls.status_changes %}
+    <div class="item-row">
+      <a class="item-link" href="{{ lab.cctl_url or '#' }}" target="_blank">{{ lab.cctl_name }}</a>
+      <span class="item-meta">{{ lab.old_status }} &#8594; {{ lab.new_status }}</span>
+    </div>
+    {% endfor %}
+    {% endif %}
+    {% if cctl_registry_total == 0 %}<p class="no-change">No registry changes.</p>{% endif %}
   </div>
 </div>
 
@@ -433,6 +498,50 @@ footer { margin-top: 2rem; padding: 1rem 0; border-top: 1px solid var(--border);
     {% endif %}
     {% endfor %}
     {% if csfc_total == 0 %}<p class="no-change">No changes detected.</p>{% endif %}
+  </div>
+</div>
+
+<!-- CC Portal (international) -->
+<div class="card {% if cc_portal_total > 0 %}card-new{% endif %}" id="sec-cc-portal">
+  <div class="card-hdr" onclick="toggleCard(this)">
+    <span>CC Portal (International)</span>
+    <span class="card-count">{{ cc_portal_total }} new item{% if cc_portal_total != 1 %}s{% endif %}</span>
+    <span class="sparkline">
+      {% for v in sparklines.cc_portal %}
+      <span class="sp-bar" style="height:{{ v }}%" title="{{ v }}%"></span>
+      {% endfor %}
+    </span>
+    <span class="toggle-icon">{% if cc_portal_total == 0 %}&#9658;{% else %}&#9660;{% endif %}</span>
+  </div>
+  <div class="card-body {% if cc_portal_total == 0 %}collapsed{% endif %}">
+    {% if diff.cc_portal.news.added %}
+    <div class="sub-hdr sub-new">News ({{ diff.cc_portal.news.added | length }})</div>
+    {% for item in diff.cc_portal.news.added %}
+    <div class="item-row">
+      <a class="item-link" href="{{ item.link or item.url or 'https://www.commoncriteriaportal.org/' }}" target="_blank">{{ item.title or item.text or item }}</a>
+      <span class="item-meta">{{ item.date or '' }}</span>
+    </div>
+    {% endfor %}
+    {% endif %}
+    {% if diff.cc_portal.pps.added %}
+    <div class="sub-hdr sub-new">New International PPs ({{ diff.cc_portal.pps.added | length }})</div>
+    {% for pp in diff.cc_portal.pps.added %}
+    <div class="item-row">
+      <a class="item-link" href="{{ pp.link or 'https://www.commoncriteriaportal.org/pps/' }}" target="_blank">{{ pp.title or pp.text or pp }}</a>
+      <span class="item-meta"></span>
+    </div>
+    {% endfor %}
+    {% endif %}
+    {% if diff.cc_portal.products.added %}
+    <div class="sub-hdr sub-new">New Certified Products ({{ diff.cc_portal.products.added | length }})</div>
+    {% for prod in diff.cc_portal.products.added %}
+    <div class="item-row">
+      <span class="item-link">{{ prod }}</span>
+      <span class="item-meta"></span>
+    </div>
+    {% endfor %}
+    {% endif %}
+    {% if cc_portal_total == 0 %}<p class="no-change">No new international items.</p>{% endif %}
   </div>
 </div>
 
@@ -675,6 +784,20 @@ def render_dashboard(diff: dict, output_dir: str = "docs") -> None:
     csfc_total_stat = csfc_total
     nist_total_stat = nist_total + cc_crypto_total
 
+    # CCTL registry changes
+    cctls_diff          = niap.get("cctls", {})
+    cctl_registry_total = (len(cctls_diff.get("added", [])) +
+                           len(cctls_diff.get("removed", [])) +
+                           len(cctls_diff.get("status_changes", [])))
+
+    # CC Portal totals
+    ccp                 = diff.get("cc_portal", {})
+    cc_portal_news_n    = len(ccp.get("news", {}).get("added", []))
+    cc_portal_pps_n     = len(ccp.get("pps", {}).get("added", []))
+    cc_portal_prod_n    = len(ccp.get("products", {}).get("added", []))
+    cc_portal_total     = cc_portal_news_n + cc_portal_pps_n + cc_portal_prod_n
+    cc_portal_total_stat = cc_portal_total
+
     # Sparkline data
     recent_diffs = _load_recent_diffs()
     def _sp(section_key):
@@ -692,6 +815,7 @@ def render_dashboard(diff: dict, output_dir: str = "docs") -> None:
         "csfc":      _sp("csfc"),
         "cc_crypto": _sp("cc_crypto"),
         "nist":      _sp("nist"),
+        "cc_portal": _sp("cc_portal"),
     }
 
     # Render template
@@ -714,8 +838,11 @@ def render_dashboard(diff: dict, output_dir: str = "docs") -> None:
         csfc_total_stat = csfc_total_stat,
         nist_total_stat = nist_total_stat,
         sparklines      = sparklines,
-        period_start    = diff.get("period_start", ""),
-        period_end      = diff.get("period_end", ""),
+        cctl_registry_total  = cctl_registry_total,
+        cc_portal_total      = cc_portal_total,
+        cc_portal_total_stat = cc_portal_total_stat,
+        period_start         = diff.get("period_start", ""),
+        period_end           = diff.get("period_end", ""),
     )
 
     html_path = os.path.join(output_dir, "cc_dashboard.html")
