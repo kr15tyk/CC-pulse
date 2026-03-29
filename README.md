@@ -64,9 +64,9 @@ CC-pulse/
 | **NIAP** | PCL (all 1,600+ certified products across all tech types), Cisco NDcPP subset, PPs, TDs, CCTLs, News, Events APIs | New/removed/archived certifications; PP adds/sunsets/status; TD adds/supersessions; CCTL lab status changes; announcements |
 | **CC Portal** | News, PPs, Products RSS | New international certifications, PPs, and news items |
 | **CCTL Labs** | 8 lab RSS feeds + scraped sites | New blog posts and lab announcements |
-| **CSfC** | 6 NSA pages, 8 CP PDFs (HEAD+hash), NSA/CISA/DISA feeds | APL changes, CP revisions, advisories |
+| **CSfC** | 7 NSA pages (incl. Announcements), 8 CP PDFs (HEAD+hash), NSA/CISA/DISA feeds | CP revisions, CSfC announcements, advisories |
 | **CC Crypto Catalog** | CCDB-018 + related PDFs (HEAD+hash), CC Portal crypto pages | New PDF versions, CCDB announcements |
-| **NIST CSRC** | 5 CSRC pages (news, FIPS, CMVP MIP, PQC, crypto-standards), 7 PDFs (HEAD+hash), 3 RSS feeds | New FIPS/SP 800, CMVP MIP entries, PQC milestones |
+| **NIST CSRC** | 6 CSRC pages (news, FIPS, CMVP MIP, PQC, crypto-standards, CMVP validated modules), 7 PDFs (HEAD+hash), 3 RSS feeds | New FIPS/SP 800, CMVP MIP entries, PQC milestones, CMVP validation changes |
 
 ### Dashboard Cards
 
@@ -75,8 +75,9 @@ CC-pulse/
 | NIAP Protection Profiles | `niap.pps` | Added, removed, sunset-date changes, status changes -- with PP title and tech type |
 | NIAP Technical Decisions | `niap.tds` | Added and removed TDs -- with full title and which PP(s) the TD applies to |
 | Cisco NDcPP Certifications | `niap.cisco_ndcpp` | New, removed, and newly-archived Cisco NDcPP products -- with PP short names |
+| NIAP In-Evaluation Products | `niap.in_evaluation` | Products currently under evaluation (22 active); alerts on newly added or removed entries |
 | NIAP PCL -- All Certifications | `niap.pcl_all` | New, archived, and removed certified products across **all** NIAP tech types |
-| NIAP News & Announcements | `niap.news` + `niap.events` | NIAP news posts and event announcements, categorised (LABGRAM, VALGRAM, CSfC, etc.) |
+| NIAP News & Announcements | `niap.news` + `niap.events` | NIAP news posts and event announcements, categorised (LABGRAM, VALGRAM, CSfC, POLICY, etc.); Policy Letters sub-section for PDF policy items |
 | NIAP CCTL Registry | `niap.cctls` | Lab additions, removals, and accreditation status changes |
 | CCTL Lab Intel | `cctl_labs` | New blog/news posts from each accredited lab, with per-lab post counts |
 | CSfC Capability Packages | `csfc.capability_packages` | Updated CPs with old vs. new content size |
@@ -206,7 +207,8 @@ The daily diff JSON written to `snapshots/diffs/YYYY-MM-DD_diff.json` has this t
     "pcl_all":      { "added": [], "removed": [], "newly_archived": [] },
     "news":         { "added": [] },
     "events":       { "added": [] },
-    "cctls":        { "added": [], "removed": [], "status_changes": [] }
+    "cctls":        { "added": [], "removed": [], "status_changes": [] },
+    "in_evaluation": { "added": [], "removed": [], "current_count": 0 }
   },
   "cc_portal":  { "news": { "added": [] }, "pps": { "added": [] }, "products": { "added": [] } },
   "cctl_labs":  { "<lab_name>": [ { "title": "", "link": "", "published": "" } ] },
@@ -233,7 +235,7 @@ The daily diff JSON written to `snapshots/diffs/YYYY-MM-DD_diff.json` has this t
 | `CSFC_FEEDS` | NSA/CISA/DISA advisory feeds |
 | `CC_CRYPTO_DOCS` | CC Crypto Catalog PDF URLs |
 | `CC_CRYPTO_PAGES` | CC Portal crypto-relevant pages |
-| `NIST_CSRC_PAGES` | NIST CSRC pages (news, FIPS, CMVP MIP, PQC) |
+| `NIST_CSRC_PAGES` | NIST CSRC pages (news, FIPS, CMVP MIP, PQC, crypto-standards, CMVP validated modules) |
 | `NIST_CRYPTO_DOCS` | NIST PDF URLs (FIPS 140-3, SP 800-131A, FIPS 203-205, etc.) |
 | `NIST_FEEDS` | NIST cybersecurity RSS feeds |
 
@@ -290,4 +292,5 @@ CC_LOG_LEVEL=DEBUG python main.py
 ## License
 
 MIT
+
 
