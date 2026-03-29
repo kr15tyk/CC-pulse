@@ -122,7 +122,7 @@ def flag_alerts(diff: Snapshot) -> list[dict[str, Any]]:
     # NIAP PCL -- All certified products
     for p in diff.get("niap", {}).get("pcl_all", {}).get("added", []):
         _add("NIAP PCL", "new_cert",
-             p.get("vendor_id_name", "") + " " + p.get("product_name", ""))
+             (p.get("vendor_id_name") or "") + " " + (p.get("product_name") or ""))
 
     # NIAP News
     for item in diff.get("niap", {}).get("news", {}).get("added", []):
@@ -619,4 +619,5 @@ def diff_nist(old_nist: Snapshot, new_nist: Snapshot) -> Snapshot:
         page_changes, doc_changes, feed_new,
     )
     return {"pages": pages, "doc_headers": doc_headers, "feeds": feeds}
+
 
