@@ -67,6 +67,10 @@ def _section_daily_counts(diffs: list, section_key: str) -> list:
         elif section_key == "nist":
             n = sum(1 for doc in d.get("nist", {}).get("doc_headers", {}).values()
                     if doc.get("changed"))
+        elif section_key == "pcl_all":
+            pa = d.get("niap", {}).get("pcl_all", {})
+            n = (len(pa.get("added", [])) + len(pa.get("removed", [])) +
+                 len(pa.get("newly_archived", [])))
         counts.append(n)
     return counts
 
@@ -356,6 +360,55 @@ footer { margin-top: 2rem; padding: 1rem 0; border-top: 1px solid var(--border);
     {% endfor %}
     {% endif %}
     {% if cisco_total == 0 %}<p class="no-change">No changes detected.</p>{% endif %}
+  </div>
+</div>
+
+<!-- NIAP PCL -- All Certifications -->
+<div class="card {% if pcl_all_total > 0 %}card-new{% endif %}" id="sec-niap-pcl">
+  <div class="card-hdr" onclick="toggleCard(this)">
+    <span>NIAP PCL -- All Certifications</span>
+    <span class="card-count">{{ pcl_all_total }} change{% if pcl_all_total != 1 %}s{% endif %}</span>
+    <span class="sparkline">
+      {% for v in sparklines.pcl_all %}
+      <span class="sp-bar" style="height:{{ v }}%" title="{{ v }}%"></span>
+      {% endfor %}
+    </span>
+  </div>
+  <div class="card-body {% if pcl_all_total == 0 %}collapsed{% endif %}">
+    {% if diff.niap.pcl_all.added %}
+    <div class="sub-hdr sub-new">New Certifications ({{ diff.niap.pcl_all.added | length }})</div>
+    {% for item in diff.niap.pcl_all.added %}
+    <div class="item-row">
+      <span class="item-link">{{ item.vendor_id_name }} -- {{ item.product_name }}</span>
+      <span class="item-meta">{% if item.certification_date %}{{ item.certification_date[:10] }}{% endif %}</span>
+    </div>
+    {% if item.protection_profiles %}
+    <div class="item-sub">{{ item.protection_profiles | map(attribute="pp_short_name") | join(", ") }}</div>
+    {% endif %}
+    {% endfor %}
+    {% endif %}
+    {% if diff.niap.pcl_all.newly_archived %}
+    <div class="sub-hdr sub-updated">Newly Archived ({{ diff.niap.pcl_all.newly_archived | length }})</div>
+    {% for item in diff.niap.pcl_all.newly_archived %}
+    <div class="item-row">
+      <span class="item-link">{{ item.vendor_id_name }} -- {{ item.product_name }}</span>
+      <span class="item-meta">Archived</span>
+    </div>
+    {% if item.protection_profiles %}
+    <div class="item-sub">{{ item.protection_profiles | map(attribute="pp_short_name") | join(", ") }}</div>
+    {% endif %}
+    {% endfor %}
+    {% endif %}
+    {% if diff.niap.pcl_all.removed %}
+    <div class="sub-hdr sub-removed">Removed ({{ diff.niap.pcl_all.removed | length }})</div>
+    {% for item in diff.niap.pcl_all.removed %}
+    <div class="item-row">
+      <span class="item-link">{{ item.vendor_id_name }} -- {{ item.product_name }}</span>
+      <span class="item-meta">{{ item.status_sort }}</span>
+    </div>
+    {% endfor %}
+    {% endif %}
+    {% if pcl_all_total == 0 %}<p class="no-change">No changes detected.</p>{% endif %}
   </div>
 </div>
 
@@ -761,6 +814,7 @@ def render_dashboard(diff: dict, output_dir: str = "docs") -> None:
     pps          = niap.get("pps", {})
     tds          = niap.get("tds", {})
     cisco        = niap.get("cisco_ndcpp", {})
+    pcl_all      = niap.get("pcl_all", {})
     news         = niap.get("news", {})
 
     niap_pp_total   = (len(pps.get("added", [])) + len(pps.get("removed", [])) +
@@ -768,6 +822,8 @@ def render_dashboard(diff: dict, output_dir: str = "docs") -> None:
     niap_td_total   = len(tds.get("added", [])) + len(tds.get("removed", []))
     cisco_total     = (len(cisco.get("added", [])) + len(cisco.get("removed", [])) +
                        len(cisco.get("newly_archived", [])))
+    pcl_all_total   = (len(pcl_all.get("added", [])) + len(pcl_all.get("removed", [])) +
+                       len(pcl_all.get("newly_archived", [])))
     niap_news_total = len(news.get("added", []))
 
     cctl_total      = sum(len(v) for v in diff.get("cctl_labs", {}).values() if v)
@@ -779,7 +835,7 @@ def render_dashboard(diff: dict, output_dir: str = "docs") -> None:
                           if d.get("changed"))
     alert_total     = len(diff.get("alerts", []))
 
-    niap_total_stat = niap_pp_total + niap_td_total + cisco_total + niap_news_total
+    niap_total_stat = niap_pp_total + niap_td_total + cisco_total + pcl_all_total + niap_news_total
     cctl_total_stat = cctl_total
     csfc_total_stat = csfc_total
     nist_total_stat = nist_total + cc_crypto_total
@@ -816,6 +872,7 @@ def render_dashboard(diff: dict, output_dir: str = "docs") -> None:
         "cc_crypto": _sp("cc_crypto"),
         "nist":      _sp("nist"),
         "cc_portal": _sp("cc_portal"),
+        "pcl_all":   _sp("pcl_all"),
     }
 
     # Render template
@@ -842,6 +899,7 @@ def render_dashboard(diff: dict, output_dir: str = "docs") -> None:
         cc_portal_total      = cc_portal_total,
         cc_portal_total_stat = cc_portal_total_stat,
         period_start         = diff.get("period_start", ""),
+        pcl_all_total        = pcl_all_total,
         period_end           = diff.get("period_end", ""),
     )
 
@@ -855,4 +913,5 @@ def render_dashboard(diff: dict, output_dir: str = "docs") -> None:
     with open(rss_path, "w", encoding="utf-8") as fh:
         fh.write(rss)
     log.info("RSS feed written to %s", rss_path)
+
 
