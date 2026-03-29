@@ -1,20 +1,20 @@
 # =============================================================
-# CC PULSE — CONFIGURATION
+# CC PULSE -- CONFIGURATION
 # Edit this file to match your environment.
 # For local dev, copy .env.example to .env and set secrets there.
 # =============================================================
 
 import os
 
-# ── Schema ─────────────────────────────────────────────────────────────────
+# -- Schema -----------------------------------------------------------------
 # Increment whenever the snapshot structure changes in a breaking way.
 SNAPSHOT_SCHEMA_VERSION = 2
 
-# ── Logging ────────────────────────────────────────────────────────────────
+# -- Logging ----------------------------------------------------------------
 # One of: DEBUG, INFO, WARNING, ERROR
 LOG_LEVEL = os.environ.get("CC_LOG_LEVEL", "INFO")
 
-# ── Email Settings ─────────────────────────────────────────────────────────
+# -- Email Settings ---------------------------------------------------------
 EMAIL_SMTP_HOST    = os.environ.get("CC_SMTP_HOST",       "smtp.gmail.com")
 EMAIL_SMTP_PORT    = int(os.environ.get("CC_SMTP_PORT",   "587"))
 EMAIL_USERNAME     = os.environ.get("CC_EMAIL_USERNAME",  "your-sender@gmail.com")
@@ -25,35 +25,35 @@ EMAIL_RECIPIENTS   = [
     for r in os.environ.get("CC_EMAIL_RECIPIENTS", "you@example.com").split(",")
     if r.strip()
 ]
-EMAIL_SUBJECT = "Weekly CC Pulse — {date}"
+EMAIL_SUBJECT = "Weekly CC Pulse -- {date}"
 
-# ── Notifications (Webex) ──────────────────────────────────────────────────
+# -- Notifications (Webex) --------------------------------------------------
 # Set CC_WEBEX_BOT_TOKEN and CC_WEBEX_ROOM_ID in your environment or GitHub
 # Secrets to enable real-time Webex Space notifications.
 # Leave blank to disable.
 WEBEX_BOT_TOKEN = os.environ.get("CC_WEBEX_BOT_TOKEN", "")
 WEBEX_ROOM_ID   = os.environ.get("CC_WEBEX_ROOM_ID",   "")
 
-# ── Dashboard ──────────────────────────────────────────────────────────────
+# -- Dashboard --------------------------------------------------------------
 DASHBOARD_DIR      = "docs"
 DASHBOARD_FILENAME = "cc_dashboard.html"
 DASHBOARD_RSS      = "cc_feed.xml"  # written alongside the HTML
 
-# ── Snapshots ──────────────────────────────────────────────────────────────
+# -- Snapshots --------------------------------------------------------------
 SNAPSHOT_DIR = "snapshots"        # daily JSON snapshots
 DIFF_DIR     = "snapshots/diffs"  # daily diff JSONs (for weekly merge)
 
-# ── Retry Settings ─────────────────────────────────────────────────────────
+# -- Retry Settings ---------------------------------------------------------
 RETRY_ATTEMPTS    = 4
 RETRY_BACKOFF_BASE = 2  # seconds; actual delay = base ** attempt
 
-# ── Sanity Check Thresholds ────────────────────────────────────────────────
+# -- Sanity Check Thresholds ------------------------------------------------
 # If a collection returns fewer items than these minimums, it is treated as a
 # fetch failure and the snapshot is rejected (or warned, per domain).
 SANITY_MIN_PCL = 50   # NIAP PCL usually has 300+ products
 SANITY_MIN_PPS = 10   # NIAP PPs usually has 50+
 
-# ── NIAP API ───────────────────────────────────────────────────────────────
+# -- NIAP API ---------------------------------------------------------------
 NIAP_BASE = "https://www.niap-ccevs.org"
 NIAP_ENDPOINTS = {
     "pcl":        "/api/project/product/pcl_products_all/",
@@ -65,7 +65,7 @@ NIAP_ENDPOINTS = {
     "news":       "/api/publish/announcements/get_news_frontend/?limit=500&offset=0",
 }
 
-# ── CC Portal ──────────────────────────────────────────────────────────────
+# -- CC Portal --------------------------------------------------------------
 CC_PORTAL_BASE = "https://www.commoncriteriaportal.org"
 CC_PORTAL_PAGES = {
     "news":         "/news/index.cfm",
@@ -76,7 +76,7 @@ CC_PORTAL_PAGES = {
 }
 CC_PORTAL_RSS = "https://www.commoncriteriaportal.org/rss/pps.xml"
 
-# ── CCTL Lab Feeds ─────────────────────────────────────────────────────────
+# -- CCTL Lab Feeds ---------------------------------------------------------
 CCTL_LABS = [
     {"name": "atsec information security",  "rss": "https://www.atsec.com/feed/",          "url": "https://www.atsec.com/blog/",                            "scrape": False},
     {"name": "Lightship Security",          "rss": "https://lightshipsec.com/feed/",        "url": "https://lightshipsec.com/blog/",                         "scrape": False},
@@ -88,13 +88,13 @@ CCTL_LABS = [
     {"name": "Leidos CCTL",                 "rss": None,                                    "url": "https://www.leidos.com/",                                "scrape": True},
 ]
 
-# ── Product Filters ────────────────────────────────────────────────────────
+# -- Product Filters --------------------------------------------------------
 CISCO_VENDOR_KEYWORDS = ["cisco"]
 NDCPP_PP_KEYWORDS     = ["CPP_ND"]
 
-# ── News Category Keywords ─────────────────────────────────────────────────
+# -- News Category Keywords -------------------------------------------------
 # Used by categorize_news() to tag news/feed items with a human-readable
-# category. Order matters — first match wins. "NEWS" is the catch-all.
+# category. Order matters -- first match wins. "NEWS" is the catch-all.
 NEWS_CATEGORY_KEYWORDS = {
     "LABGRAM":    ["labgram"],
     "VALGRAM":    ["valgram"],
@@ -118,15 +118,15 @@ NEWS_CATEGORY_KEYWORDS = {
         "sp 800", "cmvp", "cavp",
         "post-quantum", "pqc", "ml-kem", "ml-dsa", "slh-dsa", "csrc",
     ],
-    "NEWS":       [],  # catch-all — always last
+    "NEWS":       [],  # catch-all -- always last
 }
 
-# ── Watch Keywords (high-priority alert terms) ─────────────────────────────
+# -- Watch Keywords (high-priority alert terms) -----------------------------
 # Any TD title, PP name, news item, page text, or feed entry containing one
 # of these strings (case-insensitive) triggers:
-#   • an immediate Webex Space notification
-#   • an immediate alert email
-#   • a red alert banner on the dashboard
+#   * an immediate Webex Space notification
+#   * an immediate alert email
+#   * a red alert banner on the dashboard
 #
 # Guidelines for maintenance:
 #   - Keep entries specific to avoid false positives.
@@ -134,8 +134,8 @@ NEWS_CATEGORY_KEYWORDS = {
 #     because old documents may still reference 186-4 in a sunset context.
 #   - "CAVP" / "CMVP" appear in both crypto and NIST contexts intentionally.
 WATCH_KEYWORDS = [
-    # ── NIAP / NDcPP ─────────────────────────────────────────────────
-    "FIPS 186-4",          # legacy — watched for sunset/supersession references
+    # -- NIAP / NDcPP -------------------------------------------------
+    "FIPS 186-4",          # legacy -- watched for sunset/supersession references
     "FIPS 186-5",          # current DSS standard
     "NDcPP",
     "CPP_ND",
@@ -147,7 +147,7 @@ WATCH_KEYWORDS = [
     "valgram",
     "emergency",
 
-    # ── CSfC ─────────────────────────────────────────────────────────
+    # -- CSfC ---------------------------------------------------------
     "CSfC",
     "Commercial Solutions for Classified",
     "CSfC APL",
@@ -160,7 +160,7 @@ WATCH_KEYWORDS = [
     "CP-MDM",
     "NSA CSfC",
 
-    # ── CC Crypto Catalog ─────────────────────────────────────────────
+    # -- CC Crypto Catalog ---------------------------------------------
     "CCDB-018",
     "Crypto Catalog",
     "cryptography working group",
@@ -171,7 +171,7 @@ WATCH_KEYWORDS = [
     "CAVP",
     "CMVP",
 
-    # ── NIST / CSRC ───────────────────────────────────────────────────
+    # -- NIST / CSRC ---------------------------------------------------
     "FIPS 140-3",
     "FIPS 203",
     "FIPS 204",
@@ -200,7 +200,7 @@ WATCH_KEYWORDS = [
 
 CSFC_BASE = "https://www.nsa.gov"
 
-# ── CSfC web pages to snapshot for change detection ────────────────────────
+# -- CSfC web pages to snapshot for change detection ------------------------
 CSFC_PAGES = {
     "home":         "/resources/everyone/csfc/",
     "apl":          "/resources/everyone/csfc/approved-products-list/",
@@ -208,9 +208,10 @@ CSFC_PAGES = {
     "faq":          "/resources/everyone/csfc/faqs/",
     "registration": "/resources/everyone/csfc/registration/",
     "kmr":          "/resources/everyone/csfc/key-management/",
+    "announcements": "/Resources/Commercial-Solutions-for-Classified-Program/Announcements/",
 }
 
-# ── CSfC Capability Package documents (direct PDF URLs) ────────────────────
+# -- CSfC Capability Package documents (direct PDF URLs) --------------------
 # Polled for HTTP Last-Modified / ETag / Content-Length header changes.
 # A header change in the diff signals a CP document revision.
 # Falls back to a partial-GET content-hash when the server omits headers.
@@ -225,14 +226,14 @@ CSFC_CAPABILITY_PACKAGES = {
     "CP-Voice over IP":        "https://www.nsa.gov/portals/75/documents/resources/everyone/csfc/capability-packages/voip.pdf",
 }
 
-# ── CSfC RSS / news feeds ───────────────────────────────────────────────────
+# -- CSfC RSS / news feeds ---------------------------------------------------
 CSFC_FEEDS = [
     {"name": "NSA Cybersecurity Advisories", "rss": "https://www.nsa.gov/rss/rssfeed.aspx?POIID=9", "scrape": False},
     {"name": "CISA Alerts",                  "rss": "https://www.cisa.gov/cybersecurity-advisories/all.xml", "scrape": False},
     {"name": "DISA STIGs & APL News",        "rss": None, "url": "https://public.cyber.mil/stigs/", "scrape": True},
 ]
 
-# ── CSfC keyword filters for APL product categorisation ────────────────────
+# -- CSfC keyword filters for APL product categorisation --------------------
 CSFC_APL_COMPONENT_KEYWORDS = {
     "SSH":        ["ssh", "secure shell"],
     "TLS/VPN":    ["tls", "vpn", "ipsec", "ssl"],
@@ -244,7 +245,7 @@ CSFC_APL_COMPONENT_KEYWORDS = {
     "Multi-Site": ["wan", "multi-site", "sd-wan"],
 }
 
-# ── Sanity minimum for CSfC APL ─────────────────────────────────────────────
+# -- Sanity minimum for CSfC APL ---------------------------------------------
 SANITY_MIN_CSFC_APL = 5  # NSA APL typically lists dozens of components
 
 # =============================================================
@@ -266,7 +267,7 @@ SANITY_MIN_CSFC_APL = 5  # NSA APL typically lists dozens of components
 
 CC_CRYPTO_BASE = "https://www.commoncriteriaportal.org"
 
-# ── Crypto Catalog PDF documents to header-poll ────────────────────────────
+# -- Crypto Catalog PDF documents to header-poll ----------------------------
 # Falls back to a 1 KB partial GET and content hash if server omits headers.
 CC_CRYPTO_DOCS = {
     "CCDB-018 v1.0 Crypto Catalog (Jan 2025)": (
@@ -283,14 +284,14 @@ CC_CRYPTO_DOCS = {
     ),
 }
 
-# ── CC Portal pages to scrape for Crypto Catalog / working group changes ────
+# -- CC Portal pages to scrape for Crypto Catalog / working group changes ----
 CC_CRYPTO_PAGES = {
     "publications": "/cc/index.cfm",
     "news":         "/news/index.cfm",
     "communities":  "/communities/index.cfm",
 }
 
-# ── Keywords for routing news items into the CRYPTO category ───────────────
+# -- Keywords for routing news items into the CRYPTO category ---------------
 CC_CRYPTO_NEWS_KEYWORDS = [
     "ccdb-018", "crypto catalog", "cryptography", "cryptographic",
     "specification of functional requirements for cryptography",
@@ -299,35 +300,36 @@ CC_CRYPTO_NEWS_KEYWORDS = [
     "digital signature", "hash function", "random bit generator", "rbg",
 ]
 
-# ── Sanity minimum for Crypto Catalog page scrape ──────────────────────────
+# -- Sanity minimum for Crypto Catalog page scrape --------------------------
 SANITY_MIN_CC_CRYPTO_PUBS = 5
 
 # =============================================================
-# NIST CSRC Monitoring (Option B — CMVP + CSRC news + PQC)
+# NIST CSRC Monitoring (Option B -- CMVP + CSRC news + PQC)
 #
 # Monitors NIST's Computer Security Resource Center for changes
 # relevant to CC/CSfC practitioners:
-#   1. CSRC News page — all NIST cyber publication announcements
+#   1. CSRC News page -- all NIST cyber publication announcements
 #   2. NIST Cybersecurity RSS feeds
-#   3. CMVP "Modules In Process" list — FIPS 140-3 validation pipeline
-#   4. PQC project page — post-quantum standardization milestones
-#   5. FIPS publications page — new/revised crypto standards
+#   3. CMVP "Modules In Process" list -- FIPS 140-3 validation pipeline
+#   4. PQC project page -- post-quantum standardization milestones
+#   5. FIPS publications page -- new/revised crypto standards
 #   6. HTTP header poll of key PDFs (with partial-GET fallback)
 # =============================================================
 
 NIST_CSRC_BASE = "https://csrc.nist.gov"
 NIST_BASE      = "https://www.nist.gov"
 
-# ── NIST CSRC pages to scrape for change detection ───────────────────────
+# -- NIST CSRC pages to scrape for change detection -----------------------
 NIST_CSRC_PAGES = {
     "news":           "/news",
     "fips":           "/publications/fips",
     "cmvp_mip":       "/projects/cryptographic-module-validation-program/modules-in-process/modules-in-process-list",
     "pqc":            "/projects/post-quantum-cryptography",
     "crypto_standards":"/projects/cryptographic-standards-and-guidelines",
+    "cmvp_validated": "/projects/cryptographic-module-validation-program/validated-modules",
 }
 
-# ── NIST PDF documents to HTTP-HEAD-poll for version changes ──────────────
+# -- NIST PDF documents to HTTP-HEAD-poll for version changes --------------
 # Falls back to a 1 KB partial GET and content hash if server omits headers.
 NIST_CRYPTO_DOCS = {
     "FIPS 140-3": (
@@ -353,14 +355,14 @@ NIST_CRYPTO_DOCS = {
     ),
 }
 
-# ── NIST RSS / news feeds ──────────────────────────────────────────────────
+# -- NIST RSS / news feeds --------------------------------------------------
 NIST_FEEDS = [
     {"name": "NIST Cybersecurity News",          "rss": "https://www.nist.gov/news-events/cybersecurity/rss.xml",                    "scrape": False},
     {"name": "NIST Information Technology News", "rss": "https://www.nist.gov/news-events/information%20technology/rss.xml",         "scrape": False},
     {"name": "NIST Cybersecurity Insights Blog", "rss": "https://www.nist.gov/blogs/cybersecurity-insights/rss.xml",                 "scrape": False},
 ]
 
-# ── Keywords for routing NIST news into the NIST category ─────────────────
+# -- Keywords for routing NIST news into the NIST category -----------------
 NIST_NEWS_KEYWORDS = [
     "nist", "fips 140", "fips 186", "fips 197",
     "fips 203", "fips 204", "fips 205",
@@ -369,5 +371,6 @@ NIST_NEWS_KEYWORDS = [
     "algorithm transition", "key management", "cryptographic module", "csrc",
 ]
 
-# ── Sanity minimum for NIST CSRC news scrape ──────────────────────────────
+# -- Sanity minimum for NIST CSRC news scrape ------------------------------
 SANITY_MIN_NIST_NEWS = 10
+
