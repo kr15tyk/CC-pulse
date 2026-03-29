@@ -119,6 +119,11 @@ def flag_alerts(diff: Snapshot) -> list[dict[str, Any]]:
     for t in diff.get("niap", {}).get("tds", {}).get("added", []):
         _add("NIAP TD", "new", t.get("title", "") + " " + t.get("identifier", ""))
 
+    # NIAP In-Evaluation (newly entered evaluation)
+    for p in diff.get("niap", {}).get("in_evaluation", {}).get("added", []):
+        _add("NIAP In-Eval", "new_evaluation",
+             (p.get("vendor_id_name") or "") + " " + (p.get("product_name") or ""))
+
     # NIAP PCL -- All certified products
     for p in diff.get("niap", {}).get("pcl_all", {}).get("added", []):
         _add("NIAP PCL", "new_cert",
@@ -246,6 +251,15 @@ def diff_niap_pcl_all(old_pcl: Records, new_pcl: Records) -> dict[str, Any]:
             and new_all[pid].get("status_sort") == "Archived")
     ]
     return {"added": added, "removed": removed, "newly_archived": newly_archived}
+
+
+def diff_niap_in_evaluation(old_pcl: Records, new_pcl: Records) -> dict[str, Any]:
+    """Diff in-evaluation (In Progress) products from the NIAP PCL."""
+    old_ie = {str(p["product_id"]): p for p in old_pcl if p.get("status_sort") == "In Progress"}
+    new_ie = {str(p["product_id"]): p for p in new_pcl if p.get("status_sort") == "In Progress"}
+    added   = [new_ie[i] for i in set(new_ie) - set(old_ie)]
+    removed = [old_ie[i] for i in set(old_ie) - set(new_ie)]
+    return {"added": added, "removed": removed, "current_count": len(new_ie)}
 
 
 def diff_niap_news(old_news: Records, new_news: Records) -> dict[str, Any]:
@@ -411,6 +425,7 @@ def compute_diff(old_snapshot: Snapshot, new_snapshot: Snapshot) -> Snapshot:
             "tds":          diff_niap_tds(old_n.get("tds", []),     new_n.get("tds", [])),
             "cisco_ndcpp":  diff_niap_pcl_cisco(old_n.get("pcl", []), new_n.get("pcl", [])),
             "pcl_all":      diff_niap_pcl_all(old_n.get("pcl", []),   new_n.get("pcl", [])),
+            "in_evaluation": diff_niap_in_evaluation(old_n.get("pcl", []), new_n.get("pcl", [])),
             "news":         diff_niap_news(old_n.get("news", []),   new_n.get("news", [])),
             "events":       diff_niap_events(old_n.get("events", []), new_n.get("events", [])),
             "cctls":        diff_niap_cctls(old_n.get("cctls", []), new_n.get("cctls", [])),
@@ -619,5 +634,6 @@ def diff_nist(old_nist: Snapshot, new_nist: Snapshot) -> Snapshot:
         page_changes, doc_changes, feed_new,
     )
     return {"pages": pages, "doc_headers": doc_headers, "feeds": feeds}
+
 
 
