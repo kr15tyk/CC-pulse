@@ -71,6 +71,9 @@ def _section_daily_counts(diffs: list, section_key: str) -> list:
             pa = d.get("niap", {}).get("pcl_all", {})
             n = (len(pa.get("added", [])) + len(pa.get("removed", [])) +
                  len(pa.get("newly_archived", [])))
+        elif section_key == "in_eval":
+            ie = d.get("niap", {}).get("in_evaluation", {})
+            n = len(ie.get("added", [])) + len(ie.get("removed", []))
         counts.append(n)
     return counts
 
@@ -412,6 +415,45 @@ footer { margin-top: 2rem; padding: 1rem 0; border-top: 1px solid var(--border);
   </div>
 </div>
 
+<!-- NIAP In-Evaluation -->
+<div class="card {% if in_eval_total > 0 %}card-new{% endif %}" id="sec-niap-inevaluation">
+  <div class="card-hdr" onclick="toggleCard(this)">
+    <span>NIAP In-Evaluation Products</span>
+    <span class="card-count">{% if in_eval_total > 0 %}{{ in_eval_total }} change{% if in_eval_total != 1 %}s{% endif %}{% else %}{{ in_eval_current }} active{% endif %}</span>
+    <span class="sparkline">
+      {% for v in sparklines.in_eval %}
+      <span class="sp-bar" style="height:{{ v }}%" title="{{ v }}%"></span>
+      {% endfor %}
+    </span>
+  </div>
+  <div class="card-body {% if in_eval_total == 0 %}collapsed{% endif %}">
+    {% if diff.niap.in_evaluation.added %}
+    <div class="sub-hdr sub-new">Newly In Evaluation ({{ diff.niap.in_evaluation.added | length }})</div>
+    {% for item in diff.niap.in_evaluation.added %}
+    <div class="item-row">
+      <span class="item-link">{{ item.vendor_id_name or "" }} -- {{ item.product_name or "" }}</span>
+      <span class="item-meta">{% if item.assigned_lab_name %}{{ item.assigned_lab_name }}{% endif %}</span>
+    </div>
+    {% if item.tech_types %}
+    <div class="item-sub">{{ item.tech_types | join(", ") }}</div>
+    {% endif %}
+    {% endfor %}
+    {% endif %}
+    {% if diff.niap.in_evaluation.removed %}
+    <div class="sub-hdr sub-removed">Left Evaluation ({{ diff.niap.in_evaluation.removed | length }})</div>
+    {% for item in diff.niap.in_evaluation.removed %}
+    <div class="item-row">
+      <span class="item-link">{{ item.vendor_id_name or "" }} -- {{ item.product_name or "" }}</span>
+      <span class="item-meta">Completed or Withdrawn</span>
+    </div>
+    {% endfor %}
+    {% endif %}
+    {% if in_eval_total == 0 %}
+    <p class="no-change">No evaluation changes detected. {{ in_eval_current }} product{% if in_eval_current != 1 %}s{% endif %} currently in evaluation.</p>
+    {% endif %}
+  </div>
+</div>
+
 <!-- NIAP News -->
 <div class="card {% if niap_news_total > 0 or diff.niap.events.added %}card-new{% endif %}" id="sec-niap-news">
   <div class="card-hdr" onclick="toggleCard(this)">
@@ -439,6 +481,17 @@ footer { margin-top: 2rem; padding: 1rem 0; border-top: 1px solid var(--border);
     <div class="item-row">
       <span class="item-link">{{ ev.title or ev.name or ev }}</span>
       <span class="item-meta">{{ ev.date or ev.start_date or '' }}</span>
+    </div>
+    {% endfor %}
+    {% endif %}
+    {% set policy_items = diff.niap.news.added | selectattr("_category", "equalto", "POLICY") | list %}
+    {% if policy_items %}
+    <div class="sub-hdr sub-updated">Policy Letters &amp; Updates ({{ policy_items | length }})</div>
+    {% for item in policy_items %}
+    <div class="item-row">
+      {% if item.link %}<a class="item-link" href="{{ item.link }}" target="_blank">{{ item.title }}</a>
+      {% else %}<span class="item-link">{{ item.title }}</span>{% endif %}
+      <span class="item-meta">{% if item.posted %}{{ item.posted[:10] }}{% elif item.date %}{{ item.date[:10] }}{% endif %}</span>
     </div>
     {% endfor %}
     {% endif %}
@@ -815,6 +868,7 @@ def render_dashboard(diff: dict, output_dir: str = "docs") -> None:
     tds          = niap.get("tds", {})
     cisco        = niap.get("cisco_ndcpp", {})
     pcl_all      = niap.get("pcl_all", {})
+    in_eval      = niap.get("in_evaluation", {})
     news         = niap.get("news", {})
 
     niap_pp_total   = (len(pps.get("added", [])) + len(pps.get("removed", [])) +
@@ -824,6 +878,10 @@ def render_dashboard(diff: dict, output_dir: str = "docs") -> None:
                        len(cisco.get("newly_archived", [])))
     pcl_all_total   = (len(pcl_all.get("added", [])) + len(pcl_all.get("removed", [])) +
                        len(pcl_all.get("newly_archived", [])))
+    in_eval_added   = len(in_eval.get("added", []))
+    in_eval_removed = len(in_eval.get("removed", []))
+    in_eval_total   = in_eval_added + in_eval_removed
+    in_eval_current = in_eval.get("current_count", 0)
     niap_news_total = len(news.get("added", []))
 
     cctl_total      = sum(len(v) for v in diff.get("cctl_labs", {}).values() if v)
@@ -835,7 +893,7 @@ def render_dashboard(diff: dict, output_dir: str = "docs") -> None:
                           if d.get("changed"))
     alert_total     = len(diff.get("alerts", []))
 
-    niap_total_stat = niap_pp_total + niap_td_total + cisco_total + pcl_all_total + niap_news_total
+    niap_total_stat = niap_pp_total + niap_td_total + cisco_total + pcl_all_total + in_eval_total + niap_news_total
     cctl_total_stat = cctl_total
     csfc_total_stat = csfc_total
     nist_total_stat = nist_total + cc_crypto_total
@@ -873,6 +931,7 @@ def render_dashboard(diff: dict, output_dir: str = "docs") -> None:
         "nist":      _sp("nist"),
         "cc_portal": _sp("cc_portal"),
         "pcl_all":   _sp("pcl_all"),
+        "in_eval":   _sp("in_eval"),
     }
 
     # Render template
@@ -900,6 +959,10 @@ def render_dashboard(diff: dict, output_dir: str = "docs") -> None:
         cc_portal_total_stat = cc_portal_total_stat,
         period_start         = diff.get("period_start", ""),
         pcl_all_total        = pcl_all_total,
+        in_eval_added        = in_eval_added,
+        in_eval_removed      = in_eval_removed,
+        in_eval_total        = in_eval_total,
+        in_eval_current      = in_eval_current,
         period_end           = diff.get("period_end", ""),
     )
 
@@ -913,5 +976,6 @@ def render_dashboard(diff: dict, output_dir: str = "docs") -> None:
     with open(rss_path, "w", encoding="utf-8") as fh:
         fh.write(rss)
     log.info("RSS feed written to %s", rss_path)
+
 
 
