@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0"><channel>
+<title>CC Pulse</title>
+<link>https://kr15tyk.github.io/CC-pulse/cc_dashboard.html</link>
+<description>Common Criteria monitoring - 2026-03-29 14:06 UTC</description>
+<item><title>CSfC CP Updated: CP-Multi-Site Connectivity</title><link>https://www.nsa.gov/portals/75/documents/resources/everyone/csfc/capability-packages/multi-site-connectivity.pdf</link><description>Capability package updated.</description></item>
+<item><title>CSfC CP Updated: CP-Email</title><link>https://www.nsa.gov/portals/75/documents/resources/everyone/csfc/capability-packages/email.pdf</link><description>Capability package updated.</description></item>
+<item><title>CSfC CP Updated: CP-Mobile Device Management</title><link>https://www.nsa.gov/portals/75/documents/resources/everyone/csfc/capability-packages/mdm.pdf</link><description>Capability package updated.</description></item>
+<item><title>CSfC CP Updated: CP-Data at Rest</title><link>https://www.nsa.gov/portals/75/documents/resources/everyone/csfc/capability-packages/data-at-rest.pdf</link><description>Capability package updated.</description></item>
+<item><title>CSfC CP Updated: CP-Campus WLAN</title><link>https://www.nsa.gov/portals/75/documents/resources/everyone/csfc/capability-packages/campus-wlan.pdf</link><description>Capability package updated.</description></item>
+<item><title>CSfC CP Updated: CP-WAN</title><link>https://www.nsa.gov/portals/75/documents/resources/everyone/csfc/capability-packages/wan.pdf</link><description>Capability package updated.</description></item>
+<item><title>CSfC CP Updated: CP-Voice over IP</title><link>https://www.nsa.gov/portals/75/documents/resources/everyone/csfc/capability-packages/voip.pdf</link><description>Capability package updated.</description></item>
+<item><title>CSfC CP Updated: CP-Mobile Access</title><link>https://www.nsa.gov/portals/75/documents/resources/everyone/csfc/capability-packages/mobile-access.pdf</link><description>Capability package updated.</description></item>
+<item><title>NIST Doc Updated: SP 800-131A Rev 2</title><link>https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-131Ar2.pdf</link><description>Document header updated.</description></item>
+<item><title>NIST Doc Updated: FIPS 140-3</title><link>https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.140-3.pdf</link><description>Document header updated.</description></item>
+<item><title>NIST Doc Updated: FIPS 204 ML-DSA</title><link>https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.204.pdf</link><description>Document header updated.</description></item>
+<item><title>NIST Doc Updated: SP 800-57 Part 1 Rev 5</title><link>https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-57pt1r5.pdf</link><description>Document header updated.</description></item>
+<item><title>NIST Doc Updated: FIPS 203 ML-KEM</title><link>https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.203.pdf</link><description>Document header updated.</description></item>
+<item><title>NIST Doc Updated: NIST IR 8547</title><link>https://nvlpubs.nist.gov/nistpubs/ir/2024/NIST.IR.8547.ipd.pdf</link><description>Document header updated.</description></item>
+<item><title>NIST Doc Updated: FIPS 205 SLH-DSA</title><link>https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.205.pdf</link><description>Document header updated.</description></item>
+<item><title>CC Crypto Doc Updated: CC:2022 Part 2 Security Functional Requirements</title><link>https://www.commoncriteriaportal.org/files/ccfiles/CC2022PART2R1.pdf</link><description>Document header updated.</description></item>
+<item><title>CC Crypto Doc Updated: CCDB-018 v1.0 Crypto Catalog (Jan 2025)</title><link>https://www.commoncriteriaportal.org/files/ccfiles/CCDB-018-v1.0-2025-Jan-31-Final-Specification_of_Functional_Requirements_for_Cryptography.pdf</link><description>Document header updated.</description></item>
+</channel></rss>

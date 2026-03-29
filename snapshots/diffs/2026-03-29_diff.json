@@ -1,6 +1,6 @@
 {
   "period_start": "",
-  "period_end": "2026-03-29T00:40:59.441290+00:00",
+  "period_end": "2026-03-29T14:06:36.178152+00:00",
   "niap": {
     "pps": {
       "added": [],
@@ -41,37 +41,13 @@
     }
   },
   "cctl_labs": {
-    "Lightship Security": [],
     "Acumen Security (Intertek)": [],
+    "Lightship Security": [],
     "Leidos CCTL": []
   },
   "csfc": {
     "pages": {},
     "capability_packages": {
-      "CP-Campus WLAN": {
-        "changed": true,
-        "old_last_modified": "",
-        "new_last_modified": "",
-        "old_etag": "",
-        "new_etag": "",
-        "old_content_length": "",
-        "new_content_length": "485",
-        "old_partial_hash": "",
-        "new_partial_hash": "",
-        "url": "https://www.nsa.gov/portals/75/documents/resources/everyone/csfc/capability-packages/campus-wlan.pdf"
-      },
-      "CP-Mobile Access": {
-        "changed": true,
-        "old_last_modified": "",
-        "new_last_modified": "",
-        "old_etag": "",
-        "new_etag": "",
-        "old_content_length": "",
-        "new_content_length": "487",
-        "old_partial_hash": "",
-        "new_partial_hash": "",
-        "url": "https://www.nsa.gov/portals/75/documents/resources/everyone/csfc/capability-packages/mobile-access.pdf"
-      },
       "CP-Multi-Site Connectivity": {
         "changed": true,
         "old_last_modified": "",
@@ -95,6 +71,42 @@
         "old_partial_hash": "",
         "new_partial_hash": "",
         "url": "https://www.nsa.gov/portals/75/documents/resources/everyone/csfc/capability-packages/email.pdf"
+      },
+      "CP-Mobile Device Management": {
+        "changed": true,
+        "old_last_modified": "",
+        "new_last_modified": "",
+        "old_etag": "",
+        "new_etag": "",
+        "old_content_length": "",
+        "new_content_length": "473",
+        "old_partial_hash": "",
+        "new_partial_hash": "",
+        "url": "https://www.nsa.gov/portals/75/documents/resources/everyone/csfc/capability-packages/mdm.pdf"
+      },
+      "CP-Data at Rest": {
+        "changed": true,
+        "old_last_modified": "",
+        "new_last_modified": "",
+        "old_etag": "",
+        "new_etag": "",
+        "old_content_length": "",
+        "new_content_length": "490",
+        "old_partial_hash": "",
+        "new_partial_hash": "",
+        "url": "https://www.nsa.gov/portals/75/documents/resources/everyone/csfc/capability-packages/data-at-rest.pdf"
+      },
+      "CP-Campus WLAN": {
+        "changed": true,
+        "old_last_modified": "",
+        "new_last_modified": "",
+        "old_etag": "",
+        "new_etag": "",
+        "old_content_length": "",
+        "new_content_length": "485",
+        "old_partial_hash": "",
+        "new_partial_hash": "",
+        "url": "https://www.nsa.gov/portals/75/documents/resources/everyone/csfc/capability-packages/campus-wlan.pdf"
       },
       "CP-WAN": {
         "changed": true,
@@ -120,29 +132,17 @@
         "new_partial_hash": "",
         "url": "https://www.nsa.gov/portals/75/documents/resources/everyone/csfc/capability-packages/voip.pdf"
       },
-      "CP-Data at Rest": {
+      "CP-Mobile Access": {
         "changed": true,
         "old_last_modified": "",
         "new_last_modified": "",
         "old_etag": "",
         "new_etag": "",
         "old_content_length": "",
-        "new_content_length": "490",
+        "new_content_length": "487",
         "old_partial_hash": "",
         "new_partial_hash": "",
-        "url": "https://www.nsa.gov/portals/75/documents/resources/everyone/csfc/capability-packages/data-at-rest.pdf"
-      },
-      "CP-Mobile Device Management": {
-        "changed": true,
-        "old_last_modified": "",
-        "new_last_modified": "",
-        "old_etag": "",
-        "new_etag": "",
-        "old_content_length": "",
-        "new_content_length": "473",
-        "old_partial_hash": "",
-        "new_partial_hash": "",
-        "url": "https://www.nsa.gov/portals/75/documents/resources/everyone/csfc/capability-packages/mdm.pdf"
+        "url": "https://www.nsa.gov/portals/75/documents/resources/everyone/csfc/capability-packages/mobile-access.pdf"
       }
     },
     "feeds": {
@@ -155,28 +155,16 @@
         "added": [],
         "removed": []
       },
-      "publications": {
+      "communities": {
         "added": [],
         "removed": []
       },
-      "communities": {
+      "publications": {
         "added": [],
         "removed": []
       }
     },
     "doc_headers": {
-      "CCDB-018 v1.0 Crypto Catalog (Jan 2025)": {
-        "changed": true,
-        "old_last_modified": "",
-        "new_last_modified": "Tue, 25 Feb 2025 23:00:16 GMT",
-        "old_etag": "",
-        "new_etag": "\"5a21f-62eff6b918508\"",
-        "old_content_length": "",
-        "new_content_length": "369183",
-        "old_partial_hash": "",
-        "new_partial_hash": "",
-        "url": "https://www.commoncriteriaportal.org/files/ccfiles/CCDB-018-v1.0-2025-Jan-31-Final-Specification_of_Functional_Requirements_for_Cryptography.pdf"
-      },
       "CC:2022 Part 2 Security Functional Requirements": {
         "changed": true,
         "old_last_modified": "",
@@ -188,49 +176,25 @@
         "old_partial_hash": "",
         "new_partial_hash": "",
         "url": "https://www.commoncriteriaportal.org/files/ccfiles/CC2022PART2R1.pdf"
+      },
+      "CCDB-018 v1.0 Crypto Catalog (Jan 2025)": {
+        "changed": true,
+        "old_last_modified": "",
+        "new_last_modified": "Tue, 25 Feb 2025 23:00:16 GMT",
+        "old_etag": "",
+        "new_etag": "\"5a21f-62eff6b918508\"",
+        "old_content_length": "",
+        "new_content_length": "369183",
+        "old_partial_hash": "",
+        "new_partial_hash": "",
+        "url": "https://www.commoncriteriaportal.org/files/ccfiles/CCDB-018-v1.0-2025-Jan-31-Final-Specification_of_Functional_Requirements_for_Cryptography.pdf"
       }
     }
   },
   "nist": {
     "pages": {},
     "doc_headers": {
-      "FIPS 203 ML-KEM": {
-        "changed": true,
-        "old_last_modified": "",
-        "new_last_modified": "Thu, 22 Aug 2024 13:49:17 GMT",
-        "old_etag": "",
-        "new_etag": "\"2c7e8149af4da1:0\"",
-        "old_content_length": "",
-        "new_content_length": "1252341",
-        "old_partial_hash": "",
-        "new_partial_hash": "",
-        "url": "https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.203.pdf"
-      },
       "SP 800-131A Rev 2": {
-        "changed": true,
-        "old_last_modified": "",
-        "new_last_modified": "Thu, 13 Jun 2019 19:37:11 GMT",
-        "old_etag": "",
-        "new_etag": "\"b1de70651f22d51:0\"",
-        "old_content_length": "",
-        "new_content_length": "686214",
-        "old_partial_hash": "",
-        "new_partial_hash": "",
-        "url": "https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-131Ar2.pdf"
-      },
-      "FIPS 205 SLH-DSA": {
-        "changed": true,
-        "old_last_modified": "",
-        "new_last_modified": "Mon, 12 Aug 2024 22:44:10 GMT",
-        "old_etag": "",
-        "new_etag": "\"d9fcbc259edda1:0\"",
-        "old_content_length": "",
-        "new_content_length": "1055752",
-        "old_partial_hash": "",
-        "new_partial_hash": "",
-        "url": "https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.205.pdf"
-      },
-      "NIST IR 8547": {
         "changed": true,
         "old_last_modified": "",
         "new_last_modified": "",
@@ -239,20 +203,20 @@
         "old_content_length": "",
         "new_content_length": "",
         "old_partial_hash": "",
-        "new_partial_hash": "7ceb3d3a2f66169875c2dbe01450c2cc",
-        "url": "https://nvlpubs.nist.gov/nistpubs/ir/2024/NIST.IR.8547.ipd.pdf"
+        "new_partial_hash": "11e24de28c40daadf4a1c3eda68e71e7",
+        "url": "https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-131Ar2.pdf"
       },
-      "SP 800-57 Part 1 Rev 5": {
+      "FIPS 140-3": {
         "changed": true,
         "old_last_modified": "",
-        "new_last_modified": "Fri, 31 Jul 2020 15:02:29 GMT",
+        "new_last_modified": "Tue, 30 Apr 2019 17:31:42 GMT",
         "old_etag": "",
-        "new_etag": "\"bc5d539c4b67d61:0\"",
+        "new_etag": "\"17b72d937affd41:0\"",
         "old_content_length": "",
-        "new_content_length": "1688080",
+        "new_content_length": "310627",
         "old_partial_hash": "",
         "new_partial_hash": "",
-        "url": "https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-57pt1r5.pdf"
+        "url": "https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.140-3.pdf"
       },
       "FIPS 204 ML-DSA": {
         "changed": true,
@@ -266,17 +230,53 @@
         "new_partial_hash": "5f66fc055c9f56b45b53d0f2df1fae3f",
         "url": "https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.204.pdf"
       },
-      "FIPS 140-3": {
+      "SP 800-57 Part 1 Rev 5": {
         "changed": true,
         "old_last_modified": "",
-        "new_last_modified": "Tue, 30 Apr 2019 17:31:42 GMT",
+        "new_last_modified": "Fri, 31 Jul 2020 15:02:29 GMT",
         "old_etag": "",
-        "new_etag": "\"17b72d937affd41:0\"",
+        "new_etag": "\"bc5d539c4b67d61:0\"",
         "old_content_length": "",
-        "new_content_length": "310627",
+        "new_content_length": "1688080",
         "old_partial_hash": "",
         "new_partial_hash": "",
-        "url": "https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.140-3.pdf"
+        "url": "https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-57pt1r5.pdf"
+      },
+      "FIPS 203 ML-KEM": {
+        "changed": true,
+        "old_last_modified": "",
+        "new_last_modified": "Thu, 22 Aug 2024 13:49:17 GMT",
+        "old_etag": "",
+        "new_etag": "\"2c7e8149af4da1:0\"",
+        "old_content_length": "",
+        "new_content_length": "1252341",
+        "old_partial_hash": "",
+        "new_partial_hash": "",
+        "url": "https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.203.pdf"
+      },
+      "NIST IR 8547": {
+        "changed": true,
+        "old_last_modified": "",
+        "new_last_modified": "",
+        "old_etag": "",
+        "new_etag": "",
+        "old_content_length": "",
+        "new_content_length": "",
+        "old_partial_hash": "",
+        "new_partial_hash": "7ceb3d3a2f66169875c2dbe01450c2cc",
+        "url": "https://nvlpubs.nist.gov/nistpubs/ir/2024/NIST.IR.8547.ipd.pdf"
+      },
+      "FIPS 205 SLH-DSA": {
+        "changed": true,
+        "old_last_modified": "",
+        "new_last_modified": "Mon, 12 Aug 2024 22:44:10 GMT",
+        "old_etag": "",
+        "new_etag": "\"d9fcbc259edda1:0\"",
+        "old_content_length": "",
+        "new_content_length": "1055752",
+        "old_partial_hash": "",
+        "new_partial_hash": "",
+        "url": "https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.205.pdf"
       }
     },
     "feeds": {

@@ -2,424 +2,510 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="refresh" content="3600">
-  <title>CC Pulse Dashboard &mdash; 2026-03-29</title>
-  <style>
-    :root {
-      --navy: #003366; --blue: #0057a8; --green: #1a7a4a;
-      --red: #a82222; --amber: #b86a00; --gray: #f4f6f9;
-      --border: #d0d7e2; --purple: #5a2d82; --teal: #006b77;
-    }
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-           background: #eef1f7; color: #1a1a2e; }
-    header { background: var(--navy); color: white; padding: 18px 32px;
-             display: flex; justify-content: space-between; align-items: center; }
-    header h1 { font-size: 1.5rem; letter-spacing: 0.05em; }
-    header span { font-size: 0.85rem; opacity: 0.75; }
-    .alert-banner { background: #a82222; color: white; padding: 14px 32px; }
-    .alert-banner h2 { font-size: 1rem; margin-bottom: 8px; letter-spacing: 0.05em; }
-    .alert-item { background: rgba(255,255,255,0.15); border-radius: 6px;
-                  padding: 8px 12px; margin-bottom: 6px; font-size: 0.875rem; }
-    .alert-item strong { display: block; }
-    .kw-chip { display: inline-block; background: rgba(255,255,255,0.3);
-               border-radius: 4px; font-size: 0.7rem; font-weight: 700;
-               padding: 1px 6px; margin: 2px 2px 0 0; }
-    .trend-bar { background: white; border-bottom: 1px solid var(--border);
-                 padding: 12px 32px; display: flex; gap: 28px; flex-wrap: wrap; }
-    .stat { text-align: center; }
-    .stat-num { font-size: 1.6rem; font-weight: 700; color: var(--navy); }
-    .stat-lbl { font-size: 0.7rem; color: #666; text-transform: uppercase; letter-spacing: 0.07em; }
-    .domain-tabs { background: white; border-bottom: 2px solid var(--border);
-                   padding: 0 32px; display: flex; gap: 0; }
-    .domain-tab { padding: 10px 18px; font-size: 0.8rem; font-weight: 700;
-                  text-transform: uppercase; letter-spacing: 0.05em; color: #666;
-                  border-bottom: 3px solid transparent; cursor: pointer; }
-    .domain-tab.active { color: var(--navy); border-bottom-color: var(--blue); }
-    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(520px, 1fr));
-            gap: 20px; padding: 24px 32px; }
-    .card { background: white; border-radius: 8px; box-shadow: 0 1px 4px rgba(0,0,0,0.1);
-            border-top: 4px solid var(--blue); overflow: hidden; }
-    .card.green { border-color: var(--green); }
-    .card.red { border-color: var(--red); }
-    .card.amber { border-color: var(--amber); }
-    .card.purple { border-color: var(--purple); }
-    .card.teal { border-color: var(--teal); }
-    .card-header { padding: 14px 18px; background: var(--gray);
-                   border-bottom: 1px solid var(--border);
-                   display: flex; justify-content: space-between; align-items: center; }
-    .card-header h2 { font-size: 0.95rem; font-weight: 700; text-transform: uppercase;
-                      letter-spacing: 0.06em; color: var(--navy); }
-    .badge { font-size: 0.75rem; font-weight: 700; padding: 2px 9px;
-             border-radius: 12px; background: var(--blue); color: white; }
-    .badge.zero { background: #aaa; }
-    .card-body { padding: 14px 18px; }
-    .item { padding: 8px 0; border-bottom: 1px solid #eee; font-size: 0.875rem; }
-    .item:last-child { border-bottom: none; }
-    .item-title { font-weight: 600; color: var(--navy); }
-    .item-title a { color: var(--blue); text-decoration: none; }
-    .item-title a:hover { text-decoration: underline; }
-    .item-meta { color: #666; font-size: 0.8rem; margin-top: 3px; }
-    .tag { display: inline-block; font-size: 0.7rem; font-weight: 700; padding: 1px 7px;
-           border-radius: 4px; margin-right: 5px; text-transform: uppercase; }
-    .tag-add { background: #d4edda; color: #155724; }
-    .tag-remove { background: #f8d7da; color: #721c24; }
-    .tag-sunset { background: #fff3cd; color: #856404; }
-    .tag-cat { background: #e2eafc; color: #1a4a8a; }
-    .tag-csfc { background: #e8d5ff; color: #5a2d82; }
-    .tag-nist { background: #d0e4ff; color: #003366; }
-    .tag-crypto { background: #ffd5e8; color: #7a0040; }
-    .tag-update { background: #fff3cd; color: #856404; }
-    .empty { color: #999; font-size: 0.85rem; font-style: italic; padding: 10px 0; }
-    .section-label { font-size: 0.7rem; font-weight: 700; color: #888;
-                     text-transform: uppercase; letter-spacing: 0.08em; padding: 6px 0 3px; }
-    .domain-header { background: var(--gray); border-bottom: 1px solid var(--border);
-                     padding: 10px 32px; font-size: 0.85rem; font-weight: 700;
-                     color: var(--navy); text-transform: uppercase; letter-spacing: 0.08em; }
-    footer { text-align: center; padding: 20px; color: #888; font-size: 0.8rem; }
-    footer a { color: #0057a8; }
-  </style>
+<meta charset="UTF-8">
+<meta http-equiv="refresh" content="3600">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CC Pulse Dashboard</title>
+<style>
+:root {
+  --bg: #0f1117;
+  --card: #1a1d27;
+  --border: #2a2d3a;
+  --text: #e2e8f0;
+  --muted: #64748b;
+  --green: #22c55e;
+  --amber: #f59e0b;
+  --red: #ef4444;
+  --blue: #3b82f6;
+  --purple: #a855f7;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { background: var(--bg); color: var(--text); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; font-size: 14px; padding: 1rem; }
+a { color: var(--blue); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+/* Header */
+.site-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; flex-wrap: wrap; gap: 0.5rem; }
+.site-title { font-size: 1.4rem; font-weight: 700; color: var(--text); }
+.site-meta { font-size: 0.75rem; color: var(--muted); }
+
+/* Alert banner */
+.alert-banner { background: #7f1d1d; border: 1px solid var(--red); border-radius: 6px; padding: 0.75rem 1rem; margin-bottom: 1rem; font-weight: 600; color: #fca5a5; }
+
+/* Trend bar */
+.trend-bar { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.5rem; }
+.stat { background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 0.75rem 1rem; min-width: 120px; flex: 1; }
+.stat a { color: inherit; text-decoration: none; display: block; }
+.stat a:hover .stat-num { color: var(--blue); }
+.stat-num { font-size: 1.6rem; font-weight: 700; color: var(--muted); }
+.stat-num.active-num { color: var(--green); }
+.stat-num.alert-num { color: var(--red); }
+.stat-lbl { font-size: 0.7rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; margin-top: 2px; }
+
+/* Grid */
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(400px, 1fr)); gap: 1rem; }
+
+/* Cards */
+.card { background: var(--card); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
+.card-new { border-left: 3px solid var(--green); }
+.card-updated { border-left: 3px solid var(--amber); }
+.card-alert { border-left: 3px solid var(--red); }
+.card-hdr { display: flex; align-items: center; gap: 0.5rem; padding: 0.75rem 1rem; cursor: pointer; user-select: none; }
+.card-hdr:hover { background: rgba(255,255,255,0.03); }
+.card-hdr > span:first-child { font-weight: 600; flex: 1; }
+.card-count { font-size: 0.7rem; color: var(--muted); background: rgba(255,255,255,0.05); padding: 2px 6px; border-radius: 10px; }
+.toggle-icon { font-size: 0.6rem; color: var(--muted); margin-left: 4px; }
+.card-body { padding: 0.75rem 1rem; border-top: 1px solid var(--border); }
+.card-body.collapsed { display: none; }
+
+/* Sparkline */
+.sparkline { display: inline-flex; align-items: flex-end; gap: 2px; height: 16px; }
+.sp-bar { display: inline-block; width: 4px; background: var(--blue); border-radius: 1px; min-height: 2px; opacity: 0.6; }
+
+/* Sub-headers */
+.sub-hdr { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; padding: 0.25rem 0; margin-top: 0.5rem; margin-bottom: 0.25rem; }
+.sub-new { color: var(--green); }
+.sub-updated { color: var(--amber); }
+.sub-removed { color: var(--red); }
+
+/* Item rows */
+.item-row { display: flex; justify-content: space-between; align-items: baseline; gap: 0.5rem; padding: 4px 0; border-bottom: 1px solid rgba(255,255,255,0.04); }
+.item-row:last-child { border-bottom: none; }
+.item-link { color: var(--blue); flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.item-meta { font-size: 0.7rem; color: var(--muted); white-space: nowrap; flex-shrink: 0; }
+.no-change { color: var(--muted); font-size: 0.8rem; padding: 0.25rem 0; }
+
+/* CCTL lab rows */
+.lab-row { margin-bottom: 0.5rem; }
+.lab-hdr { display: flex; align-items: center; gap: 0.5rem; padding: 4px 0; cursor: pointer; }
+.lab-hdr:hover { color: var(--blue); }
+.lab-name { font-weight: 600; flex: 1; }
+.lab-cnt { font-size: 0.7rem; color: var(--muted); }
+.lab-body { padding-left: 0.75rem; }
+.lab-body.collapsed { display: none; }
+
+/* CSfC CP detail */
+.cp-row { padding: 4px 0; border-bottom: 1px solid rgba(255,255,255,0.04); }
+.cp-row:last-child { border-bottom: none; }
+.cp-detail { font-size: 0.7rem; color: var(--muted); margin-top: 2px; }
+.cp-date { }
+
+/* Alert item */
+.alert-item .item-link { color: var(--red); }
+
+/* Footer */
+footer { margin-top: 2rem; padding: 1rem 0; border-top: 1px solid var(--border); display: flex; justify-content: space-between; font-size: 0.75rem; color: var(--muted); flex-wrap: wrap; gap: 0.5rem; }
+
+/* Mobile */
+@media (max-width: 600px) {
+  .trend-bar { flex-direction: row; }
+  .stat { min-width: 0; flex: 1 1 40%; }
+  .stat-num { font-size: 1.2rem; }
+  .grid { grid-template-columns: 1fr; }
+}
+</style>
 </head>
 <body>
 
-<header>
-  <h1>&#127760; CC Pulse Dashboard</h1>
-  <span>Last updated: 2026-03-29 00:40 UTC &bull;
-    <a href="cc_feed.xml" style="color:rgba(255,255,255,0.7)">&#128280; RSS</a>
-  </span>
+
+
+<header class="site-header">
+  <div class="site-title">CC Pulse</div>
+  <div class="site-meta"> to 2026-03-29T14:06:36.178152+00:00 &bull; Generated 2026-03-29 14:06 UTC</div>
 </header>
 
-
-
-
-
 <div class="trend-bar">
-  <div class="stat">
-    <div class="stat-num">0</div>
-    <div class="stat-lbl">New PPs</div>
-  </div>
-  <div class="stat">
-    <div class="stat-num">0</div>
-    <div class="stat-lbl">PP Sunsets</div>
-  </div>
-  <div class="stat">
-    <div class="stat-num">0</div>
-    <div class="stat-lbl">New TDs</div>
-  </div>
-  <div class="stat">
-    <div class="stat-num">0</div>
-    <div class="stat-lbl">Cisco Cert.</div>
-  </div>
-  <div class="stat">
-    <div class="stat-num">0</div>
-    <div class="stat-lbl">NIAP News</div>
-  </div>
-  <div class="stat">
-    <div class="stat-num">8</div>
+  <div class="stat"><a href="#sec-niap-pp">
+    <div class="stat-num ">0</div>
+    <div class="stat-lbl">NIAP Changes</div>
+  </a></div>
+  <div class="stat"><a href="#sec-cctl">
+    <div class="stat-num ">0</div>
+    <div class="stat-lbl">CCTL Items</div>
+  </a></div>
+  <div class="stat"><a href="#sec-csfc">
+    <div class="stat-num active-num">8</div>
     <div class="stat-lbl">CSfC CP Updates</div>
-  </div>
-  <div class="stat">
-    <div class="stat-num">7</div>
+  </a></div>
+  <div class="stat"><a href="#sec-nist">
+    <div class="stat-num active-num">9</div>
     <div class="stat-lbl">NIST Doc Updates</div>
-  </div>
-  <div class="stat">
-    <div class="stat-num" style="color:#1a7a4a">
-      0
-    </div>
+  </a></div>
+  <div class="stat"><a href="#sec-niap-pp">
+    <div class="stat-num ">0</div>
     <div class="stat-lbl">Alerts</div>
-  </div>
+  </a></div>
 </div>
 
 <div class="grid">
 
-
-
-
-<div class="card ">
-  <div class="card-header">
-    <h2>&#128737; NIAP &mdash; Protection Profiles</h2>
-    <span class="badge zero">0 change(s)</span>
+<!-- NIAP PPs -->
+<div class="card " id="sec-niap-pp">
+  <div class="card-hdr" onclick="toggleCard(this)">
+    <span>NIAP Protection Profiles</span>
+    <span class="card-count">0 changes</span>
+    <span class="sparkline">
+      
+      <span class="sp-bar" style="height:100%" title="100%"></span>
+      
+      <span class="sp-bar" style="height:0%" title="0%"></span>
+      
+    </span>
+    <span class="toggle-icon">&#9658;</span>
   </div>
-  <div class="card-body">
+  <div class="card-body collapsed">
     
     
     
-    <div class="empty">No changes today.</div>
-  </div>
-</div>
-
-
-
-
-<div class="card ">
-  <div class="card-header">
-    <h2>&#9878; NIAP &mdash; Technical Decisions</h2>
-    <span class="badge zero">0 change(s)</span>
-  </div>
-  <div class="card-body">
     
-    
-    <div class="empty">No changes today.</div>
+    <p class="no-change">No changes detected.</p>
   </div>
 </div>
 
-
-
-
-<div class="card ">
-  <div class="card-header">
-    <h2>&#128225; Cisco NDcPP PCL Changes</h2>
-    <span class="badge zero">0 change(s)</span>
+<!-- NIAP TDs -->
+<div class="card " id="sec-niap-td">
+  <div class="card-hdr" onclick="toggleCard(this)">
+    <span>NIAP Technical Decisions</span>
+    <span class="card-count">0 changes</span>
+    <span class="sparkline">
+      
+      <span class="sp-bar" style="height:100%" title="100%"></span>
+      
+      <span class="sp-bar" style="height:0%" title="0%"></span>
+      
+    </span>
+    <span class="toggle-icon">&#9658;</span>
   </div>
-  <div class="card-body">
+  <div class="card-body collapsed">
     
     
-    
-    <div class="empty">No changes today.</div>
-  </div>
-</div>
-
-
-
-<div class="card ">
-  <div class="card-header">
-    <h2>&#128240; NIAP &mdash; News &amp; Announcements</h2>
-    <span class="badge zero">0 new</span>
-  </div>
-  <div class="card-body">
-    <div class="empty">No new announcements today.</div>
+    <p class="no-change">No changes detected.</p>
   </div>
 </div>
 
-
-
-<div class="card green">
-  <div class="card-header">
-    <h2>&#128269; CCTL Lab Intel</h2>
-    <span class="badge ">3 lab(s) with updates</span>
+<!-- Cisco NDcPP -->
+<div class="card " id="sec-cisco">
+  <div class="card-hdr" onclick="toggleCard(this)">
+    <span>Cisco NDcPP Evaluations</span>
+    <span class="card-count">0 changes</span>
+    <span class="toggle-icon">&#9658;</span>
   </div>
-  <div class="card-body">
-    
-    <div class="section-label">Lightship Security</div>
+  <div class="card-body collapsed">
     
     
-    <div class="section-label">Acumen Security (Intertek)</div>
     
-    
-    <div class="section-label">Leidos CCTL</div>
-    
-    
+    <p class="no-change">No changes detected.</p>
   </div>
 </div>
 
-
-
-
-
-
-
-
-
-<div class="card purple">
-  <div class="card-header">
-    <h2>&#128274; CSfC &mdash; Capability Packages &amp; APL</h2>
-    <span class="badge ">8 change(s)</span>
+<!-- NIAP News -->
+<div class="card " id="sec-niap-news">
+  <div class="card-hdr" onclick="toggleCard(this)">
+    <span>NIAP News</span>
+    <span class="card-count">0 new items</span>
+    <span class="sparkline">
+      
+      <span class="sp-bar" style="height:100%" title="100%"></span>
+      
+      <span class="sp-bar" style="height:0%" title="0%"></span>
+      
+    </span>
+    <span class="toggle-icon">&#9658;</span>
   </div>
-  <div class="card-body">
+  <div class="card-body collapsed">
     
-    <div class="section-label">Capability Package Document Updates</div>
-    
-    <div class="item">
-      <div class="item-title">
-        <span class="tag tag-update">CP UPDATE</span>
-        <a href="https://www.nsa.gov/portals/75/documents/resources/everyone/csfc/capability-packages/campus-wlan.pdf" target="_blank">CP-Campus WLAN</a>
-      </div>
-      <div class="item-meta">Last-Modified: — &rarr; —</div>
-    </div>
-    
-    <div class="item">
-      <div class="item-title">
-        <span class="tag tag-update">CP UPDATE</span>
-        <a href="https://www.nsa.gov/portals/75/documents/resources/everyone/csfc/capability-packages/mobile-access.pdf" target="_blank">CP-Mobile Access</a>
-      </div>
-      <div class="item-meta">Last-Modified: — &rarr; —</div>
-    </div>
-    
-    <div class="item">
-      <div class="item-title">
-        <span class="tag tag-update">CP UPDATE</span>
-        <a href="https://www.nsa.gov/portals/75/documents/resources/everyone/csfc/capability-packages/multi-site-connectivity.pdf" target="_blank">CP-Multi-Site Connectivity</a>
-      </div>
-      <div class="item-meta">Last-Modified: — &rarr; —</div>
-    </div>
-    
-    <div class="item">
-      <div class="item-title">
-        <span class="tag tag-update">CP UPDATE</span>
-        <a href="https://www.nsa.gov/portals/75/documents/resources/everyone/csfc/capability-packages/email.pdf" target="_blank">CP-Email</a>
-      </div>
-      <div class="item-meta">Last-Modified: — &rarr; —</div>
-    </div>
-    
-    <div class="item">
-      <div class="item-title">
-        <span class="tag tag-update">CP UPDATE</span>
-        <a href="https://www.nsa.gov/portals/75/documents/resources/everyone/csfc/capability-packages/wan.pdf" target="_blank">CP-WAN</a>
-      </div>
-      <div class="item-meta">Last-Modified: — &rarr; —</div>
-    </div>
-    
-    <div class="item">
-      <div class="item-title">
-        <span class="tag tag-update">CP UPDATE</span>
-        <a href="https://www.nsa.gov/portals/75/documents/resources/everyone/csfc/capability-packages/voip.pdf" target="_blank">CP-Voice over IP</a>
-      </div>
-      <div class="item-meta">Last-Modified: — &rarr; —</div>
-    </div>
-    
-    <div class="item">
-      <div class="item-title">
-        <span class="tag tag-update">CP UPDATE</span>
-        <a href="https://www.nsa.gov/portals/75/documents/resources/everyone/csfc/capability-packages/data-at-rest.pdf" target="_blank">CP-Data at Rest</a>
-      </div>
-      <div class="item-meta">Last-Modified: — &rarr; —</div>
-    </div>
-    
-    <div class="item">
-      <div class="item-title">
-        <span class="tag tag-update">CP UPDATE</span>
-        <a href="https://www.nsa.gov/portals/75/documents/resources/everyone/csfc/capability-packages/mdm.pdf" target="_blank">CP-Mobile Device Management</a>
-      </div>
-      <div class="item-meta">Last-Modified: — &rarr; —</div>
-    </div>
-    
-    
-    
-    
+    <p class="no-change">No new items.</p>
   </div>
 </div>
 
-
-
-
-
-
-
-<div class="card amber">
-  <div class="card-header">
-    <h2>&#128196; CC Crypto Catalog &amp; Working Group</h2>
-    <span class="badge ">2 change(s)</span>
+<!-- CCTL Lab Intel -->
+<div class="card " id="sec-cctl">
+  <div class="card-hdr" onclick="toggleCard(this)">
+    <span>CCTL Lab Intel</span>
+    <span class="card-count">0 new items</span>
+    <span class="sparkline">
+      
+      <span class="sp-bar" style="height:100%" title="100%"></span>
+      
+      <span class="sp-bar" style="height:0%" title="0%"></span>
+      
+    </span>
+    <span class="toggle-icon">&#9658;</span>
   </div>
-  <div class="card-body">
-    
-    <div class="section-label">Document Version Changes</div>
-    
-    <div class="item">
-      <div class="item-title">
-        <span class="tag tag-update">DOC UPDATE</span>
-        <a href="https://www.commoncriteriaportal.org/files/ccfiles/CCDB-018-v1.0-2025-Jan-31-Final-Specification_of_Functional_Requirements_for_Cryptography.pdf" target="_blank">CCDB-018 v1.0 Crypto Catalog (Jan 2025)</a>
-      </div>
-      <div class="item-meta">New version detected via header change</div>
-    </div>
-    
-    <div class="item">
-      <div class="item-title">
-        <span class="tag tag-update">DOC UPDATE</span>
-        <a href="https://www.commoncriteriaportal.org/files/ccfiles/CC2022PART2R1.pdf" target="_blank">CC:2022 Part 2 Security Functional Requirements</a>
-      </div>
-      <div class="item-meta">New version detected via header change</div>
-    </div>
+  <div class="card-body collapsed">
     
     
     
+    
+    
+    
+    
+    <p class="no-change">No new items.</p>
   </div>
 </div>
 
-
-
-
-
-
-
-
-<div class="card teal">
-  <div class="card-header">
-    <h2>&#128203; NIST CSRC &mdash; Standards, CMVP &amp; PQC</h2>
-    <span class="badge ">7 change(s)</span>
+<!-- CSfC Capability Packages -->
+<div class="card card-updated" id="sec-csfc">
+  <div class="card-hdr" onclick="toggleCard(this)">
+    <span>CSfC Capability Packages</span>
+    <span class="card-count">8 updates</span>
+    <span class="sparkline">
+      
+      <span class="sp-bar" style="height:100%" title="100%"></span>
+      
+      <span class="sp-bar" style="height:100%" title="100%"></span>
+      
+    </span>
+    <span class="toggle-icon">&#9660;</span>
   </div>
-  <div class="card-body">
+  <div class="card-body ">
     
-    <div class="section-label">Document Revisions Detected</div>
     
-    <div class="item">
-      <div class="item-title">
-        <span class="tag tag-nist">REVISED</span>
-        <a href="https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.203.pdf" target="_blank">FIPS 203 ML-KEM</a>
+    <div class="cp-row">
+      <a class="item-link" href="https://www.nsa.gov/portals/75/documents/resources/everyone/csfc/capability-packages/multi-site-connectivity.pdf" target="_blank">CP-Multi-Site Connectivity</a>
+      <div class="cp-detail">
+        
+        <span class="cp-date">Size:  &#8594; 501 bytes</span>
+        
       </div>
-      <div class="item-meta">Header change detected — new version likely published</div>
     </div>
     
-    <div class="item">
-      <div class="item-title">
-        <span class="tag tag-nist">REVISED</span>
-        <a href="https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-131Ar2.pdf" target="_blank">SP 800-131A Rev 2</a>
+    
+    
+    <div class="cp-row">
+      <a class="item-link" href="https://www.nsa.gov/portals/75/documents/resources/everyone/csfc/capability-packages/email.pdf" target="_blank">CP-Email</a>
+      <div class="cp-detail">
+        
+        <span class="cp-date">Size:  &#8594; 475 bytes</span>
+        
       </div>
-      <div class="item-meta">Header change detected — new version likely published</div>
     </div>
     
-    <div class="item">
-      <div class="item-title">
-        <span class="tag tag-nist">REVISED</span>
-        <a href="https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.205.pdf" target="_blank">FIPS 205 SLH-DSA</a>
+    
+    
+    <div class="cp-row">
+      <a class="item-link" href="https://www.nsa.gov/portals/75/documents/resources/everyone/csfc/capability-packages/mdm.pdf" target="_blank">CP-Mobile Device Management</a>
+      <div class="cp-detail">
+        
+        <span class="cp-date">Size:  &#8594; 473 bytes</span>
+        
       </div>
-      <div class="item-meta">Header change detected — new version likely published</div>
     </div>
     
-    <div class="item">
-      <div class="item-title">
-        <span class="tag tag-nist">REVISED</span>
-        <a href="https://nvlpubs.nist.gov/nistpubs/ir/2024/NIST.IR.8547.ipd.pdf" target="_blank">NIST IR 8547</a>
+    
+    
+    <div class="cp-row">
+      <a class="item-link" href="https://www.nsa.gov/portals/75/documents/resources/everyone/csfc/capability-packages/data-at-rest.pdf" target="_blank">CP-Data at Rest</a>
+      <div class="cp-detail">
+        
+        <span class="cp-date">Size:  &#8594; 490 bytes</span>
+        
       </div>
-      <div class="item-meta">Header change detected — new version likely published</div>
     </div>
     
-    <div class="item">
-      <div class="item-title">
-        <span class="tag tag-nist">REVISED</span>
-        <a href="https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-57pt1r5.pdf" target="_blank">SP 800-57 Part 1 Rev 5</a>
+    
+    
+    <div class="cp-row">
+      <a class="item-link" href="https://www.nsa.gov/portals/75/documents/resources/everyone/csfc/capability-packages/campus-wlan.pdf" target="_blank">CP-Campus WLAN</a>
+      <div class="cp-detail">
+        
+        <span class="cp-date">Size:  &#8594; 485 bytes</span>
+        
       </div>
-      <div class="item-meta">Header change detected — new version likely published</div>
     </div>
     
-    <div class="item">
-      <div class="item-title">
-        <span class="tag tag-nist">REVISED</span>
-        <a href="https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.204.pdf" target="_blank">FIPS 204 ML-DSA</a>
+    
+    
+    <div class="cp-row">
+      <a class="item-link" href="https://www.nsa.gov/portals/75/documents/resources/everyone/csfc/capability-packages/wan.pdf" target="_blank">CP-WAN</a>
+      <div class="cp-detail">
+        
+        <span class="cp-date">Size:  &#8594; 473 bytes</span>
+        
       </div>
-      <div class="item-meta">Header change detected — new version likely published</div>
     </div>
     
-    <div class="item">
-      <div class="item-title">
-        <span class="tag tag-nist">REVISED</span>
-        <a href="https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.140-3.pdf" target="_blank">FIPS 140-3</a>
+    
+    
+    <div class="cp-row">
+      <a class="item-link" href="https://www.nsa.gov/portals/75/documents/resources/everyone/csfc/capability-packages/voip.pdf" target="_blank">CP-Voice over IP</a>
+      <div class="cp-detail">
+        
+        <span class="cp-date">Size:  &#8594; 474 bytes</span>
+        
       </div>
-      <div class="item-meta">Header change detected — new version likely published</div>
     </div>
     
+    
+    
+    <div class="cp-row">
+      <a class="item-link" href="https://www.nsa.gov/portals/75/documents/resources/everyone/csfc/capability-packages/mobile-access.pdf" target="_blank">CP-Mobile Access</a>
+      <div class="cp-detail">
+        
+        <span class="cp-date">Size:  &#8594; 487 bytes</span>
+        
+      </div>
+    </div>
     
     
     
   </div>
 </div>
+
+<!-- CC Crypto Docs -->
+<div class="card card-updated" id="sec-cc-crypto">
+  <div class="card-hdr" onclick="toggleCard(this)">
+    <span>CC Crypto Documentation</span>
+    <span class="card-count">2 updates</span>
+    <span class="sparkline">
+      
+      <span class="sp-bar" style="height:100%" title="100%"></span>
+      
+      <span class="sp-bar" style="height:100%" title="100%"></span>
+      
+    </span>
+    <span class="toggle-icon">&#9660;</span>
+  </div>
+  <div class="card-body ">
+    
+    
+    <div class="item-row">
+      <a class="item-link" href="https://www.commoncriteriaportal.org/files/ccfiles/CC2022PART2R1.pdf" target="_blank">CC:2022 Part 2 Security Functional Requirements</a>
+      <span class="item-meta">
+        Header changed
+      </span>
+    </div>
+    
+    
+    
+    <div class="item-row">
+      <a class="item-link" href="https://www.commoncriteriaportal.org/files/ccfiles/CCDB-018-v1.0-2025-Jan-31-Final-Specification_of_Functional_Requirements_for_Cryptography.pdf" target="_blank">CCDB-018 v1.0 Crypto Catalog (Jan 2025)</a>
+      <span class="item-meta">
+        Header changed
+      </span>
+    </div>
+    
+    
+    
+  </div>
+</div>
+
+<!-- NIST Docs -->
+<div class="card card-updated" id="sec-nist">
+  <div class="card-hdr" onclick="toggleCard(this)">
+    <span>NIST Documentation</span>
+    <span class="card-count">7 updates</span>
+    <span class="sparkline">
+      
+      <span class="sp-bar" style="height:100%" title="100%"></span>
+      
+      <span class="sp-bar" style="height:100%" title="100%"></span>
+      
+    </span>
+    <span class="toggle-icon">&#9660;</span>
+  </div>
+  <div class="card-body ">
+    
+    
+    <div class="item-row">
+      <a class="item-link" href="https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-131Ar2.pdf" target="_blank">SP 800-131A Rev 2</a>
+      <span class="item-meta">
+        Header changed
+      </span>
+    </div>
+    
+    
+    
+    <div class="item-row">
+      <a class="item-link" href="https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.140-3.pdf" target="_blank">FIPS 140-3</a>
+      <span class="item-meta">
+        Header changed
+      </span>
+    </div>
+    
+    
+    
+    <div class="item-row">
+      <a class="item-link" href="https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.204.pdf" target="_blank">FIPS 204 ML-DSA</a>
+      <span class="item-meta">
+        Header changed
+      </span>
+    </div>
+    
+    
+    
+    <div class="item-row">
+      <a class="item-link" href="https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-57pt1r5.pdf" target="_blank">SP 800-57 Part 1 Rev 5</a>
+      <span class="item-meta">
+        Header changed
+      </span>
+    </div>
+    
+    
+    
+    <div class="item-row">
+      <a class="item-link" href="https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.203.pdf" target="_blank">FIPS 203 ML-KEM</a>
+      <span class="item-meta">
+        Header changed
+      </span>
+    </div>
+    
+    
+    
+    <div class="item-row">
+      <a class="item-link" href="https://nvlpubs.nist.gov/nistpubs/ir/2024/NIST.IR.8547.ipd.pdf" target="_blank">NIST IR 8547</a>
+      <span class="item-meta">
+        Header changed
+      </span>
+    </div>
+    
+    
+    
+    <div class="item-row">
+      <a class="item-link" href="https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.205.pdf" target="_blank">FIPS 205 SLH-DSA</a>
+      <span class="item-meta">
+        Header changed
+      </span>
+    </div>
+    
+    
+    
+  </div>
+</div>
+
+<!-- Alerts -->
+
 
 </div>
 
 <footer>
-  CC Pulse &mdash; Generated 2026-03-29 00:40 UTC &bull;
-  <a href="cc_feed.xml">RSS Feed</a> &bull;
-  <a href="https://github.com/kr15tyk/CC-pulse" target="_blank">GitHub</a>
+  <span>CC Pulse &middot; Auto-refreshes hourly &middot; Data from NIAP, CSfC, NIST, CC Portal</span>
+  <span>Last run: 2026-03-29 14:06 UTC</span>
 </footer>
+
+<script>
+function toggleCard(hdr) {
+  var body = hdr.nextElementSibling;
+  var icon = hdr.querySelector('.toggle-icon');
+  if (body.classList.contains('collapsed')) {
+    body.classList.remove('collapsed');
+    if (icon) icon.textContent = '▼';
+  } else {
+    body.classList.add('collapsed');
+    if (icon) icon.textContent = '▶';
+  }
+}
+function toggleLab(hdr) {
+  var body = hdr.nextElementSibling;
+  var icon = hdr.querySelector('.toggle-icon');
+  if (body.classList.contains('collapsed')) {
+    body.classList.remove('collapsed');
+    if (icon) icon.textContent = '▼';
+  } else {
+    body.classList.add('collapsed');
+    if (icon) icon.textContent = '▶';
+  }
+}
+</script>
 </body>
 </html>
