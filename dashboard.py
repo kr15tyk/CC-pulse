@@ -187,6 +187,47 @@ footer { margin-top: 2rem; padding: 1rem 0; border-top: 1px solid var(--border);
   .stat { min-width: 0; flex: 1 1 40%; }
   .stat-num { font-size: 1.2rem; }
 }
+  /* Source Health summary */
+  .source-health {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 0.75rem 1rem;
+    margin-bottom: 1.5rem;
+  }
+  .sh-title {
+    font-size: 0.65rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    margin-bottom: 0.5rem;
+  }
+  .sh-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 3px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.03);
+  }
+  .sh-row:last-of-type { border-bottom: none; }
+  .sh-source { font-size: 0.78rem; color: var(--text); }
+  .sh-badge {
+    font-size: 0.68rem;
+    padding: 2px 8px;
+    border-radius: 10px;
+    font-weight: 600;
+  }
+  .sh-ok   { background: rgba(34,197,94,0.15);  color: var(--green); }
+  .sh-idle { background: rgba(100,116,139,0.12); color: var(--muted); }
+  .sh-alert{ background: rgba(239,68,68,0.15);   color: var(--red);   }
+  .sh-footer {
+    font-size: 0.68rem;
+    color: var(--muted);
+    margin-top: 0.4rem;
+    padding-top: 0.4rem;
+    border-top: 1px solid var(--border);
+  }
 </style>
 </head>
 <body>
@@ -227,6 +268,48 @@ footer { margin-top: 2rem; padding: 1rem 0; border-top: 1px solid var(--border);
   </a></div>
 </div>
 
+
+<!-- Source health summary -->
+<div class="source-health">
+  <div class="sh-title">Source Health</div>
+  <div class="sh-row">
+    <span class="sh-source">NIAP API</span>
+    <span class="sh-badge {% if niap_total_stat > 0 %}sh-ok{% else %}sh-idle{% endif %}">
+      {% if niap_total_stat > 0 %}{{ niap_total_stat }} change{% if niap_total_stat != 1 %}s{% endif %}{% else %}no changes{% endif %}
+    </span>
+  </div>
+  <div class="sh-row">
+    <span class="sh-source">CSfC / NSA</span>
+    <span class="sh-badge {% if csfc_total_stat > 0 %}sh-ok{% else %}sh-idle{% endif %}">
+      {% if csfc_total_stat > 0 %}{{ csfc_total_stat }} update{% if csfc_total_stat != 1 %}s{% endif %}{% else %}no changes{% endif %}
+    </span>
+  </div>
+  <div class="sh-row">
+    <span class="sh-source">NIST CSRC</span>
+    <span class="sh-badge {% if nist_total_stat > 0 %}sh-ok{% else %}sh-idle{% endif %}">
+      {% if nist_total_stat > 0 %}{{ nist_total_stat }} update{% if nist_total_stat != 1 %}s{% endif %}{% else %}no changes{% endif %}
+    </span>
+  </div>
+  <div class="sh-row">
+    <span class="sh-source">CC Portal</span>
+    <span class="sh-badge {% if cc_portal_total_stat > 0 %}sh-ok{% else %}sh-idle{% endif %}">
+      {% if cc_portal_total_stat > 0 %}{{ cc_portal_total_stat }} new item{% if cc_portal_total_stat != 1 %}s{% endif %}{% else %}no changes{% endif %}
+    </span>
+  </div>
+  <div class="sh-row">
+    <span class="sh-source">CCTL Labs</span>
+    <span class="sh-badge {% if cctl_total_stat > 0 %}sh-ok{% else %}sh-idle{% endif %}">
+      {% if cctl_total_stat > 0 %}{{ cctl_total_stat }} new item{% if cctl_total_stat != 1 %}s{% endif %}{% else %}no changes{% endif %}
+    </span>
+  </div>
+  <div class="sh-row">
+    <span class="sh-source">Keyword Alerts</span>
+    <span class="sh-badge {% if alert_total > 0 %}sh-alert{% else %}sh-idle{% endif %}">
+      {% if alert_total > 0 %}{{ alert_total }} match{% if alert_total != 1 %}es{% endif %}{% else %}none{% endif %}
+    </span>
+  </div>
+  <div class="sh-footer">Period: {{ period_start[:10] if period_start else '—' }} → {{ period_end[:10] if period_end else '—' }}</div>
+</div>
 <div class="grid">
 
 <div class="section-group">
