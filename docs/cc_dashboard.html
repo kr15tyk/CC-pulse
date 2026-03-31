@@ -25,10 +25,14 @@ body { background: var(--bg); color: var(--text); font-family: var(--font); font
 a { color: var(--green); text-decoration: none; }
 a:hover { color: var(--amber); text-decoration: underline; }
 
+/* Sticky top bar */
+.sticky-top { position: sticky; top: 0; z-index: 100; background: var(--bg); padding-bottom: 0.5rem; border-bottom: 1px solid var(--border); margin-bottom: 1rem; }
 /* Header */
-.site-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; flex-wrap: wrap; gap: 0.5rem; border-bottom: 1px solid var(--border); padding-bottom: 0.75rem; }
+.site-header { display: flex; justify-content: space-between; align-items: center; padding: 0.5rem 0 0.3rem; flex-wrap: wrap; gap: 0.5rem; }
 .site-title { font-size: 1.4rem; font-weight: 700; color: var(--green); letter-spacing: 0.05em; }
 .site-title::before { content: "> "; color: var(--muted); }
+.site-title::after { content: "_"; color: var(--green); animation: blink 1s step-end infinite; }
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
 .site-meta { font-size: 0.75rem; color: var(--muted); }
 
 /* Alert banner */
@@ -41,8 +45,10 @@ a:hover { color: var(--amber); text-decoration: underline; }
 .stat a { color: inherit; text-decoration: none; display: block; }
 .stat a:hover .stat-num { color: var(--amber); }
 .stat-num { font-size: 1.6rem; font-weight: 700; color: var(--muted); font-family: var(--font); }
-.stat-num.active { color: var(--green); }
-.stat-num.alert  { color: var(--red); }
+.stat-num.active, .stat-num.active-num { color: var(--green); }
+.stat-num.alert,  .stat-num.alert-num  { color: var(--red); }
+.stat.has-data { border-color: var(--green); }
+.stat.has-alert { border-color: var(--red); }
 .stat-label { font-size: 0.6rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.12em; margin-top: 2px; }
 
 /* Sparkline */
@@ -99,6 +105,15 @@ a:hover { color: var(--amber); text-decoration: underline; }
 .cp-name { color: var(--green); font-weight: 700; }
 .cp-meta { font-size: 0.7rem; color: var(--muted); margin-top: 2px; }
 
+/* Toggle controls */
+.ctrl-bar { font-size: 0.72rem; color: var(--muted); margin-bottom: 1rem; display: flex; gap: 1rem; align-items: center; }
+.ctrl-btn { background: none; border: 1px solid var(--border); color: var(--muted); font-family: var(--font); font-size: 0.72rem; padding: 2px 8px; cursor: pointer; }
+.ctrl-btn:hover { border-color: var(--green); color: var(--green); }
+.ctrl-hint { font-size: 0.65rem; color: var(--muted); opacity: 0.6; }
+/* Last-active label */
+.last-active { font-size: 0.65rem; color: var(--muted); opacity: 0.7; margin-left: 0.5rem; }
+/* Card hidden when zero-filter is on */
+.card.zero-hidden { display: none; }
 /* Footer */
 .site-footer { margin-top: 2rem; padding-top: 0.75rem; border-top: 1px solid var(--border); font-size: 0.72rem; color: var(--muted); text-align: center; }
 
@@ -158,11 +173,11 @@ a:hover { color: var(--amber); text-decoration: underline; }
 <div class="alert-banner">3 keyword alerts &mdash; see Alerts section below.</div>
 
 
+<div class="sticky-top">
 <header class="site-header">
   <div class="site-title">CC Pulse</div>
-  <div class="site-meta">2026-03-30 → 2026-03-31 · Generated 2026-03-31 20:58 UTC</div>
+  <div class="site-meta">2026-03-30 → 2026-03-31 &middot; Generated 2026-03-31 21:18 UTC</div>
 </header>
-
 <div class="trend-bar">
   <div class="stat"><a href="#sec-niap-pp">
     <div class="stat-num ">0</div>
@@ -191,6 +206,7 @@ a:hover { color: var(--amber); text-decoration: underline; }
 </div>
 
 
+</div><!-- /sticky-top -->
 <!-- Source health summary -->
 <div class="source-health">
   <div class="sh-title">Source Health</div>
@@ -232,12 +248,18 @@ a:hover { color: var(--amber); text-decoration: underline; }
   </div>
   <div class="sh-footer">Period: 2026-03-30 → 2026-03-31</div>
 </div>
+<div class="ctrl-bar">
+  <button class="ctrl-btn" onclick="expandAll()" title="Expand all cards [E]">[E] Expand All</button>
+  <button class="ctrl-btn" onclick="collapseAll()" title="Collapse all cards [C]">[C] Collapse All</button>
+  <button class="ctrl-btn" id="filter-btn" onclick="toggleZeroFilter()" title="Toggle zero-change cards [F]">[F] Hide Empty</button>
+  <span class="ctrl-hint">keyboard: E=expand C=collapse F=filter</span>
+</div>
 <div class="grid">
 
 <div class="section-group">
   <div class="section-label">NIAP</div>
   <!-- Cisco NDcPP -->
-<div class="card " id="sec-cisco">
+<div class="card " id="sec-cisco" data-has-changes="0">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>Cisco NDcPP Certifications</span>
     <span class="card-count">0 changes</span>
@@ -252,7 +274,7 @@ a:hover { color: var(--amber); text-decoration: underline; }
 </div>
 
   <!-- NIAP CCTL Registry -->
-<div class="card " id="sec-cctl-registry">
+<div class="card " id="sec-cctl-registry" data-has-changes="0">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>NIAP CCTL Registry</span>
     <span class="card-count">0 changes</span>
@@ -267,19 +289,19 @@ a:hover { color: var(--amber); text-decoration: underline; }
 </div>
 
   <!-- NIAP In-Evaluation -->
-<div class="card " id="sec-niap-inevaluation">
+<div class="card " id="sec-niap-inevaluation" data-has-changes="0">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>NIAP In-Evaluation Products</span>
     <span class="card-count">22 active</span>
     <span class="sparkline">
       
-      <span class="sp-bar" style="height:0%" title="0%"></span>
+      <span class="sp-bar" style="height:0%" title="0 changes"></span>
       
-      <span class="sp-bar" style="height:0%" title="0%"></span>
+      <span class="sp-bar" style="height:0%" title="0 changes"></span>
       
-      <span class="sp-bar" style="height:0%" title="0%"></span>
+      <span class="sp-bar" style="height:0%" title="0 changes"></span>
       
-      <span class="sp-bar" style="height:0%" title="0%"></span>
+      <span class="sp-bar" style="height:0%" title="0 changes"></span>
       
     </span>
   </div>
@@ -293,19 +315,19 @@ a:hover { color: var(--amber); text-decoration: underline; }
 </div>
 
   <!-- NIAP News -->
-<div class="card " id="sec-niap-news">
+<div class="card " id="sec-niap-news" data-has-changes="0">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>NIAP News &amp; Announcements</span>
     <span class="card-count">0 new items</span>
     <span class="sparkline">
       
-      <span class="sp-bar" style="height:100%" title="100%"></span>
+      <span class="sp-bar" style="height:100%" title="345 changes"></span>
       
-      <span class="sp-bar" style="height:0%" title="0%"></span>
+      <span class="sp-bar" style="height:0%" title="0 changes"></span>
       
-      <span class="sp-bar" style="height:0%" title="0%"></span>
+      <span class="sp-bar" style="height:0%" title="0 changes"></span>
       
-      <span class="sp-bar" style="height:0%" title="0%"></span>
+      <span class="sp-bar" style="height:0%" title="0 changes"></span>
       
     </span>
     <span class="toggle-icon">&#9658;</span>
@@ -320,19 +342,19 @@ a:hover { color: var(--amber); text-decoration: underline; }
 </div>
 
   <!-- NIAP PCL -- All Certifications -->
-<div class="card " id="sec-niap-pcl">
+<div class="card " id="sec-niap-pcl" data-has-changes="0">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>NIAP PCL -- All Certifications</span>
     <span class="card-count">0 changes</span>
     <span class="sparkline">
       
-      <span class="sp-bar" style="height:0%" title="0%"></span>
+      <span class="sp-bar" style="height:0%" title="0 changes"></span>
       
-      <span class="sp-bar" style="height:0%" title="0%"></span>
+      <span class="sp-bar" style="height:0%" title="0 changes"></span>
       
-      <span class="sp-bar" style="height:0%" title="0%"></span>
+      <span class="sp-bar" style="height:0%" title="0 changes"></span>
       
-      <span class="sp-bar" style="height:0%" title="0%"></span>
+      <span class="sp-bar" style="height:0%" title="0 changes"></span>
       
     </span>
   </div>
@@ -345,19 +367,19 @@ a:hover { color: var(--amber); text-decoration: underline; }
 </div>
 
   <!-- NIAP PPs -->
-<div class="card " id="sec-niap-pp">
+<div class="card " id="sec-niap-pp" data-has-changes="0">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>NIAP Protection Profiles</span>
     <span class="card-count">0 changes</span>
     <span class="sparkline">
       
-      <span class="sp-bar" style="height:100%" title="100%"></span>
+      <span class="sp-bar" style="height:100%" title="266 changes"></span>
       
-      <span class="sp-bar" style="height:0%" title="0%"></span>
+      <span class="sp-bar" style="height:0%" title="0 changes"></span>
       
-      <span class="sp-bar" style="height:0%" title="0%"></span>
+      <span class="sp-bar" style="height:0%" title="0 changes"></span>
       
-      <span class="sp-bar" style="height:0%" title="0%"></span>
+      <span class="sp-bar" style="height:0%" title="0 changes"></span>
       
     </span>
     <span class="toggle-icon">&#9658;</span>
@@ -367,24 +389,24 @@ a:hover { color: var(--amber); text-decoration: underline; }
     
     
     
-    <p class="no-change">No changes detected.</p>
+    <p class="no-change">No changes detected. <span class="last-active">(last: 2026-03-28)</span></p>
   </div>
 </div>
 
   <!-- NIAP TDs -->
-<div class="card " id="sec-niap-td">
+<div class="card " id="sec-niap-td" data-has-changes="0">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>NIAP Technical Decisions</span>
     <span class="card-count">0 changes</span>
     <span class="sparkline">
       
-      <span class="sp-bar" style="height:100%" title="100%"></span>
+      <span class="sp-bar" style="height:100%" title="950 changes"></span>
       
-      <span class="sp-bar" style="height:0%" title="0%"></span>
+      <span class="sp-bar" style="height:0%" title="0 changes"></span>
       
-      <span class="sp-bar" style="height:0%" title="0%"></span>
+      <span class="sp-bar" style="height:0%" title="0 changes"></span>
       
-      <span class="sp-bar" style="height:0%" title="0%"></span>
+      <span class="sp-bar" style="height:0%" title="0 changes"></span>
       
     </span>
     <span class="toggle-icon">&#9658;</span>
@@ -392,7 +414,7 @@ a:hover { color: var(--amber); text-decoration: underline; }
   <div class="card-body collapsed">
     
     
-    <p class="no-change">No changes detected.</p>
+    <p class="no-change">No changes detected. <span class="last-active">(last: 2026-03-28)</span></p>
   </div>
 </div>
 </div>
@@ -400,26 +422,26 @@ a:hover { color: var(--amber); text-decoration: underline; }
 <div class="section-group">
   <div class="section-label">CCTL</div>
   <!-- CCTL Lab Intel -->
-<div class="card " id="sec-cctl">
+<div class="card " id="sec-cctl" data-has-changes="0">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>CCTL Lab Intel</span>
     <span class="card-count">0 new items</span>
     <span class="sparkline">
       
-      <span class="sp-bar" style="height:100%" title="100%"></span>
+      <span class="sp-bar" style="height:100%" title="27 changes"></span>
       
-      <span class="sp-bar" style="height:0%" title="0%"></span>
+      <span class="sp-bar" style="height:0%" title="0 changes"></span>
       
-      <span class="sp-bar" style="height:0%" title="0%"></span>
+      <span class="sp-bar" style="height:0%" title="0 changes"></span>
       
-      <span class="sp-bar" style="height:0%" title="0%"></span>
+      <span class="sp-bar" style="height:0%" title="0 changes"></span>
       
     </span>
     <span class="toggle-icon">&#9658;</span>
   </div>
   <div class="card-body collapsed">
     
-    <p class="no-change">No new items.</p>
+    <p class="no-change">No new items. <span class="last-active">(last: 2026-03-28)</span></p>
   </div>
 </div>
 </div>
@@ -427,26 +449,26 @@ a:hover { color: var(--amber); text-decoration: underline; }
 <div class="section-group">
   <div class="section-label">CSfC</div>
   <!-- CSfC Capability Packages -->
-<div class="card " id="sec-csfc">
+<div class="card " id="sec-csfc" data-has-changes="0">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>CSfC Capability Packages</span>
     <span class="card-count">0 updates</span>
     <span class="sparkline">
       
-      <span class="sp-bar" style="height:100%" title="100%"></span>
+      <span class="sp-bar" style="height:100%" title="8 changes"></span>
       
-      <span class="sp-bar" style="height:100%" title="100%"></span>
+      <span class="sp-bar" style="height:100%" title="8 changes"></span>
       
-      <span class="sp-bar" style="height:0%" title="0%"></span>
+      <span class="sp-bar" style="height:0%" title="0 changes"></span>
       
-      <span class="sp-bar" style="height:0%" title="0%"></span>
+      <span class="sp-bar" style="height:0%" title="0 changes"></span>
       
     </span>
     <span class="toggle-icon">&#9658;</span>
   </div>
   <div class="card-body collapsed">
     
-    <p class="no-change">No changes detected.</p>
+    <p class="no-change">No changes detected. <span class="last-active">(last: 2026-03-29)</span></p>
   </div>
 </div>
 </div>
@@ -454,43 +476,43 @@ a:hover { color: var(--amber); text-decoration: underline; }
 <div class="section-group">
   <div class="section-label">Documentation</div>
   <!-- CC Crypto Docs -->
-<div class="card " id="sec-cc-crypto">
+<div class="card " id="sec-cc-crypto" data-has-changes="0">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>CC Crypto Documentation</span>
     <span class="card-count">0 updates</span>
     <span class="sparkline">
       
-      <span class="sp-bar" style="height:100%" title="100%"></span>
+      <span class="sp-bar" style="height:100%" title="2 changes"></span>
       
-      <span class="sp-bar" style="height:100%" title="100%"></span>
+      <span class="sp-bar" style="height:100%" title="2 changes"></span>
       
-      <span class="sp-bar" style="height:0%" title="0%"></span>
+      <span class="sp-bar" style="height:0%" title="0 changes"></span>
       
-      <span class="sp-bar" style="height:0%" title="0%"></span>
+      <span class="sp-bar" style="height:0%" title="0 changes"></span>
       
     </span>
     <span class="toggle-icon">&#9658;</span>
   </div>
   <div class="card-body collapsed">
     
-    <p class="no-change">No changes detected.</p>
+    <p class="no-change">No changes detected. <span class="last-active">(last: 2026-03-29)</span></p>
   </div>
 </div>
 
   <!-- NIST Docs -->
-<div class="card card-updated" id="sec-nist">
+<div class="card card-updated" id="sec-nist" data-has-changes="3">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>NIST Documentation</span>
     <span class="card-count">3 updates</span>
     <span class="sparkline">
       
-      <span class="sp-bar" style="height:100%" title="100%"></span>
+      <span class="sp-bar" style="height:100%" title="7 changes"></span>
       
-      <span class="sp-bar" style="height:100%" title="100%"></span>
+      <span class="sp-bar" style="height:100%" title="7 changes"></span>
       
-      <span class="sp-bar" style="height:0%" title="0%"></span>
+      <span class="sp-bar" style="height:0%" title="0 changes"></span>
       
-      <span class="sp-bar" style="height:43%" title="43%"></span>
+      <span class="sp-bar" style="height:43%" title="3 changes"></span>
       
     </span>
     <span class="toggle-icon">&#9660;</span>
@@ -532,19 +554,19 @@ a:hover { color: var(--amber); text-decoration: underline; }
 <div class="section-group">
   <div class="section-label">CC Portal</div>
   <!-- CC Portal (international) -->
-<div class="card " id="sec-cc-portal">
+<div class="card " id="sec-cc-portal" data-has-changes="0">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>CC Portal (International)</span>
     <span class="card-count">0 new items</span>
     <span class="sparkline">
       
-      <span class="sp-bar" style="height:0%" title="0%"></span>
+      <span class="sp-bar" style="height:0%" title="0 changes"></span>
       
-      <span class="sp-bar" style="height:0%" title="0%"></span>
+      <span class="sp-bar" style="height:0%" title="0 changes"></span>
       
-      <span class="sp-bar" style="height:0%" title="0%"></span>
+      <span class="sp-bar" style="height:0%" title="0 changes"></span>
       
-      <span class="sp-bar" style="height:0%" title="0%"></span>
+      <span class="sp-bar" style="height:0%" title="0 changes"></span>
       
     </span>
     <span class="toggle-icon">&#9658;</span>
@@ -605,10 +627,11 @@ a:hover { color: var(--amber); text-decoration: underline; }
 
 <footer>
   <span>CC Pulse &middot; Auto-refreshes daily (06:00 UTC) &middot; Data from NIAP, CSfC, NIST, CC Portal</span>
-  <span>Last run: 2026-03-31 20:58 UTC</span>
+  <span>Last run: 2026-03-31 21:18 UTC</span>
 </footer>
 
 <script>
+// Card toggle
 function toggleCard(hdr) {
   var body = hdr.nextElementSibling;
   var icon = hdr.querySelector('.toggle-icon');
@@ -631,6 +654,59 @@ function toggleLab(hdr) {
     if (icon) icon.textContent = '▶';
   }
 }
+
+// Expand / Collapse all
+function expandAll() {
+  document.querySelectorAll('.card-body.collapsed').forEach(function(b) {
+    b.classList.remove('collapsed');
+    var icon = b.previousElementSibling && b.previousElementSibling.querySelector('.toggle-icon');
+    if (icon) icon.textContent = '▼';
+  });
+}
+function collapseAll() {
+  document.querySelectorAll('.card-body:not(.collapsed)').forEach(function(b) {
+    b.classList.add('collapsed');
+    var icon = b.previousElementSibling && b.previousElementSibling.querySelector('.toggle-icon');
+    if (icon) icon.textContent = '▶';
+  });
+}
+
+// Filter zero-change cards
+var zeroFilterOn = false;
+function toggleZeroFilter() {
+  zeroFilterOn = !zeroFilterOn;
+  document.querySelectorAll('.card[data-has-changes]').forEach(function(card) {
+    var n = parseInt(card.getAttribute('data-has-changes') || '0', 10);
+    if (zeroFilterOn && n === 0) {
+      card.classList.add('zero-hidden');
+    } else {
+      card.classList.remove('zero-hidden');
+    }
+  });
+  var btn = document.getElementById('filter-btn');
+  if (btn) btn.textContent = zeroFilterOn ? '[F] Show All' : '[F] Hide Empty';
+}
+
+// Keyboard shortcuts: E=expand, C=collapse, F=filter
+document.addEventListener('keydown', function(e) {
+  if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+  if (e.key === 'e' || e.key === 'E') expandAll();
+  if (e.key === 'c' || e.key === 'C') collapseAll();
+  if (e.key === 'f' || e.key === 'F') toggleZeroFilter();
+});
+
+// Highlight active stat tiles
+document.querySelectorAll('.stat').forEach(function(stat) {
+  var num = stat.querySelector('.stat-num');
+  if (!num) return;
+  var val = parseInt(num.textContent.trim(), 10);
+  if (isNaN(val) || val === 0) return;
+  if (num.classList.contains('alert-num')) {
+    stat.classList.add('has-alert');
+  } else {
+    stat.classList.add('has-data');
+  }
+});
 </script>
 </body>
 </html>
