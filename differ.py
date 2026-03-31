@@ -8,6 +8,7 @@ Features:
   - Improved weekly alert deduplication (source+title key, not timestamp) (fix #11)
   - categorize_news() applied to CSfC/CC Crypto/NIST feed items (fix #12)
   - Type hints throughout
+  - Two-tier keyword scanning: structured fields vs scraped page blobs (fix #17)
 """
 
 from __future__ import annotations
@@ -88,24 +89,55 @@ def _headers_changed(old_h: dict, new_h: dict) -> bool:
 
 
 # -- Keyword alert scanner -----------------------------------------------------
-def scan_watch_keywords(text: str) -> list[str]:
-    """Return any WATCH_KEYWORDS found (case-insensitive) in text."""
+def scan_watch_keywords(text: str, *, structured: bool = True) -> list[str]:
+    """Return any WATCH_KEYWORDS found (case-insensitive) in text.
+
+    Args:
+        text: The string to scan.
+        structured: If True (default), scan against the full WATCH_KEYWORDS list.
+            This is used for structured fields (PP names, TD titles, RSS titles,
+            product names) where a match is highly reliable.
+            If False, scan against only the BODY_WATCH_KEYWORDS subset defined in
+            config, which is intentionally narrower to avoid alert fatigue from
+            raw page-scrape blobs.
+    """
     tl = text.lower()
-    return [kw for kw in config.WATCH_KEYWORDS if kw.lower() in tl]
+    kw_list = config.WATCH_KEYWORDS if structured else config.BODY_WATCH_KEYWORDS
+    return [kw for kw in kw_list if kw.lower() in tl]
 
 def flag_alerts(diff: Snapshot) -> list[dict[str, Any]]:
     """Walk a computed diff and return a list of high-priority alert objects.
     Each alert: {source, kind, title, matched_keywords}.
+
+    Two-tier scanning (fix #17):
+    - _add()      scans *structured* fields (API titles, identifiers, PP names,
+                  RSS feed titles).  Uses the full WATCH_KEYWORDS list.
+    - _add_text() scans raw *page-scrape blobs* (NSA/NIST page text, CC portal
+                  paragraphs).  Uses the narrower BODY_WATCH_KEYWORDS list to
+                  avoid alert fatigue from noisy scraped content.
     """
     alerts: list[dict[str, Any]] = []
 
     def _add(source: str, kind: str, title: str) -> None:
-        hits = scan_watch_keywords(title)
+        """Scan a structured field (high-signal) against full WATCH_KEYWORDS."""
+        hits = scan_watch_keywords(title, structured=True)
         if hits:
             alerts.append({
                 "source":           source,
                 "kind":             kind,
                 "title":            title,
+                "matched_keywords": hits,
+            })
+
+    def _add_text(source: str, kind: str, text: str) -> None:
+        """Scan a raw scraped text blob (lower-signal) against BODY_WATCH_KEYWORDS only."""
+        hits = scan_watch_keywords(text, structured=False)
+        if hits:
+            truncated = text[:120].rstrip() + ("…" if len(text) > 120 else "")
+            alerts.append({
+                "source":           source,
+                "kind":             kind,
+                "title":            truncated,
                 "matched_keywords": hits,
             })
 
@@ -143,24 +175,24 @@ def flag_alerts(diff: Snapshot) -> list[dict[str, Any]]:
         for item in items:
             _add(f"CSfC Feed: {feed_name}", "advisory", item.get("title", ""))
 
-    # CSfC APL page changes
+    # CSfC APL page changes (scraped text — use _add_text for narrower matching)
     for item in diff.get("csfc", {}).get("pages", {}).get("apl", {}).get("added", []):
-        _add("CSfC APL", "new", item.get("text", ""))
+        _add_text("CSfC APL", "new", item.get("text", ""))
 
     # CSfC Capability Package header changes
     for cp_name, change in diff.get("csfc", {}).get("capability_packages", {}).items():
         if change.get("changed"):
             _add("CSfC CP", "updated", cp_name)
 
-    # CC Crypto Catalog page changes
+    # CC Crypto Catalog page changes (scraped text — use _add_text for narrower matching)
     for page_key, page_diff in diff.get("cc_crypto", {}).get("pages", {}).items():
         for item in page_diff.get("added", []):
-            _add(f"CC Crypto: {page_key}", "publication", item.get("text", ""))
+            _add_text(f"CC Crypto: {page_key}", "publication", item.get("text", ""))
 
-    # NIST page changes
+    # NIST page changes (scraped text — use _add_text for narrower matching)
     for page_key, page_diff in diff.get("nist", {}).get("pages", {}).items():
         for item in page_diff.get("added", []):
-            _add(f"NIST: {page_key}", "publication", item.get("text", ""))
+            _add_text(f"NIST: {page_key}", "publication", item.get("text", ""))
 
     # NIST RSS feed new items
     for feed_name, items in diff.get("nist", {}).get("feeds", {}).items():
