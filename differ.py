@@ -157,20 +157,10 @@ def flag_alerts(diff: Snapshot) -> list[dict[str, Any]]:
         for item in page_diff.get("added", []):
             _add(f"CC Crypto: {page_key}", "publication", item.get("text", ""))
 
-    # CC Crypto document header changes
-    for doc_name, change in diff.get("cc_crypto", {}).get("doc_headers", {}).items():
-        if change.get("changed"):
-            _add("CC Crypto Doc", "updated", doc_name)
-
     # NIST page changes
     for page_key, page_diff in diff.get("nist", {}).get("pages", {}).items():
         for item in page_diff.get("added", []):
             _add(f"NIST: {page_key}", "publication", item.get("text", ""))
-
-    # NIST document header changes
-    for doc_name, change in diff.get("nist", {}).get("doc_headers", {}).items():
-        if change.get("changed"):
-            _add("NIST Doc", "updated", doc_name)
 
     # NIST RSS feed new items
     for feed_name, items in diff.get("nist", {}).get("feeds", {}).items():
