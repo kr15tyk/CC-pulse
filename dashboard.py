@@ -170,6 +170,13 @@ a:hover { color: var(--amber); text-decoration: underline; }
 .alert-item .item-link { color: var(--red); }
 .alert-item .item-link::before { content: "[!] "; color: var(--red); }
 .alert-item .item-meta { color: var(--amber); }
+.alert-dismissed { opacity: 0.35; }
+.alert-dismissed .item-link { text-decoration: line-through; }
+.dismiss-btn { background: none; border: 1px solid var(--muted); color: var(--muted); font-family: var(--font); font-size: 0.62rem; padding: 1px 5px; cursor: pointer; margin-left: auto; white-space: nowrap; }
+.dismiss-btn:hover { border-color: var(--green); color: var(--green); }
+.dismiss-btn.seen { border-color: var(--green); color: var(--green); }
+.alert-monitoring { font-size: 0.62rem; color: var(--muted); margin-bottom: 0.5rem; padding-bottom: 0.4rem; border-bottom: 1px solid rgba(0,100,0,0.2); word-break: break-word; }
+.alert-monitoring::before { content: "Monitoring: "; color: var(--muted); }
 
 /* CCTL lab rows */
 .lab-row { margin-bottom: 0.5rem; }
@@ -280,7 +287,7 @@ a:hover { color: var(--amber); text-decoration: underline; }
     <div class="stat-num {% if cc_portal_total_stat > 0 %}active-num{% endif %}">{{ cc_portal_total_stat }}</div>
     <div class="stat-lbl">CC Portal</div>
   </a></div>
-  <div class="stat"><a href="#sec-niap-pp">
+  <div class="stat"><a href="#sec-alerts">
     <div class="stat-num {% if alert_total > 0 %}alert-num{% endif %}">{{ alert_total }}</div>
     <div class="stat-lbl">Alerts</div>
   </a></div>
@@ -328,6 +335,7 @@ a:hover { color: var(--amber); text-decoration: underline; }
     </span>
   </div>
   <div class="sh-footer">Period: {{ period_start[:10] if period_start else '—' }} → {{ period_end[:10] if period_end else '—' }}</div>
+  <div class="sh-footer">All sources last polled: {{ period_end[:10] if period_end else '—' }} (daily 06:00 UTC)</div>
 </div>
 <div class="ctrl-bar">
   <button class="ctrl-btn" onclick="expandAll()" title="Expand all cards [E]">[E] Expand All</button>
@@ -335,6 +343,35 @@ a:hover { color: var(--amber); text-decoration: underline; }
   <button class="ctrl-btn" id="filter-btn" onclick="toggleZeroFilter()" title="Toggle zero-change cards [F]">[F] Hide Empty</button>
   <span class="ctrl-hint">keyboard: E=expand C=collapse F=filter</span>
 </div>
+<!-- Alerts -->
+{% if diff.alerts %}
+<div class="section-group">
+  <div class="section-label">Alerts</div>
+<div class="card card-alert" id="sec-alerts">
+  <div class="card-hdr" onclick="toggleCard(this)">
+    <span>Alerts</span>
+    <span class="card-count">{{ alert_total }} alert{% if alert_total != 1 %}s</div>
+{% endif %}</span>
+    <span class="toggle-icon">&#9660;</span>
+  </div>
+  <div class="card-body">
+    <div class="alert-monitoring">{{ watch_keywords | join(', ') }}</div>
+    {% for alert in diff.alerts %}
+        <div class="item-row alert-item" data-alert-key="{{ alert.source }}-{{ alert.title | replace(' ', '_') }}">
+          {% if alert.url %}
+          <a class="item-link" href="{{ alert.url }}" target="_blank">{{ alert.source }}: {{ alert.title }}</a>
+          {% else %}
+          <span class="item-link">{{ alert.source }}: {{ alert.title }}</span>
+          {% endif %}
+          <span class="item-meta">{{ alert.kind }} &middot; {{ alert.matched_keywords | join(', ') }}</span>
+          {% if alert.detail %}<div class="item-sub">{{ alert.detail }}</div>{% endif %}
+          <button class="dismiss-btn" onclick="dismissAlert(this)" title="Mark as seen">&#10003; Seen</button>
+        </div>
+        {% endfor %}
+  </div>
+</div>
+{% endif %}
+
 <div class="grid">
 
 <div class="section-group">
@@ -834,70 +871,7 @@ a:hover { color: var(--amber); text-decoration: underline; }
 </div>
 </div>
 
-<!-- Alerts -->
-{% if diff.alerts %}
-<div class="section-group">
-  <div class="section-label">Alerts</div>
-<div class="card card-alert" id="sec-alerts">
-  <div class="card-hdr" onclick="toggleCard(this)">
-    <span>Alerts</span>
-    <span class="card-count">{{ alert_total }} alert{% if alert_total != 1 %}s</div>
-{% endif %}</span>
-    <span class="toggle-icon">&#9660;</span>
-  </div>
-  <div class="card-body">
-    {% for alert in diff.alerts %}
-        <div class="item-row alert-item">
-          {% if alert.url %}
-          <a class="item-link" href="{{ alert.url }}" target="_blank">{{ alert.source }}: {{ alert.title }}</a>
-          {% else %}
-          <span class="item-link">{{ alert.source }}: {{ alert.title }}</span>
-          {% endif %}
-          <span class="item-meta">{{ alert.kind }} &middot; {{ alert.matched_keywords | join(', ') }}</span>
-          {% if alert.detail %}<div class="item-sub">{{ alert.detail }}</div>{% endif %}
-        </div>
-        {% endfor %}
-  </div>
-</div>
-{% endif %}
 
-</div>
-
-</div>
-
-<footer>
-  <span>CC Pulse &middot; Auto-refreshes daily (06:00 UTC) &middot; Data from NIAP, CSfC, NIST, CC Portal</span>
-  <span>Last run: {{ generated_at }}</span>
-</footer>
-
-<script>
-// Card toggle
-function toggleCard(hdr) {
-  var body = hdr.nextElementSibling;
-  var icon = hdr.querySelector('.toggle-icon');
-  if (body.classList.contains('collapsed')) {
-    body.classList.remove('collapsed');
-    if (icon) icon.textContent = '\u25bc';
-  } else {
-    body.classList.add('collapsed');
-    if (icon) icon.textContent = '\u25b6';
-  }
-}
-function toggleLab(hdr) {
-  var body = hdr.nextElementSibling;
-  var icon = hdr.querySelector('.toggle-icon');
-  if (body.classList.contains('collapsed')) {
-    body.classList.remove('collapsed');
-    if (icon) icon.textContent = '\u25bc';
-  } else {
-    body.classList.add('collapsed');
-    if (icon) icon.textContent = '\u25b6';
-  }
-}
-
-// Expand / Collapse all
-function expandAll() {
-  document.querySelectorAll('.card-body.collapsed').forEach(function(b) {
     b.classList.remove('collapsed');
     var icon = b.previousElementSibling && b.previousElementSibling.querySelector('.toggle-icon');
     if (icon) icon.textContent = '\u25bc';
@@ -947,6 +921,32 @@ document.querySelectorAll('.stat').forEach(function(stat) {
     stat.classList.add('has-data');
   }
 });
+// Alert dismiss (localStorage persistence)
+function dismissAlert(btn) {
+  var row = btn.closest('.item-row');
+  var key = 'cpulse_seen_' + (row.dataset.alertKey || '');
+  if (row.classList.contains('alert-dismissed')) {
+    row.classList.remove('alert-dismissed');
+    btn.classList.remove('seen');
+    btn.textContent = '\u2713 Seen';
+    localStorage.removeItem(key);
+  } else {
+    row.classList.add('alert-dismissed');
+    btn.classList.add('seen');
+    btn.textContent = '\u2713 Seen';
+    localStorage.setItem(key, '1');
+  }
+}
+(function initAlertDismiss() {
+  document.querySelectorAll('.item-row[data-alert-key]').forEach(function(row) {
+    var key = 'cpulse_seen_' + row.dataset.alertKey;
+    if (localStorage.getItem(key)) {
+      row.classList.add('alert-dismissed');
+      var btn = row.querySelector('.dismiss-btn');
+      if (btn) { btn.classList.add('seen'); btn.textContent = '\u2713 Seen'; }
+    }
+  });
+})();
 </script>
 </body>
 </html>
@@ -1186,6 +1186,7 @@ def render_dashboard(diff: dict, output_dir: str = "docs") -> None:
         period_end           = diff.get("period_end", ""),
         sp_counts            = sp_counts,
         last_active          = last_active,
+        watch_keywords       = config.WATCH_KEYWORDS,
     )
 
     html_path = os.path.join(output_dir, "cc_dashboard.html")
