@@ -170,14 +170,14 @@ a:hover { color: var(--amber); text-decoration: underline; }
   align-items: center;
   gap: 18px;
   padding-left: 8px;
-  animation: dotsScroll 4s linear infinite;
+  animation: dotsScroll 12s linear infinite;
 }
 .pdot {
   width: 5px; height: 5px;
   border-radius: 50%;
   background: var(--muted);
   flex-shrink: 0;
-  animation: dotEat 4s linear infinite;
+  animation: dotEat 12s linear infinite;
 }
 @keyframes dotsScroll {
   from { transform: translateY(-50%) translateX(0); }
@@ -188,7 +188,7 @@ a:hover { color: var(--amber); text-decoration: underline; }
   position: absolute;
   top: 50%; left: -40px;
   transform: translateY(-50%);
-  animation: pacMove 4s linear infinite;
+  animation: pacMove 12s linear infinite;
 }
 .pacman-char svg {
   width: 28px; height: 28px;
@@ -203,11 +203,11 @@ a:hover { color: var(--amber); text-decoration: underline; }
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  animation: pacMove 4s linear infinite;
+  animation: pacMove 12s linear infinite;
 }
-.ghost-1 { animation-delay: -0.55s; }
-.ghost-2 { animation-delay: -1.1s;  }
-.ghost-3 { animation-delay: -1.65s; }
+.ghost-1 { animation-delay: -1.65s; }
+.ghost-2 { animation-delay: -3.3s;  }
+.ghost-3 { animation-delay: -4.95s; }
 </style>
 </head>
 <body>
@@ -218,7 +218,7 @@ a:hover { color: var(--amber); text-decoration: underline; }
 
 <header class="site-header">
   <div class="site-title">CC Pulse</div>
-  <div class="site-meta">2026-03-30 → 2026-03-31 · Generated 2026-03-31 20:35 UTC</div>
+  <div class="site-meta">2026-03-30 → 2026-03-31 · Generated 2026-03-31 20:48 UTC</div>
 </header>
 
 <div class="trend-bar">
@@ -663,7 +663,7 @@ a:hover { color: var(--amber); text-decoration: underline; }
 
 <footer>
   <span>CC Pulse &middot; Auto-refreshes daily (06:00 UTC) &middot; Data from NIAP, CSfC, NIST, CC Portal</span>
-  <span>Last run: 2026-03-31 20:35 UTC</span>
+  <span>Last run: 2026-03-31 20:48 UTC</span>
 
 <div class="pacman-stage" aria-hidden="true">
   <div class="pacman-dots">
@@ -677,7 +677,7 @@ a:hover { color: var(--amber); text-decoration: underline; }
           values="M50,50 L95,15 A45,45 0 1,0 95,85 Z;
                   M50,50 L95,48 A45,45 0 1,0 95,52 Z;
                   M50,50 L95,15 A45,45 0 1,0 95,85 Z"
-          dur="0.3s" repeatCount="indefinite"/>
+          dur="0.5s" repeatCount="indefinite"/>
       </path>
     </svg>
   </div>
