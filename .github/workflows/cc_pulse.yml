@@ -18,6 +18,7 @@ on:
           - daily
           - weekly
           - bootstrap
+          - redash
 
 # ── Permissions (minimal — only what is needed) ───────────────────────────────
 permissions:
@@ -80,6 +81,7 @@ jobs:
           case "$MODE" in
             weekly)    python main.py --weekly ;;
             bootstrap) python main.py --bootstrap ;;
+            redash)    python main.py --redash ;;
             *)         python main.py ;;
           esac
 
