@@ -26,8 +26,43 @@ log = logging.getLogger(__name__)
 
 
 # ── Webex notification ────────────────────────────────────────────────────────
+def _format_alert_lines(alerts: list[dict], max_items: int = 10) -> list[str]:
+    """Format alert objects into human-readable markdown lines for chat notifications.
+
+    Each line includes: source label, item title, what changed (detail),
+    matched keywords, and a clickable URL where available.
+    This is used by both send_webex_alert() and send_webhook_alert().
+    """
+    lines = []
+    for a in alerts[:max_items]:
+        kws   = ", ".join(a.get("matched_keywords", []))
+        title = a.get("title", "")
+        detail= a.get("detail", "")
+        url   = a.get("url", "")
+        kind  = a.get("kind", "")
+        src   = a.get("source", "")
+
+        # Build the main description line
+        desc = f"**[{src}]** {title}"
+        if detail:
+            desc += f"\n  ↳ {detail}"
+        if kind:
+            desc += f" · _{kind}_"
+        if url:
+            desc += f"\n  🔗 {url}"
+        desc += f"\n  🔑 Keywords: _{kws}_"
+        lines.append(desc)
+    if len(alerts) > max_items:
+        lines.append(f"_...and {len(alerts) - max_items} more — see the [dashboard](https://kr15tyk.github.io/CC-pulse/cc_dashboard.html)._")
+    return lines
+
+
 def send_webex_alert(alerts: list[dict]) -> None:
-    """POST a compact Webex message for high-priority keyword alerts."""
+    """POST an actionable Webex message for high-priority keyword alerts.
+
+    Each alert line includes: source, title, what changed (detail),
+    the kind of change, a direct URL to the source item, and the matched keywords.
+    """
     token = config.WEBEX_BOT_TOKEN
     room_id = config.WEBEX_ROOM_ID
     if not token or not room_id:
@@ -36,16 +71,14 @@ def send_webex_alert(alerts: list[dict]) -> None:
     if not alerts:
         return
 
-    lines = ["**CC Pulse Alert** — keyword match(es) detected:"]
-    for a in alerts[:10]:
-        kws = ", ".join(a.get("matched_keywords", []))
-        lines.append(f"- **[{a['source']}]** {a['title']} — _{kws}_")
-    if len(alerts) > 10:
-        lines.append(f"_...and {len(alerts) - 10} more. Check the dashboard._")
+    alert_lines = _format_alert_lines(alerts)
+    header = f"## ⚠️ CC Pulse — {len(alerts)} Keyword Alert{'s' if len(alerts) != 1 else ''}\n"
+    body = "\n\n---\n".join(alert_lines)
+    dashboard_link = "\n\n[View full dashboard](https://kr15tyk.github.io/CC-pulse/cc_dashboard.html)"
 
     payload = json.dumps({
         "roomId": room_id,
-        "markdown": "\n".join(lines),
+        "markdown": header + body + dashboard_link,
     }).encode("utf-8")
 
     req = urllib.request.Request(
@@ -80,14 +113,9 @@ def send_webhook_alert(alerts: list[dict]) -> None:
     if not alerts:
         return
 
-    lines = ["**CC Pulse Alert** — keyword match(es) detected:"]
-    for a in alerts[:10]:
-        kws = ", ".join(a.get("matched_keywords", []))
-        lines.append(f"- **[{a['source']}]** {a['title']} — _{kws}_")
-    if len(alerts) > 10:
-        lines.append(f"_...and {len(alerts) - 10} more. See dashboard._")
-
-    body_text = "\n".join(lines)
+    alert_lines = _format_alert_lines(alerts)
+    header = f"⚠️ CC Pulse — {len(alerts)} Keyword Alert{'s' if len(alerts) != 1 else ''}\n"
+    body_text = header + "\n\n---\n".join(alert_lines) + "\n\nDashboard: https://kr15tyk.github.io/CC-pulse/cc_dashboard.html"
 
     # Try MS Teams-style payload first; fall back to simple {"text": ...}
     payload = json.dumps({"text": body_text}).encode("utf-8")
@@ -138,20 +166,20 @@ def build_email_html(weekly_diff: dict) -> str:
     if alerts:
         alert_rows = []
         for a in alerts:
-            kws = ", ".join(a.get("matched_keywords", []))
-            alert_rows.append(
-                _row(a.get("source", "ALERT")[:14],
-                     f"<b>{a.get('title', '')}</b> &mdash; {kws}",
-                     "#ffffff", "#a82222")
-            )
-        parts.append(
-            '<div style="background:#a82222;color:white;padding:14px 18px;'
-            'border-radius:6px;margin-bottom:8px">'
-            f'<b style="font-size:1rem">&#9888; {len(alerts)} KEYWORD ALERT(S)</b>'
-            '</div>'
-            + _section("High-Priority Matches", alert_rows)
-        )
+            kws    = ", ".join(a.get("matched_keywords", []))
+            title  = a.get("title", "")
+            detail = a.get("detail", "")
+            url    = a.get("url", "")
+            kind   = a.get("kind", "")
+            src    = a.get("source", "ALERT")
 
+            title_html  = f'<a href="{url}" style="color:#ffffff;font-weight:700">{title}</a>' if url else f"<b>{title}</b>"
+            kind_html   = f' <span style="opacity:0.7;font-size:11px">({kind})</span>' if kind else ""
+            detail_html = f'<div style="font-size:11px;margin-top:3px;opacity:0.85">{detail}</div>' if detail else ""
+            kw_html     = f'<div style="font-size:11px;margin-top:2px;opacity:0.75">Keywords: {kws}</div>'
+            alert_rows.append(
+                _row(src[:14], title_html + kind_html + detail_html + kw_html, "#ffffff", "#a82222")
+            )
     # ── NIAP PPs ──────────────────────────────────────────────────────────────
     pp = weekly_diff.get("niap", {}).get("pps", {})
     rows: list[str] = []
@@ -312,38 +340,58 @@ def send_weekly_email(weekly_diff: dict) -> None:
 
 
 def send_alert_email(alerts: list[dict]) -> None:
-    """Send an immediate alert email when keyword matches are found on a daily run."""
+    """Send an immediate alert email when keyword matches are found on a daily run.
+
+    Each alert row includes: source, title, what changed (detail), kind, matched
+    keywords, and a clickable link to the source item — self-contained enough to
+    act on without opening the dashboard.
+    """
     if not alerts:
         return
-
     date_str = datetime.now(timezone.utc).strftime("%Y-%m-%d")
-    subject = f"CC Pulse ALERT — {len(alerts)} keyword match(es) on {date_str}"
+    subject = f"CC Pulse ALERT \u2014 {len(alerts)} keyword match(es) on {date_str}"
 
     rows = []
     for a in alerts:
-        kws = ", ".join(a.get("matched_keywords", []))
+        kws    = ", ".join(a.get("matched_keywords", []))
+        title  = a.get("title", "")
+        detail = a.get("detail", "")
+        url    = a.get("url", "")
+        kind   = a.get("kind", "")
+        src    = a.get("source", "ALERT")
+
+        title_html  = f'<a href="{url}" style="color:#ffffff;font-weight:700">{title}</a>' if url else f"<b>{title}</b>"
+        kind_html   = f' <span style="opacity:0.7;font-size:11px">({kind})</span>' if kind else ""
+        detail_html = f'<div style="font-size:11px;margin-top:3px;opacity:0.85">{detail}</div>' if detail else ""
+        kw_html     = f'<div style="font-size:11px;margin-top:2px;opacity:0.75">\ud83d\udd11 {kws}</div>'
         rows.append(
-            _row(a.get("source", "ALERT")[:14],
-                 f"<b>{a.get('title', '')}</b> &mdash; {kws}",
-                 "#ffffff", "#a82222")
+            _row(src[:14], title_html + kind_html + detail_html + kw_html, "#ffffff", "#a82222")
         )
+
+    dashboard_link = (
+        '<p style="margin-top:16px">'
+        '<a href="https://kr15tyk.github.io/CC-pulse/cc_dashboard.html" '
+        'style="background:#003366;color:white;padding:8px 16px;'
+        'border-radius:4px;text-decoration:none;font-size:0.85rem">'
+        '&#128202; View Full Dashboard</a></p>'
+    )
 
     body = (
         '<div style="background:#a82222;color:white;padding:14px 18px;'
         'border-radius:6px;margin-bottom:8px">'
         f'<b style="font-size:1rem">&#9888; {len(alerts)} KEYWORD ALERT(S) DETECTED</b>'
         f'<p style="margin:4px 0 0;font-size:0.85rem;opacity:0.85">'
-        f'{date_str} — immediate notification</p>'
+        f'{date_str} \u2014 immediate notification</p>'
         '</div>'
-        + _section("Matched Items", rows)
+        + _section("Keyword Matches \u2014 Source, Detail & Links", rows)
+        + dashboard_link
     )
-
     generated = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
     html = (
         '<html><body style="font-family:-apple-system,BlinkMacSystemFont,sans-serif;'
         'max-width:720px;margin:0 auto;color:#1a1a2e">'
         '<div style="background:#a82222;color:white;padding:20px 28px;border-radius:8px 8px 0 0">'
-        '<h1 style="margin:0;font-size:1.4rem">&#9888; CC Pulse — Immediate Alert</h1>'
+        '<h1 style="margin:0;font-size:1.4rem">&#9888; CC Pulse \u2014 Immediate Alert</h1>'
         f'<p style="margin:4px 0 0;opacity:0.75;font-size:0.85rem">{date_str}</p>'
         '</div>'
         '<div style="background:white;padding:20px 28px;border:1px solid #d0d7e2;'
@@ -351,7 +399,7 @@ def send_alert_email(alerts: list[dict]) -> None:
         f'{body}'
         '<hr style="margin-top:28px;border:none;border-top:1px solid #eee">'
         f'<p style="color:#888;font-size:0.75rem;margin-top:12px">'
-        f'CC Pulse automated monitoring — immediate alert<br>Generated {generated}</p>'
+        f'CC Pulse automated monitoring \u2014 immediate alert<br>Generated {generated}</p>'
         '</div></body></html>'
     )
     _send_email(subject, html)
