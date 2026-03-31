@@ -106,10 +106,14 @@ body { background: var(--bg); color: var(--text); font-family: var(--font); font
 a { color: var(--green); text-decoration: none; }
 a:hover { color: var(--amber); text-decoration: underline; }
 
+/* Sticky top bar */
+.sticky-top { position: sticky; top: 0; z-index: 100; background: var(--bg); padding-bottom: 0.5rem; border-bottom: 1px solid var(--border); margin-bottom: 1rem; }
 /* Header */
-.site-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; flex-wrap: wrap; gap: 0.5rem; border-bottom: 1px solid var(--border); padding-bottom: 0.75rem; }
+.site-header { display: flex; justify-content: space-between; align-items: center; padding: 0.5rem 0 0.3rem; flex-wrap: wrap; gap: 0.5rem; }
 .site-title { font-size: 1.4rem; font-weight: 700; color: var(--green); letter-spacing: 0.05em; }
 .site-title::before { content: "> "; color: var(--muted); }
+.site-title::after { content: "_"; color: var(--green); animation: blink 1s step-end infinite; }
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
 .site-meta { font-size: 0.75rem; color: var(--muted); }
 
 /* Alert banner */
@@ -122,8 +126,10 @@ a:hover { color: var(--amber); text-decoration: underline; }
 .stat a { color: inherit; text-decoration: none; display: block; }
 .stat a:hover .stat-num { color: var(--amber); }
 .stat-num { font-size: 1.6rem; font-weight: 700; color: var(--muted); font-family: var(--font); }
-.stat-num.active { color: var(--green); }
-.stat-num.alert  { color: var(--red); }
+.stat-num.active, .stat-num.active-num { color: var(--green); }
+.stat-num.alert,  .stat-num.alert-num  { color: var(--red); }
+.stat.has-data { border-color: var(--green); }
+.stat.has-alert { border-color: var(--red); }
 .stat-label { font-size: 0.6rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.12em; margin-top: 2px; }
 
 /* Sparkline */
@@ -180,6 +186,15 @@ a:hover { color: var(--amber); text-decoration: underline; }
 .cp-name { color: var(--green); font-weight: 700; }
 .cp-meta { font-size: 0.7rem; color: var(--muted); margin-top: 2px; }
 
+/* Toggle controls */
+.ctrl-bar { font-size: 0.72rem; color: var(--muted); margin-bottom: 1rem; display: flex; gap: 1rem; align-items: center; }
+.ctrl-btn { background: none; border: 1px solid var(--border); color: var(--muted); font-family: var(--font); font-size: 0.72rem; padding: 2px 8px; cursor: pointer; }
+.ctrl-btn:hover { border-color: var(--green); color: var(--green); }
+.ctrl-hint { font-size: 0.65rem; color: var(--muted); opacity: 0.6; }
+/* Last-active label */
+.last-active { font-size: 0.65rem; color: var(--muted); opacity: 0.7; margin-left: 0.5rem; }
+/* Card hidden when zero-filter is on */
+.card.zero-hidden { display: none; }
 /* Footer */
 .site-footer { margin-top: 2rem; padding-top: 0.75rem; border-top: 1px solid var(--border); font-size: 0.72rem; color: var(--muted); text-align: center; }
 
@@ -239,11 +254,11 @@ a:hover { color: var(--amber); text-decoration: underline; }
 <div class="alert-banner">{{ alert_total }} keyword alert{% if alert_total != 1 %}s{% endif %} &mdash; see Alerts section below.</div>
 {% endif %}
 
+<div class="sticky-top">
 <header class="site-header">
   <div class="site-title">CC Pulse</div>
-  <div class="site-meta">{{ period_start[:10] }} → {{ period_end[:10] }} · Generated {{ generated_at }}</div>
+  <div class="site-meta">{{ period_start[:10] }} → {{ period_end[:10] }} &middot; Generated {{ generated_at }}</div>
 </header>
-
 <div class="trend-bar">
   <div class="stat"><a href="#sec-niap-pp">
     <div class="stat-num {% if niap_total_stat > 0 %}active-num{% endif %}">{{ niap_total_stat }}</div>
@@ -272,6 +287,7 @@ a:hover { color: var(--amber); text-decoration: underline; }
 </div>
 
 
+</div><!-- /sticky-top -->
 <!-- Source health summary -->
 <div class="source-health">
   <div class="sh-title">Source Health</div>
@@ -313,12 +329,18 @@ a:hover { color: var(--amber); text-decoration: underline; }
   </div>
   <div class="sh-footer">Period: {{ period_start[:10] if period_start else '—' }} → {{ period_end[:10] if period_end else '—' }}</div>
 </div>
+<div class="ctrl-bar">
+  <button class="ctrl-btn" onclick="expandAll()" title="Expand all cards [E]">[E] Expand All</button>
+  <button class="ctrl-btn" onclick="collapseAll()" title="Collapse all cards [C]">[C] Collapse All</button>
+  <button class="ctrl-btn" id="filter-btn" onclick="toggleZeroFilter()" title="Toggle zero-change cards [F]">[F] Hide Empty</button>
+  <span class="ctrl-hint">keyboard: E=expand C=collapse F=filter</span>
+</div>
 <div class="grid">
 
 <div class="section-group">
   <div class="section-label">NIAP</div>
   <!-- Cisco NDcPP -->
-<div class="card {% if cisco_total > 0 %}card-new{% endif %}" id="sec-cisco">
+<div class="card {% if cisco_total > 0 %}card-new{% endif %}" id="sec-cisco" data-has-changes="{{ cisco_total }}">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>Cisco NDcPP Certifications</span>
     <span class="card-count">{{ cisco_total }} change{% if cisco_total != 1 %}s{% endif %}</span>
@@ -358,12 +380,12 @@ a:hover { color: var(--amber); text-decoration: underline; }
     {% endif %}
     {% endfor %}
     {% endif %}
-    {% if cisco_total == 0 %}<p class="no-change">No changes detected.</p>{% endif %}
+    {% if cisco_total == 0 %}<p class="no-change">No changes detected.{% if last_active.pcl_all %} <span class="last-active">(last: {{ last_active.pcl_all }})</span>{% endif %}</p>{% endif %}
   </div>
 </div>
 
   <!-- NIAP CCTL Registry -->
-<div class="card {% if cctl_registry_total > 0 %}card-updated{% endif %}" id="sec-cctl-registry">
+<div class="card {% if cctl_registry_total > 0 %}card-updated{% endif %}" id="sec-cctl-registry" data-has-changes="{{ cctl_registry_total }}">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>NIAP CCTL Registry</span>
     <span class="card-count">{{ cctl_registry_total }} change{% if cctl_registry_total != 1 %}s{% endif %}</span>
@@ -402,13 +424,13 @@ a:hover { color: var(--amber); text-decoration: underline; }
 </div>
 
   <!-- NIAP In-Evaluation -->
-<div class="card {% if in_eval_total > 0 %}card-new{% endif %}" id="sec-niap-inevaluation">
+<div class="card {% if in_eval_total > 0 %}card-new{% endif %}" id="sec-niap-inevaluation" data-has-changes="{{ in_eval_total }}">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>NIAP In-Evaluation Products</span>
     <span class="card-count">{% if in_eval_total > 0 %}{{ in_eval_total }} change{% if in_eval_total != 1 %}s{% endif %}{% else %}{{ in_eval_current }} active{% endif %}</span>
     <span class="sparkline">
       {% for v in sparklines.in_eval %}
-      <span class="sp-bar" style="height:{{ v }}%" title="{{ v }}%"></span>
+      <span class="sp-bar" style="height:{{ v }}%" title="{{ sp_counts.in_eval[loop.index0] }} change{% if sp_counts.in_eval[loop.index0] != 1 %}s{% endif %}"></span>
       {% endfor %}
     </span>
   </div>
@@ -441,13 +463,13 @@ a:hover { color: var(--amber); text-decoration: underline; }
 </div>
 
   <!-- NIAP News -->
-<div class="card {% if niap_news_total > 0 or diff.niap.events.added %}card-new{% endif %}" id="sec-niap-news">
+<div class="card {% if niap_news_total > 0 or diff.niap.events.added %}card-new{% endif %}" id="sec-niap-news" data-has-changes="{{ niap_news_total }}">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>NIAP News &amp; Announcements</span>
     <span class="card-count">{{ niap_news_total }} new item{% if niap_news_total != 1 %}s{% endif %}</span>
     <span class="sparkline">
       {% for v in sparklines.niap_news %}
-      <span class="sp-bar" style="height:{{ v }}%" title="{{ v }}%"></span>
+      <span class="sp-bar" style="height:{{ v }}%" title="{{ sp_counts.niap_news[loop.index0] }} change{% if sp_counts.niap_news[loop.index0] != 1 %}s{% endif %}"></span>
       {% endfor %}
     </span>
     <span class="toggle-icon">{% if niap_news_total == 0 and not diff.niap.events.added %}&#9658;{% else %}&#9660;{% endif %}</span>
@@ -486,13 +508,13 @@ a:hover { color: var(--amber); text-decoration: underline; }
 </div>
 
   <!-- NIAP PCL -- All Certifications -->
-<div class="card {% if pcl_all_total > 0 %}card-new{% endif %}" id="sec-niap-pcl">
+<div class="card {% if pcl_all_total > 0 %}card-new{% endif %}" id="sec-niap-pcl" data-has-changes="{{ pcl_all_total }}">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>NIAP PCL -- All Certifications</span>
     <span class="card-count">{{ pcl_all_total }} change{% if pcl_all_total != 1 %}s{% endif %}</span>
     <span class="sparkline">
       {% for v in sparklines.pcl_all %}
-      <span class="sp-bar" style="height:{{ v }}%" title="{{ v }}%"></span>
+      <span class="sp-bar" style="height:{{ v }}%" title="{{ sp_counts.pcl_all[loop.index0] }} change{% if sp_counts.pcl_all[loop.index0] != 1 %}s{% endif %}"></span>
       {% endfor %}
     </span>
   </div>
@@ -530,18 +552,18 @@ a:hover { color: var(--amber); text-decoration: underline; }
     </div>
     {% endfor %}
     {% endif %}
-    {% if pcl_all_total == 0 %}<p class="no-change">No changes detected.</p>{% endif %}
+    {% if pcl_all_total == 0 %}<p class="no-change">No changes detected.{% if last_active.pcl_all %} <span class="last-active">(last: {{ last_active.pcl_all }})</span>{% endif %}</p>{% endif %}
   </div>
 </div>
 
   <!-- NIAP PPs -->
-<div class="card {% if niap_pp_total > 0 %}card-new{% endif %}" id="sec-niap-pp">
+<div class="card {% if niap_pp_total > 0 %}card-new{% endif %}" id="sec-niap-pp" data-has-changes="{{ niap_pp_total }}">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>NIAP Protection Profiles</span>
     <span class="card-count">{{ niap_pp_total }} change{% if niap_pp_total != 1 %}s{% endif %}</span>
     <span class="sparkline">
       {% for v in sparklines.niap_pp %}
-      <span class="sp-bar" style="height:{{ v }}%" title="{{ v }}%"></span>
+      <span class="sp-bar" style="height:{{ v }}%" title="{{ sp_counts.niap_pp[loop.index0] }} change{% if sp_counts.niap_pp[loop.index0] != 1 %}s{% endif %}"></span>
       {% endfor %}
     </span>
     <span class="toggle-icon">{% if niap_pp_total == 0 %}&#9658;{% else %}&#9660;{% endif %}</span>
@@ -583,18 +605,18 @@ a:hover { color: var(--amber); text-decoration: underline; }
     </div>
     {% endfor %}
     {% endif %}
-    {% if niap_pp_total == 0 %}<p class="no-change">No changes detected.</p>{% endif %}
+    {% if niap_pp_total == 0 %}<p class="no-change">No changes detected.{% if last_active.niap_pp %} <span class="last-active">(last: {{ last_active.niap_pp }})</span>{% endif %}</p>{% endif %}
   </div>
 </div>
 
   <!-- NIAP TDs -->
-<div class="card {% if niap_td_total > 0 %}card-new{% endif %}" id="sec-niap-td">
+<div class="card {% if niap_td_total > 0 %}card-new{% endif %}" id="sec-niap-td" data-has-changes="{{ niap_td_total }}">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>NIAP Technical Decisions</span>
     <span class="card-count">{{ niap_td_total }} change{% if niap_td_total != 1 %}s{% endif %}</span>
     <span class="sparkline">
       {% for v in sparklines.niap_td %}
-      <span class="sp-bar" style="height:{{ v }}%" title="{{ v }}%"></span>
+      <span class="sp-bar" style="height:{{ v }}%" title="{{ sp_counts.niap_td[loop.index0] }} change{% if sp_counts.niap_td[loop.index0] != 1 %}s{% endif %}"></span>
       {% endfor %}
     </span>
     <span class="toggle-icon">{% if niap_td_total == 0 %}&#9658;{% else %}&#9660;{% endif %}</span>
@@ -624,7 +646,7 @@ a:hover { color: var(--amber); text-decoration: underline; }
     {% endif %}
     {% endfor %}
     {% endif %}
-    {% if niap_td_total == 0 %}<p class="no-change">No changes detected.</p>{% endif %}
+    {% if niap_td_total == 0 %}<p class="no-change">No changes detected.{% if last_active.niap_td %} <span class="last-active">(last: {{ last_active.niap_td }})</span>{% endif %}</p>{% endif %}
   </div>
 </div>
 </div>
@@ -632,13 +654,13 @@ a:hover { color: var(--amber); text-decoration: underline; }
 <div class="section-group">
   <div class="section-label">CCTL</div>
   <!-- CCTL Lab Intel -->
-<div class="card {% if cctl_total > 0 %}card-new{% endif %}" id="sec-cctl">
+<div class="card {% if cctl_total > 0 %}card-new{% endif %}" id="sec-cctl" data-has-changes="{{ cctl_total }}">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>CCTL Lab Intel</span>
     <span class="card-count">{{ cctl_total }} new item{% if cctl_total != 1 %}s{% endif %}</span>
     <span class="sparkline">
       {% for v in sparklines.cctl %}
-      <span class="sp-bar" style="height:{{ v }}%" title="{{ v }}%"></span>
+      <span class="sp-bar" style="height:{{ v }}%" title="{{ sp_counts.cctl[loop.index0] }} change{% if sp_counts.cctl[loop.index0] != 1 %}s{% endif %}"></span>
       {% endfor %}
     </span>
     <span class="toggle-icon">{% if cctl_total == 0 %}&#9658;{% else %}&#9660;{% endif %}</span>
@@ -663,7 +685,7 @@ a:hover { color: var(--amber); text-decoration: underline; }
     </div>
     {% endif %}
     {% endfor %}
-    {% if cctl_total == 0 %}<p class="no-change">No new items.</p>{% endif %}
+    {% if cctl_total == 0 %}<p class="no-change">No new items.{% if last_active.cctl %} <span class="last-active">(last: {{ last_active.cctl }})</span>{% endif %}</p>{% endif %}
   </div>
 </div>
 </div>
@@ -671,13 +693,13 @@ a:hover { color: var(--amber); text-decoration: underline; }
 <div class="section-group">
   <div class="section-label">CSfC</div>
   <!-- CSfC Capability Packages -->
-<div class="card {% if csfc_total > 0 %}card-updated{% endif %}" id="sec-csfc">
+<div class="card {% if csfc_total > 0 %}card-updated{% endif %}" id="sec-csfc" data-has-changes="{{ csfc_total }}">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>CSfC Capability Packages</span>
     <span class="card-count">{{ csfc_total }} update{% if csfc_total != 1 %}s{% endif %}</span>
     <span class="sparkline">
       {% for v in sparklines.csfc %}
-      <span class="sp-bar" style="height:{{ v }}%" title="{{ v }}%"></span>
+      <span class="sp-bar" style="height:{{ v }}%" title="{{ sp_counts.csfc[loop.index0] }} change{% if sp_counts.csfc[loop.index0] != 1 %}s{% endif %}"></span>
       {% endfor %}
     </span>
     <span class="toggle-icon">{% if csfc_total == 0 %}&#9658;{% else %}&#9660;{% endif %}</span>
@@ -699,7 +721,7 @@ a:hover { color: var(--amber); text-decoration: underline; }
     </div>
     {% endif %}
     {% endfor %}
-    {% if csfc_total == 0 %}<p class="no-change">No changes detected.</p>{% endif %}
+    {% if csfc_total == 0 %}<p class="no-change">No changes detected.{% if last_active.csfc %} <span class="last-active">(last: {{ last_active.csfc }})</span>{% endif %}</p>{% endif %}
   </div>
 </div>
 </div>
@@ -707,13 +729,13 @@ a:hover { color: var(--amber); text-decoration: underline; }
 <div class="section-group">
   <div class="section-label">Documentation</div>
   <!-- CC Crypto Docs -->
-<div class="card {% if cc_crypto_total > 0 %}card-updated{% endif %}" id="sec-cc-crypto">
+<div class="card {% if cc_crypto_total > 0 %}card-updated{% endif %}" id="sec-cc-crypto" data-has-changes="{{ cc_crypto_total }}">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>CC Crypto Documentation</span>
     <span class="card-count">{{ cc_crypto_total }} update{% if cc_crypto_total != 1 %}s{% endif %}</span>
     <span class="sparkline">
       {% for v in sparklines.cc_crypto %}
-      <span class="sp-bar" style="height:{{ v }}%" title="{{ v }}%"></span>
+      <span class="sp-bar" style="height:{{ v }}%" title="{{ sp_counts.cc_crypto[loop.index0] }} change{% if sp_counts.cc_crypto[loop.index0] != 1 %}s{% endif %}"></span>
       {% endfor %}
     </span>
     <span class="toggle-icon">{% if cc_crypto_total == 0 %}&#9658;{% else %}&#9660;{% endif %}</span>
@@ -731,18 +753,18 @@ a:hover { color: var(--amber); text-decoration: underline; }
     </div>
     {% endif %}
     {% endfor %}
-    {% if cc_crypto_total == 0 %}<p class="no-change">No changes detected.</p>{% endif %}
+    {% if cc_crypto_total == 0 %}<p class="no-change">No changes detected.{% if last_active.cc_crypto %} <span class="last-active">(last: {{ last_active.cc_crypto }})</span>{% endif %}</p>{% endif %}
   </div>
 </div>
 
   <!-- NIST Docs -->
-<div class="card {% if nist_total > 0 %}card-updated{% endif %}" id="sec-nist">
+<div class="card {% if nist_total > 0 %}card-updated{% endif %}" id="sec-nist" data-has-changes="{{ nist_total }}">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>NIST Documentation</span>
     <span class="card-count">{{ nist_total }} update{% if nist_total != 1 %}s{% endif %}</span>
     <span class="sparkline">
       {% for v in sparklines.nist %}
-      <span class="sp-bar" style="height:{{ v }}%" title="{{ v }}%"></span>
+      <span class="sp-bar" style="height:{{ v }}%" title="{{ sp_counts.nist[loop.index0] }} change{% if sp_counts.nist[loop.index0] != 1 %}s{% endif %}"></span>
       {% endfor %}
     </span>
     <span class="toggle-icon">{% if nist_total == 0 %}&#9658;{% else %}&#9660;{% endif %}</span>
@@ -760,7 +782,7 @@ a:hover { color: var(--amber); text-decoration: underline; }
     </div>
     {% endif %}
     {% endfor %}
-    {% if nist_total == 0 %}<p class="no-change">No changes detected.</p>{% endif %}
+    {% if nist_total == 0 %}<p class="no-change">No changes detected.{% if last_active.nist %} <span class="last-active">(last: {{ last_active.nist }})</span>{% endif %}</p>{% endif %}
   </div>
 </div>
 </div>
@@ -768,13 +790,13 @@ a:hover { color: var(--amber); text-decoration: underline; }
 <div class="section-group">
   <div class="section-label">CC Portal</div>
   <!-- CC Portal (international) -->
-<div class="card {% if cc_portal_total > 0 %}card-new{% endif %}" id="sec-cc-portal">
+<div class="card {% if cc_portal_total > 0 %}card-new{% endif %}" id="sec-cc-portal" data-has-changes="{{ cc_portal_total }}">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>CC Portal (International)</span>
     <span class="card-count">{{ cc_portal_total }} new item{% if cc_portal_total != 1 %}s{% endif %}</span>
     <span class="sparkline">
       {% for v in sparklines.cc_portal %}
-      <span class="sp-bar" style="height:{{ v }}%" title="{{ v }}%"></span>
+      <span class="sp-bar" style="height:{{ v }}%" title="{{ sp_counts.cc_portal[loop.index0] }} change{% if sp_counts.cc_portal[loop.index0] != 1 %}s{% endif %}"></span>
       {% endfor %}
     </span>
     <span class="toggle-icon">{% if cc_portal_total == 0 %}&#9658;{% else %}&#9660;{% endif %}</span>
@@ -807,7 +829,7 @@ a:hover { color: var(--amber); text-decoration: underline; }
     </div>
     {% endfor %}
     {% endif %}
-    {% if cc_portal_total == 0 %}<p class="no-change">No new international items.</p>{% endif %}
+    {% if cc_portal_total == 0 %}<p class="no-change">No new international items.{% if last_active.cc_portal %} <span class="last-active">(last: {{ last_active.cc_portal }})</span>{% endif %}</p>{% endif %}
   </div>
 </div>
 </div>
@@ -849,6 +871,7 @@ a:hover { color: var(--amber); text-decoration: underline; }
 </footer>
 
 <script>
+// Card toggle
 function toggleCard(hdr) {
   var body = hdr.nextElementSibling;
   var icon = hdr.querySelector('.toggle-icon');
@@ -871,6 +894,59 @@ function toggleLab(hdr) {
     if (icon) icon.textContent = '\u25b6';
   }
 }
+
+// Expand / Collapse all
+function expandAll() {
+  document.querySelectorAll('.card-body.collapsed').forEach(function(b) {
+    b.classList.remove('collapsed');
+    var icon = b.previousElementSibling && b.previousElementSibling.querySelector('.toggle-icon');
+    if (icon) icon.textContent = '\u25bc';
+  });
+}
+function collapseAll() {
+  document.querySelectorAll('.card-body:not(.collapsed)').forEach(function(b) {
+    b.classList.add('collapsed');
+    var icon = b.previousElementSibling && b.previousElementSibling.querySelector('.toggle-icon');
+    if (icon) icon.textContent = '\u25b6';
+  });
+}
+
+// Filter zero-change cards
+var zeroFilterOn = false;
+function toggleZeroFilter() {
+  zeroFilterOn = !zeroFilterOn;
+  document.querySelectorAll('.card[data-has-changes]').forEach(function(card) {
+    var n = parseInt(card.getAttribute('data-has-changes') || '0', 10);
+    if (zeroFilterOn && n === 0) {
+      card.classList.add('zero-hidden');
+    } else {
+      card.classList.remove('zero-hidden');
+    }
+  });
+  var btn = document.getElementById('filter-btn');
+  if (btn) btn.textContent = zeroFilterOn ? '[F] Show All' : '[F] Hide Empty';
+}
+
+// Keyboard shortcuts: E=expand, C=collapse, F=filter
+document.addEventListener('keydown', function(e) {
+  if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+  if (e.key === 'e' || e.key === 'E') expandAll();
+  if (e.key === 'c' || e.key === 'C') collapseAll();
+  if (e.key === 'f' || e.key === 'F') toggleZeroFilter();
+});
+
+// Highlight active stat tiles
+document.querySelectorAll('.stat').forEach(function(stat) {
+  var num = stat.querySelector('.stat-num');
+  if (!num) return;
+  var val = parseInt(num.textContent.trim(), 10);
+  if (isNaN(val) || val === 0) return;
+  if (num.classList.contains('alert-num')) {
+    stat.classList.add('has-alert');
+  } else {
+    stat.classList.add('has-data');
+  }
+});
 </script>
 </body>
 </html>
@@ -1034,6 +1110,12 @@ def render_dashboard(diff: dict, output_dir: str = "docs") -> None:
         mx = max(counts) or 1
         return [round(c / mx * 100) for c in counts]
 
+    def _sp_counts(section_key):
+        counts = _section_daily_counts(recent_diffs, section_key)
+        if not counts:
+            return [0] * 7
+        return counts
+
     sparklines = {
         "niap_pp":   _sp("niap_pp"),
         "niap_td":   _sp("niap_td"),
@@ -1046,6 +1128,31 @@ def render_dashboard(diff: dict, output_dir: str = "docs") -> None:
         "pcl_all":   _sp("pcl_all"),
         "in_eval":   _sp("in_eval"),
     }
+
+    sp_counts = {
+        "niap_pp":   _sp_counts("niap_pp"),
+        "niap_td":   _sp_counts("niap_td"),
+        "niap_news": _sp_counts("niap_news"),
+        "cctl":      _sp_counts("cctl"),
+        "csfc":      _sp_counts("csfc"),
+        "cc_crypto": _sp_counts("cc_crypto"),
+        "nist":      _sp_counts("nist"),
+        "cc_portal": _sp_counts("cc_portal"),
+        "pcl_all":   _sp_counts("pcl_all"),
+        "in_eval":   _sp_counts("in_eval"),
+    }
+
+    # Last-active dates: find most recent diff where each section had changes
+    def _last_active(section_key):
+        for d in reversed(recent_diffs):
+            counts = _section_daily_counts([d], section_key)
+            if counts and counts[0] > 0:
+                return d.get("period_end", "")[:10]
+        return None
+    last_active = {k: _last_active(k) for k in [
+        "niap_pp","niap_td","niap_news","cctl","csfc",
+        "cc_crypto","nist","cc_portal","pcl_all","in_eval"
+    ]}
 
     # Render template
     env = Environment(autoescape=False)
@@ -1077,6 +1184,8 @@ def render_dashboard(diff: dict, output_dir: str = "docs") -> None:
         in_eval_total        = in_eval_total,
         in_eval_current      = in_eval_current,
         period_end           = diff.get("period_end", ""),
+        sp_counts            = sp_counts,
+        last_active          = last_active,
     )
 
     html_path = os.path.join(output_dir, "cc_dashboard.html")
