@@ -822,11 +822,16 @@ footer { margin-top: 2rem; padding: 1rem 0; border-top: 1px solid var(--border);
   </div>
   <div class="card-body">
     {% for alert in diff.alerts %}
-    <div class="item-row alert-item">
-      <span class="item-link">{{ alert.source }}: {{ alert.title }}</span>
-      <span class="item-meta">{{ alert.kind }} &middot; {{ alert.matched_keywords | join(', ') }}</span>
-    </div>
-    {% endfor %}
+        <div class="item-row alert-item">
+          {% if alert.url %}
+          <a class="item-link" href="{{ alert.url }}" target="_blank">{{ alert.source }}: {{ alert.title }}</a>
+          {% else %}
+          <span class="item-link">{{ alert.source }}: {{ alert.title }}</span>
+          {% endif %}
+          <span class="item-meta">{{ alert.kind }} &middot; {{ alert.matched_keywords | join(', ') }}</span>
+          {% if alert.detail %}<div class="item-sub">{{ alert.detail }}</div>{% endif %}
+        </div>
+        {% endfor %}
   </div>
 </div>
 {% endif %}
