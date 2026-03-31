@@ -8,6 +8,9 @@ Features:
   - Parallel domain collection via ThreadPoolExecutor (fix #16)
   - Structured logging throughout
   - Sanity-check validation before accepting a snapshot
+  - Structured CSfC APL records with component type tagging (fix #18)
+  - CCTL scraper health warnings for empty-result detectors (fix #19)
+  - Structured CMVP MIP table parsing with named fields (fix #20)
 """
 
 import hashlib
@@ -27,7 +30,7 @@ log = logging.getLogger(__name__)
 HEADERS = {
     "User-Agent": (
         "CCPulse/2.0 (automated monitoring tool; "
-        "contact your-email@example.com)"
+        "contact your-operator@example.com)"
     )
 }
 
@@ -322,19 +325,47 @@ def scrapelab_items(url):
     return items[:20]
 
 def collect_cctl_labs():
+    """Collect CCTL lab blog/news items.
+
+    Labs with RSS feeds are reliable.  Labs configured with scrape=True use
+    a generic HTML scraper that is frequently broken by site redesigns — they
+    are collected on a best-effort basis and logged with a warning when empty
+    so operators know to check (fix #19).
+    """
     log.info("[CCTL Labs] Collecting...")
     results = {}
-    for lab in config.CCTL_LABS:
+    rss_labs = [l for l in config.CCTL_LABS if l["rss"]]
+    scrape_labs = [l for l in config.CCTL_LABS if not l["rss"] and l.get("scrape") and l["url"]]
+    disabled_labs = [l for l in config.CCTL_LABS if not l["rss"] and not l.get("scrape")]
+
+    for lab in rss_labs:
         name = lab["name"]
-        log.info("  %s...", name)
-        if lab["rss"]:
-            items = get_rss(lab["rss"])
-        elif lab["scrape"] and lab["url"]:
-            items = scrapelab_items(lab["url"])
+        log.info("  [RSS] %s...", name)
+        items = get_rss(lab["rss"])
+        results[name] = items or []
+        log.info("    -> %d items", len(results[name]))
+
+    for lab in scrape_labs:
+        name = lab["name"]
+        log.info("  [Scrape] %s...", name)
+        items = scrapelab_items(lab["url"])
+        results[name] = items or []
+        if not results[name]:
+            log.warning(
+                "  [CCTL] %s scraper returned 0 items — site may have changed layout. "
+                "Consider adding an RSS feed or disabling this scraper in config.",
+                name,
+            )
         else:
-            items = []
-        results[name] = items
-        log.info("    -> %d items", len(items))
+            log.info("    -> %d items", len(results[name]))
+
+    for lab in disabled_labs:
+        name = lab["name"]
+        log.debug("  [Skip] %s — no RSS and scrape=False", name)
+        results[name] = []
+
+    active = sum(1 for v in results.values() if v)
+    log.info("[CCTL Labs] %d/%d sources returned items.", active, len(config.CCTL_LABS))
     return results
 
 
@@ -489,6 +520,72 @@ def _scrape_csfc_page(path: str) -> list:
             unique.append(item)
     return unique
 
+def _parse_csfc_apl_structured(soup) -> list:
+    """Parse the NSA CSfC APL page into structured component records.
+
+    Each record: {name, type, vendor, link, raw_text}
+    The APL page lists components in a table or as dl/li rows.
+    Falls back to flat text items if no table is found (fix #18).
+    """
+    if not soup:
+        return []
+    items = []
+    # Try table-based layout first
+    table = soup.find("table")
+    if table:
+        headers = [th.get_text(strip=True).lower() for th in table.find_all("th")]
+        for tr in table.find_all("tr")[1:]:
+            cells = [td.get_text(strip=True) for td in tr.find_all("td")]
+            if not cells:
+                continue
+            link_tag = tr.find("a")
+            href = link_tag["href"] if link_tag and link_tag.get("href") else ""
+            record: dict = {"name": "", "type": "", "vendor": "", "link": href, "raw_text": " | ".join(cells[:4])}
+            for i, h in enumerate(headers):
+                if i >= len(cells):
+                    break
+                if "product" in h or "component" in h or "name" in h:
+                    record["name"] = cells[i]
+                elif "type" in h or "categor" in h or "technolog" in h:
+                    record["type"] = cells[i]
+                elif "vendor" in h or "manufactur" in h or "company" in h:
+                    record["vendor"] = cells[i]
+            if record["name"] or record["raw_text"]:
+                items.append(record)
+        if items:
+            return items
+    # Fallback: use existing _scrape_csfc_page-style text items, augmented with type detection
+    content = (
+        soup.find("div", {"id": "ContentPane"})
+        or soup.find("main")
+        or soup.find("div", class_="field-items")
+        or soup
+    )
+    for tag in content.find_all(["p", "li", "h2", "h3", "h4"]):
+        raw = tag.get_text(separator=" ", strip=True)
+        link_tag = tag.find("a")
+        href = link_tag["href"] if link_tag and link_tag.get("href") else ""
+        if len(raw) < 10:
+            continue
+        # Categorise by keyword
+        comp_type = "unknown"
+        raw_lower = raw.lower()
+        for cat, kws in config.CSFC_APL_COMPONENT_KEYWORDS.items():
+            if any(kw in raw_lower for kw in kws):
+                comp_type = cat
+                break
+        items.append({"name": raw[:200], "type": comp_type, "vendor": "", "link": href, "raw_text": raw[:400]})
+    # Deduplicate
+    seen: set = set()
+    unique: list = []
+    for item in items:
+        key = item["name"][:80] or item["raw_text"][:80]
+        if key not in seen:
+            seen.add(key)
+            unique.append(item)
+    return unique
+
+
 def collect_csfc() -> dict:
     """Collect all CSfC monitoring data:
       - NSA CSfC page snapshots (home, APL, capability packages, FAQ, etc.)
@@ -498,15 +595,20 @@ def collect_csfc() -> dict:
     log.info("[CSfC] Collecting...")
     data: dict = {
         "pages":                     {},
+        "apl_structured":            [],   # structured APL records (fix #18)
         "capability_package_headers":{},
         "feeds":                     {},
     }
 
-    # 1. Scrape CSfC pages
+    # 1. Scrape CSfC pages; for the APL, also parse structured records (fix #18)
     for page_key, path in config.CSFC_PAGES.items():
         log.info("  [CSfC] Scraping page: %s (%s)...", page_key, path)
         data["pages"][page_key] = _scrape_csfc_page(path)
         log.info("    -> %d items", len(data["pages"][page_key]))
+        if page_key == "apl":
+            apl_soup = get_html(config.CSFC_BASE + path)
+            data["apl_structured"] = _parse_csfc_apl_structured(apl_soup)
+            log.info("    -> %d structured APL records", len(data["apl_structured"]))
 
     # 2. HEAD-poll Capability Package PDFs (with partial-GET fallback)
     log.info("  [CSfC] Polling Capability Package PDF headers...")
@@ -601,17 +703,26 @@ def _scrape_nist_page(path: str) -> list:
         or soup.find("div", {"class": "container"})
         or soup
     )
-    # CMVP MIP page uses a table — extract rows as pipe-separated text
+    # CMVP MIP page uses a table — extract rows as structured records (fix #20)
+    # Columns (as of 2024): Vendor | Module Name | FIPS Cert # | Validation Auth Date | Status
     table = content.find("table") if content else None
     if table:
+        headers_raw = [th.get_text(strip=True) for th in table.find_all("th")]
         for tr in table.find_all("tr")[1:]:
             cells = [td.get_text(strip=True) for td in tr.find_all("td")]
-            if cells:
-                text = " | ".join(cells[:4])
-                link = tr.find("a")
-                href = link["href"] if link and link.get("href") else ""
-                if text.strip():
-                    items.append({"text": text[:400], "href": href})
+            if not cells:
+                continue
+            link_tag = tr.find("a")
+            href = link_tag["href"] if link_tag and link_tag.get("href") else ""
+            # Build a named-field record when headers are available
+            if headers_raw and len(headers_raw) >= len(cells):
+                record = dict(zip(headers_raw, cells))
+                record["href"] = href
+                # Also include a text summary for backwards compat with existing diff logic
+                record["text"] = " | ".join(cells[:4])[:400]
+            else:
+                record = {"text": " | ".join(cells[:4])[:400], "href": href}
+            items.append(record)
     else:
         for tag in content.find_all(["h2", "h3", "h4", "p", "li", "td"]):
             text = tag.get_text(separator=" ", strip=True)
