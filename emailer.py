@@ -7,6 +7,7 @@ Features:
   - Weekly digest covering NIAP, CC Portal, CCTL labs, CSfC, CC Crypto, NIST
   - Immediate alert email (send_alert_email) for same-day keyword matches
   - Structured logging
+  - Generic webhook / MS Teams delivery via send_webhook_alert()
 """
 
 import json
@@ -61,6 +62,47 @@ def send_webex_alert(alerts: list[dict]) -> None:
             log.info("[Webex] Alert sent (HTTP %d).", resp.status)
     except urllib.error.URLError as exc:
         log.warning("[Webex] Failed to send message: %s", exc)
+
+# ── Generic Webhook / MS Teams notification ─────────────────────────────────
+def send_webhook_alert(alerts: list[dict]) -> None:
+    """POST a compact notification to a generic webhook (e.g. MS Teams incoming webhook).
+
+    Supports two payload formats automatically:
+    - MS Teams Incoming Webhook: expects {"text": "..."} (or AdaptiveCard)
+    - Generic JSON webhook:      expects {"text": "..."} (Slack-compatible)
+
+    The webhook URL is read from config.WEBHOOK_URL.  Leave it blank to skip.
+    """
+    url = config.WEBHOOK_URL
+    if not url:
+        log.debug("[Webhook] WEBHOOK_URL not configured — skipping.")
+        return
+    if not alerts:
+        return
+
+    lines = ["**CC Pulse Alert** — keyword match(es) detected:"]
+    for a in alerts[:10]:
+        kws = ", ".join(a.get("matched_keywords", []))
+        lines.append(f"- **[{a['source']}]** {a['title']} — _{kws}_")
+    if len(alerts) > 10:
+        lines.append(f"_...and {len(alerts) - 10} more. See dashboard._")
+
+    body_text = "\n".join(lines)
+
+    # Try MS Teams-style payload first; fall back to simple {"text": ...}
+    payload = json.dumps({"text": body_text}).encode("utf-8")
+    req = urllib.request.Request(
+        url,
+        data=payload,
+        headers={"Content-Type": "application/json"},
+        method="POST",
+    )
+    try:
+        with urllib.request.urlopen(req, timeout=10) as resp:
+            log.info("[Webhook] Alert sent (HTTP %d).", resp.status)
+    except urllib.error.URLError as exc:
+        log.warning("[Webhook] Failed to send message: %s", exc)
+
 
 
 # ── Email HTML helpers ────────────────────────────────────────────────────────
