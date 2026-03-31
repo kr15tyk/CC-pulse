@@ -872,6 +872,26 @@ a:hover { color: var(--amber); text-decoration: underline; }
 </div>
 
 
+<footer>
+  <span>CC Pulse &middot; Auto-refreshes daily (06:00 UTC) &middot; Data from NIAP, CSfC, NIST, CC Portal</span>
+  <span>Last run: {{ generated_at }}</span>
+</footer>
+
+<script>
+// Card toggle
+function toggleCard(hdr) {
+  var body = hdr.nextElementSibling;
+  var icon = hdr.querySelector('.toggle-icon');
+  if (body.classList.contains('collapsed')) {
+    body.classList.remove('collapsed');
+    if (icon) icon.textContent = '▼';
+  } else {
+    body.classList.add('collapsed');
+    if (icon) icon.textContent = '►';
+  }
+}
+function expandAll() {
+  document.querySelectorAll('.card-body.collapsed').forEach(function(b) {
     b.classList.remove('collapsed');
     var icon = b.previousElementSibling && b.previousElementSibling.querySelector('.toggle-icon');
     if (icon) icon.textContent = '\u25bc';
