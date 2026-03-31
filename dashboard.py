@@ -9,7 +9,7 @@ Features:
   - Clickable source links on all items
   - CSfC CP entries show content-length change when dates unavailable
   - 7-day activity sparkline per section
-  - Responsive mobile layout
+  - Responsive mobile layou
   - CCTL Lab Intel: compact per-lab counts with expand
   - RSS feed (cc_pulse.rss) with items from all domains
   - Structured logging
@@ -720,8 +720,8 @@ footer { margin-top: 2rem; padding: 1rem 0; border-top: 1px solid var(--border);
   <div class="card-body">
     {% for alert in diff.alerts %}
     <div class="item-row alert-item">
-      <span class="item-link">{{ alert.type }}</span>
-      <span class="item-meta">{{ alert.message }}</span>
+      <span class="item-link">{{ alert.source }}: {{ alert.title }}</span>
+      <span class="item-meta">{{ alert.kind }} &middot; {{ alert.matched_keywords | join(', ') }}</span>
     </div>
     {% endfor %}
   </div>
@@ -839,9 +839,9 @@ def _build_rss(diff: dict, generated_at: str) -> str:
 
     for alert in diff.get("alerts", []):
         items_xml.append(
-            f"<item><title>{xml_escape('ALERT: ' + alert.get('type', ''))}</title>"
+            f"<item><title>{xml_escape('ALERT: ' + alert.get('source', '') + ' – ' + alert.get('title', ''))}</title>"
             f"<link>https://kr15tyk.github.io/CC-pulse/cc_dashboard.html</link>"
-            f"<description>{xml_escape(alert.get('message', ''))}</description></item>"
+            f"<description>{xml_escape('Kind: ' + alert.get('kind', '') + ' | Keywords: ' + ', '.join(alert.get('matched_keywords', [])))}</description></item>"
         )
 
     xml = (
