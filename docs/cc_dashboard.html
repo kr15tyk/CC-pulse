@@ -89,6 +89,13 @@ a:hover { color: var(--amber); text-decoration: underline; }
 .alert-item .item-link { color: var(--red); }
 .alert-item .item-link::before { content: "[!] "; color: var(--red); }
 .alert-item .item-meta { color: var(--amber); }
+.alert-dismissed { opacity: 0.35; }
+.alert-dismissed .item-link { text-decoration: line-through; }
+.dismiss-btn { background: none; border: 1px solid var(--muted); color: var(--muted); font-family: var(--font); font-size: 0.62rem; padding: 1px 5px; cursor: pointer; margin-left: auto; white-space: nowrap; }
+.dismiss-btn:hover { border-color: var(--green); color: var(--green); }
+.dismiss-btn.seen { border-color: var(--green); color: var(--green); }
+.alert-monitoring { font-size: 0.62rem; color: var(--muted); margin-bottom: 0.5rem; padding-bottom: 0.4rem; border-bottom: 1px solid rgba(0,100,0,0.2); word-break: break-word; }
+.alert-monitoring::before { content: "Monitoring: "; color: var(--muted); }
 
 /* CCTL lab rows */
 .lab-row { margin-bottom: 0.5rem; }
@@ -176,7 +183,7 @@ a:hover { color: var(--amber); text-decoration: underline; }
 <div class="sticky-top">
 <header class="site-header">
   <div class="site-title">CC Pulse</div>
-  <div class="site-meta">2026-03-30 → 2026-03-31 &middot; Generated 2026-03-31 21:18 UTC</div>
+  <div class="site-meta">2026-03-30 → 2026-03-31 &middot; Generated 2026-03-31 21:43 UTC</div>
 </header>
 <div class="trend-bar">
   <div class="stat"><a href="#sec-niap-pp">
@@ -199,7 +206,7 @@ a:hover { color: var(--amber); text-decoration: underline; }
     <div class="stat-num ">0</div>
     <div class="stat-lbl">CC Portal</div>
   </a></div>
-  <div class="stat"><a href="#sec-niap-pp">
+  <div class="stat"><a href="#sec-alerts">
     <div class="stat-num alert-num">3</div>
     <div class="stat-lbl">Alerts</div>
   </a></div>
@@ -247,6 +254,7 @@ a:hover { color: var(--amber); text-decoration: underline; }
     </span>
   </div>
   <div class="sh-footer">Period: 2026-03-30 → 2026-03-31</div>
+  <div class="sh-footer">All sources last polled: 2026-03-31 (daily 06:00 UTC)</div>
 </div>
 <div class="ctrl-bar">
   <button class="ctrl-btn" onclick="expandAll()" title="Expand all cards [E]">[E] Expand All</button>
@@ -254,6 +262,51 @@ a:hover { color: var(--amber); text-decoration: underline; }
   <button class="ctrl-btn" id="filter-btn" onclick="toggleZeroFilter()" title="Toggle zero-change cards [F]">[F] Hide Empty</button>
   <span class="ctrl-hint">keyboard: E=expand C=collapse F=filter</span>
 </div>
+<!-- Alerts -->
+
+<div class="section-group">
+  <div class="section-label">Alerts</div>
+<div class="card card-alert" id="sec-alerts">
+  <div class="card-hdr" onclick="toggleCard(this)">
+    <span>Alerts</span>
+    <span class="card-count">3 alerts</div>
+</span>
+    <span class="toggle-icon">&#9660;</span>
+  </div>
+  <div class="card-body">
+    <div class="alert-monitoring">FIPS 186-4, FIPS 186-5, NDcPP, CPP_ND, TLS 1.3, SSH, PP-Module_VPN, PP-Module_WLAN, labgram, valgram, emergency, CSfC, Commercial Solutions for Classified, CSfC APL, CSfC capability package, CP-Mobile, CP-MA, CP-WAN, CP-Campus WLAN, CP-DAR, CP-MDM, NSA CSfC, CCDB-018, Crypto Catalog, cryptography working group, Specification of Functional Requirements for Cryptography, FCS_CKM, FCS_COP, FCS_RBG, CAVP, CMVP, FIPS 140-3, FIPS 203, FIPS 204, FIPS 205, SP 800-131A, SP 800-57, NIST IR 8547, post-quantum cryptography, PQC migration, ML-KEM, ML-DSA, SLH-DSA, algorithm transition, CMVP validated, modules in process</div>
+    
+        <div class="item-row alert-item" data-alert-key="NIST Doc-NIST_IR_8547">
+          
+          <span class="item-link">NIST Doc: NIST IR 8547</span>
+          
+          <span class="item-meta">updated &middot; NIST IR 8547</span>
+          
+          <button class="dismiss-btn" onclick="dismissAlert(this)" title="Mark as seen">&#10003; Seen</button>
+        </div>
+        
+        <div class="item-row alert-item" data-alert-key="NIST Doc-SP_800-131A_Rev_2">
+          
+          <span class="item-link">NIST Doc: SP 800-131A Rev 2</span>
+          
+          <span class="item-meta">updated &middot; SP 800-131A</span>
+          
+          <button class="dismiss-btn" onclick="dismissAlert(this)" title="Mark as seen">&#10003; Seen</button>
+        </div>
+        
+        <div class="item-row alert-item" data-alert-key="NIST Doc-FIPS_204_ML-DSA">
+          
+          <span class="item-link">NIST Doc: FIPS 204 ML-DSA</span>
+          
+          <span class="item-meta">updated &middot; FIPS 204, ML-DSA</span>
+          
+          <button class="dismiss-btn" onclick="dismissAlert(this)" title="Mark as seen">&#10003; Seen</button>
+        </div>
+        
+  </div>
+</div>
+
+
 <div class="grid">
 
 <div class="section-group">
@@ -580,84 +633,7 @@ a:hover { color: var(--amber); text-decoration: underline; }
 </div>
 </div>
 
-<!-- Alerts -->
 
-<div class="section-group">
-  <div class="section-label">Alerts</div>
-<div class="card card-alert" id="sec-alerts">
-  <div class="card-hdr" onclick="toggleCard(this)">
-    <span>Alerts</span>
-    <span class="card-count">3 alerts</div>
-</span>
-    <span class="toggle-icon">&#9660;</span>
-  </div>
-  <div class="card-body">
-    
-        <div class="item-row alert-item">
-          
-          <span class="item-link">NIST Doc: NIST IR 8547</span>
-          
-          <span class="item-meta">updated &middot; NIST IR 8547</span>
-          
-        </div>
-        
-        <div class="item-row alert-item">
-          
-          <span class="item-link">NIST Doc: SP 800-131A Rev 2</span>
-          
-          <span class="item-meta">updated &middot; SP 800-131A</span>
-          
-        </div>
-        
-        <div class="item-row alert-item">
-          
-          <span class="item-link">NIST Doc: FIPS 204 ML-DSA</span>
-          
-          <span class="item-meta">updated &middot; FIPS 204, ML-DSA</span>
-          
-        </div>
-        
-  </div>
-</div>
-
-
-</div>
-
-</div>
-
-<footer>
-  <span>CC Pulse &middot; Auto-refreshes daily (06:00 UTC) &middot; Data from NIAP, CSfC, NIST, CC Portal</span>
-  <span>Last run: 2026-03-31 21:18 UTC</span>
-</footer>
-
-<script>
-// Card toggle
-function toggleCard(hdr) {
-  var body = hdr.nextElementSibling;
-  var icon = hdr.querySelector('.toggle-icon');
-  if (body.classList.contains('collapsed')) {
-    body.classList.remove('collapsed');
-    if (icon) icon.textContent = '▼';
-  } else {
-    body.classList.add('collapsed');
-    if (icon) icon.textContent = '▶';
-  }
-}
-function toggleLab(hdr) {
-  var body = hdr.nextElementSibling;
-  var icon = hdr.querySelector('.toggle-icon');
-  if (body.classList.contains('collapsed')) {
-    body.classList.remove('collapsed');
-    if (icon) icon.textContent = '▼';
-  } else {
-    body.classList.add('collapsed');
-    if (icon) icon.textContent = '▶';
-  }
-}
-
-// Expand / Collapse all
-function expandAll() {
-  document.querySelectorAll('.card-body.collapsed').forEach(function(b) {
     b.classList.remove('collapsed');
     var icon = b.previousElementSibling && b.previousElementSibling.querySelector('.toggle-icon');
     if (icon) icon.textContent = '▼';
@@ -707,6 +683,32 @@ document.querySelectorAll('.stat').forEach(function(stat) {
     stat.classList.add('has-data');
   }
 });
+// Alert dismiss (localStorage persistence)
+function dismissAlert(btn) {
+  var row = btn.closest('.item-row');
+  var key = 'cpulse_seen_' + (row.dataset.alertKey || '');
+  if (row.classList.contains('alert-dismissed')) {
+    row.classList.remove('alert-dismissed');
+    btn.classList.remove('seen');
+    btn.textContent = '✓ Seen';
+    localStorage.removeItem(key);
+  } else {
+    row.classList.add('alert-dismissed');
+    btn.classList.add('seen');
+    btn.textContent = '✓ Seen';
+    localStorage.setItem(key, '1');
+  }
+}
+(function initAlertDismiss() {
+  document.querySelectorAll('.item-row[data-alert-key]').forEach(function(row) {
+    var key = 'cpulse_seen_' + row.dataset.alertKey;
+    if (localStorage.getItem(key)) {
+      row.classList.add('alert-dismissed');
+      var btn = row.querySelector('.dismiss-btn');
+      if (btn) { btn.classList.add('seen'); btn.textContent = '✓ Seen'; }
+    }
+  });
+})();
 </script>
 </body>
 </html>
