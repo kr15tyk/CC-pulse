@@ -127,9 +127,9 @@ a:hover { color: var(--amber); text-decoration: underline; }
 .stat a:hover .stat-num { color: var(--amber); }
 .stat-num { font-size: 1.6rem; font-weight: 700; color: var(--muted); font-family: var(--font); }
 .stat-num.active, .stat-num.active-num { color: var(--green); }
-.stat-num.alert,  .stat-num.alert-num  { color: var(--red); }
+.stat-num.alert,  .stat-num.alert-num  { color: var(--amber); }
 .stat.has-data { border-color: var(--green); }
-.stat.has-alert { border-color: var(--red); }
+.stat.has-alert { border-color: var(--amber); }
 .stat-label { font-size: 0.6rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.12em; margin-top: 2px; }
 
 /* Sparkline */
@@ -147,7 +147,7 @@ a:hover { color: var(--amber); text-decoration: underline; }
 .card { background: var(--card); border: 1px solid var(--border); overflow: hidden; }
 .card-new     { border-left: 3px solid var(--green); }
 .card-updated { border-left: 3px solid var(--amber); }
-.card-alert   { border-left: 3px solid var(--red); }
+.card-alert   { border-left: 3px solid var(--amber); }
 .card-hdr { display: flex; align-items: center; gap: 0.5rem; padding: 0.6rem 1rem; cursor: pointer; user-select: none; }
 .card-hdr:hover { background: rgba(0,204,0,0.05); }
 .card-hdr > span:first-child { font-weight: 700; flex: 1; color: var(--text); }
@@ -167,8 +167,8 @@ a:hover { color: var(--amber); text-decoration: underline; }
 .item-sub { font-size: 0.72rem; color: var(--muted); padding: 1px 0 4px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; padding-left: 1.4em; }
 
 /* Alert item rows */
-.alert-item .item-link { color: var(--red); }
-.alert-item .item-link::before { content: "[!] "; color: var(--red); }
+.alert-item .item-link { color: var(--amber); }
+.alert-item .item-link::before { content: "[!] "; color: var(--amber); }
 .alert-item .item-meta { color: var(--amber); }
 .alert-dismissed { opacity: 0.35; }
 .alert-dismissed .item-link { text-decoration: line-through; }
@@ -240,7 +240,7 @@ a:hover { color: var(--amber); text-decoration: underline; }
 }
 .sh-ok    { color: var(--green); }
 .sh-idle  { color: var(--muted); }
-.sh-alert { color: var(--red);   }
+.sh-alert { color: var(--amber);   }
 .sh-footer {
   font-size: 0.7rem;
   color: var(--muted);
@@ -256,10 +256,6 @@ a:hover { color: var(--amber); text-decoration: underline; }
 </style>
 </head>
 <body>
-
-{% if diff.alerts %}
-<div class="alert-banner">{{ alert_total }} keyword alert{% if alert_total != 1 %}s{% endif %} &mdash; see Alerts section below.</div>
-{% endif %}
 
 <div class="sticky-top">
 <header class="site-header">
