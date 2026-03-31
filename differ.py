@@ -107,7 +107,7 @@ def scan_watch_keywords(text: str, *, structured: bool = True) -> list[str]:
 
 def flag_alerts(diff: Snapshot) -> list[dict[str, Any]]:
     """Walk a computed diff and return a list of high-priority alert objects.
-    Each alert: {source, kind, title, matched_keywords}.
+    Each alert: {source, kind, title, url, detail, matched_keywords}.
 
     Two-tier scanning (fix #17):
     - _add()      scans *structured* fields (API titles, identifiers, PP names,
@@ -118,18 +118,31 @@ def flag_alerts(diff: Snapshot) -> list[dict[str, Any]]:
     """
     alerts: list[dict[str, Any]] = []
 
-    def _add(source: str, kind: str, title: str) -> None:
-        """Scan a structured field (high-signal) against full WATCH_KEYWORDS."""
+    def _add(source: str, kind: str, title: str,
+              url: str = "", detail: str = "") -> None:
+        """Scan a structured field (high-signal) against full WATCH_KEYWORDS.
+
+        Args:
+            source:  Human-readable source label (e.g. "NIAP PP", "NIST Doc").
+            kind:    Change type (e.g. "new", "sunset", "updated", "new_cert").
+            title:   The item title or identifier to scan and display.
+            url:     Direct link to the source item (included in notifications).
+            detail:  Short human-readable summary of what changed (e.g.
+                     "Sunset changed to 2026-09-30", "Header updated").
+        """
         hits = scan_watch_keywords(title, structured=True)
         if hits:
             alerts.append({
                 "source":           source,
                 "kind":             kind,
                 "title":            title,
+                "url":              url,
+                "detail":           detail,
                 "matched_keywords": hits,
             })
 
-    def _add_text(source: str, kind: str, text: str) -> None:
+    def _add_text(source: str, kind: str, text: str,
+                  url: str = "", detail: str = "") -> None:
         """Scan a raw scraped text blob (lower-signal) against BODY_WATCH_KEYWORDS only."""
         hits = scan_watch_keywords(text, structured=False)
         if hits:
@@ -138,66 +151,120 @@ def flag_alerts(diff: Snapshot) -> list[dict[str, Any]]:
                 "source":           source,
                 "kind":             kind,
                 "title":            truncated,
+                "url":              url,
+                "detail":           detail,
                 "matched_keywords": hits,
             })
 
     # NIAP PPs
     for p in diff.get("niap", {}).get("pps", {}).get("added", []):
-        _add("NIAP PP", "new", p.get("pp_short_name", "") + " " + p.get("pp_name", ""))
+        pp_url = f"https://www.niap-ccevs.org/Profile/PP.cfm?id={p.get('pp_id', '')}"
+        _add("NIAP PP", "new",
+             p.get("pp_short_name", "") + " " + p.get("pp_name", ""),
+             url=pp_url,
+             detail=f"New Protection Profile · Tech type: {p.get('tech_type', 'N/A')}")
     for p in diff.get("niap", {}).get("pps", {}).get("sunset_changes", []):
-        _add("NIAP PP", "sunset", p.get("pp_short_name", ""))
+        pp_url = f"https://www.niap-ccevs.org/Profile/PP.cfm?id={p.get('pp_id', '')}"
+        _add("NIAP PP", "sunset",
+             p.get("pp_short_name", ""),
+             url=pp_url,
+             detail=f"Sunset date: {p.get('old_sunset') or '—'} → {p.get('new_sunset') or '—'}")
 
     # NIAP TDs
     for t in diff.get("niap", {}).get("tds", {}).get("added", []):
-        _add("NIAP TD", "new", t.get("title", "") + " " + t.get("identifier", ""))
+        _add("NIAP TD", "new",
+             t.get("identifier", "") + " — " + t.get("title", ""),
+             url="https://www.niap-ccevs.org/",
+             detail=f"New Technical Decision · Published: {(t.get('publication_date') or '')[:10] or 'N/A'}")
 
     # NIAP In-Evaluation (newly entered evaluation)
     for p in diff.get("niap", {}).get("in_evaluation", {}).get("added", []):
         _add("NIAP In-Eval", "new_evaluation",
-             (p.get("vendor_id_name") or "") + " " + (p.get("product_name") or ""))
+             (p.get("vendor_id_name") or "") + " — " + (p.get("product_name") or ""),
+             url="https://www.niap-ccevs.org/product/index.cfm",
+             detail=f"Entered evaluation · Lab: {p.get('assigned_lab_name') or 'N/A'}")
 
     # NIAP PCL -- All certified products
     for p in diff.get("niap", {}).get("pcl_all", {}).get("added", []):
+        pcl_url = f"https://www.niap-ccevs.org/product/index.cfm?pid={p.get('product_id', '')}"
+        pps_str = ", ".join(pp.get("pp_short_name","") for pp in p.get("protection_profiles", [])[:3]) or "N/A"
         _add("NIAP PCL", "new_cert",
-             (p.get("vendor_id_name") or "") + " " + (p.get("product_name") or ""))
+             (p.get("vendor_id_name") or "") + " — " + (p.get("product_name") or ""),
+             url=pcl_url,
+             detail=f"Newly certified · PPs: {pps_str} · Date: {(p.get('certification_date') or '')[:10] or 'N/A'}")
 
     # NIAP News
     for item in diff.get("niap", {}).get("news", {}).get("added", []):
-        _add("NIAP News", item.get("_category", "NEWS"), item.get("title", ""))
+        _add("NIAP News", item.get("_category", "NEWS"),
+             item.get("title", ""),
+             url=item.get("link") or item.get("url") or "https://www.niap-ccevs.org/",
+             detail=f"Category: {item.get('_category','NEWS')} · Date: {(item.get('date') or item.get('posted') or '')[:10] or 'N/A'}")
 
     # CCTL Labs
     for lab, items in diff.get("cctl_labs", {}).items():
         for item in items:
-            _add(f"Lab: {lab}", "post", item.get("title", ""))
+            _add(f"Lab: {lab}", "post",
+                 item.get("title", ""),
+                 url=item.get("link") or "",
+                 detail=f"New post from {lab}")
 
     # CSfC feeds
     for feed_name, items in diff.get("csfc", {}).get("feeds", {}).items():
         for item in items:
-            _add(f"CSfC Feed: {feed_name}", "advisory", item.get("title", ""))
+            _add(f"CSfC Feed: {feed_name}", "advisory",
+                 item.get("title", ""),
+                 url=item.get("link") or "",
+                 detail=f"Feed: {feed_name} · Published: {(item.get('published') or '')[:16] or 'N/A'}")
 
     # CSfC APL page changes (scraped text — use _add_text for narrower matching)
     for item in diff.get("csfc", {}).get("pages", {}).get("apl", {}).get("added", []):
-        _add_text("CSfC APL", "new", item.get("text", ""))
+        _add_text("CSfC APL", "new",
+                  item.get("text", ""),
+                  url=item.get("href") or "https://www.nsa.gov/resources/everyone/csfc/approved-products-list/",
+                  detail="New item on CSfC Approved Products List")
 
     # CSfC Capability Package header changes
     for cp_name, change in diff.get("csfc", {}).get("capability_packages", {}).items():
         if change.get("changed"):
-            _add("CSfC CP", "updated", cp_name)
+            old_lm = change.get("old_last_modified", "") or change.get("old_partial_hash", "")
+            new_lm = change.get("new_last_modified", "") or change.get("new_partial_hash", "")
+            date_detail = f"{old_lm[:16]} → {new_lm[:16]}" if old_lm and new_lm else "Content changed"
+            _add("CSfC CP", "updated",
+                 cp_name,
+                 url=change.get("url") or "https://www.nsa.gov/resources/everyone/csfc/capability-packages/",
+                 detail=f"Capability Package revised · {date_detail}")
 
     # CC Crypto Catalog page changes (scraped text — use _add_text for narrower matching)
     for page_key, page_diff in diff.get("cc_crypto", {}).get("pages", {}).items():
         for item in page_diff.get("added", []):
-            _add_text(f"CC Crypto: {page_key}", "publication", item.get("text", ""))
+            _add_text(f"CC Crypto: {page_key}", "publication",
+                      item.get("text", ""),
+                      url=item.get("href") or "https://www.commoncriteriaportal.org/cc/index.cfm",
+                      detail=f"New item on CC Portal {page_key} page")
 
     # NIST page changes (scraped text — use _add_text for narrower matching)
+    _nist_page_urls = {
+        "news":           "https://csrc.nist.gov/news",
+        "fips":           "https://csrc.nist.gov/publications/fips",
+        "cmvp_mip":       "https://csrc.nist.gov/projects/cryptographic-module-validation-program/modules-in-process/modules-in-process-list",
+        "pqc":            "https://csrc.nist.gov/projects/post-quantum-cryptography",
+        "crypto_standards":"https://csrc.nist.gov/projects/cryptographic-standards-and-guidelines",
+        "cmvp_validated": "https://csrc.nist.gov/projects/cryptographic-module-validation-program/validated-modules",
+    }
     for page_key, page_diff in diff.get("nist", {}).get("pages", {}).items():
         for item in page_diff.get("added", []):
-            _add_text(f"NIST: {page_key}", "publication", item.get("text", ""))
+            _add_text(f"NIST: {page_key}", "publication",
+                      item.get("text", ""),
+                      url=item.get("href") or _nist_page_urls.get(page_key, "https://csrc.nist.gov/"),
+                      detail=f"New item on NIST CSRC {page_key.replace('_', ' ')} page")
 
     # NIST RSS feed new items
     for feed_name, items in diff.get("nist", {}).get("feeds", {}).items():
         for item in items:
-            _add(f"NIST Feed: {feed_name}", "news", item.get("title", ""))
+            _add(f"NIST Feed: {feed_name}", "news",
+                 item.get("title", ""),
+                 url=item.get("link") or "https://csrc.nist.gov/",
+                 detail=f"Feed: {feed_name} · Published: {(item.get('published') or '')[:16] or 'N/A'}")
 
     if alerts:
         log.warning("[Alerts] %d keyword match(es) found!", len(alerts))
