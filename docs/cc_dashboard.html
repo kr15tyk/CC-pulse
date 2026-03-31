@@ -106,6 +106,47 @@ footer { margin-top: 2rem; padding: 1rem 0; border-top: 1px solid var(--border);
   .stat { min-width: 0; flex: 1 1 40%; }
   .stat-num { font-size: 1.2rem; }
 }
+  /* Source Health summary */
+  .source-health {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 0.75rem 1rem;
+    margin-bottom: 1.5rem;
+  }
+  .sh-title {
+    font-size: 0.65rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    margin-bottom: 0.5rem;
+  }
+  .sh-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 3px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.03);
+  }
+  .sh-row:last-of-type { border-bottom: none; }
+  .sh-source { font-size: 0.78rem; color: var(--text); }
+  .sh-badge {
+    font-size: 0.68rem;
+    padding: 2px 8px;
+    border-radius: 10px;
+    font-weight: 600;
+  }
+  .sh-ok   { background: rgba(34,197,94,0.15);  color: var(--green); }
+  .sh-idle { background: rgba(100,116,139,0.12); color: var(--muted); }
+  .sh-alert{ background: rgba(239,68,68,0.15);   color: var(--red);   }
+  .sh-footer {
+    font-size: 0.68rem;
+    color: var(--muted);
+    margin-top: 0.4rem;
+    padding-top: 0.4rem;
+    border-top: 1px solid var(--border);
+  }
 </style>
 </head>
 <body>
@@ -116,7 +157,7 @@ footer { margin-top: 2rem; padding: 1rem 0; border-top: 1px solid var(--border);
 
 <header class="site-header">
   <div class="site-title">CC Pulse</div>
-  <div class="site-meta">2026-03-30T07:28:20.631595+00:00 to 2026-03-31T07:22:03.452384+00:00 &bull; Generated 2026-03-31 17:38 UTC</div>
+  <div class="site-meta">2026-03-30T07:28:20.631595+00:00 to 2026-03-31T07:22:03.452384+00:00 &bull; Generated 2026-03-31 18:13 UTC</div>
 </header>
 
 <div class="trend-bar">
@@ -146,6 +187,48 @@ footer { margin-top: 2rem; padding: 1rem 0; border-top: 1px solid var(--border);
   </a></div>
 </div>
 
+
+<!-- Source health summary -->
+<div class="source-health">
+  <div class="sh-title">Source Health</div>
+  <div class="sh-row">
+    <span class="sh-source">NIAP API</span>
+    <span class="sh-badge sh-idle">
+      no changes
+    </span>
+  </div>
+  <div class="sh-row">
+    <span class="sh-source">CSfC / NSA</span>
+    <span class="sh-badge sh-idle">
+      no changes
+    </span>
+  </div>
+  <div class="sh-row">
+    <span class="sh-source">NIST CSRC</span>
+    <span class="sh-badge sh-ok">
+      3 updates
+    </span>
+  </div>
+  <div class="sh-row">
+    <span class="sh-source">CC Portal</span>
+    <span class="sh-badge sh-idle">
+      no changes
+    </span>
+  </div>
+  <div class="sh-row">
+    <span class="sh-source">CCTL Labs</span>
+    <span class="sh-badge sh-idle">
+      no changes
+    </span>
+  </div>
+  <div class="sh-row">
+    <span class="sh-source">Keyword Alerts</span>
+    <span class="sh-badge sh-alert">
+      3 matches
+    </span>
+  </div>
+  <div class="sh-footer">Period: 2026-03-30 → 2026-03-31</div>
+</div>
 <div class="grid">
 
 <div class="section-group">
@@ -510,7 +593,7 @@ footer { margin-top: 2rem; padding: 1rem 0; border-top: 1px solid var(--border);
 
 <footer>
   <span>CC Pulse &middot; Auto-refreshes daily (06:00 UTC) &middot; Data from NIAP, CSfC, NIST, CC Portal</span>
-  <span>Last run: 2026-03-31 17:38 UTC</span>
+  <span>Last run: 2026-03-31 18:13 UTC</span>
 </footer>
 
 <script>
