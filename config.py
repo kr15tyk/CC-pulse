@@ -34,6 +34,12 @@ EMAIL_SUBJECT = "Weekly CC Pulse -- {date}"
 WEBEX_BOT_TOKEN = os.environ.get("CC_WEBEX_BOT_TOKEN", "")
 WEBEX_ROOM_ID   = os.environ.get("CC_WEBEX_ROOM_ID",   "")
 
+# -- Notifications (Generic Webhook / MS Teams) -----------------------------
+# Set CC_WEBHOOK_URL to a Teams Incoming Webhook URL or any generic
+# endpoint that accepts a POST with JSON body {"text": "..."}.
+# Leave blank to disable.  Works alongside Webex (both can be active).
+WEBHOOK_URL = os.environ.get("CC_WEBHOOK_URL", "")
+
 # -- Dashboard --------------------------------------------------------------
 DASHBOARD_DIR      = "docs"
 DASHBOARD_FILENAME = "cc_dashboard.html"
@@ -187,6 +193,38 @@ WATCH_KEYWORDS = [
     "algorithm transition",
     "CMVP validated",
     "modules in process",
+]
+
+# -- Body Watch Keywords (page-scrape tier) ----------------------------------
+# A *narrower* subset of WATCH_KEYWORDS used when scanning raw scraped page
+# text (NSA CSfC pages, NIST CSRC pages, CC Portal paragraphs). These are
+# intentionally more specific than WATCH_KEYWORDS to avoid false positives
+# from large HTML blobs. Only terms that are unambiguous even in long prose
+# belong here. (fix #17)
+BODY_WATCH_KEYWORDS = [
+    # Very specific NIST document identifiers
+    "FIPS 203",
+    "FIPS 204",
+    "FIPS 205",
+    "NIST IR 8547",
+    "SP 800-131A",
+    # Very specific CSfC program identifiers
+    "CSfC APL",
+    "CSfC capability package",
+    "CP-Mobile",
+    "CP-MA",
+    "CP-WAN",
+    "CP-Campus WLAN",
+    "CP-DAR",
+    "CP-MDM",
+    # Specific crypto catalog identifier
+    "CCDB-018",
+    # Post-quantum terms that are specific enough for prose
+    "post-quantum cryptography",
+    "PQC migration",
+    "ML-KEM",
+    "ML-DSA",
+    "SLH-DSA",
 ]
 
 # =============================================================
