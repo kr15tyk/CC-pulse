@@ -109,10 +109,12 @@ footer { margin-top: 2rem; padding: 1rem 0; border-top: 1px solid var(--border);
 <body>
 
 
+<div class="alert-banner">Warning: 3 alerts detected -- see Alerts section below.</div>
+
 
 <header class="site-header">
   <div class="site-title">CC Pulse</div>
-  <div class="site-meta">2026-03-29T19:03:20.986750+00:00 to 2026-03-30T07:28:20.631595+00:00 &bull; Generated 2026-03-30 07:28 UTC</div>
+  <div class="site-meta">2026-03-30T07:28:20.631595+00:00 to 2026-03-31T07:22:03.452384+00:00 &bull; Generated 2026-03-31 07:22 UTC</div>
 </header>
 
 <div class="trend-bar">
@@ -129,7 +131,7 @@ footer { margin-top: 2rem; padding: 1rem 0; border-top: 1px solid var(--border);
     <div class="stat-lbl">CSfC CP Updates</div>
   </a></div>
   <div class="stat"><a href="#sec-nist">
-    <div class="stat-num ">0</div>
+    <div class="stat-num active-num">3</div>
     <div class="stat-lbl">NIST Doc Updates</div>
   </a></div>
   <div class="stat"><a href="#sec-cc-portal">
@@ -137,7 +139,7 @@ footer { margin-top: 2rem; padding: 1rem 0; border-top: 1px solid var(--border);
     <div class="stat-lbl">CC Portal</div>
   </a></div>
   <div class="stat"><a href="#sec-niap-pp">
-    <div class="stat-num ">0</div>
+    <div class="stat-num alert-num">3</div>
     <div class="stat-lbl">Alerts</div>
   </a></div>
 </div>
@@ -152,6 +154,8 @@ footer { margin-top: 2rem; padding: 1rem 0; border-top: 1px solid var(--border);
     <span class="sparkline">
       
       <span class="sp-bar" style="height:100%" title="100%"></span>
+      
+      <span class="sp-bar" style="height:0%" title="0%"></span>
       
       <span class="sp-bar" style="height:0%" title="0%"></span>
       
@@ -177,6 +181,8 @@ footer { margin-top: 2rem; padding: 1rem 0; border-top: 1px solid var(--border);
     <span class="sparkline">
       
       <span class="sp-bar" style="height:100%" title="100%"></span>
+      
+      <span class="sp-bar" style="height:0%" title="0%"></span>
       
       <span class="sp-bar" style="height:0%" title="0%"></span>
       
@@ -220,6 +226,8 @@ footer { margin-top: 2rem; padding: 1rem 0; border-top: 1px solid var(--border);
       
       <span class="sp-bar" style="height:0%" title="0%"></span>
       
+      <span class="sp-bar" style="height:0%" title="0%"></span>
+      
     </span>
   </div>
   <div class="card-body collapsed">
@@ -236,6 +244,8 @@ footer { margin-top: 2rem; padding: 1rem 0; border-top: 1px solid var(--border);
     <span>NIAP In-Evaluation Products</span>
     <span class="card-count">22 active</span>
     <span class="sparkline">
+      
+      <span class="sp-bar" style="height:0%" title="0%"></span>
       
       <span class="sp-bar" style="height:0%" title="0%"></span>
       
@@ -262,6 +272,8 @@ footer { margin-top: 2rem; padding: 1rem 0; border-top: 1px solid var(--border);
     <span class="sparkline">
       
       <span class="sp-bar" style="height:100%" title="100%"></span>
+      
+      <span class="sp-bar" style="height:0%" title="0%"></span>
       
       <span class="sp-bar" style="height:0%" title="0%"></span>
       
@@ -307,6 +319,8 @@ footer { margin-top: 2rem; padding: 1rem 0; border-top: 1px solid var(--border);
       
       <span class="sp-bar" style="height:0%" title="0%"></span>
       
+      <span class="sp-bar" style="height:0%" title="0%"></span>
+      
     </span>
     <span class="toggle-icon">&#9658;</span>
   </div>
@@ -329,6 +343,8 @@ footer { margin-top: 2rem; padding: 1rem 0; border-top: 1px solid var(--border);
       
       <span class="sp-bar" style="height:0%" title="0%"></span>
       
+      <span class="sp-bar" style="height:0%" title="0%"></span>
+      
     </span>
     <span class="toggle-icon">&#9658;</span>
   </div>
@@ -344,6 +360,8 @@ footer { margin-top: 2rem; padding: 1rem 0; border-top: 1px solid var(--border);
     <span>CC Portal (International)</span>
     <span class="card-count">0 new items</span>
     <span class="sparkline">
+      
+      <span class="sp-bar" style="height:0%" title="0%"></span>
       
       <span class="sp-bar" style="height:0%" title="0%"></span>
       
@@ -375,26 +393,6 @@ footer { margin-top: 2rem; padding: 1rem 0; border-top: 1px solid var(--border);
       
       <span class="sp-bar" style="height:0%" title="0%"></span>
       
-    </span>
-    <span class="toggle-icon">&#9658;</span>
-  </div>
-  <div class="card-body collapsed">
-    
-    <p class="no-change">No changes detected.</p>
-  </div>
-</div>
-
-<!-- NIST Docs -->
-<div class="card " id="sec-nist">
-  <div class="card-hdr" onclick="toggleCard(this)">
-    <span>NIST Documentation</span>
-    <span class="card-count">0 updates</span>
-    <span class="sparkline">
-      
-      <span class="sp-bar" style="height:100%" title="100%"></span>
-      
-      <span class="sp-bar" style="height:100%" title="100%"></span>
-      
       <span class="sp-bar" style="height:0%" title="0%"></span>
       
     </span>
@@ -406,14 +404,91 @@ footer { margin-top: 2rem; padding: 1rem 0; border-top: 1px solid var(--border);
   </div>
 </div>
 
+<!-- NIST Docs -->
+<div class="card card-updated" id="sec-nist">
+  <div class="card-hdr" onclick="toggleCard(this)">
+    <span>NIST Documentation</span>
+    <span class="card-count">3 updates</span>
+    <span class="sparkline">
+      
+      <span class="sp-bar" style="height:100%" title="100%"></span>
+      
+      <span class="sp-bar" style="height:100%" title="100%"></span>
+      
+      <span class="sp-bar" style="height:0%" title="0%"></span>
+      
+      <span class="sp-bar" style="height:43%" title="43%"></span>
+      
+    </span>
+    <span class="toggle-icon">&#9660;</span>
+  </div>
+  <div class="card-body ">
+    
+    
+    <div class="item-row">
+      <a class="item-link" href="https://nvlpubs.nist.gov/nistpubs/ir/2024/NIST.IR.8547.ipd.pdf" target="_blank">NIST IR 8547</a>
+      <span class="item-meta">
+        Header changed
+      </span>
+    </div>
+    
+    
+    
+    <div class="item-row">
+      <a class="item-link" href="https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-131Ar2.pdf" target="_blank">SP 800-131A Rev 2</a>
+      <span class="item-meta">
+        Header changed
+      </span>
+    </div>
+    
+    
+    
+    <div class="item-row">
+      <a class="item-link" href="https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.204.pdf" target="_blank">FIPS 204 ML-DSA</a>
+      <span class="item-meta">
+        Header changed
+      </span>
+    </div>
+    
+    
+    
+  </div>
+</div>
+
 <!-- Alerts -->
+
+<div class="card card-alert" id="sec-alerts">
+  <div class="card-hdr" onclick="toggleCard(this)">
+    <span>Alerts</span>
+    <span class="card-count">3 alerts</span>
+    <span class="toggle-icon">&#9660;</span>
+  </div>
+  <div class="card-body">
+    
+    <div class="item-row alert-item">
+      <span class="item-link"></span>
+      <span class="item-meta"></span>
+    </div>
+    
+    <div class="item-row alert-item">
+      <span class="item-link"></span>
+      <span class="item-meta"></span>
+    </div>
+    
+    <div class="item-row alert-item">
+      <span class="item-link"></span>
+      <span class="item-meta"></span>
+    </div>
+    
+  </div>
+</div>
 
 
 </div>
 
 <footer>
   <span>CC Pulse &middot; Auto-refreshes hourly &middot; Data from NIAP, CSfC, NIST, CC Portal</span>
-  <span>Last run: 2026-03-30 07:28 UTC</span>
+  <span>Last run: 2026-03-31 07:22 UTC</span>
 </footer>
 
 <script>
