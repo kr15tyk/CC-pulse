@@ -190,11 +190,12 @@ def run_daily() -> None:
     # 5. Render dashboard (HTML + RSS)
     dashboard.render_dashboard(diff)
 
-    # 6. Fire alerts if keyword matches found (Webex + immediate email, fix #5)
+    # 6. Fire alerts if keyword matches found (Webex + webhook + immediate email, fix #5)
     alerts = diff.get("alerts", [])
     if alerts:
-        log.warning("%d keyword alert(s) — firing Webex notification...", len(alerts))
+        log.warning("%d keyword alert(s) — firing notifications...", len(alerts))
         emailer.send_webex_alert(alerts)
+        emailer.send_webhook_alert(alerts)   # Teams / generic webhook (fix #21)
         log.warning("Sending immediate alert email...")
         emailer.send_alert_email(alerts)
     else:
@@ -230,6 +231,7 @@ def run_weekly() -> None:
     weekly = differ.merge_weekly_diffs([copy.deepcopy(d) for d in diffs])
     emailer.send_weekly_email(weekly)
     emailer.send_webex_alert(weekly.get("alerts", []))
+    emailer.send_webhook_alert(weekly.get("alerts", []))   # Teams / generic webhook (fix #21)
     log.info("Weekly digest sent.")
 
 
