@@ -167,9 +167,9 @@ a:hover { color: var(--amber); text-decoration: underline; }
 .item-sub { font-size: 0.72rem; color: var(--muted); padding: 1px 0 4px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; padding-left: 1.4em; }
 
 /* Alert item rows */
-.alert-item .item-link { color: var(--amber); }
-.alert-item .item-link::before { content: "[!] "; color: var(--amber); }
-.alert-item .item-meta { color: var(--amber); }
+.alert-item .item-link { color: #ffff00; }
+.alert-item .item-link::before { content: "[!] "; color: #ffff00; }
+.alert-item .item-meta { color: #ffff00; }
 .alert-dismissed { opacity: 0.35; }
 .alert-dismissed .item-link { text-decoration: line-through; }
 .dismiss-btn { background: none; border: 1px solid var(--muted); color: var(--muted); font-family: var(--font); font-size: 0.62rem; padding: 1px 5px; cursor: pointer; margin-left: auto; white-space: nowrap; }
@@ -342,7 +342,6 @@ a:hover { color: var(--amber); text-decoration: underline; }
 <!-- Alerts -->
 {% if diff.alerts %}
 <div class="section-group">
-  <div class="section-label">Alerts</div>
 <div class="card card-alert" id="sec-alerts">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>Alerts</span>
