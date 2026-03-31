@@ -7,7 +7,7 @@ Features:
   - Collapsible cards (empty sections auto-collapsed)
   - Color-coded section headers (green=new, amber=updated, red=removed/alert)
   - Clickable source links on all items
-  - CSfC CP entries show content-length change when dates unavailable
+  - CSfC CP entries show content-length change when dates unavailabl
   - 7-day activity sparkline per section
   - Responsive mobile layou
   - CCTL Lab Intel: compact per-lab counts with expand
@@ -238,7 +238,7 @@ footer { margin-top: 2rem; padding: 1rem 0; border-top: 1px solid var(--border);
 
 <header class="site-header">
   <div class="site-title">CC Pulse</div>
-  <div class="site-meta">{{ period_start }} to {{ period_end }} &bull; Generated {{ generated_at }}</div>
+  <div class="site-meta">{{ period_start[:10] }} → {{ period_end[:10] }} · Generated {{ generated_at }}</div>
 </header>
 
 <div class="trend-bar">
