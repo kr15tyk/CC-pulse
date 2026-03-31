@@ -252,6 +252,32 @@ def run_bootstrap() -> None:
 
 
 # ── Entry point ───────────────────────────────────────────────────────────────
+def run_redash() -> None:
+    """Re-render the dashboard HTML from the latest stored diff file.
+
+    This is useful when the dashboard template has changed but no new diff
+    has been produced today (e.g. the daily run already ran and produced no
+    new data).  It loads the most recent diff from snapshots/diffs/ and
+    passes it through dashboard.render_dashboard() without touching the
+    collector or differ.
+    """
+    _imports()
+    import dashboard as dash_mod
+
+    # Find the latest diff file
+    import glob as _glob
+    diffs = sorted(_glob.glob(os.path.join(config.DIFF_DIR, "*_diff.json")))
+    if not diffs:
+        log.error("No diff files found in %s -- run daily mode first.", config.DIFF_DIR)
+        sys.exit(1)
+
+    latest = diffs[-1]
+    log.info("[Redash] Loading diff from %s", latest)
+    diff = _load_json(latest)
+    dash_mod.render_dashboard(diff, output_dir=config.DASHBOARD_DIR)
+    log.info("[Redash] Dashboard re-rendered from %s", latest)
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(
         description="CC Pulse — Common Criteria monitoring engine"
@@ -266,9 +292,16 @@ def main() -> None:
         action="store_true",
         help="Collect initial snapshot only (no diff)",
     )
+    parser.add_argument(
+        "--redash",
+        action="store_true",
+        help="Re-render dashboard from the latest stored diff (no collection)",
+    )
     args = parser.parse_args()
 
-    if args.bootstrap:
+    if args.redash:
+        run_redash()
+    elif args.bootstrap:
         run_bootstrap()
     elif args.weekly:
         run_weekly()
