@@ -30,7 +30,7 @@ a:hover { text-decoration: underline; }
 .site-meta { font-size: 0.75rem; color: var(--muted); }
 
 /* Alert banner */
-.alert-banner { background: #7f1d1d; border: 1px solid var(--red); border-radius: 6px; padding: 0.75rem 1rem; margin-bottom: 1rem; font-weight: 600; color: #fca5a5; }
+.alert-banner { background: #451a03; border: 1px solid var(--amber); border-radius: 6px; padding: 0.75rem 1rem; margin-bottom: 1rem; font-weight: 500; color: #fde68a; }
 
 /* Trend bar */
 .trend-bar { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.5rem; }
@@ -43,7 +43,10 @@ a:hover { text-decoration: underline; }
 .stat-lbl { font-size: 0.7rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; margin-top: 2px; }
 
 /* Grid */
-.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(400px, 1fr)); gap: 1rem; }
+.grid { display: flex; flex-direction: column; gap: 0; }
+  .section-group { margin-bottom: 1.5rem; }
+  .section-label { font-size: 0.65rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); padding: 0.25rem 0 0.5rem 0.25rem; border-bottom: 1px solid var(--border); margin-bottom: 0.5rem; }
+  .section-group .card { margin-bottom: 0.5rem; }
 
 /* Cards */
 .card { background: var(--card); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
@@ -102,19 +105,18 @@ footer { margin-top: 2rem; padding: 1rem 0; border-top: 1px solid var(--border);
   .trend-bar { flex-direction: row; }
   .stat { min-width: 0; flex: 1 1 40%; }
   .stat-num { font-size: 1.2rem; }
-  .grid { grid-template-columns: 1fr; }
 }
 </style>
 </head>
 <body>
 
 
-<div class="alert-banner">Warning: 3 alerts detected -- see Alerts section below.</div>
+<div class="alert-banner">3 keyword alerts &mdash; see Alerts section below.</div>
 
 
 <header class="site-header">
   <div class="site-title">CC Pulse</div>
-  <div class="site-meta">2026-03-30T07:28:20.631595+00:00 to 2026-03-31T07:22:03.452384+00:00 &bull; Generated 2026-03-31 07:22 UTC</div>
+  <div class="site-meta">2026-03-30T07:28:20.631595+00:00 to 2026-03-31T07:22:03.452384+00:00 &bull; Generated 2026-03-31 17:38 UTC</div>
 </header>
 
 <div class="trend-bar">
@@ -146,59 +148,9 @@ footer { margin-top: 2rem; padding: 1rem 0; border-top: 1px solid var(--border);
 
 <div class="grid">
 
-<!-- NIAP PPs -->
-<div class="card " id="sec-niap-pp">
-  <div class="card-hdr" onclick="toggleCard(this)">
-    <span>NIAP Protection Profiles</span>
-    <span class="card-count">0 changes</span>
-    <span class="sparkline">
-      
-      <span class="sp-bar" style="height:100%" title="100%"></span>
-      
-      <span class="sp-bar" style="height:0%" title="0%"></span>
-      
-      <span class="sp-bar" style="height:0%" title="0%"></span>
-      
-      <span class="sp-bar" style="height:0%" title="0%"></span>
-      
-    </span>
-    <span class="toggle-icon">&#9658;</span>
-  </div>
-  <div class="card-body collapsed">
-    
-    
-    
-    
-    <p class="no-change">No changes detected.</p>
-  </div>
-</div>
-
-<!-- NIAP TDs -->
-<div class="card " id="sec-niap-td">
-  <div class="card-hdr" onclick="toggleCard(this)">
-    <span>NIAP Technical Decisions</span>
-    <span class="card-count">0 changes</span>
-    <span class="sparkline">
-      
-      <span class="sp-bar" style="height:100%" title="100%"></span>
-      
-      <span class="sp-bar" style="height:0%" title="0%"></span>
-      
-      <span class="sp-bar" style="height:0%" title="0%"></span>
-      
-      <span class="sp-bar" style="height:0%" title="0%"></span>
-      
-    </span>
-    <span class="toggle-icon">&#9658;</span>
-  </div>
-  <div class="card-body collapsed">
-    
-    
-    <p class="no-change">No changes detected.</p>
-  </div>
-</div>
-
-<!-- Cisco NDcPP -->
+<div class="section-group">
+  <div class="section-label">NIAP</div>
+  <!-- Cisco NDcPP -->
 <div class="card " id="sec-cisco">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>Cisco NDcPP Certifications</span>
@@ -213,32 +165,22 @@ footer { margin-top: 2rem; padding: 1rem 0; border-top: 1px solid var(--border);
   </div>
 </div>
 
-<!-- NIAP PCL -- All Certifications -->
-<div class="card " id="sec-niap-pcl">
+  <!-- NIAP CCTL Registry -->
+<div class="card " id="sec-cctl-registry">
   <div class="card-hdr" onclick="toggleCard(this)">
-    <span>NIAP PCL -- All Certifications</span>
+    <span>NIAP CCTL Registry</span>
     <span class="card-count">0 changes</span>
-    <span class="sparkline">
-      
-      <span class="sp-bar" style="height:0%" title="0%"></span>
-      
-      <span class="sp-bar" style="height:0%" title="0%"></span>
-      
-      <span class="sp-bar" style="height:0%" title="0%"></span>
-      
-      <span class="sp-bar" style="height:0%" title="0%"></span>
-      
-    </span>
+    <span class="toggle-icon">&#9658;</span>
   </div>
   <div class="card-body collapsed">
     
     
     
-    <p class="no-change">No changes detected.</p>
+    <p class="no-change">No registry changes.</p>
   </div>
 </div>
 
-<!-- NIAP In-Evaluation -->
+  <!-- NIAP In-Evaluation -->
 <div class="card " id="sec-niap-inevaluation">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>NIAP In-Evaluation Products</span>
@@ -264,7 +206,7 @@ footer { margin-top: 2rem; padding: 1rem 0; border-top: 1px solid var(--border);
   </div>
 </div>
 
-<!-- NIAP News -->
+  <!-- NIAP News -->
 <div class="card " id="sec-niap-news">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>NIAP News &amp; Announcements</span>
@@ -291,22 +233,87 @@ footer { margin-top: 2rem; padding: 1rem 0; border-top: 1px solid var(--border);
   </div>
 </div>
 
-<!-- NIAP CCTL Registry -->
-<div class="card " id="sec-cctl-registry">
+  <!-- NIAP PCL -- All Certifications -->
+<div class="card " id="sec-niap-pcl">
   <div class="card-hdr" onclick="toggleCard(this)">
-    <span>NIAP CCTL Registry</span>
+    <span>NIAP PCL -- All Certifications</span>
     <span class="card-count">0 changes</span>
+    <span class="sparkline">
+      
+      <span class="sp-bar" style="height:0%" title="0%"></span>
+      
+      <span class="sp-bar" style="height:0%" title="0%"></span>
+      
+      <span class="sp-bar" style="height:0%" title="0%"></span>
+      
+      <span class="sp-bar" style="height:0%" title="0%"></span>
+      
+    </span>
+  </div>
+  <div class="card-body collapsed">
+    
+    
+    
+    <p class="no-change">No changes detected.</p>
+  </div>
+</div>
+
+  <!-- NIAP PPs -->
+<div class="card " id="sec-niap-pp">
+  <div class="card-hdr" onclick="toggleCard(this)">
+    <span>NIAP Protection Profiles</span>
+    <span class="card-count">0 changes</span>
+    <span class="sparkline">
+      
+      <span class="sp-bar" style="height:100%" title="100%"></span>
+      
+      <span class="sp-bar" style="height:0%" title="0%"></span>
+      
+      <span class="sp-bar" style="height:0%" title="0%"></span>
+      
+      <span class="sp-bar" style="height:0%" title="0%"></span>
+      
+    </span>
     <span class="toggle-icon">&#9658;</span>
   </div>
   <div class="card-body collapsed">
     
     
     
-    <p class="no-change">No registry changes.</p>
+    
+    <p class="no-change">No changes detected.</p>
   </div>
 </div>
 
-<!-- CCTL Lab Intel -->
+  <!-- NIAP TDs -->
+<div class="card " id="sec-niap-td">
+  <div class="card-hdr" onclick="toggleCard(this)">
+    <span>NIAP Technical Decisions</span>
+    <span class="card-count">0 changes</span>
+    <span class="sparkline">
+      
+      <span class="sp-bar" style="height:100%" title="100%"></span>
+      
+      <span class="sp-bar" style="height:0%" title="0%"></span>
+      
+      <span class="sp-bar" style="height:0%" title="0%"></span>
+      
+      <span class="sp-bar" style="height:0%" title="0%"></span>
+      
+    </span>
+    <span class="toggle-icon">&#9658;</span>
+  </div>
+  <div class="card-body collapsed">
+    
+    
+    <p class="no-change">No changes detected.</p>
+  </div>
+</div>
+</div>
+
+<div class="section-group">
+  <div class="section-label">CCTL</div>
+  <!-- CCTL Lab Intel -->
 <div class="card " id="sec-cctl">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>CCTL Lab Intel</span>
@@ -329,8 +336,11 @@ footer { margin-top: 2rem; padding: 1rem 0; border-top: 1px solid var(--border);
     <p class="no-change">No new items.</p>
   </div>
 </div>
+</div>
 
-<!-- CSfC Capability Packages -->
+<div class="section-group">
+  <div class="section-label">CSfC</div>
+  <!-- CSfC Capability Packages -->
 <div class="card " id="sec-csfc">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>CSfC Capability Packages</span>
@@ -353,34 +363,11 @@ footer { margin-top: 2rem; padding: 1rem 0; border-top: 1px solid var(--border);
     <p class="no-change">No changes detected.</p>
   </div>
 </div>
-
-<!-- CC Portal (international) -->
-<div class="card " id="sec-cc-portal">
-  <div class="card-hdr" onclick="toggleCard(this)">
-    <span>CC Portal (International)</span>
-    <span class="card-count">0 new items</span>
-    <span class="sparkline">
-      
-      <span class="sp-bar" style="height:0%" title="0%"></span>
-      
-      <span class="sp-bar" style="height:0%" title="0%"></span>
-      
-      <span class="sp-bar" style="height:0%" title="0%"></span>
-      
-      <span class="sp-bar" style="height:0%" title="0%"></span>
-      
-    </span>
-    <span class="toggle-icon">&#9658;</span>
-  </div>
-  <div class="card-body collapsed">
-    
-    
-    
-    <p class="no-change">No new international items.</p>
-  </div>
 </div>
 
-<!-- CC Crypto Docs -->
+<div class="section-group">
+  <div class="section-label">Documentation</div>
+  <!-- CC Crypto Docs -->
 <div class="card " id="sec-cc-crypto">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>CC Crypto Documentation</span>
@@ -404,7 +391,7 @@ footer { margin-top: 2rem; padding: 1rem 0; border-top: 1px solid var(--border);
   </div>
 </div>
 
-<!-- NIST Docs -->
+  <!-- NIST Docs -->
 <div class="card card-updated" id="sec-nist">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>NIST Documentation</span>
@@ -454,30 +441,63 @@ footer { margin-top: 2rem; padding: 1rem 0; border-top: 1px solid var(--border);
     
   </div>
 </div>
+</div>
+
+<div class="section-group">
+  <div class="section-label">CC Portal</div>
+  <!-- CC Portal (international) -->
+<div class="card " id="sec-cc-portal">
+  <div class="card-hdr" onclick="toggleCard(this)">
+    <span>CC Portal (International)</span>
+    <span class="card-count">0 new items</span>
+    <span class="sparkline">
+      
+      <span class="sp-bar" style="height:0%" title="0%"></span>
+      
+      <span class="sp-bar" style="height:0%" title="0%"></span>
+      
+      <span class="sp-bar" style="height:0%" title="0%"></span>
+      
+      <span class="sp-bar" style="height:0%" title="0%"></span>
+      
+    </span>
+    <span class="toggle-icon">&#9658;</span>
+  </div>
+  <div class="card-body collapsed">
+    
+    
+    
+    <p class="no-change">No new international items.</p>
+  </div>
+</div>
+</div>
 
 <!-- Alerts -->
 
+<div class="section-group">
+  <div class="section-label">Alerts</div>
 <div class="card card-alert" id="sec-alerts">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>Alerts</span>
-    <span class="card-count">3 alerts</span>
+    <span class="card-count">3 alerts</div>
+</span>
     <span class="toggle-icon">&#9660;</span>
   </div>
   <div class="card-body">
     
     <div class="item-row alert-item">
-      <span class="item-link"></span>
-      <span class="item-meta"></span>
+      <span class="item-link">NIST Doc: NIST IR 8547</span>
+      <span class="item-meta">updated &middot; NIST IR 8547</span>
     </div>
     
     <div class="item-row alert-item">
-      <span class="item-link"></span>
-      <span class="item-meta"></span>
+      <span class="item-link">NIST Doc: SP 800-131A Rev 2</span>
+      <span class="item-meta">updated &middot; SP 800-131A</span>
     </div>
     
     <div class="item-row alert-item">
-      <span class="item-link"></span>
-      <span class="item-meta"></span>
+      <span class="item-link">NIST Doc: FIPS 204 ML-DSA</span>
+      <span class="item-meta">updated &middot; FIPS 204, ML-DSA</span>
     </div>
     
   </div>
@@ -486,9 +506,11 @@ footer { margin-top: 2rem; padding: 1rem 0; border-top: 1px solid var(--border);
 
 </div>
 
+</div>
+
 <footer>
-  <span>CC Pulse &middot; Auto-refreshes hourly &middot; Data from NIAP, CSfC, NIST, CC Portal</span>
-  <span>Last run: 2026-03-31 07:22 UTC</span>
+  <span>CC Pulse &middot; Auto-refreshes daily (06:00 UTC) &middot; Data from NIAP, CSfC, NIST, CC Portal</span>
+  <span>Last run: 2026-03-31 17:38 UTC</span>
 </footer>
 
 <script>
