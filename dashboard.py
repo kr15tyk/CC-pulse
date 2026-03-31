@@ -111,7 +111,7 @@ a:hover { text-decoration: underline; }
 .site-meta { font-size: 0.75rem; color: var(--muted); }
 
 /* Alert banner */
-.alert-banner { background: #7f1d1d; border: 1px solid var(--red); border-radius: 6px; padding: 0.75rem 1rem; margin-bottom: 1rem; font-weight: 600; color: #fca5a5; }
+.alert-banner { background: #451a03; border: 1px solid var(--amber); border-radius: 6px; padding: 0.75rem 1rem; margin-bottom: 1rem; font-weight: 500; color: #fde68a; }
 
 /* Trend bar */
 .trend-bar { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.5rem; }
@@ -124,7 +124,10 @@ a:hover { text-decoration: underline; }
 .stat-lbl { font-size: 0.7rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; margin-top: 2px; }
 
 /* Grid */
-.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(400px, 1fr)); gap: 1rem; }
+.grid { display: flex; flex-direction: column; gap: 0; }
+  .section-group { margin-bottom: 1.5rem; }
+  .section-label { font-size: 0.65rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); padding: 0.25rem 0 0.5rem 0.25rem; border-bottom: 1px solid var(--border); margin-bottom: 0.5rem; }
+  .section-group .card { margin-bottom: 0.5rem; }
 
 /* Cards */
 .card { background: var(--card); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
@@ -183,14 +186,13 @@ footer { margin-top: 2rem; padding: 1rem 0; border-top: 1px solid var(--border);
   .trend-bar { flex-direction: row; }
   .stat { min-width: 0; flex: 1 1 40%; }
   .stat-num { font-size: 1.2rem; }
-  .grid { grid-template-columns: 1fr; }
 }
 </style>
 </head>
 <body>
 
 {% if diff.alerts %}
-<div class="alert-banner">Warning: {{ alert_total }} alert{% if alert_total != 1 %}s{% endif %} detected -- see Alerts section below.</div>
+<div class="alert-banner">{{ alert_total }} keyword alert{% if alert_total != 1 %}s{% endif %} &mdash; see Alerts section below.</div>
 {% endif %}
 
 <header class="site-header">
@@ -227,7 +229,226 @@ footer { margin-top: 2rem; padding: 1rem 0; border-top: 1px solid var(--border);
 
 <div class="grid">
 
-<!-- NIAP PPs -->
+<div class="section-group">
+  <div class="section-label">NIAP</div>
+  <!-- Cisco NDcPP -->
+<div class="card {% if cisco_total > 0 %}card-new{% endif %}" id="sec-cisco">
+  <div class="card-hdr" onclick="toggleCard(this)">
+    <span>Cisco NDcPP Certifications</span>
+    <span class="card-count">{{ cisco_total }} change{% if cisco_total != 1 %}s{% endif %}</span>
+    <span class="toggle-icon">{% if cisco_total == 0 %}&#9658;{% else %}&#9660;{% endif %}</span>
+  </div>
+  <div class="card-body {% if cisco_total == 0 %}collapsed{% endif %}">
+    {% if diff.niap.cisco_ndcpp.added %}
+    <div class="sub-hdr sub-new">New Certifications ({{ diff.niap.cisco_ndcpp.added | length }})</div>
+    {% for item in diff.niap.cisco_ndcpp.added %}
+    <div class="item-row">
+      <span class="item-link">{{ item.vendor_id_name }} &mdash; {{ item.product_name }}</span>
+      <span class="item-meta">{% if item.certification_date %}{{ item.certification_date[:10] }}{% endif %}</span>
+    </div>
+    {% if item.protection_profiles %}
+    <div class="item-sub">{{ item.protection_profiles | map(attribute='pp_short_name') | join(', ') }}</div>
+    {% endif %}
+    {% endfor %}
+    {% endif %}
+    {% if diff.niap.cisco_ndcpp.removed %}
+    <div class="sub-hdr sub-removed">Removed ({{ diff.niap.cisco_ndcpp.removed | length }})</div>
+    {% for item in diff.niap.cisco_ndcpp.removed %}
+    <div class="item-row">
+      <span class="item-link">{{ item.vendor_id_name }} &mdash; {{ item.product_name }}</span>
+      <span class="item-meta">{{ item.status_sort }}</span>
+    </div>
+    {% endfor %}
+    {% endif %}
+    {% if diff.niap.cisco_ndcpp.newly_archived %}
+    <div class="sub-hdr sub-updated">Newly Archived ({{ diff.niap.cisco_ndcpp.newly_archived | length }})</div>
+    {% for item in diff.niap.cisco_ndcpp.newly_archived %}
+    <div class="item-row">
+      <span class="item-link">{{ item.vendor_id_name }} &mdash; {{ item.product_name }}</span>
+      <span class="item-meta">Archived</span>
+    </div>
+    {% if item.protection_profiles %}
+    <div class="item-sub">{{ item.protection_profiles | map(attribute='pp_short_name') | join(', ') }}</div>
+    {% endif %}
+    {% endfor %}
+    {% endif %}
+    {% if cisco_total == 0 %}<p class="no-change">No changes detected.</p>{% endif %}
+  </div>
+</div>
+
+  <!-- NIAP CCTL Registry -->
+<div class="card {% if cctl_registry_total > 0 %}card-updated{% endif %}" id="sec-cctl-registry">
+  <div class="card-hdr" onclick="toggleCard(this)">
+    <span>NIAP CCTL Registry</span>
+    <span class="card-count">{{ cctl_registry_total }} change{% if cctl_registry_total != 1 %}s{% endif %}</span>
+    <span class="toggle-icon">{% if cctl_registry_total == 0 %}&#9658;{% else %}&#9660;{% endif %}</span>
+  </div>
+  <div class="card-body {% if cctl_registry_total == 0 %}collapsed{% endif %}">
+    {% if diff.niap.cctls.added %}
+    <div class="sub-hdr sub-new">New Labs ({{ diff.niap.cctls.added | length }})</div>
+    {% for lab in diff.niap.cctls.added %}
+    <div class="item-row">
+      <a class="item-link" href="{{ lab.cctl_url or '#' }}" target="_blank">{{ lab.cctl_name }}</a>
+      <span class="item-meta">{{ lab.city }}{% if lab.state_id %}, {{ lab.state_id }}{% endif %}</span>
+    </div>
+    {% endfor %}
+    {% endif %}
+    {% if diff.niap.cctls.removed %}
+    <div class="sub-hdr sub-removed">Removed Labs ({{ diff.niap.cctls.removed | length }})</div>
+    {% for lab in diff.niap.cctls.removed %}
+    <div class="item-row">
+      <a class="item-link" href="{{ lab.cctl_url or '#' }}" target="_blank">{{ lab.cctl_name }}</a>
+      <span class="item-meta">{{ lab.city }}{% if lab.state_id %}, {{ lab.state_id }}{% endif %}</span>
+    </div>
+    {% endfor %}
+    {% endif %}
+    {% if diff.niap.cctls.status_changes %}
+    <div class="sub-hdr sub-updated">Status Changes ({{ diff.niap.cctls.status_changes | length }})</div>
+    {% for lab in diff.niap.cctls.status_changes %}
+    <div class="item-row">
+      <a class="item-link" href="{{ lab.cctl_url or '#' }}" target="_blank">{{ lab.cctl_name }}</a>
+      <span class="item-meta">{{ lab.old_status }} &#8594; {{ lab.new_status }}</span>
+    </div>
+    {% endfor %}
+    {% endif %}
+    {% if cctl_registry_total == 0 %}<p class="no-change">No registry changes.</p>{% endif %}
+  </div>
+</div>
+
+  <!-- NIAP In-Evaluation -->
+<div class="card {% if in_eval_total > 0 %}card-new{% endif %}" id="sec-niap-inevaluation">
+  <div class="card-hdr" onclick="toggleCard(this)">
+    <span>NIAP In-Evaluation Products</span>
+    <span class="card-count">{% if in_eval_total > 0 %}{{ in_eval_total }} change{% if in_eval_total != 1 %}s{% endif %}{% else %}{{ in_eval_current }} active{% endif %}</span>
+    <span class="sparkline">
+      {% for v in sparklines.in_eval %}
+      <span class="sp-bar" style="height:{{ v }}%" title="{{ v }}%"></span>
+      {% endfor %}
+    </span>
+  </div>
+  <div class="card-body {% if in_eval_total == 0 %}collapsed{% endif %}">
+    {% if diff.niap.in_evaluation.added %}
+    <div class="sub-hdr sub-new">Newly In Evaluation ({{ diff.niap.in_evaluation.added | length }})</div>
+    {% for item in diff.niap.in_evaluation.added %}
+    <div class="item-row">
+      <span class="item-link">{{ item.vendor_id_name or "" }} -- {{ item.product_name or "" }}</span>
+      <span class="item-meta">{% if item.assigned_lab_name %}{{ item.assigned_lab_name }}{% endif %}</span>
+    </div>
+    {% if item.tech_types %}
+    <div class="item-sub">{{ item.tech_types | join(", ") }}</div>
+    {% endif %}
+    {% endfor %}
+    {% endif %}
+    {% if diff.niap.in_evaluation.removed %}
+    <div class="sub-hdr sub-removed">Left Evaluation ({{ diff.niap.in_evaluation.removed | length }})</div>
+    {% for item in diff.niap.in_evaluation.removed %}
+    <div class="item-row">
+      <span class="item-link">{{ item.vendor_id_name or "" }} -- {{ item.product_name or "" }}</span>
+      <span class="item-meta">Completed or Withdrawn</span>
+    </div>
+    {% endfor %}
+    {% endif %}
+    {% if in_eval_total == 0 %}
+    <p class="no-change">No evaluation changes detected. {{ in_eval_current }} product{% if in_eval_current != 1 %}s{% endif %} currently in evaluation.</p>
+    {% endif %}
+  </div>
+</div>
+
+  <!-- NIAP News -->
+<div class="card {% if niap_news_total > 0 or diff.niap.events.added %}card-new{% endif %}" id="sec-niap-news">
+  <div class="card-hdr" onclick="toggleCard(this)">
+    <span>NIAP News &amp; Announcements</span>
+    <span class="card-count">{{ niap_news_total }} new item{% if niap_news_total != 1 %}s{% endif %}</span>
+    <span class="sparkline">
+      {% for v in sparklines.niap_news %}
+      <span class="sp-bar" style="height:{{ v }}%" title="{{ v }}%"></span>
+      {% endfor %}
+    </span>
+    <span class="toggle-icon">{% if niap_news_total == 0 and not diff.niap.events.added %}&#9658;{% else %}&#9660;{% endif %}</span>
+  </div>
+  <div class="card-body {% if niap_news_total == 0 and not diff.niap.events.added %}collapsed{% endif %}">
+    {% if diff.niap.news.added %}
+    {% for item in diff.niap.news.added %}
+    <div class="item-row">
+      <a class="item-link" href="{{ item.link or item.url or '#' }}" target="_blank">{{ item.title }}</a>
+      <span class="item-meta">{{ item.date }}</span>
+    </div>
+    {% endfor %}
+    {% endif %}
+    {% if diff.niap.events.added %}
+    <div class="sub-hdr sub-new">Events ({{ diff.niap.events.added | length }})</div>
+    {% for ev in diff.niap.events.added %}
+    <div class="item-row">
+      <span class="item-link">{{ ev.title or ev.name or ev }}</span>
+      <span class="item-meta">{{ ev.date or ev.start_date or '' }}</span>
+    </div>
+    {% endfor %}
+    {% endif %}
+    {% set policy_items = diff.niap.news.added | selectattr("_category", "equalto", "POLICY") | list %}
+    {% if policy_items %}
+    <div class="sub-hdr sub-updated">Policy Letters &amp; Updates ({{ policy_items | length }})</div>
+    {% for item in policy_items %}
+    <div class="item-row">
+      {% if item.link %}<a class="item-link" href="{{ item.link }}" target="_blank">{{ item.title }}</a>
+      {% else %}<span class="item-link">{{ item.title }}</span>{% endif %}
+      <span class="item-meta">{% if item.posted %}{{ item.posted[:10] }}{% elif item.date %}{{ item.date[:10] }}{% endif %}</span>
+    </div>
+    {% endfor %}
+    {% endif %}
+    {% if niap_news_total == 0 and not diff.niap.events.added %}<p class="no-change">No new items.</p>{% endif %}
+  </div>
+</div>
+
+  <!-- NIAP PCL -- All Certifications -->
+<div class="card {% if pcl_all_total > 0 %}card-new{% endif %}" id="sec-niap-pcl">
+  <div class="card-hdr" onclick="toggleCard(this)">
+    <span>NIAP PCL -- All Certifications</span>
+    <span class="card-count">{{ pcl_all_total }} change{% if pcl_all_total != 1 %}s{% endif %}</span>
+    <span class="sparkline">
+      {% for v in sparklines.pcl_all %}
+      <span class="sp-bar" style="height:{{ v }}%" title="{{ v }}%"></span>
+      {% endfor %}
+    </span>
+  </div>
+  <div class="card-body {% if pcl_all_total == 0 %}collapsed{% endif %}">
+    {% if diff.niap.pcl_all.added %}
+    <div class="sub-hdr sub-new">New Certifications ({{ diff.niap.pcl_all.added | length }})</div>
+    {% for item in diff.niap.pcl_all.added %}
+    <div class="item-row">
+      <span class="item-link">{{ item.vendor_id_name }} -- {{ item.product_name }}</span>
+      <span class="item-meta">{% if item.certification_date %}{{ item.certification_date[:10] }}{% endif %}</span>
+    </div>
+    {% if item.protection_profiles %}
+    <div class="item-sub">{{ item.protection_profiles | map(attribute="pp_short_name") | join(", ") }}</div>
+    {% endif %}
+    {% endfor %}
+    {% endif %}
+    {% if diff.niap.pcl_all.newly_archived %}
+    <div class="sub-hdr sub-updated">Newly Archived ({{ diff.niap.pcl_all.newly_archived | length }})</div>
+    {% for item in diff.niap.pcl_all.newly_archived %}
+    <div class="item-row">
+      <span class="item-link">{{ item.vendor_id_name }} -- {{ item.product_name }}</span>
+      <span class="item-meta">Archived</span>
+    </div>
+    {% if item.protection_profiles %}
+    <div class="item-sub">{{ item.protection_profiles | map(attribute="pp_short_name") | join(", ") }}</div>
+    {% endif %}
+    {% endfor %}
+    {% endif %}
+    {% if diff.niap.pcl_all.removed %}
+    <div class="sub-hdr sub-removed">Removed ({{ diff.niap.pcl_all.removed | length }})</div>
+    {% for item in diff.niap.pcl_all.removed %}
+    <div class="item-row">
+      <span class="item-link">{{ item.vendor_id_name }} -- {{ item.product_name }}</span>
+      <span class="item-meta">{{ item.status_sort }}</span>
+    </div>
+    {% endfor %}
+    {% endif %}
+    {% if pcl_all_total == 0 %}<p class="no-change">No changes detected.</p>{% endif %}
+  </div>
+</div>
+
+  <!-- NIAP PPs -->
 <div class="card {% if niap_pp_total > 0 %}card-new{% endif %}" id="sec-niap-pp">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>NIAP Protection Profiles</span>
@@ -280,7 +501,7 @@ footer { margin-top: 2rem; padding: 1rem 0; border-top: 1px solid var(--border);
   </div>
 </div>
 
-<!-- NIAP TDs -->
+  <!-- NIAP TDs -->
 <div class="card {% if niap_td_total > 0 %}card-new{% endif %}" id="sec-niap-td">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>NIAP Technical Decisions</span>
@@ -320,225 +541,11 @@ footer { margin-top: 2rem; padding: 1rem 0; border-top: 1px solid var(--border);
     {% if niap_td_total == 0 %}<p class="no-change">No changes detected.</p>{% endif %}
   </div>
 </div>
-
-<!-- Cisco NDcPP -->
-<div class="card {% if cisco_total > 0 %}card-new{% endif %}" id="sec-cisco">
-  <div class="card-hdr" onclick="toggleCard(this)">
-    <span>Cisco NDcPP Certifications</span>
-    <span class="card-count">{{ cisco_total }} change{% if cisco_total != 1 %}s{% endif %}</span>
-    <span class="toggle-icon">{% if cisco_total == 0 %}&#9658;{% else %}&#9660;{% endif %}</span>
-  </div>
-  <div class="card-body {% if cisco_total == 0 %}collapsed{% endif %}">
-    {% if diff.niap.cisco_ndcpp.added %}
-    <div class="sub-hdr sub-new">New Certifications ({{ diff.niap.cisco_ndcpp.added | length }})</div>
-    {% for item in diff.niap.cisco_ndcpp.added %}
-    <div class="item-row">
-      <span class="item-link">{{ item.vendor_id_name }} &mdash; {{ item.product_name }}</span>
-      <span class="item-meta">{% if item.certification_date %}{{ item.certification_date[:10] }}{% endif %}</span>
-    </div>
-    {% if item.protection_profiles %}
-    <div class="item-sub">{{ item.protection_profiles | map(attribute='pp_short_name') | join(', ') }}</div>
-    {% endif %}
-    {% endfor %}
-    {% endif %}
-    {% if diff.niap.cisco_ndcpp.removed %}
-    <div class="sub-hdr sub-removed">Removed ({{ diff.niap.cisco_ndcpp.removed | length }})</div>
-    {% for item in diff.niap.cisco_ndcpp.removed %}
-    <div class="item-row">
-      <span class="item-link">{{ item.vendor_id_name }} &mdash; {{ item.product_name }}</span>
-      <span class="item-meta">{{ item.status_sort }}</span>
-    </div>
-    {% endfor %}
-    {% endif %}
-    {% if diff.niap.cisco_ndcpp.newly_archived %}
-    <div class="sub-hdr sub-updated">Newly Archived ({{ diff.niap.cisco_ndcpp.newly_archived | length }})</div>
-    {% for item in diff.niap.cisco_ndcpp.newly_archived %}
-    <div class="item-row">
-      <span class="item-link">{{ item.vendor_id_name }} &mdash; {{ item.product_name }}</span>
-      <span class="item-meta">Archived</span>
-    </div>
-    {% if item.protection_profiles %}
-    <div class="item-sub">{{ item.protection_profiles | map(attribute='pp_short_name') | join(', ') }}</div>
-    {% endif %}
-    {% endfor %}
-    {% endif %}
-    {% if cisco_total == 0 %}<p class="no-change">No changes detected.</p>{% endif %}
-  </div>
 </div>
 
-<!-- NIAP PCL -- All Certifications -->
-<div class="card {% if pcl_all_total > 0 %}card-new{% endif %}" id="sec-niap-pcl">
-  <div class="card-hdr" onclick="toggleCard(this)">
-    <span>NIAP PCL -- All Certifications</span>
-    <span class="card-count">{{ pcl_all_total }} change{% if pcl_all_total != 1 %}s{% endif %}</span>
-    <span class="sparkline">
-      {% for v in sparklines.pcl_all %}
-      <span class="sp-bar" style="height:{{ v }}%" title="{{ v }}%"></span>
-      {% endfor %}
-    </span>
-  </div>
-  <div class="card-body {% if pcl_all_total == 0 %}collapsed{% endif %}">
-    {% if diff.niap.pcl_all.added %}
-    <div class="sub-hdr sub-new">New Certifications ({{ diff.niap.pcl_all.added | length }})</div>
-    {% for item in diff.niap.pcl_all.added %}
-    <div class="item-row">
-      <span class="item-link">{{ item.vendor_id_name }} -- {{ item.product_name }}</span>
-      <span class="item-meta">{% if item.certification_date %}{{ item.certification_date[:10] }}{% endif %}</span>
-    </div>
-    {% if item.protection_profiles %}
-    <div class="item-sub">{{ item.protection_profiles | map(attribute="pp_short_name") | join(", ") }}</div>
-    {% endif %}
-    {% endfor %}
-    {% endif %}
-    {% if diff.niap.pcl_all.newly_archived %}
-    <div class="sub-hdr sub-updated">Newly Archived ({{ diff.niap.pcl_all.newly_archived | length }})</div>
-    {% for item in diff.niap.pcl_all.newly_archived %}
-    <div class="item-row">
-      <span class="item-link">{{ item.vendor_id_name }} -- {{ item.product_name }}</span>
-      <span class="item-meta">Archived</span>
-    </div>
-    {% if item.protection_profiles %}
-    <div class="item-sub">{{ item.protection_profiles | map(attribute="pp_short_name") | join(", ") }}</div>
-    {% endif %}
-    {% endfor %}
-    {% endif %}
-    {% if diff.niap.pcl_all.removed %}
-    <div class="sub-hdr sub-removed">Removed ({{ diff.niap.pcl_all.removed | length }})</div>
-    {% for item in diff.niap.pcl_all.removed %}
-    <div class="item-row">
-      <span class="item-link">{{ item.vendor_id_name }} -- {{ item.product_name }}</span>
-      <span class="item-meta">{{ item.status_sort }}</span>
-    </div>
-    {% endfor %}
-    {% endif %}
-    {% if pcl_all_total == 0 %}<p class="no-change">No changes detected.</p>{% endif %}
-  </div>
-</div>
-
-<!-- NIAP In-Evaluation -->
-<div class="card {% if in_eval_total > 0 %}card-new{% endif %}" id="sec-niap-inevaluation">
-  <div class="card-hdr" onclick="toggleCard(this)">
-    <span>NIAP In-Evaluation Products</span>
-    <span class="card-count">{% if in_eval_total > 0 %}{{ in_eval_total }} change{% if in_eval_total != 1 %}s{% endif %}{% else %}{{ in_eval_current }} active{% endif %}</span>
-    <span class="sparkline">
-      {% for v in sparklines.in_eval %}
-      <span class="sp-bar" style="height:{{ v }}%" title="{{ v }}%"></span>
-      {% endfor %}
-    </span>
-  </div>
-  <div class="card-body {% if in_eval_total == 0 %}collapsed{% endif %}">
-    {% if diff.niap.in_evaluation.added %}
-    <div class="sub-hdr sub-new">Newly In Evaluation ({{ diff.niap.in_evaluation.added | length }})</div>
-    {% for item in diff.niap.in_evaluation.added %}
-    <div class="item-row">
-      <span class="item-link">{{ item.vendor_id_name or "" }} -- {{ item.product_name or "" }}</span>
-      <span class="item-meta">{% if item.assigned_lab_name %}{{ item.assigned_lab_name }}{% endif %}</span>
-    </div>
-    {% if item.tech_types %}
-    <div class="item-sub">{{ item.tech_types | join(", ") }}</div>
-    {% endif %}
-    {% endfor %}
-    {% endif %}
-    {% if diff.niap.in_evaluation.removed %}
-    <div class="sub-hdr sub-removed">Left Evaluation ({{ diff.niap.in_evaluation.removed | length }})</div>
-    {% for item in diff.niap.in_evaluation.removed %}
-    <div class="item-row">
-      <span class="item-link">{{ item.vendor_id_name or "" }} -- {{ item.product_name or "" }}</span>
-      <span class="item-meta">Completed or Withdrawn</span>
-    </div>
-    {% endfor %}
-    {% endif %}
-    {% if in_eval_total == 0 %}
-    <p class="no-change">No evaluation changes detected. {{ in_eval_current }} product{% if in_eval_current != 1 %}s{% endif %} currently in evaluation.</p>
-    {% endif %}
-  </div>
-</div>
-
-<!-- NIAP News -->
-<div class="card {% if niap_news_total > 0 or diff.niap.events.added %}card-new{% endif %}" id="sec-niap-news">
-  <div class="card-hdr" onclick="toggleCard(this)">
-    <span>NIAP News &amp; Announcements</span>
-    <span class="card-count">{{ niap_news_total }} new item{% if niap_news_total != 1 %}s{% endif %}</span>
-    <span class="sparkline">
-      {% for v in sparklines.niap_news %}
-      <span class="sp-bar" style="height:{{ v }}%" title="{{ v }}%"></span>
-      {% endfor %}
-    </span>
-    <span class="toggle-icon">{% if niap_news_total == 0 and not diff.niap.events.added %}&#9658;{% else %}&#9660;{% endif %}</span>
-  </div>
-  <div class="card-body {% if niap_news_total == 0 and not diff.niap.events.added %}collapsed{% endif %}">
-    {% if diff.niap.news.added %}
-    {% for item in diff.niap.news.added %}
-    <div class="item-row">
-      <a class="item-link" href="{{ item.link or item.url or '#' }}" target="_blank">{{ item.title }}</a>
-      <span class="item-meta">{{ item.date }}</span>
-    </div>
-    {% endfor %}
-    {% endif %}
-    {% if diff.niap.events.added %}
-    <div class="sub-hdr sub-new">Events ({{ diff.niap.events.added | length }})</div>
-    {% for ev in diff.niap.events.added %}
-    <div class="item-row">
-      <span class="item-link">{{ ev.title or ev.name or ev }}</span>
-      <span class="item-meta">{{ ev.date or ev.start_date or '' }}</span>
-    </div>
-    {% endfor %}
-    {% endif %}
-    {% set policy_items = diff.niap.news.added | selectattr("_category", "equalto", "POLICY") | list %}
-    {% if policy_items %}
-    <div class="sub-hdr sub-updated">Policy Letters &amp; Updates ({{ policy_items | length }})</div>
-    {% for item in policy_items %}
-    <div class="item-row">
-      {% if item.link %}<a class="item-link" href="{{ item.link }}" target="_blank">{{ item.title }}</a>
-      {% else %}<span class="item-link">{{ item.title }}</span>{% endif %}
-      <span class="item-meta">{% if item.posted %}{{ item.posted[:10] }}{% elif item.date %}{{ item.date[:10] }}{% endif %}</span>
-    </div>
-    {% endfor %}
-    {% endif %}
-    {% if niap_news_total == 0 and not diff.niap.events.added %}<p class="no-change">No new items.</p>{% endif %}
-  </div>
-</div>
-
-<!-- NIAP CCTL Registry -->
-<div class="card {% if cctl_registry_total > 0 %}card-updated{% endif %}" id="sec-cctl-registry">
-  <div class="card-hdr" onclick="toggleCard(this)">
-    <span>NIAP CCTL Registry</span>
-    <span class="card-count">{{ cctl_registry_total }} change{% if cctl_registry_total != 1 %}s{% endif %}</span>
-    <span class="toggle-icon">{% if cctl_registry_total == 0 %}&#9658;{% else %}&#9660;{% endif %}</span>
-  </div>
-  <div class="card-body {% if cctl_registry_total == 0 %}collapsed{% endif %}">
-    {% if diff.niap.cctls.added %}
-    <div class="sub-hdr sub-new">New Labs ({{ diff.niap.cctls.added | length }})</div>
-    {% for lab in diff.niap.cctls.added %}
-    <div class="item-row">
-      <a class="item-link" href="{{ lab.cctl_url or '#' }}" target="_blank">{{ lab.cctl_name }}</a>
-      <span class="item-meta">{{ lab.city }}{% if lab.state_id %}, {{ lab.state_id }}{% endif %}</span>
-    </div>
-    {% endfor %}
-    {% endif %}
-    {% if diff.niap.cctls.removed %}
-    <div class="sub-hdr sub-removed">Removed Labs ({{ diff.niap.cctls.removed | length }})</div>
-    {% for lab in diff.niap.cctls.removed %}
-    <div class="item-row">
-      <a class="item-link" href="{{ lab.cctl_url or '#' }}" target="_blank">{{ lab.cctl_name }}</a>
-      <span class="item-meta">{{ lab.city }}{% if lab.state_id %}, {{ lab.state_id }}{% endif %}</span>
-    </div>
-    {% endfor %}
-    {% endif %}
-    {% if diff.niap.cctls.status_changes %}
-    <div class="sub-hdr sub-updated">Status Changes ({{ diff.niap.cctls.status_changes | length }})</div>
-    {% for lab in diff.niap.cctls.status_changes %}
-    <div class="item-row">
-      <a class="item-link" href="{{ lab.cctl_url or '#' }}" target="_blank">{{ lab.cctl_name }}</a>
-      <span class="item-meta">{{ lab.old_status }} &#8594; {{ lab.new_status }}</span>
-    </div>
-    {% endfor %}
-    {% endif %}
-    {% if cctl_registry_total == 0 %}<p class="no-change">No registry changes.</p>{% endif %}
-  </div>
-</div>
-
-<!-- CCTL Lab Intel -->
+<div class="section-group">
+  <div class="section-label">CCTL</div>
+  <!-- CCTL Lab Intel -->
 <div class="card {% if cctl_total > 0 %}card-new{% endif %}" id="sec-cctl">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>CCTL Lab Intel</span>
@@ -573,8 +580,11 @@ footer { margin-top: 2rem; padding: 1rem 0; border-top: 1px solid var(--border);
     {% if cctl_total == 0 %}<p class="no-change">No new items.</p>{% endif %}
   </div>
 </div>
+</div>
 
-<!-- CSfC Capability Packages -->
+<div class="section-group">
+  <div class="section-label">CSfC</div>
+  <!-- CSfC Capability Packages -->
 <div class="card {% if csfc_total > 0 %}card-updated{% endif %}" id="sec-csfc">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>CSfC Capability Packages</span>
@@ -606,8 +616,72 @@ footer { margin-top: 2rem; padding: 1rem 0; border-top: 1px solid var(--border);
     {% if csfc_total == 0 %}<p class="no-change">No changes detected.</p>{% endif %}
   </div>
 </div>
+</div>
 
-<!-- CC Portal (international) -->
+<div class="section-group">
+  <div class="section-label">Documentation</div>
+  <!-- CC Crypto Docs -->
+<div class="card {% if cc_crypto_total > 0 %}card-updated{% endif %}" id="sec-cc-crypto">
+  <div class="card-hdr" onclick="toggleCard(this)">
+    <span>CC Crypto Documentation</span>
+    <span class="card-count">{{ cc_crypto_total }} update{% if cc_crypto_total != 1 %}s{% endif %}</span>
+    <span class="sparkline">
+      {% for v in sparklines.cc_crypto %}
+      <span class="sp-bar" style="height:{{ v }}%" title="{{ v }}%"></span>
+      {% endfor %}
+    </span>
+    <span class="toggle-icon">{% if cc_crypto_total == 0 %}&#9658;{% else %}&#9660;{% endif %}</span>
+  </div>
+  <div class="card-body {% if cc_crypto_total == 0 %}collapsed{% endif %}">
+    {% for doc_name, doc in diff.cc_crypto.doc_headers.items() %}
+    {% if doc.changed %}
+    <div class="item-row">
+      <a class="item-link" href="{{ doc.url }}" target="_blank">{{ doc_name }}</a>
+      <span class="item-meta">
+        {% if doc.old_last_modified and doc.new_last_modified %}
+        {{ doc.old_last_modified }} &#8594; {{ doc.new_last_modified }}
+        {% else %}Header changed{% endif %}
+      </span>
+    </div>
+    {% endif %}
+    {% endfor %}
+    {% if cc_crypto_total == 0 %}<p class="no-change">No changes detected.</p>{% endif %}
+  </div>
+</div>
+
+  <!-- NIST Docs -->
+<div class="card {% if nist_total > 0 %}card-updated{% endif %}" id="sec-nist">
+  <div class="card-hdr" onclick="toggleCard(this)">
+    <span>NIST Documentation</span>
+    <span class="card-count">{{ nist_total }} update{% if nist_total != 1 %}s{% endif %}</span>
+    <span class="sparkline">
+      {% for v in sparklines.nist %}
+      <span class="sp-bar" style="height:{{ v }}%" title="{{ v }}%"></span>
+      {% endfor %}
+    </span>
+    <span class="toggle-icon">{% if nist_total == 0 %}&#9658;{% else %}&#9660;{% endif %}</span>
+  </div>
+  <div class="card-body {% if nist_total == 0 %}collapsed{% endif %}">
+    {% for doc_name, doc in diff.nist.doc_headers.items() %}
+    {% if doc.changed %}
+    <div class="item-row">
+      <a class="item-link" href="{{ doc.url }}" target="_blank">{{ doc_name }}</a>
+      <span class="item-meta">
+        {% if doc.old_last_modified and doc.new_last_modified %}
+        {{ doc.old_last_modified }} &#8594; {{ doc.new_last_modified }}
+        {% else %}Header changed{% endif %}
+      </span>
+    </div>
+    {% endif %}
+    {% endfor %}
+    {% if nist_total == 0 %}<p class="no-change">No changes detected.</p>{% endif %}
+  </div>
+</div>
+</div>
+
+<div class="section-group">
+  <div class="section-label">CC Portal</div>
+  <!-- CC Portal (international) -->
 <div class="card {% if cc_portal_total > 0 %}card-new{% endif %}" id="sec-cc-portal">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>CC Portal (International)</span>
@@ -650,71 +724,17 @@ footer { margin-top: 2rem; padding: 1rem 0; border-top: 1px solid var(--border);
     {% if cc_portal_total == 0 %}<p class="no-change">No new international items.</p>{% endif %}
   </div>
 </div>
-
-<!-- CC Crypto Docs -->
-<div class="card {% if cc_crypto_total > 0 %}card-updated{% endif %}" id="sec-cc-crypto">
-  <div class="card-hdr" onclick="toggleCard(this)">
-    <span>CC Crypto Documentation</span>
-    <span class="card-count">{{ cc_crypto_total }} update{% if cc_crypto_total != 1 %}s{% endif %}</span>
-    <span class="sparkline">
-      {% for v in sparklines.cc_crypto %}
-      <span class="sp-bar" style="height:{{ v }}%" title="{{ v }}%"></span>
-      {% endfor %}
-    </span>
-    <span class="toggle-icon">{% if cc_crypto_total == 0 %}&#9658;{% else %}&#9660;{% endif %}</span>
-  </div>
-  <div class="card-body {% if cc_crypto_total == 0 %}collapsed{% endif %}">
-    {% for doc_name, doc in diff.cc_crypto.doc_headers.items() %}
-    {% if doc.changed %}
-    <div class="item-row">
-      <a class="item-link" href="{{ doc.url }}" target="_blank">{{ doc_name }}</a>
-      <span class="item-meta">
-        {% if doc.old_last_modified and doc.new_last_modified %}
-        {{ doc.old_last_modified }} &#8594; {{ doc.new_last_modified }}
-        {% else %}Header changed{% endif %}
-      </span>
-    </div>
-    {% endif %}
-    {% endfor %}
-    {% if cc_crypto_total == 0 %}<p class="no-change">No changes detected.</p>{% endif %}
-  </div>
-</div>
-
-<!-- NIST Docs -->
-<div class="card {% if nist_total > 0 %}card-updated{% endif %}" id="sec-nist">
-  <div class="card-hdr" onclick="toggleCard(this)">
-    <span>NIST Documentation</span>
-    <span class="card-count">{{ nist_total }} update{% if nist_total != 1 %}s{% endif %}</span>
-    <span class="sparkline">
-      {% for v in sparklines.nist %}
-      <span class="sp-bar" style="height:{{ v }}%" title="{{ v }}%"></span>
-      {% endfor %}
-    </span>
-    <span class="toggle-icon">{% if nist_total == 0 %}&#9658;{% else %}&#9660;{% endif %}</span>
-  </div>
-  <div class="card-body {% if nist_total == 0 %}collapsed{% endif %}">
-    {% for doc_name, doc in diff.nist.doc_headers.items() %}
-    {% if doc.changed %}
-    <div class="item-row">
-      <a class="item-link" href="{{ doc.url }}" target="_blank">{{ doc_name }}</a>
-      <span class="item-meta">
-        {% if doc.old_last_modified and doc.new_last_modified %}
-        {{ doc.old_last_modified }} &#8594; {{ doc.new_last_modified }}
-        {% else %}Header changed{% endif %}
-      </span>
-    </div>
-    {% endif %}
-    {% endfor %}
-    {% if nist_total == 0 %}<p class="no-change">No changes detected.</p>{% endif %}
-  </div>
 </div>
 
 <!-- Alerts -->
 {% if diff.alerts %}
+<div class="section-group">
+  <div class="section-label">Alerts</div>
 <div class="card card-alert" id="sec-alerts">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>Alerts</span>
-    <span class="card-count">{{ alert_total }} alert{% if alert_total != 1 %}s{% endif %}</span>
+    <span class="card-count">{{ alert_total }} alert{% if alert_total != 1 %}s</div>
+{% endif %}</span>
     <span class="toggle-icon">&#9660;</span>
   </div>
   <div class="card-body">
@@ -730,8 +750,10 @@ footer { margin-top: 2rem; padding: 1rem 0; border-top: 1px solid var(--border);
 
 </div>
 
+</div>
+
 <footer>
-  <span>CC Pulse &middot; Auto-refreshes hourly &middot; Data from NIAP, CSfC, NIST, CC Portal</span>
+  <span>CC Pulse &middot; Auto-refreshes daily (06:00 UTC) &middot; Data from NIAP, CSfC, NIST, CC Portal</span>
   <span>Last run: {{ generated_at }}</span>
 </footer>
 
