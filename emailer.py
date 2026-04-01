@@ -1,4 +1,4 @@
-—"""
+"""
 emailer.py — Builds and sends CC Pulse email digests.
 
 Features:
