@@ -34,7 +34,7 @@ collect → diff → dashboard → commit → alert
 2. **Diff** — Today's snapshot is compared against yesterday's. Structured records are matched by stable IDs; scraped content is matched by text prefix. Changes are categorised (new, removed, sunset, archived, updated).
 3. **Alert scan** — All structured fields (PP names, TD titles, RSS titles, product names) are scanned against `WATCH_KEYWORDS`. Raw scraped page text is scanned against the narrower `BODY_WATCH_KEYWORDS` list to avoid alert fatigue from noisy prose. Each alert carries: source label, title, what changed (`detail`), change kind, direct URL, and matched keywords.
 4. **Dashboard** — The diff is rendered into `docs/cc_dashboard.html` via a Jinja2 template and committed back to `main`. GitHub Pages serves it immediately.
-5. **RSS** — `docs/cc_pulse.rss` is written alongside the dashboard, covering all domain changes.
+5. **RSS** — `docs/cc_feed.xml` is written alongside the dashboard, covering all domain changes.
 6. **Notifications** — If keyword alerts were found, three delivery channels fire in parallel: Webex Space, generic webhook (Teams-compatible), and immediate alert email. Each notification is self-contained: source, title, what changed, direct link, matched keywords. No need to open the dashboard to act on it.
 
 ---
@@ -84,7 +84,7 @@ Cards are organised into labelled sections matching the stat bar at the top:
 | **Clickable links** | Every item links directly to the source: NIAP product page, NIST PDF, NSA page, etc. |
 | **Alert detail** | Alert rows show source, linked title, what changed (detail), kind, and matched keywords |
 | **Stable layout** | Single-column flex layout — cards never reflow or shift when the window is resized |
-| **RSS feed** | `cc_pulse.rss` covers all domains; subscribe in any feed reader |
+| **RSS feed** | `cc_feed.xml` covers all domains; subscribe in any feed reader |
 | **Footer** | "Auto-refreshes daily (06:00 UTC) · Data from NIAP, CSfC, NIST, CC Portal · Last run: ..." |
 
 ### Alert banner
@@ -105,7 +105,7 @@ CC-pulse/
 │   └── diffs/                  # Daily diff JSONs (used by weekly merge)
 ├── docs/                       # Auto-created; served by GitHub Pages
 │   ├── cc_dashboard.html       # Live HTML dashboard
-│   └── cc_pulse.rss            # RSS feed (all domains)
+│   └── cc_feed.xml            # RSS feed (all domains)
 ├── collector.py                # Parallel multi-source aggregator
 ├── differ.py                   # Diff engine + two-tier keyword alert scanner
 ├── dashboard.py                # Jinja2 HTML dashboard + RSS renderer
