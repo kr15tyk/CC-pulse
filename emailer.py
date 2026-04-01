@@ -310,7 +310,7 @@ def build_email_html(weekly_diff: dict) -> str:
                 if detail else ""
             )
             kw_html = f'<div style="font-size:11px;margin-top:2px;opacity:0.75">\U0001f511 {kws}</div>'
-            row_bg  = "#8b1a1a" if tier == 1 else "#a82222"
+            row_bg  = "#92400e" if tier == 1 else "#b45309"
             alert_rows.append(
                 _row(src[:14], cisco_badge + kind_badge + title_html + detail_html + kw_html,
                      "#ffffff", row_bg)
@@ -534,7 +534,7 @@ def send_alert_email(alerts: list[dict]) -> None:
             if detail else ""
         )
         kw_html = f'<div style="font-size:11px;margin-top:2px;opacity:0.75">\U0001f511 {kws}</div>'
-        row_bg  = "#8b1a1a" if tier == 1 else "#a82222"
+        row_bg  = "#92400e" if tier == 1 else "#b45309"
         rows.append(
             _row(src[:14], cisco_badge + kind_badge + title_html + detail_html + kw_html,
                  "#ffffff", row_bg)
@@ -556,7 +556,7 @@ def send_alert_email(alerts: list[dict]) -> None:
     )
 
     body = (
-        '<div style="background:#a82222;color:white;padding:14px 18px;'
+        '<div style="background:#b45309;color:white;padding:14px 18px;'
         'border-radius:6px;margin-bottom:8px">'
         f'<b style="font-size:1rem">&#9888; {len(alerts)} KEYWORD ALERT(S) DETECTED</b>'
         f'<p style="margin:4px 0 0;font-size:0.85rem;opacity:0.85">'
@@ -571,7 +571,7 @@ def send_alert_email(alerts: list[dict]) -> None:
     html = (
         '<html><body style="font-family:-apple-system,BlinkMacSystemFont,sans-serif;'
         'max-width:720px;margin:0 auto;color:#1a1a2e">'
-        '<div style="background:#a82222;color:white;padding:20px 28px;border-radius:8px 8px 0 0">'
+        '<div style="background:#b45309;color:white;padding:20px 28px;border-radius:8px 8px 0 0">'
         '<h1 style="margin:0;font-size:1.4rem">&#9888; CC Pulse \u2014 Immediate Alert</h1>'
         f'<p style="margin:4px 0 0;opacity:0.75;font-size:0.85rem">{date_str}</p>'
         '</div>'
