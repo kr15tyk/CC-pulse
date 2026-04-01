@@ -249,12 +249,12 @@ def send_webhook_alert(alerts: list[dict]) -> None:
 # Email HTML helpers
 # ---------------------------------------------------------------------------
 
-def _row(label: str, content: str, color: str = "#155724", bg: str = "#d4edda") -> str:
+def _row(label: str, content: str, color: str = "#22D3EE", bg: str = "#12102E") -> str:
     return (
-        f'<tr style="border-bottom:1px solid #eee">'
+        f'<tr style="border-bottom:1px solid #312E81">'
         f'<td style="width:90px"><span style="background:{bg};color:{color};'
-        f'padding:2px 8px;border-radius:4px;font-size:11px;font-weight:700">'
-        f'{label}</span></td><td>{content}</td></tr>'
+        f'padding:2px 8px;border-radius:4px;font-size:11px;font-weight:700;font-family:Courier New,monospace">'
+        f'{label}</span></td><td style="color:#E0E7FF">{content}</td></tr>'
     )
 
 
@@ -263,10 +263,9 @@ def _section(title: str, rows: list[str]) -> str:
         return ""
     body = "".join(rows)
     return (
-        f'<h3 style="color:#003366;border-bottom:2px solid #0057a8;'
-        f'padding-bottom:4px;margin-top:24px">{title}</h3>'
+        f'<h3 style="color:#60A5FA;border-bottom:1px solid #3730A3;font-family:Courier New,monospace;letter-spacing:0.08em;padding-bottom:4px;margin-top:24px">{title}</h3>'
         f'<table width="100%" cellpadding="6" cellspacing="0" '
-        f'style="border-collapse:collapse;font-size:13px">{body}</table>'
+        f'style="border-collapse:collapse;font-size:13px;background:#12102E;border:1px solid #312E81">{body}</table>'
     )
 
 
@@ -292,17 +291,17 @@ def build_email_html(weekly_diff: dict) -> str:
             src    = a.get("source", "ALERT")
             tier   = _alert_tier(a)
             cisco_badge = (
-                '<span style="background:#1e40af;color:#fff;padding:1px 6px;'
+                '<span style="background:#3B82F6;color:#fff;padding:1px 6px;'
                 'border-radius:3px;font-size:10px;margin-right:4px">CISCO</span>'
                 if tier == 1 else ""
             )
             kind_badge = (
-                f'<span style="background:#374151;color:#fff;padding:1px 6px;'
+                f'<span style="background:#6366F1;color:#fff;padding:1px 6px;'
                 f'border-radius:3px;font-size:10px;margin-right:4px">{_kind_label(kind)}</span>'
                 if kind else ""
             )
             title_html  = (
-                f'<a href="{url}" style="color:#ffffff;font-weight:700">{title}</a>'
+                f'<a href="{url}" style="color:#60A5FA;font-weight:700">{title}</a>'
                 if url else f"<b>{title}</b>"
             )
             detail_html = (
@@ -310,7 +309,7 @@ def build_email_html(weekly_diff: dict) -> str:
                 if detail else ""
             )
             kw_html = f'<div style="font-size:11px;margin-top:2px;opacity:0.75">\U0001f511 {kws}</div>'
-            row_bg  = "#92400e" if tier == 1 else "#b45309"
+            row_bg  = "#1E1B4B" if tier == 1 else "#12102E"
             alert_rows.append(
                 _row(src[:14], cisco_badge + kind_badge + title_html + detail_html + kw_html,
                      "#ffffff", row_bg)
@@ -323,11 +322,11 @@ def build_email_html(weekly_diff: dict) -> str:
     for p in pp.get("added", []):
         rows.append(_row("NEW", f"<b>{p.get('pp_short_name','')}</b> - {p.get('pp_name','')}"))
     for p in pp.get("removed", []):
-        rows.append(_row("REMOVED", f"<b>{p.get('pp_short_name','')}</b>", "#721c24", "#f8d7da"))
+        rows.append(_row("REMOVED", f"<b>{p.get('pp_short_name','')}</b>", "#F87171", "#1E1B4B"))
     for p in pp.get("sunset_changes", []):
         rows.append(_row("SUNSET",
             f"<b>{p.get('pp_short_name','')}</b> - Sunset: {p.get('new_sunset','')[:10]}",
-            "#856404", "#fff3cd"))
+            "#FBBF24", "#1E1B4B"))
     parts.append(_section("NIAP - Protection Profiles", rows))
 
     # ── NIAP TDs ───────────────────────────────────────────────────────────
@@ -336,7 +335,7 @@ def build_email_html(weekly_diff: dict) -> str:
     for t in td.get("added", []):
         rows.append(_row("NEW TD", f"<b>{t.get('identifier','')}</b> - {t.get('title','')}"))
     for t in td.get("removed", []):
-        rows.append(_row("REMOVED", f"<b>{t.get('identifier','')}</b>", "#721c24", "#f8d7da"))
+        rows.append(_row("REMOVED", f"<b>{t.get('identifier','')}</b>", "#F87171", "#1E1B4B"))
     parts.append(_section("NIAP - Technical Decisions", rows))
 
     # ── Cisco NDcPP ────────────────────────────────────────────────────────
@@ -346,9 +345,9 @@ def build_email_html(weekly_diff: dict) -> str:
         rows.append(_row("CERTIFIED",
             f"<b>{p.get('product_name','')}</b> ({p.get('vendor_id_name','')})"))
     for p in cn.get("newly_archived", []):
-        rows.append(_row("ARCHIVED", f"<b>{p.get('product_name','')}</b>", "#856404", "#fff3cd"))
+        rows.append(_row("ARCHIVED", f"<b>{p.get('product_name','')}</b>", "#FBBF24", "#1E1B4B"))
     for p in cn.get("removed", []):
-        rows.append(_row("REMOVED", f"<b>{p.get('product_name','')}</b>", "#721c24", "#f8d7da"))
+        rows.append(_row("REMOVED", f"<b>{p.get('product_name','')}</b>", "#F87171", "#1E1B4B"))
     parts.append(_section("Cisco NDcPP PCL Changes", rows))
 
     # ── NIAP News ──────────────────────────────────────────────────────────
@@ -359,7 +358,7 @@ def build_email_html(weekly_diff: dict) -> str:
         link  = item.get("url", "")
         title = item.get("title", "")
         txt   = f'<a href="{link}">{title}</a>' if link else title
-        rows.append(_row(cat, txt, "#1a4a8a", "#e2eafc"))
+        rows.append(_row(cat, txt, "#60A5FA", "#12102E"))
     parts.append(_section("NIAP - News and Announcements", rows))
 
     # ── CCTL Labs ──────────────────────────────────────────────────────────
@@ -370,7 +369,7 @@ def build_email_html(weekly_diff: dict) -> str:
             link  = item.get("link", "")
             title = item.get("title", "")
             txt   = f'<a href="{link}">{title}</a>' if link else title
-            rows.append(_row(lab[:18], txt, "#1a4a8a", "#e2eafc"))
+            rows.append(_row(lab[:18], txt, "#60A5FA", "#12102E"))
     parts.append(_section("CCTL Lab Intel", rows))
 
     # ── CSfC ───────────────────────────────────────────────────────────────
@@ -384,17 +383,17 @@ def build_email_html(weekly_diff: dict) -> str:
             detail = f"Last-Modified: {old_lm or '—'} → {new_lm or '—'}"
             txt    = f'<a href="{url}">{cp_name}</a>' if url else cp_name
             rows.append(_row("CP UPDATE",
-                f"<b>{txt}</b><br><small>{detail}</small>", "#5a3e00", "#fff3cd"))
+                f"<b>{txt}</b><br><small>{detail}</small>", "#FBBF24", "#12102E"))
     for page_key, page_diff in csfc.get("pages", {}).items():
         for item in page_diff.get("added", [])[:3]:
             rows.append(_row(f"NSA:{page_key[:8]}", item.get("text", "")[:120],
-                "#1a4a8a", "#e8f0fe"))
+                "#60A5FA", "#12102E"))
     for feed_name, items in csfc.get("feeds", {}).items():
         for item in items[:3]:
             link  = item.get("link", "")
             title = item.get("title", "")
             txt   = f'<a href="{link}">{title}</a>' if link else title
-            rows.append(_row("ADVISORY", txt, "#1a4a8a", "#e2eafc"))
+            rows.append(_row("ADVISORY", txt, "#60A5FA", "#12102E"))
     parts.append(_section("CSfC — Capability Packages & APL", rows))
 
     # ── CC Crypto Catalog ──────────────────────────────────────────────────
@@ -405,11 +404,11 @@ def build_email_html(weekly_diff: dict) -> str:
             url = change.get("url", "")
             txt = f'<a href="{url}">{doc_name}</a>' if url else doc_name
             rows.append(_row("DOC UPDATE",
-                f"<b>{txt}</b> — new version detected", "#5a0000", "#f8d7da"))
+                f"<b>{txt}</b> — new version detected", "#F87171", "#1E1B4B"))
     for page_key, page_diff in cc_crypto.get("pages", {}).items():
         for item in page_diff.get("added", [])[:3]:
             rows.append(_row(f"CC:{page_key[:8]}", item.get("text", "")[:120],
-                "#1a4a8a", "#e8f0fe"))
+                "#60A5FA", "#12102E"))
     parts.append(_section("CC Crypto Catalog & Working Group", rows))
 
     # ── NIST CSRC ──────────────────────────────────────────────────────────
@@ -419,31 +418,31 @@ def build_email_html(weekly_diff: dict) -> str:
         if change.get("changed"):
             url = change.get("url", "")
             txt = f'<a href="{url}">{doc_name}</a>' if url else doc_name
-            rows.append(_row("NIST DOC", f"<b>{txt}</b> — revised", "#003366", "#d0e4ff"))
+            rows.append(_row("NIST DOC", f"<b>{txt}</b> — revised", "#22D3EE", "#12102E"))
     for feed_name, items in nist.get("feeds", {}).items():
         for item in items[:5]:
             link  = item.get("link", "")
             title = item.get("title", "")
             txt   = f'<a href="{link}">{title}</a>' if link else title
-            rows.append(_row("NIST", txt, "#003366", "#d0e4ff"))
+            rows.append(_row("NIST", txt, "#22D3EE", "#12102E"))
     for item in nist.get("pages", {}).get("cmvp_mip", {}).get("added", [])[:5]:
-        rows.append(_row("CMVP MIP", item.get("text", "")[:120], "#003366", "#d0e4ff"))
+        rows.append(_row("CMVP MIP", item.get("text", "")[:120], "#22D3EE", "#12102E"))
     parts.append(_section("NIST CSRC — Standards, CMVP & PQC", rows))
 
     body      = "".join(parts) or "<p>No changes detected this week.</p>"
     generated = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
     return (
         '<html><body style="font-family:-apple-system,BlinkMacSystemFont,sans-serif;'
-        'max-width:720px;margin:0 auto;color:#1a1a2e">'
-        '<div style="background:#003366;color:white;padding:20px 28px;border-radius:8px 8px 0 0">'
-        '<h1 style="margin:0;font-size:1.4rem">&#127760; CC Pulse - Weekly Brief</h1>'
+        'max-width:720px;margin:0 auto;color:#E0E7FF">'
+        '<div style="background:#0B0F1A;color:#E0E7FF;padding:20px 28px;border-radius:8px 8px 0 0">'
+        '<h1 style="margin:0;font-size:1.4rem;color:#60A5FA;font-family:Courier New,monospace;letter-spacing:0.08em">// CC Pulse &#8212; Weekly Brief</h1>'
         f'<p style="margin:4px 0 0;opacity:0.75;font-size:0.85rem">Week ending {date}</p>'
         '</div>'
-        '<div style="background:white;padding:20px 28px;border:1px solid #d0d7e2;'
+        '<div style="background:#E0E7FF;padding:20px 28px;border:1px solid #3730A3;'
         'border-top:none;border-radius:0 0 8px 8px">'
         f'{body}'
-        '<hr style="margin-top:28px;border:none;border-top:1px solid #eee">'
-        f'<p style="color:#888;font-size:0.75rem;margin-top:12px">'
+        '<hr style="margin-top:28px;border:none;border-top:1px solid #312E81">'
+        f'<p style="color:#6366F1;font-size:0.75rem;margin-top:12px">'
         f'CC Pulse automated Common Criteria monitoring<br>Generated {generated}</p>'
         '</div></body></html>'
     )
@@ -516,17 +515,17 @@ def send_alert_email(alerts: list[dict]) -> None:
         src    = a.get("source", "ALERT")
         tier   = _alert_tier(a)
         cisco_badge = (
-            '<span style="background:#1e40af;color:#fff;padding:1px 6px;'
+            '<span style="background:#3B82F6;color:#fff;padding:1px 6px;'
             'border-radius:3px;font-size:10px;margin-right:4px">CISCO</span>'
             if tier == 1 else ""
         )
         kind_badge = (
-            f'<span style="background:#374151;color:#fff;padding:1px 6px;'
+            f'<span style="background:#6366F1;color:#fff;padding:1px 6px;'
             f'border-radius:3px;font-size:10px;margin-right:4px">{_kind_label(kind)}</span>'
             if kind else ""
         )
         title_html  = (
-            f'<a href="{url}" style="color:#ffffff;font-weight:700">{title}</a>'
+            f'<a href="{url}" style="color:#60A5FA;font-weight:700">{title}</a>'
             if url else f"<b>{title}</b>"
         )
         detail_html = (
@@ -534,7 +533,7 @@ def send_alert_email(alerts: list[dict]) -> None:
             if detail else ""
         )
         kw_html = f'<div style="font-size:11px;margin-top:2px;opacity:0.75">\U0001f511 {kws}</div>'
-        row_bg  = "#92400e" if tier == 1 else "#b45309"
+        row_bg  = "#1E1B4B" if tier == 1 else "#12102E"
         rows.append(
             _row(src[:14], cisco_badge + kind_badge + title_html + detail_html + kw_html,
                  "#ffffff", row_bg)
@@ -550,13 +549,13 @@ def send_alert_email(alerts: list[dict]) -> None:
     dashboard_link = (
         '<p style="margin-top:16px">'
         '<a href="https://kr15tyk.github.io/CC-pulse/cc_dashboard.html" '
-        'style="background:#003366;color:white;padding:8px 16px;'
+        'style="background:#0B0F1A;color:#E0E7FF;padding:8px 16px;'
         'border-radius:4px;text-decoration:none;font-size:0.85rem">'
         '&#128202; View Full Dashboard</a></p>'
     )
 
     body = (
-        '<div style="background:#b45309;color:white;padding:14px 18px;'
+        '<div style="background:#12102E;color:#FB923C;padding:14px 18px;border:1px solid #C026D3;'
         'border-radius:6px;margin-bottom:8px">'
         f'<b style="font-size:1rem">&#9888; {len(alerts)} KEYWORD ALERT(S) DETECTED</b>'
         f'<p style="margin:4px 0 0;font-size:0.85rem;opacity:0.85">'
@@ -570,16 +569,16 @@ def send_alert_email(alerts: list[dict]) -> None:
     generated = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
     html = (
         '<html><body style="font-family:-apple-system,BlinkMacSystemFont,sans-serif;'
-        'max-width:720px;margin:0 auto;color:#1a1a2e">'
-        '<div style="background:#b45309;color:white;padding:20px 28px;border-radius:8px 8px 0 0">'
-        '<h1 style="margin:0;font-size:1.4rem">&#9888; CC Pulse \u2014 Immediate Alert</h1>'
+        'max-width:720px;margin:0 auto;color:#E0E7FF">'
+        '<div style="background:#0B0F1A;color:#FB923C;padding:20px 28px;border-bottom:2px solid #C026D3">'
+        '<h1 style="margin:0;font-size:1.4rem;color:#FB923C;font-family:Courier New,monospace;letter-spacing:0.08em">// CC Pulse &#8212; Immediate Alert</h1>'
         f'<p style="margin:4px 0 0;opacity:0.75;font-size:0.85rem">{date_str}</p>'
         '</div>'
-        '<div style="background:white;padding:20px 28px;border:1px solid #d0d7e2;'
+        '<div style="background:#E0E7FF;padding:20px 28px;border:1px solid #3730A3;'
         'border-top:none;border-radius:0 0 8px 8px">'
         f'{body}'
-        '<hr style="margin-top:28px;border:none;border-top:1px solid #eee">'
-        f'<p style="color:#888;font-size:0.75rem;margin-top:12px">'
+        '<hr style="margin-top:28px;border:none;border-top:1px solid #312E81">'
+        f'<p style="color:#6366F1;font-size:0.75rem;margin-top:12px">'
         f'CC Pulse automated monitoring \u2014 immediate alert<br>Generated {generated}</p>'
         '</div></body></html>'
     )
@@ -761,27 +760,27 @@ def send_cisco_cert_email(new_certs: list[dict]) -> None:
         )
 
         product_title = (
-            f'<h3 style="margin:0 0 8px;font-size:1rem;color:#1e3a5f">'
-            f'<a href="{niap_url}" style="color:#1e40af;text-decoration:none">'
+            f'<h3 style="margin:0 0 8px;font-size:1rem;color:#0B0F1A">'
+            f'<a href="{niap_url}" style="color:#3B82F6;text-decoration:none">'
             f'\U0001f3c5 {name}</a></h3>'
         )
         detail_table = (
             '<table width="100%" cellpadding="6" cellspacing="0" '
             'style="border-collapse:collapse;font-size:13px;margin-bottom:6px">'
-            f'<tr style="background:#f0f4ff"><td style="width:160px;font-weight:700;color:#374151">Vendor</td><td>{vendor}</td></tr>'
-            f'<tr><td style="font-weight:700;color:#374151">Certified</td><td>{cert_date}</td></tr>'
-            f'<tr style="background:#f0f4ff"><td style="font-weight:700;color:#374151">Valid until</td><td>{sunset_date}</td></tr>'
-            f'<tr><td style="font-weight:700;color:#374151">Evaluated against</td><td>{pp_names}</td></tr>'
-            f'<tr style="background:#f0f4ff"><td style="font-weight:700;color:#374151">Evaluating lab</td><td>{lab}</td></tr>'
-            f'<tr><td style="font-weight:700;color:#374151">Submitting country</td><td>{country}</td></tr>'
+            f'<tr style="background:#1E1B4B"><td style="width:160px;font-weight:700;color:#6366F1">Vendor</td><td>{vendor}</td></tr>'
+            f'<tr><td style="font-weight:700;color:#6366F1">Certified</td><td>{cert_date}</td></tr>'
+            f'<tr style="background:#1E1B4B"><td style="font-weight:700;color:#6366F1">Valid until</td><td>{sunset_date}</td></tr>'
+            f'<tr><td style="font-weight:700;color:#6366F1">Evaluated against</td><td>{pp_names}</td></tr>'
+            f'<tr style="background:#1E1B4B"><td style="font-weight:700;color:#6366F1">Evaluating lab</td><td>{lab}</td></tr>'
+            f'<tr><td style="font-weight:700;color:#6366F1">Submitting country</td><td>{country}</td></tr>'
             '</table>'
         )
         cert_blocks.append(
-            '<div style="background:#ffffff;border:1px solid #c7d7f0;border-left:4px solid #1e40af;'
+            '<div style="background:#ffffff;border:1px solid #312E81;border-left:4px solid #3B82F6;'
             'border-radius:4px;padding:14px 16px;margin-bottom:16px">'
             + product_title + detail_table +
             f'<p style="margin:6px 0 0;font-size:12px">'
-            f'<a href="{niap_url}" style="color:#1e40af">View on NIAP PCL \u2192</a></p>'
+            f'<a href="{niap_url}" style="color:#60A5FA">View on NIAP PCL \u2192</a></p>'
             '</div>'
         )
 
@@ -789,11 +788,11 @@ def send_cisco_cert_email(new_certs: list[dict]) -> None:
     pcl_link    = (
         '<p style="margin-top:20px">'
         '<a href="https://www.niap-ccevs.org/product/index.cfm" '
-        'style="background:#1e40af;color:white;padding:8px 16px;'
+        'style="background:#3B82F6;color:#E0E7FF;padding:8px 16px;'
         'border-radius:4px;text-decoration:none;font-size:0.85rem;margin-right:8px">'
         '\U0001f4cb View Cisco PCL</a>'
         '<a href="https://kr15tyk.github.io/CC-pulse/cc_dashboard.html" '
-        'style="background:#003366;color:white;padding:8px 16px;'
+        'style="background:#0B0F1A;color:#E0E7FF;padding:8px 16px;'
         'border-radius:4px;text-decoration:none;font-size:0.85rem">'
         '\U0001f4ca Full Dashboard</a>'
         '</p>'
@@ -802,10 +801,10 @@ def send_cisco_cert_email(new_certs: list[dict]) -> None:
     generated = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
     html = (
         '<html><body style="font-family:-apple-system,BlinkMacSystemFont,sans-serif;'
-        'max-width:720px;margin:0 auto;color:#1a1a2e">'
+        'max-width:720px;margin:0 auto;color:#E0E7FF">'
 
         # Header banner
-        '<div style="background:linear-gradient(135deg,#1e3a5f,#1e40af);color:white;'
+        '<div style="background:linear-gradient(135deg,#0B0F1A,#1E1B4B);color:#E0E7FF;'
         'padding:24px 28px;border-radius:8px 8px 0 0">'
         f'<div style="font-size:2rem;margin-bottom:6px">\U0001f3c6</div>'
         f'<h1 style="margin:0;font-size:1.4rem">Cisco NDcPP PCL \u2014 {count} New {cert_word}</h1>'
@@ -813,15 +812,15 @@ def send_cisco_cert_email(new_certs: list[dict]) -> None:
         '</div>'
 
         # Body
-        '<div style="background:#f8faff;padding:20px 28px;border:1px solid #c7d7f0;'
+        '<div style="background:#12102E;padding:20px 28px;border:1px solid #312E81;'
         'border-top:none;border-radius:0 0 8px 8px">'
-        f'<p style="color:#374151;font-size:0.9rem;margin:0 0 16px">'
+        f'<p style="color:#6366F1;font-size:0.9rem;margin:0 0 16px">'
         f'The following Cisco product{"s have" if count > 1 else " has"} been added to the '
         f'NIAP Validated Products List under the NDcPP program.</p>'
         f'{certs_html}'
         f'{pcl_link}'
-        '<hr style="margin-top:28px;border:none;border-top:1px solid #dde6f0">'
-        f'<p style="color:#888;font-size:0.75rem;margin-top:12px">'
+        '<hr style="margin-top:28px;border:none;border-top:1px solid #312E81">'
+        f'<p style="color:#6366F1;font-size:0.75rem;margin-top:12px">'
         f'CC Pulse automated monitoring \u2014 Cisco NDcPP alert<br>Generated {generated}</p>'
         '</div>'
         '</body></html>'
