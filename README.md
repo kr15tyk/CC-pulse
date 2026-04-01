@@ -48,6 +48,7 @@ collect → diff → dashboard → commit → alert
 | **Webex Space** | Markdown message | Tier-sorted alerts: 🔵 Cisco-relevant first, then standards/NIST, then general. Each shows **[KIND]** label, source, title, ↳ detail, 🔗 URL, 🔑 keywords. Header includes tier breakdown summary (e.g. _🔵 2 Cisco-relevant · 📐 1 standards/NIST_). |
 | **Teams / Webhook** | JSON `{"text": ...}` | Same content, compatible with MS Teams Incoming Webhook and Slack-style webhooks |
 | **Alert email** | HTML | Tier-sorted rows with **CISCO** and kind badges. Tier 1 rows use a darker red background. Subject line calls out Cisco-relevant count explicitly. "View Full Dashboard" button. |
+| **Cisco cert email** | HTML | Dedicated cert announcement email with blue gradient header, one detail block per product (same fields as Webex card), sent alongside the Webex celebration. |
 
 ### Weekly digest (every Monday)
 
@@ -63,6 +64,8 @@ When a new Cisco product appears on the NIAP PCL, a dedicated celebration messag
 - Direct links to the NIAP PCL and the full dashboard
 
 This fires separately from keyword alerts and is not suppressed on quiet days — if a Cisco cert lands, the space hears about it.
+
+A matching celebration email is sent to all configured recipients simultaneously, with the same cert details in HTML table format and a blue gradient header banner.
 
 ---
 
