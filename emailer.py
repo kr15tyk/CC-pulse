@@ -1,4 +1,4 @@
-"""
+—"""
 emailer.py — Builds and sends CC Pulse email digests.
 
 Features:
@@ -584,3 +584,139 @@ def send_alert_email(alerts: list[dict]) -> None:
         '</div></body></html>'
     )
     _send_email(subject, html)
+
+
+# ---------------------------------------------------------------------------
+# Cisco NDcPP PCL certification celebration
+# ---------------------------------------------------------------------------
+
+# Curated list of celebration meme image URLs (static imgflip, no API key needed).
+# Webex renders inline images from public HTTPS URLs in markdown messages.
+_CELEBRATION_MEMES = [
+    # Success Kid
+    "https://i.imgflip.com/1bhk.jpg",
+    # Leonardo DiCaprio Cheers
+    "https://i.imgflip.com/39t1o.jpg",
+    # Oprah You Get A
+    "https://i.imgflip.com/gtj5t.jpg",
+    # Blinking White Guy (approval)
+    "https://i.imgflip.com/2miy4p.jpg",
+    # Excited screaming Kermit
+    "https://i.imgflip.com/2gnnjh.jpg",
+    # The Rock raising eyebrow
+    "https://i.imgflip.com/grr.jpg",
+    # We Did It — Dora
+    "https://i.imgflip.com/1c1uej.jpg",
+    # Ancient Aliens (always a classic)
+    "https://i.imgflip.com/26am.jpg",
+]
+
+
+def _cert_meme_url() -> str:
+    """Return a pseudo-random celebration meme URL using the current minute as seed."""
+    import time
+    return _CELEBRATION_MEMES[int(time.time() / 60) % len(_CELEBRATION_MEMES)]
+
+
+def _format_cisco_cert_block(product: dict) -> str:
+    """Format a single Cisco NDcPP PCL certification into a Webex Markdown block.
+
+    Included fields:
+      - Product name (bold, linked to NIAP product page)
+      - Vendor
+      - Certification date
+      - Sunset date
+      - Evaluated against (PP short names)
+      - Evaluating lab
+      - Submitting country
+    """
+    pid          = product.get("product_id", "")
+    name         = product.get("product_name", "Unknown product")
+    vendor       = product.get("vendor_id_name", "Cisco")
+    cert_date    = (product.get("certification_date") or "")[:10]
+    sunset_date  = (product.get("sunset_date") or "")[:10]
+    lab          = product.get("assigned_lab_name", "N/A")
+    country      = product.get("submitting_country_id_name", "N/A")
+    pps          = product.get("protection_profiles", [])
+    pp_names     = ", ".join(
+        p.get("pp_short_name", "") for p in pps if p.get("pp_short_name")
+    ) or "N/A"
+    niap_url     = f"https://www.niap-ccevs.org/product/index.cfm?pid={pid}" if pid else "https://www.niap-ccevs.org/"
+
+    return (
+        f"### 🎉 [{name}]({niap_url})\n"
+        f"| Field | Value |\n"
+        f"|-------|-------|\n"
+        f"| **Vendor** | {vendor} |\n"
+        f"| **Certified** | {cert_date} |\n"
+        f"| **Valid until** | {sunset_date} |\n"
+        f"| **Evaluated against** | {pp_names} |\n"
+        f"| **Evaluating lab** | {lab} |\n"
+        f"| **Submitting country** | {country} |\n"
+    )
+
+
+def send_cisco_cert_celebration(new_certs: list[dict]) -> None:
+    """Post a celebration message to Webex for each new Cisco NDcPP PCL certification.
+
+    Fires once per daily run when differ.diff_niap_pcl_cisco() finds new entries
+    in cisco_ndcpp.added. Each new cert gets:
+      - A header banner with confetti emoji
+      - A markdown table with the full certificate details
+      - A random celebration meme image
+      - A direct link to the NIAP product page
+
+    Args:
+        new_certs: List of product dicts from diff["niap"]["cisco_ndcpp"]["added"].
+    """
+    token   = config.WEBEX_BOT_TOKEN
+    room_id = config.WEBEX_ROOM_ID
+    if not token or not room_id:
+        log.debug("[Webex] Bot token or Room ID not configured — skipping celebration.")
+        return
+    if not new_certs:
+        return
+
+    count     = len(new_certs)
+    meme_url  = _cert_meme_url()
+    cert_word = "certification" if count == 1 else "certifications"
+
+    header = (
+        f"# 🏆 Cisco NDcPP PCL — {count} New {cert_word.title()}!\n\n"
+        f"🎊 🎊 🎊\n\n"
+        f"_CC Pulse detected {count} new Cisco product {cert_word} on the NIAP PCL._\n\n"
+    )
+
+    cert_blocks = "\n\n---\n\n".join(
+        _format_cisco_cert_block(p) for p in new_certs
+    )
+
+    footer = (
+        f"\n\n---\n\n"
+        f"![]({meme_url})\n\n"
+        f"[View Cisco products on NIAP PCL](https://www.niap-ccevs.org/product/index.cfm)"
+        f" · [Full dashboard](https://kr15tyk.github.io/CC-pulse/cc_dashboard.html)"
+    )
+
+    payload = json.dumps({
+        "roomId":   room_id,
+        "markdown": header + cert_blocks + footer,
+    }).encode("utf-8")
+
+    req = urllib.request.Request(
+        "https://webexapis.com/v1/messages",
+        data=payload,
+        headers={
+            "Content-Type":  "application/json",
+            "Authorization": f"Bearer {token}",
+        },
+        method="POST",
+    )
+    try:
+        with urllib.request.urlopen(req, timeout=10) as resp:
+            log.info(
+                "[Webex] Cisco cert celebration sent for %d product(s) (HTTP %d).",
+                count, resp.status,
+            )
+    except urllib.error.URLError as exc:
+        log.warning("[Webex] Failed to send celebration message: %s", exc)
