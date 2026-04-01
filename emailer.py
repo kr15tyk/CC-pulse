@@ -720,3 +720,111 @@ def send_cisco_cert_celebration(new_certs: list[dict]) -> None:
             )
     except urllib.error.URLError as exc:
         log.warning("[Webex] Failed to send celebration message: %s", exc)
+
+
+def send_cisco_cert_email(new_certs: list[dict]) -> None:
+    """Send a dedicated celebration email for new Cisco NDcPP PCL certifications.
+
+    Fires once per daily run alongside send_cisco_cert_celebration() (Webex).
+    Each certification gets a full-detail HTML row matching the Webex card:
+    product name (linked), vendor, cert date, valid-until, evaluated PPs,
+    evaluating lab, submitting country.
+
+    Args:
+        new_certs: List of product dicts from diff["niap"]["cisco_ndcpp"]["added"].
+    """
+    if not new_certs:
+        return
+
+    date_str  = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+    count     = len(new_certs)
+    cert_word = "Certification" if count == 1 else "Certifications"
+    subject   = f"\U0001f3c6 CC Pulse \u2014 {count} New Cisco NDcPP {cert_word} on {date_str}"
+
+    # Build one detail block per certified product
+    cert_blocks = []
+    for p in new_certs:
+        pid         = p.get("product_id", "")
+        name        = p.get("product_name", "Unknown product")
+        vendor      = p.get("vendor_id_name", "Cisco")
+        cert_date   = (p.get("certification_date") or "")[:10]
+        sunset_date = (p.get("sunset_date") or "")[:10]
+        lab         = p.get("assigned_lab_name", "N/A")
+        country     = p.get("submitting_country_id_name", "N/A")
+        pps         = p.get("protection_profiles", [])
+        pp_names    = ", ".join(
+            pp.get("pp_short_name", "") for pp in pps if pp.get("pp_short_name")
+        ) or "N/A"
+        niap_url    = (
+            f"https://www.niap-ccevs.org/product/index.cfm?pid={pid}"
+            if pid else "https://www.niap-ccevs.org/"
+        )
+
+        product_title = (
+            f'<h3 style="margin:0 0 8px;font-size:1rem;color:#1e3a5f">'
+            f'<a href="{niap_url}" style="color:#1e40af;text-decoration:none">'
+            f'\U0001f3c5 {name}</a></h3>'
+        )
+        detail_table = (
+            '<table width="100%" cellpadding="6" cellspacing="0" '
+            'style="border-collapse:collapse;font-size:13px;margin-bottom:6px">'
+            f'<tr style="background:#f0f4ff"><td style="width:160px;font-weight:700;color:#374151">Vendor</td><td>{vendor}</td></tr>'
+            f'<tr><td style="font-weight:700;color:#374151">Certified</td><td>{cert_date}</td></tr>'
+            f'<tr style="background:#f0f4ff"><td style="font-weight:700;color:#374151">Valid until</td><td>{sunset_date}</td></tr>'
+            f'<tr><td style="font-weight:700;color:#374151">Evaluated against</td><td>{pp_names}</td></tr>'
+            f'<tr style="background:#f0f4ff"><td style="font-weight:700;color:#374151">Evaluating lab</td><td>{lab}</td></tr>'
+            f'<tr><td style="font-weight:700;color:#374151">Submitting country</td><td>{country}</td></tr>'
+            '</table>'
+        )
+        cert_blocks.append(
+            '<div style="background:#ffffff;border:1px solid #c7d7f0;border-left:4px solid #1e40af;'
+            'border-radius:4px;padding:14px 16px;margin-bottom:16px">'
+            + product_title + detail_table +
+            f'<p style="margin:6px 0 0;font-size:12px">'
+            f'<a href="{niap_url}" style="color:#1e40af">View on NIAP PCL \u2192</a></p>'
+            '</div>'
+        )
+
+    certs_html  = "\n".join(cert_blocks)
+    pcl_link    = (
+        '<p style="margin-top:20px">'
+        '<a href="https://www.niap-ccevs.org/product/index.cfm" '
+        'style="background:#1e40af;color:white;padding:8px 16px;'
+        'border-radius:4px;text-decoration:none;font-size:0.85rem;margin-right:8px">'
+        '\U0001f4cb View Cisco PCL</a>'
+        '<a href="https://kr15tyk.github.io/CC-pulse/cc_dashboard.html" '
+        'style="background:#003366;color:white;padding:8px 16px;'
+        'border-radius:4px;text-decoration:none;font-size:0.85rem">'
+        '\U0001f4ca Full Dashboard</a>'
+        '</p>'
+    )
+
+    generated = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
+    html = (
+        '<html><body style="font-family:-apple-system,BlinkMacSystemFont,sans-serif;'
+        'max-width:720px;margin:0 auto;color:#1a1a2e">'
+
+        # Header banner
+        '<div style="background:linear-gradient(135deg,#1e3a5f,#1e40af);color:white;'
+        'padding:24px 28px;border-radius:8px 8px 0 0">'
+        f'<div style="font-size:2rem;margin-bottom:6px">\U0001f3c6</div>'
+        f'<h1 style="margin:0;font-size:1.4rem">Cisco NDcPP PCL \u2014 {count} New {cert_word}</h1>'
+        f'<p style="margin:6px 0 0;opacity:0.8;font-size:0.85rem">{date_str} \u2014 NIAP Certified Products List</p>'
+        '</div>'
+
+        # Body
+        '<div style="background:#f8faff;padding:20px 28px;border:1px solid #c7d7f0;'
+        'border-top:none;border-radius:0 0 8px 8px">'
+        f'<p style="color:#374151;font-size:0.9rem;margin:0 0 16px">'
+        f'The following Cisco product{"s have" if count > 1 else " has"} been added to the '
+        f'NIAP Validated Products List under the NDcPP program.</p>'
+        f'{certs_html}'
+        f'{pcl_link}'
+        '<hr style="margin-top:28px;border:none;border-top:1px solid #dde6f0">'
+        f'<p style="color:#888;font-size:0.75rem;margin-top:12px">'
+        f'CC Pulse automated monitoring \u2014 Cisco NDcPP alert<br>Generated {generated}</p>'
+        '</div>'
+        '</body></html>'
+    )
+
+    _send_email(subject, html)
