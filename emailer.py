@@ -4,12 +4,15 @@ emailer.py — Builds and sends CC Pulse email digests.
 Features:
   - Keyword alert section at top of email
   - Webex Space notification for immediate keyword alerts
+    - Cisco-relevant alerts tagged and sorted to top (Tier 1)
+    - Kind label promoted to front of each alert line
+    - CSfC Capability Package changes show direct PDF link prominently
+    - Tier-sorted output: Cisco/NDcPP > NIST/standards > general
   - Weekly digest covering NIAP, CC Portal, CCTL labs, CSfC, CC Crypto, NIST
   - Immediate alert email (send_alert_email) for same-day keyword matches
   - Structured logging
   - Generic webhook / MS Teams delivery via send_webhook_alert()
 """
-
 import json
 import logging
 import os
@@ -19,51 +22,144 @@ import urllib.error
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from datetime import datetime, timezone
-
 import config
 
 log = logging.getLogger(__name__)
 
+# ---------------------------------------------------------------------------
+# Cisco-relevance helpers
+# ---------------------------------------------------------------------------
 
-# ── Webex notification ────────────────────────────────────────────────────────
-def _format_alert_lines(alerts: list[dict], max_items: int = 10) -> list[str]:
-    """Format alert objects into human-readable markdown lines for chat notifications.
+# Keywords that indicate an alert is directly relevant to Cisco engineers.
+# Covers NDcPP/VPN/WLAN PPs, CSfC programmes Cisco participates in,
+# and the crypto/algorithm standards that drive CC cert requirements.
+_CISCO_RELEVANT_KEYWORDS = {
+    kw.lower() for kw in [
+        # NDcPP / PP-Modules
+        "NDcPP", "CPP_ND", "PP-Module_VPN", "PP-Module_WLAN",
+        "TLS 1.3", "SSH",
+        # CSfC programmes
+        "CSfC", "Commercial Solutions for Classified", "CSfC APL",
+        "CSfC capability package",
+        "CP-Mobile", "CP-MA", "CP-WAN", "CP-Campus WLAN", "CP-DAR", "CP-MDM",
+        "NSA CSfC",
+        # Crypto SFRs relevant to Cisco products
+        "FCS_CKM", "FCS_COP", "FCS_RBG",
+        # FIPS standards cited in NDcPP / CSfC
+        "FIPS 140-3", "FIPS 186-4", "FIPS 186-5",
+        "SP 800-131A",
+    ]
+}
 
-    Each line includes: source label, item title, what changed (detail),
-    matched keywords, and a clickable URL where available.
-    This is used by both send_webex_alert() and send_webhook_alert().
+# Tier 2: standards that drive future cert requirements
+_TIER2_KEYWORDS = {
+    kw.lower() for kw in [
+        "FIPS 203", "FIPS 204", "FIPS 205",
+        "SP 800-57", "NIST IR 8547",
+        "ML-KEM", "ML-DSA", "SLH-DSA", "post-quantum", "PQC migration",
+        "CMVP", "CAVP", "algorithm transition", "CCDB-018",
+    ]
+}
+
+
+def _is_cisco_relevant(alert: dict) -> bool:
+    """Return True if any matched keyword overlaps with _CISCO_RELEVANT_KEYWORDS."""
+    hits = {kw.lower() for kw in alert.get("matched_keywords", [])}
+    return bool(hits & _CISCO_RELEVANT_KEYWORDS)
+
+
+def _alert_tier(alert: dict) -> int:
+    """Return sort tier: 1 = Cisco/NDcPP direct, 2 = standards/NIST, 3 = general."""
+    if _is_cisco_relevant(alert):
+        return 1
+    hits = {kw.lower() for kw in alert.get("matched_keywords", [])}
+    if hits & _TIER2_KEYWORDS:
+        return 2
+    return 3
+
+
+def _kind_label(kind: str) -> str:
+    """Map kind value to a short uppercase label for the front of the alert line."""
+    return {
+        "new_cert":       "NEW CERT",
+        "new_evaluation": "IN EVAL",
+        "archived":       "ARCHIVED",
+        "removed":        "REMOVED",
+        "sunset":         "SUNSET",
+        "updated":        "UPDATED",
+        "new":            "NEW",
+        "advisory":       "ADVISORY",
+        "publication":    "PUBLISHED",
+        "news":           "NEWS",
+        "post":           "POST",
+    }.get(kind, kind.upper() if kind else "CHANGE")
+
+
+# ---------------------------------------------------------------------------
+# Webex / webhook message formatter
+# ---------------------------------------------------------------------------
+
+def _format_alert_lines(alerts: list[dict], max_items: int = 15) -> list[str]:
+    """Format alert objects into Markdown lines for Webex / webhook.
+
+    Improvements for Cisco engineers:
+    - Alerts sorted by tier: Cisco-relevant first, then NIST/standards, then general.
+    - Cisco-relevant alerts prefixed with a blue tag.
+    - Kind label promoted to the front of each line (bold, uppercase).
+    - CSfC Capability Package changes surface the direct PDF URL prominently.
     """
-    lines = []
-    for a in alerts[:max_items]:
-        kws   = ", ".join(a.get("matched_keywords", []))
-        title = a.get("title", "")
-        detail= a.get("detail", "")
-        url   = a.get("url", "")
-        kind  = a.get("kind", "")
-        src   = a.get("source", "")
+    sorted_alerts = sorted(alerts, key=lambda a: (_alert_tier(a), alerts.index(a)))
 
-        # Build the main description line
-        desc = f"**[{src}]** {title}"
+    lines = []
+    for a in sorted_alerts[:max_items]:
+        kws    = ", ".join(a.get("matched_keywords", []))
+        title  = a.get("title", "")
+        detail = a.get("detail", "")
+        url    = a.get("url", "")
+        kind   = a.get("kind", "")
+        src    = a.get("source", "")
+        tier   = _alert_tier(a)
+
+        cisco_tag = "🔵 **CISCO RELEVANT** | " if tier == 1 else ""
+        kind_str  = f"**[{_kind_label(kind)}]** " if kind else ""
+
+        desc = f"{cisco_tag}{kind_str}**[{src}]** {title}"
+
         if detail:
-            desc += f"\n  ↳ {detail}"
-        if kind:
-            desc += f" · _{kind}_"
+            desc += f"\n ↳ {detail}"
+
         if url:
-            desc += f"\n  🔗 {url}"
-        desc += f"\n  🔑 Keywords: _{kws}_"
+            if src == "CSfC CP":
+                desc += f"\n 📄 **PDF:** {url}"
+            else:
+                desc += f"\n 🔗 {url}"
+
+        desc += f"\n 🔑 _{kws}_"
         lines.append(desc)
+
     if len(alerts) > max_items:
-        lines.append(f"_...and {len(alerts) - max_items} more — see the [dashboard](https://kr15tyk.github.io/CC-pulse/cc_dashboard.html)._")
+        lines.append(
+            f"_…and {len(alerts) - max_items} more — "
+            f"[view full dashboard](https://kr15tyk.github.io/CC-pulse/cc_dashboard.html)._"
+        )
     return lines
 
+
+# ---------------------------------------------------------------------------
+# Webex notification
+# ---------------------------------------------------------------------------
 
 def send_webex_alert(alerts: list[dict]) -> None:
     """POST an actionable Webex message for high-priority keyword alerts.
 
-    Each alert line includes: source, title, what changed (detail),
-    the kind of change, a direct URL to the source item, and the matched keywords.
+    Message structure:
+      - Header with total count and tier breakdown summary
+      - Tier 1 (Cisco-relevant) alerts listed first
+      - Tier 2 (standards/NIST) next
+      - Tier 3 (general) last
+      - Dashboard link footer
     """
-    token = config.WEBEX_BOT_TOKEN
+    token   = config.WEBEX_BOT_TOKEN
     room_id = config.WEBEX_ROOM_ID
     if not token or not room_id:
         log.debug("[Webex] Bot token or Room ID not configured — skipping.")
@@ -71,13 +167,27 @@ def send_webex_alert(alerts: list[dict]) -> None:
     if not alerts:
         return
 
-    alert_lines = _format_alert_lines(alerts)
-    header = f"## ⚠️ CC Pulse — {len(alerts)} Keyword Alert{'s' if len(alerts) != 1 else ''}\n"
-    body = "\n\n---\n".join(alert_lines)
+    tier_counts = {1: 0, 2: 0, 3: 0}
+    for a in alerts:
+        tier_counts[_alert_tier(a)] += 1
+
+    tier_parts = []
+    if tier_counts[1]:
+        tier_parts.append(f"🔵 {tier_counts[1]} Cisco-relevant")
+    if tier_counts[2]:
+        tier_parts.append(f"📐 {tier_counts[2]} standards/NIST")
+    if tier_counts[3]:
+        tier_parts.append(f"📋 {tier_counts[3]} general")
+
+    header = (
+        f"## ⚠️ CC Pulse — {len(alerts)} Keyword Alert{'s' if len(alerts) != 1 else ''}\n"
+        f"_{' · '.join(tier_parts)}_\n"
+    )
+    body           = "\n\n---\n".join(_format_alert_lines(alerts))
     dashboard_link = "\n\n[View full dashboard](https://kr15tyk.github.io/CC-pulse/cc_dashboard.html)"
 
     payload = json.dumps({
-        "roomId": room_id,
+        "roomId":   room_id,
         "markdown": header + body + dashboard_link,
     }).encode("utf-8")
 
@@ -85,7 +195,7 @@ def send_webex_alert(alerts: list[dict]) -> None:
         "https://webexapis.com/v1/messages",
         data=payload,
         headers={
-            "Content-Type": "application/json",
+            "Content-Type":  "application/json",
             "Authorization": f"Bearer {token}",
         },
         method="POST",
@@ -96,15 +206,16 @@ def send_webex_alert(alerts: list[dict]) -> None:
     except urllib.error.URLError as exc:
         log.warning("[Webex] Failed to send message: %s", exc)
 
-# ── Generic Webhook / MS Teams notification ─────────────────────────────────
+
+# ---------------------------------------------------------------------------
+# Generic Webhook / MS Teams notification
+# ---------------------------------------------------------------------------
+
 def send_webhook_alert(alerts: list[dict]) -> None:
-    """POST a compact notification to a generic webhook (e.g. MS Teams incoming webhook).
+    """POST a compact notification to a generic webhook (e.g. MS Teams).
 
-    Supports two payload formats automatically:
-    - MS Teams Incoming Webhook: expects {"text": "..."} (or AdaptiveCard)
-    - Generic JSON webhook:      expects {"text": "..."} (Slack-compatible)
-
-    The webhook URL is read from config.WEBHOOK_URL.  Leave it blank to skip.
+    Uses the same tier-sorted, Cisco-tagged format as the Webex message.
+    Payload: {"text": "..."} compatible with MS Teams and Slack-style webhooks.
     """
     url = config.WEBHOOK_URL
     if not url:
@@ -113,11 +224,13 @@ def send_webhook_alert(alerts: list[dict]) -> None:
     if not alerts:
         return
 
-    alert_lines = _format_alert_lines(alerts)
-    header = f"⚠️ CC Pulse — {len(alerts)} Keyword Alert{'s' if len(alerts) != 1 else ''}\n"
-    body_text = header + "\n\n---\n".join(alert_lines) + "\n\nDashboard: https://kr15tyk.github.io/CC-pulse/cc_dashboard.html"
+    header    = f"⚠️ CC Pulse — {len(alerts)} Keyword Alert{'s' if len(alerts) != 1 else ''}\n"
+    body_text = (
+        header
+        + "\n\n---\n".join(_format_alert_lines(alerts))
+        + "\n\nDashboard: https://kr15tyk.github.io/CC-pulse/cc_dashboard.html"
+    )
 
-    # Try MS Teams-style payload first; fall back to simple {"text": ...}
     payload = json.dumps({"text": body_text}).encode("utf-8")
     req = urllib.request.Request(
         url,
@@ -132,8 +245,10 @@ def send_webhook_alert(alerts: list[dict]) -> None:
         log.warning("[Webhook] Failed to send message: %s", exc)
 
 
+# ---------------------------------------------------------------------------
+# Email HTML helpers
+# ---------------------------------------------------------------------------
 
-# ── Email HTML helpers ────────────────────────────────────────────────────────
 def _row(label: str, content: str, color: str = "#155724", bg: str = "#d4edda") -> str:
     return (
         f'<tr style="border-bottom:1px solid #eee">'
@@ -155,44 +270,68 @@ def _section(title: str, rows: list[str]) -> str:
     )
 
 
-# ── Email builder ─────────────────────────────────────────────────────────────
+# ---------------------------------------------------------------------------
+# Email builder
+# ---------------------------------------------------------------------------
+
 def build_email_html(weekly_diff: dict) -> str:
-    now = datetime.now(timezone.utc)
+    now  = datetime.now(timezone.utc)
     date = now.strftime("%B %d, %Y")
     parts: list[str] = []
 
-    # ── Keyword alerts (top, red) ─────────────────────────────────────────────
+    # ── Keyword alerts (top, sorted by tier) ──────────────────────────────
     alerts = weekly_diff.get("alerts", [])
     if alerts:
         alert_rows = []
-        for a in alerts:
+        for a in sorted(alerts, key=lambda x: (_alert_tier(x), alerts.index(x))):
             kws    = ", ".join(a.get("matched_keywords", []))
             title  = a.get("title", "")
             detail = a.get("detail", "")
             url    = a.get("url", "")
             kind   = a.get("kind", "")
             src    = a.get("source", "ALERT")
-
-            title_html  = f'<a href="{url}" style="color:#ffffff;font-weight:700">{title}</a>' if url else f"<b>{title}</b>"
-            kind_html   = f' <span style="opacity:0.7;font-size:11px">({kind})</span>' if kind else ""
-            detail_html = f'<div style="font-size:11px;margin-top:3px;opacity:0.85">{detail}</div>' if detail else ""
-            kw_html     = f'<div style="font-size:11px;margin-top:2px;opacity:0.75">Keywords: {kws}</div>'
-            alert_rows.append(
-                _row(src[:14], title_html + kind_html + detail_html + kw_html, "#ffffff", "#a82222")
+            tier   = _alert_tier(a)
+            cisco_badge = (
+                '<span style="background:#1e40af;color:#fff;padding:1px 6px;'
+                'border-radius:3px;font-size:10px;margin-right:4px">CISCO</span>'
+                if tier == 1 else ""
             )
-    # ── NIAP PPs ──────────────────────────────────────────────────────────────
-    pp = weekly_diff.get("niap", {}).get("pps", {})
+            kind_badge = (
+                f'<span style="background:#374151;color:#fff;padding:1px 6px;'
+                f'border-radius:3px;font-size:10px;margin-right:4px">{_kind_label(kind)}</span>'
+                if kind else ""
+            )
+            title_html  = (
+                f'<a href="{url}" style="color:#ffffff;font-weight:700">{title}</a>'
+                if url else f"<b>{title}</b>"
+            )
+            detail_html = (
+                f'<div style="font-size:11px;margin-top:3px;opacity:0.85">{detail}</div>'
+                if detail else ""
+            )
+            kw_html = f'<div style="font-size:11px;margin-top:2px;opacity:0.75">\U0001f511 {kws}</div>'
+            row_bg  = "#8b1a1a" if tier == 1 else "#a82222"
+            alert_rows.append(
+                _row(src[:14], cisco_badge + kind_badge + title_html + detail_html + kw_html,
+                     "#ffffff", row_bg)
+            )
+        parts.append(_section("⚠️ Keyword Alerts — Source, Detail & Links", alert_rows))
+
+    # ── NIAP PPs ───────────────────────────────────────────────────────────
+    pp   = weekly_diff.get("niap", {}).get("pps", {})
     rows: list[str] = []
     for p in pp.get("added", []):
         rows.append(_row("NEW", f"<b>{p.get('pp_short_name','')}</b> - {p.get('pp_name','')}"))
     for p in pp.get("removed", []):
         rows.append(_row("REMOVED", f"<b>{p.get('pp_short_name','')}</b>", "#721c24", "#f8d7da"))
     for p in pp.get("sunset_changes", []):
-        rows.append(_row("SUNSET", f"<b>{p.get('pp_short_name','')}</b> - Sunset: {p.get('new_sunset','')[:10]}", "#856404", "#fff3cd"))
+        rows.append(_row("SUNSET",
+            f"<b>{p.get('pp_short_name','')}</b> - Sunset: {p.get('new_sunset','')[:10]}",
+            "#856404", "#fff3cd"))
     parts.append(_section("NIAP - Protection Profiles", rows))
 
-    # ── NIAP TDs ──────────────────────────────────────────────────────────────
-    td = weekly_diff.get("niap", {}).get("tds", {})
+    # ── NIAP TDs ───────────────────────────────────────────────────────────
+    td   = weekly_diff.get("niap", {}).get("tds", {})
     rows = []
     for t in td.get("added", []):
         rows.append(_row("NEW TD", f"<b>{t.get('identifier','')}</b> - {t.get('title','')}"))
@@ -200,75 +339,80 @@ def build_email_html(weekly_diff: dict) -> str:
         rows.append(_row("REMOVED", f"<b>{t.get('identifier','')}</b>", "#721c24", "#f8d7da"))
     parts.append(_section("NIAP - Technical Decisions", rows))
 
-    # ── Cisco NDcPP ───────────────────────────────────────────────────────────
-    cn = weekly_diff.get("niap", {}).get("cisco_ndcpp", {})
+    # ── Cisco NDcPP ────────────────────────────────────────────────────────
+    cn   = weekly_diff.get("niap", {}).get("cisco_ndcpp", {})
     rows = []
     for p in cn.get("added", []):
-        rows.append(_row("CERTIFIED", f"<b>{p.get('product_name','')}</b> ({p.get('vendor_id_name','')})"))
+        rows.append(_row("CERTIFIED",
+            f"<b>{p.get('product_name','')}</b> ({p.get('vendor_id_name','')})"))
     for p in cn.get("newly_archived", []):
         rows.append(_row("ARCHIVED", f"<b>{p.get('product_name','')}</b>", "#856404", "#fff3cd"))
     for p in cn.get("removed", []):
         rows.append(_row("REMOVED", f"<b>{p.get('product_name','')}</b>", "#721c24", "#f8d7da"))
     parts.append(_section("Cisco NDcPP PCL Changes", rows))
 
-    # ── NIAP News ─────────────────────────────────────────────────────────────
+    # ── NIAP News ──────────────────────────────────────────────────────────
     news = weekly_diff.get("niap", {}).get("news", {})
     rows = []
     for item in news.get("added", []):
-        cat = item.get("_category", "NEWS")
-        link = item.get("url", "")
+        cat   = item.get("_category", "NEWS")
+        link  = item.get("url", "")
         title = item.get("title", "")
-        txt = f'<a href="{link}">{title}</a>' if link else title
+        txt   = f'<a href="{link}">{title}</a>' if link else title
         rows.append(_row(cat, txt, "#1a4a8a", "#e2eafc"))
     parts.append(_section("NIAP - News and Announcements", rows))
 
-    # ── CCTL Labs ─────────────────────────────────────────────────────────────
+    # ── CCTL Labs ──────────────────────────────────────────────────────────
     labs = weekly_diff.get("cctl_labs", {})
     rows = []
     for lab, items in labs.items():
         for item in items[:5]:
-            link = item.get("link", "")
+            link  = item.get("link", "")
             title = item.get("title", "")
-            txt = f'<a href="{link}">{title}</a>' if link else title
+            txt   = f'<a href="{link}">{title}</a>' if link else title
             rows.append(_row(lab[:18], txt, "#1a4a8a", "#e2eafc"))
     parts.append(_section("CCTL Lab Intel", rows))
 
-    # ── CSfC ──────────────────────────────────────────────────────────────────
+    # ── CSfC ───────────────────────────────────────────────────────────────
     csfc = weekly_diff.get("csfc", {})
     rows = []
     for cp_name, change in csfc.get("capability_packages", {}).items():
         if change.get("changed"):
             old_lm = change.get("old_last_modified", "")
             new_lm = change.get("new_last_modified", "")
-            url = change.get("url", "")
+            url    = change.get("url", "")
             detail = f"Last-Modified: {old_lm or '—'} → {new_lm or '—'}"
-            txt = f'<a href="{url}">{cp_name}</a>' if url else cp_name
-            rows.append(_row("CP UPDATE", f"<b>{txt}</b><br><small>{detail}</small>", "#5a3e00", "#fff3cd"))
+            txt    = f'<a href="{url}">{cp_name}</a>' if url else cp_name
+            rows.append(_row("CP UPDATE",
+                f"<b>{txt}</b><br><small>{detail}</small>", "#5a3e00", "#fff3cd"))
     for page_key, page_diff in csfc.get("pages", {}).items():
         for item in page_diff.get("added", [])[:3]:
-            rows.append(_row(f"NSA:{page_key[:8]}", item.get("text", "")[:120], "#1a4a8a", "#e8f0fe"))
+            rows.append(_row(f"NSA:{page_key[:8]}", item.get("text", "")[:120],
+                "#1a4a8a", "#e8f0fe"))
     for feed_name, items in csfc.get("feeds", {}).items():
         for item in items[:3]:
-            link = item.get("link", "")
+            link  = item.get("link", "")
             title = item.get("title", "")
-            txt = f'<a href="{link}">{title}</a>' if link else title
+            txt   = f'<a href="{link}">{title}</a>' if link else title
             rows.append(_row("ADVISORY", txt, "#1a4a8a", "#e2eafc"))
     parts.append(_section("CSfC — Capability Packages & APL", rows))
 
-    # ── CC Crypto Catalog ─────────────────────────────────────────────────────
+    # ── CC Crypto Catalog ──────────────────────────────────────────────────
     cc_crypto = weekly_diff.get("cc_crypto", {})
     rows = []
     for doc_name, change in cc_crypto.get("doc_headers", {}).items():
         if change.get("changed"):
             url = change.get("url", "")
             txt = f'<a href="{url}">{doc_name}</a>' if url else doc_name
-            rows.append(_row("DOC UPDATE", f"<b>{txt}</b> — new version detected", "#5a0000", "#f8d7da"))
+            rows.append(_row("DOC UPDATE",
+                f"<b>{txt}</b> — new version detected", "#5a0000", "#f8d7da"))
     for page_key, page_diff in cc_crypto.get("pages", {}).items():
         for item in page_diff.get("added", [])[:3]:
-            rows.append(_row(f"CC:{page_key[:8]}", item.get("text", "")[:120], "#1a4a8a", "#e8f0fe"))
+            rows.append(_row(f"CC:{page_key[:8]}", item.get("text", "")[:120],
+                "#1a4a8a", "#e8f0fe"))
     parts.append(_section("CC Crypto Catalog & Working Group", rows))
 
-    # ── NIST CSRC ─────────────────────────────────────────────────────────────
+    # ── NIST CSRC ──────────────────────────────────────────────────────────
     nist = weekly_diff.get("nist", {})
     rows = []
     for doc_name, change in nist.get("doc_headers", {}).items():
@@ -278,15 +422,15 @@ def build_email_html(weekly_diff: dict) -> str:
             rows.append(_row("NIST DOC", f"<b>{txt}</b> — revised", "#003366", "#d0e4ff"))
     for feed_name, items in nist.get("feeds", {}).items():
         for item in items[:5]:
-            link = item.get("link", "")
+            link  = item.get("link", "")
             title = item.get("title", "")
-            txt = f'<a href="{link}">{title}</a>' if link else title
+            txt   = f'<a href="{link}">{title}</a>' if link else title
             rows.append(_row("NIST", txt, "#003366", "#d0e4ff"))
     for item in nist.get("pages", {}).get("cmvp_mip", {}).get("added", [])[:5]:
         rows.append(_row("CMVP MIP", item.get("text", "")[:120], "#003366", "#d0e4ff"))
     parts.append(_section("NIST CSRC — Standards, CMVP & PQC", rows))
 
-    body = "".join(parts) or "<p>No changes detected this week.</p>"
+    body      = "".join(parts) or "<p>No changes detected this week.</p>"
     generated = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
     return (
         '<html><body style="font-family:-apple-system,BlinkMacSystemFont,sans-serif;'
@@ -305,19 +449,21 @@ def build_email_html(weekly_diff: dict) -> str:
     )
 
 
+# ---------------------------------------------------------------------------
+# Low-level email sender
+# ---------------------------------------------------------------------------
+
 def _send_email(subject: str, html: str) -> None:
-    """Low-level helper: authenticate and send one HTML email."""
+    """Authenticate and send one HTML email."""
     password = os.environ.get("CC_EMAIL_PASSWORD", config.EMAIL_PASSWORD)
     if not password:
         log.warning("[Email] No password set — skipping email send.")
         return
-
-    msg = MIMEMultipart("alternative")
+    msg            = MIMEMultipart("alternative")
     msg["Subject"] = subject
-    msg["From"] = config.EMAIL_FROM
-    msg["To"] = ", ".join(config.EMAIL_RECIPIENTS)
+    msg["From"]    = config.EMAIL_FROM
+    msg["To"]      = ", ".join(config.EMAIL_RECIPIENTS)
     msg.attach(MIMEText(html, "html"))
-
     log.info("[Email] Sending '%s' to %s...", subject, config.EMAIL_RECIPIENTS)
     try:
         with smtplib.SMTP(config.EMAIL_SMTP_HOST, config.EMAIL_SMTP_PORT) as smtp:
@@ -331,42 +477,75 @@ def _send_email(subject: str, html: str) -> None:
         raise
 
 
+# ---------------------------------------------------------------------------
+# Public send functions
+# ---------------------------------------------------------------------------
+
 def send_weekly_email(weekly_diff: dict) -> None:
     """Build and send the weekly HTML email digest."""
     date_str = datetime.now(timezone.utc).strftime("%Y-%m-%d")
-    subject = config.EMAIL_SUBJECT.format(date=date_str)
-    html = build_email_html(weekly_diff)
+    subject  = config.EMAIL_SUBJECT.format(date=date_str)
+    html     = build_email_html(weekly_diff)
     _send_email(subject, html)
 
 
 def send_alert_email(alerts: list[dict]) -> None:
-    """Send an immediate alert email when keyword matches are found on a daily run.
+    """Send an immediate alert email when keyword matches are found.
 
-    Each alert row includes: source, title, what changed (detail), kind, matched
-    keywords, and a clickable link to the source item — self-contained enough to
-    act on without opening the dashboard.
+    Alert rows are sorted tier-first (Cisco-relevant at top) with CISCO badge
+    and kind label on each row for fast scanning.
     """
     if not alerts:
         return
-    date_str = datetime.now(timezone.utc).strftime("%Y-%m-%d")
-    subject = f"CC Pulse ALERT \u2014 {len(alerts)} keyword match(es) on {date_str}"
+
+    date_str   = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+    tier1_count = sum(1 for a in alerts if _alert_tier(a) == 1)
+    subject    = (
+        f"CC Pulse ALERT \u2014 {tier1_count} Cisco-relevant + {len(alerts)-tier1_count} other match(es) on {date_str}"
+        if tier1_count else
+        f"CC Pulse ALERT \u2014 {len(alerts)} keyword match(es) on {date_str}"
+    )
 
     rows = []
-    for a in alerts:
+    for a in sorted(alerts, key=lambda x: (_alert_tier(x), alerts.index(x))):
         kws    = ", ".join(a.get("matched_keywords", []))
         title  = a.get("title", "")
         detail = a.get("detail", "")
         url    = a.get("url", "")
         kind   = a.get("kind", "")
         src    = a.get("source", "ALERT")
-
-        title_html  = f'<a href="{url}" style="color:#ffffff;font-weight:700">{title}</a>' if url else f"<b>{title}</b>"
-        kind_html   = f' <span style="opacity:0.7;font-size:11px">({kind})</span>' if kind else ""
-        detail_html = f'<div style="font-size:11px;margin-top:3px;opacity:0.85">{detail}</div>' if detail else ""
-        kw_html     = f'<div style="font-size:11px;margin-top:2px;opacity:0.75">\ud83d\udd11 {kws}</div>'
-        rows.append(
-            _row(src[:14], title_html + kind_html + detail_html + kw_html, "#ffffff", "#a82222")
+        tier   = _alert_tier(a)
+        cisco_badge = (
+            '<span style="background:#1e40af;color:#fff;padding:1px 6px;'
+            'border-radius:3px;font-size:10px;margin-right:4px">CISCO</span>'
+            if tier == 1 else ""
         )
+        kind_badge = (
+            f'<span style="background:#374151;color:#fff;padding:1px 6px;'
+            f'border-radius:3px;font-size:10px;margin-right:4px">{_kind_label(kind)}</span>'
+            if kind else ""
+        )
+        title_html  = (
+            f'<a href="{url}" style="color:#ffffff;font-weight:700">{title}</a>'
+            if url else f"<b>{title}</b>"
+        )
+        detail_html = (
+            f'<div style="font-size:11px;margin-top:3px;opacity:0.85">{detail}</div>'
+            if detail else ""
+        )
+        kw_html = f'<div style="font-size:11px;margin-top:2px;opacity:0.75">\U0001f511 {kws}</div>'
+        row_bg  = "#8b1a1a" if tier == 1 else "#a82222"
+        rows.append(
+            _row(src[:14], cisco_badge + kind_badge + title_html + detail_html + kw_html,
+                 "#ffffff", row_bg)
+        )
+
+    tier_note = (
+        f'<p style="margin:6px 0 0;font-size:0.8rem;opacity:0.85">'
+        f'🔵 {tier1_count} Cisco-relevant · '
+        f'📐 {sum(1 for a in alerts if _alert_tier(a)==2)} standards/NIST · '
+        f'📋 {sum(1 for a in alerts if _alert_tier(a)==3)} general</p>'
+    ) if tier1_count else ""
 
     dashboard_link = (
         '<p style="margin-top:16px">'
@@ -382,10 +561,12 @@ def send_alert_email(alerts: list[dict]) -> None:
         f'<b style="font-size:1rem">&#9888; {len(alerts)} KEYWORD ALERT(S) DETECTED</b>'
         f'<p style="margin:4px 0 0;font-size:0.85rem;opacity:0.85">'
         f'{date_str} \u2014 immediate notification</p>'
+        f'{tier_note}'
         '</div>'
         + _section("Keyword Matches \u2014 Source, Detail & Links", rows)
         + dashboard_link
     )
+
     generated = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
     html = (
         '<html><body style="font-family:-apple-system,BlinkMacSystemFont,sans-serif;'
