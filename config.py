@@ -225,6 +225,8 @@ BODY_WATCH_KEYWORDS = [
     "ML-KEM",
     "ML-DSA",
     "SLH-DSA",
+    # Cisco — catches CMVP MIP entries for Cisco products
+    "cisco",
 ]
 
 # =============================================================
