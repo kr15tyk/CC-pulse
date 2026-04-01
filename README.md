@@ -45,13 +45,24 @@ collect → diff → dashboard → commit → alert
 
 | Channel | Format | Content |
 |---------|--------|---------|
-| **Webex Space** | Markdown message | Source, title, ↳ detail, kind, 🔗 URL, 🔑 keywords — one block per alert, with a dashboard link |
+| **Webex Space** | Markdown message | Tier-sorted alerts: 🔵 Cisco-relevant first, then standards/NIST, then general. Each shows **[KIND]** label, source, title, ↳ detail, 🔗 URL, 🔑 keywords. Header includes tier breakdown summary (e.g. _🔵 2 Cisco-relevant · 📐 1 standards/NIST_). |
 | **Teams / Webhook** | JSON `{"text": ...}` | Same content, compatible with MS Teams Incoming Webhook and Slack-style webhooks |
-| **Alert email** | HTML | Colour-coded rows: source badge, linked title, detail, kind, keywords; "View Full Dashboard" button |
+| **Alert email** | HTML | Tier-sorted rows with **CISCO** and kind badges. Tier 1 rows use a darker red background. Subject line calls out Cisco-relevant count explicitly. "View Full Dashboard" button. |
 
 ### Weekly digest (every Monday)
 
 A single HTML email summarising all changes from the past 7 daily diffs, deduplicated by `source + title` so the same event is never listed twice.
+
+### Cisco NDcPP PCL certification celebration (daily, new certifications only)
+
+When a new Cisco product appears on the NIAP PCL, a dedicated celebration message fires in the Webex space **in addition** to the standard keyword alert. It contains:
+
+- A 🏆 header with the count of new certifications
+- A markdown table per product: name (linked to NIAP page), vendor, certification date, valid-until date, evaluated PPs, evaluating lab, submitting country
+- A randomly selected celebration meme image (8 rotating options, no API key required)
+- Direct links to the NIAP PCL and the full dashboard
+
+This fires separately from keyword alerts and is not suppressed on quiet days — if a Cisco cert lands, the space hears about it.
 
 ---
 
@@ -83,6 +94,7 @@ Cards are organised into labelled sections matching the stat bar at the top:
 | **Colour-coded borders** | Green = new items, Amber = updates, Red = alerts/removed |
 | **Clickable links** | Every item links directly to the source: NIAP product page, NIST PDF, NSA page, etc. |
 | **Alert detail** | Alert rows show source, linked title, what changed (detail), kind, and matched keywords |
+| **Cisco cert celebration** | When a new Cisco NDcPP product is certified, a dedicated Webex message fires with full cert details and a celebration meme |
 | **Stable layout** | Single-column flex layout — cards never reflow or shift when the window is resized |
 | **RSS feed** | `cc_feed.xml` covers all domains; subscribe in any feed reader |
 | **Footer** | "Auto-refreshes daily (06:00 UTC) · Data from NIAP, CSfC, NIST, CC Portal · Last run: ..." |
@@ -90,6 +102,17 @@ Cards are organised into labelled sections matching the stat bar at the top:
 ### Alert banner
 
 When keyword alerts exist, an amber banner appears at the top: *"N keyword alerts — see Alerts section below."* Deliberately non-alarming — the Alerts card at the bottom of the page contains the full detail.
+
+### Colour system
+
+The dashboard uses a deliberate four-role palette so signal priority is immediately readable at a glance:
+
+| Colour | Role | Used for |
+|--------|------|----------|
+| Indigo (`#1E1B4B` / `#312E81`) | Structure | Panel backgrounds, borders, section containers |
+| Blue (`#3B82F6`) | Functional | Active stat tiles, cards with updates, links, interactive elements |
+| Magenta (`#C026D3`) | Flair / accent | Alerts card border, hover indicators — nowhere else |
+| Orange (`#F97316`) | Alert | Alert counts, alert item text, keyword match rows |
 
 ---
 
