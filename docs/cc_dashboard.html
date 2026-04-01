@@ -186,15 +186,15 @@ a:hover { color: var(--neon-cyan); text-decoration: underline; }
 <div class="sticky-top">
 <header class="site-header">
   <div class="site-title">CC Pulse</div>
-  <div class="site-meta">2026-03-30 → 2026-03-31 &middot; Generated 2026-03-31 23:18 UTC</div>
+  <div class="site-meta">2026-03-31 → 2026-04-01 &middot; Generated 2026-04-01 19:01 UTC</div>
 </header>
 <div class="trend-bar">
   <div class="stat"><a href="#sec-niap-pp">
-    <div class="stat-num ">0</div>
+    <div class="stat-num active-num">11</div>
     <div class="stat-lbl">NIAP Changes</div>
   </a></div>
   <div class="stat"><a href="#sec-cctl">
-    <div class="stat-num ">0</div>
+    <div class="stat-num active-num">10</div>
     <div class="stat-lbl">CCTL Items</div>
   </a></div>
   <div class="stat"><a href="#sec-csfc">
@@ -202,7 +202,7 @@ a:hover { color: var(--neon-cyan); text-decoration: underline; }
     <div class="stat-lbl">CSfC CP Updates</div>
   </a></div>
   <div class="stat"><a href="#sec-nist">
-    <div class="stat-num active-num">3</div>
+    <div class="stat-num active-num">1</div>
     <div class="stat-lbl">NIST Doc Updates</div>
   </a></div>
   <div class="stat"><a href="#sec-cc-portal">
@@ -210,7 +210,7 @@ a:hover { color: var(--neon-cyan); text-decoration: underline; }
     <div class="stat-lbl">CC Portal</div>
   </a></div>
   <div class="stat"><a href="#sec-alerts">
-    <div class="stat-num alert-num">3</div>
+    <div class="stat-num alert-num">9</div>
     <div class="stat-lbl">Alerts</div>
   </a></div>
 </div>
@@ -222,8 +222,8 @@ a:hover { color: var(--neon-cyan); text-decoration: underline; }
   <div class="sh-title">Source Health</div>
   <div class="sh-row">
     <span class="sh-source">NIAP API</span>
-    <span class="sh-badge sh-idle">
-      no changes
+    <span class="sh-badge sh-ok">
+      11 changes
     </span>
   </div>
   <div class="sh-row">
@@ -235,7 +235,7 @@ a:hover { color: var(--neon-cyan); text-decoration: underline; }
   <div class="sh-row">
     <span class="sh-source">NIST CSRC</span>
     <span class="sh-badge sh-ok">
-      3 updates
+      1 update
     </span>
   </div>
   <div class="sh-row">
@@ -246,18 +246,18 @@ a:hover { color: var(--neon-cyan); text-decoration: underline; }
   </div>
   <div class="sh-row">
     <span class="sh-source">CCTL Labs</span>
-    <span class="sh-badge sh-idle">
-      no changes
+    <span class="sh-badge sh-ok">
+      10 new items
     </span>
   </div>
   <div class="sh-row">
     <span class="sh-source">Keyword Alerts</span>
     <span class="sh-badge sh-alert">
-      3 matches
+      9 matches
     </span>
   </div>
-  <div class="sh-footer">Period: 2026-03-30 → 2026-03-31</div>
-  <div class="sh-footer">All sources last polled: 2026-03-31 (daily 06:00 UTC)</div>
+  <div class="sh-footer">Period: 2026-03-31 → 2026-04-01</div>
+  <div class="sh-footer">All sources last polled: 2026-04-01 (daily 06:00 UTC)</div>
 </div>
 <div class="ctrl-bar">
   <button class="ctrl-btn" onclick="expandAll()" title="Expand all cards [E]">[E] Expand All</button>
@@ -271,37 +271,91 @@ a:hover { color: var(--neon-cyan); text-decoration: underline; }
 <div class="card card-alert" id="sec-alerts">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>Alerts</span>
-    <span class="card-count">3 alerts</div>
+    <span class="card-count">9 alerts</div>
 </span>
     <span class="toggle-icon">&#9660;</span>
   </div>
   <div class="card-body">
     <div class="alert-monitoring">FIPS 186-4, FIPS 186-5, NDcPP, CPP_ND, TLS 1.3, SSH, PP-Module_VPN, PP-Module_WLAN, labgram, valgram, emergency, CSfC, Commercial Solutions for Classified, CSfC APL, CSfC capability package, CP-Mobile, CP-MA, CP-WAN, CP-Campus WLAN, CP-DAR, CP-MDM, NSA CSfC, CCDB-018, Crypto Catalog, cryptography working group, Specification of Functional Requirements for Cryptography, FCS_CKM, FCS_COP, FCS_RBG, CAVP, CMVP, FIPS 140-3, FIPS 203, FIPS 204, FIPS 205, SP 800-131A, SP 800-57, NIST IR 8547, post-quantum cryptography, PQC migration, ML-KEM, ML-DSA, SLH-DSA, algorithm transition, CMVP validated, modules in process</div>
     
-        <div class="item-row alert-item" data-alert-key="NIST Doc-NIST_IR_8547">
+        <div class="item-row alert-item" data-alert-key="NIAP TD-TD0915_—_Updates_to_FCS_CKM.1/WPA_and_FCS_CKM.2/GTK_Tests_for_MOD_WLANAS">
           
-          <span class="item-link">NIST Doc: NIST IR 8547</span>
+          <a class="item-link" href="https://www.niap-ccevs.org/" target="_blank">NIAP TD: TD0915 — Updates to FCS_CKM.1/WPA and FCS_CKM.2/GTK Tests for MOD_WLANAS</a>
           
-          <span class="item-meta">updated &middot; NIST IR 8547</span>
-          
+          <span class="item-meta">new &middot; FCS_CKM</span>
+          <div class="item-sub">New Technical Decision · Published: 2026-04-01</div>
           <button class="dismiss-btn" onclick="dismissAlert(this)" title="Mark as seen">&#10003; Seen</button>
         </div>
         
-        <div class="item-row alert-item" data-alert-key="NIST Doc-SP_800-131A_Rev_2">
+        <div class="item-row alert-item" data-alert-key="NIAP TD-TD0916_—_Updates_to_FCS_CKM.1/WPA_and_FCS_CKM.2/GTK_Tests_for_MOD_WLANC">
           
-          <span class="item-link">NIST Doc: SP 800-131A Rev 2</span>
+          <a class="item-link" href="https://www.niap-ccevs.org/" target="_blank">NIAP TD: TD0916 — Updates to FCS_CKM.1/WPA and FCS_CKM.2/GTK Tests for MOD_WLANC</a>
           
-          <span class="item-meta">updated &middot; SP 800-131A</span>
-          
+          <span class="item-meta">new &middot; FCS_CKM</span>
+          <div class="item-sub">New Technical Decision · Published: 2026-04-01</div>
           <button class="dismiss-btn" onclick="dismissAlert(this)" title="Mark as seen">&#10003; Seen</button>
         </div>
         
-        <div class="item-row alert-item" data-alert-key="NIST Doc-FIPS_204_ML-DSA">
+        <div class="item-row alert-item" data-alert-key="NIAP TD-TD1015_—_Addition_of_ECD_to_PKG_SSH_V1.0">
           
-          <span class="item-link">NIST Doc: FIPS 204 ML-DSA</span>
+          <a class="item-link" href="https://www.niap-ccevs.org/" target="_blank">NIAP TD: TD1015 — Addition of ECD to PKG_SSH_V1.0</a>
           
-          <span class="item-meta">updated &middot; FIPS 204, ML-DSA</span>
+          <span class="item-meta">new &middot; SSH</span>
+          <div class="item-sub">New Technical Decision · Published: 2026-04-01</div>
+          <button class="dismiss-btn" onclick="dismissAlert(this)" title="Mark as seen">&#10003; Seen</button>
+        </div>
+        
+        <div class="item-row alert-item" data-alert-key="NIAP TD-TD1024_—_NIT_Technical_Decision:_Correction_to_Application_Note_for_FCS_CKM_EXT.7">
           
+          <a class="item-link" href="https://www.niap-ccevs.org/" target="_blank">NIAP TD: TD1024 — NIT Technical Decision: Correction to Application Note for FCS_CKM_EXT.7</a>
+          
+          <span class="item-meta">new &middot; FCS_CKM</span>
+          <div class="item-sub">New Technical Decision · Published: 2026-04-01</div>
+          <button class="dismiss-btn" onclick="dismissAlert(this)" title="Mark as seen">&#10003; Seen</button>
+        </div>
+        
+        <div class="item-row alert-item" data-alert-key="NIAP TD-TD1022_—_Clarifications_to_FCS_SSH_EXT.1.5_When_aes256-gcm@openssh.com_Is_Selected">
+          
+          <a class="item-link" href="https://www.niap-ccevs.org/" target="_blank">NIAP TD: TD1022 — Clarifications to FCS_SSH_EXT.1.5 When aes256-gcm@openssh.com Is Selected</a>
+          
+          <span class="item-meta">new &middot; SSH</span>
+          <div class="item-sub">New Technical Decision · Published: 2026-04-01</div>
+          <button class="dismiss-btn" onclick="dismissAlert(this)" title="Mark as seen">&#10003; Seen</button>
+        </div>
+        
+        <div class="item-row alert-item" data-alert-key="NIAP TD-TD1023_—_Clarifications_to_FCS_SSH_EXT.1.5_When_aes256-gcm@openssh.com_Is_Selected">
+          
+          <a class="item-link" href="https://www.niap-ccevs.org/" target="_blank">NIAP TD: TD1023 — Clarifications to FCS_SSH_EXT.1.5 When aes256-gcm@openssh.com Is Selected</a>
+          
+          <span class="item-meta">new &middot; SSH</span>
+          <div class="item-sub">New Technical Decision · Published: 2026-04-01</div>
+          <button class="dismiss-btn" onclick="dismissAlert(this)" title="Mark as seen">&#10003; Seen</button>
+        </div>
+        
+        <div class="item-row alert-item" data-alert-key="Lab: Lightship Security-NDcPP_v4.0_vs._v3.0e:_What’s_Changing_and_How_to_Prepare">
+          
+          <a class="item-link" href="https://lightshipsec.com/ndcpp-v4-0-vs-v3-0e-whats-changing-and-how-to-prepare/" target="_blank">Lab: Lightship Security: NDcPP v4.0 vs. v3.0e: What’s Changing and How to Prepare</a>
+          
+          <span class="item-meta">post &middot; NDcPP</span>
+          <div class="item-sub">New post from Lightship Security</div>
+          <button class="dismiss-btn" onclick="dismissAlert(this)" title="Mark as seen">&#10003; Seen</button>
+        </div>
+        
+        <div class="item-row alert-item" data-alert-key="Lab: Lightship Security-What’s_the_Deal_With_NDcPP_3.0?">
+          
+          <a class="item-link" href="https://lightshipsec.com/whats-the-deal-with-ndcpp-3-0/" target="_blank">Lab: Lightship Security: What’s the Deal With NDcPP 3.0?</a>
+          
+          <span class="item-meta">post &middot; NDcPP</span>
+          <div class="item-sub">New post from Lightship Security</div>
+          <button class="dismiss-btn" onclick="dismissAlert(this)" title="Mark as seen">&#10003; Seen</button>
+        </div>
+        
+        <div class="item-row alert-item" data-alert-key="Lab: Lightship Security-CMVP_Transitions_Update_(July_2023)">
+          
+          <a class="item-link" href="https://lightshipsec.com/cmvp-transitions-update-july-2023/" target="_blank">Lab: Lightship Security: CMVP Transitions Update (July 2023)</a>
+          
+          <span class="item-meta">post &middot; CMVP</span>
+          <div class="item-sub">New post from Lightship Security</div>
           <button class="dismiss-btn" onclick="dismissAlert(this)" title="Mark as seen">&#10003; Seen</button>
         </div>
         
@@ -358,6 +412,8 @@ a:hover { color: var(--neon-cyan); text-decoration: underline; }
       
       <span class="sp-bar" style="height:0%" title="0 changes"></span>
       
+      <span class="sp-bar" style="height:0%" title="0 changes"></span>
+      
     </span>
   </div>
   <div class="card-body collapsed">
@@ -377,6 +433,8 @@ a:hover { color: var(--neon-cyan); text-decoration: underline; }
     <span class="sparkline">
       
       <span class="sp-bar" style="height:100%" title="345 changes"></span>
+      
+      <span class="sp-bar" style="height:0%" title="0 changes"></span>
       
       <span class="sp-bar" style="height:0%" title="0 changes"></span>
       
@@ -411,6 +469,8 @@ a:hover { color: var(--neon-cyan); text-decoration: underline; }
       
       <span class="sp-bar" style="height:0%" title="0 changes"></span>
       
+      <span class="sp-bar" style="height:0%" title="0 changes"></span>
+      
     </span>
   </div>
   <div class="card-body collapsed">
@@ -436,6 +496,8 @@ a:hover { color: var(--neon-cyan); text-decoration: underline; }
       
       <span class="sp-bar" style="height:0%" title="0 changes"></span>
       
+      <span class="sp-bar" style="height:0%" title="0 changes"></span>
+      
     </span>
     <span class="toggle-icon">&#9658;</span>
   </div>
@@ -449,10 +511,10 @@ a:hover { color: var(--neon-cyan); text-decoration: underline; }
 </div>
 
   <!-- NIAP TDs -->
-<div class="card " id="sec-niap-td" data-has-changes="0">
+<div class="card card-new" id="sec-niap-td" data-has-changes="11">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>NIAP Technical Decisions</span>
-    <span class="card-count">0 changes</span>
+    <span class="card-count">11 changes</span>
     <span class="sparkline">
       
       <span class="sp-bar" style="height:100%" title="950 changes"></span>
@@ -463,13 +525,104 @@ a:hover { color: var(--neon-cyan); text-decoration: underline; }
       
       <span class="sp-bar" style="height:0%" title="0 changes"></span>
       
+      <span class="sp-bar" style="height:1%" title="11 changes"></span>
+      
     </span>
-    <span class="toggle-icon">&#9658;</span>
+    <span class="toggle-icon">&#9660;</span>
   </div>
-  <div class="card-body collapsed">
+  <div class="card-body ">
+    
+    <div class="sub-hdr sub-new">New TDs (11)</div>
+    
+    <div class="item-row">
+      <span class="item-link">TD1025 &mdash; Restriction to CNSA-Compliant Algorithms for (D)TLS Servers</span>
+      <span class="item-meta">2026-04-01</span>
+    </div>
+    
+    <div class="item-sub">Applies to: PKG_TLS_V2.1</div>
     
     
-    <p class="no-change">No changes detected. <span class="last-active">(last: 2026-03-28)</span></p>
+    <div class="item-row">
+      <span class="item-link">TD0915 &mdash; Updates to FCS_CKM.1/WPA and FCS_CKM.2/GTK Tests for MOD_WLANAS</span>
+      <span class="item-meta">2026-04-01</span>
+    </div>
+    
+    <div class="item-sub">Applies to: MOD_WLAN_AS_v1.0</div>
+    
+    
+    <div class="item-row">
+      <span class="item-link">TD0916 &mdash; Updates to FCS_CKM.1/WPA and FCS_CKM.2/GTK Tests for MOD_WLANC</span>
+      <span class="item-meta">2026-04-01</span>
+    </div>
+    
+    <div class="item-sub">Applies to: MOD_WLANC_v1.0</div>
+    
+    
+    <div class="item-row">
+      <span class="item-link">TD1020 &mdash; NIT Technical Decision: Addition of FIPS PUB 186-4</span>
+      <span class="item-meta">2026-04-01</span>
+    </div>
+    
+    <div class="item-sub">Applies to: CPP_ND_V4.0</div>
+    
+    
+    <div class="item-row">
+      <span class="item-link">TD1015 &mdash; Addition of ECD to PKG_SSH_V1.0</span>
+      <span class="item-meta">2026-04-01</span>
+    </div>
+    
+    <div class="item-sub">Applies to: PKG_SSH_V1.0</div>
+    
+    
+    <div class="item-row">
+      <span class="item-link">TD1024 &mdash; NIT Technical Decision: Correction to Application Note for FCS_CKM_EXT.7</span>
+      <span class="item-meta">2026-04-01</span>
+    </div>
+    
+    <div class="item-sub">Applies to: CPP_ND_V4.0</div>
+    
+    
+    <div class="item-row">
+      <span class="item-link">TD1017 &mdash; FPT_JTA_EXT.1 EA Update</span>
+      <span class="item-meta">2026-04-01</span>
+    </div>
+    
+    <div class="item-sub">Applies to: PP_MDF_V3.3</div>
+    
+    
+    <div class="item-row">
+      <span class="item-link">TD1022 &mdash; Clarifications to FCS_SSH_EXT.1.5 When aes256-gcm@openssh.com Is Selected</span>
+      <span class="item-meta">2026-04-01</span>
+    </div>
+    
+    <div class="item-sub">Applies to: PKG_SSH_V2.0</div>
+    
+    
+    <div class="item-row">
+      <span class="item-link">TD1014 &mdash; Addition of ECD to PKG_TLS_V2.0</span>
+      <span class="item-meta">2026-04-01</span>
+    </div>
+    
+    
+    <div class="item-row">
+      <span class="item-link">TD1023 &mdash; Clarifications to FCS_SSH_EXT.1.5 When aes256-gcm@openssh.com Is Selected</span>
+      <span class="item-meta">2026-04-01</span>
+    </div>
+    
+    <div class="item-sub">Applies to: PKG_SSH_V1.0</div>
+    
+    
+    <div class="item-row">
+      <span class="item-link">TD1008 &mdash; (D)TLS(C/S) Corrections</span>
+      <span class="item-meta">2026-04-01</span>
+    </div>
+    
+    <div class="item-sub">Applies to: PKG_TLS_V2.1</div>
+    
+    
+    
+    
+    
   </div>
 </div>
 </div>
@@ -477,10 +630,10 @@ a:hover { color: var(--neon-cyan); text-decoration: underline; }
 <div class="section-group">
   <div class="section-label">CCTL</div>
   <!-- CCTL Lab Intel -->
-<div class="card " id="sec-cctl" data-has-changes="0">
+<div class="card card-new" id="sec-cctl" data-has-changes="10">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>CCTL Lab Intel</span>
-    <span class="card-count">0 new items</span>
+    <span class="card-count">10 new items</span>
     <span class="sparkline">
       
       <span class="sp-bar" style="height:100%" title="27 changes"></span>
@@ -491,12 +644,77 @@ a:hover { color: var(--neon-cyan); text-decoration: underline; }
       
       <span class="sp-bar" style="height:0%" title="0 changes"></span>
       
+      <span class="sp-bar" style="height:37%" title="10 changes"></span>
+      
     </span>
-    <span class="toggle-icon">&#9658;</span>
+    <span class="toggle-icon">&#9660;</span>
   </div>
-  <div class="card-body collapsed">
+  <div class="card-body ">
     
-    <p class="no-change">No new items. <span class="last-active">(last: 2026-03-28)</span></p>
+    
+    <div class="lab-row">
+      <div class="lab-hdr" onclick="toggleLab(this)">
+        <span class="lab-name">Lightship Security</span>
+        <span class="lab-cnt">10 items</span>
+        <span class="toggle-icon">&#9658;</span>
+      </div>
+      <div class="lab-body collapsed">
+        
+        <div class="item-row">
+          <a class="item-link" href="https://lightshipsec.com/jitter-entropy-in-openssl-3-x/" target="_blank">Jitter Entropy in OpenSSL 3.x</a>
+          <span class="item-meta">Sun, 02 Nov 2025 17:27:04 +0000</span>
+        </div>
+        
+        <div class="item-row">
+          <a class="item-link" href="https://lightshipsec.com/ndcpp-v4-0-vs-v3-0e-whats-changing-and-how-to-prepare/" target="_blank">NDcPP v4.0 vs. v3.0e: What’s Changing and How to Prepare</a>
+          <span class="item-meta">Tue, 02 Sep 2025 18:31:59 +0000</span>
+        </div>
+        
+        <div class="item-row">
+          <a class="item-link" href="https://lightshipsec.com/accelerate-your-common-criteria-certification-with-lightship-security-applus-laboratories/" target="_blank">Accelerate Your EU Common Criteria Certification with Lightship Security & Applus+ Laboratories</a>
+          <span class="item-meta">Tue, 22 Jul 2025 18:55:54 +0000</span>
+        </div>
+        
+        <div class="item-row">
+          <a class="item-link" href="https://lightshipsec.com/key-update-in-niap-policy-letter-12-vendors-take-note-of-core-functionality-requirement/" target="_blank">Key Update in NIAP Policy Letter #12: Vendors, Take Note of Core Functionality Requirement</a>
+          <span class="item-meta">Mon, 14 Apr 2025 19:00:03 +0000</span>
+        </div>
+        
+        <div class="item-row">
+          <a class="item-link" href="https://lightshipsec.com/post-quantum-crypto-fips-standards-announced/" target="_blank">Post-Quantum Crypto – FIPS Standards Announced</a>
+          <span class="item-meta">Fri, 13 Sep 2024 14:55:29 +0000</span>
+        </div>
+        
+        <div class="item-row">
+          <a class="item-link" href="https://lightshipsec.com/esv-for-common-criteria/" target="_blank">ESV for Common Criteria</a>
+          <span class="item-meta">Wed, 10 Jul 2024 23:20:23 +0000</span>
+        </div>
+        
+        <div class="item-row">
+          <a class="item-link" href="https://lightshipsec.com/eucc-perspectives/" target="_blank">EUCC Perspectives</a>
+          <span class="item-meta">Mon, 08 Jan 2024 23:31:17 +0000</span>
+        </div>
+        
+        <div class="item-row">
+          <a class="item-link" href="https://lightshipsec.com/whats-the-deal-with-ndcpp-3-0/" target="_blank">What’s the Deal With NDcPP 3.0?</a>
+          <span class="item-meta">Thu, 04 Jan 2024 22:41:42 +0000</span>
+        </div>
+        
+        <div class="item-row">
+          <a class="item-link" href="https://lightshipsec.com/what-does-the-new-version-of-the-cc-mean-for-me/" target="_blank">What does the new version of the CC mean for me?</a>
+          <span class="item-meta">Wed, 28 Jun 2023 22:17:24 +0000</span>
+        </div>
+        
+        <div class="item-row">
+          <a class="item-link" href="https://lightshipsec.com/cmvp-transitions-update-july-2023/" target="_blank">CMVP Transitions Update (July 2023)</a>
+          <span class="item-meta">Wed, 28 Jun 2023 08:06:26 +0000</span>
+        </div>
+        
+      </div>
+    </div>
+    
+    
+    
   </div>
 </div>
 </div>
@@ -513,6 +731,8 @@ a:hover { color: var(--neon-cyan); text-decoration: underline; }
       <span class="sp-bar" style="height:100%" title="8 changes"></span>
       
       <span class="sp-bar" style="height:100%" title="8 changes"></span>
+      
+      <span class="sp-bar" style="height:0%" title="0 changes"></span>
       
       <span class="sp-bar" style="height:0%" title="0 changes"></span>
       
@@ -545,6 +765,8 @@ a:hover { color: var(--neon-cyan); text-decoration: underline; }
       
       <span class="sp-bar" style="height:0%" title="0 changes"></span>
       
+      <span class="sp-bar" style="height:0%" title="0 changes"></span>
+      
     </span>
     <span class="toggle-icon">&#9658;</span>
   </div>
@@ -555,10 +777,10 @@ a:hover { color: var(--neon-cyan); text-decoration: underline; }
 </div>
 
   <!-- NIST Docs -->
-<div class="card card-updated" id="sec-nist" data-has-changes="3">
+<div class="card card-updated" id="sec-nist" data-has-changes="1">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>NIST Documentation</span>
-    <span class="card-count">3 updates</span>
+    <span class="card-count">1 update</span>
     <span class="sparkline">
       
       <span class="sp-bar" style="height:100%" title="7 changes"></span>
@@ -569,6 +791,8 @@ a:hover { color: var(--neon-cyan); text-decoration: underline; }
       
       <span class="sp-bar" style="height:43%" title="3 changes"></span>
       
+      <span class="sp-bar" style="height:14%" title="1 change"></span>
+      
     </span>
     <span class="toggle-icon">&#9660;</span>
   </div>
@@ -576,25 +800,7 @@ a:hover { color: var(--neon-cyan); text-decoration: underline; }
     
     
     <div class="item-row">
-      <a class="item-link" href="https://nvlpubs.nist.gov/nistpubs/ir/2024/NIST.IR.8547.ipd.pdf" target="_blank">NIST IR 8547</a>
-      <span class="item-meta">
-        Header changed
-      </span>
-    </div>
-    
-    
-    
-    <div class="item-row">
       <a class="item-link" href="https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-131Ar2.pdf" target="_blank">SP 800-131A Rev 2</a>
-      <span class="item-meta">
-        Header changed
-      </span>
-    </div>
-    
-    
-    
-    <div class="item-row">
-      <a class="item-link" href="https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.204.pdf" target="_blank">FIPS 204 ML-DSA</a>
       <span class="item-meta">
         Header changed
       </span>
@@ -623,6 +829,8 @@ a:hover { color: var(--neon-cyan); text-decoration: underline; }
       
       <span class="sp-bar" style="height:0%" title="0 changes"></span>
       
+      <span class="sp-bar" style="height:0%" title="0 changes"></span>
+      
     </span>
     <span class="toggle-icon">&#9658;</span>
   </div>
@@ -638,7 +846,7 @@ a:hover { color: var(--neon-cyan); text-decoration: underline; }
 
 <footer>
   <span>CC Pulse &middot; Auto-refreshes daily (06:00 UTC) &middot; Data from NIAP, CSfC, NIST, CC Portal</span>
-  <span>Last run: 2026-03-31 23:18 UTC</span>
+  <span>Last run: 2026-04-01 19:01 UTC</span>
 </footer>
 
 <script>

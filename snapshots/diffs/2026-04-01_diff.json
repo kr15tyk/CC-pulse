@@ -1,0 +1,747 @@
+{
+  "period_start": "2026-03-31T07:22:03.452384+00:00",
+  "period_end": "2026-04-01T19:01:56.915990+00:00",
+  "niap": {
+    "pps": {
+      "added": [],
+      "removed": [],
+      "sunset_changes": [],
+      "status_changes": []
+    },
+    "tds": {
+      "added": [
+        {
+          "td_id": 1025,
+          "identifier": "TD1025",
+          "title": "Restriction to CNSA-Compliant Algorithms for (D)TLS Servers",
+          "protection_profile": [
+            {
+              "pp_id": 519,
+              "pp_name": "Functional Package for Transport Layer Security (TLS) Version 2.1",
+              "pp_common_name": "Functional Package for Transport Layer Security (TLS) Version 2.1",
+              "cc_version": "CC:2022",
+              "mr_version": null,
+              "pp_date": "2025-09-03T00:00:00Z",
+              "entrydate": "2025-09-03T12:25:21.558000Z",
+              "tech_type": "Network Encryption",
+              "pp_sponsor_id": "NIAP",
+              "community_id": null,
+              "status": "Publishing",
+              "sunset_date": null,
+              "pp_overview": "<p style=\"margin-top: 0in; background: white; margin-right: 0in; margin-left: 0in; font-size: 12pt; font-family: 'Times New Roman', serif;\"><span style=\"font-family: Arial, sans-serif; color: #212529;\">Transport Layer Security (TLS) and the closely-related Datagram TLS (DTLS) are cryptographic protocols designed to provide communications security over IP networks.&nbsp;The primary goal of the TLS protocol is to provide confidentiality and integrity of data transmitted between two communicating endpoints, as well as authentication of at least the server endpoint.</span></p>\r\n<p style=\"margin-top: 0in; background: rgb(255, 255, 253); margin-right: 0in; margin-left: 0in; font-size: 12pt; font-family: 'Times New Roman', serif;\"><span style=\"font-family: Arial, sans-serif; color: #000006;\">This \"Functional Package for Transport Layer Security\" (short name \"TLS-PKG\") defines functional requirements for the implementation of the Transport Layer Security (TLS) and Datagram TLS (DTLS) protocols.&nbsp;The requirements are intended to improve the security of products by enabling their evaluation.</span></p>",
+              "security_evaluation_summary": "<p style=\"margin-top: 0in; background: white; margin-right: 0in; margin-left: 0in; font-size: 12pt; font-family: 'Times New Roman', serif;\"><span style=\"font-family: Arial, sans-serif; color: #212529;\">The Target of Evaluation (TOE) in this Package is a product which acts as a TLS client or server, or both.&nbsp;This Package describes the security functionality of TLS in terms of CC.</span></p>\r\n<p style=\"margin: 0in 0in 1rem; background: white; box-sizing: border-box; font-variant-ligatures: normal; text-align: start; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; font-size: 12pt; font-family: 'Times New Roman', serif;\"><span style=\"font-family: Arial, sans-serif; color: #212529;\">The contents of this Package must be appropriately combined with a PP or PP-Module. When this Package is instantiated by a PP or PP-Module, the Package must include selection-based requirements in accordance with the selections or assignments indicated in the PP or PP-Module.</span></p>",
+              "environmental_strengths": "",
+              "pp_priority": null,
+              "created_on": null,
+              "removed_on": null,
+              "archived": false,
+              "assurance_maintenance": null,
+              "pp_estcompletion": null,
+              "pp_estcompletiondate": null,
+              "pp_transition": "2026-01-01T00:00:00Z",
+              "revised_on": null,
+              "pp_short_name": "PKG_TLS_V2.1",
+              "dod_compliant": false,
+              "csfceligible": true,
+              "constraint": null,
+              "predecessor_id": 465,
+              "successor_id": null,
+              "creator": 504,
+              "remover": null,
+              "editor": null
+            }
+          ],
+          "sunset_protection_profile": [],
+          "related_to": "FCS_TLSS, FCS_DTLSS",
+          "publication_date": "2026-04-01T13:19:05.096000Z",
+          "removed_on": null,
+          "status": "Published"
+        },
+        {
+          "td_id": 915,
+          "identifier": "TD0915",
+          "title": "Updates to FCS_CKM.1/WPA and FCS_CKM.2/GTK Tests for MOD_WLANAS",
+          "protection_profile": [
+            {
+              "pp_id": 464,
+              "pp_name": "PP-Module for Wireless Local Area Network (WLAN) Access System Version 1.0",
+              "pp_common_name": "PP-Module for Wireless Local Area Network (WLAN) Access System Version 1.0",
+              "cc_version": "3.1",
+              "mr_version": "",
+              "pp_date": "2022-04-19T00:00:00Z",
+              "entrydate": "2022-03-11T09:19:31Z",
+              "tech_type": "Wireless LAN",
+              "pp_sponsor_id": "NIAP",
+              "community_id": null,
+              "status": "Publishing",
+              "sunset_date": null,
+              "pp_overview": "<p>This PP-Module is written to address the situation when network packets cross the boundary between a wired private network and a wireless client via a WLAN Access System.&nbsp; The WLAN Access System provides secure communication between a user (wireless client) and a wired (trusted) network by supporting security functions such as administration, authentication, encryption, and the protection and handling of data in transit.&nbsp; To protect the data in-transit from disclosure and modification, a WLAN Access System is used to establish secure communications.&nbsp; The WLAN Access System provides one end of the secure cryptographic tunnel and performs encryption and decryption of network packets in accordance with a WLAN Access System security policy negotiated with its authenticated wireless client.&nbsp; It supports multiple simultaneous wireless connections and is capable of establishing and terminating multiple cryptographic tunnels to and from those peers.</p>\r\n<p>The proper installation, configuration, and administration of the WLAN Access System are critical to its correct operation.&nbsp;&nbsp;</p>",
+              "security_evaluation_summary": "",
+              "environmental_strengths": "",
+              "pp_priority": "",
+              "created_on": "2022-03-11T09:19:31Z",
+              "removed_on": null,
+              "archived": false,
+              "assurance_maintenance": "",
+              "pp_estcompletion": "",
+              "pp_estcompletiondate": null,
+              "pp_transition": "2022-10-19T00:00:00Z",
+              "revised_on": "2022-04-19T14:08:05Z",
+              "pp_short_name": "MOD_WLAN_AS_v1.0",
+              "dod_compliant": false,
+              "csfceligible": true,
+              "constraint": "",
+              "predecessor_id": 376,
+              "successor_id": null,
+              "creator": 504,
+              "remover": null,
+              "editor": 504
+            }
+          ],
+          "sunset_protection_profile": [],
+          "related_to": "FCS_CKM.1/WPA, FCS_CKM.2/GTK,  MOD_WLAN_AS_v1.0_SD",
+          "publication_date": "2026-04-01T13:43:21.064000Z",
+          "removed_on": null,
+          "status": "Published"
+        },
+        {
+          "td_id": 916,
+          "identifier": "TD0916",
+          "title": "Updates to FCS_CKM.1/WPA and FCS_CKM.2/GTK Tests for MOD_WLANC",
+          "protection_profile": [
+            {
+              "pp_id": 463,
+              "pp_name": "PP-Module for Wireless Local Area Network (WLAN) Client Version 1.0",
+              "pp_common_name": "PP-Module for Wireless Local Area Network (WLAN) Client Version 1.0",
+              "cc_version": "3.1",
+              "mr_version": "",
+              "pp_date": "2022-03-31T00:00:00Z",
+              "entrydate": "2022-03-11T09:14:30Z",
+              "tech_type": "Wireless LAN",
+              "pp_sponsor_id": "NIAP",
+              "community_id": null,
+              "status": "Publishing",
+              "sunset_date": null,
+              "pp_overview": "<p>The scope of the Wireless Local Area Network (WLAN) Client&nbsp;PP-Module&nbsp;is to describe the security functionality of a&nbsp;WLAN&nbsp;Client in terms of [CC] and to define functional and assurance requirements for such products. This&nbsp;PP-Module&nbsp;is intended for use with the following&nbsp;Base-PPs:</p>\r\n<ul type=\"disc\">\r\n<li>General Purpose Operating System (GPOS) Protection Profile, Version 4.2.1 and Version 4.3</li>\r\n<li>Mobile Device Fundamentals (MDF) Protection Profile, Version 3.2 and Version 3.3</li>\r\n</ul>",
+              "security_evaluation_summary": "",
+              "environmental_strengths": "",
+              "pp_priority": "",
+              "created_on": "2022-03-11T09:14:30Z",
+              "removed_on": null,
+              "archived": false,
+              "assurance_maintenance": "",
+              "pp_estcompletion": "",
+              "pp_estcompletiondate": null,
+              "pp_transition": "2022-09-30T00:00:00Z",
+              "revised_on": "2022-11-04T11:41:46Z",
+              "pp_short_name": "MOD_WLANC_v1.0",
+              "dod_compliant": false,
+              "csfceligible": true,
+              "constraint": "",
+              "predecessor_id": 386,
+              "successor_id": null,
+              "creator": 504,
+              "remover": null,
+              "editor": 504
+            }
+          ],
+          "sunset_protection_profile": [],
+          "related_to": "FCS_CKM.1/WPA, FCS_CKM.2/WLAN: MOD_WLAN_CLI_v1.0_SD",
+          "publication_date": "2026-04-01T12:36:18.265000Z",
+          "removed_on": null,
+          "status": "Published"
+        },
+        {
+          "td_id": 1020,
+          "identifier": "TD1020",
+          "title": "NIT Technical Decision: Addition of FIPS PUB 186-4",
+          "protection_profile": [
+            {
+              "pp_id": 524,
+              "pp_name": "collaborative Protection Profile for Network Devices Version 4.0",
+              "pp_common_name": "collaborative Protection Profile for Network Devices Version 4.0",
+              "cc_version": "CC:2022",
+              "mr_version": null,
+              "pp_date": "2025-12-22T00:00:00Z",
+              "entrydate": "2025-12-04T12:20:32.293000Z",
+              "tech_type": "Network Device",
+              "pp_sponsor_id": "NW Fundamentals and FW iTC",
+              "community_id": null,
+              "status": "Publishing",
+              "sunset_date": null,
+              "pp_overview": "<p style=\"margin-top: 0in; background: white; margin-right: 0in; margin-left: 0in; font-size: 12pt; font-family: 'Times New Roman', serif;\"><span style=\"font-family: Helvetica, sans-serif; color: #212529;\">This is a Collaborative Protection Profile (cPP) whose Target of Evaluation (TOE) is a Network Device (ND). It provides a minimal set of security requirements expected by all Network Devices that target the mitigation of a set of defined threats. This baseline set of requirements will be built upon by future cPPs to provide an overall set of security solutions for networks up to carrier and enterprise scale. A Network Device in the context of this cPP is a device that is connected to a network and has an infrastructure role within that network. The TOE may be standalone or distributed, where a distributed TOE is one that requires multiple distinct components to operate as a logical whole in order to fulfil the requirements of this cPP.</span></p>\r\n<p style=\"margin: 0in 0in 1rem; background: white; box-sizing: border-box; font-variant-ligatures: normal; text-align: start; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; font-size: 12pt; font-family: 'Times New Roman', serif;\"><span style=\"font-family: Helvetica, sans-serif; color: #212529;\">When discussing a ND in this document, it refers to a Network Device or a component of a distributed Network Device unless it is expressly stated otherwise.Under this cPP, NDs may be physical or virtualized.</span></p>\r\n<p style=\"margin: 0in 0in 1rem; background: white; box-sizing: border-box; font-variant-ligatures: normal; text-align: start; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; font-size: 12pt; font-family: 'Times New Roman', serif;\"><span style=\"font-family: Helvetica, sans-serif; color: #212529;\">A physical Network Device (pND) consists of network device functionality implemented inside a physical chassis with physical network connections. The network device functionality may be implemented in either hardware or software or both. For pNDs, the TOE encompasses the entire device&mdash;including both the network device functionality and the physical chassis. There is no distinction between TOE and TOE Platform.</span></p>\r\n<p><span style=\"font-size: 11.0pt; line-height: 107%; font-family: Helvetica, sans-serif; color: #212529;\">A virtual Network Device (vND) is a software implementation of network device functionality that runs inside a virtual machine (VM) on either general purpose or purpose-built hardware. The TOE consists of all software within the VM&mdash;in particular, the network device functionality and the operating system on which it runs.</span></p>",
+              "security_evaluation_summary": null,
+              "environmental_strengths": "",
+              "pp_priority": null,
+              "created_on": null,
+              "removed_on": null,
+              "archived": false,
+              "assurance_maintenance": null,
+              "pp_estcompletion": null,
+              "pp_estcompletiondate": null,
+              "pp_transition": null,
+              "revised_on": null,
+              "pp_short_name": "CPP_ND_V4.0",
+              "dod_compliant": false,
+              "csfceligible": false,
+              "constraint": null,
+              "predecessor_id": 482,
+              "successor_id": null,
+              "creator": 504,
+              "remover": null,
+              "editor": null
+            }
+          ],
+          "sunset_protection_profile": [],
+          "related_to": "FCS_CKM.1/AKG, FCS_COP.1/SigGen, FCS_COP.1/SigVer, Glossary, References, CPP_ND_V4.0-SD",
+          "publication_date": "2026-04-01T13:05:53.961000Z",
+          "removed_on": null,
+          "status": "Published"
+        },
+        {
+          "td_id": 1015,
+          "identifier": "TD1015",
+          "title": "Addition of ECD to PKG_SSH_V1.0",
+          "protection_profile": [
+            {
+              "pp_id": 459,
+              "pp_name": "Functional Package for SSH Version 1.0",
+              "pp_common_name": "Functional Package for SSH Version 1.0",
+              "cc_version": "3.1",
+              "mr_version": "",
+              "pp_date": "2021-05-13T00:00:00Z",
+              "entrydate": "2021-05-17T14:35:28Z",
+              "tech_type": "Remote Access",
+              "pp_sponsor_id": "NIAP",
+              "community_id": null,
+              "status": "Publishing",
+              "sunset_date": null,
+              "pp_overview": "<p>Secure Shell (SSH) is a protocol for secure remote login and other secure network services over an untrusted network. SSH software can act as a client, server, or both.</p>\r\n<p>This Functional Package for Secure Shell provides a collection of Secure Shell (SSH) protocol related SFRs and Evaluation Activities (EAs) covering audit, authentication, cryptographic algorithms, and protocol negotiation. The intent of this package is to provide PP, cPP, and PP-Module authors with a readily consumable collection of SFRs and EAs to be integrated into their documents.</p>\r\n<p>The contents of this Package must be appropriately combined with a PP or PP-Module. When this Package is instantiated by a PP or PP-Module, the Package must include selection-based requirements in accordance with the selections or assignments indicated in the PP or PP-Module.</p>\r\n<p>Since this Package is constructed using CC 3.1, it cannot be used in conjunction with any PPs using CC:2022, just as its successor cannot be used in conjunction with any PPs using CC 3.1. As a result, the sunset date for this Package will be completed once all PPs claiming conformance to it have also sunset.</p>",
+              "security_evaluation_summary": "",
+              "environmental_strengths": "",
+              "pp_priority": "",
+              "created_on": "2021-05-17T14:35:28Z",
+              "removed_on": null,
+              "archived": false,
+              "assurance_maintenance": "",
+              "pp_estcompletion": "",
+              "pp_estcompletiondate": null,
+              "pp_transition": null,
+              "revised_on": "2021-05-17T14:46:44Z",
+              "pp_short_name": "PKG_SSH_V1.0",
+              "dod_compliant": false,
+              "csfceligible": false,
+              "constraint": "",
+              "predecessor_id": 389,
+              "successor_id": 515,
+              "creator": 18,
+              "remover": null,
+              "editor": 18
+            }
+          ],
+          "sunset_protection_profile": [],
+          "related_to": "ECD",
+          "publication_date": "2026-04-01T14:34:58.792000Z",
+          "removed_on": null,
+          "status": "Published"
+        },
+        {
+          "td_id": 1024,
+          "identifier": "TD1024",
+          "title": "NIT Technical Decision: Correction to Application Note for FCS_CKM_EXT.7",
+          "protection_profile": [
+            {
+              "pp_id": 524,
+              "pp_name": "collaborative Protection Profile for Network Devices Version 4.0",
+              "pp_common_name": "collaborative Protection Profile for Network Devices Version 4.0",
+              "cc_version": "CC:2022",
+              "mr_version": null,
+              "pp_date": "2025-12-22T00:00:00Z",
+              "entrydate": "2025-12-04T12:20:32.293000Z",
+              "tech_type": "Network Device",
+              "pp_sponsor_id": "NW Fundamentals and FW iTC",
+              "community_id": null,
+              "status": "Publishing",
+              "sunset_date": null,
+              "pp_overview": "<p style=\"margin-top: 0in; background: white; margin-right: 0in; margin-left: 0in; font-size: 12pt; font-family: 'Times New Roman', serif;\"><span style=\"font-family: Helvetica, sans-serif; color: #212529;\">This is a Collaborative Protection Profile (cPP) whose Target of Evaluation (TOE) is a Network Device (ND). It provides a minimal set of security requirements expected by all Network Devices that target the mitigation of a set of defined threats. This baseline set of requirements will be built upon by future cPPs to provide an overall set of security solutions for networks up to carrier and enterprise scale. A Network Device in the context of this cPP is a device that is connected to a network and has an infrastructure role within that network. The TOE may be standalone or distributed, where a distributed TOE is one that requires multiple distinct components to operate as a logical whole in order to fulfil the requirements of this cPP.</span></p>\r\n<p style=\"margin: 0in 0in 1rem; background: white; box-sizing: border-box; font-variant-ligatures: normal; text-align: start; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; font-size: 12pt; font-family: 'Times New Roman', serif;\"><span style=\"font-family: Helvetica, sans-serif; color: #212529;\">When discussing a ND in this document, it refers to a Network Device or a component of a distributed Network Device unless it is expressly stated otherwise.Under this cPP, NDs may be physical or virtualized.</span></p>\r\n<p style=\"margin: 0in 0in 1rem; background: white; box-sizing: border-box; font-variant-ligatures: normal; text-align: start; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; font-size: 12pt; font-family: 'Times New Roman', serif;\"><span style=\"font-family: Helvetica, sans-serif; color: #212529;\">A physical Network Device (pND) consists of network device functionality implemented inside a physical chassis with physical network connections. The network device functionality may be implemented in either hardware or software or both. For pNDs, the TOE encompasses the entire device&mdash;including both the network device functionality and the physical chassis. There is no distinction between TOE and TOE Platform.</span></p>\r\n<p><span style=\"font-size: 11.0pt; line-height: 107%; font-family: Helvetica, sans-serif; color: #212529;\">A virtual Network Device (vND) is a software implementation of network device functionality that runs inside a virtual machine (VM) on either general purpose or purpose-built hardware. The TOE consists of all software within the VM&mdash;in particular, the network device functionality and the operating system on which it runs.</span></p>",
+              "security_evaluation_summary": null,
+              "environmental_strengths": "",
+              "pp_priority": null,
+              "created_on": null,
+              "removed_on": null,
+              "archived": false,
+              "assurance_maintenance": null,
+              "pp_estcompletion": null,
+              "pp_estcompletiondate": null,
+              "pp_transition": null,
+              "revised_on": null,
+              "pp_short_name": "CPP_ND_V4.0",
+              "dod_compliant": false,
+              "csfceligible": false,
+              "constraint": null,
+              "predecessor_id": 482,
+              "successor_id": null,
+              "creator": 504,
+              "remover": null,
+              "editor": null
+            }
+          ],
+          "sunset_protection_profile": [],
+          "related_to": "FCS_CKM_EXT.7",
+          "publication_date": "2026-04-01T13:03:45.378000Z",
+          "removed_on": null,
+          "status": "Published"
+        },
+        {
+          "td_id": 1017,
+          "identifier": "TD1017",
+          "title": "FPT_JTA_EXT.1 EA Update",
+          "protection_profile": [
+            {
+              "pp_id": 468,
+              "pp_name": "Protection Profile for Mobile Device Fundamentals Version 3.3",
+              "pp_common_name": "Protection Profile for Mobile Device Fundamentals Version 3.3",
+              "cc_version": "3.1",
+              "mr_version": "",
+              "pp_date": "2022-09-12T00:00:00Z",
+              "entrydate": "2022-03-14T08:06:00Z",
+              "tech_type": "Mobility",
+              "pp_sponsor_id": "NIAP",
+              "community_id": null,
+              "status": "Publishing",
+              "sunset_date": null,
+              "pp_overview": "<p>This assurance standard specifies information security requirements for Mobile Devices for use in an enterprise. A Mobile Device in the context of this assurance standard is a device, which is composed of a hardware platform and its system software. The device typically provides wireless connectivity and may include software for functions like secure messaging, email, web, VPN connection, and VoIP (Voice over IP), for access to the protected enterprise network, enterprise data and applications, and for communicating to other Mobile Devices.</p>\r\n<p>&nbsp;</p>\r\n<p>Examples of a \"Mobile Device\" that should claim conformance to this Protection Profile include smartphones, tablet computers, and other Mobile Devices with similar capabilities.</p>\r\n<p>&nbsp;</p>\r\n<p>The Mobile Device provides essential services, such as cryptographic services, data-at-rest protection, and key storage services to support the secure operation of applications on the device. Additional security features such as security policy enforcement, application mandatory access control, anti-exploitation features, user authentication, and software integrity protection are implemented in order to address threats.</p>\r\n<p>&nbsp;</p>\r\n<p>This assurance standard describes these essential security services provided by the Mobile Device and serves as a foundation for a secure mobile architecture. The wireless connectivity shall be validated against the PP-Module for WLAN Client. If the mobile device contains Bluetooth functionality (i.e., has Bluetooth hardware), the Bluetooth connectivity shall be evaluated against the PP-Module for Bluetooth. As illustrated in Figure 2, it is expected that a typical deployment would also include either third-party or bundled components. Whether these components are bundled as part of the Mobile Device by the manufacturer or developed by a third-party, they must be separately validated against the related assurance standards such as the PP-Module for MDM Agent, PP-Module for VPN Client, PP-Module for VVoIP, and cPP-Module for Biometrics. It is the responsibility of the architect of the overall secure mobile architecture to ensure validation of these components. Additional applications that may come pre-installed on the Mobile Device that are not validated are considered to be potentially flawed, but not malicious. Examples include email client and web browser.</p>",
+              "security_evaluation_summary": "",
+              "environmental_strengths": "",
+              "pp_priority": "",
+              "created_on": "2022-03-14T08:06:00Z",
+              "removed_on": null,
+              "archived": false,
+              "assurance_maintenance": "",
+              "pp_estcompletion": "",
+              "pp_estcompletiondate": null,
+              "pp_transition": "2023-03-22T00:00:00Z",
+              "revised_on": "2023-07-20T14:24:03Z",
+              "pp_short_name": "PP_MDF_V3.3",
+              "dod_compliant": false,
+              "csfceligible": true,
+              "constraint": "",
+              "predecessor_id": 455,
+              "successor_id": null,
+              "creator": 409,
+              "remover": null,
+              "editor": 479
+            }
+          ],
+          "sunset_protection_profile": [],
+          "related_to": "FPT_JTA_EXT.1",
+          "publication_date": "2026-04-01T13:16:34.302000Z",
+          "removed_on": null,
+          "status": "Published"
+        },
+        {
+          "td_id": 1022,
+          "identifier": "TD1022",
+          "title": "Clarifications to FCS_SSH_EXT.1.5 When aes256-gcm@openssh.com Is Selected",
+          "protection_profile": [
+            {
+              "pp_id": 515,
+              "pp_name": "Functional Package for SSH Version 2.0",
+              "pp_common_name": "Functional Package for SSH Version 2.0",
+              "cc_version": "CC:2022",
+              "mr_version": null,
+              "pp_date": "2024-12-12T00:00:00Z",
+              "entrydate": "2024-12-12T12:24:20.959000Z",
+              "tech_type": "Remote Access",
+              "pp_sponsor_id": "NIAP",
+              "community_id": null,
+              "status": "Publishing",
+              "sunset_date": null,
+              "pp_overview": "<p>&nbsp;</p>\r\n<table>\r\n<tbody>\r\n<tr>\r\n<td style=\"width: 999px;\">\r\n<p>Secure Shell (SSH) is a protocol for secure remote login and other secure network services over an untrusted network. SSH software can act as a client, server, or both.</p>\r\n<p>This Functional Package for Secure Shell provides a collection of Secure Shell (SSH) protocol related SFRs and Evaluation Activities (EAs) covering audit, authentication, cryptographic algorithms, and protocol negotiation. The intent of this package is to provide PP, cPP, and PP-Module authors with a readily consumable collection of SFRs and EAs to be integrated into their documents.</p>\r\n<p>The contents of this Package must be appropriately combined with a PP or PP-Module. When this Package is instantiated by a PP or PP-Module, the Package must include selection-based requirements in accordance with the selections or assignments indicated in the PP or PP-Module.</p>\r\n<p>Since this Package is constructed using CC:2022, it cannot be used in conjunction with any PPs using CC 3.1, just as its predecessor cannot be used in conjunction with any PPs using CC:2022. As a result, the transition date for this Package will be the sunset date of its predecessor, which will only happen after all PPs claiming conformance to it have also sunset.</p>\r\n</td>\r\n</tr>\r\n</tbody>\r\n</table>",
+              "security_evaluation_summary": null,
+              "environmental_strengths": null,
+              "pp_priority": null,
+              "created_on": null,
+              "removed_on": null,
+              "archived": false,
+              "assurance_maintenance": null,
+              "pp_estcompletion": null,
+              "pp_estcompletiondate": "2024-12-05T00:00:00Z",
+              "pp_transition": null,
+              "revised_on": null,
+              "pp_short_name": "PKG_SSH_V2.0",
+              "dod_compliant": false,
+              "csfceligible": true,
+              "constraint": null,
+              "predecessor_id": 459,
+              "successor_id": null,
+              "creator": 409,
+              "remover": null,
+              "editor": null
+            }
+          ],
+          "sunset_protection_profile": [],
+          "related_to": "FCS_SSH_EXT.1.5",
+          "publication_date": "2026-04-01T13:20:56.925000Z",
+          "removed_on": null,
+          "status": "Published"
+        },
+        {
+          "td_id": 1014,
+          "identifier": "TD1014",
+          "title": "Addition of ECD to PKG_TLS_V2.0",
+          "protection_profile": [],
+          "sunset_protection_profile": [],
+          "related_to": "ECD",
+          "publication_date": "2026-04-01T14:34:55.649000Z",
+          "removed_on": null,
+          "status": "Published"
+        },
+        {
+          "td_id": 1023,
+          "identifier": "TD1023",
+          "title": "Clarifications to FCS_SSH_EXT.1.5 When aes256-gcm@openssh.com Is Selected",
+          "protection_profile": [
+            {
+              "pp_id": 459,
+              "pp_name": "Functional Package for SSH Version 1.0",
+              "pp_common_name": "Functional Package for SSH Version 1.0",
+              "cc_version": "3.1",
+              "mr_version": "",
+              "pp_date": "2021-05-13T00:00:00Z",
+              "entrydate": "2021-05-17T14:35:28Z",
+              "tech_type": "Remote Access",
+              "pp_sponsor_id": "NIAP",
+              "community_id": null,
+              "status": "Publishing",
+              "sunset_date": null,
+              "pp_overview": "<p>Secure Shell (SSH) is a protocol for secure remote login and other secure network services over an untrusted network. SSH software can act as a client, server, or both.</p>\r\n<p>This Functional Package for Secure Shell provides a collection of Secure Shell (SSH) protocol related SFRs and Evaluation Activities (EAs) covering audit, authentication, cryptographic algorithms, and protocol negotiation. The intent of this package is to provide PP, cPP, and PP-Module authors with a readily consumable collection of SFRs and EAs to be integrated into their documents.</p>\r\n<p>The contents of this Package must be appropriately combined with a PP or PP-Module. When this Package is instantiated by a PP or PP-Module, the Package must include selection-based requirements in accordance with the selections or assignments indicated in the PP or PP-Module.</p>\r\n<p>Since this Package is constructed using CC 3.1, it cannot be used in conjunction with any PPs using CC:2022, just as its successor cannot be used in conjunction with any PPs using CC 3.1. As a result, the sunset date for this Package will be completed once all PPs claiming conformance to it have also sunset.</p>",
+              "security_evaluation_summary": "",
+              "environmental_strengths": "",
+              "pp_priority": "",
+              "created_on": "2021-05-17T14:35:28Z",
+              "removed_on": null,
+              "archived": false,
+              "assurance_maintenance": "",
+              "pp_estcompletion": "",
+              "pp_estcompletiondate": null,
+              "pp_transition": null,
+              "revised_on": "2021-05-17T14:46:44Z",
+              "pp_short_name": "PKG_SSH_V1.0",
+              "dod_compliant": false,
+              "csfceligible": false,
+              "constraint": "",
+              "predecessor_id": 389,
+              "successor_id": 515,
+              "creator": 18,
+              "remover": null,
+              "editor": 18
+            }
+          ],
+          "sunset_protection_profile": [],
+          "related_to": "FCS_SSH_EXT.1.5",
+          "publication_date": "2026-04-01T13:20:52.574000Z",
+          "removed_on": null,
+          "status": "Published"
+        },
+        {
+          "td_id": 1008,
+          "identifier": "TD1008",
+          "title": "(D)TLS(C/S) Corrections",
+          "protection_profile": [
+            {
+              "pp_id": 519,
+              "pp_name": "Functional Package for Transport Layer Security (TLS) Version 2.1",
+              "pp_common_name": "Functional Package for Transport Layer Security (TLS) Version 2.1",
+              "cc_version": "CC:2022",
+              "mr_version": null,
+              "pp_date": "2025-09-03T00:00:00Z",
+              "entrydate": "2025-09-03T12:25:21.558000Z",
+              "tech_type": "Network Encryption",
+              "pp_sponsor_id": "NIAP",
+              "community_id": null,
+              "status": "Publishing",
+              "sunset_date": null,
+              "pp_overview": "<p style=\"margin-top: 0in; background: white; margin-right: 0in; margin-left: 0in; font-size: 12pt; font-family: 'Times New Roman', serif;\"><span style=\"font-family: Arial, sans-serif; color: #212529;\">Transport Layer Security (TLS) and the closely-related Datagram TLS (DTLS) are cryptographic protocols designed to provide communications security over IP networks.&nbsp;The primary goal of the TLS protocol is to provide confidentiality and integrity of data transmitted between two communicating endpoints, as well as authentication of at least the server endpoint.</span></p>\r\n<p style=\"margin-top: 0in; background: rgb(255, 255, 253); margin-right: 0in; margin-left: 0in; font-size: 12pt; font-family: 'Times New Roman', serif;\"><span style=\"font-family: Arial, sans-serif; color: #000006;\">This \"Functional Package for Transport Layer Security\" (short name \"TLS-PKG\") defines functional requirements for the implementation of the Transport Layer Security (TLS) and Datagram TLS (DTLS) protocols.&nbsp;The requirements are intended to improve the security of products by enabling their evaluation.</span></p>",
+              "security_evaluation_summary": "<p style=\"margin-top: 0in; background: white; margin-right: 0in; margin-left: 0in; font-size: 12pt; font-family: 'Times New Roman', serif;\"><span style=\"font-family: Arial, sans-serif; color: #212529;\">The Target of Evaluation (TOE) in this Package is a product which acts as a TLS client or server, or both.&nbsp;This Package describes the security functionality of TLS in terms of CC.</span></p>\r\n<p style=\"margin: 0in 0in 1rem; background: white; box-sizing: border-box; font-variant-ligatures: normal; text-align: start; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; font-size: 12pt; font-family: 'Times New Roman', serif;\"><span style=\"font-family: Arial, sans-serif; color: #212529;\">The contents of this Package must be appropriately combined with a PP or PP-Module. When this Package is instantiated by a PP or PP-Module, the Package must include selection-based requirements in accordance with the selections or assignments indicated in the PP or PP-Module.</span></p>",
+              "environmental_strengths": "",
+              "pp_priority": null,
+              "created_on": null,
+              "removed_on": null,
+              "archived": false,
+              "assurance_maintenance": null,
+              "pp_estcompletion": null,
+              "pp_estcompletiondate": null,
+              "pp_transition": "2026-01-01T00:00:00Z",
+              "revised_on": null,
+              "pp_short_name": "PKG_TLS_V2.1",
+              "dod_compliant": false,
+              "csfceligible": true,
+              "constraint": null,
+              "predecessor_id": 465,
+              "successor_id": null,
+              "creator": 504,
+              "remover": null,
+              "editor": null
+            }
+          ],
+          "sunset_protection_profile": [],
+          "related_to": "FCS_TLSC_EXT.1, FCS_TLSS_EXT.1, FCS_DTLSC_EXT.1, FCS_DTLSS_EXT.1",
+          "publication_date": "2026-04-01T14:07:21.831000Z",
+          "removed_on": null,
+          "status": "Published"
+        }
+      ],
+      "removed": []
+    },
+    "cisco_ndcpp": {
+      "added": [],
+      "removed": [],
+      "newly_archived": []
+    },
+    "pcl_all": {
+      "added": [],
+      "removed": [],
+      "newly_archived": []
+    },
+    "in_evaluation": {
+      "added": [],
+      "removed": [],
+      "current_count": 22
+    },
+    "news": {
+      "added": []
+    },
+    "events": {
+      "added": []
+    },
+    "cctls": {
+      "added": [],
+      "removed": [],
+      "status_changes": []
+    }
+  },
+  "cc_portal": {
+    "news": {
+      "added": []
+    },
+    "pps": {
+      "added": []
+    },
+    "products": {
+      "added": []
+    }
+  },
+  "cctl_labs": {
+    "Lightship Security": [
+      {
+        "title": "Jitter Entropy in OpenSSL 3.x",
+        "link": "https://lightshipsec.com/jitter-entropy-in-openssl-3-x/",
+        "summary": "OpenSSL 3.4.0 introduced the jitter\u2011based entropy source (JITTER) as an optional RNG seed, accessible when compiled with enable\u2011jitter. In OpenSSL\u202f3.5.0 &#8211; the new long\u2011term stable (LTS) release &#8211; the jitter entropy provider remains available and gains further significance: notably, the ... <div><a class=\"more-link\" href=\"https://lightshipsec.com/jitter-entropy-in-openssl-3-x/\">Read More</a></div>",
+        "published": "Sun, 02 Nov 2025 17:27:04 +0000",
+        "id": "https://lightshipsec.com/?p=4225"
+      },
+      {
+        "title": "NDcPP v4.0 vs. v3.0e: What\u2019s Changing and How to Prepare",
+        "link": "https://lightshipsec.com/ndcpp-v4-0-vs-v3-0e-whats-changing-and-how-to-prepare/",
+        "summary": "If you ship network devices into environments that care about Common Criteria, the Network Device Collaborative Protection Profile (NDcPP) is the baseline you live with. NDcPP v3.0e&#160;has been the approved version since December 2023; the ND iTC is now iterating ... <div><a class=\"more-link\" href=\"https://lightshipsec.com/ndcpp-v4-0-vs-v3-0e-whats-changing-and-how-to-prepare/\">Read More</a></div>",
+        "published": "Tue, 02 Sep 2025 18:31:59 +0000",
+        "id": "https://lightshipsec.com/?p=4210"
+      },
+      {
+        "title": "Accelerate Your EU Common Criteria Certification with Lightship Security & Applus+ Laboratories",
+        "link": "https://lightshipsec.com/accelerate-your-common-criteria-certification-with-lightship-security-applus-laboratories/",
+        "summary": "At Lightship Security, we help leading security product vendors achieve NIAP and EUCC Common Criteria certification quickly and efficiently. As part of Applus+ Labororatories, a global leader in testing, inspection, and certification, we offer a powerful combination of deep technical ... <div><a class=\"more-link\" href=\"https://lightshipsec.com/accelerate-your-common-criteria-certification-with-lightship-security-applus-laboratories/\">Read More</a></div>",
+        "published": "Tue, 22 Jul 2025 18:55:54 +0000",
+        "id": "https://lightshipsec.com/?p=4185"
+      },
+      {
+        "title": "Key Update in NIAP Policy Letter #12: Vendors, Take Note of Core Functionality Requirement",
+        "link": "https://lightshipsec.com/key-update-in-niap-policy-letter-12-vendors-take-note-of-core-functionality-requirement/",
+        "summary": "The latest update to NIAP Policy Letter #12 (Update 5) brings a significant change that vendors should be aware of: the inclusion of core functionality as a critical requirement for products undergoing evaluation under NIAP. This new addition places an ... <div><a class=\"more-link\" href=\"https://lightshipsec.com/key-update-in-niap-policy-letter-12-vendors-take-note-of-core-functionality-requirement/\">Read More</a></div>",
+        "published": "Mon, 14 Apr 2025 19:00:03 +0000",
+        "id": "https://lightshipsec.com/?p=4178"
+      },
+      {
+        "title": "Post-Quantum Crypto \u2013 FIPS Standards Announced",
+        "link": "https://lightshipsec.com/post-quantum-crypto-fips-standards-announced/",
+        "summary": "[Update Sept 2024: These Standards have been published.] In our last article on Post Quantum Crypto (PQC) titled \u201cIntroduction to the Quantum Computing Impact on Cryptography\u201d, we introduced quantum computing concepts and the potential impact on computer security and cryptography. ... <div><a class=\"more-link\" href=\"https://lightshipsec.com/post-quantum-crypto-fips-standards-announced/\">Read More</a></div>",
+        "published": "Fri, 13 Sep 2024 14:55:29 +0000",
+        "id": "https://lightshipsec.com/?p=4156"
+      },
+      {
+        "title": "ESV for Common Criteria",
+        "link": "https://lightshipsec.com/esv-for-common-criteria/",
+        "summary": "NIAP recently released Labgram #118 - Entropy Source Validation Certificates. It mandates that ESV certificates must be included as part of the Entropy Assessment Report (EAR) for all products that enter evaluation with NIAP from January 1st, 2025. Effective immediately, vendors may submit EARs that refer to an ESV certificate. This blog post discusses what ESV is, how it relates to Common Criteria under NIAP and the impact of this policy on vendors undertaking evaluations outside of NIAP (e.g. Canada etc.) but seeking NIAP PCL entry.",
+        "published": "Wed, 10 Jul 2024 23:20:23 +0000",
+        "id": "https://lightshipsec.com/?p=4141"
+      },
+      {
+        "title": "EUCC Perspectives",
+        "link": "https://lightshipsec.com/eucc-perspectives/",
+        "summary": "In this post we examine the proposed European Cybersecurity Certification Scheme (EUCC). We\u2019ll cover: What is EUCC? EUCC is a European Commission proposal for the creation of an ICT product cybersecurity certification scheme based on Common Criteria. The birthplace of ... <div><a class=\"more-link\" href=\"https://lightshipsec.com/eucc-perspectives/\">Read More</a></div>",
+        "published": "Mon, 08 Jan 2024 23:31:17 +0000",
+        "id": "https://lightshipsec.com/?p=4103"
+      },
+      {
+        "title": "What\u2019s the Deal With NDcPP 3.0?",
+        "link": "https://lightshipsec.com/whats-the-deal-with-ndcpp-3-0/",
+        "summary": "NDcPP 3.0E has now been endorsed by NIAP. This post aims to answer the most common questions we get about NDcPP 3.0E: What\u2019s New in NDcPP 3.0E? Here\u2019s the summary of changes that was presented during the last CCUF workshops: ... <div><a class=\"more-link\" href=\"https://lightshipsec.com/whats-the-deal-with-ndcpp-3-0/\">Read More</a></div>",
+        "published": "Thu, 04 Jan 2024 22:41:42 +0000",
+        "id": "https://lightshipsec.com/?p=3960"
+      },
+      {
+        "title": "What does the new version of the CC mean for me?",
+        "link": "https://lightshipsec.com/what-does-the-new-version-of-the-cc-mean-for-me/",
+        "summary": "Short answer: probably not much! For most vendors and users of the CC, things will roll on normally. It will be the national certification schemes, labs and technical communities that must adjust. Long answer: there are some aspects and circumstances ... <div><a class=\"more-link\" href=\"https://lightshipsec.com/what-does-the-new-version-of-the-cc-mean-for-me/\">Read More</a></div>",
+        "published": "Wed, 28 Jun 2023 22:17:24 +0000",
+        "id": "https://lightshipsec.com/?p=4063"
+      },
+      {
+        "title": "CMVP Transitions Update (July 2023)",
+        "link": "https://lightshipsec.com/cmvp-transitions-update-july-2023/",
+        "summary": "CMVP algorithm transitions can be a great source of anxiety for vendors who seek to attain or maintain compliance to the FIPS 140-2 and 140-3 standards. A great deal of diligence, patience and persistence are required to continually review and ... <div><a class=\"more-link\" href=\"https://lightshipsec.com/cmvp-transitions-update-july-2023/\">Read More</a></div>",
+        "published": "Wed, 28 Jun 2023 08:06:26 +0000",
+        "id": "https://lightshipsec.com/?p=4059"
+      }
+    ]
+  },
+  "csfc": {
+    "pages": {},
+    "capability_packages": {},
+    "feeds": {
+      "CISA Alerts": [
+        {
+          "title": "Anritsu Remote Spectrum Monitor",
+          "link": "https://www.cisa.gov/news-events/ics-advisories/icsa-26-090-01",
+          "summary": "<p><a href=\"https://github.com/cisagov/CSAF/blob/develop/csaf_files/OT/white/2026/icsa-26-090-01.json\"><strong>View CSAF</strong></a></p>\n<h2>Summary</h2>\n<p><strong>Successful exploitation of this vulnerability could allow attackers with network access to alter operational settings, obtain sensitive signal data, or disrupt device availability.</strong></p>\n<p>The following versions of Anritsu Remote Spectrum Monitor are affected:</p>\n<ul>\n<li>Remote Spectrum Monitor MS27100A vers:all/* (CVE-2026-3356)</li>\n<li>Remote Spectrum Monitor MS27101A vers:all/* (CVE-2026-3356)</li>\n<li>Remote Spectrum Monitor MS27102A vers:all/* (CVE-2026-3356)</li>\n<li>Remote Spectrum Monitor MS27103A vers:all/* (CVE-2026-3356)</li>\n</ul>\n<div class=\"csaf-table\">\n<table class=\"tablesaw tablesaw-stack\">\n<thead>\n<tr>\n<th>CVSS</th>\n<th>Vendor</th>\n<th>Equipment</th>\n<th>Vulnerabilities</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>v3 9.8</td>\n<td>Anritsu</td>\n<td>Anritsu Remote Spectrum Monitor</td>\n<td>Missing Authentication for Critical Function</td>\n</tr>\n</tbody>\n</table>\n</div>\n<h3>Background</h3>\n<ul>\n<li><strong>Critical Infrastructure Sectors: </strong>Communications, Defense Industrial Base, Emergency Services, Transportation Systems</li>\n<li><strong>Countries/Areas Deployed: </strong>Worldwide</li>\n<li><strong>Company Headquarters Location: </strong>Japan</li>\n</ul>\n<hr />\n<h2>Vulnerabilities</h2>\n<div class=\"csaf-accordion\">\n<p><a class=\"csaf-accordion-toggle-all\" href=\"https://www.cisa.gov/\">Expand All +</a></p>\n<div class=\"csaf-accordion-item\">\n<h3><a class=\"csaf-accordion-toggle\" href=\"https://www.cisa.gov/\">CVE-2026-3356</a></h3>\n<div class=\"csaf-accordion-content\">\n<p>The MS27102A Remote Spectrum Monitor is vulnerable to an authentication bypass that allows unauthorized users to access and manipulate its management interface. Because the device provides no mechanism to enable or configure authentication, the issue is inherent to its design rather than a deployment error.</p>\n<p><a href=\"https://www.cve.org/CVERecord?id=CVE-2026-3356\">View CVE Details</a></p>\n<hr />\n<h4>Affected Products</h4>\n<h5>Anritsu Remote Spectrum Monitor</h5>\n<div class=\"ics-vendor-version-status\">\n<div class=\"ics-vendor\"><strong>Vendor:</strong><br />Anritsu</div>\n<div class=\"ics-version\"><strong>Product Version:</strong><br />Anritsu Remote Spectrum Monitor MS27100A: vers:all/*, Anritsu Remote Spectrum Monitor MS27101A: vers:all/*, Anritsu Remote Spectrum Monitor MS27102A: vers:all/*, Anritsu Remote Spectrum Monitor MS27103A: vers:all/*</div>\n<div class=\"ics-status\"><strong>Product Status:</strong><br />known_affected</div>\n</div>\n<div class=\"ics-remediations\">\n<h6>Remediations</h6>\n<p><strong>Mitigation</strong><br />Anritsu has no plans to fix this issue. Anritsu recommends that users deploy Remote Spectrum Monitor within secure network environments to mitigate potential risks.</p>\n<p><strong>Mitigation</strong><br />Users can contact Anritsu Technical Support (1-800-267-4878) for more information.</p>\n</div>\n<p><strong>Relevant CWE:</strong> <a href=\"https://cwe.mitre.org/data/definitions/306.html\">CWE-306 Missing Authentication for Critical Function</a></p>\n<hr />\n<h4>Metrics</h4>\n<div class=\"csaf-table csaf-metrics-table\">\n<table class=\"tablesaw tablesaw-stack\">\n<thead>\n<tr>\n<th>CVSS Version</th>\n<th>Base Score</th>\n<th>Base Severity</th>\n<th>Vector String</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>3.1</td>\n<td>9.8</td>\n<td>CRITICAL</td>\n<td><a href=\"https://www.first.org/cvss/calculator/3.1#CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H\">CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H</a></td>\n</tr>\n</tbody>\n</table>\n</div>\n</div>\n</div>\n</div>\n<hr />\n<h2>Acknowledgments</h2>\n<ul>\n<li>Souvik Kandar reported this vulnerability to CISA</li>\n</ul>\n<hr />\n<h2>Legal Notice and Terms of Use</h2>\n<p>This product is provided subject to this Notification (https://www.cisa.gov/notification) and this Privacy &amp; Use policy (https://www.cisa.gov/privacy-policy).</p>\n<hr />\n<h2>Recommended Practices</h2>\n<p>CISA recommends users take defensive measures to minimize the risk of exploitation of this vulnerability.</p>\n<p>Minimize network exposure for all control system devices and/or systems, ensuring they are not accessible from the Internet.</p>\n<p>Locate control system networks and remote devices behind firewalls and isolating them from business networks.</p>\n<p>When remote access is required, use more secure methods, such as Virtual Private Networks (VPNs), recognizing VPNs may have vulnerabilities and should be updated to the most current version available. Also recognize VPN is only as secure as the connected devices.</p>\n<p>CISA reminds organizations to perform proper impact analysis and risk assessment prior to deploying defensive measures.</p>\n<p>CISA also provides a section for control systems security recommended practices on the ICS webpage on cisa.gov/ics. Several CISA products detailing cyber defense best practices are available for reading and download, including Improving Industrial Control Systems Cybersecurity with Defense-in-Depth Strategies.</p>\n<p>CISA encourages organizations to implement recommended cybersecurity strategies for proactive defense of ICS assets.</p>\n<p>Additional mitigation guidance and recommended practices are publicly available on the ICS webpage at cisa.gov/ics in the technical information paper, ICS-TIP-12-146-01B--Targeted Cyber Intrusion Detection and Mitigation Strategies.</p>\n<p>Organizations observing suspected malicious activity should follow established internal procedures and report findings to CISA for tracking and correlation against other incidents.</p>\n<p>No known public exploitation specifically targeting this vulnerability has been reported to CISA at this time.</p>\n<hr />\n<h2>Revision History</h2>\n<ul>\n<li><strong>Initial Release Date: </strong>2026-03-31</li>\n</ul>\n<table class=\"tablesaw tablesaw-stack\">\n<thead>\n<tr>\n<th>Date</th>\n<th>Revision</th>\n<th>Summary</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>2026-03-31</td>\n<td>1</td>\n<td>Initial Publication</td>\n</tr>\n</tbody>\n</table>\n<hr />\n<h2>Legal Notice and Terms of Use</h2>",
+          "published": "Tue, 31 Mar 26 12:00:00 +0000",
+          "id": "/node/24699",
+          "_category": "NEWS"
+        },
+        {
+          "title": "PX4 Autopilot",
+          "link": "https://www.cisa.gov/news-events/ics-advisories/icsa-26-090-02",
+          "summary": "<p><a href=\"https://github.com/cisagov/CSAF/blob/develop/csaf_files/OT/white/2026/icsa-26-090-02.json\"><strong>View CSAF</strong></a></p>\n<h2>Summary</h2>\n<p><strong>Successful exploitation of this vulnerability could allow an attacker with access to the MAVLink interface to execute arbitrary shell commands without cryptographic authentication.</strong></p>\n<p>The following versions of PX4 Autopilot are affected:</p>\n<ul>\n<li>Autopilot v1.16.0_SITL_latest_stable (CVE-2026-1579)</li>\n</ul>\n<div class=\"csaf-table\">\n<table class=\"tablesaw tablesaw-stack\">\n<thead>\n<tr>\n<th>CVSS</th>\n<th>Vendor</th>\n<th>Equipment</th>\n<th>Vulnerabilities</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>v3 9.8</td>\n<td>PX4</td>\n<td>PX4 Autopilot</td>\n<td>Missing Authentication for Critical Function</td>\n</tr>\n</tbody>\n</table>\n</div>\n<h3>Background</h3>\n<ul>\n<li><strong>Critical Infrastructure Sectors: </strong>Transportation Systems, Emergency Services, Defense Industrial Base</li>\n<li><strong>Countries/Areas Deployed: </strong>Worldwide</li>\n<li><strong>Company Headquarters Location: </strong>Switzerland</li>\n</ul>\n<hr />\n<h2>Vulnerabilities</h2>\n<div class=\"csaf-accordion\">\n<p><a class=\"csaf-accordion-toggle-all\" href=\"https://www.cisa.gov/\">Expand All +</a></p>\n<div class=\"csaf-accordion-item\">\n<h3><a class=\"csaf-accordion-toggle\" href=\"https://www.cisa.gov/\">CVE-2026-1579</a></h3>\n<div class=\"csaf-accordion-content\">\n<p>The MAVLink communication protocol does not require cryptographic authentication by default. When MAVLink 2.0 message signing is not enabled, any message -- including SERIAL_CONTROL, which provides interactive shell access -- can be sent by an unauthenticated party with access to the MAVLink interface. PX4 provides MAVLink 2.0 message signing as the cryptographic authentication mechanism for all MAVLink communication. When signing is enabled, unsigned messages are rejected at the protocol level.</p>\n<p><a href=\"https://www.cve.org/CVERecord?id=CVE-2026-1579\">View CVE Details</a></p>\n<hr />\n<h4>Affected Products</h4>\n<h5>PX4 Autopilot</h5>\n<div class=\"ics-vendor-version-status\">\n<div class=\"ics-vendor\"><strong>Vendor:</strong><br />PX4</div>\n<div class=\"ics-version\"><strong>Product Version:</strong><br />PX4 Autopilot: v1.16.0_SITL_latest_stable</div>\n<div class=\"ics-status\"><strong>Product Status:</strong><br />known_affected</div>\n</div>\n<div class=\"ics-remediations\">\n<h6>Remediations</h6>\n<p><strong>Mitigation</strong><br />PX4 recommends enabling MAVLink 2.0 message signing as the authentication mechanism for all non\u2011USB communication links. PX4 has published a security hardening guide for integrators and manufacturers at https://docs.px4.io/main/en/mavlink/security_hardening.<br /><a href=\"https://docs.px4.io/main/en/mavlink/security_hardening\">https://docs.px4.io/main/en/mavlink/security_hardening</a></p>\n<p><strong>Mitigation</strong><br />Message signing configuration documentation can be found at https://docs.px4.io/main/en/mavlink/message_signing.<br /><a href=\"https://docs.px4.io/main/en/mavlink/message_signing\">https://docs.px4.io/main/en/mavlink/message_signing</a></p>\n</div>\n<p><strong>Relevant CWE:</strong> <a href=\"https://cwe.mitre.org/data/definitions/306.html\">CWE-306 Missing Authentication for Critical Function</a></p>\n<hr />\n<h4>Metrics</h4>\n<div class=\"csaf-table csaf-metrics-table\">\n<table class=\"tablesaw tablesaw-stack\">\n<thead>\n<tr>\n<th>CVSS Version</th>\n<th>Base Score</th>\n<th>Base Severity</th>\n<th>Vector String</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>3.1</td>\n<td>9.8</td>\n<td>CRITICAL</td>\n<td><a href=\"https://www.first.org/cvss/calculator/3.1#CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H\">CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H</a></td>\n</tr>\n</tbody>\n</table>\n</div>\n</div>\n</div>\n</div>\n<hr />\n<h2>Acknowledgments</h2>\n<ul>\n<li>Dolev Aviv of Cyviation reported this vulnerability to CISA</li>\n</ul>\n<hr />\n<h2>Legal Notice and Terms of Use</h2>\n<p>This product is provided subject to this Notification (https://www.cisa.gov/notification) and this Privacy &amp; Use policy (https://www.cisa.gov/privacy-policy).</p>\n<hr />\n<h2>Recommended Practices</h2>\n<p>CISA recommends users take defensive measures to minimize the risk of exploitation of this vulnerability.</p>\n<p>Minimize network exposure for all control system devices and/or systems, ensuring they are not accessible from the Internet.</p>\n<p>Locate control system networks and remote devices behind firewalls and isolating them from business networks.</p>\n<p>When remote access is required, use more secure methods, such as Virtual Private Networks (VPNs), recognizing VPNs may have vulnerabilities and should be updated to the most current version available. Also recognize VPN is only as secure as the connected devices.</p>\n<p>CISA reminds organizations to perform proper impact analysis and risk assessment prior to deploying defensive measures.</p>\n<p>CISA also provides a section for control systems security recommended practices on the ICS webpage on cisa.gov/ics. Several CISA products detailing cyber defense best practices are available for reading and download, including Improving Industrial Control Systems Cybersecurity with Defense-in-Depth Strategies.</p>\n<p>CISA encourages organizations to implement recommended cybersecurity strategies for proactive defense of ICS assets.</p>\n<p>Additional mitigation guidance and recommended practices are publicly available on the ICS webpage at cisa.gov/ics in the technical information paper, ICS-TIP-12-146-01B--Targeted Cyber Intrusion Detection and Mitigation Strategies.</p>\n<p>Organizations observing suspected malicious activity should follow established internal procedures and report findings to CISA for tracking and correlation against other incidents.</p>\n<p>CISA also recommends users take the following measures to protect themselves from social engineering attacks:</p>\n<p>Do not click web links or open attachments in unsolicited email messages.</p>\n<p>Refer to Recognizing and Avoiding Email Scams for more information on avoiding email scams.</p>\n<p>Refer to Avoiding Social Engineering and Phishing Attacks for more information on social engineering attacks.</p>\n<p>No known public exploitation specifically targeting this vulnerability has been reported to CISA at this time.</p>\n<hr />\n<h2>Revision History</h2>\n<ul>\n<li><strong>Initial Release Date: </strong>2026-03-31</li>\n</ul>\n<table class=\"tablesaw tablesaw-stack\">\n<thead>\n<tr>\n<th>Date</th>\n<th>Revision</th>\n<th>Summary</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>2026-03-31</td>\n<td>1</td>\n<td>Initial Publication</td>\n</tr>\n</tbody>\n</table>\n<hr />\n<h2>Legal Notice and Terms of Use</h2>",
+          "published": "Tue, 31 Mar 26 12:00:00 +0000",
+          "id": "/node/24700",
+          "_category": "NEWS"
+        }
+      ]
+    }
+  },
+  "cc_crypto": {
+    "pages": {},
+    "doc_headers": {}
+  },
+  "nist": {
+    "pages": {},
+    "doc_headers": {
+      "SP 800-131A Rev 2": {
+        "changed": true,
+        "old_last_modified": "",
+        "new_last_modified": "Thu, 13 Jun 2019 19:37:11 GMT",
+        "old_etag": "",
+        "new_etag": "\"b1de70651f22d51:0\"",
+        "old_content_length": "",
+        "new_content_length": "686214",
+        "old_partial_hash": "11e24de28c40daadf4a1c3eda68e71e7",
+        "new_partial_hash": "",
+        "url": "https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-131Ar2.pdf"
+      }
+    },
+    "feeds": {}
+  },
+  "alerts": [
+    {
+      "source": "NIAP TD",
+      "kind": "new",
+      "title": "TD0915 \u2014 Updates to FCS_CKM.1/WPA and FCS_CKM.2/GTK Tests for MOD_WLANAS",
+      "url": "https://www.niap-ccevs.org/",
+      "detail": "New Technical Decision \u00b7 Published: 2026-04-01",
+      "matched_keywords": [
+        "FCS_CKM"
+      ]
+    },
+    {
+      "source": "NIAP TD",
+      "kind": "new",
+      "title": "TD0916 \u2014 Updates to FCS_CKM.1/WPA and FCS_CKM.2/GTK Tests for MOD_WLANC",
+      "url": "https://www.niap-ccevs.org/",
+      "detail": "New Technical Decision \u00b7 Published: 2026-04-01",
+      "matched_keywords": [
+        "FCS_CKM"
+      ]
+    },
+    {
+      "source": "NIAP TD",
+      "kind": "new",
+      "title": "TD1015 \u2014 Addition of ECD to PKG_SSH_V1.0",
+      "url": "https://www.niap-ccevs.org/",
+      "detail": "New Technical Decision \u00b7 Published: 2026-04-01",
+      "matched_keywords": [
+        "SSH"
+      ]
+    },
+    {
+      "source": "NIAP TD",
+      "kind": "new",
+      "title": "TD1024 \u2014 NIT Technical Decision: Correction to Application Note for FCS_CKM_EXT.7",
+      "url": "https://www.niap-ccevs.org/",
+      "detail": "New Technical Decision \u00b7 Published: 2026-04-01",
+      "matched_keywords": [
+        "FCS_CKM"
+      ]
+    },
+    {
+      "source": "NIAP TD",
+      "kind": "new",
+      "title": "TD1022 \u2014 Clarifications to FCS_SSH_EXT.1.5 When aes256-gcm@openssh.com Is Selected",
+      "url": "https://www.niap-ccevs.org/",
+      "detail": "New Technical Decision \u00b7 Published: 2026-04-01",
+      "matched_keywords": [
+        "SSH"
+      ]
+    },
+    {
+      "source": "NIAP TD",
+      "kind": "new",
+      "title": "TD1023 \u2014 Clarifications to FCS_SSH_EXT.1.5 When aes256-gcm@openssh.com Is Selected",
+      "url": "https://www.niap-ccevs.org/",
+      "detail": "New Technical Decision \u00b7 Published: 2026-04-01",
+      "matched_keywords": [
+        "SSH"
+      ]
+    },
+    {
+      "source": "Lab: Lightship Security",
+      "kind": "post",
+      "title": "NDcPP v4.0 vs. v3.0e: What\u2019s Changing and How to Prepare",
+      "url": "https://lightshipsec.com/ndcpp-v4-0-vs-v3-0e-whats-changing-and-how-to-prepare/",
+      "detail": "New post from Lightship Security",
+      "matched_keywords": [
+        "NDcPP"
+      ]
+    },
+    {
+      "source": "Lab: Lightship Security",
+      "kind": "post",
+      "title": "What\u2019s the Deal With NDcPP 3.0?",
+      "url": "https://lightshipsec.com/whats-the-deal-with-ndcpp-3-0/",
+      "detail": "New post from Lightship Security",
+      "matched_keywords": [
+        "NDcPP"
+      ]
+    },
+    {
+      "source": "Lab: Lightship Security",
+      "kind": "post",
+      "title": "CMVP Transitions Update (July 2023)",
+      "url": "https://lightshipsec.com/cmvp-transitions-update-july-2023/",
+      "detail": "New post from Lightship Security",
+      "matched_keywords": [
+        "CMVP"
+      ]
+    }
+  ]
+}
