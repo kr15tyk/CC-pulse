@@ -201,6 +201,12 @@ def run_daily() -> None:
     else:
         log.info("No keyword alerts.")
 
+    # 7. Cisco NDcPP PCL celebration — fires separately from keyword alerts
+    new_cisco_certs = diff.get("niap", {}).get("cisco_ndcpp", {}).get("added", [])
+    if new_cisco_certs:
+        log.info("%d new Cisco NDcPP certification(s) — sending celebration...", len(new_cisco_certs))
+        emailer.send_cisco_cert_celebration(new_cisco_certs)
+
     log.info("Daily run complete.")
 
 
