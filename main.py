@@ -206,6 +206,7 @@ def run_daily() -> None:
     if new_cisco_certs:
         log.info("%d new Cisco NDcPP certification(s) — sending celebration...", len(new_cisco_certs))
         emailer.send_cisco_cert_celebration(new_cisco_certs)
+        emailer.send_cisco_cert_email(new_cisco_certs)
 
     log.info("Daily run complete.")
 
