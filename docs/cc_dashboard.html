@@ -186,11 +186,11 @@ a:hover { color: var(--neon-cyan); text-decoration: underline; }
 <div class="sticky-top">
 <header class="site-header">
   <div class="site-title">CC Pulse</div>
-  <div class="site-meta">2026-04-01 → 2026-04-02 &middot; Generated 2026-04-02 07:13 UTC</div>
+  <div class="site-meta">2026-04-02 → 2026-04-03 &middot; Generated 2026-04-03 07:09 UTC</div>
 </header>
 <div class="trend-bar">
   <div class="stat"><a href="#sec-niap-pp">
-    <div class="stat-num ">0</div>
+    <div class="stat-num active-num">4</div>
     <div class="stat-lbl">NIAP Changes</div>
   </a></div>
   <div class="stat"><a href="#sec-cctl">
@@ -202,7 +202,7 @@ a:hover { color: var(--neon-cyan); text-decoration: underline; }
     <div class="stat-lbl">CSfC CP Updates</div>
   </a></div>
   <div class="stat"><a href="#sec-nist">
-    <div class="stat-num active-num">3</div>
+    <div class="stat-num active-num">1</div>
     <div class="stat-lbl">NIST Doc Updates</div>
   </a></div>
   <div class="stat"><a href="#sec-cc-portal">
@@ -222,8 +222,8 @@ a:hover { color: var(--neon-cyan); text-decoration: underline; }
   <div class="sh-title">Source Health</div>
   <div class="sh-row">
     <span class="sh-source">NIAP API</span>
-    <span class="sh-badge sh-idle">
-      no changes
+    <span class="sh-badge sh-ok">
+      4 changes
     </span>
   </div>
   <div class="sh-row">
@@ -235,7 +235,7 @@ a:hover { color: var(--neon-cyan); text-decoration: underline; }
   <div class="sh-row">
     <span class="sh-source">NIST CSRC</span>
     <span class="sh-badge sh-ok">
-      3 updates
+      1 update
     </span>
   </div>
   <div class="sh-row">
@@ -256,8 +256,8 @@ a:hover { color: var(--neon-cyan); text-decoration: underline; }
       none
     </span>
   </div>
-  <div class="sh-footer">Period: 2026-04-01 → 2026-04-02</div>
-  <div class="sh-footer">All sources last polled: 2026-04-02 (daily 06:00 UTC)</div>
+  <div class="sh-footer">Period: 2026-04-02 → 2026-04-03</div>
+  <div class="sh-footer">All sources last polled: 2026-04-03 (daily 06:00 UTC)</div>
 </div>
 <div class="ctrl-bar">
   <button class="ctrl-btn" onclick="expandAll()" title="Expand all cards [E]">[E] Expand All</button>
@@ -283,7 +283,7 @@ a:hover { color: var(--neon-cyan); text-decoration: underline; }
     
     
     
-    <p class="no-change">No changes detected.</p>
+    <p class="no-change">No changes detected. <span class="last-active">(last: 2026-04-03)</span></p>
   </div>
 </div>
 
@@ -321,6 +321,8 @@ a:hover { color: var(--neon-cyan); text-decoration: underline; }
       
       <span class="sp-bar" style="height:0%" title="0 changes"></span>
       
+      <span class="sp-bar" style="height:0%" title="0 changes"></span>
+      
     </span>
   </div>
   <div class="card-body collapsed">
@@ -333,10 +335,10 @@ a:hover { color: var(--neon-cyan); text-decoration: underline; }
 </div>
 
   <!-- NIAP News -->
-<div class="card " id="sec-niap-news" data-has-changes="0">
+<div class="card card-new" id="sec-niap-news" data-has-changes="1">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>NIAP News &amp; Announcements</span>
-    <span class="card-count">0 new items</span>
+    <span class="card-count">1 new item</span>
     <span class="sparkline">
       
       <span class="sp-bar" style="height:100%" title="345 changes"></span>
@@ -351,23 +353,32 @@ a:hover { color: var(--neon-cyan); text-decoration: underline; }
       
       <span class="sp-bar" style="height:0%" title="0 changes"></span>
       
+      <span class="sp-bar" style="height:0%" title="1 change"></span>
+      
     </span>
-    <span class="toggle-icon">&#9658;</span>
+    <span class="toggle-icon">&#9660;</span>
   </div>
-  <div class="card-body collapsed">
+  <div class="card-body ">
+    
+    
+    <div class="item-row">
+      <a class="item-link" href="#" target="_blank">NIAP publishes the collaborative Protection Profile Module for Stateful Traffic Filter Firewalls, Version 2.0</a>
+      <span class="item-meta"></span>
+    </div>
     
     
     
     
-    <p class="no-change">No new items.</p>
+    
+    
   </div>
 </div>
 
   <!-- NIAP PCL -- All Certifications -->
-<div class="card " id="sec-niap-pcl" data-has-changes="0">
+<div class="card card-new" id="sec-niap-pcl" data-has-changes="2">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>NIAP PCL -- All Certifications</span>
-    <span class="card-count">0 changes</span>
+    <span class="card-count">2 changes</span>
     <span class="sparkline">
       
       <span class="sp-bar" style="height:0%" title="0 changes"></span>
@@ -382,21 +393,42 @@ a:hover { color: var(--neon-cyan); text-decoration: underline; }
       
       <span class="sp-bar" style="height:0%" title="0 changes"></span>
       
+      <span class="sp-bar" style="height:100%" title="2 changes"></span>
+      
     </span>
   </div>
-  <div class="card-body collapsed">
+  <div class="card-body ">
+    
+    
+    <div class="sub-hdr sub-updated">Newly Archived (2)</div>
+    
+    <div class="item-row">
+      <span class="item-link">Juniper Networks, Inc. -- Junos OS 22.4R2 for EX4100-F-12P, EX4100-F-24P, EX4100-F-48P, EX4100-F-12T, EX4100-F-24T and EX4100-F-48T</span>
+      <span class="item-meta">Archived</span>
+    </div>
+    
+    <div class="item-sub">CPP_ND_V2.2E</div>
+    
+    
+    <div class="item-row">
+      <span class="item-link">Juniper Networks, Inc. -- Juniper Junos OS 22.4R2 for MX304, EX4100-48MP, EX4100-24MP, EX4100-24P, EX4100-24T, EX4100-48P, EX4100-48T</span>
+      <span class="item-meta">Archived</span>
+    </div>
+    
+    <div class="item-sub">CPP_ND_V2.2E, MOD_MACSEC_V1.0</div>
     
     
     
-    <p class="no-change">No changes detected.</p>
+    
+    
   </div>
 </div>
 
   <!-- NIAP PPs -->
-<div class="card " id="sec-niap-pp" data-has-changes="0">
+<div class="card card-new" id="sec-niap-pp" data-has-changes="1">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>NIAP Protection Profiles</span>
-    <span class="card-count">0 changes</span>
+    <span class="card-count">1 change</span>
     <span class="sparkline">
       
       <span class="sp-bar" style="height:100%" title="266 changes"></span>
@@ -411,15 +443,25 @@ a:hover { color: var(--neon-cyan); text-decoration: underline; }
       
       <span class="sp-bar" style="height:0%" title="0 changes"></span>
       
+      <span class="sp-bar" style="height:0%" title="1 change"></span>
+      
     </span>
-    <span class="toggle-icon">&#9658;</span>
+    <span class="toggle-icon">&#9660;</span>
   </div>
-  <div class="card-body collapsed">
+  <div class="card-body ">
+    
+    <div class="sub-hdr sub-new">New PPs (1)</div>
+    
+    <div class="item-row">
+      <a class="item-link" href="https://www.niap-ccevs.org/Profile/PP.cfm?id=540" target="_blank">MOD_CPP_FW_v2.0</a>
+      <span class="item-meta">Firewall &middot; 2026-04-02T00:00:00Z</span>
+    </div>
     
     
     
     
-    <p class="no-change">No changes detected. <span class="last-active">(last: 2026-03-28)</span></p>
+    
+    
   </div>
 </div>
 
@@ -439,6 +481,8 @@ a:hover { color: var(--neon-cyan); text-decoration: underline; }
       <span class="sp-bar" style="height:0%" title="0 changes"></span>
       
       <span class="sp-bar" style="height:1%" title="11 changes"></span>
+      
+      <span class="sp-bar" style="height:0%" title="0 changes"></span>
       
       <span class="sp-bar" style="height:0%" title="0 changes"></span>
       
@@ -474,6 +518,8 @@ a:hover { color: var(--neon-cyan); text-decoration: underline; }
       
       <span class="sp-bar" style="height:0%" title="0 changes"></span>
       
+      <span class="sp-bar" style="height:0%" title="0 changes"></span>
+      
     </span>
     <span class="toggle-icon">&#9658;</span>
   </div>
@@ -496,6 +542,8 @@ a:hover { color: var(--neon-cyan); text-decoration: underline; }
       <span class="sp-bar" style="height:100%" title="8 changes"></span>
       
       <span class="sp-bar" style="height:100%" title="8 changes"></span>
+      
+      <span class="sp-bar" style="height:0%" title="0 changes"></span>
       
       <span class="sp-bar" style="height:0%" title="0 changes"></span>
       
@@ -536,6 +584,8 @@ a:hover { color: var(--neon-cyan); text-decoration: underline; }
       
       <span class="sp-bar" style="height:0%" title="0 changes"></span>
       
+      <span class="sp-bar" style="height:0%" title="0 changes"></span>
+      
     </span>
     <span class="toggle-icon">&#9658;</span>
   </div>
@@ -546,10 +596,10 @@ a:hover { color: var(--neon-cyan); text-decoration: underline; }
 </div>
 
   <!-- NIST Docs -->
-<div class="card card-updated" id="sec-nist" data-has-changes="3">
+<div class="card card-updated" id="sec-nist" data-has-changes="1">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>NIST Documentation</span>
-    <span class="card-count">3 updates</span>
+    <span class="card-count">1 update</span>
     <span class="sparkline">
       
       <span class="sp-bar" style="height:100%" title="7 changes"></span>
@@ -564,28 +614,12 @@ a:hover { color: var(--neon-cyan); text-decoration: underline; }
       
       <span class="sp-bar" style="height:43%" title="3 changes"></span>
       
+      <span class="sp-bar" style="height:14%" title="1 change"></span>
+      
     </span>
     <span class="toggle-icon">&#9660;</span>
   </div>
   <div class="card-body ">
-    
-    
-    <div class="item-row">
-      <a class="item-link" href="https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.204.pdf" target="_blank">FIPS 204 ML-DSA</a>
-      <span class="item-meta">
-        Header changed
-      </span>
-    </div>
-    
-    
-    
-    <div class="item-row">
-      <a class="item-link" href="https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-131Ar2.pdf" target="_blank">SP 800-131A Rev 2</a>
-      <span class="item-meta">
-        Header changed
-      </span>
-    </div>
-    
     
     
     <div class="item-row">
@@ -622,6 +656,8 @@ a:hover { color: var(--neon-cyan); text-decoration: underline; }
       
       <span class="sp-bar" style="height:0%" title="0 changes"></span>
       
+      <span class="sp-bar" style="height:0%" title="0 changes"></span>
+      
     </span>
     <span class="toggle-icon">&#9658;</span>
   </div>
@@ -637,7 +673,7 @@ a:hover { color: var(--neon-cyan); text-decoration: underline; }
 
 <footer>
   <span>CC Pulse &middot; Auto-refreshes daily (06:00 UTC) &middot; Data from NIAP, CSfC, NIST, CC Portal</span>
-  <span>Last run: 2026-04-02 07:13 UTC</span>
+  <span>Last run: 2026-04-03 07:09 UTC</span>
 </footer>
 
 <script>

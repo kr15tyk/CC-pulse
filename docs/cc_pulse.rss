@@ -2,8 +2,8 @@
 <rss version="2.0"><channel>
 <title>CC Pulse</title>
 <link>https://kr15tyk.github.io/CC-pulse/cc_dashboard.html</link>
-<description>Common Criteria monitoring - 2026-04-02 07:13 UTC</description>
-<item><title>NIST Doc Updated: FIPS 204 ML-DSA</title><link>https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.204.pdf</link><description>Document header updated.</description></item>
-<item><title>NIST Doc Updated: SP 800-131A Rev 2</title><link>https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-131Ar2.pdf</link><description>Document header updated.</description></item>
+<description>Common Criteria monitoring - 2026-04-03 07:09 UTC</description>
+<item><title>New PP: MOD_CPP_FW_v2.0</title><link>https://www.niap-ccevs.org/Profile/PP.cfm?id=540</link><description>collaborative Protection Profile Module for Stateful Traffic Filter Firewalls v2.0</description></item>
+<item><title>NIAP publishes the collaborative Protection Profile Module for Stateful Traffic Filter Firewalls, Version 2.0</title><link>https://www.niap-ccevs.org/</link><description></description></item>
 <item><title>NIST Doc Updated: NIST IR 8547</title><link>https://nvlpubs.nist.gov/nistpubs/ir/2024/NIST.IR.8547.ipd.pdf</link><description>Document header updated.</description></item>
 </channel></rss>

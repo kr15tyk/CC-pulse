@@ -1,0 +1,206 @@
+{
+  "period_start": "2026-04-02T07:13:24.719029+00:00",
+  "period_end": "2026-04-03T07:09:15.849436+00:00",
+  "niap": {
+    "pps": {
+      "added": [
+        {
+          "pp_id": 540,
+          "pp_short_name": "MOD_CPP_FW_v2.0",
+          "pp_name": "collaborative Protection Profile Module for Stateful Traffic Filter Firewalls v2.0",
+          "tech_type": "Firewall",
+          "status": "Publishing",
+          "pp_date": "2026-04-02T00:00:00Z",
+          "sunset_date": null,
+          "pp_sponsor_id": "NW Fundamentals and FW iTC",
+          "pp_transition": null,
+          "cc_version": "CC:2022"
+        }
+      ],
+      "removed": [],
+      "sunset_changes": [],
+      "status_changes": []
+    },
+    "tds": {
+      "added": [],
+      "removed": []
+    },
+    "cisco_ndcpp": {
+      "added": [],
+      "removed": [],
+      "newly_archived": []
+    },
+    "pcl_all": {
+      "added": [],
+      "removed": [],
+      "newly_archived": [
+        {
+          "active_maintenances": [],
+          "am_sort": "2026-04-02T00:00:00Z",
+          "assigned_lab_name": "ASD",
+          "certification_date": "2024-04-02T00:00:00Z",
+          "from_cc_portal": true,
+          "product_id": "2024.1075",
+          "product_name": "Junos OS 22.4R2 for EX4100-F-12P, EX4100-F-24P, EX4100-F-48P, EX4100-F-12T, EX4100-F-24T and EX4100-F-48T",
+          "protection_profiles": [
+            {
+              "pp_id": 447,
+              "pp_name": "collaborative Protection Profile for Network Devices Version 2.2e",
+              "pp_short_name": "CPP_ND_V2.2E"
+            }
+          ],
+          "status_sort": "Archived",
+          "submitting_country_id_code": "AU",
+          "submitting_country_id_name": "Australia",
+          "sunset_date": "2029-04-02T00:00:00Z",
+          "tech_types": [
+            "Network and Network-Related Devices and Systems"
+          ],
+          "vendor_id_name": "Juniper Networks, Inc.",
+          "v_id": "2024.1075",
+          "kicked_off_date": null
+        },
+        {
+          "active_maintenances": [],
+          "am_sort": "2026-04-02T00:00:00Z",
+          "assigned_lab_name": "Teron Labs",
+          "certification_date": "2024-04-02T00:00:00Z",
+          "from_cc_portal": true,
+          "product_id": "2024.1081",
+          "product_name": "Juniper Junos OS 22.4R2 for MX304, EX4100-48MP, EX4100-24MP, EX4100-24P, EX4100-24T, EX4100-48P, EX4100-48T",
+          "protection_profiles": [
+            {
+              "pp_id": 447,
+              "pp_name": "collaborative Protection Profile for Network Devices Version 2.2e",
+              "pp_short_name": "CPP_ND_V2.2E"
+            },
+            {
+              "pp_id": 480,
+              "pp_name": "PP-Module for MACsec Ethernet Encryption Version 1.0",
+              "pp_short_name": "MOD_MACSEC_V1.0"
+            }
+          ],
+          "status_sort": "Archived",
+          "submitting_country_id_code": "AU",
+          "submitting_country_id_name": "Australia",
+          "sunset_date": "2029-04-02T00:00:00Z",
+          "tech_types": [
+            "Network and Network-Related Devices and Systems"
+          ],
+          "vendor_id_name": "Juniper Networks, Inc.",
+          "v_id": "2024.1081",
+          "kicked_off_date": null
+        }
+      ]
+    },
+    "in_evaluation": {
+      "added": [],
+      "removed": [],
+      "current_count": 22
+    },
+    "news": {
+      "added": [
+        {
+          "id": 3420,
+          "title": "NIAP publishes the collaborative Protection Profile Module for Stateful Traffic Filter Firewalls, Version 2.0",
+          "announcement": "<p>The National Information Assurance Partnership/Common Criteria Evaluation and Validation Scheme (NIAP/CCEVS) is pleased to announce the posting of the collaborative Protection Profile Module for Stateful Traffic Filter Firewalls, Version 2.0.&nbsp; This release represents an update which includes alignment with CC:2022.</p>",
+          "types": "1",
+          "subject": null,
+          "posted": "2026-04-02T11:19:30.751000Z",
+          "begins": null,
+          "expires": null,
+          "link": null,
+          "venue": null,
+          "location": null,
+          "entrydate": "2026-04-02T11:19:30.751000Z",
+          "moddate": null,
+          "active": true,
+          "_category": "PP UPDATE"
+        }
+      ]
+    },
+    "events": {
+      "added": []
+    },
+    "cctls": {
+      "added": [],
+      "removed": [],
+      "status_changes": []
+    }
+  },
+  "cc_portal": {
+    "news": {
+      "added": []
+    },
+    "pps": {
+      "added": []
+    },
+    "products": {
+      "added": []
+    }
+  },
+  "cctl_labs": {},
+  "csfc": {
+    "pages": {},
+    "capability_packages": {},
+    "feeds": {
+      "CISA Alerts": [
+        {
+          "title": "Siemens SICAM 8 Products",
+          "link": "https://www.cisa.gov/news-events/ics-advisories/icsa-26-092-01",
+          "summary": "<p><a href=\"https://github.com/cisagov/CSAF/blob/develop/csaf_files/OT/white/2026/icsa-26-092-01.json\"><strong>View CSAF</strong></a></p>\n<h2>Summary</h2>\n<p><strong>Multiple SICAM 8 products are affected by multiple vulnerabilities that could lead to denial of service, namely: - SICAM A8000 Device firmware - CPCI85 for CP-8031/CP-8050 - SICORE for CP-8010/CP-8012 - RTUM85 for CP-8010/CP-8012 - SICAM EGS Device firmware - CPCI85 - SICAM S8000 - SICORE - RTUM85 Siemens has released new versions for the affected products and recommends to update to the latest versions.</strong></p>\n<p>The following versions of Siemens SICAM 8 Products are affected:</p>\n<ul>\n<li>CPCI85 Central Processing/Communication vers:intdot/&lt;26.10 (CVE-2026-27663, CVE-2026-27664)</li>\n<li>RTUM85&nbsp;RTU Base vers:intdot/&lt;26.10 (CVE-2026-27663)</li>\n<li>SICORE Base system vers:intdot/&lt;26.10.0 (CVE-2026-27664)</li>\n</ul>\n<div class=\"csaf-table\">\n<table class=\"tablesaw tablesaw-stack\">\n<thead>\n<tr>\n<th>CVSS</th>\n<th>Vendor</th>\n<th>Equipment</th>\n<th>Vulnerabilities</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>v3 7.5</td>\n<td>Siemens</td>\n<td>Siemens SICAM 8 Products</td>\n<td>Allocation of Resources Without Limits or Throttling, Out-of-bounds Write</td>\n</tr>\n</tbody>\n</table>\n</div>\n<h3>Background</h3>\n<ul>\n<li><strong>Critical Infrastructure Sectors: </strong>Critical Manufacturing</li>\n<li><strong>Countries/Areas Deployed: </strong>Worldwide</li>\n<li><strong>Company Headquarters Location: </strong>Germany</li>\n</ul>\n<hr />\n<h2>Vulnerabilities</h2>\n<div class=\"csaf-accordion\">\n<p><a class=\"csaf-accordion-toggle-all\" href=\"https://www.cisa.gov/\">Expand All +</a></p>\n<div class=\"csaf-accordion-item\">\n<h3><a class=\"csaf-accordion-toggle\" href=\"https://www.cisa.gov/\">CVE-2026-27663</a></h3>\n<div class=\"csaf-accordion-content\">\n<p>The affected application contains denial-of-service (DoS) vulnerability. The remote operation mode is susceptible to a resource exhaustion condition when subjected to a high volume of requests. Sending multiple requests can exhaust resources, preventing parameterization and requiring a reset or reboot to restore functionality.</p>\n<p><a href=\"https://www.cve.org/CVERecord?id=CVE-2026-27663\">View CVE Details</a></p>\n<hr />\n<h4>Affected Products</h4>\n<h5>Siemens SICAM 8 Products</h5>\n<div class=\"ics-vendor-version-status\">\n<div class=\"ics-vendor\"><strong>Vendor:</strong><br />Siemens</div>\n<div class=\"ics-version\"><strong>Product Version:</strong><br />CPCI85 Central Processing/Communication, RTUM85&nbsp;RTU Base</div>\n<div class=\"ics-status\"><strong>Product Status:</strong><br />known_affected</div>\n</div>\n<div class=\"ics-remediations\">\n<h6>Remediations</h6>\n<p><strong>Vendor fix</strong><br />Update to V26.10 or later version The firmware RTUM85 V26.10 is present within \u201cCP-8010/CP-8012 Package\u201d V26.10 https://support.industry.siemens.com/cs/ww/en/view/109972894/ and also within \u201cSICAM S8000 Package\u201d V26.10 https://support.industry.siemens.com/cs/document/109818240</p>\n<p><strong>Vendor fix</strong><br />Update to V26.10 or later version The firmware CPCI85 V26.10 is present within \u201cCP-8031/CP-8050 Package\u201d V26.10 https://support.industry.siemens.com/cs/ww/en/view/109804985/ and also within \u201cSICAM EGS Package\u201d V26.10 https://support.industry.siemens.com/cs/document/109972536/</p>\n</div>\n<p><strong>Relevant CWE:</strong> <a href=\"https://cwe.mitre.org/data/definitions/770.html\">CWE-770 Allocation of Resources Without Limits or Throttling</a></p>\n<hr />\n<h4>Metrics</h4>\n<div class=\"csaf-table csaf-metrics-table\">\n<table class=\"tablesaw tablesaw-stack\">\n<thead>\n<tr>\n<th>CVSS Version</th>\n<th>Base Score</th>\n<th>Base Severity</th>\n<th>Vector String</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>3.1</td>\n<td>6.5</td>\n<td>MEDIUM</td>\n<td><a href=\"https://www.first.org/cvss/calculator/3.1#CVSS:3.1/AV:A/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H\">CVSS:3.1/AV:A/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H</a></td>\n</tr>\n</tbody>\n</table>\n</div>\n</div>\n</div>\n<div class=\"csaf-accordion-item\">\n<h3><a class=\"csaf-accordion-toggle\" href=\"https://www.cisa.gov/\">CVE-2026-27664</a></h3>\n<div class=\"csaf-accordion-content\">\n<p>The affected application contains an out-of-bounds write vulnerability while parsing specially crafted XML inputs. This could allow an unauthenticated attacker to exploit this issue by sending a malicious XML request, which may cause the service to crash, resulting in a denial-of-service condition.</p>\n<p><a href=\"https://www.cve.org/CVERecord?id=CVE-2026-27664\">View CVE Details</a></p>\n<hr />\n<h4>Affected Products</h4>\n<h5>Siemens SICAM 8 Products</h5>\n<div class=\"ics-vendor-version-status\">\n<div class=\"ics-vendor\"><strong>Vendor:</strong><br />Siemens</div>\n<div class=\"ics-version\"><strong>Product Version:</strong><br />CPCI85 Central Processing/Communication, SICORE Base system</div>\n<div class=\"ics-status\"><strong>Product Status:</strong><br />known_affected</div>\n</div>\n<div class=\"ics-remediations\">\n<h6>Remediations</h6>\n<p><strong>Vendor fix</strong><br />Update to V26.10 or later version The firmware CPCI85 V26.10 is present within \u201cCP-8031/CP-8050 Package\u201d V26.10 https://support.industry.siemens.com/cs/ww/en/view/109804985/ and also within \u201cSICAM EGS Package\u201d V26.10 https://support.industry.siemens.com/cs/document/109972536/</p>\n<p><strong>Vendor fix</strong><br />Update to V26.10.0 or later version The firmware SICORE V26.10.0 is present within \u201cCP-8010/CP-8012 Package\u201d V26.10 https://support.industry.siemens.com/cs/ww/en/view/109972894/ and also within \u201cSICAM S8000 Package\u201d V26.10 https://support.industry.siemens.com/cs/document/109818240</p>\n</div>\n<p><strong>Relevant CWE:</strong> <a href=\"https://cwe.mitre.org/data/definitions/787.html\">CWE-787 Out-of-bounds Write</a></p>\n<hr />\n<h4>Metrics</h4>\n<div class=\"csaf-table csaf-metrics-table\">\n<table class=\"tablesaw tablesaw-stack\">\n<thead>\n<tr>\n<th>CVSS Version</th>\n<th>Base Score</th>\n<th>Base Severity</th>\n<th>Vector String</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>3.1</td>\n<td>7.5</td>\n<td>HIGH</td>\n<td><a href=\"https://www.first.org/cvss/calculator/3.1#CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H\">CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H</a></td>\n</tr>\n</tbody>\n</table>\n</div>\n</div>\n</div>\n</div>\n<hr />\n<h2>Acknowledgments</h2>\n<ul>\n<li>T. Weber, S. Dietz, D. Blagojevic, and F. Koroknai of CyberDanube coordinated disclosure of CVE-2026-27663</li>\n<li>S. Dietz of CyberDanube and VERBUND Digital Power coordinated disclosure of CVE-2026-27664</li>\n<li>S. Dietz of Siemens ProductCERT reported these vulnerabilities to CISA.</li>\n</ul>\n<hr />\n<h2>General Recommendations</h2>\n<p>Operators of critical power systems (e.g. TSOs or DSOs) worldwide are usually required by regulations to build resilience into the power grids by applying multi-level redundant secondary protection schemes. It is therefore recommended that the operators check whether appropriate resilient protection measures are in place. The risk of cyber incidents impacting the grid's reliability can thus be minimized by virtue of the grid design. Siemens strongly recommends applying the provided security updates using the corresponding tooling and documented procedures made available with the product. If supported by the product, an automated means to apply the security updates across multiple product instances may be used. Siemens strongly recommends prior validation of any security update before being applied, and supervision by trained staff of the update process in the target environment. As a general security measure Siemens strongly recommends to protect network access with appropriate mechanisms (e.g. firewalls, segmentation, VPN). It is advised to configure the environment according to our operational guidelines in order to run the devices in a protected IT environment. Recommended security guidelines can be found at: https://www.siemens.com/gridsecurity</p>\n<hr />\n<h2>Additional Resources</h2>\n<p>For further inquiries on security vulnerabilities in Siemens products and solutions, please contact the Siemens ProductCERT: https://www.siemens.com/cert/advisories</p>\n<hr />\n<h2>Terms of Use</h2>\n<p>The use of Siemens Security Advisories is subject to the terms and conditions listed on: https://www.siemens.com/productcert/terms-of-use.</p>\n<hr />\n<h2>Legal Notice and Terms of Use</h2>\n<p>This product is provided subject to this Notification (https://www.cisa.gov/notification) and this Privacy &amp; Use policy (https://www.cisa.gov/privacy-policy).</p>\n<hr />\n<h2>Recommended Practices</h2>\n<p>CISA recommends users take defensive measures to minimize the exploitation risk of this vulnerability.</p>\n<p>Minimize network exposure for all control system devices and/or systems, and ensure they are not accessible from the internet.</p>\n<p>Locate control system networks and remote devices behind firewalls and isolate them from business networks.</p>\n<p>When remote access is required, use more secure methods, such as Virtual Private Networks (VPNs), recognizing VPNs may have vulnerabilities and should be updated to the most recent version available. Also recognize VPN is only as secure as its connected devices.</p>\n<p>CISA reminds organizations to perform proper impact analysis and risk assessment prior to deploying defensive measures.</p>\n<p>CISA also provides a section for control systems security recommended practices on the ICS webpage on cisa.gov. Several CISA products detailing cyber defense best practices are available for reading and download, including Improving Industrial Control Systems Cybersecurity with Defense-in-Depth Strategies.</p>\n<p>CISA encourages organizations to implement recommended cybersecurity strategies for proactive defense of ICS assets. Additional mitigation guidance and recommended practices are publicly available on the ICS webpage at cisa.gov in the technical information paper, ICS-TIP-12-146-01B--Targeted Cyber Intrusion Detection and Mitigation Strategies.</p>\n<p>Organizations observing suspected malicious activity should follow established internal procedures and report findings to CISA for tracking and correlation against other incidents.</p>\n<hr />\n<h2>Advisory Conversion Disclaimer</h2>\n<p>This ICSA is a verbatim republication of Siemens ProductCERT SSA-246443 from a direct conversion of the vendor's Common Security Advisory Framework (CSAF) advisory. This is republished to CISA's website as a means of increasing visibility and is provided \"as-is\" for informational purposes only. CISA is not responsible for the editorial or technical accuracy of republished advisories and provides no warranties of any kind regarding any information contained within this advisory. Further, CISA does not endorse any commercial product or service. Please contact Siemens ProductCERT directly for any questions regarding this advisory.</p>\n<h2>Revision History</h2>\n<ul>\n<li><strong>Initial Release Date: </strong>2026-03-26</li>\n</ul>\n<table class=\"tablesaw tablesaw-stack\">\n<thead>\n<tr>\n<th>Date</th>\n<th>Revision</th>\n<th>Summary</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>2026-03-26</td>\n<td>1</td>\n<td>Publication Date</td>\n</tr>\n<tr>\n<td>2026-04-02</td>\n<td>2</td>\n<td>Initial CISA Republication of Siemens ProductCERT SSA-246443 advisory</td>\n</tr>\n</tbody>\n</table>\n<hr />\n<h2>Legal Notice and Terms of Use</h2>",
+          "published": "Thu, 02 Apr 26 12:00:00 +0000",
+          "id": "/node/24705",
+          "_category": "NEWS"
+        },
+        {
+          "title": "Yokogawa CENTUM VP",
+          "link": "https://www.cisa.gov/news-events/ics-advisories/icsa-26-092-02",
+          "summary": "<p><a href=\"https://github.com/cisagov/CSAF/blob/develop/csaf_files/OT/white/2026/icsa-26-092-02.json\"><strong>View CSAF</strong></a></p>\n<h2>Summary</h2>\n<p><strong>Successful exploitation of this vulnerability could allow an attacker to login as the PROG user and modify permissions.</strong></p>\n<p>The following versions of Yokogawa CENTUM VP are affected:</p>\n<ul>\n<li>CENTUM VP &gt;=R5.01.00|</li>\n<li>CENTUM VP &gt;=R6.01.00|</li>\n<li>CENTUM VP vR7.01.00 (CVE-2025-7741)</li>\n</ul>\n<div class=\"csaf-table\">\n<table class=\"tablesaw tablesaw-stack\">\n<thead>\n<tr>\n<th>CVSS</th>\n<th>Vendor</th>\n<th>Equipment</th>\n<th>Vulnerabilities</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>v3 4</td>\n<td>Yokogawa</td>\n<td>Yokogawa CENTUM VP</td>\n<td>Use of Hard-coded Password</td>\n</tr>\n</tbody>\n</table>\n</div>\n<h3>Background</h3>\n<ul>\n<li><strong>Critical Infrastructure Sectors: </strong>Critical Manufacturing, Energy, Food and Agriculture</li>\n<li><strong>Countries/Areas Deployed: </strong>Worldwide</li>\n<li><strong>Company Headquarters Location: </strong>Japan</li>\n</ul>\n<hr />\n<h2>Vulnerabilities</h2>\n<div class=\"csaf-accordion\">\n<p><a class=\"csaf-accordion-toggle-all\" href=\"https://www.cisa.gov/\">Expand All +</a></p>\n<div class=\"csaf-accordion-item\">\n<h3><a class=\"csaf-accordion-toggle\" href=\"https://www.cisa.gov/\">CVE-2025-7741</a></h3>\n<div class=\"csaf-accordion-content\">\n<p>Affected products contain a hardcoded password for the user account (PROG) used for CENTUM Authentication Mode within the system. Under the following conditions, there is a risk that an attacker could log in as the PROG user. The default permission for the PROG users is S1 permission (equivalent to OFFUSER). Therefore, for properly permission-controlled targets of operation and monitoring, even if an attacker logs in as the PROG user, the risk of critical operations or configuration changes being performed is considered low. If the PROG user's permissions have been changed for any reason, there is a risk that operations or configuration changes may be performed under the modified permissions. Additionally, exploiting this vulnerability requires an attacker to already have access to the HIS screen controls.</p>\n<p><a href=\"https://www.cve.org/CVERecord?id=CVE-2025-7741\">View CVE Details</a></p>\n<hr />\n<h4>Affected Products</h4>\n<h5>Yokogawa CENTUM VP</h5>\n<div class=\"ics-vendor-version-status\">\n<div class=\"ics-vendor\"><strong>Vendor:</strong><br />Yokogawa</div>\n<div class=\"ics-version\"><strong>Product Version:</strong><br />Yokogawa CENTUM VP: &gt;=R5.01.00|&lt;R5.04.20, Yokogawa CENTUM VP: &gt;=R6.01.00|&lt;R6.12.00, Yokogawa CENTUM VP: vR7.01.00</div>\n<div class=\"ics-status\"><strong>Product Status:</strong><br />known_affected</div>\n</div>\n<div class=\"ics-remediations\">\n<h6>Remediations</h6>\n<p><strong>Mitigation</strong><br />Yokogawa recommends users applying the following mitigations to affected versions:</p>\n<p><strong>Vendor fix</strong><br />CENTUM VP R5.01.00 to R5.04.20: Change the user authentication mode to Windows Authentication Mode.</p>\n<p><strong>Vendor fix</strong><br />CENTUM VP R6.01.00 to R6.12.00: Change the user authentication mode to Windows Authentication Mode.</p>\n<p><strong>Vendor fix</strong><br />CENTUM VP R7.01.00: Apply patch software R7.01.10.</p>\n<p><strong>Mitigation</strong><br />NOTE:Changing to Windows Authentication Mode requires engineering work. If users wish to make this change, please contact Yokogawa directly https://contact.yokogawa.com/cs/gw?c-id=000498.<br /><a href=\"https://contact.yokogawa.com/cs/gw?c-id=000498\">https://contact.yokogawa.com/cs/gw?c-id=000498</a></p>\n<p><strong>Mitigation</strong><br />For more information and details on implementing these mitigations, users should see the Yokogawa advisory YSAR-26-0003 at https://web-material3.yokogawa.com/1/39281/files/YSAR-26-0003-E.pdf<br /><a href=\"https://web-material3.yokogawa.com/1/39281/files/YSAR-26-0003-E.pdf\">https://web-material3.yokogawa.com/1/39281/files/YSAR-26-0003-E.pdf</a></p>\n</div>\n<p><strong>Relevant CWE:</strong> <a href=\"https://cwe.mitre.org/data/definitions/259.html\">CWE-259 Use of Hard-coded Password</a></p>\n<hr />\n<h4>Metrics</h4>\n<div class=\"csaf-table csaf-metrics-table\">\n<table class=\"tablesaw tablesaw-stack\">\n<thead>\n<tr>\n<th>CVSS Version</th>\n<th>Base Score</th>\n<th>Base Severity</th>\n<th>Vector String</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>3.1</td>\n<td>4</td>\n<td>MEDIUM</td>\n<td><a href=\"https://www.first.org/cvss/calculator/3.1#CVSS:3.1/AV:L/AC:H/PR:N/UI:N/S:U/C:L/I:L/A:N\">CVSS:3.1/AV:L/AC:H/PR:N/UI:N/S:U/C:L/I:L/A:N</a></td>\n</tr>\n</tbody>\n</table>\n</div>\n</div>\n</div>\n</div>\n<hr />\n<h2>Acknowledgments</h2>\n<ul>\n<li>Yokogawa reported this vulnerability to CISA</li>\n</ul>\n<hr />\n<h2>Legal Notice and Terms of Use</h2>\n<p>This product is provided subject to this Notification (https://www.cisa.gov/notification) and this Privacy &amp; Use policy (https://www.cisa.gov/privacy-policy).</p>\n<hr />\n<h2>Recommended Practices</h2>\n<p>CISA recommends users take defensive measures to minimize the risk of exploitation of this vulnerability.</p>\n<p>Minimize network exposure for all control system devices and/or systems, ensuring they are not accessible from the internet.</p>\n<p>Locate control system networks and remote devices behind firewalls and isolating them from business networks.</p>\n<p>When remote access is required, use more secure methods, such as Virtual Private Networks (VPNs), recognizing VPNs may have vulnerabilities and should be updated to the most current version available. Also recognize VPN is only as secure as the connected devices.</p>\n<p>CISA reminds organizations to perform proper impact analysis and risk assessment prior to deploying defensive measures.</p>\n<p>CISA also provides a section for control systems security recommended practices on the ICS webpage on cisa.gov/ics. Several CISA products detailing cyber defense best practices are available for reading and download, including Improving Industrial Control Systems Cybersecurity with Defense-in-Depth Strategies.</p>\n<p>CISA encourages organizations to implement recommended cybersecurity strategies for proactive defense of ICS assets.</p>\n<p>Additional mitigation guidance and recommended practices are publicly available on the ICS webpage at cisa.gov/ics in the technical information paper, ICS-TIP-12-146-01B--Targeted Cyber Intrusion Detection and Mitigation Strategies.</p>\n<p>Organizations observing suspected malicious activity should follow established internal procedures and report findings to CISA for tracking and correlation against other incidents.</p>\n<p>CISA also recommends users take the following measures to protect themselves from social engineering attacks:</p>\n<p>Do not click web links or open attachments in unsolicited email messages.</p>\n<p>Refer to Recognizing and Avoiding Email Scams for more information on avoiding email scams.</p>\n<p>Refer to Avoiding Social Engineering and Phishing Attacks for more information on social engineering attacks.</p>\n<p>No known public exploitation specifically targeting this vulnerability has been reported to CISA at this time. This vulnerability is not exploitable remotely. This vulnerability has a high attack complexity.</p>\n<hr />\n<h2>Revision History</h2>\n<ul>\n<li><strong>Initial Release Date: </strong>2026-04-02</li>\n</ul>\n<table class=\"tablesaw tablesaw-stack\">\n<thead>\n<tr>\n<th>Date</th>\n<th>Revision</th>\n<th>Summary</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>2026-04-02</td>\n<td>1</td>\n<td>Initial Republication of YSAR-26-0003</td>\n</tr>\n</tbody>\n</table>\n<hr />\n<h2>Legal Notice and Terms of Use</h2>",
+          "published": "Thu, 02 Apr 26 12:00:00 +0000",
+          "id": "/node/24706",
+          "_category": "NEWS"
+        },
+        {
+          "title": "CISA Adds One Known Exploited Vulnerability to Catalog",
+          "link": "https://www.cisa.gov/news-events/alerts/2026/04/02/cisa-adds-one-known-exploited-vulnerability-catalog",
+          "summary": "<p>CISA has added&nbsp;one&nbsp;new&nbsp;vulnerability&nbsp;to its&nbsp;<a href=\"https://www.cisa.gov/known-exploited-vulnerabilities-catalog\">Known Exploited Vulnerabilities (KEV) Catalog</a>, based on evidence of active exploitation.&nbsp;</p>\n<ul>\n<li><a href=\"https://www.cve.org/CVERecord?id=CVE-2026-3502\" target=\"_blank\">CVE-2026-3502</a>&nbsp;TrueConf&nbsp;Client Download of Code Without Integrity Check Vulnerability&nbsp;</li>\n</ul>\n<p>This type of vulnerability is a frequent attack vector for malicious cyber actors and poses significant risks to the federal enterprise.&nbsp;</p>\n<p><a href=\"https://www.cisa.gov/binding-operational-directive-22-01\">Binding Operational Directive (BOD) 22-01: Reducing the Significant Risk of Known Exploited Vulnerabilities</a>&nbsp;established the KEV&nbsp;Catalog as a living list of known Common Vulnerabilities and Exposures (CVEs) that carry significant risk to the federal enterprise. BOD 22-01 requires Federal Civilian Executive Branch (FCEB) agencies to remediate identified vulnerabilities by the due date to protect FCEB networks against active threats. See the&nbsp;<a href=\"https://www.cisa.gov/sites/default/files/publications/Reducing_the_Significant_Risk_of_Known_Exploited_Vulnerabilities_211103.pdf\">BOD 22-01 Fact Sheet</a>&nbsp;for more information.&nbsp;</p>\n<p>Although BOD 22-01 only applies to FCEB agencies, CISA strongly urges all organizations to reduce their exposure to cyberattacks by prioritizing&nbsp;timely&nbsp;remediation of&nbsp;<a href=\"https://www.cisa.gov/known-exploited-vulnerabilities-catalog\">KEV Catalog vulnerabilities</a>&nbsp;as part of their vulnerability management practice. CISA will continue to add vulnerabilities to the catalog that meet the&nbsp;<a href=\"https://www.cisa.gov/known-exploited-vulnerabilities\">specified criteria</a>.&nbsp;</p>",
+          "published": "Thu, 02 Apr 26 12:00:00 +0000",
+          "id": "/node/24703",
+          "_category": "CISA"
+        },
+        {
+          "title": "Hitachi Energy Ellipse",
+          "link": "https://www.cisa.gov/news-events/ics-advisories/icsa-26-092-03",
+          "summary": "<p><a href=\"https://github.com/cisagov/CSAF/blob/develop/csaf_files/OT/white/2026/icsa-26-092-03.json\"><strong>View CSAF</strong></a></p>\n<h2>Summary</h2>\n<p><strong>Hitachi Energy is aware of a Jasper Report vulnerability that affects the Ellipse product versions mentioned in this document below. This vulnerability can be exploited to carry out remote code execution (RCE) attack on the product. Please refer to the Recommended Immediate Actions for information about the mitigation/remediation.</strong></p>\n<p>The following versions of Hitachi Energy Ellipse are affected:</p>\n<ul>\n<li>Ellipse vers:Ellipse/&lt;=9.0.50 (CVE-2025-10492)</li>\n</ul>\n<div class=\"csaf-table\">\n<table class=\"tablesaw tablesaw-stack\">\n<thead>\n<tr>\n<th>CVSS</th>\n<th>Vendor</th>\n<th>Equipment</th>\n<th>Vulnerabilities</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>v3 9.8</td>\n<td>Hitachi Energy</td>\n<td>Hitachi Energy Ellipse</td>\n<td>Deserialization of Untrusted Data</td>\n</tr>\n</tbody>\n</table>\n</div>\n<h3>Background</h3>\n<ul>\n<li><strong>Critical Infrastructure Sectors: </strong>Critical Manufacturing</li>\n<li><strong>Countries/Areas Deployed: </strong>Worldwide</li>\n<li><strong>Company Headquarters Location: </strong>Switzerland</li>\n</ul>\n<hr />\n<h2>Vulnerabilities</h2>\n<div class=\"csaf-accordion\">\n<p><a class=\"csaf-accordion-toggle-all\" href=\"https://www.cisa.gov/\">Expand All +</a></p>\n<div class=\"csaf-accordion-item\">\n<h3><a class=\"csaf-accordion-toggle\" href=\"https://www.cisa.gov/\">CVE-2025-10492</a></h3>\n<div class=\"csaf-accordion-content\">\n<p>A vulnerability exists in Jasper Report third party component that is used for creating custom reports in Ellipse product. A Java deserialization vulnerability has been discovered in Jaspersoft Library. Improper handling of externally supplied data may allow attackers to execute arbitrary code remotely on systems that use the affected library.</p>\n<p><a href=\"https://www.cve.org/CVERecord?id=CVE-2025-10492\">View CVE Details</a></p>\n<hr />\n<h4>Affected Products</h4>\n<h5>Hitachi Energy Ellipse</h5>\n<div class=\"ics-vendor-version-status\">\n<div class=\"ics-vendor\"><strong>Vendor:</strong><br />Hitachi Energy</div>\n<div class=\"ics-version\"><strong>Product Version:</strong><br />Ellipse versions 9.0.50 and prior</div>\n<div class=\"ics-status\"><strong>Product Status:</strong><br />known_affected</div>\n</div>\n<div class=\"ics-remediations\">\n<h6>Remediations</h6>\n<p><strong>Mitigation</strong><br />Since the vulnerability exists in Jasper Report component that is external to Ellipse application, restrict the loading of external custom reports created by end users by allowing only trusted Jasper reports generated by the system administrator.</p>\n</div>\n<p><strong>Relevant CWE:</strong> <a href=\"https://cwe.mitre.org/data/definitions/502.html\">CWE-502 Deserialization of Untrusted Data</a></p>\n<hr />\n<h4>Metrics</h4>\n<div class=\"csaf-table csaf-metrics-table\">\n<table class=\"tablesaw tablesaw-stack\">\n<thead>\n<tr>\n<th>CVSS Version</th>\n<th>Base Score</th>\n<th>Base Severity</th>\n<th>Vector String</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>3.1</td>\n<td>9.8</td>\n<td>CRITICAL</td>\n<td><a href=\"https://www.first.org/cvss/calculator/3.1#CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H\">CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H</a></td>\n</tr>\n</tbody>\n</table>\n</div>\n</div>\n</div>\n</div>\n<hr />\n<h2>Acknowledgments</h2>\n<ul>\n<li>Hitachi Energy PSIRT reported this vulnerability to CISA.</li>\n</ul>\n<hr />\n<h2>Notice</h2>\n<p>The information in this document is subject to change without notice and should not be construed as a commitment by Hitachi Energy. Hitachi Energy provides no warranty, express or implied, including warranties of merchantability and fitness for a particular purpose, for the information contained in this document, and assumes no responsibility for any errors that may appear in this document. In no event shall Hitachi Energy or any of its suppliers be liable for direct, indirect, special, incidental or consequential damages of any nature or kind arising from the use of this document, or from the use of any hardware or software described in this document, even if Hitachi Energy or its suppliers have been advised of the possibility of such damages. This document and parts hereof must not be reproduced or copied without written permission from Hitachi Energy and the contents hereof must not be imparted to a third party nor used for any unauthorized purpose. All rights to registrations and trademarks reside with their respective owners.</p>\n<hr />\n<h2>Support</h2>\n<p>For additional information and support please contact your product provider or Hitachi Energy service organization. For contact information, see https://www.hitachienergy.com/contact-us/ for Hitachi Energy contact-centers.</p>\n<hr />\n<h2>General Mitigation Factors</h2>\n<p>Recommended security practices and firewall configurations can help protect a process control network from attacks that originate from outside the network. Such practices include that process control systems are physically protected from direct access by unauthorized personnel, have no direct connections to the Internet, and are separated from other networks by means of a firewall system that has a minimal number of ports exposed, and others that have to be evaluated case by case. Process control systems should not be used for Internet surfing, instant messaging, or receiving e-mails. Portable computers and removable storage media should be carefully scanned for viruses before they are connected to a control system. Proper password policies and processes should be followed.</p>\n<hr />\n<h2>Legal Notice and Terms of Use</h2>\n<p>This product is provided subject to this Notification (https://www.cisa.gov/notification) and this Privacy &amp; Use policy (https://www.cisa.gov/privacy-policy).</p>\n<hr />\n<h2>Recommended Practices</h2>\n<p>CISA recommends users take defensive measures to minimize the exploitation risk of these vulnerabilities.</p>\n<p>Minimize network exposure for all control system devices and/or systems, and ensure they are not accessible from the internet.</p>\n<p>Locate control system networks and remote devices behind firewalls and isolate them from business networks.</p>\n<p>When remote access is required, use more secure methods, such as Virtual Private Networks (VPNs), recognizing VPNs may have vulnerabilities and should be updated to the most recent version available. Also recognize VPN is only as secure as its connected devices.</p>\n<p>CISA reminds organizations to perform proper impact analysis and risk assessment prior to deploying defensive measures.</p>\n<p>CISA also provides a section for control systems security recommended practices on the ICS webpage on cisa.gov. Several CISA products detailing cyber defense best practices are available for reading and download, including Improving Industrial Control Systems Cybersecurity with Defense-in-Depth Strategies.</p>\n<p>CISA encourages organizations to implement recommended cybersecurity strategies for proactive defense of ICS assets. Additional mitigation guidance and recommended practices are publicly available on the ICS webpage at cisa.gov in the technical information paper, ICS-TIP-12-146-01B--Targeted Cyber Intrusion Detection and Mitigation Strategies.</p>\n<p>Organizations observing suspected malicious activity should follow established internal procedures and report findings to CISA for tracking and correlation against other incidents.</p>\n<hr />\n<h2>Advisory Conversion Disclaimer</h2>\n<p>This ICSA is a verbatim republication of Hitachi Energy PSIRT 8DBD000238 from a direct conversion of the vendor's Common Security Advisory Framework (CSAF) advisory. This is republished to CISA's website as a means of increasing visibility and is provided \"as-is\" for informational purposes only. CISA is not responsible for the editorial or technical accuracy of republished advisories and provides no warranties of any kind regarding any information contained within this advisory. Further, CISA does not endorse any commercial product or service. Please contact Hitachi Energy PSIRT directly for any questions regarding this advisory.</p>\n<h2>Revision History</h2>\n<ul>\n<li><strong>Initial Release Date: </strong>2026-02-24</li>\n</ul>\n<table class=\"tablesaw tablesaw-stack\">\n<thead>\n<tr>\n<th>Date</th>\n<th>Revision</th>\n<th>Summary</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>2026-02-24</td>\n<td>1</td>\n<td>Initial public release</td>\n</tr>\n<tr>\n<td>2026-04-02</td>\n<td>2</td>\n<td>Initial CISA Republication of Hitachi Energy PSIRT 8DBD000238 advisory</td>\n</tr>\n</tbody>\n</table>\n<hr />\n<h2>Legal Notice and Terms of Use</h2>",
+          "published": "Thu, 02 Apr 26 12:00:00 +0000",
+          "id": "/node/24707",
+          "_category": "NEWS"
+        }
+      ]
+    }
+  },
+  "cc_crypto": {
+    "pages": {},
+    "doc_headers": {}
+  },
+  "nist": {
+    "pages": {},
+    "doc_headers": {
+      "NIST IR 8547": {
+        "changed": true,
+        "old_last_modified": "Fri, 08 Nov 2024 19:04:22 GMT",
+        "new_last_modified": "",
+        "old_etag": "\"c25c6651132db1:0\"",
+        "new_etag": "",
+        "old_content_length": "722379",
+        "new_content_length": "",
+        "old_partial_hash": "",
+        "new_partial_hash": "7ceb3d3a2f66169875c2dbe01450c2cc",
+        "url": "https://nvlpubs.nist.gov/nistpubs/ir/2024/NIST.IR.8547.ipd.pdf"
+      }
+    },
+    "feeds": {}
+  },
+  "alerts": []
+}
