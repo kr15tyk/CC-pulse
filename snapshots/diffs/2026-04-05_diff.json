@@ -1,0 +1,135 @@
+{
+  "period_start": "2026-04-04T07:02:02.171264+00:00",
+  "period_end": "2026-04-05T07:06:59.139426+00:00",
+  "niap": {
+    "pps": {
+      "added": [],
+      "removed": [],
+      "sunset_changes": [],
+      "status_changes": []
+    },
+    "tds": {
+      "added": [],
+      "removed": []
+    },
+    "cisco_ndcpp": {
+      "added": [],
+      "removed": [],
+      "newly_archived": []
+    },
+    "pcl_all": {
+      "added": [],
+      "removed": [],
+      "newly_archived": [
+        {
+          "active_maintenances": [],
+          "am_sort": "2026-04-04T00:00:00Z",
+          "assigned_lab_name": "Lightship Security, Inc.",
+          "certification_date": "2024-04-04T00:00:00Z",
+          "from_cc_portal": true,
+          "product_id": "2024.1086",
+          "product_name": "NETSCOUT\u00ae nGeniusONE\u00ae with InfiniStreamNG\u00ae v6.3.3",
+          "protection_profiles": [
+            {
+              "pp_id": 447,
+              "pp_name": "collaborative Protection Profile for Network Devices Version 2.2e",
+              "pp_short_name": "CPP_ND_V2.2E"
+            }
+          ],
+          "status_sort": "Archived",
+          "submitting_country_id_code": "CA",
+          "submitting_country_id_name": "Canada",
+          "sunset_date": "2029-04-04T00:00:00Z",
+          "tech_types": [
+            "Network and Network-Related Devices and Systems"
+          ],
+          "vendor_id_name": "NetScout Systems, Inc.",
+          "v_id": "2024.1086",
+          "kicked_off_date": null
+        },
+        {
+          "active_maintenances": [],
+          "am_sort": "2026-04-05T00:00:00Z",
+          "assigned_lab_name": "Acumen Security",
+          "certification_date": "2024-04-05T00:00:00Z",
+          "from_cc_portal": false,
+          "product_id": 11428,
+          "product_name": "MMA10G-EXE Series",
+          "protection_profiles": [
+            {
+              "pp_id": 447,
+              "pp_name": "collaborative Protection Profile for Network Devices Version 2.2e",
+              "pp_short_name": "CPP_ND_V2.2E"
+            }
+          ],
+          "status_sort": "Archived",
+          "submitting_country_id_code": "US",
+          "submitting_country_id_name": "United States",
+          "sunset_date": "2026-04-05T00:00:00Z",
+          "tech_types": [
+            "Network Device"
+          ],
+          "vendor_id_name": "Evertz Microsystems",
+          "v_id": 11428,
+          "kicked_off_date": "2023-11-20T00:00:00Z"
+        }
+      ]
+    },
+    "in_evaluation": {
+      "added": [],
+      "removed": [],
+      "current_count": 22
+    },
+    "news": {
+      "added": []
+    },
+    "events": {
+      "added": []
+    },
+    "cctls": {
+      "added": [],
+      "removed": [],
+      "status_changes": []
+    }
+  },
+  "cc_portal": {
+    "news": {
+      "added": []
+    },
+    "pps": {
+      "added": []
+    },
+    "products": {
+      "added": []
+    }
+  },
+  "cctl_labs": {},
+  "csfc": {
+    "pages": {},
+    "capability_packages": {},
+    "feeds": {}
+  },
+  "cc_crypto": {
+    "pages": {},
+    "doc_headers": {}
+  },
+  "nist": {
+    "pages": {},
+    "doc_headers": {
+      "FIPS 204 ML-DSA": {
+        "changed": true,
+        "old_last_modified": "Thu, 22 Aug 2024 13:51:35 GMT",
+        "new_last_modified": "",
+        "old_etag": "\"3eaf4669af4da1:0\"",
+        "new_etag": "",
+        "old_content_length": "3291746",
+        "new_content_length": "",
+        "old_partial_hash": "",
+        "new_partial_hash": "5f66fc055c9f56b45b53d0f2df1fae3f",
+        "url": "https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.204.pdf"
+      }
+    },
+    "feeds": {}
+  },
+  "alerts": []
+}
