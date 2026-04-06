@@ -142,7 +142,7 @@ def _poll_doc_headers(doc_dict: dict, domain_tag: str) -> dict:
     """
     results = {}
     for name, url in doc_dict.items():
-        log.info("  [%s] HEAD %s ...", domain_tag, name)
+        log.debug("  [%s] HEAD %s ...", domain_tag, name)
         entry: dict = {
             "url":            url,
             "status_code":    None,
@@ -182,32 +182,32 @@ def collect_niap():
     eps  = config.NIAP_ENDPOINTS
     data = {}
 
-    log.info("  PCL...")
+    log.debug("  PCL...")
     pcl = get_json(base + eps["pcl"])
     data["pcl"] = pcl or []
 
-    log.info("  Protection Profiles...")
+    log.debug("  Protection Profiles...")
     pps = get_json(base + eps["pps"])
     data["pps"] = pps or []
 
-    log.info("  Technical Decisions...")
+    log.debug("  Technical Decisions...")
     tds = get_json(base + eps["tds"])
     data["tds"] = tds or []
 
-    log.info("  CCTL Directory...")
+    log.debug("  CCTL Directory...")
     cctls_raw = get_json(base + eps["cctls"])
     data["cctls"] = (
         cctls_raw.get("results", {}).get("cctls", []) if cctls_raw else []
     )
 
-    log.info("  Events...")
+    log.debug("  Events...")
     ev_curr = get_json(base + eps["events_curr"])
     ev_prev = get_json(base + eps["events_prev"])
     curr = ev_curr.get("results", []) if ev_curr else []
     prev = ev_prev.get("results", []) if ev_prev else []
     data["events"] = curr + prev
 
-    log.info("  News & Announcements...")
+    log.debug("  News & Announcements...")
     news_raw = get_json(base + eps["news"])
     data["news"] = news_raw.get("results", []) if news_raw else []
 
@@ -286,17 +286,17 @@ def collect_cc_portal():
     pages = config.CC_PORTAL_PAGES
     data  = {}
 
-    log.info("  News...")
+    log.debug("  News...")
     data["news"] = parsecc_news(get_html(base + pages["news"]))
-    log.info("  Protection Profiles...")
+    log.debug("  Protection Profiles...")
     data["pps"] = parsecc_pps(get_html(base + pages["pps"]))
-    log.info("  Certified Products...")
+    log.debug("  Certified Products...")
     data["products"] = parsecc_products(get_html(base + pages["products"]))
-    log.info("  Technical Communities...")
+    log.debug("  Technical Communities...")
     data["communities"] = parsecc_communities(get_html(base + pages["communities"]))
-    log.info("  Publications...")
+    log.debug("  Publications...")
     data["publications"] = parsecc_news(get_html(base + pages["publications"]))
-    log.info("  PP RSS Feed...")
+    log.debug("  PP RSS Feed...")
     data["pp_rss"] = get_rss(config.CC_PORTAL_RSS)
 
     log.info(
@@ -340,14 +340,14 @@ def collect_cctl_labs():
 
     for lab in rss_labs:
         name = lab["name"]
-        log.info("  [RSS] %s...", name)
+        log.debug("  [RSS] %s...", name)
         items = get_rss(lab["rss"])
         results[name] = items or []
-        log.info("    -> %d items", len(results[name]))
+        log.debug("    -> %d items", len(results[name]))
 
     for lab in scrape_labs:
         name = lab["name"]
-        log.info("  [Scrape] %s...", name)
+        log.debug("  [Scrape] %s...", name)
         items = scrapelab_items(lab["url"])
         results[name] = items or []
         if not results[name]:
@@ -357,7 +357,7 @@ def collect_cctl_labs():
                 name,
             )
         else:
-            log.info("    -> %d items", len(results[name]))
+            log.debug("    -> %d items", len(results[name]))
 
     for lab in disabled_labs:
         name = lab["name"]
@@ -602,16 +602,16 @@ def collect_csfc() -> dict:
 
     # 1. Scrape CSfC pages; for the APL, also parse structured records (fix #18)
     for page_key, path in config.CSFC_PAGES.items():
-        log.info("  [CSfC] Scraping page: %s (%s)...", page_key, path)
+        log.debug("  [CSfC] Scraping page: %s (%s)...", page_key, path)
         data["pages"][page_key] = _scrape_csfc_page(path)
-        log.info("    -> %d items", len(data["pages"][page_key]))
+        log.debug("    -> %d items", len(data["pages"][page_key]))
         if page_key == "apl":
             apl_soup = get_html(config.CSFC_BASE + path)
             data["apl_structured"] = _parse_csfc_apl_structured(apl_soup)
-            log.info("    -> %d structured APL records", len(data["apl_structured"]))
+            log.debug("    -> %d structured APL records", len(data["apl_structured"]))
 
     # 2. HEAD-poll Capability Package PDFs (with partial-GET fallback)
-    log.info("  [CSfC] Polling Capability Package PDF headers...")
+    log.debug("  [CSfC] Polling Capability Package PDF headers...")
     data["capability_package_headers"] = _poll_doc_headers(
         config.CSFC_CAPABILITY_PACKAGES, "CSfC CP"
     )
@@ -619,7 +619,7 @@ def collect_csfc() -> dict:
     # 3. RSS / news feeds
     for feed in config.CSFC_FEEDS:
         name = feed["name"]
-        log.info("  [CSfC] Feed: %s...", name)
+        log.debug("  [CSfC] Feed: %s...", name)
         if feed.get("rss"):
             items = get_rss(feed["rss"])
         elif feed.get("scrape") and feed.get("url"):
@@ -627,7 +627,7 @@ def collect_csfc() -> dict:
         else:
             items = []
         data["feeds"][name] = items
-        log.info("    -> %d items", len(items))
+        log.debug("    -> %d items", len(items))
 
     apl_count = len(data["pages"].get("apl", []))
     cp_count  = len(data["capability_package_headers"])
@@ -676,11 +676,11 @@ def collect_cc_crypto() -> dict:
     }
 
     for page_key, path in config.CC_CRYPTO_PAGES.items():
-        log.info("  [CC Crypto] Scraping page: %s (%s)...", page_key, path)
+        log.debug("  [CC Crypto] Scraping page: %s (%s)...", page_key, path)
         data["pages"][page_key] = _scrape_cc_crypto_page(path)
-        log.info("    -> %d items", len(data["pages"][page_key]))
+        log.debug("    -> %d items", len(data["pages"][page_key]))
 
-    log.info("  [CC Crypto] Polling document headers...")
+    log.debug("  [CC Crypto] Polling document headers...")
     data["doc_headers"] = _poll_doc_headers(config.CC_CRYPTO_DOCS, "CC Crypto")
 
     pubs_count  = len(data["pages"].get("publications", []))
@@ -753,16 +753,16 @@ def collect_nist() -> dict:
     }
 
     for page_key, path in config.NIST_CSRC_PAGES.items():
-        log.info("  [NIST] Scraping page: %s (%s)...", page_key, path)
+        log.debug("  [NIST] Scraping page: %s (%s)...", page_key, path)
         data["pages"][page_key] = _scrape_nist_page(path)
-        log.info("    -> %d items", len(data["pages"][page_key]))
+        log.debug("    -> %d items", len(data["pages"][page_key]))
 
-    log.info("  [NIST] Polling document headers...")
+    log.debug("  [NIST] Polling document headers...")
     data["doc_headers"] = _poll_doc_headers(config.NIST_CRYPTO_DOCS, "NIST Docs")
 
     for feed in config.NIST_FEEDS:
         name = feed["name"]
-        log.info("  [NIST] Feed: %s...", name)
+        log.debug("  [NIST] Feed: %s...", name)
         if feed.get("rss"):
             items = get_rss(feed["rss"])
         elif feed.get("scrape") and feed.get("url"):
@@ -770,7 +770,7 @@ def collect_nist() -> dict:
         else:
             items = []
         data["feeds"][name] = items
-        log.info("    -> %d items", len(items))
+        log.debug("    -> %d items", len(items))
 
     news_count  = len(data["pages"].get("news", []))
     docs_polled = len(data["doc_headers"])
