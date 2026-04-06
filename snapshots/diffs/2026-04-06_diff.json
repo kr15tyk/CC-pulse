@@ -1,0 +1,82 @@
+{
+  "period_start": "2026-04-05T07:06:59.139426+00:00",
+  "period_end": "2026-04-06T07:30:32.479200+00:00",
+  "niap": {
+    "pps": {
+      "added": [],
+      "removed": [],
+      "sunset_changes": [],
+      "status_changes": []
+    },
+    "tds": {
+      "added": [],
+      "removed": []
+    },
+    "cisco_ndcpp": {
+      "added": [],
+      "removed": [],
+      "newly_archived": []
+    },
+    "pcl_all": {
+      "added": [],
+      "removed": [],
+      "newly_archived": []
+    },
+    "in_evaluation": {
+      "added": [],
+      "removed": [],
+      "current_count": 22
+    },
+    "news": {
+      "added": []
+    },
+    "events": {
+      "added": []
+    },
+    "cctls": {
+      "added": [],
+      "removed": [],
+      "status_changes": []
+    }
+  },
+  "cc_portal": {
+    "news": {
+      "added": []
+    },
+    "pps": {
+      "added": []
+    },
+    "products": {
+      "added": []
+    }
+  },
+  "cctl_labs": {},
+  "csfc": {
+    "pages": {},
+    "capability_packages": {},
+    "feeds": {}
+  },
+  "cc_crypto": {
+    "pages": {},
+    "doc_headers": {}
+  },
+  "nist": {
+    "pages": {},
+    "doc_headers": {
+      "NIST IR 8547": {
+        "changed": true,
+        "old_last_modified": "Fri, 08 Nov 2024 19:04:22 GMT",
+        "new_last_modified": "",
+        "old_etag": "\"c25c6651132db1:0\"",
+        "new_etag": "",
+        "old_content_length": "722379",
+        "new_content_length": "",
+        "old_partial_hash": "",
+        "new_partial_hash": "7ceb3d3a2f66169875c2dbe01450c2cc",
+        "url": "https://nvlpubs.nist.gov/nistpubs/ir/2024/NIST.IR.8547.ipd.pdf"
+      }
+    },
+    "feeds": {}
+  },
+  "alerts": []
+}
