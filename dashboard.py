@@ -166,15 +166,15 @@ a:hover { color: var(--neon-cyan); text-decoration: underline; }
 .item-row { display: flex; justify-content: space-between; align-items: baseline; gap: 0.5rem; padding: 4px 0; border-bottom: 1px solid rgba(55,48,163,0.4); }
 .item-row:last-child { border-bottom: none; }
 .item-link { color: var(--neon-blue); flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.item-link::before { content: "› "; color: var(--muted); }
+.item-link::before { content: "âº "; color: var(--muted); }
 .item-meta { font-size: 0.7rem; color: var(--muted); white-space: nowrap; flex-shrink: 0; }
 .no-change { color: var(--muted); font-size: 0.8rem; padding: 0.25rem 0; }
-.no-change::before { content: "— "; }
+.no-change::before { content: "â "; }
 .item-sub { font-size: 0.72rem; color: var(--muted); padding: 1px 0 4px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; padding-left: 1.4em; }
 
 /* Alert item rows */
 .alert-item .item-link { color: var(--alert-color); }
-.alert-item .item-link::before { content: "⚡ "; color: var(--alert-color); }
+.alert-item .item-link::before { content: "â¡ "; color: var(--alert-color); }
 .alert-item .item-meta { color: var(--alert-color); opacity: 0.85; }
 .alert-dismissed { opacity: 0.3; }
 .alert-dismissed .item-link { text-decoration: line-through; }
@@ -260,6 +260,9 @@ a:hover { color: var(--neon-cyan); text-decoration: underline; }
   .trend-bar { flex-direction: column; }
   .stat { min-width: unset; }
 }
+
+/* search-filter */
+.search-row{display:flex;gap:.6rem;align-items:center;flex-wrap:wrap;margin-top:.5rem;margin-bottom:.5rem}.search-input{flex:1;min-width:180px;max-width:340px;background:var(--panel);border:1px solid var(--border-dim);color:var(--text);font-family:var(--font);font-size:.72rem;padding:3px 8px;outline:none}.search-input:focus{border-color:var(--neon-cyan)}.search-input::placeholder{color:var(--muted);opacity:.6}.search-clear{background:none;border:none;color:var(--muted);font-family:var(--font);font-size:.8rem;cursor:pointer;padding:0 4px;line-height:1}.search-clear:hover{color:var(--neon-cyan)}.filter-chips{display:flex;gap:.35rem;flex-wrap:wrap;align-items:center}.chip{background:none;border:1px solid var(--border-dim);color:var(--muted);font-family:var(--font);font-size:.65rem;padding:2px 7px;cursor:pointer;white-space:nowrap}.chip:hover{border-color:var(--neon-cyan);color:var(--neon-cyan)}.chip.active{border-color:var(--primary);color:var(--primary);background:rgba(59,130,246,.12)}.chip.chip-alert.active{border-color:var(--alert-color);color:var(--alert-color);background:rgba(251,146,60,.12)}.search-count{font-size:.65rem;color:var(--muted);opacity:.7;white-space:nowrap}mark.sh{background:rgba(251,146,60,.35);color:var(--text);border-radius:2px;padding:0 1px}.search-hidden{display:none!important}.no-results-msg{color:var(--muted);font-size:.8rem;padding:.25rem 0;display:none}.no-results-msg::before{content:"\2296 "}
 </style>
 </head>
 <body>
@@ -267,7 +270,7 @@ a:hover { color: var(--neon-cyan); text-decoration: underline; }
 <div class="sticky-top">
 <header class="site-header">
   <div class="site-title">CC Pulse</div>
-  <div class="site-meta">{{ period_start[:10] }} → {{ period_end[:10] }} &middot; Generated {{ generated_at }}</div>
+  <div class="site-meta">{{ period_start[:10] }} â {{ period_end[:10] }} &middot; Generated {{ generated_at }}</div>
 </header>
 <div class="trend-bar">
   <div class="stat"><a href="#sec-niap-pp">
@@ -337,14 +340,29 @@ a:hover { color: var(--neon-cyan); text-decoration: underline; }
       {% if alert_total > 0 %}{{ alert_total }} match{% if alert_total != 1 %}es{% endif %}{% else %}none{% endif %}
     </span>
   </div>
-  <div class="sh-footer">Period: {{ period_start[:10] if period_start else '—' }} → {{ period_end[:10] if period_end else '—' }}</div>
-  <div class="sh-footer">All sources last polled: {{ period_end[:10] if period_end else '—' }} (daily 06:00 UTC)</div>
+  <div class="sh-footer">Period: {{ period_start[:10] if period_start else 'â' }} â {{ period_end[:10] if period_end else 'â' }}</div>
+  <div class="sh-footer">All sources last polled: {{ period_end[:10] if period_end else 'â' }} (daily 06:00 UTC)</div>
 </div>
 <div class="ctrl-bar">
   <button class="ctrl-btn" onclick="expandAll()" title="Expand all cards [E]">[E] Expand All</button>
   <button class="ctrl-btn" onclick="collapseAll()" title="Collapse all cards [C]">[C] Collapse All</button>
   <button class="ctrl-btn" id="filter-btn" onclick="toggleZeroFilter()" title="Toggle zero-change cards [F]">[F] Hide Empty</button>
-  <span class="ctrl-hint">keyboard: E=expand C=collapse F=filter</span>
+  <span class="ctrl-hint">keyboard: E=expand C=collapse F=filter /=search Esc=clear</span>
+</div>
+<div class="search-row">
+  <input id="search-input" class="search-input" type="search" placeholder="Search items…"
+    oninput="liveSearch()" title="Search across all cards [/]" autocomplete="off" spellcheck="false">
+  <button class="search-clear" onclick="clearSearch()" title="Clear search">✕</button>
+  <div class="filter-chips">
+    <span style="font-size:.65rem;color:var(--muted);opacity:.6;">kind:</span>
+    <button class="chip active" data-kind="all"     onclick="setKindFilter(this)">All</button>
+    <button class="chip"        data-kind="new"     onclick="setKindFilter(this)">New</button>
+    <button class="chip"        data-kind="removed" onclick="setKindFilter(this)">Removed</button>
+    <button class="chip"        data-kind="updated" onclick="setKindFilter(this)">Updated</button>
+    <button class="chip"        data-kind="archived" onclick="setKindFilter(this)">Archived</button>
+    <button class="chip chip-alert" data-kind="alert" onclick="setKindFilter(this)">Alert</button>
+  </div>
+  <span id="search-count" class="search-count"></span>
 </div>
 <!-- Alerts -->
 {% if diff.alerts %}
@@ -389,7 +407,7 @@ a:hover { color: var(--neon-cyan); text-decoration: underline; }
     {% if diff.niap.cisco_ndcpp.added %}
     <div class="sub-hdr sub-new">New Certifications ({{ diff.niap.cisco_ndcpp.added | length }})</div>
     {% for item in diff.niap.cisco_ndcpp.added %}
-    <div class="item-row">
+    <div class="item-row" data-source="cisco" data-kind="new">
       <span class="item-link">{{ item.vendor_id_name }} &mdash; {{ item.product_name }}</span>
       <span class="item-meta">{% if item.certification_date %}{{ item.certification_date[:10] }}{% endif %}</span>
     </div>
@@ -401,7 +419,7 @@ a:hover { color: var(--neon-cyan); text-decoration: underline; }
     {% if diff.niap.cisco_ndcpp.removed %}
     <div class="sub-hdr sub-removed">Removed ({{ diff.niap.cisco_ndcpp.removed | length }})</div>
     {% for item in diff.niap.cisco_ndcpp.removed %}
-    <div class="item-row">
+    <div class="item-row" data-source="cisco" data-kind="removed">
       <span class="item-link">{{ item.vendor_id_name }} &mdash; {{ item.product_name }}</span>
       <span class="item-meta">{{ item.status_sort }}</span>
     </div>
@@ -410,7 +428,7 @@ a:hover { color: var(--neon-cyan); text-decoration: underline; }
     {% if diff.niap.cisco_ndcpp.newly_archived %}
     <div class="sub-hdr sub-updated">Newly Archived ({{ diff.niap.cisco_ndcpp.newly_archived | length }})</div>
     {% for item in diff.niap.cisco_ndcpp.newly_archived %}
-    <div class="item-row">
+    <div class="item-row" data-source="cisco" data-kind="archived">
       <span class="item-link">{{ item.vendor_id_name }} &mdash; {{ item.product_name }}</span>
       <span class="item-meta">Archived</span>
     </div>
@@ -434,7 +452,7 @@ a:hover { color: var(--neon-cyan); text-decoration: underline; }
     {% if diff.niap.cctls.added %}
     <div class="sub-hdr sub-new">New Labs ({{ diff.niap.cctls.added | length }})</div>
     {% for lab in diff.niap.cctls.added %}
-    <div class="item-row">
+    <div class="item-row" data-source="cctl-registry" data-kind="new">
       <a class="item-link" href="{{ lab.cctl_url or '#' }}" target="_blank">{{ lab.cctl_name }}</a>
       <span class="item-meta">{{ lab.city }}{% if lab.state_id %}, {{ lab.state_id }}{% endif %}</span>
     </div>
@@ -443,7 +461,7 @@ a:hover { color: var(--neon-cyan); text-decoration: underline; }
     {% if diff.niap.cctls.removed %}
     <div class="sub-hdr sub-removed">Removed Labs ({{ diff.niap.cctls.removed | length }})</div>
     {% for lab in diff.niap.cctls.removed %}
-    <div class="item-row">
+    <div class="item-row" data-source="cctl-registry" data-kind="removed">
       <a class="item-link" href="{{ lab.cctl_url or '#' }}" target="_blank">{{ lab.cctl_name }}</a>
       <span class="item-meta">{{ lab.city }}{% if lab.state_id %}, {{ lab.state_id }}{% endif %}</span>
     </div>
@@ -452,7 +470,7 @@ a:hover { color: var(--neon-cyan); text-decoration: underline; }
     {% if diff.niap.cctls.status_changes %}
     <div class="sub-hdr sub-updated">Status Changes ({{ diff.niap.cctls.status_changes | length }})</div>
     {% for lab in diff.niap.cctls.status_changes %}
-    <div class="item-row">
+    <div class="item-row" data-source="cctl-registry" data-kind="updated">
       <a class="item-link" href="{{ lab.cctl_url or '#' }}" target="_blank">{{ lab.cctl_name }}</a>
       <span class="item-meta">{{ lab.old_status }} &#8594; {{ lab.new_status }}</span>
     </div>
@@ -477,7 +495,7 @@ a:hover { color: var(--neon-cyan); text-decoration: underline; }
     {% if diff.niap.in_evaluation.added %}
     <div class="sub-hdr sub-new">Newly In Evaluation ({{ diff.niap.in_evaluation.added | length }})</div>
     {% for item in diff.niap.in_evaluation.added %}
-    <div class="item-row">
+    <div class="item-row" data-source="niap-inevaluation" data-kind="new">
       <span class="item-link">{{ item.vendor_id_name or "" }} -- {{ item.product_name or "" }}</span>
       <span class="item-meta">{% if item.assigned_lab_name %}{{ item.assigned_lab_name }}{% endif %}</span>
     </div>
@@ -489,7 +507,7 @@ a:hover { color: var(--neon-cyan); text-decoration: underline; }
     {% if diff.niap.in_evaluation.removed %}
     <div class="sub-hdr sub-removed">Left Evaluation ({{ diff.niap.in_evaluation.removed | length }})</div>
     {% for item in diff.niap.in_evaluation.removed %}
-    <div class="item-row">
+    <div class="item-row" data-source="niap-inevaluation" data-kind="removed">
       <span class="item-link">{{ item.vendor_id_name or "" }} -- {{ item.product_name or "" }}</span>
       <span class="item-meta">Completed or Withdrawn</span>
     </div>
@@ -516,7 +534,7 @@ a:hover { color: var(--neon-cyan); text-decoration: underline; }
   <div class="card-body {% if niap_news_total == 0 and not diff.niap.events.added %}collapsed{% endif %}">
     {% if diff.niap.news.added %}
     {% for item in diff.niap.news.added %}
-    <div class="item-row">
+    <div class="item-row" data-source="niap-news" data-kind="new">
       <a class="item-link" href="{{ item.link or item.url or '#' }}" target="_blank">{{ item.title }}</a>
       <span class="item-meta">{{ item.date }}</span>
     </div>
@@ -525,7 +543,7 @@ a:hover { color: var(--neon-cyan); text-decoration: underline; }
     {% if diff.niap.events.added %}
     <div class="sub-hdr sub-new">Events ({{ diff.niap.events.added | length }})</div>
     {% for ev in diff.niap.events.added %}
-    <div class="item-row">
+    <div class="item-row" data-source="niap-news" data-kind="new">
       <span class="item-link">{{ ev.title or ev.name or ev }}</span>
       <span class="item-meta">{{ ev.date or ev.start_date or '' }}</span>
     </div>
@@ -535,7 +553,7 @@ a:hover { color: var(--neon-cyan); text-decoration: underline; }
     {% if policy_items %}
     <div class="sub-hdr sub-updated">Policy Letters &amp; Updates ({{ policy_items | length }})</div>
     {% for item in policy_items %}
-    <div class="item-row">
+    <div class="item-row" data-source="niap-news" data-kind="new">
       {% if item.link %}<a class="item-link" href="{{ item.link }}" target="_blank">{{ item.title }}</a>
       {% else %}<span class="item-link">{{ item.title }}</span>{% endif %}
       <span class="item-meta">{% if item.posted %}{{ item.posted[:10] }}{% elif item.date %}{{ item.date[:10] }}{% endif %}</span>
@@ -561,7 +579,7 @@ a:hover { color: var(--neon-cyan); text-decoration: underline; }
     {% if diff.niap.pcl_all.added %}
     <div class="sub-hdr sub-new">New Certifications ({{ diff.niap.pcl_all.added | length }})</div>
     {% for item in diff.niap.pcl_all.added %}
-    <div class="item-row">
+    <div class="item-row" data-source="niap-pcl" data-kind="new">
       <span class="item-link">{{ item.vendor_id_name }} -- {{ item.product_name }}</span>
       <span class="item-meta">{% if item.certification_date %}{{ item.certification_date[:10] }}{% endif %}</span>
     </div>
@@ -573,7 +591,7 @@ a:hover { color: var(--neon-cyan); text-decoration: underline; }
     {% if diff.niap.pcl_all.newly_archived %}
     <div class="sub-hdr sub-updated">Newly Archived ({{ diff.niap.pcl_all.newly_archived | length }})</div>
     {% for item in diff.niap.pcl_all.newly_archived %}
-    <div class="item-row">
+    <div class="item-row" data-source="niap-pcl" data-kind="archived">
       <span class="item-link">{{ item.vendor_id_name }} -- {{ item.product_name }}</span>
       <span class="item-meta">Archived</span>
     </div>
@@ -585,7 +603,7 @@ a:hover { color: var(--neon-cyan); text-decoration: underline; }
     {% if diff.niap.pcl_all.removed %}
     <div class="sub-hdr sub-removed">Removed ({{ diff.niap.pcl_all.removed | length }})</div>
     {% for item in diff.niap.pcl_all.removed %}
-    <div class="item-row">
+    <div class="item-row" data-source="niap-pcl" data-kind="removed">
       <span class="item-link">{{ item.vendor_id_name }} -- {{ item.product_name }}</span>
       <span class="item-meta">{{ item.status_sort }}</span>
     </div>
@@ -611,7 +629,7 @@ a:hover { color: var(--neon-cyan); text-decoration: underline; }
     {% if diff.niap.pps.added %}
     <div class="sub-hdr sub-new">New PPs ({{ diff.niap.pps.added | length }})</div>
     {% for pp in diff.niap.pps.added %}
-    <div class="item-row">
+    <div class="item-row" data-source="niap-pp" data-kind="new">
       <a class="item-link" href="https://www.niap-ccevs.org/Profile/PP.cfm?id={{ pp.pp_id }}" target="_blank">{{ pp.pp_short_name }}</a>
       <span class="item-meta">{{ pp.tech_type }} &middot; {{ pp.pp_date }}</span>
     </div>
@@ -620,7 +638,7 @@ a:hover { color: var(--neon-cyan); text-decoration: underline; }
     {% if diff.niap.pps.removed %}
     <div class="sub-hdr sub-removed">Removed PPs ({{ diff.niap.pps.removed | length }})</div>
     {% for pp in diff.niap.pps.removed %}
-    <div class="item-row">
+    <div class="item-row" data-source="niap-pp" data-kind="removed">
       <a class="item-link" href="https://www.niap-ccevs.org/Profile/PP.cfm?id={{ pp.pp_id }}" target="_blank">{{ pp.pp_short_name }}</a>
       <span class="item-meta">{{ pp.tech_type }} &middot; {{ pp.pp_date }}</span>
     </div>
@@ -629,7 +647,7 @@ a:hover { color: var(--neon-cyan); text-decoration: underline; }
     {% if diff.niap.pps.sunset_changes %}
     <div class="sub-hdr sub-updated">Sunset Changes ({{ diff.niap.pps.sunset_changes | length }})</div>
     {% for pp in diff.niap.pps.sunset_changes %}
-    <div class="item-row">
+    <div class="item-row" data-source="niap-pp" data-kind="updated">
       <a class="item-link" href="https://www.niap-ccevs.org/Profile/PP.cfm?id={{ pp.pp_id }}" target="_blank">{{ pp.pp_short_name }}</a>
       <span class="item-meta">{{ pp.tech_type }} &middot; Sunset: {{ pp.sunset_date }}</span>
     </div>
@@ -638,7 +656,7 @@ a:hover { color: var(--neon-cyan); text-decoration: underline; }
     {% if diff.niap.pps.status_changes %}
     <div class="sub-hdr sub-updated">Status Changes ({{ diff.niap.pps.status_changes | length }})</div>
     {% for pp in diff.niap.pps.status_changes %}
-    <div class="item-row">
+    <div class="item-row" data-source="niap-pp" data-kind="updated">
       <a class="item-link" href="https://www.niap-ccevs.org/Profile/PP.cfm?id={{ pp.pp_id }}" target="_blank">{{ pp.pp_short_name }}</a>
       <span class="item-meta">{{ pp.tech_type }} &middot; {{ pp.status }}</span>
     </div>
@@ -664,7 +682,7 @@ a:hover { color: var(--neon-cyan); text-decoration: underline; }
     {% if diff.niap.tds.added %}
     <div class="sub-hdr sub-new">New TDs ({{ diff.niap.tds.added | length }})</div>
     {% for td in diff.niap.tds.added %}
-    <div class="item-row">
+    <div class="item-row" data-source="niap-td" data-kind="new">
       <span class="item-link">{{ td.identifier }} &mdash; {{ td.title }}</span>
       <span class="item-meta">{% if td.publication_date %}{{ td.publication_date[:10] }}{% endif %}</span>
     </div>
@@ -676,7 +694,7 @@ a:hover { color: var(--neon-cyan); text-decoration: underline; }
     {% if diff.niap.tds.removed %}
     <div class="sub-hdr sub-removed">Removed TDs ({{ diff.niap.tds.removed | length }})</div>
     {% for td in diff.niap.tds.removed %}
-    <div class="item-row">
+    <div class="item-row" data-source="niap-td" data-kind="removed">
       <span class="item-link">{{ td.identifier }} &mdash; {{ td.title }}</span>
       <span class="item-meta">{% if td.removed_on %}Removed: {{ td.removed_on[:10] }}{% endif %}</span>
     </div>
@@ -715,7 +733,7 @@ a:hover { color: var(--neon-cyan); text-decoration: underline; }
       </div>
       <div class="lab-body collapsed">
         {% for item in lab_items %}
-        <div class="item-row">
+        <div class="item-row" data-source="cctl" data-kind="new">
           <a class="item-link" href="{{ item.link }}" target="_blank">{{ item.title }}</a>
           <span class="item-meta">{{ item.published }}</span>
         </div>
@@ -746,7 +764,7 @@ a:hover { color: var(--neon-cyan); text-decoration: underline; }
   <div class="card-body {% if csfc_total == 0 %}collapsed{% endif %}">
     {% for cp_name, cp in diff.csfc.capability_packages.items() %}
     {% if cp.changed %}
-    <div class="cp-row">
+    <div class="cp-row" data-source="csfc" data-kind="updated">
       <a class="item-link" href="{{ cp.url }}" target="_blank">{{ cp_name }}</a>
       <div class="cp-detail">
         {% if cp.old_last_modified and cp.new_last_modified %}
@@ -782,7 +800,7 @@ a:hover { color: var(--neon-cyan); text-decoration: underline; }
   <div class="card-body {% if cc_crypto_total == 0 %}collapsed{% endif %}">
     {% for doc_name, doc in diff.cc_crypto.doc_headers.items() %}
     {% if doc.changed %}
-    <div class="item-row">
+    <div class="item-row" data-source="cc-crypto" data-kind="updated">
       <a class="item-link" href="{{ doc.url }}" target="_blank">{{ doc_name }}</a>
       <span class="item-meta">
         {% if doc.old_last_modified and doc.new_last_modified %}
@@ -811,7 +829,7 @@ a:hover { color: var(--neon-cyan); text-decoration: underline; }
   <div class="card-body {% if nist_total == 0 %}collapsed{% endif %}">
     {% for doc_name, doc in diff.nist.doc_headers.items() %}
     {% if doc.changed %}
-    <div class="item-row">
+    <div class="item-row" data-source="nist" data-kind="updated">
       <a class="item-link" href="{{ doc.url }}" target="_blank">{{ doc_name }}</a>
       <span class="item-meta">
         {% if doc.old_last_modified and doc.new_last_modified %}
@@ -844,7 +862,7 @@ a:hover { color: var(--neon-cyan); text-decoration: underline; }
     {% if diff.cc_portal.news.added %}
     <div class="sub-hdr sub-new">News ({{ diff.cc_portal.news.added | length }})</div>
     {% for item in diff.cc_portal.news.added %}
-    <div class="item-row">
+    <div class="item-row" data-source="cc-portal" data-kind="new">
       <a class="item-link" href="{{ item.link or item.url or 'https://www.commoncriteriaportal.org/' }}" target="_blank">{{ item.title or item.text or item }}</a>
       <span class="item-meta">{{ item.date or '' }}</span>
     </div>
@@ -853,7 +871,7 @@ a:hover { color: var(--neon-cyan); text-decoration: underline; }
     {% if diff.cc_portal.pps.added %}
     <div class="sub-hdr sub-new">New International PPs ({{ diff.cc_portal.pps.added | length }})</div>
     {% for pp in diff.cc_portal.pps.added %}
-    <div class="item-row">
+    <div class="item-row" data-source="cc-portal" data-kind="new">
       <a class="item-link" href="{{ pp.link or 'https://www.commoncriteriaportal.org/pps/' }}" target="_blank">{{ pp.title or pp.text or pp }}</a>
       <span class="item-meta"></span>
     </div>
@@ -862,7 +880,7 @@ a:hover { color: var(--neon-cyan); text-decoration: underline; }
     {% if diff.cc_portal.products.added %}
     <div class="sub-hdr sub-new">New Certified Products ({{ diff.cc_portal.products.added | length }})</div>
     {% for prod in diff.cc_portal.products.added %}
-    <div class="item-row">
+    <div class="item-row" data-source="cc-portal" data-kind="new">
       <span class="item-link">{{ prod }}</span>
       <span class="item-meta"></span>
     </div>
@@ -880,95 +898,21 @@ a:hover { color: var(--neon-cyan); text-decoration: underline; }
 </footer>
 
 <script>
-// Card toggle
-function toggleCard(hdr) {
-  var body = hdr.nextElementSibling;
-  var icon = hdr.querySelector('.toggle-icon');
-  if (body.classList.contains('collapsed')) {
-    body.classList.remove('collapsed');
-    if (icon) icon.textContent = '▼';
-  } else {
-    body.classList.add('collapsed');
-    if (icon) icon.textContent = '►';
-  }
-}
-function expandAll() {
-  document.querySelectorAll('.card-body.collapsed').forEach(function(b) {
-    b.classList.remove('collapsed');
-    var icon = b.previousElementSibling && b.previousElementSibling.querySelector('.toggle-icon');
-    if (icon) icon.textContent = '\u25bc';
-  });
-}
-function collapseAll() {
-  document.querySelectorAll('.card-body:not(.collapsed)').forEach(function(b) {
-    b.classList.add('collapsed');
-    var icon = b.previousElementSibling && b.previousElementSibling.querySelector('.toggle-icon');
-    if (icon) icon.textContent = '\u25b6';
-  });
-}
-
-// Filter zero-change cards
-var zeroFilterOn = false;
-function toggleZeroFilter() {
-  zeroFilterOn = !zeroFilterOn;
-  document.querySelectorAll('.card[data-has-changes]').forEach(function(card) {
-    var n = parseInt(card.getAttribute('data-has-changes') || '0', 10);
-    if (zeroFilterOn && n === 0) {
-      card.classList.add('zero-hidden');
-    } else {
-      card.classList.remove('zero-hidden');
-    }
-  });
-  var btn = document.getElementById('filter-btn');
-  if (btn) btn.textContent = zeroFilterOn ? '[F] Show All' : '[F] Hide Empty';
-}
-
-// Keyboard shortcuts: E=expand, C=collapse, F=filter
-document.addEventListener('keydown', function(e) {
-  if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
-  if (e.key === 'e' || e.key === 'E') expandAll();
-  if (e.key === 'c' || e.key === 'C') collapseAll();
-  if (e.key === 'f' || e.key === 'F') toggleZeroFilter();
-});
-
-// Highlight active stat tiles
-document.querySelectorAll('.stat').forEach(function(stat) {
-  var num = stat.querySelector('.stat-num');
-  if (!num) return;
-  var val = parseInt(num.textContent.trim(), 10);
-  if (isNaN(val) || val === 0) return;
-  if (num.classList.contains('alert-num')) {
-    stat.classList.add('has-alert');
-  } else {
-    stat.classList.add('has-data');
-  }
-});
-// Alert dismiss (localStorage persistence)
-function dismissAlert(btn) {
-  var row = btn.closest('.item-row');
-  var key = 'cpulse_seen_' + (row.dataset.alertKey || '');
-  if (row.classList.contains('alert-dismissed')) {
-    row.classList.remove('alert-dismissed');
-    btn.classList.remove('seen');
-    btn.textContent = '\u2713 Seen';
-    localStorage.removeItem(key);
-  } else {
-    row.classList.add('alert-dismissed');
-    btn.classList.add('seen');
-    btn.textContent = '\u2713 Seen';
-    localStorage.setItem(key, '1');
-  }
-}
-(function initAlertDismiss() {
-  document.querySelectorAll('.item-row[data-alert-key]').forEach(function(row) {
-    var key = 'cpulse_seen_' + row.dataset.alertKey;
-    if (localStorage.getItem(key)) {
-      row.classList.add('alert-dismissed');
-      var btn = row.querySelector('.dismiss-btn');
-      if (btn) { btn.classList.add('seen'); btn.textContent = '\u2713 Seen'; }
-    }
-  });
-})();
+function toggleCard(h){const b=h.nextElementSibling,i=h.querySelector('.toggle-icon'),c=b.classList.toggle('collapsed');if(i)i.textContent=c?'\u25ba':'\u25bc'}
+function expandAll(){document.querySelectorAll('.card-body').forEach(b=>{b.classList.remove('collapsed');const i=b.previousElementSibling.querySelector('.toggle-icon');if(i)i.textContent='\u25bc'})}
+function collapseAll(){document.querySelectorAll('.card-body').forEach(b=>{b.classList.add('collapsed');const i=b.previousElementSibling.querySelector('.toggle-icon');if(i)i.textContent='\u25ba'})}
+let _zeroHidden=false;
+function toggleZeroFilter(){_zeroHidden=!_zeroHidden;document.querySelectorAll('.card[data-has-changes]').forEach(c=>{const n=parseInt(c.dataset.hasChanges,10)||0;if(n===0)c.classList.toggle('zero-hidden',_zeroHidden)});const b=document.getElementById('filter-btn');if(b)b.textContent=_zeroHidden?'[F] Show All':'[F] Hide Empty';_reconcileGroupVisibility()}
+function dismissAlert(btn){const r=btn.closest('.item-row');if(r)r.classList.add('alert-dismissed')}
+function initAlertDismiss(){const stored=JSON.parse(sessionStorage.getItem('dismissed')||'[]');stored.forEach(k=>{const el=document.querySelector('[data-alert-key="'+k+'"]');if(el)el.classList.add('alert-dismissed')});document.querySelectorAll('.dismiss-btn').forEach(btn=>{btn.addEventListener('click',()=>{const r=btn.closest('[data-alert-key]');if(!r)return;const d=JSON.parse(sessionStorage.getItem('dismissed')||'[]');d.push(r.dataset.alertKey);sessionStorage.setItem('dismissed',JSON.stringify(d))})})}
+let _activeKind='all';
+function liveSearch(){const raw=(document.getElementById('search-input').value||'').trim(),term=raw.toLowerCase();document.querySelectorAll('mark.sh').forEach(m=>m.replaceWith(document.createTextNode(m.textContent)));const rows=document.querySelectorAll('.item-row,.cp-row');let vis=0;rows.forEach(row=>{const km=_activeKind==='all'||(_activeKind==='alert'&&row.closest('#sec-alerts'))||(row.dataset.kind===_activeKind);if(!km){row.classList.add('search-hidden');return}if(!term){row.classList.remove('search-hidden');vis++;return}const le=row.querySelector('.item-link'),me=row.querySelector('.item-meta'),se2=row.querySelector('.item-sub,.cp-detail'),hay=[le?le.textContent:'',me?me.textContent:'',se2?se2.textContent:''].join(' ').toLowerCase();if(hay.includes(term)){row.classList.remove('search-hidden');vis++;if(le)_highlight(le,raw)}else row.classList.add('search-hidden')});document.querySelectorAll('.card').forEach(card=>{const vr=card.querySelectorAll('.item-row:not(.search-hidden),.cp-row:not(.search-hidden)');let msg=card.querySelector('.no-results-msg');if(!msg){msg=document.createElement('p');msg.className='no-results-msg';msg.textContent='No matching items.';const body=card.querySelector('.card-body');if(body)body.appendChild(msg)}msg.style.display=(term||_activeKind!=='all')&&vr.length===0?'block':'none'});const ce=document.getElementById('search-count');if(ce)ce.textContent=(term||_activeKind!=='all')?vis+' result'+(vis!==1?'s':''):'';_reconcileGroupVisibility()}
+function _highlight(el,term){const w=document.createTreeWalker(el,NodeFilter.SHOW_TEXT),nodes=[];let n;while((n=w.nextNode()))nodes.push(n);const lt=term.toLowerCase();nodes.forEach(tn=>{const i=tn.nodeValue.toLowerCase().indexOf(lt);if(i===-1)return;const b=document.createTextNode(tn.nodeValue.slice(0,i)),m=document.createElement('mark');m.className='sh';m.textContent=tn.nodeValue.slice(i,i+term.length);const a=document.createTextNode(tn.nodeValue.slice(i+term.length));tn.parentNode.replaceChild(a,tn);tn.parentNode.insertBefore(m,a);tn.parentNode.insertBefore(b,m)})}
+function setKindFilter(btn){document.querySelectorAll('.chip').forEach(c=>c.classList.remove('active'));btn.classList.add('active');_activeKind=btn.dataset.kind;liveSearch()}
+function clearSearch(){const inp=document.getElementById('search-input');if(inp)inp.value='';document.querySelectorAll('.chip').forEach(c=>c.classList.remove('active'));const ac=document.querySelector('.chip[data-kind="all"]');if(ac)ac.classList.add('active');_activeKind='all';liveSearch()}
+function _reconcileGroupVisibility(){document.querySelectorAll('.section-group').forEach(g=>{const hv=[...g.querySelectorAll('.card')].some(c=>!c.classList.contains('zero-hidden')&&getComputedStyle(c).display!=='none');g.style.display=hv?'':' none'})}
+document.addEventListener('keydown',e=>{const t=document.activeElement.tagName;if(t==='INPUT'||t==='TEXTAREA'){if(e.key==='Escape'){clearSearch();document.activeElement.blur()}return}if(e.key==='e'||e.key==='E')expandAll();if(e.key==='c'||e.key==='C')collapseAll();if(e.key==='f'||e.key==='F')toggleZeroFilter();if(e.key==='/'){e.preventDefault();const inp=document.getElementById('search-input');if(inp)inp.focus()}});
+document.addEventListener('DOMContentLoaded',initAlertDismiss);
 </script>
 </body>
 </html>
@@ -1050,7 +994,7 @@ def _build_rss(diff: dict, generated_at: str) -> str:
 
     for alert in diff.get("alerts", []):
         items_xml.append(
-            f"<item><title>{xml_escape('ALERT: ' + alert.get('source', '') + ' – ' + alert.get('title', ''))}</title>"
+            f"<item><title>{xml_escape('ALERT: ' + alert.get('source', '') + ' â ' + alert.get('title', ''))}</title>"
             f"<link>https://kr15tyk.github.io/CC-pulse/cc_dashboard.html</link>"
             f"<description>{xml_escape('Kind: ' + alert.get('kind', '') + ' | Keywords: ' + ', '.join(alert.get('matched_keywords', [])))}</description></item>"
         )
