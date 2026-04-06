@@ -85,15 +85,15 @@ a:hover { color: var(--neon-cyan); text-decoration: underline; }
 .item-row { display: flex; justify-content: space-between; align-items: baseline; gap: 0.5rem; padding: 4px 0; border-bottom: 1px solid rgba(55,48,163,0.4); }
 .item-row:last-child { border-bottom: none; }
 .item-link { color: var(--neon-blue); flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.item-link::before { content: "› "; color: var(--muted); }
+.item-link::before { content: "âº "; color: var(--muted); }
 .item-meta { font-size: 0.7rem; color: var(--muted); white-space: nowrap; flex-shrink: 0; }
 .no-change { color: var(--muted); font-size: 0.8rem; padding: 0.25rem 0; }
-.no-change::before { content: "— "; }
+.no-change::before { content: "â "; }
 .item-sub { font-size: 0.72rem; color: var(--muted); padding: 1px 0 4px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; padding-left: 1.4em; }
 
 /* Alert item rows */
 .alert-item .item-link { color: var(--alert-color); }
-.alert-item .item-link::before { content: "⚡ "; color: var(--alert-color); }
+.alert-item .item-link::before { content: "â¡ "; color: var(--alert-color); }
 .alert-item .item-meta { color: var(--alert-color); opacity: 0.85; }
 .alert-dismissed { opacity: 0.3; }
 .alert-dismissed .item-link { text-decoration: line-through; }
@@ -179,6 +179,9 @@ a:hover { color: var(--neon-cyan); text-decoration: underline; }
   .trend-bar { flex-direction: column; }
   .stat { min-width: unset; }
 }
+
+/* search-filter */
+.search-row{display:flex;gap:.6rem;align-items:center;flex-wrap:wrap;margin-top:.5rem;margin-bottom:.5rem}.search-input{flex:1;min-width:180px;max-width:340px;background:var(--panel);border:1px solid var(--border-dim);color:var(--text);font-family:var(--font);font-size:.72rem;padding:3px 8px;outline:none}.search-input:focus{border-color:var(--neon-cyan)}.search-input::placeholder{color:var(--muted);opacity:.6}.search-clear{background:none;border:none;color:var(--muted);font-family:var(--font);font-size:.8rem;cursor:pointer;padding:0 4px;line-height:1}.search-clear:hover{color:var(--neon-cyan)}.filter-chips{display:flex;gap:.35rem;flex-wrap:wrap;align-items:center}.chip{background:none;border:1px solid var(--border-dim);color:var(--muted);font-family:var(--font);font-size:.65rem;padding:2px 7px;cursor:pointer;white-space:nowrap}.chip:hover{border-color:var(--neon-cyan);color:var(--neon-cyan)}.chip.active{border-color:var(--primary);color:var(--primary);background:rgba(59,130,246,.12)}.chip.chip-alert.active{border-color:var(--alert-color);color:var(--alert-color);background:rgba(251,146,60,.12)}.search-count{font-size:.65rem;color:var(--muted);opacity:.7;white-space:nowrap}mark.sh{background:rgba(251,146,60,.35);color:var(--text);border-radius:2px;padding:0 1px}.search-hidden{display:none!important}.no-results-msg{color:var(--muted);font-size:.8rem;padding:.25rem 0;display:none}.no-results-msg::before{content:"96 "}
 </style>
 </head>
 <body>
@@ -186,7 +189,7 @@ a:hover { color: var(--neon-cyan); text-decoration: underline; }
 <div class="sticky-top">
 <header class="site-header">
   <div class="site-title">CC Pulse</div>
-  <div class="site-meta">2026-04-05 → 2026-04-06 &middot; Generated 2026-04-06 07:30 UTC</div>
+  <div class="site-meta">2026-04-05 â 2026-04-06 &middot; Generated 2026-04-06 17:20 UTC</div>
 </header>
 <div class="trend-bar">
   <div class="stat"><a href="#sec-niap-pp">
@@ -256,14 +259,29 @@ a:hover { color: var(--neon-cyan); text-decoration: underline; }
       none
     </span>
   </div>
-  <div class="sh-footer">Period: 2026-04-05 → 2026-04-06</div>
+  <div class="sh-footer">Period: 2026-04-05 â 2026-04-06</div>
   <div class="sh-footer">All sources last polled: 2026-04-06 (daily 06:00 UTC)</div>
 </div>
 <div class="ctrl-bar">
   <button class="ctrl-btn" onclick="expandAll()" title="Expand all cards [E]">[E] Expand All</button>
   <button class="ctrl-btn" onclick="collapseAll()" title="Collapse all cards [C]">[C] Collapse All</button>
   <button class="ctrl-btn" id="filter-btn" onclick="toggleZeroFilter()" title="Toggle zero-change cards [F]">[F] Hide Empty</button>
-  <span class="ctrl-hint">keyboard: E=expand C=collapse F=filter</span>
+  <span class="ctrl-hint">keyboard: E=expand C=collapse F=filter /=search Esc=clear</span>
+</div>
+<div class="search-row">
+  <input id="search-input" class="search-input" type="search" placeholder="Search items…"
+    oninput="liveSearch()" title="Search across all cards [/]" autocomplete="off" spellcheck="false">
+  <button class="search-clear" onclick="clearSearch()" title="Clear search">✕</button>
+  <div class="filter-chips">
+    <span style="font-size:.65rem;color:var(--muted);opacity:.6;">kind:</span>
+    <button class="chip active" data-kind="all"     onclick="setKindFilter(this)">All</button>
+    <button class="chip"        data-kind="new"     onclick="setKindFilter(this)">New</button>
+    <button class="chip"        data-kind="removed" onclick="setKindFilter(this)">Removed</button>
+    <button class="chip"        data-kind="updated" onclick="setKindFilter(this)">Updated</button>
+    <button class="chip"        data-kind="archived" onclick="setKindFilter(this)">Archived</button>
+    <button class="chip chip-alert" data-kind="alert" onclick="setKindFilter(this)">Alert</button>
+  </div>
+  <span id="search-count" class="search-count"></span>
 </div>
 <!-- Alerts -->
 
@@ -588,7 +606,7 @@ a:hover { color: var(--neon-cyan); text-decoration: underline; }
   <div class="card-body ">
     
     
-    <div class="item-row">
+    <div class="item-row" data-source="nist" data-kind="updated">
       <a class="item-link" href="https://nvlpubs.nist.gov/nistpubs/ir/2024/NIST.IR.8547.ipd.pdf" target="_blank">NIST IR 8547</a>
       <span class="item-meta">
         Header changed
@@ -639,99 +657,25 @@ a:hover { color: var(--neon-cyan); text-decoration: underline; }
 
 <footer>
   <span>CC Pulse &middot; Auto-refreshes daily (06:00 UTC) &middot; Data from NIAP, CSfC, NIST, CC Portal</span>
-  <span>Last run: 2026-04-06 07:30 UTC</span>
+  <span>Last run: 2026-04-06 17:20 UTC</span>
 </footer>
 
 <script>
-// Card toggle
-function toggleCard(hdr) {
-  var body = hdr.nextElementSibling;
-  var icon = hdr.querySelector('.toggle-icon');
-  if (body.classList.contains('collapsed')) {
-    body.classList.remove('collapsed');
-    if (icon) icon.textContent = '▼';
-  } else {
-    body.classList.add('collapsed');
-    if (icon) icon.textContent = '►';
-  }
-}
-function expandAll() {
-  document.querySelectorAll('.card-body.collapsed').forEach(function(b) {
-    b.classList.remove('collapsed');
-    var icon = b.previousElementSibling && b.previousElementSibling.querySelector('.toggle-icon');
-    if (icon) icon.textContent = '▼';
-  });
-}
-function collapseAll() {
-  document.querySelectorAll('.card-body:not(.collapsed)').forEach(function(b) {
-    b.classList.add('collapsed');
-    var icon = b.previousElementSibling && b.previousElementSibling.querySelector('.toggle-icon');
-    if (icon) icon.textContent = '▶';
-  });
-}
-
-// Filter zero-change cards
-var zeroFilterOn = false;
-function toggleZeroFilter() {
-  zeroFilterOn = !zeroFilterOn;
-  document.querySelectorAll('.card[data-has-changes]').forEach(function(card) {
-    var n = parseInt(card.getAttribute('data-has-changes') || '0', 10);
-    if (zeroFilterOn && n === 0) {
-      card.classList.add('zero-hidden');
-    } else {
-      card.classList.remove('zero-hidden');
-    }
-  });
-  var btn = document.getElementById('filter-btn');
-  if (btn) btn.textContent = zeroFilterOn ? '[F] Show All' : '[F] Hide Empty';
-}
-
-// Keyboard shortcuts: E=expand, C=collapse, F=filter
-document.addEventListener('keydown', function(e) {
-  if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
-  if (e.key === 'e' || e.key === 'E') expandAll();
-  if (e.key === 'c' || e.key === 'C') collapseAll();
-  if (e.key === 'f' || e.key === 'F') toggleZeroFilter();
-});
-
-// Highlight active stat tiles
-document.querySelectorAll('.stat').forEach(function(stat) {
-  var num = stat.querySelector('.stat-num');
-  if (!num) return;
-  var val = parseInt(num.textContent.trim(), 10);
-  if (isNaN(val) || val === 0) return;
-  if (num.classList.contains('alert-num')) {
-    stat.classList.add('has-alert');
-  } else {
-    stat.classList.add('has-data');
-  }
-});
-// Alert dismiss (localStorage persistence)
-function dismissAlert(btn) {
-  var row = btn.closest('.item-row');
-  var key = 'cpulse_seen_' + (row.dataset.alertKey || '');
-  if (row.classList.contains('alert-dismissed')) {
-    row.classList.remove('alert-dismissed');
-    btn.classList.remove('seen');
-    btn.textContent = '✓ Seen';
-    localStorage.removeItem(key);
-  } else {
-    row.classList.add('alert-dismissed');
-    btn.classList.add('seen');
-    btn.textContent = '✓ Seen';
-    localStorage.setItem(key, '1');
-  }
-}
-(function initAlertDismiss() {
-  document.querySelectorAll('.item-row[data-alert-key]').forEach(function(row) {
-    var key = 'cpulse_seen_' + row.dataset.alertKey;
-    if (localStorage.getItem(key)) {
-      row.classList.add('alert-dismissed');
-      var btn = row.querySelector('.dismiss-btn');
-      if (btn) { btn.classList.add('seen'); btn.textContent = '✓ Seen'; }
-    }
-  });
-})();
+function toggleCard(h){const b=h.nextElementSibling,i=h.querySelector('.toggle-icon'),c=b.classList.toggle('collapsed');if(i)i.textContent=c?'►':'▼'}
+function expandAll(){document.querySelectorAll('.card-body').forEach(b=>{b.classList.remove('collapsed');const i=b.previousElementSibling.querySelector('.toggle-icon');if(i)i.textContent='▼'})}
+function collapseAll(){document.querySelectorAll('.card-body').forEach(b=>{b.classList.add('collapsed');const i=b.previousElementSibling.querySelector('.toggle-icon');if(i)i.textContent='►'})}
+let _zeroHidden=false;
+function toggleZeroFilter(){_zeroHidden=!_zeroHidden;document.querySelectorAll('.card[data-has-changes]').forEach(c=>{const n=parseInt(c.dataset.hasChanges,10)||0;if(n===0)c.classList.toggle('zero-hidden',_zeroHidden)});const b=document.getElementById('filter-btn');if(b)b.textContent=_zeroHidden?'[F] Show All':'[F] Hide Empty';_reconcileGroupVisibility()}
+function dismissAlert(btn){const r=btn.closest('.item-row');if(r)r.classList.add('alert-dismissed')}
+function initAlertDismiss(){const stored=JSON.parse(sessionStorage.getItem('dismissed')||'[]');stored.forEach(k=>{const el=document.querySelector('[data-alert-key="'+k+'"]');if(el)el.classList.add('alert-dismissed')});document.querySelectorAll('.dismiss-btn').forEach(btn=>{btn.addEventListener('click',()=>{const r=btn.closest('[data-alert-key]');if(!r)return;const d=JSON.parse(sessionStorage.getItem('dismissed')||'[]');d.push(r.dataset.alertKey);sessionStorage.setItem('dismissed',JSON.stringify(d))})})}
+let _activeKind='all';
+function liveSearch(){const raw=(document.getElementById('search-input').value||'').trim(),term=raw.toLowerCase();document.querySelectorAll('mark.sh').forEach(m=>m.replaceWith(document.createTextNode(m.textContent)));const rows=document.querySelectorAll('.item-row,.cp-row');let vis=0;rows.forEach(row=>{const km=_activeKind==='all'||(_activeKind==='alert'&&row.closest('#sec-alerts'))||(row.dataset.kind===_activeKind);if(!km){row.classList.add('search-hidden');return}if(!term){row.classList.remove('search-hidden');vis++;return}const le=row.querySelector('.item-link'),me=row.querySelector('.item-meta'),se2=row.querySelector('.item-sub,.cp-detail'),hay=[le?le.textContent:'',me?me.textContent:'',se2?se2.textContent:''].join(' ').toLowerCase();if(hay.includes(term)){row.classList.remove('search-hidden');vis++;if(le)_highlight(le,raw)}else row.classList.add('search-hidden')});document.querySelectorAll('.card').forEach(card=>{const vr=card.querySelectorAll('.item-row:not(.search-hidden),.cp-row:not(.search-hidden)');let msg=card.querySelector('.no-results-msg');if(!msg){msg=document.createElement('p');msg.className='no-results-msg';msg.textContent='No matching items.';const body=card.querySelector('.card-body');if(body)body.appendChild(msg)}msg.style.display=(term||_activeKind!=='all')&&vr.length===0?'block':'none'});const ce=document.getElementById('search-count');if(ce)ce.textContent=(term||_activeKind!=='all')?vis+' result'+(vis!==1?'s':''):'';_reconcileGroupVisibility()}
+function _highlight(el,term){const w=document.createTreeWalker(el,NodeFilter.SHOW_TEXT),nodes=[];let n;while((n=w.nextNode()))nodes.push(n);const lt=term.toLowerCase();nodes.forEach(tn=>{const i=tn.nodeValue.toLowerCase().indexOf(lt);if(i===-1)return;const b=document.createTextNode(tn.nodeValue.slice(0,i)),m=document.createElement('mark');m.className='sh';m.textContent=tn.nodeValue.slice(i,i+term.length);const a=document.createTextNode(tn.nodeValue.slice(i+term.length));tn.parentNode.replaceChild(a,tn);tn.parentNode.insertBefore(m,a);tn.parentNode.insertBefore(b,m)})}
+function setKindFilter(btn){document.querySelectorAll('.chip').forEach(c=>c.classList.remove('active'));btn.classList.add('active');_activeKind=btn.dataset.kind;liveSearch()}
+function clearSearch(){const inp=document.getElementById('search-input');if(inp)inp.value='';document.querySelectorAll('.chip').forEach(c=>c.classList.remove('active'));const ac=document.querySelector('.chip[data-kind="all"]');if(ac)ac.classList.add('active');_activeKind='all';liveSearch()}
+function _reconcileGroupVisibility(){document.querySelectorAll('.section-group').forEach(g=>{const hv=[...g.querySelectorAll('.card')].some(c=>!c.classList.contains('zero-hidden')&&getComputedStyle(c).display!=='none');g.style.display=hv?'':' none'})}
+document.addEventListener('keydown',e=>{const t=document.activeElement.tagName;if(t==='INPUT'||t==='TEXTAREA'){if(e.key==='Escape'){clearSearch();document.activeElement.blur()}return}if(e.key==='e'||e.key==='E')expandAll();if(e.key==='c'||e.key==='C')collapseAll();if(e.key==='f'||e.key==='F')toggleZeroFilter();if(e.key==='/'){e.preventDefault();const inp=document.getElementById('search-input');if(inp)inp.focus()}});
+document.addEventListener('DOMContentLoaded',initAlertDismiss);
 </script>
 </body>
 </html>
