@@ -189,23 +189,23 @@ a:hover { color: var(--neon-cyan); text-decoration: underline; }
 <div class="sticky-top">
 <header class="site-header">
   <div class="site-title">CC Pulse</div>
-  <div class="site-meta">2026-04-06 â 2026-04-07 &middot; Generated 2026-04-07 07:17 UTC</div>
+  <div class="site-meta">2026-04-07 â 2026-04-08 &middot; Generated 2026-04-08 07:27 UTC</div>
 </header>
 <div class="trend-bar">
   <div class="stat"><a href="#sec-niap-pp">
-    <div class="stat-num active-num">1</div>
+    <div class="stat-num active-num">4</div>
     <div class="stat-lbl">NIAP Changes</div>
   </a></div>
   <div class="stat"><a href="#sec-cctl">
-    <div class="stat-num active-num">1</div>
+    <div class="stat-num ">0</div>
     <div class="stat-lbl">CCTL Items</div>
   </a></div>
   <div class="stat"><a href="#sec-csfc">
-    <div class="stat-num ">0</div>
+    <div class="stat-num active-num">8</div>
     <div class="stat-lbl">CSfC CP Updates</div>
   </a></div>
   <div class="stat"><a href="#sec-nist">
-    <div class="stat-num ">0</div>
+    <div class="stat-num active-num">1</div>
     <div class="stat-lbl">NIST Doc Updates</div>
   </a></div>
   <div class="stat"><a href="#sec-cc-portal">
@@ -213,7 +213,7 @@ a:hover { color: var(--neon-cyan); text-decoration: underline; }
     <div class="stat-lbl">CC Portal</div>
   </a></div>
   <div class="stat"><a href="#sec-alerts">
-    <div class="stat-num alert-num">1</div>
+    <div class="stat-num alert-num">4</div>
     <div class="stat-lbl">Alerts</div>
   </a></div>
 </div>
@@ -226,19 +226,19 @@ a:hover { color: var(--neon-cyan); text-decoration: underline; }
   <div class="sh-row">
     <span class="sh-source">NIAP API</span>
     <span class="sh-badge sh-ok">
-      1 change
+      4 changes
     </span>
   </div>
   <div class="sh-row">
     <span class="sh-source">CSfC / NSA</span>
-    <span class="sh-badge sh-idle">
-      no changes
+    <span class="sh-badge sh-ok">
+      8 updates
     </span>
   </div>
   <div class="sh-row">
     <span class="sh-source">NIST CSRC</span>
-    <span class="sh-badge sh-idle">
-      no changes
+    <span class="sh-badge sh-ok">
+      1 update
     </span>
   </div>
   <div class="sh-row">
@@ -249,18 +249,18 @@ a:hover { color: var(--neon-cyan); text-decoration: underline; }
   </div>
   <div class="sh-row">
     <span class="sh-source">CCTL Labs</span>
-    <span class="sh-badge sh-ok">
-      1 new item
+    <span class="sh-badge sh-idle">
+      no changes
     </span>
   </div>
   <div class="sh-row">
     <span class="sh-source">Keyword Alerts</span>
     <span class="sh-badge sh-alert">
-      1 match
+      4 matches
     </span>
   </div>
-  <div class="sh-footer">Period: 2026-04-06 â 2026-04-07</div>
-  <div class="sh-footer">All sources last polled: 2026-04-07 (daily 06:00 UTC)</div>
+  <div class="sh-footer">Period: 2026-04-07 â 2026-04-08</div>
+  <div class="sh-footer">All sources last polled: 2026-04-08 (daily 06:00 UTC)</div>
 </div>
 <div class="ctrl-bar">
   <button class="ctrl-btn" onclick="expandAll()" title="Expand all cards [E]">[E] Expand All</button>
@@ -289,18 +289,46 @@ a:hover { color: var(--neon-cyan); text-decoration: underline; }
 <div class="card card-alert" id="sec-alerts">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>Alerts</span>
-    <span class="card-count">1 alert</span>
+    <span class="card-count">4 alerts</div>
+</span>
     <span class="toggle-icon">&#9660;</span>
   </div>
   <div class="card-body">
     <div class="alert-monitoring">FIPS 186-4, FIPS 186-5, NDcPP, CPP_ND, TLS 1.3, SSH, PP-Module_VPN, PP-Module_WLAN, labgram, valgram, emergency, CSfC, Commercial Solutions for Classified, CSfC APL, CSfC capability package, CP-Mobile, CP-MA, CP-WAN, CP-Campus WLAN, CP-DAR, CP-MDM, NSA CSfC, CCDB-018, Crypto Catalog, cryptography working group, Specification of Functional Requirements for Cryptography, FCS_CKM, FCS_COP, FCS_RBG, CAVP, CMVP, FIPS 140-3, FIPS 203, FIPS 204, FIPS 205, SP 800-131A, SP 800-57, NIST IR 8547, post-quantum cryptography, PQC migration, ML-KEM, ML-DSA, SLH-DSA, algorithm transition, CMVP validated, modules in process</div>
     
-        <div class="item-row alert-item" data-alert-key="NIAP PP-CPP_ND_V3.0E">
+        <div class="item-row alert-item" data-alert-key="CSfC CP-CP-WAN">
           
-          <a class="item-link" href="https://www.niap-ccevs.org/Profile/PP.cfm?id=482" target="_blank">NIAP PP: CPP_ND_V3.0E</a>
+          <a class="item-link" href="https://www.nsa.gov/portals/75/documents/resources/everyone/csfc/capability-packages/wan.pdf" target="_blank">CSfC CP: CP-WAN</a>
           
-          <span class="item-meta">sunset &middot; CPP_ND</span>
-          <div class="item-sub">Sunset date: 2026-06-22T00:00:00Z → 2026-10-02T00:00:00Z</div>
+          <span class="item-meta">updated &middot; CP-WAN</span>
+          <div class="item-sub">Capability Package revised · Content changed</div>
+          <button class="dismiss-btn" onclick="dismissAlert(this)" title="Mark as seen">&#10003; Seen</button>
+        </div>
+        
+        <div class="item-row alert-item" data-alert-key="CSfC CP-CP-Campus_WLAN">
+          
+          <a class="item-link" href="https://www.nsa.gov/portals/75/documents/resources/everyone/csfc/capability-packages/campus-wlan.pdf" target="_blank">CSfC CP: CP-Campus WLAN</a>
+          
+          <span class="item-meta">updated &middot; CP-Campus WLAN</span>
+          <div class="item-sub">Capability Package revised · Content changed</div>
+          <button class="dismiss-btn" onclick="dismissAlert(this)" title="Mark as seen">&#10003; Seen</button>
+        </div>
+        
+        <div class="item-row alert-item" data-alert-key="CSfC CP-CP-Mobile_Device_Management">
+          
+          <a class="item-link" href="https://www.nsa.gov/portals/75/documents/resources/everyone/csfc/capability-packages/mdm.pdf" target="_blank">CSfC CP: CP-Mobile Device Management</a>
+          
+          <span class="item-meta">updated &middot; CP-Mobile</span>
+          <div class="item-sub">Capability Package revised · Content changed</div>
+          <button class="dismiss-btn" onclick="dismissAlert(this)" title="Mark as seen">&#10003; Seen</button>
+        </div>
+        
+        <div class="item-row alert-item" data-alert-key="CSfC CP-CP-Mobile_Access">
+          
+          <a class="item-link" href="https://www.nsa.gov/portals/75/documents/resources/everyone/csfc/capability-packages/mobile-access.pdf" target="_blank">CSfC CP: CP-Mobile Access</a>
+          
+          <span class="item-meta">updated &middot; CP-Mobile</span>
+          <div class="item-sub">Capability Package revised · Content changed</div>
           <button class="dismiss-btn" onclick="dismissAlert(this)" title="Mark as seen">&#10003; Seen</button>
         </div>
         
@@ -323,7 +351,7 @@ a:hover { color: var(--neon-cyan); text-decoration: underline; }
     
     
     
-    <p class="no-change">No changes detected. <span class="last-active">(last: 2026-04-05)</span></p>
+    <p class="no-change">No changes detected. <span class="last-active">(last: 2026-04-08)</span></p>
   </div>
 </div>
 
@@ -343,10 +371,10 @@ a:hover { color: var(--neon-cyan); text-decoration: underline; }
 </div>
 
   <!-- NIAP In-Evaluation -->
-<div class="card " id="sec-niap-inevaluation" data-has-changes="0">
+<div class="card card-new" id="sec-niap-inevaluation" data-has-changes="1">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>NIAP In-Evaluation Products</span>
-    <span class="card-count">22 active</span>
+    <span class="card-count">1 change</span>
     <span class="sparkline">
       
       <span class="sp-bar" style="height:0%" title="0 changes"></span>
@@ -361,15 +389,24 @@ a:hover { color: var(--neon-cyan); text-decoration: underline; }
       
       <span class="sp-bar" style="height:0%" title="0 changes"></span>
       
-      <span class="sp-bar" style="height:0%" title="0 changes"></span>
+      <span class="sp-bar" style="height:100%" title="1 change"></span>
       
     </span>
   </div>
-  <div class="card-body collapsed">
+  <div class="card-body ">
+    
+    <div class="sub-hdr sub-new">Newly In Evaluation (1)</div>
+    
+    <div class="item-row" data-source="niap-inevaluation" data-kind="new">
+      <span class="item-link">RedData, an RPI-CS, Inc. division -- RedData PCIe Gen3 NVMe 1.3 & SATA III SED SSD's</span>
+      <span class="item-meta">Lightship Security USA, Inc.</span>
+    </div>
+    
+    <div class="item-sub">Encrypted Storage</div>
     
     
     
-    <p class="no-change">No evaluation changes detected. 22 products currently in evaluation.</p>
+    
     
   </div>
 </div>
@@ -383,9 +420,9 @@ a:hover { color: var(--neon-cyan); text-decoration: underline; }
       
       <span class="sp-bar" style="height:0%" title="0 changes"></span>
       
-      <span class="sp-bar" style="height:0%" title="0 changes"></span>
-      
       <span class="sp-bar" style="height:100%" title="1 change"></span>
+      
+      <span class="sp-bar" style="height:0%" title="0 changes"></span>
       
       <span class="sp-bar" style="height:0%" title="0 changes"></span>
       
@@ -408,44 +445,72 @@ a:hover { color: var(--neon-cyan); text-decoration: underline; }
 </div>
 
   <!-- NIAP PCL -- All Certifications -->
-<div class="card " id="sec-niap-pcl" data-has-changes="0">
+<div class="card card-new" id="sec-niap-pcl" data-has-changes="3">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>NIAP PCL -- All Certifications</span>
-    <span class="card-count">0 changes</span>
+    <span class="card-count">3 changes</span>
     <span class="sparkline">
       
       <span class="sp-bar" style="height:0%" title="0 changes"></span>
       
-      <span class="sp-bar" style="height:0%" title="0 changes"></span>
-      
-      <span class="sp-bar" style="height:100%" title="2 changes"></span>
+      <span class="sp-bar" style="height:67%" title="2 changes"></span>
       
       <span class="sp-bar" style="height:0%" title="0 changes"></span>
       
-      <span class="sp-bar" style="height:100%" title="2 changes"></span>
+      <span class="sp-bar" style="height:67%" title="2 changes"></span>
       
       <span class="sp-bar" style="height:0%" title="0 changes"></span>
       
       <span class="sp-bar" style="height:0%" title="0 changes"></span>
+      
+      <span class="sp-bar" style="height:100%" title="3 changes"></span>
       
     </span>
   </div>
-  <div class="card-body collapsed">
+  <div class="card-body ">
+    
+    <div class="sub-hdr sub-new">New Certifications (2)</div>
+    
+    <div class="item-row" data-source="niap-pcl" data-kind="new">
+      <span class="item-link">RedData, an RPI-CS, Inc. division -- RedData PCIe Gen3 NVMe 1.3 & SATA III SED SSD's</span>
+      <span class="item-meta"></span>
+    </div>
+    
+    <div class="item-sub">CPP_FDE_EE_V2.0E</div>
+    
+    
+    <div class="item-row" data-source="niap-pcl" data-kind="new">
+      <span class="item-link">HP Inc. -- HP G2.0 AJM BCBC  Color LaserJet Managed MFP E785) System firmware version: 2509306_000318 HP Color Laserjet MFP (Flow) E877, Enterprise (Flow) MFP 8801 System Firmware 2509306_000318 HP Color LaserJet Enterprise (Flow) MFP 5800dn/f/zf, HP Color LaserJet Enterprise MFP X57945dn, HP Color LaserJet Enterprise (Flow) MFP X58045dn/z/zs, and HP Color LaserJet Enterprise Flow MFP X57945z/zs System Firmware 2509306_000319 HP Color LaserJet Enterprise MFP 6800dn, HP Color LaserJet Enterprise Flow MFP 6800 zf/zfsw/zfw+, HP Color LaserJet Enterprise Flow MFP 6801zfsw/zfw+ HP Color LaserJet Enterprise MFP X677 dn/s/z/z+/zs System Firmware 2509306_000320 HP Color LaserJet Enterprise MFP M480f HP Color LaserJet Managed MFP E47528f System Firmware 2509306_000329 HP LaserJet Enterprise MFP M430f/M431f and HP LaserJet Managed MFP E42540f System Firmware 2509306_000331 HP LaserJet Managed (Flow) MFP E826 and HP LaserJet Enterprise (Flow) MFP 8601 printers, all with HP FutureSmart 5.9.2.1 Firmware and  System Firmware 2509306_000334 All with HP FutureSmart 5.9.2.1 Firmware and JetDirect Inside Firmware JOL25090252</span>
+      <span class="item-meta">2026-02-26</span>
+    </div>
+    
+    <div class="item-sub">CPP_HCD_V1.0E</div>
     
     
     
-    <p class="no-change">No changes detected. <span class="last-active">(last: 2026-04-05)</span></p>
+    
+    <div class="sub-hdr sub-updated">Newly Archived (1)</div>
+    
+    <div class="item-row" data-source="niap-pcl" data-kind="archived">
+      <span class="item-link">Juniper Networks, Inc. -- Juniper Networks Junos OS 22.3R1 for MX240, MX480, MX960, EX9204, EX9208 and EX9214 with MACsec</span>
+      <span class="item-meta">Archived</span>
+    </div>
+    
+    <div class="item-sub">PP_NDCPP_MACSEC_EP_V1.2, CPP_ND_V2.2E</div>
+    
+    
+    
+    
+    
   </div>
 </div>
 
   <!-- NIAP PPs -->
-<div class="card card-new" id="sec-niap-pp" data-has-changes="1">
+<div class="card " id="sec-niap-pp" data-has-changes="0">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>NIAP Protection Profiles</span>
-    <span class="card-count">1 change</span>
+    <span class="card-count">0 changes</span>
     <span class="sparkline">
-      
-      <span class="sp-bar" style="height:0%" title="0 changes"></span>
       
       <span class="sp-bar" style="height:0%" title="0 changes"></span>
       
@@ -459,23 +524,17 @@ a:hover { color: var(--neon-cyan); text-decoration: underline; }
       
       <span class="sp-bar" style="height:33%" title="1 change"></span>
       
+      <span class="sp-bar" style="height:0%" title="0 changes"></span>
+      
     </span>
-    <span class="toggle-icon">&#9660;</span>
+    <span class="toggle-icon">&#9658;</span>
   </div>
-  <div class="card-body ">
-    
-    
-    
-    <div class="sub-hdr sub-updated">Sunset Changes (1)</div>
-    
-    <div class="item-row" data-source="niap-pp" data-kind="updated">
-      <a class="item-link" href="https://www.niap-ccevs.org/Profile/PP.cfm?id=482" target="_blank">CPP_ND_V3.0E</a>
-      <span class="item-meta">Network Device &middot; Sunset: 2026-10-02T00:00:00Z</span>
-    </div>
+  <div class="card-body collapsed">
     
     
     
     
+    <p class="no-change">No changes detected. <span class="last-active">(last: 2026-04-07)</span></p>
   </div>
 </div>
 
@@ -486,7 +545,7 @@ a:hover { color: var(--neon-cyan); text-decoration: underline; }
     <span class="card-count">0 changes</span>
     <span class="sparkline">
       
-      <span class="sp-bar" style="height:100%" title="11 changes"></span>
+      <span class="sp-bar" style="height:0%" title="0 changes"></span>
       
       <span class="sp-bar" style="height:0%" title="0 changes"></span>
       
@@ -506,7 +565,7 @@ a:hover { color: var(--neon-cyan); text-decoration: underline; }
   <div class="card-body collapsed">
     
     
-    <p class="no-change">No changes detected. <span class="last-active">(last: 2026-04-01)</span></p>
+    <p class="no-change">No changes detected.</p>
   </div>
 </div>
 </div>
@@ -514,61 +573,10 @@ a:hover { color: var(--neon-cyan); text-decoration: underline; }
 <div class="section-group">
   <div class="section-label">CCTL</div>
   <!-- CCTL Lab Intel -->
-<div class="card card-new" id="sec-cctl" data-has-changes="1">
+<div class="card " id="sec-cctl" data-has-changes="0">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>CCTL Lab Intel</span>
-    <span class="card-count">1 new item</span>
-    <span class="sparkline">
-      
-      <span class="sp-bar" style="height:100%" title="10 changes"></span>
-      
-      <span class="sp-bar" style="height:0%" title="0 changes"></span>
-      
-      <span class="sp-bar" style="height:0%" title="0 changes"></span>
-      
-      <span class="sp-bar" style="height:0%" title="0 changes"></span>
-      
-      <span class="sp-bar" style="height:0%" title="0 changes"></span>
-      
-      <span class="sp-bar" style="height:0%" title="0 changes"></span>
-      
-      <span class="sp-bar" style="height:10%" title="1 change"></span>
-      
-    </span>
-    <span class="toggle-icon">&#9660;</span>
-  </div>
-  <div class="card-body ">
-    
-    
-    <div class="lab-row">
-      <div class="lab-hdr" onclick="toggleLab(this)">
-        <span class="lab-name">Acumen Security (Intertek)</span>
-        <span class="lab-cnt">1 item</span>
-        <span class="toggle-icon">&#9658;</span>
-      </div>
-      <div class="lab-body collapsed">
-        
-        <div class="item-row" data-source="cctl" data-kind="new">
-          <a class="item-link" href="/blog/2026/04-07-data-centers-are-redefining-system-assurance/" target="_blank">Digital Twins at Scale: How Massive Data Centers Are Redefining System Assurance</a>
-          <span class="item-meta"></span>
-        </div>
-        
-      </div>
-    </div>
-    
-    
-    
-  </div>
-</div>
-</div>
-
-<div class="section-group">
-  <div class="section-label">CSfC</div>
-  <!-- CSfC Capability Packages -->
-<div class="card " id="sec-csfc" data-has-changes="0">
-  <div class="card-hdr" onclick="toggleCard(this)">
-    <span>CSfC Capability Packages</span>
-    <span class="card-count">0 updates</span>
+    <span class="card-count">0 new items</span>
     <span class="sparkline">
       
       <span class="sp-bar" style="height:0%" title="0 changes"></span>
@@ -581,7 +589,7 @@ a:hover { color: var(--neon-cyan); text-decoration: underline; }
       
       <span class="sp-bar" style="height:0%" title="0 changes"></span>
       
-      <span class="sp-bar" style="height:0%" title="0 changes"></span>
+      <span class="sp-bar" style="height:100%" title="1 change"></span>
       
       <span class="sp-bar" style="height:0%" title="0 changes"></span>
       
@@ -590,7 +598,128 @@ a:hover { color: var(--neon-cyan); text-decoration: underline; }
   </div>
   <div class="card-body collapsed">
     
-    <p class="no-change">No changes detected.</p>
+    <p class="no-change">No new items. <span class="last-active">(last: 2026-04-07)</span></p>
+  </div>
+</div>
+</div>
+
+<div class="section-group">
+  <div class="section-label">CSfC</div>
+  <!-- CSfC Capability Packages -->
+<div class="card card-updated" id="sec-csfc" data-has-changes="8">
+  <div class="card-hdr" onclick="toggleCard(this)">
+    <span>CSfC Capability Packages</span>
+    <span class="card-count">8 updates</span>
+    <span class="sparkline">
+      
+      <span class="sp-bar" style="height:0%" title="0 changes"></span>
+      
+      <span class="sp-bar" style="height:0%" title="0 changes"></span>
+      
+      <span class="sp-bar" style="height:0%" title="0 changes"></span>
+      
+      <span class="sp-bar" style="height:0%" title="0 changes"></span>
+      
+      <span class="sp-bar" style="height:0%" title="0 changes"></span>
+      
+      <span class="sp-bar" style="height:0%" title="0 changes"></span>
+      
+      <span class="sp-bar" style="height:100%" title="8 changes"></span>
+      
+    </span>
+    <span class="toggle-icon">&#9660;</span>
+  </div>
+  <div class="card-body ">
+    
+    
+    <div class="cp-row" data-source="csfc" data-kind="updated">
+      <a class="item-link" href="https://www.nsa.gov/portals/75/documents/resources/everyone/csfc/capability-packages/data-at-rest.pdf" target="_blank">CP-Data at Rest</a>
+      <div class="cp-detail">
+        
+        <span class="cp-date">Size: 490 &#8594; 488 bytes</span>
+        
+      </div>
+    </div>
+    
+    
+    
+    <div class="cp-row" data-source="csfc" data-kind="updated">
+      <a class="item-link" href="https://www.nsa.gov/portals/75/documents/resources/everyone/csfc/capability-packages/wan.pdf" target="_blank">CP-WAN</a>
+      <div class="cp-detail">
+        
+        <span class="cp-date">Size: 473 &#8594; 471 bytes</span>
+        
+      </div>
+    </div>
+    
+    
+    
+    <div class="cp-row" data-source="csfc" data-kind="updated">
+      <a class="item-link" href="https://www.nsa.gov/portals/75/documents/resources/everyone/csfc/capability-packages/campus-wlan.pdf" target="_blank">CP-Campus WLAN</a>
+      <div class="cp-detail">
+        
+        <span class="cp-date">Size: 485 &#8594; 483 bytes</span>
+        
+      </div>
+    </div>
+    
+    
+    
+    <div class="cp-row" data-source="csfc" data-kind="updated">
+      <a class="item-link" href="https://www.nsa.gov/portals/75/documents/resources/everyone/csfc/capability-packages/email.pdf" target="_blank">CP-Email</a>
+      <div class="cp-detail">
+        
+        <span class="cp-date">Size: 475 &#8594; 473 bytes</span>
+        
+      </div>
+    </div>
+    
+    
+    
+    <div class="cp-row" data-source="csfc" data-kind="updated">
+      <a class="item-link" href="https://www.nsa.gov/portals/75/documents/resources/everyone/csfc/capability-packages/multi-site-connectivity.pdf" target="_blank">CP-Multi-Site Connectivity</a>
+      <div class="cp-detail">
+        
+        <span class="cp-date">Size: 501 &#8594; 499 bytes</span>
+        
+      </div>
+    </div>
+    
+    
+    
+    <div class="cp-row" data-source="csfc" data-kind="updated">
+      <a class="item-link" href="https://www.nsa.gov/portals/75/documents/resources/everyone/csfc/capability-packages/mdm.pdf" target="_blank">CP-Mobile Device Management</a>
+      <div class="cp-detail">
+        
+        <span class="cp-date">Size: 473 &#8594; 471 bytes</span>
+        
+      </div>
+    </div>
+    
+    
+    
+    <div class="cp-row" data-source="csfc" data-kind="updated">
+      <a class="item-link" href="https://www.nsa.gov/portals/75/documents/resources/everyone/csfc/capability-packages/voip.pdf" target="_blank">CP-Voice over IP</a>
+      <div class="cp-detail">
+        
+        <span class="cp-date">Size: 474 &#8594; 472 bytes</span>
+        
+      </div>
+    </div>
+    
+    
+    
+    <div class="cp-row" data-source="csfc" data-kind="updated">
+      <a class="item-link" href="https://www.nsa.gov/portals/75/documents/resources/everyone/csfc/capability-packages/mobile-access.pdf" target="_blank">CP-Mobile Access</a>
+      <div class="cp-detail">
+        
+        <span class="cp-date">Size: 487 &#8594; 485 bytes</span>
+        
+      </div>
+    </div>
+    
+    
+    
   </div>
 </div>
 </div>
@@ -628,13 +757,11 @@ a:hover { color: var(--neon-cyan); text-decoration: underline; }
 </div>
 
   <!-- NIST Docs -->
-<div class="card " id="sec-nist" data-has-changes="0">
+<div class="card card-updated" id="sec-nist" data-has-changes="1">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>NIST Documentation</span>
-    <span class="card-count">0 updates</span>
+    <span class="card-count">1 update</span>
     <span class="sparkline">
-      
-      <span class="sp-bar" style="height:33%" title="1 change"></span>
       
       <span class="sp-bar" style="height:100%" title="3 changes"></span>
       
@@ -648,12 +775,23 @@ a:hover { color: var(--neon-cyan); text-decoration: underline; }
       
       <span class="sp-bar" style="height:0%" title="0 changes"></span>
       
+      <span class="sp-bar" style="height:33%" title="1 change"></span>
+      
     </span>
-    <span class="toggle-icon">&#9658;</span>
+    <span class="toggle-icon">&#9660;</span>
   </div>
-  <div class="card-body collapsed">
+  <div class="card-body ">
     
-    <p class="no-change">No changes detected. <span class="last-active">(last: 2026-04-06)</span></p>
+    
+    <div class="item-row" data-source="nist" data-kind="updated">
+      <a class="item-link" href="https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-131Ar2.pdf" target="_blank">SP 800-131A Rev 2</a>
+      <span class="item-meta">
+        Header changed
+      </span>
+    </div>
+    
+    
+    
   </div>
 </div>
 </div>
@@ -696,7 +834,7 @@ a:hover { color: var(--neon-cyan); text-decoration: underline; }
 
 <footer>
   <span>CC Pulse &middot; Auto-refreshes daily (06:00 UTC) &middot; Data from NIAP, CSfC, NIST, CC Portal</span>
-  <span>Last run: 2026-04-07 07:17 UTC</span>
+  <span>Last run: 2026-04-08 07:27 UTC</span>
 </footer>
 
 <script>

@@ -2,7 +2,18 @@
 <rss version="2.0"><channel>
 <title>CC Pulse</title>
 <link>https://kr15tyk.github.io/CC-pulse/cc_dashboard.html</link>
-<description>Common Criteria monitoring - 2026-04-07 07:17 UTC</description>
-<item><title>[Acumen Security (Intertek)] Digital Twins at Scale: How Massive Data Centers Are Redefining System Assurance</title><link>/blog/2026/04-07-data-centers-are-redefining-system-assurance/</link><description></description></item>
-<item><title>ALERT: NIAP PP â CPP_ND_V3.0E</title><link>https://kr15tyk.github.io/CC-pulse/cc_dashboard.html</link><description>Kind: sunset | Keywords: CPP_ND</description></item>
+<description>Common Criteria monitoring - 2026-04-08 07:27 UTC</description>
+<item><title>CSfC CP Updated: CP-Data at Rest</title><link>https://www.nsa.gov/portals/75/documents/resources/everyone/csfc/capability-packages/data-at-rest.pdf</link><description>Capability package updated.</description></item>
+<item><title>CSfC CP Updated: CP-WAN</title><link>https://www.nsa.gov/portals/75/documents/resources/everyone/csfc/capability-packages/wan.pdf</link><description>Capability package updated.</description></item>
+<item><title>CSfC CP Updated: CP-Campus WLAN</title><link>https://www.nsa.gov/portals/75/documents/resources/everyone/csfc/capability-packages/campus-wlan.pdf</link><description>Capability package updated.</description></item>
+<item><title>CSfC CP Updated: CP-Email</title><link>https://www.nsa.gov/portals/75/documents/resources/everyone/csfc/capability-packages/email.pdf</link><description>Capability package updated.</description></item>
+<item><title>CSfC CP Updated: CP-Multi-Site Connectivity</title><link>https://www.nsa.gov/portals/75/documents/resources/everyone/csfc/capability-packages/multi-site-connectivity.pdf</link><description>Capability package updated.</description></item>
+<item><title>CSfC CP Updated: CP-Mobile Device Management</title><link>https://www.nsa.gov/portals/75/documents/resources/everyone/csfc/capability-packages/mdm.pdf</link><description>Capability package updated.</description></item>
+<item><title>CSfC CP Updated: CP-Voice over IP</title><link>https://www.nsa.gov/portals/75/documents/resources/everyone/csfc/capability-packages/voip.pdf</link><description>Capability package updated.</description></item>
+<item><title>CSfC CP Updated: CP-Mobile Access</title><link>https://www.nsa.gov/portals/75/documents/resources/everyone/csfc/capability-packages/mobile-access.pdf</link><description>Capability package updated.</description></item>
+<item><title>NIST Doc Updated: SP 800-131A Rev 2</title><link>https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-131Ar2.pdf</link><description>Document header updated.</description></item>
+<item><title>ALERT: CSfC CP â CP-WAN</title><link>https://kr15tyk.github.io/CC-pulse/cc_dashboard.html</link><description>Kind: updated | Keywords: CP-WAN</description></item>
+<item><title>ALERT: CSfC CP â CP-Campus WLAN</title><link>https://kr15tyk.github.io/CC-pulse/cc_dashboard.html</link><description>Kind: updated | Keywords: CP-Campus WLAN</description></item>
+<item><title>ALERT: CSfC CP â CP-Mobile Device Management</title><link>https://kr15tyk.github.io/CC-pulse/cc_dashboard.html</link><description>Kind: updated | Keywords: CP-Mobile</description></item>
+<item><title>ALERT: CSfC CP â CP-Mobile Access</title><link>https://kr15tyk.github.io/CC-pulse/cc_dashboard.html</link><description>Kind: updated | Keywords: CP-Mobile</description></item>
 </channel></rss>
