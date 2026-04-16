@@ -2,7 +2,8 @@
 <rss version="2.0"><channel>
 <title>CC Pulse</title>
 <link>https://kr15tyk.github.io/CC-pulse/cc_dashboard.html</link>
-<description>Common Criteria monitoring - 2026-04-15 07:45 UTC</description>
-<item><title>[Acumen Security (Intertek)] U.S. FDA Reissues Medical Device Cybersecurity Guidance to Align with QMSR</title><link>/blog/2026/04-15-medical-device-cybersecurity-guidance/</link><description></description></item>
+<description>Common Criteria monitoring - 2026-04-16 07:46 UTC</description>
+<item><title>[Acumen Security (Intertek)] Intertek Acumen Security</title><link>/iot/cybersecurity/acumen-security/</link><description></description></item>
+<item><title>[Lightship Security] FIPS Validation Pitfalls—and How to Avoid Costly Delays</title><link>https://lightshipsec.com/fips-validation-pitfalls-and-how-to-avoid-costly-delays/</link><description>A Practical Guide for Security, Engineering, and Compliance Teams Achieving FIPS validation is often viewed as a final checkpoint—something to address once development is complete. In practice, this m</description></item>
 <item><title>NIST Doc Updated: SP 800-131A Rev 2</title><link>https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-131Ar2.pdf</link><description>Document header updated.</description></item>
 </channel></rss>
