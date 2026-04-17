@@ -27,8 +27,8 @@
   .nav-spacer{flex:1} .nav-meta{font-size:.75rem;color:rgba(255,255,255,0.55)}
     .hero-banner{background:var(--gradient-hero);padding:.6rem 2rem;position:relative;overflow:hidden}
   .hero-banner::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 60% 40%,rgba(4,159,217,.12) 0%,transparent 65%),radial-gradient(ellipse at 25% 75%,rgba(94,79,195,.10) 0%,transparent 60%);pointer-events:none}
-    .hero-inner{position:relative;z-index:1;max-width:900px;margin:0 auto;display:flex;align-items:center;justify-content:center;gap:1rem}
-    .hero-logo{height:72px;width:auto}
+    .hero-inner{position:relative;z-index:1;width:100%;padding:0 2rem;display:flex;align-items:center;justify-content:space-between;gap:1rem}
+    .hero-logo{height:90px;width:auto}
     .hero-title{font-size:1.5rem;font-weight:700;color:#fff;letter-spacing:-.01em;margin:0}
   .hero-sub{font-size:1.05rem;color:rgba(255,255,255,.65)}
   .sticky-top{position:sticky;top:0;z-index:100;background:var(--card);border-bottom:2px solid var(--border);padding:.75rem 2rem;box-shadow:var(--shadow-md)}
@@ -102,9 +102,9 @@
   .sparkline span,.sp-bar{display:inline-block;width:4px;background:var(--border);border-radius:2px;min-height:2px}
   .last-active{font-size:.65rem;color:var(--muted);opacity:.6;margin-left:.4rem} .card.zero-hidden{display:none}
   footer,.site-footer{margin-top:3rem;padding:1.5rem 2rem;border-top:1px solid var(--border);font-size:.75rem;color:var(--muted);display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap;background:var(--card)}
-    @media(max-width:768px){.hero-banner{padding:.4rem 1rem}.hero-title{font-size:1.2rem}.hero-logo{height:36px}.main-content{padding:1rem}.sticky-top{padding:.5rem 1rem;top:0}.site-nav{padding:0 1rem}.trend-bar{display:grid;grid-template-columns:1fr 1fr}.stat{min-width:unset}}
+    @media(max-width:768px){.hero-banner{padding:.4rem 1rem}.hero-title{font-size:1.2rem}.hero-logo{height:48px}.main-content{padding:1rem}.sticky-top{padding:.5rem 1rem;top:0}.site-nav{padding:0 1rem}.trend-bar{display:grid;grid-template-columns:1fr 1fr}.stat{min-width:unset}.hero-inner{padding:0 1rem}.hero-date{display:none}}
   /* hero date */
-  .hero-date{font-size:.78rem;color:rgba(255,255,255,.55);margin-top:.15rem}
+  .hero-date{font-size:.78rem;color:rgba(255,255,255,.55);margin-top:.15rem;text-align:right}
   /* source health collapsible */
   .sh-arrow{margin-left:auto;transition:transform .2s;display:inline-block;font-style:normal}
   .sh-body.collapsed{display:none}
@@ -128,10 +128,8 @@
 <div class="hero-banner">
   <div class="hero-inner">
     <img src="cc_pulse_logo.png" alt="CC-Pulse" class="hero-logo">
-    <div>
-      <h1 class="hero-title">CC Pulse Dashboard</h1>
-      <div class="hero-date">Updated: 2026-04-17 07:47 UTC</div>
-    </div>
+    <h1 class="hero-title">CC Pulse Dashboard</h1>
+    <div class="hero-date">Updated: 2026-04-17 07:47 UTC</div>
   </div>
 </div>
 <div class="sticky-top">
