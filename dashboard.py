@@ -102,17 +102,17 @@ DASHBOARD_TEMPLATE = """
   *{box-sizing:border-box;margin:0;padding:0}
   body{background:var(--bg);color:var(--text);font-family:var(--font);font-size:14px;line-height:1.6}
   a{color:var(--primary);text-decoration:none} a:hover{color:var(--primary-dark);text-decoration:underline}
-  .site-nav{background:var(--nav-bg);padding:0 2rem;display:flex;align-items:center;gap:1rem;height:64px;position:sticky;top:0;z-index:200;box-shadow:0 2px 8px rgba(0,0,0,0.25)}
+  .site-nav{background:var(--nav-bg);padding:0 1.5rem;display:flex;align-items:center;gap:1rem;height:44px;position:sticky;top:0;z-index:200;box-shadow:0 1px 4px rgba(0,0,0,0.2)}
   .nav-logo{display:flex;align-items:center;gap:.75rem;text-decoration:none}
-  .nav-logo img{height:44px;width:auto}.nav-logo-pill{display:inline-flex;align-items:center;background:#fff;border-radius:8px;padding:4px 10px}
+  .nav-logo img{height:32px;width:auto}
   .nav-spacer{flex:1} .nav-meta{font-size:.75rem;color:rgba(255,255,255,0.55)}
-  .hero-banner{background:var(--gradient-hero);padding:3.5rem 2rem 3rem;text-align:center;position:relative;overflow:hidden}
+  .hero-banner{background:var(--gradient-hero);padding:2rem 2rem 1.5rem;text-align:center;position:relative;overflow:hidden}
   .hero-banner::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 60% 40%,rgba(4,159,217,.12) 0%,transparent 65%),radial-gradient(ellipse at 25% 75%,rgba(94,79,195,.10) 0%,transparent 60%);pointer-events:none}
   .hero-inner{position:relative;z-index:1;max-width:900px;margin:0 auto}
-  .hero-logo{height:160px;width:auto}.hero-logo-wrap{display:inline-block;background:#fff;border-radius:16px;padding:14px 22px;margin-bottom:1.5rem;box-shadow:0 6px 28px rgba(0,0,0,0.28)}
+  .hero-logo{height:160px;width:auto;margin-bottom:1rem}
   .hero-title{font-size:2.4rem;font-weight:700;color:#fff;margin-bottom:.6rem;letter-spacing:-.02em}
   .hero-sub{font-size:1.05rem;color:rgba(255,255,255,.65)}
-  .sticky-top{position:sticky;top:64px;z-index:100;background:var(--card);border-bottom:1px solid var(--border);padding:.75rem 2rem;box-shadow:var(--shadow-sm)}
+  .sticky-top{position:sticky;top:44px;z-index:100;background:var(--card);border-bottom:1px solid var(--border);padding:.75rem 2rem;box-shadow:var(--shadow-sm)}
   .trend-bar{display:flex;flex-wrap:wrap;gap:.75rem}
   .stat{background:var(--card);border:1px solid var(--card-border);border-radius:8px;padding:.75rem 1.25rem;min-width:120px;flex:1;transition:border-color .2s,box-shadow .2s;box-shadow:var(--shadow-sm)}
   .stat:hover{border-color:var(--primary);box-shadow:0 4px 12px rgba(4,159,217,.12)}
@@ -190,7 +190,7 @@ DASHBOARD_TEMPLATE = """
 
 <nav class="site-nav">
   <a href="#" class="nav-logo">
-    <div class="nav-logo-pill"><img src="cc_pulse_logo.png" alt="CC-Pulse Logo"></div>
+    <img src="cc_pulse_logo.png" alt="CC-Pulse Logo">
   </a>
   <span class="nav-spacer"></span>
   <span class="nav-meta">Generated {{ generated_at }}</span>
@@ -198,9 +198,9 @@ DASHBOARD_TEMPLATE = """
 
 <div class="hero-banner">
   <div class="hero-inner">
-    <div class="hero-logo-wrap"><img src="cc_pulse_logo.png" alt="CC-Pulse" class="hero-logo"></div>
+    <img src="cc_pulse_logo.png" alt="CC-Pulse" class="hero-logo">
     <h1 class="hero-title">CC Pulse Dashboard</h1>
-    <p class="hero-sub">Common Criteria &amp; NIAP Ecosystem Monitor &mdash; {{ period_start[:10] }} to {{ period_end[:10] }}</p>
+    
   </div>
 </div>
 
