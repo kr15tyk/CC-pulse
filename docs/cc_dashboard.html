@@ -9,7 +9,7 @@
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
   :root {
-    --bg:#f4f6f9; --nav-bg:#0d1f3e; --card:#ffffff; --card-border:#dde3ed; --panel:#edf1f7;
+    --bg:#f4f6f9; --nav-bg:#0d1f3e; --card:#ffffff; --card-order:#dde3ed; --panel:#edf1f7;
     --border:#dde3ed; --text:#1a2d4e; --text-light:#4a5f7a; --muted:#6b82a0;
     --primary:#049fd9; --primary-dark:#0376a8; --accent:#049d9;
     --green:#00875a; --amber:#d97706; --red:#c0392b; --alert-color:#d97706;
@@ -25,11 +25,11 @@
   .nav-logo{display:flex;align-items:center;gap:.75rem;text-decoration:none}
   .nav-logo img{height:32px;width:auto}
   .nav-spacer{flex:1} .nav-meta{font-size:.75rem;color:rgba(255,255,255,0.55)}
-  .hero-banner{background:var(--gradient-hero);padding:2rem 2rem 1.5rem;text-align:center;position:relative;overflow:hidden}
+    .hero-banner{background:var(--gradient-hero);padding:.6rem 2rem;position:relative;overflow:hidden}
   .hero-banner::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 60% 40%,rgba(4,159,217,.12) 0%,transparent 65%),radial-gradient(ellipse at 25% 75%,rgba(94,79,195,.10) 0%,transparent 60%);pointer-events:none}
-  .hero-inner{position:relative;z-index:1;max-width:900px;margin:0 auto}
-  .hero-logo{height:160px;width:auto;margin-bottom:1rem}
-  .hero-title{font-size:2.4rem;font-weight:700;color:#fff;margin-bottom:.6rem;letter-spacing:-.02em}
+    .hero-inner{position:relative;z-index:1;max-width:900px;margin:0 auto;display:flex;align-items:center;justify-content:center;gap:1rem}
+    .hero-logo{height:44px;width:auto}
+    .hero-title{font-size:1.5rem;font-weight:700;color:#fff;letter-spacing:-.01em;margin:0}
   .hero-sub{font-size:1.05rem;color:rgba(255,255,255,.65)}
   .sticky-top{position:sticky;top:44px;z-index:100;background:var(--card);border-bottom:1px solid var(--border);padding:.75rem 2rem;box-shadow:var(--shadow-sm)}
   .trend-bar{display:flex;flex-wrap:wrap;gap:.75rem}
@@ -102,16 +102,12 @@
   .sparkline span,.sp-bar{display:inline-block;width:4px;background:var(--border);border-radius:2px;min-height:2px}
   .last-active{font-size:.65rem;color:var(--muted);opacity:.6;margin-left:.4rem} .card.zero-hidden{display:none}
   footer,.site-footer{margin-top:3rem;padding:1.5rem 2rem;border-top:1px solid var(--border);font-size:.75rem;color:var(--muted);display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap;background:var(--card)}
-  @media(max-width:768px){.hero-banner{padding:2rem 1rem}.hero-title{font-size:1.6rem}.hero-logo{height:90px}.main-content{padding:1rem}.sticky-top{padding:.5rem 1rem;top:0}.site-nav{padding:0 1rem}.trend-bar{flex-direction:column}.stat{min-width:unset}}
+    @media(max-width:768px){.hero-banner{padding:.4rem 1rem}.hero-title{font-size:1.2rem}.hero-logo{height:36px}.main-content{padding:1rem}.sticky-top{padding:.5rem 1rem;top:0}.site-nav{padding:0 1rem}.trend-bar{flex-direction:column}.stat{min-width:unset}}
 </style>
 </head>
 <body>
 
 <nav class="site-nav">
-  <a href="#" class="nav-logo">
-    <img src="cc_pulse_logo.png" alt="CC-Pulse Logo">
-  </a>
-  <span class="nav-spacer"></span>
   <span class="nav-meta">CC Pulse Dashboard</span>
 </nav>
 <div class="hero-banner">
