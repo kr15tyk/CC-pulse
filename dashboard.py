@@ -104,12 +104,12 @@ DASHBOARD_TEMPLATE = """
   a{color:var(--primary);text-decoration:none} a:hover{color:var(--primary-dark);text-decoration:underline}
   .site-nav{background:var(--nav-bg);padding:0 2rem;display:flex;align-items:center;gap:1rem;height:64px;position:sticky;top:0;z-index:200;box-shadow:0 2px 8px rgba(0,0,0,0.25)}
   .nav-logo{display:flex;align-items:center;gap:.75rem;text-decoration:none}
-  .nav-logo img{height:40px;width:auto;mix-blend-mode:screen;filter:brightness(1.1)}
+  .nav-logo img{height:52px;width:auto}
   .nav-spacer{flex:1} .nav-meta{font-size:.75rem;color:rgba(255,255,255,0.55)}
   .hero-banner{background:var(--gradient-hero);padding:3.5rem 2rem 3rem;text-align:center;position:relative;overflow:hidden}
   .hero-banner::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 60% 40%,rgba(4,159,217,.12) 0%,transparent 65%),radial-gradient(ellipse at 25% 75%,rgba(94,79,195,.10) 0%,transparent 60%);pointer-events:none}
   .hero-inner{position:relative;z-index:1;max-width:900px;margin:0 auto}
-  .hero-logo{height:140px;width:auto;margin-bottom:1.25rem;mix-blend-mode:screen;filter:brightness(1.05) drop-shadow(0 4px 20px rgba(4,159,217,.4))}
+  .hero-logo{height:180px;width:auto;margin-bottom:1.25rem;filter:drop-shadow(0 4px 20px rgba(4,159,217,.4))}
   .hero-title{font-size:2.4rem;font-weight:700;color:#fff;margin-bottom:.6rem;letter-spacing:-.02em}
   .hero-sub{font-size:1.05rem;color:rgba(255,255,255,.65)}
   .sticky-top{position:sticky;top:64px;z-index:100;background:var(--card);border-bottom:1px solid var(--border);padding:.75rem 2rem;box-shadow:var(--shadow-sm)}
