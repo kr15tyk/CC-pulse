@@ -28,10 +28,10 @@
     .hero-banner{background:var(--gradient-hero);padding:.6rem 2rem;position:relative;overflow:hidden}
   .hero-banner::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 60% 40%,rgba(4,159,217,.12) 0%,transparent 65%),radial-gradient(ellipse at 25% 75%,rgba(94,79,195,.10) 0%,transparent 60%);pointer-events:none}
     .hero-inner{position:relative;z-index:1;max-width:900px;margin:0 auto;display:flex;align-items:center;justify-content:center;gap:1rem}
-    .hero-logo{height:44px;width:auto}
+    .hero-logo{height:72px;width:auto}
     .hero-title{font-size:1.5rem;font-weight:700;color:#fff;letter-spacing:-.01em;margin:0}
   .hero-sub{font-size:1.05rem;color:rgba(255,255,255,.65)}
-  .sticky-top{position:sticky;top:44px;z-index:100;background:var(--card);border-bottom:1px solid var(--border);padding:.75rem 2rem;box-shadow:var(--shadow-sm)}
+  .sticky-top{position:sticky;top:0;z-index:100;background:var(--card);border-bottom:2px solid var(--border);padding:.75rem 2rem;box-shadow:var(--shadow-md)}
   .trend-bar{display:flex;flex-wrap:wrap;gap:.75rem}
   .stat{background:var(--card);border:1px solid var(--card-border);border-radius:8px;padding:.75rem 1.25rem;min-width:120px;flex:1;transition:border-color .2s,box-shadow .2s;box-shadow:var(--shadow-sm)}
   .stat:hover{border-color:var(--primary);box-shadow:0 4px 12px rgba(4,159,217,.12)}
@@ -39,10 +39,10 @@
   .stat-num{font-size:1.8rem;font-weight:700;color:#b0bec5;line-height:1;margin-bottom:.2rem}
   .stat-num.active-num{color:var(--primary)} .stat-num.alert-num{color:var(--alert-color)}
   .stat.has-data{border-color:rgba(4,159,217,.3)} .stat.has-alert{border-color:rgba(217,119,6,.3)}
-  .stat-lbl,.stat-label{font-size:.68rem;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;font-weight:600}
+  .stat-lbl,.stat-label{font-size:.78rem;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;font-weight:600}
   .main-content{max-width:1200px;margin:0 auto;padding:2rem}
   .source-health{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1.5rem;margin-bottom:2rem;box-shadow:var(--shadow-sm)}
-  .sh-title{font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.15em;color:var(--muted);margin-bottom:1rem;display:flex;align-items:center;gap:.5rem}
+  .sh-title{font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.15em;color:var(--muted);margin-bottom:1rem;display:flex;align-items:center;gap:.5rem;cursor:pointer;user-select:none}
   .sh-title::before{content:'';display:inline-block;width:3px;height:13px;background:var(--primary);border-radius:2px}
   .sh-row{display:flex;align-items:center;justify-content:space-between;padding:.5rem 0;border-bottom:1px solid var(--border)} .sh-row:last-of-type{border-bottom:none}
   .sh-source{font-size:.875rem;color:var(--text);font-weight:500}
@@ -102,19 +102,36 @@
   .sparkline span,.sp-bar{display:inline-block;width:4px;background:var(--border);border-radius:2px;min-height:2px}
   .last-active{font-size:.65rem;color:var(--muted);opacity:.6;margin-left:.4rem} .card.zero-hidden{display:none}
   footer,.site-footer{margin-top:3rem;padding:1.5rem 2rem;border-top:1px solid var(--border);font-size:.75rem;color:var(--muted);display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap;background:var(--card)}
-    @media(max-width:768px){.hero-banner{padding:.4rem 1rem}.hero-title{font-size:1.2rem}.hero-logo{height:36px}.main-content{padding:1rem}.sticky-top{padding:.5rem 1rem;top:0}.site-nav{padding:0 1rem}.trend-bar{flex-direction:column}.stat{min-width:unset}}
+    @media(max-width:768px){.hero-banner{padding:.4rem 1rem}.hero-title{font-size:1.2rem}.hero-logo{height:36px}.main-content{padding:1rem}.sticky-top{padding:.5rem 1rem;top:0}.site-nav{padding:0 1rem}.trend-bar{display:grid;grid-template-columns:1fr 1fr}.stat{min-width:unset}}
+  /* hero date */
+  .hero-date{font-size:.78rem;color:rgba(255,255,255,.55);margin-top:.15rem}
+  /* source health collapsible */
+  .sh-arrow{margin-left:auto;transition:transform .2s;display:inline-block;font-style:normal}
+  .sh-body.collapsed{display:none}
+  /* keyword toggle */
+  .kw-body{display:none}
+  .kw-toggle-btn{background:none;border:1px solid var(--border);color:var(--muted);font-family:var(--font);font-size:.62rem;padding:1px 8px;cursor:pointer;border-radius:4px;margin-left:.25rem;vertical-align:middle}
+  .kw-toggle-btn:hover{border-color:var(--primary);color:var(--primary)}
+  /* help modal */
+  #help-modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:500;align-items:center;justify-content:center}
+  #help-modal.open{display:flex}
+  .help-box{background:var(--card);border-radius:12px;padding:1.5rem 2rem;max-width:360px;width:90%;box-shadow:var(--shadow-md)}
+  .help-box h3{font-size:.9rem;font-weight:700;margin-bottom:1rem;color:var(--text)}
+  .help-key{display:flex;justify-content:space-between;padding:.3rem 0;border-bottom:1px solid var(--border);font-size:.8rem;color:var(--text-light)}
+  .help-key:last-of-type{border-bottom:none}
+  .help-key kbd{background:var(--panel);border:1px solid var(--border);border-radius:4px;padding:1px 6px;font-family:monospace;font-size:.75rem;color:var(--text)}
+  .help-close{margin-top:1rem;width:100%;background:var(--primary);color:#fff;border:none;border-radius:6px;padding:.5rem;cursor:pointer;font-family:var(--font);font-weight:600;font-size:.8rem}
 </style>
 </head>
 <body>
 
-<nav class="site-nav">
-  <span class="nav-meta">CC Pulse Dashboard</span>
-</nav>
 <div class="hero-banner">
   <div class="hero-inner">
     <img src="cc_pulse_logo.png" alt="CC-Pulse" class="hero-logo">
-    <h1 class="hero-title">CC Pulse Dashboard</h1>
-    
+    <div>
+      <h1 class="hero-title">CC Pulse Dashboard</h1>
+      <div class="hero-date">Updated: 2026-04-17 07:47 UTC</div>
+    </div>
   </div>
 </div>
 <div class="sticky-top">
@@ -152,7 +169,8 @@
 
 <!-- Source health summary -->
 <div class="source-health">
-  <div class="sh-title">Source Health</div>
+  <div class="sh-title" onclick="toggleSH(this)">Source Health <span class="sh-arrow">▾</span></div>
+  <div class="sh-body">
   <div class="sh-row">
     <span class="sh-source">NIAP API</span>
     <span class="sh-badge sh-ok">
@@ -191,12 +209,14 @@
   </div>
   <div class="sh-footer">Period: 2026-04-16 â 2026-04-17</div>
   <div class="sh-footer">All sources last polled: 2026-04-17 (daily 06:00 UTC)</div>
+  </div>
 </div>
 <div class="ctrl-bar">
   <button class="ctrl-btn" onclick="expandAll()" title="Expand all cards [E]">[E] Expand All</button>
   <button class="ctrl-btn" onclick="collapseAll()" title="Collapse all cards [C]">[C] Collapse All</button>
   <button class="ctrl-btn" id="filter-btn" onclick="toggleZeroFilter()" title="Toggle zero-change cards [F]">[F] Hide Empty</button>
-  <span class="ctrl-hint">keyboard: E=expand C=collapse F=filter /=search Esc=clear</span>
+  <button class="ctrl-btn" onclick="toggleHelp()" title="Keyboard shortcuts [?]">? Help</button>
+  <span class="ctrl-hint">keyboard: E / C / F / / / ? — <em>Esc</em> to clear</span>
 </div>
 <div class="search-row">
   <input id="search-input" class="search-input" type="search" placeholder="Search items…"
@@ -223,7 +243,7 @@
     <span class="toggle-icon">&#9660;</span>
   </div>
   <div class="card-body">
-    <div class="alert-monitoring">FIPS 186-4, FIPS 186-5, NDcPP, CPP_ND, TLS 1.3, SSH, PP-Module_VPN, PP-Module_WLAN, labgram, valgram, emergency, CSfC, Commercial Solutions for Classified, CSfC APL, CSfC capability package, CP-Mobile, CP-MA, CP-WAN, CP-Campus WLAN, CP-DAR, CP-MDM, NSA CSfC, CCDB-018, Crypto Catalog, cryptography working group, Specification of Functional Requirements for Cryptography, FCS_CKM, FCS_COP, FCS_RBG, CAVP, CMVP, FIPS 140-3, FIPS 203, FIPS 204, FIPS 205, SP 800-131A, SP 800-57, NIST IR 8547, post-quantum cryptography, PQC migration, ML-KEM, ML-DSA, SLH-DSA, algorithm transition, CMVP validated, modules in process</div>
+    <div class="alert-monitoring"><button class="kw-toggle-btn" onclick="toggleKw(this)">Show keywords ▶</button><span class="kw-body"> FIPS 186-4, FIPS 186-5, NDcPP, CPP_ND, TLS 1.3, SSH, PP-Module_VPN, PP-Module_WLAN, labgram, valgram, emergency, CSfC, Commercial Solutions for Classified, CSfC APL, CSfC capability package, CP-Mobile, CP-MA, CP-WAN, CP-Campus WLAN, CP-DAR, CP-MDM, NSA CSfC, CCDB-018, Crypto Catalog, cryptography working group, Specification of Functional Requirements for Cryptography, FCS_CKM, FCS_COP, FCS_RBG, CAVP, CMVP, FIPS 140-3, FIPS 203, FIPS 204, FIPS 205, SP 800-131A, SP 800-57, NIST IR 8547, post-quantum cryptography, PQC migration, ML-KEM, ML-DSA, SLH-DSA, algorithm transition, CMVP validated, modules in process</span></div>
     
         <div class="item-row alert-item" data-alert-key="NIAP News-NIAP_Policy_#5_Frequently_Asked_Questions_and_CAVP_Mapping_Document_Updated">
           
@@ -659,7 +679,22 @@
   <span>Last run: 2026-04-17 07:47 UTC</span>
 </footer>
 
+<div id="help-modal" onclick="if(event.target===this)toggleHelp()">
+  <div class="help-box">
+    <h3>Keyboard Shortcuts</h3>
+    <div class="help-key"><span>Expand all cards</span><kbd>E</kbd></div>
+    <div class="help-key"><span>Collapse all cards</span><kbd>C</kbd></div>
+    <div class="help-key"><span>Toggle hide empty</span><kbd>F</kbd></div>
+    <div class="help-key"><span>Focus search</span><kbd>/</kbd></div>
+    <div class="help-key"><span>Show/hide this help</span><kbd>?</kbd></div>
+    <div class="help-key"><span>Clear search / close</span><kbd>Esc</kbd></div>
+    <button class="help-close" onclick="toggleHelp()">Close</button>
+  </div>
+</div>
 <script>
+function toggleHelp(){const m=document.getElementById('help-modal');if(m)m.classList.toggle('open')}
+function toggleSH(el){const body=el.nextElementSibling;if(!body)return;body.classList.toggle('collapsed');const arr=el.querySelector('.sh-arrow');if(arr)arr.style.transform=body.classList.contains('collapsed')?'rotate(-90deg)':''}
+function toggleKw(btn){const span=btn.nextElementSibling;if(!span)return;const vis=span.style.display==='inline';span.style.display=vis?'none':'inline';btn.textContent=vis?'Show keywords ▶':'Hide keywords ▼'}
 function toggleCard(h){const b=h.nextElementSibling,i=h.querySelector('.toggle-icon'),c=b.classList.toggle('collapsed');if(i)i.textContent=c?'►':'▼'}
 function expandAll(){document.querySelectorAll('.card-body').forEach(b=>{b.classList.remove('collapsed');const i=b.previousElementSibling.querySelector('.toggle-icon');if(i)i.textContent='▼'})}
 function collapseAll(){document.querySelectorAll('.card-body').forEach(b=>{b.classList.add('collapsed');const i=b.previousElementSibling.querySelector('.toggle-icon');if(i)i.textContent='►'})}
@@ -673,8 +708,8 @@ function _highlight(el,term){const w=document.createTreeWalker(el,NodeFilter.SHO
 function setKindFilter(btn){document.querySelectorAll('.chip').forEach(c=>c.classList.remove('active'));btn.classList.add('active');_activeKind=btn.dataset.kind;liveSearch()}
 function clearSearch(){const inp=document.getElementById('search-input');if(inp)inp.value='';document.querySelectorAll('.chip').forEach(c=>c.classList.remove('active'));const ac=document.querySelector('.chip[data-kind="all"]');if(ac)ac.classList.add('active');_activeKind='all';liveSearch()}
 function _reconcileGroupVisibility(){document.querySelectorAll('.section-group').forEach(g=>{const hv=[...g.querySelectorAll('.card')].some(c=>!c.classList.contains('zero-hidden')&&getComputedStyle(c).display!=='none');g.style.display=hv?'':' none'})}
-document.addEventListener('keydown',e=>{const t=document.activeElement.tagName;if(t==='INPUT'||t==='TEXTAREA'){if(e.key==='Escape'){clearSearch();document.activeElement.blur()}return}if(e.key==='e'||e.key==='E')expandAll();if(e.key==='c'||e.key==='C')collapseAll();if(e.key==='f'||e.key==='F')toggleZeroFilter();if(e.key==='/'){e.preventDefault();const inp=document.getElementById('search-input');if(inp)inp.focus()}});
-document.addEventListener('DOMContentLoaded',initAlertDismiss);
+document.addEventListener('keydown',e=>{const t=document.activeElement.tagName;if(t==='INPUT'||t==='TEXTAREA'){if(e.key==='Escape'){clearSearch();document.activeElement.blur()}return}const m=document.getElementById('help-modal');if(e.key==='Escape'&&m&&m.classList.contains('open')){m.classList.remove('open');return}if(e.key==='e'||e.key==='E')expandAll();if(e.key==='c'||e.key==='C')collapseAll();if(e.key==='f'||e.key==='F')toggleZeroFilter();if(e.key==='?')toggleHelp();if(e.key==='/'){e.preventDefault();const inp=document.getElementById('search-input');if(inp)inp.focus()}});
+document.addEventListener('DOMContentLoaded',()=>{initAlertDismiss();toggleZeroFilter();});
 </script>
 </body>
 </html>
