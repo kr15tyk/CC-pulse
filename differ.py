@@ -9,10 +9,10 @@ Features:
   - categorize_news() applied to CSfC/CC Crypto/NIST feed items (fix #12)
   - Type hints throughout
   - Two-tier keyword scanning: structured fields vs scraped page blobs (fix #17)
-"""
+  - cisco_ndcpp celebration only fires for status_sort == "Certified" products (fix #22)
+  """
 
 from __future__ import annotations
-
 import logging
 from typing import Any
 
@@ -317,7 +317,8 @@ def diff_niap_tds(old_tds: Records, new_tds: Records) -> dict[str, Any]:
 def diff_niap_pcl_cisco(old_pcl: Records, new_pcl: Records) -> dict[str, Any]:
     old_cisco = {str(p["product_id"]): p for p in old_pcl if is_cisco_ndcpp(p)}
     new_cisco = {str(p["product_id"]): p for p in new_pcl if is_cisco_ndcpp(p)}
-    added     = [new_cisco[i] for i in set(new_cisco) - set(old_cisco)]
+            added    = [new_cisco[i] for i in set(new_cisco) - set(old_cisco)
+                                           if new_cisco[i].get("status_sort") == "Certified"]
     removed   = [old_cisco[i] for i in set(old_cisco) - set(new_cisco)]
     newly_archived = [
         new_cisco[pid]
