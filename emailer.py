@@ -17,6 +17,7 @@ import json
 import logging
 import os
 import smtplib
+import requests
 import urllib.request
 import urllib.error
 from email.mime.multipart import MIMEMultipart
