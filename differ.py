@@ -69,12 +69,12 @@ def categorize_news(title: str) -> str:
 
 def is_cisco_ndcpp(product: dict[str, Any]) -> bool:
     """Return True if a PCL product is a Cisco NDcPP certification."""
-    vendor = product.get("vendor_id_name", "").lower()
+    vendor = (product.get("vendor_id_name") or "").lower()
     if not any(kw in vendor for kw in config.CISCO_VENDOR_KEYWORDS):
         return False
-    pps = product.get("protection_profiles", [])
+    pps = product.get("protection_profiles") or []
     return any(
-        any(kw in pp.get("pp_short_name", "") for kw in config.NDCPP_PP_KEYWORDS)
+        any(kw in (pp.get("pp_short_name") or "") for kw in config.NDCPP_PP_KEYWORDS)
         for pp in pps
     )
 
