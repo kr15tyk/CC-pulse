@@ -184,6 +184,15 @@ DASHBOARD_TEMPLATE = """
   .last-active{font-size:.65rem;color:var(--muted);opacity:.6;margin-left:.4rem} .card.zero-hidden{display:none}
   footer,.site-footer{margin-top:3rem;padding:1.5rem 2rem;border-top:1px solid var(--border);font-size:.75rem;color:var(--muted);display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap;background:var(--card)}
   @media(max-width:768px){.hero-banner{padding:2rem 1rem}.hero-title{font-size:1.6rem}.hero-logo{height:90px}.main-content{padding:1rem}.sticky-top{padding:.5rem 1rem;top:0}.site-nav{padding:0 1rem}.trend-bar{flex-direction:column}.stat{min-width:unset}}
+/* ── Regional tab navigation ── */
+        .tab-nav{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:1.5rem;border-bottom:2px solid var(--border);padding-bottom:.5rem}
+        .tab-btn{background:none;border:1px solid var(--border);color:var(--text-light);font-family:var(--font);font-size:.8rem;padding:6px 16px;cursor:pointer;border-radius:8px 8px 0 0;transition:all .2s;font-weight:500;margin-bottom:-2px}
+        .tab-btn:hover{border-color:var(--primary);color:var(--primary);background:rgba(4,159,217,.05)}
+        .tab-btn.active{border-color:var(--primary);color:var(--primary);background:rgba(4,159,217,.08);border-bottom:2px solid var(--bg)}
+        .section-group[data-tab]{display:none}
+        .section-group[data-tab].tab-active{display:block}
+        /* US sections don't have data-tab — they are always shown when tab-us is active */
+        .tab-us-hidden{display:none}
 </style>
 </head>
 <body>
@@ -272,7 +281,19 @@ DASHBOARD_TEMPLATE = """
       {% if alert_total > 0 %}{{ alert_total }} match{% if alert_total != 1 %}es{% endif %}{% else %}none{% endif %}
     </span>
   </div>
-  <div class="sh-footer">Period: {{ period_start[:10] if period_start else 'â' }} â {{ period_end[:10] if period_end else 'â' }}</div>
+  <div class="sh-row">
+              <span class="sh-source">NATO NIAPCL</span>
+              <span class="sh-badge {% if nato_total > 0 %}sh-ok{% else %}sh-idle{% endif %}">
+                {% if nato_total > 0 %}{{ nato_total }} change{% if nato_total != 1 %}s{% endif %}{% else %}no changes{% endif %}
+              </span>
+            </div>
+            <div class="sh-row">
+              <span class="sh-source">EUCC / ENISA</span>
+              <span class="sh-badge {% if eucc_total > 0 %}sh-ok{% else %}sh-idle{% endif %}">
+                {% if eucc_total > 0 %}{{ eucc_total }} change{% if eucc_total != 1 %}s{% endif %}{% else %}no changes{% endif %}
+              </span>
+            </div>
+      <div class="sh-footer">Period: {{ period_start[:10] if period_start else 'â' }} â {{ period_end[:10] if period_end else 'â' }}</div>
   <div class="sh-footer">All sources last polled: {{ period_end[:10] if period_end else 'â' }} (daily 06:00 UTC)</div>
 </div>
 <div class="ctrl-bar">
@@ -324,7 +345,13 @@ DASHBOARD_TEMPLATE = """
 </div>
 {% endif %}
 
-<div class="grid">
+<!-- Regional tab navigation -->
+      <div class="tab-nav" id="region-tabs">
+        <button class="tab-btn active" data-tab="us" onclick="switchTab(this)">&#127482;&#127480; US (NIAP / CSfC / NIST)</button>
+        <button class="tab-btn" data-tab="nato" onclick="switchTab(this)">&#127758; NATO NIAPCL</button>
+        <button class="tab-btn" data-tab="eu" onclick="switchTab(this)">&#127466;&#127482; EU (EUCC / ENISA)</button>
+      </div>
+      <div class="grid">
 
 <div class="section-group">
   <div class="section-label">NIAP</div>
@@ -818,6 +845,93 @@ DASHBOARD_TEMPLATE = """
 </div>
 
 
+
+      <div class="section-group" id="tab-pane-nato" data-tab="nato">
+        <div class="section-label">NATO NIAPCL</div>
+        <!-- NATO NIAPCL -->
+        <div class="card {% if nato_total > 0 %}card-new{% endif %}" id="sec-nato" data-has-changes="{{ nato_total }}">
+          <div class="card-hdr" onclick="toggleCard(this)">
+            <span>NATO NIAPCL Products</span>
+            <span class="card-count">{{ nato_total }} change{% if nato_total != 1 %}s{% endif %}</span>
+            <span class="toggle-icon">{% if nato_total == 0 %}&#9658;{% else %}&#9660;{% endif %}</span>
+          </div>
+          <div class="card-body {% if nato_total == 0 %}collapsed{% endif %}">
+            {% if diff.nato.cisco_added %}
+            <div class="sub-hdr sub-new">New Cisco NATO Listings ({{ diff.nato.cisco_added | length }})</div>
+            {% for item in diff.nato.cisco_added %}
+            <div class="item-row" data-source="nato" data-kind="new">
+              <a class="item-link" href="{{ item.link or config_nato_url }}" target="_blank">{{ item.name or item.raw_text }}</a>
+              <span class="item-meta">{{ item.manufacturer or '' }}</span>
+            </div>
+            {% endfor %}
+            {% endif %}
+            {% if diff.nato.pages %}
+            {% for page_key, page_diff in diff.nato.pages.items() %}
+            {% if page_diff.added %}
+            <div class="sub-hdr sub-new">{{ page_key }} — New Items ({{ page_diff.added | length }})</div>
+            {% for item in page_diff.added %}
+            <div class="item-row" data-source="nato" data-kind="new">
+              <a class="item-link" href="{{ item.link or item.href or '#' }}" target="_blank">{{ item.name or item.text or item.raw_text or item }}</a>
+              <span class="item-meta"></span>
+            </div>
+            {% endfor %}
+            {% endif %}
+            {% endfor %}
+            {% endif %}
+            {% if nato_total == 0 %}<p class="no-change">No NATO NIAPCL changes detected.</p>{% endif %}
+          </div>
+        </div>
+      </div>
+
+      <div class="section-group" id="tab-pane-eu" data-tab="eu">
+        <div class="section-label">EU (EUCC / ENISA)</div>
+        <!-- EUCC Requirements -->
+        <div class="card {% if eucc_req_total > 0 %}card-updated{% endif %}" id="sec-eucc-req" data-has-changes="{{ eucc_req_total }}">
+          <div class="card-hdr" onclick="toggleCard(this)">
+            <span>EUCC Requirements &amp; Scheme Updates</span>
+            <span class="card-count">{{ eucc_req_total }} change{% if eucc_req_total != 1 %}s{% endif %}</span>
+            <span class="toggle-icon">{% if eucc_req_total == 0 %}&#9658;{% else %}&#9660;{% endif %}</span>
+          </div>
+          <div class="card-body {% if eucc_req_total == 0 %}collapsed{% endif %}">
+            {% for item in diff.eucc.pages.requirements.added if diff.eucc.pages and diff.eucc.pages.requirements %}
+            <div class="item-row" data-source="eucc" data-kind="updated">
+              <a class="item-link" href="{{ item.href or '#' }}" target="_blank">{{ item.text or item.name or item }}</a>
+              <span class="item-meta"></span>
+            </div>
+            {% endfor %}
+            {% if eucc_req_total == 0 %}<p class="no-change">No EUCC requirement changes detected.</p>{% endif %}
+          </div>
+        </div>
+        <!-- EUCC Certificates -->
+        <div class="card {% if eucc_cert_total > 0 %}card-new{% endif %}" id="sec-eucc-certs" data-has-changes="{{ eucc_cert_total }}">
+          <div class="card-hdr" onclick="toggleCard(this)">
+            <span>EUCC Certified Products</span>
+            <span class="card-count">{{ eucc_cert_total }} new{% if eucc_cert_total != 1 %} items{% else %} item{% endif %}</span>
+            <span class="toggle-icon">{% if eucc_cert_total == 0 %}&#9658;{% else %}&#9660;{% endif %}</span>
+          </div>
+          <div class="card-body {% if eucc_cert_total == 0 %}collapsed{% endif %}">
+            {% if diff.eucc.cisco_added %}
+            <div class="sub-hdr sub-new">New Cisco EUCC Certifications ({{ diff.eucc.cisco_added | length }})</div>
+            {% for item in diff.eucc.cisco_added %}
+            <div class="item-row" data-source="eucc" data-kind="new">
+              <a class="item-link" href="{{ item.href or '#' }}" target="_blank">{{ item.name or item.text }}</a>
+              <span class="item-meta"></span>
+            </div>
+            {% endfor %}
+            {% endif %}
+            {% if diff.eucc.pages and diff.eucc.pages.certificates %}
+            {% for item in diff.eucc.pages.certificates.added %}
+            <div class="item-row" data-source="eucc" data-kind="new">
+              <a class="item-link" href="{{ item.href or '#' }}" target="_blank">{{ item.name or item.text or item }}</a>
+              <span class="item-meta"></span>
+            </div>
+            {% endfor %}
+            {% endif %}
+            {% if eucc_cert_total == 0 %}<p class="no-change">No new EUCC certified products.</p>{% endif %}
+          </div>
+        </div>
+      </div>
+
 </div><!-- /main-content -->
 <footer>
   <span>CC Pulse &middot; Auto-refreshes daily (06:00 UTC) &middot; Data from NIAP, CSfC, NIST, CC Portal</span>
@@ -840,6 +954,24 @@ function clearSearch(){const inp=document.getElementById('search-input');if(inp)
 function _reconcileGroupVisibility(){document.querySelectorAll('.section-group').forEach(g=>{const hv=[...g.querySelectorAll('.card')].some(c=>!c.classList.contains('zero-hidden')&&getComputedStyle(c).display!=='none');g.style.display=hv?'':' none'})}
 document.addEventListener('keydown',e=>{const t=document.activeElement.tagName;if(t==='INPUT'||t==='TEXTAREA'){if(e.key==='Escape'){clearSearch();document.activeElement.blur()}return}if(e.key==='e'||e.key==='E')expandAll();if(e.key==='c'||e.key==='C')collapseAll();if(e.key==='f'||e.key==='F')toggleZeroFilter();if(e.key==='/'){e.preventDefault();const inp=document.getElementById('search-input');if(inp)inp.focus()}});
 document.addEventListener('DOMContentLoaded',initAlertDismiss);
+function switchTab(btn) {
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            const tab = btn.dataset.tab;
+            // Show/hide NATO and EU tab panes
+            document.querySelectorAll('.section-group[data-tab]').forEach(p => {
+                p.classList.toggle('tab-active', p.dataset.tab === tab);
+            });
+            // Show/hide US sections (those without data-tab attribute, inside .grid)
+            document.querySelectorAll('.grid > .section-group:not([data-tab])').forEach(p => {
+                p.classList.toggle('tab-us-hidden', tab !== 'us');
+            });
+        }
+        // Initialize: show US tab by default
+        document.addEventListener('DOMContentLoaded', function() {
+            // NATO/EU panes start hidden (no tab-active class)
+            // US sections (no data-tab) are shown by default
+        });
 </script>
 </body>
 </html>
@@ -994,6 +1126,23 @@ def render_dashboard(diff: dict, output_dir: str = "docs") -> None:
     cc_portal_total     = cc_portal_news_n + cc_portal_pps_n + cc_portal_prod_n
     cc_portal_total_stat = cc_portal_total
 
+    # NATO NIAPCL totals
+    nato_diff = diff.get("nato", {})
+    nato_total = (
+        len(nato_diff.get("cisco_added", [])) +
+        len(nato_diff.get("cisco_removed", [])) +
+        sum(len(v.get("added", [])) for v in nato_diff.get("pages", {}).values())
+    )
+
+    # EUCC totals
+    eucc_diff = diff.get("eucc", {})
+    eucc_req_total  = len(eucc_diff.get("pages", {}).get("requirements", {}).get("added", []))
+    eucc_cert_total = (
+        len(eucc_diff.get("cisco_added", [])) +
+        len(eucc_diff.get("pages", {}).get("certificates", {}).get("added", []))
+    )
+    eucc_total = eucc_req_total + eucc_cert_total
+
     # Sparkline data
     recent_diffs = _load_recent_diffs()
     def _sp(section_key):
@@ -1080,6 +1229,13 @@ def render_dashboard(diff: dict, output_dir: str = "docs") -> None:
         sp_counts            = sp_counts,
         last_active          = last_active,
         watch_keywords       = config.WATCH_KEYWORDS,
+        nato_total           = nato_total,
+        eucc_total           = eucc_total,
+        eucc_req_total       = eucc_req_total,
+        eucc_cert_total      = eucc_cert_total,
+        config_nato_url      = config.NATO_NIAPCL_URL,
+        config_eucc_req_url  = config.EUCC_REQUIREMENTS_URL,
+        config_eucc_cert_url = config.EUCC_CERTIFICATES_URL,
     )
 
     html_path = os.path.join(output_dir, "cc_dashboard.html")
