@@ -343,7 +343,7 @@ def main() -> None:
 
     if args.readme:
         _setup_logging()
-        _, emailer, _, _ = _imports()
+        _, _, _, emailer = _imports()
         emailer.send_readme_message()
     elif args.redash:
         run_redash()
