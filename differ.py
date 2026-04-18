@@ -171,7 +171,7 @@ def flag_alerts(diff: Snapshot) -> list[dict]:
 # CSfC Component Selections -- hash change means the PDF content changed
     for sel_name, change in diff.get("csfc", {}).get("component_selections", {}).items():
         if change.get("changed"):
-            _add(
+            _add_text(
                 "CSfC Component Selections",
                 "updated",
                 sel_name,
@@ -206,7 +206,7 @@ def flag_alerts(diff: Snapshot) -> list[dict]:
     # NIST RSS feed new items
     for feed_name, items in diff.get("nist", {}).get("feeds", {}).items():
         for item in items:
-            _add(f"NIST Feed: {feed_name}", "news",
+            _add_text(f"NIST Feed: {feed_name}", "news",
                  item.get("title", ""),
                  url=item.get("link") or "https://csrc.nist.gov/",
                  detail=f"Feed: {feed_name} · Published: {(item.get('published') or '')[:16] or 'N/A'}")
