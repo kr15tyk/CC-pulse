@@ -59,7 +59,7 @@ def _section_daily_counts(diffs: list, section_key: str) -> list:
         elif section_key == "cctl":
             n = sum(len(v) for v in d.get("cctl_labs", {}).values() if v)
         elif section_key == "csfc":
-            n = sum(1 for cp in d.get("csfc", {}).get("capability_packages", {}).values()
+            n = sum(1 for cp in d.get("csfc", {}).get("component_selections", {}).values()
                     if cp.get("changed"))
         elif section_key == "cc_crypto":
             n = sum(1 for doc in d.get("cc_crypto", {}).get("doc_headers", {}).values()
@@ -216,7 +216,7 @@ DASHBOARD_TEMPLATE = """
     </a></div>
     <div class="stat"><a href="#sec-csfc">
       <div class="stat-num {% if csfc_total_stat > 0 %}active-num{% endif %}">{{ csfc_total_stat }}</div>
-      <div class="stat-lbl">CSfC CP Updates</div>
+      <div class="stat-lbl">CSfC Selection Updates</div>
     </a></div>
     <div class="stat"><a href="#sec-nist">
       <div class="stat-num {% if nist_total_stat > 0 %}active-num{% endif %}">{{ nist_total_stat }}</div>
@@ -681,10 +681,10 @@ DASHBOARD_TEMPLATE = """
 
 <div class="section-group">
   <div class="section-label">CSfC</div>
-  <!-- CSfC Capability Packages -->
+  <!-- CSfC Component Selections -->
 <div class="card {% if csfc_total > 0 %}card-updated{% endif %}" id="sec-csfc" data-has-changes="{{ csfc_total }}">
   <div class="card-hdr" onclick="toggleCard(this)">
-    <span>CSfC Capability Packages</span>
+    <span>CSfC Component Selections</span>
     <span class="card-count">{{ csfc_total }} update{% if csfc_total != 1 %}s{% endif %}</span>
     <span class="sparkline">
       {% for v in sparklines.csfc %}
@@ -694,18 +694,12 @@ DASHBOARD_TEMPLATE = """
     <span class="toggle-icon">{% if csfc_total == 0 %}&#9658;{% else %}&#9660;{% endif %}</span>
   </div>
   <div class="card-body {% if csfc_total == 0 %}collapsed{% endif %}">
-    {% for cp_name, cp in diff.csfc.capability_packages.items() %}
+    {% for cp_name, cp in diff.csfc.component_selections.items() %}
     {% if cp.changed %}
     <div class="cp-row" data-source="csfc" data-kind="updated">
       <a class="item-link" href="{{ cp.url }}" target="_blank">{{ cp_name }}</a>
       <div class="cp-detail">
-        {% if cp.old_last_modified and cp.new_last_modified %}
-        <span class="cp-date">{{ cp.old_last_modified }} &#8594; {{ cp.new_last_modified }}</span>
-        {% elif cp.old_content_length is defined and cp.new_content_length is defined %}
-        <span class="cp-date">Size: {{ cp.old_content_length }} &#8594; {{ cp.new_content_length }} bytes</span>
-        {% else %}
-        <span class="cp-date">Content changed</span>
-        {% endif %}
+        <span class="cp-date">Content hash changed</span>
       </div>
     </div>
     {% endif %}
@@ -898,13 +892,13 @@ def _build_rss(diff: dict, generated_at: str) -> str:
                 f"<description>{xml_escape(it.get('summary', '')[:200])}</description></item>"
             )
 
-    for cp_name, cp in diff.get("csfc", {}).get("capability_packages", {}).items():
+    for cp_name, cp in diff.get("csfc", {}).get("component_selections", {}).items():
         if cp.get("changed"):
-            link = cp.get("url", "https://www.nsa.gov/")
+            link = cp.get("url", "https://www.nsa.gov/Resources/Commercial-Solutions-for-Classified-Program/Components-List/")
             items_xml.append(
-                f"<item><title>{xml_escape('CSfC CP Updated: ' + cp_name)}</title>"
+                f"<item><title>{xml_escape('CSfC Selection Updated: ' + cp_name)}</title>"
                 f"<link>{link}</link>"
-                f"<description>Capability package updated.</description></item>"
+                f"<description>Component selection document updated.</description></item>"
             )
 
     for doc_name, doc in diff.get("nist", {}).get("doc_headers", {}).items():
@@ -973,7 +967,7 @@ def render_dashboard(diff: dict, output_dir: str = "docs") -> None:
     niap_news_total = len(news.get("added", []))
 
     cctl_total      = sum(len(v) for v in diff.get("cctl_labs", {}).values() if v)
-    csfc_total      = sum(1 for cp in diff.get("csfc", {}).get("capability_packages", {}).values()
+    csfc_total      = sum(1 for cp in diff.get("csfc", {}).get("component_selections", {}).values()
                           if cp.get("changed"))
     cc_crypto_total = sum(1 for d in diff.get("cc_crypto", {}).get("doc_headers", {}).values()
                           if d.get("changed"))
