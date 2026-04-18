@@ -222,7 +222,7 @@ def flag_alerts(diff: Snapshot) -> list[dict]:
 
     # NATO NIAPCL Cisco-specific additions (Tier 1 EU/NATO)
     for item in diff.get("nato", {}).get("cisco_added", []):
-        _add("NATO NIAPCL", "new_cert",
+        _add_text("NATO NIAPCL", "new_cert",
              item.get("name", "") or item.get("raw_text", "")[:80],
              url=item.get("link") or config.NATO_NIAPCL_URL,
              detail=f"New Cisco product on NATO NIAPCL · {item.get('manufacturer', '')}")
@@ -243,7 +243,7 @@ def flag_alerts(diff: Snapshot) -> list[dict]:
 
     # EUCC Cisco-specific certificates (Tier 1 EU)
     for item in diff.get("eucc", {}).get("cisco_added", []):
-        _add("EUCC Certificates", "new_cert",
+        _add_text("EUCC Certificates", "new_cert",
              item.get("name", "") or item.get("text", "")[:80],
              url=item.get("href") or config.EUCC_CERTIFICATES_URL,
              detail="New Cisco EUCC certified product")
