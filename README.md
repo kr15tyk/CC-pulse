@@ -14,6 +14,8 @@ CC Pulse monitors these sources daily:
 |---|---|
 | **NIAP** | Certified products (PCL), Protection Profiles, Technical Decisions, CCTLs, and news/events |
 | **CSfC / NSA** | Approved Products List and Component Selection documents |
+| **NATO NIAPCL** | NATO Information Assurance Product Catalogue — certified products and components |
+| **EUCC / ENISA** | EU Common Criteria certification scheme — requirements pages and issued certificates |
 | **CC Portal** | International CC news, Protection Profiles, and certified products |
 | **CCTL Labs** | New posts from accredited Common Criteria evaluation labs |
 | **NIST CSRC** | Cryptography news, FIPS publications, CMVP, and post-quantum standards |
@@ -27,13 +29,11 @@ It runs automatically every day at **06:00 UTC** and posts to this space only wh
 When CC Pulse finds something relevant, it posts a message to this space. Here's how to read it.
 
 **The message header** tells you the tier breakdown — for example:
-
 > 🔵 2 Cisco-relevant · 📐 1 standards/NIST
 
 **Each alert in the message shows:**
-
 - **[KIND]** — what type of change it is (see kinds below)
-- **Source** — which portal it came from (e.g., NIAP PP, NIST CSRC)
+- **Source** — which portal it came from (e.g., NIAP PP, NIST CSRC, NATO NIAPCL, EUCC)
 - **Title** — the name of the item that changed
 - **↳ Detail** — a short description of what changed
 - **🔗 URL** — a direct link to the source page
@@ -59,15 +59,12 @@ When CC Pulse finds something relevant, it posts a message to this space. Here's
 
 ## Cisco Certification Celebration 🏆
 
-If a **new Cisco product is certified on the NIAP PCL**, the space gets a dedicated celebration message — separate from the regular alert. It includes:
-
-- Product name (linked to the NIAP page), vendor, and certification date
-- Valid-until date, evaluated Protection Profiles, and evaluating lab
+If a **new Cisco product is certified on the NIAP PCL, CSfC Approved Products List, NATO NIAPCL, or EUCC**, the space gets a dedicated celebration message — separate from the regular alert. It includes:
+- Product name (linked to the source page), vendor, and certification date
+- Evaluated Protection Profiles / scheme details and evaluating lab (where available)
 - A rotating celebration image
 
-This fires whenever a new Cisco cert lands, regardless of whether anything else changed that day.
-
-A matching email is sent to all distribution list recipients at the same time.
+This fires whenever a new Cisco cert lands on any of those four lists, regardless of whether anything else changed that day. A matching email is sent to all distribution list recipients at the same time.
 
 ---
 
@@ -90,16 +87,21 @@ Six tiles show a count of changes detected that day:
 
 Tiles with a count are highlighted in blue. The **Alerts** tile is highlighted in orange when keyword matches exist.
 
-### Source Health Panel
+### Tabbed Navigation
 
-Just below the stat bar, the **Source Health** panel shows whether each source reported changes or not, and confirms when all sources were last polled. This lets you see at a glance if a particular source was quiet vs. if it simply wasn't reached.
+Below the stat bar, the dashboard is split into three tabs:
+
+| Tab | What's in it |
+|---|---|
+| 🇺🇸 **US (NIAP / CSfC / NIST)** | All NIAP, CSfC, NIST, CC Portal, and CCTL cards |
+| 🌐 **NATO NIAPCL** | Changes to the NATO Information Assurance Product Catalogue |
+| 🇪🇺 **EU (EUCC)** | Changes to EUCC requirements and issued certificates from ENISA |
 
 ### The Cards
 
-Below Source Health, the page is divided into collapsible cards, one per data area. Cards with changes are expanded by default; quiet cards are collapsed. You can click any card header to expand or collapse it.
+Below the tab bar, the page is divided into collapsible cards, one per data area. Cards with changes are expanded by default; quiet cards are collapsed. You can click any card header to expand or collapse it.
 
 **What you'll find in the cards:**
-
 - **NIAP Cisco NDcPP Certifications** — New or archived Cisco NDcPP products
 - **NIAP CCTL Registry** — Changes to the list of accredited evaluation labs
 - **NIAP In-Evaluation Products** — Products that newly entered NIAP evaluation
@@ -112,12 +114,13 @@ Below Source Health, the page is divided into collapsible cards, one per data ar
 - **CC Crypto Documentation** — Changes to CC cryptography documents
 - **NIST Documentation** — Changes to NIST FIPS, SP, and CMVP publications
 - **CC Portal (International)** — International CC news and certified products
+- **NATO NIAPCL** — New, removed, or changed NATO-certified products *(NATO tab)*
+- **EUCC Certificates** — New or changed EUCC-certified products *(EU tab)*
 - **Alerts** — Full list of keyword-matched items (only appears when alerts exist)
 
 ### Colour Coding
 
 Card borders are colour-coded by what's inside:
-
 - **Green border** — new items
 - **Amber border** — updates to existing items
 - **Red/magenta border** — keyword alerts
@@ -125,7 +128,6 @@ Card borders are colour-coded by what's inside:
 ### Alert Banner
 
 When keyword matches exist, an amber banner appears at the very top of the dashboard:
-
 > *"N keyword alerts — see Alerts section below."*
 
 This is intentionally low-key — it's a pointer, not an alarm. The full detail is in the Alerts card at the bottom.
@@ -144,4 +146,4 @@ Every **Monday morning**, a digest email goes out covering all changes from the 
 
 ## Questions?
 
-If you see something in Webex or on the dashboard and want to know more, click the direct link in the alert — it goes straight to the source page (NIAP, NIST, NSA, etc.). No login required.
+If you see something in Webex or on the dashboard and want to know more, click the direct link in the alert — it goes straight to the source page (NIAP, NIST, NSA, NATO, ENISA, etc.). No login required.
