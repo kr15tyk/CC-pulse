@@ -238,7 +238,7 @@ DASHBOARD_TEMPLATE = """
   <button class="ctrl-btn" onclick="expandAll()" title="Expand all cards [E]">[E] Expand All</button>
   <button class="ctrl-btn" onclick="collapseAll()" title="Collapse all cards [C]">[C] Collapse All</button>
   <button class="ctrl-btn" id="filter-btn" onclick="toggleZeroFilter()" title="Toggle zero-change cards [F]">[F] Hide Empty</button>
-  <span class="ctrl-hint">keyboard: E=expand C=collapse F=filter /=search Esc=clear</span>
+  <span class="ctrl-hint">keys: E=expand  C=collapse  F=filter  /=search  1/2/3=tabs</span>
 </div>
 <div class="search-row">
   <input id="search-input" class="search-input" type="search" placeholder="Search items…"
@@ -255,11 +255,13 @@ DASHBOARD_TEMPLATE = """
   </div>
   <span id="search-count" class="search-count"></span>
 </div>
-<div class="tab-nav">
-  <button class="tab-btn active" onclick="switchTab('us', this)">&#127482;&#127480; US (NIAP / CSfC / NIST)</button>
-  <button class="tab-btn" onclick="switchTab('nato', this)">&#127760; NATO NIAPCL</button>
-  <button class="tab-btn" onclick="switchTab('eu', this)">&#127466;&#127482; EU (EUCC)</button>
-</div>
+<!-- Regional tab navigation -->
+      <div class="tab-nav" id="region-tabs">
+        <button class="tab-btn active" data-tab="us" onclick="switchTab(this)">&#127482;&#127480; US (NIAP / CSfC / NIST)</button>
+        <button class="tab-btn" data-tab="nato" onclick="switchTab(this)">&#127758; NATO NIAPCL</button>
+        <button class="tab-btn" data-tab="eu" onclick="switchTab(this)">&#127466;&#127482; EU (EUCC / ENISA)</button>
+      </div>
+      
 <!-- Alerts -->
 {% if diff.alerts %}
 <div class="section-group">
@@ -288,13 +290,7 @@ DASHBOARD_TEMPLATE = """
 </div>
 {% endif %}
 
-<!-- Regional tab navigation -->
-      <div class="tab-nav" id="region-tabs">
-        <button class="tab-btn active" data-tab="us" onclick="switchTab(this)">&#127482;&#127480; US (NIAP / CSfC / NIST)</button>
-        <button class="tab-btn" data-tab="nato" onclick="switchTab(this)">&#127758; NATO NIAPCL</button>
-        <button class="tab-btn" data-tab="eu" onclick="switchTab(this)">&#127466;&#127482; EU (EUCC / ENISA)</button>
-      </div>
-      <div class="grid">
+<div class="grid">
 
 <div class="section-group">
   <div class="section-label">NIAP</div>
@@ -895,7 +891,7 @@ function _highlight(el,term){const w=document.createTreeWalker(el,NodeFilter.SHO
 function setKindFilter(btn){document.querySelectorAll('.chip').forEach(c=>c.classList.remove('active'));btn.classList.add('active');_activeKind=btn.dataset.kind;liveSearch()}
 function clearSearch(){const inp=document.getElementById('search-input');if(inp)inp.value='';document.querySelectorAll('.chip').forEach(c=>c.classList.remove('active'));const ac=document.querySelector('.chip[data-kind="all"]');if(ac)ac.classList.add('active');_activeKind='all';liveSearch()}
 function _reconcileGroupVisibility(){document.querySelectorAll('.section-group').forEach(g=>{const hv=[...g.querySelectorAll('.card')].some(c=>!c.classList.contains('zero-hidden')&&getComputedStyle(c).display!=='none');g.style.display=hv?'':' none'})}
-document.addEventListener('keydown',e=>{const t=document.activeElement.tagName;if(t==='INPUT'||t==='TEXTAREA'){if(e.key==='Escape'){clearSearch();document.activeElement.blur()}return}if(e.key==='e'||e.key==='E')expandAll();if(e.key==='c'||e.key==='C')collapseAll();if(e.key==='f'||e.key==='F')toggleZeroFilter();if(e.key==='/'){e.preventDefault();const inp=document.getElementById('search-input');if(inp)inp.focus()}});
+document.addEventListener('keydown',e=>{const t=document.activeElement.tagName;if(t==='INPUT'||t==='TEXTAREA'){if(e.key==='Escape'){clearSearch();document.activeElement.blur()}return}if(e.key==='e'||e.key==='E')expandAll();if(e.key==='c'||e.key==='C')collapseAll();if(e.key==='f'||e.key==='F')toggleZeroFilter();if(e.key==='1'){const b=document.querySelector('.tab-btn[data-tab="us"]');if(b)switchTab(b)}if(e.key==='2'){const b=document.querySelector('.tab-btn[data-tab="nato"]');if(b)switchTab(b)}if(e.key==='3'){const b=document.querySelector('.tab-btn[data-tab="eu"]');if(b)switchTab(b)}if(e.key==='/'){e.preventDefault();const inp=document.getElementById('search-input');if(inp)inp.focus()}});
 document.addEventListener('DOMContentLoaded',initAlertDismiss);
 function switchTab(btn) {
             document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
@@ -910,11 +906,7 @@ function switchTab(btn) {
                 p.classList.toggle('tab-us-hidden', tab !== 'us');
             });
         }
-        // Initialize: show US tab by default
-        document.addEventListener('DOMContentLoaded', function() {
-            // NATO/EU panes start hidden (no tab-active class)
-            // US sections (no data-tab) are shown by default
-        });
+  
 </script>
 </body>
 </html>
