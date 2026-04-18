@@ -41,16 +41,6 @@
   .stat.has-data{border-color:rgba(4,159,217,.3)} .stat.has-alert{border-color:rgba(217,119,6,.3)}
   .stat-lbl,.stat-label{font-size:.78rem;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;font-weight:600}
   .main-content{max-width:1200px;margin:0 auto;padding:2rem}
-  .source-health{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1.5rem;margin-bottom:2rem;box-shadow:var(--shadow-sm)}
-  .sh-title{font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.15em;color:var(--muted);margin-bottom:1rem;display:flex;align-items:center;gap:.5rem;cursor:pointer;user-select:none}
-  .sh-title::before{content:'';display:inline-block;width:3px;height:13px;background:var(--primary);border-radius:2px}
-  .sh-row{display:flex;align-items:center;justify-content:space-between;padding:.5rem 0;border-bottom:1px solid var(--border)} .sh-row:last-of-type{border-bottom:none}
-  .sh-source{font-size:.875rem;color:var(--text);font-weight:500}
-  .sh-badge{font-size:.72rem;padding:3px 10px;border-radius:100px;font-weight:600}
-  .sh-ok{color:var(--green);background:rgba(0,135,90,.08);border:1px solid rgba(0,135,90,.2)}
-  .sh-idle{color:var(--muted);background:rgba(107,130,160,.08);border:1px solid rgba(107,130,160,.2)}
-  .sh-alert{color:var(--alert-color);background:rgba(217,119,6,.08);border:1px solid rgba(217,119,6,.2)}
-  .sh-footer{font-size:.72rem;color:var(--muted);margin-top:.75rem;padding-top:.5rem;border-top:1px solid var(--border)}
   .alert-banner{background:rgba(217,119,6,.06);border:1px solid rgba(217,119,6,.3);border-radius:8px;padding:.75rem 1.1rem;margin-bottom:1.5rem;font-weight:600;color:var(--alert-color);font-size:.875rem}
   .alert-banner::before{content:"⚠ "}
   .ctrl-bar{font-size:.75rem;color:var(--muted);margin-bottom:1rem;display:flex;gap:.6rem;align-items:center;flex-wrap:wrap}
@@ -176,49 +166,6 @@
 <div class="main-content">
 
 <!-- Source health summary -->
-<div class="source-health">
-  <div class="sh-title" onclick="toggleSH(this)">Source Health <span class="sh-arrow">▾</span></div>
-  <div class="sh-body">
-  <div class="sh-row">
-    <span class="sh-source">NIAP API</span>
-    <span class="sh-badge sh-ok">
-      4 changes
-    </span>
-  </div>
-  <div class="sh-row">
-    <span class="sh-source">CSfC / NSA</span>
-    <span class="sh-badge sh-idle">
-      no changes
-    </span>
-  </div>
-  <div class="sh-row">
-    <span class="sh-source">NIST CSRC</span>
-    <span class="sh-badge sh-ok">
-      1 update
-    </span>
-  </div>
-  <div class="sh-row">
-    <span class="sh-source">CC Portal</span>
-    <span class="sh-badge sh-idle">
-      no changes
-    </span>
-  </div>
-  <div class="sh-row">
-    <span class="sh-source">CCTL Labs</span>
-    <span class="sh-badge sh-idle">
-      no changes
-    </span>
-  </div>
-  <div class="sh-row">
-    <span class="sh-source">Keyword Alerts</span>
-    <span class="sh-badge sh-alert">
-      1 match
-    </span>
-  </div>
-  <div class="sh-footer">Period: 2026-04-16 â 2026-04-17</div>
-  <div class="sh-footer">All sources last polled: 2026-04-17 (daily 06:00 UTC)</div>
-  </div>
-</div>
 <div class="ctrl-bar">
   <button class="ctrl-btn" onclick="expandAll()" title="Expand all cards [E]">[E] Expand All</button>
   <button class="ctrl-btn" onclick="collapseAll()" title="Collapse all cards [C]">[C] Collapse All</button>
@@ -688,7 +635,7 @@
 
 </div>
 <footer>
-  <span>CC Pulse &middot; Auto-refreshes daily (06:00 UTC) &middot; Data from NIAP, CSfC, NIST, CC Portal</span>
+  <span>CC Pulse &middot; Auto-refreshes daily (06:00 UTC) &middot; NIAP, CSfC, NIST, CC Portal, NATO NIAPCL, EUCC / ENISA</span>
   <span>Last run: 2026-04-17 07:47 UTC</span>
 </footer>
 
@@ -706,36 +653,7 @@
 </div>
 <script>
 function toggleHelp(){const m=document.getElementById('help-modal');if(m)m.classList.toggle('open')}
-function toggleSH(el){const body=el.nextElementSibling;if(!body)return;body.classList.toggle('collapsed');const arr=el.querySelector('.sh-arrow');if(arr)arr.style.transform=body.classList.contains('collapsed')?'rotate(-90deg)':''}
-function toggleKw(btn){const span=btn.nextElementSibling;if(!span)return;const vis=span.style.display==='inline';span.style.display=vis?'none':'inline';btn.textContent=vis?'Show keywords ▶':'Hide keywords ▼'}
-function toggleCard(h){const b=h.nextElementSibling,i=h.querySelector('.toggle-icon'),c=b.classList.toggle('collapsed');if(i)i.textContent=c?'►':'▼'}
-function expandAll(){document.querySelectorAll('.card-body').forEach(b=>{b.classList.remove('collapsed');const i=b.previousElementSibling.querySelector('.toggle-icon');if(i)i.textContent='▼'})}
-function collapseAll(){document.querySelectorAll('.card-body').forEach(b=>{b.classList.add('collapsed');const i=b.previousElementSibling.querySelector('.toggle-icon');if(i)i.textContent='►'})}
-let _zeroHidden=false;
-function toggleZeroFilter(){_zeroHidden=!_zeroHidden;document.querySelectorAll('.card[data-has-changes]').forEach(c=>{const n=parseInt(c.dataset.hasChanges,10)||0;if(n===0)c.classList.toggle('zero-hidden',_zeroHidden)});const b=document.getElementById('filter-btn');if(b)b.textContent=_zeroHidden?'[F] Show All':'[F] Hide Empty';_reconcileGroupVisibility()}
-function dismissAlert(btn){const r=btn.closest('.item-row');if(r)r.classList.add('alert-dismissed')}
-function initAlertDismiss(){const stored=JSON.parse(sessionStorage.getItem('dismissed')||'[]');stored.forEach(k=>{const el=document.querySelector('[data-alert-key="'+k+'"]');if(el)el.classList.add('alert-dismissed')});document.querySelectorAll('.dismiss-btn').forEach(btn=>{btn.addEventListener('click',()=>{const r=btn.closest('[data-alert-key]');if(!r)return;const d=JSON.parse(sessionStorage.getItem('dismissed')||'[]');d.push(r.dataset.alertKey);sessionStorage.setItem('dismissed',JSON.stringify(d))})})}
-let _activeKind='all';
-function liveSearch(){const raw=(document.getElementById('search-input').value||'').trim(),term=raw.toLowerCase();document.querySelectorAll('mark.sh').forEach(m=>m.replaceWith(document.createTextNode(m.textContent)));const rows=document.querySelectorAll('.item-row,.cp-row');let vis=0;rows.forEach(row=>{const km=_activeKind==='all'||(_activeKind==='alert'&&row.closest('#sec-alerts'))||(row.dataset.kind===_activeKind);if(!km){row.classList.add('search-hidden');return}if(!term){row.classList.remove('search-hidden');vis++;return}const le=row.querySelector('.item-link'),me=row.querySelector('.item-meta'),se2=row.querySelector('.item-sub,.cp-detail'),hay=[le?le.textContent:'',me?me.textContent:'',se2?se2.textContent:''].join(' ').toLowerCase();if(hay.includes(term)){row.classList.remove('search-hidden');vis++;if(le)_highlight(le,raw)}else row.classList.add('search-hidden')});document.querySelectorAll('.card').forEach(card=>{const vr=card.querySelectorAll('.item-row:not(.search-hidden),.cp-row:not(.search-hidden)');let msg=card.querySelector('.no-results-msg');if(!msg){msg=document.createElement('p');msg.className='no-results-msg';msg.textContent='No matching items.';const body=card.querySelector('.card-body');if(body)body.appendChild(msg)}msg.style.display=(term||_activeKind!=='all')&&vr.length===0?'block':'none'});const ce=document.getElementById('search-count');if(ce)ce.textContent=(term||_activeKind!=='all')?vis+' result'+(vis!==1?'s':''):'';_reconcileGroupVisibility()}
-function _highlight(el,term){const w=document.createTreeWalker(el,NodeFilter.SHOW_TEXT),nodes=[];let n;while((n=w.nextNode()))nodes.push(n);const lt=term.toLowerCase();nodes.forEach(tn=>{const i=tn.nodeValue.toLowerCase().indexOf(lt);if(i===-1)return;const b=document.createTextNode(tn.nodeValue.slice(0,i)),m=document.createElement('mark');m.className='sh';m.textContent=tn.nodeValue.slice(i,i+term.length);const a=document.createTextNode(tn.nodeValue.slice(i+term.length));tn.parentNode.replaceChild(a,tn);tn.parentNode.insertBefore(m,a);tn.parentNode.insertBefore(b,m)})}
-function setKindFilter(btn){document.querySelectorAll('.chip').forEach(c=>c.classList.remove('active'));btn.classList.add('active');_activeKind=btn.dataset.kind;liveSearch()}
-function clearSearch(){const inp=document.getElementById('search-input');if(inp)inp.value='';document.querySelectorAll('.chip').forEach(c=>c.classList.remove('active'));const ac=document.querySelector('.chip[data-kind="all"]');if(ac)ac.classList.add('active');_activeKind='all';liveSearch()}
-function _reconcileGroupVisibility(){document.querySelectorAll('.section-group').forEach(g=>{const hv=[...g.querySelectorAll('.card')].some(c=>!c.classList.contains('zero-hidden')&&getComputedStyle(c).display!=='none');g.style.display=hv?'':' none'})}
-document.addEventListener('keydown',e=>{const t=document.activeElement.tagName;if(t==='INPUT'||t==='TEXTAREA'){if(e.key==='Escape'){clearSearch();document.activeElement.blur()}return}const m=document.getElementById('help-modal');if(e.key==='Escape'&&m&&m.classList.contains('open')){m.classList.remove('open');return}if(e.key==='e'||e.key==='E')expandAll();if(e.key==='c'||e.key==='C')collapseAll();if(e.key==='f'||e.key==='F')toggleZeroFilter();if(e.key==='?')toggleHelp();if(e.key==='/'){e.preventDefault();const inp=document.getElementById('search-input');if(inp)inp.focus()}});
-document.addEventListener('DOMContentLoaded',()=>{initAlertDismiss();toggleZeroFilter();});
-  function switchTab(tab, btn) {
-    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    document.querySelectorAll('.section-group[data-tab]').forEach(g => g.classList.remove('tab-active'));
-    if (tab !== 'us') {
-      document.querySelectorAll('.section-group[data-tab="' + tab + '"]').forEach(g => g.classList.add('tab-active'));
-      document.querySelectorAll('.tab-us-hidden').forEach(el => el.style.display = 'none');
-      document.querySelectorAll('.section-group:not([data-tab])').forEach(g => g.style.display = 'none');
-    } else {
-      document.querySelectorAll('.tab-us-hidden').forEach(el => el.style.display = '');
-      document.querySelectorAll('.section-group:not([data-tab])').forEach(g => g.style.display = '');
-    }
-  }
+
 </script>
 </body>
 </html>
