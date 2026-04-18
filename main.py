@@ -120,6 +120,8 @@ def _empty_snapshot() -> dict:
         "csfc":      {"pages": {}, "capability_package_headers": {}, "feeds": {}},
         "cc_crypto": {"pages": {}, "doc_headers": {}},
         "nist":      {"pages": {}, "doc_headers": {}, "feeds": {}},
+        "nato":      {"pages": {}, "cisco_added": [], "cisco_removed": []},
+        "eucc":      {"pages": {}, "cisco_added": [], "cisco_removed": []},
     }
 
 
@@ -207,6 +209,32 @@ def run_daily() -> None:
         log.info("%d new Cisco NDcPP certification(s) — sending celebration...", len(new_cisco_certs))
         emailer.send_cisco_cert_celebration(new_cisco_certs)
         emailer.send_cisco_cert_email(new_cisco_certs)
+
+
+    # 8. Cisco CSfC APL alert — check keyword alerts tagged to CSfC containing Cisco
+    new_cisco_csfc_alerts = [
+        a for a in diff.get("alerts", [])
+        if "CSfC" in a.get("source", "") and
+           any(kw in a.get("title", "").lower() for kw in config.CISCO_VENDOR_KEYWORDS)
+    ]
+    if new_cisco_csfc_alerts:
+        log.info("%d new Cisco CSfC alert(s) — sending celebration...", len(new_cisco_csfc_alerts))
+        emailer.send_cisco_cert_celebration(new_cisco_csfc_alerts)
+        emailer.send_cisco_cert_email(new_cisco_csfc_alerts)
+
+    # 9. Cisco NATO NIAPCL celebration
+    new_cisco_nato = diff.get("nato", {}).get("cisco_added", [])
+    if new_cisco_nato:
+        log.info("%d new Cisco NATO NIAPCL listing(s) — sending celebration...", len(new_cisco_nato))
+        emailer.send_cisco_cert_celebration(new_cisco_nato)
+        emailer.send_cisco_cert_email(new_cisco_nato)
+
+    # 10. Cisco EUCC celebration
+    new_cisco_eucc = diff.get("eucc", {}).get("cisco_added", [])
+    if new_cisco_eucc:
+        log.info("%d new Cisco EUCC certification(s) — sending celebration...", len(new_cisco_eucc))
+        emailer.send_cisco_cert_celebration(new_cisco_eucc)
+        emailer.send_cisco_cert_email(new_cisco_eucc)
 
     log.info("Daily run complete.")
 
