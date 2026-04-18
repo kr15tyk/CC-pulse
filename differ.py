@@ -237,8 +237,8 @@ def diff_niap_tds(old_tds: Records, new_tds: Records) -> dict[str, Any]:
 def diff_niap_pcl_cisco(old_pcl: Records, new_pcl: Records) -> dict[str, Any]:
     old_cisco = {str(p["product_id"]): p for p in old_pcl if is_cisco_ndcpp(p)}
     new_cisco = {str(p["product_id"]): p for p in new_pcl if is_cisco_ndcpp(p)}
-            added    = [new_cisco[i] for i in set(new_cisco) - set(old_cisco)
-                                           if new_cisco[i].get("status_sort") == "Certified"]
+    added    = [new_cisco[i] for i in set(new_cisco) - set(old_cisco)
+                 if new_cisco[i].get("status_sort") == "Certified"]
     removed   = [old_cisco[i] for i in set(old_cisco) - set(new_cisco)]
     newly_archived = [
         new_cisco[pid]
