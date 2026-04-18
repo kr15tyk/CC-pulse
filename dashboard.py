@@ -122,16 +122,6 @@ DASHBOARD_TEMPLATE = """
   .stat.has-data{border-color:rgba(4,159,217,.3)} .stat.has-alert{border-color:rgba(217,119,6,.3)}
   .stat-lbl,.stat-label{font-size:.68rem;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;font-weight:600}
   .main-content{max-width:1200px;margin:0 auto;padding:2rem}
-  .source-health{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1.5rem;margin-bottom:2rem;box-shadow:var(--shadow-sm)}
-  .sh-title{font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.15em;color:var(--muted);margin-bottom:1rem;display:flex;align-items:center;gap:.5rem}
-  .sh-title::before{content:'';display:inline-block;width:3px;height:13px;background:var(--primary);border-radius:2px}
-  .sh-row{display:flex;align-items:center;justify-content:space-between;padding:.5rem 0;border-bottom:1px solid var(--border)} .sh-row:last-of-type{border-bottom:none}
-  .sh-source{font-size:.875rem;color:var(--text);font-weight:500}
-  .sh-badge{font-size:.72rem;padding:3px 10px;border-radius:100px;font-weight:600}
-  .sh-ok{color:var(--green);background:rgba(0,135,90,.08);border:1px solid rgba(0,135,90,.2)}
-  .sh-idle{color:var(--muted);background:rgba(107,130,160,.08);border:1px solid rgba(107,130,160,.2)}
-  .sh-alert{color:var(--alert-color);background:rgba(217,119,6,.08);border:1px solid rgba(217,119,6,.2)}
-  .sh-footer{font-size:.72rem;color:var(--muted);margin-top:.75rem;padding-top:.5rem;border-top:1px solid var(--border)}
   .alert-banner{background:rgba(217,119,6,.06);border:1px solid rgba(217,119,6,.3);border-radius:8px;padding:.75rem 1.1rem;margin-bottom:1.5rem;font-weight:600;color:var(--alert-color);font-size:.875rem}
   .alert-banner::before{content:"⚠ "}
   .ctrl-bar{font-size:.75rem;color:var(--muted);margin-bottom:1rem;display:flex;gap:.6rem;align-items:center;flex-wrap:wrap}
@@ -243,59 +233,6 @@ DASHBOARD_TEMPLATE = """
 </div><!-- /sticky-top -->
 <div class="main-content">
 <!-- Source health summary -->
-<div class="source-health">
-  <div class="sh-title">Source Health</div>
-  <div class="sh-row">
-    <span class="sh-source">NIAP API</span>
-    <span class="sh-badge {% if niap_total_stat > 0 %}sh-ok{% else %}sh-idle{% endif %}">
-      {% if niap_total_stat > 0 %}{{ niap_total_stat }} change{% if niap_total_stat != 1 %}s{% endif %}{% else %}no changes{% endif %}
-    </span>
-  </div>
-  <div class="sh-row">
-    <span class="sh-source">CSfC / NSA</span>
-    <span class="sh-badge {% if csfc_total_stat > 0 %}sh-ok{% else %}sh-idle{% endif %}">
-      {% if csfc_total_stat > 0 %}{{ csfc_total_stat }} update{% if csfc_total_stat != 1 %}s{% endif %}{% else %}no changes{% endif %}
-    </span>
-  </div>
-  <div class="sh-row">
-    <span class="sh-source">NIST CSRC</span>
-    <span class="sh-badge {% if nist_total_stat > 0 %}sh-ok{% else %}sh-idle{% endif %}">
-      {% if nist_total_stat > 0 %}{{ nist_total_stat }} update{% if nist_total_stat != 1 %}s{% endif %}{% else %}no changes{% endif %}
-    </span>
-  </div>
-  <div class="sh-row">
-    <span class="sh-source">CC Portal</span>
-    <span class="sh-badge {% if cc_portal_total_stat > 0 %}sh-ok{% else %}sh-idle{% endif %}">
-      {% if cc_portal_total_stat > 0 %}{{ cc_portal_total_stat }} new item{% if cc_portal_total_stat != 1 %}s{% endif %}{% else %}no changes{% endif %}
-    </span>
-  </div>
-  <div class="sh-row">
-    <span class="sh-source">CCTL Labs</span>
-    <span class="sh-badge {% if cctl_total_stat > 0 %}sh-ok{% else %}sh-idle{% endif %}">
-      {% if cctl_total_stat > 0 %}{{ cctl_total_stat }} new item{% if cctl_total_stat != 1 %}s{% endif %}{% else %}no changes{% endif %}
-    </span>
-  </div>
-  <div class="sh-row">
-    <span class="sh-source">Keyword Alerts</span>
-    <span class="sh-badge {% if alert_total > 0 %}sh-alert{% else %}sh-idle{% endif %}">
-      {% if alert_total > 0 %}{{ alert_total }} match{% if alert_total != 1 %}es{% endif %}{% else %}none{% endif %}
-    </span>
-  </div>
-  <div class="sh-row">
-              <span class="sh-source">NATO NIAPCL</span>
-              <span class="sh-badge {% if nato_total > 0 %}sh-ok{% else %}sh-idle{% endif %}">
-                {% if nato_total > 0 %}{{ nato_total }} change{% if nato_total != 1 %}s{% endif %}{% else %}no changes{% endif %}
-              </span>
-            </div>
-            <div class="sh-row">
-              <span class="sh-source">EUCC / ENISA</span>
-              <span class="sh-badge {% if eucc_total > 0 %}sh-ok{% else %}sh-idle{% endif %}">
-                {% if eucc_total > 0 %}{{ eucc_total }} change{% if eucc_total != 1 %}s{% endif %}{% else %}no changes{% endif %}
-              </span>
-            </div>
-      <div class="sh-footer">Period: {{ period_start[:10] if period_start else 'â' }} â {{ period_end[:10] if period_end else 'â' }}</div>
-  <div class="sh-footer">All sources last polled: {{ period_end[:10] if period_end else 'â' }} (daily 06:00 UTC)</div>
-</div>
 <div class="ctrl-bar">
   <button class="ctrl-btn" onclick="expandAll()" title="Expand all cards [E]">[E] Expand All</button>
   <button class="ctrl-btn" onclick="collapseAll()" title="Collapse all cards [C]">[C] Collapse All</button>
@@ -939,7 +876,7 @@ DASHBOARD_TEMPLATE = """
 
 </div><!-- /main-content -->
 <footer>
-  <span>CC Pulse &middot; Auto-refreshes daily (06:00 UTC) &middot; Data from NIAP, CSfC, NIST, CC Portal</span>
+  <span>CC Pulse &middot; Auto-refreshes daily (06:00 UTC) &middot; NIAP, CSfC, NIST, CC Portal, NATO NIAPCL, EUCC / ENISA</span>
   <span>Last run: {{ generated_at }}</span>
 </footer>
 
