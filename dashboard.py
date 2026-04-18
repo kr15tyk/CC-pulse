@@ -317,6 +317,11 @@ DASHBOARD_TEMPLATE = """
   </div>
   <span id="search-count" class="search-count"></span>
 </div>
+<div class="tab-nav">
+  <button class="tab-btn active" onclick="switchTab('us', this)">&#127482;&#127480; US (NIAP / CSfC / NIST)</button>
+  <button class="tab-btn" onclick="switchTab('nato', this)">&#127760; NATO NIAPCL</button>
+  <button class="tab-btn" onclick="switchTab('eu', this)">&#127466;&#127482; EU (EUCC)</button>
+</div>
 <!-- Alerts -->
 {% if diff.alerts %}
 <div class="section-group">
