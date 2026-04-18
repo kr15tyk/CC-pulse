@@ -157,13 +157,7 @@ WATCH_KEYWORDS = [
     "CSfC",
     "Commercial Solutions for Classified",
     "CSfC APL",
-    "CSfC capability package",
-    "CP-Mobile",
-    "CP-MA",
-    "CP-WAN",
-    "CP-Campus WLAN",
-    "CP-DAR",
-    "CP-MDM",
+    "CSfC component selections",
     "NSA CSfC",
 
     # -- CC Crypto Catalog ---------------------------------------------
@@ -210,13 +204,7 @@ BODY_WATCH_KEYWORDS = [
     "SP 800-131A",
     # Very specific CSfC program identifiers
     "CSfC APL",
-    "CSfC capability package",
-    "CP-Mobile",
-    "CP-MA",
-    "CP-WAN",
-    "CP-Campus WLAN",
-    "CP-DAR",
-    "CP-MDM",
+    "CSfC component selections",
     # Specific crypto catalog identifier
     "CCDB-018",
     # Post-quantum terms that are specific enough for prose
@@ -234,7 +222,7 @@ BODY_WATCH_KEYWORDS = [
 # NSA's CSfC program approves commercial products for use in
 # classified environments via layered, NIAP-certified solutions.
 # Sources below are scraped/polled for Approved Products List
-# (APL) changes, new/revised Capability Packages, and program
+# (APL) changes, new/revised Component Selections, and program
 # news. collector.py reads CSFC_PAGES and CSFC_FEEDS.
 # =============================================================
 
@@ -242,29 +230,50 @@ CSFC_BASE = "https://www.nsa.gov"
 
 # -- CSfC web pages to snapshot for change detection ------------------------
 CSFC_PAGES = {
-    "home":         "/resources/everyone/csfc/",
-    "apl":          "/resources/everyone/csfc/approved-products-list/",
-    "cap_packages": "/resources/everyone/csfc/capability-packages/",
-    "faq":          "/resources/everyone/csfc/faqs/",
-    "registration": "/resources/everyone/csfc/registration/",
-    "kmr":          "/resources/everyone/csfc/key-management/",
+    "home":          "/resources/everyone/csfc/",
+    "apl":           "/resources/everyone/csfc/approved-products-list/",
+    "cap_packages":  "/resources/everyone/csfc/capability-packages/",
+    "faq":           "/resources/everyone/csfc/faqs/",
+    "registration":  "/resources/everyone/csfc/registration/",
+    "kmr":           "/resources/everyone/csfc/key-management/",
     "announcements": "/Resources/Commercial-Solutions-for-Classified-Program/Announcements/",
 }
 
-# -- CSfC Capability Package documents (direct PDF URLs) --------------------
-# Polled for HTTP Last-Modified / ETag / Content-Length header changes.
-# A header change in the diff signals a CP document revision.
-# Falls back to a partial-GET content-hash when the server omits headers.
-CSFC_CAPABILITY_PACKAGES = {
-    "CP-Mobile Access":        "https://www.nsa.gov/portals/75/documents/resources/everyone/csfc/capability-packages/mobile-access.pdf",
-    "CP-Multi-Site Connectivity":"https://www.nsa.gov/portals/75/documents/resources/everyone/csfc/capability-packages/multi-site-connectivity.pdf",
-    "CP-Campus WLAN":          "https://www.nsa.gov/portals/75/documents/resources/everyone/csfc/capability-packages/campus-wlan.pdf",
-    "CP-Data at Rest":         "https://www.nsa.gov/portals/75/documents/resources/everyone/csfc/capability-packages/data-at-rest.pdf",
-    "CP-Mobile Device Management":"https://www.nsa.gov/portals/75/documents/resources/everyone/csfc/capability-packages/mdm.pdf",
-    "CP-WAN":                  "https://www.nsa.gov/portals/75/documents/resources/everyone/csfc/capability-packages/wan.pdf",
-    "CP-Email":                "https://www.nsa.gov/portals/75/documents/resources/everyone/csfc/capability-packages/email.pdf",
-    "CP-Voice over IP":        "https://www.nsa.gov/portals/75/documents/resources/everyone/csfc/capability-packages/voip.pdf",
+# -- CSfC Component Selections documents (direct PDF URLs) ------------------
+# One PDF per component category, linked by "Click for Selections" on the
+# Components List page. Downloaded in full and SHA-256 hashed each run --
+# header polling is unreliable on NSA's CDN so content hashing is used
+# instead. All dashboard/alert links point to CSFC_COMPONENTS_LIST_URL
+# because the individual /portals/ PDF URLs return 404 in a browser.
+CSFC_COMPONENT_SELECTIONS = {
+    "Authentication Server":            "https://www.nsa.gov/portals/75/documents/resources/everyone/csfc/components-list/selections/authentication-servers.pdf",
+    "Certificate Authority":            "https://www.nsa.gov/portals/75/documents/resources/everyone/csfc/components-list/selections/certificate-authorities.pdf",
+    "Client Virtualization Systems":    "https://www.nsa.gov/Portals/75/documents/resources/everyone/csfc/components-list/selections/Client-Virtualization.pdf",
+    "E-mail Clients":                   "https://www.nsa.gov/portals/75/documents/resources/everyone/csfc/components-list/selections/email-clients.pdf",
+    "End User Device / Mobile Platform":"https://www.nsa.gov/portals/75/documents/resources/everyone/csfc/capability-packages/CSfC%20Selections%20for%20End%20User%20Devices%20and%20Mobile%20Platform_Nov%202018.pdf",
+    "File Encryption":                  "https://www.nsa.gov/portals/75/documents/resources/everyone/csfc/components-list/selections/file-encryption.pdf",
+    "General Purpose Operating System": "https://www.nsa.gov/Portals/75/documents/resources/everyone/csfc/components-list/General%20Purpose%20Operating%20System%20Selectors.pdf",
+    "General Purpose Compute Platform": "https://www.nsa.gov/Portals/75/documents/resources/everyone/csfc/components-list/General%20Purpose%20Compute%20Platform%20Selectors.pdf",
+    "Hardware Full Drive Encryption":   "https://www.nsa.gov/portals/75/documents/resources/everyone/csfc/components-list/selections/sw-fde.pdf",
+    "IPS":                              "https://www.nsa.gov/portals/75/documents/resources/everyone/csfc/components-list/selections/ips.pdf",
+    "IPsec VPN Client":                 "https://www.nsa.gov/portals/75/documents/resources/everyone/csfc/components-list/selections/vpn-clients.pdf",
+    "IPsec VPN Gateway":                "https://www.nsa.gov/portals/75/documents/resources/everyone/csfc/components-list/selections/vpn-gateways.pdf",
+    "MACSEC Ethernet Encryption":       "https://www.nsa.gov/portals/75/documents/resources/everyone/csfc/components-list/selections/macsec.pdf",
+    "MDM":                              "https://www.nsa.gov/portals/75/documents/resources/everyone/csfc/components-list/selections/mdm.pdf",
+    "Session Border Controller":        "https://www.nsa.gov/portals/75/documents/resources/everyone/csfc/components-list/selections/sbc.pdf",
+    "Enterprise Session Controller":    "https://www.nsa.gov/portals/75/documents/resources/everyone/csfc/components-list/selections/esc.pdf",
+    "Software Full Drive Encryption":   "https://www.nsa.gov/portals/75/documents/resources/everyone/csfc/components-list/selections/sw-fde.pdf",
+    "TLS Protected Servers":            "https://www.nsa.gov/Portals/75/documents/resources/everyone/csfc/components-list/selections/TLS-Protected-Servers-2022-08-24.pdf",
+    "TLS Software Applications":        "https://www.nsa.gov/Portals/75/documents/resources/everyone/csfc/components-list/selections/CSfC%20Selections%20for%20TLS%20Software%20Application-2022-11-03.pdf",
+    "Traffic Filtering Firewall":       "https://www.nsa.gov/portals/75/documents/resources/everyone/csfc/components-list/selections/tffw.pdf",
+    "VoIP Applications":                "https://www.nsa.gov/portals/75/documents/resources/everyone/csfc/components-list/selections/voip-applications.pdf",
+    "Web Browsers":                     "https://www.nsa.gov/portals/75/documents/resources/everyone/csfc/components-list/selections/web-browsers.pdf",
+    "WLAN Access System":               "https://www.nsa.gov/portals/75/documents/resources/everyone/csfc/components-list/selections/wlan-access-systems.pdf",
 }
+
+# Canonical URL used for all Component Selections alerts and dashboard links.
+# The individual PDF /portals/ URLs return 404 when navigated to in a browser.
+CSFC_COMPONENTS_LIST_URL = "https://www.nsa.gov/Resources/Commercial-Solutions-for-Classified-Program/Components-List/"
 
 # -- CSfC RSS / news feeds ---------------------------------------------------
 CSFC_FEEDS = [
