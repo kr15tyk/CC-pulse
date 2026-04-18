@@ -330,13 +330,22 @@ def main() -> None:
         help="Collect initial snapshot only (no diff)",
     )
     parser.add_argument(
+        "--readme",
+        action="store_true",
+        help="Post the pinned README/info message to Webex (then pin it manually)",
+    )
+    parser.add_argument(
         "--redash",
         action="store_true",
         help="Re-render dashboard from the latest stored diff (no collection)",
     )
     args = parser.parse_args()
 
-    if args.redash:
+    if args.readme:
+        _setup_logging()
+        _, emailer, _, _ = _imports()
+        emailer.send_readme_message()
+    elif args.redash:
         run_redash()
     elif args.bootstrap:
         run_bootstrap()
