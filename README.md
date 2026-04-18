@@ -13,7 +13,7 @@ CC Pulse monitors these sources daily:
 | Source | What's tracked |
 |---|---|
 | **NIAP** | Certified products (PCL), Protection Profiles, Technical Decisions, CCTLs, and news/events |
-| **CSfC / NSA** | Approved Products List and Capability Package documents |
+| **CSfC / NSA** | Approved Products List and Component Selection documents |
 | **CC Portal** | International CC news, Protection Profiles, and certified products |
 | **CCTL Labs** | New posts from accredited Common Criteria evaluation labs |
 | **NIST CSRC** | Cryptography news, FIPS publications, CMVP, and post-quantum standards |
@@ -83,7 +83,7 @@ Six tiles show a count of changes detected that day:
 |---|---|
 | **NIAP Changes** | Total changes across all NIAP sources |
 | **CCTL Items** | New posts from evaluation labs |
-| **CSfC CP Updates** | Changes to NSA Capability Package documents |
+| **CSfC Selection Updates** | Changes to NSA Component Selection documents |
 | **NIST Doc Updates** | Changes to NIST publications or pages |
 | **CC Portal** | Changes from the international CC Portal |
 | **Alerts** | Number of keyword matches (Cisco/relevant items) |
@@ -108,7 +108,7 @@ Below Source Health, the page is divided into collapsible cards, one per data ar
 - **NIAP Protection Profiles** — New, updated, or sunsetted PPs
 - **NIAP Technical Decisions** — New or updated TDs
 - **CCTL Lab Intel** — New posts from evaluation labs
-- **CSfC Capability Packages** — Document changes from NSA
+- **CSfC Component Selections** — Changes to NSA Component Selection PDFs
 - **CC Crypto Documentation** — Changes to CC cryptography documents
 - **NIST Documentation** — Changes to NIST FIPS, SP, and CMVP publications
 - **CC Portal (International)** — International CC news and certified products
