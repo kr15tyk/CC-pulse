@@ -299,17 +299,23 @@ def diff_niap_tds(old_tds: Records, new_tds: Records) -> dict[str, Any]:
 def diff_niap_pcl_cisco(old_pcl: Records, new_pcl: Records) -> dict[str, Any]:
     old_cisco = {str(p["product_id"]): p for p in old_pcl if is_cisco_ndcpp(p)}
     new_cisco = {str(p["product_id"]): p for p in new_pcl if is_cisco_ndcpp(p)}
-    added    = [new_cisco[i] for i in set(new_cisco) - set(old_cisco)
+    # Newly added to PCL already certified
+    brand_new = [new_cisco[i] for i in set(new_cisco) - set(old_cisco)
                  if new_cisco[i].get("status_sort") == "Certified"]
-    removed   = [old_cisco[i] for i in set(old_cisco) - set(new_cisco)]
+    # Was In Progress, now Certified (the most common transition)
+    newly_certified = [
+        new_cisco[pid] for pid in set(old_cisco) & set(new_cisco)
+        if (old_cisco[pid].get("status_sort") in ("In Progress", "In Review")
+            and new_cisco[pid].get("status_sort") == "Certified")
+    ]
+    added = brand_new + newly_certified
+    removed = [old_cisco[i] for i in set(old_cisco) - set(new_cisco)]
     newly_archived = [
-        new_cisco[pid]
-        for pid in set(old_cisco) & set(new_cisco)
+        new_cisco[pid] for pid in set(old_cisco) & set(new_cisco)
         if (old_cisco[pid].get("status_sort") == "Certified"
             and new_cisco[pid].get("status_sort") == "Archived")
     ]
     return {"added": added, "removed": removed, "newly_archived": newly_archived}
-
 def diff_niap_pcl_all(old_pcl: Records, new_pcl: Records) -> dict[str, Any]:
     """Diff the full NIAP PCL across all tech types."""
     old_all = {str(p["product_id"]): p for p in old_pcl}
