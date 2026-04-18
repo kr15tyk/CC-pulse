@@ -7,6 +7,7 @@ per-source change lists and keyword alerts.
 
 from __future__ import annotations
 
+import copy
 import logging
 import re
 from typing import Any
@@ -44,6 +45,58 @@ def check_schema_compat(old: Snapshot, new: Snapshot) -> None:
 
 # -- Keyword alert scanner -----------------------------------------------------
 
+
+def _ids(records: Records, key: str) -> set[str]:
+    """Return a set of stringified key values from a list of records."""
+    return {str(r[key]) for r in records if key in r}
+
+
+def byid(records: Records, key: str) -> dict[str, Any]:
+    """Index a list of records by a string key field."""
+    return {str(r[key]): r for r in records if key in r}
+
+
+def categorize_news(title: str) -> str:
+    """Map a news/feed item title to a category using NEWS_CATEGORY_KEYWORDS."""
+    t = title.lower()
+    for cat, keywords in config.NEWS_CATEGORY_KEYWORDS.items():
+        if cat == "NEWS":
+            continue
+        if any(kw in t for kw in keywords):
+            return cat
+    return "NEWS"
+
+
+def is_cisco_ndcpp(product: dict[str, Any]) -> bool:
+    """Return True if a PCL product is a Cisco NDcPP certification."""
+    vendor = product.get("vendor_id_name", "").lower()
+    if not any(kw in vendor for kw in config.CISCO_VENDOR_KEYWORDS):
+        return False
+    pps = product.get("protection_profiles", [])
+    return any(
+        any(kw in pp.get("pp_short_name", "") for kw in config.NDCPP_PP_KEYWORDS)
+        for pp in pps
+    )
+
+
+def _headers_changed(old_h: dict, new_h: dict) -> bool:
+    """Return True if any change-detection field differs between two header dicts.
+
+    Checks in order of reliability:
+      1. ETag — most authoritative when present
+      2. Last-Modified — widely supported
+      3. Content-Length — rough version signal (can change without content change)
+      4. partial_hash — MD5 of first 2 KB; populated only when 1-3 are all absent
+    """
+    for field in ("etag", "last_modified", "content_length", "partial_hash"):
+        old_val = old_h.get(field, "")
+        new_val = new_h.get(field, "")
+        # Only compare if at least one side has a non-empty value
+        if old_val or new_val:
+            if old_val != new_val:
+                return True
+    return False
+
 def flag_alerts(diff: Snapshot) -> list[dict]:
     """Scan a diff for keyword matches and return structured alert list."""
     alerts: list[dict] = []
@@ -64,6 +117,15 @@ def flag_alerts(diff: Snapshot) -> list[dict]:
             if hits:
                 _add(alerts, source, item.get("kind", "alert"), title,
                      url=url, detail=detail, keywords=hits)
+
+    def _add_text(source: str, kind: str, text: str,
+                  url: str = "", detail: str = "") -> None:
+        """Scan a raw scraped text blob (lower-signal) against _matches only."""
+        hits = _matches(text)
+        if hits:
+            truncated = text[:120].rstrip() + ("…" if len(text) > 120 else "")
+            _add(alerts, source, kind, truncated, url=url, detail=detail, keywords=hits)
+
 
     # NIAP PCL (Cisco NDcPP certs)
     for item in diff.get("niap", {}).get("pcl_cisco", {}).get("new", []):
