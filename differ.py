@@ -223,16 +223,16 @@ def flag_alerts(diff: Snapshot) -> list[dict[str, Any]]:
                   url=item.get("href") or "https://www.nsa.gov/resources/everyone/csfc/approved-products-list/",
                   detail="New item on CSfC Approved Products List")
 
-    # CSfC Capability Package header changes
-    for cp_name, change in diff.get("csfc", {}).get("capability_packages", {}).items():
+    # CSfC Component Selections -- hash change means the PDF content changed
+    for sel_name, change in diff.get("csfc", {}).get("component_selections", {}).items():
         if change.get("changed"):
-            old_lm = change.get("old_last_modified", "") or change.get("old_partial_hash", "")
-            new_lm = change.get("new_last_modified", "") or change.get("new_partial_hash", "")
-            date_detail = f"{old_lm[:16]} → {new_lm[:16]}" if old_lm and new_lm else "Content changed"
-            _add("CSfC CP", "updated",
-                 cp_name,
-                 url=change.get("url") or "https://www.nsa.gov/resources/everyone/csfc/capability-packages/",
-                 detail=f"Capability Package revised · {date_detail}")
+            _add(
+                "CSfC Component Selections",
+                "updated",
+                sel_name,
+                url=config.CSFC_COMPONENTS_LIST_URL,
+                detail="Selections document content changed",
+            )
 
     # CC Crypto Catalog page changes (scraped text — use _add_text for narrower matching)
     for page_key, page_diff in diff.get("cc_crypto", {}).get("pages", {}).items():
@@ -446,6 +446,33 @@ def _diff_doc_headers(old_docs: dict, new_docs: dict) -> dict:
     return result
 
 
+def _diff_selection_hashes(old_sels: dict, new_sels: dict) -> dict:
+    """Diff two {name: {url, hash, fetch_error}} dicts by SHA-256 hash.
+    Only flags a change when both old and new have a valid hash and they differ.
+    Skips entries where either side had a fetch error to avoid false positives
+    from transient network failures.
+    """
+    result = {}
+    for name in set(old_sels) | set(new_sels):
+        old_s = old_sels.get(name, {})
+        new_s = new_sels.get(name, {})
+        if old_s.get("fetch_error") or new_s.get("fetch_error"):
+            log.warning(
+                "[CSfC Selections] Skipping diff for %s due to fetch error: old=%r new=%r",
+                name, old_s.get("fetch_error", ""), new_s.get("fetch_error", ""),
+            )
+            continue
+        old_hash = old_s.get("hash", "")
+        new_hash = new_s.get("hash", "")
+        if old_hash and new_hash and old_hash != new_hash:
+            result[name] = {
+                "changed": True,
+                "old_hash": old_hash,
+                "new_hash": new_hash,
+            }
+    return result
+
+
 # -- Generic page text diff helper ---------------------------------------------
 def _diff_pages(old_pages: dict, new_pages: dict) -> dict:
     """Diff two {page_key: [items]} dicts by text prefix."""
@@ -584,7 +611,7 @@ def merge_weekly_diffs(diffs: list[Snapshot]) -> Snapshot:
                        "cctls": {"added":[], "removed":[], "status_changes":[]}}),
         ("cc_portal", {"news": {"added":[]}, "pps": {"added":[]}, "products": {"added":[]}}),
         ("cctl_labs", {}),
-        ("csfc",      {"feeds": {}, "pages": {}, "capability_packages": {}}),
+        ("csfc",      {"feeds": {}, "pages": {}, "component_selections": {}}),
         ("cc_crypto", {"pages": {}, "doc_headers": {}}),
         ("nist",      {"pages": {}, "doc_headers": {}, "feeds": {}}),
         ("alerts",    []),
@@ -640,8 +667,8 @@ def merge_weekly_diffs(diffs: list[Snapshot]) -> Snapshot:
                     weekly["csfc"]["pages"][page_key] = {"added": []}
                 weekly["csfc"]["pages"][page_key]["added"] = merge_lists(
                     weekly["csfc"]["pages"][page_key]["added"], page_diff["added"])
-        for cp_name, cp_data in d.get("csfc", {}).get("capability_packages", {}).items():
-            weekly["csfc"]["capability_packages"][cp_name] = cp_data
+        for cp_name, cp_data in d.get("csfc", {}).get("component_selections", {}).items():
+            weekly["csfc"]["component_selections"][sel_name] = sel_data
 
         # CC Crypto
         for page_key, page_diff in d.get("cc_crypto", {}).get("pages", {}).items():
@@ -673,24 +700,23 @@ def merge_weekly_diffs(diffs: list[Snapshot]) -> Snapshot:
 def diff_csfc(old_csfc: Snapshot, new_csfc: Snapshot) -> Snapshot:
     """Diff two CSfC snapshots."""
     pages = _diff_pages(old_csfc.get("pages", {}), new_csfc.get("pages", {}))
-    cap_packages = _diff_doc_headers(
-        old_csfc.get("capability_package_headers", {}),
-        new_csfc.get("capability_package_headers", {}),
+    component_selections = _diff_selection_hashes(
+        old_csfc.get("component_selection_hashes", {}),
+        new_csfc.get("component_selection_hashes", {}),
     )
     feeds = _diff_feeds(
         old_csfc.get("feeds", {}),
         new_csfc.get("feeds", {}),
         categorize=True,
     )
-
-    page_changes  = sum(len(v.get("added", [])) for v in pages.values())
-    cp_changes    = len(cap_packages)
-    feed_new      = sum(len(v) for v in feeds.values())
+    page_changes = sum(len(v.get("added", [])) for v in pages.values())
+    sel_changes = len(component_selections)
+    feed_new = sum(len(v) for v in feeds.values())
     log.info(
-        "[CSfC Diff] page-items-added:%d CP-changes:%d feed-new:%d",
-        page_changes, cp_changes, feed_new,
+        "[CSfC Diff] page-items-added:%d selection-changes:%d feed-new:%d",
+        page_changes, sel_changes, feed_new,
     )
-    return {"pages": pages, "capability_packages": cap_packages, "feeds": feeds}
+    return {"pages": pages, "component_selections": component_selections, "feeds": feeds}
 
 
 # -- CC Crypto Catalog diff ----------------------------------------------------
