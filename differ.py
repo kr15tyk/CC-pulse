@@ -667,7 +667,8 @@ def merge_weekly_diffs(diffs: list[Snapshot]) -> Snapshot:
                     weekly["csfc"]["pages"][page_key] = {"added": []}
                 weekly["csfc"]["pages"][page_key]["added"] = merge_lists(
                     weekly["csfc"]["pages"][page_key]["added"], page_diff["added"])
-        for cp_name, cp_data in d.get("csfc", {}).get("component_selections", {}).items():
+        # CSfC component selections -- keep latest hash for each doc
+        for sel_name, sel_data in d.get("csfc", {}).get("component_selections", {}).items():
             weekly["csfc"]["component_selections"][sel_name] = sel_data
 
         # CC Crypto
