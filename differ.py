@@ -1,229 +1,4 @@
-"""
-differ.py -- Compares two snapshots and returns a structured diff.
-
-Features:
-  - Schema version compatibility check
-  - Keyword-alert scanning (WATCH_KEYWORDS from config)
-  - partial_hash field comparison for PDF polling fallback (fix #10)
-  - Improved weekly alert deduplication (source+title key, not timestamp) (fix #11)
-  - categorize_news() applied to CSfC/CC Crypto/NIST feed items (fix #12)
-  - Type hints throughout
-  - Two-tier keyword scanning: structured fields vs scraped page blobs (fix #17)
-  - cisco_ndcpp celebration only fires for status_sort == "Certified" products (fix #22)
-  """
-
-from __future__ import annotations
-import logging
-from typing import Any
-
-import config
-
-log = logging.getLogger(__name__)
-
-# Type aliases
-Snapshot = dict[str, Any]
-Records  = list[dict[str, Any]]
-
-
-# -- Schema compatibility -------------------------------------------------------
-class SchemaVersionError(RuntimeError):
-    pass
-
-def check_schema_compat(old: Snapshot, new: Snapshot) -> None:
-    """Warn (don't crash) if schema versions differ."""
-    old_v = old.get("schema_version", 1)
-    new_v = new.get("schema_version", 1)
-    if old_v != new_v:
-        log.warning(
-            "Schema version mismatch: old=%s new=%s -- diff may be inaccurate.",
-            old_v, new_v,
-        )
-
-
-# -- Helpers -------------------------------------------------------------------
-def _ids(records: Records, key: str) -> set[str]:
-    return {str(r[key]) for r in records if key in r}
-
-def byid(records: Records, key: str) -> dict[str, Any]:
-    return {str(r[key]): r for r in records if key in r}
-
-def categorize_news(title: str) -> str:
-    """Map a news/feed item title to a category using NEWS_CATEGORY_KEYWORDS.
-    Applied to NIAP news, CSfC feeds, CC Crypto feeds, and NIST feeds.
-    """
-    t = title.lower()
-    for cat, keywords in config.NEWS_CATEGORY_KEYWORDS.items():
-        if cat == "NEWS":
-            continue
-        if any(kw in t for kw in keywords):
-            return cat
-    return "NEWS"
-
-def is_cisco_ndcpp(product: dict[str, Any]) -> bool:
-    vendor = (product.get("vendor_id_name") or "").lower()
-    if not any(kw in vendor for kw in config.CISCO_VENDOR_KEYWORDS):
-        return False
-    pps = product.get("protection_profiles", [])
-    return any(
-        any(kw in pp.get("pp_short_name", "") for kw in config.NDCPP_PP_KEYWORDS)
-        for pp in pps
-    )
-
-def _headers_changed(old_h: dict, new_h: dict) -> bool:
-    """Return True if any change-detection field differs between two header dicts.
-
-    Checks in order of reliability:
-      1. ETag -- most authoritative when present
-      2. Last-Modified -- widely supported
-      3. Content-Length -- rough version signal (can change without content change)
-      4. partial_hash -- MD5 of first 2 KB; populated only when 1-3 are all absent
-    """
-    for field in ("etag", "last_modified", "content_length", "partial_hash"):
-        old_val = old_h.get(field, "")
-        new_val = new_h.get(field, "")
-        # Only compare if at least one side has a non-empty value
-        if old_val or new_val:
-            if old_val != new_val:
-                return True
-    return False
-
-
-# -- Keyword alert scanner -----------------------------------------------------
-def scan_watch_keywords(text: str, *, structured: bool = True) -> list[str]:
-    """Return any WATCH_KEYWORDS found (case-insensitive) in text.
-
-    Args:
-        text: The string to scan.
-        structured: If True (default), scan against the full WATCH_KEYWORDS list.
-            This is used for structured fields (PP names, TD titles, RSS titles,
-            product names) where a match is highly reliable.
-            If False, scan against only the BODY_WATCH_KEYWORDS subset defined in
-            config, which is intentionally narrower to avoid alert fatigue from
-            raw page-scrape blobs.
-    """
-    tl = text.lower()
-    kw_list = config.WATCH_KEYWORDS if structured else config.BODY_WATCH_KEYWORDS
-    return [kw for kw in kw_list if kw.lower() in tl]
-
-def flag_alerts(diff: Snapshot) -> list[dict[str, Any]]:
-    """Walk a computed diff and return a list of high-priority alert objects.
-    Each alert: {source, kind, title, url, detail, matched_keywords}.
-
-    Two-tier scanning (fix #17):
-    - _add()      scans *structured* fields (API titles, identifiers, PP names,
-                  RSS feed titles).  Uses the full WATCH_KEYWORDS list.
-    - _add_text() scans raw *page-scrape blobs* (NSA/NIST page text, CC portal
-                  paragraphs).  Uses the narrower BODY_WATCH_KEYWORDS list to
-                  avoid alert fatigue from noisy scraped content.
-    """
-    alerts: list[dict[str, Any]] = []
-
-    def _add(source: str, kind: str, title: str,
-              url: str = "", detail: str = "") -> None:
-        """Scan a structured field (high-signal) against full WATCH_KEYWORDS.
-
-        Args:
-            source:  Human-readable source label (e.g. "NIAP PP", "NIST Doc").
-            kind:    Change type (e.g. "new", "sunset", "updated", "new_cert").
-            title:   The item title or identifier to scan and display.
-            url:     Direct link to the source item (included in notifications).
-            detail:  Short human-readable summary of what changed (e.g.
-                     "Sunset changed to 2026-09-30", "Header updated").
-        """
-        hits = scan_watch_keywords(title, structured=True)
-        if hits:
-            alerts.append({
-                "source":           source,
-                "kind":             kind,
-                "title":            title,
-                "url":              url,
-                "detail":           detail,
-                "matched_keywords": hits,
-            })
-
-    def _add_text(source: str, kind: str, text: str,
-                  url: str = "", detail: str = "") -> None:
-        """Scan a raw scraped text blob (lower-signal) against BODY_WATCH_KEYWORDS only."""
-        hits = scan_watch_keywords(text, structured=False)
-        if hits:
-            truncated = text[:120].rstrip() + ("…" if len(text) > 120 else "")
-            alerts.append({
-                "source":           source,
-                "kind":             kind,
-                "title":            truncated,
-                "url":              url,
-                "detail":           detail,
-                "matched_keywords": hits,
-            })
-
-    # NIAP PPs
-    for p in diff.get("niap", {}).get("pps", {}).get("added", []):
-        pp_url = f"https://www.niap-ccevs.org/Profile/PP.cfm?id={p.get('pp_id', '')}"
-        _add("NIAP PP", "new",
-             p.get("pp_short_name", "") + " " + p.get("pp_name", ""),
-             url=pp_url,
-             detail=f"New Protection Profile · Tech type: {p.get('tech_type', 'N/A')}")
-    for p in diff.get("niap", {}).get("pps", {}).get("sunset_changes", []):
-        pp_url = f"https://www.niap-ccevs.org/Profile/PP.cfm?id={p.get('pp_id', '')}"
-        _add("NIAP PP", "sunset",
-             p.get("pp_short_name", ""),
-             url=pp_url,
-             detail=f"Sunset date: {p.get('old_sunset') or '—'} → {p.get('new_sunset') or '—'}")
-
-    # NIAP TDs
-    for t in diff.get("niap", {}).get("tds", {}).get("added", []):
-        _add("NIAP TD", "new",
-             t.get("identifier", "") + " — " + t.get("title", ""),
-             url="https://www.niap-ccevs.org/",
-             detail=f"New Technical Decision · Published: {(t.get('publication_date') or '')[:10] or 'N/A'}")
-
-    # NIAP In-Evaluation (newly entered evaluation)
-    for p in diff.get("niap", {}).get("in_evaluation", {}).get("added", []):
-        _add("NIAP In-Eval", "new_evaluation",
-             (p.get("vendor_id_name") or "") + " — " + (p.get("product_name") or ""),
-             url="https://www.niap-ccevs.org/product/index.cfm",
-             detail=f"Entered evaluation · Lab: {p.get('assigned_lab_name') or 'N/A'}")
-
-    # NIAP PCL -- All certified products
-    for p in diff.get("niap", {}).get("pcl_all", {}).get("added", []):
-        pcl_url = f"https://www.niap-ccevs.org/product/index.cfm?pid={p.get('product_id', '')}"
-        pps_str = ", ".join(pp.get("pp_short_name","") for pp in p.get("protection_profiles", [])[:3]) or "N/A"
-        _add("NIAP PCL", "new_cert",
-             (p.get("vendor_id_name") or "") + " — " + (p.get("product_name") or ""),
-             url=pcl_url,
-             detail=f"Newly certified · PPs: {pps_str} · Date: {(p.get('certification_date') or '')[:10] or 'N/A'}")
-
-    # NIAP News
-    for item in diff.get("niap", {}).get("news", {}).get("added", []):
-        _add("NIAP News", item.get("_category", "NEWS"),
-             item.get("title", ""),
-             url=item.get("link") or item.get("url") or "https://www.niap-ccevs.org/",
-             detail=f"Category: {item.get('_category','NEWS')} · Date: {(item.get('date') or item.get('posted') or '')[:10] or 'N/A'}")
-
-    # CCTL Labs
-    for lab, items in diff.get("cctl_labs", {}).items():
-        for item in items:
-            _add(f"Lab: {lab}", "post",
-                 item.get("title", ""),
-                 url=item.get("link") or "",
-                 detail=f"New post from {lab}")
-
-    # CSfC feeds
-    for feed_name, items in diff.get("csfc", {}).get("feeds", {}).items():
-        for item in items:
-            _add(f"CSfC Feed: {feed_name}", "advisory",
-                 item.get("title", ""),
-                 url=item.get("link") or "",
-                 detail=f"Feed: {feed_name} · Published: {(item.get('published') or '')[:16] or 'N/A'}")
-
-    # CSfC APL page changes (scraped text — use _add_text for narrower matching)
-    for item in diff.get("csfc", {}).get("pages", {}).get("apl", {}).get("added", []):
-        _add_text("CSfC APL", "new",
-                  item.get("text", ""),
-                  url=item.get("href") or "https://www.nsa.gov/resources/everyone/csfc/approved-products-list/",
-                  detail="New item on CSfC Approved Products List")
-
-    # CSfC Component Selections -- hash change means the PDF content changed
+# CSfC Component Selections -- hash change means the PDF content changed
     for sel_name, change in diff.get("csfc", {}).get("component_selections", {}).items():
         if change.get("changed"):
             _add(
@@ -442,6 +217,33 @@ def _diff_doc_headers(old_docs: dict, new_docs: dict) -> dict:
                 "old_partial_hash":  old_h.get("partial_hash", ""),
                 "new_partial_hash":  new_h.get("partial_hash", ""),
                 "url":               new_h.get("url", old_h.get("url", "")),
+            }
+    return result
+
+
+def _diff_selection_hashes(old_sels: dict, new_sels: dict) -> dict:
+    """Diff two {name: {url, hash, fetch_error}} dicts by SHA-256 hash.
+    Only flags a change when both old and new have a valid hash and they differ.
+    Skips entries where either side had a fetch error to avoid false positives
+    from transient network failures.
+    """
+    result = {}
+    for name in set(old_sels) | set(new_sels):
+        old_s = old_sels.get(name, {})
+        new_s = new_sels.get(name, {})
+        if old_s.get("fetch_error") or new_s.get("fetch_error"):
+            log.warning(
+                "[CSfC Selections] Skipping diff for %s due to fetch error: old=%r new=%r",
+                name, old_s.get("fetch_error", ""), new_s.get("fetch_error", ""),
+            )
+            continue
+        old_hash = old_s.get("hash", "")
+        new_hash = new_s.get("hash", "")
+        if old_hash and new_hash and old_hash != new_hash:
+            result[name] = {
+                "changed": True,
+                "old_hash": old_hash,
+                "new_hash": new_hash,
             }
     return result
 
