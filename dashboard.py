@@ -258,7 +258,7 @@ DASHBOARD_TEMPLATE = """
 <!-- Regional tab navigation -->
       <div class="tab-nav" id="region-tabs">
         <button class="tab-btn active" data-tab="us" onclick="switchTab(this)">&#127482;&#127480; US (NIAP / CSfC / NIST)</button>
-        <button class="tab-btn" data-tab="nato" onclick="switchTab(this)">&#127758; NATO</button>
+        <button class="tab-btn" data-tab="intl" onclick="switchTab(this)">&#127760; International</button>
         <button class="tab-btn" data-tab="eu" onclick="switchTab(this)">&#127466;&#127482; EU (EUCC / ENISA)</button>
       </div>
       
@@ -782,11 +782,8 @@ DASHBOARD_TEMPLATE = """
   </div>
 </div>
 </div>
-
-
-
-      <div class="section-group" id="tab-pane-nato" data-tab="nato">
-        <div class="section-label">NATO</div>
+<div class="section-group" id="tab-pane-intl" data-tab="intl">
+        <div class="section-label">International</div>
         <!-- NATO NIAPCL -->
         <div class="card {% if nato_total > 0 %}card-new{% endif %}" id="sec-nato" data-has-changes="{{ nato_total }}">
           <div class="card-hdr" onclick="toggleCard(this)">
@@ -820,7 +817,54 @@ DASHBOARD_TEMPLATE = """
             {% if nato_total == 0 %}<p class="no-change">No NATO NIAPCL changes detected.</p>{% endif %}
           </div>
         </div>
-      </div>
+      
+<div class="section-group">
+  <div class="section-label">CC Portal</div>
+  <!-- CC Portal (international) -->
+<div class="card {% if cc_portal_total > 0 %}card-new{% endif %}" id="sec-cc-portal" data-has-changes="{{ cc_portal_total }}">
+  <div class="card-hdr" onclick="toggleCard(this)">
+    <span>CC Portal (International)</span>
+    <span class="card-count">{{ cc_portal_total }} new item{% if cc_portal_total != 1 %}s{% endif %}</span>
+    <span class="sparkline">
+      {% for v in sparklines.cc_portal %}
+      <span class="sp-bar" style="height:{{ v }}%" title="{{ sp_counts.cc_portal[loop.index0] }} change{% if sp_counts.cc_portal[loop.index0] != 1 %}s{% endif %}"></span>
+      {% endfor %}
+    </span>
+    <span class="toggle-icon">{% if cc_portal_total == 0 %}&#9658;{% else %}&#9660;{% endif %}</span>
+  </div>
+  <div class="card-body {% if cc_portal_total == 0 %}collapsed{% endif %}">
+    {% if diff.cc_portal.news.added %}
+    <div class="sub-hdr sub-new">News ({{ diff.cc_portal.news.added | length }})</div>
+    {% for item in diff.cc_portal.news.added %}
+    <div class="item-row" data-source="cc-portal" data-kind="new">
+      <a class="item-link" href="{{ item.link or item.url or 'https://www.commoncriteriaportal.org/' }}" target="_blank">{{ item.title or item.text or item }}</a>
+      <span class="item-meta">{{ item.date or '' }}</span>
+    </div>
+    {% endfor %}
+    {% endif %}
+    {% if diff.cc_portal.pps.added %}
+    <div class="sub-hdr sub-new">New International PPs ({{ diff.cc_portal.pps.added | length }})</div>
+    {% for pp in diff.cc_portal.pps.added %}
+    <div class="item-row" data-source="cc-portal" data-kind="new">
+      <a class="item-link" href="{{ pp.link or 'https://www.commoncriteriaportal.org/pps/' }}" target="_blank">{{ pp.title or pp.text or pp }}</a>
+      <span class="item-meta"></span>
+    </div>
+    {% endfor %}
+    {% endif %}
+    {% if diff.cc_portal.products.added %}
+    <div class="sub-hdr sub-new">New Certified Products ({{ diff.cc_portal.products.added | length }})</div>
+    {% for prod in diff.cc_portal.products.added %}
+    <div class="item-row" data-source="cc-portal" data-kind="new">
+      <span class="item-link">{{ prod }}</span>
+      <span class="item-meta"></span>
+    </div>
+    {% endfor %}
+    {% endif %}
+    {% if cc_portal_total == 0 %}<p class="no-change">No new international items.{% if last_active.cc_portal %} <span class="last-active">(last: {{ last_active.cc_portal }})</span>{% endif %}</p>{% endif %}
+  </div>
+</div>
+</div>
+</div>   </div>
 
       <div class="section-group" id="tab-pane-eu" data-tab="eu">
         <div class="section-label">EU (EUCC / ENISA)</div>
@@ -891,7 +935,7 @@ function _highlight(el,term){const w=document.createTreeWalker(el,NodeFilter.SHO
 function setKindFilter(btn){document.querySelectorAll('.chip').forEach(c=>c.classList.remove('active'));btn.classList.add('active');_activeKind=btn.dataset.kind;liveSearch()}
 function clearSearch(){const inp=document.getElementById('search-input');if(inp)inp.value='';document.querySelectorAll('.chip').forEach(c=>c.classList.remove('active'));const ac=document.querySelector('.chip[data-kind="all"]');if(ac)ac.classList.add('active');_activeKind='all';liveSearch()}
 function _reconcileGroupVisibility(){document.querySelectorAll('.section-group').forEach(g=>{const hv=[...g.querySelectorAll('.card')].some(c=>!c.classList.contains('zero-hidden')&&getComputedStyle(c).display!=='none');if(g.dataset.tab)return;const hv2=[...g.querySelectorAll('.card')].some(c=>!c.classList.contains('zero-hidden')&&getComputedStyle(c).display!=='none');g.style.display=hv2?'':'none'})}
-document.addEventListener('keydown',e=>{const t=document.activeElement.tagName;if(t==='INPUT'||t==='TEXTAREA'){if(e.key==='Escape'){clearSearch();document.activeElement.blur()}return}if(e.key==='e'||e.key==='E')expandAll();if(e.key==='c'||e.key==='C')collapseAll();if(e.key==='f'||e.key==='F')toggleZeroFilter();if(e.key==='1'){const b=document.querySelector('.tab-btn[data-tab="us"]');if(b)switchTab(b)}if(e.key==='2'){const b=document.querySelector('.tab-btn[data-tab="nato"]');if(b)switchTab(b)}if(e.key==='3'){const b=document.querySelector('.tab-btn[data-tab="eu"]');if(b)switchTab(b)}if(e.key==='/'){e.preventDefault();const inp=document.getElementById('search-input');if(inp)inp.focus()}});
+document.addEventListener('keydown',e=>{const t=document.activeElement.tagName;if(t==='INPUT'||t==='TEXTAREA'){if(e.key==='Escape'){clearSearch();document.activeElement.blur()}return}if(e.key==='e'||e.key==='E')expandAll();if(e.key==='c'||e.key==='C')collapseAll();if(e.key==='f'||e.key==='F')toggleZeroFilter();if(e.key==='1'){const b=document.querySelector('.tab-btn[data-tab="us"]');if(b)switchTab(b)}if(e.key==='2'){const b=document.querySelector('.tab-btn[data-tab="intl"]');if(b)switchTab(b)}if(e.key==='3'){const b=document.querySelector('.tab-btn[data-tab="eu"]');if(b)switchTab(b)}if(e.key==='/'){e.preventDefault();const inp=document.getElementById('search-input');if(inp)inp.focus()}});
 document.addEventListener('DOMContentLoaded',initAlertDismiss);
 function switchTab(btn) {
             document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
