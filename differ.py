@@ -41,6 +41,43 @@
                  url=item.get("link") or "https://csrc.nist.gov/",
                  detail=f"Feed: {feed_name} · Published: {(item.get('published') or '')[:16] or 'N/A'}")
 
+
+    # NATO NIAPCL page changes
+    for page_key, page_diff in diff.get("nato", {}).get("pages", {}).items():
+        for item in page_diff.get("added", []):
+            _add_text(f"NATO NIAPCL: {page_key}", "new",
+                      item.get("text", "") or item.get("raw_text", ""),
+                      url=item.get("link") or config.NATO_NIAPCL_URL,
+                      detail=f"New item on NATO NIAPCL {page_key} page")
+
+    # NATO NIAPCL Cisco-specific additions (Tier 1 EU/NATO)
+    for item in diff.get("nato", {}).get("cisco_added", []):
+        _add("NATO NIAPCL", "new_cert",
+             item.get("name", "") or item.get("raw_text", "")[:80],
+             url=item.get("link") or config.NATO_NIAPCL_URL,
+             detail=f"New Cisco product on NATO NIAPCL · {item.get('manufacturer', '')}")
+
+    # EUCC requirements page changes
+    for item in diff.get("eucc", {}).get("pages", {}).get("requirements", {}).get("added", []):
+        _add_text("EUCC Requirements", "updated",
+                  item.get("text", ""),
+                  url=item.get("href") or config.EUCC_REQUIREMENTS_URL,
+                  detail="New item on EUCC requirements / scheme page")
+
+    # EUCC certificate additions (general)
+    for item in diff.get("eucc", {}).get("pages", {}).get("certificates", {}).get("added", []):
+        _add_text("EUCC Certificates", "new_cert",
+                  item.get("text", "") or item.get("name", ""),
+                  url=item.get("href") or config.EUCC_CERTIFICATES_URL,
+                  detail="New EUCC certified product")
+
+    # EUCC Cisco-specific certificates (Tier 1 EU)
+    for item in diff.get("eucc", {}).get("cisco_added", []):
+        _add("EUCC Certificates", "new_cert",
+             item.get("name", "") or item.get("text", "")[:80],
+             url=item.get("href") or config.EUCC_CERTIFICATES_URL,
+             detail="New Cisco EUCC certified product")
+
     if alerts:
         log.warning("[Alerts] %d keyword match(es) found!", len(alerts))
     return alerts
@@ -318,6 +355,60 @@ def _diff_feeds(old_feeds: dict, new_feeds: dict, categorize: bool = False) -> d
     return result
 
 
+
+# -- NATO NIAPCL diff ---------------------------------------------------------
+def diff_nato(old_nato: Snapshot, new_nato: Snapshot) -> Snapshot:
+    """Diff two NATO NIAPCL snapshots."""
+    old_pages = old_nato.get("pages", {})
+    new_pages = new_nato.get("pages", {})
+
+    pages = _diff_pages(old_pages, new_pages)
+
+    # Diff Cisco products specifically
+    old_cisco = {p.get("raw_text", "")[:80]: p for p in old_nato.get("cisco_products", [])}
+    new_cisco = {p.get("raw_text", "")[:80]: p for p in new_nato.get("cisco_products", [])}
+    cisco_added   = [new_cisco[k] for k in set(new_cisco) - set(old_cisco)]
+    cisco_removed = [old_cisco[k] for k in set(old_cisco) - set(new_cisco)]
+
+    page_changes = sum(len(v.get("added", [])) for v in pages.values())
+    log.info("[NATO Diff] page-items-added:%d cisco-added:%d cisco-removed:%d",
+             page_changes, len(cisco_added), len(cisco_removed))
+    return {
+        "pages": pages,
+        "cisco_added":   cisco_added,
+        "cisco_removed": cisco_removed,
+    }
+
+
+# -- EUCC / ENISA diff --------------------------------------------------------
+def diff_eucc(old_eucc: Snapshot, new_eucc: Snapshot) -> Snapshot:
+    """Diff two EUCC / ENISA snapshots.
+    Handles two sub-sources:
+    - requirements page (scheme policy / requirement changes)
+    - certificates page (new certified products, including Cisco)
+    """
+    old_pages = old_eucc.get("pages", {})
+    new_pages = new_eucc.get("pages", {})
+
+    pages = _diff_pages(old_pages, new_pages)
+
+    # Diff Cisco-specific certificates
+    old_cisco = {c.get("text", "")[:80]: c for c in old_eucc.get("cisco_certs", [])}
+    new_cisco = {c.get("text", "")[:80]: c for c in new_eucc.get("cisco_certs", [])}
+    cisco_added   = [new_cisco[k] for k in set(new_cisco) - set(old_cisco)]
+    cisco_removed = [old_cisco[k] for k in set(old_cisco) - set(new_cisco)]
+
+    req_changes  = len(pages.get("requirements", {}).get("added", []))
+    cert_changes = len(pages.get("certificates", {}).get("added", []))
+    log.info("[EUCC Diff] req-changes:%d cert-additions:%d cisco-added:%d",
+             req_changes, cert_changes, len(cisco_added))
+    return {
+        "pages": pages,
+        "cisco_added":   cisco_added,
+        "cisco_removed": cisco_removed,
+    }
+
+
 # -- Master diff ---------------------------------------------------------------
 def compute_diff(old_snapshot: Snapshot, new_snapshot: Snapshot) -> Snapshot:
     """Compare two full snapshots, scan for keyword alerts, return diff."""
@@ -335,6 +426,10 @@ def compute_diff(old_snapshot: Snapshot, new_snapshot: Snapshot) -> Snapshot:
     new_cc = new_snapshot.get("cc_crypto", {})
     old_ni = old_snapshot.get("nist",      {})
     new_ni = new_snapshot.get("nist",      {})
+    old_na = old_snapshot.get("nato",      {})
+    new_na = new_snapshot.get("nato",      {})
+    old_eu = old_snapshot.get("eucc",      {})
+    new_eu = new_snapshot.get("eucc",      {})
 
     diff: Snapshot = {
         "period_start": old_snapshot.get("collected_at", ""),
@@ -358,6 +453,8 @@ def compute_diff(old_snapshot: Snapshot, new_snapshot: Snapshot) -> Snapshot:
         "csfc":      diff_csfc(old_cs, new_cs),
         "cc_crypto": diff_cc_crypto(old_cc, new_cc),
         "nist":      diff_nist(old_ni, new_ni),
+        "nato":      diff_nato(old_na, new_na),
+        "eucc":      diff_eucc(old_eu, new_eu),
     }
 
     diff["alerts"] = flag_alerts(diff)
