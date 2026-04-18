@@ -1,3 +1,111 @@
+"""
+differ.py — Computes diffs between two CC Pulse snapshots.
+
+Compares old and new snapshot dicts, returning a diff dict with
+per-source change lists and keyword alerts.
+"""
+
+from __future__ import annotations
+
+import logging
+import re
+from typing import Any
+
+import config
+
+log = logging.getLogger(__name__)
+
+# -- Types ---------------------------------------------------------------------
+Snapshot = dict[str, Any]
+Records  = list[dict[str, Any]]
+
+# -- Internal helpers ----------------------------------------------------------
+
+def _add(alerts: list, source: str, kind: str, title: str, *,
+         url: str = "", detail: str = "", keywords: list | None = None) -> None:
+    """Append a structured alert entry."""
+    alerts.append({
+        "source":   source,
+        "kind":     kind,
+        "title":    title,
+        "url":      url,
+        "detail":   detail,
+        "keywords": keywords or [],
+    })
+
+
+def check_schema_compat(old: Snapshot, new: Snapshot) -> None:
+    """Warn if snapshot schema versions differ."""
+    ov = old.get("schema_version", 1)
+    nv = new.get("schema_version", 1)
+    if ov != nv:
+        log.warning("Schema version mismatch: old=%s new=%s — diff may be incomplete.", ov, nv)
+
+
+# -- Keyword alert scanner -----------------------------------------------------
+
+def flag_alerts(diff: Snapshot) -> list[dict]:
+    """Scan a diff for keyword matches and return structured alert list."""
+    alerts: list[dict] = []
+    kw_tiers = config.WATCH_KEYWORDS  # {term: tier}
+
+    def _matches(text: str) -> list[str]:
+        if not text:
+            return []
+        text_l = text.lower()
+        return [kw for kw in kw_tiers if kw.lower() in text_l]
+
+    def _scan_items(source: str, items: list[dict], url_key: str = "url") -> None:
+        for item in items:
+            title  = item.get("title", "") or item.get("name", "")
+            detail = item.get("detail", "") or item.get("description", "")
+            url    = item.get(url_key, "") or item.get("url", "")
+            hits   = _matches(title + " " + detail)
+            if hits:
+                _add(alerts, source, item.get("kind", "alert"), title,
+                     url=url, detail=detail, keywords=hits)
+
+    # NIAP PCL (Cisco NDcPP certs)
+    for item in diff.get("niap", {}).get("pcl_cisco", {}).get("new", []):
+        title = item.get("title", item.get("name", ""))
+        hits  = _matches(title)
+        if hits:
+            _add(alerts, "NIAP PCL", "new_cert", title,
+                 url=item.get("url", ""), keywords=hits)
+
+    # NIAP Protection Profiles
+    _scan_items("NIAP PP", diff.get("niap", {}).get("pps", {}).get("new", []))
+    _scan_items("NIAP PP", diff.get("niap", {}).get("pps", {}).get("updated", []))
+    _scan_items("NIAP PP", diff.get("niap", {}).get("pps", {}).get("sunsetted", []))
+
+    # NIAP Technical Decisions
+    _scan_items("NIAP TD", diff.get("niap", {}).get("tds", {}).get("new", []))
+    _scan_items("NIAP TD", diff.get("niap", {}).get("tds", {}).get("updated", []))
+
+    # NIAP News
+    _scan_items("NIAP News", diff.get("niap", {}).get("news", {}).get("new", []))
+
+    # NIST
+    for section_key in ("csrc_news", "fips", "sp", "cmvp", "pqc"):
+        section = diff.get("nist", {}).get(section_key, {})
+        _scan_items("NIST CSRC", section.get("new", []))
+        _scan_items("NIST CSRC", section.get("updated", []))
+
+    # CC Portal
+    _scan_items("CC Portal", diff.get("cc_portal", {}).get("news", {}).get("new", []))
+    _scan_items("CC Portal", diff.get("cc_portal", {}).get("pps", {}).get("new", []))
+
+    # CCTL Labs
+    _scan_items("CCTL Labs", diff.get("cctl", {}).get("new_posts", []))
+
+    # NATO NIAPCL
+    _scan_items("NATO NIAPCL", diff.get("nato", {}).get("new", []))
+    _scan_items("NATO NIAPCL", diff.get("nato", {}).get("updated", []))
+
+    # EUCC / ENISA
+    _scan_items("EUCC", diff.get("eucc", {}).get("new", []))
+    _scan_items("EUCC", diff.get("eucc", {}).get("updated", []))
+
 # CSfC Component Selections -- hash change means the PDF content changed
     for sel_name, change in diff.get("csfc", {}).get("component_selections", {}).items():
         if change.get("changed"):
