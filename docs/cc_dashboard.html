@@ -28,7 +28,8 @@
     .hero-banner{background:var(--gradient-hero);padding:.6rem 2rem;position:relative;overflow:hidden}
   .hero-banner::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 60% 40%,rgba(4,159,217,.12) 0%,transparent 65%),radial-gradient(ellipse at 25% 75%,rgba(94,79,195,.10) 0%,transparent 60%);pointer-events:none}
     .hero-inner{position:relative;z-index:1;width:100%;padding:0 2rem;display:flex;align-items:center;justify-content:center;gap:1rem}
-    .hero-logo{height:130px;width:auto;display:block;margin-bottom:-.18rem}
+    .hero-wordmark{display:block;font-size:3.6rem;font-weight:800;color:#fff;letter-spacing:-.02em;line-height:1;text-align:center;font-family:var(--font)}
+    .hero-wordmark-accent{background:linear-gradient(135deg,#00c6ff,#049fd9);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
     .hero-title{font-size:1.5rem;font-weight:700;color:#fff;letter-spacing:-.01em;margin:0}
   .hero-sub{font-size:1.05rem;color:rgba(255,255,255,.65)}
   .sticky-top{position:sticky;top:0;z-index:100;background:var(--card);border-bottom:2px solid var(--border);padding:.75rem 2rem;box-shadow:var(--shadow-md)}
@@ -92,7 +93,7 @@
   .sparkline span,.sp-bar{display:inline-block;width:4px;background:var(--border);border-radius:2px;min-height:2px}
   .last-active{font-size:.65rem;color:var(--muted);opacity:.6;margin-left:.4rem} .card.zero-hidden{display:none}
   footer,.site-footer{margin-top:3rem;padding:1.5rem 2rem;border-top:1px solid var(--border);font-size:.75rem;color:var(--muted);display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap;background:var(--card)}
-    @media(max-width:768px){.hero-banner{padding:.4rem 1rem}.hero-title{font-size:1.2rem}.hero-logo{height:60px}.main-content{padding:1rem}.sticky-top{padding:.5rem 1rem;top:0}.site-nav{padding:0 1rem}.trend-bar{display:grid;grid-template-columns:1fr 1fr}.stat{min-width:unset}.hero-inner{padding:0 1rem}.hero-date{display:none}}
+    @media(max-width:768px){.hero-banner{padding:.4rem 1rem}.hero-title{font-size:1.2rem}.hero-wordmark{font-size:2.4rem}.main-content{padding:1rem}.sticky-top{padding:.5rem 1rem;top:0}.site-nav{padding:0 1rem}.trend-bar{display:grid;grid-template-columns:1fr 1fr}.stat{min-width:unset}.hero-inner{padding:0 1rem}.hero-date{display:none}}
   /* hero date */
   .hero-logo-wrap{display:flex;flex-direction:column;align-items:center;gap:0}
   .hero-sub-label{display:block;width:100%;text-align:center;font-size:1.15rem;font-weight:800;letter-spacing:.42em;text-transform:uppercase;background:linear-gradient(90deg,#1a55e0,#00d4ff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin:.24rem 0 0 0;line-height:1;padding-left:.42em}
@@ -127,7 +128,7 @@
 <div class="hero-banner">
   <div class="hero-inner">
     <div class="hero-logo-wrap">
-      <img src="cc_pulse_logo.png" alt="CC-Pulse" class="hero-logo">
+      <span class="hero-wordmark">CC<span class="hero-wordmark-accent"> Pulse</span></span>
       <span class="hero-sub-label">Dashboard</span>
     </div>
   </div>
