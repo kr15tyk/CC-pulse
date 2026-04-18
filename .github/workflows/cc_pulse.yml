@@ -19,6 +19,7 @@ on:
           - weekly
           - bootstrap
           - redash
+          - readme
 
 # ── Permissions (minimal — only what is needed) ───────────────────────────────
 permissions:
@@ -82,6 +83,7 @@ jobs:
             weekly)    python main.py --weekly ;;
             bootstrap) python main.py --bootstrap ;;
             redash)    python main.py --redash ;;
+            readme)    python main.py --readme ;;
             *)         python main.py ;;
           esac
 
