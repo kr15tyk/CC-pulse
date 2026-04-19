@@ -253,9 +253,12 @@ DASHBOARD_TEMPLATE = """
   *{box-sizing:border-box;margin:0;padding:0}
   body{background:var(--bg);color:var(--text);font-family:var(--font);font-size:14px;line-height:1.6}
   a{color:var(--primary);text-decoration:none} a:hover{color:var(--primary-dark);text-decoration:underline}
-  .site-nav{background:var(--nav-bg);padding:0 1.5rem;display:flex;align-items:center;gap:1rem;height:32px;position:sticky;top:0;z-index:200;box-shadow:0 1px 4px rgba(0,0,0,0.2)}
-  .nav-logo{display:flex;align-items:center;gap:.75rem;text-decoration:none}
-  .nav-logo img{height:32px;width:auto}
+  .site-nav{background:var(--nav-bg);padding:0 1.5rem;display:flex;align-items:center;gap:1rem;height:44px;position:sticky;top:0;z-index:200;box-shadow:0 1px 4px rgba(0,0,0,0.2)}
+  .nav-title{font-size:1.25rem;font-weight:700;letter-spacing:.04em;
+    background:linear-gradient(90deg,#7dd3fc 0%,#38bdf8 30%,#0ea5e9 60%,#2563eb 100%);
+    -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+    background-clip:text;text-fill-color:transparent;
+    font-family:inherit;white-space:nowrap;line-height:1}
   .nav-spacer{flex:1} .nav-meta{font-size:.75rem;color:rgba(255,255,255,0.55)}
   .sticky-top{position:sticky;top:32px;z-index:100;background:var(--card);border-bottom:1px solid var(--border);padding:.75rem 2rem;box-shadow:var(--shadow-sm)}
   .trend-bar{display:flex;flex-wrap:wrap;gap:.75rem}
@@ -353,9 +356,7 @@ DASHBOARD_TEMPLATE = """
 <body>
 
 <nav class="site-nav">
-  <a href="#" class="nav-logo">
-    <img src="cc_pulse_logo.png" alt="CC-Pulse Logo">
-  </a>
+  <span class="nav-title">CC Pulse Dashboard</span>
   <span class="nav-spacer"></span>
   <span class="nav-meta">Generated {{ generated_at }}</span>
 </nav>
