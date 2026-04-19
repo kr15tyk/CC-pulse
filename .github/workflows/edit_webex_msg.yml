@@ -17,16 +17,19 @@ jobs:
           ACTION: ${{ github.event.inputs.action }}
         run: |
           python3 << 'PYEOF'
-          import os, json, urllib.request, urllib.error
+          import os, json, base64, urllib.request, urllib.error
 
           tok = os.environ['BOT_TOKEN']
           room_id = os.environ['ROOM_ID']
           action = os.environ.get('ACTION', 'delete_and_repost')
 
-          # Hydra message ID of the bad celebration post
-          bad_msg_id = 'Y2lzY29zcGFyazovL3VzL01FU1NBR0UvZWVjMDBiMDAtMzNlNC0xMWYxLTkyYWQtZjc5MGUwY2Q1MDdi'
+          # Activity UUID of the bad celebration post (April 18 2026 13:21:17)
+          uuid = '7b17eee0-3b29-11f1-b80f-57f7fe8bd756'
+          hydra = 'ciscospark://us/MESSAGE/' + uuid
+          bad_msg_id = base64.b64encode(hydra.encode()).decode()
+          print('Message ID:', bad_msg_id)
 
-          # Corrected markdown content
+          # Corrected markdown content for the C8000 IOS-XE 17.18 certification
           md = (
               "# \U0001F3C6 Cisco NDcPP PCL \u2014 1 New Certification!\n\n"
               "\U0001F38A \U0001F38A \U0001F38A\n\n"
@@ -60,36 +63,32 @@ jobs:
               except urllib.error.HTTPError as e:
                   return e.code, e.read().decode()[:300]
 
-          if action in ('delete_and_repost', 'delete_only'):
-              # Step 1: Try PUT first (edit in place)
-              status, body = api_call(
+          # Step 1: Try PUT (edit in place)
+          status, body = api_call(
+              'https://webexapis.com/v1/messages/' + bad_msg_id,
+              method='PUT',
+              data=json.dumps({'markdown': md}).encode())
+          print(f'PUT result: {status}')
+          if status == 200:
+              print('SUCCESS: Message edited in place!')
+          else:
+              print(f'PUT failed: {body[:200]}')
+              # Step 2: Delete + repost
+              status2, body2 = api_call(
                   'https://webexapis.com/v1/messages/' + bad_msg_id,
-                  method='PUT',
-                  data=json.dumps({'markdown': md}).encode())
-              print(f'PUT result: {status} {body[:200]}')
-
-              if status == 200:
-                  print('Successfully EDITED the message in place!')
-              else:
-                  print(f'PUT failed ({status}), trying DELETE + POST...')
-                  # Step 2: Delete the bad message
-                  status2, body2 = api_call(
-                      'https://webexapis.com/v1/messages/' + bad_msg_id,
-                      method='DELETE')
-                  print(f'DELETE result: {status2} {body2[:100]}')
-
-                  if status2 == 204:
-                      print('Deleted bad message successfully')
-                      if action == 'delete_and_repost':
-                          # Step 3: Post corrected message
-                          status3, body3 = api_call(
-                              'https://webexapis.com/v1/messages',
-                              method='POST',
-                              data=json.dumps({'roomId': room_id, 'markdown': md}).encode())
-                          print(f'POST result: {status3} {body3[:200]}')
-                          if status3 == 200:
-                              print('Successfully posted corrected message!')
+                  method='DELETE')
+              print(f'DELETE result: {status2} {body2[:100]}')
+              if status2 == 204:
+                  print('Deleted, now posting corrected version...')
+                  status3, body3 = api_call(
+                      'https://webexapis.com/v1/messages',
+                      method='POST',
+                      data=json.dumps({'roomId': room_id, 'markdown': md}).encode())
+                  print(f'POST result: {status3}')
+                  if status3 == 200:
+                      print('SUCCESS: Posted corrected message!')
                   else:
-                      print(f'DELETE also failed: {status2} {body2}')
-
+                      print(f'POST failed: {body3[:200]}')
+              else:
+                  print(f'DELETE also failed - unable to edit message')
           PYEOF
