@@ -159,7 +159,7 @@ def flag_alerts(diff: Snapshot) -> list[dict]:
     _scan_items("CC Portal", diff.get("cc_portal", {}).get("pps", {}).get("new", []), tab="intl")
 
     # CCTL Labs
-    _scan_items("CCTL Labs", diff.get("cctl", {}).get("new_posts", []), tab="us")
+    _scan_items("CCTL Labs", diff.get("cctl", {}).get("new_posts", []), tab="intl")
 
     # NATO NIAPCL
     _scan_items("NATO NIAPCL", diff.get("nato", {}).get("new", []), tab="intl")
