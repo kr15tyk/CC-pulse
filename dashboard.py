@@ -226,6 +226,14 @@ DASHBOARD_TEMPLATE = """
       <div class="stat-num {% if cc_portal_total_stat > 0 %}active-num{% endif %}">{{ cc_portal_total_stat }}</div>
       <div class="stat-lbl">CC Portal</div>
     </a></div>
+    <div class="stat"><a href="#sec-nato">
+      <div class="stat-num {% if nato_total > 0 %}active-num{% endif %}">{{ nato_total }}</div>
+      <div class="stat-lbl">NATO NIAPCL</div>
+    </a></div>
+    <div class="stat"><a href="#sec-eucc-req">
+      <div class="stat-num {% if eucc_total > 0 %}active-num{% endif %}">{{ eucc_total }}</div>
+      <div class="stat-lbl">EUCC Changes</div>
+    </a></div>
     <div class="stat"><a href="#sec-alerts">
       <div class="stat-num {% if alert_total > 0 %}alert-num{% endif %}">{{ alert_total }}</div>
       <div class="stat-lbl">Alerts</div>
