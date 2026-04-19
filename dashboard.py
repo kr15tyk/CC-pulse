@@ -367,10 +367,6 @@ DASHBOARD_TEMPLATE = """
       <div class="stat-num {% if niap_total_stat > 0 %}active-num{% endif %}">{{ niap_total_stat }}</div>
       <div class="stat-lbl">NIAP Changes</div>
     </a></div>
-    <div class="stat"><a href="#sec-cctl" onclick="navigateTo('sec-cctl');return false;">
-      <div class="stat-num {% if cctl_total_stat > 0 %}active-num{% endif %}">{{ cctl_total_stat }}</div>
-      <div class="stat-lbl">CCTL Updates</div>
-    </a></div>
     <div class="stat"><a href="#sec-csfc" onclick="navigateTo('sec-csfc');return false;">
       <div class="stat-num {% if csfc_total_stat > 0 %}active-num{% endif %}">{{ csfc_total_stat }}</div>
       <div class="stat-lbl">CSfC Selection Updates</div>
@@ -386,6 +382,10 @@ DASHBOARD_TEMPLATE = """
     <div class="stat"><a href="#sec-nato" onclick="navigateTo('sec-nato');return false;">
       <div class="stat-num {% if nato_total > 0 %}active-num{% endif %}">{{ nato_total }}</div>
       <div class="stat-lbl">NATO NIAPCL</div>
+    </a></div>
+    <div class="stat"><a href="#sec-cctl" onclick="navigateTo('sec-cctl');return false;">
+      <div class="stat-num {% if cctl_total_stat > 0 %}active-num{% endif %}">{{ cctl_total_stat }}</div>
+      <div class="stat-lbl">CCTL Updates</div>
     </a></div>
     <div class="stat"><a href="#sec-eucc-req" onclick="navigateTo('sec-eucc-req');return false;">
       <div class="stat-num {% if eucc_total > 0 %}active-num{% endif %}">{{ eucc_total }}</div>
