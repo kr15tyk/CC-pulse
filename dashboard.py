@@ -102,18 +102,11 @@ DASHBOARD_TEMPLATE = """
   *{box-sizing:border-box;margin:0;padding:0}
   body{background:var(--bg);color:var(--text);font-family:var(--font);font-size:14px;line-height:1.6}
   a{color:var(--primary);text-decoration:none} a:hover{color:var(--primary-dark);text-decoration:underline}
-  .site-nav{background:var(--nav-bg);padding:0 1.5rem;display:flex;align-items:center;gap:1rem;height:44px;position:sticky;top:0;z-index:200;box-shadow:0 1px 4px rgba(0,0,0,0.2)}
+  .site-nav{background:var(--nav-bg);padding:0 1.5rem;display:flex;align-items:center;gap:1rem;height:32px;position:sticky;top:0;z-index:200;box-shadow:0 1px 4px rgba(0,0,0,0.2)}
   .nav-logo{display:flex;align-items:center;gap:.75rem;text-decoration:none}
   .nav-logo img{height:32px;width:auto}
   .nav-spacer{flex:1} .nav-meta{font-size:.75rem;color:rgba(255,255,255,0.55)}
-  .hero-banner{background:var(--gradient-hero);padding:2rem 2rem 1.5rem;text-align:center;position:relative;overflow:hidden}
-  .hero-banner::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 60% 40%,rgba(4,159,217,.12) 0%,transparent 65%),radial-gradient(ellipse at 25% 75%,rgba(94,79,195,.10) 0%,transparent 60%);pointer-events:none}
-  .hero-inner{position:relative;z-index:1;max-width:900px;margin:0 auto}
-  .hero-wordmark{display:block;font-size:3.6rem;font-weight:800;color:#fff;letter-spacing:-.02em;line-height:1;text-align:center;font-family:var(--font)}
-  .hero-wordmark-accent{background:linear-gradient(135deg,#00c6ff,#049fd9);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-  .hero-sub-label{display:block;width:100%;text-align:center;font-size:1.15rem;font-weight:800;letter-spacing:.42em;text-transform:uppercase;background:linear-gradient(90deg,#1a55e0,#00d4ff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin:.24rem 0 0 0;line-height:1;padding-left:.42em}
-  .hero-sub{font-size:1.05rem;color:rgba(255,255,255,.65)}
-  .sticky-top{position:sticky;top:44px;z-index:100;background:var(--card);border-bottom:1px solid var(--border);padding:.75rem 2rem;box-shadow:var(--shadow-sm)}
+  .sticky-top{position:sticky;top:32px;z-index:100;background:var(--card);border-bottom:1px solid var(--border);padding:.75rem 2rem;box-shadow:var(--shadow-sm)}
   .trend-bar{display:flex;flex-wrap:wrap;gap:.75rem}
   .stat{background:var(--card);border:1px solid var(--card-border);border-radius:8px;padding:.75rem 1.25rem;min-width:80px;flex:1;transition:border-color .2s,box-shadow .2s;box-shadow:var(--shadow-sm)}
   .stat:hover{border-color:var(--primary);box-shadow:0 4px 12px rgba(4,159,217,.12)}
@@ -174,7 +167,7 @@ DASHBOARD_TEMPLATE = """
   .sparkline span,.sp-bar{display:inline-block;width:4px;background:var(--border);border-radius:2px;min-height:2px}
   .last-active{font-size:.65rem;color:var(--muted);opacity:.6;margin-left:.4rem} .card.zero-hidden{display:none}
   footer,.site-footer{margin-top:3rem;padding:1.5rem 2rem;border-top:1px solid var(--border);font-size:.75rem;color:var(--muted);display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap;background:var(--card)}
-  @media(max-width:768px){.hero-banner{padding:2rem 1rem}.hero-title{font-size:1.6rem}.hero-wordmark{font-size:2.4rem}.main-content{padding:1rem}.sticky-top{padding:.5rem 1rem;top:0}.site-nav{padding:0 1rem}.trend-bar{flex-direction:column}.stat{min-width:unset}}
+  @media(max-width:768px){.main-content{padding:1rem}.sticky-top{padding:.5rem 1rem;top:0}.site-nav{padding:0 1rem}.trend-bar{flex-direction:column}.stat{min-width:unset}}
 /* ── Regional tab navigation ── */
         .tab-nav{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:1.5rem;border-bottom:2px solid var(--border);padding-bottom:.5rem}
         .tab-btn{background:none;border:1px solid var(--border);color:var(--text-light);font-family:var(--font);font-size:.8rem;padding:6px 16px;cursor:pointer;border-radius:8px 8px 0 0;transition:all .2s;font-weight:500;margin-bottom:-2px}
@@ -195,14 +188,6 @@ DASHBOARD_TEMPLATE = """
   <span class="nav-spacer"></span>
   <span class="nav-meta">Generated {{ generated_at }}</span>
 </nav>
-
-<div class="hero-banner">
-  <div class="hero-inner">
-    <span class="hero-wordmark">CC<span class="hero-wordmark-accent"> Pulse</span></span>
-    <span class="hero-sub-label">Dashboard</span>
-    
-  </div>
-</div>
 
 <div class="sticky-top">
   <div class="trend-bar">
