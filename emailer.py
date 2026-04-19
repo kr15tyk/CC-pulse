@@ -22,7 +22,8 @@ import urllib.request
 import urllib.error
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
-from datetime import datetime, timezone
+from datetime import datetime, timezone, timedelta
+EST = timezone(timedelta(hours=-5))
 import config
 
 log = logging.getLogger(__name__)
@@ -275,7 +276,7 @@ def _section(title: str, rows: list[str]) -> str:
 # ---------------------------------------------------------------------------
 
 def build_email_html(weekly_diff: dict) -> str:
-    now  = datetime.now(timezone.utc)
+    now  = datetime.now(EST)
     date = now.strftime("%B %d, %Y")
     parts: list[str] = []
 
@@ -431,7 +432,7 @@ def build_email_html(weekly_diff: dict) -> str:
     parts.append(_section("NIST CSRC — Standards, CMVP & PQC", rows))
 
     body      = "".join(parts) or "<p>No changes detected this week.</p>"
-    generated = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
+    generated = datetime.now(EST).strftime("%Y-%m-%d %H:%M EST")
     return (
         '<html><body style="font-family:-apple-system,BlinkMacSystemFont,sans-serif;'
         'max-width:720px;margin:0 auto;color:#E0E7FF">'
@@ -483,7 +484,7 @@ def _send_email(subject: str, html: str) -> None:
 
 def send_weekly_email(weekly_diff: dict) -> None:
     """Build and send the weekly HTML email digest."""
-    date_str = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+    date_str = datetime.now(EST).strftime("%Y-%m-%d")
     subject  = config.EMAIL_SUBJECT.format(date=date_str)
     html     = build_email_html(weekly_diff)
     _send_email(subject, html)
@@ -498,7 +499,7 @@ def send_alert_email(alerts: list[dict]) -> None:
     if not alerts:
         return
 
-    date_str   = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+    date_str   = datetime.now(EST).strftime("%Y-%m-%d")
     tier1_count = sum(1 for a in alerts if _alert_tier(a) == 1)
     subject    = (
         f"CC Pulse ALERT \u2014 {tier1_count} Cisco-relevant + {len(alerts)-tier1_count} other match(es) on {date_str}"
@@ -567,7 +568,7 @@ def send_alert_email(alerts: list[dict]) -> None:
         + dashboard_link
     )
 
-    generated = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
+    generated = datetime.now(EST).strftime("%Y-%m-%d %H:%M EST")
     html = (
         '<html><body style="font-family:-apple-system,BlinkMacSystemFont,sans-serif;'
         'max-width:720px;margin:0 auto;color:#E0E7FF">'
@@ -736,7 +737,7 @@ def send_cisco_cert_email(new_certs: list[dict]) -> None:
     if not new_certs:
         return
 
-    date_str  = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+    date_str  = datetime.now(EST).strftime("%Y-%m-%d")
     count     = len(new_certs)
     cert_word = "Certification" if count == 1 else "Certifications"
     subject   = f"\U0001f3c6 CC Pulse \u2014 {count} New Cisco NDcPP {cert_word} on {date_str}"
@@ -799,7 +800,7 @@ def send_cisco_cert_email(new_certs: list[dict]) -> None:
         '</p>'
     )
 
-    generated = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
+    generated = datetime.now(EST).strftime("%Y-%m-%d %H:%M EST")
     html = (
         '<html><body style="font-family:-apple-system,BlinkMacSystemFont,sans-serif;'
         'max-width:720px;margin:0 auto;color:#E0E7FF">'
@@ -861,7 +862,7 @@ def send_readme_message() -> None:
         "| **CC Portal** | International CC news, Protection Profiles, and certified products |\n"
         "| **CCTL Labs** | New posts from accredited Common Criteria evaluation labs |\n"
         "| **NIST CSRC** | Cryptography news, FIPS publications, CMVP, and post-quantum standards |\n\n"
-        "Runs automatically every day at **06:00 UTC** and posts here only when something relevant is found.\n\n"
+        "Runs automatically every day at **01:00 EST** and posts here only when something relevant is found.\n\n"
         "---\n\n"
         "## Dashboard Navigation\n\n"
         "The dashboard has three tabs:\n\n"
