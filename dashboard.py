@@ -462,10 +462,10 @@ DASHBOARD_TEMPLATE = """
   </div>
 </div>
 
-  <!-- NIAP PCL -- All Certifications -->
+  <!-- NIAP PCL — All Certifications -->
 <div class="card {% if pcl_all_total > 0 %}card-new{% endif %}" id="sec-niap-pcl" data-has-changes="{{ pcl_all_total }}">
   <div class="card-hdr" onclick="toggleCard(this)">
-    <span>NIAP PCL -- All Certifications</span>
+    <span>NIAP PCL — All Certifications</span>
     <span class="card-count">{{ pcl_all_total }} change{% if pcl_all_total != 1 %}s{% endif %}</span>
     <span class="sparkline">
       {% for v in sparklines.pcl_all %}
