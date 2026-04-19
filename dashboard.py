@@ -19,6 +19,7 @@ import json
 import logging
 import os
 from datetime import datetime, timezone, timedelta
+from zoneinfo import ZoneInfo
 from xml.sax.saxutils import escape as xml_escape
 
 from jinja2 import Environment
@@ -358,7 +359,7 @@ DASHBOARD_TEMPLATE = """
 <nav class="site-nav">
   <span class="nav-title">CC Pulse Dashboard</span>
   <span class="nav-spacer"></span>
-  <span class="nav-meta">Generated {{ generated_at }}</span>
+  <span class="nav-meta">Last run: {{ generated_at }}</span>
 </nav>
 
 <div class="sticky-top">
@@ -1231,8 +1232,8 @@ def _build_rss(diff: dict, generated_at: str) -> str:
 def render_dashboard(diff: dict, output_dir: str = "docs") -> None:
     """Render the HTML dashboard and RSS feed from a diff dict."""
     os.makedirs(output_dir, exist_ok=True)
-    EST = timezone(timedelta(hours=-5))
-    generated_at = datetime.now(EST).strftime("%Y-%m-%d %H:%M EST")
+    ET = ZoneInfo("America/New_York")
+    generated_at = datetime.now(ET).strftime("%Y-%m-%d %H:%M ET")
 
     # Compute totals
     niap         = diff.get("niap", {})
