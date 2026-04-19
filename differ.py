@@ -23,7 +23,7 @@ Records  = list[dict[str, Any]]
 # -- Internal helpers ----------------------------------------------------------
 
 def _add(alerts: list, source: str, kind: str, title: str, *,
-         url: str = "", detail: str = "", keywords: list | None = None) -> None:
+         url: str = "", detail: str = "", keywords: list | None = None, tab: str = "us") -> None:
     """Append a structured alert entry."""
     alerts.append({
         "source":   source,
@@ -32,6 +32,7 @@ def _add(alerts: list, source: str, kind: str, title: str, *,
         "url":      url,
         "detail":   detail,
         "keywords": keywords or [],
+        "tab":      tab,
     })
 
 
@@ -108,7 +109,7 @@ def flag_alerts(diff: Snapshot) -> list[dict]:
         text_l = text.lower()
         return [kw for kw in kw_tiers if kw.lower() in text_l]
 
-    def _scan_items(source: str, items: list[dict], url_key: str = "url") -> None:
+    def _scan_items(source: str, items: list[dict], url_key: str = "url", tab: str = "us") -> None:
         for item in items:
             title  = item.get("title", "") or item.get("name", "")
             detail = item.get("detail", "") or item.get("description", "")
@@ -116,15 +117,15 @@ def flag_alerts(diff: Snapshot) -> list[dict]:
             hits   = _matches(title + " " + detail)
             if hits:
                 _add(alerts, source, item.get("kind", "alert"), title,
-                     url=url, detail=detail, keywords=hits)
+                     url=url, detail=detail, keywords=hits, tab=tab)
 
     def _add_text(source: str, kind: str, text: str,
-                  url: str = "", detail: str = "") -> None:
+                  url: str = "", detail: str = "", tab: str = "us") -> None:
         """Scan a raw scraped text blob (lower-signal) against _matches only."""
         hits = _matches(text)
         if hits:
             truncated = text[:120].rstrip() + ("…" if len(text) > 120 else "")
-            _add(alerts, source, kind, truncated, url=url, detail=detail, keywords=hits)
+            _add(alerts, source, kind, truncated, url=url, detail=detail, keywords=hits, tab=tab)
 
 
     # NIAP PCL (Cisco NDcPP certs)
@@ -133,40 +134,40 @@ def flag_alerts(diff: Snapshot) -> list[dict]:
         hits  = _matches(title)
         if hits:
             _add(alerts, "NIAP PCL", "new_cert", title,
-                 url=item.get("url", ""), keywords=hits)
+                 url=item.get("url", ""), keywords=hits, tab="us")
 
     # NIAP Protection Profiles
-    _scan_items("NIAP PP", diff.get("niap", {}).get("pps", {}).get("new", []))
-    _scan_items("NIAP PP", diff.get("niap", {}).get("pps", {}).get("updated", []))
+    _scan_items("NIAP PP", diff.get("niap", {}).get("pps", {}).get("new", []), tab="us")
+    _scan_items("NIAP PP", diff.get("niap", {}).get("pps", {}).get("updated", []), tab="us")
     _scan_items("NIAP PP", diff.get("niap", {}).get("pps", {}).get("sunsetted", []))
 
     # NIAP Technical Decisions
-    _scan_items("NIAP TD", diff.get("niap", {}).get("tds", {}).get("new", []))
-    _scan_items("NIAP TD", diff.get("niap", {}).get("tds", {}).get("updated", []))
+    _scan_items("NIAP TD", diff.get("niap", {}).get("tds", {}).get("new", []), tab="us")
+    _scan_items("NIAP TD", diff.get("niap", {}).get("tds", {}).get("updated", []), tab="us")
 
     # NIAP News
-    _scan_items("NIAP News", diff.get("niap", {}).get("news", {}).get("new", []))
+    _scan_items("NIAP News", diff.get("niap", {}).get("news", {}).get("new", []), tab="us")
 
     # NIST
     for section_key in ("csrc_news", "fips", "sp", "cmvp", "pqc"):
         section = diff.get("nist", {}).get(section_key, {})
-        _scan_items("NIST CSRC", section.get("new", []))
-        _scan_items("NIST CSRC", section.get("updated", []))
+        _scan_items("NIST CSRC", section.get("new", []), tab="us")
+        _scan_items("NIST CSRC", section.get("updated", []), tab="us")
 
     # CC Portal
-    _scan_items("CC Portal", diff.get("cc_portal", {}).get("news", {}).get("new", []))
-    _scan_items("CC Portal", diff.get("cc_portal", {}).get("pps", {}).get("new", []))
+    _scan_items("CC Portal", diff.get("cc_portal", {}).get("news", {}).get("new", []), tab="intl")
+    _scan_items("CC Portal", diff.get("cc_portal", {}).get("pps", {}).get("new", []), tab="intl")
 
     # CCTL Labs
-    _scan_items("CCTL Labs", diff.get("cctl", {}).get("new_posts", []))
+    _scan_items("CCTL Labs", diff.get("cctl", {}).get("new_posts", []), tab="us")
 
     # NATO NIAPCL
-    _scan_items("NATO NIAPCL", diff.get("nato", {}).get("new", []))
-    _scan_items("NATO NIAPCL", diff.get("nato", {}).get("updated", []))
+    _scan_items("NATO NIAPCL", diff.get("nato", {}).get("new", []), tab="intl")
+    _scan_items("NATO NIAPCL", diff.get("nato", {}).get("updated", []), tab="intl")
 
     # EUCC / ENISA
-    _scan_items("EUCC", diff.get("eucc", {}).get("new", []))
-    _scan_items("EUCC", diff.get("eucc", {}).get("updated", []))
+    _scan_items("EUCC", diff.get("eucc", {}).get("new", []), tab="eu")
+    _scan_items("EUCC", diff.get("eucc", {}).get("updated", []), tab="eu")
 
 # CSfC Component Selections -- hash change means the PDF content changed
     for sel_name, change in diff.get("csfc", {}).get("component_selections", {}).items():
@@ -177,6 +178,7 @@ def flag_alerts(diff: Snapshot) -> list[dict]:
                 sel_name,
                 url=config.CSFC_COMPONENTS_LIST_URL,
                 detail="Selections document content changed",
+                tab="us",
             )
 
     # CC Crypto Catalog page changes (scraped text — use _add_text for narrower matching)
@@ -185,7 +187,8 @@ def flag_alerts(diff: Snapshot) -> list[dict]:
             _add_text(f"CC Crypto: {page_key}", "publication",
                       item.get("text", ""),
                       url=item.get("href") or "https://www.commoncriteriaportal.org/cc/index.cfm",
-                      detail=f"New item on CC Portal {page_key} page")
+                      detail=f"New item on CC Portal {page_key} page",
+                      tab="us")
 
     # NIST page changes (scraped text — use _add_text for narrower matching)
     _nist_page_urls = {
@@ -201,7 +204,8 @@ def flag_alerts(diff: Snapshot) -> list[dict]:
             _add_text(f"NIST: {page_key}", "publication",
                       item.get("text", ""),
                       url=item.get("href") or _nist_page_urls.get(page_key, "https://csrc.nist.gov/"),
-                      detail=f"New item on NIST CSRC {page_key.replace('_', ' ')} page")
+                      detail=f"New item on NIST CSRC {page_key.replace('_', ' ')} page",
+                      tab="us")
 
     # NIST RSS feed new items
     for feed_name, items in diff.get("nist", {}).get("feeds", {}).items():
@@ -209,7 +213,8 @@ def flag_alerts(diff: Snapshot) -> list[dict]:
             _add_text(f"NIST Feed: {feed_name}", "news",
                  item.get("title", ""),
                  url=item.get("link") or "https://csrc.nist.gov/",
-                 detail=f"Feed: {feed_name} · Published: {(item.get('published') or '')[:16] or 'N/A'}")
+                 detail=f"Feed: {feed_name} · Published: {(item.get('published') or '')[:16] or 'N/A'}",
+                 tab="us")
 
 
     # NATO NIAPCL page changes
@@ -218,35 +223,40 @@ def flag_alerts(diff: Snapshot) -> list[dict]:
             _add_text(f"NATO NIAPCL: {page_key}", "new",
                       item.get("text", "") or item.get("raw_text", ""),
                       url=item.get("link") or config.NATO_NIAPCL_URL,
-                      detail=f"New item on NATO NIAPCL {page_key} page")
+                      detail=f"New item on NATO NIAPCL {page_key} page",
+                      tab="intl")
 
     # NATO NIAPCL Cisco-specific additions (Tier 1 EU/NATO)
     for item in diff.get("nato", {}).get("cisco_added", []):
         _add_text("NATO NIAPCL", "new_cert",
              item.get("name", "") or item.get("raw_text", "")[:80],
              url=item.get("link") or config.NATO_NIAPCL_URL,
-             detail=f"New Cisco product on NATO NIAPCL · {item.get('manufacturer', '')}")
+             detail=f"New Cisco product on NATO NIAPCL · {item.get('manufacturer', '')}",
+             tab="intl")
 
     # EUCC requirements page changes
     for item in diff.get("eucc", {}).get("pages", {}).get("requirements", {}).get("added", []):
         _add_text("EUCC Requirements", "updated",
                   item.get("text", ""),
                   url=item.get("href") or config.EUCC_REQUIREMENTS_URL,
-                  detail="New item on EUCC requirements / scheme page")
+                  detail="New item on EUCC requirements / scheme page",
+                  tab="eu")
 
     # EUCC certificate additions (general)
     for item in diff.get("eucc", {}).get("pages", {}).get("certificates", {}).get("added", []):
         _add_text("EUCC Certificates", "new_cert",
                   item.get("text", "") or item.get("name", ""),
                   url=item.get("href") or config.EUCC_CERTIFICATES_URL,
-                  detail="New EUCC certified product")
+                  detail="New EUCC certified product",
+               tab="eu")
 
     # EUCC Cisco-specific certificates (Tier 1 EU)
     for item in diff.get("eucc", {}).get("cisco_added", []):
         _add_text("EUCC Certificates", "new_cert",
              item.get("name", "") or item.get("text", "")[:80],
              url=item.get("href") or config.EUCC_CERTIFICATES_URL,
-             detail="New Cisco EUCC certified product")
+             detail="New Cisco EUCC certified product",
+         tab="eu")
 
     if alerts:
         log.warning("[Alerts] %d keyword match(es) found!", len(alerts))
