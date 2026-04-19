@@ -18,7 +18,7 @@ import glob
 import json
 import logging
 import os
-from datetime import datetime, timezone
+from datetime import datetime, timezone, timedelta
 from xml.sax.saxutils import escape as xml_escape
 
 from jinja2 import Environment
@@ -736,7 +736,9 @@ DASHBOARD_TEMPLATE = """
   </div>
 </div>
 </div>
-
+<div class="section-group" id="tab-pane-intl" data-tab="intl">
+        <div class="section-label">International</div>
+        
 <div class="section-group">
   <div class="section-label">CC Portal</div>
   <!-- CC Portal (international) -->
@@ -781,11 +783,7 @@ DASHBOARD_TEMPLATE = """
     {% endif %}
     {% if cc_portal_total == 0 %}<p class="no-change">No new international items.{% if last_active.cc_portal %} <span class="last-active">(last: {{ last_active.cc_portal }})</span>{% endif %}</p>{% endif %}
   </div>
-</div>
-</div>
-<div class="section-group" id="tab-pane-intl" data-tab="intl">
-        <div class="section-label">International</div>
-        <!-- NATO NIAPCL -->
+</div><!-- NATO NIAPCL -->
         <div class="card {% if nato_total > 0 %}card-new{% endif %}" id="sec-nato" data-has-changes="{{ nato_total }}">
           <div class="card-hdr" onclick="toggleCard(this)">
             <span>NATO NIAPCL Products</span>
@@ -819,51 +817,6 @@ DASHBOARD_TEMPLATE = """
           </div>
         </div>
       
-<div class="section-group">
-  <div class="section-label">CC Portal</div>
-  <!-- CC Portal (international) -->
-<div class="card {% if cc_portal_total > 0 %}card-new{% endif %}" id="sec-cc-portal" data-has-changes="{{ cc_portal_total }}">
-  <div class="card-hdr" onclick="toggleCard(this)">
-    <span>CC Portal (International)</span>
-    <span class="card-count">{{ cc_portal_total }} new item{% if cc_portal_total != 1 %}s{% endif %}</span>
-    <span class="sparkline">
-      {% for v in sparklines.cc_portal %}
-      <span class="sp-bar" style="height:{{ v }}%" title="{{ sp_counts.cc_portal[loop.index0] }} change{% if sp_counts.cc_portal[loop.index0] != 1 %}s{% endif %}"></span>
-      {% endfor %}
-    </span>
-    <span class="toggle-icon">{% if cc_portal_total == 0 %}&#9658;{% else %}&#9660;{% endif %}</span>
-  </div>
-  <div class="card-body {% if cc_portal_total == 0 %}collapsed{% endif %}">
-    {% if diff.cc_portal.news.added %}
-    <div class="sub-hdr sub-new">News ({{ diff.cc_portal.news.added | length }})</div>
-    {% for item in diff.cc_portal.news.added %}
-    <div class="item-row" data-source="cc-portal" data-kind="new">
-      <a class="item-link" href="{{ item.link or item.url or 'https://www.commoncriteriaportal.org/' }}" target="_blank">{{ item.title or item.text or item }}</a>
-      <span class="item-meta">{{ item.date or '' }}</span>
-    </div>
-    {% endfor %}
-    {% endif %}
-    {% if diff.cc_portal.pps.added %}
-    <div class="sub-hdr sub-new">New International PPs ({{ diff.cc_portal.pps.added | length }})</div>
-    {% for pp in diff.cc_portal.pps.added %}
-    <div class="item-row" data-source="cc-portal" data-kind="new">
-      <a class="item-link" href="{{ pp.link or 'https://www.commoncriteriaportal.org/pps/' }}" target="_blank">{{ pp.title or pp.text or pp }}</a>
-      <span class="item-meta"></span>
-    </div>
-    {% endfor %}
-    {% endif %}
-    {% if diff.cc_portal.products.added %}
-    <div class="sub-hdr sub-new">New Certified Products ({{ diff.cc_portal.products.added | length }})</div>
-    {% for prod in diff.cc_portal.products.added %}
-    <div class="item-row" data-source="cc-portal" data-kind="new">
-      <span class="item-link">{{ prod }}</span>
-      <span class="item-meta"></span>
-    </div>
-    {% endfor %}
-    {% endif %}
-    {% if cc_portal_total == 0 %}<p class="no-change">No new international items.{% if last_active.cc_portal %} <span class="last-active">(last: {{ last_active.cc_portal }})</span>{% endif %}</p>{% endif %}
-  </div>
-</div>
 </div>
 </div>   </div>
 
@@ -918,7 +871,7 @@ DASHBOARD_TEMPLATE = """
 
 </div><!-- /main-content -->
 <footer>
-  <span>CC Pulse &middot; Auto-refreshes daily (06:00 UTC) &middot; NIAP, CSfC, NIST, CC Portal, NATO NIAPCL, EUCC / ENISA</span>
+  <span>CC Pulse &middot; Auto-refreshes daily (01:00 EST) &middot; NIAP, CSfC, NIST, CC Portal, NATO NIAPCL, EUCC / ENISA</span>
   <span>Last run: {{ generated_at }}</span>
 </footer>
 
@@ -1054,7 +1007,8 @@ def _build_rss(diff: dict, generated_at: str) -> str:
 def render_dashboard(diff: dict, output_dir: str = "docs") -> None:
     """Render the HTML dashboard and RSS feed from a diff dict."""
     os.makedirs(output_dir, exist_ok=True)
-    generated_at = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
+    EST = timezone(timedelta(hours=-5))
+    generated_at = datetime.now(EST).strftime("%Y-%m-%d %H:%M EST")
 
     # Compute totals
     niap         = diff.get("niap", {})
