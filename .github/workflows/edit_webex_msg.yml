@@ -1,0 +1,56 @@
+name: Edit Webex Message (one-time)
+on:
+  workflow_dispatch:
+    inputs:
+      activity_uuid:
+        description: Webex activity UUID
+        required: true
+        default: eec00e00-33e4-11f1-92ad-f790e0cd507b
+jobs:
+  edit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Edit message via bot token
+        env:
+          BOT_TOKEN: ${{ secrets.CC_WEBEX_BOT_TOKEN }}
+          UUID: ${{ github.event.inputs.activity_uuid }}
+        run: |
+          python3 << 'PYEOF'
+          import os, base64, json, urllib.request, urllib.error
+          tok = os.environ['BOT_TOKEN']
+          uid = os.environ['UUID']
+          hydra = 'ciscospark://us/MESSAGE/' + uid
+          mid = base64.b64encode(hydra.encode()).decode().rstrip('=')
+          md = (
+              "# \U0001F3C6 Cisco NDcPP PCL \u2014 1 New Certification!\n\n"
+              "\U0001F38A \U0001F38A \U0001F38A\n\n"
+              "_CC Pulse detected 1 new Cisco product certification on the NIAP PCL._\n\n"
+              "### \U0001F389 [Cisco 8200, 8300, 8400, 8500 Series Secure Routers (C8000) running IOS-XE 17.18]"
+              "(https://www.niap-ccevs.org/product/index.cfm?pid=11661)\n\n"
+              "| Field | Value |\n"
+              "|-------|-------|\n"
+              "| **Vendor** | Cisco Systems, Inc. |\n"
+              "| **Certified** | 2026-04-09 |\n"
+              "| **Valid until** | 2028-04-09 |\n"
+              "| **Evaluated against** | CPP\\_ND\\_V3.0E, PKG\\_SSH\\_V1.0, MOD\\_MACSEC\\_V1.0, MOD\\_VPNGW\\_v1.3 |\n"
+              "| **Evaluating lab** | Lightship Security USA, Inc. |\n"
+              "| **Submitting country** | United States |\n\n"
+              "---\n\n"
+              "[View Cisco products on NIAP PCL](https://www.niap-ccevs.org/product/index.cfm)"
+              " \u00b7 [Full dashboard](https://kr15tyk.github.io/CC-pulse/cc_dashboard.html)"
+          )
+          req = urllib.request.Request(
+              'https://webexapis.com/v1/messages/' + mid,
+              data=json.dumps({'markdown': md}).encode(),
+              headers={
+                  'Content-Type': 'application/json',
+                  'Authorization': 'Bearer ' + tok,
+              },
+              method='PUT')
+          try:
+              with urllib.request.urlopen(req, timeout=15) as resp:
+                  print('OK', resp.status)
+          except urllib.error.HTTPError as e:
+              print('ERR', e.code, e.read().decode())
+              raise
+          PYEOF
