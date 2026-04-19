@@ -1512,20 +1512,21 @@ function switchTab(btn) {
       function navigateTo(sectionId) {
         const section = document.getElementById(sectionId);
         if (!section) return;
+        // Determine target tab: intl/eu panes carry data-tab; US sections have none
         const pane = section.closest('.section-group[data-tab]');
-        if (pane) {
-          const targetTab = pane.dataset.tab;
-          const activeBtn = document.querySelector('.tab-btn.active');
-          if (!activeBtn || activeBtn.dataset.tab !== targetTab) {
-            const btn = document.querySelector('.tab-btn[data-tab="' + targetTab + '"]');
-            if (btn) switchTab(btn);
-          }
+        const targetTab = pane ? pane.dataset.tab : 'us';
+        const activeBtn = document.querySelector('.tab-btn.active');
+        if (!activeBtn || activeBtn.dataset.tab !== targetTab) {
+          const btn = document.querySelector('.tab-btn[data-tab="' + targetTab + '"]');
+          if (btn) switchTab(btn);
         }
+        // Expand the section's first collapsed card
         const firstCard = section.querySelector('.card-header');
         if (firstCard) {
           const body = firstCard.nextElementSibling;
           if (body && body.classList.contains('collapsed')) toggleCard(firstCard);
         }
+        // Scroll after tab switch reflow
         setTimeout(() => {
           section.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }, 50);
