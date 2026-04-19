@@ -60,7 +60,6 @@ NIAP_ENDPOINTS = {
         "pcl":         "/api/project/product/pcl_products_all/",
         "pps":         "/api/protection-profile/public_pps_all/",
         "tds":         "/api/technical-decision/frontend_tds/",
-        "cctls":       "/api/cctl/directory/frontend_cctls/?status=Certified&limit=100&offset=0",
         "events_curr": "/api/publish/announcements/get_events_frontend/?limit=200&offset=0&current=true",
         "events_prev": "/api/publish/announcements/get_events_frontend/?limit=200&offset=0&previous=true",
         "news":        "/api/publish/announcements/get_news_frontend/?limit=500&offset=0",
