@@ -191,35 +191,35 @@ DASHBOARD_TEMPLATE = """
 
 <div class="sticky-top">
   <div class="trend-bar">
-    <div class="stat"><a href="#sec-niap-pp">
+    <div class="stat"><a href="#sec-niap-pp" onclick="navigateTo('sec-niap-pp');return false;">
       <div class="stat-num {% if niap_total_stat > 0 %}active-num{% endif %}">{{ niap_total_stat }}</div>
       <div class="stat-lbl">NIAP Changes</div>
     </a></div>
-    <div class="stat"><a href="#sec-cctl">
+    <div class="stat"><a href="#sec-cctl" onclick="navigateTo('sec-cctl');return false;">
       <div class="stat-num {% if cctl_total_stat > 0 %}active-num{% endif %}">{{ cctl_total_stat }}</div>
       <div class="stat-lbl">CCTL Items</div>
     </a></div>
-    <div class="stat"><a href="#sec-csfc">
+    <div class="stat"><a href="#sec-csfc" onclick="navigateTo('sec-csfc');return false;">
       <div class="stat-num {% if csfc_total_stat > 0 %}active-num{% endif %}">{{ csfc_total_stat }}</div>
       <div class="stat-lbl">CSfC Selection Updates</div>
     </a></div>
-    <div class="stat"><a href="#sec-nist">
+    <div class="stat"><a href="#sec-nist" onclick="navigateTo('sec-nist');return false;">
       <div class="stat-num {% if nist_total_stat > 0 %}active-num{% endif %}">{{ nist_total_stat }}</div>
       <div class="stat-lbl">NIST Doc Updates</div>
     </a></div>
-    <div class="stat"><a href="#sec-cc-portal">
+    <div class="stat"><a href="#sec-cc-portal" onclick="navigateTo('sec-cc-portal');return false;">
       <div class="stat-num {% if cc_portal_total_stat > 0 %}active-num{% endif %}">{{ cc_portal_total_stat }}</div>
       <div class="stat-lbl">CC Portal</div>
     </a></div>
-    <div class="stat"><a href="#sec-nato">
+    <div class="stat"><a href="#sec-nato" onclick="navigateTo('sec-nato');return false;">
       <div class="stat-num {% if nato_total > 0 %}active-num{% endif %}">{{ nato_total }}</div>
       <div class="stat-lbl">NATO NIAPCL</div>
     </a></div>
-    <div class="stat"><a href="#sec-eucc-req">
+    <div class="stat"><a href="#sec-eucc-req" onclick="navigateTo('sec-eucc-req');return false;">
       <div class="stat-num {% if eucc_total > 0 %}active-num{% endif %}">{{ eucc_total }}</div>
       <div class="stat-lbl">EUCC Changes</div>
     </a></div>
-    <div class="stat"><a href="#sec-alerts">
+    <div class="stat"><a href="#sec-alerts" onclick="navigateTo('sec-alerts');return false;">
       <div class="stat-num {% if alert_total > 0 %}alert-num{% endif %}">{{ alert_total }}</div>
       <div class="stat-lbl">Alerts</div>
     </a></div>
@@ -898,6 +898,28 @@ function switchTab(btn) {
             });
         }
   
+
+      function navigateTo(sectionId) {
+        const section = document.getElementById(sectionId);
+        if (!section) return;
+        const pane = section.closest('.section-group[data-tab]');
+        if (pane) {
+          const targetTab = pane.dataset.tab;
+          const activeBtn = document.querySelector('.tab-btn.active');
+          if (!activeBtn || activeBtn.dataset.tab !== targetTab) {
+            const btn = document.querySelector('.tab-btn[data-tab="' + targetTab + '"]');
+            if (btn) switchTab(btn);
+          }
+        }
+        const firstCard = section.querySelector('.card-header');
+        if (firstCard) {
+          const body = firstCard.nextElementSibling;
+          if (body && body.classList.contains('collapsed')) toggleCard(firstCard);
+        }
+        setTimeout(() => {
+          section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 50);
+      }
 </script>
 </body>
 </html>
