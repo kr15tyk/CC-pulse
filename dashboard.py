@@ -1078,14 +1078,16 @@ function switchTab(btn) {
                 p.classList.toggle('tab-us-hidden', tab !== 'us');
             });
 
-            // Auto-collapse alerts when not on US tab
+            // Auto-collapse alerts when leaving US tab (never force-expand)
             const alertCard=document.getElementById('sec-alerts');
             if(alertCard){
               const alertBody=alertCard.nextElementSibling;
               const alertIcon=alertCard.querySelector('.toggle-icon');
               const isUS=(btn.dataset.tab==='us'||!btn.dataset.tab);
-              if(alertBody){alertBody.classList.toggle('collapsed',!isUS);}
-              if(alertIcon)alertIcon.textContent=isUS?'\u25bc':'\u25ba';
+              if(!isUS&&alertBody&&!alertBody.classList.contains('collapsed')){
+                alertBody.classList.add('collapsed');
+                if(alertIcon)alertIcon.textContent='\u25ba';
+              }
             }
         }
   
