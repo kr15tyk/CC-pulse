@@ -256,11 +256,7 @@ DASHBOARD_TEMPLATE = """
   <span id="search-count" class="search-count"></span>
 </div>
 <!-- Regional tab navigation -->
-      <div class="tab-nav" id="region-tabs">
-        <button class="tab-btn active" data-tab="us" onclick="switchTab(this)">&#127482;&#127480; US (NIAP / CSfC / NIST)</button>
-        <button class="tab-btn" data-tab="intl" onclick="switchTab(this)">&#127760; International</button>
-        <button class="tab-btn" data-tab="eu" onclick="switchTab(this)">&#127466;&#127482; EU (EUCC / ENISA)</button>
-      </div>
+      
       
 <!-- Alerts -->
 {% if diff.alerts %}
@@ -275,7 +271,7 @@ DASHBOARD_TEMPLATE = """
   <div class="card-body">
     <div class="alert-monitoring">{{ watch_keywords | join(', ') }}</div>
     {% for alert in diff.alerts %}
-        <div class="item-row alert-item" data-alert-key="{{ alert.source }}-{{ alert.title | replace(' ', '_') }}">
+        <div class="item-row alert-item" data-alert-key="{{ alert.source }}-{{ alert.title | replace(' ', '_') }}" data-tab="{{ alert.tab }}">
           {% if alert.url %}
           <a class="item-link" href="{{ alert.url }}" target="_blank">{{ alert.source }}: {{ alert.title }}</a>
           {% else %}
@@ -289,6 +285,11 @@ DASHBOARD_TEMPLATE = """
   </div>
 </div>
 {% endif %}
+<div class="tab-nav" id="region-tabs">
+        <button class="tab-btn active" data-tab="us" onclick="switchTab(this)">&#127482;&#127480; US (NIAP / CSfC / NIST)</button>
+        <button class="tab-btn" data-tab="intl" onclick="switchTab(this)">&#127760; International</button>
+        <button class="tab-btn" data-tab="eu" onclick="switchTab(this)">&#127466;&#127482; EU (EUCC / ENISA)</button>
+      </div>
 
 <div class="grid">
 
