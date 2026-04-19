@@ -17273,11 +17273,21 @@ function initEnhancements() {
     });
   }
 
-  // Show mark-all-seen button if there are unseen alerts
+  // Dynamically add Mark All Seen button to alerts card header
   const alertItems = document.querySelectorAll('.alert-item');
   if (alertItems.length > 0) {
-    const markAllBtn = document.getElementById('mark-all-alerts');
-    if (markAllBtn) markAllBtn.style.display = 'inline-block';
+    const alertHdr = document.querySelector('.card-alert .card-hdr');
+    if (alertHdr && !alertHdr.querySelector('.mark-all-btn')) {
+      const markBtn = document.createElement('button');
+      markBtn.id = 'mark-all-alerts';
+      markBtn.className = 'ctrl-btn mark-all-btn';
+      markBtn.title = 'Mark all as seen';
+      markBtn.textContent = '\u2713 Mark All Seen';
+      markBtn.addEventListener('click', function(e) { e.stopPropagation(); markAllAlertsSeen(e); });
+      const toggleIcon = alertHdr.querySelector('.toggle-icon');
+      if (toggleIcon) alertHdr.insertBefore(markBtn, toggleIcon);
+      else alertHdr.appendChild(markBtn);
+    }
   }
 
   // Tab change count badges
