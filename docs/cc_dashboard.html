@@ -26,10 +26,16 @@
     --shadow-sm:0 1px 3px rgba(0,0,0,.3),0 1px 2px rgba(0,0,0,.2);
     --shadow-md:0 4px 12px rgba(0,0,0,.4),0 2px 4px rgba(0,0,0,.3)
   }
-  .nav-home-link{color:rgba(255,255,255,.75);text-decoration:none;font-size:.8rem;font-family:var(--font);padding:3px 10px;border:1px solid rgba(255,255,255,.2);border-radius:6px;transition:all .2s;white-space:nowrap}
-  .nav-home-link:hover{color:#fff;background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.5)}
-  .sources-btn{background:none;border:1px solid rgba(255,255,255,.2);color:rgba(255,255,255,.7);border-radius:6px;padding:3px 10px;font-size:.75rem;cursor:pointer;font-family:var(--font);transition:all .2s;margin-left:.5rem}
-  .sources-btn:hover{background:rgba(255,255,255,.1);color:#fff}
+  .ham-btn{background:none;border:1px solid rgba(255,255,255,.2);color:rgba(255,255,255,.8);border-radius:6px;padding:4px 10px;font-size:1.05rem;cursor:pointer;font-family:var(--font);transition:all .2s;line-height:1.2;letter-spacing:1px}
+  .ham-btn:hover,.ham-btn[aria-expanded="true"]{background:rgba(255,255,255,.12);color:#fff;border-color:rgba(255,255,255,.5)}
+  .ham-menu{display:none;position:absolute;top:calc(100% + 6px);right:0;background:var(--card);border:1px solid var(--border);border-radius:10px;box-shadow:var(--shadow-md);min-width:200px;z-index:500;overflow:hidden;flex-direction:column}
+  .ham-menu.open{display:flex}
+  .ham-item{display:flex;align-items:center;gap:.65rem;padding:.6rem 1rem;font-size:.82rem;color:var(--text);text-decoration:none;background:none;border:none;width:100%;text-align:left;cursor:pointer;font-family:var(--font);transition:background .12s}
+  .ham-item:hover{background:var(--panel)}
+  .ham-item .ham-icon{font-size:.95rem;width:1.2rem;text-align:center;flex-shrink:0}
+  .ham-item.ham-divider{border-top:1px solid var(--border);margin-top:.25rem;padding-top:.6rem}
+  .ham-item.ham-disabled{opacity:.45;cursor:not-allowed;pointer-events:none}
+  .ham-wrap{position:relative;display:flex;align-items:center}
   .sources-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:9000;align-items:flex-start;justify-content:center;padding-top:5vh}
   .sources-overlay.open{display:flex}
   .sources-modal{background:var(--card);border:1px solid var(--border);border-radius:12px;box-shadow:var(--shadow-md);width:min(820px,95vw);max-height:85vh;overflow:hidden;display:flex;flex-direction:column}
@@ -185,12 +191,19 @@
 <body>
 
 <nav class="site-nav">
-  <a class="nav-home-link" href="https://github.com/kr15tyk/CC-pulse" target="_blank" rel="noopener" title="CC Pulse on GitHub">🏠 Home</a>
   <span class="nav-title">CC Pulse Dashboard</span>
   <span class="nav-spacer"></span>
   <span class="nav-meta">Last run: 2026-04-19 17:39 ET</span>
-  <button class="dark-toggle" id="dark-toggle" onclick="toggleDarkMode()" title="Toggle dark mode">🌙 Dark</button>
-  <button class="sources-btn" onclick="showSourcesModal()" title="View all monitored sources">📋 Sources</button>
+  <div class="ham-wrap">
+    <button class="ham-btn" id="ham-btn" onclick="toggleHamMenu()" aria-expanded="false" aria-haspopup="true" title="Open menu">☰</button>
+    <div class="ham-menu" id="ham-menu" role="menu">
+      <a class="ham-item" href="https://github.com/kr15tyk/CC-pulse" target="_blank" rel="noopener" role="menuitem"><span class="ham-icon">🏠</span>Home</a>
+      <button class="ham-item" id="ham-darkmode" onclick="toggleDarkMode()" role="menuitem"><span class="ham-icon" id="ham-dark-icon">🌙</span><span id="ham-dark-label">Dark Mode</span></button>
+      <button class="ham-item" onclick="showSourcesModal()" role="menuitem"><span class="ham-icon">📋</span>Source List</button>
+      <a class="ham-item ham-disabled" id="ham-webex" href="#" role="menuitem"><span class="ham-icon">💬</span>WebEx Space</a>
+      <button class="ham-item ham-divider" onclick="copyFeedUrl()" role="menuitem"><span class="ham-icon">📡</span>Copy RSS URL</button>
+    </div>
+  </div>
 </nav>
 
 <div id="sources-overlay" class="sources-overlay" onclick="closeSourcesModalOutside(event)">
@@ -17274,6 +17287,7 @@ function toggleDarkMode() {
   document.documentElement.setAttribute('data-theme', isDark ? 'light' : 'dark');
   const btn = document.getElementById('dark-toggle');
   if (btn) btn.textContent = isDark ? '🌙 Dark' : '☀️ Light';
+  updateHamDarkLabel(isDark);
   localStorage.setItem('cc-pulse-theme', isDark ? 'light' : 'dark');
 }
 
@@ -17317,7 +17331,30 @@ function copyFeedUrl() {
   }
 }
 
+function toggleHamMenu() {
+  var menu = document.getElementById('ham-menu');
+  var btn  = document.getElementById('ham-btn');
+  var open = menu.classList.toggle('open');
+  btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+}
+function closeHamMenu() {
+  var menu = document.getElementById('ham-menu');
+  var btn  = document.getElementById('ham-btn');
+  if (menu) { menu.classList.remove('open'); }
+  if (btn)  { btn.setAttribute('aria-expanded', 'false'); }
+}
+function updateHamDarkLabel(isDark) {
+  var icon  = document.getElementById('ham-dark-icon');
+  var label = document.getElementById('ham-dark-label');
+  if (icon)  icon.textContent  = isDark ? '☀️' : '🌙';
+  if (label) label.textContent = isDark ? 'Light Mode' : 'Dark Mode';
+}
+document.addEventListener('click', function(e) {
+  var wrap = document.querySelector('.ham-wrap');
+  if (wrap && !wrap.contains(e.target)) closeHamMenu();
+});
 function showSourcesModal() {
+  closeHamMenu();
   document.getElementById('sources-overlay').classList.add('open');
   document.body.style.overflow = 'hidden';
 }
@@ -17329,7 +17366,7 @@ function closeSourcesModalOutside(e) {
   if (e.target === document.getElementById('sources-overlay')) closeSourcesModal();
 }
 document.addEventListener('keydown', function(e) {
-  if (e.key === 'Escape') closeSourcesModal();
+  if (e.key === 'Escape') { closeSourcesModal(); closeHamMenu(); }
 });
 function initEnhancements() {
   // Dark mode restore
@@ -17337,6 +17374,7 @@ function initEnhancements() {
   document.documentElement.setAttribute('data-theme', savedTheme);
   const darkBtn = document.getElementById('dark-toggle');
   if (darkBtn) darkBtn.textContent = savedTheme === 'dark' ? '☀️ Light' : '🌙 Dark';
+  updateHamDarkLabel(savedTheme === 'dark');
 
   // Zero stat tile de-emphasis
   document.querySelectorAll('.stat').forEach(function(tile) {
