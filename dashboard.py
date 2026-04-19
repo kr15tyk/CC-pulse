@@ -369,7 +369,7 @@ DASHBOARD_TEMPLATE = """
     </a></div>
     <div class="stat"><a href="#sec-cctl" onclick="navigateTo('sec-cctl');return false;">
       <div class="stat-num {% if cctl_total_stat > 0 %}active-num{% endif %}">{{ cctl_total_stat }}</div>
-      <div class="stat-lbl">CCTL Items</div>
+      <div class="stat-lbl">CCTL Updates</div>
     </a></div>
     <div class="stat"><a href="#sec-csfc" onclick="navigateTo('sec-csfc');return false;">
       <div class="stat-num {% if csfc_total_stat > 0 %}active-num{% endif %}">{{ csfc_total_stat }}</div>
@@ -735,44 +735,6 @@ DASHBOARD_TEMPLATE = """
 </div>
 </div>
 
-<div class="section-group">
-  <div class="section-label">CCTL</div>
-  <!-- CCTL Lab Intel -->
-<div class="card {% if cctl_total > 0 %}card-new{% endif %}" id="sec-cctl" data-has-changes="{{ cctl_total }}">
-  <div class="card-hdr" onclick="toggleCard(this)">
-    <span>CCTL Lab Intel</span>
-    <span class="card-count">{{ cctl_total }} new item{% if cctl_total != 1 %}s{% endif %}</span>
-    <span class="sparkline">
-      {% for v in sparklines.cctl %}
-      <span class="sp-bar" style="height:{{ v }}%" title="{{ sp_counts.cctl[loop.index0] }} change{% if sp_counts.cctl[loop.index0] != 1 %}s{% endif %}"></span>
-      {% endfor %}
-    </span>
-    <span class="toggle-icon">{% if cctl_total == 0 %}&#9658;{% else %}&#9660;{% endif %}</span>
-  </div>
-  <div class="card-body {% if cctl_total == 0 %}collapsed{% endif %}">
-    {% for lab_name, lab_items in diff.cctl_labs.items() %}
-    {% if lab_items %}
-    <div class="lab-row">
-      <div class="lab-hdr" onclick="toggleLab(this)">
-        <span class="lab-name">{{ lab_name }}</span>
-        <span class="lab-cnt">{{ lab_items | length }} item{% if lab_items | length != 1 %}s{% endif %}</span>
-        <span class="toggle-icon">&#9658;</span>
-      </div>
-      <div class="lab-body collapsed">
-        {% for item in lab_items %}
-        <div class="item-row" data-source="cctl" data-kind="new">
-          <a class="item-link" href="{{ item.link }}" target="_blank">{{ item.title }}</a>
-          <span class="item-meta">{{ item.published }}</span>
-        </div>
-        {% endfor %}
-      </div>
-    </div>
-    {% endif %}
-    {% endfor %}
-    {% if cctl_total == 0 %}<p class="no-change">No new items.{% if last_active.cctl %} <span class="last-active">(last: {{ last_active.cctl }})</span>{% endif %}</p>{% endif %}
-  </div>
-</div>
-</div>
 
 <div class="section-group">
   <div class="section-label">CSfC</div>
@@ -944,7 +906,45 @@ DASHBOARD_TEMPLATE = """
             {% if nato_total == 0 %}<p class="no-change">No NATO NIAPCL changes detected.</p>{% endif %}
           </div>
         </div>
-      
+
+<div class="section-group">
+  <div class="section-label">CCTL</div>
+  <!-- CCTL Updates -->
+<div class="card {% if cctl_total > 0 %}card-new{% endif %}" id="sec-cctl" data-has-changes="{{ cctl_total }}">
+  <div class="card-hdr" onclick="toggleCard(this)">
+    <span>CCTL Updates</span>
+    <span class="card-count">{{ cctl_total }} new item{% if cctl_total != 1 %}s{% endif %}</span>
+    <span class="sparkline">
+      {% for v in sparklines.cctl %}
+      <span class="sp-bar" style="height:{{ v }}%" title="{{ sp_counts.cctl[loop.index0] }} change{% if sp_counts.cctl[loop.index0] != 1 %}s{% endif %}"></span>
+      {% endfor %}
+    </span>
+    <span class="toggle-icon collapsed">▼</span>
+  </div>
+  <div class="card-body {% if cctl_total == 0 %}collapsed{% endif %}">
+    {% for lab_name, lab_items in diff.cctl_labs.items() %}
+    {% if lab_items %}
+    <div class="lab-row">
+      <div class="lab-hdr" onclick="toggleLab(this)">
+        <span class="lab-name">{{ lab_name }}</span>
+        <span class="lab-cnt">{{ lab_items | length }} item{% if lab_items | length != 1 %}s{% endif %}</span>
+        <span class="lab-toggle">▼</span>
+      </div>
+      <div class="lab-body collapsed">
+        {% for item in lab_items %}
+        <div class="item-row" data-source="cctl" data-kind="new">
+          <a class="item-link" href="{{ item.link }}" target="_blank">{{ item.title }}</a>
+          <span class="item-meta">{{ item.published }}</span>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+    {% endif %}
+    {% endfor %}
+    {% if cctl_total == 0 %}<p class="no-change">No new items.{% if last_active.cctl %} <span class="last-active">Last: {{ last_active.cctl }}</span>{% endif %}</p>{% endif %}
+  </div>
+</div>
+</div>      
 </div>
 </div>   </div>
 
