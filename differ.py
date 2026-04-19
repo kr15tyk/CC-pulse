@@ -365,20 +365,6 @@ def diff_niap_events(old_events: Records, new_events: Records) -> dict[str, Any]
     new_map = byid(new_events, "id")
     return {"added": [new_map[i] for i in new_ids - old_ids]}
 
-def diff_niap_cctls(old_cctls: Records, new_cctls: Records) -> dict[str, Any]:
-    old_map = byid(old_cctls, "cctl_id")
-    new_map = byid(new_cctls, "cctl_id")
-    added   = [new_map[i] for i in set(new_map) - set(old_map)]
-    removed = [old_map[i] for i in set(old_map) - set(new_map)]
-    status_changes = []
-    for cid in set(old_map) & set(new_map):
-        old_s = old_map[cid].get("status_id", {}).get("status_name")
-        new_s = new_map[cid].get("status_id", {}).get("status_name")
-        if old_s != new_s:
-            status_changes.append({**new_map[cid], "old_status": old_s, "new_status": new_s})
-    return {"added": added, "removed": removed, "status_changes": status_changes}
-
-
 # -- CC Portal diffs -----------------------------------------------------------
 def diff_cc_news(old_items: Records, new_items: Records) -> dict[str, Any]:
     old_texts = {i["text"][:80] for i in old_items}
@@ -628,7 +614,6 @@ def compute_diff(old_snapshot: Snapshot, new_snapshot: Snapshot) -> Snapshot:
             "in_evaluation": diff_niap_in_evaluation(old_n.get("pcl", []), new_n.get("pcl", [])),
             "news":         diff_niap_news(old_n.get("news", []),   new_n.get("news", [])),
             "events":       diff_niap_events(old_n.get("events", []), new_n.get("events", [])),
-            "cctls":        diff_niap_cctls(old_n.get("cctls", []), new_n.get("cctls", [])),
         },
         "cc_portal": {
             "news":     diff_cc_news(old_c.get("news", []),     new_c.get("news", [])),
@@ -692,8 +677,7 @@ def merge_weekly_diffs(diffs: list[Snapshot]) -> Snapshot:
                        "tds": {"added":[], "removed":[]},
                        "cisco_ndcpp": {"added":[], "removed":[], "newly_archived":[]},
                        "news": {"added":[]},
-                       "events": {"added":[]},
-                       "cctls": {"added":[], "removed":[], "status_changes":[]}}),
+                       "events": {"added":[]}}),
         ("cc_portal", {"news": {"added":[]}, "pps": {"added":[]}, "products": {"added":[]}}),
         ("cctl_labs", {}),
         ("csfc",      {"feeds": {}, "pages": {}, "component_selections": {}}),
