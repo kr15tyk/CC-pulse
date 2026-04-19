@@ -42,6 +42,157 @@ def _load_recent_diffs(n: int = 7) -> list:
     return diffs
 
 
+
+def _build_history(n: int = 90) -> list:
+    """Scan the last N days of diffs and extract curated history entries.
+
+    Each entry is a dict with:
+      date      - YYYY-MM-DD string
+      category  - one of: cisco_cert, cisco_archived, pp_new, pp_removed,
+                          td_new, nato_cisco, eucc_cisco, in_eval_new,
+                          in_eval_removed, csfc_change, nist_doc, pcl_cert
+      kind      - 'new' | 'removed' | 'updated'
+      title     - human-readable one-liner
+      detail    - optional sub-text (lab, PPs, etc.)
+      url       - optional link
+    Returned sorted newest-first.
+    """
+    pattern = os.path.join("snapshots", "diffs", "*_diff.json")
+    paths = sorted(glob.glob(pattern))[-n:]
+    entries = []
+
+    for p in paths:
+        try:
+            with open(p, encoding="utf-8") as fh:
+                d = json.load(fh)
+        except Exception:
+            continue
+        date = (d.get("period_end") or "")[:10]
+        if not date:
+            continue
+        niap = d.get("niap", {})
+
+        # Cisco NDcPP new certifications
+        for item in niap.get("cisco_ndcpp", {}).get("added", []):
+            name = item.get("product_name") or item.get("name") or "Unknown product"
+            vendor = item.get("vendor_id_name") or "Cisco"
+            cert_date = (item.get("certification_date") or "")[:10]
+            lab = item.get("assigned_lab_name") or ""
+            pps = ", ".join(
+                pp.get("pp_short_name", "") for pp in item.get("protection_profiles") or []
+            )
+            pid = item.get("product_id") or item.get("v_id") or ""
+            url = f"https://www.niap-ccevs.org/product/index.cfm?pid={pid}" if pid else "https://www.niap-ccevs.org/"
+            entries.append({
+                "date": date, "category": "cisco_cert", "kind": "new",
+                "title": f"{vendor} — {name}",
+                "detail": f"Certified {cert_date} · {lab}{(' · ' + pps) if pps else ''}",
+                "url": url,
+            })
+
+        # Cisco NDcPP newly archived
+        for item in niap.get("cisco_ndcpp", {}).get("newly_archived", []):
+            name = item.get("product_name") or "Unknown product"
+            entries.append({
+                "date": date, "category": "cisco_archived", "kind": "removed",
+                "title": f"Archived: {name}",
+                "detail": "",
+                "url": "https://www.niap-ccevs.org/",
+            })
+
+        # New Protection Profiles
+        for pp in niap.get("pps", {}).get("added", []):
+            entries.append({
+                "date": date, "category": "pp_new", "kind": "new",
+                "title": f"New PP: {pp.get('pp_short_name') or pp.get('pp_name') or '?'}",
+                "detail": pp.get("pp_name") or "",
+                "url": f"https://www.niap-ccevs.org/Profile/PP.cfm?id={pp.get('pp_id','')}" if pp.get("pp_id") else "https://www.niap-ccevs.org/",
+            })
+
+        # Removed / sunsetted PPs
+        for pp in niap.get("pps", {}).get("removed", []):
+            entries.append({
+                "date": date, "category": "pp_removed", "kind": "removed",
+                "title": f"Removed PP: {pp.get('pp_short_name') or pp.get('pp_name') or '?'}",
+                "detail": pp.get("pp_name") or "",
+                "url": "https://www.niap-ccevs.org/",
+            })
+
+        # New Technical Decisions
+        for td in niap.get("tds", {}).get("added", []):
+            entries.append({
+                "date": date, "category": "td_new", "kind": "new",
+                "title": f"New TD: {td.get('identifier') or td.get('td_id') or '?'}",
+                "detail": td.get("pp_short_name") or td.get("title") or "",
+                "url": "https://www.niap-ccevs.org/",
+            })
+
+        # NATO NIAPCL Cisco additions
+        for item in d.get("nato", {}).get("cisco_added", []):
+            name = item.get("name") or item.get("raw_text", "")[:80] or "Unknown"
+            entries.append({
+                "date": date, "category": "nato_cisco", "kind": "new",
+                "title": f"NATO NIAPCL: {name}",
+                "detail": item.get("manufacturer") or "",
+                "url": item.get("link") or "https://www.ia.nato.int/",
+            })
+
+        # EUCC Cisco additions
+        for item in d.get("eucc", {}).get("cisco_added", []):
+            name = item.get("name") or item.get("text", "")[:80] or "Unknown"
+            entries.append({
+                "date": date, "category": "eucc_cisco", "kind": "new",
+                "title": f"EUCC: {name}",
+                "detail": "",
+                "url": item.get("href") or "https://certification.enisa.europa.eu/",
+            })
+
+        # NIAP PCL all-cert additions (non-Cisco, Cisco already covered above)
+        for item in niap.get("pcl_all", {}).get("added", []):
+            # Skip if already captured as Cisco NDcPP
+            vendor = (item.get("vendor_id_name") or "").lower()
+            pid = str(item.get("product_id") or "")
+            cisco_pids = {str(c.get("product_id") or "") for c in niap.get("cisco_ndcpp", {}).get("added", [])}
+            if pid in cisco_pids:
+                continue
+            name = item.get("product_name") or "Unknown"
+            cert_date = (item.get("certification_date") or "")[:10]
+            lab = item.get("assigned_lab_name") or ""
+            pps = ", ".join(
+                pp.get("pp_short_name", "") for pp in item.get("protection_profiles") or []
+            )
+            url = f"https://www.niap-ccevs.org/product/index.cfm?pid={pid}" if pid else "https://www.niap-ccevs.org/"
+            entries.append({
+                "date": date, "category": "pcl_cert", "kind": "new",
+                "title": f"{item.get('vendor_id_name') or 'Unknown'} — {name}",
+                "detail": f"Certified {cert_date}{(' · ' + lab) if lab else ''}{(' · ' + pps) if pps else ''}",
+                "url": url,
+            })
+
+        # NIST document header changes
+        for doc_name, doc_data in d.get("nist", {}).get("doc_headers", {}).items():
+            if doc_data.get("changed"):
+                entries.append({
+                    "date": date, "category": "nist_doc", "kind": "updated",
+                    "title": f"NIST doc updated: {doc_name}",
+                    "detail": "",
+                    "url": doc_data.get("url") or "https://csrc.nist.gov/",
+                })
+
+        # CSfC component selection changes
+        for sel_name, sel_data in d.get("csfc", {}).get("component_selections", {}).items():
+            if sel_data.get("changed"):
+                entries.append({
+                    "date": date, "category": "csfc_change", "kind": "updated",
+                    "title": f"CSfC Selection updated: {sel_name}",
+                    "detail": "",
+                    "url": "https://www.nsa.gov/Resources/Commercial-Solutions-for-Classified-Program/Components-List/",
+                })
+
+    # Sort newest-first
+    entries.sort(key=lambda e: e["date"], reverse=True)
+    return entries
+
 def _section_daily_counts(diffs: list, section_key: str) -> list:
     """Return per-section change counts for the last N days (for sparkline)."""
     counts = []
@@ -177,6 +328,26 @@ DASHBOARD_TEMPLATE = """
         .section-group[data-tab].tab-active{display:block}
         /* US sections don't have data-tab — they are always shown when tab-us is active */
         .tab-us-hidden{display:none}
+
+/* ── History timeline ── */
+.timeline{display:flex;flex-direction:column;gap:0}
+.tl-entry{display:grid;grid-template-columns:90px 1fr;gap:0 1.2rem;padding:.55rem 0;border-bottom:1px solid var(--border)}
+.tl-entry:last-child{border-bottom:none}
+.tl-date{font-size:.72rem;color:var(--muted);font-weight:600;padding-top:.15rem;white-space:nowrap}
+.tl-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;margin-top:.35rem}
+.tl-body{display:flex;flex-direction:column;gap:.15rem}
+.tl-title{font-size:.82rem;color:var(--text);font-weight:500}
+.tl-title a{color:var(--primary);text-decoration:none}
+.tl-title a:hover{text-decoration:underline}
+.tl-detail{font-size:.72rem;color:var(--muted)}
+.tl-badge{display:inline-block;font-size:.62rem;font-weight:600;padding:1px 6px;border-radius:4px;margin-right:5px;vertical-align:middle;text-transform:uppercase;letter-spacing:.03em}
+.tl-badge.new{background:#dcfce7;color:#166534}
+.tl-badge.removed{background:#fee2e2;color:#991b1b}
+.tl-badge.updated{background:#fef9c3;color:#854d0e}
+.tl-filter{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:1rem;align-items:center}
+.tl-filter-btn{background:none;border:1px solid var(--border);color:var(--text-light);font-size:.72rem;padding:3px 10px;border-radius:12px;cursor:pointer;transition:all .15s}
+.tl-filter-btn:hover,.tl-filter-btn.active{border-color:var(--primary);color:var(--primary);background:rgba(4,159,217,.07)}
+.tl-empty{color:var(--muted);font-size:.82rem;padding:.5rem 0;font-style:italic}
 </style>
 </head>
 <body>
@@ -282,7 +453,9 @@ DASHBOARD_TEMPLATE = """
         <button class="tab-btn active" data-tab="us" onclick="switchTab(this)">&#127482;&#127480; US (NIAP / CSfC / NIST)</button>
         <button class="tab-btn" data-tab="intl" onclick="switchTab(this)">&#127760; International</button>
         <button class="tab-btn" data-tab="eu" onclick="switchTab(this)">&#127466;&#127482; EU (EUCC / ENISA)</button>
-      </div>
+      
+<button class="tab-btn" data-tab="history" onclick="switchTab(this)">🕑 History</button>
+</div>
 
 <div class="grid">
 
@@ -823,6 +996,53 @@ DASHBOARD_TEMPLATE = """
         </div>
       </div>
 
+
+<div class="section-group" id="tab-pane-history" data-tab="history">
+<div class="section-label">History</div>
+
+<div class="card card-new" id="sec-history" data-has-changes="1">
+  <div class="card-hdr" onclick="toggleCard(this)">
+    <span>Change History</span>
+    <span class="card-count">{{ history_entries | length }} event{% if history_entries | length != 1 %}s{% endif %}</span>
+    <span class="toggle-icon">▼</span>
+  </div>
+  <div class="card-body">
+    <div class="tl-filter" id="tl-filter-bar">
+      <span style="font-size:.72rem;color:var(--muted);margin-right:.2rem">Filter:</span>
+      <button class="tl-filter-btn active" data-cat="all" onclick="filterHistory(this)">All</button>
+      <button class="tl-filter-btn" data-cat="cisco_cert" onclick="filterHistory(this)">🏆 Cisco NDcPP</button>
+      <button class="tl-filter-btn" data-cat="cisco_archived" onclick="filterHistory(this)">📦 Cisco Archived</button>
+      <button class="tl-filter-btn" data-cat="pp_new,pp_removed" onclick="filterHistory(this)">📄 PPs</button>
+      <button class="tl-filter-btn" data-cat="td_new" onclick="filterHistory(this)">📋 TDs</button>
+      <button class="tl-filter-btn" data-cat="pcl_cert" onclick="filterHistory(this)">✅ PCL Certs</button>
+      <button class="tl-filter-btn" data-cat="nato_cisco" onclick="filterHistory(this)">🛡 NATO</button>
+      <button class="tl-filter-btn" data-cat="eucc_cisco" onclick="filterHistory(this)">🇪🇺 EUCC</button>
+      <button class="tl-filter-btn" data-cat="csfc_change" onclick="filterHistory(this)">🔒 CSfC</button>
+      <button class="tl-filter-btn" data-cat="nist_doc" onclick="filterHistory(this)">📐 NIST</button>
+    </div>
+    <div class="timeline" id="history-timeline">
+    {% if history_entries %}
+      {% for entry in history_entries %}
+      <div class="tl-entry" data-cat="{{ entry.category }}">
+        <div class="tl-date">{{ entry.date }}</div>
+        <div class="tl-body">
+          <div class="tl-title">
+            <span class="tl-badge {{ entry.kind }}">{{ entry.kind }}</span>
+            {% if entry.url %}<a href="{{ entry.url }}" target="_blank">{{ entry.title }}</a>{% else %}{{ entry.title }}{% endif %}
+          </div>
+          {% if entry.detail %}<div class="tl-detail">{{ entry.detail }}</div>{% endif %}
+        </div>
+      </div>
+      {% endfor %}
+    {% else %}
+      <p class="tl-empty">No history entries found. Run the daily job at least once to populate this tab.</p>
+    {% endif %}
+    </div>
+  </div>
+</div>
+
+</div>
+
 </div><!-- /main-content -->
 <footer>
   <span>CC Pulse &middot; Auto-refreshes daily (01:00 EST) &middot; NIAP, CSfC, NIST, CC Portal, NATO NIAPCL, EUCC / ENISA</span>
@@ -882,6 +1102,20 @@ function switchTab(btn) {
           section.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }, 50);
       }
+
+function filterHistory(btn) {
+  // Update active button
+  document.querySelectorAll('.tl-filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  const cats = btn.dataset.cat.split(',');
+  document.querySelectorAll('.tl-entry').forEach(row => {
+    if (cats[0] === 'all' || cats.includes(row.dataset.cat)) {
+      row.style.display = '';
+    } else {
+      row.style.display = 'none';
+    }
+  });
+}
 </script>
 </body>
 </html>
@@ -1051,6 +1285,7 @@ def render_dashboard(diff: dict, output_dir: str = "docs") -> None:
 
     # Sparkline data
     recent_diffs = _load_recent_diffs()
+    history_entries = _build_history()
     def _sp(section_key):
         counts = _section_daily_counts(recent_diffs, section_key)
         if not counts:
@@ -1134,6 +1369,7 @@ def render_dashboard(diff: dict, output_dir: str = "docs") -> None:
         sp_counts            = sp_counts,
         last_active          = last_active,
         watch_keywords       = config.WATCH_KEYWORDS,
+    history_entries      = history_entries,
         nato_total           = nato_total,
         eucc_total           = eucc_total,
         eucc_req_total       = eucc_req_total,
