@@ -1050,7 +1050,7 @@ DASHBOARD_TEMPLATE = """
 </footer>
 
 <script>
-function toggleCard(h){const b=h.nextElementSibling,i=h.querySelector('.toggle-icon'),c=b.classList.toggle('collapsed');if(i)i.textContent=c?'\u25ba':'\u25bc'}
+function toggleCard(h){const card=h.closest('.card'),b=card.nextElementSibling,i=card.querySelector('.toggle-icon'),c=b.classList.toggle('collapsed');if(i)i.textContent=c?'\u25ba':'\u25bc'}
 function expandAll(){document.querySelectorAll('.card-body').forEach(b=>{b.classList.remove('collapsed');const i=b.previousElementSibling.querySelector('.toggle-icon');if(i)i.textContent='\u25bc'})}
 function collapseAll(){document.querySelectorAll('.card-body').forEach(b=>{b.classList.add('collapsed');const i=b.previousElementSibling.querySelector('.toggle-icon');if(i)i.textContent='\u25ba'})}
 let _zeroHidden=false;
@@ -1077,6 +1077,16 @@ function switchTab(btn) {
             document.querySelectorAll('.grid > .section-group:not([data-tab])').forEach(p => {
                 p.classList.toggle('tab-us-hidden', tab !== 'us');
             });
+
+            // Auto-collapse alerts when not on US tab
+            const alertCard=document.getElementById('sec-alerts');
+            if(alertCard){
+              const alertBody=alertCard.nextElementSibling;
+              const alertIcon=alertCard.querySelector('.toggle-icon');
+              const isUS=(btn.dataset.tab==='us'||!btn.dataset.tab);
+              if(alertBody){alertBody.classList.toggle('collapsed',!isUS);}
+              if(alertIcon)alertIcon.textContent=isUS?'\u25bc':'\u25ba';
+            }
         }
   
 
