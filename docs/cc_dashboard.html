@@ -26,6 +26,25 @@
     --shadow-sm:0 1px 3px rgba(0,0,0,.3),0 1px 2px rgba(0,0,0,.2);
     --shadow-md:0 4px 12px rgba(0,0,0,.4),0 2px 4px rgba(0,0,0,.3)
   }
+  .nav-home-link{color:rgba(255,255,255,.75);text-decoration:none;font-size:.8rem;font-family:var(--font);padding:3px 10px;border:1px solid rgba(255,255,255,.2);border-radius:6px;transition:all .2s;white-space:nowrap}
+  .nav-home-link:hover{color:#fff;background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.5)}
+  .sources-btn{background:none;border:1px solid rgba(255,255,255,.2);color:rgba(255,255,255,.7);border-radius:6px;padding:3px 10px;font-size:.75rem;cursor:pointer;font-family:var(--font);transition:all .2s;margin-left:.5rem}
+  .sources-btn:hover{background:rgba(255,255,255,.1);color:#fff}
+  .sources-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:9000;align-items:flex-start;justify-content:center;padding-top:5vh}
+  .sources-overlay.open{display:flex}
+  .sources-modal{background:var(--card);border:1px solid var(--border);border-radius:12px;box-shadow:var(--shadow-md);width:min(820px,95vw);max-height:85vh;overflow:hidden;display:flex;flex-direction:column}
+  .sources-modal-hdr{display:flex;align-items:center;justify-content:space-between;padding:.85rem 1.25rem;border-bottom:1px solid var(--border);background:var(--primary);border-radius:12px 12px 0 0}
+  .sources-modal-hdr h2{font-size:1rem;color:#fff;margin:0}
+  .sources-close{background:none;border:none;color:rgba(255,255,255,.8);font-size:1.2rem;cursor:pointer;padding:0 4px;line-height:1;transition:color .15s}
+  .sources-close:hover{color:#fff}
+  .sources-modal-body{overflow-y:auto;padding:1.25rem;display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:1rem}
+  .sources-group{border:1px solid var(--border);border-radius:8px;padding:.75rem 1rem;background:var(--bg)}
+  .sources-group-title{font-size:.8rem;font-weight:700;color:var(--primary);text-transform:uppercase;letter-spacing:.04em;margin-bottom:.5rem}
+  .sources-item{font-size:.78rem;color:var(--text);padding:.25rem 0;border-top:1px solid var(--border);display:flex;gap:.4rem;align-items:baseline;line-height:1.4}
+  .sources-item:first-of-type{border-top:none}
+  .sources-item a{color:var(--primary);text-decoration:none;word-break:break-word}
+  .sources-item a:hover{text-decoration:underline}
+  .sources-item .src-label{font-weight:600;min-width:0;flex-shrink:0}
   .dark-toggle{background:none;border:1px solid rgba(255,255,255,.2);color:rgba(255,255,255,.7);border-radius:6px;padding:3px 10px;font-size:.75rem;cursor:pointer;font-family:var(--font);transition:all .2s;margin-left:.5rem}
   .dark-toggle:hover{background:rgba(255,255,255,.1);color:#fff}
   *{box-sizing:border-box;margin:0;padding:0}
@@ -166,11 +185,75 @@
 <body>
 
 <nav class="site-nav">
+  <a class="nav-home-link" href="https://github.com/kr15tyk/CC-pulse" target="_blank" rel="noopener" title="CC Pulse on GitHub">🏠 Home</a>
   <span class="nav-title">CC Pulse Dashboard</span>
   <span class="nav-spacer"></span>
   <span class="nav-meta">Last run: 2026-04-19 17:39 ET</span>
   <button class="dark-toggle" id="dark-toggle" onclick="toggleDarkMode()" title="Toggle dark mode">🌙 Dark</button>
+  <button class="sources-btn" onclick="showSourcesModal()" title="View all monitored sources">📋 Sources</button>
 </nav>
+
+<div id="sources-overlay" class="sources-overlay" onclick="closeSourcesModalOutside(event)">
+  <div class="sources-modal" role="dialog" aria-modal="true" aria-labelledby="sources-title">
+    <div class="sources-modal-hdr">
+      <h2 id="sources-title">📋 Monitored Sources</h2>
+      <button class="sources-close" onclick="closeSourcesModal()" title="Close">&times;</button>
+    </div>
+    <div class="sources-modal-body">
+      <div class="sources-group">
+        <div class="sources-group-title">🇳🇮 NIAP (National Information Assurance Partnership)</div>
+        <div class="sources-item"><span class="src-label">Products (PCL):</span><a href="https://www.niap-ccevs.org/api/project/product/pcl_products_all/" target="_blank" rel="noopener">niap-ccevs.org &mdash; PCL Products API</a></div>
+        <div class="sources-item"><span class="src-label">Protection Profiles:</span><a href="https://www.niap-ccevs.org/api/protection-profile/public_pps_all/" target="_blank" rel="noopener">niap-ccevs.org &mdash; Protection Profiles API</a></div>
+        <div class="sources-item"><span class="src-label">Technical Decisions:</span><a href="https://www.niap-ccevs.org/api/technical-decision/frontend_tds/" target="_blank" rel="noopener">niap-ccevs.org &mdash; Technical Decisions API</a></div>
+        <div class="sources-item"><span class="src-label">News &amp; Events:</span><a href="https://www.niap-ccevs.org/api/publish/announcements/get_news_frontend/" target="_blank" rel="noopener">niap-ccevs.org &mdash; Announcements API</a></div>
+      </div>
+      <div class="sources-group">
+        <div class="sources-group-title">🇳🇮 CSfC (Commercial Solutions for Classified)</div>
+        <div class="sources-item"><span class="src-label">Main:</span><a href="https://www.nsa.gov/resources/everyone/csfc/" target="_blank" rel="noopener">nsa.gov &mdash; CSfC Home</a></div>
+        <div class="sources-item"><span class="src-label">Components List:</span><a href="https://www.nsa.gov/Resources/Commercial-Solutions-for-Classified-Program/Components-List/" target="_blank" rel="noopener">nsa.gov &mdash; CSfC APL Components</a></div>
+        <div class="sources-item"><span class="src-label">Capability Packages:</span><a href="https://www.nsa.gov/resources/everyone/csfc/capability-packages/" target="_blank" rel="noopener">nsa.gov &mdash; Capability Packages</a></div>
+        <div class="sources-item"><span class="src-label">NSA Advisories (RSS):</span><a href="https://www.nsa.gov/rss/rssfeed.aspx?POIID=9" target="_blank" rel="noopener">nsa.gov &mdash; Cybersecurity RSS</a></div>
+        <div class="sources-item"><span class="src-label">CISA Alerts (RSS):</span><a href="https://www.cisa.gov/cybersecurity-advisories/all.xml" target="_blank" rel="noopener">cisa.gov &mdash; All Advisories</a></div>
+      </div>
+      <div class="sources-group">
+        <div class="sources-group-title">🇳🇮 NIST CSRC</div>
+        <div class="sources-item"><span class="src-label">News:</span><a href="https://csrc.nist.gov/news" target="_blank" rel="noopener">csrc.nist.gov &mdash; CSRC News</a></div>
+        <div class="sources-item"><span class="src-label">FIPS Publications:</span><a href="https://csrc.nist.gov/publications/fips" target="_blank" rel="noopener">csrc.nist.gov &mdash; FIPS Pubs</a></div>
+        <div class="sources-item"><span class="src-label">CMVP (Modules In Process):</span><a href="https://csrc.nist.gov/projects/cryptographic-module-validation-program/modules-in-process/modules-in-process-list" target="_blank" rel="noopener">csrc.nist.gov &mdash; CMVP MIP</a></div>
+        <div class="sources-item"><span class="src-label">Post-Quantum Crypto:</span><a href="https://csrc.nist.gov/projects/post-quantum-cryptography" target="_blank" rel="noopener">csrc.nist.gov &mdash; PQC Project</a></div>
+        <div class="sources-item"><span class="src-label">NIST News (RSS):</span><a href="https://www.nist.gov/news-events/cybersecurity/rss.xml" target="_blank" rel="noopener">nist.gov &mdash; Cybersecurity RSS</a></div>
+      </div>
+      <div class="sources-group">
+        <div class="sources-group-title">🌐 CC Portal (International)</div>
+        <div class="sources-item"><span class="src-label">News:</span><a href="https://www.commoncriteriaportal.org/news/index.cfm" target="_blank" rel="noopener">commoncriteriaportal.org &mdash; News</a></div>
+        <div class="sources-item"><span class="src-label">Products:</span><a href="https://www.commoncriteriaportal.org/products/index.cfm" target="_blank" rel="noopener">commoncriteriaportal.org &mdash; Products</a></div>
+        <div class="sources-item"><span class="src-label">Protection Profiles:</span><a href="https://www.commoncriteriaportal.org/pps/index.cfm" target="_blank" rel="noopener">commoncriteriaportal.org &mdash; PPs</a></div>
+        <div class="sources-item"><span class="src-label">Publications (Crypto):</span><a href="https://www.commoncriteriaportal.org/cc/index.cfm" target="_blank" rel="noopener">commoncriteriaportal.org &mdash; CC Publications</a></div>
+        <div class="sources-item"><span class="src-label">PP RSS:</span><a href="https://www.commoncriteriaportal.org/rss/pps.xml" target="_blank" rel="noopener">commoncriteriaportal.org &mdash; PP RSS Feed</a></div>
+      </div>
+      <div class="sources-group">
+        <div class="sources-group-title">🇪🇺 EUCC / ENISA</div>
+        <div class="sources-item"><span class="src-label">Scheme Requirements:</span><a href="https://certification.enisa.europa.eu/browse-topic/eucc_en" target="_blank" rel="noopener">certification.enisa.europa.eu &mdash; EUCC Scheme</a></div>
+        <div class="sources-item"><span class="src-label">Certified Products:</span><a href="https://certification.enisa.europa.eu/certificates_en" target="_blank" rel="noopener">certification.enisa.europa.eu &mdash; Certificates</a></div>
+      </div>
+      <div class="sources-group">
+        <div class="sources-group-title">🇳🇦 NATO NIAPCL</div>
+        <div class="sources-item"><span class="src-label">Product Catalogue:</span><a href="https://www.ia.nato.int/Search/NIAPC/AND/Category_/Manufacturer_10/Country_/SecurityGroup_" target="_blank" rel="noopener">ia.nato.int &mdash; NIAPCL Search</a></div>
+      </div>
+      <div class="sources-group">
+        <div class="sources-group-title">🧪 CCTL Labs</div>
+        <div class="sources-item"><span class="src-label">Lightship Security:</span><a href="https://lightshipsec.com/blog/" target="_blank" rel="noopener">lightshipsec.com &mdash; Blog (RSS)</a></div>
+        <div class="sources-item"><span class="src-label">atsec:</span><a href="https://www.atsec.com/blog/" target="_blank" rel="noopener">atsec.com &mdash; Blog (scraped)</a></div>
+      </div>
+      <div class="sources-group">
+        <div class="sources-group-title">🔒 CC Crypto Catalog (CCDB-018)</div>
+        <div class="sources-item"><span class="src-label">CCDB-018 v1.0 (Jan 2025):</span><a href="https://www.commoncriteriaportal.org/files/ccfiles/CCDB-018-v1.0-2025-Jan-31-Final-Specification_of_Functional_Requirements_for_Cryptography.pdf" target="_blank" rel="noopener">commoncriteriaportal.org &mdash; CCDB-018 PDF</a></div>
+        <div class="sources-item"><span class="src-label">CCDB-014 v3.1:</span><a href="https://www.commoncriteriaportal.org/files/ccfiles/CCDB-014-v3.1-2024-February-29.pdf" target="_blank" rel="noopener">commoncriteriaportal.org &mdash; CCDB-014 PDF</a></div>
+        <div class="sources-item"><span class="src-label">CC:2022 Part 2:</span><a href="https://www.commoncriteriaportal.org/files/ccfiles/CC2022PART2R1.pdf" target="_blank" rel="noopener">commoncriteriaportal.org &mdash; CC:2022 SFRs PDF</a></div>
+      </div>
+    </div>
+  </div>
+</div>
 
 <div class="sticky-top">
   <div class="trend-bar">
@@ -17234,6 +17317,20 @@ function copyFeedUrl() {
   }
 }
 
+function showSourcesModal() {
+  document.getElementById('sources-overlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeSourcesModal() {
+  document.getElementById('sources-overlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+function closeSourcesModalOutside(e) {
+  if (e.target === document.getElementById('sources-overlay')) closeSourcesModal();
+}
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') closeSourcesModal();
+});
 function initEnhancements() {
   // Dark mode restore
   const savedTheme = localStorage.getItem('cc-pulse-theme') || 'light';
