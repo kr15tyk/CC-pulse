@@ -333,45 +333,6 @@ DASHBOARD_TEMPLATE = """
   </div>
 </div>
 
-  <!-- NIAP CCTL Registry -->
-<div class="card {% if cctl_registry_total > 0 %}card-updated{% endif %}" id="sec-cctl-registry" data-has-changes="{{ cctl_registry_total }}">
-  <div class="card-hdr" onclick="toggleCard(this)">
-    <span>NIAP CCTL Registry</span>
-    <span class="card-count">{{ cctl_registry_total }} change{% if cctl_registry_total != 1 %}s{% endif %}</span>
-    <span class="toggle-icon">{% if cctl_registry_total == 0 %}&#9658;{% else %}&#9660;{% endif %}</span>
-  </div>
-  <div class="card-body {% if cctl_registry_total == 0 %}collapsed{% endif %}">
-    {% if diff.niap.cctls.added %}
-    <div class="sub-hdr sub-new">New Labs ({{ diff.niap.cctls.added | length }})</div>
-    {% for lab in diff.niap.cctls.added %}
-    <div class="item-row" data-source="cctl-registry" data-kind="new">
-      <a class="item-link" href="{{ lab.cctl_url or '#' }}" target="_blank">{{ lab.cctl_name }}</a>
-      <span class="item-meta">{{ lab.city }}{% if lab.state_id %}, {{ lab.state_id }}{% endif %}</span>
-    </div>
-    {% endfor %}
-    {% endif %}
-    {% if diff.niap.cctls.removed %}
-    <div class="sub-hdr sub-removed">Removed Labs ({{ diff.niap.cctls.removed | length }})</div>
-    {% for lab in diff.niap.cctls.removed %}
-    <div class="item-row" data-source="cctl-registry" data-kind="removed">
-      <a class="item-link" href="{{ lab.cctl_url or '#' }}" target="_blank">{{ lab.cctl_name }}</a>
-      <span class="item-meta">{{ lab.city }}{% if lab.state_id %}, {{ lab.state_id }}{% endif %}</span>
-    </div>
-    {% endfor %}
-    {% endif %}
-    {% if diff.niap.cctls.status_changes %}
-    <div class="sub-hdr sub-updated">Status Changes ({{ diff.niap.cctls.status_changes | length }})</div>
-    {% for lab in diff.niap.cctls.status_changes %}
-    <div class="item-row" data-source="cctl-registry" data-kind="updated">
-      <a class="item-link" href="{{ lab.cctl_url or '#' }}" target="_blank">{{ lab.cctl_name }}</a>
-      <span class="item-meta">{{ lab.old_status }} &#8594; {{ lab.new_status }}</span>
-    </div>
-    {% endfor %}
-    {% endif %}
-    {% if cctl_registry_total == 0 %}<p class="no-change">No registry changes.</p>{% endif %}
-  </div>
-</div>
-
   <!-- NIAP In-Evaluation -->
 <div class="card {% if in_eval_total > 0 %}card-new{% endif %}" id="sec-niap-inevaluation" data-has-changes="{{ in_eval_total }}">
   <div class="card-hdr" onclick="toggleCard(this)">
@@ -1062,11 +1023,6 @@ def render_dashboard(diff: dict, output_dir: str = "docs") -> None:
     csfc_total_stat = csfc_total
     nist_total_stat = nist_total + cc_crypto_total
 
-    # CCTL registry changes
-    cctls_diff          = niap.get("cctls", {})
-    cctl_registry_total = (len(cctls_diff.get("added", [])) +
-                           len(cctls_diff.get("removed", [])) +
-                           len(cctls_diff.get("status_changes", [])))
 
     # CC Portal totals
     ccp                 = diff.get("cc_portal", {})
@@ -1166,7 +1122,6 @@ def render_dashboard(diff: dict, output_dir: str = "docs") -> None:
         csfc_total_stat = csfc_total_stat,
         nist_total_stat = nist_total_stat,
         sparklines      = sparklines,
-        cctl_registry_total  = cctl_registry_total,
         cc_portal_total      = cc_portal_total,
         cc_portal_total_stat = cc_portal_total_stat,
         period_start         = diff.get("period_start", ""),
