@@ -17325,8 +17325,11 @@ function initHistoryNav() {
   const navDiv = document.createElement('div');
   navDiv.className = 'hist-nav';
   navDiv.innerHTML = '<span style="font-size:.75rem;color:var(--muted);font-weight:600">View:</span>' +
-    '<button class="hist-nav-btn active" data-hist-view="week" onclick="setHistoryView(this,'week')">Last 7 Days</button>' +
-    '<button class="hist-nav-btn" data-hist-view="all" onclick="setHistoryView(this,'all')">All History</button>';
+    '<button class="hist-nav-btn active" data-hist-view="week">Last 7 Days</button>' +
+    '<button class="hist-nav-btn" data-hist-view="all">All History</button>';
+  navDiv.querySelectorAll('.hist-nav-btn').forEach(function(b) {
+    b.addEventListener('click', function() { setHistoryView(b, b.getAttribute('data-hist-view')); });
+  });
   histSec.insertBefore(navDiv, card);
   // Apply default 7-day view
   setHistoryView(navDiv.querySelector('[data-hist-view="week"]'), 'week');
