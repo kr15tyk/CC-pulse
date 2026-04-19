@@ -194,11 +194,6 @@ def collect_niap():
     tds = get_json(base + eps["tds"])
     data["tds"] = tds or []
 
-    log.info("  CCTL Directory...")
-    cctls_raw = get_json(base + eps["cctls"])
-    data["cctls"] = (
-        cctls_raw.get("results", {}).get("cctls", []) if cctls_raw else []
-    )
 
     log.info("  Events...")
     ev_curr = get_json(base + eps["events_curr"])
