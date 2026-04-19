@@ -79,14 +79,10 @@ CC_PORTAL_RSS = "https://www.commoncriteriaportal.org/rss/pps.xml"
 
 # -- CCTL Lab Feeds ---------------------------------------------------------
 CCTL_LABS = [
-        {"name": "atsec information security",  "rss": "https://www.atsec.com/feed/",         "url": "https://www.atsec.com/blog/",                      "scrape": False},
-        {"name": "Lightship Security",           "rss": "https://lightshipsec.com/feed/",      "url": "https://lightshipsec.com/blog/",                   "scrape": False},
-        {"name": "Advanced Data Security",       "rss": "https://adseclab.com/feed/",          "url": "https://adseclab.com/",                            "scrape": False},
-        {"name": "Acumen Security (Intertek)",   "rss": None,                                  "url": "https://www.intertek.com/iot/cybersecurity/",       "scrape": True},
-        {"name": "Booz Allen Hamilton CCTL",     "rss": None,                                  "url": "https://www.boozallen.com/insights.html",           "scrape": True},
-        {"name": "DEKRA Cybersecurity",          "rss": None,                                  "url": "https://www.dekra.com/en/common-criteria/",         "scrape": True},
-        {"name": "Gossamer Security Solutions",  "rss": None,                                  "url": "https://gossamericsec.com/",                       "scrape": True},
-        {"name": "Leidos CCTL",                  "rss": None,                                  "url": "https://www.leidos.com/",                          "scrape": True},
+        # RSS feed working and CC-focused
+        {"name": "Lightship Security",  "rss": "https://lightshipsec.com/feed/",  "url": "https://lightshipsec.com/blog/",  "scrape": False},
+        # RSS broken after site rebuild (2025); scrape blog directly
+        {"name": "atsec",               "rss": None,                              "url": "https://www.atsec.com/blog/",     "scrape": True},
 ]
 
 # -- Product Filters --------------------------------------------------------
