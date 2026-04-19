@@ -1292,7 +1292,7 @@ function initEnhancements() {
   document.documentElement.setAttribute('data-theme', savedTheme);
   const darkBtn = document.getElementById('dark-toggle');
   if (darkBtn) darkBtn.textContent = savedTheme === 'dark' ? '\u2600\uFE0F Light' : '\u{1F319} Dark';
-  updateHamDarkLabel(savedTheme === 'dark');
+  updateHamDarkLabel(document.documentElement.getAttribute('data-theme') === 'dark');
 
   // Zero stat tile de-emphasis
   document.querySelectorAll('.stat').forEach(function(tile) {
