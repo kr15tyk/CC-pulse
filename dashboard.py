@@ -268,7 +268,7 @@ DASHBOARD_TEMPLATE = """
   .ham-item .ham-icon{font-size:.95rem;width:1.2rem;text-align:center;flex-shrink:0}
   .ham-item.ham-divider{border-top:1px solid var(--border);margin-top:.25rem;padding-top:.6rem}
   .ham-item.ham-disabled{opacity:.45;cursor:not-allowed;pointer-events:none}
-  .ham-wrap{position:relative;display:flex;align-items:center}
+  .ham-wrap{position:relative;display:flex;align-items:center;gap:.75rem}
   .sources-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:9000;align-items:flex-start;justify-content:center;padding-top:5vh}
   .sources-overlay.open{display:flex}
   .sources-modal{background:var(--card);border:1px solid var(--border);border-radius:12px;box-shadow:var(--shadow-md);width:min(820px,95vw);max-height:85vh;overflow:hidden;display:flex;flex-direction:column}
@@ -421,14 +421,13 @@ DASHBOARD_TEMPLATE = """
 <nav class="site-nav">
   <span class="nav-title">CC Pulse Dashboard</span>
   <span class="nav-spacer"></span>
-  <span class="nav-meta">Last run: {{ generated_at }}</span>
   <div class="ham-wrap">
+    <span class="nav-meta">Last run: {{ generated_at }}</span>
     <button class="ham-btn" id="ham-btn" onclick="toggleHamMenu()" aria-expanded="false" aria-haspopup="true" title="Open menu">&#9776;</button>
     <div class="ham-menu" id="ham-menu" role="menu">
-      <a class="ham-item" href="https://github.com/kr15tyk/CC-pulse" target="_blank" rel="noopener" role="menuitem"><span class="ham-icon">&#127968;</span>Home</a>
+      <a class="ham-item" href="https://kr15tyk.github.io/CC-pulse/cc_dashboard.html" role="menuitem"><span class="ham-icon">&#127968;</span>Home</a>
       <button class="ham-item" id="ham-darkmode" onclick="toggleDarkMode()" role="menuitem"><span class="ham-icon" id="ham-dark-icon">&#127769;</span><span id="ham-dark-label">Dark Mode</span></button>
       <button class="ham-item" onclick="showSourcesModal()" role="menuitem"><span class="ham-icon">&#128203;</span>Source List</button>
-      <a class="ham-item ham-disabled" id="ham-webex" href="#" role="menuitem"><span class="ham-icon">&#128172;</span>WebEx Space</a>
       <button class="ham-item ham-divider" onclick="copyFeedUrl()" role="menuitem"><span class="ham-icon">&#128225;</span>Copy RSS URL</button>
     </div>
   </div>
@@ -1192,9 +1191,6 @@ DASHBOARD_TEMPLATE = """
 <footer>
   <span>CC Pulse &middot; Auto-refreshes daily (01:00 EST) &middot; NIAP, CSfC, NIST, CC Portal, NATO NIAPCL, EUCC / ENISA</span>
   <span>Last run: {{ generated_at }}</span>
-  <span>
-    <button class="ctrl-btn" id="copy-feed-btn" onclick="copyFeedUrl()" title="Copy RSS feed URL to clipboard" style="font-size:.7rem;padding:3px 10px">&#128225; Copy Feed URL</button>
-  </span>
 </footer>
 
 <script>
@@ -1264,8 +1260,8 @@ function closeHamMenu() {
 function updateHamDarkLabel(isDark) {
   var icon  = document.getElementById('ham-dark-icon');
   var label = document.getElementById('ham-dark-label');
-  if (icon)  icon.textContent  = isDark ? '☀️' : '🌙';
-  if (label) label.textContent = isDark ? 'Light Mode' : 'Dark Mode';
+  if (icon)  icon.textContent  = isDark ? '🌙' : '☀️';
+  if (label) label.textContent = isDark ? 'Dark Mode' : 'Light Mode';
 }
 document.addEventListener('click', function(e) {
   var wrap = document.querySelector('.ham-wrap');
