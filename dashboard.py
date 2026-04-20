@@ -1059,12 +1059,14 @@ DASHBOARD_TEMPLATE = """
             <span class="toggle-icon">{% if eucc_req_total == 0 %}&#9658;{% else %}&#9660;{% endif %}</span>
           </div>
           <div class="card-body {% if eucc_req_total == 0 %}collapsed{% endif %}">
-            {% for item in diff.eucc.pages.requirements.added if diff.eucc.pages and diff.eucc.pages.requirements %}
+            {% if diff.eucc.pages and diff.eucc.pages.requirements %}
+            {% for item in diff.eucc.pages.requirements.added %}
             <div class="item-row" data-source="eucc" data-kind="updated">
               <a class="item-link" href="{{ item.href or '#' }}" target="_blank">{{ item.text or item.name or item }}</a>
               <span class="item-meta"></span>
             </div>
             {% endfor %}
+            {% endif %}
             {% if eucc_req_total == 0 %}<p class="no-change">No EUCC requirement changes detected.</p>{% endif %}
           </div>
         </div>
