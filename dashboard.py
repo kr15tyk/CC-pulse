@@ -774,7 +774,6 @@ DASHBOARD_TEMPLATE = """
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>NIAP Protection Profiles</span>
     <span class="card-count">{{ niap_pp_total }} change{% if niap_pp_total != 1 %}s{% endif %}</span>
-      {% endfor %}
     </span>
     <span class="toggle-icon">{% if niap_pp_total == 0 %}&#9658;{% else %}&#9660;{% endif %}</span>
   </div>
@@ -824,7 +823,6 @@ DASHBOARD_TEMPLATE = """
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>NIAP Technical Decisions</span>
     <span class="card-count">{{ niap_td_total }} change{% if niap_td_total != 1 %}s{% endif %}</span>
-      {% endfor %}
     </span>
     <span class="toggle-icon">{% if niap_td_total == 0 %}&#9658;{% else %}&#9660;{% endif %}</span>
   </div>
@@ -866,7 +864,6 @@ DASHBOARD_TEMPLATE = """
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>CSfC Component Selections</span>
     <span class="card-count">{{ csfc_total }} update{% if csfc_total != 1 %}s{% endif %}</span>
-      {% endfor %}
     </span>
     <span class="toggle-icon">{% if csfc_total == 0 %}&#9658;{% else %}&#9660;{% endif %}</span>
   </div>
@@ -893,7 +890,6 @@ DASHBOARD_TEMPLATE = """
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>CC Crypto Documentation</span>
     <span class="card-count">{{ cc_crypto_total }} update{% if cc_crypto_total != 1 %}s{% endif %}</span>
-      {% endfor %}
     </span>
     <span class="toggle-icon">{% if cc_crypto_total == 0 %}&#9658;{% else %}&#9660;{% endif %}</span>
   </div>
@@ -919,7 +915,6 @@ DASHBOARD_TEMPLATE = """
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>NIST Documentation</span>
     <span class="card-count">{{ nist_total }} update{% if nist_total != 1 %}s{% endif %}</span>
-      {% endfor %}
     </span>
     <span class="toggle-icon">{% if nist_total == 0 %}&#9658;{% else %}&#9660;{% endif %}</span>
   </div>
@@ -950,7 +945,6 @@ DASHBOARD_TEMPLATE = """
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>CC Portal (International)</span>
     <span class="card-count">{{ cc_portal_total }} new item{% if cc_portal_total != 1 %}s{% endif %}</span>
-      {% endfor %}
     </span>
     <span class="toggle-icon">{% if cc_portal_total == 0 %}&#9658;{% else %}&#9660;{% endif %}</span>
   </div>
@@ -1025,7 +1019,6 @@ DASHBOARD_TEMPLATE = """
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>CCTL Updates</span>
     <span class="card-count">{{ cctl_total }} new item{% if cctl_total != 1 %}s{% endif %}</span>
-      {% endfor %}
     </span>
     <span class="toggle-icon collapsed">▼</span>
   </div>
