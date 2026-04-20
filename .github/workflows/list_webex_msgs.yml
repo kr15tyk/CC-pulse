@@ -11,12 +11,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: List recent Webex messages
+        env:
+          WEBEX_TOKEN: ${{ secrets.CC_WEBEX_BOT_TOKEN }}
+          WEBEX_ROOM: ${{ secrets.CC_WEBEX_ROOM_ID }}
+          MAX_MSGS: ${{ github.event.inputs.max_messages }}
         run: |
-          curl -s "https://webexapis.com/v1/messages?roomId=${{ secrets.CC_WEBEX_ROOM_ID }}&max=${{ github.event.inputs.max_messages }}" \
-            -H "Authorization: Bearer ${{ secrets.CC_WEBEX_BOT_TOKEN }}" \
-            | python3 -c "
-import json, sys
-data = json.load(sys.stdin)
+          curl -s "https://webexapis.com/v1/messages?roomId=${WEBEX_ROOM}&max=${MAX_MSGS}" -H "Authorization: Bearer ${WEBEX_TOKEN}" > /tmp/msgs.json
+          python3 -c "
+import json
+with open('/tmp/msgs.json') as f:
+    data = json.load(f)
 msgs = data.get('items', [])
 print(f'Found {len(msgs)} messages:')
 for m in msgs:
