@@ -1,0 +1,27 @@
+name: List Webex Messages (one-time)
+on:
+  workflow_dispatch:
+    inputs:
+      max_messages:
+        description: Number of recent messages to list
+        required: false
+        default: "50"
+jobs:
+  list:
+    runs-on: ubuntu-latest
+    steps:
+      - name: List recent Webex messages
+        run: |
+          curl -s "https://webexapis.com/v1/messages?roomId=${{ secrets.CC_WEBEX_ROOM_ID }}&max=${{ github.event.inputs.max_messages }}" \
+            -H "Authorization: Bearer ${{ secrets.CC_WEBEX_BOT_TOKEN }}" \
+            | python3 -c "
+import json, sys
+data = json.load(sys.stdin)
+msgs = data.get('items', [])
+print(f'Found {len(msgs)} messages:')
+for m in msgs:
+    mid = m.get('id','')
+    created = m.get('created','')
+    text = m.get('text','')[:80].replace(chr(10),' ')
+    print(f'  {created}  {mid}  {text}')
+"
