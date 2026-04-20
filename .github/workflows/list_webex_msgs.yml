@@ -17,20 +17,10 @@ jobs:
           MAX_MSGS: ${{ github.event.inputs.max_messages }}
         run: |
           curl -s "https://webexapis.com/v1/messages?roomId=${WEBEX_ROOM}&max=${MAX_MSGS}" -H "Authorization: Bearer ${WEBEX_TOKEN}" > /tmp/msgs.json
-          echo "=== HTTP status check ==="
+          echo "File size:"
           wc -c /tmp/msgs.json
-          echo "=== Message list ==="
-          python3 << 'PYEOF'
-import json
-with open('/tmp/msgs.json') as f:
-    raw = f.read()
-data = json.loads(raw)
-msgs = data.get('items', [])
-print(f'Total messages: {len(msgs)}')
-for m in msgs:
-    mid = m.get('id','')
-    created = m.get('created','')
-    person = m.get('personEmail','')
-    text = m.get('text','')[:50].replace(chr(10),' ')
-    print(f'{created} | {mid} | {person} | {text}')
-PYEOF
+          echo "First 200 chars:"
+          head -c 200 /tmp/msgs.json
+          echo ""
+          echo "Parsed messages:"
+          cat /tmp/msgs.json | python3 -c "import json,sys; d=json.load(sys.stdin); print('COUNT:',len(d.get('items',[]))) or [print('MSG:', m.get('created','')[:19], '|', m.get('id',''), '|', m.get('personEmail','')) for m in d.get('items',[])]"
