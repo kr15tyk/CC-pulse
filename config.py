@@ -36,6 +36,7 @@ WEBHOOK_URL = os.environ.get("CC_WEBHOOK_URL", "")
 
 # -- Dashboard --------------------------------------------------------------
 DASHBOARD_DIR      = "docs"
+STAGING_DIR        = "docs/staging"
 DASHBOARD_FILENAME = "cc_dashboard.html"
 DASHBOARD_RSS      = "cc_feed.xml"
 
