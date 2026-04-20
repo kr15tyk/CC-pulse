@@ -450,7 +450,7 @@ DASHBOARD_TEMPLATE = """
         <div class="sources-item"><span class="src-label">Main:</span><a href="https://www.nsa.gov/Resources/Commercial-Solutions-for-Classified-Program/" target="_blank" rel="noopener">nsa.gov &mdash; CSfC Home</a></div>
         <div class="sources-item"><span class="src-label">Components List:</span><a href="https://www.nsa.gov/Resources/Commercial-Solutions-for-Classified-Program/Components-List/" target="_blank" rel="noopener">nsa.gov &mdash; CSfC APL Components</a></div>
         <div class="sources-item"><span class="src-label">Capability Packages:</span><a href="https://www.nsa.gov/Resources/Commercial-Solutions-for-Classified-Program/Capability-Packages/" target="_blank" rel="noopener">nsa.gov &mdash; Capability Packages</a></div>
-        <div class="sources-item"><span class="src-label">NSA Advisories (RSS):</span><a href="https://www.nsa.gov/DesktopModules/ArticleCS/RSS.ashx?ContentType=1&Site=1282&max=20" target="_blank" rel="noopener">nsa.gov &mdash; Cybersecurity RSS</a></div>
+        <div class="sources-item"><span class="src-label">NSA Advisories (RSS):</span><a href="https://www.nsa.gov/DesktopModules/ArticleCS/RSS.ashx?ContentType=1&amp;Site=1282&amp;max=20" target="_blank" rel="noopener">nsa.gov &mdash; Cybersecurity RSS</a></div>
         <div class="sources-item"><span class="src-label">CISA Alerts (RSS):</span><a href="https://www.cisa.gov/cybersecurity-advisories/all.xml" target="_blank" rel="noopener">cisa.gov &mdash; All Advisories</a></div>
       </div>
       <div class="sources-group">
