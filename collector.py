@@ -21,6 +21,7 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 import feedparser
 import requests
 from bs4 import BeautifulSoup
+from urllib.parse import urljoin
 from datetime import datetime, timezone
 
 import config
@@ -311,11 +312,14 @@ def scrapelab_items(url):
     for tag in soup.find_all(["h2", "h3", "h4", "article"]):
         a = tag.find("a") if tag.name != "a" else tag
         if a and a.get_text(strip=True):
+            href = a.get("href", "")
+            if href:
+                href = urljoin(url, href)
             items.append({
                 "title":     a.get_text(strip=True),
-                "link":      a.get("href", ""),
+                "link":      href,
                 "published": "",
-                "id":        a.get("href", a.get_text(strip=True)),
+                "id":        href or a.get_text(strip=True),
             })
     return items[:20]
 

@@ -185,12 +185,12 @@ BODY_WATCH_KEYWORDS = [
 CSFC_BASE = "https://www.nsa.gov"
 
 CSFC_PAGES = {
-        "home":          "/resources/everyone/csfc/",
-        "apl":           "/resources/everyone/csfc/approved-products-list/",
-        "cap_packages":  "/resources/everyone/csfc/capability-packages/",
-        "faq":           "/resources/everyone/csfc/faqs/",
-        "registration":  "/resources/everyone/csfc/registration/",
-        "kmr":           "/resources/everyone/csfc/key-management/",
+        "home":          "/Resources/Commercial-Solutions-for-Classified-Program/",
+        "apl":           "/Resources/Commercial-Solutions-for-Classified-Program/Components-List/",
+        "cap_packages":  "/Resources/Commercial-Solutions-for-Classified-Program/Capability-Packages/",
+        "faq":           "/Resources/Commercial-Solutions-for-Classified-Program/faq/",
+        "registration":  "/Resources/Commercial-Solutions-for-Classified-Program/Solution-Registration/",
+        "kmr":           "/Resources/Commercial-Solutions-for-Classified-Program/Customer-Handbook/",
         "announcements": "/Resources/Commercial-Solutions-for-Classified-Program/Announcements/",
 }
 
@@ -227,7 +227,7 @@ CSFC_COMPONENTS_LIST_URL = "https://www.nsa.gov/Resources/Commercial-Solutions-f
 CSFC_PRODUCT_LIST_URL = "https://www.nsa.gov/Resources/Commercial-Solutions-for-Classified-Program/Components-List/"
 
 CSFC_FEEDS = [
-        {"name": "NSA Cybersecurity Advisories", "rss": "https://www.nsa.gov/rss/rssfeed.aspx?POIID=9", "scrape": False},
+        {"name": "NSA Cybersecurity Advisories", "rss": "https://www.nsa.gov/DesktopModules/ArticleCS/RSS.ashx?ContentType=1&Site=1282&max=20", "scrape": False},
         {"name": "CISA Alerts",                  "rss": "https://www.cisa.gov/cybersecurity-advisories/all.xml", "scrape": False},
         {"name": "DISA STIGs & APL News",        "rss": None, "url": "https://public.cyber.mil/stigs/", "scrape": True},
 ]
@@ -311,8 +311,8 @@ CC_CRYPTO_DOCS = {
                     "Specification_of_Functional_Requirements_for_Cryptography.pdf"
         ),
         "CCDB-014 v3.1 Assurance Continuity (Feb 2024)": (
-                    "https://www.commoncriteriaportal.org/files/ccfiles/"
-                    "CCDB-014-v3.1-2024-February-29.pdf"
+                    "https://www.commoncriteriaportal.org/files/operatingprocedures/"
+                    "CCDB-014-v3.1-2024-February-29-Final-Assurance_Continuity.pdf"
         ),
         "CC:2022 Part 2 Security Functional Requirements": (
                     "https://www.commoncriteriaportal.org/files/ccfiles/CC2022PART2R1.pdf"

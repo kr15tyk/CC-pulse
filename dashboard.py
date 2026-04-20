@@ -447,10 +447,10 @@ DASHBOARD_TEMPLATE = """
       </div>
       <div class="sources-group">
         <div class="sources-group-title">🇳🇮 CSfC (Commercial Solutions for Classified)</div>
-        <div class="sources-item"><span class="src-label">Main:</span><a href="https://www.nsa.gov/resources/everyone/csfc/" target="_blank" rel="noopener">nsa.gov &mdash; CSfC Home</a></div>
+        <div class="sources-item"><span class="src-label">Main:</span><a href="https://www.nsa.gov/Resources/Commercial-Solutions-for-Classified-Program/" target="_blank" rel="noopener">nsa.gov &mdash; CSfC Home</a></div>
         <div class="sources-item"><span class="src-label">Components List:</span><a href="https://www.nsa.gov/Resources/Commercial-Solutions-for-Classified-Program/Components-List/" target="_blank" rel="noopener">nsa.gov &mdash; CSfC APL Components</a></div>
-        <div class="sources-item"><span class="src-label">Capability Packages:</span><a href="https://www.nsa.gov/resources/everyone/csfc/capability-packages/" target="_blank" rel="noopener">nsa.gov &mdash; Capability Packages</a></div>
-        <div class="sources-item"><span class="src-label">NSA Advisories (RSS):</span><a href="https://www.nsa.gov/rss/rssfeed.aspx?POIID=9" target="_blank" rel="noopener">nsa.gov &mdash; Cybersecurity RSS</a></div>
+        <div class="sources-item"><span class="src-label">Capability Packages:</span><a href="https://www.nsa.gov/Resources/Commercial-Solutions-for-Classified-Program/Capability-Packages/" target="_blank" rel="noopener">nsa.gov &mdash; Capability Packages</a></div>
+        <div class="sources-item"><span class="src-label">NSA Advisories (RSS):</span><a href="https://www.nsa.gov/DesktopModules/ArticleCS/RSS.ashx?ContentType=1&amp;Site=1282&amp;max=20" target="_blank" rel="noopener">nsa.gov &mdash; Cybersecurity RSS</a></div>
         <div class="sources-item"><span class="src-label">CISA Alerts (RSS):</span><a href="https://www.cisa.gov/cybersecurity-advisories/all.xml" target="_blank" rel="noopener">cisa.gov &mdash; All Advisories</a></div>
       </div>
       <div class="sources-group">
@@ -486,7 +486,7 @@ DASHBOARD_TEMPLATE = """
       <div class="sources-group">
         <div class="sources-group-title">🔒 CC Crypto Catalog (CCDB-018)</div>
         <div class="sources-item"><span class="src-label">CCDB-018 v1.0 (Jan 2025):</span><a href="https://www.commoncriteriaportal.org/files/ccfiles/CCDB-018-v1.0-2025-Jan-31-Final-Specification_of_Functional_Requirements_for_Cryptography.pdf" target="_blank" rel="noopener">commoncriteriaportal.org &mdash; CCDB-018 PDF</a></div>
-        <div class="sources-item"><span class="src-label">CCDB-014 v3.1:</span><a href="https://www.commoncriteriaportal.org/files/ccfiles/CCDB-014-v3.1-2024-February-29.pdf" target="_blank" rel="noopener">commoncriteriaportal.org &mdash; CCDB-014 PDF</a></div>
+        <div class="sources-item"><span class="src-label">CCDB-014 v3.1:</span><a href="https://www.commoncriteriaportal.org/files/operatingprocedures/CCDB-014-v3.1-2024-February-29-Final-Assurance_Continuity.pdf" target="_blank" rel="noopener">commoncriteriaportal.org &mdash; CCDB-014 PDF</a></div>
         <div class="sources-item"><span class="src-label">CC:2022 Part 2:</span><a href="https://www.commoncriteriaportal.org/files/ccfiles/CC2022PART2R1.pdf" target="_blank" rel="noopener">commoncriteriaportal.org &mdash; CC:2022 SFRs PDF</a></div>
       </div>
     </div>
