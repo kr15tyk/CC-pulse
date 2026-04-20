@@ -126,7 +126,7 @@ def _empty_snapshot() -> dict:
 
 
 # ── Run modes ─────────────────────────────────────────────────────────────────
-def run_daily() -> None:
+def run_daily(output_dir: str = None) -> None:
     """Collect, diff, dashboard, alert (Webex + immediate email on alerts)."""
     _setup_logging()
     collector, differ, dashboard, emailer = _imports()
@@ -190,7 +190,7 @@ def run_daily() -> None:
     _rotate_old_files()
 
     # 5. Render dashboard (HTML + RSS)
-    dashboard.render_dashboard(diff)
+    dashboard.render_dashboard(diff, output_dir=output_dir or config.DASHBOARD_DIR)
 
     # 6. Fire alerts if keyword matches found (Webex + webhook + immediate email, fix #5)
     alerts = diff.get("alerts", [])
@@ -339,12 +339,19 @@ def main() -> None:
         action="store_true",
         help="Re-render dashboard from the latest stored diff (no collection)",
     )
+    parser.add_argument(
+        "--staging",
+        action="store_true",
+        help="Run daily pipeline but output to docs/staging/ (private test dashboard)",
+    )
     args = parser.parse_args()
 
     if args.readme:
         _setup_logging()
         _, _, _, emailer = _imports()
         emailer.send_readme_message()
+    elif args.staging:
+        run_daily(output_dir=config.STAGING_DIR)
     elif args.redash:
         run_redash()
     elif args.bootstrap:
