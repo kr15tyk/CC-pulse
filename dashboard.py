@@ -1185,7 +1185,7 @@ function toggleDarkMode() {
   const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
   document.documentElement.setAttribute('data-theme', isDark ? 'light' : 'dark');
   const btn = document.getElementById('dark-toggle');
-  if (btn) btn.textContent = isDark ? '\u{1F319} Dark' : '\u2600\uFE0F Light';
+  if (btn) btn.textContent = isDark ? '🌙 Dark' : '\u2600\uFE0F Light';
   updateHamDarkLabel(isDark);
   localStorage.setItem('cc-pulse-theme', isDark ? 'light' : 'dark');
 }
@@ -1255,7 +1255,7 @@ function initEnhancements() {
   const savedTheme = localStorage.getItem('cc-pulse-theme') || 'light';
   document.documentElement.setAttribute('data-theme', savedTheme);
   const darkBtn = document.getElementById('dark-toggle');
-  if (darkBtn) darkBtn.textContent = savedTheme === 'dark' ? '\u2600\uFE0F Light' : '\u{1F319} Dark';
+  if (darkBtn) darkBtn.textContent = savedTheme === 'dark' ? '\u2600\uFE0F Light' : '🌙 Dark';
   updateHamDarkLabel(document.documentElement.getAttribute('data-theme') === 'dark');
 
   // Zero stat tile de-emphasis
