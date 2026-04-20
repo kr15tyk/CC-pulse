@@ -311,8 +311,8 @@ CC_CRYPTO_DOCS = {
                     "Specification_of_Functional_Requirements_for_Cryptography.pdf"
         ),
         "CCDB-014 v3.1 Assurance Continuity (Feb 2024)": (
-                    "https://www.commoncriteriaportal.org/files/ccfiles/"
-                    "CCDB-014-v3.1-2024-February-29.pdf"
+                    "https://www.commoncriteriaportal.org/files/operatingprocedures/"
+                    "CCDB-014-v3.1-2024-February-29-Final-Assurance_Continuity.pdf"
         ),
         "CC:2022 Part 2 Security Functional Requirements": (
                     "https://www.commoncriteriaportal.org/files/ccfiles/CC2022PART2R1.pdf"
