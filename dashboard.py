@@ -653,7 +653,6 @@ DASHBOARD_TEMPLATE = """
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>NIAP In-Evaluation Products</span>
     <span class="card-count">{% if in_eval_total > 0 %}{{ in_eval_total }} change{% if in_eval_total != 1 %}s{% endif %}{% else %}{{ in_eval_current }} active{% endif %}</span>
-      {% endfor %}
     </span>
   </div>
   <div class="card-body {% if in_eval_total == 0 %}collapsed{% endif %}">
@@ -689,7 +688,6 @@ DASHBOARD_TEMPLATE = """
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>NIAP News &amp; Announcements</span>
     <span class="card-count">{{ niap_news_total }} new item{% if niap_news_total != 1 %}s{% endif %}</span>
-      {% endfor %}
     </span>
     <span class="toggle-icon">{% if niap_news_total == 0 and not diff.niap.events.added %}&#9658;{% else %}&#9660;{% endif %}</span>
   </div>
@@ -731,7 +729,6 @@ DASHBOARD_TEMPLATE = """
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>NIAP PCL — All Certifications</span>
     <span class="card-count">{{ pcl_all_total }} change{% if pcl_all_total != 1 %}s{% endif %}</span>
-      {% endfor %}
     </span>
   </div>
   <div class="card-body {% if pcl_all_total == 0 %}collapsed{% endif %}">
