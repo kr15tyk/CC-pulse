@@ -364,8 +364,6 @@ DASHBOARD_TEMPLATE = """
   .cp-meta{font-size:.7rem;color:var(--muted);margin-top:2px} .cp-detail{font-size:.72rem;color:var(--muted)} .cp-date{font-size:.7rem}
   .new-badge{display:inline-block;background:#00875a;color:#fff;font-size:.55rem;font-weight:700;padding:1px 5px;border-radius:3px;margin-right:.35rem;letter-spacing:.04em;vertical-align:middle;animation:newGlow 2s ease-in-out infinite}
   @keyframes newGlow{0%,100%{box-shadow:0 0 4px rgba(0,135,90,.5)}50%{box-shadow:0 0 10px rgba(0,135,90,.9)}}
-  .sparkline{display:inline-flex;align-items:flex-end;gap:2px;height:16px;margin-right:6px;vertical-align:middle}
-  .sparkline span,.sp-bar{display:inline-block;width:4px;background:var(--border);border-radius:2px;min-height:2px}
   .last-active{font-size:.65rem;color:var(--muted);opacity:.6;margin-left:.4rem} .card.zero-hidden{display:none}
   footer,.site-footer{margin-top:3rem;padding:1.5rem 2rem;border-top:1px solid var(--border);font-size:.75rem;color:var(--muted);display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap;background:var(--card)}
   @media(max-width:768px){
@@ -655,9 +653,6 @@ DASHBOARD_TEMPLATE = """
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>NIAP In-Evaluation Products</span>
     <span class="card-count">{% if in_eval_total > 0 %}{{ in_eval_total }} change{% if in_eval_total != 1 %}s{% endif %}{% else %}{{ in_eval_current }} active{% endif %}</span>
-    <span class="sparkline">
-      {% for v in sparklines.in_eval %}
-      <span class="sp-bar" style="height:{{ v }}%" title="{{ sp_counts.in_eval[loop.index0] }} change{% if sp_counts.in_eval[loop.index0] != 1 %}s{% endif %}"></span>
       {% endfor %}
     </span>
   </div>
@@ -694,9 +689,6 @@ DASHBOARD_TEMPLATE = """
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>NIAP News &amp; Announcements</span>
     <span class="card-count">{{ niap_news_total }} new item{% if niap_news_total != 1 %}s{% endif %}</span>
-    <span class="sparkline">
-      {% for v in sparklines.niap_news %}
-      <span class="sp-bar" style="height:{{ v }}%" title="{{ sp_counts.niap_news[loop.index0] }} change{% if sp_counts.niap_news[loop.index0] != 1 %}s{% endif %}"></span>
       {% endfor %}
     </span>
     <span class="toggle-icon">{% if niap_news_total == 0 and not diff.niap.events.added %}&#9658;{% else %}&#9660;{% endif %}</span>
@@ -739,9 +731,6 @@ DASHBOARD_TEMPLATE = """
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>NIAP PCL — All Certifications</span>
     <span class="card-count">{{ pcl_all_total }} change{% if pcl_all_total != 1 %}s{% endif %}</span>
-    <span class="sparkline">
-      {% for v in sparklines.pcl_all %}
-      <span class="sp-bar" style="height:{{ v }}%" title="{{ sp_counts.pcl_all[loop.index0] }} change{% if sp_counts.pcl_all[loop.index0] != 1 %}s{% endif %}"></span>
       {% endfor %}
     </span>
   </div>
@@ -788,9 +777,6 @@ DASHBOARD_TEMPLATE = """
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>NIAP Protection Profiles</span>
     <span class="card-count">{{ niap_pp_total }} change{% if niap_pp_total != 1 %}s{% endif %}</span>
-    <span class="sparkline">
-      {% for v in sparklines.niap_pp %}
-      <span class="sp-bar" style="height:{{ v }}%" title="{{ sp_counts.niap_pp[loop.index0] }} change{% if sp_counts.niap_pp[loop.index0] != 1 %}s{% endif %}"></span>
       {% endfor %}
     </span>
     <span class="toggle-icon">{% if niap_pp_total == 0 %}&#9658;{% else %}&#9660;{% endif %}</span>
@@ -841,9 +827,6 @@ DASHBOARD_TEMPLATE = """
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>NIAP Technical Decisions</span>
     <span class="card-count">{{ niap_td_total }} change{% if niap_td_total != 1 %}s{% endif %}</span>
-    <span class="sparkline">
-      {% for v in sparklines.niap_td %}
-      <span class="sp-bar" style="height:{{ v }}%" title="{{ sp_counts.niap_td[loop.index0] }} change{% if sp_counts.niap_td[loop.index0] != 1 %}s{% endif %}"></span>
       {% endfor %}
     </span>
     <span class="toggle-icon">{% if niap_td_total == 0 %}&#9658;{% else %}&#9660;{% endif %}</span>
@@ -886,9 +869,6 @@ DASHBOARD_TEMPLATE = """
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>CSfC Component Selections</span>
     <span class="card-count">{{ csfc_total }} update{% if csfc_total != 1 %}s{% endif %}</span>
-    <span class="sparkline">
-      {% for v in sparklines.csfc %}
-      <span class="sp-bar" style="height:{{ v }}%" title="{{ sp_counts.csfc[loop.index0] }} change{% if sp_counts.csfc[loop.index0] != 1 %}s{% endif %}"></span>
       {% endfor %}
     </span>
     <span class="toggle-icon">{% if csfc_total == 0 %}&#9658;{% else %}&#9660;{% endif %}</span>
@@ -916,9 +896,6 @@ DASHBOARD_TEMPLATE = """
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>CC Crypto Documentation</span>
     <span class="card-count">{{ cc_crypto_total }} update{% if cc_crypto_total != 1 %}s{% endif %}</span>
-    <span class="sparkline">
-      {% for v in sparklines.cc_crypto %}
-      <span class="sp-bar" style="height:{{ v }}%" title="{{ sp_counts.cc_crypto[loop.index0] }} change{% if sp_counts.cc_crypto[loop.index0] != 1 %}s{% endif %}"></span>
       {% endfor %}
     </span>
     <span class="toggle-icon">{% if cc_crypto_total == 0 %}&#9658;{% else %}&#9660;{% endif %}</span>
@@ -945,9 +922,6 @@ DASHBOARD_TEMPLATE = """
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>NIST Documentation</span>
     <span class="card-count">{{ nist_total }} update{% if nist_total != 1 %}s{% endif %}</span>
-    <span class="sparkline">
-      {% for v in sparklines.nist %}
-      <span class="sp-bar" style="height:{{ v }}%" title="{{ sp_counts.nist[loop.index0] }} change{% if sp_counts.nist[loop.index0] != 1 %}s{% endif %}"></span>
       {% endfor %}
     </span>
     <span class="toggle-icon">{% if nist_total == 0 %}&#9658;{% else %}&#9660;{% endif %}</span>
@@ -979,9 +953,6 @@ DASHBOARD_TEMPLATE = """
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>CC Portal (International)</span>
     <span class="card-count">{{ cc_portal_total }} new item{% if cc_portal_total != 1 %}s{% endif %}</span>
-    <span class="sparkline">
-      {% for v in sparklines.cc_portal %}
-      <span class="sp-bar" style="height:{{ v }}%" title="{{ sp_counts.cc_portal[loop.index0] }} change{% if sp_counts.cc_portal[loop.index0] != 1 %}s{% endif %}"></span>
       {% endfor %}
     </span>
     <span class="toggle-icon">{% if cc_portal_total == 0 %}&#9658;{% else %}&#9660;{% endif %}</span>
@@ -1057,9 +1028,6 @@ DASHBOARD_TEMPLATE = """
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>CCTL Updates</span>
     <span class="card-count">{{ cctl_total }} new item{% if cctl_total != 1 %}s{% endif %}</span>
-    <span class="sparkline">
-      {% for v in sparklines.cctl %}
-      <span class="sp-bar" style="height:{{ v }}%" title="{{ sp_counts.cctl[loop.index0] }} change{% if sp_counts.cctl[loop.index0] != 1 %}s{% endif %}"></span>
       {% endfor %}
     </span>
     <span class="toggle-icon collapsed">▼</span>
@@ -1628,48 +1596,11 @@ def render_dashboard(diff: dict, output_dir: str = "docs") -> None:
     )
     eucc_total = eucc_req_total + eucc_cert_total
 
-    # Sparkline data
-    recent_diffs = _load_recent_diffs()
     history_entries = _build_history()
-    def _sp(section_key):
-        counts = _section_daily_counts(recent_diffs, section_key)
-        if not counts:
-            return [0] * 7
-        mx = max(counts) or 1
-        return [round(c / mx * 100) for c in counts]
 
-    def _sp_counts(section_key):
-        counts = _section_daily_counts(recent_diffs, section_key)
-        if not counts:
-            return [0] * 7
-        return counts
 
-    sparklines = {
-        "niap_pp":   _sp("niap_pp"),
-        "niap_td":   _sp("niap_td"),
-        "niap_news": _sp("niap_news"),
-        "cctl":      _sp("cctl"),
-        "csfc":      _sp("csfc"),
-        "cc_crypto": _sp("cc_crypto"),
-        "nist":      _sp("nist"),
-        "cc_portal": _sp("cc_portal"),
-        "pcl_all":   _sp("pcl_all"),
-        "in_eval":   _sp("in_eval"),
-    }
 
-    sp_counts = {
-        "niap_pp":   _sp_counts("niap_pp"),
-        "niap_td":   _sp_counts("niap_td"),
-        "niap_news": _sp_counts("niap_news"),
-        "cctl":      _sp_counts("cctl"),
-        "csfc":      _sp_counts("csfc"),
-        "cc_crypto": _sp_counts("cc_crypto"),
-        "nist":      _sp_counts("nist"),
-        "cc_portal": _sp_counts("cc_portal"),
-        "pcl_all":   _sp_counts("pcl_all"),
-        "in_eval":   _sp_counts("in_eval"),
-    }
-
+    recent_diffs = _load_recent_diffs()
     # Last-active dates: find most recent diff where each section had changes
     def _last_active(section_key):
         for d in reversed(recent_diffs):
@@ -1701,7 +1632,6 @@ def render_dashboard(diff: dict, output_dir: str = "docs") -> None:
         cctl_total_stat = cctl_total_stat,
         csfc_total_stat = csfc_total_stat,
         nist_total_stat = nist_total_stat,
-        sparklines      = sparklines,
         cc_portal_total      = cc_portal_total,
         cc_portal_total_stat = cc_portal_total_stat,
         period_start         = diff.get("period_start", ""),
@@ -1711,7 +1641,6 @@ def render_dashboard(diff: dict, output_dir: str = "docs") -> None:
         in_eval_total        = in_eval_total,
         in_eval_current      = in_eval_current,
         period_end           = diff.get("period_end", ""),
-        sp_counts            = sp_counts,
         last_active          = last_active,
         watch_keywords       = config.WATCH_KEYWORDS,
     history_entries      = history_entries,
