@@ -17,15 +17,4 @@ jobs:
           MAX_MSGS: ${{ github.event.inputs.max_messages }}
         run: |
           curl -s "https://webexapis.com/v1/messages?roomId=${WEBEX_ROOM}&max=${MAX_MSGS}" -H "Authorization: Bearer ${WEBEX_TOKEN}" > /tmp/msgs.json
-          python3 -c "
-import json
-with open('/tmp/msgs.json') as f:
-    data = json.load(f)
-msgs = data.get('items', [])
-print(f'Found {len(msgs)} messages:')
-for m in msgs:
-    mid = m.get('id','')
-    created = m.get('created','')
-    text = m.get('text','')[:80].replace(chr(10),' ')
-    print(f'  {created}  {mid}  {text}')
-"
+          cat /tmp/msgs.json | python3 -c "import json,sys; data=json.load(sys.stdin); [print(m.get('created','')[:19], m.get('id',''), m.get('text','')[:60].replace(chr(10),' ')) for m in data.get('items',[])]"
