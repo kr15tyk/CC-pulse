@@ -119,8 +119,6 @@ Below the stat bar and tabs you'll find:
 - **[E] Expand All** / **[C] Collapse All** — expand or collapse all cards
 - **[F] Hide Empty** — toggle hiding of cards with no changes
 - **⌨ Keys** — collapsible tooltip showing all keyboard shortcuts
-- **Search bar** — filter cards by keyword
-- **Filter chips** — narrow by change type: New / Removed / Updated / Archived / Alert
 
 **Keyboard shortcuts:** `E` expands all cards, `C` collapses all, `F` toggles hiding of empty cards, `/` focuses the search bar.
 
