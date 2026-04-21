@@ -89,7 +89,7 @@ jobs:
             bootstrap) python main.py --bootstrap ;;
             redash)    python main.py --redash ;;
             readme)    python main.py --readme ;;
-          staging)   python main.py --staging ;;
+            staging)   python main.py --staging ;;
             *)         python main.py ;;
           esac
 
