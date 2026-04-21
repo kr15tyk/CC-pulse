@@ -1,3 +1,7 @@
 # Staging / preview dashboard — not for public indexing
-User-agent: *
-Disallow: /CC-pulse/staging/
+#
+# Note: a robots.txt file under docs/staging/ is not normally consulted by crawlers;
+# they generally only fetch /robots.txt from the site root.
+#
+# To keep staging pages out of search results, emit `noindex,nofollow`
+# in the staging HTML (or send an equivalent X-Robots-Tag response header).
