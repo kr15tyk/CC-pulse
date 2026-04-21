@@ -179,7 +179,7 @@
   <span class="nav-title">CC Pulse Dashboard</span>
   <span class="nav-spacer"></span>
   <div class="ham-wrap">
-    <span class="nav-meta">Last run: 2026-04-20 21:15 ET</span>
+    <span class="nav-meta">Last run: 2026-04-20 21:26 ET</span>
     <button class="ham-btn" id="ham-btn" onclick="toggleHamMenu()" aria-expanded="false" aria-haspopup="true" title="Open menu">&#9776;</button>
     <div class="ham-menu" id="ham-menu" role="menu">
       <a class="ham-item" href="https://kr15tyk.github.io/CC-pulse/cc_dashboard.html" role="menuitem"><span class="ham-icon">&#127968;</span>Home</a>
@@ -16334,7 +16334,7 @@
 </div><!-- /main-content -->
 <footer>
   <span>CC Pulse &middot; Auto-refreshes daily (01:00 EST) &middot; NIAP, CSfC, NIST, CC Portal, NATO NIAPCL, EUCC / ENISA</span>
-  <span>Last run: 2026-04-20 21:15 ET</span>
+  <span>Last run: 2026-04-20 21:26 ET</span>
 </footer>
 
 <script>
@@ -16495,6 +16495,7 @@ function initEnhancements() {
       navDiv.className = 'hist-nav';
       navDiv.innerHTML = '<span style="font-size:.75rem;color:var(--muted);font-weight:600">View:</span>' +
         '<button class="hist-nav-btn active" data-hist-view="week">Last 7 Days</button>' +
+        '<button class="hist-nav-btn" data-hist-view="month">Last 30 Days</button>' +
         '<button class="hist-nav-btn" data-hist-view="all">All History</button>';
       navDiv.querySelectorAll('.hist-nav-btn').forEach(function(b) {
         b.addEventListener('click', function() { setHistoryView(b, b.getAttribute('data-hist-view')); });
@@ -16508,13 +16509,14 @@ function initEnhancements() {
 function setHistoryView(btn, view) {
   document.querySelectorAll('.hist-nav-btn').forEach(function(b) { b.classList.remove('active'); });
   if (btn) btn.classList.add('active');
-  const sevenDaysAgo = new Date();
-  sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
+  const daysBack = view === 'month' ? 30 : 7;
+  const cutoff = new Date();
+  cutoff.setDate(cutoff.getDate() - daysBack);
   document.querySelectorAll('.tl-entry').forEach(function(entry) {
     if (view === 'all') { entry.style.display = ''; return; }
     const dateEl = entry.querySelector('.tl-date');
     if (!dateEl) { entry.style.display = ''; return; }
-    entry.style.display = new Date(dateEl.textContent.trim()) >= sevenDaysAgo ? '' : 'none';
+    entry.style.display = new Date(dateEl.textContent.trim()) >= cutoff ? '' : 'none';
   });
 }
 
