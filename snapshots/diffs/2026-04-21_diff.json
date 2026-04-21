@@ -1,0 +1,423 @@
+{
+  "period_start": "2026-04-20T14:21:24.510755+00:00",
+  "period_end": "2026-04-21T00:41:45.553512+00:00",
+  "niap": {
+    "pps": {
+      "added": [
+        {
+          "pp_id": 541,
+          "pp_short_name": "MOD_MACSEC_V2.0",
+          "pp_name": "PP-Module for MACsec Ethernet Encryption Version 2.0",
+          "tech_type": "Network Encryption",
+          "status": "Publishing",
+          "pp_date": "2026-04-17T00:00:00Z",
+          "sunset_date": null,
+          "pp_sponsor_id": "NIAP",
+          "pp_transition": null,
+          "cc_version": "CC:2022"
+        }
+      ],
+      "removed": [],
+      "sunset_changes": [
+        {
+          "pp_id": 480,
+          "pp_short_name": "MOD_MACSEC_V1.0",
+          "pp_name": "PP-Module for MACsec Ethernet Encryption Version 1.0",
+          "tech_type": "Network Encryption",
+          "status": "Publishing",
+          "pp_date": "2023-03-02T00:00:00Z",
+          "sunset_date": "2026-10-16T00:00:00Z",
+          "pp_sponsor_id": "NIAP",
+          "pp_transition": "2023-09-02T00:00:00Z",
+          "cc_version": "3.1",
+          "old_sunset": null,
+          "new_sunset": "2026-10-16T00:00:00Z"
+        }
+      ],
+      "status_changes": []
+    },
+    "tds": {
+      "added": [],
+      "removed": []
+    },
+    "cisco_ndcpp": {
+      "added": [],
+      "removed": [],
+      "newly_archived": []
+    },
+    "pcl_all": {
+      "added": [
+        {
+          "active_maintenances": [],
+          "am_sort": "2028-02-26T00:00:00Z",
+          "assigned_lab_name": "Teron Labs",
+          "certification_date": "2026-02-26T00:00:00Z",
+          "from_cc_portal": true,
+          "product_id": "2026.1096",
+          "product_name": "Ad Noctem Connect 2.3",
+          "protection_profiles": [
+            {
+              "pp_id": 462,
+              "pp_name": "Protection Profile for Application Software Version 1.4",
+              "pp_short_name": "PP_APP_v1.4"
+            }
+          ],
+          "status_sort": "Certified",
+          "submitting_country_id_code": "AU",
+          "submitting_country_id_name": "Australia",
+          "sunset_date": "2031-02-25T00:00:00Z",
+          "tech_types": [
+            "Other Devices and Systems"
+          ],
+          "vendor_id_name": "Northrop Grumman Corporation",
+          "v_id": "2026.1096",
+          "kicked_off_date": null
+        }
+      ],
+      "removed": [],
+      "newly_archived": []
+    },
+    "in_evaluation": {
+      "added": [],
+      "removed": [],
+      "current_count": 24
+    },
+    "news": {
+      "added": [
+        {
+          "id": 3422,
+          "title": "PP-Module for Media Access Control Security Version 2.0 Published",
+          "announcement": "<p style=\"margin: 0in 0in 8pt; line-height: 107%; font-size: 11pt; font-family: Calibri, sans-serif;\">The National Information Assurance Partnership/Common Criteria Evaluation and Validation Scheme (NIAP/CCEVS) is pleased to announce the posting of the Protection Profile Module for Media Access Control Security (MACsec) v2.0. This update replaces Media Access Control Security Version 1.0, supports CNSA 2.0 updates, incorporates all applicable NIAP Technical Decisions, and converts to the latest version of the Common Criteria, CC:2022.&nbsp;</p>",
+          "types": "1",
+          "subject": null,
+          "posted": "2026-04-20T14:12:52.114000Z",
+          "begins": null,
+          "expires": "2028-04-20T00:00:00Z",
+          "link": null,
+          "venue": null,
+          "location": null,
+          "entrydate": "2026-04-20T14:12:52.114000Z",
+          "moddate": null,
+          "active": true,
+          "_category": "PUBLICATION"
+        }
+      ]
+    },
+    "events": {
+      "added": []
+    }
+  },
+  "cc_portal": {
+    "news": {
+      "added": []
+    },
+    "pps": {
+      "added": []
+    },
+    "products": {
+      "added": []
+    }
+  },
+  "cctl_labs": {
+    "atsec": [
+      {
+        "title": "What NIAP\u2019s Latest CAVP Mapping Means for CNSA Compliance",
+        "link": "https://www.atsec.com/what-niaps-latest-cavp-mapping-means-for-cnsa-compliance/",
+        "published": "",
+        "id": "https://www.atsec.com/what-niaps-latest-cavp-mapping-means-for-cnsa-compliance/"
+      },
+      {
+        "title": "atsec is Recognized by EMVCo as a Security Evaluation Laboratory",
+        "link": "https://www.atsec.com/atsec-is-recognized-by-emvco/",
+        "published": "",
+        "id": "https://www.atsec.com/atsec-is-recognized-by-emvco/"
+      },
+      {
+        "title": "The Emerging Cybersecurity Certification Landscape",
+        "link": "https://www.atsec.com/the-emerging-cybersecurity-certification-landscape/",
+        "published": "",
+        "id": "https://www.atsec.com/the-emerging-cybersecurity-certification-landscape/"
+      },
+      {
+        "title": "Introducing FIPZ FUEL\u2122: The World\u2019s First FIPS-Validated Energy Drink",
+        "link": "https://www.atsec.com/introducing-fipz-fuel-the-worlds-first-fips-validated-energy-drink/",
+        "published": "",
+        "id": "https://www.atsec.com/introducing-fipz-fuel-the-worlds-first-fips-validated-energy-drink/"
+      },
+      {
+        "title": "atsec at AutoCS 2026: Leveraging CC, FIPS, and PCI for Automotive Cybersecurity",
+        "link": "https://www.atsec.com/atsec-at-autocs-2026/",
+        "published": "",
+        "id": "https://www.atsec.com/atsec-at-autocs-2026/"
+      },
+      {
+        "title": "Updates on the Automated Cryptographic Module Validation Program at ICMC 2026",
+        "link": "https://www.atsec.com/updates-on-the-acmvp-at-icmc-2026/",
+        "published": "",
+        "id": "https://www.atsec.com/updates-on-the-acmvp-at-icmc-2026/"
+      },
+      {
+        "title": "23 Years in IT Security: What I Carry With Me as I Leave",
+        "link": "https://www.atsec.com/23-years-in-it-security/",
+        "published": "",
+        "id": "https://www.atsec.com/23-years-in-it-security/"
+      },
+      {
+        "title": "Happy International Women\u2019s Day",
+        "link": "https://www.atsec.com/happy-international-womens-day-4/",
+        "published": "",
+        "id": "https://www.atsec.com/happy-international-womens-day-4/"
+      },
+      {
+        "title": "DORA: From \u201cFormal Compliance\u201d to Real Operational Resilience in the World of European Finance",
+        "link": "https://www.atsec.com/dora-introduces-real-operational-resilience-to-european-finance/",
+        "published": "",
+        "id": "https://www.atsec.com/dora-introduces-real-operational-resilience-to-european-finance/"
+      }
+    ]
+  },
+  "csfc": {
+    "pages": {},
+    "component_selections": {},
+    "feeds": {
+      "CISA Alerts": [
+        {
+          "title": "\u200b\u200bSupply Chain Compromise Impacts Axios Node Package Manager\u200b",
+          "link": "https://www.cisa.gov/news-events/alerts/2026/04/20/supply-chain-compromise-impacts-axios-node-package-manager",
+          "summary": "<div class=\"OutlineElement Ltr SCXW232133708 BCX8\">\n<p>The Cybersecurity and Infrastructure Security Agency (CISA) is releasing this alert to provide guidance in response to the software supply chain compromise of the Axios node package manager (npm).<a href=\"https://www.cisa.gov/#note1\"><sup>1</sup></a> Axios is an HTTP client for JavaScript that developers commonly use in Node.js and browser environments.&nbsp;</p>\n</div>\n<div class=\"OutlineElement Ltr SCXW232133708 BCX8\">\n<p>On March 31, 2026, two npm packages for versions <code>axios@1.14.1</code> and <code>axios@0.30.4</code> of Axios npm injected the malicious dependency <code>plain-crypto-js@4.2.1</code> that downloads multi-stage payloads from cyber threat actor infrastructure, including a remote access trojan.<a href=\"https://www.cisa.gov/#note2\"><sup>2</sup></a></p>\n<div class=\"OutlineElement Ltr SCXW205905216 BCX8\">\n<p>CISA urges organizations to implement the following recommendations to detect and remediate a potential compromise:\u202f</p>\n</div>\n<div class=\"ListContainerWrapper SCXW205905216 BCX8\">\n<ul>\n<li>Monitor and review code repositories, continuous integration/continuous delivery (CI/CD) pipelines, and developer machines that ran <code>npm install</code> or <code>npm update</code> with the compromised Axios version.\n<ul>\n<li>Search for cached versions of affected dependencies in artifact repositories and dependency management tools. Pin npm package dependency versions to known safe releases.</li>\n</ul>\n</li>\n</ul>\n<div class=\"OutlineElement Ltr SCXW94631961 BCX8\">\n<p>If compromised dependencies are identified, revert the environment to a known safe state.&nbsp;</p>\n</div>\n<div class=\"ListContainerWrapper SCXW94631961 BCX8\">\n<ul>\n<li>Downgrade to <code>axios@1.14.0</code> or <code>axios@0.30.3</code> and delete <code>node_modules/plain-crypto-js/</code>.</li>\n</ul>\n</div>\n<div class=\"ListContainerWrapper SCXW94631961 BCX8\">\n<ul>\n<li>Rotate/revoke credentials that may have been exposed on affected systems or pipelines (e.g., version control system [VCS] tokens, CI/CD secrets, cloud keys, npm tokens, and Secure Shell [SSH] keys). For ephemeral CI jobs, rotate all secrets injected into the compromised run.</li>\n</ul>\n</div>\n<div class=\"ListContainerWrapper SCXW94631961 BCX8\">\n<ul>\n<li>Monitor for unexpected child processes and anomalous network behavior, specifically during <code>npm install</code> or <code>npm update</code>.\n<ul>\n<li>Block and monitor outbound connections to <code>Sfrclak[.]com</code> domains.</li>\n<li>Conduct continuous indicator searches and endpoint detection and response (EDR) hunts to confirm no indicators of compromise (IOCs) remain; ensure no further egress to the command and control (C2).</li>\n</ul>\n</li>\n</ul>\n<div class=\"OutlineElement Ltr SCXW237985159 BCX8\">\n<p>In addition, CISA recommends organizations using Axios npm:</p>\n</div>\n<div class=\"ListContainerWrapper SCXW237985159 BCX8\">\n<ul>\n<li>Mandate phishing-resistant multifactor authentication (MFA) on all developer accounts, especially for critical platforms.</li>\n</ul>\n</div>\n<div class=\"ListContainerWrapper SCXW237985159 BCX8\">\n<ul>\n<li>Set\u202f<code>ignore-scripts=true</code> in the <code>.npmrc</code> configuration file, which prevents potentially malicious scripts from executing during npm install packages.</li>\n</ul>\n</div>\n<div class=\"ListContainerWrapper SCXW237985159 BCX8\">\n<ul>\n<li>Set <code>min-release-age=7</code> in the <code>.npmrc</code> configuration file to only install packages that have been published for at least seven days, which helps avoid installation of packages that may not be completely vetted or are potentially malicious.</li>\n</ul>\n</div>\n<div class=\"ListContainerWrapper SCXW237985159 BCX8\">\n<ul>\n<li>Establish and maintain a baseline of normal execution behavior for tools that use Axios.\n<ul>\n<li>Alert when a dependency behaves differently (e.g., building containers, enabling shells, executing commands) and trace outbound network activity for anomalous connections.</li>\n</ul>\n</li>\n</ul>\n<div class=\"SCXW13694102 BCX8\">\n<div class=\"OutlineElement Ltr SCXW13694102 BCX8\">\n<p>See the following resources for additional guidance on this compromise:&nbsp;</p>\n</div>\n<div class=\"ListContainerWrapper SCXW13694102 BCX8\">\n<ul>\n<li>GitHub: <a href=\"https://github.com/axios/axios/issues/10636\" target=\"_blank\"><u>Post Mortem: axios npm supply chain compromise #10636</u></a></li>\n</ul>\n</div>\n</div>\n<div class=\"SCXW13694102 BCX8\">\n<div class=\"ListContainerWrapper SCXW13694102 BCX8\">\n<ul>\n<li>Microsoft: <a href=\"https://www.microsoft.com/en-us/security/blog/2026/04/01/mitigating-the-axios-npm-supply-chain-compromise/\" target=\"_blank\"><u>Mitigating the Axios npm supply chain compromise</u></a></li>\n</ul>\n</div>\n<div class=\"ListContainerWrapper SCXW13694102 BCX8\">\n<ul>\n<li>StepSecurity: <a href=\"https://www.stepsecurity.io/blog/axios-compromised-on-npm-malicious-versions-drop-remote-access-trojan\" target=\"_blank\"><u>axios Compromised on npm - Malicious Versions Drop Remote Access Trojan</u></a></li>\n</ul>\n</div>\n<div class=\"ListContainerWrapper SCXW13694102 BCX8\">\n<ul>\n<li>npm Docs: <a href=\"https://docs.npmjs.com/packages-and-modules/securing-your-code\" target=\"_blank\"><u>Securing your code</u></a></li>\n</ul>\n</div>\n<div class=\"ListContainerWrapper SCXW13694102 BCX8\">\n<ul>\n<li>Socket: <a href=\"https://socket.dev/blog/axios-npm-package-compromised\" target=\"_blank\"><u>Supply Chain Attack on Axios Pulls Malicious Dependency from npm</u></a></li>\n</ul>\n<h2><strong>Disclaimer</strong></h2>\n<p>The information in this report is being provided \u201cas is\u201d for informational purposes only. CISA does not endorse any commercial entity, product, company, or service, including any entities, products, or services linked within this document. Any reference to specific commercial entities, products, processes, or services by service mark, trademark, manufacturer, or otherwise, does not constitute or imply endorsement, recommendation, or favoring by CISA.</p>\n<h2><strong>Notes</strong></h2>\n<p><a class=\"ck-anchor\" id=\"note1\"></a><sup>1</sup> \u201cPost Mortem: axios npm supply chain compromise,\u201d axios GitHub, Issue #10636, March 31, 2026, <a href=\"https://github.com/axios/axios/issues/10636\" target=\"_blank\">https://github.com/axios/axios/issues/10636</a>.</p>\n<p><a class=\"ck-anchor\" id=\"note2\"></a><sup>2</sup> \u201cMitigating the Axios npm supply chain compromise,\u201d Microsoft Threat Intelligence and Microsoft Defender Security Research Team, April 1, 2026, <a href=\"https://www.microsoft.com/en-us/security/blog/2026/04/01/mitigating-the-axios-npm-supply-chain-compromise/\" target=\"_blank\">https://www.microsoft.com/en-us/security/blog/2026/04/01/mitigating-the-axios-npm-supply-chain-compromise/</a>.</p>\n</div>\n</div>\n</div>\n</div>\n</div>\n</div>",
+          "published": "Mon, 20 Apr 26 12:00:00 +0000",
+          "id": "/node/24750",
+          "_category": "NEWS"
+        },
+        {
+          "title": "CISA Adds Eight Known Exploited Vulnerabilities to Catalog",
+          "link": "https://www.cisa.gov/news-events/alerts/2026/04/20/cisa-adds-eight-known-exploited-vulnerabilities-catalog",
+          "summary": "<div class=\"OutlineElement Ltr SCXW178812853 BCX8\">\n<p>CISA has added eight new vulnerabilities to its <a href=\"https://www.cisa.gov/known-exploited-vulnerabilities-catalog\"><u>Known Exploited Vulnerabilities (KEV) Catalog</u></a>, based on evidence of active exploitation.&nbsp;</p>\n</div>\n<div class=\"ListContainerWrapper SCXW178812853 BCX8\">\n<ul>\n<li><a href=\"https://www.cve.org/CVERecord?id=CVE-2023-27351\" target=\"_blank\"><u>CVE-2023-27351</u></a> PaperCut NG/MF Improper Authentication Vulnerability</li>\n<li><a href=\"https://www.cve.org/CVERecord?id=CVE-2024-27199\" target=\"_blank\"><u>CVE-2024-27199</u></a> JetBrains TeamCity Relative Path Traversal Vulnerability</li>\n<li><a href=\"https://www.cve.org/CVERecord?id=CVE-2025-2749\" target=\"_blank\"><u>CVE-2025-2749</u></a> Kentico Xperience Path Traversal Vulnerability</li>\n<li><a class=\"Hyperlink SCXW178812853 BCX8\" href=\"https://www.cve.org/CVERecord?id=CVE-2025-32975\" rel=\"noreferrer noopener\" target=\"_blank\"><u>CVE-2025-32975</u></a> Quest KACE Systems Management Appliance (SMA) Improper Authentication Vulnerability</li>\n<li><a href=\"https://www.cve.org/CVERecord?id=CVE-2025-48700\" target=\"_blank\"><u>CVE-2025-48700</u></a> Synacor Zimbra Collaboration Suite (ZCS) Cross-site Scripting Vulnerability</li>\n<li><a href=\"https://www.cve.org/CVERecord?id=CVE-2026-20122\" target=\"_blank\"><u>CVE-2026-20122</u></a> Cisco Catalyst SD-WAN Manager Incorrect Use of Privileged APIs Vulnerability</li>\n<li><a href=\"https://www.cve.org/CVERecord?id=CVE-2026-20128\" target=\"_blank\"><u>CVE-2026-20128</u></a> Cisco Catalyst SD-WAN Manager Storing Passwords in a Recoverable Format Vulnerability</li>\n<li><a href=\"https://www.cve.org/CVERecord?id=CVE-2026-20133\" target=\"_blank\"><u>CVE-2026-20133</u></a> Cisco Catalyst SD-WAN Manager Exposure of Sensitive Information to an Unauthorized Actor Vulnerability</li>\n</ul>\n<p>These types of vulnerabilities are frequent attack vectors for malicious cyber actors and pose significant risks to the federal enterprise.&nbsp;</p>\n</div>\n<div class=\"OutlineElement Ltr SCXW178812853 BCX8\">\n<p><a href=\"https://www.cisa.gov/binding-operational-directive-22-01\"><u>Binding Operational Directive (BOD) 22-01: Reducing the Significant Risk of Known Exploited Vulnerabilities</u></a> established the KEV Catalog as a living list of known Common Vulnerabilities and Exposures (CVEs) that carry significant risk to the federal enterprise. BOD 22-01 requires Federal Civilian Executive Branch (FCEB) agencies to remediate identified vulnerabilities by the due date to protect FCEB networks against active threats. See the <a href=\"https://www.cisa.gov/sites/default/files/publications/Reducing_the_Significant_Risk_of_Known_Exploited_Vulnerabilities_211103.pdf\"><u>BOD 22-01 Fact Sheet</u></a> for more information.&nbsp;</p>\n</div>\n<div class=\"OutlineElement Ltr SCXW178812853 BCX8\">\n<p>Although BOD 22-01 only applies to FCEB agencies, CISA strongly urges all organizations to reduce their exposure to cyberattacks by prioritizing timely remediation of <a href=\"https://www.cisa.gov/known-exploited-vulnerabilities-catalog\"><u>KEV Catalog vulnerabilities</u></a> as part of their vulnerability management practice. CISA will continue to add vulnerabilities to the catalog that meet the <a href=\"https://www.cisa.gov/known-exploited-vulnerabilities\"><u>specified criteria</u></a>.&nbsp;</p>\n</div>",
+          "published": "Mon, 20 Apr 26 12:00:00 +0000",
+          "id": "/node/24760",
+          "_category": "CISA"
+        }
+      ],
+      "NSA Cybersecurity Advisories": [
+        {
+          "title": "NSA mourns the loss of former Deputy Director Barbara McNamara",
+          "link": "http://www.nsa.gov/Press-Room/News-Highlights/Article/Article/4388948/nsa-mourns-the-loss-of-former-deputy-director-barbara-mcnamara/",
+          "summary": "<a href=\"https://www.nsa.gov/History/Cryptologic-History/Historical-Figures/Historical-Figures-View/Article/2446996/barbara-a-mcnamara/\">Barbara McNamara</a>, who served as NSA deputy director from 1997 to 2000 as part of a long and distinguished career at the Agency, passed away Saturday at age 83.<br />\n<img alt=\"Portrait of Barbara A. McNamara\" src=\"https://media.defense.gov/2021/Jul/14/2002762685/150/150/0/180903-D-IM742-2199.JPG\" /> <br />",
+          "published": "Sat, 24 Jan 2026 00:30:00 GMT",
+          "id": "http://www.nsa.gov/Press-Room/News-Highlights/Article/Article/4388948/nsa-mourns-the-loss-of-former-deputy-director-barbara-mcnamara/",
+          "_category": "NEWS"
+        },
+        {
+          "title": "Toying with Secrets at the National Cryptologic Museum",
+          "link": "http://www.nsa.gov/Press-Room/News-Highlights/Article/Article/3946210/toying-with-secrets-at-the-national-cryptologic-museum/",
+          "summary": "<p>From Baby Boomers to Generation Z, the action-packed world of comics has stitched generations together. From huddling around the radio to Little Orphan Annie&rsquo;s adventures to starting Saturday with Batman&rsquo;s caped crusades, these captivating tales have woven themselves into our lives.</p>\n<br />\n<img alt=\"Display Case with Cryptologic Toys\" src=\"https://media.defense.gov/2025/Dec/16/2003843534/150/150/0/251216-D-AB123-0001.JPG\" /> <br />",
+          "published": "Tue, 16 Dec 2025 21:30:00 GMT",
+          "id": "http://www.nsa.gov/Press-Room/News-Highlights/Article/Article/3946210/toying-with-secrets-at-the-national-cryptologic-museum/",
+          "_category": "NEWS"
+        },
+        {
+          "title": "NSA mourns the loss of former Director Lt Gen Kenneth Minihan",
+          "link": "http://www.nsa.gov/Press-Room/News-Highlights/Article/Article/4338284/nsa-mourns-the-loss-of-former-director-lt-gen-kenneth-minihan/",
+          "summary": "<p>Earlier this month Lt Gen Minihan passed away at age 81, nearly six years to the day from when he was inducted into <a href=\"https://www.nsa.gov/History/Cryptologic-History/Historical-Figures/#honor\" target=\"_blank\">NSA's Cryptologic Hall of Honor</a>.</p>\n<br />\n<img alt=\"Lt Gen Kenneth A. Minihan, USAF, NSA Director February 1996 - March 1999\" src=\"https://media.defense.gov/2019/May/31/2002138944/150/150/0/190531-D-IM742-1073.JPG\" /> <br />",
+          "published": "Thu, 20 Nov 2025 13:36:06 GMT",
+          "id": "http://www.nsa.gov/Press-Room/News-Highlights/Article/Article/4338284/nsa-mourns-the-loss-of-former-director-lt-gen-kenneth-minihan/",
+          "_category": "NEWS"
+        },
+        {
+          "title": "Message from NSA Acting Deputy Director Sheila Thomas: Return from Furlough",
+          "link": "http://www.nsa.gov/Press-Room/News-Highlights/Article/Article/4329932/message-from-nsa-acting-deputy-director-sheila-thomas-return-from-furlough/",
+          "summary": "<p>We are grateful the Government is now open and are looking forward to having all of our workforce back full time. We missed you!&nbsp;</p>\n<br />\n<img alt=\"National Security Agency Seal\" src=\"https://media.defense.gov/2025/Aug/22/2003786383/150/150/0/250822-D-IM742-2025.PNG\" /> <br />",
+          "published": "Thu, 13 Nov 2025 04:23:00 GMT",
+          "id": "http://www.nsa.gov/Press-Room/News-Highlights/Article/Article/4329932/message-from-nsa-acting-deputy-director-sheila-thomas-return-from-furlough/",
+          "_category": "NEWS"
+        },
+        {
+          "title": "NSA Awards Authors of Assessment of Trustworthiness in GPT Models",
+          "link": "http://www.nsa.gov/Press-Room/News-Highlights/Article/Article/3990748/nsa-awards-authors-of-assessment-of-trustworthiness-in-gpt-models/",
+          "summary": "The National Security Agency (NSA) Research Directorate recently selected &ldquo;<a href=\"https://arxiv.org/abs/2306.11698\">Decoding Trust: Comprehensive Assessment of Trustworthiness in GPT Models</a>,&rdquo; as the winner of its 12th Annual Best Scientific Cybersecurity Paper Competition.<br />\n<img alt=\"A gold trophy with the &quot;Science of Security&quot; logo is filled with lightbulbs representing ideas. One stands above the rest and is lit up, signifying the winning idea. To the right of this image the text says &quot;12th Annual Best Scientific Cybersecurity Paper Competition&quot; followed by the logos for the National Security Agency and Science of Security.\" src=\"https://media.defense.gov/2024/Dec/09/2003602818/150/150/0/241209-D-IM742-1020.PNG\" /> <br />",
+          "published": "Tue, 10 Dec 2024 19:15:00 GMT",
+          "id": "http://www.nsa.gov/Press-Room/News-Highlights/Article/Article/3990748/nsa-awards-authors-of-assessment-of-trustworthiness-in-gpt-models/",
+          "_category": "NEWS"
+        },
+        {
+          "title": "U.S. Military Academy honored at White House for winning NSA\u2019s 2024 Cyber Exercise",
+          "link": "http://www.nsa.gov/Press-Room/News-Highlights/Article/Article/3984761/us-military-academy-honored-at-white-house-for-winning-nsas-2024-cyber-exercise/",
+          "summary": "<p>Feelings of pride, accomplishment, and excitement came over West Point cadets in the Indian Treaty Room of the Eisenhower Executive Office Building on Nov. 15, 2024 as The Honorable Harry Coker Jr., National Cyber Director, stepped to the podium.</p>\n<br />\n<img alt=\"U.S. Military Academy honored at White House for winning NSA\u2019s 2024 Cyber Exercise\" src=\"https://media.defense.gov/2024/Dec/04/2003598271/150/150/0/241204-D-IM742-3344.JPG\" /> <br />",
+          "published": "Wed, 04 Dec 2024 18:53:00 GMT",
+          "id": "http://www.nsa.gov/Press-Room/News-Highlights/Article/Article/3984761/us-military-academy-honored-at-white-house-for-winning-nsas-2024-cyber-exercise/",
+          "_category": "NEWS"
+        },
+        {
+          "title": "How the Need for Direct Cryptologic Military Support Helped Establish NSA\u2019s Cryptologic Centers",
+          "link": "http://www.nsa.gov/Press-Room/News-Highlights/Article/Article/3966105/how-the-need-for-direct-cryptologic-military-support-helped-establish-nsas-cryp/",
+          "summary": "<p>As a combat support agency for the U.S. Department of Defense (DoD), <a href=\"http://www.nsa.gov/about/locations/\" target=\"_blank\">the National Security Agency/Central Security Service (NSA/CSS) has centers across the country</a> to provide support to the DoD and U.S. military personnel around the world.</p>\n<br />\n<img alt=\"NSA Georgia\" src=\"https://media.defense.gov/2023/Feb/08/2003158039/150/150/0/230208-D-IM742-1235.JPG\" /> <br />",
+          "published": "Fri, 15 Nov 2024 15:52:52 GMT",
+          "id": "http://www.nsa.gov/Press-Room/News-Highlights/Article/Article/3966105/how-the-need-for-direct-cryptologic-military-support-helped-establish-nsas-cryp/",
+          "_category": "NEWS"
+        },
+        {
+          "title": "NSA Inducts Five Innovators into Cryptologic Hall of Honor",
+          "link": "http://www.nsa.gov/Press-Room/News-Highlights/Article/Article/3953681/nsa-inducts-five-innovators-into-cryptologic-hall-of-honor/",
+          "summary": "<p>The National Security Agency's (NSA) Center for Cryptologic History is pleased to announce the induction of five major cryptologic figures into the&nbsp;<a href=\"https://www.nsa.gov/History/Cryptologic-History/Historical-Figures/#honor\" target=\"_blank\">Cryptologic Hall of Honor</a>.</p>\n<br />\n<img alt=\"NSA Cryptologic Hall of Honor Display\" src=\"https://media.defense.gov/2024/Nov/06/2003579429/150/150/0/241106-D-IM742-2024.JPG\" /> <br />",
+          "published": "Thu, 07 Nov 2024 16:00:00 GMT",
+          "id": "http://www.nsa.gov/Press-Room/News-Highlights/Article/Article/3953681/nsa-inducts-five-innovators-into-cryptologic-hall-of-honor/",
+          "_category": "NEWS"
+        },
+        {
+          "title": "NSA/CSS Donates Two Tractor Trailers of Food in Feds Feed Families Campaign",
+          "link": "http://www.nsa.gov/Press-Room/News-Highlights/Article/Article/3939076/nsacss-donates-two-tractor-trailers-of-food-in-feds-feed-families-campaign/",
+          "summary": "<p>National Security Agency/Central Security Service (NSA/CSS)&nbsp;affiliates across the Enterprise helped raise 136,472 pounds of food in this year&rsquo;s Feds Feed Families (FFF) Summer Food Drive.</p>\n<br />\n<img alt=\"A woman carries items to a large box filled with donations, while behind her another woman takes items out of a white car. Several other women stand watching near a tent with a large stuffed unicorn seated in a chair beside them.\" src=\"https://media.defense.gov/2024/Oct/17/2003566848/150/150/0/241017-D-IM742-1111.JPG\" /> <br />",
+          "published": "Thu, 17 Oct 2024 18:00:00 GMT",
+          "id": "http://www.nsa.gov/Press-Room/News-Highlights/Article/Article/3939076/nsacss-donates-two-tractor-trailers-of-food-in-feds-feed-families-campaign/",
+          "_category": "NEWS"
+        },
+        {
+          "title": "STEM Fest: Engineering Ideas Into Reality",
+          "link": "http://www.nsa.gov/Press-Room/News-Highlights/Article/Article/3918349/stem-fest-engineering-ideas-into-reality/",
+          "summary": "<p>Join the National Cryptologic Museum for <a href=\"https://media.defense.gov/2024/Sep/26/2003554407/-1/-1/0/STEM%20FLYER%20SAVE%20THE%20DATE.PDF\" target=\"_blank\">the 10<sup>th</sup> Annual STEM Fest</a>! Explore a world of discovery where science, technology, engineering and math come together!</p>\n<br />\n<img alt=\"National Cryptologic Museum Logo\" src=\"https://media.defense.gov/2022/Sep/28/2003086716/150/150/0/220928-D-IM742-1234.JPG\" /> <br />",
+          "published": "Thu, 26 Sep 2024 17:08:33 GMT",
+          "id": "http://www.nsa.gov/Press-Room/News-Highlights/Article/Article/3918349/stem-fest-engineering-ideas-into-reality/",
+          "_category": "NEWS"
+        },
+        {
+          "title": "\u201cRemember Why You\u2019re Here\u201d: Mother of 9/11 Victim Visits Morrison Center Memorial",
+          "link": "http://www.nsa.gov/Press-Room/News-Highlights/Article/Article/3812589/remember-why-youre-here-mother-of-911-victim-visits-morrison-center-memorial/",
+          "summary": "\u201cIt shows you how fragile life is,\u201d mother of Flight 93\u2019s youngest victim said with tear-filled eyes at the sight of her 20-year old daughter\u2019s photo and purse on display at the 9/11 memorial in the lobby of the Morrison Center on NSA/CSS Washington\u2019s East Campus.<br />\n<img alt=\"A display case showing a photo and the purse of Deora Bodley, killed as a passenger on Flight 93 on September 11, 2001.\" src=\"https://media.defense.gov/2024/Jun/20/2003489084/150/150/0/240620-D-IM742-1111.JPG\" /> <br />",
+          "published": "Thu, 20 Jun 2024 19:26:00 GMT",
+          "id": "http://www.nsa.gov/Press-Room/News-Highlights/Article/Article/3812589/remember-why-youre-here-mother-of-911-victim-visits-morrison-center-memorial/",
+          "_category": "NEWS"
+        },
+        {
+          "title": "History Today, June 6: The role of signals intelligence or 'ULTRA' on D-Day",
+          "link": "http://www.nsa.gov/Press-Room/News-Highlights/Article/Article/3790238/history-today-june-6-the-role-of-signals-intelligence-or-ultra-on-d-day/",
+          "summary": "The term D-Day was a shorthand expression first used in World War I to denote the date an operation was to be launched. In the earlier war, officers also used H-HOUR and M-MINUTE, but these were seldom used in World War II. Because of the scope of the 1944 operation and the momentous stakes, in common parlance, \u201cD-Day\u201d has come to refer primarily to the landings in Normandy.\n<br />\n<img alt=\"U.S. Soldiers disembark a landing craft under heavy fire off the coast of Normandy, France, June 6, 1944. (Photo Credit: National Archives U.S. Coast Guard Collection)\" src=\"https://media.defense.gov/2024/Jun/04/2003478139/150/150/0/440606-D-IM472-1540.JPG\" /> <br />",
+          "published": "Thu, 06 Jun 2024 12:00:00 GMT",
+          "id": "http://www.nsa.gov/Press-Room/News-Highlights/Article/Article/3790238/history-today-june-6-the-role-of-signals-intelligence-or-ultra-on-d-day/",
+          "_category": "NEWS"
+        },
+        {
+          "title": "NSA and Universities Partnering to Advance Cybersecurity Research",
+          "link": "http://www.nsa.gov/Press-Room/News-Highlights/Article/Article/3796389/nsa-and-universities-partnering-to-advance-cybersecurity-research/",
+          "summary": "NSA Research invited leading university research institutions across the country to the National Cryptologic Museum for a day-long event to tackle the ongoing challenge of securing critical cyber systems.\n<br />\n<img alt=\"Rita Bush, chief of the Laboratory for Advanced Cybersecurity Research, delivers opening remarks.\" src=\"https://media.defense.gov/2024/Jun/04/2003478426/150/150/0/240604-D-IM742-2024.JPG\" /> <br />",
+          "published": "Tue, 04 Jun 2024 19:27:13 GMT",
+          "id": "http://www.nsa.gov/Press-Room/News-Highlights/Article/Article/3796389/nsa-and-universities-partnering-to-advance-cybersecurity-research/",
+          "_category": "NEWS"
+        },
+        {
+          "title": "Small Industry Contractors Share How NSA Gives Them a Boost",
+          "link": "http://www.nsa.gov/Press-Room/News-Highlights/Article/Article/3774721/small-industry-contractors-share-how-nsa-gives-them-a-boost/",
+          "summary": "NSA's new Cybersecurity Collaboration Center (CCC) offers no-cost cybersecurity services, and businesses are signing up in growing numbers, according to CCC Chief Morgan Adamski: &ldquo;Companies see the value not just for their bottom line, but also for national security.&rdquo;<br />\n<img alt=\"Silver balloons reading 1000 against a bright red backdrop\" src=\"https://media.defense.gov/2024/May/14/2003464082/150/150/0/240514-D-IM742-3512.PNG\" /> <br />",
+          "published": "Wed, 15 May 2024 14:29:00 GMT",
+          "id": "http://www.nsa.gov/Press-Room/News-Highlights/Article/Article/3774721/small-industry-contractors-share-how-nsa-gives-them-a-boost/",
+          "_category": "NEWS"
+        },
+        {
+          "title": "U.S. Military Academy Wins First Place at the 2024 NSA Cyber Exercise",
+          "link": "http://www.nsa.gov/Press-Room/News-Highlights/Article/Article/3773513/us-military-academy-wins-first-place-at-the-2024-nsa-cyber-exercise/",
+          "summary": "After months of preparation and three days of elaborate and challenging cyber operations, the U.S. Military Academy has emerged as the champion of the sixth annual NSA Cyber Exercise (NCX).<br />\n<img alt=\"A mid-size trophy with a wooden base, ten small plaques, and a golden eagle on top\" src=\"https://media.defense.gov/2024/May/13/2003463195/150/150/0/240513-D-IM742-2116.JPG\" /> <br />",
+          "published": "Mon, 13 May 2024 18:40:00 GMT",
+          "id": "http://www.nsa.gov/Press-Room/News-Highlights/Article/Article/3773513/us-military-academy-wins-first-place-at-the-2024-nsa-cyber-exercise/",
+          "_category": "NEWS"
+        },
+        {
+          "title": "NSA/CSS Employees Donate More Than $2M for 2023 Combined Federal Campaign",
+          "link": "http://www.nsa.gov/Press-Room/News-Highlights/Article/Article/3754167/nsacss-employees-donate-more-than-2m-for-2023-combined-federal-campaign/",
+          "summary": "The 2023 Combined Federal Campaign (CFC) concluded on January 12, 2024,\u00a0with National Security Agency (NSA) affiliate contributions exceeded NSA\u2019s goal of $1.9 million with over $2 million donated to 1,398 charities.\n<br />\n<img alt=\"The 2023 Combined Federal Campaign concluded on January 12 with National Security Agency (NSA) affiliate contributions exceeded NSA\u2019s goal of $1.9 million with over $2 million donated to 1,398 charities.\" src=\"https://media.defense.gov/2024/Apr/24/2003448822/150/150/0/240424-D-IM742-2024.JPG\" /> <br />",
+          "published": "Wed, 24 Apr 2024 15:12:41 GMT",
+          "id": "http://www.nsa.gov/Press-Room/News-Highlights/Article/Article/3754167/nsacss-employees-donate-more-than-2m-for-2023-combined-federal-campaign/",
+          "_category": "NEWS"
+        },
+        {
+          "title": "Reforestation Underway on NSA Washington\u2019s East Campus",
+          "link": "http://www.nsa.gov/Press-Room/News-Highlights/Article/Article/3750107/reforestation-underway-on-nsa-washingtons-east-campus/",
+          "summary": "As construction continues on NSA/CSS Washington\u2019s (NSAW) East Campus, hundreds of native trees have been planted as part of the agency\u2019s reforestation effort.<br />\n<img alt=\"As construction continues on NSA/CSS Washington\u2019s (NSAW) East Campus, hundreds of native trees have been planted as part of the agency\u2019s reforestation effort.\" src=\"https://media.defense.gov/2024/Apr/22/2003446204/150/150/0/240422-D-IM742-1113.JPG\" /> <br />",
+          "published": "Mon, 22 Apr 2024 13:56:42 GMT",
+          "id": "http://www.nsa.gov/Press-Room/News-Highlights/Article/Article/3750107/reforestation-underway-on-nsa-washingtons-east-campus/",
+          "_category": "NEWS"
+        },
+        {
+          "title": "New NSA Display at BWI Honors SIGINT Support to Warfighters",
+          "link": "http://www.nsa.gov/Press-Room/News-Highlights/Article/Article/3729175/new-nsa-display-at-bwi-honors-sigint-support-to-warfighters/",
+          "summary": "The early 1950s saw the dedication of two new organizations headquartered less than 10 miles apart: NSA and the Friendship International Airport \u2014 now Baltimore/Washington International Thurgood Marshall Airport (BWI). Nearly eight decades later, the partnership between these organizations is expanding in a new way.\n<br />\n<img alt=\"The display at BWI. Three panels (orange, blue, and green) include images of cryptologists during WWII, the Korean War, and the Vietnam War. A screen features a slideshow of images from SIGINT operations during these times.\" src=\"https://media.defense.gov/2024/Apr/03/2003428165/150/150/0/240403-D-IM742-2024.JPG\" /> <br />",
+          "published": "Wed, 03 Apr 2024 16:16:00 GMT",
+          "id": "http://www.nsa.gov/Press-Room/News-Highlights/Article/Article/3729175/new-nsa-display-at-bwi-honors-sigint-support-to-warfighters/",
+          "_category": "NEWS"
+        },
+        {
+          "title": "Scouts Honored at National Cryptologic Museum's Annual Scout Day",
+          "link": "http://www.nsa.gov/Press-Room/News-Highlights/Article/Article/3703024/scouts-honored-at-national-cryptologic-museums-annual-scout-day/",
+          "summary": "\u201cBest day of my life!\u201d One Scout exclaimed as he left the National Cryptologic Museum\u2019s (NCM) annual event on Saturday March 2nd, 2024. Rain couldn\u2019t damper things for the scouts and their families. The event drew a near record number of attendees with more than 650 people coming through the doors of the NCM in just six hours.<br />\n<img alt=\"Scouts during National Cryptologic Museum\" src=\"https://media.defense.gov/2024/Mar/12/2003411507/150/150/0/240312-D-IM742-1111.JPG\" /> <br />",
+          "published": "Tue, 12 Mar 2024 16:21:54 GMT",
+          "id": "http://www.nsa.gov/Press-Room/News-Highlights/Article/Article/3703024/scouts-honored-at-national-cryptologic-museums-annual-scout-day/",
+          "_category": "NEWS"
+        },
+        {
+          "title": "NSA Awards Authors of Study of Automated Attacks on New Webservers",
+          "link": "http://www.nsa.gov/Press-Room/News-Highlights/Article/Article/3676583/nsa-awards-authors-of-study-of-automated-attacks-on-new-webservers/",
+          "summary": "The National Security Agency (NSA) Research Directorate recently selected \u201cUninvited Guests: Analyzing the Identity and Behavior of Certificate Transparency Bots,\u201d as the winner of its 11th Annual Best Scientific Cybersecurity Paper Competition.<br />\n<img alt=\"NSA Research is proud to announce the winning paper for the 11th annual Best Scientific Cybersecurity Paper Competition, \u201cUninvited Guest: Analyzing the Identity and Behavior of Certificate Transparency Bots.\u201d\" src=\"https://media.defense.gov/2024/Feb/14/2003394157/150/150/0/240214-D-IM742-2024.JPG\" /> <br />",
+          "published": "Wed, 14 Feb 2024 15:29:00 GMT",
+          "id": "http://www.nsa.gov/Press-Room/News-Highlights/Article/Article/3676583/nsa-awards-authors-of-study-of-automated-attacks-on-new-webservers/",
+          "_category": "NEWS"
+        }
+      ]
+    }
+  },
+  "cc_crypto": {
+    "pages": {},
+    "doc_headers": {
+      "CCDB-014 v3.1 Assurance Continuity (Feb 2024)": {
+        "changed": true,
+        "old_last_modified": "",
+        "new_last_modified": "Sun, 02 Jun 2024 00:14:19 GMT",
+        "old_etag": "",
+        "new_etag": "\"4f6c8-619dd19157b68\"",
+        "old_content_length": "",
+        "new_content_length": "325320",
+        "old_partial_hash": "",
+        "new_partial_hash": "",
+        "url": "https://www.commoncriteriaportal.org/files/operatingprocedures/CCDB-014-v3.1-2024-February-29-Final-Assurance_Continuity.pdf"
+      }
+    }
+  },
+  "nist": {
+    "pages": {},
+    "doc_headers": {
+      "SP 800-131A Rev 2": {
+        "changed": true,
+        "old_last_modified": "Thu, 13 Jun 2019 19:37:11 GMT",
+        "new_last_modified": "",
+        "old_etag": "\"b1de70651f22d51:0\"",
+        "new_etag": "",
+        "old_content_length": "686214",
+        "new_content_length": "",
+        "old_partial_hash": "",
+        "new_partial_hash": "11e24de28c40daadf4a1c3eda68e71e7",
+        "url": "https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-131Ar2.pdf"
+      },
+      "SP 800-57 Part 1 Rev 5": {
+        "changed": true,
+        "old_last_modified": "Fri, 31 Jul 2020 15:02:29 GMT",
+        "new_last_modified": "",
+        "old_etag": "\"bc5d539c4b67d61:0\"",
+        "new_etag": "",
+        "old_content_length": "1688080",
+        "new_content_length": "",
+        "old_partial_hash": "",
+        "new_partial_hash": "a14f937bc70bfa49590772ce670fada1",
+        "url": "https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-57pt1r5.pdf"
+      }
+    },
+    "feeds": {}
+  },
+  "nato": {
+    "pages": {},
+    "cisco_added": [],
+    "cisco_removed": []
+  },
+  "eucc": {
+    "pages": {},
+    "cisco_added": [],
+    "cisco_removed": []
+  },
+  "alerts": []
+}
