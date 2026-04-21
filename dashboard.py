@@ -322,16 +322,258 @@ DASHBOARD_TEMPLATE = """
   .keys-tooltip td{padding:.2rem .5rem;color:var(--text)}
   .keys-tooltip td:first-child{text-align:right}
   kbd{background:var(--panel);border:1px solid var(--border);border-radius:3px;padding:.1rem .35rem;font-size:.7rem;font-family:monospace;color:var(--text)}
-  .search-row{display:flex;gap:.6rem;align-items:center;flex-wrap:wrap;margin-top:.5rem;margin-bottom:1.5rem}
-  .search-input{flex:1;min-width:180px;max-width:340px;background:var(--card);border:1px solid var(--border);color:var(--text);font-family:var(--font);font-size:.8rem;padding:6px 12px;outline:none;border-radius:6px;transition:border-color .2s,box-shadow .2s}
-  .search-input:focus{border-color:var(--primary);box-shadow:0 0 0 3px rgba(4,159,217,.12)}
-  .search-input::placeholder{color:var(--muted)}
-  .search-clear{background:none;border:none;color:var(--muted);font-family:var(--font);font-size:.8rem;cursor:pointer;padding:0 4px} .search-clear:hover{color:var(--primary)}
-  .filter-chips{display:flex;gap:.35rem;flex-wrap:wrap;align-items:center}
-  .chip{background:none;border:1px solid var(--border);color:var(--muted);font-family:var(--font);font-size:.65rem;padding:3px 10px;cursor:pointer;white-space:nowrap;border-radius:100px;transition:all .15s;font-weight:600}
-  .chip:hover{border-color:var(--primary);color:var(--primary)} .chip.active{border-color:var(--primary);color:var(--primary);background:rgba(4,159,217,.08)}
-  .chip.chip-alert.active{border-color:var(--alert-color);color:var(--alert-color);background:rgba(217,119,6,.08)}
-  .search-count{font-size:.65rem;color:var(--muted);white-space:nowrap} mark.sh{background:rgba(217,119,6,.2);color:var(--text);border-radius:2px;padding:0 2px}
+  
+
+        # Cisco NDcPP new certifications
+        for item in niap.get("cisco_ndcpp", {}).get("added", []):
+            name = item.get("product_name") or item.get("name") or "Unknown product"
+            vendor = item.get("vendor_id_name") or "Cisco"
+            cert_date = (item.get("certification_date") or "")[:10]
+            lab = item.get("assigned_lab_name") or ""
+            pps = ", ".join(
+                pp.get("pp_short_name", "") for pp in item.get("protection_profiles") or []
+            )
+            pid = item.get("product_id") or item.get("v_id") or ""
+            url = f"https://www.niap-ccevs.org/product/index.cfm?pid={pid}" if pid else "https://www.niap-ccevs.org/"
+            entries.append({
+                "date": date, "category": "cisco_cert", "kind": "new",
+                "title": f"{vendor} — {name}",
+                "detail": f"Certified {cert_date} · {lab}{(' · ' + pps) if pps else ''}",
+                "url": url,
+            })
+
+        # Cisco NDcPP newly archived
+        for item in niap.get("cisco_ndcpp", {}).get("newly_archived", []):
+            name = item.get("product_name") or "Unknown product"
+            entries.append({
+                "date": date, "category": "cisco_archived", "kind": "removed",
+                "title": f"Archived: {name}",
+                "detail": "",
+                "url": "https://www.niap-ccevs.org/",
+            })
+
+        # New Protection Profiles
+        for pp in niap.get("pps", {}).get("added", []):
+            entries.append({
+                "date": date, "category": "pp_new", "kind": "new",
+                "title": f"New PP: {pp.get('pp_short_name') or pp.get('pp_name') or '?'}",
+                "detail": pp.get("pp_name") or "",
+                "url": f"https://www.niap-ccevs.org/Profile/PP.cfm?id={pp.get('pp_id','')}" if pp.get("pp_id") else "https://www.niap-ccevs.org/",
+            })
+
+        # Removed / sunsetted PPs
+        for pp in niap.get("pps", {}).get("removed", []):
+            entries.append({
+                "date": date, "category": "pp_removed", "kind": "removed",
+                "title": f"Removed PP: {pp.get('pp_short_name') or pp.get('pp_name') or '?'}",
+                "detail": pp.get("pp_name") or "",
+                "url": "https://www.niap-ccevs.org/",
+            })
+
+        # New Technical Decisions
+        for td in niap.get("tds", {}).get("added", []):
+            entries.append({
+                "date": date, "category": "td_new", "kind": "new",
+                "title": f"New TD: {td.get('identifier') or td.get('td_id') or '?'}",
+                "detail": td.get("pp_short_name") or td.get("title") or "",
+                "url": "https://www.niap-ccevs.org/",
+            })
+
+        # NATO NIAPCL Cisco additions
+        for item in d.get("nato", {}).get("cisco_added", []):
+            name = item.get("name") or item.get("raw_text", "")[:80] or "Unknown"
+            entries.append({
+                "date": date, "category": "nato_cisco", "kind": "new",
+                "title": f"NATO NIAPCL: {name}",
+                "detail": item.get("manufacturer") or "",
+                "url": item.get("link") or "https://www.ia.nato.int/",
+            })
+
+        # EUCC Cisco additions
+        for item in d.get("eucc", {}).get("cisco_added", []):
+            name = item.get("name") or item.get("text", "")[:80] or "Unknown"
+            entries.append({
+                "date": date, "category": "eucc_cisco", "kind": "new",
+                "title": f"EUCC: {name}",
+                "detail": "",
+                "url": item.get("href") or "https://certification.enisa.europa.eu/",
+            })
+
+        # NIAP PCL all-cert additions (non-Cisco, Cisco already covered above)
+        for item in niap.get("pcl_all", {}).get("added", []):
+            # Skip if already captured as Cisco NDcPP
+            vendor = (item.get("vendor_id_name") or "").lower()
+            pid = str(item.get("product_id") or "")
+            cisco_pids = {str(c.get("product_id") or "") for c in niap.get("cisco_ndcpp", {}).get("added", [])}
+            if pid in cisco_pids:
+                continue
+            name = item.get("product_name") or "Unknown"
+            cert_date = (item.get("certification_date") or "")[:10]
+            lab = item.get("assigned_lab_name") or ""
+            pps = ", ".join(
+                pp.get("pp_short_name", "") for pp in item.get("protection_profiles") or []
+            )
+            url = f"https://www.niap-ccevs.org/product/index.cfm?pid={pid}" if pid else "https://www.niap-ccevs.org/"
+            entries.append({
+                "date": date, "category": "pcl_cert", "kind": "new",
+                "title": f"{item.get('vendor_id_name') or 'Unknown'} — {name}",
+                "detail": f"Certified {cert_date}{(' · ' + lab) if lab else ''}{(' · ' + pps) if pps else ''}",
+                "url": url,
+            })
+
+        # NIST document header changes
+        for doc_name, doc_data in d.get("nist", {}).get("doc_headers", {}).items():
+            if doc_data.get("changed"):
+                entries.append({
+                    "date": date, "category": "nist_doc", "kind": "updated",
+                    "title": f"NIST doc updated: {doc_name}",
+                    "detail": "",
+                    "url": doc_data.get("url") or "https://csrc.nist.gov/",
+                })
+
+        # CSfC component selection changes
+        for sel_name, sel_data in d.get("csfc", {}).get("component_selections", {}).items():
+            if sel_data.get("changed"):
+                entries.append({
+                    "date": date, "category": "csfc_change", "kind": "updated",
+                    "title": f"CSfC Selection updated: {sel_name}",
+                    "detail": "",
+                    "url": "https://www.nsa.gov/Resources/Commercial-Solutions-for-Classified-Program/Components-List/",
+                })
+
+    # Sort newest-first
+    entries.sort(key=lambda e: e["date"], reverse=True)
+    return entries
+
+def _section_daily_counts(diffs: list, section_key: str) -> list:
+    """Return per-section change counts for the last N days (for sparkline)."""
+    counts = []
+    for d in diffs:
+        n = 0
+        if section_key == "niap_pp":
+            pps = d.get("niap", {}).get("pps", {})
+            n = (len(pps.get("added", [])) + len(pps.get("removed", [])) +
+                 len(pps.get("sunset_changes", [])) + len(pps.get("status_changes", [])))
+        elif section_key == "niap_td":
+            tds = d.get("niap", {}).get("tds", {})
+            n = len(tds.get("added", [])) + len(tds.get("removed", []))
+        elif section_key == "niap_news":
+            n = len(d.get("niap", {}).get("news", {}).get("added", []))
+        elif section_key == "cctl":
+            n = sum(len(v) for v in d.get("cctl_labs", {}).values() if v)
+        elif section_key == "csfc":
+            n = sum(1 for cp in d.get("csfc", {}).get("component_selections", {}).values()
+                    if cp.get("changed"))
+        elif section_key == "cc_crypto":
+            n = sum(1 for doc in d.get("cc_crypto", {}).get("doc_headers", {}).values()
+                    if doc.get("changed"))
+        elif section_key == "nist":
+            n = sum(1 for doc in d.get("nist", {}).get("doc_headers", {}).values()
+                    if doc.get("changed"))
+        elif section_key == "pcl_all":
+            pa = d.get("niap", {}).get("pcl_all", {})
+            n = (len(pa.get("added", [])) + len(pa.get("removed", [])) +
+                 len(pa.get("newly_archived", [])))
+        elif section_key == "in_eval":
+            ie = d.get("niap", {}).get("in_evaluation", {})
+            n = len(ie.get("added", [])) + len(ie.get("removed", []))
+        counts.append(n)
+    return counts
+
+
+# -- Dashboard HTML template --------------------------------------------------
+DASHBOARD_TEMPLATE = """
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="refresh" content="3600">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+{{ noindex_meta }}
+<title>CC Pulse Dashboard</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+  :root {
+    --bg:#f4f6f9; --nav-bg:#0d1f3e; --card:#ffffff; --card-border:#dde3ed; --panel:#edf1f7;
+    --border:#dde3ed; --text:#1a2d4e; --text-light:#4a5f7a; --muted:#6b82a0;
+    --primary:#049fd9; --primary-dark:#0376a8; --accent:#049fd9;
+    --green:#00875a; --amber:#d97706; --red:#c0392b; --alert-color:#d97706;
+    --font:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;
+    --gradient-hero:linear-gradient(135deg,#0d1f3e 0%,#0d2b5e 50%,#1a3566 100%);
+    --shadow-sm:0 1px 3px rgba(0,0,0,0.08),0 1px 2px rgba(0,0,0,0.05);
+    --shadow-md:0 4px 12px rgba(0,0,0,0.08),0 2px 4px rgba(0,0,0,0.05);
+  }
+  [data-theme="dark"]{
+    --bg:#0d1117;--nav-bg:#0a1628;--card:#161b22;--card-border:#30363d;--panel:#1f2937;
+    --border:#30363d;--text:#e6edf3;--text-light:#848d97;--muted:#6e7681;
+    --primary:#58a6ff;--primary-dark:#1f6feb;--accent:#58a6ff;
+    --green:#3fb950;--amber:#d29922;--red:#f85149;--alert-color:#d29922;
+    --shadow-sm:0 1px 3px rgba(0,0,0,.3),0 1px 2px rgba(0,0,0,.2);
+    --shadow-md:0 4px 12px rgba(0,0,0,.4),0 2px 4px rgba(0,0,0,.3)
+  }
+  .ham-btn{background:none;border:1px solid rgba(255,255,255,.2);color:rgba(255,255,255,.8);border-radius:6px;padding:4px 10px;font-size:1.05rem;cursor:pointer;font-family:var(--font);transition:all .2s;line-height:1.2;letter-spacing:1px}
+  .ham-btn:hover,.ham-btn[aria-expanded="true"]{background:rgba(255,255,255,.12);color:#fff;border-color:rgba(255,255,255,.5)}
+  .ham-menu{display:none;position:absolute;top:calc(100% + 6px);right:0;background:var(--card);border:1px solid var(--border);border-radius:10px;box-shadow:var(--shadow-md);min-width:200px;z-index:500;overflow:hidden;flex-direction:column}
+  .ham-menu.open{display:flex}
+  .ham-item{display:flex;align-items:center;gap:.65rem;padding:.6rem 1rem;font-size:.82rem;color:var(--text);text-decoration:none;background:none;border:none;width:100%;text-align:left;cursor:pointer;font-family:var(--font);transition:background .12s}
+  .ham-item:hover{background:var(--panel)}
+  .ham-item .ham-icon{font-size:.95rem;width:1.2rem;text-align:center;flex-shrink:0}
+  .ham-item.ham-divider{border-top:1px solid var(--border);margin-top:.25rem;padding-top:.6rem}
+  .ham-item.ham-disabled{opacity:.45;cursor:not-allowed;pointer-events:none}
+  .ham-wrap{position:relative;display:flex;align-items:center;gap:.75rem}
+  .sources-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:9000;align-items:flex-start;justify-content:center;padding-top:5vh}
+  .sources-overlay.open{display:flex}
+  .sources-modal{background:var(--card);border:1px solid var(--border);border-radius:12px;box-shadow:var(--shadow-md);width:min(820px,95vw);max-height:85vh;overflow:hidden;display:flex;flex-direction:column}
+  .sources-modal-hdr{display:flex;align-items:center;justify-content:space-between;padding:.85rem 1.25rem;border-bottom:1px solid var(--border);background:var(--primary);border-radius:12px 12px 0 0}
+  .sources-modal-hdr h2{font-size:1rem;color:#fff;margin:0}
+  .sources-close{background:none;border:none;color:rgba(255,255,255,.8);font-size:1.2rem;cursor:pointer;padding:0 4px;line-height:1;transition:color .15s}
+  .sources-close:hover{color:#fff}
+  .sources-modal-body{overflow-y:auto;padding:1.25rem;display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:1rem}
+  .sources-group{border:1px solid var(--border);border-radius:8px;padding:.75rem 1rem;background:var(--bg)}
+  .sources-group-title{font-size:.8rem;font-weight:700;color:var(--primary);text-transform:uppercase;letter-spacing:.04em;margin-bottom:.5rem}
+  .sources-item{font-size:.78rem;color:var(--text);padding:.25rem 0;border-top:1px solid var(--border);display:flex;gap:.4rem;align-items:baseline;line-height:1.4}
+  .sources-item:first-of-type{border-top:none}
+  .sources-item a{color:var(--primary);text-decoration:none;word-break:break-word}
+  .sources-item a:hover{text-decoration:underline}
+  .sources-item .src-label{font-weight:600;min-width:0;flex-shrink:0}
+  .dark-toggle{background:none;border:1px solid rgba(255,255,255,.2);color:rgba(255,255,255,.7);border-radius:6px;padding:3px 10px;font-size:.75rem;cursor:pointer;font-family:var(--font);transition:all .2s;margin-left:.5rem}
+  .dark-toggle:hover{background:rgba(255,255,255,.1);color:#fff}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--text);font-family:var(--font);font-size:14px;line-height:1.6}
+  a{color:var(--primary);text-decoration:none} a:hover{color:var(--primary-dark);text-decoration:underline}
+  .site-nav{background:var(--nav-bg);padding:0 1.5rem;display:flex;align-items:center;gap:1rem;height:44px;position:sticky;top:0;z-index:200;box-shadow:0 1px 4px rgba(0,0,0,0.2)}
+  .nav-title{font-size:1.25rem;font-weight:700;letter-spacing:.04em;
+    background:linear-gradient(90deg,#7dd3fc 0%,#38bdf8 30%,#0ea5e9 60%,#2563eb 100%);
+    -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+    background-clip:text;text-fill-color:transparent;
+    font-family:inherit;white-space:nowrap;line-height:1}
+  .nav-spacer{flex:1} .nav-meta{font-size:.75rem;color:rgba(255,255,255,0.55)}
+  .sticky-top{position:sticky;top:32px;z-index:100;background:var(--card);border-bottom:1px solid var(--border);padding:.75rem 2rem;box-shadow:var(--shadow-sm)}
+  .trend-bar{display:flex;flex-wrap:wrap;gap:.75rem}
+  .stat{background:var(--card);border:1px solid var(--card-border);border-radius:8px;padding:.75rem 1.25rem;min-width:80px;flex:1;transition:border-color .2s,box-shadow .2s;box-shadow:var(--shadow-sm)}
+  .stat:hover{border-color:var(--primary);box-shadow:0 4px 12px rgba(4,159,217,.12)}
+  .stat a{color:inherit;text-decoration:none;display:block}
+  .stat-num{font-size:1.8rem;font-weight:700;color:#b0bec5;line-height:1;margin-bottom:.2rem}
+  .stat-num.active-num{color:var(--primary)} .stat-num.alert-num{color:var(--alert-color)}
+  .stat.has-data{border-color:rgba(4,159,217,.3)} .stat.has-alert{border-color:rgba(217,119,6,.3)}
+  .stat.no-data{opacity:.45;transform:scale(.97)}
+  .stat-lbl,.stat-label{font-size:.68rem;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;font-weight:600}
+  .main-content{max-width:1200px;margin:0 auto;padding:2rem}
+  .alert-banner{background:rgba(217,119,6,.06);border:1px solid rgba(217,119,6,.3);border-radius:8px;padding:.75rem 1.1rem;margin-bottom:1.5rem;font-weight:600;color:var(--alert-color);font-size:.875rem}
+  .alert-banner::before{content:"⚠ "}
+  .ctrl-bar{font-size:.75rem;color:var(--muted);margin-bottom:1rem;display:flex;gap:.6rem;align-items:center;flex-wrap:wrap}
+  .ctrl-btn{background:var(--card);border:1px solid var(--border);color:var(--text-light);font-family:var(--font);font-size:.72rem;padding:4px 12px;cursor:pointer;border-radius:6px;transition:all .15s;font-weight:500}
+  .ctrl-btn:hover{border-color:var(--primary);color:var(--primary);background:rgba(4,159,217,.05)}
+  .mark-all-btn{font-size:.7rem;padding:3px 8px;margin-left:.5rem;background:rgba(217,119,6,.1);border-color:rgba(217,119,6,.4);color:#d97706;cursor:pointer;position:relative;z-index:2}
+  .mark-all-btn:hover{background:rgba(217,119,6,.2)}
+  .ctrl-hint{font-size:.65rem;color:var(--muted);opacity:.6;position:relative}
+  .keys-tooltip{display:none;position:absolute;top:calc(100% + 6px);right:0;background:var(--card);border:1px solid var(--border);border-radius:8px;padding:.75rem 1rem;font-size:.75rem;white-space:nowrap;z-index:200;box-shadow:var(--shadow-md);min-width:200px}
+  .keys-tooltip.visible{display:block}
+  .keys-tooltip table{border-collapse:collapse}
+  .keys-tooltip td{padding:.2rem .5rem;color:var(--text)}
+  .keys-tooltip td:first-child{text-align:right}
+  kbd{background:var(--panel);border:1px solid var(--border);border-radius:3px;padding:.1rem .35rem;font-size:.7rem;font-family:monospace;color:var(--text)}
+    mark.sh{background:rgba(217,119,6,.2);color:var(--text);border-radius:2px;padding:0 2px}
   .search-hidden{display:none!important} .no-results-msg{color:var(--muted);font-size:.8rem;padding:.5rem 0;display:none;font-style:italic}
   .section-group{margin-bottom:2rem}
   .section-label{font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.15em;color:var(--primary);padding:0 0 .6rem 0;border-bottom:2px solid var(--border);margin-bottom:.75rem;display:flex;align-items:center;gap:.5rem}
@@ -542,26 +784,11 @@ DASHBOARD_TEMPLATE = """
     <table><tr><td><kbd>E</kbd></td><td>Expand all</td></tr>
     <tr><td><kbd>C</kbd></td><td>Collapse all</td></tr>
     <tr><td><kbd>F</kbd></td><td>Toggle empty cards</td></tr>
-    <tr><td><kbd>/</kbd></td><td>Focus search</td></tr>
-    <tr><td><kbd>1</kbd><kbd>2</kbd><kbd>3</kbd></td><td>Switch tabs</td></tr></table>
+        <tr><td><kbd>1</kbd><kbd>2</kbd><kbd>3</kbd></td><td>Switch tabs</td></tr></table>
   </div>
 </span>
 </div>
-<div class="search-row">
-  <input id="search-input" class="search-input" type="search" placeholder="Search items…"
-    oninput="liveSearch()" title="Search across all cards [/]" autocomplete="off" spellcheck="false">
-  <button class="search-clear" onclick="clearSearch()" title="Clear search">✕</button>
-  <div class="filter-chips">
-    <span style="font-size:.65rem;color:var(--muted);opacity:.6;">kind:</span>
-    <button class="chip active" data-kind="all"     onclick="setKindFilter(this)">All</button>
-    <button class="chip"        data-kind="new"     onclick="setKindFilter(this)">New</button>
-    <button class="chip"        data-kind="removed" onclick="setKindFilter(this)">Removed</button>
-    <button class="chip"        data-kind="updated" onclick="setKindFilter(this)">Updated</button>
-    <button class="chip"        data-kind="archived" onclick="setKindFilter(this)">Archived</button>
-    <button class="chip chip-alert" data-kind="alert" onclick="setKindFilter(this)">Alert</button>
-  </div>
-  <span id="search-count" class="search-count"></span>
-</div>
+
 <!-- Regional tab navigation -->
       
       
@@ -1163,17 +1390,6 @@ function toggleZeroFilter(){_zeroHidden=!_zeroHidden;document.querySelectorAll('
 function dismissAlert(btn){const r=btn.closest('.item-row');if(r)r.classList.add('alert-dismissed')}
 function initAlertDismiss(){const stored=JSON.parse(sessionStorage.getItem('dismissed')||'[]');stored.forEach(k=>{const el=document.querySelector('[data-alert-key="'+k+'"]');if(el)el.classList.add('alert-dismissed')});document.querySelectorAll('.dismiss-btn').forEach(btn=>{btn.addEventListener('click',()=>{const r=btn.closest('[data-alert-key]');if(!r)return;const d=JSON.parse(sessionStorage.getItem('dismissed')||'[]');d.push(r.dataset.alertKey);sessionStorage.setItem('dismissed',JSON.stringify(d))})})}
 let _activeKind='all';
-function liveSearch(){const raw=(document.getElementById('search-input').value||'').trim(),term=raw.toLowerCase();document.querySelectorAll('mark.sh').forEach(m=>m.replaceWith(document.createTextNode(m.textContent)));const rows=document.querySelectorAll('.item-row,.cp-row');let vis=0;rows.forEach(row=>{const km=_activeKind==='all'||(_activeKind==='alert'&&row.closest('#sec-alerts'))||(row.dataset.kind===_activeKind);if(!km){row.classList.add('search-hidden');return}if(!term){row.classList.remove('search-hidden');vis++;return}const le=row.querySelector('.item-link'),me=row.querySelector('.item-meta'),se2=row.querySelector('.item-sub,.cp-detail'),hay=[le?le.textContent:'',me?me.textContent:'',se2?se2.textContent:''].join(' ').toLowerCase();if(hay.includes(term)){row.classList.remove('search-hidden');vis++;if(le)_highlight(le,raw)}else row.classList.add('search-hidden')});document.querySelectorAll('.card').forEach(card=>{const vr=card.querySelectorAll('.item-row:not(.search-hidden),.cp-row:not(.search-hidden)');let msg=card.querySelector('.no-results-msg');if(!msg){msg=document.createElement('p');msg.className='no-results-msg';msg.textContent='No matching items.';const body=card.querySelector('.card-body');if(body)body.appendChild(msg)}msg.style.display=(term||_activeKind!=='all')&&vr.length===0?'block':'none'});const ce=document.getElementById('search-count');if(ce)ce.textContent=(term||_activeKind!=='all')?vis+' result'+(vis!==1?'s':''):'';_reconcileGroupVisibility()}
-function _highlight(el,term){const w=document.createTreeWalker(el,NodeFilter.SHOW_TEXT),nodes=[];let n;while((n=w.nextNode()))nodes.push(n);const lt=term.toLowerCase();nodes.forEach(tn=>{const i=tn.nodeValue.toLowerCase().indexOf(lt);if(i===-1)return;const b=document.createTextNode(tn.nodeValue.slice(0,i)),m=document.createElement('mark');m.className='sh';m.textContent=tn.nodeValue.slice(i,i+term.length);const a=document.createTextNode(tn.nodeValue.slice(i+term.length));tn.parentNode.replaceChild(a,tn);tn.parentNode.insertBefore(m,a);tn.parentNode.insertBefore(b,m)})}
-function setKindFilter(btn){document.querySelectorAll('.chip').forEach(c=>c.classList.remove('active'));btn.classList.add('active');_activeKind=btn.dataset.kind;liveSearch()}
-function clearSearch(){const inp=document.getElementById('search-input');if(inp)inp.value='';document.querySelectorAll('.chip').forEach(c=>c.classList.remove('active'));const ac=document.querySelector('.chip[data-kind="all"]');if(ac)ac.classList.add('active');_activeKind='all';liveSearch()}
-function _reconcileGroupVisibility(){document.querySelectorAll('.section-group').forEach(g=>{const hv=[...g.querySelectorAll('.card')].some(c=>!c.classList.contains('zero-hidden')&&getComputedStyle(c).display!=='none');if(g.dataset.tab)return;const hv2=[...g.querySelectorAll('.card')].some(c=>!c.classList.contains('zero-hidden')&&getComputedStyle(c).display!=='none');g.style.display=hv2?'':'none'})}
-document.addEventListener('keydown',e=>{const t=document.activeElement.tagName;if(t==='INPUT'||t==='TEXTAREA'){if(e.key==='Escape'){clearSearch();document.activeElement.blur()}return}if(e.key==='e'||e.key==='E')expandAll();if(e.key==='c'||e.key==='C')collapseAll();if(e.key==='f'||e.key==='F')toggleZeroFilter();if(e.key==='1'){const b=document.querySelector('.tab-btn[data-tab="us"]');if(b)switchTab(b)}if(e.key==='2'){const b=document.querySelector('.tab-btn[data-tab="intl"]');if(b)switchTab(b)}if(e.key==='3'){const b=document.querySelector('.tab-btn[data-tab="eu"]');if(b)switchTab(b)}if(e.key==='/'){e.preventDefault();const inp=document.getElementById('search-input');if(inp)inp.focus()}});
-
-// ═══════════════════════════════════════
-// CC Pulse UI Enhancement Functions
-// ═══════════════════════════════════════
-
 function toggleDarkMode() {
   const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
   document.documentElement.setAttribute('data-theme', isDark ? 'light' : 'dark');
