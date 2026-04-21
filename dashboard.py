@@ -238,6 +238,7 @@ DASHBOARD_TEMPLATE = """
 <meta charset="UTF-8">
 <meta http-equiv="refresh" content="3600">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+{{ noindex_meta }}
 <title>CC Pulse Dashboard</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
@@ -1643,6 +1644,7 @@ def render_dashboard(diff: dict, output_dir: str = "docs") -> None:
         config_nato_url      = config.NATO_NIAPCL_URL,
         config_eucc_req_url  = config.EUCC_REQUIREMENTS_URL,
         config_eucc_cert_url = config.EUCC_CERTIFICATES_URL,
+        noindex_meta         = '<meta name="robots" content="noindex, nofollow">' if config.STAGING_DIR in output_dir else '',
     )
 
     html_path = os.path.join(output_dir, "cc_dashboard.html")
