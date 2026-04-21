@@ -289,7 +289,7 @@ def run_bootstrap() -> None:
 
 
 # ── Entry point ───────────────────────────────────────────────────────────────
-def run_redash() -> None:
+def run_redash(output_dir: str = None) -> None:
     """Re-render the dashboard HTML from the latest stored diff file.
 
     This is useful when the dashboard template has changed but no new diff
@@ -297,6 +297,10 @@ def run_redash() -> None:
     new data).  It loads the most recent diff from snapshots/diffs/ and
     passes it through dashboard.render_dashboard() without touching the
     collector or differ.
+
+    Args:
+        output_dir: Directory to write the dashboard HTML to.  Defaults to
+            ``config.DASHBOARD_DIR`` (the production output directory).
     """
     _imports()
     import dashboard as dash_mod
@@ -308,11 +312,12 @@ def run_redash() -> None:
         log.error("No diff files found in %s -- run daily mode first.", config.DIFF_DIR)
         sys.exit(1)
 
+    dest = output_dir or config.DASHBOARD_DIR
     latest = diffs[-1]
     log.info("[Redash] Loading diff from %s", latest)
     diff = _load_json(latest)
-    dash_mod.render_dashboard(diff, output_dir=config.DASHBOARD_DIR)
-    log.info("[Redash] Dashboard re-rendered from %s", latest)
+    dash_mod.render_dashboard(diff, output_dir=dest)
+    log.info("[Redash] Dashboard re-rendered to %s from %s", dest, latest)
 
 
 def main() -> None:
@@ -342,7 +347,7 @@ def main() -> None:
     parser.add_argument(
         "--staging",
         action="store_true",
-        help="Run daily pipeline but output to docs/staging/ (private test dashboard)",
+        help="Re-render dashboard from the latest stored diff into docs/staging/ (private test dashboard)",
     )
     args = parser.parse_args()
 
@@ -351,7 +356,7 @@ def main() -> None:
         _, _, _, emailer = _imports()
         emailer.send_readme_message()
     elif args.staging:
-        run_daily(output_dir=config.STAGING_DIR)
+        run_redash(output_dir=config.STAGING_DIR)
     elif args.redash:
         run_redash()
     elif args.bootstrap:
