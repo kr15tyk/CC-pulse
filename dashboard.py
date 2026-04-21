@@ -1288,6 +1288,7 @@ function initEnhancements() {
       navDiv.className = 'hist-nav';
       navDiv.innerHTML = '<span style="font-size:.75rem;color:var(--muted);font-weight:600">View:</span>' +
         '<button class="hist-nav-btn active" data-hist-view="week">Last 7 Days</button>' +
+        '<button class="hist-nav-btn" data-hist-view="month">Last 30 Days</button>' +
         '<button class="hist-nav-btn" data-hist-view="all">All History</button>';
       navDiv.querySelectorAll('.hist-nav-btn').forEach(function(b) {
         b.addEventListener('click', function() { setHistoryView(b, b.getAttribute('data-hist-view')); });
@@ -1301,13 +1302,14 @@ function initEnhancements() {
 function setHistoryView(btn, view) {
   document.querySelectorAll('.hist-nav-btn').forEach(function(b) { b.classList.remove('active'); });
   if (btn) btn.classList.add('active');
-  const sevenDaysAgo = new Date();
-  sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
+  const daysBack = view === 'month' ? 30 : 7;
+  const cutoff = new Date();
+  cutoff.setDate(cutoff.getDate() - daysBack);
   document.querySelectorAll('.tl-entry').forEach(function(entry) {
     if (view === 'all') { entry.style.display = ''; return; }
     const dateEl = entry.querySelector('.tl-date');
     if (!dateEl) { entry.style.display = ''; return; }
-    entry.style.display = new Date(dateEl.textContent.trim()) >= sevenDaysAgo ? '' : 'none';
+    entry.style.display = new Date(dateEl.textContent.trim()) >= cutoff ? '' : 'none';
   });
 }
 
