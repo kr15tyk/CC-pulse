@@ -1299,18 +1299,29 @@ function initEnhancements() {
   }
 }
 
-function setHistoryView(btn, view) {
-  document.querySelectorAll('.hist-nav-btn').forEach(function(b) { b.classList.remove('active'); });
-  if (btn) btn.classList.add('active');
+function applyHistoryFilters() {
+  const activeViewBtn = document.querySelector('.hist-nav-btn.active');
+  const view = activeViewBtn ? activeViewBtn.getAttribute('data-hist-view') : 'week';
+  const activeFilterBtn = document.querySelector('.tl-filter-btn.active');
+  const cats = activeFilterBtn ? activeFilterBtn.dataset.cat.split(',') : ['all'];
   const daysBack = view === 'month' ? 30 : 7;
   const cutoff = new Date();
   cutoff.setDate(cutoff.getDate() - daysBack);
   document.querySelectorAll('.tl-entry').forEach(function(entry) {
-    if (view === 'all') { entry.style.display = ''; return; }
-    const dateEl = entry.querySelector('.tl-date');
-    if (!dateEl) { entry.style.display = ''; return; }
-    entry.style.display = new Date(dateEl.textContent.trim()) >= cutoff ? '' : 'none';
+    let showByDate = true;
+    if (view !== 'all') {
+      const dateEl = entry.querySelector('.tl-date');
+      showByDate = dateEl ? new Date(dateEl.textContent.trim()) >= cutoff : true;
+    }
+    const showByCat = cats[0] === 'all' || cats.includes(entry.dataset.cat);
+    entry.style.display = (showByDate && showByCat) ? '' : 'none';
   });
+}
+
+function setHistoryView(btn, view) {
+  document.querySelectorAll('.hist-nav-btn').forEach(function(b) { b.classList.remove('active'); });
+  if (btn) btn.classList.add('active');
+  applyHistoryFilters();
 }
 
 document.addEventListener('click', function(e) {
@@ -1380,14 +1391,7 @@ function filterHistory(btn) {
   // Update active button
   document.querySelectorAll('.tl-filter-btn').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
-  const cats = btn.dataset.cat.split(',');
-  document.querySelectorAll('.tl-entry').forEach(row => {
-    if (cats[0] === 'all' || cats.includes(row.dataset.cat)) {
-      row.style.display = '';
-    } else {
-      row.style.display = 'none';
-    }
-  });
+  applyHistoryFilters();
 }
 </script>
 </body>
