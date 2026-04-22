@@ -2,19 +2,9 @@
 <rss version="2.0"><channel>
 <title>CC Pulse</title>
 <link>https://kr15tyk.github.io/CC-pulse/cc_dashboard.html</link>
-<description>Common Criteria monitoring - 2026-04-21 04:18 ET</description>
-<item><title>New PP: MOD_MACSEC_V2.0</title><link>https://www.niap-ccevs.org/Profile/PP.cfm?id=541</link><description>PP-Module for MACsec Ethernet Encryption Version 2.0</description></item>
-<item><title>PP-Module for Media Access Control Security Version 2.0 Published</title><link>https://www.niap-ccevs.org/</link><description></description></item>
-<item><title>[atsec] What NIAP’s Latest CAVP Mapping Means for CNSA Compliance</title><link>https://www.atsec.com/what-niaps-latest-cavp-mapping-means-for-cnsa-compliance/</link><description></description></item>
-<item><title>[atsec] atsec is Recognized by EMVCo as a Security Evaluation Laboratory</title><link>https://www.atsec.com/atsec-is-recognized-by-emvco/</link><description></description></item>
-<item><title>[atsec] The Emerging Cybersecurity Certification Landscape</title><link>https://www.atsec.com/the-emerging-cybersecurity-certification-landscape/</link><description></description></item>
-<item><title>[atsec] Introducing FIPZ FUEL™: The World’s First FIPS-Validated Energy Drink</title><link>https://www.atsec.com/introducing-fipz-fuel-the-worlds-first-fips-validated-energy-drink/</link><description></description></item>
-<item><title>[atsec] atsec at AutoCS 2026: Leveraging CC, FIPS, and PCI for Automotive Cybersecurity</title><link>https://www.atsec.com/atsec-at-autocs-2026/</link><description></description></item>
-<item><title>[atsec] Updates on the Automated Cryptographic Module Validation Program at ICMC 2026</title><link>https://www.atsec.com/updates-on-the-acmvp-at-icmc-2026/</link><description></description></item>
-<item><title>[atsec] 23 Years in IT Security: What I Carry With Me as I Leave</title><link>https://www.atsec.com/23-years-in-it-security/</link><description></description></item>
-<item><title>[atsec] Happy International Women’s Day</title><link>https://www.atsec.com/happy-international-womens-day-4/</link><description></description></item>
-<item><title>[atsec] DORA: From “Formal Compliance” to Real Operational Resilience in the World of European Finance</title><link>https://www.atsec.com/dora-introduces-real-operational-resilience-to-european-finance/</link><description></description></item>
-<item><title>NIST Doc Updated: SP 800-131A Rev 2</title><link>https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-131Ar2.pdf</link><description>Document header updated.</description></item>
-<item><title>NIST Doc Updated: SP 800-57 Part 1 Rev 5</title><link>https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-57pt1r5.pdf</link><description>Document header updated.</description></item>
-<item><title>CC Crypto Doc Updated: CCDB-014 v3.1 Assurance Continuity (Feb 2024)</title><link>https://www.commoncriteriaportal.org/files/operatingprocedures/CCDB-014-v3.1-2024-February-29-Final-Assurance_Continuity.pdf</link><description>Document header updated.</description></item>
+<description>Common Criteria monitoring - 2026-04-22 04:16 ET</description>
+<item><title>New PP: MOD_SDN-Controller_v1.0</title><link>https://www.niap-ccevs.org/Profile/PP.cfm?id=542</link><description>PP-Module for SDN Controller Version 1.0</description></item>
+<item><title>PP-Module for Software Defined Networking - Controller Version 1.0 Published</title><link>https://www.niap-ccevs.org/</link><description></description></item>
+<item><title>[atsec] ICMC 2026 is Here</title><link>https://www.atsec.com/icmc-2026-is-here/</link><description></description></item>
+<item><title>NIST Doc Updated: FIPS 204 ML-DSA</title><link>https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.204.pdf</link><description>Document header updated.</description></item>
 </channel></rss>
