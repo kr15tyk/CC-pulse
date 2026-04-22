@@ -179,7 +179,7 @@
   <span class="nav-title">CC Pulse Dashboard</span>
   <span class="nav-spacer"></span>
   <div class="ham-wrap">
-    <span class="nav-meta">Last run: 2026-04-20 21:26 ET</span>
+    <span class="nav-meta">Last run: 2026-04-22 03:47 ET</span>
     <button class="ham-btn" id="ham-btn" onclick="toggleHamMenu()" aria-expanded="false" aria-haspopup="true" title="Open menu">&#9776;</button>
     <div class="ham-menu" id="ham-menu" role="menu">
       <a class="ham-item" href="https://kr15tyk.github.io/CC-pulse/cc_dashboard.html" role="menuitem"><span class="ham-icon">&#127968;</span>Home</a>
@@ -255,7 +255,7 @@
 <div class="sticky-top">
   <div class="trend-bar">
     <div class="stat"><a href="#sec-niap-pp" onclick="navigateTo('sec-niap-pp');return false;">
-      <div class="stat-num active-num">4</div>
+      <div class="stat-num active-num">5</div>
       <div class="stat-lbl">NIAP Changes</div>
     </a></div>
     <div class="stat"><a href="#sec-csfc" onclick="navigateTo('sec-csfc');return false;">
@@ -263,7 +263,7 @@
       <div class="stat-lbl">CSfC Selection Updates</div>
     </a></div>
     <div class="stat"><a href="#sec-nist" onclick="navigateTo('sec-nist');return false;">
-      <div class="stat-num active-num">3</div>
+      <div class="stat-num active-num">1</div>
       <div class="stat-lbl">NIST Doc Updates</div>
     </a></div>
     <div class="stat"><a href="#sec-cc-portal" onclick="navigateTo('sec-cc-portal');return false;">
@@ -275,7 +275,7 @@
       <div class="stat-lbl">NATO NIAPCL</div>
     </a></div>
     <div class="stat"><a href="#sec-cctl" onclick="navigateTo('sec-cctl');return false;">
-      <div class="stat-num active-num">9</div>
+      <div class="stat-num active-num">1</div>
       <div class="stat-lbl">CCTL Updates</div>
     </a></div>
     <div class="stat"><a href="#sec-eucc-req" onclick="navigateTo('sec-eucc-req');return false;">
@@ -333,22 +333,31 @@
     
     
     
-    <p class="no-change">No changes detected. <span class="last-active">(last: 2026-04-21)</span></p>
+    <p class="no-change">No changes detected. <span class="last-active">(last: 2026-04-22)</span></p>
   </div>
 </div>
 
   <!-- NIAP In-Evaluation -->
-<div class="card " id="sec-niap-inevaluation" data-has-changes="0">
+<div class="card card-new" id="sec-niap-inevaluation" data-has-changes="1">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>NIAP In-Evaluation Products</span>
-    <span class="card-count">24 active</span>
+    <span class="card-count">1 change</span>
     </span>
   </div>
-  <div class="card-body collapsed">
+  <div class="card-body ">
+    
+    <div class="sub-hdr sub-new">Newly In Evaluation (1)</div>
+    
+    <div class="item-row" data-source="niap-inevaluation" data-kind="new">
+      <span class="item-link">HPE Juniper Networking -- Junos 24.4R2 FOR MX240/480/960 Routers and EX9204/9208/9214 Switches</span>
+      <span class="item-meta">Acumen Security</span>
+    </div>
+    
+    <div class="item-sub">Network Device</div>
     
     
     
-    <p class="no-change">No evaluation changes detected. 24 products currently in evaluation.</p>
+    
     
   </div>
 </div>
@@ -365,7 +374,7 @@
     
     
     <div class="item-row" data-source="niap-news" data-kind="new">
-      <a class="item-link" href="#" target="_blank">PP-Module for Media Access Control Security Version 2.0 Published</a>
+      <a class="item-link" href="#" target="_blank">PP-Module for Software Defined Networking - Controller Version 1.0 Published</a>
       <span class="item-meta"></span>
     </div>
     
@@ -378,10 +387,10 @@
 </div>
 
   <!-- NIAP PCL — All Certifications -->
-<div class="card card-new" id="sec-niap-pcl" data-has-changes="1">
+<div class="card card-new" id="sec-niap-pcl" data-has-changes="2">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>NIAP PCL — All Certifications</span>
-    <span class="card-count">1 change</span>
+    <span class="card-count">2 changes</span>
     </span>
   </div>
   <div class="card-body ">
@@ -389,12 +398,23 @@
     <div class="sub-hdr sub-new">New Certifications (1)</div>
     
     <div class="item-row" data-source="niap-pcl" data-kind="new">
-      <span class="item-link">Northrop Grumman Corporation -- Ad Noctem Connect 2.3</span>
-      <span class="item-meta">2026-02-26</span>
+      <span class="item-link">HPE Juniper Networking -- Junos 24.4R2 FOR MX240/480/960 Routers and EX9204/9208/9214 Switches</span>
+      <span class="item-meta"></span>
     </div>
     
-    <div class="item-sub">PP_APP_v1.4</div>
+    <div class="item-sub">PKG_SSH_V1.0, MOD_MACSEC_V1.0, CPP_ND_V3.0E</div>
     
+    
+    
+    
+    <div class="sub-hdr sub-updated">Newly Archived (1)</div>
+    
+    <div class="item-row" data-source="niap-pcl" data-kind="archived">
+      <span class="item-link">Aruba, a Hewlett Packard Enterprise Company -- Aruba, a Hewlett Packard Enterprise Company 6300M and 8360v2 Switch Series MACsec</span>
+      <span class="item-meta">Archived</span>
+    </div>
+    
+    <div class="item-sub">CPP_ND_V2.2E, MOD_MACSEC_V1.0</div>
     
     
     
@@ -404,10 +424,10 @@
 </div>
 
   <!-- NIAP PPs -->
-<div class="card card-new" id="sec-niap-pp" data-has-changes="2">
+<div class="card card-new" id="sec-niap-pp" data-has-changes="1">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>NIAP Protection Profiles</span>
-    <span class="card-count">2 changes</span>
+    <span class="card-count">1 change</span>
     </span>
     <span class="toggle-icon">&#9660;</span>
   </div>
@@ -416,19 +436,11 @@
     <div class="sub-hdr sub-new">New PPs (1)</div>
     
     <div class="item-row" data-source="niap-pp" data-kind="new">
-      <a class="item-link" href="https://www.niap-ccevs.org/Profile/PP.cfm?id=541" target="_blank">MOD_MACSEC_V2.0</a>
-      <span class="item-meta">Network Encryption &middot; 2026-04-17T00:00:00Z</span>
+      <a class="item-link" href="https://www.niap-ccevs.org/Profile/PP.cfm?id=542" target="_blank">MOD_SDN-Controller_v1.0</a>
+      <span class="item-meta">Network Device &middot; 2026-04-21T00:00:00Z</span>
     </div>
     
     
-    
-    
-    <div class="sub-hdr sub-updated">Sunset Changes (1)</div>
-    
-    <div class="item-row" data-source="niap-pp" data-kind="updated">
-      <a class="item-link" href="https://www.niap-ccevs.org/Profile/PP.cfm?id=480" target="_blank">MOD_MACSEC_V1.0</a>
-      <span class="item-meta">Network Encryption &middot; Sunset: 2026-10-16T00:00:00Z</span>
-    </div>
     
     
     
@@ -473,9 +485,23 @@
 <div class="section-group">
   <div class="section-label">Documentation</div>
   <!-- CC Crypto Docs -->
-<div class="card card-updated" id="sec-cc-crypto" data-has-changes="1">
+<div class="card " id="sec-cc-crypto" data-has-changes="0">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>CC Crypto Documentation</span>
+    <span class="card-count">0 updates</span>
+    </span>
+    <span class="toggle-icon">&#9658;</span>
+  </div>
+  <div class="card-body collapsed">
+    
+    <p class="no-change">No changes detected. <span class="last-active">(last: 2026-04-21)</span></p>
+  </div>
+</div>
+
+  <!-- NIST Docs -->
+<div class="card card-updated" id="sec-nist" data-has-changes="1">
+  <div class="card-hdr" onclick="toggleCard(this)">
+    <span>NIST Documentation</span>
     <span class="card-count">1 update</span>
     </span>
     <span class="toggle-icon">&#9660;</span>
@@ -483,40 +509,8 @@
   <div class="card-body ">
     
     
-    <div class="item-row" data-source="cc-crypto" data-kind="updated">
-      <a class="item-link" href="https://www.commoncriteriaportal.org/files/operatingprocedures/CCDB-014-v3.1-2024-February-29-Final-Assurance_Continuity.pdf" target="_blank">CCDB-014 v3.1 Assurance Continuity (Feb 2024)</a>
-      <span class="item-meta">
-        Header changed
-      </span>
-    </div>
-    
-    
-    
-  </div>
-</div>
-
-  <!-- NIST Docs -->
-<div class="card card-updated" id="sec-nist" data-has-changes="2">
-  <div class="card-hdr" onclick="toggleCard(this)">
-    <span>NIST Documentation</span>
-    <span class="card-count">2 updates</span>
-    </span>
-    <span class="toggle-icon">&#9660;</span>
-  </div>
-  <div class="card-body ">
-    
-    
     <div class="item-row" data-source="nist" data-kind="updated">
-      <a class="item-link" href="https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-131Ar2.pdf" target="_blank">SP 800-131A Rev 2</a>
-      <span class="item-meta">
-        Header changed
-      </span>
-    </div>
-    
-    
-    
-    <div class="item-row" data-source="nist" data-kind="updated">
-      <a class="item-link" href="https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-57pt1r5.pdf" target="_blank">SP 800-57 Part 1 Rev 5</a>
+      <a class="item-link" href="https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.204.pdf" target="_blank">FIPS 204 ML-DSA</a>
       <span class="item-meta">
         Header changed
       </span>
@@ -563,10 +557,10 @@
 <div class="section-group">
   <div class="section-label">CCTL</div>
   <!-- CCTL Updates -->
-<div class="card card-new" id="sec-cctl" data-has-changes="9">
+<div class="card card-new" id="sec-cctl" data-has-changes="1">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>CCTL Updates</span>
-    <span class="card-count">9 new items</span>
+    <span class="card-count">1 new item</span>
     </span>
     <span class="toggle-icon collapsed">▼</span>
   </div>
@@ -576,53 +570,13 @@
     <div class="lab-row">
       <div class="lab-hdr" onclick="toggleLab(this)">
         <span class="lab-name">atsec</span>
-        <span class="lab-cnt">9 items</span>
+        <span class="lab-cnt">1 item</span>
         <span class="lab-toggle">▼</span>
       </div>
       <div class="lab-body collapsed">
         
         <div class="item-row" data-source="cctl" data-kind="new">
-          <a class="item-link" href="https://www.atsec.com/what-niaps-latest-cavp-mapping-means-for-cnsa-compliance/" target="_blank">What NIAP’s Latest CAVP Mapping Means for CNSA Compliance</a>
-          <span class="item-meta"></span>
-        </div>
-        
-        <div class="item-row" data-source="cctl" data-kind="new">
-          <a class="item-link" href="https://www.atsec.com/atsec-is-recognized-by-emvco/" target="_blank">atsec is Recognized by EMVCo as a Security Evaluation Laboratory</a>
-          <span class="item-meta"></span>
-        </div>
-        
-        <div class="item-row" data-source="cctl" data-kind="new">
-          <a class="item-link" href="https://www.atsec.com/the-emerging-cybersecurity-certification-landscape/" target="_blank">The Emerging Cybersecurity Certification Landscape</a>
-          <span class="item-meta"></span>
-        </div>
-        
-        <div class="item-row" data-source="cctl" data-kind="new">
-          <a class="item-link" href="https://www.atsec.com/introducing-fipz-fuel-the-worlds-first-fips-validated-energy-drink/" target="_blank">Introducing FIPZ FUEL™: The World’s First FIPS-Validated Energy Drink</a>
-          <span class="item-meta"></span>
-        </div>
-        
-        <div class="item-row" data-source="cctl" data-kind="new">
-          <a class="item-link" href="https://www.atsec.com/atsec-at-autocs-2026/" target="_blank">atsec at AutoCS 2026: Leveraging CC, FIPS, and PCI for Automotive Cybersecurity</a>
-          <span class="item-meta"></span>
-        </div>
-        
-        <div class="item-row" data-source="cctl" data-kind="new">
-          <a class="item-link" href="https://www.atsec.com/updates-on-the-acmvp-at-icmc-2026/" target="_blank">Updates on the Automated Cryptographic Module Validation Program at ICMC 2026</a>
-          <span class="item-meta"></span>
-        </div>
-        
-        <div class="item-row" data-source="cctl" data-kind="new">
-          <a class="item-link" href="https://www.atsec.com/23-years-in-it-security/" target="_blank">23 Years in IT Security: What I Carry With Me as I Leave</a>
-          <span class="item-meta"></span>
-        </div>
-        
-        <div class="item-row" data-source="cctl" data-kind="new">
-          <a class="item-link" href="https://www.atsec.com/happy-international-womens-day-4/" target="_blank">Happy International Women’s Day</a>
-          <span class="item-meta"></span>
-        </div>
-        
-        <div class="item-row" data-source="cctl" data-kind="new">
-          <a class="item-link" href="https://www.atsec.com/dora-introduces-real-operational-resilience-to-european-finance/" target="_blank">DORA: From “Formal Compliance” to Real Operational Resilience in the World of European Finance</a>
+          <a class="item-link" href="https://www.atsec.com/icmc-2026-is-here/" target="_blank">ICMC 2026 is Here</a>
           <span class="item-meta"></span>
         </div>
         
@@ -673,7 +627,7 @@
 <div class="card card-new" id="sec-history" data-has-changes="1">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>Change History</span>
-    <span class="card-count">1421 events</span>
+    <span class="card-count">1424 events</span>
     <span class="toggle-icon">▼</span>
   </div>
   <div class="card-body">
@@ -692,6 +646,39 @@
     </div>
     <div class="timeline" id="history-timeline">
     
+      
+      <div class="tl-entry" data-cat="pp_new">
+        <div class="tl-date">2026-04-22</div>
+        <div class="tl-body">
+          <div class="tl-title">
+            <span class="tl-badge new">new</span>
+            <a href="https://www.niap-ccevs.org/Profile/PP.cfm?id=542" target="_blank">New PP: MOD_SDN-Controller_v1.0</a>
+          </div>
+          <div class="tl-detail">PP-Module for SDN Controller Version 1.0</div>
+        </div>
+      </div>
+      
+      <div class="tl-entry" data-cat="pcl_cert">
+        <div class="tl-date">2026-04-22</div>
+        <div class="tl-body">
+          <div class="tl-title">
+            <span class="tl-badge new">new</span>
+            <a href="https://www.niap-ccevs.org/product/index.cfm?pid=11700" target="_blank">HPE Juniper Networking — Junos 24.4R2 FOR MX240/480/960 Routers and EX9204/9208/9214 Switches</a>
+          </div>
+          <div class="tl-detail">Certified  · Acumen Security · PKG_SSH_V1.0, MOD_MACSEC_V1.0, CPP_ND_V3.0E</div>
+        </div>
+      </div>
+      
+      <div class="tl-entry" data-cat="nist_doc">
+        <div class="tl-date">2026-04-22</div>
+        <div class="tl-body">
+          <div class="tl-title">
+            <span class="tl-badge updated">updated</span>
+            <a href="https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.204.pdf" target="_blank">NIST doc updated: FIPS 204 ML-DSA</a>
+          </div>
+          
+        </div>
+      </div>
       
       <div class="tl-entry" data-cat="pp_new">
         <div class="tl-date">2026-04-21</div>
@@ -16334,7 +16321,7 @@
 </div><!-- /main-content -->
 <footer>
   <span>CC Pulse &middot; Auto-refreshes daily (01:00 EST) &middot; NIAP, CSfC, NIST, CC Portal, NATO NIAPCL, EUCC / ENISA</span>
-  <span>Last run: 2026-04-20 21:26 ET</span>
+  <span>Last run: 2026-04-22 03:47 ET</span>
 </footer>
 
 <script>
