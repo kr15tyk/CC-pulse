@@ -1,0 +1,286 @@
+{
+  "period_start": "2026-04-22T07:47:13.120036+00:00",
+  "period_end": "2026-04-23T07:52:31.181914+00:00",
+  "niap": {
+    "pps": {
+      "added": [
+        {
+          "pp_id": 539,
+          "pp_short_name": "PP_GPCP_V2.0",
+          "pp_name": "Protection Profile for General Purpose Computing Platform, Version 2.0",
+          "tech_type": "Hardware Platform and Components",
+          "status": "Publishing",
+          "pp_date": "2026-04-22T00:00:00Z",
+          "sunset_date": null,
+          "pp_sponsor_id": "NIAP",
+          "pp_transition": null,
+          "cc_version": "CC:2022"
+        }
+      ],
+      "removed": [],
+      "sunset_changes": [
+        {
+          "pp_id": 480,
+          "pp_short_name": "MOD_MACSEC_V1.0",
+          "pp_name": "PP-Module for MACsec Ethernet Encryption Version 1.0",
+          "tech_type": "Network Encryption",
+          "status": "Publishing",
+          "pp_date": "2023-03-02T00:00:00Z",
+          "sunset_date": "2026-10-02T00:00:00Z",
+          "pp_sponsor_id": "NIAP",
+          "pp_transition": "2023-09-02T00:00:00Z",
+          "cc_version": "3.1",
+          "old_sunset": "2026-10-16T00:00:00Z",
+          "new_sunset": "2026-10-02T00:00:00Z"
+        }
+      ],
+      "status_changes": []
+    },
+    "tds": {
+      "added": [
+        {
+          "td_id": 1033,
+          "identifier": "TD1033",
+          "title": "Sunset Dates for NDcPP Configurations",
+          "protection_profile": [
+            {
+              "pp_id": 482,
+              "pp_name": "collaborative Protection Profile for Network Devices Version 3.0e",
+              "pp_common_name": "collaborative Protection Profile for Network Devices Version 3.0e",
+              "cc_version": "3.1",
+              "mr_version": "",
+              "pp_date": "2023-12-14T00:00:00Z",
+              "entrydate": "2023-12-14T12:59:51Z",
+              "tech_type": "Network Device",
+              "pp_sponsor_id": "NW Fundamentals and FW iTC",
+              "community_id": null,
+              "status": "Publishing",
+              "sunset_date": "2026-10-02T00:00:00Z",
+              "pp_overview": "<p><strong>The sunset date for this cPP varies based on the applicable PP-Configuration and is further explained in <a href=\"https://www.niap-ccevs.org/technical-decisions/TD1033\">TD1033</a>.</strong></p>\r\n<p>This is a Collaborative Protection Profile (cPP) whose Target of Evaluation (TOE) is a Network Device (ND). It provides a minimal set of security requirements expected by all Network Devices that target the mitigation of a set of defined threats. This baseline set of requirements will be built upon by future cPPs to provide an overall set of security solutions for networks up to carrier and enterprise scale. A Network Device in the context of this cPP is a device that is connected to a network and has an infrastructure role within that network. The TOE may be standalone or distributed, where a distributed TOE is one that requires multiple distinct components to operate as a logical whole in order to fulfil the requirements of this cPP.</p>\r\n<p>When discussing a ND in this document, it refers to a Network Device or a component of a distributed Network Device unless it is expressly stated otherwise.Under this cPP, NDs may be physical or virtualized.</p>\r\n<p>A physical Network Device (pND) consists of network device functionality implemented inside a physical chassis with physical network connections. The network device functionality may be implemented in either hardware or software or both. For pNDs, the TOE encompasses the entire device&mdash;including both the network device functionality and the physical chassis. There is no distinction between TOE and TOE Platform.</p>\r\n<p>A virtual Network Device (vND) is a software implementation of network device functionality that runs inside a virtual machine (VM) on either general purpose or purpose-built hardware. The TOE consists of all software within the VM&mdash;in particular, the network device functionality and the operating system on which it runs.</p>",
+              "security_evaluation_summary": "",
+              "environmental_strengths": "",
+              "pp_priority": "",
+              "created_on": "2023-12-14T12:59:51Z",
+              "removed_on": null,
+              "archived": false,
+              "assurance_maintenance": "",
+              "pp_estcompletion": "",
+              "pp_estcompletiondate": null,
+              "pp_transition": "2024-06-14T00:00:00Z",
+              "revised_on": "2023-12-14T12:59:51Z",
+              "pp_short_name": "CPP_ND_V3.0E",
+              "dod_compliant": false,
+              "csfceligible": false,
+              "constraint": "",
+              "predecessor_id": 447,
+              "successor_id": 524,
+              "creator": 504,
+              "remover": null,
+              "editor": 504
+            }
+          ],
+          "sunset_protection_profile": [],
+          "related_to": "Sunset Date",
+          "publication_date": "2026-04-22T13:05:32.807000Z",
+          "removed_on": null,
+          "status": "Published"
+        },
+        {
+          "td_id": 1032,
+          "identifier": "TD1032",
+          "title": "Corrections to Application Notes for FTP_ITC.1 Iterations",
+          "protection_profile": [
+            {
+              "pp_id": 532,
+              "pp_name": "PP-Module for Session Border Controller (SBC) Version 2.0",
+              "pp_common_name": "PP-Module for Session Border Controller (SBC) Version 2.0",
+              "cc_version": "CC:2022",
+              "mr_version": null,
+              "pp_date": "2026-03-17T00:00:00Z",
+              "entrydate": "2026-03-11T10:23:56.354000Z",
+              "tech_type": "Network Device",
+              "pp_sponsor_id": "NIAP",
+              "community_id": null,
+              "status": "Publishing",
+              "sunset_date": null,
+              "pp_overview": "<p>This PP-Module specifically addresses Session Border Controllers (SBCs) that provide firewalling, interoperability, and security functions for Voice/Video over IP (VVoIP) networks. The SBC also provides protected communication between trusted components of the network infrastructure.</p>\r\n<p>The physical boundary of the SBC is defined by the operating system components storing or providing security functions and all software supplied by the vendor (including vendor modified components to the operating system). All of the security functionality is contained and executed within the physical boundary of the device.</p>\r\n<p>While the functionality that the Target of Evaluation (TOE) is obligated to implement in response to the described threat environment is detailed in later sections, a brief description is provided here. A compliant TOE will provide security functionality that addresses threats to itself. It must also protect communications between itself and an IP PBX or another SBC by using a trusted channel. Some protocols required by this PP-Module make use of certificates; therefore, the SBC must securely store certificates and private keys.</p>\r\n<p>Since this PP-Module builds on the Network Device collaborative Protection Profile (NDcPP), conformant TOEs are obligated to implement the functionality required in the NDcPP along with the additional functionality defined in this PP-Module in response to the threat environment discussed later in this document.</p>",
+              "security_evaluation_summary": null,
+              "environmental_strengths": "",
+              "pp_priority": null,
+              "created_on": null,
+              "removed_on": null,
+              "archived": false,
+              "assurance_maintenance": null,
+              "pp_estcompletion": null,
+              "pp_estcompletiondate": null,
+              "pp_transition": null,
+              "revised_on": null,
+              "pp_short_name": "MOD_SBC_v2.0",
+              "dod_compliant": false,
+              "csfceligible": false,
+              "constraint": null,
+              "predecessor_id": 478,
+              "successor_id": null,
+              "creator": 620,
+              "remover": null,
+              "editor": null
+            }
+          ],
+          "sunset_protection_profile": [],
+          "related_to": "FTP_ITC.1.1/ESC, FTP_ITC.1.1/VVoIP, FTP_ITC.1.1/H323",
+          "publication_date": "2026-04-22T13:08:19.245000Z",
+          "removed_on": null,
+          "status": "Published"
+        },
+        {
+          "td_id": 1030,
+          "identifier": "TD1030",
+          "title": "Correction to FCS_MAC_EXT.2 TSS Activity When FPT_RPL_EXT.1 is Claimed",
+          "protection_profile": [
+            {
+              "pp_id": 480,
+              "pp_name": "PP-Module for MACsec Ethernet Encryption Version 1.0",
+              "pp_common_name": "PP-Module for MACsec Ethernet Encryption Version 1.0",
+              "cc_version": "3.1",
+              "mr_version": "",
+              "pp_date": "2023-03-02T00:00:00Z",
+              "entrydate": "2023-03-02T20:40:21Z",
+              "tech_type": "Network Encryption",
+              "pp_sponsor_id": "NIAP",
+              "community_id": null,
+              "status": "Publishing",
+              "sunset_date": "2026-10-02T00:00:00Z",
+              "pp_overview": "<p style=\"caret-color: #000006; color: #000006; font-family: Arial, Helvetica; -webkit-text-size-adjust: auto;\">This PP-Module describes security requirements for a network device that implements Media Access Control Security (MACsec) encryption to secure communications over a trusted channel and is intended to provide a minimal, baseline set of requirements that are targeted at mitigating well defined and described threats. However, this PP-Module is not complete in itself, but rather extends the Security Requirements for Network Devices collaborative Protection Profile (NDcPP).</p>\r\n<p style=\"caret-color: #000006; color: #000006; font-family: Arial, Helvetica; -webkit-text-size-adjust: auto;\">This PP-Module specifically addresses MACsec, which allows authorized systems using Ethernet Transport to maintain confidentiality of transmitted data and to take measures against frames that are transmitted or modified by unauthorized devices. MACsec protects communication between trusted components of the network infrastructure, thus protecting the network operation. It facilitates maintenance of correct network connectivity and services as well as isolation of denial of service attacks.</p>\r\n<p style=\"caret-color: #000006; color: #000006; font-family: Arial, Helvetica; -webkit-text-size-adjust: auto;\">The hardware, firmware, and software of the MACsec device define the physical boundary. All of the security functionality is contained and executed within the physical boundary of the device. For example, given a computer with an Ethernet card, the whole computer is considered to be within the boundary.</p>\r\n<p style=\"caret-color: #000006; color: #000006; font-family: Arial, Helvetica; -webkit-text-size-adjust: auto;\">Since this PP-Module builds on the NDcPP, conformant TOEs are obligated to implement the functionality required in the NDcPP along with the additional functionality defined in this PP-Module in response to the threat environment discussed later in this document.</p>",
+              "security_evaluation_summary": "",
+              "environmental_strengths": "",
+              "pp_priority": "",
+              "created_on": "2023-03-02T20:40:21Z",
+              "removed_on": null,
+              "archived": false,
+              "assurance_maintenance": "",
+              "pp_estcompletion": "",
+              "pp_estcompletiondate": null,
+              "pp_transition": "2023-09-02T00:00:00Z",
+              "revised_on": "2023-10-05T10:07:01Z",
+              "pp_short_name": "MOD_MACSEC_V1.0",
+              "dod_compliant": false,
+              "csfceligible": true,
+              "constraint": "",
+              "predecessor_id": 402,
+              "successor_id": 541,
+              "creator": 409,
+              "remover": null,
+              "editor": 409
+            }
+          ],
+          "sunset_protection_profile": [],
+          "related_to": "FCS_MACSEC_EXT.2, MOD_MACSEC_V1.0-SD",
+          "publication_date": "2026-04-22T13:16:33.932000Z",
+          "removed_on": null,
+          "status": "Published"
+        }
+      ],
+      "removed": []
+    },
+    "cisco_ndcpp": {
+      "added": [],
+      "removed": [],
+      "newly_archived": []
+    },
+    "pcl_all": {
+      "added": [],
+      "removed": [],
+      "newly_archived": []
+    },
+    "in_evaluation": {
+      "added": [],
+      "removed": [],
+      "current_count": 25
+    },
+    "news": {
+      "added": [
+        {
+          "id": 3424,
+          "title": "Protection Profile for General Purpose Computing Platform (GPCP) Version 2.0 Published",
+          "announcement": "<p>The National Information Assurance Partnership/Common Criteria Evaluation and Validation Scheme (NIAP/CCEVS) is pleased to announce the posting of the Protection Profile for General Purpose Computing Platform V2.0. This update supports CNSA 2.0 updates, incorporates all applicable NIAP Technical Decisions, and converts to the latest version of the Common Criteria, CC:2022.</p>",
+          "types": "1",
+          "subject": null,
+          "posted": "2026-04-22T10:01:54.188000Z",
+          "begins": null,
+          "expires": null,
+          "link": null,
+          "venue": null,
+          "location": null,
+          "entrydate": "2026-04-22T10:01:54.188000Z",
+          "moddate": null,
+          "active": true,
+          "_category": "PUBLICATION"
+        }
+      ]
+    },
+    "events": {
+      "added": []
+    }
+  },
+  "cc_portal": {
+    "news": {
+      "added": []
+    },
+    "pps": {
+      "added": []
+    },
+    "products": {
+      "added": []
+    }
+  },
+  "cctl_labs": {},
+  "csfc": {
+    "pages": {},
+    "component_selections": {},
+    "feeds": {
+      "CISA Alerts": [
+        {
+          "title": "CISA Adds One Known Exploited Vulnerability to Catalog",
+          "link": "https://www.cisa.gov/news-events/alerts/2026/04/22/cisa-adds-one-known-exploited-vulnerability-catalog",
+          "summary": "<p>CISA has added one new vulnerability to its <a href=\"https://www.cisa.gov/known-exploited-vulnerabilities-catalog\" title=\"Known Exploited Vulnerabilities Catalog\">Known Exploited Vulnerabilities (KEV) Catalog</a>, based on evidence of active exploitation.</p>\n<ul>\n<li><a href=\"https://www.cve.org/CVERecord?id=CVE-2026-33825\" target=\"_blank\">CVE-2026-33825</a> Microsoft Defender Insufficient Granularity of Access Control Vulnerability</li>\n</ul>\n<p>This type of vulnerability is a frequent attack vector for malicious cyber actors and poses significant risks to the federal enterprise.</p>\n<p><a href=\"https://www.cisa.gov/binding-operational-directive-22-01\">Binding Operational Directive (BOD) 22-01: Reducing the Significant Risk of Known Exploited Vulnerabilities</a> established the KEV Catalog as a living list of known Common Vulnerabilities and Exposures (CVEs) that carry significant risk to the federal enterprise. BOD 22-01 requires Federal Civilian Executive Branch (FCEB) agencies to remediate identified vulnerabilities by the due date to protect FCEB networks against active threats. See the <a href=\"https://www.cisa.gov/sites/default/files/publications/Reducing_the_Significant_Risk_of_Known_Exploited_Vulnerabilities_211103.pdf\">BOD 22-01 Fact Sheet</a> for more information.</p>\n<p>Although BOD 22-01 only applies to FCEB agencies, CISA strongly urges all organizations to reduce their exposure to cyberattacks by prioritizing timely remediation of <a href=\"https://www.cisa.gov/known-exploited-vulnerabilities-catalog\" title=\"Known Exploited Vulnerabilities Catalog\">KEV Catalog vulnerabilities</a> as part of their vulnerability management practice. CISA will continue to add vulnerabilities to the catalog that meet the <a href=\"https://www.cisa.gov/known-exploited-vulnerabilities\" title=\"Reducing the Significant Risk of Known Exploited Vulnerabilities\">specified criteria</a>.&nbsp;</p>",
+          "published": "Wed, 22 Apr 26 12:00:00 +0000",
+          "id": "/node/24775",
+          "_category": "CISA"
+        }
+      ]
+    }
+  },
+  "cc_crypto": {
+    "pages": {},
+    "doc_headers": {}
+  },
+  "nist": {
+    "pages": {},
+    "doc_headers": {
+      "FIPS 204 ML-DSA": {
+        "changed": true,
+        "old_last_modified": "Thu, 22 Aug 2024 13:51:35 GMT",
+        "new_last_modified": "",
+        "old_etag": "\"3eaf4669af4da1:0\"",
+        "new_etag": "",
+        "old_content_length": "3291746",
+        "new_content_length": "",
+        "old_partial_hash": "",
+        "new_partial_hash": "5f66fc055c9f56b45b53d0f2df1fae3f",
+        "url": "https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.204.pdf"
+      }
+    },
+    "feeds": {}
+  },
+  "nato": {
+    "pages": {},
+    "cisco_added": [],
+    "cisco_removed": []
+  },
+  "eucc": {
+    "pages": {},
+    "cisco_added": [],
+    "cisco_removed": []
+  },
+  "alerts": []
+}
