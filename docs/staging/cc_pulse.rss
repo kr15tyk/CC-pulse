@@ -2,9 +2,11 @@
 <rss version="2.0"><channel>
 <title>CC Pulse</title>
 <link>https://kr15tyk.github.io/CC-pulse/cc_dashboard.html</link>
-<description>Common Criteria monitoring - 2026-04-22 04:16 ET</description>
-<item><title>New PP: MOD_SDN-Controller_v1.0</title><link>https://www.niap-ccevs.org/Profile/PP.cfm?id=542</link><description>PP-Module for SDN Controller Version 1.0</description></item>
-<item><title>PP-Module for Software Defined Networking - Controller Version 1.0 Published</title><link>https://www.niap-ccevs.org/</link><description></description></item>
-<item><title>[atsec] ICMC 2026 is Here</title><link>https://www.atsec.com/icmc-2026-is-here/</link><description></description></item>
+<description>Common Criteria monitoring - 2026-04-23 04:20 ET</description>
+<item><title>New PP: PP_GPCP_V2.0</title><link>https://www.niap-ccevs.org/Profile/PP.cfm?id=539</link><description>Protection Profile for General Purpose Computing Platform, Version 2.0</description></item>
+<item><title>New TD: TD1033</title><link>https://www.niap-ccevs.org/</link><description></description></item>
+<item><title>New TD: TD1032</title><link>https://www.niap-ccevs.org/</link><description></description></item>
+<item><title>New TD: TD1030</title><link>https://www.niap-ccevs.org/</link><description></description></item>
+<item><title>Protection Profile for General Purpose Computing Platform (GPCP) Version 2.0 Published</title><link>https://www.niap-ccevs.org/</link><description></description></item>
 <item><title>NIST Doc Updated: FIPS 204 ML-DSA</title><link>https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.204.pdf</link><description>Document header updated.</description></item>
 </channel></rss>
