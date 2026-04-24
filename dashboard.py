@@ -125,7 +125,7 @@ def _build_history(n: int = 90) -> list:
                 "date": date, "category": "td_new", "kind": "new",
                 "title": f"New TD: {td.get('identifier') or td.get('td_id') or '?'}",
                 "detail": td.get("pp_short_name") or td.get("title") or "",
-                "url": "https://www.niap-ccevs.org/",
+                "url": "https://www.niap-ccevs.org/technical-decisions",
             })
 
         # NATO NIAPCL Cisco additions
