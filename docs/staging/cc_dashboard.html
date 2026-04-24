@@ -179,7 +179,7 @@
   <span class="nav-title">CC Pulse Dashboard</span>
   <span class="nav-spacer"></span>
   <div class="ham-wrap">
-    <span class="nav-meta">Last run: 2026-04-23 04:20 ET</span>
+    <span class="nav-meta">Last run: 2026-04-24 04:32 ET</span>
     <button class="ham-btn" id="ham-btn" onclick="toggleHamMenu()" aria-expanded="false" aria-haspopup="true" title="Open menu">&#9776;</button>
     <div class="ham-menu" id="ham-menu" role="menu">
       <a class="ham-item" href="https://kr15tyk.github.io/CC-pulse/cc_dashboard.html" role="menuitem"><span class="ham-icon">&#127968;</span>Home</a>
@@ -255,7 +255,7 @@
 <div class="sticky-top">
   <div class="trend-bar">
     <div class="stat"><a href="#sec-niap-pp" onclick="navigateTo('sec-niap-pp');return false;">
-      <div class="stat-num active-num">6</div>
+      <div class="stat-num active-num">1</div>
       <div class="stat-lbl">NIAP Changes</div>
     </a></div>
     <div class="stat"><a href="#sec-csfc" onclick="navigateTo('sec-csfc');return false;">
@@ -263,7 +263,7 @@
       <div class="stat-lbl">CSfC Selection Updates</div>
     </a></div>
     <div class="stat"><a href="#sec-nist" onclick="navigateTo('sec-nist');return false;">
-      <div class="stat-num active-num">1</div>
+      <div class="stat-num ">0</div>
       <div class="stat-lbl">NIST Doc Updates</div>
     </a></div>
     <div class="stat"><a href="#sec-cc-portal" onclick="navigateTo('sec-cc-portal');return false;">
@@ -333,7 +333,7 @@
     
     
     
-    <p class="no-change">No changes detected. <span class="last-active">(last: 2026-04-22)</span></p>
+    <p class="no-change">No changes detected. <span class="last-active">(last: 2026-04-24)</span></p>
   </div>
 </div>
 
@@ -354,116 +354,77 @@
 </div>
 
   <!-- NIAP News -->
-<div class="card card-new" id="sec-niap-news" data-has-changes="1">
+<div class="card " id="sec-niap-news" data-has-changes="0">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>NIAP News &amp; Announcements</span>
-    <span class="card-count">1 new item</span>
+    <span class="card-count">0 new items</span>
     </span>
-    <span class="toggle-icon">&#9660;</span>
-  </div>
-  <div class="card-body ">
-    
-    
-    <div class="item-row" data-source="niap-news" data-kind="new">
-      <a class="item-link" href="#" target="_blank">Protection Profile for General Purpose Computing Platform (GPCP) Version 2.0 Published</a>
-      <span class="item-meta"></span>
-    </div>
-    
-    
-    
-    
-    
-    
-  </div>
-</div>
-
-  <!-- NIAP PCL — All Certifications -->
-<div class="card " id="sec-niap-pcl" data-has-changes="0">
-  <div class="card-hdr" onclick="toggleCard(this)">
-    <span>NIAP PCL — All Certifications</span>
-    <span class="card-count">0 changes</span>
-    </span>
+    <span class="toggle-icon">&#9658;</span>
   </div>
   <div class="card-body collapsed">
     
     
     
-    <p class="no-change">No changes detected. <span class="last-active">(last: 2026-04-22)</span></p>
+    
+    <p class="no-change">No new items.</p>
+  </div>
+</div>
+
+  <!-- NIAP PCL — All Certifications -->
+<div class="card card-new" id="sec-niap-pcl" data-has-changes="1">
+  <div class="card-hdr" onclick="toggleCard(this)">
+    <span>NIAP PCL — All Certifications</span>
+    <span class="card-count">1 change</span>
+    </span>
+  </div>
+  <div class="card-body ">
+    
+    <div class="sub-hdr sub-new">New Certifications (1)</div>
+    
+    <div class="item-row" data-source="niap-pcl" data-kind="new">
+      <span class="item-link">SUSE LLC -- SUSE Linux Enterprise Server, Version 15 SP7</span>
+      <span class="item-meta">2026-02-24</span>
+    </div>
+    
+    <div class="item-sub">PKG_TLS_V1.1, PKG_SSH_V1.0, PP_OS_V4.3</div>
+    
+    
+    
+    
+    
+    
   </div>
 </div>
 
   <!-- NIAP PPs -->
-<div class="card card-new" id="sec-niap-pp" data-has-changes="2">
+<div class="card " id="sec-niap-pp" data-has-changes="0">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>NIAP Protection Profiles</span>
-    <span class="card-count">2 changes</span>
+    <span class="card-count">0 changes</span>
     </span>
-    <span class="toggle-icon">&#9660;</span>
+    <span class="toggle-icon">&#9658;</span>
   </div>
-  <div class="card-body ">
-    
-    <div class="sub-hdr sub-new">New PPs (1)</div>
-    
-    <div class="item-row" data-source="niap-pp" data-kind="new">
-      <a class="item-link" href="https://www.niap-ccevs.org/Profile/PP.cfm?id=539" target="_blank">PP_GPCP_V2.0</a>
-      <span class="item-meta">Hardware Platform and Components &middot; 2026-04-22T00:00:00Z</span>
-    </div>
+  <div class="card-body collapsed">
     
     
     
     
-    <div class="sub-hdr sub-updated">Sunset Changes (1)</div>
-    
-    <div class="item-row" data-source="niap-pp" data-kind="updated">
-      <a class="item-link" href="https://www.niap-ccevs.org/Profile/PP.cfm?id=480" target="_blank">MOD_MACSEC_V1.0</a>
-      <span class="item-meta">Network Encryption &middot; Sunset: 2026-10-02T00:00:00Z</span>
-    </div>
-    
-    
-    
-    
+    <p class="no-change">No changes detected. <span class="last-active">(last: 2026-04-23)</span></p>
   </div>
 </div>
 
   <!-- NIAP TDs -->
-<div class="card card-new" id="sec-niap-td" data-has-changes="3">
+<div class="card " id="sec-niap-td" data-has-changes="0">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>NIAP Technical Decisions</span>
-    <span class="card-count">3 changes</span>
+    <span class="card-count">0 changes</span>
     </span>
-    <span class="toggle-icon">&#9660;</span>
+    <span class="toggle-icon">&#9658;</span>
   </div>
-  <div class="card-body ">
-    
-    <div class="sub-hdr sub-new">New TDs (3)</div>
-    
-    <div class="item-row" data-source="niap-td" data-kind="new">
-      <span class="item-link">TD1033 &mdash; Sunset Dates for NDcPP Configurations</span>
-      <span class="item-meta">2026-04-22</span>
-    </div>
-    
-    <div class="item-sub">Applies to: CPP_ND_V3.0E</div>
+  <div class="card-body collapsed">
     
     
-    <div class="item-row" data-source="niap-td" data-kind="new">
-      <span class="item-link">TD1032 &mdash; Corrections to Application Notes for FTP_ITC.1 Iterations</span>
-      <span class="item-meta">2026-04-22</span>
-    </div>
-    
-    <div class="item-sub">Applies to: MOD_SBC_v2.0</div>
-    
-    
-    <div class="item-row" data-source="niap-td" data-kind="new">
-      <span class="item-link">TD1030 &mdash; Correction to FCS_MAC_EXT.2 TSS Activity When FPT_RPL_EXT.1 is Claimed</span>
-      <span class="item-meta">2026-04-22</span>
-    </div>
-    
-    <div class="item-sub">Applies to: MOD_MACSEC_V1.0</div>
-    
-    
-    
-    
-    
+    <p class="no-change">No changes detected. <span class="last-active">(last: 2026-04-23)</span></p>
   </div>
 </div>
 </div>
@@ -503,25 +464,16 @@
 </div>
 
   <!-- NIST Docs -->
-<div class="card card-updated" id="sec-nist" data-has-changes="1">
+<div class="card " id="sec-nist" data-has-changes="0">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>NIST Documentation</span>
-    <span class="card-count">1 update</span>
+    <span class="card-count">0 updates</span>
     </span>
-    <span class="toggle-icon">&#9660;</span>
+    <span class="toggle-icon">&#9658;</span>
   </div>
-  <div class="card-body ">
+  <div class="card-body collapsed">
     
-    
-    <div class="item-row" data-source="nist" data-kind="updated">
-      <a class="item-link" href="https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.204.pdf" target="_blank">FIPS 204 ML-DSA</a>
-      <span class="item-meta">
-        Header changed
-      </span>
-    </div>
-    
-    
-    
+    <p class="no-change">No changes detected. <span class="last-active">(last: 2026-04-23)</span></p>
   </div>
 </div>
 </div>
@@ -613,7 +565,7 @@
 <div class="card card-new" id="sec-history" data-has-changes="1">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>Change History</span>
-    <span class="card-count">1429 events</span>
+    <span class="card-count">1430 events</span>
     <span class="toggle-icon">▼</span>
   </div>
   <div class="card-body">
@@ -632,6 +584,17 @@
     </div>
     <div class="timeline" id="history-timeline">
     
+      
+      <div class="tl-entry" data-cat="pcl_cert">
+        <div class="tl-date">2026-04-24</div>
+        <div class="tl-body">
+          <div class="tl-title">
+            <span class="tl-badge new">new</span>
+            <a href="https://www.niap-ccevs.org/product/index.cfm?pid=2026.1146" target="_blank">SUSE LLC — SUSE Linux Enterprise Server, Version 15 SP7</a>
+          </div>
+          <div class="tl-detail">Certified 2026-02-24 · atsec information security GmbH Prüfstelle für IT-Sicherheit · PKG_TLS_V1.1, PKG_SSH_V1.0, PP_OS_V4.3</div>
+        </div>
+      </div>
       
       <div class="tl-entry" data-cat="pp_new">
         <div class="tl-date">2026-04-23</div>
@@ -16362,7 +16325,7 @@
 </div><!-- /main-content -->
 <footer>
   <span>CC Pulse &middot; Auto-refreshes daily (01:00 EST) &middot; NIAP, CSfC, NIST, CC Portal, NATO NIAPCL, EUCC / ENISA</span>
-  <span>Last run: 2026-04-23 04:20 ET</span>
+  <span>Last run: 2026-04-24 04:32 ET</span>
 </footer>
 
 <script>
