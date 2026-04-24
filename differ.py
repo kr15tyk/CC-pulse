@@ -141,7 +141,14 @@ def flag_alerts(diff: Snapshot) -> list[dict]:
     _scan_items("NIAP PP", diff.get("niap", {}).get("pps", {}).get("sunset_changes", []))
 
     # NIAP Technical Decisions
-    _scan_items("NIAP TD", diff.get("niap", {}).get("tds", {}).get("added", []), tab="us")
+    _TD_URL = "https://www.niap-ccevs.org/technical-decisions"
+    for td in diff.get("niap", {}).get("tds", {}).get("added", []):
+        title  = td.get("title", "") or td.get("identifier", "")
+        detail = td.get("identifier", "")
+        hits   = _matches(title + " " + detail)
+        if hits:
+            _add(alerts, "NIAP TD", "new", title,
+                 url=_TD_URL, detail=detail, keywords=hits, tab="us")
 
     # NIAP News
     _scan_items("NIAP News", diff.get("niap", {}).get("news", {}).get("added", []), tab="us")
