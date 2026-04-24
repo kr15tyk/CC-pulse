@@ -129,45 +129,29 @@ def flag_alerts(diff: Snapshot) -> list[dict]:
 
 
     # NIAP PCL (Cisco NDcPP certs)
-    for item in diff.get("niap", {}).get("pcl_cisco", {}).get("new", []):
-        title = item.get("title", item.get("name", ""))
+    for item in diff.get("niap", {}).get("cisco_ndcpp", {}).get("added", []):
+        title = item.get("product_name", item.get("title", item.get("name", "")))
         hits  = _matches(title)
         if hits:
             _add(alerts, "NIAP PCL", "new_cert", title,
                  url=item.get("url", ""), keywords=hits, tab="us")
 
     # NIAP Protection Profiles
-    _scan_items("NIAP PP", diff.get("niap", {}).get("pps", {}).get("new", []), tab="us")
-    _scan_items("NIAP PP", diff.get("niap", {}).get("pps", {}).get("updated", []), tab="us")
-    _scan_items("NIAP PP", diff.get("niap", {}).get("pps", {}).get("sunsetted", []))
+    _scan_items("NIAP PP", diff.get("niap", {}).get("pps", {}).get("added", []), tab="us")
+    _scan_items("NIAP PP", diff.get("niap", {}).get("pps", {}).get("sunset_changes", []))
 
     # NIAP Technical Decisions
-    _scan_items("NIAP TD", diff.get("niap", {}).get("tds", {}).get("new", []), tab="us")
-    _scan_items("NIAP TD", diff.get("niap", {}).get("tds", {}).get("updated", []), tab="us")
+    _scan_items("NIAP TD", diff.get("niap", {}).get("tds", {}).get("added", []), tab="us")
 
     # NIAP News
-    _scan_items("NIAP News", diff.get("niap", {}).get("news", {}).get("new", []), tab="us")
-
-    # NIST
-    for section_key in ("csrc_news", "fips", "sp", "cmvp", "pqc"):
-        section = diff.get("nist", {}).get(section_key, {})
-        _scan_items("NIST CSRC", section.get("new", []), tab="us")
-        _scan_items("NIST CSRC", section.get("updated", []), tab="us")
+    _scan_items("NIAP News", diff.get("niap", {}).get("news", {}).get("added", []), tab="us")
 
     # CC Portal
-    _scan_items("CC Portal", diff.get("cc_portal", {}).get("news", {}).get("new", []), tab="intl")
-    _scan_items("CC Portal", diff.get("cc_portal", {}).get("pps", {}).get("new", []), tab="intl")
+    _scan_items("CC Portal", diff.get("cc_portal", {}).get("news", {}).get("added", []), tab="intl")
+    _scan_items("CC Portal", diff.get("cc_portal", {}).get("pps", {}).get("added", []), tab="intl")
 
     # CCTL Labs
-    _scan_items("CCTL Labs", diff.get("cctl", {}).get("new_posts", []), tab="intl")
-
-    # NATO NIAPCL
-    _scan_items("NATO NIAPCL", diff.get("nato", {}).get("new", []), tab="intl")
-    _scan_items("NATO NIAPCL", diff.get("nato", {}).get("updated", []), tab="intl")
-
-    # EUCC / ENISA
-    _scan_items("EUCC", diff.get("eucc", {}).get("new", []), tab="eu")
-    _scan_items("EUCC", diff.get("eucc", {}).get("updated", []), tab="eu")
+    _scan_items("CCTL Labs", diff.get("cctl_labs", {}).get("added", []), tab="intl")
 
 # CSfC Component Selections -- hash change means the PDF content changed
     for sel_name, change in diff.get("csfc", {}).get("component_selections", {}).items():
