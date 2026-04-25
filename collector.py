@@ -30,9 +30,15 @@ log = logging.getLogger(__name__)
 
 HEADERS = {
     "User-Agent": (
-        "CCPulse/2.0 (automated monitoring tool; "
-        "contact your-operator@example.com)"
-    )
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
+        "AppleWebKit/537.36 (KHTML, like Gecko) "
+        "Chrome/124.0.0.0 Safari/537.36"
+    ),
+    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+    "Accept-Language": "en-US,en;q=0.5",
+    "Accept-Encoding": "gzip, deflate, br",
+    "Connection": "keep-alive",
+    "Upgrade-Insecure-Requests": "1",
 }
 
 SESSION = requests.Session()
@@ -67,6 +73,12 @@ def _do_get_json(url, params=None):
 
 def _do_get_html(url):
     r = SESSION.get(url, timeout=30)
+    if r.status_code == 403:
+        log.warning(
+            "403 Forbidden for %s — WAF may be blocking this request "
+            "(bot-detection, IP reputation, or missing browser headers)",
+            url,
+        )
     r.raise_for_status()
     return BeautifulSoup(r.text, "lxml")
 
@@ -500,6 +512,15 @@ def collect_nato() -> dict:
         "pages": {},
         "cisco_products": [],
     }
+
+    # Warm up the session on the NATO base domain to pick up any required
+    # cookies before hitting the NIAPCL search pages (helps bypass WAF/bot filters).
+    log.info("[NATO NIAPCL] Warming up session on NATO base domain...")
+    try:
+        SESSION.get("https://www.ia.nato.int/", timeout=15)
+    except Exception as exc:
+        log.warning("[NATO] Session warm-up failed: %s", exc)
+
     for page_key, path in config.NATO_NIAPCL_PAGES.items():
         url = config.NATO_BASE + path
         log.info("  [NATO] Fetching page: %s (%s)...", page_key, url)
@@ -801,6 +822,14 @@ def collect_csfc() -> dict:
         "component_selection_hashes": {},
         "feeds": {},
     }
+
+    # Warm up the session on the NSA base domain to pick up any required
+    # cookies before hitting deep CSfC sub-pages (helps bypass WAF/bot filters).
+    log.info("[CSfC] Warming up session on NSA base domain...")
+    try:
+        SESSION.get("https://www.nsa.gov/", timeout=15)
+    except Exception as exc:
+        log.warning("[CSfC] Session warm-up failed: %s", exc)
 
     # 1. Scrape CSfC pages; for the APL, also parse structured records (fix #18)
     for page_key, path in config.CSFC_PAGES.items():
