@@ -722,6 +722,68 @@ def send_cisco_cert_celebration(new_certs: list[dict]) -> None:
     except urllib.error.URLError as exc:
         log.warning("[Webex] Failed to send celebration message: %s", exc)
 
+def send_new_tds_webex(new_tds: list[dict]) -> None:
+    """Post a Webex notification for every new NIAP Technical Decision.
+
+    Fires unconditionally whenever new TDs are detected in the daily diff,
+    regardless of keyword matches.
+
+    Args:
+        new_tds: List of TD dicts from diff["niap"]["tds"]["added"].
+    """
+    token   = config.WEBEX_BOT_TOKEN
+    room_id = config.WEBEX_ROOM_ID
+    if not token or not room_id:
+        log.debug("[Webex] Bot token or Room ID not configured — skipping TD notification.")
+        return
+    if not new_tds:
+        return
+
+    count   = len(new_tds)
+    td_word = "Decision" if count == 1 else "Decisions"
+
+    lines = []
+    for td in new_tds:
+        ident = td.get("identifier", "")
+        title = td.get("title", "") or ident
+        pps   = td.get("protection_profile", []) or []
+        pp_names = ", ".join(pp.get("pp_short_name", "") for pp in pps[:3] if pp.get("pp_short_name"))
+        if len(pps) > 3:
+            pp_names += f" +{len(pps) - 3} more"
+        url = f"https://www.niap-ccevs.org/technical-decisions/{ident}" if ident else "https://www.niap-ccevs.org/technical-decisions"
+        line = f"**[NEW TD]** [{ident} — {title}]({url})"
+        if pp_names:
+            line += f"\n ↳ Applies to: {pp_names}"
+        lines.append(line)
+
+    body = "\n\n---\n".join(lines)
+    header = (
+        f"## 📋 NIAP — {count} New Technical {td_word}\n"
+        f"_CC Pulse detected {count} new TD{'s' if count != 1 else ''} on the NIAP site._\n"
+    )
+    footer = "\n\n[View full dashboard](https://kr15tyk.github.io/CC-pulse/cc_dashboard.html)"
+
+    payload = json.dumps({
+        "roomId":   room_id,
+        "markdown": header + body + footer,
+    }).encode("utf-8")
+
+    req = urllib.request.Request(
+        "https://webexapis.com/v1/messages",
+        data=payload,
+        headers={
+            "Content-Type":  "application/json",
+            "Authorization": f"Bearer {token}",
+        },
+        method="POST",
+    )
+    try:
+        with urllib.request.urlopen(req, timeout=10) as resp:
+            log.info("[Webex] New TDs notification sent for %d TD(s) (HTTP %d).", count, resp.status)
+    except urllib.error.URLError as exc:
+        log.warning("[Webex] Failed to send new TDs notification: %s", exc)
+
+
 
 def send_cisco_cert_email(new_certs: list[dict]) -> None:
     """Send a dedicated celebration email for new Cisco NDcPP PCL certifications.
