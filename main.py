@@ -203,7 +203,13 @@ def run_daily(output_dir: str = None) -> None:
     else:
         log.info("No keyword alerts.")
 
-    # 7. Cisco NDcPP PCL celebration — fires separately from keyword alerts
+    # 7. New NIAP TDs — post to Webex for every new TD, regardless of keyword matches
+    new_tds = diff.get("niap", {}).get("tds", {}).get("added", [])
+    if new_tds:
+        log.info("%d new NIAP TD(s) — sending Webex notification...", len(new_tds))
+        emailer.send_new_tds_webex(new_tds)
+
+    # 8. Cisco NDcPP PCL celebration — fires separately from keyword alerts
     new_cisco_certs = diff.get("niap", {}).get("cisco_ndcpp", {}).get("added", [])
     if new_cisco_certs:
         log.info("%d new Cisco NDcPP certification(s) — sending celebration...", len(new_cisco_certs))
