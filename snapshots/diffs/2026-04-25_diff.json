@@ -1,0 +1,244 @@
+{
+  "period_start": "2026-04-24T08:03:57.418323+00:00",
+  "period_end": "2026-04-25T07:16:01.817161+00:00",
+  "niap": {
+    "pps": {
+      "added": [],
+      "removed": [],
+      "sunset_changes": [],
+      "status_changes": []
+    },
+    "tds": {
+      "added": [
+        {
+          "td_id": 1034,
+          "identifier": "TD1034",
+          "title": "Clarification on RFC 8784 in FIA_PSK_EXT.1",
+          "protection_profile": [
+            {
+              "pp_id": 481,
+              "pp_name": "PP-Module for Virtual Private Network (VPN) Gateways Version 1.3",
+              "pp_common_name": "PP-Module for Virtual Private Network (VPN) Gateways Version 1.3",
+              "cc_version": "3.1",
+              "mr_version": "",
+              "pp_date": "2023-08-16T00:00:00Z",
+              "entrydate": "2023-08-25T10:15:27Z",
+              "tech_type": "Virtual Private Network",
+              "pp_sponsor_id": "NIAP",
+              "community_id": null,
+              "status": "Publishing",
+              "sunset_date": "2026-07-21T00:00:00Z",
+              "pp_overview": "<p><span dir=\"ltr\">This PP-Module defines requirements for the evaluation of VPN Gateways in addition to the requirements of the Base-PP which specifies requirements on network devices in general. This PP-Module specifically addresses network gateway devices that terminate IPsec VPN tunnels. A compliant VPN gateway is a device composed of hardware and software that is connected to two or more distinct networks and has an infrastructure role in the overall enterprise network. In particular, a VPN gateway establishes a secure tunnel that provides an authenticated and encrypted path to another site(s) and thereby decreases the risk of exposure of information transiting an untrusted network. The baseline requirements of this PP-Module are those determined necessary for a multi-site VPN gateway device. A compliant TOE may also contain the ability to act as a headend for remote clients.</span></p>",
+              "security_evaluation_summary": "",
+              "environmental_strengths": "",
+              "pp_priority": "",
+              "created_on": "2023-08-25T10:15:27Z",
+              "removed_on": null,
+              "archived": false,
+              "assurance_maintenance": "",
+              "pp_estcompletion": "",
+              "pp_estcompletiondate": null,
+              "pp_transition": "2023-11-16T00:00:00Z",
+              "revised_on": "2023-08-29T11:30:13Z",
+              "pp_short_name": "MOD_VPNGW_v1.3",
+              "dod_compliant": false,
+              "csfceligible": true,
+              "constraint": "",
+              "predecessor_id": 466,
+              "successor_id": 527,
+              "creator": 558,
+              "remover": null,
+              "editor": 409
+            }
+          ],
+          "sunset_protection_profile": [],
+          "related_to": "FIA_PSK_EXT.1",
+          "publication_date": "2026-04-24T08:57:00.854000Z",
+          "removed_on": null,
+          "status": "Published"
+        },
+        {
+          "td_id": 1027,
+          "identifier": "TD1027",
+          "title": "Clarification on RFC 8784 in FIA_PSK_EXT.1",
+          "protection_profile": [
+            {
+              "pp_id": 527,
+              "pp_name": "PP-Module for Virtual Private Network (VPN) Gateways Version 2.0",
+              "pp_common_name": "PP-Module for Virtual Private Network (VPN) Gateways Version 2.0",
+              "cc_version": "CC:2022",
+              "mr_version": null,
+              "pp_date": "2026-01-21T00:00:00Z",
+              "entrydate": "2026-01-21T14:37:03.453000Z",
+              "tech_type": "Virtual Private Network",
+              "pp_sponsor_id": "NIAP",
+              "community_id": null,
+              "status": "Publishing",
+              "sunset_date": null,
+              "pp_overview": "<p><span dir=\"ltr\">This PP-Module defines requirements for the evaluation of VPN Gateways in addition to the requirements of the Base-PP which specifies requirements on network devices in general. This PP-Module specifically addresses network gateway devices that terminate IPsec VPN tunnels. A compliant VPN gateway is a device composed of hardware and software that is connected to two or more distinct networks and has an infrastructure role in the overall enterprise network. In particular, a VPN gateway establishes a secure tunnel that provides an authenticated and encrypted path to another site(s) and thereby decreases the risk of exposure of information transiting an untrusted network. The baseline requirements of this PP-Module are those determined necessary for a multi-site VPN gateway device. A compliant TOE may also contain the ability to act as a headend for remote clients.</span></p>",
+              "security_evaluation_summary": "",
+              "environmental_strengths": "",
+              "pp_priority": null,
+              "created_on": null,
+              "removed_on": null,
+              "archived": false,
+              "assurance_maintenance": "",
+              "pp_estcompletion": null,
+              "pp_estcompletiondate": null,
+              "pp_transition": null,
+              "revised_on": null,
+              "pp_short_name": "MOD_VPNGW_v2.0",
+              "dod_compliant": false,
+              "csfceligible": true,
+              "constraint": null,
+              "predecessor_id": 481,
+              "successor_id": null,
+              "creator": 771,
+              "remover": null,
+              "editor": null
+            }
+          ],
+          "sunset_protection_profile": [],
+          "related_to": "FIA_PSK_EXT.1",
+          "publication_date": "2026-04-24T08:57:15.190000Z",
+          "removed_on": null,
+          "status": "Published"
+        }
+      ],
+      "removed": []
+    },
+    "cisco_ndcpp": {
+      "added": [],
+      "removed": [],
+      "newly_archived": []
+    },
+    "pcl_all": {
+      "added": [
+        {
+          "active_maintenances": [],
+          "am_sort": "2028-01-27T00:00:00Z",
+          "assigned_lab_name": "atsec information security GmbH Pr\u00fcfstelle f\u00fcr IT-Sicherheit",
+          "certification_date": "2026-01-27T00:00:00Z",
+          "from_cc_portal": true,
+          "product_id": "2026.1141",
+          "product_name": "SUSE Linux Enterprise Server, Version 15 SP4",
+          "protection_profiles": [
+            {
+              "pp_id": 456,
+              "pp_name": "Protection Profile for Virtualization Version 1.1",
+              "pp_short_name": "PP_BASE_VIRTUALIZATION_V1.1"
+            },
+            {
+              "pp_id": 458,
+              "pp_name": "PP-Module for Server Virtualization Version 1.1",
+              "pp_short_name": "MOD_SV_V1.1"
+            },
+            {
+              "pp_id": 459,
+              "pp_name": "Functional Package for SSH Version 1.0",
+              "pp_short_name": "PKG_SSH_V1.0"
+            }
+          ],
+          "status_sort": "Certified",
+          "submitting_country_id_code": "DE",
+          "submitting_country_id_name": "Germany",
+          "sunset_date": "2031-01-27T00:00:00Z",
+          "tech_types": [
+            "Other Devices and Systems"
+          ],
+          "vendor_id_name": "SUSE LLC",
+          "v_id": "2026.1141",
+          "kicked_off_date": null
+        }
+      ],
+      "removed": [],
+      "newly_archived": [
+        {
+          "active_maintenances": [],
+          "am_sort": "2026-04-24T00:00:00Z",
+          "assigned_lab_name": "Lightship Security, Inc.",
+          "certification_date": "2024-04-24T00:00:00Z",
+          "from_cc_portal": true,
+          "product_id": "2024.1102",
+          "product_name": "Xerox\u00ae VersaLink\u2122 C415 and B415 with HDD",
+          "protection_profiles": [
+            {
+              "pp_id": 317,
+              "pp_name": "Protection Profile for Hardcopy Devices Version 1.0",
+              "pp_short_name": "PP_HCD_V1.0"
+            }
+          ],
+          "status_sort": "Archived",
+          "submitting_country_id_code": "CA",
+          "submitting_country_id_name": "Canada",
+          "sunset_date": "2029-04-24T00:00:00Z",
+          "tech_types": [
+            "Multi-Function Devices"
+          ],
+          "vendor_id_name": "Xerox Corporation",
+          "v_id": "2024.1102",
+          "kicked_off_date": null
+        }
+      ]
+    },
+    "in_evaluation": {
+      "added": [],
+      "removed": [],
+      "current_count": 25
+    },
+    "news": {
+      "added": []
+    },
+    "events": {
+      "added": []
+    }
+  },
+  "cc_portal": {
+    "news": {
+      "added": []
+    },
+    "pps": {
+      "added": []
+    },
+    "products": {
+      "added": []
+    }
+  },
+  "cctl_labs": {},
+  "csfc": {
+    "pages": {},
+    "component_selections": {},
+    "feeds": {
+      "CISA Alerts": [
+        {
+          "title": "CISA Adds Four Known Exploited Vulnerabilities to Catalog",
+          "link": "https://www.cisa.gov/news-events/alerts/2026/04/24/cisa-adds-four-known-exploited-vulnerabilities-catalog",
+          "summary": "<p>CISA has added four new vulnerabilities to its <a href=\"https://www.cisa.gov/known-exploited-vulnerabilities-catalog\">Known Exploited Vulnerabilities (KEV) Catalog</a>, based on evidence of active exploitation.</p>\n<ul>\n<li><a href=\"https://www.cve.org/CVERecord?id=CVE-2024-7399\" target=\"_blank\">CVE-2024-7399</a>&nbsp;Samsung&nbsp;MagicINFO&nbsp;9 Server Path Traversal Vulnerability</li>\n<li><a href=\"https://www.cve.org/CVERecord?id=CVE-2024-57726\" target=\"_blank\">CVE-2024-57726</a>&nbsp;SimpleHelp&nbsp;Missing Authorization Vulnerability</li>\n<li><a href=\"https://www.cve.org/CVERecord?id=CVE-2024-57728\" target=\"_blank\">CVE-2024-57728</a>&nbsp;SimpleHelp&nbsp;Path Traversal Vulnerability</li>\n<li><a href=\"https://www.cve.org/CVERecord?id=CVE-2025-29635\" target=\"_blank\">CVE-2025-29635</a>&nbsp;D-Link DIR-823X Command Injection Vulnerability&nbsp;</li>\n</ul>\n<p>These&nbsp;types&nbsp;of vulnerabilities&nbsp;are&nbsp;frequent attack vectors&nbsp;for malicious cyber actors and pose significant risks to the federal enterprise.&nbsp;</p>\n<p><a href=\"https://www.cisa.gov/binding-operational-directive-22-01\">Binding Operational Directive (BOD) 22-01: Reducing the Significant Risk of Known Exploited Vulnerabilities</a>&nbsp;established the KEV Catalog as a living list of known Common Vulnerabilities and Exposures (CVEs) that carry significant risk to the federal enterprise. BOD 22-01 requires Federal Civilian Executive Branch (FCEB) agencies to remediate identified vulnerabilities by the due date to protect FCEB networks against active threats. See the&nbsp;<a href=\"https://www.cisa.gov/sites/default/files/publications/Reducing_the_Significant_Risk_of_Known_Exploited_Vulnerabilities_211103.pdf\">BOD 22-01 Fact Sheet</a>&nbsp;for more information.&nbsp;</p>\n<p>Although BOD 22-01 only applies to FCEB agencies, CISA strongly urges all organizations to reduce their exposure to cyberattacks by prioritizing&nbsp;timely&nbsp;remediation of&nbsp;<a href=\"https://www.cisa.gov/known-exploited-vulnerabilities-catalog\">KEV Catalog vulnerabilities</a>&nbsp;as part of their vulnerability management practice. CISA will continue to add vulnerabilities to the catalog that meet the&nbsp;<a href=\"https://www.cisa.gov/known-exploited-vulnerabilities\">specified criteria</a>.&nbsp;</p>",
+          "published": "Fri, 24 Apr 26 12:00:00 +0000",
+          "id": "/node/24794",
+          "_category": "CISA"
+        }
+      ]
+    }
+  },
+  "cc_crypto": {
+    "pages": {},
+    "doc_headers": {}
+  },
+  "nist": {
+    "pages": {},
+    "doc_headers": {},
+    "feeds": {}
+  },
+  "nato": {
+    "pages": {},
+    "cisco_added": [],
+    "cisco_removed": []
+  },
+  "eucc": {
+    "pages": {},
+    "cisco_added": [],
+    "cisco_removed": []
+  },
+  "alerts": []
+}
