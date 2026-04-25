@@ -10,7 +10,7 @@ Features:
   - CSfC CP entries show content-length change when dates unavailabl
   - 7-day activity sparkline per section
   - Responsive mobile layou
-  - CCTL Lab Intel: compact per-lab counts with expand
+  - CCTL Lab Intel: compact per-lab counts with expan
   - RSS feed (cc_pulse.rss) with items from all domains
   - Structured logging
 """
@@ -125,7 +125,7 @@ def _build_history(n: int = 90) -> list:
                 "date": date, "category": "td_new", "kind": "new",
                 "title": f"New TD: {td.get('identifier') or td.get('td_id') or '?'}",
                 "detail": td.get("pp_short_name") or td.get("title") or "",
-                "url": "https://www.niap-ccevs.org/technical-decisions",
+                "url": f"https://www.niap-ccevs.org/technical-decisions/{td.get('identifier') or td.get('td_id') or ''}",
             })
 
         # NATO NIAPCL Cisco additions
@@ -808,7 +808,7 @@ DASHBOARD_TEMPLATE = """
     <div class="sub-hdr sub-new">New TDs ({{ diff.niap.tds.added | length }})</div>
     {% for td in diff.niap.tds.added %}
     <div class="item-row" data-source="niap-td" data-kind="new">
-      <span class="item-link">{{ td.identifier }} &mdash; {{ td.title }}</span>
+      <a class="item-link" href="https://www.niap-ccevs.org/technical-decisions/{{ td.identifier }}" target="_blank">{{ td.identifier }} &mdash; {{ td.title }}</a>
       <span class="item-meta">{% if td.publication_date %}{{ td.publication_date[:10] }}{% endif %}</span>
     </div>
     {% if td.protection_profile %}
@@ -820,7 +820,7 @@ DASHBOARD_TEMPLATE = """
     <div class="sub-hdr sub-removed">Removed TDs ({{ diff.niap.tds.removed | length }})</div>
     {% for td in diff.niap.tds.removed %}
     <div class="item-row" data-source="niap-td" data-kind="removed">
-      <span class="item-link">{{ td.identifier }} &mdash; {{ td.title }}</span>
+      <a class="item-link" href="https://www.niap-ccevs.org/technical-decisions/{{ td.identifier }}" target="_blank">{{ td.identifier }} &mdash; {{ td.title }}</a>
       <span class="item-meta">{% if td.removed_on %}Removed: {{ td.removed_on[:10] }}{% endif %}</span>
     </div>
     {% if td.protection_profile %}
