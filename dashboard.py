@@ -1291,10 +1291,10 @@ function initEnhancements() {
         '<button class="hist-nav-btn" data-hist-view="month">Last 30 Days</button>' +
         '<button class="hist-nav-btn" data-hist-view="all">All History</button>';
       navDiv.querySelectorAll('.hist-nav-btn').forEach(function(b) {
-        b.addEventListener('click', function() { setHistoryView(b, b.getAttribute('data-hist-view')); });
+        b.addEventListener('click', function() { setHistoryView(b); });
       });
       histSec.insertBefore(navDiv, card);
-      setHistoryView(navDiv.querySelector('[data-hist-view="week"]'), 'week');
+      setHistoryView(navDiv.querySelector('[data-hist-view="week"]'));
     }
   }
 }
@@ -1311,14 +1311,14 @@ function applyHistoryFilters() {
     let showByDate = true;
     if (view !== 'all') {
       const dateEl = entry.querySelector('.tl-date');
-      showByDate = dateEl ? new Date(dateEl.textContent.trim()) >= cutoff : true;
+      showByDate = dateEl ? new Date(dateEl.textContent.trim() + 'T00:00:00') >= cutoff : true;
     }
     const showByCat = cats[0] === 'all' || cats.includes(entry.dataset.cat);
     entry.style.display = (showByDate && showByCat) ? '' : 'none';
   });
 }
 
-function setHistoryView(btn, view) {
+function setHistoryView(btn) {
   document.querySelectorAll('.hist-nav-btn').forEach(function(b) { b.classList.remove('active'); });
   if (btn) btn.classList.add('active');
   applyHistoryFilters();
