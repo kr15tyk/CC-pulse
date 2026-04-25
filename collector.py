@@ -21,6 +21,7 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 import feedparser
 import requests
 from bs4 import BeautifulSoup
+from urllib.parse import urljoin
 from datetime import datetime, timezone
 
 import config
@@ -29,9 +30,15 @@ log = logging.getLogger(__name__)
 
 HEADERS = {
     "User-Agent": (
-        "CCPulse/2.0 (automated monitoring tool; "
-        "contact your-operator@example.com)"
-    )
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
+        "AppleWebKit/537.36 (KHTML, like Gecko) "
+        "Chrome/124.0.0.0 Safari/537.36"
+    ),
+    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+    "Accept-Language": "en-US,en;q=0.5",
+    "Accept-Encoding": "gzip, deflate, br",
+    "Connection": "keep-alive",
+    "Upgrade-Insecure-Requests": "1",
 }
 
 SESSION = requests.Session()
@@ -66,6 +73,12 @@ def _do_get_json(url, params=None):
 
 def _do_get_html(url):
     r = SESSION.get(url, timeout=30)
+    if r.status_code == 403:
+        log.warning(
+            "403 Forbidden for %s — WAF may be blocking this request "
+            "(bot-detection, IP reputation, or missing browser headers)",
+            url,
+        )
     r.raise_for_status()
     return BeautifulSoup(r.text, "lxml")
 
@@ -194,11 +207,6 @@ def collect_niap():
     tds = get_json(base + eps["tds"])
     data["tds"] = tds or []
 
-    log.info("  CCTL Directory...")
-    cctls_raw = get_json(base + eps["cctls"])
-    data["cctls"] = (
-        cctls_raw.get("results", {}).get("cctls", []) if cctls_raw else []
-    )
 
     log.info("  Events...")
     ev_curr = get_json(base + eps["events_curr"])
@@ -316,11 +324,14 @@ def scrapelab_items(url):
     for tag in soup.find_all(["h2", "h3", "h4", "article"]):
         a = tag.find("a") if tag.name != "a" else tag
         if a and a.get_text(strip=True):
+            href = a.get("href", "")
+            if href:
+                href = urljoin(url, href)
             items.append({
                 "title":     a.get_text(strip=True),
-                "link":      a.get("href", ""),
+                "link":      href,
                 "published": "",
-                "id":        a.get("href", a.get_text(strip=True)),
+                "id":        href or a.get_text(strip=True),
             })
     return items[:20]
 
@@ -431,6 +442,192 @@ def validate_snapshot(snapshot):
     )
 
 
+
+# ── NATO NIAPCL ──────────────────────────────────────────────────────────────
+def _parse_nato_niapcl_products(soup) -> list:
+    """Parse the NATO NIAPCL product listing page into structured records.
+    Each record: {name, manufacturer, category, link, raw_text}
+    """
+    if not soup:
+        return []
+    items = []
+    # Try table-based layout
+    table = soup.find("table")
+    if table:
+        headers = [th.get_text(strip=True).lower() for th in table.find_all("th")]
+        for tr in table.find_all("tr")[1:]:
+            cells = [td.get_text(strip=True) for td in tr.find_all("td")]
+            if not cells:
+                continue
+            link_tag = tr.find("a")
+            href = link_tag["href"] if link_tag and link_tag.get("href") else ""
+            if href and not href.startswith("http"):
+                href = config.NATO_BASE + href
+            record: dict = {
+                "name": "", "manufacturer": "", "category": "",
+                "link": href, "raw_text": " | ".join(cells[:4])
+            }
+            for i, h in enumerate(headers):
+                if i >= len(cells):
+                    break
+                if "product" in h or "name" in h:
+                    record["name"] = cells[i]
+                elif "manufactur" in h or "vendor" in h or "company" in h:
+                    record["manufacturer"] = cells[i]
+                elif "categor" in h or "type" in h:
+                    record["category"] = cells[i]
+            if record["name"] or record["raw_text"]:
+                items.append(record)
+        if items:
+            return items
+    # Fallback: generic scrape
+    content = soup.find("main") or soup.find("div", {"id": "content"}) or soup
+    for tag in content.find_all(["li", "tr", "div", "p"]):
+        text = tag.get_text(separator=" ", strip=True)
+        link_tag = tag.find("a")
+        href = link_tag["href"] if link_tag and link_tag.get("href") else ""
+        if href and not href.startswith("http"):
+            href = config.NATO_BASE + href
+        if len(text) > 10:
+            items.append({"name": text[:200], "manufacturer": "", "category": "", "link": href, "raw_text": text[:400]})
+    # Deduplicate
+    seen: set = set()
+    unique: list = []
+    for item in items:
+        key = item["raw_text"][:80]
+        if key not in seen:
+            seen.add(key)
+            unique.append(item)
+    return unique
+
+
+def collect_nato() -> dict:
+    """Collect NATO NIAPCL product listings.
+    Monitors the NATO Information Assurance Product Catalogue for:
+    - New Cisco product listings (triggers Cisco celebration alert)
+    - General product additions / removals
+    """
+    log.info("[NATO NIAPCL] Collecting...")
+    data: dict = {
+        "pages": {},
+        "cisco_products": [],
+    }
+
+    # Warm up the session on the NATO base domain to pick up any required
+    # cookies before hitting the NIAPCL search pages (helps bypass WAF/bot filters).
+    log.info("[NATO NIAPCL] Warming up session on NATO base domain...")
+    try:
+        SESSION.get("https://www.ia.nato.int/", timeout=15)
+    except Exception as exc:
+        log.warning("[NATO] Session warm-up failed: %s", exc)
+
+    for page_key, path in config.NATO_NIAPCL_PAGES.items():
+        url = config.NATO_BASE + path
+        log.info("  [NATO] Fetching page: %s (%s)...", page_key, url)
+        soup = get_html(url)
+        products = _parse_nato_niapcl_products(soup)
+        data["pages"][page_key] = products
+        log.info("  -> %d products", len(products))
+    # Extract Cisco-specific entries
+    all_products = data["pages"].get("all_products", [])
+    data["cisco_products"] = [
+        p for p in all_products
+        if any(kw in (p.get("manufacturer", "") + p.get("name", "") + p.get("raw_text", "")).lower()
+               for kw in config.NATO_CISCO_KEYWORDS)
+    ]
+    log.info("[NATO NIAPCL] total:%d cisco:%d", len(all_products), len(data["cisco_products"]))
+    return data
+
+
+# ── EUCC / ENISA ─────────────────────────────────────────────────────────────
+def _scrape_eucc_page(path: str) -> list:
+    """Scrape a single ENISA EUCC page and return a list of text/link items."""
+    url = config.EUCC_BASE + path
+    soup = get_html(url)
+    if not soup:
+        return []
+    items = []
+    content = (
+        soup.find("main")
+        or soup.find("div", {"id": "content"})
+        or soup.find("div", {"class": "content"})
+        or soup
+    )
+    # Try table layout first (certificates page)
+    table = content.find("table")
+    if table:
+        headers = [th.get_text(strip=True).lower() for th in table.find_all("th")]
+        for tr in table.find_all("tr")[1:]:
+            cells = [td.get_text(strip=True) for td in tr.find_all("td")]
+            if not cells:
+                continue
+            link_tag = tr.find("a")
+            href = link_tag["href"] if link_tag and link_tag.get("href") else ""
+            if href and not href.startswith("http"):
+                href = config.EUCC_BASE + href
+            record: dict = {
+                "name": cells[0] if cells else "",
+                "text": " | ".join(cells[:4])[:400],
+                "href": href,
+            }
+            # Try to map headers to fields
+            for i, h in enumerate(headers):
+                if i < len(cells):
+                    if "product" in h or "name" in h:
+                        record["name"] = cells[i]
+            items.append(record)
+        if items:
+            return items
+    # Fallback: generic text scrape
+    for tag in content.find_all(["p", "li", "h2", "h3", "h4", "td"]):
+        text = tag.get_text(separator=" ", strip=True)
+        link_tag = tag.find("a")
+        href = link_tag["href"] if link_tag and link_tag.get("href") else ""
+        if href and not href.startswith("http"):
+            href = config.EUCC_BASE + href
+        if len(text) > 15:
+            items.append({"name": text[:200], "text": text[:400], "href": href})
+    # Deduplicate
+    seen: set = set()
+    unique: list = []
+    for item in items:
+        key = item["text"][:80]
+        if key not in seen:
+            seen.add(key)
+            unique.append(item)
+    return unique
+
+
+def collect_eucc() -> dict:
+    """Collect EUCC / ENISA certification data.
+    Monitors two sources:
+    1. EUCC scheme requirements / news page (policy updates, scheme changes)
+    2. EUCC certificates page (new certified products)
+    Cisco-specific products in certificates page trigger a dedicated alert.
+    """
+    log.info("[EUCC] Collecting...")
+    data: dict = {
+        "pages": {},
+        "cisco_certs": [],
+    }
+    for page_key, path in config.EUCC_PAGES.items():
+        log.info("  [EUCC] Scraping page: %s (%s)...", page_key, path)
+        data["pages"][page_key] = _scrape_eucc_page(path)
+        log.info("  -> %d items", len(data["pages"][page_key]))
+    # Extract Cisco-specific certificates
+    certs = data["pages"].get("certificates", [])
+    data["cisco_certs"] = [
+        c for c in certs
+        if any(kw in (c.get("name", "") + c.get("text", "")).lower()
+               for kw in config.EUCC_CISCO_KEYWORDS)
+    ]
+    req_count  = len(data["pages"].get("requirements", []))
+    cert_count = len(data["pages"].get("certificates", []))
+    log.info("[EUCC] requirements-items:%d certificates:%d cisco-certs:%d",
+             req_count, cert_count, len(data["cisco_certs"]))
+    return data
+
+
 # ── Master snapshot — parallel collection (fix #16) ──────────────────────────
 def collect_all():
     """Collect all domains concurrently, validate, and return a timestamped
@@ -449,12 +646,14 @@ def collect_all():
         "csfc":      collect_csfc,
         "cc_crypto": collect_cc_crypto,
         "nist":      collect_nist,
+        "nato":      collect_nato,
+        "eucc":      collect_eucc,
     }
 
     results: dict = {}
     errors:  dict = {}
 
-    with ThreadPoolExecutor(max_workers=6, thread_name_prefix="cc_pulse") as executor:
+    with ThreadPoolExecutor(max_workers=8, thread_name_prefix="cc_pulse") as executor:
         future_to_domain = {
             executor.submit(fn): domain
             for domain, fn in domain_collectors.items()
@@ -484,6 +683,8 @@ def collect_all():
         "csfc":           results.get("csfc",      {}),
         "cc_crypto":      results.get("cc_crypto", {}),
         "nist":           results.get("nist",      {}),
+        "nato":           results.get("nato",      {}),
+        "eucc":           results.get("eucc",      {}),
     }
 
     validate_snapshot(snapshot)  # raises SanityError on bad NIAP data
@@ -493,7 +694,7 @@ def collect_all():
 # ── CSfC (Commercial Solutions for Classified) ────────────────────────────────
 def _scrape_csfc_page(path: str) -> list:
     """Scrape a single NSA CSfC page and return a list of text/link items."""
-    url  = config.CSFC_BASE + path
+    url = config.CSFC_BASE + path
     soup = get_html(url)
     if not soup:
         return []
@@ -511,7 +712,7 @@ def _scrape_csfc_page(path: str) -> list:
         if len(text) > 15:
             items.append({"text": text[:400], "href": href})
     # Deduplicate by text prefix
-    seen:   set = set()
+    seen: set = set()
     unique: list = []
     for item in items:
         key = item["text"][:80]
@@ -520,9 +721,9 @@ def _scrape_csfc_page(path: str) -> list:
             unique.append(item)
     return unique
 
+
 def _parse_csfc_apl_structured(soup) -> list:
     """Parse the NSA CSfC APL page into structured component records.
-
     Each record: {name, type, vendor, link, raw_text}
     The APL page lists components in a table or as dl/li rows.
     Falls back to flat text items if no table is found (fix #18).
@@ -586,19 +787,49 @@ def _parse_csfc_apl_structured(soup) -> list:
     return unique
 
 
+def _hash_csfc_selections(selections: dict) -> dict:
+    """Download each Component Selections PDF and store a SHA-256 content hash.
+    This is the only reliable way to detect changes on NSA's CDN, which does
+    not serve consistent Last-Modified, ETag, or Content-Length headers.
+    Returns a dict keyed by selection name: {url, hash, fetch_error}.
+    """
+    results = {}
+    for name, url in selections.items():
+        log.info(" [CSfC Selections] Fetching %s ...", name)
+        entry: dict = {"url": url, "hash": "", "fetch_error": ""}
+        try:
+            r = SESSION.get(url, timeout=60, allow_redirects=True)
+            r.raise_for_status()
+            entry["hash"] = hashlib.sha256(r.content).hexdigest()
+            log.info(" -> %d bytes, hash %s...", len(r.content), entry["hash"][:12])
+        except Exception as exc:
+            log.warning(" [CSfC Selections] Failed to fetch %s: %s", name, exc)
+            entry["fetch_error"] = str(exc)
+        results[name] = entry
+    return results
+
+
 def collect_csfc() -> dict:
     """Collect all CSfC monitoring data:
-      - NSA CSfC page snapshots (home, APL, capability packages, FAQ, etc.)
-      - HTTP header polling of Capability Package PDFs (with partial-GET fallback)
-      - CSfC-tagged RSS / news feeds
+    - NSA CSfC page snapshots (home, APL, components list, FAQ, etc.)
+    - SHA-256 content hashes of Component Selections PDFs
+    - CSfC-tagged RSS / news feeds
     """
     log.info("[CSfC] Collecting...")
     data: dict = {
-        "pages":                     {},
-        "apl_structured":            [],   # structured APL records (fix #18)
-        "capability_package_headers":{},
-        "feeds":                     {},
+        "pages": {},
+        "apl_structured": [],           # structured APL records (fix #18)
+        "component_selection_hashes": {},
+        "feeds": {},
     }
+
+    # Warm up the session on the NSA base domain to pick up any required
+    # cookies before hitting deep CSfC sub-pages (helps bypass WAF/bot filters).
+    log.info("[CSfC] Warming up session on NSA base domain...")
+    try:
+        SESSION.get("https://www.nsa.gov/", timeout=15)
+    except Exception as exc:
+        log.warning("[CSfC] Session warm-up failed: %s", exc)
 
     # 1. Scrape CSfC pages; for the APL, also parse structured records (fix #18)
     for page_key, path in config.CSFC_PAGES.items():
@@ -610,10 +841,10 @@ def collect_csfc() -> dict:
             data["apl_structured"] = _parse_csfc_apl_structured(apl_soup)
             log.debug("    -> %d structured APL records", len(data["apl_structured"]))
 
-    # 2. HEAD-poll Capability Package PDFs (with partial-GET fallback)
-    log.info("  [CSfC] Polling Capability Package PDF headers...")
-    data["capability_package_headers"] = _poll_doc_headers(
-        config.CSFC_CAPABILITY_PACKAGES, "CSfC CP"
+    # 2. Download and SHA-256 hash Component Selections PDFs
+    log.info(" [CSfC] Hashing Component Selections PDFs...")
+    data["component_selection_hashes"] = _hash_csfc_selections(
+        config.CSFC_COMPONENT_SELECTIONS
     )
 
     # 3. RSS / news feeds
@@ -630,8 +861,8 @@ def collect_csfc() -> dict:
         log.debug("    -> %d items", len(items))
 
     apl_count = len(data["pages"].get("apl", []))
-    cp_count  = len(data["capability_package_headers"])
-    log.info("[CSfC] APL items:%d CPs polled:%d", apl_count, cp_count)
+    sel_count = len(data["component_selection_hashes"])
+    log.info("[CSfC] APL items:%d Component Selections hashed:%d", apl_count, sel_count)
     return data
 
 

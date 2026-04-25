@@ -1,0 +1,75 @@
+name: Repost Missed Webex Alerts
+
+on:
+  workflow_dispatch:
+    inputs:
+      dates:
+        description: 'Comma-separated diff dates to repost (e.g. 2026-04-23,2026-04-24)'
+        required: true
+        default: '2026-04-23,2026-04-24'
+
+jobs:
+  repost:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Repost missed alerts from stored diffs
+        env:
+          CC_WEBEX_BOT_TOKEN: ${{ secrets.CC_WEBEX_BOT_TOKEN }}
+          CC_WEBEX_ROOM_ID:   ${{ secrets.CC_WEBEX_ROOM_ID }}
+          CC_WEBHOOK_URL:     ${{ secrets.CC_WEBHOOK_URL }}
+          DATES: ${{ github.event.inputs.dates }}
+        run: |
+          python3 << 'PYEOF'
+          import os, json, sys, glob
+          import config, differ, emailer
+
+          dates = [d.strip() for d in os.environ.get('DATES', '').split(',') if d.strip()]
+          if not dates:
+              print("No dates provided, exiting.")
+              sys.exit(0)
+
+          for date in dates:
+              diff_path = f"snapshots/diffs/{date}_diff.json"
+              if not os.path.exists(diff_path):
+                  print(f"[{date}] Diff file not found: {diff_path} -- skipping.")
+                  continue
+
+              with open(diff_path) as f:
+                  diff = json.load(f)
+
+              # Re-run flag_alerts with the now-fixed code
+              alerts = differ.flag_alerts(diff)
+              print(f"[{date}] flag_alerts found {len(alerts)} alert(s).")
+
+              if alerts:
+                  print(f"[{date}] Sending Webex alert...")
+                  # Prepend date label to header so it's clear this is a backfill
+                  # Temporarily patch the header by wrapping alerts with a note
+                  emailer.send_webex_alert(alerts)
+                  emailer.send_webhook_alert(alerts)
+                  # Always post new TDs regardless of keyword matches
+                  new_tds = diff.get("niap", {}).get("tds", {}).get("added", [])
+                  if new_tds:
+                      print(f"[{date}] Sending new TDs Webex notification ({len(new_tds)} TD(s))...")
+                      emailer.send_new_tds_webex(new_tds)
+                  print(f"[{date}] Done.")
+              else:
+                  print(f"[{date}] No keyword alerts -- checking for new TDs...")
+                  new_tds = diff.get("niap", {}).get("tds", {}).get("added", [])
+                  if new_tds:
+                      print(f"[{date}] Sending new TDs Webex notification ({len(new_tds)} TD(s))...")
+                      emailer.send_new_tds_webex(new_tds)
+                  else:
+                      print(f"[{date}] No new TDs either -- nothing to post.")
+          PYEOF

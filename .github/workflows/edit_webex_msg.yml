@@ -1,0 +1,94 @@
+name: Edit Webex Message (one-time)
+on:
+  workflow_dispatch:
+    inputs:
+      action:
+        description: 'delete_and_repost or put_only'
+        required: false
+        default: delete_and_repost
+jobs:
+  edit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Delete bad message and post corrected version
+        env:
+          BOT_TOKEN: ${{ secrets.CC_WEBEX_BOT_TOKEN }}
+          ROOM_ID: ${{ secrets.CC_WEBEX_ROOM_ID }}
+          ACTION: ${{ github.event.inputs.action }}
+        run: |
+          python3 << 'PYEOF'
+          import os, json, base64, urllib.request, urllib.error
+
+          tok = os.environ['BOT_TOKEN']
+          room_id = os.environ['ROOM_ID']
+          action = os.environ.get('ACTION', 'delete_and_repost')
+
+          # Activity UUID of the bad celebration post (April 18 2026 13:21:17)
+          uuid = '7b17eee0-3b29-11f1-b80f-57f7fe8bd756'
+          hydra = 'ciscospark://us/MESSAGE/' + uuid
+          bad_msg_id = base64.b64encode(hydra.encode()).decode()
+          print('Message ID:', bad_msg_id)
+
+          # Corrected markdown content for the C8000 IOS-XE 17.18 certification
+          md = (
+              "# \U0001F3C6 Cisco NDcPP PCL \u2014 1 New Certification!\n\n"
+              "\U0001F38A \U0001F38A \U0001F38A\n\n"
+              "_CC Pulse detected 1 new Cisco product certification on the NIAP PCL._\n\n"
+              "### \U0001F389 [Cisco 8200, 8300, 8400, 8500 Series Secure Routers (C8000) running IOS-XE 17.18]"
+              "(https://www.niap-ccevs.org/product/index.cfm?pid=11661)\n\n"
+              "| Field | Value |\n"
+              "|-------|-------|\n"
+              "| **Vendor** | Cisco Systems, Inc. |\n"
+              "| **Certified** | 2026-04-09 |\n"
+              "| **Valid until** | 2028-04-09 |\n"
+              "| **Evaluated against** | CPP\\_ND\\_V3.0E, PKG\\_SSH\\_V1.0, MOD\\_MACSEC\\_V1.0, MOD\\_VPNGW\\_v1.3 |\n"
+              "| **Evaluating lab** | Lightship Security USA, Inc. |\n"
+              "| **Submitting country** | United States |\n\n"
+              "---\n\n"
+              "[View Cisco products on NIAP PCL](https://www.niap-ccevs.org/product/index.cfm)"
+              " \u00b7 [Full dashboard](https://kr15tyk.github.io/CC-pulse/cc_dashboard.html)"
+          )
+
+          def api_call(url, method='GET', data=None):
+              req = urllib.request.Request(
+                  url, data=data,
+                  headers={
+                      'Content-Type': 'application/json',
+                      'Authorization': 'Bearer ' + tok,
+                  },
+                  method=method)
+              try:
+                  with urllib.request.urlopen(req, timeout=15) as r:
+                      return r.status, r.read().decode()[:300]
+              except urllib.error.HTTPError as e:
+                  return e.code, e.read().decode()[:300]
+
+          # Step 1: Try PUT (edit in place)
+          status, body = api_call(
+              'https://webexapis.com/v1/messages/' + bad_msg_id,
+              method='PUT',
+              data=json.dumps({'markdown': md}).encode())
+          print(f'PUT result: {status}')
+          if status == 200:
+              print('SUCCESS: Message edited in place!')
+          else:
+              print(f'PUT failed: {body[:200]}')
+              # Step 2: Delete + repost
+              status2, body2 = api_call(
+                  'https://webexapis.com/v1/messages/' + bad_msg_id,
+                  method='DELETE')
+              print(f'DELETE result: {status2} {body2[:100]}')
+              if status2 == 204:
+                  print('Deleted, now posting corrected version...')
+                  status3, body3 = api_call(
+                      'https://webexapis.com/v1/messages',
+                      method='POST',
+                      data=json.dumps({'roomId': room_id, 'markdown': md}).encode())
+                  print(f'POST result: {status3}')
+                  if status3 == 200:
+                      print('SUCCESS: Posted corrected message!')
+                  else:
+                      print(f'POST failed: {body3[:200]}')
+              else:
+                  print(f'DELETE also failed - unable to edit message')
+          PYEOF

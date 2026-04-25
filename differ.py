@@ -1,56 +1,64 @@
 """
-differ.py -- Compares two snapshots and returns a structured diff.
+differ.py — Computes diffs between two CC Pulse snapshots.
 
-Features:
-  - Schema version compatibility check
-  - Keyword-alert scanning (WATCH_KEYWORDS from config)
-  - partial_hash field comparison for PDF polling fallback (fix #10)
-  - Improved weekly alert deduplication (source+title key, not timestamp) (fix #11)
-  - categorize_news() applied to CSfC/CC Crypto/NIST feed items (fix #12)
-  - Type hints throughout
-  - Two-tier keyword scanning: structured fields vs scraped page blobs (fix #17)
+Compares old and new snapshot dicts, returning a diff dict with
+per-source change lists and keyword alerts.
 """
 
 from __future__ import annotations
 
+import copy
 import logging
+import re
 from typing import Any
 
 import config
 
 log = logging.getLogger(__name__)
 
-# Type aliases
+# -- Types ---------------------------------------------------------------------
 Snapshot = dict[str, Any]
 Records  = list[dict[str, Any]]
 
+# -- Internal helpers ----------------------------------------------------------
 
-# -- Schema compatibility -------------------------------------------------------
-class SchemaVersionError(RuntimeError):
-    pass
+def _add(alerts: list, source: str, kind: str, title: str, *,
+         url: str = "", detail: str = "", keywords: list | None = None, tab: str = "us") -> None:
+    """Append a structured alert entry."""
+    alerts.append({
+        "source":   source,
+        "kind":     kind,
+        "title":    title,
+        "url":      url,
+        "detail":   detail,
+        "keywords": keywords or [],
+        "tab":      tab,
+    })
+
 
 def check_schema_compat(old: Snapshot, new: Snapshot) -> None:
-    """Warn (don't crash) if schema versions differ."""
-    old_v = old.get("schema_version", 1)
-    new_v = new.get("schema_version", 1)
-    if old_v != new_v:
-        log.warning(
-            "Schema version mismatch: old=%s new=%s -- diff may be inaccurate.",
-            old_v, new_v,
-        )
+    """Warn if snapshot schema versions differ."""
+    ov = old.get("schema_version", 1)
+    nv = new.get("schema_version", 1)
+    if ov != nv:
+        log.warning("Schema version mismatch: old=%s new=%s — diff may be incomplete.", ov, nv)
 
 
-# -- Helpers -------------------------------------------------------------------
+# -- Keyword alert scanner -----------------------------------------------------
+
+
 def _ids(records: Records, key: str) -> set[str]:
+    """Return a set of stringified key values from a list of records."""
     return {str(r[key]) for r in records if key in r}
 
+
 def byid(records: Records, key: str) -> dict[str, Any]:
+    """Index a list of records by a string key field."""
     return {str(r[key]): r for r in records if key in r}
 
+
 def categorize_news(title: str) -> str:
-    """Map a news/feed item title to a category using NEWS_CATEGORY_KEYWORDS.
-    Applied to NIAP news, CSfC feeds, CC Crypto feeds, and NIST feeds.
-    """
+    """Map a news/feed item title to a category using NEWS_CATEGORY_KEYWORDS."""
     t = title.lower()
     for cat, keywords in config.NEWS_CATEGORY_KEYWORDS.items():
         if cat == "NEWS":
@@ -59,24 +67,27 @@ def categorize_news(title: str) -> str:
             return cat
     return "NEWS"
 
+
 def is_cisco_ndcpp(product: dict[str, Any]) -> bool:
+    """Return True if a PCL product is a Cisco NDcPP certification."""
     vendor = (product.get("vendor_id_name") or "").lower()
     if not any(kw in vendor for kw in config.CISCO_VENDOR_KEYWORDS):
         return False
-    pps = product.get("protection_profiles", [])
+    pps = product.get("protection_profiles") or []
     return any(
-        any(kw in pp.get("pp_short_name", "") for kw in config.NDCPP_PP_KEYWORDS)
+        any(kw in (pp.get("pp_short_name") or "") for kw in config.NDCPP_PP_KEYWORDS)
         for pp in pps
     )
+
 
 def _headers_changed(old_h: dict, new_h: dict) -> bool:
     """Return True if any change-detection field differs between two header dicts.
 
     Checks in order of reliability:
-      1. ETag -- most authoritative when present
-      2. Last-Modified -- widely supported
-      3. Content-Length -- rough version signal (can change without content change)
-      4. partial_hash -- MD5 of first 2 KB; populated only when 1-3 are all absent
+      1. ETag — most authoritative when present
+      2. Last-Modified — widely supported
+      3. Content-Length — rough version signal (can change without content change)
+      4. partial_hash — MD5 of first 2 KB; populated only when 1-3 are all absent
     """
     for field in ("etag", "last_modified", "content_length", "partial_hash"):
         old_val = old_h.get(field, "")
@@ -87,152 +98,80 @@ def _headers_changed(old_h: dict, new_h: dict) -> bool:
                 return True
     return False
 
+def flag_alerts(diff: Snapshot) -> list[dict]:
+    """Scan a diff for keyword matches and return structured alert list."""
+    alerts: list[dict] = []
+    kw_tiers = config.WATCH_KEYWORDS  # {term: tier}
 
-# -- Keyword alert scanner -----------------------------------------------------
-def scan_watch_keywords(text: str, *, structured: bool = True) -> list[str]:
-    """Return any WATCH_KEYWORDS found (case-insensitive) in text.
+    def _matches(text: str) -> list[str]:
+        if not text:
+            return []
+        text_l = text.lower()
+        return [kw for kw in kw_tiers if kw.lower() in text_l]
 
-    Args:
-        text: The string to scan.
-        structured: If True (default), scan against the full WATCH_KEYWORDS list.
-            This is used for structured fields (PP names, TD titles, RSS titles,
-            product names) where a match is highly reliable.
-            If False, scan against only the BODY_WATCH_KEYWORDS subset defined in
-            config, which is intentionally narrower to avoid alert fatigue from
-            raw page-scrape blobs.
-    """
-    tl = text.lower()
-    kw_list = config.WATCH_KEYWORDS if structured else config.BODY_WATCH_KEYWORDS
-    return [kw for kw in kw_list if kw.lower() in tl]
-
-def flag_alerts(diff: Snapshot) -> list[dict[str, Any]]:
-    """Walk a computed diff and return a list of high-priority alert objects.
-    Each alert: {source, kind, title, url, detail, matched_keywords}.
-
-    Two-tier scanning (fix #17):
-    - _add()      scans *structured* fields (API titles, identifiers, PP names,
-                  RSS feed titles).  Uses the full WATCH_KEYWORDS list.
-    - _add_text() scans raw *page-scrape blobs* (NSA/NIST page text, CC portal
-                  paragraphs).  Uses the narrower BODY_WATCH_KEYWORDS list to
-                  avoid alert fatigue from noisy scraped content.
-    """
-    alerts: list[dict[str, Any]] = []
-
-    def _add(source: str, kind: str, title: str,
-              url: str = "", detail: str = "") -> None:
-        """Scan a structured field (high-signal) against full WATCH_KEYWORDS.
-
-        Args:
-            source:  Human-readable source label (e.g. "NIAP PP", "NIST Doc").
-            kind:    Change type (e.g. "new", "sunset", "updated", "new_cert").
-            title:   The item title or identifier to scan and display.
-            url:     Direct link to the source item (included in notifications).
-            detail:  Short human-readable summary of what changed (e.g.
-                     "Sunset changed to 2026-09-30", "Header updated").
-        """
-        hits = scan_watch_keywords(title, structured=True)
-        if hits:
-            alerts.append({
-                "source":           source,
-                "kind":             kind,
-                "title":            title,
-                "url":              url,
-                "detail":           detail,
-                "matched_keywords": hits,
-            })
+    def _scan_items(source: str, items: list[dict], url_key: str = "url", tab: str = "us") -> None:
+        for item in items:
+            title  = item.get("title", "") or item.get("name", "")
+            detail = item.get("detail", "") or item.get("description", "")
+            url    = item.get(url_key, "") or item.get("url", "")
+            hits   = _matches(title + " " + detail)
+            if hits:
+                _add(alerts, source, item.get("kind", "alert"), title,
+                     url=url, detail=detail, keywords=hits, tab=tab)
 
     def _add_text(source: str, kind: str, text: str,
-                  url: str = "", detail: str = "") -> None:
-        """Scan a raw scraped text blob (lower-signal) against BODY_WATCH_KEYWORDS only."""
-        hits = scan_watch_keywords(text, structured=False)
+                  url: str = "", detail: str = "", tab: str = "us") -> None:
+        """Scan a raw scraped text blob (lower-signal) against _matches only."""
+        hits = _matches(text)
         if hits:
             truncated = text[:120].rstrip() + ("…" if len(text) > 120 else "")
-            alerts.append({
-                "source":           source,
-                "kind":             kind,
-                "title":            truncated,
-                "url":              url,
-                "detail":           detail,
-                "matched_keywords": hits,
-            })
+            _add(alerts, source, kind, truncated, url=url, detail=detail, keywords=hits, tab=tab)
 
-    # NIAP PPs
-    for p in diff.get("niap", {}).get("pps", {}).get("added", []):
-        pp_url = f"https://www.niap-ccevs.org/Profile/PP.cfm?id={p.get('pp_id', '')}"
-        _add("NIAP PP", "new",
-             p.get("pp_short_name", "") + " " + p.get("pp_name", ""),
-             url=pp_url,
-             detail=f"New Protection Profile · Tech type: {p.get('tech_type', 'N/A')}")
-    for p in diff.get("niap", {}).get("pps", {}).get("sunset_changes", []):
-        pp_url = f"https://www.niap-ccevs.org/Profile/PP.cfm?id={p.get('pp_id', '')}"
-        _add("NIAP PP", "sunset",
-             p.get("pp_short_name", ""),
-             url=pp_url,
-             detail=f"Sunset date: {p.get('old_sunset') or '—'} → {p.get('new_sunset') or '—'}")
 
-    # NIAP TDs
-    for t in diff.get("niap", {}).get("tds", {}).get("added", []):
-        _add("NIAP TD", "new",
-             t.get("identifier", "") + " — " + t.get("title", ""),
-             url="https://www.niap-ccevs.org/",
-             detail=f"New Technical Decision · Published: {(t.get('publication_date') or '')[:10] or 'N/A'}")
+    # NIAP PCL (Cisco NDcPP certs)
+    for item in diff.get("niap", {}).get("cisco_ndcpp", {}).get("added", []):
+        title = item.get("product_name", item.get("title", item.get("name", "")))
+        hits  = _matches(title)
+        if hits:
+            _add(alerts, "NIAP PCL", "new_cert", title,
+                 url=item.get("url", ""), keywords=hits, tab="us")
 
-    # NIAP In-Evaluation (newly entered evaluation)
-    for p in diff.get("niap", {}).get("in_evaluation", {}).get("added", []):
-        _add("NIAP In-Eval", "new_evaluation",
-             (p.get("vendor_id_name") or "") + " — " + (p.get("product_name") or ""),
-             url="https://www.niap-ccevs.org/product/index.cfm",
-             detail=f"Entered evaluation · Lab: {p.get('assigned_lab_name') or 'N/A'}")
+    # NIAP Protection Profiles
+    _scan_items("NIAP PP", diff.get("niap", {}).get("pps", {}).get("added", []), tab="us")
+    _scan_items("NIAP PP", diff.get("niap", {}).get("pps", {}).get("sunset_changes", []))
 
-    # NIAP PCL -- All certified products
-    for p in diff.get("niap", {}).get("pcl_all", {}).get("added", []):
-        pcl_url = f"https://www.niap-ccevs.org/product/index.cfm?pid={p.get('product_id', '')}"
-        pps_str = ", ".join(pp.get("pp_short_name","") for pp in p.get("protection_profiles", [])[:3]) or "N/A"
-        _add("NIAP PCL", "new_cert",
-             (p.get("vendor_id_name") or "") + " — " + (p.get("product_name") or ""),
-             url=pcl_url,
-             detail=f"Newly certified · PPs: {pps_str} · Date: {(p.get('certification_date') or '')[:10] or 'N/A'}")
+    # NIAP Technical Decisions
+    _TD_BASE = "https://www.niap-ccevs.org/technical-decisions"
+    for td in diff.get("niap", {}).get("tds", {}).get("added", []):
+        title  = td.get("title", "") or td.get("identifier", "")
+        detail = td.get("identifier", "")
+        url    = f"{_TD_BASE}/{detail}" if detail else _TD_BASE
+        hits   = _matches(title + " " + detail)
+        if hits:
+            _add(alerts, "NIAP TD", "new", title,
+                 url=url, detail=detail, keywords=hits, tab="us")
 
     # NIAP News
-    for item in diff.get("niap", {}).get("news", {}).get("added", []):
-        _add("NIAP News", item.get("_category", "NEWS"),
-             item.get("title", ""),
-             url=item.get("link") or item.get("url") or "https://www.niap-ccevs.org/",
-             detail=f"Category: {item.get('_category','NEWS')} · Date: {(item.get('date') or item.get('posted') or '')[:10] or 'N/A'}")
+    _scan_items("NIAP News", diff.get("niap", {}).get("news", {}).get("added", []), tab="us")
+
+    # CC Portal
+    _scan_items("CC Portal", diff.get("cc_portal", {}).get("news", {}).get("added", []), tab="intl")
+    _scan_items("CC Portal", diff.get("cc_portal", {}).get("pps", {}).get("added", []), tab="intl")
 
     # CCTL Labs
-    for lab, items in diff.get("cctl_labs", {}).items():
-        for item in items:
-            _add(f"Lab: {lab}", "post",
-                 item.get("title", ""),
-                 url=item.get("link") or "",
-                 detail=f"New post from {lab}")
+    _scan_items("CCTL Labs", diff.get("cctl_labs", {}).get("added", []), tab="intl")
 
-    # CSfC feeds
-    for feed_name, items in diff.get("csfc", {}).get("feeds", {}).items():
-        for item in items:
-            _add(f"CSfC Feed: {feed_name}", "advisory",
-                 item.get("title", ""),
-                 url=item.get("link") or "",
-                 detail=f"Feed: {feed_name} · Published: {(item.get('published') or '')[:16] or 'N/A'}")
-
-    # CSfC APL page changes (scraped text — use _add_text for narrower matching)
-    for item in diff.get("csfc", {}).get("pages", {}).get("apl", {}).get("added", []):
-        _add_text("CSfC APL", "new",
-                  item.get("text", ""),
-                  url=item.get("href") or "https://www.nsa.gov/resources/everyone/csfc/approved-products-list/",
-                  detail="New item on CSfC Approved Products List")
-
-    # CSfC Capability Package header changes
-    for cp_name, change in diff.get("csfc", {}).get("capability_packages", {}).items():
+# CSfC Component Selections -- hash change means the PDF content changed
+    for sel_name, change in diff.get("csfc", {}).get("component_selections", {}).items():
         if change.get("changed"):
-            old_lm = change.get("old_last_modified", "") or change.get("old_partial_hash", "")
-            new_lm = change.get("new_last_modified", "") or change.get("new_partial_hash", "")
-            date_detail = f"{old_lm[:16]} → {new_lm[:16]}" if old_lm and new_lm else "Content changed"
-            _add("CSfC CP", "updated",
-                 cp_name,
-                 url=change.get("url") or "https://www.nsa.gov/resources/everyone/csfc/capability-packages/",
-                 detail=f"Capability Package revised · {date_detail}")
+            _add_text(
+                "CSfC Component Selections",
+                "updated",
+                sel_name,
+                url=config.CSFC_COMPONENTS_LIST_URL,
+                detail="Selections document content changed",
+                tab="us",
+            )
 
     # CC Crypto Catalog page changes (scraped text — use _add_text for narrower matching)
     for page_key, page_diff in diff.get("cc_crypto", {}).get("pages", {}).items():
@@ -240,7 +179,8 @@ def flag_alerts(diff: Snapshot) -> list[dict[str, Any]]:
             _add_text(f"CC Crypto: {page_key}", "publication",
                       item.get("text", ""),
                       url=item.get("href") or "https://www.commoncriteriaportal.org/cc/index.cfm",
-                      detail=f"New item on CC Portal {page_key} page")
+                      detail=f"New item on CC Portal {page_key} page",
+                      tab="us")
 
     # NIST page changes (scraped text — use _add_text for narrower matching)
     _nist_page_urls = {
@@ -256,15 +196,59 @@ def flag_alerts(diff: Snapshot) -> list[dict[str, Any]]:
             _add_text(f"NIST: {page_key}", "publication",
                       item.get("text", ""),
                       url=item.get("href") or _nist_page_urls.get(page_key, "https://csrc.nist.gov/"),
-                      detail=f"New item on NIST CSRC {page_key.replace('_', ' ')} page")
+                      detail=f"New item on NIST CSRC {page_key.replace('_', ' ')} page",
+                      tab="us")
 
     # NIST RSS feed new items
     for feed_name, items in diff.get("nist", {}).get("feeds", {}).items():
         for item in items:
-            _add(f"NIST Feed: {feed_name}", "news",
+            _add_text(f"NIST Feed: {feed_name}", "news",
                  item.get("title", ""),
                  url=item.get("link") or "https://csrc.nist.gov/",
-                 detail=f"Feed: {feed_name} · Published: {(item.get('published') or '')[:16] or 'N/A'}")
+                 detail=f"Feed: {feed_name} · Published: {(item.get('published') or '')[:16] or 'N/A'}",
+                 tab="us")
+
+
+    # NATO NIAPCL page changes
+    for page_key, page_diff in diff.get("nato", {}).get("pages", {}).items():
+        for item in page_diff.get("added", []):
+            _add_text(f"NATO NIAPCL: {page_key}", "new",
+                      item.get("text", "") or item.get("raw_text", ""),
+                      url=item.get("link") or config.NATO_NIAPCL_URL,
+                      detail=f"New item on NATO NIAPCL {page_key} page",
+                      tab="intl")
+
+    # NATO NIAPCL Cisco-specific additions (Tier 1 EU/NATO)
+    for item in diff.get("nato", {}).get("cisco_added", []):
+        _add_text("NATO NIAPCL", "new_cert",
+             item.get("name", "") or item.get("raw_text", "")[:80],
+             url=item.get("link") or config.NATO_NIAPCL_URL,
+             detail=f"New Cisco product on NATO NIAPCL · {item.get('manufacturer', '')}",
+             tab="intl")
+
+    # EUCC requirements page changes
+    for item in diff.get("eucc", {}).get("pages", {}).get("requirements", {}).get("added", []):
+        _add_text("EUCC Requirements", "updated",
+                  item.get("text", ""),
+                  url=item.get("href") or config.EUCC_REQUIREMENTS_URL,
+                  detail="New item on EUCC requirements / scheme page",
+                  tab="eu")
+
+    # EUCC certificate additions (general)
+    for item in diff.get("eucc", {}).get("pages", {}).get("certificates", {}).get("added", []):
+        _add_text("EUCC Certificates", "new_cert",
+                  item.get("text", "") or item.get("name", ""),
+                  url=item.get("href") or config.EUCC_CERTIFICATES_URL,
+                  detail="New EUCC certified product",
+               tab="eu")
+
+    # EUCC Cisco-specific certificates (Tier 1 EU)
+    for item in diff.get("eucc", {}).get("cisco_added", []):
+        _add_text("EUCC Certificates", "new_cert",
+             item.get("name", "") or item.get("text", "")[:80],
+             url=item.get("href") or config.EUCC_CERTIFICATES_URL,
+             detail="New Cisco EUCC certified product",
+         tab="eu")
 
     if alerts:
         log.warning("[Alerts] %d keyword match(es) found!", len(alerts))
@@ -317,16 +301,23 @@ def diff_niap_tds(old_tds: Records, new_tds: Records) -> dict[str, Any]:
 def diff_niap_pcl_cisco(old_pcl: Records, new_pcl: Records) -> dict[str, Any]:
     old_cisco = {str(p["product_id"]): p for p in old_pcl if is_cisco_ndcpp(p)}
     new_cisco = {str(p["product_id"]): p for p in new_pcl if is_cisco_ndcpp(p)}
-    added     = [new_cisco[i] for i in set(new_cisco) - set(old_cisco)]
-    removed   = [old_cisco[i] for i in set(old_cisco) - set(new_cisco)]
+    # Newly added to PCL already certified
+    brand_new = [new_cisco[i] for i in set(new_cisco) - set(old_cisco)
+                 if new_cisco[i].get("status_sort") == "Certified"]
+    # Was In Progress, now Certified (the most common transition)
+    newly_certified = [
+        new_cisco[pid] for pid in set(old_cisco) & set(new_cisco)
+        if (old_cisco[pid].get("status_sort") in ("In Progress", "In Review")
+            and new_cisco[pid].get("status_sort") == "Certified")
+    ]
+    added = brand_new + newly_certified
+    removed = [old_cisco[i] for i in set(old_cisco) - set(new_cisco)]
     newly_archived = [
-        new_cisco[pid]
-        for pid in set(old_cisco) & set(new_cisco)
+        new_cisco[pid] for pid in set(old_cisco) & set(new_cisco)
         if (old_cisco[pid].get("status_sort") == "Certified"
             and new_cisco[pid].get("status_sort") == "Archived")
     ]
     return {"added": added, "removed": removed, "newly_archived": newly_archived}
-
 def diff_niap_pcl_all(old_pcl: Records, new_pcl: Records) -> dict[str, Any]:
     """Diff the full NIAP PCL across all tech types."""
     old_all = {str(p["product_id"]): p for p in old_pcl}
@@ -365,20 +356,6 @@ def diff_niap_events(old_events: Records, new_events: Records) -> dict[str, Any]
     new_ids = _ids(new_events, "id")
     new_map = byid(new_events, "id")
     return {"added": [new_map[i] for i in new_ids - old_ids]}
-
-def diff_niap_cctls(old_cctls: Records, new_cctls: Records) -> dict[str, Any]:
-    old_map = byid(old_cctls, "cctl_id")
-    new_map = byid(new_cctls, "cctl_id")
-    added   = [new_map[i] for i in set(new_map) - set(old_map)]
-    removed = [old_map[i] for i in set(old_map) - set(new_map)]
-    status_changes = []
-    for cid in set(old_map) & set(new_map):
-        old_s = old_map[cid].get("status_id", {}).get("status_name")
-        new_s = new_map[cid].get("status_id", {}).get("status_name")
-        if old_s != new_s:
-            status_changes.append({**new_map[cid], "old_status": old_s, "new_status": new_s})
-    return {"added": added, "removed": removed, "status_changes": status_changes}
-
 
 # -- CC Portal diffs -----------------------------------------------------------
 def diff_cc_news(old_items: Records, new_items: Records) -> dict[str, Any]:
@@ -445,6 +422,60 @@ def _diff_doc_headers(old_docs: dict, new_docs: dict) -> dict:
     return result
 
 
+def _diff_selection_hashes(old_sels: dict, new_sels: dict) -> dict:
+    """Diff two {name: {url, hash, fetch_error}} dicts by SHA-256 hash.
+    Only flags a change when both old and new have a valid hash and they differ.
+    Skips entries where either side had a fetch error to avoid false positives
+    from transient network failures.
+    """
+    result = {}
+    for name in set(old_sels) | set(new_sels):
+        old_s = old_sels.get(name, {})
+        new_s = new_sels.get(name, {})
+        if old_s.get("fetch_error") or new_s.get("fetch_error"):
+            log.warning(
+                "[CSfC Selections] Skipping diff for %s due to fetch error: old=%r new=%r",
+                name, old_s.get("fetch_error", ""), new_s.get("fetch_error", ""),
+            )
+            continue
+        old_hash = old_s.get("hash", "")
+        new_hash = new_s.get("hash", "")
+        if old_hash and new_hash and old_hash != new_hash:
+            result[name] = {
+                "changed": True,
+                "old_hash": old_hash,
+                "new_hash": new_hash,
+            }
+    return result
+
+
+def _diff_selection_hashes(old_sels: dict, new_sels: dict) -> dict:
+    """Diff two {name: {url, hash, fetch_error}} dicts by SHA-256 hash.
+    Only flags a change when both old and new have a valid hash and they differ.
+    Skips entries where either side had a fetch error to avoid false positives
+    from transient network failures.
+    """
+    result = {}
+    for name in set(old_sels) | set(new_sels):
+        old_s = old_sels.get(name, {})
+        new_s = new_sels.get(name, {})
+        if old_s.get("fetch_error") or new_s.get("fetch_error"):
+            log.warning(
+                "[CSfC Selections] Skipping diff for %s due to fetch error: old=%r new=%r",
+                name, old_s.get("fetch_error", ""), new_s.get("fetch_error", ""),
+            )
+            continue
+        old_hash = old_s.get("hash", "")
+        new_hash = new_s.get("hash", "")
+        if old_hash and new_hash and old_hash != new_hash:
+            result[name] = {
+                "changed": True,
+                "old_hash": old_hash,
+                "new_hash": new_hash,
+            }
+    return result
+
+
 # -- Generic page text diff helper ---------------------------------------------
 def _diff_pages(old_pages: dict, new_pages: dict) -> dict:
     """Diff two {page_key: [items]} dicts by text prefix."""
@@ -488,6 +519,60 @@ def _diff_feeds(old_feeds: dict, new_feeds: dict, categorize: bool = False) -> d
     return result
 
 
+
+# -- NATO NIAPCL diff ---------------------------------------------------------
+def diff_nato(old_nato: Snapshot, new_nato: Snapshot) -> Snapshot:
+    """Diff two NATO NIAPCL snapshots."""
+    old_pages = old_nato.get("pages", {})
+    new_pages = new_nato.get("pages", {})
+
+    pages = _diff_pages(old_pages, new_pages)
+
+    # Diff Cisco products specifically
+    old_cisco = {p.get("raw_text", "")[:80]: p for p in old_nato.get("cisco_products", [])}
+    new_cisco = {p.get("raw_text", "")[:80]: p for p in new_nato.get("cisco_products", [])}
+    cisco_added   = [new_cisco[k] for k in set(new_cisco) - set(old_cisco)]
+    cisco_removed = [old_cisco[k] for k in set(old_cisco) - set(new_cisco)]
+
+    page_changes = sum(len(v.get("added", [])) for v in pages.values())
+    log.info("[NATO Diff] page-items-added:%d cisco-added:%d cisco-removed:%d",
+             page_changes, len(cisco_added), len(cisco_removed))
+    return {
+        "pages": pages,
+        "cisco_added":   cisco_added,
+        "cisco_removed": cisco_removed,
+    }
+
+
+# -- EUCC / ENISA diff --------------------------------------------------------
+def diff_eucc(old_eucc: Snapshot, new_eucc: Snapshot) -> Snapshot:
+    """Diff two EUCC / ENISA snapshots.
+    Handles two sub-sources:
+    - requirements page (scheme policy / requirement changes)
+    - certificates page (new certified products, including Cisco)
+    """
+    old_pages = old_eucc.get("pages", {})
+    new_pages = new_eucc.get("pages", {})
+
+    pages = _diff_pages(old_pages, new_pages)
+
+    # Diff Cisco-specific certificates
+    old_cisco = {c.get("text", "")[:80]: c for c in old_eucc.get("cisco_certs", [])}
+    new_cisco = {c.get("text", "")[:80]: c for c in new_eucc.get("cisco_certs", [])}
+    cisco_added   = [new_cisco[k] for k in set(new_cisco) - set(old_cisco)]
+    cisco_removed = [old_cisco[k] for k in set(old_cisco) - set(new_cisco)]
+
+    req_changes  = len(pages.get("requirements", {}).get("added", []))
+    cert_changes = len(pages.get("certificates", {}).get("added", []))
+    log.info("[EUCC Diff] req-changes:%d cert-additions:%d cisco-added:%d",
+             req_changes, cert_changes, len(cisco_added))
+    return {
+        "pages": pages,
+        "cisco_added":   cisco_added,
+        "cisco_removed": cisco_removed,
+    }
+
+
 # -- Master diff ---------------------------------------------------------------
 def compute_diff(old_snapshot: Snapshot, new_snapshot: Snapshot) -> Snapshot:
     """Compare two full snapshots, scan for keyword alerts, return diff."""
@@ -505,6 +590,10 @@ def compute_diff(old_snapshot: Snapshot, new_snapshot: Snapshot) -> Snapshot:
     new_cc = new_snapshot.get("cc_crypto", {})
     old_ni = old_snapshot.get("nist",      {})
     new_ni = new_snapshot.get("nist",      {})
+    old_na = old_snapshot.get("nato",      {})
+    new_na = new_snapshot.get("nato",      {})
+    old_eu = old_snapshot.get("eucc",      {})
+    new_eu = new_snapshot.get("eucc",      {})
 
     diff: Snapshot = {
         "period_start": old_snapshot.get("collected_at", ""),
@@ -517,7 +606,6 @@ def compute_diff(old_snapshot: Snapshot, new_snapshot: Snapshot) -> Snapshot:
             "in_evaluation": diff_niap_in_evaluation(old_n.get("pcl", []), new_n.get("pcl", [])),
             "news":         diff_niap_news(old_n.get("news", []),   new_n.get("news", [])),
             "events":       diff_niap_events(old_n.get("events", []), new_n.get("events", [])),
-            "cctls":        diff_niap_cctls(old_n.get("cctls", []), new_n.get("cctls", [])),
         },
         "cc_portal": {
             "news":     diff_cc_news(old_c.get("news", []),     new_c.get("news", [])),
@@ -528,6 +616,8 @@ def compute_diff(old_snapshot: Snapshot, new_snapshot: Snapshot) -> Snapshot:
         "csfc":      diff_csfc(old_cs, new_cs),
         "cc_crypto": diff_cc_crypto(old_cc, new_cc),
         "nist":      diff_nist(old_ni, new_ni),
+        "nato":      diff_nato(old_na, new_na),
+        "eucc":      diff_eucc(old_eu, new_eu),
     }
 
     diff["alerts"] = flag_alerts(diff)
@@ -579,11 +669,10 @@ def merge_weekly_diffs(diffs: list[Snapshot]) -> Snapshot:
                        "tds": {"added":[], "removed":[]},
                        "cisco_ndcpp": {"added":[], "removed":[], "newly_archived":[]},
                        "news": {"added":[]},
-                       "events": {"added":[]},
-                       "cctls": {"added":[], "removed":[], "status_changes":[]}}),
+                       "events": {"added":[]}}),
         ("cc_portal", {"news": {"added":[]}, "pps": {"added":[]}, "products": {"added":[]}}),
         ("cctl_labs", {}),
-        ("csfc",      {"feeds": {}, "pages": {}, "capability_packages": {}}),
+        ("csfc",      {"feeds": {}, "pages": {}, "component_selections": {}}),
         ("cc_crypto", {"pages": {}, "doc_headers": {}}),
         ("nist",      {"pages": {}, "doc_headers": {}, "feeds": {}}),
         ("alerts",    []),
@@ -639,8 +728,9 @@ def merge_weekly_diffs(diffs: list[Snapshot]) -> Snapshot:
                     weekly["csfc"]["pages"][page_key] = {"added": []}
                 weekly["csfc"]["pages"][page_key]["added"] = merge_lists(
                     weekly["csfc"]["pages"][page_key]["added"], page_diff["added"])
-        for cp_name, cp_data in d.get("csfc", {}).get("capability_packages", {}).items():
-            weekly["csfc"]["capability_packages"][cp_name] = cp_data
+        # CSfC component selections -- keep latest hash for each doc
+        for sel_name, sel_data in d.get("csfc", {}).get("component_selections", {}).items():
+            weekly["csfc"]["component_selections"][sel_name] = sel_data
 
         # CC Crypto
         for page_key, page_diff in d.get("cc_crypto", {}).get("pages", {}).items():
@@ -672,24 +762,23 @@ def merge_weekly_diffs(diffs: list[Snapshot]) -> Snapshot:
 def diff_csfc(old_csfc: Snapshot, new_csfc: Snapshot) -> Snapshot:
     """Diff two CSfC snapshots."""
     pages = _diff_pages(old_csfc.get("pages", {}), new_csfc.get("pages", {}))
-    cap_packages = _diff_doc_headers(
-        old_csfc.get("capability_package_headers", {}),
-        new_csfc.get("capability_package_headers", {}),
+    component_selections = _diff_selection_hashes(
+        old_csfc.get("component_selection_hashes", {}),
+        new_csfc.get("component_selection_hashes", {}),
     )
     feeds = _diff_feeds(
         old_csfc.get("feeds", {}),
         new_csfc.get("feeds", {}),
         categorize=True,
     )
-
-    page_changes  = sum(len(v.get("added", [])) for v in pages.values())
-    cp_changes    = len(cap_packages)
-    feed_new      = sum(len(v) for v in feeds.values())
+    page_changes = sum(len(v.get("added", [])) for v in pages.values())
+    sel_changes = len(component_selections)
+    feed_new = sum(len(v) for v in feeds.values())
     log.info(
-        "[CSfC Diff] page-items-added:%d CP-changes:%d feed-new:%d",
-        page_changes, cp_changes, feed_new,
+        "[CSfC Diff] page-items-added:%d selection-changes:%d feed-new:%d",
+        page_changes, sel_changes, feed_new,
     )
-    return {"pages": pages, "capability_packages": cap_packages, "feeds": feeds}
+    return {"pages": pages, "component_selections": component_selections, "feeds": feeds}
 
 
 # -- CC Crypto Catalog diff ----------------------------------------------------

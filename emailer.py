@@ -17,11 +17,13 @@ import json
 import logging
 import os
 import smtplib
+import requests
 import urllib.request
 import urllib.error
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
-from datetime import datetime, timezone
+from datetime import datetime, timezone, timedelta
+EST = timezone(timedelta(hours=-5))
 import config
 
 log = logging.getLogger(__name__)
@@ -274,7 +276,7 @@ def _section(title: str, rows: list[str]) -> str:
 # ---------------------------------------------------------------------------
 
 def build_email_html(weekly_diff: dict) -> str:
-    now  = datetime.now(timezone.utc)
+    now  = datetime.now(EST)
     date = now.strftime("%B %d, %Y")
     parts: list[str] = []
 
@@ -430,7 +432,7 @@ def build_email_html(weekly_diff: dict) -> str:
     parts.append(_section("NIST CSRC — Standards, CMVP & PQC", rows))
 
     body      = "".join(parts) or "<p>No changes detected this week.</p>"
-    generated = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
+    generated = datetime.now(EST).strftime("%Y-%m-%d %H:%M EST")
     return (
         '<html><body style="font-family:-apple-system,BlinkMacSystemFont,sans-serif;'
         'max-width:720px;margin:0 auto;color:#E0E7FF">'
@@ -482,7 +484,7 @@ def _send_email(subject: str, html: str) -> None:
 
 def send_weekly_email(weekly_diff: dict) -> None:
     """Build and send the weekly HTML email digest."""
-    date_str = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+    date_str = datetime.now(EST).strftime("%Y-%m-%d")
     subject  = config.EMAIL_SUBJECT.format(date=date_str)
     html     = build_email_html(weekly_diff)
     _send_email(subject, html)
@@ -497,7 +499,7 @@ def send_alert_email(alerts: list[dict]) -> None:
     if not alerts:
         return
 
-    date_str   = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+    date_str   = datetime.now(EST).strftime("%Y-%m-%d")
     tier1_count = sum(1 for a in alerts if _alert_tier(a) == 1)
     subject    = (
         f"CC Pulse ALERT \u2014 {tier1_count} Cisco-relevant + {len(alerts)-tier1_count} other match(es) on {date_str}"
@@ -566,7 +568,7 @@ def send_alert_email(alerts: list[dict]) -> None:
         + dashboard_link
     )
 
-    generated = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
+    generated = datetime.now(EST).strftime("%Y-%m-%d %H:%M EST")
     html = (
         '<html><body style="font-family:-apple-system,BlinkMacSystemFont,sans-serif;'
         'max-width:720px;margin:0 auto;color:#E0E7FF">'
@@ -720,6 +722,68 @@ def send_cisco_cert_celebration(new_certs: list[dict]) -> None:
     except urllib.error.URLError as exc:
         log.warning("[Webex] Failed to send celebration message: %s", exc)
 
+def send_new_tds_webex(new_tds: list[dict]) -> None:
+    """Post a Webex notification for every new NIAP Technical Decision.
+
+    Fires unconditionally whenever new TDs are detected in the daily diff,
+    regardless of keyword matches.
+
+    Args:
+        new_tds: List of TD dicts from diff["niap"]["tds"]["added"].
+    """
+    token   = config.WEBEX_BOT_TOKEN
+    room_id = config.WEBEX_ROOM_ID
+    if not token or not room_id:
+        log.debug("[Webex] Bot token or Room ID not configured — skipping TD notification.")
+        return
+    if not new_tds:
+        return
+
+    count   = len(new_tds)
+    td_word = "Decision" if count == 1 else "Decisions"
+
+    lines = []
+    for td in new_tds:
+        ident = td.get("identifier", "")
+        title = td.get("title", "") or ident
+        pps   = td.get("protection_profile", []) or []
+        pp_names = ", ".join(pp.get("pp_short_name", "") for pp in pps[:3] if pp.get("pp_short_name"))
+        if len(pps) > 3:
+            pp_names += f" +{len(pps) - 3} more"
+        url = f"https://www.niap-ccevs.org/technical-decisions/{ident}" if ident else "https://www.niap-ccevs.org/technical-decisions"
+        line = f"**[NEW TD]** [{ident} — {title}]({url})"
+        if pp_names:
+            line += f"\n ↳ Applies to: {pp_names}"
+        lines.append(line)
+
+    body = "\n\n---\n".join(lines)
+    header = (
+        f"## 📋 NIAP — {count} New Technical {td_word}\n"
+        f"_CC Pulse detected {count} new TD{'s' if count != 1 else ''} on the NIAP site._\n"
+    )
+    footer = "\n\n[View full dashboard](https://kr15tyk.github.io/CC-pulse/cc_dashboard.html)"
+
+    payload = json.dumps({
+        "roomId":   room_id,
+        "markdown": header + body + footer,
+    }).encode("utf-8")
+
+    req = urllib.request.Request(
+        "https://webexapis.com/v1/messages",
+        data=payload,
+        headers={
+            "Content-Type":  "application/json",
+            "Authorization": f"Bearer {token}",
+        },
+        method="POST",
+    )
+    try:
+        with urllib.request.urlopen(req, timeout=10) as resp:
+            log.info("[Webex] New TDs notification sent for %d TD(s) (HTTP %d).", count, resp.status)
+    except urllib.error.URLError as exc:
+        log.warning("[Webex] Failed to send new TDs notification: %s", exc)
+
+
 
 def send_cisco_cert_email(new_certs: list[dict]) -> None:
     """Send a dedicated celebration email for new Cisco NDcPP PCL certifications.
@@ -735,7 +799,7 @@ def send_cisco_cert_email(new_certs: list[dict]) -> None:
     if not new_certs:
         return
 
-    date_str  = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+    date_str  = datetime.now(EST).strftime("%Y-%m-%d")
     count     = len(new_certs)
     cert_word = "Certification" if count == 1 else "Certifications"
     subject   = f"\U0001f3c6 CC Pulse \u2014 {count} New Cisco NDcPP {cert_word} on {date_str}"
@@ -798,7 +862,7 @@ def send_cisco_cert_email(new_certs: list[dict]) -> None:
         '</p>'
     )
 
-    generated = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
+    generated = datetime.now(EST).strftime("%Y-%m-%d %H:%M EST")
     html = (
         '<html><body style="font-family:-apple-system,BlinkMacSystemFont,sans-serif;'
         'max-width:720px;margin:0 auto;color:#E0E7FF">'
@@ -827,3 +891,65 @@ def send_cisco_cert_email(new_certs: list[dict]) -> None:
     )
 
     _send_email(subject, html)
+
+
+# ── README / Pinned message ────────────────────────────────────────────────
+
+def send_readme_message() -> None:
+    """Post the CC Pulse README to the Webex space as a pinnable info message.
+
+    Call via:  python main.py --readme
+    Then manually pin the resulting message in the Webex space.
+    """
+    token   = config.WEBEX_BOT_TOKEN
+    room_id = config.WEBEX_ROOM_ID
+    if not token or not room_id:
+        log.debug("[Webex] Bot token or Room ID not configured — skipping README post.")
+        return
+
+    msg = (
+        "## CC Pulse — What You're Seeing\n\n"
+        "**CC Pulse** is an automated monitor that watches government and international "
+        "cybersecurity certification portals so you don't have to. Every day it checks for "
+        "changes and pushes a summary to this Webex space and the live dashboard.\n\n"
+        "**Live dashboard:** https://kr15tyk.github.io/CC-pulse/cc_dashboard.html\n\n"
+        "---\n\n"
+        "## What Does It Watch?\n\n"
+        "| Source | What's tracked |\n"
+        "|---|---|\n"
+        "| **NIAP** | Certified products (PCL), Protection Profiles, Technical Decisions, CCTLs, news/events |\n"
+        "| **CSfC / NSA** | Approved Products List and Component Selection documents |\n"
+        "| **NATO NIAPCL** | NATO Information Assurance Product Catalogue — certified products and components |\n"
+        "| **EUCC / ENISA** | EU Common Criteria certification scheme — requirements and issued certificates |\n"
+        "| **CC Portal** | International CC news, Protection Profiles, and certified products |\n"
+        "| **CCTL Labs** | New posts from accredited Common Criteria evaluation labs |\n"
+        "| **NIST CSRC** | Cryptography news, FIPS publications, CMVP, and post-quantum standards |\n\n"
+        "Runs automatically every day at **01:00 EST** and posts here only when something relevant is found.\n\n"
+        "---\n\n"
+        "## Dashboard Navigation\n\n"
+        "The dashboard has three tabs:\n\n"
+        "- 🇺🇸 **US (NIAP / CSfC / NIST)** — All NIAP, CSfC, NIST, CC Portal, and CCTL cards\n"
+        "- 🌐 **NATO NIAPCL** — Changes to the NATO Information Assurance Product Catalogue\n"
+        "- 🇪🇺 **EU (EUCC)** — Changes to EUCC requirements and certificates from ENISA\n\n"
+        "---\n\n"
+        "## Cisco Celebration 🏆\n\n"
+        "When a new **Cisco product is certified** on NIAP PCL, CSfC, NATO NIAPCL, or EUCC, "
+        "the space gets a dedicated celebration message with product details and a rotating image. "
+        "A matching email goes to the distribution list at the same time.\n\n"
+        "---\n\n"
+        "## Questions?\n\n"
+        "Click any direct link in an alert — it goes straight to the source page "
+        "(NIAP, NIST, NSA, NATO, ENISA). No login required."
+    )
+
+    payload = {"roomId": room_id, "markdown": msg}
+    resp = requests.post(
+        "https://webexapis.com/v1/messages",
+        headers={"Authorization": f"Bearer {token}", "Content-Type": "application/json"},
+        json=payload,
+        timeout=15,
+    )
+    if resp.ok:
+        log.info("[Webex] README posted successfully (id=%s). Pin it in the space.", resp.json().get("id"))
+    else:
+        log.error("[Webex] Failed to post README: %s %s", resp.status_code, resp.text)

@@ -1,0 +1,144 @@
+{
+  "period_start": "2026-04-18T13:21:14.105631+00:00",
+  "period_end": "2026-04-20T14:21:24.510755+00:00",
+  "niap": {
+    "pps": {
+      "added": [],
+      "removed": [],
+      "sunset_changes": [],
+      "status_changes": []
+    },
+    "tds": {
+      "added": [],
+      "removed": []
+    },
+    "cisco_ndcpp": {
+      "added": [],
+      "removed": [],
+      "newly_archived": []
+    },
+    "pcl_all": {
+      "added": [],
+      "removed": [],
+      "newly_archived": []
+    },
+    "in_evaluation": {
+      "added": [],
+      "removed": [],
+      "current_count": 24
+    },
+    "news": {
+      "added": []
+    },
+    "events": {
+      "added": []
+    }
+  },
+  "cc_portal": {
+    "news": {
+      "added": []
+    },
+    "pps": {
+      "added": []
+    },
+    "products": {
+      "added": []
+    }
+  },
+  "cctl_labs": {
+    "atsec": [
+      {
+        "title": "atsec is Recognized by EMVCo as a Security Evaluation Laboratory",
+        "link": "/atsec-is-recognized-by-emvco/",
+        "published": "",
+        "id": "/atsec-is-recognized-by-emvco/"
+      },
+      {
+        "title": "The Emerging Cybersecurity Certification Landscape",
+        "link": "/the-emerging-cybersecurity-certification-landscape/",
+        "published": "",
+        "id": "/the-emerging-cybersecurity-certification-landscape/"
+      },
+      {
+        "title": "Introducing FIPZ FUEL\u2122: The World\u2019s First FIPS-Validated Energy Drink",
+        "link": "/introducing-fipz-fuel-the-worlds-first-fips-validated-energy-drink/",
+        "published": "",
+        "id": "/introducing-fipz-fuel-the-worlds-first-fips-validated-energy-drink/"
+      },
+      {
+        "title": "atsec at AutoCS 2026: Leveraging CC, FIPS, and PCI for Automotive Cybersecurity",
+        "link": "/atsec-at-autocs-2026/",
+        "published": "",
+        "id": "/atsec-at-autocs-2026/"
+      },
+      {
+        "title": "Updates on the Automated Cryptographic Module Validation Program at ICMC 2026",
+        "link": "/updates-on-the-acmvp-at-icmc-2026/",
+        "published": "",
+        "id": "/updates-on-the-acmvp-at-icmc-2026/"
+      },
+      {
+        "title": "23 Years in IT Security: What I Carry With Me as I Leave",
+        "link": "/23-years-in-it-security/",
+        "published": "",
+        "id": "/23-years-in-it-security/"
+      },
+      {
+        "title": "Happy International Women\u2019s Day",
+        "link": "/happy-international-womens-day-4/",
+        "published": "",
+        "id": "/happy-international-womens-day-4/"
+      },
+      {
+        "title": "DORA: From \u201cFormal Compliance\u201d to Real Operational Resilience in the World of European Finance",
+        "link": "/dora-introduces-real-operational-resilience-to-european-finance/",
+        "published": "",
+        "id": "/dora-introduces-real-operational-resilience-to-european-finance/"
+      },
+      {
+        "title": "One Year of EUCC",
+        "link": "/one-year-of-eucc/",
+        "published": "",
+        "id": "/one-year-of-eucc/"
+      }
+    ]
+  },
+  "csfc": {
+    "pages": {},
+    "component_selections": {},
+    "feeds": {}
+  },
+  "cc_crypto": {
+    "pages": {},
+    "doc_headers": {}
+  },
+  "nist": {
+    "pages": {},
+    "doc_headers": {
+      "SP 800-131A Rev 2": {
+        "changed": true,
+        "old_last_modified": "",
+        "new_last_modified": "Thu, 13 Jun 2019 19:37:11 GMT",
+        "old_etag": "",
+        "new_etag": "\"b1de70651f22d51:0\"",
+        "old_content_length": "",
+        "new_content_length": "686214",
+        "old_partial_hash": "11e24de28c40daadf4a1c3eda68e71e7",
+        "new_partial_hash": "",
+        "url": "https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-131Ar2.pdf"
+      }
+    },
+    "feeds": {}
+  },
+  "nato": {
+    "pages": {},
+    "cisco_added": [],
+    "cisco_removed": []
+  },
+  "eucc": {
+    "pages": {},
+    "cisco_added": [],
+    "cisco_removed": []
+  },
+  "alerts": []
+}

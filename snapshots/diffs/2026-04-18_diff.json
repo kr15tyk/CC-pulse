@@ -1,0 +1,1082 @@
+{
+  "period_start": "2026-04-17T07:47:15.162421+00:00",
+  "period_end": "2026-04-18T13:21:14.105631+00:00",
+  "niap": {
+    "pps": {
+      "added": [],
+      "removed": [],
+      "sunset_changes": [],
+      "status_changes": []
+    },
+    "tds": {
+      "added": [],
+      "removed": []
+    },
+    "cisco_ndcpp": {
+      "added": [
+        {
+          "active_maintenances": [],
+          "am_sort": "2028-04-09T00:00:00Z",
+          "assigned_lab_name": "Lightship Security USA, Inc.",
+          "certification_date": "2026-04-09T00:00:00Z",
+          "from_cc_portal": false,
+          "product_id": 11661,
+          "product_name": "Cisco 8200, 8300, 8400, 8500 Series Secure Routers (C8000) running IOS-XE 17.18",
+          "protection_profiles": [
+            {
+              "pp_id": 459,
+              "pp_name": "Functional Package for SSH Version 1.0",
+              "pp_short_name": "PKG_SSH_V1.0"
+            },
+            {
+              "pp_id": 480,
+              "pp_name": "PP-Module for MACsec Ethernet Encryption Version 1.0",
+              "pp_short_name": "MOD_MACSEC_V1.0"
+            },
+            {
+              "pp_id": 481,
+              "pp_name": "PP-Module for Virtual Private Network (VPN) Gateways Version 1.3",
+              "pp_short_name": "MOD_VPNGW_v1.3"
+            },
+            {
+              "pp_id": 482,
+              "pp_name": "collaborative Protection Profile for Network Devices Version 3.0e",
+              "pp_short_name": "CPP_ND_V3.0E"
+            }
+          ],
+          "status_sort": "Certified",
+          "submitting_country_id_code": "US",
+          "submitting_country_id_name": "United States",
+          "sunset_date": null,
+          "tech_types": [
+            "Network Device",
+            "Network Encryption",
+            "Remote Access",
+            "Virtual Private Network"
+          ],
+          "vendor_id_name": "Cisco Systems, Inc.",
+          "v_id": 11661
+        }
+      ],
+      "removed": [],
+      "newly_archived": []
+    },
+    "pcl_all": {
+      "added": [
+        {
+          "active_maintenances": [],
+          "am_sort": "2028-02-23T00:00:00Z",
+          "assigned_lab_name": "atsec information security AB",
+          "certification_date": "2026-02-23T00:00:00Z",
+          "from_cc_portal": true,
+          "product_id": "2026.1089",
+          "product_name": "F5 BIG-IP 17.5.0 including AFM",
+          "protection_profiles": [
+            {
+              "pp_id": 448,
+              "pp_name": "collaborative Protection Profile Module for Stateful Traffic Filter Firewalls v1.4 + Errata 20200625",
+              "pp_short_name": "MOD_CPP_FW_v1.4e"
+            },
+            {
+              "pp_id": 459,
+              "pp_name": "Functional Package for SSH Version 1.0",
+              "pp_short_name": "PKG_SSH_V1.0"
+            },
+            {
+              "pp_id": 482,
+              "pp_name": "collaborative Protection Profile for Network Devices Version 3.0e",
+              "pp_short_name": "CPP_ND_V3.0E"
+            }
+          ],
+          "status_sort": "Certified",
+          "submitting_country_id_code": "SE",
+          "submitting_country_id_name": "Sweden",
+          "sunset_date": "2031-02-23T00:00:00Z",
+          "tech_types": [
+            "Network and Network-Related Devices and Systems"
+          ],
+          "vendor_id_name": "F5 Networks, Inc.",
+          "v_id": "2026.1089",
+          "kicked_off_date": null
+        }
+      ],
+      "removed": [],
+      "newly_archived": []
+    },
+    "in_evaluation": {
+      "added": [],
+      "removed": [],
+      "current_count": 24
+    },
+    "news": {
+      "added": []
+    },
+    "events": {
+      "added": []
+    },
+    "cctls": {
+      "added": [],
+      "removed": [],
+      "status_changes": []
+    }
+  },
+  "cc_portal": {
+    "news": {
+      "added": []
+    },
+    "pps": {
+      "added": []
+    },
+    "products": {
+      "added": []
+    }
+  },
+  "cctl_labs": {},
+  "csfc": {
+    "pages": {},
+    "component_selections": {},
+    "feeds": {}
+  },
+  "cc_crypto": {
+    "pages": {},
+    "doc_headers": {}
+  },
+  "nist": {
+    "pages": {},
+    "doc_headers": {
+      "FIPS 204 ML-DSA": {
+        "changed": true,
+        "old_last_modified": "Thu, 22 Aug 2024 13:51:35 GMT",
+        "new_last_modified": "",
+        "old_etag": "\"3eaf4669af4da1:0\"",
+        "new_etag": "",
+        "old_content_length": "3291746",
+        "new_content_length": "",
+        "old_partial_hash": "",
+        "new_partial_hash": "5f66fc055c9f56b45b53d0f2df1fae3f",
+        "url": "https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.204.pdf"
+      }
+    },
+    "feeds": {}
+  },
+  "nato": {
+    "pages": {},
+    "cisco_added": [],
+    "cisco_removed": []
+  },
+  "eucc": {
+    "pages": {
+      "certificates": {
+        "added": [
+          {
+            "name": "ENISA, the European Union Agency for Cybersecurity is in charge of publishing European cybersecurity certificates.",
+            "text": "ENISA, the European Union Agency for Cybersecurity is in charge of publishing European cybersecurity certificates.",
+            "href": ""
+          },
+          {
+            "name": "Certificates are published along with associated certification reports, and their validity status will also be highlighted.",
+            "text": "Certificates are published along with associated certification reports, and their validity status will also be highlighted.",
+            "href": ""
+          },
+          {
+            "name": "EU Cybersecurity Certificates",
+            "text": "EU Cybersecurity Certificates",
+            "href": ""
+          },
+          {
+            "name": "18 February 2026",
+            "text": "18 February 2026",
+            "href": ""
+          },
+          {
+            "name": "The evaluated product is a \"smart card\" type device that can be used in two modes: contact and contactless. It is intended for use as a secure signature creation device (SSCD).",
+            "text": "The evaluated product is a \"smart card\" type device that can be used in two modes: contact and contactless. It is intended for use as a secure signature creation device (SSCD).",
+            "href": ""
+          },
+          {
+            "name": "This product is a TPM (Trusted Platform Module). It is designed to guarantee the hardware and software integrity of trusted platforms (servers, computers, etc.) in accordance with TPM2.0 functional sp",
+            "text": "This product is a TPM (Trusted Platform Module). It is designed to guarantee the hardware and software integrity of trusted platforms (servers, computers, etc.) in accordance with TPM2.0 functional specifications.",
+            "href": ""
+          },
+          {
+            "name": "The JCOP 8.x/9.x on SN300 B2 Secure Elemen is a composite platform containing the Java Card OS embedded on the SN300 B2 Secure Element with IC Dedicated Software",
+            "text": "The JCOP 8.x/9.x on SN300 B2 Secure Elemen is a composite platform containing the Java Card OS embedded on the SN300 B2 Secure Element with IC Dedicated Software",
+            "href": ""
+          },
+          {
+            "name": "The TOE is a composite platform containing the Java Card OS embedded on the SE310 A0 Secure Element with IC Dedicated Software.",
+            "text": "The TOE is a composite platform containing the Java Card OS embedded on the SE310 A0 Secure Element with IC Dedicated Software.",
+            "href": ""
+          },
+          {
+            "name": "19 December 2025",
+            "text": "19 December 2025",
+            "href": ""
+          },
+          {
+            "name": "Evaluation of Infineon Security Controller IFX_CCI_00000Fh, IFX_CCI_000010h, IFX_CCI_000026h, IFX_CCI_000027h, IFX_CCI_000028h, IFX_CCI_000029h, IFX_CCI_00002Ah, IFX_CCI_00002Bh, IFX_CCI_00002Ch in th",
+            "text": "Evaluation of Infineon Security Controller IFX_CCI_00000Fh, IFX_CCI_000010h, IFX_CCI_000026h, IFX_CCI_000027h, IFX_CCI_000028h, IFX_CCI_000029h, IFX_CCI_00002Ah, IFX_CCI_00002Bh, IFX_CCI_00002Ch in the design step G12.",
+            "href": ""
+          },
+          {
+            "name": "15 December 2025",
+            "text": "15 December 2025",
+            "href": ""
+          },
+          {
+            "name": "The product evaluated is the family of micro-controlers  «S3D384E/S3D352E/S3D300E/S3D264E/S3D232E/S3K384E, S3D384E_20250730» developed by SAMSUNG ELECTRONICS CO. LTD.",
+            "text": "The product evaluated is the family of micro-controlers  «S3D384E/S3D352E/S3D300E/S3D264E/S3D232E/S3K384E, S3D384E_20250730» developed by SAMSUNG ELECTRONICS CO. LTD.",
+            "href": ""
+          },
+          {
+            "name": "The S3SSE1A microcontroller is a smartcard integrated circuit which is composed of a processing unit, security components, contact based I/O ports, hardware circuit for testing purpose during the manu",
+            "text": "The S3SSE1A microcontroller is a smartcard integrated circuit which is composed of a processing unit, security components, contact based I/O ports, hardware circuit for testing purpose during the manufacturing process and volatile and non-volatile memories (hardware).",
+            "href": ""
+          },
+          {
+            "name": "10 December 2025",
+            "text": "10 December 2025",
+            "href": ""
+          },
+          {
+            "name": "The product evaluated is the family of micro-controlers «S3D384C/S3D352C/S3D300C/S3D264C/S3D232C/S3K384C, S3D384C_20250630 » developed by SAMSUNG ELECTRONICS CO. LTD.",
+            "text": "The product evaluated is the family of micro-controlers «S3D384C/S3D352C/S3D300C/S3D264C/S3D232C/S3K384C, S3D384C_20250630 » developed by SAMSUNG ELECTRONICS CO. LTD.",
+            "href": ""
+          },
+          {
+            "name": "The product evaluated is « ST31P450, A08 » developed by STMICROELECTRONICS.",
+            "text": "The product evaluated is « ST31P450, A08 » developed by STMICROELECTRONICS.",
+            "href": ""
+          },
+          {
+            "name": "The product evaluated is « ST31P450 including optional cryptographic library NESLIB, C03 » developed by STMICROELECTRONICS.",
+            "text": "The product evaluated is « ST31P450 including optional cryptographic library NESLIB, C03 » developed by STMICROELECTRONICS.",
+            "href": ""
+          },
+          {
+            "name": "The Cisco Nexus 9K Series are data center-class switches for use as an aggregation switch in the data center. Cisco NX-OS is a Cisco-developed highly configurable proprietary operating system that pro",
+            "text": "The Cisco Nexus 9K Series are data center-class switches for use as an aggregation switch in the data center. Cisco NX-OS is a Cisco-developed highly configurable proprietary operating system that provides for efficient and effective routing and switching.",
+            "href": ""
+          },
+          {
+            "name": "14 November 2025",
+            "text": "14 November 2025",
+            "href": ""
+          },
+          {
+            "name": "Huawei ATN Series Routers. The TOE is a series of network infrastructure routers including both hardware and software.  It is defined as the software running on the hardware corresponding to the follo",
+            "text": "Huawei ATN Series Routers. The TOE is a series of network infrastructure routers including both hardware and software.  It is defined as the software running on the hardware corresponding to the following routers: ATN 910C-M, ATN 910C-K and ATN 910D-B.",
+            "href": ""
+          },
+          {
+            "name": "The product evaluated is «S3NSEN6, S3NSEN6_20250630 » microcontroller, developed by SAMSUNG ELECTRONICS CO. LTD.",
+            "text": "The product evaluated is «S3NSEN6, S3NSEN6_20250630 » microcontroller, developed by SAMSUNG ELECTRONICS CO. LTD.",
+            "href": ""
+          },
+          {
+            "name": "The product evaluated is «S3NSN6H, S3NSN6H_20250630» microcontroller, developed by SAMSUNG ELECTRONICS CO. LTD.",
+            "text": "The product evaluated is «S3NSN6H, S3NSN6H_20250630» microcontroller, developed by SAMSUNG ELECTRONICS CO. LTD.",
+            "href": ""
+          },
+          {
+            "name": "The product evaluated is «SCE900U, version A » developed by IDEMIA.",
+            "text": "The product evaluated is «SCE900U, version A » developed by IDEMIA.",
+            "href": ""
+          },
+          {
+            "name": "4 September 2025",
+            "text": "4 September 2025",
+            "href": ""
+          },
+          {
+            "name": "The certified product is Cisco Intersight Virtual Appliance 1.0.9 with IMM Fabric 4.3 UCS X-Series Servers and UCS C-Series Servers.",
+            "text": "The certified product is Cisco Intersight Virtual Appliance 1.0.9 with IMM Fabric 4.3 UCS X-Series Servers and UCS C-Series Servers.",
+            "href": ""
+          },
+          {
+            "name": "The certified product is NXP JCOP 8.x/9.x with eUICC extension on SN300 B2 Secure Element.",
+            "text": "The certified product is NXP JCOP 8.x/9.x with eUICC extension on SN300 B2 Secure Element.",
+            "href": ""
+          },
+          {
+            "name": "The certified product is NXP JCOP 7.x with eUICC extension on SN300 B1.1 Secure Element, versions JCOP 7.0 R1.64.0.2, JCOP 7.0 R2.04.0.2, JCOP 7.1 R1.04.0.2, JCOP 7.2 R1.09.0.2, JCOP 7.3 R1.07.0.2 fro",
+            "text": "The certified product is NXP JCOP 7.x with eUICC extension on SN300 B1.1 Secure Element, versions JCOP 7.0 R1.64.0.2, JCOP 7.0 R2.04.0.2, JCOP 7.1 R1.04.0.2, JCOP 7.2 R1.09.0.2, JCOP 7.3 R1.07.0.2 from NXP Semiconductors Netherlands.",
+            "href": ""
+          },
+          {
+            "name": "The certified product is the GMV GNSS Cryptographic Module.",
+            "text": "The certified product is the GMV GNSS Cryptographic Module.",
+            "href": ""
+          },
+          {
+            "name": "The evaluated product is “ST54J / ST54K, A07” developed by STMICROELECTRONICS.",
+            "text": "The evaluated product is “ST54J / ST54K, A07” developed by STMICROELECTRONICS.",
+            "href": ""
+          },
+          {
+            "name": "The evaluated product is “Smart Tachograph G2 on MultiApp V4.0.1, versions 2.0.1 G and 2.0.1 H” developed by THALES DIS FRANCE SAS.",
+            "text": "The evaluated product is “Smart Tachograph G2 on MultiApp V4.0.1, versions 2.0.1 G and 2.0.1 H” developed by THALES DIS FRANCE SAS.",
+            "href": ""
+          }
+        ],
+        "removed": []
+      },
+      "requirements": {
+        "added": [
+          {
+            "name": "The EUCC scheme allows ICT suppliers who wish to showcase proof of assurance to go through an EU commonly understood assessment process to certify ICT products such as technological components (chips,",
+            "text": "The EUCC scheme allows ICT suppliers who wish to showcase proof of assurance to go through an EU commonly understood assessment process to certify ICT products such as technological components (chips, smartcards), hardware and software.",
+            "href": ""
+          },
+          {
+            "name": "With EUCC, the EU commonly agreed on assessment process to certify ICT products such as technological components, hardware and software. The scheme is based on Common Criteria, an international standa",
+            "text": "With EUCC, the EU commonly agreed on assessment process to certify ICT products such as technological components, hardware and software. The scheme is based on Common Criteria, an international standard (ISO/IEC 15408) broadly used internationally.",
+            "href": ""
+          },
+          {
+            "name": "Some regulations might require Common Criteria certification, but in all cases, such a certificate provides a competitive advantage by giving trust to customers and users .",
+            "text": "Some regulations might require Common Criteria certification, but in all cases, such a certificate provides a competitive advantage by giving trust to customers and users .",
+            "href": ""
+          },
+          {
+            "name": "EUCC in Application",
+            "text": "EUCC in Application",
+            "href": ""
+          },
+          {
+            "name": "The scope of EUCC",
+            "text": "The scope of EUCC",
+            "href": ""
+          },
+          {
+            "name": "The vendor or manufacturer can specify the security functional requirements (SFRs) and security assurance requirements (SARs) against which their ICT products will be assessed. The methodology offers ",
+            "text": "The vendor or manufacturer can specify the security functional requirements (SFRs) and security assurance requirements (SARs) against which their ICT products will be assessed. The methodology offers to define Protection Profiles corresponding to product Categories.",
+            "href": ""
+          },
+          {
+            "name": "These requirements also allow for an assurance level to be indicated: the EUCC covers two, substantial and high , that have been mapped with AVA_VAN, the vulnerability assessment class of the Common C",
+            "text": "These requirements also allow for an assurance level to be indicated: the EUCC covers two, substantial and high , that have been mapped with AVA_VAN, the vulnerability assessment class of the Common Criteria.",
+            "href": ""
+          },
+          {
+            "name": "EUCC Certificates",
+            "text": "EUCC Certificates",
+            "href": ""
+          },
+          {
+            "name": "Since February 2025, EUCC Certificates can be issued . Certificates are issued by Certification Bodies based on an evaluation process carried out by an accredited and, where necessary, authorised labo",
+            "text": "Since February 2025, EUCC Certificates can be issued . Certificates are issued by Certification Bodies based on an evaluation process carried out by an accredited and, where necessary, authorised laboratory. The laboratory performs documental and technical assessment activities defined by the Common Criteria standard.",
+            "href": ""
+          },
+          {
+            "name": "During the validity period of their certificate, ICT products are subject to monitoring, vulnerability management, and disclosure procedures .",
+            "text": "During the validity period of their certificate, ICT products are subject to monitoring, vulnerability management, and disclosure procedures .",
+            "href": ""
+          },
+          {
+            "name": "The ENISA website dedicated to certification will present EUCC certificates and other EU certificates issued under the CSA.",
+            "text": "The ENISA website dedicated to certification will present EUCC certificates and other EU certificates issued under the CSA.",
+            "href": ""
+          },
+          {
+            "name": "EUCC a live scheme",
+            "text": "EUCC a live scheme",
+            "href": ""
+          },
+          {
+            "name": "ENISA developed a candidate scheme first in 2020, with the support of an ad hoc Working Group, and reused widely the experience of the SOG-IS Mutual Recognition Agreement.",
+            "text": "ENISA developed a candidate scheme first in 2020, with the support of an ad hoc Working Group, and reused widely the experience of the SOG-IS Mutual Recognition Agreement.",
+            "href": ""
+          },
+          {
+            "name": "The EUCC scheme, adopted in 2024 and amended since then, is now in operation and under regular maintenance.",
+            "text": "The EUCC scheme, adopted in 2024 and amended since then, is now in operation and under regular maintenance.",
+            "href": ""
+          },
+          {
+            "name": "Access EUCC Library",
+            "text": "Access EUCC Library",
+            "href": ""
+          },
+          {
+            "name": "EUCC is composed of a rich list of documents from the Implementing Act and its amendments to state-of-the-art documents and guidelines.",
+            "text": "EUCC is composed of a rich list of documents from the Implementing Act and its amendments to state-of-the-art documents and guidelines.",
+            "href": ""
+          },
+          {
+            "name": "EUCC Certification scheme Documents",
+            "text": "EUCC Certification scheme Documents",
+            "href": ""
+          },
+          {
+            "name": "This section displays Frequently Asked Questions on EUCC Scheme",
+            "text": "This section displays Frequently Asked Questions on EUCC Scheme",
+            "href": ""
+          },
+          {
+            "name": "Commission Implementing Regulation (EU) 2024/482 of 31 January 2024 (EUCC Implementing Regulation) made reference to ISO/IEC standards, but didn’t specify the applicable version of those standards. Co",
+            "text": "Commission Implementing Regulation (EU) 2024/482 of 31 January 2024 (EUCC Implementing Regulation) made reference to ISO/IEC standards, but didn’t specify the applicable version of those standards. Commission Implementing Regulation (EU) 2024/3144 of 18 December 2024 (EUCC amendment) therefore specified which version of the standards applies for certificates issued under the EUCC, and defined tran",
+            "href": "https://eur-lex.europa.eu/eli/reg_impl/2024/482/oj"
+          },
+          {
+            "name": "In line with the amended Articles 2 and 3 of the EUCC Implementing Regulation, the following standards shall apply to evaluations performed under the EUCC scheme:",
+            "text": "In line with the amended Articles 2 and 3 of the EUCC Implementing Regulation, the following standards shall apply to evaluations performed under the EUCC scheme:",
+            "href": ""
+          },
+          {
+            "name": "the Common Criteria, as set out in standards ISO/IEC 15408-1:2022, ISO/IEC 15408-2:2022, ISO/IEC 15408-3:2022, ISO/IEC 15408-4:2022 or ISO/IEC 15408-5:2022, or set out in Common Criteria for Informati",
+            "text": "the Common Criteria, as set out in standards ISO/IEC 15408-1:2022, ISO/IEC 15408-2:2022, ISO/IEC 15408-3:2022, ISO/IEC 15408-4:2022 or ISO/IEC 15408-5:2022, or set out in Common Criteria for Information Technology Security Evaluation, version CC:2022, Parts 1 through 5, published by the participants of the Arrangement on the Recognition of Common Criteria Certificates in the field of IT Security;",
+            "href": ""
+          },
+          {
+            "name": "the Common Evaluation Methodology, as set out in standard ISO/IEC 18045:2022, or the Common Methodology for Information Technology Security Evaluation, version CEM:2022, published by the participants ",
+            "text": "the Common Evaluation Methodology, as set out in standard ISO/IEC 18045:2022, or the Common Methodology for Information Technology Security Evaluation, version CEM:2022, published by the participants of the Arrangement on the Recognition of Common Criteria Certificates in the field of IT Security.",
+            "href": ""
+          },
+          {
+            "name": "In addition, the use of the errata to CC:2022 and CEM:2022 available on the CCRA portal is not mandatory but is recommended to allow consistency in the interpretations with the CCRA.",
+            "text": "In addition, the use of the errata to CC:2022 and CEM:2022 available on the CCRA portal is not mandatory but is recommended to allow consistency in the interpretations with the CCRA.",
+            "href": "https://commoncriteriaportal.org/cc/index.cfm"
+          },
+          {
+            "name": "Furthermore, the transition rules between the former and latest version of the above-mentioned standards were defined in Article 3 of the EUCC Implementing Regulation. Such rules enable the use of the",
+            "text": "Furthermore, the transition rules between the former and latest version of the above-mentioned standards were defined in Article 3 of the EUCC Implementing Regulation. Such rules enable the use of the older standard versions within the defined timeframe and ensure sufficient time to update relevant protection profiles as appropriate. More specifically, the amended Article 3 reads as follows:",
+            "href": ""
+          },
+          {
+            "name": "“2. Until 31 December 2027, a certificate may be issued under the EUCC scheme applying either of the following standards:",
+            "text": "“2. Until 31 December 2027, a certificate may be issued under the EUCC scheme applying either of the following standards:",
+            "href": ""
+          },
+          {
+            "name": "ISO/IEC 15408-1:2009, ISO/IEC 15408-2:2008 or ISO/IEC 15408-3:2008;",
+            "text": "ISO/IEC 15408-1:2009, ISO/IEC 15408-2:2008 or ISO/IEC 15408-3:2008;",
+            "href": ""
+          },
+          {
+            "name": "Common Criteria for Information Technology Security Evaluation, version 3.1, revision 5, published by the participants of the Arrangement on the Recognition of Common Criteria Certificates in the fiel",
+            "text": "Common Criteria for Information Technology Security Evaluation, version 3.1, revision 5, published by the participants of the Arrangement on the Recognition of Common Criteria Certificates in the field of IT Security;",
+            "href": ""
+          },
+          {
+            "name": "ISO/IEC 18045:2008;",
+            "text": "ISO/IEC 18045:2008;",
+            "href": ""
+          },
+          {
+            "name": "Common Methodology for Information Technology Security Evaluation, revision 5, version 3.1, published by the participants of the Arrangement on the Recognition of Common Criteria Certificates in the f",
+            "text": "Common Methodology for Information Technology Security Evaluation, revision 5, version 3.1, published by the participants of the Arrangement on the Recognition of Common Criteria Certificates in the field of IT Security.",
+            "href": ""
+          },
+          {
+            "name": "3. Until 31 December 2027, a certificate applying the standards referred to in paragraph 1 may be issued under the EUCC scheme claiming conformance to a protection profile that has applied the standar",
+            "text": "3. Until 31 December 2027, a certificate applying the standards referred to in paragraph 1 may be issued under the EUCC scheme claiming conformance to a protection profile that has applied the standards listed in paragraph 2.",
+            "href": ""
+          },
+          {
+            "name": "4. A certificate applying the standards referred to in paragraph 1 may also be issued under the EUCC scheme claiming conformance to a protection profile that has applied either of the following standa",
+            "text": "4. A certificate applying the standards referred to in paragraph 1 may also be issued under the EUCC scheme claiming conformance to a protection profile that has applied either of the following standards, provided that the use of such protection profile is required under Commission Implementing Regulation (EU) 2016/799, Regulation (EU) No 910/2014 of the European Parliament and of the Council or C",
+            "href": ""
+          },
+          {
+            "name": "Common Methodology for Information Technology Security Evaluation, version 3.1., revision 1 to 4, published by the participants of the Arrangement on the Recognition of Common Criteria Certificates in",
+            "text": "Common Methodology for Information Technology Security Evaluation, version 3.1., revision 1 to 4, published by the participants of the Arrangement on the Recognition of Common Criteria Certificates in the field of IT Security.”",
+            "href": ""
+          },
+          {
+            "name": "A consolidated version of the EUCC Implementing Regulation that includes the amendments made to the scheme with Regulation (EU) 2024/3144 can be found here (please note that the consolidated text is m",
+            "text": "A consolidated version of the EUCC Implementing Regulation that includes the amendments made to the scheme with Regulation (EU) 2024/3144 can be found here (please note that the consolidated text is meant purely as a documentation tool and has no legal effect).",
+            "href": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A02024R0482-20250108%20"
+          },
+          {
+            "name": "A presentation of the EUCC scheme review, including clarifications on the applicable standards and the transition rules, is provided here .",
+            "text": "A presentation of the EUCC scheme review, including clarifications on the applicable standards and the transition rules, is provided here .",
+            "href": "https://certification.enisa.europa.eu/publications/eucc-amendment-presentation_en%20"
+          },
+          {
+            "name": "The general rule is that a new or updated version of a SotA should be applied to certification processes initiated after the SotAs become applicable through the adoption of the amendment to the EUCC. ",
+            "text": "The general rule is that a new or updated version of a SotA should be applied to certification processes initiated after the SotAs become applicable through the adoption of the amendment to the EUCC. However, considering Common Criteria (CC) mandate the use of the most recent versions of the vulnerability assessment and attack potential methodologies by ITSEFs, it is highly recommended to use the ",
+            "href": "https://certification.enisa.europa.eu/certification-library/eucc-certification-scheme_en#state-of-the-art-documents-for-eucc"
+          },
+          {
+            "name": "Accreditation is mandatory to perform evaluation and certification activities at assurance level ‘substantial’, and authorisation, in addition, is required to perform similar activities at assurance l",
+            "text": "Accreditation is mandatory to perform evaluation and certification activities at assurance level ‘substantial’, and authorisation, in addition, is required to perform similar activities at assurance level ‘high’.",
+            "href": ""
+          },
+          {
+            "name": "Pursuant to Article 9(1) of the EUCC Implementing Regulation, the certification bodies shall issue an EUCC certificate under certain conditions listed there, one of which is that:",
+            "text": "Pursuant to Article 9(1) of the EUCC Implementing Regulation, the certification bodies shall issue an EUCC certificate under certain conditions listed there, one of which is that:",
+            "href": ""
+          },
+          {
+            "name": "“the category of ICT product falls within the scope of the accreditation, and where applicable of the authorisation, of the certification body and the ITSEF involved in the certification” (point (a) o",
+            "text": "“the category of ICT product falls within the scope of the accreditation, and where applicable of the authorisation, of the certification body and the ITSEF involved in the certification” (point (a) of Article 9(1)).",
+            "href": ""
+          },
+          {
+            "name": "In addition, Article 21(1) outlines additional or specific requirements for a certification body which read like that:",
+            "text": "In addition, Article 21(1) outlines additional or specific requirements for a certification body which read like that:",
+            "href": ""
+          },
+          {
+            "name": "“1. A certification body shall be authorised by the national cybersecurity certification authority to issue EUCC certificates at assurance level ‘high’ where that body demonstrates that, in addition t",
+            "text": "“1. A certification body shall be authorised by the national cybersecurity certification authority to issue EUCC certificates at assurance level ‘high’ where that body demonstrates that, in addition to meeting the requirements laid down in Article 60(1) and the Annex to Regulation (EU) 2019/881 regarding accreditation of conformity assessment bodies, the following:",
+            "href": ""
+          },
+          {
+            "name": "it has the expertise and competences required for the certification decision at assurance level ‘high’;",
+            "text": "it has the expertise and competences required for the certification decision at assurance level ‘high’;",
+            "href": ""
+          },
+          {
+            "name": "it conducts its certification activities in cooperation with an ITSEF authorised in accordance with Article 22; and",
+            "text": "it conducts its certification activities in cooperation with an ITSEF authorised in accordance with Article 22; and",
+            "href": ""
+          },
+          {
+            "name": "it has the requisite competences and put in place appropriate technical and operational measures to effectively protect confidential and sensitive information for assurance level ‘high’, in addition t",
+            "text": "it has the requisite competences and put in place appropriate technical and operational measures to effectively protect confidential and sensitive information for assurance level ‘high’, in addition to the requirements set out in Article 43.”,",
+            "href": ""
+          },
+          {
+            "name": "whereas Article 22(1) sets out additional or specific requirements for an ITSEF:",
+            "text": "whereas Article 22(1) sets out additional or specific requirements for an ITSEF:",
+            "href": ""
+          },
+          {
+            "name": "“1. An ITSEF shall be authorised by the national cybersecurity certification authority to carry out the evaluation of ICT products which are subject to certification under the assurance level ‘high’, ",
+            "text": "“1. An ITSEF shall be authorised by the national cybersecurity certification authority to carry out the evaluation of ICT products which are subject to certification under the assurance level ‘high’, where the ITSEF demonstrates that, in addition to meeting the requirements laid down in Article 60(1) and the Annex to Regulation (EU) 2019/881 regarding accreditation of conformity assessment bodies,",
+            "href": ""
+          },
+          {
+            "name": "it has the necessary expertise for performing the evaluation activities to determine the resistance to state-of-the-art cyberattacks carried out by actors with significant skills and resources;",
+            "text": "it has the necessary expertise for performing the evaluation activities to determine the resistance to state-of-the-art cyberattacks carried out by actors with significant skills and resources;",
+            "href": ""
+          },
+          {
+            "name": "for the technical domains and protection profiles, which are part of the ICT process for those ICT products, it has: the expertise to perform the specific evaluation activities necessary to methodical",
+            "text": "for the technical domains and protection profiles, which are part of the ICT process for those ICT products, it has: the expertise to perform the specific evaluation activities necessary to methodically determine a target of evaluation’s resistance against skilled attackers in its operational environment assuming an attack potential of ‘moderate’ or ‘high’ as set out in the standards referred to i",
+            "href": ""
+          },
+          {
+            "name": "the expertise to perform the specific evaluation activities necessary to methodically determine a target of evaluation’s resistance against skilled attackers in its operational environment assuming an",
+            "text": "the expertise to perform the specific evaluation activities necessary to methodically determine a target of evaluation’s resistance against skilled attackers in its operational environment assuming an attack potential of ‘moderate’ or ‘high’ as set out in the standards referred to in Article 3;",
+            "href": ""
+          },
+          {
+            "name": "the technical competences as specified in the state-of-the-art documents listed in Annex I;",
+            "text": "the technical competences as specified in the state-of-the-art documents listed in Annex I;",
+            "href": ""
+          },
+          {
+            "name": "Article 5(1) of the EUCC Implementing Regulation sets out the following:",
+            "text": "Article 5(1) of the EUCC Implementing Regulation sets out the following:",
+            "href": ""
+          },
+          {
+            "name": "“1. Certification of an ICT product shall be carried out against its security target:",
+            "text": "“1. Certification of an ICT product shall be carried out against its security target:",
+            "href": ""
+          },
+          {
+            "name": "as defined by the applicant; or",
+            "text": "as defined by the applicant; or",
+            "href": ""
+          },
+          {
+            "name": "incorporating a certified protection profile as part of the ICT process, where the ICT product falls in the ICT product category covered by that protection profile.”",
+            "text": "incorporating a certified protection profile as part of the ICT process, where the ICT product falls in the ICT product category covered by that protection profile.”",
+            "href": ""
+          },
+          {
+            "name": "Therefore, the EUCC Implementing Regulation allows the following options:",
+            "text": "Therefore, the EUCC Implementing Regulation allows the following options:",
+            "href": ""
+          },
+          {
+            "name": "to develop a security target which does not refer to any PP;",
+            "text": "to develop a security target which does not refer to any PP;",
+            "href": ""
+          },
+          {
+            "name": "to develop a security target which refers to a non-EUCC certified PP, and still assess conformance to the PP into the certification report; or",
+            "text": "to develop a security target which refers to a non-EUCC certified PP, and still assess conformance to the PP into the certification report; or",
+            "href": ""
+          },
+          {
+            "name": "incorporating an EUCC-certified PP.",
+            "text": "incorporating an EUCC-certified PP.",
+            "href": ""
+          },
+          {
+            "name": "In case the applicant defines the security target based on a non-EUCC certified PP (option b), the certification body (CB) takes full responsibility for the certification results. It is hence up to th",
+            "text": "In case the applicant defines the security target based on a non-EUCC certified PP (option b), the certification body (CB) takes full responsibility for the certification results. It is hence up to the CB to ensure that all relevant and necessary activities have been performed and the results of the certification against this PP are in line with the EUCC requirements.",
+            "href": ""
+          },
+          {
+            "name": "According to Article 7(1)(e) of the EUCC Implementing Regulation, the PPs listed in Annex II shall apply in the case the ICT product submitted to evaluation falls into the category of the PP.",
+            "text": "According to Article 7(1)(e) of the EUCC Implementing Regulation, the PPs listed in Annex II shall apply in the case the ICT product submitted to evaluation falls into the category of the PP.",
+            "href": ""
+          },
+          {
+            "name": "Protection profiles listed in Annex III are recommended, as per recital (31) of the EUCC Implementing Regulation.",
+            "text": "Protection profiles listed in Annex III are recommended, as per recital (31) of the EUCC Implementing Regulation.",
+            "href": ""
+          },
+          {
+            "name": "Yes, the CCRA (non-EU) participants will recognise EUCC certificates under the conditions outlined in the following document:",
+            "text": "Yes, the CCRA (non-EU) participants will recognise EUCC certificates under the conditions outlined in the following document:",
+            "href": ""
+          },
+          {
+            "name": "https://www.commoncriteriaportal.org/files/supdocs/CCMC-011-v1.0-2025-Mar-19-CCRA%20and%20EUCC%20Co-existence.pdf .",
+            "text": "https://www.commoncriteriaportal.org/files/supdocs/CCMC-011-v1.0-2025-Mar-19-CCRA%20and%20EUCC%20Co-existence.pdf .",
+            "href": "https://www.commoncriteriaportal.org/files/supdocs/CCMC-011-v1.0-2025-Mar-19-CCRA%20and%20EUCC%20Co-existence.pdf"
+          },
+          {
+            "name": "EUCC certificates emitted by a European public Certification Body (CB) that is also a CCRA authorising participant will be recognised by other CCRA members as before EUCC entered into application.",
+            "text": "EUCC certificates emitted by a European public Certification Body (CB) that is also a CCRA authorising participant will be recognised by other CCRA members as before EUCC entered into application.",
+            "href": ""
+          },
+          {
+            "name": "EUCC certificates emitted by a private/ commercial CB shall meet additional requirements related to per-certificate oversight process for CCRA recognition by the NCCA [1] and can be flexible and condu",
+            "text": "EUCC certificates emitted by a private/ commercial CB shall meet additional requirements related to per-certificate oversight process for CCRA recognition by the NCCA [1] and can be flexible and conducted throughout or at the end of the process.",
+            "href": "https://certification.enisa.europa.eu#_ftn1"
+          },
+          {
+            "name": "While mutual recognition has not yet been established, this voluntary approach enables EU Member States active in the CCRA to issue EUCC certificates, which additionally carry the CCRA mark. This is a",
+            "text": "While mutual recognition has not yet been established, this voluntary approach enables EU Member States active in the CCRA to issue EUCC certificates, which additionally carry the CCRA mark. This is a short-term solution and additional efforts will be required to allow full mutual recognition. In the meantime, CCRA certificates will continue to be recognised in accordance with the CCRA by EU Membe",
+            "href": ""
+          },
+          {
+            "name": "[1] The trusted public-private certification model deployed by the Netherlands can be used as a reference. See further information here: https://www.dutchncca.nl/documents/schemedoc/np/002/eucc-proces",
+            "text": "[1] The trusted public-private certification model deployed by the Netherlands can be used as a reference. See further information here: https://www.dutchncca.nl/documents/schemedoc/np/002/eucc-processes-v2.0#9c5889430a",
+            "href": "https://certification.enisa.europa.eu#_ftnref1"
+          },
+          {
+            "name": "More FAQs on certification and contact us to ask a question or raise an issue.",
+            "text": "More FAQs on certification and contact us to ask a question or raise an issue.",
+            "href": ""
+          }
+        ],
+        "removed": []
+      }
+    },
+    "cisco_added": [
+      {
+        "name": "The certified product is Cisco Intersight Virtual Appliance 1.0.9 with IMM Fabric 4.3 UCS X-Series Servers and UCS C-Series Servers.",
+        "text": "The certified product is Cisco Intersight Virtual Appliance 1.0.9 with IMM Fabric 4.3 UCS X-Series Servers and UCS C-Series Servers.",
+        "href": ""
+      },
+      {
+        "name": "The Cisco Nexus 9K Series are data center-class switches for use as an aggregation switch in the data center. Cisco NX-OS is a Cisco-developed highly configurable proprietary operating system that pro",
+        "text": "The Cisco Nexus 9K Series are data center-class switches for use as an aggregation switch in the data center. Cisco NX-OS is a Cisco-developed highly configurable proprietary operating system that provides for efficient and effective routing and switching.",
+        "href": ""
+      }
+    ],
+    "cisco_removed": []
+  },
+  "alerts": [
+    {
+      "source": "EUCC Requirements",
+      "kind": "updated",
+      "title": "The EUCC scheme allows ICT suppliers who wish to showcase proof of assurance to go through an EU commonly understood ass…",
+      "url": "https://certification.enisa.europa.eu/browse-topic/eucc_en",
+      "detail": "New item on EUCC requirements / scheme page",
+      "keywords": [
+        "EUCC"
+      ]
+    },
+    {
+      "source": "EUCC Requirements",
+      "kind": "updated",
+      "title": "With EUCC, the EU commonly agreed on assessment process to certify ICT products such as technological components, hardwa…",
+      "url": "https://certification.enisa.europa.eu/browse-topic/eucc_en",
+      "detail": "New item on EUCC requirements / scheme page",
+      "keywords": [
+        "EUCC"
+      ]
+    },
+    {
+      "source": "EUCC Requirements",
+      "kind": "updated",
+      "title": "EUCC in Application",
+      "url": "https://certification.enisa.europa.eu/browse-topic/eucc_en",
+      "detail": "New item on EUCC requirements / scheme page",
+      "keywords": [
+        "EUCC"
+      ]
+    },
+    {
+      "source": "EUCC Requirements",
+      "kind": "updated",
+      "title": "The scope of EUCC",
+      "url": "https://certification.enisa.europa.eu/browse-topic/eucc_en",
+      "detail": "New item on EUCC requirements / scheme page",
+      "keywords": [
+        "EUCC"
+      ]
+    },
+    {
+      "source": "EUCC Requirements",
+      "kind": "updated",
+      "title": "These requirements also allow for an assurance level to be indicated: the EUCC covers two, substantial and high , that h…",
+      "url": "https://certification.enisa.europa.eu/browse-topic/eucc_en",
+      "detail": "New item on EUCC requirements / scheme page",
+      "keywords": [
+        "EUCC"
+      ]
+    },
+    {
+      "source": "EUCC Requirements",
+      "kind": "updated",
+      "title": "EUCC Certificates",
+      "url": "https://certification.enisa.europa.eu/browse-topic/eucc_en",
+      "detail": "New item on EUCC requirements / scheme page",
+      "keywords": [
+        "EUCC"
+      ]
+    },
+    {
+      "source": "EUCC Requirements",
+      "kind": "updated",
+      "title": "Since February 2025, EUCC Certificates can be issued . Certificates are issued by Certification Bodies based on an evalu…",
+      "url": "https://certification.enisa.europa.eu/browse-topic/eucc_en",
+      "detail": "New item on EUCC requirements / scheme page",
+      "keywords": [
+        "EUCC"
+      ]
+    },
+    {
+      "source": "EUCC Requirements",
+      "kind": "updated",
+      "title": "The ENISA website dedicated to certification will present EUCC certificates and other EU certificates issued under the C…",
+      "url": "https://certification.enisa.europa.eu/browse-topic/eucc_en",
+      "detail": "New item on EUCC requirements / scheme page",
+      "keywords": [
+        "EUCC",
+        "ENISA"
+      ]
+    },
+    {
+      "source": "EUCC Requirements",
+      "kind": "updated",
+      "title": "EUCC a live scheme",
+      "url": "https://certification.enisa.europa.eu/browse-topic/eucc_en",
+      "detail": "New item on EUCC requirements / scheme page",
+      "keywords": [
+        "EUCC"
+      ]
+    },
+    {
+      "source": "EUCC Requirements",
+      "kind": "updated",
+      "title": "ENISA developed a candidate scheme first in 2020, with the support of an ad hoc Working Group, and reused widely the exp…",
+      "url": "https://certification.enisa.europa.eu/browse-topic/eucc_en",
+      "detail": "New item on EUCC requirements / scheme page",
+      "keywords": [
+        "ENISA"
+      ]
+    },
+    {
+      "source": "EUCC Requirements",
+      "kind": "updated",
+      "title": "The EUCC scheme, adopted in 2024 and amended since then, is now in operation and under regular maintenance.",
+      "url": "https://certification.enisa.europa.eu/browse-topic/eucc_en",
+      "detail": "New item on EUCC requirements / scheme page",
+      "keywords": [
+        "EUCC"
+      ]
+    },
+    {
+      "source": "EUCC Requirements",
+      "kind": "updated",
+      "title": "Access EUCC Library",
+      "url": "https://certification.enisa.europa.eu/browse-topic/eucc_en",
+      "detail": "New item on EUCC requirements / scheme page",
+      "keywords": [
+        "EUCC"
+      ]
+    },
+    {
+      "source": "EUCC Requirements",
+      "kind": "updated",
+      "title": "EUCC is composed of a rich list of documents from the Implementing Act and its amendments to state-of-the-art documents…",
+      "url": "https://certification.enisa.europa.eu/browse-topic/eucc_en",
+      "detail": "New item on EUCC requirements / scheme page",
+      "keywords": [
+        "EUCC"
+      ]
+    },
+    {
+      "source": "EUCC Requirements",
+      "kind": "updated",
+      "title": "EUCC Certification scheme Documents",
+      "url": "https://certification.enisa.europa.eu/browse-topic/eucc_en",
+      "detail": "New item on EUCC requirements / scheme page",
+      "keywords": [
+        "EUCC"
+      ]
+    },
+    {
+      "source": "EUCC Requirements",
+      "kind": "updated",
+      "title": "This section displays Frequently Asked Questions on EUCC Scheme",
+      "url": "https://certification.enisa.europa.eu/browse-topic/eucc_en",
+      "detail": "New item on EUCC requirements / scheme page",
+      "keywords": [
+        "EUCC"
+      ]
+    },
+    {
+      "source": "EUCC Requirements",
+      "kind": "updated",
+      "title": "Commission Implementing Regulation (EU) 2024/482 of 31 January 2024 (EUCC Implementing Regulation) made reference to ISO…",
+      "url": "https://eur-lex.europa.eu/eli/reg_impl/2024/482/oj",
+      "detail": "New item on EUCC requirements / scheme page",
+      "keywords": [
+        "EUCC"
+      ]
+    },
+    {
+      "source": "EUCC Requirements",
+      "kind": "updated",
+      "title": "In line with the amended Articles 2 and 3 of the EUCC Implementing Regulation, the following standards shall apply to ev…",
+      "url": "https://certification.enisa.europa.eu/browse-topic/eucc_en",
+      "detail": "New item on EUCC requirements / scheme page",
+      "keywords": [
+        "EUCC"
+      ]
+    },
+    {
+      "source": "EUCC Requirements",
+      "kind": "updated",
+      "title": "Furthermore, the transition rules between the former and latest version of the above-mentioned standards were defined in…",
+      "url": "https://certification.enisa.europa.eu/browse-topic/eucc_en",
+      "detail": "New item on EUCC requirements / scheme page",
+      "keywords": [
+        "EUCC"
+      ]
+    },
+    {
+      "source": "EUCC Requirements",
+      "kind": "updated",
+      "title": "“2. Until 31 December 2027, a certificate may be issued under the EUCC scheme applying either of the following standards…",
+      "url": "https://certification.enisa.europa.eu/browse-topic/eucc_en",
+      "detail": "New item on EUCC requirements / scheme page",
+      "keywords": [
+        "EUCC"
+      ]
+    },
+    {
+      "source": "EUCC Requirements",
+      "kind": "updated",
+      "title": "3. Until 31 December 2027, a certificate applying the standards referred to in paragraph 1 may be issued under the EUCC…",
+      "url": "https://certification.enisa.europa.eu/browse-topic/eucc_en",
+      "detail": "New item on EUCC requirements / scheme page",
+      "keywords": [
+        "EUCC"
+      ]
+    },
+    {
+      "source": "EUCC Requirements",
+      "kind": "updated",
+      "title": "4. A certificate applying the standards referred to in paragraph 1 may also be issued under the EUCC scheme claiming con…",
+      "url": "https://certification.enisa.europa.eu/browse-topic/eucc_en",
+      "detail": "New item on EUCC requirements / scheme page",
+      "keywords": [
+        "EUCC"
+      ]
+    },
+    {
+      "source": "EUCC Requirements",
+      "kind": "updated",
+      "title": "A consolidated version of the EUCC Implementing Regulation that includes the amendments made to the scheme with Regulati…",
+      "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A02024R0482-20250108%20",
+      "detail": "New item on EUCC requirements / scheme page",
+      "keywords": [
+        "EUCC"
+      ]
+    },
+    {
+      "source": "EUCC Requirements",
+      "kind": "updated",
+      "title": "A presentation of the EUCC scheme review, including clarifications on the applicable standards and the transition rules,…",
+      "url": "https://certification.enisa.europa.eu/publications/eucc-amendment-presentation_en%20",
+      "detail": "New item on EUCC requirements / scheme page",
+      "keywords": [
+        "EUCC"
+      ]
+    },
+    {
+      "source": "EUCC Requirements",
+      "kind": "updated",
+      "title": "The general rule is that a new or updated version of a SotA should be applied to certification processes initiated after…",
+      "url": "https://certification.enisa.europa.eu/certification-library/eucc-certification-scheme_en#state-of-the-art-documents-for-eucc",
+      "detail": "New item on EUCC requirements / scheme page",
+      "keywords": [
+        "EUCC"
+      ]
+    },
+    {
+      "source": "EUCC Requirements",
+      "kind": "updated",
+      "title": "Pursuant to Article 9(1) of the EUCC Implementing Regulation, the certification bodies shall issue an EUCC certificate u…",
+      "url": "https://certification.enisa.europa.eu/browse-topic/eucc_en",
+      "detail": "New item on EUCC requirements / scheme page",
+      "keywords": [
+        "EUCC"
+      ]
+    },
+    {
+      "source": "EUCC Requirements",
+      "kind": "updated",
+      "title": "“1. A certification body shall be authorised by the national cybersecurity certification authority to issue EUCC certifi…",
+      "url": "https://certification.enisa.europa.eu/browse-topic/eucc_en",
+      "detail": "New item on EUCC requirements / scheme page",
+      "keywords": [
+        "EUCC"
+      ]
+    },
+    {
+      "source": "EUCC Requirements",
+      "kind": "updated",
+      "title": "Article 5(1) of the EUCC Implementing Regulation sets out the following:",
+      "url": "https://certification.enisa.europa.eu/browse-topic/eucc_en",
+      "detail": "New item on EUCC requirements / scheme page",
+      "keywords": [
+        "EUCC"
+      ]
+    },
+    {
+      "source": "EUCC Requirements",
+      "kind": "updated",
+      "title": "Therefore, the EUCC Implementing Regulation allows the following options:",
+      "url": "https://certification.enisa.europa.eu/browse-topic/eucc_en",
+      "detail": "New item on EUCC requirements / scheme page",
+      "keywords": [
+        "EUCC"
+      ]
+    },
+    {
+      "source": "EUCC Requirements",
+      "kind": "updated",
+      "title": "to develop a security target which refers to a non-EUCC certified PP, and still assess conformance to the PP into the ce…",
+      "url": "https://certification.enisa.europa.eu/browse-topic/eucc_en",
+      "detail": "New item on EUCC requirements / scheme page",
+      "keywords": [
+        "EUCC"
+      ]
+    },
+    {
+      "source": "EUCC Requirements",
+      "kind": "updated",
+      "title": "incorporating an EUCC-certified PP.",
+      "url": "https://certification.enisa.europa.eu/browse-topic/eucc_en",
+      "detail": "New item on EUCC requirements / scheme page",
+      "keywords": [
+        "EUCC"
+      ]
+    },
+    {
+      "source": "EUCC Requirements",
+      "kind": "updated",
+      "title": "In case the applicant defines the security target based on a non-EUCC certified PP (option b), the certification body (C…",
+      "url": "https://certification.enisa.europa.eu/browse-topic/eucc_en",
+      "detail": "New item on EUCC requirements / scheme page",
+      "keywords": [
+        "EUCC"
+      ]
+    },
+    {
+      "source": "EUCC Requirements",
+      "kind": "updated",
+      "title": "According to Article 7(1)(e) of the EUCC Implementing Regulation, the PPs listed in Annex II shall apply in the case the…",
+      "url": "https://certification.enisa.europa.eu/browse-topic/eucc_en",
+      "detail": "New item on EUCC requirements / scheme page",
+      "keywords": [
+        "EUCC"
+      ]
+    },
+    {
+      "source": "EUCC Requirements",
+      "kind": "updated",
+      "title": "Protection profiles listed in Annex III are recommended, as per recital (31) of the EUCC Implementing Regulation.",
+      "url": "https://certification.enisa.europa.eu/browse-topic/eucc_en",
+      "detail": "New item on EUCC requirements / scheme page",
+      "keywords": [
+        "EUCC"
+      ]
+    },
+    {
+      "source": "EUCC Requirements",
+      "kind": "updated",
+      "title": "Yes, the CCRA (non-EU) participants will recognise EUCC certificates under the conditions outlined in the following docu…",
+      "url": "https://certification.enisa.europa.eu/browse-topic/eucc_en",
+      "detail": "New item on EUCC requirements / scheme page",
+      "keywords": [
+        "EUCC"
+      ]
+    },
+    {
+      "source": "EUCC Requirements",
+      "kind": "updated",
+      "title": "https://www.commoncriteriaportal.org/files/supdocs/CCMC-011-v1.0-2025-Mar-19-CCRA%20and%20EUCC%20Co-existence.pdf .",
+      "url": "https://www.commoncriteriaportal.org/files/supdocs/CCMC-011-v1.0-2025-Mar-19-CCRA%20and%20EUCC%20Co-existence.pdf",
+      "detail": "New item on EUCC requirements / scheme page",
+      "keywords": [
+        "EUCC"
+      ]
+    },
+    {
+      "source": "EUCC Requirements",
+      "kind": "updated",
+      "title": "EUCC certificates emitted by a European public Certification Body (CB) that is also a CCRA authorising participant will…",
+      "url": "https://certification.enisa.europa.eu/browse-topic/eucc_en",
+      "detail": "New item on EUCC requirements / scheme page",
+      "keywords": [
+        "EUCC"
+      ]
+    },
+    {
+      "source": "EUCC Requirements",
+      "kind": "updated",
+      "title": "EUCC certificates emitted by a private/ commercial CB shall meet additional requirements related to per-certificate over…",
+      "url": "https://certification.enisa.europa.eu#_ftn1",
+      "detail": "New item on EUCC requirements / scheme page",
+      "keywords": [
+        "EUCC"
+      ]
+    },
+    {
+      "source": "EUCC Requirements",
+      "kind": "updated",
+      "title": "While mutual recognition has not yet been established, this voluntary approach enables EU Member States active in the CC…",
+      "url": "https://certification.enisa.europa.eu/browse-topic/eucc_en",
+      "detail": "New item on EUCC requirements / scheme page",
+      "keywords": [
+        "EUCC"
+      ]
+    },
+    {
+      "source": "EUCC Requirements",
+      "kind": "updated",
+      "title": "[1] The trusted public-private certification model deployed by the Netherlands can be used as a reference. See further i…",
+      "url": "https://certification.enisa.europa.eu#_ftnref1",
+      "detail": "New item on EUCC requirements / scheme page",
+      "keywords": [
+        "EUCC"
+      ]
+    },
+    {
+      "source": "EUCC Certificates",
+      "kind": "new_cert",
+      "title": "ENISA, the European Union Agency for Cybersecurity is in charge of publishing European cybersecurity certificates.",
+      "url": "https://certification.enisa.europa.eu/certificates_en",
+      "detail": "New EUCC certified product",
+      "keywords": [
+        "ENISA"
+      ]
+    }
+  ]
+}

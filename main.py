@@ -120,11 +120,13 @@ def _empty_snapshot() -> dict:
         "csfc":      {"pages": {}, "capability_package_headers": {}, "feeds": {}},
         "cc_crypto": {"pages": {}, "doc_headers": {}},
         "nist":      {"pages": {}, "doc_headers": {}, "feeds": {}},
+        "nato":      {"pages": {}, "cisco_added": [], "cisco_removed": []},
+        "eucc":      {"pages": {}, "cisco_added": [], "cisco_removed": []},
     }
 
 
 # ── Run modes ─────────────────────────────────────────────────────────────────
-def run_daily() -> None:
+def run_daily(output_dir: str = None) -> None:
     """Collect, diff, dashboard, alert (Webex + immediate email on alerts)."""
     _setup_logging()
     collector, differ, dashboard, emailer = _imports()
@@ -188,7 +190,7 @@ def run_daily() -> None:
     _rotate_old_files()
 
     # 5. Render dashboard (HTML + RSS)
-    dashboard.render_dashboard(diff)
+    dashboard.render_dashboard(diff, output_dir=output_dir or config.DASHBOARD_DIR)
 
     # 6. Fire alerts if keyword matches found (Webex + webhook + immediate email, fix #5)
     alerts = diff.get("alerts", [])
@@ -201,12 +203,44 @@ def run_daily() -> None:
     else:
         log.info("No keyword alerts.")
 
-    # 7. Cisco NDcPP PCL celebration — fires separately from keyword alerts
+    # 7. New NIAP TDs — post to Webex for every new TD, regardless of keyword matches
+    new_tds = diff.get("niap", {}).get("tds", {}).get("added", [])
+    if new_tds:
+        log.info("%d new NIAP TD(s) — sending Webex notification...", len(new_tds))
+        emailer.send_new_tds_webex(new_tds)
+
+    # 8. Cisco NDcPP PCL celebration — fires separately from keyword alerts
     new_cisco_certs = diff.get("niap", {}).get("cisco_ndcpp", {}).get("added", [])
     if new_cisco_certs:
         log.info("%d new Cisco NDcPP certification(s) — sending celebration...", len(new_cisco_certs))
         emailer.send_cisco_cert_celebration(new_cisco_certs)
         emailer.send_cisco_cert_email(new_cisco_certs)
+
+
+    # 8. Cisco CSfC APL alert — check keyword alerts tagged to CSfC containing Cisco
+    new_cisco_csfc_alerts = [
+        a for a in diff.get("alerts", [])
+        if "CSfC" in a.get("source", "") and
+           any(kw in a.get("title", "").lower() for kw in config.CISCO_VENDOR_KEYWORDS)
+    ]
+    if new_cisco_csfc_alerts:
+        log.info("%d new Cisco CSfC alert(s) — sending celebration...", len(new_cisco_csfc_alerts))
+        emailer.send_cisco_cert_celebration(new_cisco_csfc_alerts)
+        emailer.send_cisco_cert_email(new_cisco_csfc_alerts)
+
+    # 9. Cisco NATO NIAPCL celebration
+    new_cisco_nato = diff.get("nato", {}).get("cisco_added", [])
+    if new_cisco_nato:
+        log.info("%d new Cisco NATO NIAPCL listing(s) — sending celebration...", len(new_cisco_nato))
+        emailer.send_cisco_cert_celebration(new_cisco_nato)
+        emailer.send_cisco_cert_email(new_cisco_nato)
+
+    # 10. Cisco EUCC celebration
+    new_cisco_eucc = diff.get("eucc", {}).get("cisco_added", [])
+    if new_cisco_eucc:
+        log.info("%d new Cisco EUCC certification(s) — sending celebration...", len(new_cisco_eucc))
+        emailer.send_cisco_cert_celebration(new_cisco_eucc)
+        emailer.send_cisco_cert_email(new_cisco_eucc)
 
     log.info("Daily run complete.")
 
@@ -261,7 +295,7 @@ def run_bootstrap() -> None:
 
 
 # ── Entry point ───────────────────────────────────────────────────────────────
-def run_redash() -> None:
+def run_redash(output_dir: str = None) -> None:
     """Re-render the dashboard HTML from the latest stored diff file.
 
     This is useful when the dashboard template has changed but no new diff
@@ -269,6 +303,10 @@ def run_redash() -> None:
     new data).  It loads the most recent diff from snapshots/diffs/ and
     passes it through dashboard.render_dashboard() without touching the
     collector or differ.
+
+    Args:
+        output_dir: Directory to write the dashboard HTML to.  Defaults to
+            ``config.DASHBOARD_DIR`` (the production output directory).
     """
     _imports()
     import dashboard as dash_mod
@@ -280,11 +318,12 @@ def run_redash() -> None:
         log.error("No diff files found in %s -- run daily mode first.", config.DIFF_DIR)
         sys.exit(1)
 
+    dest = output_dir or config.DASHBOARD_DIR
     latest = diffs[-1]
     log.info("[Redash] Loading diff from %s", latest)
     diff = _load_json(latest)
-    dash_mod.render_dashboard(diff, output_dir=config.DASHBOARD_DIR)
-    log.info("[Redash] Dashboard re-rendered from %s", latest)
+    dash_mod.render_dashboard(diff, output_dir=dest)
+    log.info("[Redash] Dashboard re-rendered to %s from %s", dest, latest)
 
 
 def main() -> None:
@@ -302,13 +341,29 @@ def main() -> None:
         help="Collect initial snapshot only (no diff)",
     )
     parser.add_argument(
+        "--readme",
+        action="store_true",
+        help="Post the pinned README/info message to Webex (then pin it manually)",
+    )
+    parser.add_argument(
         "--redash",
         action="store_true",
         help="Re-render dashboard from the latest stored diff (no collection)",
     )
+    parser.add_argument(
+        "--staging",
+        action="store_true",
+        help="Re-render dashboard from the latest stored diff into docs/staging/ (private test dashboard)",
+    )
     args = parser.parse_args()
 
-    if args.redash:
+    if args.readme:
+        _setup_logging()
+        _, _, _, emailer = _imports()
+        emailer.send_readme_message()
+    elif args.staging:
+        run_redash(output_dir=config.STAGING_DIR)
+    elif args.redash:
         run_redash()
     elif args.bootstrap:
         run_bootstrap()

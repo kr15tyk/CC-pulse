@@ -10,7 +10,7 @@ Features:
   - CSfC CP entries show content-length change when dates unavailabl
   - 7-day activity sparkline per section
   - Responsive mobile layou
-  - CCTL Lab Intel: compact per-lab counts with expand
+  - CCTL Lab Intel: compact per-lab counts with expan
   - RSS feed (cc_pulse.rss) with items from all domains
   - Structured logging
 """
@@ -18,7 +18,8 @@ import glob
 import json
 import logging
 import os
-from datetime import datetime, timezone
+from datetime import datetime, timezone, timedelta
+from zoneinfo import ZoneInfo
 from xml.sax.saxutils import escape as xml_escape
 
 from jinja2 import Environment
@@ -42,6 +43,157 @@ def _load_recent_diffs(n: int = 7) -> list:
     return diffs
 
 
+
+def _build_history(n: int = 90) -> list:
+    """Scan the last N days of diffs and extract curated history entries.
+
+    Each entry is a dict with:
+      date      - YYYY-MM-DD string
+      category  - one of: cisco_cert, cisco_archived, pp_new, pp_removed,
+                          td_new, nato_cisco, eucc_cisco, in_eval_new,
+                          in_eval_removed, csfc_change, nist_doc, pcl_cert
+      kind      - 'new' | 'removed' | 'updated'
+      title     - human-readable one-liner
+      detail    - optional sub-text (lab, PPs, etc.)
+      url       - optional link
+    Returned sorted newest-first.
+    """
+    pattern = os.path.join("snapshots", "diffs", "*_diff.json")
+    paths = sorted(glob.glob(pattern))[-n:]
+    entries = []
+
+    for p in paths:
+        try:
+            with open(p, encoding="utf-8") as fh:
+                d = json.load(fh)
+        except Exception:
+            continue
+        date = (d.get("period_end") or "")[:10]
+        if not date:
+            continue
+        niap = d.get("niap", {})
+
+        # Cisco NDcPP new certifications
+        for item in niap.get("cisco_ndcpp", {}).get("added", []):
+            name = item.get("product_name") or item.get("name") or "Unknown product"
+            vendor = item.get("vendor_id_name") or "Cisco"
+            cert_date = (item.get("certification_date") or "")[:10]
+            lab = item.get("assigned_lab_name") or ""
+            pps = ", ".join(
+                pp.get("pp_short_name", "") for pp in item.get("protection_profiles") or []
+            )
+            pid = item.get("product_id") or item.get("v_id") or ""
+            url = f"https://www.niap-ccevs.org/product/index.cfm?pid={pid}" if pid else "https://www.niap-ccevs.org/"
+            entries.append({
+                "date": date, "category": "cisco_cert", "kind": "new",
+                "title": f"{vendor} — {name}",
+                "detail": f"Certified {cert_date} · {lab}{(' · ' + pps) if pps else ''}",
+                "url": url,
+            })
+
+        # Cisco NDcPP newly archived
+        for item in niap.get("cisco_ndcpp", {}).get("newly_archived", []):
+            name = item.get("product_name") or "Unknown product"
+            entries.append({
+                "date": date, "category": "cisco_archived", "kind": "removed",
+                "title": f"Archived: {name}",
+                "detail": "",
+                "url": "https://www.niap-ccevs.org/",
+            })
+
+        # New Protection Profiles
+        for pp in niap.get("pps", {}).get("added", []):
+            entries.append({
+                "date": date, "category": "pp_new", "kind": "new",
+                "title": f"New PP: {pp.get('pp_short_name') or pp.get('pp_name') or '?'}",
+                "detail": pp.get("pp_name") or "",
+                "url": f"https://www.niap-ccevs.org/Profile/PP.cfm?id={pp.get('pp_id','')}" if pp.get("pp_id") else "https://www.niap-ccevs.org/",
+            })
+
+        # Removed / sunsetted PPs
+        for pp in niap.get("pps", {}).get("removed", []):
+            entries.append({
+                "date": date, "category": "pp_removed", "kind": "removed",
+                "title": f"Removed PP: {pp.get('pp_short_name') or pp.get('pp_name') or '?'}",
+                "detail": pp.get("pp_name") or "",
+                "url": "https://www.niap-ccevs.org/",
+            })
+
+        # New Technical Decisions
+        for td in niap.get("tds", {}).get("added", []):
+            entries.append({
+                "date": date, "category": "td_new", "kind": "new",
+                "title": f"New TD: {td.get('identifier') or td.get('td_id') or '?'}",
+                "detail": td.get("pp_short_name") or td.get("title") or "",
+                "url": f"https://www.niap-ccevs.org/technical-decisions/{td.get('identifier') or td.get('td_id') or ''}",
+            })
+
+        # NATO NIAPCL Cisco additions
+        for item in d.get("nato", {}).get("cisco_added", []):
+            name = item.get("name") or item.get("raw_text", "")[:80] or "Unknown"
+            entries.append({
+                "date": date, "category": "nato_cisco", "kind": "new",
+                "title": f"NATO NIAPCL: {name}",
+                "detail": item.get("manufacturer") or "",
+                "url": item.get("link") or "https://www.ia.nato.int/",
+            })
+
+        # EUCC Cisco additions
+        for item in d.get("eucc", {}).get("cisco_added", []):
+            name = item.get("name") or item.get("text", "")[:80] or "Unknown"
+            entries.append({
+                "date": date, "category": "eucc_cisco", "kind": "new",
+                "title": f"EUCC: {name}",
+                "detail": "",
+                "url": item.get("href") or "https://certification.enisa.europa.eu/",
+            })
+
+        # NIAP PCL all-cert additions (non-Cisco, Cisco already covered above)
+        for item in niap.get("pcl_all", {}).get("added", []):
+            # Skip if already captured as Cisco NDcPP
+            vendor = (item.get("vendor_id_name") or "").lower()
+            pid = str(item.get("product_id") or "")
+            cisco_pids = {str(c.get("product_id") or "") for c in niap.get("cisco_ndcpp", {}).get("added", [])}
+            if pid in cisco_pids:
+                continue
+            name = item.get("product_name") or "Unknown"
+            cert_date = (item.get("certification_date") or "")[:10]
+            lab = item.get("assigned_lab_name") or ""
+            pps = ", ".join(
+                pp.get("pp_short_name", "") for pp in item.get("protection_profiles") or []
+            )
+            url = f"https://www.niap-ccevs.org/product/index.cfm?pid={pid}" if pid else "https://www.niap-ccevs.org/"
+            entries.append({
+                "date": date, "category": "pcl_cert", "kind": "new",
+                "title": f"{item.get('vendor_id_name') or 'Unknown'} — {name}",
+                "detail": f"Certified {cert_date}{(' · ' + lab) if lab else ''}{(' · ' + pps) if pps else ''}",
+                "url": url,
+            })
+
+        # NIST document header changes
+        for doc_name, doc_data in d.get("nist", {}).get("doc_headers", {}).items():
+            if doc_data.get("changed"):
+                entries.append({
+                    "date": date, "category": "nist_doc", "kind": "updated",
+                    "title": f"NIST doc updated: {doc_name}",
+                    "detail": "",
+                    "url": doc_data.get("url") or "https://csrc.nist.gov/",
+                })
+
+        # CSfC component selection changes
+        for sel_name, sel_data in d.get("csfc", {}).get("component_selections", {}).items():
+            if sel_data.get("changed"):
+                entries.append({
+                    "date": date, "category": "csfc_change", "kind": "updated",
+                    "title": f"CSfC Selection updated: {sel_name}",
+                    "detail": "",
+                    "url": "https://www.nsa.gov/Resources/Commercial-Solutions-for-Classified-Program/Components-List/",
+                })
+
+    # Sort newest-first
+    entries.sort(key=lambda e: e["date"], reverse=True)
+    return entries
+
 def _section_daily_counts(diffs: list, section_key: str) -> list:
     """Return per-section change counts for the last N days (for sparkline)."""
     counts = []
@@ -59,7 +211,7 @@ def _section_daily_counts(diffs: list, section_key: str) -> list:
         elif section_key == "cctl":
             n = sum(len(v) for v in d.get("cctl_labs", {}).values() if v)
         elif section_key == "csfc":
-            n = sum(1 for cp in d.get("csfc", {}).get("capability_packages", {}).values()
+            n = sum(1 for cp in d.get("csfc", {}).get("component_selections", {}).values()
                     if cp.get("changed"))
         elif section_key == "cc_crypto":
             n = sum(1 for doc in d.get("cc_crypto", {}).get("doc_headers", {}).values()
@@ -86,284 +238,309 @@ DASHBOARD_TEMPLATE = """
 <meta charset="UTF-8">
 <meta http-equiv="refresh" content="3600">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+{{ noindex_meta }}
 <title>CC Pulse Dashboard</title>
 <style>
-:root {
-  --bg:          #0B0F1A;
-  --card:        #1E1B4B;
-  --panel:       #12102E;
-  --border:      #3730A3;
-  --border-dim:  #312E81;
-  --text:        #E0E7FF;
-  --muted:       #6366F1;
-  --primary:     #3B82F6;
-  --accent:      #C026D3;
-  --neon-blue:   #60A5FA;
-  --neon-cyan:   #22D3EE;
-  --neon-pink:   #E879F9;
-  --alert-color: #FB923C;
-  --green:       #34D399;
-  --amber:       #FBBF24;
-  --red:         #F87171;
-  --font:        "Courier New", Courier, monospace;
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+  :root {
+    --bg:#f4f6f9; --nav-bg:#0d1f3e; --card:#ffffff; --card-border:#dde3ed; --panel:#edf1f7;
+    --border:#dde3ed; --text:#1a2d4e; --text-light:#4a5f7a; --muted:#6b82a0;
+    --primary:#049fd9; --primary-dark:#0376a8; --accent:#049fd9;
+    --green:#00875a; --amber:#d97706; --red:#c0392b; --alert-color:#d97706;
+    --font:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;
+    --gradient-hero:linear-gradient(135deg,#0d1f3e 0%,#0d2b5e 50%,#1a3566 100%);
+    --shadow-sm:0 1px 3px rgba(0,0,0,0.08),0 1px 2px rgba(0,0,0,0.05);
+    --shadow-md:0 4px 12px rgba(0,0,0,0.08),0 2px 4px rgba(0,0,0,0.05);
+  }
+  [data-theme="dark"]{
+    --bg:#0d1117;--nav-bg:#0a1628;--card:#161b22;--card-border:#30363d;--panel:#1f2937;
+    --border:#30363d;--text:#e6edf3;--text-light:#848d97;--muted:#6e7681;
+    --primary:#58a6ff;--primary-dark:#1f6feb;--accent:#58a6ff;
+    --green:#3fb950;--amber:#d29922;--red:#f85149;--alert-color:#d29922;
+    --shadow-sm:0 1px 3px rgba(0,0,0,.3),0 1px 2px rgba(0,0,0,.2);
+    --shadow-md:0 4px 12px rgba(0,0,0,.4),0 2px 4px rgba(0,0,0,.3)
+  }
+  .ham-btn{background:none;border:1px solid rgba(255,255,255,.2);color:rgba(255,255,255,.8);border-radius:6px;padding:4px 10px;font-size:1.05rem;cursor:pointer;font-family:var(--font);transition:all .2s;line-height:1.2;letter-spacing:1px}
+  .ham-btn:hover,.ham-btn[aria-expanded="true"]{background:rgba(255,255,255,.12);color:#fff;border-color:rgba(255,255,255,.5)}
+  .ham-menu{display:none;position:absolute;top:calc(100% + 6px);right:0;background:var(--card);border:1px solid var(--border);border-radius:10px;box-shadow:var(--shadow-md);min-width:200px;z-index:500;overflow:hidden;flex-direction:column}
+  .ham-menu.open{display:flex}
+  .ham-item{display:flex;align-items:center;gap:.65rem;padding:.6rem 1rem;font-size:.82rem;color:var(--text);text-decoration:none;background:none;border:none;width:100%;text-align:left;cursor:pointer;font-family:var(--font);transition:background .12s}
+  .ham-item:hover{background:var(--panel)}
+  .ham-item .ham-icon{font-size:.95rem;width:1.2rem;text-align:center;flex-shrink:0}
+  .ham-item.ham-divider{border-top:1px solid var(--border);margin-top:.25rem;padding-top:.6rem}
+  .ham-item.ham-disabled{opacity:.45;cursor:not-allowed;pointer-events:none}
+  .ham-wrap{position:relative;display:flex;align-items:center;gap:.75rem}
+  .sources-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:9000;align-items:flex-start;justify-content:center;padding-top:5vh}
+  .sources-overlay.open{display:flex}
+  .sources-modal{background:var(--card);border:1px solid var(--border);border-radius:12px;box-shadow:var(--shadow-md);width:min(820px,95vw);max-height:85vh;overflow:hidden;display:flex;flex-direction:column}
+  .sources-modal-hdr{display:flex;align-items:center;justify-content:space-between;padding:.85rem 1.25rem;border-bottom:1px solid var(--border);background:var(--primary);border-radius:12px 12px 0 0}
+  .sources-modal-hdr h2{font-size:1rem;color:#fff;margin:0}
+  .sources-close{background:none;border:none;color:rgba(255,255,255,.8);font-size:1.2rem;cursor:pointer;padding:0 4px;line-height:1;transition:color .15s}
+  .sources-close:hover{color:#fff}
+  .sources-modal-body{overflow-y:auto;padding:1.25rem;display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:1rem}
+  .sources-group{border:1px solid var(--border);border-radius:8px;padding:.75rem 1rem;background:var(--bg)}
+  .sources-group-title{font-size:.8rem;font-weight:700;color:var(--primary);text-transform:uppercase;letter-spacing:.04em;margin-bottom:.5rem}
+  .sources-item{font-size:.78rem;color:var(--text);padding:.25rem 0;border-top:1px solid var(--border);display:flex;gap:.4rem;align-items:baseline;line-height:1.4}
+  .sources-item:first-of-type{border-top:none}
+  .sources-item a{color:var(--primary);text-decoration:none;word-break:break-word}
+  .sources-item a:hover{text-decoration:underline}
+  .sources-item .src-label{font-weight:600;min-width:0;flex-shrink:0}
+  .dark-toggle{background:none;border:1px solid rgba(255,255,255,.2);color:rgba(255,255,255,.7);border-radius:6px;padding:3px 10px;font-size:.75rem;cursor:pointer;font-family:var(--font);transition:all .2s;margin-left:.5rem}
+  .dark-toggle:hover{background:rgba(255,255,255,.1);color:#fff}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--text);font-family:var(--font);font-size:14px;line-height:1.6}
+  a{color:var(--primary);text-decoration:none} a:hover{color:var(--primary-dark);text-decoration:underline}
+  .site-nav{background:var(--nav-bg);padding:0 1.5rem;display:flex;align-items:center;gap:1rem;height:44px;position:sticky;top:0;z-index:200;box-shadow:0 1px 4px rgba(0,0,0,0.2)}
+  .nav-title{font-size:1.25rem;font-weight:700;letter-spacing:.04em;
+    background:linear-gradient(90deg,#7dd3fc 0%,#38bdf8 30%,#0ea5e9 60%,#2563eb 100%);
+    -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+    background-clip:text;text-fill-color:transparent;
+    font-family:inherit;white-space:nowrap;line-height:1}
+  .nav-spacer{flex:1} .nav-meta{font-size:.75rem;color:rgba(255,255,255,0.55)}
+  .sticky-top{position:sticky;top:32px;z-index:100;background:var(--card);border-bottom:1px solid var(--border);padding:.75rem 2rem;box-shadow:var(--shadow-sm)}
+  .trend-bar{display:flex;flex-wrap:wrap;gap:.75rem}
+  .stat{background:var(--card);border:1px solid var(--card-border);border-radius:8px;padding:.75rem 1.25rem;min-width:80px;flex:1;transition:border-color .2s,box-shadow .2s;box-shadow:var(--shadow-sm)}
+  .stat:hover{border-color:var(--primary);box-shadow:0 4px 12px rgba(4,159,217,.12)}
+  .stat a{color:inherit;text-decoration:none;display:block}
+  .stat-num{font-size:1.8rem;font-weight:700;color:#b0bec5;line-height:1;margin-bottom:.2rem}
+  .stat-num.active-num{color:var(--primary)} .stat-num.alert-num{color:var(--alert-color)}
+  .stat.has-data{border-color:rgba(4,159,217,.3)} .stat.has-alert{border-color:rgba(217,119,6,.3)}
+  .stat.no-data{opacity:.45;transform:scale(.97)}
+  .stat-lbl,.stat-label{font-size:.68rem;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;font-weight:600}
+  .main-content{max-width:1200px;margin:0 auto;padding:2rem}
+  .alert-banner{background:rgba(217,119,6,.06);border:1px solid rgba(217,119,6,.3);border-radius:8px;padding:.75rem 1.1rem;margin-bottom:1.5rem;font-weight:600;color:var(--alert-color);font-size:.875rem}
+  .alert-banner::before{content:"⚠ "}
+  .ctrl-bar{font-size:.75rem;color:var(--muted);margin-bottom:1rem;display:flex;gap:.6rem;align-items:center;flex-wrap:wrap}
+  .ctrl-btn{background:var(--card);border:1px solid var(--border);color:var(--text-light);font-family:var(--font);font-size:.72rem;padding:4px 12px;cursor:pointer;border-radius:6px;transition:all .15s;font-weight:500}
+  .ctrl-btn:hover{border-color:var(--primary);color:var(--primary);background:rgba(4,159,217,.05)}
+  .mark-all-btn{font-size:.7rem;padding:3px 8px;margin-left:.5rem;background:rgba(217,119,6,.1);border-color:rgba(217,119,6,.4);color:#d97706;cursor:pointer;position:relative;z-index:2}
+  .mark-all-btn:hover{background:rgba(217,119,6,.2)}
+  .ctrl-hint{font-size:.65rem;color:var(--muted);opacity:.6;position:relative}
+  .keys-tooltip{display:none;position:absolute;top:calc(100% + 6px);right:0;background:var(--card);border:1px solid var(--border);border-radius:8px;padding:.75rem 1rem;font-size:.75rem;white-space:nowrap;z-index:200;box-shadow:var(--shadow-md);min-width:200px}
+  .keys-tooltip.visible{display:block}
+  .keys-tooltip table{border-collapse:collapse}
+  .keys-tooltip td{padding:.2rem .5rem;color:var(--text)}
+  .keys-tooltip td:first-child{text-align:right}
+  kbd{background:var(--panel);border:1px solid var(--border);border-radius:3px;padding:.1rem .35rem;font-size:.7rem;font-family:monospace;color:var(--text)}
+    mark.sh{background:rgba(217,119,6,.2);color:var(--text);border-radius:2px;padding:0 2px}
+  .search-hidden{display:none!important} .no-results-msg{color:var(--muted);font-size:.8rem;padding:.5rem 0;display:none;font-style:italic}
+  .section-group{margin-bottom:2rem}
+  .section-label{font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.15em;color:var(--primary);padding:0 0 .6rem 0;border-bottom:2px solid var(--border);margin-bottom:.75rem;display:flex;align-items:center;gap:.5rem}
+  .section-label::before{content:'';display:inline-block;width:3px;height:13px;background:var(--primary);border-radius:2px}
+  .section-group .card{margin-bottom:.6rem}
+  .card{background:var(--card);border:1px solid var(--border);border-radius:10px;overflow:hidden;box-shadow:var(--shadow-sm);transition:box-shadow .2s,border-color .2s}
+  .card:hover{box-shadow:var(--shadow-md)}
+  .card-new{border-left:3px solid var(--green)} .card-updated{border-left:3px solid var(--primary)} .card-alert{border-left:3px solid var(--alert-color)}
+  .card-hdr{display:flex;align-items:center;gap:.75rem;padding:.85rem 1.25rem;cursor:pointer;user-select:none;transition:background .15s}
+  .card-hdr:hover{background:var(--panel)} .card-hdr>span:first-child{font-weight:600;flex:1;color:var(--text);font-size:.9rem}
+  .card-count{font-size:.68rem;color:var(--muted);background:var(--panel);padding:2px 9px;border-radius:100px;border:1px solid var(--border);font-weight:600}
+  .toggle-icon{font-size:.6rem;color:var(--muted);margin-left:4px}
+  .card-body{padding:1rem 1.25rem;border-top:1px solid var(--border)} .card-body.collapsed{display:none}
+  .sub-hdr{font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;padding:.5rem 0 .3rem;margin-top:.25rem}
+  .sub-new{color:var(--green)} .sub-removed{color:var(--red)} .sub-updated{color:var(--primary)}
+  .item-row{display:flex;justify-content:space-between;align-items:baseline;gap:.5rem;padding:5px 0;border-bottom:1px solid var(--border)} .item-row:last-child{border-bottom:none}
+  .item-link{color:var(--primary);flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:.85rem}
+  .item-link::before{content:"→ ";color:var(--muted);font-size:.75rem}
+  .item-meta{font-size:.7rem;color:var(--muted);white-space:nowrap;flex-shrink:0}
+  .item-sub{font-size:.72rem;color:var(--muted);padding:1px 0 4px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding-left:1.4em}
+  .no-change{color:var(--muted);font-size:.8rem;padding:.5rem 0;font-style:italic}
+  .alert-item .item-link{color:var(--alert-color)} .alert-item .item-link::before{content:"⚡ ";color:var(--alert-color)} .alert-item .item-meta{color:var(--alert-color);opacity:.85}
+  .alert-dismissed{opacity:.3} .alert-dismissed .item-link{text-decoration:line-through}
+  .dismiss-btn{background:none;border:1px solid var(--border);color:var(--muted);font-family:var(--font);font-size:.62rem;padding:2px 7px;cursor:pointer;margin-left:auto;white-space:nowrap;border-radius:4px;transition:all .15s}
+  .dismiss-btn:hover{border-color:var(--primary);color:var(--primary)} .dismiss-btn.seen{border-color:var(--primary);color:var(--primary)}
+  .alert-monitoring{font-size:.65rem;color:var(--muted);margin-bottom:.75rem;padding-bottom:.5rem;border-bottom:1px solid var(--border);word-break:break-word}
+  .alert-monitoring::before{content:"Monitoring: ";font-weight:700;color:var(--text-light)}
+  .lab-row{margin-bottom:.5rem} .lab-hdr{display:flex;align-items:center;gap:.5rem;padding:5px 0;cursor:pointer;transition:color .15s} .lab-hdr:hover{color:var(--primary)}
+  .lab-name{font-weight:600;flex:1;font-size:.85rem} .lab-cnt{font-size:.7rem;color:var(--muted)} .lab-body{padding-left:.75rem} .lab-body.collapsed{display:none}
+  .cp-row{padding:6px 0;border-bottom:1px solid var(--border)} .cp-row:last-child{border-bottom:none} .cp-name{color:var(--primary);font-weight:600}
+  .cp-meta{font-size:.7rem;color:var(--muted);margin-top:2px} .cp-detail{font-size:.72rem;color:var(--muted)} .cp-date{font-size:.7rem}
+  .new-badge{display:inline-block;background:#00875a;color:#fff;font-size:.55rem;font-weight:700;padding:1px 5px;border-radius:3px;margin-right:.35rem;letter-spacing:.04em;vertical-align:middle;animation:newGlow 2s ease-in-out infinite}
+  @keyframes newGlow{0%,100%{box-shadow:0 0 4px rgba(0,135,90,.5)}50%{box-shadow:0 0 10px rgba(0,135,90,.9)}}
+  .last-active{font-size:.65rem;color:var(--muted);opacity:.6;margin-left:.4rem} .card.zero-hidden{display:none}
+  footer,.site-footer{margin-top:3rem;padding:1.5rem 2rem;border-top:1px solid var(--border);font-size:.75rem;color:var(--muted);display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap;background:var(--card)}
+  @media(max-width:768px){
+  .main-content{padding:1rem}
+  .sticky-top{padding:.5rem 1rem;top:0}
+  .site-nav{padding:0 1rem;gap:.5rem}
+  .trend-bar{display:grid;grid-template-columns:repeat(2,1fr);gap:.5rem}
+  .stat{min-width:unset}
+  .ctrl-bar{flex-wrap:wrap;gap:.5rem}
+  .tab-btn{font-size:.75rem;padding:.35rem .6rem}
+  .tab-badge{display:inline-flex;align-items:center;justify-content:center;background:#e55;color:#fff;border-radius:10px;font-size:.6rem;font-weight:700;min-width:16px;height:16px;padding:0 4px;margin-left:.3rem;vertical-align:middle}
 }
-* { box-sizing: border-box; margin: 0; padding: 0; }
-body { background: var(--bg); color: var(--text); font-family: var(--font); font-size: 13px; padding: 1rem; line-height: 1.5; }
-a { color: var(--neon-blue); text-decoration: none; }
-a:hover { color: var(--neon-cyan); text-decoration: underline; }
-
-/* Sticky top bar */
-.sticky-top { position: sticky; top: 0; z-index: 100; background: var(--bg); padding-bottom: 0.5rem; border-bottom: 1px solid var(--border-dim); margin-bottom: 1rem; }
-/* Header */
-.site-header { display: flex; justify-content: space-between; align-items: center; padding: 0.5rem 0 0.3rem; flex-wrap: wrap; gap: 0.5rem; }
-.site-title { font-size: 1.4rem; font-weight: 700; color: var(--neon-blue); letter-spacing: 0.08em; text-shadow: 0 0 12px rgba(96,165,250,0.7), 0 0 24px rgba(96,165,250,0.35); }
-.site-title::before { content: "// "; color: var(--muted); }
-.site-title::after { content: ""; }
-@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
-.site-meta { font-size: 0.75rem; color: var(--muted); }
-
-/* Alert banner */
-.alert-banner { background: rgba(192,38,211,0.08); border: 1px solid var(--accent); padding: 0.6rem 1rem; margin-bottom: 1rem; font-weight: 700; color: var(--alert-color); font-family: var(--font); }
-.alert-banner::before { content: "[!] "; }
-
-/* Trend bar */
-.trend-bar { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.5rem; }
-.stat { background: var(--panel); border: 1px solid var(--border-dim); padding: 0.75rem 1rem; min-width: 120px; flex: 1; box-shadow: inset 0 0 20px rgba(79,70,229,0.15); }
-.stat a { color: inherit; text-decoration: none; display: block; }
-.stat a:hover .stat-num { color: var(--neon-cyan); }
-.stat-num { font-size: 1.6rem; font-weight: 700; color: var(--muted); font-family: var(--font); }
-.stat-num.active, .stat-num.active-num { color: var(--neon-blue); text-shadow: 0 0 8px rgba(96,165,250,0.6); }
-.stat-num.alert,  .stat-num.alert-num  { color: var(--alert-color); text-shadow: 0 0 8px rgba(251,146,60,0.6); }
-.stat.has-data { border-color: var(--primary); box-shadow: inset 0 0 20px rgba(59,130,246,0.12); }
-.stat.has-alert { border-color: var(--accent); box-shadow: inset 0 0 20px rgba(192,38,211,0.15); }
-.stat-label { font-size: 0.6rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.12em; margin-top: 2px; }
-
-/* Sparkline */
-.sparkline { display: inline-flex; align-items: flex-end; gap: 2px; height: 14px; margin-right: 6px; vertical-align: middle; }
-.sparkline span { display: inline-block; width: 4px; background: var(--border-dim); }
-
-/* Section groups */
-.section-group { margin-bottom: 1.5rem; }
-.section-label { font-size: 0.6rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.15em; color: var(--muted); padding: 0.25rem 0 0.5rem 0.25rem; border-bottom: 1px solid var(--border-dim); margin-bottom: 0.5rem; }
-.section-label::before { content: ""; }
-.section-label::after  { content: ""; }
-.section-group .card { margin-bottom: 0.5rem; }
-
-/* Cards */
-.card { background: var(--card); border: 1px solid var(--border-dim); overflow: hidden; box-shadow: inset 0 0 20px rgba(79,70,229,0.15); }
-.card-new     { border-left: 3px solid var(--neon-cyan); box-shadow: inset 0 0 20px rgba(34,211,238,0.08); }
-.card-updated { border-left: 3px solid var(--primary); box-shadow: inset 0 0 20px rgba(59,130,246,0.1); }
-.card-alert   { border-left: 3px solid var(--accent); box-shadow: inset 0 0 20px rgba(192,38,211,0.12); }
-.card-hdr { display: flex; align-items: center; gap: 0.5rem; padding: 0.6rem 1rem; cursor: pointer; user-select: none; }
-.card-hdr:hover { background: rgba(59,130,246,0.07); }
-.card-hdr > span:first-child { font-weight: 700; flex: 1; color: var(--text); }
-.card-count { font-size: 0.7rem; color: var(--muted); background: rgba(99,102,241,0.15); padding: 2px 6px; font-family: var(--font); }
-.toggle-icon { font-size: 0.6rem; color: var(--muted); margin-left: 4px; }
-.card-body { padding: 0.75rem 1rem; border-top: 1px solid var(--border-dim); }
-.card-body.collapsed { display: none; }
-
-/* Item rows */
-.item-row { display: flex; justify-content: space-between; align-items: baseline; gap: 0.5rem; padding: 4px 0; border-bottom: 1px solid rgba(55,48,163,0.4); }
-.item-row:last-child { border-bottom: none; }
-.item-link { color: var(--neon-blue); flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.item-link::before { content: "âº "; color: var(--muted); }
-.item-meta { font-size: 0.7rem; color: var(--muted); white-space: nowrap; flex-shrink: 0; }
-.no-change { color: var(--muted); font-size: 0.8rem; padding: 0.25rem 0; }
-.no-change::before { content: "â "; }
-.item-sub { font-size: 0.72rem; color: var(--muted); padding: 1px 0 4px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; padding-left: 1.4em; }
-
-/* Alert item rows */
-.alert-item .item-link { color: var(--alert-color); }
-.alert-item .item-link::before { content: "â¡ "; color: var(--alert-color); }
-.alert-item .item-meta { color: var(--alert-color); opacity: 0.85; }
-.alert-dismissed { opacity: 0.3; }
-.alert-dismissed .item-link { text-decoration: line-through; }
-.dismiss-btn { background: none; border: 1px solid var(--muted); color: var(--muted); font-family: var(--font); font-size: 0.62rem; padding: 1px 5px; cursor: pointer; margin-left: auto; white-space: nowrap; }
-.dismiss-btn:hover { border-color: var(--neon-cyan); color: var(--neon-cyan); }
-.dismiss-btn.seen { border-color: var(--neon-cyan); color: var(--neon-cyan); }
-.alert-monitoring { font-size: 0.62rem; color: var(--muted); margin-bottom: 0.5rem; padding-bottom: 0.4rem; border-bottom: 1px solid rgba(55,48,163,0.3); word-break: break-word; }
-.alert-monitoring::before { content: "Monitoring: "; color: var(--muted); }
-
-/* CCTL lab rows */
-.lab-row { margin-bottom: 0.5rem; }
-.lab-hdr { display: flex; align-items: center; gap: 0.5rem; padding: 4px 0; cursor: pointer; }
-.lab-hdr:hover { color: var(--neon-cyan); }
-.lab-name { font-weight: 700; flex: 1; }
-.lab-cnt { font-size: 0.7rem; color: var(--muted); }
-.lab-body { padding-left: 0.75rem; }
-.lab-body.collapsed { display: none; }
-
-/* CSfC CP detail */
-.cp-row { padding: 4px 0; border-bottom: 1px solid rgba(55,48,163,0.3); }
-.cp-row:last-child { border-bottom: none; }
-.cp-name { color: var(--neon-blue); font-weight: 700; }
-.cp-meta { font-size: 0.7rem; color: var(--muted); margin-top: 2px; }
-
-/* Toggle controls */
-.ctrl-bar { font-size: 0.72rem; color: var(--muted); margin-bottom: 1rem; display: flex; gap: 1rem; align-items: center; }
-.ctrl-btn { background: none; border: 1px solid var(--border-dim); color: var(--muted); font-family: var(--font); font-size: 0.72rem; padding: 2px 8px; cursor: pointer; }
-.ctrl-btn:hover { border-color: var(--neon-cyan); color: var(--neon-cyan); }
-.ctrl-hint { font-size: 0.65rem; color: var(--muted); opacity: 0.6; }
-/* Last-active label */
-.last-active { font-size: 0.65rem; color: var(--muted); opacity: 0.7; margin-left: 0.5rem; }
-/* Card hidden when zero-filter is on */
-.card.zero-hidden { display: none; }
-/* Footer */
-.site-footer { margin-top: 2rem; padding-top: 0.75rem; border-top: 1px solid var(--border-dim); font-size: 0.72rem; color: var(--muted); text-align: center; }
-
-/* Source Health summary */
-.source-health {
-  background: var(--panel);
-  border: 1px solid var(--border-dim);
-  padding: 0.75rem 1rem;
-  margin-bottom: 1.5rem;
-  box-shadow: inset 0 0 20px rgba(79,70,229,0.15);
+@media(max-width:400px){
+  .trend-bar{grid-template-columns:repeat(2,1fr)}
 }
-.sh-title {
-  font-size: 0.6rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.15em;
-  color: var(--muted);
-  margin-bottom: 0.5rem;
-}
-.sh-title::before { content: ""; }
-.sh-title::after  { content: ""; }
-.sh-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 3px 0;
-  border-bottom: 1px solid rgba(55,48,163,0.3);
-}
-.sh-row:last-of-type { border-bottom: none; }
-.sh-source { font-size: 0.78rem; color: var(--text); }
-.sh-source::before { content: ""; }
-.sh-badge {
-  font-size: 0.68rem;
-  padding: 2px 8px;
-  font-weight: 700;
-  font-family: var(--font);
-}
-.sh-ok    { color: var(--neon-cyan); }
-.sh-idle  { color: var(--muted); }
-.sh-alert { color: var(--alert-color); }
-.sh-footer {
-  font-size: 0.7rem;
-  color: var(--muted);
-  margin-top: 0.5rem;
-  padding-top: 0.25rem;
-  border-top: 1px solid rgba(55,48,163,0.3);
-}
+/* ── Regional tab navigation ── */
+        .tab-nav{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:1.5rem;border-bottom:2px solid var(--border);padding-bottom:.5rem}
+        .tab-btn{background:none;border:1px solid var(--border);color:var(--text-light);font-family:var(--font);font-size:.8rem;padding:6px 16px;cursor:pointer;border-radius:8px 8px 0 0;transition:all .2s;font-weight:500;margin-bottom:-2px}
+        .tab-btn:hover{border-color:var(--primary);color:var(--primary);background:rgba(4,159,217,.05)}
+        .tab-btn.active{border-color:var(--primary);color:var(--primary);background:rgba(4,159,217,.08);border-bottom:2px solid var(--bg)}
+        .section-group[data-tab]{display:none}
+        .section-group[data-tab].tab-active{display:block}
+        /* US sections don't have data-tab — they are always shown when tab-us is active */
+        .tab-us-hidden{display:none}
 
-@media (max-width: 600px) {
-  .trend-bar { flex-direction: column; }
-  .stat { min-width: unset; }
-}
-
-/* search-filter */
-.search-row{display:flex;gap:.6rem;align-items:center;flex-wrap:wrap;margin-top:.5rem;margin-bottom:.5rem}.search-input{flex:1;min-width:180px;max-width:340px;background:var(--panel);border:1px solid var(--border-dim);color:var(--text);font-family:var(--font);font-size:.72rem;padding:3px 8px;outline:none}.search-input:focus{border-color:var(--neon-cyan)}.search-input::placeholder{color:var(--muted);opacity:.6}.search-clear{background:none;border:none;color:var(--muted);font-family:var(--font);font-size:.8rem;cursor:pointer;padding:0 4px;line-height:1}.search-clear:hover{color:var(--neon-cyan)}.filter-chips{display:flex;gap:.35rem;flex-wrap:wrap;align-items:center}.chip{background:none;border:1px solid var(--border-dim);color:var(--muted);font-family:var(--font);font-size:.65rem;padding:2px 7px;cursor:pointer;white-space:nowrap}.chip:hover{border-color:var(--neon-cyan);color:var(--neon-cyan)}.chip.active{border-color:var(--primary);color:var(--primary);background:rgba(59,130,246,.12)}.chip.chip-alert.active{border-color:var(--alert-color);color:var(--alert-color);background:rgba(251,146,60,.12)}.search-count{font-size:.65rem;color:var(--muted);opacity:.7;white-space:nowrap}mark.sh{background:rgba(251,146,60,.35);color:var(--text);border-radius:2px;padding:0 1px}.search-hidden{display:none!important}.no-results-msg{color:var(--muted);font-size:.8rem;padding:.25rem 0;display:none}.no-results-msg::before{content:"\2296 "}
+/* ── History timeline ── */
+.timeline{display:flex;flex-direction:column;gap:0}
+.tl-entry{display:grid;grid-template-columns:90px 1fr;gap:0 1.2rem;padding:.55rem 0;border-bottom:1px solid var(--border)}
+.tl-entry:last-child{border-bottom:none}
+.tl-date{font-size:.72rem;color:var(--muted);font-weight:600;padding-top:.15rem;white-space:nowrap}
+.tl-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;margin-top:.35rem}
+.tl-body{display:flex;flex-direction:column;gap:.15rem}
+.tl-title{font-size:.82rem;color:var(--text);font-weight:500}
+.tl-title a{color:var(--primary);text-decoration:none}
+.tl-title a:hover{text-decoration:underline}
+.tl-detail{font-size:.72rem;color:var(--muted)}
+.tl-badge{display:inline-block;font-size:.62rem;font-weight:600;padding:1px 6px;border-radius:4px;margin-right:5px;vertical-align:middle;text-transform:uppercase;letter-spacing:.03em}
+.tl-badge.new{background:#dcfce7;color:#166534}
+.tl-badge.removed{background:#fee2e2;color:#991b1b}
+.tl-badge.updated{background:#fef9c3;color:#854d0e}
+.hist-nav{display:flex;gap:.5rem;align-items:center;margin-bottom:1rem;flex-wrap:wrap}
+  .hist-nav-btn{background:var(--card);border:1px solid var(--border);color:var(--text);border-radius:6px;padding:4px 12px;font-size:.75rem;cursor:pointer;font-family:var(--font);transition:all .15s}
+  .hist-nav-btn:hover{border-color:var(--primary);color:var(--primary)}
+  .hist-nav-btn.active{background:var(--primary);border-color:var(--primary);color:#fff}
+  .tl-filter{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:1rem;align-items:center}
+.tl-filter-btn{background:none;border:1px solid var(--border);color:var(--text-light);font-size:.72rem;padding:3px 10px;border-radius:12px;cursor:pointer;transition:all .15s}
+.tl-filter-btn:hover,.tl-filter-btn.active{border-color:var(--primary);color:var(--primary);background:rgba(4,159,217,.07)}
+.tl-empty{color:var(--muted);font-size:.82rem;padding:.5rem 0;font-style:italic}
 </style>
 </head>
 <body>
 
+<nav class="site-nav">
+  <span class="nav-title">CC Pulse Dashboard</span>
+  <span class="nav-spacer"></span>
+  <div class="ham-wrap">
+    <span class="nav-meta">Last run: {{ generated_at }}</span>
+    <button class="ham-btn" id="ham-btn" onclick="toggleHamMenu()" aria-expanded="false" aria-haspopup="true" title="Open menu">&#9776;</button>
+    <div class="ham-menu" id="ham-menu" role="menu">
+      <a class="ham-item" href="https://kr15tyk.github.io/CC-pulse/cc_dashboard.html" role="menuitem"><span class="ham-icon">&#127968;</span>Home</a>
+      <button class="ham-item" id="ham-darkmode" onclick="toggleDarkMode()" role="menuitem"><span class="ham-icon" id="ham-dark-icon">&#127769;</span><span id="ham-dark-label">Dark Mode</span></button>
+      <button class="ham-item" onclick="showSourcesModal()" role="menuitem"><span class="ham-icon">&#128203;</span>Source List</button>
+      <button class="ham-item ham-divider" onclick="copyFeedUrl()" role="menuitem"><span class="ham-icon">&#128225;</span>Copy RSS URL</button>
+    </div>
+  </div>
+</nav>
+
+<div id="sources-overlay" class="sources-overlay" onclick="closeSourcesModalOutside(event)">
+  <div class="sources-modal" role="dialog" aria-modal="true" aria-labelledby="sources-title">
+    <div class="sources-modal-hdr">
+      <h2 id="sources-title">📋 Monitored Sources</h2>
+      <button class="sources-close" onclick="closeSourcesModal()" title="Close">&times;</button>
+    </div>
+    <div class="sources-modal-body">
+      <div class="sources-group">
+        <div class="sources-group-title">🇳🇮 NIAP (National Information Assurance Partnership)</div>
+        <div class="sources-item"><span class="src-label">Products (PCL):</span><a href="https://www.niap-ccevs.org/api/project/product/pcl_products_all/" target="_blank" rel="noopener">niap-ccevs.org &mdash; PCL Products API</a></div>
+        <div class="sources-item"><span class="src-label">Protection Profiles:</span><a href="https://www.niap-ccevs.org/api/protection-profile/public_pps_all/" target="_blank" rel="noopener">niap-ccevs.org &mdash; Protection Profiles API</a></div>
+        <div class="sources-item"><span class="src-label">Technical Decisions:</span><a href="https://www.niap-ccevs.org/api/technical-decision/frontend_tds/" target="_blank" rel="noopener">niap-ccevs.org &mdash; Technical Decisions API</a></div>
+        <div class="sources-item"><span class="src-label">News &amp; Events:</span><a href="https://www.niap-ccevs.org/api/publish/announcements/get_news_frontend/" target="_blank" rel="noopener">niap-ccevs.org &mdash; Announcements API</a></div>
+      </div>
+      <div class="sources-group">
+        <div class="sources-group-title">🇳🇮 CSfC (Commercial Solutions for Classified)</div>
+        <div class="sources-item"><span class="src-label">Main:</span><a href="https://www.nsa.gov/Resources/Commercial-Solutions-for-Classified-Program/" target="_blank" rel="noopener">nsa.gov &mdash; CSfC Home</a></div>
+        <div class="sources-item"><span class="src-label">Components List:</span><a href="https://www.nsa.gov/Resources/Commercial-Solutions-for-Classified-Program/Components-List/" target="_blank" rel="noopener">nsa.gov &mdash; CSfC APL Components</a></div>
+        <div class="sources-item"><span class="src-label">Capability Packages:</span><a href="https://www.nsa.gov/Resources/Commercial-Solutions-for-Classified-Program/Capability-Packages/" target="_blank" rel="noopener">nsa.gov &mdash; Capability Packages</a></div>
+        <div class="sources-item"><span class="src-label">NSA Advisories (RSS):</span><a href="https://www.nsa.gov/DesktopModules/ArticleCS/RSS.ashx?ContentType=1&amp;Site=1282&amp;max=20" target="_blank" rel="noopener">nsa.gov &mdash; Cybersecurity RSS</a></div>
+        <div class="sources-item"><span class="src-label">CISA Alerts (RSS):</span><a href="https://www.cisa.gov/cybersecurity-advisories/all.xml" target="_blank" rel="noopener">cisa.gov &mdash; All Advisories</a></div>
+      </div>
+      <div class="sources-group">
+        <div class="sources-group-title">🇳🇮 NIST CSRC</div>
+        <div class="sources-item"><span class="src-label">News:</span><a href="https://csrc.nist.gov/news" target="_blank" rel="noopener">csrc.nist.gov &mdash; CSRC News</a></div>
+        <div class="sources-item"><span class="src-label">FIPS Publications:</span><a href="https://csrc.nist.gov/publications/fips" target="_blank" rel="noopener">csrc.nist.gov &mdash; FIPS Pubs</a></div>
+        <div class="sources-item"><span class="src-label">CMVP (Modules In Process):</span><a href="https://csrc.nist.gov/projects/cryptographic-module-validation-program/modules-in-process/modules-in-process-list" target="_blank" rel="noopener">csrc.nist.gov &mdash; CMVP MIP</a></div>
+        <div class="sources-item"><span class="src-label">Post-Quantum Crypto:</span><a href="https://csrc.nist.gov/projects/post-quantum-cryptography" target="_blank" rel="noopener">csrc.nist.gov &mdash; PQC Project</a></div>
+        <div class="sources-item"><span class="src-label">NIST News (RSS):</span><a href="https://www.nist.gov/news-events/cybersecurity/rss.xml" target="_blank" rel="noopener">nist.gov &mdash; Cybersecurity RSS</a></div>
+      </div>
+      <div class="sources-group">
+        <div class="sources-group-title">🌐 CC Portal (International)</div>
+        <div class="sources-item"><span class="src-label">News:</span><a href="https://www.commoncriteriaportal.org/news/index.cfm" target="_blank" rel="noopener">commoncriteriaportal.org &mdash; News</a></div>
+        <div class="sources-item"><span class="src-label">Products:</span><a href="https://www.commoncriteriaportal.org/products/index.cfm" target="_blank" rel="noopener">commoncriteriaportal.org &mdash; Products</a></div>
+        <div class="sources-item"><span class="src-label">Protection Profiles:</span><a href="https://www.commoncriteriaportal.org/pps/index.cfm" target="_blank" rel="noopener">commoncriteriaportal.org &mdash; PPs</a></div>
+        <div class="sources-item"><span class="src-label">Publications (Crypto):</span><a href="https://www.commoncriteriaportal.org/cc/index.cfm" target="_blank" rel="noopener">commoncriteriaportal.org &mdash; CC Publications</a></div>
+        <div class="sources-item"><span class="src-label">PP RSS:</span><a href="https://www.commoncriteriaportal.org/rss/pps.xml" target="_blank" rel="noopener">commoncriteriaportal.org &mdash; PP RSS Feed</a></div>
+      </div>
+      <div class="sources-group">
+        <div class="sources-group-title">🇪🇺 EUCC / ENISA</div>
+        <div class="sources-item"><span class="src-label">Scheme Requirements:</span><a href="https://certification.enisa.europa.eu/browse-topic/eucc_en" target="_blank" rel="noopener">certification.enisa.europa.eu &mdash; EUCC Scheme</a></div>
+        <div class="sources-item"><span class="src-label">Certified Products:</span><a href="https://certification.enisa.europa.eu/certificates_en" target="_blank" rel="noopener">certification.enisa.europa.eu &mdash; Certificates</a></div>
+      </div>
+      <div class="sources-group">
+        <div class="sources-group-title">🇳🇦 NATO NIAPCL</div>
+        <div class="sources-item"><span class="src-label">Product Catalogue:</span><a href="https://www.ia.nato.int/Search/NIAPC/AND/Category_/Manufacturer_10/Country_/SecurityGroup_" target="_blank" rel="noopener">ia.nato.int &mdash; NIAPCL Search</a></div>
+      </div>
+      <div class="sources-group">
+        <div class="sources-group-title">🧪 CCTL Labs</div>
+        <div class="sources-item"><span class="src-label">Lightship Security:</span><a href="https://lightshipsec.com/blog/" target="_blank" rel="noopener">lightshipsec.com &mdash; Blog (RSS)</a></div>
+        <div class="sources-item"><span class="src-label">atsec:</span><a href="https://www.atsec.com/blog/" target="_blank" rel="noopener">atsec.com &mdash; Blog (scraped)</a></div>
+      </div>
+      <div class="sources-group">
+        <div class="sources-group-title">🔒 CC Crypto Catalog (CCDB-018)</div>
+        <div class="sources-item"><span class="src-label">CCDB-018 v1.0 (Jan 2025):</span><a href="https://www.commoncriteriaportal.org/files/ccfiles/CCDB-018-v1.0-2025-Jan-31-Final-Specification_of_Functional_Requirements_for_Cryptography.pdf" target="_blank" rel="noopener">commoncriteriaportal.org &mdash; CCDB-018 PDF</a></div>
+        <div class="sources-item"><span class="src-label">CCDB-014 v3.1:</span><a href="https://www.commoncriteriaportal.org/files/operatingprocedures/CCDB-014-v3.1-2024-February-29-Final-Assurance_Continuity.pdf" target="_blank" rel="noopener">commoncriteriaportal.org &mdash; CCDB-014 PDF</a></div>
+        <div class="sources-item"><span class="src-label">CC:2022 Part 2:</span><a href="https://www.commoncriteriaportal.org/files/ccfiles/CC2022PART2R1.pdf" target="_blank" rel="noopener">commoncriteriaportal.org &mdash; CC:2022 SFRs PDF</a></div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div class="sticky-top">
-<header class="site-header">
-  <div class="site-title">CC Pulse</div>
-  <div class="site-meta">{{ period_start[:10] }} â {{ period_end[:10] }} &middot; Generated {{ generated_at }}</div>
-</header>
-<div class="trend-bar">
-  <div class="stat"><a href="#sec-niap-pp">
-    <div class="stat-num {% if niap_total_stat > 0 %}active-num{% endif %}">{{ niap_total_stat }}</div>
-    <div class="stat-lbl">NIAP Changes</div>
-  </a></div>
-  <div class="stat"><a href="#sec-cctl">
-    <div class="stat-num {% if cctl_total_stat > 0 %}active-num{% endif %}">{{ cctl_total_stat }}</div>
-    <div class="stat-lbl">CCTL Items</div>
-  </a></div>
-  <div class="stat"><a href="#sec-csfc">
-    <div class="stat-num {% if csfc_total_stat > 0 %}active-num{% endif %}">{{ csfc_total_stat }}</div>
-    <div class="stat-lbl">CSfC CP Updates</div>
-  </a></div>
-  <div class="stat"><a href="#sec-nist">
-    <div class="stat-num {% if nist_total_stat > 0 %}active-num{% endif %}">{{ nist_total_stat }}</div>
-    <div class="stat-lbl">NIST Doc Updates</div>
-  </a></div>
-  <div class="stat"><a href="#sec-cc-portal">
-    <div class="stat-num {% if cc_portal_total_stat > 0 %}active-num{% endif %}">{{ cc_portal_total_stat }}</div>
-    <div class="stat-lbl">CC Portal</div>
-  </a></div>
-  <div class="stat"><a href="#sec-alerts">
-    <div class="stat-num {% if alert_total > 0 %}alert-num{% endif %}">{{ alert_total }}</div>
-    <div class="stat-lbl">Alerts</div>
-  </a></div>
-</div>
-
-
+  <div class="trend-bar">
+    <div class="stat"><a href="#sec-niap-pp" onclick="navigateTo('sec-niap-pp');return false;">
+      <div class="stat-num {% if niap_total_stat > 0 %}active-num{% endif %}">{{ niap_total_stat }}</div>
+      <div class="stat-lbl">NIAP Changes</div>
+    </a></div>
+    <div class="stat"><a href="#sec-csfc" onclick="navigateTo('sec-csfc');return false;">
+      <div class="stat-num {% if csfc_total_stat > 0 %}active-num{% endif %}">{{ csfc_total_stat }}</div>
+      <div class="stat-lbl">CSfC Selection Updates</div>
+    </a></div>
+    <div class="stat"><a href="#sec-nist" onclick="navigateTo('sec-nist');return false;">
+      <div class="stat-num {% if nist_total_stat > 0 %}active-num{% endif %}">{{ nist_total_stat }}</div>
+      <div class="stat-lbl">NIST Doc Updates</div>
+    </a></div>
+    <div class="stat"><a href="#sec-cc-portal" onclick="navigateTo('sec-cc-portal');return false;">
+      <div class="stat-num {% if cc_portal_total_stat > 0 %}active-num{% endif %}">{{ cc_portal_total_stat }}</div>
+      <div class="stat-lbl">CC Portal</div>
+    </a></div>
+    <div class="stat"><a href="#sec-nato" onclick="navigateTo('sec-nato');return false;">
+      <div class="stat-num {% if nato_total > 0 %}active-num{% endif %}">{{ nato_total }}</div>
+      <div class="stat-lbl">NATO NIAPCL</div>
+    </a></div>
+    <div class="stat"><a href="#sec-cctl" onclick="navigateTo('sec-cctl');return false;">
+      <div class="stat-num {% if cctl_total_stat > 0 %}active-num{% endif %}">{{ cctl_total_stat }}</div>
+      <div class="stat-lbl">CCTL Updates</div>
+    </a></div>
+    <div class="stat"><a href="#sec-eucc-req" onclick="navigateTo('sec-eucc-req');return false;">
+      <div class="stat-num {% if eucc_total > 0 %}active-num{% endif %}">{{ eucc_total }}</div>
+      <div class="stat-lbl">EUCC Changes</div>
+    </a></div>
+    <div class="stat"><a href="#sec-alerts" onclick="navigateTo('sec-alerts');return false;">
+      <div class="stat-num {% if alert_total > 0 %}alert-num{% endif %}">{{ alert_total }}</div>
+      <div class="stat-lbl">Alerts</div>
+    </a></div>
+  </div>
 </div><!-- /sticky-top -->
+<div class="main-content">
 <!-- Source health summary -->
-<div class="source-health">
-  <div class="sh-title">Source Health</div>
-  <div class="sh-row">
-    <span class="sh-source">NIAP API</span>
-    <span class="sh-badge {% if niap_total_stat > 0 %}sh-ok{% else %}sh-idle{% endif %}">
-      {% if niap_total_stat > 0 %}{{ niap_total_stat }} change{% if niap_total_stat != 1 %}s{% endif %}{% else %}no changes{% endif %}
-    </span>
-  </div>
-  <div class="sh-row">
-    <span class="sh-source">CSfC / NSA</span>
-    <span class="sh-badge {% if csfc_total_stat > 0 %}sh-ok{% else %}sh-idle{% endif %}">
-      {% if csfc_total_stat > 0 %}{{ csfc_total_stat }} update{% if csfc_total_stat != 1 %}s{% endif %}{% else %}no changes{% endif %}
-    </span>
-  </div>
-  <div class="sh-row">
-    <span class="sh-source">NIST CSRC</span>
-    <span class="sh-badge {% if nist_total_stat > 0 %}sh-ok{% else %}sh-idle{% endif %}">
-      {% if nist_total_stat > 0 %}{{ nist_total_stat }} update{% if nist_total_stat != 1 %}s{% endif %}{% else %}no changes{% endif %}
-    </span>
-  </div>
-  <div class="sh-row">
-    <span class="sh-source">CC Portal</span>
-    <span class="sh-badge {% if cc_portal_total_stat > 0 %}sh-ok{% else %}sh-idle{% endif %}">
-      {% if cc_portal_total_stat > 0 %}{{ cc_portal_total_stat }} new item{% if cc_portal_total_stat != 1 %}s{% endif %}{% else %}no changes{% endif %}
-    </span>
-  </div>
-  <div class="sh-row">
-    <span class="sh-source">CCTL Labs</span>
-    <span class="sh-badge {% if cctl_total_stat > 0 %}sh-ok{% else %}sh-idle{% endif %}">
-      {% if cctl_total_stat > 0 %}{{ cctl_total_stat }} new item{% if cctl_total_stat != 1 %}s{% endif %}{% else %}no changes{% endif %}
-    </span>
-  </div>
-  <div class="sh-row">
-    <span class="sh-source">Keyword Alerts</span>
-    <span class="sh-badge {% if alert_total > 0 %}sh-alert{% else %}sh-idle{% endif %}">
-      {% if alert_total > 0 %}{{ alert_total }} match{% if alert_total != 1 %}es{% endif %}{% else %}none{% endif %}
-    </span>
-  </div>
-  <div class="sh-footer">Period: {{ period_start[:10] if period_start else 'â' }} â {{ period_end[:10] if period_end else 'â' }}</div>
-  <div class="sh-footer">All sources last polled: {{ period_end[:10] if period_end else 'â' }} (daily 06:00 UTC)</div>
-</div>
 <div class="ctrl-bar">
   <button class="ctrl-btn" onclick="expandAll()" title="Expand all cards [E]">[E] Expand All</button>
   <button class="ctrl-btn" onclick="collapseAll()" title="Collapse all cards [C]">[C] Collapse All</button>
   <button class="ctrl-btn" id="filter-btn" onclick="toggleZeroFilter()" title="Toggle zero-change cards [F]">[F] Hide Empty</button>
-  <span class="ctrl-hint">keyboard: E=expand C=collapse F=filter /=search Esc=clear</span>
-</div>
-<div class="search-row">
-  <input id="search-input" class="search-input" type="search" placeholder="Search items…"
-    oninput="liveSearch()" title="Search across all cards [/]" autocomplete="off" spellcheck="false">
-  <button class="search-clear" onclick="clearSearch()" title="Clear search">✕</button>
-  <div class="filter-chips">
-    <span style="font-size:.65rem;color:var(--muted);opacity:.6;">kind:</span>
-    <button class="chip active" data-kind="all"     onclick="setKindFilter(this)">All</button>
-    <button class="chip"        data-kind="new"     onclick="setKindFilter(this)">New</button>
-    <button class="chip"        data-kind="removed" onclick="setKindFilter(this)">Removed</button>
-    <button class="chip"        data-kind="updated" onclick="setKindFilter(this)">Updated</button>
-    <button class="chip"        data-kind="archived" onclick="setKindFilter(this)">Archived</button>
-    <button class="chip chip-alert" data-kind="alert" onclick="setKindFilter(this)">Alert</button>
+  <span class="ctrl-hint" id="keys-hint-wrap">
+  <button class="ctrl-btn" id="keys-hint-btn" onclick="document.getElementById('keys-hint-box').classList.toggle('visible')" title="Keyboard shortcuts">&#9000; Keys</button>
+  <div id="keys-hint-box" class="keys-tooltip">
+    <table><tr><td><kbd>E</kbd></td><td>Expand all</td></tr>
+    <tr><td><kbd>C</kbd></td><td>Collapse all</td></tr>
+    <tr><td><kbd>F</kbd></td><td>Toggle empty cards</td></tr>
+        <tr><td><kbd>1</kbd><kbd>2</kbd><kbd>3</kbd></td><td>Switch tabs</td></tr></table>
   </div>
-  <span id="search-count" class="search-count"></span>
+</span>
 </div>
+
+<!-- Regional tab navigation -->
+      
+      
 <!-- Alerts -->
 {% if diff.alerts %}
 <div class="section-group">
@@ -377,7 +554,7 @@ a:hover { color: var(--neon-cyan); text-decoration: underline; }
   <div class="card-body">
     <div class="alert-monitoring">{{ watch_keywords | join(', ') }}</div>
     {% for alert in diff.alerts %}
-        <div class="item-row alert-item" data-alert-key="{{ alert.source }}-{{ alert.title | replace(' ', '_') }}">
+        <div class="item-row alert-item" data-alert-key="{{ alert.source }}-{{ alert.title | replace(' ', '_') }}" data-tab="{{ alert.tab }}">
           {% if alert.url %}
           <a class="item-link" href="{{ alert.url }}" target="_blank">{{ alert.source }}: {{ alert.title }}</a>
           {% else %}
@@ -391,6 +568,13 @@ a:hover { color: var(--neon-cyan); text-decoration: underline; }
   </div>
 </div>
 {% endif %}
+<div class="tab-nav" id="region-tabs">
+        <button class="tab-btn active" data-tab="us" onclick="switchTab(this)">&#127482;&#127480; US (NIAP / CSfC / NIST)</button>
+        <button class="tab-btn" data-tab="intl" onclick="switchTab(this)">&#127760; International</button>
+        <button class="tab-btn" data-tab="eu" onclick="switchTab(this)">&#127466;&#127482; EU (EUCC / ENISA)</button>
+      
+<button class="tab-btn" data-tab="history" onclick="switchTab(this)">🕑 History</button>
+</div>
 
 <div class="grid">
 
@@ -441,54 +625,11 @@ a:hover { color: var(--neon-cyan); text-decoration: underline; }
   </div>
 </div>
 
-  <!-- NIAP CCTL Registry -->
-<div class="card {% if cctl_registry_total > 0 %}card-updated{% endif %}" id="sec-cctl-registry" data-has-changes="{{ cctl_registry_total }}">
-  <div class="card-hdr" onclick="toggleCard(this)">
-    <span>NIAP CCTL Registry</span>
-    <span class="card-count">{{ cctl_registry_total }} change{% if cctl_registry_total != 1 %}s{% endif %}</span>
-    <span class="toggle-icon">{% if cctl_registry_total == 0 %}&#9658;{% else %}&#9660;{% endif %}</span>
-  </div>
-  <div class="card-body {% if cctl_registry_total == 0 %}collapsed{% endif %}">
-    {% if diff.niap.cctls.added %}
-    <div class="sub-hdr sub-new">New Labs ({{ diff.niap.cctls.added | length }})</div>
-    {% for lab in diff.niap.cctls.added %}
-    <div class="item-row" data-source="cctl-registry" data-kind="new">
-      <a class="item-link" href="{{ lab.cctl_url or '#' }}" target="_blank">{{ lab.cctl_name }}</a>
-      <span class="item-meta">{{ lab.city }}{% if lab.state_id %}, {{ lab.state_id }}{% endif %}</span>
-    </div>
-    {% endfor %}
-    {% endif %}
-    {% if diff.niap.cctls.removed %}
-    <div class="sub-hdr sub-removed">Removed Labs ({{ diff.niap.cctls.removed | length }})</div>
-    {% for lab in diff.niap.cctls.removed %}
-    <div class="item-row" data-source="cctl-registry" data-kind="removed">
-      <a class="item-link" href="{{ lab.cctl_url or '#' }}" target="_blank">{{ lab.cctl_name }}</a>
-      <span class="item-meta">{{ lab.city }}{% if lab.state_id %}, {{ lab.state_id }}{% endif %}</span>
-    </div>
-    {% endfor %}
-    {% endif %}
-    {% if diff.niap.cctls.status_changes %}
-    <div class="sub-hdr sub-updated">Status Changes ({{ diff.niap.cctls.status_changes | length }})</div>
-    {% for lab in diff.niap.cctls.status_changes %}
-    <div class="item-row" data-source="cctl-registry" data-kind="updated">
-      <a class="item-link" href="{{ lab.cctl_url or '#' }}" target="_blank">{{ lab.cctl_name }}</a>
-      <span class="item-meta">{{ lab.old_status }} &#8594; {{ lab.new_status }}</span>
-    </div>
-    {% endfor %}
-    {% endif %}
-    {% if cctl_registry_total == 0 %}<p class="no-change">No registry changes.</p>{% endif %}
-  </div>
-</div>
-
   <!-- NIAP In-Evaluation -->
 <div class="card {% if in_eval_total > 0 %}card-new{% endif %}" id="sec-niap-inevaluation" data-has-changes="{{ in_eval_total }}">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>NIAP In-Evaluation Products</span>
     <span class="card-count">{% if in_eval_total > 0 %}{{ in_eval_total }} change{% if in_eval_total != 1 %}s{% endif %}{% else %}{{ in_eval_current }} active{% endif %}</span>
-    <span class="sparkline">
-      {% for v in sparklines.in_eval %}
-      <span class="sp-bar" style="height:{{ v }}%" title="{{ sp_counts.in_eval[loop.index0] }} change{% if sp_counts.in_eval[loop.index0] != 1 %}s{% endif %}"></span>
-      {% endfor %}
     </span>
   </div>
   <div class="card-body {% if in_eval_total == 0 %}collapsed{% endif %}">
@@ -524,10 +665,6 @@ a:hover { color: var(--neon-cyan); text-decoration: underline; }
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>NIAP News &amp; Announcements</span>
     <span class="card-count">{{ niap_news_total }} new item{% if niap_news_total != 1 %}s{% endif %}</span>
-    <span class="sparkline">
-      {% for v in sparklines.niap_news %}
-      <span class="sp-bar" style="height:{{ v }}%" title="{{ sp_counts.niap_news[loop.index0] }} change{% if sp_counts.niap_news[loop.index0] != 1 %}s{% endif %}"></span>
-      {% endfor %}
     </span>
     <span class="toggle-icon">{% if niap_news_total == 0 and not diff.niap.events.added %}&#9658;{% else %}&#9660;{% endif %}</span>
   </div>
@@ -564,15 +701,11 @@ a:hover { color: var(--neon-cyan); text-decoration: underline; }
   </div>
 </div>
 
-  <!-- NIAP PCL -- All Certifications -->
+  <!-- NIAP PCL — All Certifications -->
 <div class="card {% if pcl_all_total > 0 %}card-new{% endif %}" id="sec-niap-pcl" data-has-changes="{{ pcl_all_total }}">
   <div class="card-hdr" onclick="toggleCard(this)">
-    <span>NIAP PCL -- All Certifications</span>
+    <span>NIAP PCL — All Certifications</span>
     <span class="card-count">{{ pcl_all_total }} change{% if pcl_all_total != 1 %}s{% endif %}</span>
-    <span class="sparkline">
-      {% for v in sparklines.pcl_all %}
-      <span class="sp-bar" style="height:{{ v }}%" title="{{ sp_counts.pcl_all[loop.index0] }} change{% if sp_counts.pcl_all[loop.index0] != 1 %}s{% endif %}"></span>
-      {% endfor %}
     </span>
   </div>
   <div class="card-body {% if pcl_all_total == 0 %}collapsed{% endif %}">
@@ -618,10 +751,6 @@ a:hover { color: var(--neon-cyan); text-decoration: underline; }
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>NIAP Protection Profiles</span>
     <span class="card-count">{{ niap_pp_total }} change{% if niap_pp_total != 1 %}s{% endif %}</span>
-    <span class="sparkline">
-      {% for v in sparklines.niap_pp %}
-      <span class="sp-bar" style="height:{{ v }}%" title="{{ sp_counts.niap_pp[loop.index0] }} change{% if sp_counts.niap_pp[loop.index0] != 1 %}s{% endif %}"></span>
-      {% endfor %}
     </span>
     <span class="toggle-icon">{% if niap_pp_total == 0 %}&#9658;{% else %}&#9660;{% endif %}</span>
   </div>
@@ -671,10 +800,6 @@ a:hover { color: var(--neon-cyan); text-decoration: underline; }
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>NIAP Technical Decisions</span>
     <span class="card-count">{{ niap_td_total }} change{% if niap_td_total != 1 %}s{% endif %}</span>
-    <span class="sparkline">
-      {% for v in sparklines.niap_td %}
-      <span class="sp-bar" style="height:{{ v }}%" title="{{ sp_counts.niap_td[loop.index0] }} change{% if sp_counts.niap_td[loop.index0] != 1 %}s{% endif %}"></span>
-      {% endfor %}
     </span>
     <span class="toggle-icon">{% if niap_td_total == 0 %}&#9658;{% else %}&#9660;{% endif %}</span>
   </div>
@@ -683,7 +808,7 @@ a:hover { color: var(--neon-cyan); text-decoration: underline; }
     <div class="sub-hdr sub-new">New TDs ({{ diff.niap.tds.added | length }})</div>
     {% for td in diff.niap.tds.added %}
     <div class="item-row" data-source="niap-td" data-kind="new">
-      <span class="item-link">{{ td.identifier }} &mdash; {{ td.title }}</span>
+      <a class="item-link" href="https://www.niap-ccevs.org/technical-decisions/{{ td.identifier }}" target="_blank">{{ td.identifier }} &mdash; {{ td.title }}</a>
       <span class="item-meta">{% if td.publication_date %}{{ td.publication_date[:10] }}{% endif %}</span>
     </div>
     {% if td.protection_profile %}
@@ -695,7 +820,7 @@ a:hover { color: var(--neon-cyan); text-decoration: underline; }
     <div class="sub-hdr sub-removed">Removed TDs ({{ diff.niap.tds.removed | length }})</div>
     {% for td in diff.niap.tds.removed %}
     <div class="item-row" data-source="niap-td" data-kind="removed">
-      <span class="item-link">{{ td.identifier }} &mdash; {{ td.title }}</span>
+      <a class="item-link" href="https://www.niap-ccevs.org/technical-decisions/{{ td.identifier }}" target="_blank">{{ td.identifier }} &mdash; {{ td.title }}</a>
       <span class="item-meta">{% if td.removed_on %}Removed: {{ td.removed_on[:10] }}{% endif %}</span>
     </div>
     {% if td.protection_profile %}
@@ -708,72 +833,24 @@ a:hover { color: var(--neon-cyan); text-decoration: underline; }
 </div>
 </div>
 
-<div class="section-group">
-  <div class="section-label">CCTL</div>
-  <!-- CCTL Lab Intel -->
-<div class="card {% if cctl_total > 0 %}card-new{% endif %}" id="sec-cctl" data-has-changes="{{ cctl_total }}">
-  <div class="card-hdr" onclick="toggleCard(this)">
-    <span>CCTL Lab Intel</span>
-    <span class="card-count">{{ cctl_total }} new item{% if cctl_total != 1 %}s{% endif %}</span>
-    <span class="sparkline">
-      {% for v in sparklines.cctl %}
-      <span class="sp-bar" style="height:{{ v }}%" title="{{ sp_counts.cctl[loop.index0] }} change{% if sp_counts.cctl[loop.index0] != 1 %}s{% endif %}"></span>
-      {% endfor %}
-    </span>
-    <span class="toggle-icon">{% if cctl_total == 0 %}&#9658;{% else %}&#9660;{% endif %}</span>
-  </div>
-  <div class="card-body {% if cctl_total == 0 %}collapsed{% endif %}">
-    {% for lab_name, lab_items in diff.cctl_labs.items() %}
-    {% if lab_items %}
-    <div class="lab-row">
-      <div class="lab-hdr" onclick="toggleLab(this)">
-        <span class="lab-name">{{ lab_name }}</span>
-        <span class="lab-cnt">{{ lab_items | length }} item{% if lab_items | length != 1 %}s{% endif %}</span>
-        <span class="toggle-icon">&#9658;</span>
-      </div>
-      <div class="lab-body collapsed">
-        {% for item in lab_items %}
-        <div class="item-row" data-source="cctl" data-kind="new">
-          <a class="item-link" href="{{ item.link }}" target="_blank">{{ item.title }}</a>
-          <span class="item-meta">{{ item.published }}</span>
-        </div>
-        {% endfor %}
-      </div>
-    </div>
-    {% endif %}
-    {% endfor %}
-    {% if cctl_total == 0 %}<p class="no-change">No new items.{% if last_active.cctl %} <span class="last-active">(last: {{ last_active.cctl }})</span>{% endif %}</p>{% endif %}
-  </div>
-</div>
-</div>
 
 <div class="section-group">
   <div class="section-label">CSfC</div>
-  <!-- CSfC Capability Packages -->
+  <!-- CSfC Component Selections -->
 <div class="card {% if csfc_total > 0 %}card-updated{% endif %}" id="sec-csfc" data-has-changes="{{ csfc_total }}">
   <div class="card-hdr" onclick="toggleCard(this)">
-    <span>CSfC Capability Packages</span>
+    <span>CSfC Component Selections</span>
     <span class="card-count">{{ csfc_total }} update{% if csfc_total != 1 %}s{% endif %}</span>
-    <span class="sparkline">
-      {% for v in sparklines.csfc %}
-      <span class="sp-bar" style="height:{{ v }}%" title="{{ sp_counts.csfc[loop.index0] }} change{% if sp_counts.csfc[loop.index0] != 1 %}s{% endif %}"></span>
-      {% endfor %}
     </span>
     <span class="toggle-icon">{% if csfc_total == 0 %}&#9658;{% else %}&#9660;{% endif %}</span>
   </div>
   <div class="card-body {% if csfc_total == 0 %}collapsed{% endif %}">
-    {% for cp_name, cp in diff.csfc.capability_packages.items() %}
+    {% for cp_name, cp in diff.csfc.component_selections.items() %}
     {% if cp.changed %}
     <div class="cp-row" data-source="csfc" data-kind="updated">
       <a class="item-link" href="{{ cp.url }}" target="_blank">{{ cp_name }}</a>
       <div class="cp-detail">
-        {% if cp.old_last_modified and cp.new_last_modified %}
-        <span class="cp-date">{{ cp.old_last_modified }} &#8594; {{ cp.new_last_modified }}</span>
-        {% elif cp.old_content_length is defined and cp.new_content_length is defined %}
-        <span class="cp-date">Size: {{ cp.old_content_length }} &#8594; {{ cp.new_content_length }} bytes</span>
-        {% else %}
-        <span class="cp-date">Content changed</span>
-        {% endif %}
+        <span class="cp-date">Content hash changed</span>
       </div>
     </div>
     {% endif %}
@@ -790,10 +867,6 @@ a:hover { color: var(--neon-cyan); text-decoration: underline; }
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>CC Crypto Documentation</span>
     <span class="card-count">{{ cc_crypto_total }} update{% if cc_crypto_total != 1 %}s{% endif %}</span>
-    <span class="sparkline">
-      {% for v in sparklines.cc_crypto %}
-      <span class="sp-bar" style="height:{{ v }}%" title="{{ sp_counts.cc_crypto[loop.index0] }} change{% if sp_counts.cc_crypto[loop.index0] != 1 %}s{% endif %}"></span>
-      {% endfor %}
     </span>
     <span class="toggle-icon">{% if cc_crypto_total == 0 %}&#9658;{% else %}&#9660;{% endif %}</span>
   </div>
@@ -819,10 +892,6 @@ a:hover { color: var(--neon-cyan); text-decoration: underline; }
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>NIST Documentation</span>
     <span class="card-count">{{ nist_total }} update{% if nist_total != 1 %}s{% endif %}</span>
-    <span class="sparkline">
-      {% for v in sparklines.nist %}
-      <span class="sp-bar" style="height:{{ v }}%" title="{{ sp_counts.nist[loop.index0] }} change{% if sp_counts.nist[loop.index0] != 1 %}s{% endif %}"></span>
-      {% endfor %}
     </span>
     <span class="toggle-icon">{% if nist_total == 0 %}&#9658;{% else %}&#9660;{% endif %}</span>
   </div>
@@ -843,7 +912,9 @@ a:hover { color: var(--neon-cyan); text-decoration: underline; }
   </div>
 </div>
 </div>
-
+<div class="section-group" id="tab-pane-intl" data-tab="intl">
+        <div class="section-label">International</div>
+        
 <div class="section-group">
   <div class="section-label">CC Portal</div>
   <!-- CC Portal (international) -->
@@ -851,10 +922,6 @@ a:hover { color: var(--neon-cyan); text-decoration: underline; }
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>CC Portal (International)</span>
     <span class="card-count">{{ cc_portal_total }} new item{% if cc_portal_total != 1 %}s{% endif %}</span>
-    <span class="sparkline">
-      {% for v in sparklines.cc_portal %}
-      <span class="sp-bar" style="height:{{ v }}%" title="{{ sp_counts.cc_portal[loop.index0] }} change{% if sp_counts.cc_portal[loop.index0] != 1 %}s{% endif %}"></span>
-      {% endfor %}
     </span>
     <span class="toggle-icon">{% if cc_portal_total == 0 %}&#9658;{% else %}&#9660;{% endif %}</span>
   </div>
@@ -888,17 +955,183 @@ a:hover { color: var(--neon-cyan); text-decoration: underline; }
     {% endif %}
     {% if cc_portal_total == 0 %}<p class="no-change">No new international items.{% if last_active.cc_portal %} <span class="last-active">(last: {{ last_active.cc_portal }})</span>{% endif %}</p>{% endif %}
   </div>
+</div><!-- NATO NIAPCL -->
+        <div class="card {% if nato_total > 0 %}card-new{% endif %}" id="sec-nato" data-has-changes="{{ nato_total }}">
+          <div class="card-hdr" onclick="toggleCard(this)">
+            <span>NATO NIAPCL Products</span>
+            <span class="card-count">{{ nato_total }} change{% if nato_total != 1 %}s{% endif %}</span>
+            <span class="toggle-icon">{% if nato_total == 0 %}&#9658;{% else %}&#9660;{% endif %}</span>
+          </div>
+          <div class="card-body {% if nato_total == 0 %}collapsed{% endif %}">
+            {% if diff.nato.cisco_added %}
+            <div class="sub-hdr sub-new">New Cisco NATO Listings ({{ diff.nato.cisco_added | length }})</div>
+            {% for item in diff.nato.cisco_added %}
+            <div class="item-row" data-source="nato" data-kind="new">
+              <a class="item-link" href="{{ item.link or config_nato_url }}" target="_blank">{{ item.name or item.raw_text }}</a>
+              <span class="item-meta">{{ item.manufacturer or '' }}</span>
+            </div>
+            {% endfor %}
+            {% endif %}
+            {% if diff.nato.pages %}
+            {% for page_key, page_diff in diff.nato.pages.items() %}
+            {% if page_diff.added %}
+            <div class="sub-hdr sub-new">{{ page_key }} — New Items ({{ page_diff.added | length }})</div>
+            {% for item in page_diff.added %}
+            <div class="item-row" data-source="nato" data-kind="new">
+              <a class="item-link" href="{{ item.link or item.href or '#' }}" target="_blank">{{ item.name or item.text or item.raw_text or item }}</a>
+              <span class="item-meta"></span>
+            </div>
+            {% endfor %}
+            {% endif %}
+            {% endfor %}
+            {% endif %}
+            {% if nato_total == 0 %}<p class="no-change">No NATO NIAPCL changes detected.</p>{% endif %}
+          </div>
+        </div>
+
+<div class="section-group">
+  <div class="section-label">CCTL</div>
+  <!-- CCTL Updates -->
+<div class="card {% if cctl_total > 0 %}card-new{% endif %}" id="sec-cctl" data-has-changes="{{ cctl_total }}">
+  <div class="card-hdr" onclick="toggleCard(this)">
+    <span>CCTL Updates</span>
+    <span class="card-count">{{ cctl_total }} new item{% if cctl_total != 1 %}s{% endif %}</span>
+    </span>
+    <span class="toggle-icon collapsed">▼</span>
+  </div>
+  <div class="card-body {% if cctl_total == 0 %}collapsed{% endif %}">
+    {% for lab_name, lab_items in diff.cctl_labs.items() %}
+    {% if lab_items %}
+    <div class="lab-row">
+      <div class="lab-hdr" onclick="toggleLab(this)">
+        <span class="lab-name">{{ lab_name }}</span>
+        <span class="lab-cnt">{{ lab_items | length }} item{% if lab_items | length != 1 %}s{% endif %}</span>
+        <span class="lab-toggle">▼</span>
+      </div>
+      <div class="lab-body collapsed">
+        {% for item in lab_items %}
+        <div class="item-row" data-source="cctl" data-kind="new">
+          <a class="item-link" href="{{ item.link }}" target="_blank">{{ item.title }}</a>
+          <span class="item-meta">{{ item.published }}</span>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+    {% endif %}
+    {% endfor %}
+    {% if cctl_total == 0 %}<p class="no-change">No new items.{% if last_active.cctl %} <span class="last-active">Last: {{ last_active.cctl }}</span>{% endif %}</p>{% endif %}
+  </div>
 </div>
+</div>      
 </div>
+</div>   </div>
+
+      <div class="section-group" id="tab-pane-eu" data-tab="eu">
+        <div class="section-label">EU (EUCC / ENISA)</div>
+        <!-- EUCC Requirements -->
+        <div class="card {% if eucc_req_total > 0 %}card-updated{% endif %}" id="sec-eucc-req" data-has-changes="{{ eucc_req_total }}">
+          <div class="card-hdr" onclick="toggleCard(this)">
+            <span>EUCC Requirements &amp; Scheme Updates</span>
+            <span class="card-count">{{ eucc_req_total }} change{% if eucc_req_total != 1 %}s{% endif %}</span>
+            <span class="toggle-icon">{% if eucc_req_total == 0 %}&#9658;{% else %}&#9660;{% endif %}</span>
+          </div>
+          <div class="card-body {% if eucc_req_total == 0 %}collapsed{% endif %}">
+            {% if diff.eucc.pages and diff.eucc.pages.requirements %}
+            {% for item in diff.eucc.pages.requirements.added %}
+            <div class="item-row" data-source="eucc" data-kind="updated">
+              <a class="item-link" href="{{ item.href or '#' }}" target="_blank">{{ item.text or item.name or item }}</a>
+              <span class="item-meta"></span>
+            </div>
+            {% endfor %}
+            {% endif %}
+            {% if eucc_req_total == 0 %}<p class="no-change">No EUCC requirement changes detected.</p>{% endif %}
+          </div>
+        </div>
+        <!-- EUCC Certificates -->
+        <div class="card {% if eucc_cert_total > 0 %}card-new{% endif %}" id="sec-eucc-certs" data-has-changes="{{ eucc_cert_total }}">
+          <div class="card-hdr" onclick="toggleCard(this)">
+            <span>EUCC Certified Products</span>
+            <span class="card-count">{{ eucc_cert_total }} new{% if eucc_cert_total != 1 %} items{% else %} item{% endif %}</span>
+            <span class="toggle-icon">{% if eucc_cert_total == 0 %}&#9658;{% else %}&#9660;{% endif %}</span>
+          </div>
+          <div class="card-body {% if eucc_cert_total == 0 %}collapsed{% endif %}">
+            {% if diff.eucc.cisco_added %}
+            <div class="sub-hdr sub-new">New Cisco EUCC Certifications ({{ diff.eucc.cisco_added | length }})</div>
+            {% for item in diff.eucc.cisco_added %}
+            <div class="item-row" data-source="eucc" data-kind="new">
+              <a class="item-link" href="{{ item.href or '#' }}" target="_blank">{{ item.name or item.text }}</a>
+              <span class="item-meta"></span>
+            </div>
+            {% endfor %}
+            {% endif %}
+            {% if diff.eucc.pages and diff.eucc.pages.certificates %}
+            {% for item in diff.eucc.pages.certificates.added %}
+            <div class="item-row" data-source="eucc" data-kind="new">
+              <a class="item-link" href="{{ item.href or '#' }}" target="_blank">{{ item.name or item.text or item }}</a>
+              <span class="item-meta"></span>
+            </div>
+            {% endfor %}
+            {% endif %}
+            {% if eucc_cert_total == 0 %}<p class="no-change">No new EUCC certified products.</p>{% endif %}
+          </div>
+        </div>
+      </div>
 
 
+<div class="section-group" id="tab-pane-history" data-tab="history">
+<div class="section-label">History</div>
+
+<div class="card card-new" id="sec-history" data-has-changes="1">
+  <div class="card-hdr" onclick="toggleCard(this)">
+    <span>Change History</span>
+    <span class="card-count">{{ history_entries | length }} event{% if history_entries | length != 1 %}s{% endif %}</span>
+    <span class="toggle-icon">▼</span>
+  </div>
+  <div class="card-body">
+    <div class="tl-filter" id="tl-filter-bar">
+      <span style="font-size:.72rem;color:var(--muted);margin-right:.2rem">Filter:</span>
+      <button class="tl-filter-btn active" data-cat="all" onclick="filterHistory(this)">All</button>
+      <button class="tl-filter-btn" data-cat="cisco_cert" onclick="filterHistory(this)">🏆 Cisco NDcPP</button>
+      <button class="tl-filter-btn" data-cat="cisco_archived" onclick="filterHistory(this)">📦 Cisco Archived</button>
+      <button class="tl-filter-btn" data-cat="pp_new,pp_removed" onclick="filterHistory(this)">📄 PPs</button>
+      <button class="tl-filter-btn" data-cat="td_new" onclick="filterHistory(this)">📋 TDs</button>
+      <button class="tl-filter-btn" data-cat="pcl_cert" onclick="filterHistory(this)">✅ PCL Certs</button>
+      <button class="tl-filter-btn" data-cat="nato_cisco" onclick="filterHistory(this)">🛡 NATO</button>
+      <button class="tl-filter-btn" data-cat="eucc_cisco" onclick="filterHistory(this)">🇪🇺 EUCC</button>
+      <button class="tl-filter-btn" data-cat="csfc_change" onclick="filterHistory(this)">🔒 CSfC</button>
+      <button class="tl-filter-btn" data-cat="nist_doc" onclick="filterHistory(this)">📐 NIST</button>
+    </div>
+    <div class="timeline" id="history-timeline">
+    {% if history_entries %}
+      {% for entry in history_entries %}
+      <div class="tl-entry" data-cat="{{ entry.category }}">
+        <div class="tl-date">{{ entry.date }}</div>
+        <div class="tl-body">
+          <div class="tl-title">
+            <span class="tl-badge {{ entry.kind }}">{{ entry.kind }}</span>
+            {% if entry.url %}<a href="{{ entry.url }}" target="_blank">{{ entry.title }}</a>{% else %}{{ entry.title }}{% endif %}
+          </div>
+          {% if entry.detail %}<div class="tl-detail">{{ entry.detail }}</div>{% endif %}
+        </div>
+      </div>
+      {% endfor %}
+    {% else %}
+      <p class="tl-empty">No history entries found. Run the daily job at least once to populate this tab.</p>
+    {% endif %}
+    </div>
+  </div>
+</div>
+
+</div>
+
+</div><!-- /main-content -->
 <footer>
-  <span>CC Pulse &middot; Auto-refreshes daily (06:00 UTC) &middot; Data from NIAP, CSfC, NIST, CC Portal</span>
+  <span>CC Pulse &middot; Auto-refreshes daily (01:00 EST) &middot; NIAP, CSfC, NIST, CC Portal, NATO NIAPCL, EUCC / ENISA</span>
   <span>Last run: {{ generated_at }}</span>
 </footer>
 
 <script>
-function toggleCard(h){const b=h.nextElementSibling,i=h.querySelector('.toggle-icon'),c=b.classList.toggle('collapsed');if(i)i.textContent=c?'\u25ba':'\u25bc'}
+function toggleCard(h){const card=h.closest('.card'),b=card.nextElementSibling,i=card.querySelector('.toggle-icon'),c=b.classList.toggle('collapsed');if(i)i.textContent=c?'\u25ba':'\u25bc'}
 function expandAll(){document.querySelectorAll('.card-body').forEach(b=>{b.classList.remove('collapsed');const i=b.previousElementSibling.querySelector('.toggle-icon');if(i)i.textContent='\u25bc'})}
 function collapseAll(){document.querySelectorAll('.card-body').forEach(b=>{b.classList.add('collapsed');const i=b.previousElementSibling.querySelector('.toggle-icon');if(i)i.textContent='\u25ba'})}
 let _zeroHidden=false;
@@ -906,13 +1139,260 @@ function toggleZeroFilter(){_zeroHidden=!_zeroHidden;document.querySelectorAll('
 function dismissAlert(btn){const r=btn.closest('.item-row');if(r)r.classList.add('alert-dismissed')}
 function initAlertDismiss(){const stored=JSON.parse(sessionStorage.getItem('dismissed')||'[]');stored.forEach(k=>{const el=document.querySelector('[data-alert-key="'+k+'"]');if(el)el.classList.add('alert-dismissed')});document.querySelectorAll('.dismiss-btn').forEach(btn=>{btn.addEventListener('click',()=>{const r=btn.closest('[data-alert-key]');if(!r)return;const d=JSON.parse(sessionStorage.getItem('dismissed')||'[]');d.push(r.dataset.alertKey);sessionStorage.setItem('dismissed',JSON.stringify(d))})})}
 let _activeKind='all';
-function liveSearch(){const raw=(document.getElementById('search-input').value||'').trim(),term=raw.toLowerCase();document.querySelectorAll('mark.sh').forEach(m=>m.replaceWith(document.createTextNode(m.textContent)));const rows=document.querySelectorAll('.item-row,.cp-row');let vis=0;rows.forEach(row=>{const km=_activeKind==='all'||(_activeKind==='alert'&&row.closest('#sec-alerts'))||(row.dataset.kind===_activeKind);if(!km){row.classList.add('search-hidden');return}if(!term){row.classList.remove('search-hidden');vis++;return}const le=row.querySelector('.item-link'),me=row.querySelector('.item-meta'),se2=row.querySelector('.item-sub,.cp-detail'),hay=[le?le.textContent:'',me?me.textContent:'',se2?se2.textContent:''].join(' ').toLowerCase();if(hay.includes(term)){row.classList.remove('search-hidden');vis++;if(le)_highlight(le,raw)}else row.classList.add('search-hidden')});document.querySelectorAll('.card').forEach(card=>{const vr=card.querySelectorAll('.item-row:not(.search-hidden),.cp-row:not(.search-hidden)');let msg=card.querySelector('.no-results-msg');if(!msg){msg=document.createElement('p');msg.className='no-results-msg';msg.textContent='No matching items.';const body=card.querySelector('.card-body');if(body)body.appendChild(msg)}msg.style.display=(term||_activeKind!=='all')&&vr.length===0?'block':'none'});const ce=document.getElementById('search-count');if(ce)ce.textContent=(term||_activeKind!=='all')?vis+' result'+(vis!==1?'s':''):'';_reconcileGroupVisibility()}
-function _highlight(el,term){const w=document.createTreeWalker(el,NodeFilter.SHOW_TEXT),nodes=[];let n;while((n=w.nextNode()))nodes.push(n);const lt=term.toLowerCase();nodes.forEach(tn=>{const i=tn.nodeValue.toLowerCase().indexOf(lt);if(i===-1)return;const b=document.createTextNode(tn.nodeValue.slice(0,i)),m=document.createElement('mark');m.className='sh';m.textContent=tn.nodeValue.slice(i,i+term.length);const a=document.createTextNode(tn.nodeValue.slice(i+term.length));tn.parentNode.replaceChild(a,tn);tn.parentNode.insertBefore(m,a);tn.parentNode.insertBefore(b,m)})}
-function setKindFilter(btn){document.querySelectorAll('.chip').forEach(c=>c.classList.remove('active'));btn.classList.add('active');_activeKind=btn.dataset.kind;liveSearch()}
-function clearSearch(){const inp=document.getElementById('search-input');if(inp)inp.value='';document.querySelectorAll('.chip').forEach(c=>c.classList.remove('active'));const ac=document.querySelector('.chip[data-kind="all"]');if(ac)ac.classList.add('active');_activeKind='all';liveSearch()}
-function _reconcileGroupVisibility(){document.querySelectorAll('.section-group').forEach(g=>{const hv=[...g.querySelectorAll('.card')].some(c=>!c.classList.contains('zero-hidden')&&getComputedStyle(c).display!=='none');g.style.display=hv?'':' none'})}
-document.addEventListener('keydown',e=>{const t=document.activeElement.tagName;if(t==='INPUT'||t==='TEXTAREA'){if(e.key==='Escape'){clearSearch();document.activeElement.blur()}return}if(e.key==='e'||e.key==='E')expandAll();if(e.key==='c'||e.key==='C')collapseAll();if(e.key==='f'||e.key==='F')toggleZeroFilter();if(e.key==='/'){e.preventDefault();const inp=document.getElementById('search-input');if(inp)inp.focus()}});
-document.addEventListener('DOMContentLoaded',initAlertDismiss);
+function toggleDarkMode() {
+  const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+  document.documentElement.setAttribute('data-theme', isDark ? 'light' : 'dark');
+  const btn = document.getElementById('dark-toggle');
+  if (btn) btn.textContent = isDark ? '🌙 Dark' : '\u2600\uFE0F Light';
+  updateHamDarkLabel(isDark);
+  localStorage.setItem('cc-pulse-theme', isDark ? 'light' : 'dark');
+}
+
+function markAllAlertsSeen(evt) {
+  if (evt) evt.stopPropagation();
+  document.querySelectorAll('.alert-item').forEach(function(item) {
+    item.style.opacity = '0.45';
+    item.style.transform = 'scale(0.98)';
+  });
+  const btn = document.getElementById('mark-all-alerts');
+  if (btn) { btn.textContent = '\u2713 All Seen'; btn.disabled = true; }
+  const countEl = document.querySelector('.card-alert .card-count');
+  if (countEl) countEl.style.opacity = '0.4';
+  localStorage.setItem('cc-alerts-seen-' + new Date().toDateString(), '1');
+}
+
+function copyFeedUrl() {
+  const url = 'https://kr15tyk.github.io/CC-pulse/cc_pulse.rss';
+  if (navigator.clipboard) {
+    navigator.clipboard.writeText(url).then(function() {
+      const btn = document.getElementById('copy-feed-btn');
+      if (btn) { const orig = btn.textContent; btn.textContent = '\u2713 Copied!'; setTimeout(function(){ btn.textContent = orig; }, 2000); }
+    });
+  }
+}
+
+function toggleHamMenu() {
+  var menu = document.getElementById('ham-menu');
+  var btn  = document.getElementById('ham-btn');
+  var open = menu.classList.toggle('open');
+  btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+}
+function closeHamMenu() {
+  var menu = document.getElementById('ham-menu');
+  var btn  = document.getElementById('ham-btn');
+  if (menu) { menu.classList.remove('open'); }
+  if (btn)  { btn.setAttribute('aria-expanded', 'false'); }
+}
+function updateHamDarkLabel(isDark) {
+  var icon  = document.getElementById('ham-dark-icon');
+  var label = document.getElementById('ham-dark-label');
+  if (icon)  icon.textContent  = isDark ? '🌙' : '☀️';
+  if (label) label.textContent = isDark ? 'Dark Mode' : 'Light Mode';
+}
+document.addEventListener('click', function(e) {
+  var wrap = document.querySelector('.ham-wrap');
+  if (wrap && !wrap.contains(e.target)) closeHamMenu();
+});
+function showSourcesModal() {
+  closeHamMenu();
+  document.getElementById('sources-overlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeSourcesModal() {
+  document.getElementById('sources-overlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+function closeSourcesModalOutside(e) {
+  if (e.target === document.getElementById('sources-overlay')) closeSourcesModal();
+}
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') { closeSourcesModal(); closeHamMenu(); }
+});
+function initEnhancements() {
+  // Dark mode restore
+  const savedTheme = localStorage.getItem('cc-pulse-theme') || 'light';
+  document.documentElement.setAttribute('data-theme', savedTheme);
+  const darkBtn = document.getElementById('dark-toggle');
+  if (darkBtn) darkBtn.textContent = savedTheme === 'dark' ? '\u2600\uFE0F Light' : '🌙 Dark';
+  updateHamDarkLabel(document.documentElement.getAttribute('data-theme') === 'dark');
+
+  // Zero stat tile de-emphasis
+  document.querySelectorAll('.stat').forEach(function(tile) {
+    const num = tile.querySelector('.stat-num');
+    if (num && num.textContent.trim() === '0') tile.classList.add('no-data');
+  });
+
+  // New since last visit badges
+  const lastVisit = parseInt(localStorage.getItem('cc-last-visit') || '0');
+  const now = Date.now();
+  localStorage.setItem('cc-last-visit', now.toString());
+  if (lastVisit > 0) {
+    document.querySelectorAll('.tl-entry').forEach(function(entry) {
+      const dateEl = entry.querySelector('.tl-date');
+      if (!dateEl) return;
+      const entryTime = new Date(dateEl.textContent.trim()).getTime();
+      if (entryTime > lastVisit && entryTime < now) {
+        const titleEl = entry.querySelector('.tl-title');
+        if (titleEl && !titleEl.querySelector('.new-badge')) {
+          const badge = document.createElement('span');
+          badge.className = 'new-badge';
+          badge.textContent = 'NEW';
+          titleEl.insertBefore(badge, titleEl.firstChild);
+        }
+      }
+    });
+  }
+
+  // Dynamically add Mark All Seen button to alerts card header
+  const alertItems = document.querySelectorAll('.alert-item');
+  if (alertItems.length > 0) {
+    const alertHdr = document.querySelector('.card-alert .card-hdr');
+    if (alertHdr && !alertHdr.querySelector('.mark-all-btn')) {
+      const markBtn = document.createElement('button');
+      markBtn.id = 'mark-all-alerts';
+      markBtn.className = 'ctrl-btn mark-all-btn';
+      markBtn.title = 'Mark all as seen';
+      markBtn.textContent = '\u2713 Mark All Seen';
+      markBtn.addEventListener('click', function(e) { e.stopPropagation(); markAllAlertsSeen(e); });
+      const toggleIcon = alertHdr.querySelector('.toggle-icon');
+      if (toggleIcon) alertHdr.insertBefore(markBtn, toggleIcon);
+      else alertHdr.appendChild(markBtn);
+    }
+  }
+
+  // Tab change count badges
+  const tabCounts = {};
+  document.querySelectorAll('.section-group').forEach(function(sg) {
+    const tab = sg.getAttribute('data-tab');
+    if (!tab || tab === 'history') return;
+    const count = sg.querySelectorAll('.item-row:not(.no-change)').length;
+    tabCounts[tab] = (tabCounts[tab] || 0) + count;
+  });
+  document.querySelectorAll('.tab-btn').forEach(function(btn) {
+    const tab = btn.getAttribute('data-tab');
+    const count = tabCounts[tab];
+    if (count > 0 && !btn.querySelector('.tab-badge')) {
+      const badge = document.createElement('span');
+      badge.className = 'tab-badge';
+      badge.textContent = count;
+      btn.appendChild(badge);
+    }
+  });
+
+  // History 7-day digest nav
+  const histSec = document.querySelector('.section-group[data-tab="history"]');
+  if (histSec) {
+    const card = histSec.querySelector('.card');
+    if (card && !histSec.querySelector('.hist-nav')) {
+      const navDiv = document.createElement('div');
+      navDiv.className = 'hist-nav';
+      navDiv.innerHTML = '<span style="font-size:.75rem;color:var(--muted);font-weight:600">View:</span>' +
+        '<button class="hist-nav-btn active" data-hist-view="week">Last 7 Days</button>' +
+        '<button class="hist-nav-btn" data-hist-view="month">Last 30 Days</button>' +
+        '<button class="hist-nav-btn" data-hist-view="all">All History</button>';
+      navDiv.querySelectorAll('.hist-nav-btn').forEach(function(b) {
+        b.addEventListener('click', function() { setHistoryView(b); });
+      });
+      histSec.insertBefore(navDiv, card);
+      setHistoryView(navDiv.querySelector('[data-hist-view="week"]'));
+    }
+  }
+}
+
+function applyHistoryFilters() {
+  const activeViewBtn = document.querySelector('.hist-nav-btn.active');
+  const view = activeViewBtn ? activeViewBtn.getAttribute('data-hist-view') : 'week';
+  const activeFilterBtn = document.querySelector('.tl-filter-btn.active');
+  const cats = activeFilterBtn ? activeFilterBtn.dataset.cat.split(',') : ['all'];
+  const daysBack = view === 'month' ? 30 : 7;
+  const cutoff = new Date();
+  cutoff.setDate(cutoff.getDate() - daysBack);
+  document.querySelectorAll('.tl-entry').forEach(function(entry) {
+    let showByDate = true;
+    if (view !== 'all') {
+      const dateEl = entry.querySelector('.tl-date');
+      showByDate = dateEl ? new Date(dateEl.textContent.trim() + 'T00:00:00') >= cutoff : true;
+    }
+    const showByCat = cats[0] === 'all' || cats.includes(entry.dataset.cat);
+    entry.style.display = (showByDate && showByCat) ? '' : 'none';
+  });
+}
+
+function setHistoryView(btn) {
+  document.querySelectorAll('.hist-nav-btn').forEach(function(b) { b.classList.remove('active'); });
+  if (btn) btn.classList.add('active');
+  applyHistoryFilters();
+}
+
+document.addEventListener('click', function(e) {
+  const box = document.getElementById('keys-hint-box');
+  const btn = document.getElementById('keys-hint-btn');
+  if (box && box.classList.contains('visible') && !box.contains(e.target) && e.target !== btn) {
+    box.classList.remove('visible');
+  }
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+  initAlertDismiss();
+  initEnhancements();
+});
+
+function switchTab(btn) {
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            const tab = btn.dataset.tab;
+            // Show/hide NATO and EU tab panes
+            document.querySelectorAll('.section-group[data-tab]').forEach(p => {
+                p.classList.toggle('tab-active', p.dataset.tab === tab);
+            });
+            // Show/hide US sections (those without data-tab attribute, inside .grid)
+            document.querySelectorAll('.grid > .section-group:not([data-tab])').forEach(p => {
+                p.classList.toggle('tab-us-hidden', tab !== 'us');
+            });
+
+            // Auto-collapse alerts when leaving US tab (never force-expand)
+            const alertCard=document.getElementById('sec-alerts');
+            if(alertCard){
+              const alertBody=alertCard.nextElementSibling;
+              const alertIcon=alertCard.querySelector('.toggle-icon');
+              const isUS=(btn.dataset.tab==='us'||!btn.dataset.tab);
+              if(!isUS&&alertBody&&!alertBody.classList.contains('collapsed')){
+                alertBody.classList.add('collapsed');
+                if(alertIcon)alertIcon.textContent='\u25ba';
+              }
+            }
+        }
+  
+
+      function navigateTo(sectionId) {
+        const section = document.getElementById(sectionId);
+        if (!section) return;
+        // Determine target tab: intl/eu panes carry data-tab; US sections have none
+        const pane = section.closest('.section-group[data-tab]');
+        const targetTab = pane ? pane.dataset.tab : 'us';
+        const activeBtn = document.querySelector('.tab-btn.active');
+        if (!activeBtn || activeBtn.dataset.tab !== targetTab) {
+          const btn = document.querySelector('.tab-btn[data-tab="' + targetTab + '"]');
+          if (btn) switchTab(btn);
+        }
+        // Expand the section's first collapsed card
+        const firstCard = section.querySelector('.card-header');
+        if (firstCard) {
+          const body = firstCard.nextElementSibling;
+          if (body && body.classList.contains('collapsed')) toggleCard(firstCard);
+        }
+        // Scroll after tab switch reflow
+        setTimeout(() => {
+          section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 50);
+      }
+
+function filterHistory(btn) {
+  // Update active button
+  document.querySelectorAll('.tl-filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  applyHistoryFilters();
+}
 </script>
 </body>
 </html>
@@ -965,13 +1445,13 @@ def _build_rss(diff: dict, generated_at: str) -> str:
                 f"<description>{xml_escape(it.get('summary', '')[:200])}</description></item>"
             )
 
-    for cp_name, cp in diff.get("csfc", {}).get("capability_packages", {}).items():
+    for cp_name, cp in diff.get("csfc", {}).get("component_selections", {}).items():
         if cp.get("changed"):
-            link = cp.get("url", "https://www.nsa.gov/")
+            link = cp.get("url", "https://www.nsa.gov/Resources/Commercial-Solutions-for-Classified-Program/Components-List/")
             items_xml.append(
-                f"<item><title>{xml_escape('CSfC CP Updated: ' + cp_name)}</title>"
+                f"<item><title>{xml_escape('CSfC Selection Updated: ' + cp_name)}</title>"
                 f"<link>{link}</link>"
-                f"<description>Capability package updated.</description></item>"
+                f"<description>Component selection document updated.</description></item>"
             )
 
     for doc_name, doc in diff.get("nist", {}).get("doc_headers", {}).items():
@@ -1015,7 +1495,8 @@ def _build_rss(diff: dict, generated_at: str) -> str:
 def render_dashboard(diff: dict, output_dir: str = "docs") -> None:
     """Render the HTML dashboard and RSS feed from a diff dict."""
     os.makedirs(output_dir, exist_ok=True)
-    generated_at = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
+    ET = ZoneInfo("America/New_York")
+    generated_at = datetime.now(ET).strftime("%Y-%m-%d %H:%M ET")
 
     # Compute totals
     niap         = diff.get("niap", {})
@@ -1040,7 +1521,7 @@ def render_dashboard(diff: dict, output_dir: str = "docs") -> None:
     niap_news_total = len(news.get("added", []))
 
     cctl_total      = sum(len(v) for v in diff.get("cctl_labs", {}).values() if v)
-    csfc_total      = sum(1 for cp in diff.get("csfc", {}).get("capability_packages", {}).values()
+    csfc_total      = sum(1 for cp in diff.get("csfc", {}).get("component_selections", {}).values()
                           if cp.get("changed"))
     cc_crypto_total = sum(1 for d in diff.get("cc_crypto", {}).get("doc_headers", {}).values()
                           if d.get("changed"))
@@ -1053,11 +1534,6 @@ def render_dashboard(diff: dict, output_dir: str = "docs") -> None:
     csfc_total_stat = csfc_total
     nist_total_stat = nist_total + cc_crypto_total
 
-    # CCTL registry changes
-    cctls_diff          = niap.get("cctls", {})
-    cctl_registry_total = (len(cctls_diff.get("added", [])) +
-                           len(cctls_diff.get("removed", [])) +
-                           len(cctls_diff.get("status_changes", [])))
 
     # CC Portal totals
     ccp                 = diff.get("cc_portal", {})
@@ -1067,47 +1543,28 @@ def render_dashboard(diff: dict, output_dir: str = "docs") -> None:
     cc_portal_total     = cc_portal_news_n + cc_portal_pps_n + cc_portal_prod_n
     cc_portal_total_stat = cc_portal_total
 
-    # Sparkline data
+    # NATO NIAPCL totals
+    nato_diff = diff.get("nato", {})
+    nato_total = (
+        len(nato_diff.get("cisco_added", [])) +
+        len(nato_diff.get("cisco_removed", [])) +
+        sum(len(v.get("added", [])) for v in nato_diff.get("pages", {}).values())
+    )
+
+    # EUCC totals
+    eucc_diff = diff.get("eucc", {})
+    eucc_req_total  = len(eucc_diff.get("pages", {}).get("requirements", {}).get("added", []))
+    eucc_cert_total = (
+        len(eucc_diff.get("cisco_added", [])) +
+        len(eucc_diff.get("pages", {}).get("certificates", {}).get("added", []))
+    )
+    eucc_total = eucc_req_total + eucc_cert_total
+
+    history_entries = _build_history()
+
+
+
     recent_diffs = _load_recent_diffs()
-    def _sp(section_key):
-        counts = _section_daily_counts(recent_diffs, section_key)
-        if not counts:
-            return [0] * 7
-        mx = max(counts) or 1
-        return [round(c / mx * 100) for c in counts]
-
-    def _sp_counts(section_key):
-        counts = _section_daily_counts(recent_diffs, section_key)
-        if not counts:
-            return [0] * 7
-        return counts
-
-    sparklines = {
-        "niap_pp":   _sp("niap_pp"),
-        "niap_td":   _sp("niap_td"),
-        "niap_news": _sp("niap_news"),
-        "cctl":      _sp("cctl"),
-        "csfc":      _sp("csfc"),
-        "cc_crypto": _sp("cc_crypto"),
-        "nist":      _sp("nist"),
-        "cc_portal": _sp("cc_portal"),
-        "pcl_all":   _sp("pcl_all"),
-        "in_eval":   _sp("in_eval"),
-    }
-
-    sp_counts = {
-        "niap_pp":   _sp_counts("niap_pp"),
-        "niap_td":   _sp_counts("niap_td"),
-        "niap_news": _sp_counts("niap_news"),
-        "cctl":      _sp_counts("cctl"),
-        "csfc":      _sp_counts("csfc"),
-        "cc_crypto": _sp_counts("cc_crypto"),
-        "nist":      _sp_counts("nist"),
-        "cc_portal": _sp_counts("cc_portal"),
-        "pcl_all":   _sp_counts("pcl_all"),
-        "in_eval":   _sp_counts("in_eval"),
-    }
-
     # Last-active dates: find most recent diff where each section had changes
     def _last_active(section_key):
         for d in reversed(recent_diffs):
@@ -1139,8 +1596,6 @@ def render_dashboard(diff: dict, output_dir: str = "docs") -> None:
         cctl_total_stat = cctl_total_stat,
         csfc_total_stat = csfc_total_stat,
         nist_total_stat = nist_total_stat,
-        sparklines      = sparklines,
-        cctl_registry_total  = cctl_registry_total,
         cc_portal_total      = cc_portal_total,
         cc_portal_total_stat = cc_portal_total_stat,
         period_start         = diff.get("period_start", ""),
@@ -1150,9 +1605,17 @@ def render_dashboard(diff: dict, output_dir: str = "docs") -> None:
         in_eval_total        = in_eval_total,
         in_eval_current      = in_eval_current,
         period_end           = diff.get("period_end", ""),
-        sp_counts            = sp_counts,
         last_active          = last_active,
         watch_keywords       = config.WATCH_KEYWORDS,
+    history_entries      = history_entries,
+        nato_total           = nato_total,
+        eucc_total           = eucc_total,
+        eucc_req_total       = eucc_req_total,
+        eucc_cert_total      = eucc_cert_total,
+        config_nato_url      = config.NATO_NIAPCL_URL,
+        config_eucc_req_url  = config.EUCC_REQUIREMENTS_URL,
+        config_eucc_cert_url = config.EUCC_CERTIFICATES_URL,
+        noindex_meta         = '<meta name="robots" content="noindex, nofollow">' if config.STAGING_DIR in output_dir else '',
     )
 
     html_path = os.path.join(output_dir, "cc_dashboard.html")
