@@ -58,7 +58,18 @@ jobs:
                   # Temporarily patch the header by wrapping alerts with a note
                   emailer.send_webex_alert(alerts)
                   emailer.send_webhook_alert(alerts)
+                  # Always post new TDs regardless of keyword matches
+                  new_tds = diff.get("niap", {}).get("tds", {}).get("added", [])
+                  if new_tds:
+                      print(f"[{date}] Sending new TDs Webex notification ({len(new_tds)} TD(s))...")
+                      emailer.send_new_tds_webex(new_tds)
                   print(f"[{date}] Done.")
               else:
-                  print(f"[{date}] No keyword alerts found after re-scan -- nothing to post.")
+                  print(f"[{date}] No keyword alerts -- checking for new TDs...")
+                  new_tds = diff.get("niap", {}).get("tds", {}).get("added", [])
+                  if new_tds:
+                      print(f"[{date}] Sending new TDs Webex notification ({len(new_tds)} TD(s))...")
+                      emailer.send_new_tds_webex(new_tds)
+                  else:
+                      print(f"[{date}] No new TDs either -- nothing to post.")
           PYEOF
