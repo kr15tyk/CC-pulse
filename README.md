@@ -106,7 +106,8 @@ Below the stat bar, the dashboard is split into four tabs:
 | Tab | What's in it |
 |-----|-------------|
 | 🇺🇸 US (NIAP / CSfC / NIST) | All NIAP, CSfC, NIST, and CC Portal cards |
-| 🌐 International | NATO NIAPCL, EUCC, CC Portal, and CCTL Updates cards |
+| 🌐 International | NATO NIAPCL, CC Portal, and CCTL Updates cards |
+| 🇪🇺 EU (EUCC / ENISA) | EUCC requirements and issued certificates |
 | 📅 History | Full change timeline across all sources |
 | ⚡ Alerts | Keyword-matched items (only appears when alerts exist) |
 
@@ -140,7 +141,7 @@ What you'll find in the cards:
 - **CC Portal (International)** — International CC news and certified products
 - **NATO NIAPCL** — New, removed, or changed NATO-certified products (International tab)
 - **CCTL Updates** — New posts from evaluation labs (International tab)
-- **EUCC Certificates** — New or changed EUCC-certified products (International tab)
+- **EUCC Certificates** — New or changed EUCC-certified products (EU tab)
 - **Alerts** — Full list of keyword-matched items (only appears when alerts exist)
 
 ### Colour Coding
@@ -161,7 +162,7 @@ The Alerts card shows a **"Mark All Seen"** button when there are unseen alerts.
 
 ### History Tab
 
-The History tab shows a full timeline of all changes across recent daily runs. By default it shows the **last 7 days**; use the **All History** / **Last 7 Days** navigation buttons to switch views. Entries that are new since your last visit are tagged with a **NEW** badge.
+The History tab shows a full timeline of all changes across recent daily runs. By default it shows the **last 7 days**; use the **Last 7 Days** / **Last 30 Days** / **All History** navigation buttons to switch views. Entries that are new since your last visit are tagged with a **NEW** badge.
 
 ---
 
