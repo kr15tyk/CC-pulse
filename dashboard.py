@@ -442,7 +442,7 @@ DASHBOARD_TEMPLATE = """
         <div class="sources-item"><span class="src-label">Main:</span><a href="https://www.nsa.gov/Resources/Commercial-Solutions-for-Classified-Program/" target="_blank" rel="noopener">nsa.gov &mdash; CSfC Home</a></div>
         <div class="sources-item"><span class="src-label">Components List:</span><a href="https://www.nsa.gov/Resources/Commercial-Solutions-for-Classified-Program/Components-List/" target="_blank" rel="noopener">nsa.gov &mdash; CSfC APL Components</a></div>
         <div class="sources-item"><span class="src-label">Capability Packages:</span><a href="https://www.nsa.gov/Resources/Commercial-Solutions-for-Classified-Program/Capability-Packages/" target="_blank" rel="noopener">nsa.gov &mdash; Capability Packages</a></div>
-        <div class="sources-item"><span class="src-label">NSA Advisories (RSS):</span><a href="https://www.nsa.gov/DesktopModules/ArticleCS/RSS.ashx?ContentType=1&amp;Site=1282&amp;max=20" target="_blank" rel="noopener">nsa.gov &mdash; Cybersecurity RSS</a></div>
+        <div class="sources-item"><span class="src-label">NSA Advisories (RSS):</span><a href="https://www.nsa.gov/DesktopModules/ArticleCS/RSS.ashx?ContentType=1&amp;Site=1282&amp;max=20" target="_blank" rel="noopener">nsa.gov &mdash; NSA News RSS</a></div>
         <div class="sources-item"><span class="src-label">CISA Alerts (RSS):</span><a href="https://www.cisa.gov/cybersecurity-advisories/all.xml" target="_blank" rel="noopener">cisa.gov &mdash; All Advisories</a></div>
       </div>
       <div class="sources-group">
@@ -451,7 +451,7 @@ DASHBOARD_TEMPLATE = """
         <div class="sources-item"><span class="src-label">FIPS Publications:</span><a href="https://csrc.nist.gov/publications/fips" target="_blank" rel="noopener">csrc.nist.gov &mdash; FIPS Pubs</a></div>
         <div class="sources-item"><span class="src-label">CMVP (Modules In Process):</span><a href="https://csrc.nist.gov/projects/cryptographic-module-validation-program/modules-in-process/modules-in-process-list" target="_blank" rel="noopener">csrc.nist.gov &mdash; CMVP MIP</a></div>
         <div class="sources-item"><span class="src-label">Post-Quantum Crypto:</span><a href="https://csrc.nist.gov/projects/post-quantum-cryptography" target="_blank" rel="noopener">csrc.nist.gov &mdash; PQC Project</a></div>
-        <div class="sources-item"><span class="src-label">NIST News (RSS):</span><a href="https://www.nist.gov/news-events/cybersecurity/rss.xml" target="_blank" rel="noopener">nist.gov &mdash; Cybersecurity RSS</a></div>
+        <div class="sources-item"><span class="src-label">NIST News (RSS):</span><a href="https://www.nist.gov/news-events/cybersecurity/rss.xml" target="_blank" rel="noopener">nist.gov &mdash; Cybersecurity RSS (⚠️ empty feed)</a></div>
       </div>
       <div class="sources-group">
         <div class="sources-group-title">🌐 CC Portal (International)</div>
@@ -459,7 +459,7 @@ DASHBOARD_TEMPLATE = """
         <div class="sources-item"><span class="src-label">Products:</span><a href="https://www.commoncriteriaportal.org/products/index.cfm" target="_blank" rel="noopener">commoncriteriaportal.org &mdash; Products</a></div>
         <div class="sources-item"><span class="src-label">Protection Profiles:</span><a href="https://www.commoncriteriaportal.org/pps/index.cfm" target="_blank" rel="noopener">commoncriteriaportal.org &mdash; PPs</a></div>
         <div class="sources-item"><span class="src-label">Publications (Crypto):</span><a href="https://www.commoncriteriaportal.org/cc/index.cfm" target="_blank" rel="noopener">commoncriteriaportal.org &mdash; CC Publications</a></div>
-        <div class="sources-item"><span class="src-label">PP RSS:</span><a href="https://www.commoncriteriaportal.org/rss/pps.xml" target="_blank" rel="noopener">commoncriteriaportal.org &mdash; PP RSS Feed</a></div>
+        <div class="sources-item"><span class="src-label">PP RSS:</span><a href="https://www.commoncriteriaportal.org/rss/pps.xml" target="_blank" rel="noopener">commoncriteriaportal.org &mdash; PP RSS Feed (⚠️ abandoned, last updated 2018)</a></div>
       </div>
       <div class="sources-group">
         <div class="sources-group-title">🇪🇺 EUCC / ENISA</div>
