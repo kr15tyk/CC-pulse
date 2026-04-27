@@ -179,7 +179,7 @@
   <span class="nav-title">CC Pulse Dashboard</span>
   <span class="nav-spacer"></span>
   <div class="ham-wrap">
-    <span class="nav-meta">Last run: 2026-04-26 04:03 ET</span>
+    <span class="nav-meta">Last run: 2026-04-27 05:05 ET</span>
     <button class="ham-btn" id="ham-btn" onclick="toggleHamMenu()" aria-expanded="false" aria-haspopup="true" title="Open menu">&#9776;</button>
     <div class="ham-menu" id="ham-menu" role="menu">
       <a class="ham-item" href="https://kr15tyk.github.io/CC-pulse/cc_dashboard.html" role="menuitem"><span class="ham-icon">&#127968;</span>Home</a>
@@ -209,7 +209,7 @@
         <div class="sources-item"><span class="src-label">Main:</span><a href="https://www.nsa.gov/Resources/Commercial-Solutions-for-Classified-Program/" target="_blank" rel="noopener">nsa.gov &mdash; CSfC Home</a></div>
         <div class="sources-item"><span class="src-label">Components List:</span><a href="https://www.nsa.gov/Resources/Commercial-Solutions-for-Classified-Program/Components-List/" target="_blank" rel="noopener">nsa.gov &mdash; CSfC APL Components</a></div>
         <div class="sources-item"><span class="src-label">Capability Packages:</span><a href="https://www.nsa.gov/Resources/Commercial-Solutions-for-Classified-Program/Capability-Packages/" target="_blank" rel="noopener">nsa.gov &mdash; Capability Packages</a></div>
-        <div class="sources-item"><span class="src-label">NSA Advisories (RSS):</span><a href="https://www.nsa.gov/DesktopModules/ArticleCS/RSS.ashx?ContentType=1&amp;Site=1282&amp;max=20" target="_blank" rel="noopener">nsa.gov &mdash; Cybersecurity RSS</a></div>
+        <div class="sources-item"><span class="src-label">NSA Advisories (RSS):</span><a href="https://www.nsa.gov/DesktopModules/ArticleCS/RSS.ashx?ContentType=1&amp;Site=1282&amp;max=20" target="_blank" rel="noopener">nsa.gov &mdash; NSA News RSS</a></div>
         <div class="sources-item"><span class="src-label">CISA Alerts (RSS):</span><a href="https://www.cisa.gov/cybersecurity-advisories/all.xml" target="_blank" rel="noopener">cisa.gov &mdash; All Advisories</a></div>
       </div>
       <div class="sources-group">
@@ -218,7 +218,7 @@
         <div class="sources-item"><span class="src-label">FIPS Publications:</span><a href="https://csrc.nist.gov/publications/fips" target="_blank" rel="noopener">csrc.nist.gov &mdash; FIPS Pubs</a></div>
         <div class="sources-item"><span class="src-label">CMVP (Modules In Process):</span><a href="https://csrc.nist.gov/projects/cryptographic-module-validation-program/modules-in-process/modules-in-process-list" target="_blank" rel="noopener">csrc.nist.gov &mdash; CMVP MIP</a></div>
         <div class="sources-item"><span class="src-label">Post-Quantum Crypto:</span><a href="https://csrc.nist.gov/projects/post-quantum-cryptography" target="_blank" rel="noopener">csrc.nist.gov &mdash; PQC Project</a></div>
-        <div class="sources-item"><span class="src-label">NIST News (RSS):</span><a href="https://www.nist.gov/news-events/cybersecurity/rss.xml" target="_blank" rel="noopener">nist.gov &mdash; Cybersecurity RSS</a></div>
+        <div class="sources-item"><span class="src-label">NIST News (RSS):</span><a href="https://www.nist.gov/news-events/cybersecurity/rss.xml" target="_blank" rel="noopener">nist.gov &mdash; Cybersecurity RSS (⚠️ empty feed)</a></div>
       </div>
       <div class="sources-group">
         <div class="sources-group-title">🌐 CC Portal (International)</div>
@@ -226,7 +226,7 @@
         <div class="sources-item"><span class="src-label">Products:</span><a href="https://www.commoncriteriaportal.org/products/index.cfm" target="_blank" rel="noopener">commoncriteriaportal.org &mdash; Products</a></div>
         <div class="sources-item"><span class="src-label">Protection Profiles:</span><a href="https://www.commoncriteriaportal.org/pps/index.cfm" target="_blank" rel="noopener">commoncriteriaportal.org &mdash; PPs</a></div>
         <div class="sources-item"><span class="src-label">Publications (Crypto):</span><a href="https://www.commoncriteriaportal.org/cc/index.cfm" target="_blank" rel="noopener">commoncriteriaportal.org &mdash; CC Publications</a></div>
-        <div class="sources-item"><span class="src-label">PP RSS:</span><a href="https://www.commoncriteriaportal.org/rss/pps.xml" target="_blank" rel="noopener">commoncriteriaportal.org &mdash; PP RSS Feed</a></div>
+        <div class="sources-item"><span class="src-label">PP RSS:</span><a href="https://www.commoncriteriaportal.org/rss/pps.xml" target="_blank" rel="noopener">commoncriteriaportal.org &mdash; PP RSS Feed (⚠️ abandoned, last updated 2018)</a></div>
       </div>
       <div class="sources-group">
         <div class="sources-group-title">🇪🇺 EUCC / ENISA</div>
@@ -263,7 +263,7 @@
       <div class="stat-lbl">CSfC Selection Updates</div>
     </a></div>
     <div class="stat"><a href="#sec-nist" onclick="navigateTo('sec-nist');return false;">
-      <div class="stat-num ">0</div>
+      <div class="stat-num active-num">2</div>
       <div class="stat-lbl">NIST Doc Updates</div>
     </a></div>
     <div class="stat"><a href="#sec-cc-portal" onclick="navigateTo('sec-cc-portal');return false;">
@@ -453,16 +453,34 @@
 </div>
 
   <!-- NIST Docs -->
-<div class="card " id="sec-nist" data-has-changes="0">
+<div class="card card-updated" id="sec-nist" data-has-changes="2">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>NIST Documentation</span>
-    <span class="card-count">0 updates</span>
+    <span class="card-count">2 updates</span>
     </span>
-    <span class="toggle-icon">&#9658;</span>
+    <span class="toggle-icon">&#9660;</span>
   </div>
-  <div class="card-body collapsed">
+  <div class="card-body ">
     
-    <p class="no-change">No changes detected. <span class="last-active">(last: 2026-04-23)</span></p>
+    
+    <div class="item-row" data-source="nist" data-kind="updated">
+      <a class="item-link" href="https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-131Ar2.pdf" target="_blank">SP 800-131A Rev 2</a>
+      <span class="item-meta">
+        Header changed
+      </span>
+    </div>
+    
+    
+    
+    <div class="item-row" data-source="nist" data-kind="updated">
+      <a class="item-link" href="https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-57pt1r5.pdf" target="_blank">SP 800-57 Part 1 Rev 5</a>
+      <span class="item-meta">
+        Header changed
+      </span>
+    </div>
+    
+    
+    
   </div>
 </div>
 </div>
@@ -554,7 +572,7 @@
 <div class="card card-new" id="sec-history" data-has-changes="1">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>Change History</span>
-    <span class="card-count">1433 events</span>
+    <span class="card-count">1435 events</span>
     <span class="toggle-icon">▼</span>
   </div>
   <div class="card-body">
@@ -573,6 +591,28 @@
     </div>
     <div class="timeline" id="history-timeline">
     
+      
+      <div class="tl-entry" data-cat="nist_doc">
+        <div class="tl-date">2026-04-27</div>
+        <div class="tl-body">
+          <div class="tl-title">
+            <span class="tl-badge updated">updated</span>
+            <a href="https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-131Ar2.pdf" target="_blank">NIST doc updated: SP 800-131A Rev 2</a>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="tl-entry" data-cat="nist_doc">
+        <div class="tl-date">2026-04-27</div>
+        <div class="tl-body">
+          <div class="tl-title">
+            <span class="tl-badge updated">updated</span>
+            <a href="https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-57pt1r5.pdf" target="_blank">NIST doc updated: SP 800-57 Part 1 Rev 5</a>
+          </div>
+          
+        </div>
+      </div>
       
       <div class="tl-entry" data-cat="td_new">
         <div class="tl-date">2026-04-25</div>
@@ -16347,7 +16387,7 @@
 </div><!-- /main-content -->
 <footer>
   <span>CC Pulse &middot; Auto-refreshes daily (01:00 EST) &middot; NIAP, CSfC, NIST, CC Portal, NATO NIAPCL, EUCC / ENISA</span>
-  <span>Last run: 2026-04-26 04:03 ET</span>
+  <span>Last run: 2026-04-27 05:05 ET</span>
 </footer>
 
 <script>
