@@ -1,0 +1,144 @@
+{
+  "period_start": "2026-04-27T08:24:43.500064+00:00",
+  "period_end": "2026-04-28T08:25:54.345070+00:00",
+  "niap": {
+    "pps": {
+      "added": [],
+      "removed": [],
+      "sunset_changes": [],
+      "status_changes": []
+    },
+    "tds": {
+      "added": [
+        {
+          "td_id": 1035,
+          "identifier": "TD1035",
+          "title": "Correction to Appendix E reference in FPT_TST.1 TSS Activity",
+          "protection_profile": [
+            {
+              "pp_id": 539,
+              "pp_name": "Protection Profile for General Purpose Computing Platform, Version 2.0",
+              "pp_common_name": "Protection Profile for General Purpose Computing Platform, Version 2.0",
+              "cc_version": "CC:2022",
+              "mr_version": null,
+              "pp_date": "2026-04-22T00:00:00Z",
+              "entrydate": "2026-03-31T08:47:14.901000Z",
+              "tech_type": "Hardware Platform and Components",
+              "pp_sponsor_id": "NIAP",
+              "community_id": null,
+              "status": "Publishing",
+              "sunset_date": null,
+              "pp_overview": "<p style=\"margin-top: 0in; background: white; margin-right: 0in; margin-left: 0in; font-size: 12pt; font-family: 'Times New Roman', serif;\"><span style=\"font-family: Helvetica, sans-serif; color: #212529;\">The scope of this Protection Profile (PP) is to describe the security functionality of General-Purpose Computing Platforms in terms of the Common Criteria and to define functional and assurance requirements for such products.</span></p>\r\n<p style=\"margin: 0in 0in 1rem; background: white; box-sizing: border-box; font-variant-ligatures: normal; text-align: start; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; font-size: 12pt; font-family: 'Times New Roman', serif;\"><span style=\"font-family: Helvetica, sans-serif; color: #212529;\">A platform is a collection of hardware devices and firmware that provide the functional capabilities and services needed by tenant software. Such components typically include embedded controllers, trusted platform modules, management controllers, host processors, network interface controllers, graphics processing units, flash memory, storage controllers, storage devices, boot firmware, runtime firmware, human interface devices, and a power supply.</span></p>\r\n<p style=\"margin: 0in 0in 1rem; background: white; box-sizing: border-box; font-variant-ligatures: normal; text-align: start; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; font-size: 12pt; font-family: 'Times New Roman', serif;\"><span style=\"font-family: Helvetica, sans-serif; color: #212529;\">This Protection Profile for General-Purpose Computing Platforms derives requirements from the following documents:</span></p>\r\n<p style=\"margin: 0in 0in 1rem; background: white; box-sizing: border-box; font-variant-ligatures: normal; text-align: start; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; font-size: 12pt; font-family: 'Times New Roman', serif;\"><span style=\"font-family: Helvetica, sans-serif; color: #212529;\">-NIAP, BIOS Update for PC Client Devices protection Profile, Version 1.0, 12 Feb 2013</span></p>\r\n<p style=\"margin: 0in 0in 1rem; background: white; box-sizing: border-box; font-variant-ligatures: normal; text-align: start; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; font-size: 12pt; font-family: 'Times New Roman', serif;\"><span style=\"font-family: Helvetica, sans-serif; color: #212529;\">-NIST SP 800-147 BIOS Protection Guidelines, April 2011</span></p>\r\n<p style=\"margin: 0in 0in 1rem; background: white; box-sizing: border-box; font-variant-ligatures: normal; text-align: start; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; font-size: 12pt; font-family: 'Times New Roman', serif;\"><span style=\"font-family: Helvetica, sans-serif; color: #212529;\">-NIST SP 800-147B BIOS Protection Guidelines for Servers, August 2014</span></p>\r\n<p style=\"margin: 0in 0in 1rem; background: white; box-sizing: border-box; font-variant-ligatures: normal; text-align: start; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; font-size: 12pt; font-family: 'Times New Roman', serif;\"><span style=\"font-family: Helvetica, sans-serif; color: #212529;\">-NIST SP 800-193 Platform Firmware Resiliency Guidelines</span></p>\r\n<p style=\"margin: 0in 0in 1rem; background: white; box-sizing: border-box; font-variant-ligatures: normal; text-align: start; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; font-size: 12pt; font-family: 'Times New Roman', serif;\"><span style=\"font-family: Helvetica, sans-serif; color: #212529;\">Additionally, the following specifications and standards may be relevant to requirements in this PP:</span></p>\r\n<p style=\"margin: 0in 0in 1rem; background: white; box-sizing: border-box; font-variant-ligatures: normal; text-align: start; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; font-size: 12pt; font-family: 'Times New Roman', serif;\"><span style=\"font-family: Helvetica, sans-serif; color: #212529;\">-NIST SP 800-155 (Draft) BIOS Integrity Measurement Guidelines (Draft), December 2011</span></p>\r\n<p style=\"margin: 0in 0in 1rem; background: white; box-sizing: border-box; font-variant-ligatures: normal; text-align: start; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; font-size: 12pt; font-family: 'Times New Roman', serif;\"><span style=\"font-family: Helvetica, sans-serif; color: #212529;\">-NIST SP 1800-34 (Draft) Validating the Integrity of Computing Devices (Preliminary Draft), 2021</span></p>\r\n<p style=\"margin: 0in 0in 1rem; background: white; box-sizing: border-box; font-variant-ligatures: normal; text-align: start; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; font-size: 12pt; font-family: 'Times New Roman', serif;\"><span style=\"font-family: Helvetica, sans-serif; color: #212529;\">-Trusted Computing Group, TCG PC Client Platform Firmware Integrity Measurement Version 1.0 Revision Specification 43 Family 2.0, May 7, 2021</span></p>\r\n<p style=\"margin: 0in 0in 1rem; background: white; box-sizing: border-box; font-variant-ligatures: normal; text-align: start; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; font-size: 12pt; font-family: 'Times New Roman', serif;\"><span style=\"font-family: Helvetica, sans-serif; color: #212529;\">-IEEE Std 802.1AR-2018, Secure Device Identity&nbsp;</span></p>",
+              "security_evaluation_summary": "",
+              "environmental_strengths": "",
+              "pp_priority": null,
+              "created_on": null,
+              "removed_on": null,
+              "archived": false,
+              "assurance_maintenance": null,
+              "pp_estcompletion": null,
+              "pp_estcompletiondate": null,
+              "pp_transition": null,
+              "revised_on": null,
+              "pp_short_name": "PP_GPCP_V2.0",
+              "dod_compliant": false,
+              "csfceligible": false,
+              "constraint": null,
+              "predecessor_id": 451,
+              "successor_id": null,
+              "creator": 504,
+              "remover": null,
+              "editor": null
+            }
+          ],
+          "sunset_protection_profile": [],
+          "related_to": "FPT_TST.1",
+          "publication_date": "2026-04-27T09:39:12.058000Z",
+          "removed_on": null,
+          "status": "Published"
+        }
+      ],
+      "removed": []
+    },
+    "cisco_ndcpp": {
+      "added": [],
+      "removed": [],
+      "newly_archived": []
+    },
+    "pcl_all": {
+      "added": [],
+      "removed": [],
+      "newly_archived": []
+    },
+    "in_evaluation": {
+      "added": [],
+      "removed": [],
+      "current_count": 25
+    },
+    "news": {
+      "added": []
+    },
+    "events": {
+      "added": []
+    }
+  },
+  "cc_portal": {
+    "news": {
+      "added": []
+    },
+    "pps": {
+      "added": []
+    },
+    "products": {
+      "added": []
+    }
+  },
+  "cctl_labs": {
+    "atsec": [
+      {
+        "title": "ICMC 2026: Celebrate the Community",
+        "link": "https://www.atsec.com/icmc-2026-celebrate-the-community/",
+        "published": "",
+        "id": "https://www.atsec.com/icmc-2026-celebrate-the-community/"
+      }
+    ]
+  },
+  "csfc": {
+    "pages": {},
+    "component_selections": {},
+    "feeds": {}
+  },
+  "cc_crypto": {
+    "pages": {},
+    "doc_headers": {}
+  },
+  "nist": {
+    "pages": {},
+    "doc_headers": {
+      "SP 800-131A Rev 2": {
+        "changed": true,
+        "old_last_modified": "Thu, 13 Jun 2019 19:37:11 GMT",
+        "new_last_modified": "",
+        "old_etag": "\"b1de70651f22d51:0\"",
+        "new_etag": "",
+        "old_content_length": "686214",
+        "new_content_length": "",
+        "old_partial_hash": "",
+        "new_partial_hash": "11e24de28c40daadf4a1c3eda68e71e7",
+        "url": "https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-131Ar2.pdf"
+      }
+    },
+    "feeds": {}
+  },
+  "nato": {
+    "pages": {},
+    "cisco_added": [],
+    "cisco_removed": []
+  },
+  "eucc": {
+    "pages": {},
+    "cisco_added": [],
+    "cisco_removed": []
+  },
+  "alerts": []
+}
