@@ -179,7 +179,7 @@
   <span class="nav-title">CC Pulse Dashboard</span>
   <span class="nav-spacer"></span>
   <div class="ham-wrap">
-    <span class="nav-meta">Last run: 2026-04-28 04:25 ET</span>
+    <span class="nav-meta">Last run: 2026-04-29 04:17 ET</span>
     <button class="ham-btn" id="ham-btn" onclick="toggleHamMenu()" aria-expanded="false" aria-haspopup="true" title="Open menu">&#9776;</button>
     <div class="ham-menu" id="ham-menu" role="menu">
       <a class="ham-item" href="https://kr15tyk.github.io/CC-pulse/cc_dashboard.html" role="menuitem"><span class="ham-icon">&#127968;</span>Home</a>
@@ -263,7 +263,7 @@
       <div class="stat-lbl">CSfC Selection Updates</div>
     </a></div>
     <div class="stat"><a href="#sec-nist" onclick="navigateTo('sec-nist');return false;">
-      <div class="stat-num active-num">1</div>
+      <div class="stat-num active-num">2</div>
       <div class="stat-lbl">NIST Doc Updates</div>
     </a></div>
     <div class="stat"><a href="#sec-cc-portal" onclick="navigateTo('sec-cc-portal');return false;">
@@ -279,7 +279,7 @@
       <div class="stat-lbl">CCTL Updates</div>
     </a></div>
     <div class="stat"><a href="#sec-eucc-req" onclick="navigateTo('sec-eucc-req');return false;">
-      <div class="stat-num ">0</div>
+      <div class="stat-num active-num">3</div>
       <div class="stat-lbl">EUCC Changes</div>
     </a></div>
     <div class="stat"><a href="#sec-alerts" onclick="navigateTo('sec-alerts');return false;">
@@ -415,11 +415,9 @@
     <div class="sub-hdr sub-new">New TDs (1)</div>
     
     <div class="item-row" data-source="niap-td" data-kind="new">
-      <a class="item-link" href="https://www.niap-ccevs.org/technical-decisions/TD1035" target="_blank">TD1035 &mdash; Correction to Appendix E reference in FPT_TST.1 TSS Activity</a>
-      <span class="item-meta">2026-04-27</span>
+      <a class="item-link" href="https://www.niap-ccevs.org/technical-decisions/TD1031" target="_blank">TD1031 &mdash; Addition of PP_APP_V1.4 to Base-PPs</a>
+      <span class="item-meta">2026-04-28</span>
     </div>
-    
-    <div class="item-sub">Applies to: PP_GPCP_V2.0</div>
     
     
     
@@ -464,14 +462,23 @@
 </div>
 
   <!-- NIST Docs -->
-<div class="card card-updated" id="sec-nist" data-has-changes="1">
+<div class="card card-updated" id="sec-nist" data-has-changes="2">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>NIST Documentation</span>
-    <span class="card-count">1 update</span>
+    <span class="card-count">2 updates</span>
     </span>
     <span class="toggle-icon">&#9660;</span>
   </div>
   <div class="card-body ">
+    
+    
+    <div class="item-row" data-source="nist" data-kind="updated">
+      <a class="item-link" href="https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.204.pdf" target="_blank">FIPS 204 ML-DSA</a>
+      <span class="item-meta">
+        Header changed
+      </span>
+    </div>
+    
     
     
     <div class="item-row" data-source="nist" data-kind="updated">
@@ -541,7 +548,7 @@
       <div class="lab-body collapsed">
         
         <div class="item-row" data-source="cctl" data-kind="new">
-          <a class="item-link" href="https://www.atsec.com/icmc-2026-celebrate-the-community/" target="_blank">ICMC 2026: Celebrate the Community</a>
+          <a class="item-link" href="https://www.atsec.com/where-theory-meets-practice-atsec-at-the-7th-texas-crypto-day/" target="_blank">Where Theory Meets Practice: atsec at the 7th Texas Crypto Day</a>
           <span class="item-meta"></span>
         </div>
         
@@ -571,16 +578,33 @@
           </div>
         </div>
         <!-- EUCC Certificates -->
-        <div class="card " id="sec-eucc-certs" data-has-changes="0">
+        <div class="card card-new" id="sec-eucc-certs" data-has-changes="3">
           <div class="card-hdr" onclick="toggleCard(this)">
             <span>EUCC Certified Products</span>
-            <span class="card-count">0 new items</span>
-            <span class="toggle-icon">&#9658;</span>
+            <span class="card-count">3 new items</span>
+            <span class="toggle-icon">&#9660;</span>
           </div>
-          <div class="card-body collapsed">
+          <div class="card-body ">
             
             
-            <p class="no-change">No new EUCC certified products.</p>
+            
+            <div class="item-row" data-source="eucc" data-kind="new">
+              <a class="item-link" href="#" target="_blank">The Distromel Waste Container Identification System is a component of a Waste Bin Identification System (WBIS) that ensures the reliable identification of waste containers and the integrity of collect</a>
+              <span class="item-meta"></span>
+            </div>
+            
+            <div class="item-row" data-source="eucc" data-kind="new">
+              <a class="item-link" href="#" target="_blank">L4Re SSK is a distribution of the open-source L4Re Operating System Framework. As such it is based on the L4Re Microkernel. The L4Re Microkernel is a 3rd-generation microkernel with a state-of-the-art</a>
+              <span class="item-meta"></span>
+            </div>
+            
+            <div class="item-row" data-source="eucc" data-kind="new">
+              <a class="item-link" href="#" target="_blank">The TOE is the security functionality of a Smart Meter Gateway that serves as the communi-cation unit between devices of private and commercial consumers and commodity industry service providers (e.g.</a>
+              <span class="item-meta"></span>
+            </div>
+            
+            
+            
           </div>
         </div>
       </div>
@@ -592,7 +616,7 @@
 <div class="card card-new" id="sec-history" data-has-changes="1">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>Change History</span>
-    <span class="card-count">77 events</span>
+    <span class="card-count">73 events</span>
     <span class="toggle-icon">▼</span>
   </div>
   <div class="card-body">
@@ -611,6 +635,39 @@
     </div>
     <div class="timeline" id="history-timeline">
     
+      
+      <div class="tl-entry" data-cat="td_new">
+        <div class="tl-date">2026-04-29</div>
+        <div class="tl-body">
+          <div class="tl-title">
+            <span class="tl-badge new">new</span>
+            <a href="https://www.niap-ccevs.org/technical-decisions/TD1031" target="_blank">New TD: TD1031</a>
+          </div>
+          <div class="tl-detail">Addition of PP_APP_V1.4 to Base-PPs</div>
+        </div>
+      </div>
+      
+      <div class="tl-entry" data-cat="nist_doc">
+        <div class="tl-date">2026-04-29</div>
+        <div class="tl-body">
+          <div class="tl-title">
+            <span class="tl-badge updated">updated</span>
+            <a href="https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.204.pdf" target="_blank">NIST doc updated: FIPS 204 ML-DSA</a>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="tl-entry" data-cat="nist_doc">
+        <div class="tl-date">2026-04-29</div>
+        <div class="tl-body">
+          <div class="tl-title">
+            <span class="tl-badge updated">updated</span>
+            <a href="https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-131Ar2.pdf" target="_blank">NIST doc updated: SP 800-131A Rev 2</a>
+          </div>
+          
+        </div>
+      </div>
       
       <div class="tl-entry" data-cat="td_new">
         <div class="tl-date">2026-04-28</div>
@@ -1382,83 +1439,6 @@
         </div>
       </div>
       
-      <div class="tl-entry" data-cat="nist_doc">
-        <div class="tl-date">2026-03-29</div>
-        <div class="tl-body">
-          <div class="tl-title">
-            <span class="tl-badge updated">updated</span>
-            <a href="https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.203.pdf" target="_blank">NIST doc updated: FIPS 203 ML-KEM</a>
-          </div>
-          
-        </div>
-      </div>
-      
-      <div class="tl-entry" data-cat="nist_doc">
-        <div class="tl-date">2026-03-29</div>
-        <div class="tl-body">
-          <div class="tl-title">
-            <span class="tl-badge updated">updated</span>
-            <a href="https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.204.pdf" target="_blank">NIST doc updated: FIPS 204 ML-DSA</a>
-          </div>
-          
-        </div>
-      </div>
-      
-      <div class="tl-entry" data-cat="nist_doc">
-        <div class="tl-date">2026-03-29</div>
-        <div class="tl-body">
-          <div class="tl-title">
-            <span class="tl-badge updated">updated</span>
-            <a href="https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.205.pdf" target="_blank">NIST doc updated: FIPS 205 SLH-DSA</a>
-          </div>
-          
-        </div>
-      </div>
-      
-      <div class="tl-entry" data-cat="nist_doc">
-        <div class="tl-date">2026-03-29</div>
-        <div class="tl-body">
-          <div class="tl-title">
-            <span class="tl-badge updated">updated</span>
-            <a href="https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-57pt1r5.pdf" target="_blank">NIST doc updated: SP 800-57 Part 1 Rev 5</a>
-          </div>
-          
-        </div>
-      </div>
-      
-      <div class="tl-entry" data-cat="nist_doc">
-        <div class="tl-date">2026-03-29</div>
-        <div class="tl-body">
-          <div class="tl-title">
-            <span class="tl-badge updated">updated</span>
-            <a href="https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.140-3.pdf" target="_blank">NIST doc updated: FIPS 140-3</a>
-          </div>
-          
-        </div>
-      </div>
-      
-      <div class="tl-entry" data-cat="nist_doc">
-        <div class="tl-date">2026-03-29</div>
-        <div class="tl-body">
-          <div class="tl-title">
-            <span class="tl-badge updated">updated</span>
-            <a href="https://nvlpubs.nist.gov/nistpubs/ir/2024/NIST.IR.8547.ipd.pdf" target="_blank">NIST doc updated: NIST IR 8547</a>
-          </div>
-          
-        </div>
-      </div>
-      
-      <div class="tl-entry" data-cat="nist_doc">
-        <div class="tl-date">2026-03-29</div>
-        <div class="tl-body">
-          <div class="tl-title">
-            <span class="tl-badge updated">updated</span>
-            <a href="https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-131Ar2.pdf" target="_blank">NIST doc updated: SP 800-131A Rev 2</a>
-          </div>
-          
-        </div>
-      </div>
-      
     
     </div>
   </div>
@@ -1469,7 +1449,7 @@
 </div><!-- /main-content -->
 <footer>
   <span>CC Pulse &middot; Auto-refreshes daily (01:00 EST) &middot; NIAP, CSfC, NIST, CC Portal, NATO NIAPCL, EUCC / ENISA</span>
-  <span>Last run: 2026-04-28 04:25 ET</span>
+  <span>Last run: 2026-04-29 04:17 ET</span>
 </footer>
 
 <script>
