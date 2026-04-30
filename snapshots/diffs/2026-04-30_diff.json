@@ -1,0 +1,157 @@
+{
+  "period_start": "2026-04-29T08:17:03.164859+00:00",
+  "period_end": "2026-04-30T08:22:29.426684+00:00",
+  "niap": {
+    "pps": {
+      "added": [],
+      "removed": [],
+      "sunset_changes": [],
+      "status_changes": []
+    },
+    "tds": {
+      "added": [],
+      "removed": []
+    },
+    "cisco_ndcpp": {
+      "added": [],
+      "removed": [],
+      "newly_archived": []
+    },
+    "pcl_all": {
+      "added": [],
+      "removed": [],
+      "newly_archived": [
+        {
+          "active_maintenances": [],
+          "am_sort": "2026-04-29T00:00:00Z",
+          "assigned_lab_name": "EWA - Canada",
+          "certification_date": "2021-04-29T00:00:00Z",
+          "from_cc_portal": true,
+          "product_id": "2021.1120",
+          "product_name": "Belkin F1DN104KVM-UN-4, F1DN204KVM-UN-4, F1DN102KVM-UN-4, F1DN202KVM-UN-4, F1DN108KVM-UN-4, F1DN208KVM-UN-4, F1DN116KVM-UN-4 Firmware Version 44444-E7E7 Peripheral Sharing Devices",
+          "protection_profiles": [
+            {
+              "pp_id": 412,
+              "pp_name": "Protection Profile for Peripheral Sharing Device Version 4.0",
+              "pp_short_name": "PP_PSD_V4.0"
+            },
+            {
+              "pp_id": 433,
+              "pp_name": "PP-Module for Analog Audio Output Devices Version 1.0",
+              "pp_short_name": "MOD_AO_V1.0"
+            },
+            {
+              "pp_id": 434,
+              "pp_name": "PP-Module for User Authentication Devices Version 1.0",
+              "pp_short_name": "MOD_UA_V1.0"
+            },
+            {
+              "pp_id": 435,
+              "pp_name": "PP-Module for Keyboard/Mouse Devices Version 1.0",
+              "pp_short_name": "MOD_KM_V1.0"
+            },
+            {
+              "pp_id": 436,
+              "pp_name": "PP-Module for Video/Display Devices Version 1.0",
+              "pp_short_name": "MOD_VI_V1.0"
+            }
+          ],
+          "status_sort": "Archived",
+          "submitting_country_id_code": "CA",
+          "submitting_country_id_name": "Canada",
+          "sunset_date": "2026-04-29T00:00:00Z",
+          "tech_types": [
+            "Other Devices and Systems"
+          ],
+          "vendor_id_name": "Belkin International, Inc.",
+          "v_id": "2021.1120",
+          "kicked_off_date": null
+        }
+      ]
+    },
+    "in_evaluation": {
+      "added": [],
+      "removed": [],
+      "current_count": 25
+    },
+    "news": {
+      "added": []
+    },
+    "events": {
+      "added": []
+    }
+  },
+  "cc_portal": {
+    "news": {
+      "added": []
+    },
+    "pps": {
+      "added": []
+    },
+    "products": {
+      "added": []
+    }
+  },
+  "cctl_labs": {},
+  "csfc": {
+    "pages": {},
+    "component_selections": {},
+    "feeds": {
+      "CISA Alerts": [
+        {
+          "title": "Adapting Zero Trust Principles to Operational Technology",
+          "link": "https://www.cisa.gov/resources-tools/resources/adapting-zero-trust-principles-operational-technology",
+          "summary": "<p><a class=\"c-button\" href=\"https://www.cisa.gov/sites/default/files/2026-04/joint-guide-adapting-zero-trust-principles-to-operational-technology_508c.pdf\">Adapting Zero Trust Principles to Operational Technology</a></p>\n<p>CISA, in coordination with the Department of War, Department of Energy, Federal Bureau of Investigation, and Department of State, released <a href=\"https://www.cisa.gov/sites/default/files/2026-04/joint-guide-adapting-zero-trust-principles-to-operational-technology_508c.pdf\">Adapting Zero Trust Principles to Operational Technology</a>, joint guidance for organizations applying zero trust (ZT) principles to operational technology (OT). Zero trust is a modern, adaptive approach to cybersecurity that eliminates implicit trust and requires continuously validating access based on identity, context, and risk.</p>\n<p>With advancements in technology, OT systems that were traditionally isolated or manually operated are now increasingly interconnected, digitally monitored, and remotely controlled. This IT-OT convergence introduces new cybersecurity risks that make perimeter-based defenses and implicit trust models inadequate for safeguarding OT systems and the critical physical processes they control.</p>\n<p>This guidance supports OT owners and operators in addressing the unique challenges of transitioning to a ZT architecture, considering technology gaps from legacy infrastructure, operational constraints, and safety requirements. It focuses on establishing comprehensive asset visibility, proactively addressing supply chain risks, and implementing robust identity and access management while stressing the importance of layered security measures\u2014including network segmentation, secure communication protocols, and vulnerability management.</p>\n<p>To learn more about ZT principles, visit<a href=\"https://www.cisa.gov/topics/cybersecurity-best-practices/zero-trust\"> Zero Trust</a> &nbsp;<br />&nbsp;</p>\n<div class=\"c-text-cta\">\n<div class=\"l-constrain c-text-cta__inner\">\n<div class=\"c-text-cta__content\">\n<h2>CISA Product Survey</h2>\n<div class=\"c-text-cta__summary\">\n<p>We welcome your feedback.</p>\n</div>\n<p><a class=\"c-button c-button--on-dark\" href=\"https://cisasurvey.gov1.qualtrics.com/jfe/form/SV_9n4TtB8uttUPaM6?product=https://www.cisa.gov/resources-tools/resources/adapting-zero-trust-principles-operational-technology\">CISA Product Survey</a></p>\n</div>\n</div>\n</div>\n<p>&nbsp;</p>",
+          "published": "Wed, 29 Apr 26 12:00:00 +0000",
+          "id": "/node/24426",
+          "_category": "NEWS"
+        }
+      ]
+    }
+  },
+  "cc_crypto": {
+    "pages": {},
+    "doc_headers": {}
+  },
+  "nist": {
+    "pages": {},
+    "doc_headers": {
+      "SP 800-57 Part 1 Rev 5": {
+        "changed": true,
+        "old_last_modified": "Fri, 31 Jul 2020 15:02:29 GMT",
+        "new_last_modified": "",
+        "old_etag": "\"bc5d539c4b67d61:0\"",
+        "new_etag": "",
+        "old_content_length": "1688080",
+        "new_content_length": "",
+        "old_partial_hash": "",
+        "new_partial_hash": "a14f937bc70bfa49590772ce670fada1",
+        "url": "https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-57pt1r5.pdf"
+      },
+      "SP 800-131A Rev 2": {
+        "changed": true,
+        "old_last_modified": "Thu, 13 Jun 2019 19:37:11 GMT",
+        "new_last_modified": "",
+        "old_etag": "\"b1de70651f22d51:0\"",
+        "new_etag": "",
+        "old_content_length": "686214",
+        "new_content_length": "",
+        "old_partial_hash": "",
+        "new_partial_hash": "11e24de28c40daadf4a1c3eda68e71e7",
+        "url": "https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-131Ar2.pdf"
+      }
+    },
+    "feeds": {}
+  },
+  "nato": {
+    "pages": {},
+    "cisco_added": [],
+    "cisco_removed": []
+  },
+  "eucc": {
+    "pages": {},
+    "cisco_added": [],
+    "cisco_removed": []
+  },
+  "alerts": []
+}
