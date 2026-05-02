@@ -179,7 +179,7 @@
   <span class="nav-title">CC Pulse Dashboard</span>
   <span class="nav-spacer"></span>
   <div class="ham-wrap">
-    <span class="nav-meta">Last run: 2026-05-01 04:29 ET</span>
+    <span class="nav-meta">Last run: 2026-05-02 04:08 ET</span>
     <button class="ham-btn" id="ham-btn" onclick="toggleHamMenu()" aria-expanded="false" aria-haspopup="true" title="Open menu">&#9776;</button>
     <div class="ham-menu" id="ham-menu" role="menu">
       <a class="ham-item" href="https://kr15tyk.github.io/CC-pulse/cc_dashboard.html" role="menuitem"><span class="ham-icon">&#127968;</span>Home</a>
@@ -255,7 +255,7 @@
 <div class="sticky-top">
   <div class="trend-bar">
     <div class="stat"><a href="#sec-niap-pp" onclick="navigateTo('sec-niap-pp');return false;">
-      <div class="stat-num active-num">2</div>
+      <div class="stat-num active-num">1</div>
       <div class="stat-lbl">NIAP Changes</div>
     </a></div>
     <div class="stat"><a href="#sec-csfc" onclick="navigateTo('sec-csfc');return false;">
@@ -263,7 +263,7 @@
       <div class="stat-lbl">CSfC Selection Updates</div>
     </a></div>
     <div class="stat"><a href="#sec-nist" onclick="navigateTo('sec-nist');return false;">
-      <div class="stat-num active-num">5</div>
+      <div class="stat-num active-num">6</div>
       <div class="stat-lbl">NIST Doc Updates</div>
     </a></div>
     <div class="stat"><a href="#sec-cc-portal" onclick="navigateTo('sec-cc-portal');return false;">
@@ -333,31 +333,22 @@
     
     
     
-    <p class="no-change">No changes detected. <span class="last-active">(last: 2026-05-01)</span></p>
+    <p class="no-change">No changes detected. <span class="last-active">(last: 2026-05-02)</span></p>
   </div>
 </div>
 
   <!-- NIAP In-Evaluation -->
-<div class="card card-new" id="sec-niap-inevaluation" data-has-changes="1">
+<div class="card " id="sec-niap-inevaluation" data-has-changes="0">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>NIAP In-Evaluation Products</span>
-    <span class="card-count">1 change</span>
+    <span class="card-count">26 active</span>
     </span>
   </div>
-  <div class="card-body ">
-    
-    <div class="sub-hdr sub-new">Newly In Evaluation (1)</div>
-    
-    <div class="item-row" data-source="niap-inevaluation" data-kind="new">
-      <span class="item-link">Broadcom -- Carbon Black Endpoint Detection and Response (EDR) System</span>
-      <span class="item-meta">Booz Allen Hamilton Common Criteria Testing Laboratory</span>
-    </div>
-    
-    <div class="item-sub">Application Software</div>
+  <div class="card-body collapsed">
     
     
     
-    
+    <p class="no-change">No evaluation changes detected. 26 products currently in evaluation.</p>
     
   </div>
 </div>
@@ -391,11 +382,11 @@
     <div class="sub-hdr sub-new">New Certifications (1)</div>
     
     <div class="item-row" data-source="niap-pcl" data-kind="new">
-      <span class="item-link">Broadcom -- Carbon Black Endpoint Detection and Response (EDR) System</span>
-      <span class="item-meta"></span>
+      <span class="item-link">Xerox Corporation -- Xerox® VersaLink™ C415 / B415 / C625 / B625 with HDD</span>
+      <span class="item-meta">2026-03-27</span>
     </div>
     
-    <div class="item-sub">MOD_EDR_V1.0, MOD_HA_V1.0, PP_APP_v1.4</div>
+    <div class="item-sub">CPP_HCD_V1.0E</div>
     
     
     
@@ -473,10 +464,10 @@
 </div>
 
   <!-- NIST Docs -->
-<div class="card card-updated" id="sec-nist" data-has-changes="5">
+<div class="card card-updated" id="sec-nist" data-has-changes="6">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>NIST Documentation</span>
-    <span class="card-count">5 updates</span>
+    <span class="card-count">6 updates</span>
     </span>
     <span class="toggle-icon">&#9660;</span>
   </div>
@@ -484,7 +475,7 @@
     
     
     <div class="item-row" data-source="nist" data-kind="updated">
-      <a class="item-link" href="https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-131Ar2.pdf" target="_blank">SP 800-131A Rev 2</a>
+      <a class="item-link" href="https://nvlpubs.nist.gov/nistpubs/ir/2024/NIST.IR.8547.ipd.pdf" target="_blank">NIST IR 8547</a>
       <span class="item-meta">
         Header changed
       </span>
@@ -502,7 +493,7 @@
     
     
     <div class="item-row" data-source="nist" data-kind="updated">
-      <a class="item-link" href="https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.204.pdf" target="_blank">FIPS 204 ML-DSA</a>
+      <a class="item-link" href="https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.205.pdf" target="_blank">FIPS 205 SLH-DSA</a>
       <span class="item-meta">
         Header changed
       </span>
@@ -511,7 +502,7 @@
     
     
     <div class="item-row" data-source="nist" data-kind="updated">
-      <a class="item-link" href="https://nvlpubs.nist.gov/nistpubs/ir/2024/NIST.IR.8547.ipd.pdf" target="_blank">NIST IR 8547</a>
+      <a class="item-link" href="https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-131Ar2.pdf" target="_blank">SP 800-131A Rev 2</a>
       <span class="item-meta">
         Header changed
       </span>
@@ -521,6 +512,15 @@
     
     <div class="item-row" data-source="nist" data-kind="updated">
       <a class="item-link" href="https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-57pt1r5.pdf" target="_blank">SP 800-57 Part 1 Rev 5</a>
+      <span class="item-meta">
+        Header changed
+      </span>
+    </div>
+    
+    
+    
+    <div class="item-row" data-source="nist" data-kind="updated">
+      <a class="item-link" href="https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.204.pdf" target="_blank">FIPS 204 ML-DSA</a>
       <span class="item-meta">
         Header changed
       </span>
@@ -619,7 +619,7 @@
 <div class="card card-new" id="sec-history" data-has-changes="1">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>Change History</span>
-    <span class="card-count">78 events</span>
+    <span class="card-count">73 events</span>
     <span class="toggle-icon">▼</span>
   </div>
   <div class="card-body">
@@ -638,6 +638,83 @@
     </div>
     <div class="timeline" id="history-timeline">
     
+      
+      <div class="tl-entry" data-cat="pcl_cert">
+        <div class="tl-date">2026-05-02</div>
+        <div class="tl-body">
+          <div class="tl-title">
+            <span class="tl-badge new">new</span>
+            <a href="https://www.niap-ccevs.org/product/index.cfm?pid=2026.1161" target="_blank">Xerox Corporation — Xerox® VersaLink™ C415 / B415 / C625 / B625 with HDD</a>
+          </div>
+          <div class="tl-detail">Certified 2026-03-27 · Lightship Security · CPP_HCD_V1.0E</div>
+        </div>
+      </div>
+      
+      <div class="tl-entry" data-cat="nist_doc">
+        <div class="tl-date">2026-05-02</div>
+        <div class="tl-body">
+          <div class="tl-title">
+            <span class="tl-badge updated">updated</span>
+            <a href="https://nvlpubs.nist.gov/nistpubs/ir/2024/NIST.IR.8547.ipd.pdf" target="_blank">NIST doc updated: NIST IR 8547</a>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="tl-entry" data-cat="nist_doc">
+        <div class="tl-date">2026-05-02</div>
+        <div class="tl-body">
+          <div class="tl-title">
+            <span class="tl-badge updated">updated</span>
+            <a href="https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.203.pdf" target="_blank">NIST doc updated: FIPS 203 ML-KEM</a>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="tl-entry" data-cat="nist_doc">
+        <div class="tl-date">2026-05-02</div>
+        <div class="tl-body">
+          <div class="tl-title">
+            <span class="tl-badge updated">updated</span>
+            <a href="https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.205.pdf" target="_blank">NIST doc updated: FIPS 205 SLH-DSA</a>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="tl-entry" data-cat="nist_doc">
+        <div class="tl-date">2026-05-02</div>
+        <div class="tl-body">
+          <div class="tl-title">
+            <span class="tl-badge updated">updated</span>
+            <a href="https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-131Ar2.pdf" target="_blank">NIST doc updated: SP 800-131A Rev 2</a>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="tl-entry" data-cat="nist_doc">
+        <div class="tl-date">2026-05-02</div>
+        <div class="tl-body">
+          <div class="tl-title">
+            <span class="tl-badge updated">updated</span>
+            <a href="https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-57pt1r5.pdf" target="_blank">NIST doc updated: SP 800-57 Part 1 Rev 5</a>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="tl-entry" data-cat="nist_doc">
+        <div class="tl-date">2026-05-02</div>
+        <div class="tl-body">
+          <div class="tl-title">
+            <span class="tl-badge updated">updated</span>
+            <a href="https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.204.pdf" target="_blank">NIST doc updated: FIPS 204 ML-DSA</a>
+          </div>
+          
+        </div>
+      </div>
       
       <div class="tl-entry" data-cat="pcl_cert">
         <div class="tl-date">2026-05-01</div>
@@ -1365,138 +1442,6 @@
         </div>
       </div>
       
-      <div class="tl-entry" data-cat="td_new">
-        <div class="tl-date">2026-04-01</div>
-        <div class="tl-body">
-          <div class="tl-title">
-            <span class="tl-badge new">new</span>
-            <a href="https://www.niap-ccevs.org/technical-decisions/TD1025" target="_blank">New TD: TD1025</a>
-          </div>
-          <div class="tl-detail">Restriction to CNSA-Compliant Algorithms for (D)TLS Servers</div>
-        </div>
-      </div>
-      
-      <div class="tl-entry" data-cat="td_new">
-        <div class="tl-date">2026-04-01</div>
-        <div class="tl-body">
-          <div class="tl-title">
-            <span class="tl-badge new">new</span>
-            <a href="https://www.niap-ccevs.org/technical-decisions/TD0915" target="_blank">New TD: TD0915</a>
-          </div>
-          <div class="tl-detail">Updates to FCS_CKM.1/WPA and FCS_CKM.2/GTK Tests for MOD_WLANAS</div>
-        </div>
-      </div>
-      
-      <div class="tl-entry" data-cat="td_new">
-        <div class="tl-date">2026-04-01</div>
-        <div class="tl-body">
-          <div class="tl-title">
-            <span class="tl-badge new">new</span>
-            <a href="https://www.niap-ccevs.org/technical-decisions/TD0916" target="_blank">New TD: TD0916</a>
-          </div>
-          <div class="tl-detail">Updates to FCS_CKM.1/WPA and FCS_CKM.2/GTK Tests for MOD_WLANC</div>
-        </div>
-      </div>
-      
-      <div class="tl-entry" data-cat="td_new">
-        <div class="tl-date">2026-04-01</div>
-        <div class="tl-body">
-          <div class="tl-title">
-            <span class="tl-badge new">new</span>
-            <a href="https://www.niap-ccevs.org/technical-decisions/TD1020" target="_blank">New TD: TD1020</a>
-          </div>
-          <div class="tl-detail">NIT Technical Decision: Addition of FIPS PUB 186-4</div>
-        </div>
-      </div>
-      
-      <div class="tl-entry" data-cat="td_new">
-        <div class="tl-date">2026-04-01</div>
-        <div class="tl-body">
-          <div class="tl-title">
-            <span class="tl-badge new">new</span>
-            <a href="https://www.niap-ccevs.org/technical-decisions/TD1015" target="_blank">New TD: TD1015</a>
-          </div>
-          <div class="tl-detail">Addition of ECD to PKG_SSH_V1.0</div>
-        </div>
-      </div>
-      
-      <div class="tl-entry" data-cat="td_new">
-        <div class="tl-date">2026-04-01</div>
-        <div class="tl-body">
-          <div class="tl-title">
-            <span class="tl-badge new">new</span>
-            <a href="https://www.niap-ccevs.org/technical-decisions/TD1024" target="_blank">New TD: TD1024</a>
-          </div>
-          <div class="tl-detail">NIT Technical Decision: Correction to Application Note for FCS_CKM_EXT.7</div>
-        </div>
-      </div>
-      
-      <div class="tl-entry" data-cat="td_new">
-        <div class="tl-date">2026-04-01</div>
-        <div class="tl-body">
-          <div class="tl-title">
-            <span class="tl-badge new">new</span>
-            <a href="https://www.niap-ccevs.org/technical-decisions/TD1017" target="_blank">New TD: TD1017</a>
-          </div>
-          <div class="tl-detail">FPT_JTA_EXT.1 EA Update</div>
-        </div>
-      </div>
-      
-      <div class="tl-entry" data-cat="td_new">
-        <div class="tl-date">2026-04-01</div>
-        <div class="tl-body">
-          <div class="tl-title">
-            <span class="tl-badge new">new</span>
-            <a href="https://www.niap-ccevs.org/technical-decisions/TD1022" target="_blank">New TD: TD1022</a>
-          </div>
-          <div class="tl-detail">Clarifications to FCS_SSH_EXT.1.5 When aes256-gcm@openssh.com Is Selected</div>
-        </div>
-      </div>
-      
-      <div class="tl-entry" data-cat="td_new">
-        <div class="tl-date">2026-04-01</div>
-        <div class="tl-body">
-          <div class="tl-title">
-            <span class="tl-badge new">new</span>
-            <a href="https://www.niap-ccevs.org/technical-decisions/TD1014" target="_blank">New TD: TD1014</a>
-          </div>
-          <div class="tl-detail">Addition of ECD to PKG_TLS_V2.0</div>
-        </div>
-      </div>
-      
-      <div class="tl-entry" data-cat="td_new">
-        <div class="tl-date">2026-04-01</div>
-        <div class="tl-body">
-          <div class="tl-title">
-            <span class="tl-badge new">new</span>
-            <a href="https://www.niap-ccevs.org/technical-decisions/TD1023" target="_blank">New TD: TD1023</a>
-          </div>
-          <div class="tl-detail">Clarifications to FCS_SSH_EXT.1.5 When aes256-gcm@openssh.com Is Selected</div>
-        </div>
-      </div>
-      
-      <div class="tl-entry" data-cat="td_new">
-        <div class="tl-date">2026-04-01</div>
-        <div class="tl-body">
-          <div class="tl-title">
-            <span class="tl-badge new">new</span>
-            <a href="https://www.niap-ccevs.org/technical-decisions/TD1008" target="_blank">New TD: TD1008</a>
-          </div>
-          <div class="tl-detail">(D)TLS(C/S) Corrections</div>
-        </div>
-      </div>
-      
-      <div class="tl-entry" data-cat="nist_doc">
-        <div class="tl-date">2026-04-01</div>
-        <div class="tl-body">
-          <div class="tl-title">
-            <span class="tl-badge updated">updated</span>
-            <a href="https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-131Ar2.pdf" target="_blank">NIST doc updated: SP 800-131A Rev 2</a>
-          </div>
-          
-        </div>
-      </div>
-      
     
     </div>
   </div>
@@ -1507,7 +1452,7 @@
 </div><!-- /main-content -->
 <footer>
   <span>CC Pulse &middot; Auto-refreshes daily (01:00 EST) &middot; NIAP, CSfC, NIST, CC Portal, NATO NIAPCL, EUCC / ENISA</span>
-  <span>Last run: 2026-05-01 04:29 ET</span>
+  <span>Last run: 2026-05-02 04:08 ET</span>
 </footer>
 
 <script>
