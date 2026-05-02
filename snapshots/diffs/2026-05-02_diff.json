@@ -1,0 +1,193 @@
+{
+  "period_start": "2026-05-01T08:11:59.703054+00:00",
+  "period_end": "2026-05-02T07:44:27.292282+00:00",
+  "niap": {
+    "pps": {
+      "added": [],
+      "removed": [],
+      "sunset_changes": [],
+      "status_changes": []
+    },
+    "tds": {
+      "added": [],
+      "removed": []
+    },
+    "cisco_ndcpp": {
+      "added": [],
+      "removed": [],
+      "newly_archived": []
+    },
+    "pcl_all": {
+      "added": [
+        {
+          "active_maintenances": [],
+          "am_sort": "2028-03-27T00:00:00Z",
+          "assigned_lab_name": "Lightship Security",
+          "certification_date": "2026-03-27T00:00:00Z",
+          "from_cc_portal": true,
+          "product_id": "2026.1161",
+          "product_name": "Xerox\u00ae VersaLink\u2122 C415 / B415 / C625 / B625 with HDD",
+          "protection_profiles": [
+            {
+              "pp_id": 483,
+              "pp_name": "collaborative Protection Profile for Hardcopy Devices Version 1.0E",
+              "pp_short_name": "CPP_HCD_V1.0E"
+            }
+          ],
+          "status_sort": "Certified",
+          "submitting_country_id_code": "CA",
+          "submitting_country_id_name": "Canada",
+          "sunset_date": "2031-03-27T00:00:00Z",
+          "tech_types": [
+            "Multi-Function Devices"
+          ],
+          "vendor_id_name": "Xerox Corporation",
+          "v_id": "2026.1161",
+          "kicked_off_date": null
+        }
+      ],
+      "removed": [],
+      "newly_archived": []
+    },
+    "in_evaluation": {
+      "added": [],
+      "removed": [],
+      "current_count": 26
+    },
+    "news": {
+      "added": []
+    },
+    "events": {
+      "added": []
+    }
+  },
+  "cc_portal": {
+    "news": {
+      "added": []
+    },
+    "pps": {
+      "added": []
+    },
+    "products": {
+      "added": []
+    }
+  },
+  "cctl_labs": {},
+  "csfc": {
+    "pages": {},
+    "component_selections": {},
+    "feeds": {
+      "CISA Alerts": [
+        {
+          "title": "CISA Adds One Known Exploited Vulnerability to Catalog",
+          "link": "https://www.cisa.gov/news-events/alerts/2026/05/01/cisa-adds-one-known-exploited-vulnerability-catalog",
+          "summary": "<p>CISA has added one new vulnerability to its <a href=\"https://www.cisa.gov/known-exploited-vulnerabilities-catalog\" title=\"Known Exploited Vulnerabilities Catalog\">Known Exploited Vulnerabilities (KEV) Catalog</a>, based on evidence of active exploitation.</p>\n<ul>\n<li><a href=\"https://www.cve.org/CVERecord?id=CVE-2026-31431\" target=\"_blank\">CVE-2026-31431</a> Linux Kernel Incorrect Resource Transfer Between Spheres Vulnerability</li>\n</ul>\n<p>This type of vulnerability is a frequent attack vector for malicious cyber actors and poses significant risks to the federal enterprise.</p>\n<p><a href=\"https://www.cisa.gov/binding-operational-directive-22-01\">Binding Operational Directive (BOD) 22-01: Reducing the Significant Risk of Known Exploited Vulnerabilities</a> established the KEV Catalog as a living list of known Common Vulnerabilities and Exposures (CVEs) that carry significant risk to the federal enterprise. BOD 22-01 requires Federal Civilian Executive Branch (FCEB) agencies to remediate identified vulnerabilities by the due date to protect FCEB networks against active threats. See the <a href=\"https://www.cisa.gov/sites/default/files/publications/Reducing_the_Significant_Risk_of_Known_Exploited_Vulnerabilities_211103.pdf\">BOD 22-01 Fact Sheet</a> for more information.</p>\n<p>Although BOD 22-01 only applies to FCEB agencies, CISA strongly urges all organizations to reduce their exposure to cyberattacks by prioritizing timely remediation of <a href=\"https://www.cisa.gov/known-exploited-vulnerabilities-catalog\" title=\"Known Exploited Vulnerabilities Catalog\">KEV Catalog vulnerabilities</a> as part of their vulnerability management practice. CISA will continue to add vulnerabilities to the catalog that meet the <a href=\"https://www.cisa.gov/known-exploited-vulnerabilities\" title=\"Reducing the Significant Risk of Known Exploited Vulnerabilities\">specified criteria</a>.&nbsp;</p>",
+          "published": "Fri, 01 May 26 12:00:00 +0000",
+          "id": "/node/24831",
+          "_category": "CISA"
+        },
+        {
+          "title": "Careful Adoption of Agentic AI Services",
+          "link": "https://www.cisa.gov/resources-tools/resources/careful-adoption-agentic-ai-services",
+          "summary": "<p>CISA, in collaboration with the Australian Signals Directorate\u2019s Australian Cyber Security Centre (ASD\u2019s ACSC) and other international and U.S. partners, released guidance for organizations on adopting agentic artificial intelligence (AI) systems.</p>\n<p>This guide outlines key security challenges and risks associated with agentic AI, and provides actionable steps for designing, deploying, and operating these systems safely. It helps organizations align AI risk management with existing cybersecurity frameworks and strengthen oversight as agentic AI adoption grows.</p>\n<p>&nbsp;</p>\n<div class=\"c-text-cta\">\n<div class=\"l-constrain c-text-cta__inner\">\n<div class=\"c-text-cta__content\">\n<h2>Please share your thoughts!</h2>\n<div class=\"c-text-cta__summary\">\n<div class=\"c-text-cta__summary\">\n<p>We welcome your feedback.</p>\n</div>\n</div>\n<p><a class=\"c-button c-button--on-dark\" href=\"https://cisasurvey.gov1.qualtrics.com/jfe/form/SV_9n4TtB8uttUPaM6?product=https://www.cisa.gov/resources-tools/resources/careful-adoption-agentic-ai-services\">CISA Product Survey</a></p>\n</div>\n</div>\n</div>",
+          "published": "Fri, 01 May 26 12:00:00 +0000",
+          "id": "/node/24820",
+          "_category": "NEWS"
+        }
+      ]
+    }
+  },
+  "cc_crypto": {
+    "pages": {},
+    "doc_headers": {}
+  },
+  "nist": {
+    "pages": {},
+    "doc_headers": {
+      "NIST IR 8547": {
+        "changed": true,
+        "old_last_modified": "",
+        "new_last_modified": "",
+        "old_etag": "",
+        "new_etag": "",
+        "old_content_length": "7242",
+        "new_content_length": "7241",
+        "old_partial_hash": "",
+        "new_partial_hash": "",
+        "url": "https://nvlpubs.nist.gov/nistpubs/ir/2024/NIST.IR.8547.ipd.pdf"
+      },
+      "FIPS 203 ML-KEM": {
+        "changed": true,
+        "old_last_modified": "",
+        "new_last_modified": "",
+        "old_etag": "",
+        "new_etag": "",
+        "old_content_length": "7242",
+        "new_content_length": "7241",
+        "old_partial_hash": "",
+        "new_partial_hash": "",
+        "url": "https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.203.pdf"
+      },
+      "FIPS 205 SLH-DSA": {
+        "changed": true,
+        "old_last_modified": "Mon, 12 Aug 2024 22:44:10 GMT",
+        "new_last_modified": "",
+        "old_etag": "\"d9fcbc259edda1:0\"",
+        "new_etag": "",
+        "old_content_length": "1055752",
+        "new_content_length": "7241",
+        "old_partial_hash": "",
+        "new_partial_hash": "",
+        "url": "https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.205.pdf"
+      },
+      "SP 800-131A Rev 2": {
+        "changed": true,
+        "old_last_modified": "",
+        "new_last_modified": "",
+        "old_etag": "",
+        "new_etag": "",
+        "old_content_length": "7242",
+        "new_content_length": "7241",
+        "old_partial_hash": "",
+        "new_partial_hash": "",
+        "url": "https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-131Ar2.pdf"
+      },
+      "SP 800-57 Part 1 Rev 5": {
+        "changed": true,
+        "old_last_modified": "",
+        "new_last_modified": "",
+        "old_etag": "",
+        "new_etag": "",
+        "old_content_length": "7242",
+        "new_content_length": "7241",
+        "old_partial_hash": "",
+        "new_partial_hash": "",
+        "url": "https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-57pt1r5.pdf"
+      },
+      "FIPS 204 ML-DSA": {
+        "changed": true,
+        "old_last_modified": "",
+        "new_last_modified": "",
+        "old_etag": "",
+        "new_etag": "",
+        "old_content_length": "7242",
+        "new_content_length": "7241",
+        "old_partial_hash": "",
+        "new_partial_hash": "",
+        "url": "https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.204.pdf"
+      }
+    },
+    "feeds": {}
+  },
+  "nato": {
+    "pages": {},
+    "cisco_added": [],
+    "cisco_removed": []
+  },
+  "eucc": {
+    "pages": {},
+    "cisco_added": [],
+    "cisco_removed": []
+  },
+  "alerts": []
+}
