@@ -1,0 +1,134 @@
+{
+  "period_start": "2026-05-04T08:29:56.807602+00:00",
+  "period_end": "2026-05-05T08:09:28.541384+00:00",
+  "niap": {
+    "pps": {
+      "added": [],
+      "removed": [],
+      "sunset_changes": [],
+      "status_changes": []
+    },
+    "tds": {
+      "added": [],
+      "removed": []
+    },
+    "cisco_ndcpp": {
+      "added": [],
+      "removed": [],
+      "newly_archived": []
+    },
+    "pcl_all": {
+      "added": [],
+      "removed": [],
+      "newly_archived": []
+    },
+    "in_evaluation": {
+      "added": [],
+      "removed": [],
+      "current_count": 26
+    },
+    "news": {
+      "added": []
+    },
+    "events": {
+      "added": []
+    }
+  },
+  "cc_portal": {
+    "news": {
+      "added": []
+    },
+    "pps": {
+      "added": []
+    },
+    "products": {
+      "added": []
+    }
+  },
+  "cctl_labs": {},
+  "csfc": {
+    "pages": {},
+    "component_selections": {},
+    "feeds": {}
+  },
+  "cc_crypto": {
+    "pages": {},
+    "doc_headers": {}
+  },
+  "nist": {
+    "pages": {},
+    "doc_headers": {
+      "FIPS 140-3": {
+        "changed": true,
+        "old_last_modified": "Tue, 30 Apr 2019 17:31:42 GMT",
+        "new_last_modified": "",
+        "old_etag": "\"17b72d937affd41:0\"",
+        "new_etag": "",
+        "old_content_length": "310627",
+        "new_content_length": "",
+        "old_partial_hash": "",
+        "new_partial_hash": "",
+        "url": "https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.140-3.pdf"
+      },
+      "SP 800-57 Part 1 Rev 5": {
+        "changed": true,
+        "old_last_modified": "",
+        "new_last_modified": "Fri, 31 Jul 2020 15:02:29 GMT",
+        "old_etag": "",
+        "new_etag": "\"bc5d539c4b67d61:0\"",
+        "old_content_length": "",
+        "new_content_length": "1688080",
+        "old_partial_hash": "a14f937bc70bfa49590772ce670fada1",
+        "new_partial_hash": "",
+        "url": "https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-57pt1r5.pdf"
+      },
+      "NIST IR 8547": {
+        "changed": true,
+        "old_last_modified": "Fri, 08 Nov 2024 19:04:22 GMT",
+        "new_last_modified": "",
+        "old_etag": "\"c25c6651132db1:0\"",
+        "new_etag": "",
+        "old_content_length": "722379",
+        "new_content_length": "",
+        "old_partial_hash": "",
+        "new_partial_hash": "7ceb3d3a2f66169875c2dbe01450c2cc",
+        "url": "https://nvlpubs.nist.gov/nistpubs/ir/2024/NIST.IR.8547.ipd.pdf"
+      },
+      "FIPS 205 SLH-DSA": {
+        "changed": true,
+        "old_last_modified": "",
+        "new_last_modified": "Mon, 12 Aug 2024 22:44:10 GMT",
+        "old_etag": "",
+        "new_etag": "\"d9fcbc259edda1:0\"",
+        "old_content_length": "7240",
+        "new_content_length": "1055752",
+        "old_partial_hash": "",
+        "new_partial_hash": "",
+        "url": "https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.205.pdf"
+      }
+    },
+    "feeds": {
+      "NIST Cybersecurity Insights Blog": [
+        {
+          "title": "Stronger Cybersecurity, Stronger Business: NIST Celebrates 2026 National Small Business Week",
+          "link": "https://www.nist.gov/blogs/cybersecurity-insights/stronger-cybersecurity-stronger-business-nist-celebrates-2026-national",
+          "summary": "Happy National Small Business Week! For over 60 years, the U.S. Small Business Administration has led this initiative to acknowledge the critical contributions of America\u2019s entrepreneurs and small business owners. Part of the U.S. Department of Commerce, NIST\u2019s mission is to drive U.S. innovation and global competitiveness, and the small business community is central to this mission. In this year\u2019s blog, we shine a spotlight on some new and upcoming NIST resources that are all focused on strengthening the cybersecurity and resilience of the nation\u2019s small business community. Build Your Small",
+          "published": "Mon, 04 May 2026 12:00:00 +0000",
+          "id": "https://www.nist.gov/node/1911321",
+          "_category": "NIST"
+        }
+      ]
+    }
+  },
+  "nato": {
+    "pages": {},
+    "cisco_added": [],
+    "cisco_removed": []
+  },
+  "eucc": {
+    "pages": {},
+    "cisco_added": [],
+    "cisco_removed": []
+  },
+  "alerts": []
+}
