@@ -1,0 +1,306 @@
+{
+  "period_start": "2026-05-06T08:27:02.818440+00:00",
+  "period_end": "2026-05-07T08:33:58.277935+00:00",
+  "niap": {
+    "pps": {
+      "added": [],
+      "removed": [],
+      "sunset_changes": [],
+      "status_changes": []
+    },
+    "tds": {
+      "added": [
+        {
+          "td_id": 1038,
+          "identifier": "TD1038",
+          "title": "Corrections to Application Notes Regarding Extended Master Secret Extension",
+          "protection_profile": [
+            {
+              "pp_id": 519,
+              "pp_name": "Functional Package for Transport Layer Security (TLS) Version 2.1",
+              "pp_common_name": "Functional Package for Transport Layer Security (TLS) Version 2.1",
+              "cc_version": "CC:2022",
+              "mr_version": null,
+              "pp_date": "2025-09-03T00:00:00Z",
+              "entrydate": "2025-09-03T12:25:21.558000Z",
+              "tech_type": "Network Encryption",
+              "pp_sponsor_id": "NIAP",
+              "community_id": null,
+              "status": "Publishing",
+              "sunset_date": null,
+              "pp_overview": "<p style=\"margin-top: 0in; background: white; margin-right: 0in; margin-left: 0in; font-size: 12pt; font-family: 'Times New Roman', serif;\"><span style=\"font-family: Arial, sans-serif; color: #212529;\">Transport Layer Security (TLS) and the closely-related Datagram TLS (DTLS) are cryptographic protocols designed to provide communications security over IP networks.&nbsp;The primary goal of the TLS protocol is to provide confidentiality and integrity of data transmitted between two communicating endpoints, as well as authentication of at least the server endpoint.</span></p>\r\n<p style=\"margin-top: 0in; background: rgb(255, 255, 253); margin-right: 0in; margin-left: 0in; font-size: 12pt; font-family: 'Times New Roman', serif;\"><span style=\"font-family: Arial, sans-serif; color: #000006;\">This \"Functional Package for Transport Layer Security\" (short name \"TLS-PKG\") defines functional requirements for the implementation of the Transport Layer Security (TLS) and Datagram TLS (DTLS) protocols.&nbsp;The requirements are intended to improve the security of products by enabling their evaluation.</span></p>",
+              "security_evaluation_summary": "<p style=\"margin-top: 0in; background: white; margin-right: 0in; margin-left: 0in; font-size: 12pt; font-family: 'Times New Roman', serif;\"><span style=\"font-family: Arial, sans-serif; color: #212529;\">The Target of Evaluation (TOE) in this Package is a product which acts as a TLS client or server, or both.&nbsp;This Package describes the security functionality of TLS in terms of CC.</span></p>\r\n<p style=\"margin: 0in 0in 1rem; background: white; box-sizing: border-box; font-variant-ligatures: normal; text-align: start; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; font-size: 12pt; font-family: 'Times New Roman', serif;\"><span style=\"font-family: Arial, sans-serif; color: #212529;\">The contents of this Package must be appropriately combined with a PP or PP-Module. When this Package is instantiated by a PP or PP-Module, the Package must include selection-based requirements in accordance with the selections or assignments indicated in the PP or PP-Module.</span></p>",
+              "environmental_strengths": "",
+              "pp_priority": null,
+              "created_on": null,
+              "removed_on": null,
+              "archived": false,
+              "assurance_maintenance": null,
+              "pp_estcompletion": null,
+              "pp_estcompletiondate": null,
+              "pp_transition": "2026-01-01T00:00:00Z",
+              "revised_on": null,
+              "pp_short_name": "PKG_TLS_V2.1",
+              "dod_compliant": false,
+              "csfceligible": true,
+              "constraint": null,
+              "predecessor_id": 465,
+              "successor_id": null,
+              "creator": 504,
+              "remover": null,
+              "editor": null
+            }
+          ],
+          "sunset_protection_profile": [],
+          "related_to": "FCS_DTLSC_EXT.1.4; FCS_DTLSS_EXT.1.4; FCS_TLSC_EXT.1.4; FCS_TLSS_EXT.1.4",
+          "publication_date": "2026-05-06T13:33:34.013000Z",
+          "removed_on": null,
+          "status": "Published"
+        },
+        {
+          "td_id": 1037,
+          "identifier": "TD1037",
+          "title": "Corrections to MOD_ESC_V2.0",
+          "protection_profile": [
+            {
+              "pp_id": 531,
+              "pp_name": "PP-Module for Enterprise Session Controller (ESC) Version 2.0",
+              "pp_common_name": "PP-Module for Enterprise Session Controller (ESC) Version 2.0",
+              "cc_version": "CC:2022",
+              "mr_version": null,
+              "pp_date": "2026-03-10T00:00:00Z",
+              "entrydate": "2026-03-11T10:22:11.008000Z",
+              "tech_type": "SIP Server",
+              "pp_sponsor_id": "NIAP",
+              "community_id": null,
+              "status": "Publishing",
+              "sunset_date": null,
+              "pp_overview": "<table>\r\n<tbody>\r\n<tr>\r\n<td style=\"width: 999px;\">\r\n<p>An Enterprise Session Controller (ESC) is a logical component of a physical hardware appliance that is responsible for establishing connectivity between Voice/Video over IP (VVoIP) endpoints. The ESC is an advanced version of a legacy IP-PBX system. As a specific type of network device, an ESC Target of Evaluation (TOE) will be evaluated against both the Network Device collaborative Protection Profile (NDcPP) and this PP-Module. All functionality described by the SFRs are within the TOE boundary, as is the ability for the TOE Security Functionality (TSF) to establish secure remote connections with trusted entities in the Operational Environment.<br><br>The ESC&rsquo;s purpose is to provide an interface between VVoIP networks in order to connect calls. The ESC depends on or communicates with a number of services that are located within the internal network such as voicemail, conferencing, NTP, DNS, and software updates that are downloaded from VVoIP endpoint manufacturers and stored on the ESC for distribution to the clients. Certain storage capabilities may be implemented exclusively within the TOE or within both the TOE and its operational environment (such as the TOE maintaining an internal audit log that is also written to an external audit server).<br>For connecting networks, the ESC relies on edge routing to handle lower-level communications between the networks and on a Session Border Controller (SBC) to filter out potentially malicious activity.<br><br>The ESC provides the following logical capabilities:<br>&bull; Operations, Administration, and Management Application (OA&amp;M) &ndash; responsible for providing a management interface to the ESC&rsquo;s configuration.<br>&bull; Call Processing &ndash; responsible for setting up and tearing down calls between VVoIP endpoints using one or more call control protocols.<br>&bull; Call Detail Records &ndash; responsible for storage of call activity for auditing purposes.<br>&bull; Voice/Video Media Conferencing, Controls, and Storage &ndash; responsible for establishing multi-way conference calls and storage of call recordings.<br><br>Different ESCs may implement these capabilities in different ways. This PP-Module defines a minimum baseline of capabilities that all conformant ESCs must provide.</p>\r\n</td>\r\n</tr>\r\n</tbody>\r\n</table>\r\n<p>&nbsp;</p>",
+              "security_evaluation_summary": null,
+              "environmental_strengths": "",
+              "pp_priority": null,
+              "created_on": null,
+              "removed_on": null,
+              "archived": false,
+              "assurance_maintenance": "",
+              "pp_estcompletion": null,
+              "pp_estcompletiondate": null,
+              "pp_transition": null,
+              "revised_on": null,
+              "pp_short_name": "MOD_ESC_V2.0",
+              "dod_compliant": false,
+              "csfceligible": false,
+              "constraint": null,
+              "predecessor_id": 454,
+              "successor_id": null,
+              "creator": 620,
+              "remover": null,
+              "editor": null
+            }
+          ],
+          "sunset_protection_profile": [],
+          "related_to": "Section 1.1; Section 5.1.1.2",
+          "publication_date": "2026-05-06T13:10:03.082000Z",
+          "removed_on": null,
+          "status": "Published"
+        }
+      ],
+      "removed": []
+    },
+    "cisco_ndcpp": {
+      "added": [],
+      "removed": [],
+      "newly_archived": []
+    },
+    "pcl_all": {
+      "added": [
+        {
+          "active_maintenances": [],
+          "am_sort": "2028-03-26T00:00:00Z",
+          "assigned_lab_name": "Lightship Security",
+          "certification_date": "2026-03-26T00:00:00Z",
+          "from_cc_portal": true,
+          "product_id": "2026.1160",
+          "product_name": "Xerox\u00ae VersaLink\u2122 C415 / B415 / C625 / B625 with eMMC",
+          "protection_profiles": [
+            {
+              "pp_id": 483,
+              "pp_name": "collaborative Protection Profile for Hardcopy Devices Version 1.0E",
+              "pp_short_name": "CPP_HCD_V1.0E"
+            }
+          ],
+          "status_sort": "Certified",
+          "submitting_country_id_code": "CA",
+          "submitting_country_id_name": "Canada",
+          "sunset_date": "2031-03-26T00:00:00Z",
+          "tech_types": [
+            "Multi-Function Devices"
+          ],
+          "vendor_id_name": "Xerox Corporation",
+          "v_id": "2026.1160",
+          "kicked_off_date": null
+        },
+        {
+          "active_maintenances": [],
+          "am_sort": "2028-03-26T00:00:00Z",
+          "assigned_lab_name": "Lightship Security",
+          "certification_date": "2026-03-26T00:00:00Z",
+          "from_cc_portal": true,
+          "product_id": "2026.1159",
+          "product_name": "RICOH IM C2510/C3010/C3510/C4510/C6010 Enhanced Security Firmware, version E-1.00-H",
+          "protection_profiles": [
+            {
+              "pp_id": 483,
+              "pp_name": "collaborative Protection Profile for Hardcopy Devices Version 1.0E",
+              "pp_short_name": "CPP_HCD_V1.0E"
+            }
+          ],
+          "status_sort": "Certified",
+          "submitting_country_id_code": "CA",
+          "submitting_country_id_name": "Canada",
+          "sunset_date": "2031-03-26T00:00:00Z",
+          "tech_types": [
+            "Multi-Function Devices"
+          ],
+          "vendor_id_name": "Ricoh Company, Ltd.",
+          "v_id": "2026.1159",
+          "kicked_off_date": null
+        }
+      ],
+      "removed": [],
+      "newly_archived": []
+    },
+    "in_evaluation": {
+      "added": [],
+      "removed": [],
+      "current_count": 26
+    },
+    "news": {
+      "added": []
+    },
+    "events": {
+      "added": []
+    }
+  },
+  "cc_portal": {
+    "news": {
+      "added": []
+    },
+    "pps": {
+      "added": []
+    },
+    "products": {
+      "added": []
+    }
+  },
+  "cctl_labs": {},
+  "csfc": {
+    "pages": {},
+    "component_selections": {},
+    "feeds": {
+      "CISA Alerts": [
+        {
+          "title": "CISA Adds One Known Exploited Vulnerability to Catalog",
+          "link": "https://www.cisa.gov/news-events/alerts/2026/05/06/cisa-adds-one-known-exploited-vulnerability-catalog",
+          "summary": "<p>CISA has added one new vulnerability to its&nbsp;<a href=\"https://www.cisa.gov/known-exploited-vulnerabilities-catalog\">Known Exploited Vulnerabilities (KEV) Catalog</a>, based on evidence of active exploitation.&nbsp;</p>\n<ul type=\"disc\">\n<li><a href=\"https://www.cve.org/CVERecord?id=CVE-2026-0300\" target=\"_blank\">CVE-2026-0300</a>&nbsp;Palo Alto Networks PAN-OS Out-of-bounds Write Vulnerability</li>\n</ul>\n<p>This type of vulnerability is a frequent attack vector for malicious cyber actors and poses significant risks to the federal enterprise.</p>\n<p><a href=\"https://www.cisa.gov/binding-operational-directive-22-01\">Binding Operational Directive (BOD) 22-01: Reducing the Significant Risk of Known Exploited Vulnerabilities</a>&nbsp;established the KEV Catalog as a living list of known Common Vulnerabilities and Exposures (CVEs) that carry significant risk to the federal enterprise. BOD 22-01 requires Federal Civilian Executive Branch (FCEB) agencies to remediate identified vulnerabilities by the due date to protect FCEB networks against active threats. See the&nbsp;<a href=\"https://www.cisa.gov/sites/default/files/publications/Reducing_the_Significant_Risk_of_Known_Exploited_Vulnerabilities_211103.pdf\">BOD 22-01 Fact Sheet</a>&nbsp;for more information.&nbsp;</p>\n<p>Although BOD 22-01 only applies to FCEB agencies, CISA strongly urges all organizations to reduce their exposure to cyberattacks by prioritizing&nbsp;timely&nbsp;remediation of&nbsp;<a href=\"https://www.cisa.gov/known-exploited-vulnerabilities-catalog\">KEV Catalog vulnerabilities</a>&nbsp;as part of their vulnerability management practice. CISA will continue to add vulnerabilities to the catalog that meet the&nbsp;<a href=\"https://www.cisa.gov/known-exploited-vulnerabilities\">specified criteria</a>.&nbsp;</p>",
+          "published": "Wed, 06 May 26 12:00:00 +0000",
+          "id": "/node/24846",
+          "_category": "CISA"
+        }
+      ]
+    }
+  },
+  "cc_crypto": {
+    "pages": {},
+    "doc_headers": {}
+  },
+  "nist": {
+    "pages": {},
+    "doc_headers": {
+      "FIPS 140-3": {
+        "changed": true,
+        "old_last_modified": "Tue, 30 Apr 2019 17:31:42 GMT",
+        "new_last_modified": "",
+        "old_etag": "\"17b72d937affd41:0\"",
+        "new_etag": "",
+        "old_content_length": "310627",
+        "new_content_length": "",
+        "old_partial_hash": "",
+        "new_partial_hash": "d3cf3553359907f013eefffb943d6856",
+        "url": "https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.140-3.pdf"
+      },
+      "SP 800-131A Rev 2": {
+        "changed": true,
+        "old_last_modified": "Thu, 13 Jun 2019 19:37:11 GMT",
+        "new_last_modified": "",
+        "old_etag": "\"b1de70651f22d51:0\"",
+        "new_etag": "",
+        "old_content_length": "686214",
+        "new_content_length": "7244",
+        "old_partial_hash": "",
+        "new_partial_hash": "",
+        "url": "https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-131Ar2.pdf"
+      },
+      "SP 800-57 Part 1 Rev 5": {
+        "changed": true,
+        "old_last_modified": "Fri, 31 Jul 2020 15:02:29 GMT",
+        "new_last_modified": "",
+        "old_etag": "\"bc5d539c4b67d61:0\"",
+        "new_etag": "",
+        "old_content_length": "1688080",
+        "new_content_length": "",
+        "old_partial_hash": "",
+        "new_partial_hash": "a14f937bc70bfa49590772ce670fada1",
+        "url": "https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-57pt1r5.pdf"
+      },
+      "NIST IR 8547": {
+        "changed": true,
+        "old_last_modified": "",
+        "new_last_modified": "",
+        "old_etag": "",
+        "new_etag": "",
+        "old_content_length": "",
+        "new_content_length": "7244",
+        "old_partial_hash": "7ceb3d3a2f66169875c2dbe01450c2cc",
+        "new_partial_hash": "",
+        "url": "https://nvlpubs.nist.gov/nistpubs/ir/2024/NIST.IR.8547.ipd.pdf"
+      },
+      "FIPS 204 ML-DSA": {
+        "changed": true,
+        "old_last_modified": "",
+        "new_last_modified": "",
+        "old_etag": "",
+        "new_etag": "",
+        "old_content_length": "",
+        "new_content_length": "7244",
+        "old_partial_hash": "5f66fc055c9f56b45b53d0f2df1fae3f",
+        "new_partial_hash": "",
+        "url": "https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.204.pdf"
+      },
+      "FIPS 203 ML-KEM": {
+        "changed": true,
+        "old_last_modified": "Thu, 22 Aug 2024 13:49:17 GMT",
+        "new_last_modified": "",
+        "old_etag": "\"2c7e8149af4da1:0\"",
+        "new_etag": "",
+        "old_content_length": "1252341",
+        "new_content_length": "7244",
+        "old_partial_hash": "",
+        "new_partial_hash": "",
+        "url": "https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.203.pdf"
+      }
+    },
+    "feeds": {}
+  },
+  "nato": {
+    "pages": {},
+    "cisco_added": [],
+    "cisco_removed": []
+  },
+  "eucc": {
+    "pages": {},
+    "cisco_added": [],
+    "cisco_removed": []
+  },
+  "alerts": []
+}
