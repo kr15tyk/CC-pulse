@@ -179,7 +179,7 @@
   <span class="nav-title">CC Pulse Dashboard</span>
   <span class="nav-spacer"></span>
   <div class="ham-wrap">
-    <span class="nav-meta">Last run: 2026-05-07 05:11 ET</span>
+    <span class="nav-meta">Last run: 2026-05-08 04:10 ET</span>
     <button class="ham-btn" id="ham-btn" onclick="toggleHamMenu()" aria-expanded="false" aria-haspopup="true" title="Open menu">&#9776;</button>
     <div class="ham-menu" id="ham-menu" role="menu">
       <a class="ham-item" href="https://kr15tyk.github.io/CC-pulse/cc_dashboard.html" role="menuitem"><span class="ham-icon">&#127968;</span>Home</a>
@@ -255,7 +255,7 @@
 <div class="sticky-top">
   <div class="trend-bar">
     <div class="stat"><a href="#sec-niap-pp" onclick="navigateTo('sec-niap-pp');return false;">
-      <div class="stat-num active-num">4</div>
+      <div class="stat-num active-num">3</div>
       <div class="stat-lbl">NIAP Changes</div>
     </a></div>
     <div class="stat"><a href="#sec-csfc" onclick="navigateTo('sec-csfc');return false;">
@@ -263,7 +263,7 @@
       <div class="stat-lbl">CSfC Selection Updates</div>
     </a></div>
     <div class="stat"><a href="#sec-nist" onclick="navigateTo('sec-nist');return false;">
-      <div class="stat-num active-num">6</div>
+      <div class="stat-num active-num">5</div>
       <div class="stat-lbl">NIST Doc Updates</div>
     </a></div>
     <div class="stat"><a href="#sec-cc-portal" onclick="navigateTo('sec-cc-portal');return false;">
@@ -323,32 +323,49 @@
 <div class="section-group">
   <div class="section-label">NIAP</div>
   <!-- Cisco NDcPP -->
-<div class="card " id="sec-cisco" data-has-changes="0">
+<div class="card card-new" id="sec-cisco" data-has-changes="1">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>Cisco NDcPP Certifications</span>
-    <span class="card-count">0 changes</span>
-    <span class="toggle-icon">&#9658;</span>
+    <span class="card-count">1 change</span>
+    <span class="toggle-icon">&#9660;</span>
   </div>
-  <div class="card-body collapsed">
+  <div class="card-body ">
+    
+    <div class="sub-hdr sub-new">New Certifications (1)</div>
+    
+    <div class="item-row" data-source="cisco" data-kind="new">
+      <span class="item-link">Cisco Systems, Inc. &mdash; Cisco Embedded Services 9300 and 3300 Series Switches (ESS9300 & ESS3300) running IOS-XE 17.15</span>
+      <span class="item-meta">2026-04-11</span>
+    </div>
+    
+    <div class="item-sub">PKG_SSH_V1.0, MOD_MACSEC_V1.0, CPP_ND_V3.0E</div>
     
     
     
-    <p class="no-change">No changes detected. <span class="last-active">(last: 2026-05-07)</span></p>
+    
+    
+    
   </div>
 </div>
 
   <!-- NIAP In-Evaluation -->
-<div class="card " id="sec-niap-inevaluation" data-has-changes="0">
+<div class="card card-new" id="sec-niap-inevaluation" data-has-changes="1">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>NIAP In-Evaluation Products</span>
-    <span class="card-count">26 active</span>
+    <span class="card-count">1 change</span>
     </span>
   </div>
-  <div class="card-body collapsed">
+  <div class="card-body ">
     
     
+    <div class="sub-hdr sub-removed">Left Evaluation (1)</div>
     
-    <p class="no-change">No evaluation changes detected. 26 products currently in evaluation.</p>
+    <div class="item-row" data-source="niap-inevaluation" data-kind="removed">
+      <span class="item-link">Cisco Systems, Inc. -- Cisco Embedded Services 9300 and 3300 Series Switches (ESS9300 & ESS3300) running IOS-XE 17.15</span>
+      <span class="item-meta">Completed or Withdrawn</span>
+    </div>
+    
+    
     
   </div>
 </div>
@@ -371,31 +388,23 @@
 </div>
 
   <!-- NIAP PCL — All Certifications -->
-<div class="card card-new" id="sec-niap-pcl" data-has-changes="2">
+<div class="card card-new" id="sec-niap-pcl" data-has-changes="1">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>NIAP PCL — All Certifications</span>
-    <span class="card-count">2 changes</span>
+    <span class="card-count">1 change</span>
     </span>
   </div>
   <div class="card-body ">
     
-    <div class="sub-hdr sub-new">New Certifications (2)</div>
     
-    <div class="item-row" data-source="niap-pcl" data-kind="new">
-      <span class="item-link">Xerox Corporation -- Xerox® VersaLink™ C415 / B415 / C625 / B625 with eMMC</span>
-      <span class="item-meta">2026-03-26</span>
+    <div class="sub-hdr sub-updated">Newly Archived (1)</div>
+    
+    <div class="item-row" data-source="niap-pcl" data-kind="archived">
+      <span class="item-link">Tenable, Inc -- Nessus Network Monitor 6.2.2</span>
+      <span class="item-meta">Archived</span>
     </div>
     
-    <div class="item-sub">CPP_HCD_V1.0E</div>
-    
-    
-    <div class="item-row" data-source="niap-pcl" data-kind="new">
-      <span class="item-link">Ricoh Company, Ltd. -- RICOH IM C2510/C3010/C3510/C4510/C6010 Enhanced Security Firmware, version E-1.00-H</span>
-      <span class="item-meta">2026-03-26</span>
-    </div>
-    
-    <div class="item-sub">CPP_HCD_V1.0E</div>
-    
+    <div class="item-sub">PKG_TLS_V1.1, PP_APP_v1.4</div>
     
     
     
@@ -422,36 +431,17 @@
 </div>
 
   <!-- NIAP TDs -->
-<div class="card card-new" id="sec-niap-td" data-has-changes="2">
+<div class="card " id="sec-niap-td" data-has-changes="0">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>NIAP Technical Decisions</span>
-    <span class="card-count">2 changes</span>
+    <span class="card-count">0 changes</span>
     </span>
-    <span class="toggle-icon">&#9660;</span>
+    <span class="toggle-icon">&#9658;</span>
   </div>
-  <div class="card-body ">
-    
-    <div class="sub-hdr sub-new">New TDs (2)</div>
-    
-    <div class="item-row" data-source="niap-td" data-kind="new">
-      <a class="item-link" href="https://www.niap-ccevs.org/technical-decisions/TD1038" target="_blank">TD1038 &mdash; Corrections to Application Notes Regarding Extended Master Secret Extension</a>
-      <span class="item-meta">2026-05-06</span>
-    </div>
-    
-    <div class="item-sub">Applies to: PKG_TLS_V2.1</div>
+  <div class="card-body collapsed">
     
     
-    <div class="item-row" data-source="niap-td" data-kind="new">
-      <a class="item-link" href="https://www.niap-ccevs.org/technical-decisions/TD1037" target="_blank">TD1037 &mdash; Corrections to MOD_ESC_V2.0</a>
-      <span class="item-meta">2026-05-06</span>
-    </div>
-    
-    <div class="item-sub">Applies to: MOD_ESC_V2.0</div>
-    
-    
-    
-    
-    
+    <p class="no-change">No changes detected. <span class="last-active">(last: 2026-05-07)</span></p>
   </div>
 </div>
 </div>
@@ -491,10 +481,10 @@
 </div>
 
   <!-- NIST Docs -->
-<div class="card card-updated" id="sec-nist" data-has-changes="6">
+<div class="card card-updated" id="sec-nist" data-has-changes="5">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>NIST Documentation</span>
-    <span class="card-count">6 updates</span>
+    <span class="card-count">5 updates</span>
     </span>
     <span class="toggle-icon">&#9660;</span>
   </div>
@@ -502,7 +492,7 @@
     
     
     <div class="item-row" data-source="nist" data-kind="updated">
-      <a class="item-link" href="https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.140-3.pdf" target="_blank">FIPS 140-3</a>
+      <a class="item-link" href="https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.205.pdf" target="_blank">FIPS 205 SLH-DSA</a>
       <span class="item-meta">
         Header changed
       </span>
@@ -520,7 +510,7 @@
     
     
     <div class="item-row" data-source="nist" data-kind="updated">
-      <a class="item-link" href="https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-57pt1r5.pdf" target="_blank">SP 800-57 Part 1 Rev 5</a>
+      <a class="item-link" href="https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.203.pdf" target="_blank">FIPS 203 ML-KEM</a>
       <span class="item-meta">
         Header changed
       </span>
@@ -539,15 +529,6 @@
     
     <div class="item-row" data-source="nist" data-kind="updated">
       <a class="item-link" href="https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.204.pdf" target="_blank">FIPS 204 ML-DSA</a>
-      <span class="item-meta">
-        Header changed
-      </span>
-    </div>
-    
-    
-    
-    <div class="item-row" data-source="nist" data-kind="updated">
-      <a class="item-link" href="https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.203.pdf" target="_blank">FIPS 203 ML-KEM</a>
       <span class="item-meta">
         Header changed
       </span>
@@ -646,7 +627,7 @@
 <div class="card card-new" id="sec-history" data-has-changes="1">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>Change History</span>
-    <span class="card-count">91 events</span>
+    <span class="card-count">97 events</span>
     <span class="toggle-icon">▼</span>
   </div>
   <div class="card-body">
@@ -665,6 +646,72 @@
     </div>
     <div class="timeline" id="history-timeline">
     
+      
+      <div class="tl-entry" data-cat="cisco_cert">
+        <div class="tl-date">2026-05-08</div>
+        <div class="tl-body">
+          <div class="tl-title">
+            <span class="tl-badge new">new</span>
+            <a href="https://www.niap-ccevs.org/product/index.cfm?pid=11662" target="_blank">Cisco Systems, Inc. — Cisco Embedded Services 9300 and 3300 Series Switches (ESS9300 & ESS3300) running IOS-XE 17.15</a>
+          </div>
+          <div class="tl-detail">Certified 2026-04-11 · Gossamer Security Solutions · PKG_SSH_V1.0, MOD_MACSEC_V1.0, CPP_ND_V3.0E</div>
+        </div>
+      </div>
+      
+      <div class="tl-entry" data-cat="nist_doc">
+        <div class="tl-date">2026-05-08</div>
+        <div class="tl-body">
+          <div class="tl-title">
+            <span class="tl-badge updated">updated</span>
+            <a href="https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.205.pdf" target="_blank">NIST doc updated: FIPS 205 SLH-DSA</a>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="tl-entry" data-cat="nist_doc">
+        <div class="tl-date">2026-05-08</div>
+        <div class="tl-body">
+          <div class="tl-title">
+            <span class="tl-badge updated">updated</span>
+            <a href="https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-131Ar2.pdf" target="_blank">NIST doc updated: SP 800-131A Rev 2</a>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="tl-entry" data-cat="nist_doc">
+        <div class="tl-date">2026-05-08</div>
+        <div class="tl-body">
+          <div class="tl-title">
+            <span class="tl-badge updated">updated</span>
+            <a href="https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.203.pdf" target="_blank">NIST doc updated: FIPS 203 ML-KEM</a>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="tl-entry" data-cat="nist_doc">
+        <div class="tl-date">2026-05-08</div>
+        <div class="tl-body">
+          <div class="tl-title">
+            <span class="tl-badge updated">updated</span>
+            <a href="https://nvlpubs.nist.gov/nistpubs/ir/2024/NIST.IR.8547.ipd.pdf" target="_blank">NIST doc updated: NIST IR 8547</a>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="tl-entry" data-cat="nist_doc">
+        <div class="tl-date">2026-05-08</div>
+        <div class="tl-body">
+          <div class="tl-title">
+            <span class="tl-badge updated">updated</span>
+            <a href="https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.204.pdf" target="_blank">NIST doc updated: FIPS 204 ML-DSA</a>
+          </div>
+          
+        </div>
+      </div>
       
       <div class="tl-entry" data-cat="td_new">
         <div class="tl-date">2026-05-07</div>
@@ -1677,7 +1724,7 @@
 </div><!-- /main-content -->
 <footer>
   <span>CC Pulse &middot; Auto-refreshes daily (01:00 EST) &middot; NIAP, CSfC, NIST, CC Portal, NATO NIAPCL, EUCC / ENISA</span>
-  <span>Last run: 2026-05-07 05:11 ET</span>
+  <span>Last run: 2026-05-08 04:10 ET</span>
 </footer>
 
 <script>
