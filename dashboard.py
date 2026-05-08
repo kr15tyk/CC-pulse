@@ -83,7 +83,7 @@ def _build_history(n: int = 90) -> list:
                 pp.get("pp_short_name", "") for pp in item.get("protection_profiles") or []
             )
             pid = item.get("product_id") or item.get("v_id") or ""
-            url = f"https://www.niap-ccevs.org/product/index.cfm?pid={pid}" if pid else "https://www.niap-ccevs.org/"
+            url = f"https://www.niap-ccevs.org/products/{pid}" if pid else "https://www.niap-ccevs.org/products"
             entries.append({
                 "date": date, "category": "cisco_cert", "kind": "new",
                 "title": f"{vendor} — {name}",
@@ -162,7 +162,7 @@ def _build_history(n: int = 90) -> list:
             pps = ", ".join(
                 pp.get("pp_short_name", "") for pp in item.get("protection_profiles") or []
             )
-            url = f"https://www.niap-ccevs.org/product/index.cfm?pid={pid}" if pid else "https://www.niap-ccevs.org/"
+            url = f"https://www.niap-ccevs.org/products/{pid}" if pid else "https://www.niap-ccevs.org/products"
             entries.append({
                 "date": date, "category": "pcl_cert", "kind": "new",
                 "title": f"{item.get('vendor_id_name') or 'Unknown'} — {name}",
