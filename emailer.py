@@ -642,7 +642,7 @@ def _format_cisco_cert_block(product: dict) -> str:
     pp_names     = ", ".join(
         p.get("pp_short_name", "") for p in pps if p.get("pp_short_name")
     ) or "N/A"
-    niap_url     = f"https://www.niap-ccevs.org/product/index.cfm?pid={pid}" if pid else "https://www.niap-ccevs.org/"
+    niap_url     = f"https://www.niap-ccevs.org/products/{pid}" if pid else "https://www.niap-ccevs.org/products"
 
     return (
         f"### 🎉 [{name}]({niap_url})\n"
@@ -695,7 +695,7 @@ def send_cisco_cert_celebration(new_certs: list[dict]) -> None:
     footer = (
         f"\n\n---\n\n"
         f"![]({meme_url})\n\n"
-        f"[View Cisco products on NIAP PCL](https://www.niap-ccevs.org/product/index.cfm)"
+        f"[View Cisco products on NIAP PCL](https://www.niap-ccevs.org/products)"
         f" · [Full dashboard](https://kr15tyk.github.io/CC-pulse/cc_dashboard.html)"
     )
 
@@ -819,8 +819,8 @@ def send_cisco_cert_email(new_certs: list[dict]) -> None:
             pp.get("pp_short_name", "") for pp in pps if pp.get("pp_short_name")
         ) or "N/A"
         niap_url    = (
-            f"https://www.niap-ccevs.org/product/index.cfm?pid={pid}"
-            if pid else "https://www.niap-ccevs.org/"
+            f"https://www.niap-ccevs.org/products/{pid}"
+            if pid else "https://www.niap-ccevs.org/products"
         )
 
         product_title = (
@@ -851,7 +851,7 @@ def send_cisco_cert_email(new_certs: list[dict]) -> None:
     certs_html  = "\n".join(cert_blocks)
     pcl_link    = (
         '<p style="margin-top:20px">'
-        '<a href="https://www.niap-ccevs.org/product/index.cfm" '
+        '<a href="https://www.niap-ccevs.org/products" '
         'style="background:#3B82F6;color:#E0E7FF;padding:8px 16px;'
         'border-radius:4px;text-decoration:none;font-size:0.85rem;margin-right:8px">'
         '\U0001f4cb View Cisco PCL</a>'
