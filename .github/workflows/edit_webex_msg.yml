@@ -35,7 +35,7 @@ jobs:
               "\U0001F38A \U0001F38A \U0001F38A\n\n"
               "_CC Pulse detected 1 new Cisco product certification on the NIAP PCL._\n\n"
               "### \U0001F389 [Cisco 8200, 8300, 8400, 8500 Series Secure Routers (C8000) running IOS-XE 17.18]"
-              "(https://www.niap-ccevs.org/product/index.cfm?pid=11661)\n\n"
+              "(https://www.niap-ccevs.org/products/11661)\n\n"
               "| Field | Value |\n"
               "|-------|-------|\n"
               "| **Vendor** | Cisco Systems, Inc. |\n"
@@ -45,7 +45,7 @@ jobs:
               "| **Evaluating lab** | Lightship Security USA, Inc. |\n"
               "| **Submitting country** | United States |\n\n"
               "---\n\n"
-              "[View Cisco products on NIAP PCL](https://www.niap-ccevs.org/product/index.cfm)"
+              "[View Cisco products on NIAP PCL](https://www.niap-ccevs.org/products)"
               " \u00b7 [Full dashboard](https://kr15tyk.github.io/CC-pulse/cc_dashboard.html)"
           )
 
