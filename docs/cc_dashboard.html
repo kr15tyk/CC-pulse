@@ -179,7 +179,7 @@
   <span class="nav-title">CC Pulse Dashboard</span>
   <span class="nav-spacer"></span>
   <div class="ham-wrap">
-    <span class="nav-meta">Last run: 2026-05-08 03:30 ET</span>
+    <span class="nav-meta">Last run: 2026-05-09 03:56 ET</span>
     <button class="ham-btn" id="ham-btn" onclick="toggleHamMenu()" aria-expanded="false" aria-haspopup="true" title="Open menu">&#9776;</button>
     <div class="ham-menu" id="ham-menu" role="menu">
       <a class="ham-item" href="https://kr15tyk.github.io/CC-pulse/cc_dashboard.html" role="menuitem"><span class="ham-icon">&#127968;</span>Home</a>
@@ -255,7 +255,7 @@
 <div class="sticky-top">
   <div class="trend-bar">
     <div class="stat"><a href="#sec-niap-pp" onclick="navigateTo('sec-niap-pp');return false;">
-      <div class="stat-num active-num">3</div>
+      <div class="stat-num active-num">1</div>
       <div class="stat-lbl">NIAP Changes</div>
     </a></div>
     <div class="stat"><a href="#sec-csfc" onclick="navigateTo('sec-csfc');return false;">
@@ -263,7 +263,7 @@
       <div class="stat-lbl">CSfC Selection Updates</div>
     </a></div>
     <div class="stat"><a href="#sec-nist" onclick="navigateTo('sec-nist');return false;">
-      <div class="stat-num active-num">5</div>
+      <div class="stat-num active-num">2</div>
       <div class="stat-lbl">NIST Doc Updates</div>
     </a></div>
     <div class="stat"><a href="#sec-cc-portal" onclick="navigateTo('sec-cc-portal');return false;">
@@ -323,49 +323,32 @@
 <div class="section-group">
   <div class="section-label">NIAP</div>
   <!-- Cisco NDcPP -->
-<div class="card card-new" id="sec-cisco" data-has-changes="1">
+<div class="card " id="sec-cisco" data-has-changes="0">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>Cisco NDcPP Certifications</span>
-    <span class="card-count">1 change</span>
-    <span class="toggle-icon">&#9660;</span>
+    <span class="card-count">0 changes</span>
+    <span class="toggle-icon">&#9658;</span>
   </div>
-  <div class="card-body ">
-    
-    <div class="sub-hdr sub-new">New Certifications (1)</div>
-    
-    <div class="item-row" data-source="cisco" data-kind="new">
-      <span class="item-link">Cisco Systems, Inc. &mdash; Cisco Embedded Services 9300 and 3300 Series Switches (ESS9300 & ESS3300) running IOS-XE 17.15</span>
-      <span class="item-meta">2026-04-11</span>
-    </div>
-    
-    <div class="item-sub">PKG_SSH_V1.0, MOD_MACSEC_V1.0, CPP_ND_V3.0E</div>
+  <div class="card-body collapsed">
     
     
     
-    
-    
-    
+    <p class="no-change">No changes detected. <span class="last-active">(last: 2026-05-09)</span></p>
   </div>
 </div>
 
   <!-- NIAP In-Evaluation -->
-<div class="card card-new" id="sec-niap-inevaluation" data-has-changes="1">
+<div class="card " id="sec-niap-inevaluation" data-has-changes="0">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>NIAP In-Evaluation Products</span>
-    <span class="card-count">1 change</span>
+    <span class="card-count">25 active</span>
     </span>
   </div>
-  <div class="card-body ">
+  <div class="card-body collapsed">
     
     
-    <div class="sub-hdr sub-removed">Left Evaluation (1)</div>
     
-    <div class="item-row" data-source="niap-inevaluation" data-kind="removed">
-      <span class="item-link">Cisco Systems, Inc. -- Cisco Embedded Services 9300 and 3300 Series Switches (ESS9300 & ESS3300) running IOS-XE 17.15</span>
-      <span class="item-meta">Completed or Withdrawn</span>
-    </div>
-    
-    
+    <p class="no-change">No evaluation changes detected. 25 products currently in evaluation.</p>
     
   </div>
 </div>
@@ -400,11 +383,11 @@
     <div class="sub-hdr sub-updated">Newly Archived (1)</div>
     
     <div class="item-row" data-source="niap-pcl" data-kind="archived">
-      <span class="item-link">Tenable, Inc -- Nessus Network Monitor 6.2.2</span>
+      <span class="item-link">Xerox Corporation -- Xerox® VersaLink™ C625 and B625 with eMMC</span>
       <span class="item-meta">Archived</span>
     </div>
     
-    <div class="item-sub">PKG_TLS_V1.1, PP_APP_v1.4</div>
+    <div class="item-sub">PP_HCD_V1.0</div>
     
     
     
@@ -481,10 +464,10 @@
 </div>
 
   <!-- NIST Docs -->
-<div class="card card-updated" id="sec-nist" data-has-changes="5">
+<div class="card card-updated" id="sec-nist" data-has-changes="2">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>NIST Documentation</span>
-    <span class="card-count">5 updates</span>
+    <span class="card-count">2 updates</span>
     </span>
     <span class="toggle-icon">&#9660;</span>
   </div>
@@ -492,34 +475,7 @@
     
     
     <div class="item-row" data-source="nist" data-kind="updated">
-      <a class="item-link" href="https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.205.pdf" target="_blank">FIPS 205 SLH-DSA</a>
-      <span class="item-meta">
-        Header changed
-      </span>
-    </div>
-    
-    
-    
-    <div class="item-row" data-source="nist" data-kind="updated">
-      <a class="item-link" href="https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-131Ar2.pdf" target="_blank">SP 800-131A Rev 2</a>
-      <span class="item-meta">
-        Header changed
-      </span>
-    </div>
-    
-    
-    
-    <div class="item-row" data-source="nist" data-kind="updated">
       <a class="item-link" href="https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.203.pdf" target="_blank">FIPS 203 ML-KEM</a>
-      <span class="item-meta">
-        Header changed
-      </span>
-    </div>
-    
-    
-    
-    <div class="item-row" data-source="nist" data-kind="updated">
-      <a class="item-link" href="https://nvlpubs.nist.gov/nistpubs/ir/2024/NIST.IR.8547.ipd.pdf" target="_blank">NIST IR 8547</a>
       <span class="item-meta">
         Header changed
       </span>
@@ -627,7 +583,7 @@
 <div class="card card-new" id="sec-history" data-has-changes="1">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>Change History</span>
-    <span class="card-count">97 events</span>
+    <span class="card-count">96 events</span>
     <span class="toggle-icon">▼</span>
   </div>
   <div class="card-body">
@@ -647,12 +603,34 @@
     <div class="timeline" id="history-timeline">
     
       
+      <div class="tl-entry" data-cat="nist_doc">
+        <div class="tl-date">2026-05-09</div>
+        <div class="tl-body">
+          <div class="tl-title">
+            <span class="tl-badge updated">updated</span>
+            <a href="https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.203.pdf" target="_blank">NIST doc updated: FIPS 203 ML-KEM</a>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="tl-entry" data-cat="nist_doc">
+        <div class="tl-date">2026-05-09</div>
+        <div class="tl-body">
+          <div class="tl-title">
+            <span class="tl-badge updated">updated</span>
+            <a href="https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.204.pdf" target="_blank">NIST doc updated: FIPS 204 ML-DSA</a>
+          </div>
+          
+        </div>
+      </div>
+      
       <div class="tl-entry" data-cat="cisco_cert">
         <div class="tl-date">2026-05-08</div>
         <div class="tl-body">
           <div class="tl-title">
             <span class="tl-badge new">new</span>
-            <a href="https://www.niap-ccevs.org/product/index.cfm?pid=11662" target="_blank">Cisco Systems, Inc. — Cisco Embedded Services 9300 and 3300 Series Switches (ESS9300 & ESS3300) running IOS-XE 17.15</a>
+            <a href="https://www.niap-ccevs.org/products/11662" target="_blank">Cisco Systems, Inc. — Cisco Embedded Services 9300 and 3300 Series Switches (ESS9300 & ESS3300) running IOS-XE 17.15</a>
           </div>
           <div class="tl-detail">Certified 2026-04-11 · Gossamer Security Solutions · PKG_SSH_V1.0, MOD_MACSEC_V1.0, CPP_ND_V3.0E</div>
         </div>
@@ -740,7 +718,7 @@
         <div class="tl-body">
           <div class="tl-title">
             <span class="tl-badge new">new</span>
-            <a href="https://www.niap-ccevs.org/product/index.cfm?pid=2026.1160" target="_blank">Xerox Corporation — Xerox® VersaLink™ C415 / B415 / C625 / B625 with eMMC</a>
+            <a href="https://www.niap-ccevs.org/products/2026.1160" target="_blank">Xerox Corporation — Xerox® VersaLink™ C415 / B415 / C625 / B625 with eMMC</a>
           </div>
           <div class="tl-detail">Certified 2026-03-26 · Lightship Security · CPP_HCD_V1.0E</div>
         </div>
@@ -751,7 +729,7 @@
         <div class="tl-body">
           <div class="tl-title">
             <span class="tl-badge new">new</span>
-            <a href="https://www.niap-ccevs.org/product/index.cfm?pid=2026.1159" target="_blank">Ricoh Company, Ltd. — RICOH IM C2510/C3010/C3510/C4510/C6010 Enhanced Security Firmware, version E-1.00-H</a>
+            <a href="https://www.niap-ccevs.org/products/2026.1159" target="_blank">Ricoh Company, Ltd. — RICOH IM C2510/C3010/C3510/C4510/C6010 Enhanced Security Firmware, version E-1.00-H</a>
           </div>
           <div class="tl-detail">Certified 2026-03-26 · Lightship Security · CPP_HCD_V1.0E</div>
         </div>
@@ -1015,7 +993,7 @@
         <div class="tl-body">
           <div class="tl-title">
             <span class="tl-badge new">new</span>
-            <a href="https://www.niap-ccevs.org/product/index.cfm?pid=2026.1161" target="_blank">Xerox Corporation — Xerox® VersaLink™ C415 / B415 / C625 / B625 with HDD</a>
+            <a href="https://www.niap-ccevs.org/products/2026.1161" target="_blank">Xerox Corporation — Xerox® VersaLink™ C415 / B415 / C625 / B625 with HDD</a>
           </div>
           <div class="tl-detail">Certified 2026-03-27 · Lightship Security · CPP_HCD_V1.0E</div>
         </div>
@@ -1092,7 +1070,7 @@
         <div class="tl-body">
           <div class="tl-title">
             <span class="tl-badge new">new</span>
-            <a href="https://www.niap-ccevs.org/product/index.cfm?pid=11692" target="_blank">Broadcom — Carbon Black Endpoint Detection and Response (EDR) System</a>
+            <a href="https://www.niap-ccevs.org/products/11692" target="_blank">Broadcom — Carbon Black Endpoint Detection and Response (EDR) System</a>
           </div>
           <div class="tl-detail">Certified  · Booz Allen Hamilton Common Criteria Testing Laboratory · MOD_EDR_V1.0, MOD_HA_V1.0, PP_APP_v1.4</div>
         </div>
@@ -1279,7 +1257,7 @@
         <div class="tl-body">
           <div class="tl-title">
             <span class="tl-badge new">new</span>
-            <a href="https://www.niap-ccevs.org/product/index.cfm?pid=2026.1141" target="_blank">SUSE LLC — SUSE Linux Enterprise Server, Version 15 SP4</a>
+            <a href="https://www.niap-ccevs.org/products/2026.1141" target="_blank">SUSE LLC — SUSE Linux Enterprise Server, Version 15 SP4</a>
           </div>
           <div class="tl-detail">Certified 2026-01-27 · atsec information security GmbH Prüfstelle für IT-Sicherheit · PP_BASE_VIRTUALIZATION_V1.1, MOD_SV_V1.1, PKG_SSH_V1.0</div>
         </div>
@@ -1290,7 +1268,7 @@
         <div class="tl-body">
           <div class="tl-title">
             <span class="tl-badge new">new</span>
-            <a href="https://www.niap-ccevs.org/product/index.cfm?pid=2026.1146" target="_blank">SUSE LLC — SUSE Linux Enterprise Server, Version 15 SP7</a>
+            <a href="https://www.niap-ccevs.org/products/2026.1146" target="_blank">SUSE LLC — SUSE Linux Enterprise Server, Version 15 SP7</a>
           </div>
           <div class="tl-detail">Certified 2026-02-24 · atsec information security GmbH Prüfstelle für IT-Sicherheit · PKG_TLS_V1.1, PKG_SSH_V1.0, PP_OS_V4.3</div>
         </div>
@@ -1367,7 +1345,7 @@
         <div class="tl-body">
           <div class="tl-title">
             <span class="tl-badge new">new</span>
-            <a href="https://www.niap-ccevs.org/product/index.cfm?pid=11700" target="_blank">HPE Juniper Networking — Junos 24.4R2 FOR MX240/480/960 Routers and EX9204/9208/9214 Switches</a>
+            <a href="https://www.niap-ccevs.org/products/11700" target="_blank">HPE Juniper Networking — Junos 24.4R2 FOR MX240/480/960 Routers and EX9204/9208/9214 Switches</a>
           </div>
           <div class="tl-detail">Certified  · Acumen Security · PKG_SSH_V1.0, MOD_MACSEC_V1.0, CPP_ND_V3.0E</div>
         </div>
@@ -1400,7 +1378,7 @@
         <div class="tl-body">
           <div class="tl-title">
             <span class="tl-badge new">new</span>
-            <a href="https://www.niap-ccevs.org/product/index.cfm?pid=2026.1096" target="_blank">Northrop Grumman Corporation — Ad Noctem Connect 2.3</a>
+            <a href="https://www.niap-ccevs.org/products/2026.1096" target="_blank">Northrop Grumman Corporation — Ad Noctem Connect 2.3</a>
           </div>
           <div class="tl-detail">Certified 2026-02-26 · Teron Labs · PP_APP_v1.4</div>
         </div>
@@ -1444,7 +1422,7 @@
         <div class="tl-body">
           <div class="tl-title">
             <span class="tl-badge new">new</span>
-            <a href="https://www.niap-ccevs.org/product/index.cfm?pid=11661" target="_blank">Cisco Systems, Inc. — Cisco 8200, 8300, 8400, 8500 Series Secure Routers (C8000) running IOS-XE 17.18</a>
+            <a href="https://www.niap-ccevs.org/products/11661" target="_blank">Cisco Systems, Inc. — Cisco 8200, 8300, 8400, 8500 Series Secure Routers (C8000) running IOS-XE 17.18</a>
           </div>
           <div class="tl-detail">Certified 2026-04-09 · Lightship Security USA, Inc. · PKG_SSH_V1.0, MOD_MACSEC_V1.0, MOD_VPNGW_v1.3, CPP_ND_V3.0E</div>
         </div>
@@ -1477,7 +1455,7 @@
         <div class="tl-body">
           <div class="tl-title">
             <span class="tl-badge new">new</span>
-            <a href="https://www.niap-ccevs.org/product/index.cfm?pid=2026.1089" target="_blank">F5 Networks, Inc. — F5 BIG-IP 17.5.0 including AFM</a>
+            <a href="https://www.niap-ccevs.org/products/2026.1089" target="_blank">F5 Networks, Inc. — F5 BIG-IP 17.5.0 including AFM</a>
           </div>
           <div class="tl-detail">Certified 2026-02-23 · atsec information security AB · MOD_CPP_FW_v1.4e, PKG_SSH_V1.0, CPP_ND_V3.0E</div>
         </div>
@@ -1499,7 +1477,7 @@
         <div class="tl-body">
           <div class="tl-title">
             <span class="tl-badge new">new</span>
-            <a href="https://www.niap-ccevs.org/product/index.cfm?pid=11691" target="_blank">Progress Software Technologies Ltd — Progress LoadMaster</a>
+            <a href="https://www.niap-ccevs.org/products/11691" target="_blank">Progress Software Technologies Ltd — Progress LoadMaster</a>
           </div>
           <div class="tl-detail">Certified  · Acumen Security · CPP_ND_V3.0E</div>
         </div>
@@ -1521,7 +1499,7 @@
         <div class="tl-body">
           <div class="tl-title">
             <span class="tl-badge new">new</span>
-            <a href="https://www.niap-ccevs.org/product/index.cfm?pid=11687" target="_blank">Gigamon Inc — Gigamon GigaVUE Visibility Appliances</a>
+            <a href="https://www.niap-ccevs.org/products/11687" target="_blank">Gigamon Inc — Gigamon GigaVUE Visibility Appliances</a>
           </div>
           <div class="tl-detail">Certified  · Booz Allen Hamilton Common Criteria Testing Laboratory · PKG_SSH_V1.0, CPP_ND_V3.0E</div>
         </div>
@@ -1620,7 +1598,7 @@
         <div class="tl-body">
           <div class="tl-title">
             <span class="tl-badge new">new</span>
-            <a href="https://www.niap-ccevs.org/product/index.cfm?pid=11683" target="_blank">Cisco Systems, Inc. — Cisco Nexus 9000 MACsec Series Switches Running NX-OS 10.4</a>
+            <a href="https://www.niap-ccevs.org/products/11683" target="_blank">Cisco Systems, Inc. — Cisco Nexus 9000 MACsec Series Switches Running NX-OS 10.4</a>
           </div>
           <div class="tl-detail">Certified  · Gossamer Security Solutions · PKG_SSH_V1.0, MOD_MACSEC_V1.0, CPP_ND_V3.0E</div>
         </div>
@@ -1675,42 +1653,9 @@
         <div class="tl-body">
           <div class="tl-title">
             <span class="tl-badge new">new</span>
-            <a href="https://www.niap-ccevs.org/product/index.cfm?pid=2024.1331" target="_blank">KONICA MINOLTA, INC. — KONICA MINOLTA bizhub 651i/bizhub 551i/bizhub 451i/bizhub 361i/bizhub 301i with FK-514,  DEVELOP ineo 651i/ineo 551i/ineo 451i/ineo 361i/ineo 301i with FK-514 G00-R6</a>
+            <a href="https://www.niap-ccevs.org/products/2024.1331" target="_blank">KONICA MINOLTA, INC. — KONICA MINOLTA bizhub 651i/bizhub 551i/bizhub 451i/bizhub 361i/bizhub 301i with FK-514,  DEVELOP ineo 651i/ineo 551i/ineo 451i/ineo 361i/ineo 301i with FK-514 G00-R6</a>
           </div>
           <div class="tl-detail">Certified 2024-10-24 · ECSEC Laboratory Inc. Evaluation Center · PP_HCD_V1.0</div>
-        </div>
-      </div>
-      
-      <div class="tl-entry" data-cat="pcl_cert">
-        <div class="tl-date">2026-04-08</div>
-        <div class="tl-body">
-          <div class="tl-title">
-            <span class="tl-badge new">new</span>
-            <a href="https://www.niap-ccevs.org/product/index.cfm?pid=11680" target="_blank">RedData, an RPI-CS, Inc. division — RedData PCIe Gen3 NVMe 1.3 & SATA III SED SSD's</a>
-          </div>
-          <div class="tl-detail">Certified  · Lightship Security USA, Inc. · CPP_FDE_EE_V2.0E</div>
-        </div>
-      </div>
-      
-      <div class="tl-entry" data-cat="pcl_cert">
-        <div class="tl-date">2026-04-08</div>
-        <div class="tl-body">
-          <div class="tl-title">
-            <span class="tl-badge new">new</span>
-            <a href="https://www.niap-ccevs.org/product/index.cfm?pid=2026.1100" target="_blank">HP Inc. — HP G2.0 AJM BCBC  Color LaserJet Managed MFP E785) System firmware version: 2509306_000318 HP Color Laserjet MFP (Flow) E877, Enterprise (Flow) MFP 8801 System Firmware 2509306_000318 HP Color LaserJet Enterprise (Flow) MFP 5800dn/f/zf, HP Color LaserJet Enterprise MFP X57945dn, HP Color LaserJet Enterprise (Flow) MFP X58045dn/z/zs, and HP Color LaserJet Enterprise Flow MFP X57945z/zs System Firmware 2509306_000319 HP Color LaserJet Enterprise MFP 6800dn, HP Color LaserJet Enterprise Flow MFP 6800 zf/zfsw/zfw+, HP Color LaserJet Enterprise Flow MFP 6801zfsw/zfw+ HP Color LaserJet Enterprise MFP X677 dn/s/z/z+/zs System Firmware 2509306_000320 HP Color LaserJet Enterprise MFP M480f HP Color LaserJet Managed MFP E47528f System Firmware 2509306_000329 HP LaserJet Enterprise MFP M430f/M431f and HP LaserJet Managed MFP E42540f System Firmware 2509306_000331 HP LaserJet Managed (Flow) MFP E826 and HP LaserJet Enterprise (Flow) MFP 8601 printers, all with HP FutureSmart 5.9.2.1 Firmware and  System Firmware 2509306_000334 All with HP FutureSmart 5.9.2.1 Firmware and JetDirect Inside Firmware JOL25090252</a>
-          </div>
-          <div class="tl-detail">Certified 2026-02-26 · atsec information security AB · CPP_HCD_V1.0E</div>
-        </div>
-      </div>
-      
-      <div class="tl-entry" data-cat="nist_doc">
-        <div class="tl-date">2026-04-08</div>
-        <div class="tl-body">
-          <div class="tl-title">
-            <span class="tl-badge updated">updated</span>
-            <a href="https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-131Ar2.pdf" target="_blank">NIST doc updated: SP 800-131A Rev 2</a>
-          </div>
-          
         </div>
       </div>
       
@@ -1724,7 +1669,7 @@
 </div><!-- /main-content -->
 <footer>
   <span>CC Pulse &middot; Auto-refreshes daily (01:00 EST) &middot; NIAP, CSfC, NIST, CC Portal, NATO NIAPCL, EUCC / ENISA</span>
-  <span>Last run: 2026-05-08 03:30 ET</span>
+  <span>Last run: 2026-05-09 03:56 ET</span>
 </footer>
 
 <script>
