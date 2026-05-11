@@ -179,7 +179,7 @@
   <span class="nav-title">CC Pulse Dashboard</span>
   <span class="nav-spacer"></span>
   <div class="ham-wrap">
-    <span class="nav-meta">Last run: 2026-05-10 04:26 ET</span>
+    <span class="nav-meta">Last run: 2026-05-11 06:07 ET</span>
     <button class="ham-btn" id="ham-btn" onclick="toggleHamMenu()" aria-expanded="false" aria-haspopup="true" title="Open menu">&#9776;</button>
     <div class="ham-menu" id="ham-menu" role="menu">
       <a class="ham-item" href="https://kr15tyk.github.io/CC-pulse/cc_dashboard.html" role="menuitem"><span class="ham-icon">&#127968;</span>Home</a>
@@ -263,7 +263,7 @@
       <div class="stat-lbl">CSfC Selection Updates</div>
     </a></div>
     <div class="stat"><a href="#sec-nist" onclick="navigateTo('sec-nist');return false;">
-      <div class="stat-num active-num">1</div>
+      <div class="stat-num active-num">3</div>
       <div class="stat-lbl">NIST Doc Updates</div>
     </a></div>
     <div class="stat"><a href="#sec-cc-portal" onclick="navigateTo('sec-cc-portal');return false;">
@@ -453,10 +453,10 @@
 </div>
 
   <!-- NIST Docs -->
-<div class="card card-updated" id="sec-nist" data-has-changes="1">
+<div class="card card-updated" id="sec-nist" data-has-changes="3">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>NIST Documentation</span>
-    <span class="card-count">1 update</span>
+    <span class="card-count">3 updates</span>
     </span>
     <span class="toggle-icon">&#9660;</span>
   </div>
@@ -464,7 +464,25 @@
     
     
     <div class="item-row" data-source="nist" data-kind="updated">
+      <a class="item-link" href="https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.203.pdf" target="_blank">FIPS 203 ML-KEM</a>
+      <span class="item-meta">
+        Header changed
+      </span>
+    </div>
+    
+    
+    
+    <div class="item-row" data-source="nist" data-kind="updated">
       <a class="item-link" href="https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.204.pdf" target="_blank">FIPS 204 ML-DSA</a>
+      <span class="item-meta">
+        Header changed
+      </span>
+    </div>
+    
+    
+    
+    <div class="item-row" data-source="nist" data-kind="updated">
+      <a class="item-link" href="https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.205.pdf" target="_blank">FIPS 205 SLH-DSA</a>
       <span class="item-meta">
         Header changed
       </span>
@@ -563,7 +581,7 @@
 <div class="card card-new" id="sec-history" data-has-changes="1">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>Change History</span>
-    <span class="card-count">91 events</span>
+    <span class="card-count">94 events</span>
     <span class="toggle-icon">▼</span>
   </div>
   <div class="card-body">
@@ -582,6 +600,39 @@
     </div>
     <div class="timeline" id="history-timeline">
     
+      
+      <div class="tl-entry" data-cat="nist_doc">
+        <div class="tl-date">2026-05-11</div>
+        <div class="tl-body">
+          <div class="tl-title">
+            <span class="tl-badge updated">updated</span>
+            <a href="https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.203.pdf" target="_blank">NIST doc updated: FIPS 203 ML-KEM</a>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="tl-entry" data-cat="nist_doc">
+        <div class="tl-date">2026-05-11</div>
+        <div class="tl-body">
+          <div class="tl-title">
+            <span class="tl-badge updated">updated</span>
+            <a href="https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.204.pdf" target="_blank">NIST doc updated: FIPS 204 ML-DSA</a>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="tl-entry" data-cat="nist_doc">
+        <div class="tl-date">2026-05-11</div>
+        <div class="tl-body">
+          <div class="tl-title">
+            <span class="tl-badge updated">updated</span>
+            <a href="https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.205.pdf" target="_blank">NIST doc updated: FIPS 205 SLH-DSA</a>
+          </div>
+          
+        </div>
+      </div>
       
       <div class="tl-entry" data-cat="nist_doc">
         <div class="tl-date">2026-05-10</div>
@@ -1594,7 +1645,7 @@
 </div><!-- /main-content -->
 <footer>
   <span>CC Pulse &middot; Auto-refreshes daily (01:00 EST) &middot; NIAP, CSfC, NIST, CC Portal, NATO NIAPCL, EUCC / ENISA</span>
-  <span>Last run: 2026-05-10 04:26 ET</span>
+  <span>Last run: 2026-05-11 06:07 ET</span>
 </footer>
 
 <script>
