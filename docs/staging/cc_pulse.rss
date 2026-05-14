@@ -2,10 +2,15 @@
 <rss version="2.0"><channel>
 <title>CC Pulse</title>
 <link>https://kr15tyk.github.io/CC-pulse/cc_dashboard.html</link>
-<description>Common Criteria monitoring - 2026-05-13 05:25 ET</description>
-<item><title>NIST Doc Updated: FIPS 140-3</title><link>https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.140-3.pdf</link><description>Document header updated.</description></item>
+<description>Common Criteria monitoring - 2026-05-14 05:15 ET</description>
+<item><title>New TD: TD1039</title><link>https://www.niap-ccevs.org/</link><description></description></item>
+<item><title>New TD: TD1019</title><link>https://www.niap-ccevs.org/</link><description></description></item>
+<item><title>New TD: TD0994</title><link>https://www.niap-ccevs.org/</link><description></description></item>
+<item><title>New TD: TD1040</title><link>https://www.niap-ccevs.org/</link><description></description></item>
 <item><title>NIST Doc Updated: SP 800-131A Rev 2</title><link>https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-131Ar2.pdf</link><description>Document header updated.</description></item>
-<item><title>NIST Doc Updated: NIST IR 8547</title><link>https://nvlpubs.nist.gov/nistpubs/ir/2024/NIST.IR.8547.ipd.pdf</link><description>Document header updated.</description></item>
-<item><title>NIST Doc Updated: FIPS 203 ML-KEM</title><link>https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.203.pdf</link><description>Document header updated.</description></item>
 <item><title>NIST Doc Updated: FIPS 204 ML-DSA</title><link>https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.204.pdf</link><description>Document header updated.</description></item>
+<item><title>NIST Doc Updated: NIST IR 8547</title><link>https://nvlpubs.nist.gov/nistpubs/ir/2024/NIST.IR.8547.ipd.pdf</link><description>Document header updated.</description></item>
+<item><title>NIST Doc Updated: FIPS 140-3</title><link>https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.140-3.pdf</link><description>Document header updated.</description></item>
+<item><title>ALERT: NIAP TD â Removal of Physical Attack for CSfC EUD Use Case</title><link>https://kr15tyk.github.io/CC-pulse/cc_dashboard.html</link><description>Kind: new | Keywords: </description></item>
+<item><title>ALERT: NIAP TD â Addition of FCS_COP.1/XOF to PP_APP_V2.0</title><link>https://kr15tyk.github.io/CC-pulse/cc_dashboard.html</link><description>Kind: new | Keywords: </description></item>
 </channel></rss>
