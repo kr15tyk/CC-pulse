@@ -1,0 +1,282 @@
+{
+  "period_start": "2026-05-15T08:49:21.073697+00:00",
+  "period_end": "2026-05-16T08:04:13.774867+00:00",
+  "niap": {
+    "pps": {
+      "added": [],
+      "removed": [],
+      "sunset_changes": [
+        {
+          "pp_id": 475,
+          "pp_short_name": "MOD_WEB_V1.0",
+          "pp_name": "PP-Module for Web Browsers v1.0",
+          "tech_type": "Web Browser",
+          "status": "Archived",
+          "pp_date": null,
+          "sunset_date": "2025-12-15T00:00:00Z",
+          "pp_sponsor_id": "NIAP",
+          "pp_transition": null,
+          "cc_version": "3.1",
+          "old_sunset": null,
+          "new_sunset": "2025-12-15T00:00:00Z"
+        }
+      ],
+      "status_changes": []
+    },
+    "tds": {
+      "added": [
+        {
+          "td_id": 919,
+          "identifier": "TD0919",
+          "title": "FDP_ACF_EXT.1 Clarifications",
+          "protection_profile": [
+            {
+              "pp_id": 518,
+              "pp_name": "PP-Module for Web Browser v1.0",
+              "pp_common_name": "PP-Module for Web Browser v1.0",
+              "cc_version": "CC:2022",
+              "mr_version": null,
+              "pp_date": "2025-06-16T00:00:00Z",
+              "entrydate": "2025-06-16T13:13:42.181000Z",
+              "tech_type": "Web Browser",
+              "pp_sponsor_id": "NIAP",
+              "community_id": null,
+              "status": "Publishing",
+              "sunset_date": null,
+              "pp_overview": "<p>The scope of the PP-Module for Web Browsers, Version 1.0 is to describe the security functionality of web browser applications in terms of [CC] and to define functional and assurance requirements for the product\u0002specific capabilities of web browser applications. Web browsers are client applications that retrieve and render content provided by web servers, primarily using the hypertext transfer protocol (HTTP) or HTTP Secure (HTTPS).&nbsp;</p>",
+              "security_evaluation_summary": "<p>The Target of Evaluation (TOE) in this PP-Module is a web browser application running on a desktop or mobile operating system. Web browsers are client applications that retrieve and render content provided by web servers, primarily using the hypertext transfer protocol (HTTP) or HTTP Secure (HTTPS). Browsers have grown in complexity over the years, starting as tools used to display simple, unchanging websites and becoming sophisticated execution environments for web content. The use of browsers to administer accounts, servers, or embedded systems remotely requires them to handle sensitive information securely. Innovations such as tabs, extensions, and HTML5 have not only increased browser functionality, but also introduced new security concerns. Being the principal method for accessing the internet, and due to their complexity and the information that they process, browsers are a natural target for attackers. As a result, it is paramount that the security of web browsers be improved to reduce the risk to client machines and enterprise networks.&nbsp;</p>",
+              "environmental_strengths": "",
+              "pp_priority": null,
+              "created_on": null,
+              "removed_on": null,
+              "archived": false,
+              "assurance_maintenance": null,
+              "pp_estcompletion": null,
+              "pp_estcompletiondate": null,
+              "pp_transition": "2025-12-16T00:00:00Z",
+              "revised_on": null,
+              "pp_short_name": "MOD_WB_v1.0",
+              "dod_compliant": false,
+              "csfceligible": true,
+              "constraint": null,
+              "predecessor_id": 378,
+              "successor_id": null,
+              "creator": 620,
+              "remover": null,
+              "editor": null
+            }
+          ],
+          "sunset_protection_profile": [],
+          "related_to": "FDP_ACF_EXT.1",
+          "publication_date": "2026-05-15T07:51:47.704000Z",
+          "removed_on": null,
+          "status": "Published"
+        }
+      ],
+      "removed": []
+    },
+    "cisco_ndcpp": {
+      "added": [],
+      "removed": [],
+      "newly_archived": []
+    },
+    "pcl_all": {
+      "added": [
+        {
+          "active_maintenances": [],
+          "am_sort": "2031-04-24T00:00:00Z",
+          "assigned_lab_name": "EWA - Canada",
+          "certification_date": "2026-04-24T00:00:00Z",
+          "from_cc_portal": true,
+          "product_id": "2026.1171",
+          "product_name": "Belkin F1DN102KVM-UN-4, F1DN102KVM-UN4Z, F1DN102KVM-UN4C, F1DN202KVM-UN-4, F1DN202KVM-UN4Z, F1DN202KVM-UN4C, F1DN104KVM-UN-4, F1DN104KVM-UN4Z, F1DN104KVM-UN4C, F1DN104KVM-UN4W, F1DN204KVM-UN-4, F1DN204KVM-UN4Z, F1DN204KVM-UN4C, F1DN204KVM-UN4W, F1DN204KVM-UN4M, F1DN108KVM-UN-4, F1DN108KVM-UN4Z, F1DN108KVM-UN4W, F1DN208KVM-UN-4, F1DN208KVM-UN4Z, F1DN208KVM-UN4W, F1DN116KVM-UN-4 Firmware Version 44444-E7E7",
+          "protection_profiles": [
+            {
+              "pp_id": 412,
+              "pp_name": "Protection Profile for Peripheral Sharing Device Version 4.0",
+              "pp_short_name": "PP_PSD_V4.0"
+            },
+            {
+              "pp_id": 433,
+              "pp_name": "PP-Module for Analog Audio Output Devices Version 1.0",
+              "pp_short_name": "MOD_AO_V1.0"
+            },
+            {
+              "pp_id": 434,
+              "pp_name": "PP-Module for User Authentication Devices Version 1.0",
+              "pp_short_name": "MOD_UA_V1.0"
+            },
+            {
+              "pp_id": 435,
+              "pp_name": "PP-Module for Keyboard/Mouse Devices Version 1.0",
+              "pp_short_name": "MOD_KM_V1.0"
+            },
+            {
+              "pp_id": 436,
+              "pp_name": "PP-Module for Video/Display Devices Version 1.0",
+              "pp_short_name": "MOD_VI_V1.0"
+            }
+          ],
+          "status_sort": "Certified",
+          "submitting_country_id_code": "CA",
+          "submitting_country_id_name": "Canada",
+          "sunset_date": "2031-04-24T00:00:00Z",
+          "tech_types": [
+            "Other Devices and Systems"
+          ],
+          "vendor_id_name": "Belkin International, Inc.",
+          "v_id": "2026.1171",
+          "kicked_off_date": null
+        },
+        {
+          "active_maintenances": [],
+          "am_sort": "2028-02-10T00:00:00Z",
+          "assigned_lab_name": "atsec information security AB",
+          "certification_date": "2026-02-10T00:00:00Z",
+          "from_cc_portal": true,
+          "product_id": "2026.1044",
+          "product_name": "F5 BIG-IP 17.5.0 including APM",
+          "protection_profiles": [
+            {
+              "pp_id": 482,
+              "pp_name": "collaborative Protection Profile for Network Devices Version 3.0e",
+              "pp_short_name": "CPP_ND_V3.0E"
+            }
+          ],
+          "status_sort": "Certified",
+          "submitting_country_id_code": "SE",
+          "submitting_country_id_name": "Sweden",
+          "sunset_date": "2031-02-10T00:00:00Z",
+          "tech_types": [
+            "Network and Network-Related Devices and Systems"
+          ],
+          "vendor_id_name": "F5 Networks, Inc.",
+          "v_id": "2026.1044",
+          "kicked_off_date": null
+        },
+        {
+          "active_maintenances": [],
+          "am_sort": "2028-02-26T00:00:00Z",
+          "assigned_lab_name": "atsec information security AB",
+          "certification_date": "2026-02-26T00:00:00Z",
+          "from_cc_portal": true,
+          "product_id": "2026.1117",
+          "product_name": "F5 BIG-IP 17.5.0 including SSLO",
+          "protection_profiles": [
+            {
+              "pp_id": 459,
+              "pp_name": "Functional Package for SSH Version 1.0",
+              "pp_short_name": "PKG_SSH_V1.0"
+            },
+            {
+              "pp_id": 477,
+              "pp_name": "PP-Module for SSL/TLS Inspection Proxy Version 1.1",
+              "pp_short_name": "MOD_STIP_V1.1"
+            },
+            {
+              "pp_id": 482,
+              "pp_name": "collaborative Protection Profile for Network Devices Version 3.0e",
+              "pp_short_name": "CPP_ND_V3.0E"
+            }
+          ],
+          "status_sort": "Certified",
+          "submitting_country_id_code": "SE",
+          "submitting_country_id_name": "Sweden",
+          "sunset_date": "2031-02-26T00:00:00Z",
+          "tech_types": [
+            "Network and Network-Related Devices and Systems"
+          ],
+          "vendor_id_name": "F5 Networks, Inc.",
+          "v_id": "2026.1117",
+          "kicked_off_date": null
+        }
+      ],
+      "removed": [],
+      "newly_archived": []
+    },
+    "in_evaluation": {
+      "added": [],
+      "removed": [],
+      "current_count": 24
+    },
+    "news": {
+      "added": []
+    },
+    "events": {
+      "added": []
+    }
+  },
+  "cc_portal": {
+    "news": {
+      "added": []
+    },
+    "pps": {
+      "added": []
+    },
+    "products": {
+      "added": []
+    }
+  },
+  "cctl_labs": {},
+  "csfc": {
+    "pages": {},
+    "component_selections": {},
+    "feeds": {
+      "CISA Alerts": [
+        {
+          "title": "CISA Adds One Known Exploited Vulnerability to Catalog",
+          "link": "https://www.cisa.gov/news-events/alerts/2026/05/15/cisa-adds-one-known-exploited-vulnerability-catalog",
+          "summary": "<p>CISA has added one new vulnerability to its <a href=\"https://www.cisa.gov/known-exploited-vulnerabilities-catalog\" title=\"Known Exploited Vulnerabilities Catalog\">Known Exploited Vulnerabilities (KEV) Catalog</a>, based on evidence of active exploitation.</p>\n<ul>\n<li><a href=\"https://www.cve.org/CVERecord?id=CVE-2026-42897\" target=\"_blank\">CVE-2026-42897</a> Microsoft Exchange Server Cross-Site Scripting Vulnerability</li>\n</ul>\n<p>This type of vulnerability is a frequent attack vector for malicious cyber actors and poses significant risks to the federal enterprise.</p>\n<p><a href=\"https://www.cisa.gov/binding-operational-directive-22-01\">Binding Operational Directive (BOD) 22-01: Reducing the Significant Risk of Known Exploited Vulnerabilities</a> established the KEV Catalog as a living list of known Common Vulnerabilities and Exposures (CVEs) that carry significant risk to the federal enterprise. BOD 22-01 requires Federal Civilian Executive Branch (FCEB) agencies to remediate identified vulnerabilities by the due date to protect FCEB networks against active threats. See the <a href=\"https://www.cisa.gov/sites/default/files/publications/Reducing_the_Significant_Risk_of_Known_Exploited_Vulnerabilities_211103.pdf\">BOD 22-01 Fact Sheet</a> for more information.</p>\n<p>Although BOD 22-01 only applies to FCEB agencies, CISA strongly urges all organizations to reduce their exposure to cyberattacks by prioritizing timely remediation of <a href=\"https://www.cisa.gov/known-exploited-vulnerabilities-catalog\" title=\"Known Exploited Vulnerabilities Catalog\">KEV Catalog vulnerabilities</a> as part of their vulnerability management practice. CISA will continue to add vulnerabilities to the catalog that meet the <a href=\"https://www.cisa.gov/known-exploited-vulnerabilities\" title=\"Reducing the Significant Risk of Known Exploited Vulnerabilities\">specified criteria</a>.&nbsp;</p>",
+          "published": "Fri, 15 May 26 12:00:00 +0000",
+          "id": "/node/24887",
+          "_category": "CISA"
+        }
+      ]
+    }
+  },
+  "cc_crypto": {
+    "pages": {},
+    "doc_headers": {}
+  },
+  "nist": {
+    "pages": {},
+    "doc_headers": {
+      "SP 800-131A Rev 2": {
+        "changed": true,
+        "old_last_modified": "",
+        "new_last_modified": "Thu, 13 Jun 2019 19:37:11 GMT",
+        "old_etag": "",
+        "new_etag": "\"b1de70651f22d51:0\"",
+        "old_content_length": "",
+        "new_content_length": "686214",
+        "old_partial_hash": "11e24de28c40daadf4a1c3eda68e71e7",
+        "new_partial_hash": "",
+        "url": "https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-131Ar2.pdf"
+      },
+      "FIPS 204 ML-DSA": {
+        "changed": true,
+        "old_last_modified": "",
+        "new_last_modified": "Thu, 22 Aug 2024 13:51:35 GMT",
+        "old_etag": "",
+        "new_etag": "\"3eaf4669af4da1:0\"",
+        "old_content_length": "",
+        "new_content_length": "3291746",
+        "old_partial_hash": "5f66fc055c9f56b45b53d0f2df1fae3f",
+        "new_partial_hash": "",
+        "url": "https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.204.pdf"
+      }
+    },
+    "feeds": {}
+  },
+  "nato": {
+    "pages": {},
+    "cisco_added": [],
+    "cisco_removed": []
+  },
+  "eucc": {
+    "pages": {},
+    "cisco_added": [],
+    "cisco_removed": []
+  },
+  "alerts": []
+}
