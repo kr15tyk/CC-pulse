@@ -1,0 +1,134 @@
+{
+  "period_start": "2026-05-16T08:04:13.774867+00:00",
+  "period_end": "2026-05-17T08:21:46.662673+00:00",
+  "niap": {
+    "pps": {
+      "added": [],
+      "removed": [],
+      "sunset_changes": [],
+      "status_changes": []
+    },
+    "tds": {
+      "added": [],
+      "removed": []
+    },
+    "cisco_ndcpp": {
+      "added": [],
+      "removed": [],
+      "newly_archived": []
+    },
+    "pcl_all": {
+      "added": [],
+      "removed": [],
+      "newly_archived": []
+    },
+    "in_evaluation": {
+      "added": [],
+      "removed": [],
+      "current_count": 24
+    },
+    "news": {
+      "added": []
+    },
+    "events": {
+      "added": []
+    }
+  },
+  "cc_portal": {
+    "news": {
+      "added": []
+    },
+    "pps": {
+      "added": []
+    },
+    "products": {
+      "added": []
+    }
+  },
+  "cctl_labs": {},
+  "csfc": {
+    "pages": {},
+    "component_selections": {},
+    "feeds": {}
+  },
+  "cc_crypto": {
+    "pages": {},
+    "doc_headers": {}
+  },
+  "nist": {
+    "pages": {},
+    "doc_headers": {
+      "SP 800-57 Part 1 Rev 5": {
+        "changed": true,
+        "old_last_modified": "Fri, 31 Jul 2020 15:02:29 GMT",
+        "new_last_modified": "",
+        "old_etag": "\"bc5d539c4b67d61:0\"",
+        "new_etag": "",
+        "old_content_length": "1688080",
+        "new_content_length": "",
+        "old_partial_hash": "",
+        "new_partial_hash": "a14f937bc70bfa49590772ce670fada1",
+        "url": "https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-57pt1r5.pdf"
+      },
+      "FIPS 140-3": {
+        "changed": true,
+        "old_last_modified": "Tue, 30 Apr 2019 17:31:42 GMT",
+        "new_last_modified": "",
+        "old_etag": "\"17b72d937affd41:0\"",
+        "new_etag": "",
+        "old_content_length": "310627",
+        "new_content_length": "",
+        "old_partial_hash": "",
+        "new_partial_hash": "d3cf3553359907f013eefffb943d6856",
+        "url": "https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.140-3.pdf"
+      },
+      "SP 800-131A Rev 2": {
+        "changed": true,
+        "old_last_modified": "Thu, 13 Jun 2019 19:37:11 GMT",
+        "new_last_modified": "",
+        "old_etag": "\"b1de70651f22d51:0\"",
+        "new_etag": "",
+        "old_content_length": "686214",
+        "new_content_length": "",
+        "old_partial_hash": "",
+        "new_partial_hash": "11e24de28c40daadf4a1c3eda68e71e7",
+        "url": "https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-131Ar2.pdf"
+      },
+      "FIPS 203 ML-KEM": {
+        "changed": true,
+        "old_last_modified": "",
+        "new_last_modified": "Thu, 22 Aug 2024 13:49:17 GMT",
+        "old_etag": "",
+        "new_etag": "\"2c7e8149af4da1:0\"",
+        "old_content_length": "",
+        "new_content_length": "1252341",
+        "old_partial_hash": "ccfb9e5837e011131ec0c3ab24d35dbc",
+        "new_partial_hash": "",
+        "url": "https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.203.pdf"
+      }
+    },
+    "feeds": {
+      "NIST Information Technology News": [
+        {
+          "title": "NCCoE Manufacturing Project Update",
+          "link": "https://www.nist.gov/news-events/events/2026/06/nccoe-manufacturing-project-update",
+          "summary": "Event Date/Time: June 4, 2026 | 1:00 P.M. \u2013 2:00 P.M. The NIST NCCoE will host a virtual event on June 4, 2026, to provide an overview of upcoming guidelines on improving cybersecurity incident response and recovery capabilities for organizations",
+          "published": "Thu, 04 Jun 2026 13:00:00 -0400",
+          "id": "https://www.nist.gov/node/1912181",
+          "_category": "NEWS"
+        }
+      ]
+    }
+  },
+  "nato": {
+    "pages": {},
+    "cisco_added": [],
+    "cisco_removed": []
+  },
+  "eucc": {
+    "pages": {},
+    "cisco_added": [],
+    "cisco_removed": []
+  },
+  "alerts": []
+}
