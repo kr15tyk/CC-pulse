@@ -1,0 +1,123 @@
+{
+  "period_start": "2026-05-17T08:21:46.662673+00:00",
+  "period_end": "2026-05-18T10:02:35.267389+00:00",
+  "niap": {
+    "pps": {
+      "added": [],
+      "removed": [],
+      "sunset_changes": [],
+      "status_changes": []
+    },
+    "tds": {
+      "added": [],
+      "removed": []
+    },
+    "cisco_ndcpp": {
+      "added": [],
+      "removed": [],
+      "newly_archived": []
+    },
+    "pcl_all": {
+      "added": [],
+      "removed": [],
+      "newly_archived": []
+    },
+    "in_evaluation": {
+      "added": [],
+      "removed": [],
+      "current_count": 24
+    },
+    "news": {
+      "added": []
+    },
+    "events": {
+      "added": []
+    }
+  },
+  "cc_portal": {
+    "news": {
+      "added": []
+    },
+    "pps": {
+      "added": []
+    },
+    "products": {
+      "added": []
+    }
+  },
+  "cctl_labs": {},
+  "csfc": {
+    "pages": {},
+    "component_selections": {},
+    "feeds": {}
+  },
+  "cc_crypto": {
+    "pages": {},
+    "doc_headers": {}
+  },
+  "nist": {
+    "pages": {},
+    "doc_headers": {
+      "FIPS 140-3": {
+        "changed": true,
+        "old_last_modified": "",
+        "new_last_modified": "Tue, 30 Apr 2019 17:31:42 GMT",
+        "old_etag": "",
+        "new_etag": "\"17b72d937affd41:0\"",
+        "old_content_length": "",
+        "new_content_length": "310627",
+        "old_partial_hash": "d3cf3553359907f013eefffb943d6856",
+        "new_partial_hash": "",
+        "url": "https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.140-3.pdf"
+      },
+      "FIPS 204 ML-DSA": {
+        "changed": true,
+        "old_last_modified": "Thu, 22 Aug 2024 13:51:35 GMT",
+        "new_last_modified": "",
+        "old_etag": "\"3eaf4669af4da1:0\"",
+        "new_etag": "",
+        "old_content_length": "3291746",
+        "new_content_length": "",
+        "old_partial_hash": "",
+        "new_partial_hash": "5f66fc055c9f56b45b53d0f2df1fae3f",
+        "url": "https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.204.pdf"
+      },
+      "FIPS 203 ML-KEM": {
+        "changed": true,
+        "old_last_modified": "Thu, 22 Aug 2024 13:49:17 GMT",
+        "new_last_modified": "",
+        "old_etag": "\"2c7e8149af4da1:0\"",
+        "new_etag": "",
+        "old_content_length": "1252341",
+        "new_content_length": "",
+        "old_partial_hash": "",
+        "new_partial_hash": "ccfb9e5837e011131ec0c3ab24d35dbc",
+        "url": "https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.203.pdf"
+      },
+      "FIPS 205 SLH-DSA": {
+        "changed": true,
+        "old_last_modified": "Mon, 12 Aug 2024 22:44:10 GMT",
+        "new_last_modified": "",
+        "old_etag": "\"d9fcbc259edda1:0\"",
+        "new_etag": "",
+        "old_content_length": "1055752",
+        "new_content_length": "",
+        "old_partial_hash": "",
+        "new_partial_hash": "eb8438880f529be2c9afac482ddbc78f",
+        "url": "https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.205.pdf"
+      }
+    },
+    "feeds": {}
+  },
+  "nato": {
+    "pages": {},
+    "cisco_added": [],
+    "cisco_removed": []
+  },
+  "eucc": {
+    "pages": {},
+    "cisco_added": [],
+    "cisco_removed": []
+  },
+  "alerts": []
+}
