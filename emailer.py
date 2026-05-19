@@ -170,7 +170,14 @@ def _describe_change(kind: str, source: str) -> str:
     Returns:
         A single sentence suitable for appending to a Webex or email alert.
     """
-    for (k, s_prefix), desc in _CHANGE_DESCRIPTIONS.items():
+    # Sort by prefix length descending so the most-specific prefix wins
+    # (e.g. "NIAP PP" beats "NIAP" when source is "NIAP PP Extra").
+    candidates = sorted(
+        ((k, s_prefix, desc) for (k, s_prefix), desc in _CHANGE_DESCRIPTIONS.items()),
+        key=lambda x: len(x[1]),
+        reverse=True,
+    )
+    for k, s_prefix, desc in candidates:
         if k == kind and source.startswith(s_prefix):
             return desc
     if kind in _GENERIC_DESCRIPTIONS:
@@ -395,7 +402,7 @@ def build_email_html(weekly_diff: dict) -> str:
             blurb      = _describe_change(kind, src)
             blurb_html = (
                 f'<div style="font-size:11px;margin-top:3px;color:#93C5FD;font-style:italic">'
-                f'U0001f4ac {blurb}</div>'
+                f'\U0001f4ac {blurb}</div>'
             )
             kw_html = f'<div style="font-size:11px;margin-top:2px;opacity:0.75">\U0001f511 {kws}</div>'
             row_bg  = "#1E1B4B" if tier == 1 else "#12102E"
@@ -625,7 +632,7 @@ def send_alert_email(alerts: list[dict]) -> None:
         blurb      = _describe_change(kind, src)
         blurb_html = (
             f'<div style="font-size:11px;margin-top:3px;color:#93C5FD;font-style:italic">'
-            f'U0001f4ac {blurb}</div>'
+            f'\U0001f4ac {blurb}</div>'
         )
         row_bg  = "#1E1B4B" if tier == 1 else "#12102E"
         rows.append(
