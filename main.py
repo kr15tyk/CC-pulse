@@ -2,18 +2,20 @@
 main.py — Entry point for CC Pulse.
 
 Features:
-  - Structured logging (respects config.LOG_LEVEL)
-  - Daily diff JSON saved to snapshots/diffs/ (decouples weekly from re-diffing)
-  - Weekly job merges pre-computed daily diff files (fast, no re-diff)
-  - Webex + immediate email alert fired after daily diff if keyword alerts found
-  - Graceful handling of SanityError (rejects bad snapshot, does not overwrite)
-  - Snapshot rotation: keeps last 30 daily snapshots + diffs (fix #4)
-  - Guard against double-run overwriting today's snapshot (fix #7)
+- Structured logging (respects config.LOG_LEVEL)
+- Daily diff JSON saved to snapshots/diffs/ (decouples weekly from re-diffing)
+- Weekly job merges pre-computed daily diff files (fast, no re-diff)
+- Webex + immediate email alert fired after daily diff if keyword alerts found
+- Graceful handling of SanityError (rejects bad snapshot, does not overwrite)
+- Snapshot rotation: keeps last 30 daily snapshots + diffs (fix #4)
+- Guard against double-run overwriting today's snapshot (fix #7)
+- Matrix merge mode: assemble full snapshot from per-domain partial JSONs (issue #20)
 
 Usage:
-  python main.py            # Daily pulse check
-  python main.py --weekly   # Send weekly email from stored daily diffs
-  python main.py --bootstrap  # Collect initial snapshot (no diff)
+  python main.py                  # Daily pulse check
+  python main.py --weekly         # Send weekly email from stored daily diffs
+  python main.py --bootstrap      # Collect initial snapshot (no diff)
+  python main.py --merge          # Assemble snapshot from snapshots/partial/*.json then diff/alert
 """
 
 import argparse
@@ -27,7 +29,7 @@ from datetime import datetime, timezone
 
 import config
 
-# ── Logging setup ─────────────────────────────────────────────────────────────
+# ── Logging setup ─────────────────────────────────────────────────────────────────────────────
 def _setup_logging() -> None:
     level = getattr(logging, config.LOG_LEVEL.upper(), logging.INFO)
     logging.basicConfig(
@@ -38,11 +40,9 @@ def _setup_logging() -> None:
     for noisy in ("urllib3", "requests", "feedparser"):
         logging.getLogger(noisy).setLevel(logging.WARNING)
 
-
 log = logging.getLogger("cc_pulse.main")
 
-
-# ── Lazy imports (after logging is configured) ────────────────────────────────
+# ── Lazy imports (after logging is configured) ────────────────────────────────────────────
 def _imports():
     import collector
     import differ
@@ -50,14 +50,12 @@ def _imports():
     import emailer
     return collector, differ, dashboard, emailer
 
-
-# ── Path helpers ──────────────────────────────────────────────────────────────
+# ── Path helpers ───────────────────────────────────────────────────────────────────────────────
 def snapshot_path(dt=None) -> str:
     if dt is None:
         dt = datetime.now(timezone.utc)
     os.makedirs(config.SNAPSHOT_DIR, exist_ok=True)
     return os.path.join(config.SNAPSHOT_DIR, dt.strftime("%Y-%m-%d") + ".json")
-
 
 def diff_path(dt=None) -> str:
     if dt is None:
@@ -65,17 +63,14 @@ def diff_path(dt=None) -> str:
     os.makedirs(config.DIFF_DIR, exist_ok=True)
     return os.path.join(config.DIFF_DIR, dt.strftime("%Y-%m-%d") + "_diff.json")
 
-
 def _load_json(path: str) -> dict:
     with open(path, "r", encoding="utf-8") as f:
         return json.load(f)
-
 
 def _save_json(obj: dict, path: str) -> None:
     with open(path, "w", encoding="utf-8") as f:
         json.dump(obj, f, indent=2, default=str)
     log.info("Saved: %s", path)
-
 
 def _latest_prior_snapshot() -> str | None:
     """Return the most recent snapshot file that is NOT today's."""
@@ -87,10 +82,8 @@ def _latest_prior_snapshot() -> str | None:
             return f
     return None
 
-
-# ── Snapshot rotation (fix #4) ────────────────────────────────────────────────
+# ── Snapshot rotation (fix #4) ──────────────────────────────────────────────────────────────────────
 KEEP_SNAPSHOTS = 30  # days
-
 
 def _rotate_old_files() -> None:
     """Delete snapshot and diff files older than KEEP_SNAPSHOTS days."""
@@ -107,8 +100,7 @@ def _rotate_old_files() -> None:
             except OSError as exc:
                 log.warning("[Rotate] Could not delete %s: %s", f, exc)
 
-
-# ── Empty baseline snapshot (fix #2) ──────────────────────────────────────────
+# ── Empty baseline snapshot (fix #2) ──────────────────────────────────────────────────────────────────
 def _empty_snapshot() -> dict:
     """Return a structurally complete empty snapshot for first-run diffing."""
     return {
@@ -124,8 +116,56 @@ def _empty_snapshot() -> dict:
         "eucc":      {"pages": {}, "cisco_added": [], "cisco_removed": []},
     }
 
+# ── Shared alert-firing logic ──────────────────────────────────────────────────────────────────────────
+def _fire_alerts(diff: dict, emailer) -> None:
+    """Send all notifications derived from a completed diff.
 
-# ── Run modes ─────────────────────────────────────────────────────────────────
+    Shared between run_daily() and run_merge() to avoid duplication.
+    """
+    alerts = diff.get("alerts", [])
+    if alerts:
+        log.warning("%d keyword alert(s) — firing notifications...", len(alerts))
+        emailer.send_webex_alert(alerts)
+        emailer.send_webhook_alert(alerts)
+        log.warning("Sending immediate alert email...")
+        emailer.send_alert_email(alerts)
+    else:
+        log.info("No keyword alerts.")
+
+    new_tds = diff.get("niap", {}).get("tds", {}).get("added", [])
+    if new_tds:
+        log.info("%d new NIAP TD(s) — sending Webex notification...", len(new_tds))
+        emailer.send_new_tds_webex(new_tds)
+
+    new_cisco_certs = diff.get("niap", {}).get("cisco_ndcpp", {}).get("added", [])
+    if new_cisco_certs:
+        log.info("%d new Cisco NDcPP certification(s) — sending celebration...", len(new_cisco_certs))
+        emailer.send_cisco_cert_celebration(new_cisco_certs)
+        emailer.send_cisco_cert_email(new_cisco_certs)
+
+    new_cisco_csfc_alerts = [
+        a for a in diff.get("alerts", [])
+        if "CSfC" in a.get("source", "") and
+        any(kw in a.get("title", "").lower() for kw in config.CISCO_VENDOR_KEYWORDS)
+    ]
+    if new_cisco_csfc_alerts:
+        log.info("%d new Cisco CSfC alert(s) — sending celebration...", len(new_cisco_csfc_alerts))
+        emailer.send_cisco_cert_celebration(new_cisco_csfc_alerts)
+        emailer.send_cisco_cert_email(new_cisco_csfc_alerts)
+
+    new_cisco_nato = diff.get("nato", {}).get("cisco_added", [])
+    if new_cisco_nato:
+        log.info("%d new Cisco NATO NIAPCL listing(s) — sending celebration...", len(new_cisco_nato))
+        emailer.send_cisco_cert_celebration(new_cisco_nato)
+        emailer.send_cisco_cert_email(new_cisco_nato)
+
+    new_cisco_eucc = diff.get("eucc", {}).get("cisco_added", [])
+    if new_cisco_eucc:
+        log.info("%d new Cisco EUCC certification(s) — sending celebration...", len(new_cisco_eucc))
+        emailer.send_cisco_cert_celebration(new_cisco_eucc)
+        emailer.send_cisco_cert_email(new_cisco_eucc)
+
+# ── Run modes ─────────────────────────────────────────────────────────────────────────────────────
 def run_daily(output_dir: str = None) -> None:
     """Collect, diff, dashboard, alert (Webex + immediate email on alerts)."""
     _setup_logging()
@@ -135,7 +175,6 @@ def run_daily(output_dir: str = None) -> None:
     log.info("CC Pulse daily run — %s", datetime.now(timezone.utc).isoformat())
     log.info("=" * 55)
 
-    # Guard: skip if today's snapshot already exists (fix #7)
     today_path = snapshot_path()
     if os.path.exists(today_path):
         log.warning(
@@ -145,7 +184,6 @@ def run_daily(output_dir: str = None) -> None:
         )
         sys.exit(0)
 
-    # 1. Collect (may raise SanityError on bad data)
     try:
         new_snap = collector.collect_all()
     except collector.SanityError as exc:
@@ -154,7 +192,6 @@ def run_daily(output_dir: str = None) -> None:
         sys.exit(1)
     _save_json(new_snap, today_path)
 
-    # 2. Load prior snapshot for diff
     prior_path = _latest_prior_snapshot()
     first_run = prior_path is None
     if first_run:
@@ -164,16 +201,9 @@ def run_daily(output_dir: str = None) -> None:
         log.info("Diffing against: %s", prior_path)
         old_snap = _load_json(prior_path)
 
-    # 3. Compute diff and save it
     diff = differ.compute_diff(old_snap, new_snap)
-    # Suppress alerts on first run — every item looks "new" vs empty baseline,
-    # producing hundreds of false positives. Real alerts start from run #2 onward.
     if first_run:
         log.warning("First run: suppressing all changes from diff (baseline snapshot, not a real diff).")
-        # Clear all change lists — on first run every item looks "new" vs empty baseline.
-        # The dashboard should show 0 changes and 0 alerts. Real diffs start from run #2.
-        # Each section value may be a dict-of-lists (e.g. pps: {added:[...], removed:[...]})
-        # or a plain list. Recurse one level deep to clear all lists.
         def _clear_lists(obj):
             if isinstance(obj, list):
                 return []
@@ -186,63 +216,107 @@ def run_daily(output_dir: str = None) -> None:
         diff["alerts"] = []
     _save_json(diff, diff_path())
 
-    # 4. Rotate old snapshots
     _rotate_old_files()
-
-    # 5. Render dashboard (HTML + RSS)
     dashboard.render_dashboard(diff, output_dir=output_dir or config.DASHBOARD_DIR)
-
-    # 6. Fire alerts if keyword matches found (Webex + webhook + immediate email, fix #5)
-    alerts = diff.get("alerts", [])
-    if alerts:
-        log.warning("%d keyword alert(s) — firing notifications...", len(alerts))
-        emailer.send_webex_alert(alerts)
-        emailer.send_webhook_alert(alerts)   # Teams / generic webhook (fix #21)
-        log.warning("Sending immediate alert email...")
-        emailer.send_alert_email(alerts)
-    else:
-        log.info("No keyword alerts.")
-
-    # 7. New NIAP TDs — post to Webex for every new TD, regardless of keyword matches
-    new_tds = diff.get("niap", {}).get("tds", {}).get("added", [])
-    if new_tds:
-        log.info("%d new NIAP TD(s) — sending Webex notification...", len(new_tds))
-        emailer.send_new_tds_webex(new_tds)
-
-    # 8. Cisco NDcPP PCL celebration — fires separately from keyword alerts
-    new_cisco_certs = diff.get("niap", {}).get("cisco_ndcpp", {}).get("added", [])
-    if new_cisco_certs:
-        log.info("%d new Cisco NDcPP certification(s) — sending celebration...", len(new_cisco_certs))
-        emailer.send_cisco_cert_celebration(new_cisco_certs)
-        emailer.send_cisco_cert_email(new_cisco_certs)
-
-
-    # 8. Cisco CSfC APL alert — check keyword alerts tagged to CSfC containing Cisco
-    new_cisco_csfc_alerts = [
-        a for a in diff.get("alerts", [])
-        if "CSfC" in a.get("source", "") and
-           any(kw in a.get("title", "").lower() for kw in config.CISCO_VENDOR_KEYWORDS)
-    ]
-    if new_cisco_csfc_alerts:
-        log.info("%d new Cisco CSfC alert(s) — sending celebration...", len(new_cisco_csfc_alerts))
-        emailer.send_cisco_cert_celebration(new_cisco_csfc_alerts)
-        emailer.send_cisco_cert_email(new_cisco_csfc_alerts)
-
-    # 9. Cisco NATO NIAPCL celebration
-    new_cisco_nato = diff.get("nato", {}).get("cisco_added", [])
-    if new_cisco_nato:
-        log.info("%d new Cisco NATO NIAPCL listing(s) — sending celebration...", len(new_cisco_nato))
-        emailer.send_cisco_cert_celebration(new_cisco_nato)
-        emailer.send_cisco_cert_email(new_cisco_nato)
-
-    # 10. Cisco EUCC celebration
-    new_cisco_eucc = diff.get("eucc", {}).get("cisco_added", [])
-    if new_cisco_eucc:
-        log.info("%d new Cisco EUCC certification(s) — sending celebration...", len(new_cisco_eucc))
-        emailer.send_cisco_cert_celebration(new_cisco_eucc)
-        emailer.send_cisco_cert_email(new_cisco_eucc)
-
+    _fire_alerts(diff, emailer)
     log.info("Daily run complete.")
+
+
+def run_merge(partial_dir: str = "snapshots/partial", output_dir: str = None) -> None:
+    """Assemble a full snapshot from per-domain partial JSONs, then diff and alert.
+
+    This is the merge step for the GitHub Actions matrix workflow (issue #20).
+    Each matrix job runs `python collector.py --domain <name>` which writes
+    `snapshots/partial/<name>.json`.  Once all matrix jobs complete, the
+    downstream merge-and-notify job calls `python main.py --merge` to:
+
+    1. Read every <partial_dir>/<domain>.json file.
+    2. Assemble them into a full snapshot (same structure as collect_all()).
+    3. Validate with collector.validate_snapshot().
+    4. Write the full snapshot to snapshots/YYYY-MM-DD.json.
+    5. Diff, render dashboard, fire alerts.
+
+    Missing domain files are tolerated with an empty fallback so a single
+    slow/failed matrix job does not block the whole pipeline.  The sanity
+    check in step 3 still catches critically broken snapshots.
+    """
+    _setup_logging()
+    collector, differ, dashboard, emailer = _imports()
+
+    log.info("=" * 55)
+    log.info("CC Pulse merge run — %s", datetime.now(timezone.utc).isoformat())
+    log.info("=" * 55)
+
+    today_path = snapshot_path()
+    if os.path.exists(today_path):
+        log.warning(
+            "Today's snapshot already exists at %s — skipping merge "
+            "to avoid duplicate diff.",
+            today_path,
+        )
+        sys.exit(0)
+
+    domains = list(collector.DOMAIN_COLLECTORS.keys())
+    domain_data: dict = {}
+    missing: list = []
+    for domain in domains:
+        path = os.path.join(partial_dir, f"{domain}.json")
+        if os.path.exists(path):
+            try:
+                domain_data[domain] = _load_json(path)
+                log.info("[Merge] Loaded partial: %s (%d bytes)", path, os.path.getsize(path))
+            except Exception as exc:
+                log.error("[Merge] Failed to load %s: %s — using empty fallback.", path, exc)
+                domain_data[domain] = {}
+                missing.append(domain)
+        else:
+            log.warning("[Merge] Partial file not found: %s — using empty fallback.", path)
+            domain_data[domain] = {}
+            missing.append(domain)
+
+    if missing:
+        log.warning("[Merge] %d domain(s) missing/failed: %s", len(missing), missing)
+
+    new_snap = {
+        "schema_version": config.SNAPSHOT_SCHEMA_VERSION,
+        "collected_at": datetime.now(timezone.utc).isoformat(),
+        "niap":      domain_data.get("niap", {}),
+        "cc_portal": domain_data.get("cc_portal", {}),
+        "cctl_labs": domain_data.get("cctl_labs", {}),
+        "csfc":      domain_data.get("csfc", {}),
+        "cc_crypto": domain_data.get("cc_crypto", {}),
+        "nist":      domain_data.get("nist", {}),
+        "nato":      domain_data.get("nato", {}),
+        "eucc":      domain_data.get("eucc", {}),
+    }
+
+    try:
+        collector.validate_snapshot(new_snap)
+    except collector.SanityError as exc:
+        log.error("[Merge] Snapshot failed sanity check: %s", exc)
+        log.error("[Merge] Aborting — no files written.")
+        sys.exit(1)
+
+    _save_json(new_snap, today_path)
+
+    prior_path = _latest_prior_snapshot()
+    first_run = prior_path is None
+    if first_run:
+        log.warning("[Merge] No prior snapshot — diff suppressed (first run).")
+        old_snap = _empty_snapshot()
+    else:
+        log.info("[Merge] Diffing against: %s", prior_path)
+        old_snap = _load_json(prior_path)
+
+    diff = differ.compute_diff(old_snap, new_snap)
+    if first_run:
+        diff["alerts"] = []
+    _save_json(diff, diff_path())
+
+    _rotate_old_files()
+    dashboard.render_dashboard(diff, output_dir=output_dir or config.DASHBOARD_DIR)
+    _fire_alerts(diff, emailer)
+    log.info("[Merge] Merge run complete.")
 
 
 def run_weekly() -> None:
@@ -258,7 +332,6 @@ def run_weekly() -> None:
         log.error("Run the daily job at least once first.")
         sys.exit(1)
 
-    # Use at most the last 7 daily diffs
     window = files[-7:]
     log.info(
         "Merging %d daily diff(s): %s ... %s",
@@ -268,13 +341,11 @@ def run_weekly() -> None:
     )
     diffs = [_load_json(f) for f in window]
 
-    # Use deepcopy so merge doesn't mutate the loaded dicts (fix #3)
     weekly = differ.merge_weekly_diffs([copy.deepcopy(d) for d in diffs])
     emailer.send_weekly_email(weekly)
     emailer.send_webex_alert(weekly.get("alerts", []))
-    emailer.send_webhook_alert(weekly.get("alerts", []))   # Teams / generic webhook (fix #21)
+    emailer.send_webhook_alert(weekly.get("alerts", []))
     log.info("Weekly digest sent.")
-
 
 def run_bootstrap() -> None:
     """Collect the initial snapshot without producing a diff."""
@@ -293,26 +364,12 @@ def run_bootstrap() -> None:
     log.info("Bootstrap complete. Snapshot at %s", path)
     log.info("Run the daily job tomorrow to get your first diff.")
 
-
-# ── Entry point ───────────────────────────────────────────────────────────────
 def run_redash(output_dir: str = None) -> None:
-    """Re-render the dashboard HTML from the latest stored diff file.
-
-    This is useful when the dashboard template has changed but no new diff
-    has been produced today (e.g. the daily run already ran and produced no
-    new data).  It loads the most recent diff from snapshots/diffs/ and
-    passes it through dashboard.render_dashboard() without touching the
-    collector or differ.
-
-    Args:
-        output_dir: Directory to write the dashboard HTML to.  Defaults to
-            ``config.DASHBOARD_DIR`` (the production output directory).
-    """
+    """Re-render the dashboard HTML from the latest stored diff file."""
     _imports()
     import dashboard as dash_mod
-
-    # Find the latest diff file
     import glob as _glob
+
     diffs = sorted(_glob.glob(os.path.join(config.DIFF_DIR, "*_diff.json")))
     if not diffs:
         log.error("No diff files found in %s -- run daily mode first.", config.DIFF_DIR)
@@ -324,7 +381,6 @@ def run_redash(output_dir: str = None) -> None:
     diff = _load_json(latest)
     dash_mod.render_dashboard(diff, output_dir=dest)
     log.info("[Redash] Dashboard re-rendered to %s from %s", dest, latest)
-
 
 def main() -> None:
     parser = argparse.ArgumentParser(
@@ -355,6 +411,15 @@ def main() -> None:
         action="store_true",
         help="Re-render dashboard from the latest stored diff into docs/staging/ (private test dashboard)",
     )
+    parser.add_argument(
+        "--merge",
+        action="store_true",
+        help=(
+            "Assemble full snapshot from snapshots/partial/*.json (written by "
+            "matrix collect jobs), then diff, render dashboard, and send alerts. "
+            "Used by the merge-and-notify Actions job."
+        ),
+    )
     args = parser.parse_args()
 
     if args.readme:
@@ -369,11 +434,10 @@ def main() -> None:
         run_bootstrap()
     elif args.weekly:
         run_weekly()
+    elif args.merge:
+        run_merge()
     else:
         run_daily()
 
-
 if __name__ == "__main__":
     main()
-
-
