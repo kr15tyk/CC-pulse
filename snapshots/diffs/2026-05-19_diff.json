@@ -1,0 +1,124 @@
+{
+  "period_start": "2026-05-18T10:02:35.267389+00:00",
+  "period_end": "2026-05-19T09:42:08.483084+00:00",
+  "niap": {
+    "pps": {
+      "added": [],
+      "removed": [],
+      "sunset_changes": [],
+      "status_changes": []
+    },
+    "tds": {
+      "added": [],
+      "removed": []
+    },
+    "cisco_ndcpp": {
+      "added": [],
+      "removed": [],
+      "newly_archived": []
+    },
+    "pcl_all": {
+      "added": [],
+      "removed": [],
+      "newly_archived": []
+    },
+    "in_evaluation": {
+      "added": [],
+      "removed": [],
+      "current_count": 24
+    },
+    "news": {
+      "added": [
+        {
+          "id": 3425,
+          "title": "NIAP Policy #29 Addendum 1 posted",
+          "announcement": "<p>NIAP CCEVS Policy #29: Addendum for Certificate Length Updates has been published to the NIAP Portal.&nbsp; The addendum outlines the eligibility criteria that must be met to qualify for the new certificate length, as well as the applicable certificate lengths by Protection Profile (PP) and PP-Module.</p>\r\n<p>N<span data-teams=\"true\">ote that there are future dates (as yet undetermined) where NIAP will archive products that do not conform to CNSA 1.0 or CNSA 2.0 requirements, regardless of the remaining certificate length. This conforms with Policy #26, since the products will no longer be eligible for procurement for use in NSS.</span>&nbsp;</p>\r\n<p>&nbsp;</p>\r\n<p style=\"margin-right: 0in; margin-left: 0in; font-size: 12pt; font-family: 'Times New Roman', serif;\">The documents can be&nbsp; found here:&nbsp; <a href=\"https://www.niap-ccevs.org/policies\">https://www.niap-ccevs.org/policies</a></p>\r\n<p style=\"margin-right: 0in; margin-left: 0in; font-size: 12pt; font-family: 'Times New Roman', serif;\">If you have any questions or concerns, please contact us by email at <a href=\"mailto:niap@niap-ccevs.org\">niap@niap-ccevs.org</a>.</p>",
+          "types": "1",
+          "subject": null,
+          "posted": "2026-05-18T12:07:15.458000Z",
+          "begins": null,
+          "expires": "2029-05-18T00:00:00Z",
+          "link": null,
+          "venue": null,
+          "location": null,
+          "entrydate": "2026-05-18T12:07:15.458000Z",
+          "moddate": null,
+          "active": true,
+          "_category": "POLICY"
+        }
+      ]
+    },
+    "events": {
+      "added": []
+    }
+  },
+  "cc_portal": {
+    "news": {
+      "added": []
+    },
+    "pps": {
+      "added": []
+    },
+    "products": {
+      "added": []
+    }
+  },
+  "cctl_labs": {},
+  "csfc": {
+    "pages": {},
+    "component_selections": {},
+    "feeds": {}
+  },
+  "cc_crypto": {
+    "pages": {},
+    "doc_headers": {}
+  },
+  "nist": {
+    "pages": {},
+    "doc_headers": {},
+    "feeds": {}
+  },
+  "nato": {
+    "pages": {},
+    "cisco_added": [],
+    "cisco_removed": []
+  },
+  "eucc": {
+    "pages": {
+      "certificates": {
+        "added": [
+          {
+            "name": "EU Cybersecurity Certificates (33)",
+            "text": "EU Cybersecurity Certificates (33)",
+            "href": ""
+          },
+          {
+            "name": "14 September 2025",
+            "text": "14 September 2025",
+            "href": ""
+          },
+          {
+            "name": "19 February 2026",
+            "text": "19 February 2026",
+            "href": ""
+          },
+          {
+            "name": "16 February 2026",
+            "text": "16 February 2026",
+            "href": ""
+          }
+        ],
+        "removed": [
+          {
+            "name": "EU Cybersecurity Certificates (30)",
+            "text": "EU Cybersecurity Certificates (30)",
+            "href": ""
+          }
+        ]
+      }
+    },
+    "cisco_added": [],
+    "cisco_removed": []
+  },
+  "alerts": []
+}
