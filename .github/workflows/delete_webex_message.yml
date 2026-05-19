@@ -1,0 +1,55 @@
+name: Delete Webex Failure Message
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  delete-message:
+    name: Delete Workflow Failure Alert
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Find and delete failure alert message
+        env:
+          CC_WEBEX_BOT_TOKEN: ${{ secrets.CC_WEBEX_BOT_TOKEN }}
+          CC_WEBEX_ROOM_ID: ${{ secrets.CC_WEBEX_ROOM_ID }}
+        run: |
+          python3 - <<'EOF'
+import json, os, sys, urllib.request
+
+TOKEN   = os.environ["CC_WEBEX_BOT_TOKEN"]
+ROOM_ID = os.environ["CC_WEBEX_ROOM_ID"]
+MARKER  = "CC Pulse — Workflow Failure"
+
+headers = {
+    "Authorization": f"Bearer {TOKEN}",
+    "Content-Type":  "application/json",
+}
+
+# List up to 50 recent messages in the room
+url = f"https://webexapis.com/v1/messages?roomId={ROOM_ID}&max=50"
+req = urllib.request.Request(url, headers=headers, method="GET")
+with urllib.request.urlopen(req) as r:
+    messages = json.loads(r.read())["items"]
+
+# Find messages posted by the bot that contain the failure marker
+to_delete = [
+    m["id"] for m in messages
+    if MARKER in m.get("markdown", "") or MARKER in m.get("text", "")
+]
+
+if not to_delete:
+    print("No failure alert messages found — nothing to delete.")
+    sys.exit(0)
+
+for msg_id in to_delete:
+    del_url = f"https://webexapis.com/v1/messages/{msg_id}"
+    req = urllib.request.Request(del_url, headers=headers, method="DELETE")
+    with urllib.request.urlopen(req) as r:
+        print(f"Deleted message {msg_id} (HTTP {r.status})")
+
+print(f"Done — deleted {len(to_delete)} message(s).")
+EOF
