@@ -1,6 +1,6 @@
 name: CC Pulse — Daily & Weekly Run
 
-# ── Triggers ──────────────────────────────────────────────────────────────────
+# ── Triggers ──────────────────────────────────────────────────────────────────────────────
 on:
   schedule:
     # Daily pulse at 06:00 UTC
@@ -24,9 +24,9 @@ on:
           - readme
           - staging
 
-# ── Permissions (minimal — only what is needed) ───────────────────────────────
+# ── Permissions (minimal — only what is needed) ─────────────────────────────────────────────
 permissions:
-  contents: write  # required to commit snapshots/ and docs/ back to repo
+  contents: write # required to commit snapshots/ and docs/ back to repo
   actions: read
 
 jobs:
@@ -35,7 +35,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # ── Checkout ─────────────────────────────────────────────────────────────
+      # ── Checkout ─────────────────────────────────────────────────────────────────────────
       - name: Checkout repository
         # Pinned to commit SHA — avoids supply-chain risk from floating tags
         # actions/checkout v6.0.2
@@ -43,7 +43,7 @@ jobs:
         with:
           fetch-depth: 0
 
-      # ── Python setup ─────────────────────────────────────────────────────────
+      # ── Python setup ─────────────────────────────────────────────────────────────────────
       - name: Set up Python
         # actions/setup-python v6.2.0
         uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405
@@ -51,11 +51,11 @@ jobs:
           python-version: "3.11"
           cache: pip
 
-      # ── Install dependencies ──────────────────────────────────────────────────
+      # ── Install dependencies ────────────────────────────────────────────────────────────
       - name: Install dependencies
         run: pip install -r requirements.txt
 
-      # ── Determine run mode ────────────────────────────────────────────────────
+      # ── Determine run mode ────────────────────────────────────────────────────────────────
       # Scheduled Monday runs are weekly; all other scheduled runs are daily.
       # Manual dispatch uses the mode input.
       - name: Determine run mode
@@ -71,15 +71,15 @@ jobs:
             echo "mode=daily" >> "$GITHUB_OUTPUT"
           fi
 
-      # ── Run CC Pulse ──────────────────────────────────────────────────────────
+      # ── Run CC Pulse ──────────────────────────────────────────────────────────────────────────────
       - name: Run CC Pulse
         env:
-          CC_EMAIL_PASSWORD:   ${{ secrets.CC_EMAIL_PASSWORD }}
-          CC_WEBEX_BOT_TOKEN:  ${{ secrets.CC_WEBEX_BOT_TOKEN }}
-          CC_WEBEX_ROOM_ID:    ${{ secrets.CC_WEBEX_ROOM_ID }}
-          CC_EMAIL_USERNAME:   ${{ secrets.CC_EMAIL_USERNAME }}
+          CC_EMAIL_PASSWORD: ${{ secrets.CC_EMAIL_PASSWORD }}
+          CC_WEBEX_BOT_TOKEN: ${{ secrets.CC_WEBEX_BOT_TOKEN }}
+          CC_WEBEX_ROOM_ID: ${{ secrets.CC_WEBEX_ROOM_ID }}
+          CC_EMAIL_USERNAME: ${{ secrets.CC_EMAIL_USERNAME }}
           CC_EMAIL_RECIPIENTS: ${{ secrets.CC_EMAIL_RECIPIENTS }}
-          CC_SMTP_HOST:        ${{ secrets.CC_SMTP_HOST }}
+          CC_SMTP_HOST: ${{ secrets.CC_SMTP_HOST }}
           CC_LOG_LEVEL: INFO
         run: |
           MODE="${{ steps.mode.outputs.mode }}"
@@ -93,7 +93,7 @@ jobs:
             *)         python main.py ;;
           esac
 
-      # ── Commit generated files back to repo ───────────────────────────────────
+      # ── Commit generated files back to repo ───────────────────────────────────────────────────
       - name: Commit snapshots and dashboard
         # stefanzweifel/git-auto-commit-action v7.1.0
         uses: stefanzweifel/git-auto-commit-action@04702edda442b2e678b25b537cec683a1493fcb9
@@ -104,3 +104,42 @@ jobs:
           commit_user_name: "cc-pulse-bot"
           commit_user_email: "cc-pulse-bot@users.noreply.github.com"
           skip_dirty_check: false
+
+  # ── Workflow failure notification (issue #20) ────────────────────────────────────────────
+  notify_failure:
+    name: Notify on Failure
+    runs-on: ubuntu-latest
+    needs: [pulse]
+    if: failure()
+
+    steps:
+      - name: Checkout repository
+        # actions/checkout v6.0.2
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
+        with:
+          fetch-depth: 1
+
+      - name: Set up Python
+        # actions/setup-python v6.2.0
+        uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Send failure alert to Webex
+        env:
+          CC_WEBEX_BOT_TOKEN: ${{ secrets.CC_WEBEX_BOT_TOKEN }}
+          CC_WEBEX_ROOM_ID: ${{ secrets.CC_WEBEX_ROOM_ID }}
+        run: |
+          python - <<'EOF'
+          import emailer
+          emailer.send_workflow_failure_alert(
+              run_id="${{ github.run_id }}",
+              run_url="${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}",
+              workflow="${{ github.workflow }}",
+              branch="${{ github.ref_name }}",
+          )
+          EOF
