@@ -2,7 +2,7 @@
 <rss version="2.0"><channel>
 <title>CC Pulse</title>
 <link>https://kr15tyk.github.io/CC-pulse/cc_dashboard.html</link>
-<description>Common Criteria monitoring - 2026-05-19 09:27 ET</description>
+<description>Common Criteria monitoring - 2026-05-19 11:29 ET</description>
 <item><title>New PP: PP_WEBSVR_BR_V1.1</title><link>https://www.niap-ccevs.org/Profile/PP.cfm?id=241</link><description>U.S. Government Protection Profile Web Server for Basic Robustness Environments, Version 1.1 </description></item>
 <item><title>New PP: PP_OS_CA_V1.d</title><link>https://www.niap-ccevs.org/Profile/PP.cfm?id=14</link><description>Controlled Access Protection Profile, Version 1.d</description></item>
 <item><title>New PP: PP_FW_TF_MR2.0_V1.0</title><link>https://www.niap-ccevs.org/Profile/PP.cfm?id=218</link><description>U.S. Government Traffic-Filter Firewall Protection Profile for Medium Robustness Environments, Version 1.0</description></item>
