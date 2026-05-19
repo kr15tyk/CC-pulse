@@ -17,39 +17,5 @@ jobs:
           CC_WEBEX_BOT_TOKEN: ${{ secrets.CC_WEBEX_BOT_TOKEN }}
           CC_WEBEX_ROOM_ID: ${{ secrets.CC_WEBEX_ROOM_ID }}
         run: |
-          python3 - <<'EOF'
-import json, os, sys, urllib.request
-
-TOKEN   = os.environ["CC_WEBEX_BOT_TOKEN"]
-ROOM_ID = os.environ["CC_WEBEX_ROOM_ID"]
-MARKER  = "CC Pulse — Workflow Failure"
-
-headers = {
-    "Authorization": f"Bearer {TOKEN}",
-    "Content-Type":  "application/json",
-}
-
-# List up to 50 recent messages in the room
-url = f"https://webexapis.com/v1/messages?roomId={ROOM_ID}&max=50"
-req = urllib.request.Request(url, headers=headers, method="GET")
-with urllib.request.urlopen(req) as r:
-    messages = json.loads(r.read())["items"]
-
-# Find messages posted by the bot that contain the failure marker
-to_delete = [
-    m["id"] for m in messages
-    if MARKER in m.get("markdown", "") or MARKER in m.get("text", "")
-]
-
-if not to_delete:
-    print("No failure alert messages found — nothing to delete.")
-    sys.exit(0)
-
-for msg_id in to_delete:
-    del_url = f"https://webexapis.com/v1/messages/{msg_id}"
-    req = urllib.request.Request(del_url, headers=headers, method="DELETE")
-    with urllib.request.urlopen(req) as r:
-        print(f"Deleted message {msg_id} (HTTP {r.status})")
-
-print(f"Done — deleted {len(to_delete)} message(s).")
-EOF
+          echo 'aW1wb3J0IGpzb24sIG9zLCBzeXMsIHVybGxpYi5yZXF1ZXN0CgpUT0tFTiAgID0gb3MuZW52aXJvblsiQ0NfV0VCRVhfQk9UX1RPS0VOIl0KUk9PTV9JRCA9IG9zLmVudmlyb25bIkNDX1dFQkVYX1JPT01fSUQiXQpNQVJLRVIgID0gIkNDIFB1bHNlIOKAlCBXb3JrZmxvdyBGYWlsdXJlIgoKaGVhZGVycyA9IHsKICAgICJBdXRob3JpemF0aW9uIjogZiJCZWFyZXIge1RPS0VOfSIsCiAgICAiQ29udGVudC1UeXBlIjogICJhcHBsaWNhdGlvbi9qc29uIiwKfQoKdXJsID0gZiJodHRwczovL3dlYmV4YXBpcy5jb20vdjEvbWVzc2FnZXM/cm9vbUlkPXtST09NX0lEfSZtYXg9NTAiCnJlcSA9IHVybGxpYi5yZXF1ZXN0LlJlcXVlc3QodXJsLCBoZWFkZXJzPWhlYWRlcnMsIG1ldGhvZD0iR0VUIikKd2l0aCB1cmxsaWIucmVxdWVzdC51cmxvcGVuKHJlcSkgYXMgcjoKICAgIG1lc3NhZ2VzID0ganNvbi5sb2FkcyhyLnJlYWQoKSlbIml0ZW1zIl0KCnRvX2RlbGV0ZSA9IFsKICAgIG1bImlkIl0gZm9yIG0gaW4gbWVzc2FnZXMKICAgIGlmIE1BUktFUiBpbiBtLmdldCgibWFya2Rvd24iLCAiIikgb3IgTUFSS0VSIGluIG0uZ2V0KCJ0ZXh0IiwgIiIpCl0KCmlmIG5vdCB0b19kZWxldGU6CiAgICBwcmludCgiTm8gZmFpbHVyZSBhbGVydCBtZXNzYWdlcyBmb3VuZC4iKQogICAgc3lzLmV4aXQoMCkKCmZvciBtc2dfaWQgaW4gdG9fZGVsZXRlOgogICAgZGVsX3VybCA9IGYiaHR0cHM6Ly93ZWJleGFwaXMuY29tL3YxL21lc3NhZ2VzL3ttc2dfaWR9IgogICAgcmVxID0gdXJsbGliLnJlcXVlc3QuUmVxdWVzdChkZWxfdXJsLCBoZWFkZXJzPWhlYWRlcnMsIG1ldGhvZD0iREVMRVRFIikKICAgIHdpdGggdXJsbGliLnJlcXVlc3QudXJsb3BlbihyZXEpIGFzIHI6CiAgICAgICAgcHJpbnQoZiJEZWxldGVkIG1lc3NhZ2Uge21zZ19pZH0gKEhUVFAge3Iuc3RhdHVzfSkiKQoKcHJpbnQoZiJEb25lIC0gZGVsZXRlZCB7dG9fZGVsZXRlLl9fbGVuX18oKX0gbWVzc2FnZShzKS4iKQo=' | base64 -d > delete_msg.py
+          python3 delete_msg.py
