@@ -170,6 +170,8 @@ def _describe_change(kind: str, source: str) -> str:
     Returns:
         A single sentence suitable for appending to a Webex or email alert.
     """
+    kind   = kind   or ""  # guard against None
+    source = source or ""  # guard against None
     # Sort by prefix length descending so the most-specific prefix wins
     # (e.g. "NIAP PP" beats "NIAP" when source is "NIAP PP Extra").
     candidates = sorted(
