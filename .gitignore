@@ -205,3 +205,10 @@ cython_debug/
 marimo/_static/
 marimo/_lsp/
 __marimo__/
+
+# CC Pulse — snapshot store (issue #20)
+# Snapshots live on the dedicated `snapshots` branch and are
+# checked out into snapshot-store/ as a git worktree.
+# Neither directory should ever be committed to `main`.
+snapshots/
+snapshot-store/
