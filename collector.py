@@ -1007,3 +1007,90 @@ def collect_nist() -> dict:
     docs_polled = len(data["doc_headers"])
     log.info("[NIST] news-items:%d docs-polled:%d", news_count, docs_polled)
     return data
+
+
+# ── Per-domain CLI entry point (issue #20 — parallel matrix support) ─────────────────
+
+#: Maps domain name → collector function.
+#: Used by `collect_domain()` and the `--domain` CLI flag so that each
+#: GitHub Actions matrix job can collect exactly one domain and write a
+#: partial snapshot to `snapshots/partial/<domain>.json`.
+DOMAIN_COLLECTORS: dict = {
+    "niap":      collect_niap,
+    "cc_portal": collect_cc_portal,
+    "cctl_labs": collect_cctl_labs,
+    "csfc":      collect_csfc,
+    "cc_crypto": collect_cc_crypto,
+    "nist":      collect_nist,
+    "nato":      collect_nato,
+    "eucc":      collect_eucc,
+}
+
+
+def collect_domain(name: str, out_dir: str = "snapshots/partial") -> dict:
+    """Collect a single domain and persist the result as a partial snapshot.
+
+    Called by `python collector.py --domain <name>` in each GitHub Actions
+    matrix job.  The partial file is later merged by `main.py --merge`.
+
+    Args:
+        name:    One of the keys in DOMAIN_COLLECTORS (e.g. "niap", "nist").
+        out_dir: Directory in which to write `<name>.json`.  Created if absent.
+
+    Returns:
+        The collected data dict for the domain.
+
+    Raises:
+        ValueError: If `name` is not a recognised domain key.
+        Any exception raised by the underlying collector propagates unchanged.
+    """
+    import json
+    import os
+
+    if name not in DOMAIN_COLLECTORS:
+        raise ValueError(
+            f"Unknown domain '{name}'. "
+            f"Valid options: {sorted(DOMAIN_COLLECTORS)}"
+        )
+
+    log.info("[collect_domain] Collecting domain: %s", name)
+    data = DOMAIN_COLLECTORS[name]()
+
+    os.makedirs(out_dir, exist_ok=True)
+    out_path = os.path.join(out_dir, f"{name}.json")
+    with open(out_path, "w", encoding="utf-8") as fh:
+        json.dump(data, fh, indent=2, default=str)
+    log.info("[collect_domain] Written to %s", out_path)
+    return data
+
+
+# ── CLI ───────────────────────────────────────────────────────────────────────────────────────────────
+
+if __name__ == "__main__":
+    import argparse
+    import logging as _logging
+
+    _logging.basicConfig(
+        level=_logging.INFO,
+        format="%(asctime)s %(levelname)-8s %(name)s — %(message)s",
+        datefmt="%Y-%m-%dT%H:%M:%SZ",
+    )
+    for _noisy in ("urllib3", "requests", "feedparser"):
+        _logging.getLogger(_noisy).setLevel(_logging.WARNING)
+
+    parser = argparse.ArgumentParser(
+        description="CC Pulse collector — run a single-domain collection pass."
+    )
+    parser.add_argument(
+        "--domain",
+        required=True,
+        choices=sorted(DOMAIN_COLLECTORS),
+        help="Domain to collect (e.g. niap, nist, nato).",
+    )
+    parser.add_argument(
+        "--out-dir",
+        default="snapshots/partial",
+        help="Directory to write the partial snapshot JSON (default: snapshots/partial).",
+    )
+    args = parser.parse_args()
+    collect_domain(args.domain, out_dir=args.out_dir)
