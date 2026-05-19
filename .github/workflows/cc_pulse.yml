@@ -26,7 +26,7 @@ on:
 
 # ── Permissions (minimal — only what is needed) ─────────────────────────────────────────────
 permissions:
-  contents: write # required to commit snapshots/ and docs/ back to repo
+  contents: write # required to commit snapshots branch and docs/ back to repo
   actions: read
 
 jobs:
@@ -55,7 +55,7 @@ jobs:
 
   # ────────────────────────────────────────────────────────────────────────────────────
   # JOB 2 — Parallel domain collection (matrix, daily mode only)
-  # Each domain runs in its own runner concurrently.  A 403 or timeout on
+  # Each domain runs in its own runner concurrently. A 403 or timeout on
   # one source stalls only that runner — all others continue.
   # ────────────────────────────────────────────────────────────────────────────────────
   collect:
@@ -66,7 +66,7 @@ jobs:
     if: needs.resolve-mode.outputs.mode == 'daily'
 
     strategy:
-      fail-fast: false   # one domain failing must not cancel the others
+      fail-fast: false # one domain failing must not cancel the others
       matrix:
         domain:
           - niap
@@ -115,6 +115,13 @@ jobs:
   # Runs after ALL collect matrix jobs (even if some failed, via always()).
   # Downloads all partial artifacts, merges into a full snapshot, diffs,
   # renders the dashboard, and fires Webex/email alerts.
+  #
+  # Snapshot storage (issue #20):
+  # - Partial JSONs are downloaded to snapshots/partial/ in the main workspace
+  #   (these are temporary; .gitignore excludes snapshots/ from main).
+  # - The full snapshot and diffs are written into snapshot-store/, a git
+  #   worktree of the dedicated `snapshots` branch, via CC_SNAPSHOT_DIR and
+  #   CC_DIFF_DIR env vars. Only docs/ is committed back to main.
   # ────────────────────────────────────────────────────────────────────────────────────
   merge-and-notify:
     name: Merge & Notify
@@ -125,11 +132,16 @@ jobs:
     if: always() && needs.resolve-mode.outputs.mode == 'daily'
 
     steps:
-      - name: Checkout repository
+      - name: Checkout repository (main)
         # actions/checkout v6.0.2
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
         with:
           fetch-depth: 0
+
+      - name: Checkout snapshots branch as worktree
+        run: |
+          git fetch origin snapshots
+          git worktree add snapshot-store snapshots
 
       - name: Set up Python
         # actions/setup-python v6.2.0
@@ -141,7 +153,9 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
 
-      # Download all partial snapshots from matrix collect jobs
+      # Download all partial snapshots from matrix collect jobs into the
+      # main workspace (snapshots/partial/). These are read by run_merge()
+      # and are never committed to any branch.
       - name: Download partial snapshots
         uses: actions/download-artifact@v4
         with:
@@ -158,14 +172,26 @@ jobs:
           CC_EMAIL_RECIPIENTS: ${{ secrets.CC_EMAIL_RECIPIENTS }}
           CC_SMTP_HOST: ${{ secrets.CC_SMTP_HOST }}
           CC_LOG_LEVEL: INFO
+          # Redirect snapshot I/O to the snapshots-branch worktree (issue #20)
+          CC_SNAPSHOT_DIR: snapshot-store
+          CC_DIFF_DIR: snapshot-store/diffs
         run: python main.py --merge
 
-      - name: Commit snapshots and dashboard
+      - name: Commit snapshots to snapshots branch
+        run: |
+          cd snapshot-store
+          git config user.name "cc-pulse-bot"
+          git config user.email "cc-pulse-bot@users.noreply.github.com"
+          git add -A
+          git diff --cached --quiet || git commit -m "chore: CC Pulse snapshot update [skip ci]"
+          git push origin snapshots
+
+      - name: Commit dashboard to main
         # stefanzweifel/git-auto-commit-action v7.1.0
         uses: stefanzweifel/git-auto-commit-action@04702edda442b2e678b25b537cec683a1493fcb9
         with:
-          commit_message: "chore: CC Pulse auto-update [skip ci]"
-          file_pattern: "snapshots/ docs/"
+          commit_message: "chore: CC Pulse dashboard update [skip ci]"
+          file_pattern: "docs/"
           commit_user_name: "cc-pulse-bot"
           commit_user_email: "cc-pulse-bot@users.noreply.github.com"
           skip_dirty_check: false
@@ -173,6 +199,7 @@ jobs:
   # ────────────────────────────────────────────────────────────────────────────────────
   # JOB 3b — Non-daily pulse (weekly, staging, redash, bootstrap, readme)
   # Replaces the old single-job pulse for all non-daily scheduled/manual runs.
+  # Snapshots are read/written via a git worktree of the `snapshots` branch.
   # ────────────────────────────────────────────────────────────────────────────────────
   pulse:
     name: Pulse (non-daily)
@@ -181,11 +208,16 @@ jobs:
     if: needs.resolve-mode.outputs.mode != 'daily'
 
     steps:
-      - name: Checkout repository
+      - name: Checkout repository (main)
         # actions/checkout v6.0.2
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
         with:
           fetch-depth: 0
+
+      - name: Checkout snapshots branch as worktree
+        run: |
+          git fetch origin snapshots
+          git worktree add snapshot-store snapshots
 
       - name: Set up Python
         # actions/setup-python v6.2.0
@@ -206,6 +238,9 @@ jobs:
           CC_EMAIL_RECIPIENTS: ${{ secrets.CC_EMAIL_RECIPIENTS }}
           CC_SMTP_HOST: ${{ secrets.CC_SMTP_HOST }}
           CC_LOG_LEVEL: INFO
+          # Redirect snapshot I/O to the snapshots-branch worktree (issue #20)
+          CC_SNAPSHOT_DIR: snapshot-store
+          CC_DIFF_DIR: snapshot-store/diffs
         run: |
           MODE="${{ needs.resolve-mode.outputs.mode }}"
           echo "Running in mode: $MODE"
@@ -218,12 +253,21 @@ jobs:
             *)         python main.py ;;
           esac
 
-      - name: Commit snapshots and dashboard
+      - name: Commit snapshots to snapshots branch
+        run: |
+          cd snapshot-store
+          git config user.name "cc-pulse-bot"
+          git config user.email "cc-pulse-bot@users.noreply.github.com"
+          git add -A
+          git diff --cached --quiet || git commit -m "chore: CC Pulse snapshot update [skip ci]"
+          git push origin snapshots
+
+      - name: Commit dashboard to main
         # stefanzweifel/git-auto-commit-action v7.1.0
         uses: stefanzweifel/git-auto-commit-action@04702edda442b2e678b25b537cec683a1493fcb9
         with:
-          commit_message: "chore: CC Pulse auto-update [skip ci]"
-          file_pattern: "snapshots/ docs/"
+          commit_message: "chore: CC Pulse dashboard update [skip ci]"
+          file_pattern: "docs/"
           commit_user_name: "cc-pulse-bot"
           commit_user_email: "cc-pulse-bot@users.noreply.github.com"
           skip_dirty_check: false
