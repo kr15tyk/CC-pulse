@@ -1061,62 +1061,62 @@ def send_readme_message() -> None:
 # ---------------------------------------------------------------------------
 
 def send_workflow_failure_alert(
-      run_id: str = "",
-      run_url: str = "",
-      workflow: str = "CC Pulse",
-      branch: str = "main",
+    run_id: str = "",
+    run_url: str = "",
+    workflow: str = "CC Pulse",
+    branch: str = "main",
 ) -> None:
-      """Post a Webex alert when the GitHub Actions workflow itself fails.
+    """Post a Webex alert when the GitHub Actions workflow itself fails.
 
-          Called from a dedicated ``notify_failure`` job in cc_pulse.yml that has
-              ``if: failure()`` so it only fires when an upstream job errored or was
-                  cancelled.  The message is intentionally minimal — just enough context
-                      to let an engineer know a run was skipped and where to look.
+    Called from a dedicated ``notify_failure`` job in cc_pulse.yml that has
+    ``if: failure()`` so it only fires when an upstream job errored or was
+    cancelled. The message is intentionally minimal — just enough context
+    to let an engineer know a run was skipped and where to look.
 
-                          Args:
-                                  run_id:   GitHub Actions run ID (used to build the run URL if
-                                                    ``run_url`` is not supplied).
-                                                            run_url:  Direct URL to the failed Actions run.  If blank, a URL is
-                                                                              constructed from ``run_id`` and the hard-coded repo path.
-                                                                                      workflow: Human-readable workflow name shown in the message header.
-                                                                                              branch:   Branch the workflow ran on (for context).
-                                                                                                  """
-      token = config.WEBEX_BOT_TOKEN
-      room_id = config.WEBEX_ROOM_ID
-      if not token or not room_id:
-                log.debug("[Webex] Bot token or Room ID not configured — skipping failure alert.")
-                return
+    Args:
+        run_id:   GitHub Actions run ID (used to build the run URL if
+                  ``run_url`` is not supplied).
+        run_url:  Direct URL to the failed Actions run. If blank, a URL is
+                  constructed from ``run_id`` and the hard-coded repo path.
+        workflow: Human-readable workflow name shown in the message header.
+        branch:   Branch the workflow ran on (for context).
+    """
+    token = config.WEBEX_BOT_TOKEN
+    room_id = config.WEBEX_ROOM_ID
+    if not token or not room_id:
+        log.debug("[Webex] Bot token or Room ID not configured — skipping failure alert.")
+        return
 
-      if not run_url and run_id:
-                run_url = (
-                              f"https://github.com/kr15tyk/CC-pulse/actions/runs/{run_id}"
-                )
+    if not run_url and run_id:
+        run_url = (
+            f"https://github.com/kr15tyk/CC-pulse/actions/runs/{run_id}"
+        )
 
-      ts = datetime.now(EST).strftime("%Y-%m-%d %H:%M EST")
-      run_link = f"[View failed run]({run_url})" if run_url else "Check the Actions tab for details."
+    ts = datetime.now(EST).strftime("%Y-%m-%d %H:%M EST")
+    run_link = f"[View failed run]({run_url})" if run_url else "Check the Actions tab for details."
 
     msg = (
-              f"## \u26a0\ufe0f CC Pulse \u2014 Workflow Failure\n"
-              f"_{workflow} on `{branch}` failed at {ts}._\n\n"
-              f"Today\u2019s snapshot and dashboard were **not** updated. "
-              f"No diff or alert emails were sent.\n\n"
-              f"{run_link}\n\n"
-              f"_This is an automated failure notification from CC Pulse (issue [#20]("
-              f"https://github.com/kr15tyk/CC-pulse/issues/20))._"
+        f"## ⚠️ CC Pulse — Workflow Failure\n"
+        f"_{workflow} on `{branch}` failed at {ts}._\n\n"
+        f"Today’s snapshot and dashboard were **not** updated. "
+        f"No diff or alert emails were sent.\n\n"
+        f"{run_link}\n\n"
+        f"_This is an automated failure notification from CC Pulse (issue [#20]("
+        f"https://github.com/kr15tyk/CC-pulse/issues/20))._"
     )
 
     payload = json.dumps({"roomId": room_id, "markdown": msg}).encode("utf-8")
     req = urllib.request.Request(
-              "https://webexapis.com/v1/messages",
-              data=payload,
-              headers={
-                            "Content-Type": "application/json",
-                            "Authorization": f"Bearer {token}",
-              },
-              method="POST",
+        "https://webexapis.com/v1/messages",
+        data=payload,
+        headers={
+            "Content-Type": "application/json",
+            "Authorization": f"Bearer {token}",
+        },
+        method="POST",
     )
     try:
-              with urllib.request.urlopen(req, timeout=10) as resp:
-                            log.info("[Webex] Workflow failure alert sent (HTTP %d).", resp.status)
+        with urllib.request.urlopen(req, timeout=10) as resp:
+            log.info("[Webex] Workflow failure alert sent (HTTP %d).", resp.status)
     except urllib.error.URLError as exc:
-              log.warning("[Webex] Failed to send workflow failure alert: %s", exc)
+        log.warning("[Webex] Failed to send workflow failure alert: %s", exc)
