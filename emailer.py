@@ -12,6 +12,7 @@ Features:
   - Immediate alert email (send_alert_email) for same-day keyword matches
   - Structured logging
   - Generic webhook / MS Teams delivery via send_webhook_alert()
+- Plain-language change descriptions via _describe_change() (issue #17)
 """
 import json
 import logging
@@ -97,6 +98,94 @@ def _kind_label(kind: str) -> str:
     }.get(kind, kind.upper() if kind else "CHANGE")
 
 
+
+# ---------------------------------------------------------------------------
+# Plain-language change descriptions (issue #17)
+# ---------------------------------------------------------------------------
+
+# Maps (kind, source_prefix) -> plain-English blurb shown below each alert.
+# source_prefix is matched with str.startswith() so "NIAP" covers all NIAP sources.
+# Falls back to a generic message when no specific entry matches.
+_CHANGE_DESCRIPTIONS: dict[tuple[str, str], str] = {
+    # New certifications
+    ("new_cert",       "NIAP"):  "A product has been newly certified on the NIAP Validated Products List.",
+    ("new_cert",       "CSfC"):  "A product has been added to the NSA Commercial Solutions for Classified (CSfC) Approved Products List.",
+    ("new_cert",       "NATO"):  "A product has received a new listing on the NATO Information Assurance Product Catalogue (NIAPCL).",
+    ("new_cert",       "EUCC"):  "A product has received a new EU Common Criteria (EUCC) certificate from ENISA.",
+    # Products entering evaluation
+    ("new_evaluation", "NIAP"):  "A product has entered the NIAP evaluation pipeline — it is not yet certified but is undergoing formal testing.",
+    # Removals
+    ("removed",        "NIAP"):  "A product or document has been removed from the NIAP site. This may indicate it was withdrawn, superseded, or delisted.",
+    ("removed",        "CSfC"):  "An item has been removed from a CSfC/NSA list. Check the link for details.",
+    ("removed",        "NATO"):  "An item has been removed from the NATO NIAPCL. This may indicate a product was delisted or superseded.",
+    # Protection Profile changes
+    ("new",            "NIAP PP"): "A new NIAP Protection Profile (PP) has been published. PPs define the security requirements a product category must meet for certification.",
+    ("sunset",         "NIAP PP"): "A Protection Profile has been sunsetted. Products evaluated against it may no longer be accepted for new certifications after the sunset date.",
+    ("updated",        "NIAP PP"): "An existing Protection Profile has been revised. Products in evaluation against it may be affected.",
+    # Technical Decisions
+    ("new",            "NIAP TD"): "A new NIAP Technical Decision (TD) has been issued. TDs clarify how a specific requirement in a Protection Profile should be interpreted by labs and vendors.",
+    # NIST / standards
+    ("publication",    "NIST"):  "A new or updated NIST cryptography publication has appeared. NIST standards often drive future Common Criteria and CSfC requirements.",
+    ("news",           "NIST"):  "New content has appeared on the NIST CSRC website (news, FIPS, CMVP, or post-quantum standards).",
+    ("updated",        "NIST"):  "A NIST standards document has been revised. Review the link for what changed.",
+    # CSfC
+    ("updated",        "CSfC"):  "A CSfC Capability Package or Component Selection document has changed. These documents define the approved architectures for handling classified information.",
+    ("advisory",       "CSfC"):  "A new CSfC advisory or policy document has been published by the NSA.",
+    # CC Portal
+    ("new",            "CC Portal"): "New content has been posted to the international Common Criteria Portal.",
+    # CCTL labs
+    ("post",           "CCTL"):  "A Common Criteria Testing Laboratory (CCTL) has published a new post. Labs post updates about evaluations, tooling, and CC news.",
+    ("new",            "CCTL"):  "A Common Criteria Testing Laboratory (CCTL) has published a new item.",
+    # EUCC / ENISA
+    ("updated",        "EUCC"):  "The EU EUCC scheme requirements or policy documents have been updated by ENISA.",
+    # NATO
+    ("new",            "NATO"):  "A new item has appeared on the NATO Information Assurance Product Catalogue (NIAPCL).",
+}
+
+_GENERIC_DESCRIPTIONS: dict[str, str] = {
+    "new_cert":       "A new product certification has been detected.",
+    "new_evaluation": "A product has entered a formal evaluation process.",
+    "archived":       "An item has been archived — it is no longer actively maintained but remains visible for reference.",
+    "removed":        "An item has been removed from the source list.",
+    "sunset":         "An item has been sunsetted and is approaching or past its end-of-life date.",
+    "updated":        "An existing item has been revised or updated.",
+    "new":            "A new item has appeared.",
+    "advisory":       "A new advisory or policy notice has been published.",
+    "publication":    "A new document or standard has been published.",
+    "news":           "A news item or announcement has been posted.",
+    "post":           "A new post has been published.",
+}
+
+
+def _describe_change(kind: str, source: str) -> str:
+    """Return a short plain-language description of what a change means.
+
+    Looks up (kind, source_prefix) in _CHANGE_DESCRIPTIONS first (most specific),
+    then falls back to _GENERIC_DESCRIPTIONS keyed on kind alone, then a catch-all.
+
+    Args:
+        kind:   The change kind string (e.g. "new_cert", "sunset", "updated").
+        source: The source label (e.g. "NIAP PP", "NIST: fips", "CCTL Labs").
+
+    Returns:
+        A single sentence suitable for appending to a Webex or email alert.
+    """
+    kind   = kind   or ""  # guard against None
+    source = source or ""  # guard against None
+    # Sort by prefix length descending so the most-specific prefix wins
+    # (e.g. "NIAP PP" beats "NIAP" when source is "NIAP PP Extra").
+    candidates = sorted(
+        ((k, s_prefix, desc) for (k, s_prefix), desc in _CHANGE_DESCRIPTIONS.items()),
+        key=lambda x: len(x[1]),
+        reverse=True,
+    )
+    for k, s_prefix, desc in candidates:
+        if k == kind and source.startswith(s_prefix):
+            return desc
+    if kind in _GENERIC_DESCRIPTIONS:
+        return _GENERIC_DESCRIPTIONS[kind]
+    return "A change was detected on the monitored source."
+
 # ---------------------------------------------------------------------------
 # Webex / webhook message formatter
 # ---------------------------------------------------------------------------
@@ -136,6 +225,8 @@ def _format_alert_lines(alerts: list[dict], max_items: int = 15) -> list[str]:
             else:
                 desc += f"\n 🔗 {url}"
 
+        blurb = _describe_change(kind, src)
+        desc += f"\n \U0001f4ac _{blurb}_"
         desc += f"\n 🔑 _{kws}_"
         lines.append(desc)
 
@@ -310,10 +401,15 @@ def build_email_html(weekly_diff: dict) -> str:
                 f'<div style="font-size:11px;margin-top:3px;opacity:0.85">{detail}</div>'
                 if detail else ""
             )
+            blurb      = _describe_change(kind, src)
+            blurb_html = (
+                f'<div style="font-size:11px;margin-top:3px;color:#93C5FD;font-style:italic">'
+                f'\U0001f4ac {blurb}</div>'
+            )
             kw_html = f'<div style="font-size:11px;margin-top:2px;opacity:0.75">\U0001f511 {kws}</div>'
             row_bg  = "#1E1B4B" if tier == 1 else "#12102E"
             alert_rows.append(
-                _row(src[:14], cisco_badge + kind_badge + title_html + detail_html + kw_html,
+                 _row(src[:14], cisco_badge + kind_badge + title_html + detail_html + blurb_html + kw_html,
                      "#ffffff", row_bg)
             )
         parts.append(_section("⚠️ Keyword Alerts — Source, Detail & Links", alert_rows))
@@ -535,9 +631,14 @@ def send_alert_email(alerts: list[dict]) -> None:
             if detail else ""
         )
         kw_html = f'<div style="font-size:11px;margin-top:2px;opacity:0.75">\U0001f511 {kws}</div>'
+        blurb      = _describe_change(kind, src)
+        blurb_html = (
+            f'<div style="font-size:11px;margin-top:3px;color:#93C5FD;font-style:italic">'
+            f'\U0001f4ac {blurb}</div>'
+        )
         row_bg  = "#1E1B4B" if tier == 1 else "#12102E"
         rows.append(
-            _row(src[:14], cisco_badge + kind_badge + title_html + detail_html + kw_html,
+            _row(src[:14], cisco_badge + kind_badge + title_html + detail_html + blurb_html + kw_html,
                  "#ffffff", row_bg)
         )
 
