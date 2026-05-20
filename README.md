@@ -20,7 +20,7 @@ CC Pulse monitors these sources daily:
 | **CCTL Labs** | New posts from accredited Common Criteria evaluation labs |
 | **NIST CSRC** | Cryptography news, FIPS publications, CMVP, and post-quantum standards |
 
-It runs automatically every day at **01:00 EST** and posts to this space only when something relevant is found.
+It runs automatically every day at **06:00 UTC / 01:00 ET** (adjusts for EDT in summer) and posts to this space only when something relevant is found.
 
 ---
 
