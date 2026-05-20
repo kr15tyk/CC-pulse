@@ -122,6 +122,13 @@ def _fire_alerts(diff: dict, emailer) -> None:
 
     Shared between run_daily() and run_merge() to avoid duplication.
     """
+    if config.DRY_RUN:
+        alerts = diff.get("alerts", [])
+        log.info("[DRY RUN] Notifications suppressed. Would have fired: %d alert(s), %d new TD(s), %d new Cisco cert(s).",
+                 len(alerts),
+                 len(diff.get("niap", {}).get("tds", {}).get("added", [])),
+                 len(diff.get("niap", {}).get("cisco_ndcpp", {}).get("added", [])))
+        return
     alerts = diff.get("alerts", [])
     if alerts:
         log.warning("%d keyword alert(s) — firing notifications...", len(alerts))
@@ -351,10 +358,14 @@ def run_weekly() -> None:
     diffs = [_load_json(f) for f in window]
 
     weekly = differ.merge_weekly_diffs([copy.deepcopy(d) for d in diffs])
-    emailer.send_weekly_email(weekly)
-    emailer.send_webex_alert(weekly.get("alerts", []))
-    emailer.send_webhook_alert(weekly.get("alerts", []))
-    log.info("Weekly digest sent.")
+    if config.DRY_RUN:
+        log.info("[DRY RUN] Weekly notifications suppressed. %d alert(s) in weekly digest.",
+                 len(weekly.get("alerts", [])))
+    else:
+        emailer.send_weekly_email(weekly)
+        emailer.send_webex_alert(weekly.get("alerts", []))
+        emailer.send_webhook_alert(weekly.get("alerts", []))
+        log.info("Weekly digest sent.")
 
 def run_bootstrap() -> None:
     """Collect the initial snapshot without producing a diff."""
