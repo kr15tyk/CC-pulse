@@ -281,3 +281,48 @@ jobs:
           commit_user_email: "cc-pulse-bot@users.noreply.github.com"
           skip_dirty_check: false
 
+
+  # ────────────────────────────────────────────────────────────────────────────────────
+  # JOB 4 — Workflow failure notification
+  # Sends an email alert whenever ANY upstream job fails on a scheduled run.
+  # ────────────────────────────────────────────────────────────────────────────────────
+  notify_failure:
+    name: Notify on Failure
+    runs-on: ubuntu-latest
+    needs: [resolve-mode, collect, merge-and-notify, pulse]
+    if: failure() && github.event_name != 'workflow_dispatch'
+
+    steps:
+      - name: Checkout repository
+        # actions/checkout v6.0.2
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
+        with:
+          fetch-depth: 1
+
+      - name: Set up Python
+        # actions/setup-python v6.2.0
+        uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Send failure alert email
+        env:
+          CC_EMAIL_PASSWORD: ${{ secrets.CC_EMAIL_PASSWORD }}
+          CC_EMAIL_USERNAME: ${{ secrets.CC_EMAIL_USERNAME }}
+          CC_EMAIL_RECIPIENTS: ${{ secrets.CC_EMAIL_RECIPIENTS }}
+          CC_SMTP_HOST: ${{ secrets.CC_SMTP_HOST }}
+          CC_LOG_LEVEL: INFO
+        run: |
+          python - <<'EOF'
+          import emailer
+          emailer.send_workflow_failure_alert(
+              run_id="${{ github.run_id }}",
+              run_url="${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}",
+              workflow="${{ github.workflow }}",
+              branch="${{ github.ref_name }}",
+          )
+          EOF
