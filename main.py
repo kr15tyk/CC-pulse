@@ -106,7 +106,7 @@ def _empty_snapshot() -> dict:
     return {
         "schema_version": config.SNAPSHOT_SCHEMA_VERSION,
         "collected_at": "",
-        "niap": {"pcl": [], "pps": [], "tds": [], "events": [], "news": []}  # fix #26: removed dead "cctls" key,
+        "niap": {"pcl": [], "pps": [], "tds": [], "events": [], "news": []},  # fix #26: removed dead "cctls" key
         "cc_portal": {"news": [], "pps": [], "products": [], "communities": [], "publications": [], "pp_rss": []},
         "cctl_labs": {},
         "csfc":      {"pages": {}, "capability_package_headers": {}, "feeds": {}},
