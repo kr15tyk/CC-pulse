@@ -77,6 +77,44 @@ jobs:
           cache: pip
 
       - name: Install dependencies
+
+  # ────────────────────────────────────────────────────────────────────────────────────
+  # JOB 2 — Parallel domain collection (daily mode only)
+  # Each matrix job collects exactly one domain and uploads a partial JSON artifact.
+  # ────────────────────────────────────────────────────────────────────────────────────
+  collect:
+    name: Collect (${{ matrix.domain }})
+    runs-on: ubuntu-latest
+    needs: [resolve-mode]
+    if: needs.resolve-mode.outputs.mode == "daily"
+    strategy:
+      fail-fast: false
+      matrix:
+        domain:
+          - niap
+          - cc_portal
+          - cctl_labs
+          - csfc
+          - cc_crypto
+          - nist
+          - nato
+          - eucc
+
+    steps:
+      - name: Checkout repository
+        # actions/checkout v6.0.2
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
+        with:
+          fetch-depth: 1
+
+      - name: Set up Python
+        # actions/setup-python v6.2.0
+        uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: Install dependencies
         run: pip install -r requirements.txt
 
       - name: Collect domain
