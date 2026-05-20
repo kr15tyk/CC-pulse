@@ -30,7 +30,7 @@ _cfg.NEWS_CATEGORY_KEYWORDS = {
 }
 _cfg.CISCO_VENDOR_KEYWORDS = ["cisco"]
 _cfg.NDCPP_PP_KEYWORDS = ["CPP_ND"]
-_cfg.CSFC_COMPONENTS_LIST_URL = "https://nsa.gov/csfc"
+_cfg.CSFC_PRODUCT_LIST_URL = "https://nsa.gov/csfc"
 _cfg.NATO_NIAPCL_URL = "https://nato.int/niapcl"
 _cfg.EUCC_REQUIREMENTS_URL = "https://enisa.eu/eucc"
 _cfg.EUCC_CERTIFICATES_URL = "https://enisa.eu/certs"
