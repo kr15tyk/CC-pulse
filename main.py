@@ -210,7 +210,7 @@ def run_daily(output_dir: str = None) -> None:
             if isinstance(obj, dict):
                 return {k: _clear_lists(v) for k, v in obj.items()}
             return obj
-        for section in ("niap", "cc_portal", "cctl_labs", "csfc", "cc_crypto", "nist"):
+        for section in ("niap", "cc_portal", "cctl_labs", "csfc", "cc_crypto", "nist", "nato", "eucc"):  # fix #23
             if section in diff:
                 diff[section] = _clear_lists(diff[section])
         diff["alerts"] = []
@@ -310,6 +310,15 @@ def run_merge(partial_dir: str = "snapshots/partial", output_dir: str = None) ->
 
     diff = differ.compute_diff(old_snap, new_snap)
     if first_run:
+        def _clear_lists(obj):  # fix #23
+            if isinstance(obj, list):
+                return []
+            if isinstance(obj, dict):
+                return {k: _clear_lists(v) for k, v in obj.items()}
+            return obj
+        for section in ("niap", "cc_portal", "cctl_labs", "csfc", "cc_crypto", "nist", "nato", "eucc"):
+            if section in diff:
+                diff[section] = _clear_lists(diff[section])
         diff["alerts"] = []
     _save_json(diff, diff_path())
 
