@@ -34,6 +34,9 @@ WEBEX_ROOM_ID = os.environ.get("CC_WEBEX_ROOM_ID", "")
 # -- Notifications (Generic Webhook / MS Teams) -----------------------------
 WEBHOOK_URL = os.environ.get("CC_WEBHOOK_URL", "")
 
+# -- Dry-run mode (suppresses all Webex/email sends) ------------------------
+DRY_RUN = os.environ.get("CC_DRY_RUN", "").lower() in ("1", "true", "yes")
+
 # -- Dashboard --------------------------------------------------------------
 DASHBOARD_DIR = "docs"
 STAGING_DIR = "docs/staging"
