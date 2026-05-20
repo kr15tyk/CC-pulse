@@ -179,7 +179,7 @@
   <span class="nav-title">CC Pulse Dashboard</span>
   <span class="nav-spacer"></span>
   <div class="ham-wrap">
-    <span class="nav-meta">Last run: 2026-05-19 06:23 ET</span>
+    <span class="nav-meta">Last run: 2026-05-20 06:01 ET</span>
     <button class="ham-btn" id="ham-btn" onclick="toggleHamMenu()" aria-expanded="false" aria-haspopup="true" title="Open menu">&#9776;</button>
     <div class="ham-menu" id="ham-menu" role="menu">
       <a class="ham-item" href="https://kr15tyk.github.io/CC-pulse/cc_dashboard.html" role="menuitem"><span class="ham-icon">&#127968;</span>Home</a>
@@ -263,7 +263,7 @@
       <div class="stat-lbl">CSfC Selection Updates</div>
     </a></div>
     <div class="stat"><a href="#sec-nist" onclick="navigateTo('sec-nist');return false;">
-      <div class="stat-num ">0</div>
+      <div class="stat-num active-num">3</div>
       <div class="stat-lbl">NIST Doc Updates</div>
     </a></div>
     <div class="stat"><a href="#sec-cc-portal" onclick="navigateTo('sec-cc-portal');return false;">
@@ -279,7 +279,7 @@
       <div class="stat-lbl">CCTL Updates</div>
     </a></div>
     <div class="stat"><a href="#sec-eucc-req" onclick="navigateTo('sec-eucc-req');return false;">
-      <div class="stat-num active-num">4</div>
+      <div class="stat-num ">0</div>
       <div class="stat-lbl">EUCC Changes</div>
     </a></div>
     <div class="stat"><a href="#sec-alerts" onclick="navigateTo('sec-alerts');return false;">
@@ -354,49 +354,45 @@
 </div>
 
   <!-- NIAP News -->
-<div class="card card-new" id="sec-niap-news" data-has-changes="1">
+<div class="card " id="sec-niap-news" data-has-changes="0">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>NIAP News &amp; Announcements</span>
-    <span class="card-count">1 new item</span>
+    <span class="card-count">0 new items</span>
     </span>
-    <span class="toggle-icon">&#9660;</span>
-  </div>
-  <div class="card-body ">
-    
-    
-    <div class="item-row" data-source="niap-news" data-kind="new">
-      <a class="item-link" href="#" target="_blank">NIAP Policy #29 Addendum 1 posted</a>
-      <span class="item-meta"></span>
-    </div>
-    
-    
-    
-    
-    
-    <div class="sub-hdr sub-updated">Policy Letters &amp; Updates (1)</div>
-    
-    <div class="item-row" data-source="niap-news" data-kind="new">
-      <span class="item-link">NIAP Policy #29 Addendum 1 posted</span>
-      <span class="item-meta">2026-05-18</span>
-    </div>
-    
-    
-    
-  </div>
-</div>
-
-  <!-- NIAP PCL — All Certifications -->
-<div class="card " id="sec-niap-pcl" data-has-changes="0">
-  <div class="card-hdr" onclick="toggleCard(this)">
-    <span>NIAP PCL — All Certifications</span>
-    <span class="card-count">0 changes</span>
-    </span>
+    <span class="toggle-icon">&#9658;</span>
   </div>
   <div class="card-body collapsed">
     
     
     
-    <p class="no-change">No changes detected. <span class="last-active">(last: 2026-05-16)</span></p>
+    
+    <p class="no-change">No new items.</p>
+  </div>
+</div>
+
+  <!-- NIAP PCL — All Certifications -->
+<div class="card card-new" id="sec-niap-pcl" data-has-changes="1">
+  <div class="card-hdr" onclick="toggleCard(this)">
+    <span>NIAP PCL — All Certifications</span>
+    <span class="card-count">1 change</span>
+    </span>
+  </div>
+  <div class="card-body ">
+    
+    
+    <div class="sub-hdr sub-updated">Newly Archived (1)</div>
+    
+    <div class="item-row" data-source="niap-pcl" data-kind="archived">
+      <span class="item-link">Musarubra US LLC ("Trellix") -- Trellix Intrusion Prevention System Sensor and Manager Appliances version 11.1</span>
+      <span class="item-meta">Archived</span>
+    </div>
+    
+    <div class="item-sub">CPP_ND_V2.2E, MOD_IPS_V1.0</div>
+    
+    
+    
+    
+    
   </div>
 </div>
 
@@ -468,16 +464,43 @@
 </div>
 
   <!-- NIST Docs -->
-<div class="card " id="sec-nist" data-has-changes="0">
+<div class="card card-updated" id="sec-nist" data-has-changes="3">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>NIST Documentation</span>
-    <span class="card-count">0 updates</span>
+    <span class="card-count">3 updates</span>
     </span>
-    <span class="toggle-icon">&#9658;</span>
+    <span class="toggle-icon">&#9660;</span>
   </div>
-  <div class="card-body collapsed">
+  <div class="card-body ">
     
-    <p class="no-change">No changes detected. <span class="last-active">(last: 2026-05-18)</span></p>
+    
+    <div class="item-row" data-source="nist" data-kind="updated">
+      <a class="item-link" href="https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-131Ar2.pdf" target="_blank">SP 800-131A Rev 2</a>
+      <span class="item-meta">
+        Header changed
+      </span>
+    </div>
+    
+    
+    
+    <div class="item-row" data-source="nist" data-kind="updated">
+      <a class="item-link" href="https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.205.pdf" target="_blank">FIPS 205 SLH-DSA</a>
+      <span class="item-meta">
+        Header changed
+      </span>
+    </div>
+    
+    
+    
+    <div class="item-row" data-source="nist" data-kind="updated">
+      <a class="item-link" href="https://nvlpubs.nist.gov/nistpubs/ir/2024/NIST.IR.8547.ipd.pdf" target="_blank">NIST IR 8547</a>
+      <span class="item-meta">
+        Header changed
+      </span>
+    </div>
+    
+    
+    
   </div>
 </div>
 </div>
@@ -548,38 +571,16 @@
           </div>
         </div>
         <!-- EUCC Certificates -->
-        <div class="card card-new" id="sec-eucc-certs" data-has-changes="4">
+        <div class="card " id="sec-eucc-certs" data-has-changes="0">
           <div class="card-hdr" onclick="toggleCard(this)">
             <span>EUCC Certified Products</span>
-            <span class="card-count">4 new items</span>
-            <span class="toggle-icon">&#9660;</span>
+            <span class="card-count">0 new items</span>
+            <span class="toggle-icon">&#9658;</span>
           </div>
-          <div class="card-body ">
+          <div class="card-body collapsed">
             
             
-            
-            <div class="item-row" data-source="eucc" data-kind="new">
-              <a class="item-link" href="#" target="_blank">EU Cybersecurity Certificates (33)</a>
-              <span class="item-meta"></span>
-            </div>
-            
-            <div class="item-row" data-source="eucc" data-kind="new">
-              <a class="item-link" href="#" target="_blank">14 September 2025</a>
-              <span class="item-meta"></span>
-            </div>
-            
-            <div class="item-row" data-source="eucc" data-kind="new">
-              <a class="item-link" href="#" target="_blank">19 February 2026</a>
-              <span class="item-meta"></span>
-            </div>
-            
-            <div class="item-row" data-source="eucc" data-kind="new">
-              <a class="item-link" href="#" target="_blank">16 February 2026</a>
-              <span class="item-meta"></span>
-            </div>
-            
-            
-            
+            <p class="no-change">No new EUCC certified products.</p>
           </div>
         </div>
       </div>
@@ -1842,7 +1843,7 @@
 </div><!-- /main-content -->
 <footer>
   <span>CC Pulse &middot; Auto-refreshes daily (01:00 EST) &middot; NIAP, CSfC, NIST, CC Portal, NATO NIAPCL, EUCC / ENISA</span>
-  <span>Last run: 2026-05-19 06:23 ET</span>
+  <span>Last run: 2026-05-20 06:01 ET</span>
 </footer>
 
 <script>

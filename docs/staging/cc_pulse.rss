@@ -2,6 +2,8 @@
 <rss version="2.0"><channel>
 <title>CC Pulse</title>
 <link>https://kr15tyk.github.io/CC-pulse/cc_dashboard.html</link>
-<description>Common Criteria monitoring - 2026-05-19 06:23 ET</description>
-<item><title>NIAP Policy #29 Addendum 1 posted</title><link>https://www.niap-ccevs.org/</link><description></description></item>
+<description>Common Criteria monitoring - 2026-05-20 06:01 ET</description>
+<item><title>NIST Doc Updated: SP 800-131A Rev 2</title><link>https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-131Ar2.pdf</link><description>Document header updated.</description></item>
+<item><title>NIST Doc Updated: FIPS 205 SLH-DSA</title><link>https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.205.pdf</link><description>Document header updated.</description></item>
+<item><title>NIST Doc Updated: NIST IR 8547</title><link>https://nvlpubs.nist.gov/nistpubs/ir/2024/NIST.IR.8547.ipd.pdf</link><description>Document header updated.</description></item>
 </channel></rss>
