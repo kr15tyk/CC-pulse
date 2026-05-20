@@ -23,6 +23,11 @@ on:
           - redash
           - readme
           - staging
+      dry_run:
+        description: "Dry run — suppress all Webex/email notifications"
+        required: false
+        default: false
+        type: boolean
 
 # ── Permissions (minimal — only what is needed) ─────────────────────────────────────────────
 permissions:
@@ -151,6 +156,7 @@ jobs:
           CC_EMAIL_RECIPIENTS: ${{ secrets.CC_EMAIL_RECIPIENTS }}
           CC_SMTP_HOST: ${{ secrets.CC_SMTP_HOST }}
           CC_LOG_LEVEL: INFO
+          CC_DRY_RUN: ${{ github.event.inputs.dry_run || 'false' }}
           # Redirect snapshot I/O to the snapshots-branch worktree (issue #20)
           CC_SNAPSHOT_DIR: snapshot-store
           CC_DIFF_DIR: snapshot-store/diffs
@@ -217,6 +223,7 @@ jobs:
           CC_EMAIL_RECIPIENTS: ${{ secrets.CC_EMAIL_RECIPIENTS }}
           CC_SMTP_HOST: ${{ secrets.CC_SMTP_HOST }}
           CC_LOG_LEVEL: INFO
+          CC_DRY_RUN: ${{ github.event.inputs.dry_run || 'false' }}
           # Redirect snapshot I/O to the snapshots-branch worktree (issue #20)
           CC_SNAPSHOT_DIR: snapshot-store
           CC_DIFF_DIR: snapshot-store/diffs
