@@ -63,22 +63,6 @@ jobs:
             fi
           fi
 
-      - name: Checkout repository
-        # actions/checkout v6.0.2
-        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
-        with:
-          fetch-depth: 1
-
-      - name: Set up Python
-        # actions/setup-python v6.2.0
-        uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405
-        with:
-          python-version: "3.11"
-          cache: pip
-
-      - name: Install dependencies
-        run: pip install -r requirements.txt
-
   # ────────────────────────────────────────────────────────────────────────────────────
   # JOB 2 — Parallel domain collection (daily mode only)
   # Each matrix job collects exactly one domain and uploads a partial JSON artifact.
