@@ -1129,3 +1129,23 @@ def send_workflow_failure_alert(
             log.info("[Webex] Workflow failure alert sent (HTTP %d).", resp.status)
     except urllib.error.URLError as exc:
         log.warning("[Webex] Failed to send workflow failure alert: %s", exc)
+
+
+    # -- Email failure alert -------------------------------------------------------
+    subject = f"⚠️ CC Pulse — Workflow Failure ({branch})"
+    ts_plain = datetime.now(ET).strftime("%Y-%m-%d %H:%M ET")
+    run_link_html = (
+        f'<a href="{run_url}">View failed run →</a>' if run_url
+        else "Check the Actions tab for details."
+    )
+    html = f"""
+<html><body style="font-family:sans-serif;color:#222;max-width:600px;margin:auto">
+<h2 style="color:#c0392b">⚠️ CC Pulse — Workflow Failure</h2>
+<p><strong>{workflow}</strong> on <code>{branch}</code> failed at {ts_plain}.</p>
+<p>Today's snapshot and dashboard were <strong>not</strong> updated.
+No diff or alert emails were sent.</p>
+<p>{run_link_html}</p>
+<hr style="border:none;border-top:1px solid #eee">
+<p style="font-size:11px;color:#999">Automated failure notification from CC Pulse.</p>
+</body></html>"""
+    _send_email(subject, html)
