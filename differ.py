@@ -157,7 +157,7 @@ def flag_alerts(diff: Snapshot) -> list[dict]:
                 "CSfC Component Selections",
                 "updated",
                 sel_name,
-                url=config.CSFC_COMPONENTS_LIST_URL,
+                url=config.CSFC_PRODUCT_LIST_URL,
                 detail="Selections document content changed",
                 tab="us",
             )
