@@ -228,8 +228,6 @@ CSFC_COMPONENT_SELECTIONS = {
     "WLAN Access System": "https://www.nsa.gov/portals/75/documents/resources/everyone/csfc/components-list/selections/wlan-access-systems.pdf",
 }
 
-CSFC_COMPONENTS_LIST_URL = "https://www.nsa.gov/Resources/Commercial-Solutions-for-Classified-Program/Components-List/"
-
 # -- CSfC Product List (approved products) ----------------------------------
 # Monitored separately from component selections for Cisco-specific alerting.
 CSFC_PRODUCT_LIST_URL = "https://www.nsa.gov/Resources/Commercial-Solutions-for-Classified-Program/Components-List/"  # CSfC APL: confirmed correct (Components List = approved CC-evaluated products for CSfC)
