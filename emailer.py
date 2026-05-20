@@ -483,10 +483,18 @@ def build_email_html(weekly_diff: dict) -> str:
             txt    = f'<a href="{url}">{cp_name}</a>' if url else cp_name
             rows.append(_row("CP UPDATE",
                 f"<b>{txt}</b><br><small>{detail}</small>", "#FBBF24", "#12102E"))
+    _csfc_page_urls = {
+        "apl":           config.CSFC_PRODUCT_LIST_URL,
+        "home":          config.CSFC_BASE + "/Resources/Commercial-Solutions-for-Classified-Program/",
+        "cap_packages":  config.CSFC_BASE + "/Resources/Commercial-Solutions-for-Classified-Program/Capability-Packages/",
+        "announcements": config.CSFC_BASE + "/Resources/Commercial-Solutions-for-Classified-Program/Announcements/",
+    }
     for page_key, page_diff in csfc.get("pages", {}).items():
         for item in page_diff.get("added", [])[:3]:
-            rows.append(_row(f"NSA:{page_key[:8]}", item.get("text", "")[:120],
-                "#60A5FA", "#12102E"))
+            page_url = item.get("href") or item.get("link") or _csfc_page_urls.get(page_key, config.CSFC_PRODUCT_LIST_URL)
+            label    = "APL" if page_key == "apl" else page_key[:8]
+            txt      = f'<a href="{page_url}">{item.get("text", "")[:100]}</a>' if page_url else item.get("text", "")[:120]
+            rows.append(_row(f"NSA:{label}", txt, "#60A5FA", "#12102E"))
     for feed_name, items in csfc.get("feeds", {}).items():
         for item in items[:3]:
             link  = item.get("link", "")
