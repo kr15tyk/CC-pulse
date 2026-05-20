@@ -692,6 +692,35 @@ def collect_all():
 
 
 # ── CSfC (Commercial Solutions for Classified) ────────────────────────────────
+def _scrape_csfc_page_from_soup(soup) -> list:
+    """Scrape a pre-fetched NSA CSfC page soup and return a list of text/link items.
+    Used by collect_csfc() for the APL page so soup is only fetched once (fix #24).
+    """
+    if not soup:
+        return []
+    items = []
+    content = (
+        soup.find("div", {"id": "ContentPane"})
+        or soup.find("main")
+        or soup.find("div", class_="field-items")
+        or soup
+    )
+    for tag in content.find_all(["p", "li", "h2", "h3", "h4"]):
+        text = tag.get_text(separator=" ", strip=True)
+        link = tag.find("a")
+        href = link["href"] if link and link.get("href") else ""
+        if len(text) > 15:
+            items.append({"text": text[:400], "href": href})
+    seen: set = set()
+    unique: list = []
+    for item in items:
+        key = item["text"][:80]
+        if key not in seen:
+            seen.add(key)
+            unique.append(item)
+    return unique
+
+
 def _scrape_csfc_page(path: str) -> list:
     """Scrape a single NSA CSfC page and return a list of text/link items."""
     url = config.CSFC_BASE + path
@@ -834,12 +863,17 @@ def collect_csfc() -> dict:
     # 1. Scrape CSfC pages; for the APL, also parse structured records (fix #18)
     for page_key, path in config.CSFC_PAGES.items():
         log.debug("  [CSfC] Scraping page: %s (%s)...", page_key, path)
-        data["pages"][page_key] = _scrape_csfc_page(path)
-        log.debug("    -> %d items", len(data["pages"][page_key]))
         if page_key == "apl":
+            # fix #24: fetch APL page once; reuse soup for both parsers to avoid
+            # double GET on a WAF-protected NSA URL that intermittently 403s.
             apl_soup = get_html(config.CSFC_BASE + path)
+            data["pages"][page_key] = _scrape_csfc_page_from_soup(apl_soup)
             data["apl_structured"] = _parse_csfc_apl_structured(apl_soup)
-            log.debug("    -> %d structured APL records", len(data["apl_structured"]))
+            log.debug("    -> %d items, %d structured APL records",
+                      len(data["pages"][page_key]), len(data["apl_structured"]))
+        else:
+            data["pages"][page_key] = _scrape_csfc_page(path)
+            log.debug("    -> %d items", len(data["pages"][page_key]))
 
     # 2. Download and SHA-256 hash Component Selections PDFs
     log.info(" [CSfC] Hashing Component Selections PDFs...")
