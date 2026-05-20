@@ -162,6 +162,24 @@ def flag_alerts(diff: Snapshot) -> list[dict]:
                 tab="us",
             )
 
+    # CSfC APL page changes — new items on the Components List page
+    _csfc_page_urls = {
+        "apl":           config.CSFC_PRODUCT_LIST_URL,
+        "home":          config.CSFC_BASE + "/Resources/Commercial-Solutions-for-Classified-Program/",
+        "cap_packages":  config.CSFC_BASE + "/Resources/Commercial-Solutions-for-Classified-Program/Capability-Packages/",
+        "announcements": config.CSFC_BASE + "/Resources/Commercial-Solutions-for-Classified-Program/Announcements/",
+    }
+    for page_key, page_diff in diff.get("csfc", {}).get("pages", {}).items():
+        for item in page_diff.get("added", []):
+            _add_text(
+                "CSfC APL" if page_key == "apl" else f"CSfC: {page_key}",
+                "new_cert" if page_key == "apl" else "new",
+                item.get("text", ""),
+                url=item.get("href") or item.get("link") or _csfc_page_urls.get(page_key, config.CSFC_PRODUCT_LIST_URL),
+                detail=f"New item on CSfC {page_key.replace('_', ' ')} page",
+                tab="us",
+            )
+
     # CC Crypto Catalog page changes (scraped text — use _add_text for narrower matching)
     for page_key, page_diff in diff.get("cc_crypto", {}).get("pages", {}).items():
         for item in page_diff.get("added", []):
