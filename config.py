@@ -229,7 +229,7 @@ CSFC_COMPONENTS_LIST_URL = "https://www.nsa.gov/Resources/Commercial-Solutions-f
 
 # -- CSfC Product List (approved products) ----------------------------------
 # Monitored separately from component selections for Cisco-specific alerting.
-CSFC_PRODUCT_LIST_URL = "https://www.nsa.gov/Resources/Commercial-Solutions-for-Classified-Program/Components-List/"  # fix #24: TODO — update to actual APL product URL when confirmed
+CSFC_PRODUCT_LIST_URL = "https://www.nsa.gov/Resources/Commercial-Solutions-for-Classified-Program/Components-List/"  # CSfC APL: confirmed correct (Components List = approved CC-evaluated products for CSfC)
 
 CSFC_FEEDS = [
     {"name": "NSA Cybersecurity Advisories", "rss": "https://www.nsa.gov/DesktopModules/ArticleCS/RSS.ashx?ContentType=1&Site=1282&max=20", "scrape": False},
