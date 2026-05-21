@@ -172,6 +172,9 @@ def _fire_alerts(diff: dict, emailer) -> None:
         emailer.send_cisco_cert_celebration(new_cisco_eucc)
         emailer.send_cisco_cert_email(new_cisco_eucc)
 
+    # -- Daily status heartbeat (always fires unless DRY_RUN) ----------------
+    emailer.send_daily_status_email(diff)
+
 # ── Run modes ─────────────────────────────────────────────────────────────────────────────────────
 def run_daily(output_dir: str = None) -> None:
     """Collect, diff, dashboard, alert (Webex + immediate email on alerts)."""
