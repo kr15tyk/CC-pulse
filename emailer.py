@@ -1149,3 +1149,88 @@ No diff or alert emails were sent.</p>
 <p style="font-size:11px;color:#999">Automated failure notification from CC Pulse.</p>
 </body></html>"""
     _send_email(subject, html)
+
+
+def send_daily_status_email(diff: dict, run_date: str = "") -> None:
+    """Send a brief daily status email summarising what CC Pulse found today.
+
+    Always fires after every successful scheduled merge run so you have a
+    heartbeat confirmation even on quiet days when no changes were detected.
+    Suppressed when DRY_RUN is set.
+
+    Args:
+        diff:      The computed diff dict from differ.compute_diff().
+        run_date:  ISO date string (YYYY-MM-DD) for the subject line.
+                   Defaults to today in ET if not supplied.
+    """
+    import config as _cfg
+    if _cfg.DRY_RUN:
+        log.info("[DRY RUN] Daily status email suppressed.")
+        return
+
+    today_str = run_date or datetime.now(ET).strftime("%Y-%m-%d")
+    ts_plain  = datetime.now(ET).strftime("%Y-%m-%d %H:%M ET")
+
+    alerts     = diff.get("alerts", [])
+    new_tds    = diff.get("niap", {}).get("tds", {}).get("added", [])
+    new_certs  = diff.get("niap", {}).get("cisco_ndcpp", {}).get("added", [])
+    nato_adds  = diff.get("nato", {}).get("cisco_added", [])
+    eucc_adds  = diff.get("eucc", {}).get("cisco_added", [])
+
+    total_changes = len(alerts) + len(new_tds) + len(new_certs) + len(nato_adds) + len(eucc_adds)
+
+    if total_changes == 0:
+        status_icon  = "✅"
+        status_label = "No changes detected"
+        status_color = "#16A34A"
+        body_detail  = ("<p style='margin:0 0 12px;color:#94a3b8;font-size:14px;'>"
+                        "CC Pulse ran successfully and found no new activity across all"
+                        " monitored sources. No alerts or digest updates were sent."
+                        "</p>")
+    else:
+        status_icon  = "⚠️"
+        status_label = f"{total_changes} change(s) detected — alerts sent"
+        status_color = "#F59E0B"
+        lines_detail = []
+        if alerts:    lines_detail.append(f"{len(alerts)} keyword alert(s)")
+        if new_tds:   lines_detail.append(f"{len(new_tds)} new NIAP TD(s)")
+        if new_certs: lines_detail.append(f"{len(new_certs)} new Cisco NDcPP cert(s)")
+        if nato_adds: lines_detail.append(f"{len(nato_adds)} new Cisco NATO listing(s)")
+        if eucc_adds: lines_detail.append(f"{len(eucc_adds)} new Cisco EUCC cert(s)")
+        body_detail  = ("<p style='margin:0 0 12px;color:#94a3b8;font-size:14px;'>"
+                        "CC Pulse detected new activity and sent the appropriate alerts:"
+                        "<br><br>" + "<br>".join("&bull; " + l for l in lines_detail)
+                        + "</p>")
+
+    subject = f"{status_icon} CC Pulse — {today_str} — {status_label}"
+
+    html = f"""
+<!DOCTYPE html>
+<html><head><meta charset="utf-8"></head>
+<body style="background:#0f0e1a;margin:0;padding:0;font-family:'Segoe UI',Arial,sans-serif;">
+<table width="100%" cellpadding="0" cellspacing="0" style="background:#0f0e1a;">
+  <tr><td align="center" style="padding:32px 16px;">
+    <table width="600" cellpadding="0" cellspacing="0" style="background:#1a1830;border-radius:10px;overflow:hidden;max-width:600px;">
+      <tr><td style="background:#1e1b3a;padding:24px 32px;border-bottom:1px solid #2d2b50;">
+        <span style="font-size:22px;font-weight:700;color:#e2e8f0;">CC Pulse</span>
+        <span style="font-size:14px;color:#94a3b8;margin-left:12px;">Daily Status</span>
+      </td></tr>
+      <tr><td style="padding:28px 32px;">
+        <p style="margin:0 0 8px;font-size:26px;">{status_icon}</p>
+        <p style="margin:0 0 16px;font-size:20px;font-weight:600;color:{status_color};">{status_label}</p>
+        {body_detail}
+        <p style="margin:0;color:#64748b;font-size:12px;">Run completed at {ts_plain}</p>
+      </td></tr>
+      <tr><td style="background:#12102e;padding:16px 32px;border-top:1px solid #2d2b50;">
+        <p style="margin:0;color:#475569;font-size:11px;">
+          CC Pulse automated monitoring — 
+          <a href="https://kr15tyk.github.io/CC-pulse/cc_dashboard.html" style="color:#22d3ee;text-decoration:none;">View Dashboard</a>
+        </p>
+      </td></tr>
+    </table>
+  </td></tr>
+</table>
+</body></html>
+"""
+
+    _send_email(subject, html)
