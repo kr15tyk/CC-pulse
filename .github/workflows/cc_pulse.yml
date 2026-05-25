@@ -164,7 +164,7 @@ jobs:
       # main workspace (snapshots/partial/). These are read by run_merge()
       # and are never committed to any branch.
       - name: Download partial snapshots
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v8
         with:
           pattern: partial-*
           path: snapshots/partial
