@@ -110,8 +110,8 @@ def _empty_snapshot() -> dict:
         "cc_portal": {"news": [], "pps": [], "products": [], "communities": [], "publications": [], "pp_rss": []},
         "cctl_labs": {},
         "csfc":      {"pages": {}, "capability_package_headers": {}, "feeds": {}},
-        "cc_crypto": {"pages": {}, "doc_headers": {}},
-        "nist":      {"pages": {}, "doc_headers": {}, "feeds": {}},
+        "cc_crypto": {"pages": {}},
+        "nist":      {"pages": {}, "cmvp_mip": {"added": [], "removed": [], "status_changes": []}, "feeds": {}},
         "nato":      {"pages": {}, "cisco_added": [], "cisco_removed": []},
         "eucc":      {"pages": {}, "cisco_added": [], "cisco_removed": []},
     }
