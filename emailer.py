@@ -975,6 +975,91 @@ def send_readme_message() -> None:
 
 
 # ---------------------------------------------------------------------------
+# NIST CMVP MIP notification (fix #27)
+# ---------------------------------------------------------------------------
+
+def send_nist_cmvp_webex(cmvp_mip: dict) -> None:
+    """Post a Webex notification for CMVP Modules-in-Process additions and status changes.
+
+    Fires unconditionally whenever new modules are added to the CMVP MIP list
+    or existing modules change status (e.g. 'Review Pending' -> 'In Review').
+    This mirrors the send_new_tds_webex pattern for NIAP TDs.
+
+    Args:
+        cmvp_mip: The cmvp_mip sub-dict from diff["nist"]["cmvp_mip"],
+                  containing "added" and "status_changes" lists.
+    """
+    token = config.WEBEX_BOT_TOKEN
+    room_id = config.WEBEX_ROOM_ID
+    if not token or not room_id:
+        log.debug("[Webex] Bot token or Room ID not configured — skipping CMVP MIP notification.")
+        return
+
+    added = cmvp_mip.get("added", [])
+    status_changes = cmvp_mip.get("status_changes", [])
+    if not added and not status_changes:
+        return
+
+    mip_url = (
+        "https://csrc.nist.gov/projects/cryptographic-module-validation-program"
+        "/modules-in-process/modules-in-process-list"
+    )
+
+    lines = []
+
+    if added:
+        lines.append(f"### U0001f195 {len(added)} New Module(s) on CMVP MIP List")
+        for item in added:
+            name = item.get("Module Name") or item.get("name") or item.get("text", "Unknown module")
+            vendor = item.get("Vendor") or item.get("vendor") or ""
+            status = item.get("Status") or item.get("status") or ""
+            label = f"{name}" + (f" ({vendor})" if vendor else "")
+            status_str = f" — Status: *{status}*" if status else ""
+            lines.append(f"**[CMVP NEW]** [{label}]({mip_url}){status_str}")
+
+    if status_changes:
+        lines.append(f"### U0001f504 {len(status_changes)} Module Status Change(s)")
+        for item in status_changes:
+            name = item.get("Module Name") or item.get("name") or item.get("text", "Unknown module")
+            vendor = item.get("Vendor") or item.get("vendor") or ""
+            old_s = item.get("old_status", "?")
+            new_s = item.get("new_status", "?")
+            label = f"{name}" + (f" ({vendor})" if vendor else "")
+            lines.append(f"**[CMVP STATUS]** [{label}]({mip_url})\n  ↳ {old_s} → {new_s}")
+
+    total = len(added) + len(status_changes)
+    header = (
+        f"## U0001f510 NIST CMVP — {total} Module{{'s' if total != 1 else ''}} in Process Update{{'s' if total != 1 else ''}}\n"
+        f"_CC Pulse detected CMVP Modules-in-Process changes._\n"
+    )
+    footer = f"\n\n[View CMVP MIP List]({mip_url}) · [Full dashboard](https://kr15tyk.github.io/CC-pulse/cc_dashboard.html)"
+
+    body = "\n\n".join(lines)
+    payload = json.dumps({
+        "roomId": room_id,
+        "markdown": header + body + footer,
+    }).encode("utf-8")
+
+    req = urllib.request.Request(
+        "https://webexapis.com/v1/messages",
+        data=payload,
+        headers={
+            "Content-Type": "application/json",
+            "Authorization": f"Bearer {token}",
+        },
+        method="POST",
+    )
+    try:
+        with urllib.request.urlopen(req, timeout=10) as resp:
+            log.info(
+                "[Webex] CMVP MIP notification sent: %d added, %d status changes (HTTP %d).",
+                len(added), len(status_changes), resp.status,
+            )
+    except urllib.error.URLError as exc:
+        log.warning("[Webex] Failed to send CMVP MIP notification: %s", exc)
+
+
+# ---------------------------------------------------------------------------
 # Workflow failure notification (issue #20)
 # ---------------------------------------------------------------------------
 
