@@ -285,20 +285,8 @@ SANITY_MIN_EUCC_CERTS = 2
 # =============================================================
 CC_CRYPTO_BASE = "https://www.commoncriteriaportal.org"
 
-CC_CRYPTO_DOCS = {
-    "CCDB-018 v1.0 Crypto Catalog (Jan 2025)": (
-        "https://www.commoncriteriaportal.org/files/ccfiles/"
-        "CCDB-018-v1.0-2025-Jan-31-Final-"
-        "Specification_of_Functional_Requirements_for_Cryptography.pdf"
-    ),
-    "CCDB-014 v3.1 Assurance Continuity (Feb 2024)": (
-        "https://www.commoncriteriaportal.org/files/operatingprocedures/"
-        "CCDB-014-v3.1-2024-February-29-Final-Assurance_Continuity.pdf"
-    ),
-    "CC:2022 Part 2 Security Functional Requirements": (
-        "https://www.commoncriteriaportal.org/files/ccfiles/CC2022PART2R1.pdf"
-    ),
-}
+# CC_CRYPTO_DOCS removed (fix #27): doc header polling was unreliable.
+# CC Crypto changes are tracked via CC_CRYPTO_PAGES page scrapes.
 
 CC_CRYPTO_PAGES = {
     "publications": "/cc/index.cfm",
@@ -329,15 +317,8 @@ NIST_CSRC_PAGES = {
     "cmvp_validated": "/projects/cryptographic-module-validation-program/validated-modules",
 }
 
-NIST_CRYPTO_DOCS = {
-    "FIPS 140-3": "https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.140-3.pdf",
-    "SP 800-131A Rev 2":"https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-131Ar2.pdf",
-    "SP 800-57 Part 1 Rev 5": "https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-57pt1r5.pdf",
-    "NIST IR 8547": "https://nvlpubs.nist.gov/nistpubs/ir/2024/NIST.IR.8547.ipd.pdf",
-    "FIPS 203 ML-KEM": "https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.203.pdf",
-    "FIPS 204 ML-DSA": "https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.204.pdf",
-    "FIPS 205 SLH-DSA": "https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.205.pdf",
-}
+# NIST_CRYPTO_DOCS removed (fix #27): doc header polling was unreliable.
+# NIST changes are tracked via NIST_CSRC_PAGES scrapes and NIST_FEEDS RSS.
 
 NIST_FEEDS = [
     {"name": "NIST Cybersecurity News", "rss": "https://www.nist.gov/news-events/cybersecurity/rss.xml", "scrape": False},
@@ -352,4 +333,3 @@ NIST_NEWS_KEYWORDS = [
     "key management", "cryptographic module", "csrc",
 ]
 
-SANITY_MIN_NIST_NEWS = 10
