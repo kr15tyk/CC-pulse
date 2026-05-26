@@ -156,18 +156,19 @@ def flag_alerts(diff: Snapshot) -> list[dict]:
             old_href = change.get("old_href", "")
             new_href = change.get("new_href", "")
             detail = (
-                "New component selection document added"
+                "NSA added a new component selection document for this role"
                 if not old_href
-                else "Component selection document removed"
+                else "NSA removed the component selection document for this role"
                 if not new_href
-                else "Component selection document updated (version token changed)"
+                else "NSA updated the component selection document for this role"
             )
+            pdf_href = new_href or old_href
             _add_text(
                 "CSfC Component Selections",
                 "updated",
                 sel_name,
-                url=new_href or old_href or config.CSFC_PRODUCT_LIST_URL,
-                detail=detail,
+                url=config.CSFC_PRODUCT_LIST_URL,
+                detail=f"{detail} — {pdf_href}" if pdf_href else detail,
                 tab="us",
             )
 
