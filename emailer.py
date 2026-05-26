@@ -130,6 +130,13 @@ _CHANGE_DESCRIPTIONS: dict[tuple[str, str], str] = {
     ("news",           "NIST"):  "New content has appeared on the NIST CSRC website (news, FIPS, CMVP, or post-quantum standards).",
     ("updated",        "NIST"):  "A NIST standards document has been revised. Review the link for what changed.",
     # CSfC
+    ("updated", "CSfC Component Selections"): (
+        "NSA has updated a Component Selection document. "
+        "These documents list which CC-evaluated products are approved for a specific "
+        "CSfC role (e.g. VPN gateway, MDM, IPsec client). "
+        "Review the Components List page to see what changed and check whether any "
+        "approved products relevant to your program have been added or removed."
+    ),
     ("updated",        "CSfC"):  "A CSfC Capability Package or Component Selection document has changed. These documents define the approved architectures for handling classified information.",
     ("advisory",       "CSfC"):  "A new CSfC advisory or policy document has been published by the NSA.",
     # CC Portal
