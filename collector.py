@@ -944,12 +944,13 @@ def _scrape_cc_crypto_page(path: str) -> list:
 def collect_cc_crypto() -> dict:
     """Collect CC Crypto Catalog and working group monitoring data:
       - CC Portal page snapshots (publications, news, communities)
-      - HTTP header polling of crypto PDFs (with partial-GET fallback)
+
+    Doc header polling removed (fix #27): CDN headers were unreliable
+    and produced false positives. Page scrapes are the correct signal.
     """
     log.info("[CC Crypto] Collecting...")
     data: dict = {
-        "pages":       {},
-        "doc_headers": {},
+        "pages": {},
     }
 
     for page_key, path in config.CC_CRYPTO_PAGES.items():
@@ -957,12 +958,8 @@ def collect_cc_crypto() -> dict:
         data["pages"][page_key] = _scrape_cc_crypto_page(path)
         log.debug("    -> %d items", len(data["pages"][page_key]))
 
-    log.info("  [CC Crypto] Polling document headers...")
-    data["doc_headers"] = _poll_doc_headers(config.CC_CRYPTO_DOCS, "CC Crypto")
-
-    pubs_count  = len(data["pages"].get("publications", []))
-    docs_polled = len(data["doc_headers"])
-    log.info("[CC Crypto] publications-items:%d docs-polled:%d", pubs_count, docs_polled)
+    pubs_count = len(data["pages"].get("publications", []))
+    log.info("[CC Crypto] publications-items:%d", pubs_count)
     return data
 
 
@@ -1024,18 +1021,14 @@ def collect_nist() -> dict:
     """
     log.info("[NIST] Collecting...")
     data: dict = {
-        "pages":       {},
-        "doc_headers": {},
-        "feeds":       {},
+        "pages": {},
+        "feeds": {},
     }
 
     for page_key, path in config.NIST_CSRC_PAGES.items():
         log.debug("  [NIST] Scraping page: %s (%s)...", page_key, path)
         data["pages"][page_key] = _scrape_nist_page(path)
         log.debug("    -> %d items", len(data["pages"][page_key]))
-
-    log.info("  [NIST] Polling document headers...")
-    data["doc_headers"] = _poll_doc_headers(config.NIST_CRYPTO_DOCS, "NIST Docs")
 
     for feed in config.NIST_FEEDS:
         name = feed["name"]
@@ -1049,9 +1042,9 @@ def collect_nist() -> dict:
         data["feeds"][name] = items
         log.debug("    -> %d items", len(items))
 
-    news_count  = len(data["pages"].get("news", []))
-    docs_polled = len(data["doc_headers"])
-    log.info("[NIST] news-items:%d docs-polled:%d", news_count, docs_polled)
+    news_count = len(data["pages"].get("news", []))
+    mip_count  = len(data["pages"].get("cmvp_mip", []))
+    log.info("[NIST] news-items:%d cmvp-mip-modules:%d", news_count, mip_count)
     return data
 
 
