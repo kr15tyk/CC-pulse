@@ -202,31 +202,6 @@ CSFC_PAGES = {
     "announcements": "/Resources/Commercial-Solutions-for-Classified-Program/Announcements/",
 }
 
-CSFC_COMPONENT_SELECTIONS = {
-    "Authentication Server": "https://www.nsa.gov/portals/75/documents/resources/everyone/csfc/components-list/selections/authentication-servers.pdf",
-    "Certificate Authority": "https://www.nsa.gov/portals/75/documents/resources/everyone/csfc/components-list/selections/certificate-authorities.pdf",
-    "Client Virtualization Systems": "https://www.nsa.gov/Portals/75/documents/resources/everyone/csfc/components-list/selections/Client-Virtualization.pdf",
-    "E-mail Clients": "https://www.nsa.gov/portals/75/documents/resources/everyone/csfc/components-list/selections/email-clients.pdf",
-    "End User Device / Mobile Platform": "https://www.nsa.gov/portals/75/documents/resources/everyone/csfc/components-list/selections/CSfC%20Selections%20for%20End%20User%20Devices%20and%20Mobile%20Platform_Nov%202018.pdf",
-    "File Encryption": "https://www.nsa.gov/portals/75/documents/resources/everyone/csfc/components-list/selections/file-encryption.pdf",
-    "General Purpose Operating System":"https://www.nsa.gov/Portals/75/documents/resources/everyone/csfc/components-list/selections/General%20Purpose%20Operating%20System%20Selectors.pdf",
-    "General Purpose Compute Platform":"https://www.nsa.gov/Portals/75/documents/resources/everyone/csfc/components-list/selections/General%20Purpose%20Compute%20Platform%20Selectors.pdf",
-    "Hardware Full Drive Encryption": "https://www.nsa.gov/portals/75/documents/resources/everyone/csfc/components-list/selections/sw-fde.pdf",
-    "IPS": "https://www.nsa.gov/portals/75/documents/resources/everyone/csfc/components-list/selections/ips.pdf",
-    "IPsec VPN Client": "https://www.nsa.gov/portals/75/documents/resources/everyone/csfc/components-list/selections/vpn-clients.pdf",
-    "IPsec VPN Gateway": "https://www.nsa.gov/portals/75/documents/resources/everyone/csfc/components-list/selections/vpn-gateways.pdf",
-    "MACSEC Ethernet Encryption": "https://www.nsa.gov/portals/75/documents/resources/everyone/csfc/components-list/selections/macsec.pdf",
-    "MDM": "https://www.nsa.gov/portals/75/documents/resources/everyone/csfc/components-list/selections/mdm.pdf",
-    "Session Border Controller": "https://www.nsa.gov/portals/75/documents/resources/everyone/csfc/components-list/selections/sbc.pdf",
-    "Enterprise Session Controller": "https://www.nsa.gov/portals/75/documents/resources/everyone/csfc/components-list/selections/esc.pdf",
-    "Software Full Drive Encryption": "https://www.nsa.gov/portals/75/documents/resources/everyone/csfc/components-list/selections/sw-fde.pdf",
-    "TLS Protected Servers": "https://www.nsa.gov/Portals/75/documents/resources/everyone/csfc/components-list/selections/TLS-Protected-Servers-2022-08-24.pdf",
-    "TLS Software Applications": "https://www.nsa.gov/Portals/75/documents/resources/everyone/csfc/components-list/selections/CSfC%20Selections%20for%20TLS%20Software%20Application-2022-11-03.pdf",
-    "Traffic Filtering Firewall": "https://www.nsa.gov/portals/75/documents/resources/everyone/csfc/components-list/selections/tffw.pdf",
-    "VoIP Applications": "https://www.nsa.gov/portals/75/documents/resources/everyone/csfc/components-list/selections/voip-applications.pdf",
-    "Web Browsers": "https://www.nsa.gov/portals/75/documents/resources/everyone/csfc/components-list/selections/web-browsers.pdf",
-    "WLAN Access System": "https://www.nsa.gov/portals/75/documents/resources/everyone/csfc/components-list/selections/wlan-access-systems.pdf",
-}
 
 # -- CSfC Product List (approved products) ----------------------------------
 # Monitored separately from component selections for Cisco-specific alerting.
