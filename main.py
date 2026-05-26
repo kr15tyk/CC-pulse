@@ -172,7 +172,16 @@ def _fire_alerts(diff: dict, emailer) -> None:
         emailer.send_cisco_cert_celebration(new_cisco_eucc)
         emailer.send_cisco_cert_email(new_cisco_eucc)
 
-    # -- Daily status heartbeat (always fires unless DRY_RUN) ----------------
+    # -- NIST CMVP MIP changes (fix #27) ------------------------------------------
+    cmvp_mip = diff.get("nist", {}).get("cmvp_mip", {})
+    if cmvp_mip.get("added") or cmvp_mip.get("status_changes"):
+        log.info(
+            "%d CMVP MIP addition(s), %d status change(s) — sending Webex notification...",
+            len(cmvp_mip.get("added", [])), len(cmvp_mip.get("status_changes", [])),
+        )
+        emailer.send_nist_cmvp_webex(cmvp_mip)
+
+        # -- Daily status heartbeat (always fires unless DRY_RUN) ----------------
     emailer.send_daily_status_email(diff)
 
 # ── Run modes ─────────────────────────────────────────────────────────────────────────────────────
