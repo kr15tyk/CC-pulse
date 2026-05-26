@@ -721,6 +721,42 @@ def _scrape_csfc_page_from_soup(soup) -> list:
     return unique
 
 
+def _scrape_csfc_selection_links(soup) -> dict:
+    """Walk the NSA CSfC Components List page and return a mapping of
+    {category_heading: full_href} for every Component Selections PDF link.
+
+    Each link has text "Click for Selections" or "Click for Selection" and
+    is preceded by an <h2> or <h3> heading with the category name.
+    The href is preserved in full, including the DNN ?ver= cache-busting
+    token — changes in that token signal that the document was updated.
+
+    Returns {} if soup is None or no links are found.
+    """
+    if not soup:
+        return {}
+    results: dict = {}
+    for a_tag in soup.find_all("a", href=True):
+        href = a_tag["href"]
+        text = a_tag.get_text(strip=True).lower()
+        # Only process Selection PDF links
+        if "click for selection" not in text:
+            continue
+        if "/portals/" not in href.lower() and ".pdf" not in href.lower():
+            continue
+        # Walk up to find the nearest preceding <h2> or <h3> heading
+        heading = ""
+        for sibling in a_tag.find_all_previous(["h2", "h3"]):
+            heading = sibling.get_text(strip=True)
+            break
+        if not heading:
+            heading = a_tag.get_text(strip=True)
+        # Build absolute URL if needed
+        if href.startswith("/"):
+            href = config.CSFC_BASE + href
+        results[heading] = href
+    log.debug("[CSfC Selections] Scraped %d selection links from Components List page.", len(results))
+    return results
+
 def _scrape_csfc_page(path: str) -> list:
     """Scrape a single NSA CSfC page and return a list of text/link items."""
     url = config.CSFC_BASE + path
@@ -816,28 +852,6 @@ def _parse_csfc_apl_structured(soup) -> list:
     return unique
 
 
-def _hash_csfc_selections(selections: dict) -> dict:
-    """Download each Component Selections PDF and store a SHA-256 content hash.
-    This is the only reliable way to detect changes on NSA's CDN, which does
-    not serve consistent Last-Modified, ETag, or Content-Length headers.
-    Returns a dict keyed by selection name: {url, hash, fetch_error}.
-    """
-    results = {}
-    for name, url in selections.items():
-        log.info(" [CSfC Selections] Fetching %s ...", name)
-        entry: dict = {"url": url, "hash": "", "fetch_error": ""}
-        try:
-            r = SESSION.get(url, timeout=60, allow_redirects=True)
-            r.raise_for_status()
-            entry["hash"] = hashlib.sha256(r.content).hexdigest()
-            log.info(" -> %d bytes, hash %s...", len(r.content), entry["hash"][:12])
-        except Exception as exc:
-            log.warning(" [CSfC Selections] Failed to fetch %s: %s", name, exc)
-            entry["fetch_error"] = str(exc)
-        results[name] = entry
-    return results
-
-
 def collect_csfc() -> dict:
     """Collect all CSfC monitoring data:
     - NSA CSfC page snapshots (home, APL, components list, FAQ, etc.)
@@ -848,7 +862,7 @@ def collect_csfc() -> dict:
     data: dict = {
         "pages": {},
         "apl_structured": [],           # structured APL records (fix #18)
-        "component_selection_hashes": {},
+        "selection_links": {},
         "feeds": {},
     }
 
@@ -871,15 +885,13 @@ def collect_csfc() -> dict:
             data["apl_structured"] = _parse_csfc_apl_structured(apl_soup)
             log.debug("    -> %d items, %d structured APL records",
                       len(data["pages"][page_key]), len(data["apl_structured"]))
+        # Scrape Component Selection links from the already-fetched APL soup (fix #25)
+        data["selection_links"] = _scrape_csfc_selection_links(apl_soup)
+        log.debug(" -> %d selection links", len(data["selection_links"]))
         else:
             data["pages"][page_key] = _scrape_csfc_page(path)
             log.debug("    -> %d items", len(data["pages"][page_key]))
 
-    # 2. Download and SHA-256 hash Component Selections PDFs
-    log.info(" [CSfC] Hashing Component Selections PDFs...")
-    data["component_selection_hashes"] = _hash_csfc_selections(
-        config.CSFC_COMPONENT_SELECTIONS
-    )
 
     # 3. RSS / news feeds
     for feed in config.CSFC_FEEDS:
@@ -895,8 +907,8 @@ def collect_csfc() -> dict:
         log.debug("    -> %d items", len(items))
 
     apl_count = len(data["pages"].get("apl", []))
-    sel_count = len(data["component_selection_hashes"])
-    log.info("[CSfC] APL items:%d Component Selections hashed:%d", apl_count, sel_count)
+    sel_count = len(data["selection_links"])
+    log.info("[CSfC] APL items:%d Component Selection links scraped:%d", apl_count, sel_count)
     return data
 
 
