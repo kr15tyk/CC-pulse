@@ -885,9 +885,9 @@ def collect_csfc() -> dict:
             data["apl_structured"] = _parse_csfc_apl_structured(apl_soup)
             log.debug("    -> %d items, %d structured APL records",
                       len(data["pages"][page_key]), len(data["apl_structured"]))
-        # Scrape Component Selection links from the already-fetched APL soup (fix #25)
-        data["selection_links"] = _scrape_csfc_selection_links(apl_soup)
-        log.debug(" -> %d selection links", len(data["selection_links"]))
+            # Scrape Component Selection links from the already-fetched APL soup (fix #25)
+            data["selection_links"] = _scrape_csfc_selection_links(apl_soup)
+            log.debug(" -> %d selection links", len(data["selection_links"]))
         else:
             data["pages"][page_key] = _scrape_csfc_page(path)
             log.debug("    -> %d items", len(data["pages"][page_key]))
