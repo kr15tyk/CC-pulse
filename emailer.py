@@ -510,168 +510,70 @@ def build_email_html(weekly_diff: dict) -> str:
             rows.append(_row("ADVISORY", txt, "#60A5FA", "#12102E"))
     parts.append(_section("CSfC — Capability Packages & APL", rows))
 
-    # ── CC Crypto Catalog ──────────────────────────────────────────────────
+    # ── CC Crypto Catalog ──────────────────────────────────────────────────────
     cc_crypto = weekly_diff.get("cc_crypto", {})
     rows = []
-    for doc_name, change in cc_crypto.get("doc_headers", {}).items():
-        if change.get("changed"):
-            url = change.get("url", "")
-            txt = f'<a href="{url}">{doc_name}</a>' if url else doc_name
-            rows.append(_row("DOC UPDATE",
-                f"<b>{txt}</b> — new version detected", "#F87171", "#1E1B4B"))
+    _cc_urls = {
+        "publications": "https://www.commoncriteriaportal.org/cc/index.cfm",
+        "news": "https://www.commoncriteriaportal.org/news/index.cfm",
+        "communities": "https://www.commoncriteriaportal.org/communities/index.cfm",
+    }
     for page_key, page_diff in cc_crypto.get("pages", {}).items():
-        for item in page_diff.get("added", [])[:3]:
-            rows.append(_row(f"CC:{page_key[:8]}", item.get("text", "")[:120],
-                "#60A5FA", "#12102E"))
+        if not isinstance(page_diff, dict):
+            continue
+        for item in page_diff.get("added", [])[:5]:
+            page_url = item.get("href") or _cc_urls.get(page_key, "https://www.commoncriteriaportal.org/cc/index.cfm")
+            txt = f'<a href="{page_url}">{item.get("text","")[:100]}</a>' if page_url else item.get("text","")[:120]
+            label = "CC PUB" if page_key == "publications" else f"CC:{page_key[:6]}"
+            rows.append(_row(label, txt, "#60A5FA", "#12102E"))
     parts.append(_section("CC Crypto Catalog & Working Group", rows))
 
-    # ── NIST CSRC ──────────────────────────────────────────────────────────
+    # ── NIST CSRC ────────────────────────────────────────────────────────────
     nist = weekly_diff.get("nist", {})
     rows = []
-    for doc_name, change in nist.get("doc_headers", {}).items():
-        if change.get("changed"):
-            url = change.get("url", "")
-            txt = f'<a href="{url}">{doc_name}</a>' if url else doc_name
-            rows.append(_row("NIST DOC", f"<b>{txt}</b> — revised", "#22D3EE", "#12102E"))
+    # CMVP MIP structured changes (fix #27)
+    cmvp_mip = nist.get("cmvp_mip", {})
+    _cmvp_url = "https://csrc.nist.gov/projects/cryptographic-module-validation-program/modules-in-process/modules-in-process-list"
+    for item in cmvp_mip.get("added", [])[:5]:
+        name = item.get("Module Name") or item.get("name") or item.get("text", "")[:80]
+        vendor = item.get("Vendor") or item.get("vendor") or ""
+        status = item.get("Status") or item.get("status") or ""
+        label = f"{name}" + (f" ({vendor})" if vendor else "")
+        detail = f"Status: {status}" if status else "New to MIP list"
+        rows.append(_row("CMVP NEW",
+            f'<a href="{_cmvp_url}">{label}</a><br><small>{detail}</small>',
+            "#22D3EE", "#12102E"))
+    for item in cmvp_mip.get("status_changes", [])[:5]:
+        name = item.get("Module Name") or item.get("name") or item.get("text", "")[:80]
+        vendor = item.get("Vendor") or item.get("vendor") or ""
+        label = f"{name}" + (f" ({vendor})" if vendor else "")
+        detail = f"{item.get('old_status','?')} → {item.get('new_status','?')}"
+        rows.append(_row("CMVP STATUS",
+            f'<a href="{_cmvp_url}">{label}</a><br><small>{detail}</small>',
+            "#FBBF24", "#12102E"))
+    _nist_page_urls = {
+        "news": "https://csrc.nist.gov/news",
+        "fips": "https://csrc.nist.gov/publications/fips",
+        "pqc": "https://csrc.nist.gov/projects/post-quantum-cryptography",
+        "crypto_standards": "https://csrc.nist.gov/projects/cryptographic-standards-and-guidelines",
+        "cmvp_validated": "https://csrc.nist.gov/projects/cryptographic-module-validation-program/validated-modules",
+    }
+    for page_key, page_diff in nist.get("pages", {}).items():
+        if page_key == "cmvp_mip":
+            continue
+        if not isinstance(page_diff, dict):
+            continue
+        for item in page_diff.get("added", [])[:3]:
+            page_url = item.get("href") or _nist_page_urls.get(page_key, "https://csrc.nist.gov/")
+            txt = f'<a href="{page_url}">{item.get("text","")[:100]}</a>' if page_url else item.get("text","")[:120]
+            rows.append(_row(f"NIST:{page_key[:7]}", txt, "#22D3EE", "#12102E"))
     for feed_name, items in nist.get("feeds", {}).items():
         for item in items[:5]:
-            link  = item.get("link", "")
+            link = item.get("link", "")
             title = item.get("title", "")
-            txt   = f'<a href="{link}">{title}</a>' if link else title
-            rows.append(_row("NIST", txt, "#22D3EE", "#12102E"))
-    for item in nist.get("pages", {}).get("cmvp_mip", {}).get("added", [])[:5]:
-        rows.append(_row("CMVP MIP", item.get("text", "")[:120], "#22D3EE", "#12102E"))
+            txt = f'<a href="{link}">{title}</a>' if link else title
+            rows.append(_row("NIST FEED", txt, "#22D3EE", "#12102E"))
     parts.append(_section("NIST CSRC — Standards, CMVP & PQC", rows))
-
-    body      = "".join(parts) or "<p>No changes detected this week.</p>"
-    generated = datetime.now(ET).strftime("%Y-%m-%d %H:%M ET")
-    return (
-        '<html><body style="font-family:-apple-system,BlinkMacSystemFont,sans-serif;'
-        'max-width:720px;margin:0 auto;color:#E0E7FF">'
-        '<div style="background:#0B0F1A;color:#E0E7FF;padding:20px 28px;border-radius:8px 8px 0 0">'
-        '<h1 style="margin:0;font-size:1.4rem;color:#60A5FA;font-family:Courier New,monospace;letter-spacing:0.08em">// CC Pulse &#8212; Weekly Brief</h1>'
-        f'<p style="margin:4px 0 0;opacity:0.75;font-size:0.85rem">Week ending {date}</p>'
-        '</div>'
-        '<div style="background:#E0E7FF;padding:20px 28px;border:1px solid #3730A3;'
-        'border-top:none;border-radius:0 0 8px 8px">'
-        f'{body}'
-        '<hr style="margin-top:28px;border:none;border-top:1px solid #312E81">'
-        f'<p style="color:#6366F1;font-size:0.75rem;margin-top:12px">'
-        f'CC Pulse automated Common Criteria monitoring<br>Generated {generated}</p>'
-        '</div></body></html>'
-    )
-
-
-# ---------------------------------------------------------------------------
-# Low-level email sender
-# ---------------------------------------------------------------------------
-
-def _send_email(subject: str, html: str) -> None:
-    """Authenticate and send one HTML email."""
-    password = os.environ.get("CC_EMAIL_PASSWORD", config.EMAIL_PASSWORD)
-    if not password:
-        log.warning("[Email] No password set — skipping email send.")
-        return
-    msg            = MIMEMultipart("alternative")
-    msg["Subject"] = subject
-    msg["From"]    = config.EMAIL_FROM
-    msg["To"]      = ", ".join(config.EMAIL_RECIPIENTS)
-    msg.attach(MIMEText(html, "html"))
-    log.info("[Email] Sending '%s' to %s...", subject, config.EMAIL_RECIPIENTS)
-    try:
-        with smtplib.SMTP(config.EMAIL_SMTP_HOST, config.EMAIL_SMTP_PORT) as smtp:
-            smtp.ehlo()
-            smtp.starttls()
-            smtp.login(config.EMAIL_USERNAME, password)
-            smtp.sendmail(config.EMAIL_USERNAME, config.EMAIL_RECIPIENTS, msg.as_string())
-        log.info("[Email] Sent successfully.")
-    except Exception as exc:
-        log.error("[Email] Failed: %s", exc)
-        raise
-
-
-# ---------------------------------------------------------------------------
-# Public send functions
-# ---------------------------------------------------------------------------
-
-def send_weekly_email(weekly_diff: dict) -> None:
-    """Build and send the weekly HTML email digest."""
-    date_str = datetime.now(ET).strftime("%Y-%m-%d")
-    subject  = config.EMAIL_SUBJECT.format(date=date_str)
-    html     = build_email_html(weekly_diff)
-    _send_email(subject, html)
-
-
-def send_alert_email(alerts: list[dict]) -> None:
-    """Send an immediate alert email when keyword matches are found.
-
-    Alert rows are sorted tier-first (Cisco-relevant at top) with CISCO badge
-    and kind label on each row for fast scanning.
-    """
-    if not alerts:
-        return
-
-    date_str   = datetime.now(ET).strftime("%Y-%m-%d")
-    tier1_count = sum(1 for a in alerts if _alert_tier(a) == 1)
-    subject    = (
-        f"CC Pulse ALERT \u2014 {tier1_count} Cisco-relevant + {len(alerts)-tier1_count} other match(es) on {date_str}"
-        if tier1_count else
-        f"CC Pulse ALERT \u2014 {len(alerts)} keyword match(es) on {date_str}"
-    )
-
-    rows = []
-    for a in sorted(alerts, key=lambda x: (_alert_tier(x), alerts.index(x))):
-        kws    = ", ".join(a.get("matched_keywords", []))
-        title  = a.get("title", "")
-        detail = a.get("detail", "")
-        url    = a.get("url", "")
-        kind   = a.get("kind", "")
-        src    = a.get("source", "ALERT")
-        tier   = _alert_tier(a)
-        cisco_badge = (
-            '<span style="background:#3B82F6;color:#fff;padding:1px 6px;'
-            'border-radius:3px;font-size:10px;margin-right:4px">CISCO</span>'
-            if tier == 1 else ""
-        )
-        kind_badge = (
-            f'<span style="background:#6366F1;color:#fff;padding:1px 6px;'
-            f'border-radius:3px;font-size:10px;margin-right:4px">{_kind_label(kind)}</span>'
-            if kind else ""
-        )
-        title_html  = (
-            f'<a href="{url}" style="color:#60A5FA;font-weight:700">{title}</a>'
-            if url else f"<b>{title}</b>"
-        )
-        detail_html = (
-            f'<div style="font-size:11px;margin-top:3px;opacity:0.85">{detail}</div>'
-            if detail else ""
-        )
-        kw_html = f'<div style="font-size:11px;margin-top:2px;opacity:0.75">\U0001f511 {kws}</div>'
-        blurb      = _describe_change(kind, src)
-        blurb_html = (
-            f'<div style="font-size:11px;margin-top:3px;color:#93C5FD;font-style:italic">'
-            f'\U0001f4ac {blurb}</div>'
-        )
-        row_bg  = "#1E1B4B" if tier == 1 else "#12102E"
-        rows.append(
-            _row(src[:14], cisco_badge + kind_badge + title_html + detail_html + blurb_html + kw_html,
-                 "#ffffff", row_bg)
-        )
-
-    tier_note = (
-        f'<p style="margin:6px 0 0;font-size:0.8rem;opacity:0.85">'
-        f'🔵 {tier1_count} Cisco-relevant · '
-        f'📐 {sum(1 for a in alerts if _alert_tier(a)==2)} standards/NIST · '
-        f'📋 {sum(1 for a in alerts if _alert_tier(a)==3)} general</p>'
-    ) if tier1_count else ""
-
-    dashboard_link = (
-        '<p style="margin-top:16px">'
-        '<a href="https://kr15tyk.github.io/CC-pulse/cc_dashboard.html" '
-        'style="background:#0B0F1A;color:#E0E7FF;padding:8px 16px;'
-        'border-radius:4px;text-decoration:none;font-size:0.85rem">'
-        '&#128202; View Full Dashboard</a></p>'
-    )
 
     body = (
         '<div style="background:#12102E;color:#FB923C;padding:14px 18px;border:1px solid #C026D3;'
@@ -1184,7 +1086,17 @@ def send_daily_status_email(diff: dict, run_date: str = "") -> None:
     nato_adds  = diff.get("nato", {}).get("cisco_added", [])
     eucc_adds  = diff.get("eucc", {}).get("cisco_added", [])
 
-    total_changes = len(alerts) + len(new_tds) + len(new_certs) + len(nato_adds) + len(eucc_adds)
+    nist_news = sum(
+        len(v.get("added", [])) for v in diff.get("nist", {}).get("pages", {}).values()
+        if isinstance(v, dict)
+    ) + sum(len(v) for v in diff.get("nist", {}).get("feeds", {}).values()) + \
+        len(diff.get("nist", {}).get("cmvp_mip", {}).get("added", [])) + \
+        len(diff.get("nist", {}).get("cmvp_mip", {}).get("status_changes", []))
+    cc_crypto_new = sum(
+        len(v.get("added", [])) for v in diff.get("cc_crypto", {}).get("pages", {}).values()
+        if isinstance(v, dict)
+    )
+    total_changes = len(alerts) + len(new_tds) + len(new_certs) + len(nato_adds) + len(eucc_adds) + nist_news + cc_crypto_new
 
     if total_changes == 0:
         status_icon  = "✅"
@@ -1204,6 +1116,8 @@ def send_daily_status_email(diff: dict, run_date: str = "") -> None:
         if new_certs: lines_detail.append(f"{len(new_certs)} new Cisco NDcPP cert(s)")
         if nato_adds: lines_detail.append(f"{len(nato_adds)} new Cisco NATO listing(s)")
         if eucc_adds: lines_detail.append(f"{len(eucc_adds)} new Cisco EUCC cert(s)")
+        if nist_news: lines_detail.append(f"{nist_news} NIST update(s) (news/FIPS/CMVP)")
+        if cc_crypto_new: lines_detail.append(f"{cc_crypto_new} CC Crypto publication(s)")
         body_detail  = ("<p style='margin:0 0 12px;color:#94a3b8;font-size:14px;'>"
                         "CC Pulse detected new activity and sent the appropriate alerts:"
                         "<br><br>" + "<br>".join("&bull; " + l for l in lines_detail)
