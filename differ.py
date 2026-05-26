@@ -190,16 +190,30 @@ def flag_alerts(diff: Snapshot) -> list[dict]:
                 tab="us",
             )
 
-    # CC Crypto Catalog page changes (scraped text — use _add_text for narrower matching)
+    # CC Crypto Catalog page changes — fire unconditionally for publications (fix #27)
+    # The publications page is curated CC crypto content; all new items are relevant.
+    _cc_crypto_urls = {
+        "publications": "https://www.commoncriteriaportal.org/cc/index.cfm",
+        "news": "https://www.commoncriteriaportal.org/news/index.cfm",
+        "communities": "https://www.commoncriteriaportal.org/communities/index.cfm",
+    }
+    _cc_crypto_unconditional = {"publications", "news"}
     for page_key, page_diff in diff.get("cc_crypto", {}).get("pages", {}).items():
         for item in page_diff.get("added", []):
-            _add_text(f"CC Crypto: {page_key}", "publication",
-                      item.get("text", ""),
-                      url=item.get("href") or "https://www.commoncriteriaportal.org/cc/index.cfm",
-                      detail=f"New item on CC Portal {page_key} page",
-                      tab="us")
+            page_url = item.get("href") or _cc_crypto_urls.get(page_key, "https://www.commoncriteriaportal.org/cc/index.cfm")
+            detail = f"New item on CC Crypto {page_key} page"
+            if page_key in _cc_crypto_unconditional:
+                title = item.get("text", "")[:120]
+                _add(alerts, f"CC Crypto: {page_key}", "publication", title,
+                     url=page_url, detail=detail, tab="us")
+            else:
+                _add_text(f"CC Crypto: {page_key}", "publication",
+                          item.get("text", ""),
+                          url=page_url, detail=detail, tab="us")
 
-    # NIST page changes (scraped text — use _add_text for narrower matching)
+    # NIST page changes — fire unconditionally for high-value pages (fix #27)
+    # FIPS publications and CSRC news are always worth notifying on.
+    # Other pages (PQC, crypto standards, CMVP validated) still keyword-filter.
     _nist_page_urls = {
         "news": "https://csrc.nist.gov/news",
         "fips": "https://csrc.nist.gov/publications/fips",
@@ -208,21 +222,52 @@ def flag_alerts(diff: Snapshot) -> list[dict]:
         "crypto_standards":"https://csrc.nist.gov/projects/cryptographic-standards-and-guidelines",
         "cmvp_validated": "https://csrc.nist.gov/projects/cryptographic-module-validation-program/validated-modules",
     }
+    _nist_unconditional_pages = {"news", "fips"}  # always notify, no keyword filter needed
     for page_key, page_diff in diff.get("nist", {}).get("pages", {}).items():
-        for item in page_diff.get("added", []):
-            _add_text(f"NIST: {page_key}", "publication",
-                      item.get("text", ""),
-                      url=item.get("href") or _nist_page_urls.get(page_key, "https://csrc.nist.gov/"),
-                      detail=f"New item on NIST CSRC {page_key.replace('_', ' ')} page",
-                      tab="us")
-    # NIST RSS feed new items
+        if isinstance(page_diff, dict):
+            items_to_check = page_diff.get("added", [])
+        else:
+            items_to_check = []
+        for item in items_to_check:
+            page_url = item.get("href") or _nist_page_urls.get(page_key, "https://csrc.nist.gov/")
+            detail = f"New item on NIST CSRC {page_key.replace('_', ' ')} page"
+            if page_key in _nist_unconditional_pages:
+                # Always alert — no keyword filter
+                title = item.get("text", "")[:120]
+                _add(alerts, f"NIST: {page_key}", "publication", title,
+                     url=page_url, detail=detail, tab="us")
+            else:
+                _add_text(f"NIST: {page_key}", "publication",
+                          item.get("text", ""),
+                          url=page_url, detail=detail, tab="us")
+
+    # CMVP MIP status changes — always alert (fix #27)
+    cmvp_mip = diff.get("nist", {}).get("cmvp_mip", {})
+    for item in cmvp_mip.get("added", []):
+        name = item.get("Module Name") or item.get("name") or item.get("text", "")[:80]
+        vendor = item.get("Vendor") or item.get("vendor") or ""
+        status = item.get("Status") or item.get("status") or ""
+        title = f"{name}" + (f" ({vendor})" if vendor else "")
+        detail = f"New module in CMVP modules-in-process" + (f" — Status: {status}" if status else "")
+        _add(alerts, "NIST CMVP MIP", "new", title,
+             url=_nist_page_urls["cmvp_mip"], detail=detail, tab="us")
+    for item in cmvp_mip.get("status_changes", []):
+        name = item.get("Module Name") or item.get("name") or item.get("text", "")[:80]
+        vendor = item.get("Vendor") or item.get("vendor") or ""
+        title = f"{name}" + (f" ({vendor})" if vendor else "")
+        detail = f"CMVP status: {item.get('old_status', '?')} → {item.get('new_status', '?')}"
+        _add(alerts, "NIST CMVP MIP", "updated", title,
+             url=_nist_page_urls["cmvp_mip"], detail=detail, tab="us")
+
+    # NIST RSS feed new items — always alert (all items are crypto/security relevant)
     for feed_name, items in diff.get("nist", {}).get("feeds", {}).items():
         for item in items:
-            _add_text(f"NIST Feed: {feed_name}", "news",
-                      item.get("title", ""),
-                      url=item.get("link") or "https://csrc.nist.gov/",
-                      detail=f"Feed: {feed_name} · Published: {(item.get('published') or '')[:16] or 'N/A'}",
-                      tab="us")
+            title = item.get("title", "")
+            _add(alerts, f"NIST Feed: {feed_name}", "news",
+                 title,
+                 url=item.get("link") or "https://csrc.nist.gov/",
+                 detail=f"Feed: {feed_name} · Published: {(item.get('published') or '')[:16] or 'N/A'}",
+                 tab="us")
 
     # NATO NIAPCL page changes
     for page_key, page_diff in diff.get("nato", {}).get("pages", {}).items():
@@ -423,6 +468,43 @@ def _diff_doc_headers(old_docs: dict, new_docs: dict) -> dict:
             }
     return result
 
+def _diff_cmvp_mip(old_mip: list, new_mip: list) -> dict:
+    """Diff CMVP modules-in-process by module name.
+
+    Tracks:
+    - added: new modules appearing in MIP list
+    - removed: modules that left the MIP list (validated or withdrawn)
+    - status_changes: modules whose validation status changed
+
+    Each record is expected to have 'Module Name' and 'Status' fields
+    (from the structured CMVP MIP table parser in collector.py).
+    Returns a dict with 'added', 'removed', 'status_changes' lists.
+    """
+    def _key(r: dict) -> str:
+        return (r.get("Module Name") or r.get("name") or r.get("text") or "").strip().lower()
+
+    old_map = {_key(r): r for r in old_mip if _key(r)}
+    new_map = {_key(r): r for r in new_mip if _key(r)}
+
+    added = [new_map[k] for k in set(new_map) - set(old_map)]
+    removed = [old_map[k] for k in set(old_map) - set(new_map)]
+
+    status_changes = []
+    for k in set(old_map) & set(new_map):
+        old_status = (old_map[k].get("Status") or old_map[k].get("status") or "").strip()
+        new_status = (new_map[k].get("Status") or new_map[k].get("status") or "").strip()
+        if old_status and new_status and old_status != new_status:
+            status_changes.append({
+                **new_map[k],
+                "old_status": old_status,
+                "new_status": new_status,
+            })
+
+    log.debug("[CMVP MIP Diff] added:%d removed:%d status_changes:%d",
+              len(added), len(removed), len(status_changes))
+    return {"added": added, "removed": removed, "status_changes": status_changes}
+
+
 def _diff_selection_links(old_links: dict, new_links: dict) -> dict:
     """Diff two {category_heading: full_href} dicts.
 
@@ -619,8 +701,8 @@ def merge_weekly_diffs(diffs: list[Snapshot]) -> Snapshot:
         ("cc_portal", {"news": {"added":[]}, "pps": {"added":[]}, "products": {"added":[]}}),
         ("cctl_labs", {}),
         ("csfc", {"feeds": {}, "pages": {}, "selection_links": {}}),
-        ("cc_crypto", {"pages": {}, "doc_headers": {}}),
-        ("nist", {"pages": {}, "doc_headers": {}, "feeds": {}}),
+        ("cc_crypto", {"pages": {}}),
+        ("nist", {"pages": {}, "cmvp_mip": {"added": [], "removed": [], "status_changes": []}, "feeds": {}}),
         ("nato", {"pages": {}, "cisco_added": [], "cisco_removed": []}),  # fix #23
         ("eucc", {"pages": {}, "cisco_added": [], "cisco_removed": []}),  # fix #23
         ("alerts", []),
@@ -684,8 +766,6 @@ def merge_weekly_diffs(diffs: list[Snapshot]) -> Snapshot:
                     weekly["cc_crypto"]["pages"][page_key] = {"added": []}
                 weekly["cc_crypto"]["pages"][page_key]["added"] = merge_lists(
                     weekly["cc_crypto"]["pages"][page_key]["added"], page_diff["added"])
-        for doc_name, doc_data in d.get("cc_crypto", {}).get("doc_headers", {}).items():
-            weekly["cc_crypto"]["doc_headers"][doc_name] = doc_data
 
         # NIST
         for page_key, page_diff in d.get("nist", {}).get("pages", {}).items():
@@ -694,8 +774,11 @@ def merge_weekly_diffs(diffs: list[Snapshot]) -> Snapshot:
                     weekly["nist"]["pages"][page_key] = {"added": []}
                 weekly["nist"]["pages"][page_key]["added"] = merge_lists(
                     weekly["nist"]["pages"][page_key]["added"], page_diff["added"])
-        for doc_name, doc_data in d.get("nist", {}).get("doc_headers", {}).items():
-            weekly["nist"]["doc_headers"][doc_name] = doc_data
+        # cmvp_mip: take latest status_changes / added (last day wins — avoid duplicates)
+        for key in ("added", "removed", "status_changes"):
+            weekly["nist"]["cmvp_mip"][key] = merge_lists(
+                weekly["nist"].get("cmvp_mip", {}).get(key, []),
+                d.get("nist", {}).get("cmvp_mip", {}).get(key, []))
         for feed_name, items in d.get("nist", {}).get("feeds", {}).items():
             weekly["nist"]["feeds"][feed_name] = merge_lists(
                 weekly["nist"]["feeds"].get(feed_name, []), items)
@@ -752,31 +835,47 @@ def diff_csfc(old_csfc: Snapshot, new_csfc: Snapshot) -> Snapshot:
 
 # -- CC Crypto Catalog diff ----------------------------------------------------
 def diff_cc_crypto(old_cc: Snapshot, new_cc: Snapshot) -> Snapshot:
-    """Diff two CC Crypto Catalog snapshots."""
+    """Diff two CC Crypto Catalog snapshots.
+
+    Doc header polling removed (fix #27): unreliable CDN headers replaced
+    by structured page-text diffing. Publication changes on the CC Portal
+    crypto pages are now surfaced directly as notifications.
+    """
     pages = _diff_pages(old_cc.get("pages", {}), new_cc.get("pages", {}))
-    doc_headers = _diff_doc_headers(old_cc.get("doc_headers", {}), new_cc.get("doc_headers", {}))
 
     page_changes = sum(len(v.get("added", [])) for v in pages.values())
-    doc_changes = len(doc_headers)
-    log.info("[CC Crypto Diff] page-items-added:%d doc-changes:%d", page_changes, doc_changes)
-    return {"pages": pages, "doc_headers": doc_headers}
+    log.info("[CC Crypto Diff] page-items-added:%d", page_changes)
+    return {"pages": pages}
 
 # -- NIST CSRC diff ------------------------------------------------------------
 def diff_nist(old_nist: Snapshot, new_nist: Snapshot) -> Snapshot:
-    """Diff two NIST CSRC snapshots."""
+    """Diff two NIST CSRC snapshots.
+
+    Doc header polling removed (fix #27): CDN header rotation produced
+    false positives with no actionable signal. NIST changes are now
+    tracked via page scrapes (news, FIPS, CMVP MIP) and RSS feeds.
+    CMVP MIP is diffed as a structured list to track module status changes.
+    """
     pages = _diff_pages(old_nist.get("pages", {}), new_nist.get("pages", {}))
-    doc_headers = _diff_doc_headers(old_nist.get("doc_headers", {}), new_nist.get("doc_headers", {}))
     feeds = _diff_feeds(
         old_nist.get("feeds", {}),
         new_nist.get("feeds", {}),
         categorize=True,
     )
+    # Structured CMVP MIP diff (fix #27)
+    old_mip = old_nist.get("pages", {}).get("cmvp_mip", [])
+    new_mip = new_nist.get("pages", {}).get("cmvp_mip", [])
+    # cmvp_mip pages entry is a list of structured records from the table parser
+    if isinstance(old_mip, dict):
+        old_mip = old_mip.get("added", [])
+    if isinstance(new_mip, dict):
+        new_mip = new_mip.get("added", [])
+    cmvp_mip = _diff_cmvp_mip(old_mip, new_mip)
 
-    page_changes = sum(len(v.get("added", [])) for v in pages.values())
-    doc_changes = len(doc_headers)
+    page_changes = sum(len(v.get("added", [])) for v in pages.values() if isinstance(v, dict))
     feed_new = sum(len(v) for v in feeds.values())
     log.info(
-        "[NIST Diff] page-items-added:%d doc-changes:%d feed-new:%d",
-        page_changes, doc_changes, feed_new,
+        "[NIST Diff] page-items-added:%d cmvp-added:%d cmvp-status-changes:%d feed-new:%d",
+        page_changes, len(cmvp_mip["added"]), len(cmvp_mip["status_changes"]), feed_new,
     )
-    return {"pages": pages, "doc_headers": doc_headers, "feeds": feeds}
+    return {"pages": pages, "cmvp_mip": cmvp_mip, "feeds": feeds}
