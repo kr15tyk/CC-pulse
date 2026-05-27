@@ -172,6 +172,16 @@ def _fire_alerts(diff: dict, emailer) -> None:
         emailer.send_cisco_cert_celebration(new_cisco_eucc)
         emailer.send_cisco_cert_email(new_cisco_eucc)
 
+    # -- NIAP PP changes (new PPs, sunset changes) --------------------------------
+    new_pps = diff.get("niap", {}).get("pps", {}).get("added", [])
+    pp_sunsets = diff.get("niap", {}).get("pps", {}).get("sunset_changes", [])
+    if new_pps or pp_sunsets:
+        log.info(
+            "%d new PP(s), %d PP sunset change(s) — sending Webex notification...",
+            len(new_pps), len(pp_sunsets),
+        )
+        emailer.send_new_pps_webex(new_pps, pp_sunsets)
+
     # -- NIST CMVP MIP changes (fix #27) ------------------------------------------
     cmvp_mip = diff.get("nist", {}).get("cmvp_mip", {})
     if cmvp_mip.get("added") or cmvp_mip.get("status_changes"):
