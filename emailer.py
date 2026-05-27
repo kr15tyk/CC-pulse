@@ -961,7 +961,7 @@ def send_new_pps_webex(new_pps: list[dict], pp_sunsets: list[dict]) -> None:
             name  = pp.get("pp_name", "") or short
             tech  = pp.get("tech_type", "")
             date  = (pp.get("pp_date") or "")[:10]
-            url   = f"https://www.niap-ccevs.org/Profile/Info.cfm?PPID={pp.get('pp_id','')}" if pp.get("pp_id") else "https://www.niap-ccevs.org/Profile/"
+            url   = f"https://www.niap-ccevs.org/protectionprofiles/{pp.get('pp_id','')}" if pp.get("pp_id") else "https://www.niap-ccevs.org/protectionprofiles"
             line  = f"**[NEW PP]** [{short} — {name}]({url})"
             if tech:
                 line += f"\n ↳ Technology: {tech}"
@@ -974,7 +974,7 @@ def send_new_pps_webex(new_pps: list[dict], pp_sunsets: list[dict]) -> None:
         for pp in pp_sunsets:
             short      = pp.get("pp_short_name", "")
             new_sunset = (pp.get("new_sunset") or pp.get("sunset_date") or "")[:10]
-            url        = f"https://www.niap-ccevs.org/Profile/Info.cfm?PPID={pp.get('pp_id','')}" if pp.get("pp_id") else "https://www.niap-ccevs.org/Profile/"
+            url        = f"https://www.niap-ccevs.org/protectionprofiles/{pp.get('pp_id','')}" if pp.get("pp_id") else "https://www.niap-ccevs.org/protectionprofiles"
             line       = f"**[PP SUNSET]** [{short}]({url}) — Sunset date: {new_sunset}"
             lines.append(line)
 
@@ -1033,7 +1033,7 @@ def send_niap_news_webex(new_news: list[dict]) -> None:
     lines = []
     for item in new_news:
         title = item.get("title", "")
-        url = item.get("url", "") or item.get("link", "")
+        url = item.get("url", "") or item.get("link", "") or "https://www.niap-ccevs.org/"
         category = item.get("_category", "") or item.get("category", "NEWS")
         date = (item.get("date") or item.get("published") or "")[:10]
         label = f"[{category.upper()}]" if category else "[NEWS]"
@@ -1047,7 +1047,7 @@ def send_niap_news_webex(new_news: list[dict]) -> None:
         f"## 📰 NIAP — {count} New News {item_word}\n"
         f"_CC Pulse detected new content on the NIAP news and announcements page._\n"
     )
-    footer = "\n\n[View NIAP News](https://www.niap-ccevs.org/News/) · [Full dashboard](https://kr15tyk.github.io/CC-pulse/cc_dashboard.html)"
+    footer = "\n\n[View NIAP News & Announcements](https://www.niap-ccevs.org/) · [Full dashboard](https://kr15tyk.github.io/CC-pulse/cc_dashboard.html)"
 
     body = "\n\n---\n".join(lines)
     payload = json.dumps({
