@@ -182,6 +182,12 @@ def _fire_alerts(diff: dict, emailer) -> None:
         )
         emailer.send_new_pps_webex(new_pps, pp_sunsets)
 
+    # -- NIAP News items (new announcements) -----------------------------------
+    new_news = diff.get("niap", {}).get("news", {}).get("added", [])
+    if new_news:
+        log.info("%d new NIAP news item(s) — sending Webex notification...", len(new_news))
+        emailer.send_niap_news_webex(new_news)
+
     # -- NIST CMVP MIP changes (fix #27) ------------------------------------------
     cmvp_mip = diff.get("nist", {}).get("cmvp_mip", {})
     if cmvp_mip.get("added") or cmvp_mip.get("status_changes"):
