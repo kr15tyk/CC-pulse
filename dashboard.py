@@ -170,18 +170,19 @@ def _build_history(n: int = 90) -> list:
                 "url": url,
             })
 
-        # NIST document header changes
-        for doc_name, doc_data in d.get("nist", {}).get("doc_headers", {}).items():
-            if doc_data.get("changed"):
-                entries.append({
-                    "date": date, "category": "nist_doc", "kind": "updated",
-                    "title": f"NIST doc updated: {doc_name}",
-                    "detail": "",
-                    "url": doc_data.get("url") or "https://csrc.nist.gov/",
-                })
+        # NIST page changes
+        for page_key, page_diff in d.get("nist", {}).get("pages", {}).items():
+            if isinstance(page_diff, dict):
+                for item in page_diff.get("added", []):
+                    entries.append({
+                        "date": date, "category": "nist_doc", "kind": "updated",
+                        "title": f"NIST {page_key}: {(item.get('text') or '')[:60]}",
+                        "detail": "",
+                        "url": item.get("href") or "https://csrc.nist.gov/",
+                    })
 
         # CSfC component selection changes
-        for sel_name, sel_data in d.get("csfc", {}).get("component_selections", {}).items():
+        for sel_name, sel_data in d.get("csfc", {}).get("selection_links", {}).items():
             if sel_data.get("changed"):
                 entries.append({
                     "date": date, "category": "csfc_change", "kind": "updated",
@@ -211,14 +212,12 @@ def _section_daily_counts(diffs: list, section_key: str) -> list:
         elif section_key == "cctl":
             n = sum(len(v) for v in d.get("cctl_labs", {}).values() if v)
         elif section_key == "csfc":
-            n = sum(1 for cp in d.get("csfc", {}).get("component_selections", {}).values()
+            n = sum(1 for cp in d.get("csfc", {}).get("selection_links", {}).values()
                     if cp.get("changed"))
         elif section_key == "cc_crypto":
-            n = sum(1 for doc in d.get("cc_crypto", {}).get("doc_headers", {}).values()
-                    if doc.get("changed"))
+            n = sum(len(p.get("added", [])) for p in d.get("cc_crypto", {}).get("pages", {}).values() if isinstance(p, dict))
         elif section_key == "nist":
-            n = sum(1 for doc in d.get("nist", {}).get("doc_headers", {}).values()
-                    if doc.get("changed"))
+            n = sum(len(p.get("added", [])) for p in d.get("nist", {}).get("pages", {}).values() if isinstance(p, dict))
         elif section_key == "pcl_all":
             pa = d.get("niap", {}).get("pcl_all", {})
             n = (len(pa.get("added", [])) + len(pa.get("removed", [])) +
@@ -845,7 +844,7 @@ DASHBOARD_TEMPLATE = """
     <span class="toggle-icon">{% if csfc_total == 0 %}&#9658;{% else %}&#9660;{% endif %}</span>
   </div>
   <div class="card-body {% if csfc_total == 0 %}collapsed{% endif %}">
-    {% for cp_name, cp in diff.csfc.component_selections.items() %}
+    {% for cp_name, cp in diff.csfc.selection_links.items() %}
     {% if cp.changed %}
     <div class="cp-row" data-source="csfc" data-kind="updated">
       <a class="item-link" href="{{ cp.url }}" target="_blank">{{ cp_name }}</a>
@@ -871,17 +870,13 @@ DASHBOARD_TEMPLATE = """
     <span class="toggle-icon">{% if cc_crypto_total == 0 %}&#9658;{% else %}&#9660;{% endif %}</span>
   </div>
   <div class="card-body {% if cc_crypto_total == 0 %}collapsed{% endif %}">
-    {% for doc_name, doc in diff.cc_crypto.doc_headers.items() %}
-    {% if doc.changed %}
-    <div class="item-row" data-source="cc-crypto" data-kind="updated">
-      <a class="item-link" href="{{ doc.url }}" target="_blank">{{ doc_name }}</a>
-      <span class="item-meta">
-        {% if doc.old_last_modified and doc.new_last_modified %}
-        {{ doc.old_last_modified }} &#8594; {{ doc.new_last_modified }}
-        {% else %}Header changed{% endif %}
-      </span>
-    </div>
-    {% endif %}
+    {% for page_key, page_diff in diff.cc_crypto.pages.items() %}
+      {% for item in page_diff.added %}
+      <div class="item-row" data-source="cc-crypto" data-kind="updated">
+        <a class="item-link" href="{{ item.href or 'https://www.commoncriteriaportal.org/' }}" target="_blank">{{ item.text or page_key }}</a>
+        <span class="item-meta">{{ page_key }}</span>
+      </div>
+      {% endfor %}
     {% endfor %}
     {% if cc_crypto_total == 0 %}<p class="no-change">No changes detected.{% if last_active.cc_crypto %} <span class="last-active">(last: {{ last_active.cc_crypto }})</span>{% endif %}</p>{% endif %}
   </div>
@@ -896,17 +891,13 @@ DASHBOARD_TEMPLATE = """
     <span class="toggle-icon">{% if nist_total == 0 %}&#9658;{% else %}&#9660;{% endif %}</span>
   </div>
   <div class="card-body {% if nist_total == 0 %}collapsed{% endif %}">
-    {% for doc_name, doc in diff.nist.doc_headers.items() %}
-    {% if doc.changed %}
-    <div class="item-row" data-source="nist" data-kind="updated">
-      <a class="item-link" href="{{ doc.url }}" target="_blank">{{ doc_name }}</a>
-      <span class="item-meta">
-        {% if doc.old_last_modified and doc.new_last_modified %}
-        {{ doc.old_last_modified }} &#8594; {{ doc.new_last_modified }}
-        {% else %}Header changed{% endif %}
-      </span>
-    </div>
-    {% endif %}
+    {% for page_key, page_diff in diff.nist.pages.items() %}
+      {% for item in page_diff.added %}
+      <div class="item-row" data-source="nist" data-kind="updated">
+        <a class="item-link" href="{{ item.href or 'https://csrc.nist.gov/' }}" target="_blank">{{ item.text or page_key }}</a>
+        <span class="item-meta">{{ page_key }}</span>
+      </div>
+      {% endfor %}
     {% endfor %}
     {% if nist_total == 0 %}<p class="no-change">No changes detected.{% if last_active.nist %} <span class="last-active">(last: {{ last_active.nist }})</span>{% endif %}</p>{% endif %}
   </div>
@@ -1445,7 +1436,7 @@ def _build_rss(diff: dict, generated_at: str) -> str:
                 f"<description>{xml_escape(it.get('summary', '')[:200])}</description></item>"
             )
 
-    for cp_name, cp in diff.get("csfc", {}).get("component_selections", {}).items():
+    for cp_name, cp in diff.get("csfc", {}).get("selection_links", {}).items():
         if cp.get("changed"):
             link = cp.get("url", "https://www.nsa.gov/Resources/Commercial-Solutions-for-Classified-Program/Components-List/")
             items_xml.append(
@@ -1454,22 +1445,22 @@ def _build_rss(diff: dict, generated_at: str) -> str:
                 f"<description>Component selection document updated.</description></item>"
             )
 
-    for doc_name, doc in diff.get("nist", {}).get("doc_headers", {}).items():
-        if doc.get("changed"):
-            link = doc.get("url", "https://csrc.nist.gov/")
+    for page_key, page_diff in diff.get("nist", {}).get("pages", {}).items():
+        for item in page_diff.get("added", []):
+            link = item.get("href", "https://csrc.nist.gov/")
             items_xml.append(
-                f"<item><title>{xml_escape('NIST Doc Updated: ' + doc_name)}</title>"
+                f"<item><title>{xml_escape('NIST ' + page_key + ': ' + (item.get('text') or '')[:60])}</title>"
                 f"<link>{link}</link>"
-                f"<description>Document header updated.</description></item>"
+                f"<description>New item on NIST CSRC {xml_escape(page_key)} page.</description></item>"
             )
 
-    for doc_name, doc in diff.get("cc_crypto", {}).get("doc_headers", {}).items():
-        if doc.get("changed"):
-            link = doc.get("url", "https://www.commoncriteriaportal.org/")
+    for page_key, page_diff in diff.get("cc_crypto", {}).get("pages", {}).items():
+        for item in page_diff.get("added", []):
+            link = item.get("href", "https://www.commoncriteriaportal.org/")
             items_xml.append(
-                f"<item><title>{xml_escape('CC Crypto Doc Updated: ' + doc_name)}</title>"
+                f"<item><title>{xml_escape('CC Crypto: ' + (item.get('text') or page_key)[:80])}</title>"
                 f"<link>{link}</link>"
-                f"<description>Document header updated.</description></item>"
+                f"<description>New item on CC Crypto {xml_escape(page_key)} page.</description></item>"
             )
 
     for alert in diff.get("alerts", []):
@@ -1521,12 +1512,10 @@ def render_dashboard(diff: dict, output_dir: str = "docs") -> None:
     niap_news_total = len(news.get("added", []))
 
     cctl_total      = sum(len(v) for v in diff.get("cctl_labs", {}).values() if v)
-    csfc_total      = sum(1 for cp in diff.get("csfc", {}).get("component_selections", {}).values()
+    csfc_total      = sum(1 for cp in diff.get("csfc", {}).get("selection_links", {}).values()
                           if cp.get("changed"))
-    cc_crypto_total = sum(1 for d in diff.get("cc_crypto", {}).get("doc_headers", {}).values()
-                          if d.get("changed"))
-    nist_total      = sum(1 for d in diff.get("nist", {}).get("doc_headers", {}).values()
-                          if d.get("changed"))
+    cc_crypto_total = sum(len(p.get("added", [])) for p in diff.get("cc_crypto", {}).get("pages", {}).values() if isinstance(p, dict))
+    nist_total      = sum(len(p.get("added", [])) for p in diff.get("nist", {}).get("pages", {}).values() if isinstance(p, dict))
     alert_total     = len(diff.get("alerts", []))
 
     niap_total_stat = niap_pp_total + niap_td_total + cisco_total + pcl_all_total + in_eval_total + niap_news_total
