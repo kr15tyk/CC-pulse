@@ -607,6 +607,136 @@ def build_email_html(weekly_diff: dict) -> str:
 
 
 # ---------------------------------------------------------------------------
+# Low-level email sender
+# ---------------------------------------------------------------------------
+
+def _send_email(subject: str, html: str) -> None:
+    """Authenticate and send one HTML email."""
+    password = os.environ.get("CC_EMAIL_PASSWORD", config.EMAIL_PASSWORD)
+    if not password:
+        log.warning("[Email] No password set — skipping email send.")
+        return
+    msg = MIMEMultipart("alternative")
+    msg["Subject"] = subject
+    msg["From"] = config.EMAIL_FROM
+    msg["To"] = ", ".join(config.EMAIL_RECIPIENTS)
+    msg.attach(MIMEText(html, "html"))
+    log.info("[Email] Sending '%s' to %s...", subject, config.EMAIL_RECIPIENTS)
+    try:
+        with smtplib.SMTP(config.EMAIL_SMTP_HOST, config.EMAIL_SMTP_PORT) as smtp:
+            smtp.ehlo()
+            smtp.starttls()
+            smtp.login(config.EMAIL_USERNAME, password)
+            smtp.sendmail(config.EMAIL_USERNAME, config.EMAIL_RECIPIENTS, msg.as_string())
+        log.info("[Email] Sent successfully.")
+    except Exception as exc:
+        log.error("[Email] Failed: %s", exc)
+        raise
+
+# ---------------------------------------------------------------------------
+# Public send functions
+# ---------------------------------------------------------------------------
+
+def send_weekly_email(weekly_diff: dict) -> None:
+    """Build and send the weekly HTML email digest."""
+    date_str = datetime.now(ET).strftime("%Y-%m-%d")
+    subject = config.EMAIL_SUBJECT.format(date=date_str)
+    html = build_email_html(weekly_diff)
+    _send_email(subject, html)
+
+def send_alert_email(alerts: list[dict]) -> None:
+    """Send an immediate alert email when keyword matches are found."""
+    if not alerts:
+        return
+    date_str = datetime.now(ET).strftime("%Y-%m-%d")
+    tier1_count = sum(1 for a in alerts if _alert_tier(a) == 1)
+    subject = (
+        f"CC Pulse ALERT — {tier1_count} Cisco-relevant + {len(alerts)-tier1_count} other match(es) on {date_str}"
+        if tier1_count else
+        f"CC Pulse ALERT — {len(alerts)} keyword match(es) on {date_str}"
+    )
+    rows = []
+    for a in sorted(alerts, key=lambda x: (_alert_tier(x), alerts.index(x))):
+        kws = ", ".join(a.get("matched_keywords", []))
+        title = a.get("title", "")
+        detail = a.get("detail", "")
+        url = a.get("url", "")
+        kind = a.get("kind", "")
+        src = a.get("source", "ALERT")
+        tier = _alert_tier(a)
+        cisco_badge = (
+            '<span style="background:#3B82F6;color:#fff;padding:1px 6px;'
+            'border-radius:3px;font-size:10px;margin-right:4px">CISCO</span>'
+            if tier == 1 else ""
+        )
+        kind_badge = (
+            f'<span style="background:#6366F1;color:#fff;padding:1px 6px;'
+            f'border-radius:3px;font-size:10px;margin-right:4px">{_kind_label(kind)}</span>'
+            if kind else ""
+        )
+        title_html = (
+            f'<a href="{url}" style="color:#60A5FA;font-weight:700">{title}</a>'
+            if url else f"<b>{title}</b>"
+        )
+        detail_html = (
+            f'<div style="font-size:11px;margin-top:3px;opacity:0.85">{detail}</div>'
+            if detail else ""
+        )
+        kw_html = f'<div style="font-size:11px;margin-top:2px;opacity:0.75">\U0001f511 {kws}</div>'
+        blurb = _describe_change(kind, src)
+        blurb_html = (
+            f'<div style="font-size:11px;margin-top:3px;color:#93C5FD;font-style:italic">'
+            f'\U0001f4ac {blurb}</div>'
+        )
+        row_bg = "#1E1B4B" if tier == 1 else "#12102E"
+        rows.append(
+            _row(src[:14], cisco_badge + kind_badge + title_html + detail_html + blurb_html + kw_html,
+                 "#ffffff", row_bg)
+        )
+    tier_note = (
+        f'<p style="margin:6px 0 0;font-size:0.8rem;opacity:0.85">'
+        f'\U0001f535 {tier1_count} Cisco-relevant \u00b7 '
+        f'\U0001f4d0 {sum(1 for a in alerts if _alert_tier(a)==2)} standards/NIST \u00b7 '
+        f'\U0001f4cb {sum(1 for a in alerts if _alert_tier(a)==3)} general</p>'
+    ) if tier1_count else ""
+    dashboard_link = (
+        '<p style="margin-top:16px">'
+        '<a href="https://kr15tyk.github.io/CC-pulse/cc_dashboard.html" '
+        'style="background:#0B0F1A;color:#E0E7FF;padding:8px 16px;'
+        'border-radius:4px;text-decoration:none;font-size:0.85rem">'
+        '&#128202; View Full Dashboard</a></p>'
+    )
+    body = (
+        '<div style="background:#12102E;color:#FB923C;padding:14px 18px;border:1px solid #C026D3;'
+        'border-radius:6px;margin-bottom:8px">'
+        f'<b style="font-size:1rem">&#9888; {len(alerts)} KEYWORD ALERT(S) DETECTED</b>'
+        f'<p style="margin:4px 0 0;font-size:0.85rem;opacity:0.85">'
+        f'{date_str} — immediate notification</p>'
+        f'{tier_note}'
+        '</div>'
+        + _section("Keyword Matches — Source, Detail & Links", rows)
+        + dashboard_link
+    )
+    generated = datetime.now(ET).strftime("%Y-%m-%d %H:%M ET")
+    html = (
+        '<html><body style="font-family:-apple-system,BlinkMacSystemFont,sans-serif;'
+        'max-width:720px;margin:0 auto;color:#E0E7FF">'
+        '<div style="background:#0B0F1A;color:#FB923C;padding:20px 28px;border-bottom:2px solid #C026D3">'
+        '<h1 style="margin:0;font-size:1.4rem;color:#FB923C;font-family:Courier New,monospace;'
+        'letter-spacing:0.08em">// CC Pulse &#8212; Immediate Alert</h1>'
+        f'<p style="margin:4px 0 0;opacity:0.75;font-size:0.85rem">{date_str}</p>'
+        '</div>'
+        '<div style="background:#E0E7FF;padding:20px 28px;border:1px solid #3730A3;'
+        'border-top:none;border-radius:0 0 8px 8px">'
+        f'{body}'
+        '<hr style="margin-top:28px;border:none;border-top:1px solid #312E81">'
+        f'<p style="color:#6366F1;font-size:0.75rem;margin-top:12px">'
+        f'CC Pulse automated monitoring — immediate alert<br>Generated {generated}</p>'
+        '</div></body></html>'
+    )
+    _send_email(subject, html)
+
+# ---------------------------------------------------------------------------
 # Cisco NDcPP PCL certification celebration
 # ---------------------------------------------------------------------------
 
