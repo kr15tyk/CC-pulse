@@ -934,6 +934,82 @@ def send_new_tds_webex(new_tds: list[dict]) -> None:
 
 
 
+def send_new_pps_webex(new_pps: list[dict], pp_sunsets: list[dict]) -> None:
+    """Post a Webex notification for new NIAP Protection Profiles and sunset changes.
+
+    Fires unconditionally whenever new PPs are added or PP sunset dates change
+    in the daily diff, regardless of keyword matches.
+
+    Args:
+        new_pps:    List of PP dicts from diff["niap"]["pps"]["added"].
+        pp_sunsets: List of PP dicts from diff["niap"]["pps"]["sunset_changes"].
+    """
+    token   = config.WEBEX_BOT_TOKEN
+    room_id = config.WEBEX_ROOM_ID
+    if not token or not room_id:
+        log.debug("[Webex] Bot token or Room ID not configured — skipping PP notification.")
+        return
+    if not new_pps and not pp_sunsets:
+        return
+
+    lines = []
+
+    if new_pps:
+        lines.append(f"### 📄 {len(new_pps)} New Protection Profile{'s' if len(new_pps) != 1 else ''}")
+        for pp in new_pps:
+            short = pp.get("pp_short_name", "")
+            name  = pp.get("pp_name", "") or short
+            tech  = pp.get("tech_type", "")
+            date  = (pp.get("pp_date") or "")[:10]
+            url   = f"https://www.niap-ccevs.org/Profile/Info.cfm?PPID={pp.get('pp_id','')}" if pp.get("pp_id") else "https://www.niap-ccevs.org/Profile/"
+            line  = f"**[NEW PP]** [{short} — {name}]({url})"
+            if tech:
+                line += f"\n ↳ Technology: {tech}"
+            if date:
+                line += f" · Published: {date}"
+            lines.append(line)
+
+    if pp_sunsets:
+        lines.append(f"### 🌅 {len(pp_sunsets)} PP Sunset Change{'s' if len(pp_sunsets) != 1 else ''}")
+        for pp in pp_sunsets:
+            short      = pp.get("pp_short_name", "")
+            new_sunset = (pp.get("new_sunset") or pp.get("sunset_date") or "")[:10]
+            url        = f"https://www.niap-ccevs.org/Profile/Info.cfm?PPID={pp.get('pp_id','')}" if pp.get("pp_id") else "https://www.niap-ccevs.org/Profile/"
+            line       = f"**[PP SUNSET]** [{short}]({url}) — Sunset date: {new_sunset}"
+            lines.append(line)
+
+    total = len(new_pps) + len(pp_sunsets)
+    header = (
+        f"## 📋 NIAP — {total} Protection Profile Update{'s' if total != 1 else ''}\n"
+        f"_CC Pulse detected NIAP Protection Profile changes._\n"
+    )
+    footer = "\n\n[View NIAP PPs](https://www.niap-ccevs.org/Profile/) · [Full dashboard](https://kr15tyk.github.io/CC-pulse/cc_dashboard.html)"
+
+    body = "\n\n---\n".join(lines)
+    payload = json.dumps({
+        "roomId": room_id,
+        "markdown": header + body + footer,
+    }).encode("utf-8")
+
+    req = urllib.request.Request(
+        "https://webexapis.com/v1/messages",
+        data=payload,
+        headers={
+            "Content-Type": "application/json",
+            "Authorization": f"Bearer {token}",
+        },
+        method="POST",
+    )
+    try:
+        with urllib.request.urlopen(req, timeout=10) as resp:
+            log.info(
+                "[Webex] New PPs notification sent: %d new, %d sunsets (HTTP %d).",
+                len(new_pps), len(pp_sunsets), resp.status,
+            )
+    except urllib.error.URLError as exc:
+        log.warning("[Webex] Failed to send new PPs notification: %s", exc)
+
+
 def send_cisco_cert_email(new_certs: list[dict]) -> None:
     """Send a dedicated celebration email for new Cisco NDcPP PCL certifications.
 
@@ -1311,7 +1387,9 @@ def send_daily_status_email(diff: dict, run_date: str = "") -> None:
         len(v.get("added", [])) for v in diff.get("cc_crypto", {}).get("pages", {}).values()
         if isinstance(v, dict)
     )
-    total_changes = len(alerts) + len(new_tds) + len(new_certs) + len(nato_adds) + len(eucc_adds) + nist_news + cc_crypto_new
+    niap_pp_changes = len(diff.get("niap", {}).get("pps", {}).get("added", [])) + \
+                      len(diff.get("niap", {}).get("pps", {}).get("sunset_changes", []))
+    total_changes = len(alerts) + len(new_tds) + len(new_certs) + len(nato_adds) + len(eucc_adds) + nist_news + cc_crypto_new + niap_pp_changes
 
     if total_changes == 0:
         status_icon  = "✅"
@@ -1333,6 +1411,7 @@ def send_daily_status_email(diff: dict, run_date: str = "") -> None:
         if eucc_adds: lines_detail.append(f"{len(eucc_adds)} new Cisco EUCC cert(s)")
         if nist_news: lines_detail.append(f"{nist_news} NIST update(s) (news/FIPS/CMVP)")
         if cc_crypto_new: lines_detail.append(f"{cc_crypto_new} CC Crypto publication(s)")
+        if niap_pp_changes: lines_detail.append(f"{niap_pp_changes} new/updated NIAP PP(s)")
         body_detail  = ("<p style='margin:0 0 12px;color:#94a3b8;font-size:14px;'>"
                         "CC Pulse detected new activity and sent the appropriate alerts:"
                         "<br><br>" + "<br>".join("&bull; " + l for l in lines_detail)
