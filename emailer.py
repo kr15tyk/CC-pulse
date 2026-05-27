@@ -1010,6 +1010,67 @@ def send_new_pps_webex(new_pps: list[dict], pp_sunsets: list[dict]) -> None:
         log.warning("[Webex] Failed to send new PPs notification: %s", exc)
 
 
+def send_niap_news_webex(new_news: list[dict]) -> None:
+    """Post a Webex notification for new NIAP news and announcements.
+
+    Fires unconditionally whenever new items appear in the NIAP news feed
+    in the daily diff, regardless of keyword matches.
+
+    Args:
+        new_news: List of news dicts from diff["niap"]["news"]["added"].
+    """
+    token = config.WEBEX_BOT_TOKEN
+    room_id = config.WEBEX_ROOM_ID
+    if not token or not room_id:
+        log.debug("[Webex] Bot token or Room ID not configured — skipping NIAP news notification.")
+        return
+    if not new_news:
+        return
+
+    count = len(new_news)
+    item_word = "Item" if count == 1 else "Items"
+
+    lines = []
+    for item in new_news:
+        title = item.get("title", "")
+        url = item.get("url", "") or item.get("link", "")
+        category = item.get("_category", "") or item.get("category", "NEWS")
+        date = (item.get("date") or item.get("published") or "")[:10]
+        label = f"[{category.upper()}]" if category else "[NEWS]"
+        link_text = f"[{title}]({url})" if url else title
+        line = f"**{label}** {link_text}"
+        if date:
+            line += f" _(published {date})_"
+        lines.append(line)
+
+    header = (
+        f"## 📰 NIAP — {count} New News {item_word}\n"
+        f"_CC Pulse detected new content on the NIAP news and announcements page._\n"
+    )
+    footer = "\n\n[View NIAP News](https://www.niap-ccevs.org/News/) · [Full dashboard](https://kr15tyk.github.io/CC-pulse/cc_dashboard.html)"
+
+    body = "\n\n---\n".join(lines)
+    payload = json.dumps({
+        "roomId": room_id,
+        "markdown": header + body + footer,
+    }).encode("utf-8")
+
+    req = urllib.request.Request(
+        "https://webexapis.com/v1/messages",
+        data=payload,
+        headers={
+            "Content-Type": "application/json",
+            "Authorization": f"Bearer {token}",
+        },
+        method="POST",
+    )
+    try:
+        with urllib.request.urlopen(req, timeout=10) as resp:
+            log.info("[Webex] NIAP news notification sent for %d item(s) (HTTP %d).", count, resp.status)
+    except urllib.error.URLError as exc:
+        log.warning("[Webex] Failed to send NIAP news notification: %s", exc)
+
+
 def send_cisco_cert_email(new_certs: list[dict]) -> None:
     """Send a dedicated celebration email for new Cisco NDcPP PCL certifications.
 
