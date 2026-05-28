@@ -2,7 +2,6 @@
 <rss version="2.0"><channel>
 <title>CC Pulse</title>
 <link>https://kr15tyk.github.io/CC-pulse/cc_dashboard.html</link>
-<description>Common Criteria monitoring - 2026-05-27 13:43 ET</description>
-<item><title>New PP: PP_VIRT_v2.0</title><link>https://www.niap-ccevs.org/Profile/PP.cfm?id=543</link><description>Protection Profile for Virtualization Version 2.0</description></item>
-<item><title>Protection Profile for Virtualization Version 2.0 Published</title><link>https://www.niap-ccevs.org/</link><description></description></item>
+<description>Common Criteria monitoring - 2026-05-28 05:54 ET</description>
+<item><title>[atsec] Why Cryptographic Assurance Matters for the Future of Automotive Security</title><link>https://www.atsec.com/why-cryptographic-assurance-matters-for-the-future-of-automotive-security/</link><description></description></item>
 </channel></rss>
