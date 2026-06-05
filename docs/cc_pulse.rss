@@ -2,6 +2,8 @@
 <rss version="2.0"><channel>
 <title>CC Pulse</title>
 <link>https://kr15tyk.github.io/CC-pulse/cc_dashboard.html</link>
-<description>Common Criteria monitoring - 2026-06-04 03:39 ET</description>
-
+<description>Common Criteria monitoring - 2026-06-05 03:30 ET</description>
+<item><title>New TD: TD1043</title><link>https://www.niap-ccevs.org/</link><description></description></item>
+<item><title>New TD: TD1044</title><link>https://www.niap-ccevs.org/</link><description></description></item>
+<item><title>ALERT: NIAP TD â FIT Technical Decision: Block Erase in FCS_CKM.6.2/TOEHW</title><link>https://kr15tyk.github.io/CC-pulse/cc_dashboard.html</link><description>Kind: new | Keywords: FCS_CKM</description></item>
 </channel></rss>
