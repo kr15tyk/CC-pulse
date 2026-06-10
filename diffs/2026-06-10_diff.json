@@ -1,0 +1,439 @@
+{
+  "period_start": "2026-06-09T07:15:25.334498+00:00",
+  "period_end": "2026-06-10T07:29:54.398338+00:00",
+  "niap": {
+    "pps": {
+      "added": [],
+      "removed": [],
+      "sunset_changes": [],
+      "status_changes": []
+    },
+    "tds": {
+      "added": [],
+      "removed": []
+    },
+    "cisco_ndcpp": {
+      "added": [],
+      "removed": [],
+      "newly_archived": []
+    },
+    "pcl_all": {
+      "added": [
+        {
+          "active_maintenances": [],
+          "am_sort": null,
+          "assigned_lab_name": "Acumen Security",
+          "certification_date": null,
+          "from_cc_portal": false,
+          "product_id": 11709,
+          "product_name": "High Sec Labs SK41D-4TR KVM",
+          "protection_profiles": [
+            {
+              "pp_id": 412,
+              "pp_name": "Protection Profile for Peripheral Sharing Device Version 4.0",
+              "pp_short_name": "PP_PSD_V4.0"
+            },
+            {
+              "pp_id": 435,
+              "pp_name": "PP-Module for Keyboard/Mouse Devices Version 1.0",
+              "pp_short_name": "MOD_KM_V1.0"
+            },
+            {
+              "pp_id": 436,
+              "pp_name": "PP-Module for Video/Display Devices Version 1.0",
+              "pp_short_name": "MOD_VI_V1.0"
+            }
+          ],
+          "status_sort": "In Progress",
+          "submitting_country_id_code": "US",
+          "submitting_country_id_name": "United States",
+          "sunset_date": null,
+          "tech_types": [
+            "Peripheral Switch"
+          ],
+          "vendor_id_name": "High Sec Labs, Inc.",
+          "v_id": 11709,
+          "kicked_off_date": "2026-06-09T11:07:24.398000Z"
+        },
+        {
+          "active_maintenances": [],
+          "am_sort": null,
+          "assigned_lab_name": "Acumen Security",
+          "certification_date": null,
+          "from_cc_portal": false,
+          "product_id": 11708,
+          "product_name": "Vertiv CYBEX\u2122 SC845DPH, SC885DPH, SC945DPH, SC845DPHC, SC945DPHC, SCM145DPH, SCM185DPH, SC985DPH, SCMV245DPH, SCMV285DPH Firmware Version 44444-E7E7 Peripheral Sharing Devices",
+          "protection_profiles": [
+            {
+              "pp_id": 412,
+              "pp_name": "Protection Profile for Peripheral Sharing Device Version 4.0",
+              "pp_short_name": "PP_PSD_V4.0"
+            },
+            {
+              "pp_id": 433,
+              "pp_name": "PP-Module for Analog Audio Output Devices Version 1.0",
+              "pp_short_name": "MOD_AO_V1.0"
+            },
+            {
+              "pp_id": 434,
+              "pp_name": "PP-Module for User Authentication Devices Version 1.0",
+              "pp_short_name": "MOD_UA_V1.0"
+            },
+            {
+              "pp_id": 435,
+              "pp_name": "PP-Module for Keyboard/Mouse Devices Version 1.0",
+              "pp_short_name": "MOD_KM_V1.0"
+            },
+            {
+              "pp_id": 436,
+              "pp_name": "PP-Module for Video/Display Devices Version 1.0",
+              "pp_short_name": "MOD_VI_V1.0"
+            }
+          ],
+          "status_sort": "In Progress",
+          "submitting_country_id_code": "US",
+          "submitting_country_id_name": "United States",
+          "sunset_date": null,
+          "tech_types": [
+            "Peripheral Switch"
+          ],
+          "vendor_id_name": "Vertiv IT Systems",
+          "v_id": 11708,
+          "kicked_off_date": "2026-06-09T11:05:46.686000Z"
+        },
+        {
+          "active_maintenances": [],
+          "am_sort": null,
+          "assigned_lab_name": "Acumen Security",
+          "certification_date": null,
+          "from_cc_portal": false,
+          "product_id": 11707,
+          "product_name": "Vertiv CYBEX\u2122 SC820DPH, SC840DPH, SC920DPH, SC940DPH, SC840DPHC, SC940DPHC Firmware Version 44404-E7E7 Peripheral Sharing Devices",
+          "protection_profiles": [
+            {
+              "pp_id": 412,
+              "pp_name": "Protection Profile for Peripheral Sharing Device Version 4.0",
+              "pp_short_name": "PP_PSD_V4.0"
+            },
+            {
+              "pp_id": 433,
+              "pp_name": "PP-Module for Analog Audio Output Devices Version 1.0",
+              "pp_short_name": "MOD_AO_V1.0"
+            },
+            {
+              "pp_id": 435,
+              "pp_name": "PP-Module for Keyboard/Mouse Devices Version 1.0",
+              "pp_short_name": "MOD_KM_V1.0"
+            },
+            {
+              "pp_id": 436,
+              "pp_name": "PP-Module for Video/Display Devices Version 1.0",
+              "pp_short_name": "MOD_VI_V1.0"
+            }
+          ],
+          "status_sort": "In Progress",
+          "submitting_country_id_code": "US",
+          "submitting_country_id_name": "United States",
+          "sunset_date": null,
+          "tech_types": [
+            "Peripheral Switch"
+          ],
+          "vendor_id_name": "Vertiv IT Systems",
+          "v_id": 11707,
+          "kicked_off_date": "2026-06-09T10:57:35.839000Z"
+        }
+      ],
+      "removed": [],
+      "newly_archived": []
+    },
+    "in_evaluation": {
+      "added": [
+        {
+          "active_maintenances": [],
+          "am_sort": null,
+          "assigned_lab_name": "Acumen Security",
+          "certification_date": null,
+          "from_cc_portal": false,
+          "product_id": 11709,
+          "product_name": "High Sec Labs SK41D-4TR KVM",
+          "protection_profiles": [
+            {
+              "pp_id": 412,
+              "pp_name": "Protection Profile for Peripheral Sharing Device Version 4.0",
+              "pp_short_name": "PP_PSD_V4.0"
+            },
+            {
+              "pp_id": 435,
+              "pp_name": "PP-Module for Keyboard/Mouse Devices Version 1.0",
+              "pp_short_name": "MOD_KM_V1.0"
+            },
+            {
+              "pp_id": 436,
+              "pp_name": "PP-Module for Video/Display Devices Version 1.0",
+              "pp_short_name": "MOD_VI_V1.0"
+            }
+          ],
+          "status_sort": "In Progress",
+          "submitting_country_id_code": "US",
+          "submitting_country_id_name": "United States",
+          "sunset_date": null,
+          "tech_types": [
+            "Peripheral Switch"
+          ],
+          "vendor_id_name": "High Sec Labs, Inc.",
+          "v_id": 11709,
+          "kicked_off_date": "2026-06-09T11:07:24.398000Z"
+        },
+        {
+          "active_maintenances": [],
+          "am_sort": null,
+          "assigned_lab_name": "Acumen Security",
+          "certification_date": null,
+          "from_cc_portal": false,
+          "product_id": 11707,
+          "product_name": "Vertiv CYBEX\u2122 SC820DPH, SC840DPH, SC920DPH, SC940DPH, SC840DPHC, SC940DPHC Firmware Version 44404-E7E7 Peripheral Sharing Devices",
+          "protection_profiles": [
+            {
+              "pp_id": 412,
+              "pp_name": "Protection Profile for Peripheral Sharing Device Version 4.0",
+              "pp_short_name": "PP_PSD_V4.0"
+            },
+            {
+              "pp_id": 433,
+              "pp_name": "PP-Module for Analog Audio Output Devices Version 1.0",
+              "pp_short_name": "MOD_AO_V1.0"
+            },
+            {
+              "pp_id": 435,
+              "pp_name": "PP-Module for Keyboard/Mouse Devices Version 1.0",
+              "pp_short_name": "MOD_KM_V1.0"
+            },
+            {
+              "pp_id": 436,
+              "pp_name": "PP-Module for Video/Display Devices Version 1.0",
+              "pp_short_name": "MOD_VI_V1.0"
+            }
+          ],
+          "status_sort": "In Progress",
+          "submitting_country_id_code": "US",
+          "submitting_country_id_name": "United States",
+          "sunset_date": null,
+          "tech_types": [
+            "Peripheral Switch"
+          ],
+          "vendor_id_name": "Vertiv IT Systems",
+          "v_id": 11707,
+          "kicked_off_date": "2026-06-09T10:57:35.839000Z"
+        },
+        {
+          "active_maintenances": [],
+          "am_sort": null,
+          "assigned_lab_name": "Acumen Security",
+          "certification_date": null,
+          "from_cc_portal": false,
+          "product_id": 11708,
+          "product_name": "Vertiv CYBEX\u2122 SC845DPH, SC885DPH, SC945DPH, SC845DPHC, SC945DPHC, SCM145DPH, SCM185DPH, SC985DPH, SCMV245DPH, SCMV285DPH Firmware Version 44444-E7E7 Peripheral Sharing Devices",
+          "protection_profiles": [
+            {
+              "pp_id": 412,
+              "pp_name": "Protection Profile for Peripheral Sharing Device Version 4.0",
+              "pp_short_name": "PP_PSD_V4.0"
+            },
+            {
+              "pp_id": 433,
+              "pp_name": "PP-Module for Analog Audio Output Devices Version 1.0",
+              "pp_short_name": "MOD_AO_V1.0"
+            },
+            {
+              "pp_id": 434,
+              "pp_name": "PP-Module for User Authentication Devices Version 1.0",
+              "pp_short_name": "MOD_UA_V1.0"
+            },
+            {
+              "pp_id": 435,
+              "pp_name": "PP-Module for Keyboard/Mouse Devices Version 1.0",
+              "pp_short_name": "MOD_KM_V1.0"
+            },
+            {
+              "pp_id": 436,
+              "pp_name": "PP-Module for Video/Display Devices Version 1.0",
+              "pp_short_name": "MOD_VI_V1.0"
+            }
+          ],
+          "status_sort": "In Progress",
+          "submitting_country_id_code": "US",
+          "submitting_country_id_name": "United States",
+          "sunset_date": null,
+          "tech_types": [
+            "Peripheral Switch"
+          ],
+          "vendor_id_name": "Vertiv IT Systems",
+          "v_id": 11708,
+          "kicked_off_date": "2026-06-09T11:05:46.686000Z"
+        }
+      ],
+      "removed": [
+        {
+          "active_maintenances": [],
+          "am_sort": null,
+          "assigned_lab_name": "Booz Allen Hamilton Common Criteria Testing Laboratory",
+          "certification_date": null,
+          "from_cc_portal": false,
+          "product_id": 11590,
+          "product_name": "GovShield Version 1.60.05",
+          "protection_profiles": [
+            {
+              "pp_id": 428,
+              "pp_name": "Protection Profile for Mobile Device Management Version 4.0",
+              "pp_short_name": "PP_MDM_V4.0"
+            },
+            {
+              "pp_id": 441,
+              "pp_name": "PP-Module for MDM Agent Version 1.0",
+              "pp_short_name": "MOD_MDM_AGENT_V1.0"
+            }
+          ],
+          "status_sort": "In Progress",
+          "submitting_country_id_code": "US",
+          "submitting_country_id_name": "United States",
+          "sunset_date": null,
+          "tech_types": [
+            "Mobility"
+          ],
+          "vendor_id_name": "General Dynamics Mission Systems",
+          "v_id": 11590,
+          "kicked_off_date": "2025-12-09T11:21:27.157000Z"
+        }
+      ],
+      "current_count": 25
+    },
+    "news": {
+      "added": []
+    },
+    "events": {
+      "added": []
+    }
+  },
+  "cc_portal": {
+    "news": {
+      "added": []
+    },
+    "pps": {
+      "added": []
+    },
+    "products": {
+      "added": []
+    }
+  },
+  "cctl_labs": {
+    "atsec": [
+      {
+        "title": "atsec Holds Successful PCI Security Standards Training in Beijing",
+        "link": "https://www.atsec.com/atsec-holds-successful-pci-security-standards-training-in-beijing/",
+        "published": "",
+        "id": "https://www.atsec.com/atsec-holds-successful-pci-security-standards-training-in-beijing/"
+      }
+    ]
+  },
+  "csfc": {
+    "pages": {},
+    "selection_links": {},
+    "feeds": {
+      "CISA Alerts": [
+        {
+          "title": "CISA Adds Three Known Exploited Vulnerabilities to Catalog",
+          "link": "https://www.cisa.gov/news-events/alerts/2026/06/09/cisa-adds-three-known-exploited-vulnerabilities-catalog",
+          "summary": "<p>CISA has added three new vulnerabilities to its <a href=\"https://www.cisa.gov/known-exploited-vulnerabilities-catalog\">Known Exploited Vulnerabilities (KEV) Catalog</a>, based on evidence of active exploitation.</p>\n<ul>\n<li><a href=\"https://www.cve.org/CVERecord?id=CVE-2026-7473\" target=\"_blank\">CVE-2026-7473</a> Arista Extensible Operating System Incomplete Comparison with Missing Factors Vulnerability</li>\n<li><a href=\"https://www.cve.org/CVERecord?id=CVE-2026-11645\" target=\"_blank\">CVE-2026-11645</a> Google Chromium V8 Out-of-Bounds Read and Write Vulnerability</li>\n<li><a href=\"https://www.cve.org/CVERecord?id=CVE-2026-20245\" target=\"_blank\">CVE-2026-20245</a> Cisco Catalyst SD-WAN Manager Improper Encoding or Escaping of Output Vulnerability</li>\n</ul>\n<p>These types of vulnerabilities are a frequent attack vector for malicious cyber actors and pose significant risks to the federal enterprise.</p>\n<p><a href=\"https://www.cisa.gov/binding-operational-directive-22-01\">Binding Operational Directive (BOD) 22-01: Reducing the Significant Risk of Known Exploited Vulnerabilities</a> established the KEV Catalog as a living list of known Common Vulnerabilities and Exposures (CVEs) that carry significant risk to the federal enterprise. BOD 22-01 requires Federal Civilian Executive Branch (FCEB) agencies to remediate identified vulnerabilities by the due date to protect FCEB networks against active threats. See the <a href=\"https://www.cisa.gov/sites/default/files/publications/Reducing_the_Significant_Risk_of_Known_Exploited_Vulnerabilities_211103.pdf\">BOD 22-01 Fact Sheet</a> for more information.</p>\n<p>Although BOD 22-01 only applies to FCEB agencies, CISA strongly urges all organizations to reduce their exposure to cyberattacks by prioritizing timely remediation of <a href=\"https://www.cisa.gov/known-exploited-vulnerabilities-catalog\">KEV Catalog vulnerabilities</a> as part of their vulnerability management practice. CISA will continue to add vulnerabilities to the catalog that meet the <a href=\"https://www.cisa.gov/known-exploited-vulnerabilities\">specified criteria</a>.&nbsp;</p>",
+          "published": "Tue, 09 Jun 26 12:00:00 +0000",
+          "id": "/node/25008",
+          "_category": "CISA"
+        },
+        {
+          "title": "Siemens KACO Blueplanet Inverters",
+          "link": "https://www.cisa.gov/news-events/ics-advisories/icsa-26-160-02",
+          "summary": "<p><a href=\"https://github.com/cisagov/CSAF/blob/develop/csaf_files/OT/white/2026/icsa-26-160-02.json\"><strong>View CSAF</strong></a></p>\n<h2>Summary</h2>\n<p><strong>KACO blueplanet Inverters contain multiple vulnerabilities that could allow an attacker to derive the credentials from the devices serial number and misuse them to gain unauthorized access. KACO new energy GmbH has released new versions for several affected products and recommends to update to the latest versions. KACO new energy GmbH is preparing further fix versions and recommends countermeasures for products where fixes are not, or not yet available.</strong></p>\n<p>The following versions of Siemens KACO Blueplanet Inverters are affected:</p>\n<ul>\n<li>blueplanet 100 NX3 M8 vers:all/*</li>\n<li>blueplanet 100 TL3 GEN2 vers:all/*, vers:intdot/&lt;6.1.4.9&nbsp;</li>\n<li>blueplanet 105 TL3 vers:all/*&nbsp;</li>\n<li>blueplanet 105 TL3 GEN2 vers:all/*, vers:intdot/&lt;6.1.4.9&nbsp;</li>\n<li>blueplanet 110 TL3 vers:all/*&nbsp;</li>\n<li>blueplanet 125 NX3 M11 vers:all/*&nbsp;</li>\n<li>blueplanet 125 TL3 vers:all/*&nbsp;</li>\n<li>blueplanet 125 TL3 GEN2 vers:all/*, vers:intdot/&lt;6.1.4.9&nbsp;</li>\n<li>blueplanet 137 TL3 vers:all/*&nbsp;</li>\n<li>blueplanet 150 TL3 vers:all/*&nbsp;</li>\n<li>blueplanet 150 TL3 GEN2 vers:all/*, vers:intdot/&lt;6.1.4.9&nbsp;</li>\n<li>blueplanet 155 TL3 vers:all/*&nbsp;</li>\n<li>blueplanet 155 TL3 GEN2 vers:all/*, vers:intdot/&lt;6.1.4.9&nbsp;</li>\n<li>blueplanet 165 TL3 vers:all/*&nbsp;</li>\n<li>blueplanet 165 TL3 GEN2 vers:all/*, vers:intdot/&lt;6.1.4.9&nbsp;</li>\n<li>blueplanet 25.0 NX3-33.0 NX3 vers:all/*&nbsp;</li>\n<li>blueplanet 3.0 NX3-20.0 NX3 vers:all/*&nbsp;</li>\n<li>blueplanet 3.0 TL3-60.0 TL3 vers:all/*&nbsp;</li>\n<li>blueplanet 3.0-5.0 NX1 vers:all/*&nbsp;</li>\n<li>blueplanet 360 NX3 M6 vers:all/*&nbsp;</li>\n<li>blueplanet 50.0 NX3-60.0 NX3 vers:all/*&nbsp;</li>\n<li>blueplanet 87.0 TL3 vers:all/*&nbsp;</li>\n<li>blueplanet 87.0 TL3 GEN2 vers:all/*, vers:intdot/&lt;6.1.4.9&nbsp;</li>\n<li>blueplanet 92.0 TL3 vers:all/*&nbsp;</li>\n<li>blueplanet 92.0 TL3 GEN2 vers:all/*, vers:intdot/&lt;6.1.4.9&nbsp;</li>\n<li>blueplanet gridsafe 110 TL3-S vers:intdot/&lt;3.91, vers:all/*&nbsp;</li>\n<li>blueplanet gridsafe 137 TL3-S vers:intdot/&lt;3.91, vers:all/*</li>\n<li>blueplanet gridsafe 92.0 TL3-S vers:all/*, vers:intdot/&lt;3.91&nbsp;</li>\n<li>blueplanet hybrid 10.0 TL3 vers:all/*&nbsp;</li>\n<li>blueplanet hybrid 6.0 NH3-12.0 NH3 vers:all/*&nbsp;</li>\n</ul>\n<div class=\"csaf-table\">\n<table class=\"tablesaw tablesaw-stack\">\n<thead>\n<tr>\n<th>CVSS</th>\n<th>Vendor</th>\n<th>Equipment</th>\n<th>Vulnerabilities</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>v3 8.3</td>\n<td>Siemens</td>\n<td>Siemens KACO Blueplanet Inverters</td>\n<td>Use of Hard-coded Cryptographic Key, Improper Neutralization of Special Elements used in an SQL Command ('SQL Injection')</td>\n</tr>\n</tbody>\n</table>\n</div>\n<h3>Background</h3>\n<ul>\n<li><strong>Critical Infrastructure Sectors: </strong>Energy</li>\n<li><strong>Countries/Areas Deployed: </strong>Worldwide</li>\n<li><strong>Company Headquarters Location: </strong>Germany</li>\n</ul>\n<hr />\n<h2>Vulnerabilities</h2>\n<div class=\"csaf-accordion\">\n<p><a class=\"csaf-accordion-toggle-all\" href=\"https://www.cisa.gov/\">Expand All +</a></p>\n<div class=\"csaf-accordion-item\">\n<h3><a class=\"csaf-accordion-toggle\" href=\"https://www.cisa.gov/\">CVE-2025-40946</a></h3>\n<div class=\"csaf-accordion-content\">\n<p>A CRC16-based algorithm for generating Technical Service credentials could allow an attacker to derive the credentials from the devices serial number and misuse them to gain unauthorized access.</p>\n<p><a href=\"https://www.cve.org/CVERecord?id=CVE-2025-40946\">View CVE Details</a></p>\n<hr />\n<h4>Affected Products</h4>\n<h5>Siemens KACO Blueplanet Inverters</h5>\n<div class=\"ics-vendor-version-status\">\n<div class=\"ics-vendor\"><strong>Vendor:</strong><br />Siemens</div>\n<div class=\"ics-version\"><strong>Product Version:</strong><br />blueplanet 100 NX3 M8, blueplanet 100 TL3 GEN2, blueplanet 105 TL3, blueplanet 105 TL3 GEN2, blueplanet 110 TL3, blueplanet 125 NX3 M11, blueplanet 125 TL3, blueplanet 125 TL3 GEN2, blueplanet 137 TL3, blueplanet 150 TL3, blueplanet 150 TL3 GEN2, blueplanet 155 TL3, blueplanet 155 TL3 GEN2, blueplanet 165 TL3, blueplanet 165 TL3 GEN2, blueplanet 3.0 TL3-60.0 TL3, blueplanet 87.0 TL3, blueplanet 87.0 TL3 GEN2, blueplanet 92.0 TL3, blueplanet 92.0 TL3 GEN2, blueplanet gridsafe 110 TL3-S, blueplanet gridsafe 137 TL3-S, blueplanet gridsafe 92.0 TL3-S</div>\n<div class=\"ics-status\"><strong>Product Status:</strong><br />known_affected, known_not_affected</div>\n</div>\n<div class=\"ics-remediations\">\n<h6>Remediations</h6>\n<p><strong>No fix planned</strong><br />Currently no fix is planned</p>\n<p><strong>None available</strong><br />Currently no fix is available</p>\n<p><strong>Vendor fix</strong><br />Update to V3.91 or later version<br /><a href=\"https://kaco-newenergy.com/service/mykacocom-customer-portal\">https://kaco-newenergy.com/service/mykacocom-customer-portal</a></p>\n<p><strong>Vendor fix</strong><br />Update to V6.1.4.9 or later version<br /><a href=\"https://kaco-newenergy.com/service/mykacocom-customer-portal\">https://kaco-newenergy.com/service/mykacocom-customer-portal</a></p>\n</div>\n<p><strong>Relevant CWE:</strong> <a href=\"https://cwe.mitre.org/data/definitions/321.html\">CWE-321 Use of Hard-coded Cryptographic Key</a></p>\n<hr />\n<h4>Metrics</h4>\n<div class=\"csaf-table csaf-metrics-table\">\n<table class=\"tablesaw tablesaw-stack\">\n<thead>\n<tr>\n<th>CVSS Version</th>\n<th>Base Score</th>\n<th>Base Severity</th>\n<th>Vector String</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>3.1</td>\n<td>8.3</td>\n<td>HIGH</td>\n<td><a href=\"https://www.first.org/cvss/calculator/3.1#CVSS:3.1/AV:A/AC:L/PR:N/UI:N/S:U/C:L/I:H/A:H\">CVSS:3.1/AV:A/AC:L/PR:N/UI:N/S:U/C:L/I:H/A:H</a></td>\n</tr>\n</tbody>\n</table>\n</div>\n</div>\n</div>\n<div class=\"csaf-accordion-item\">\n<h3><a class=\"csaf-accordion-toggle\" href=\"https://www.cisa.gov/\">CVE-2026-41125</a></h3>\n<div class=\"csaf-accordion-content\">\n<p>Improper neutralization of special elements used in an sql command ('sql injection') in KACO Meteor server allows an authorized attacker to elevate privileges over a local network.</p>\n<p><a href=\"https://www.cve.org/CVERecord?id=CVE-2026-41125\">View CVE Details</a></p>\n<hr />\n<h4>Affected Products</h4>\n<h5>Siemens KACO Blueplanet Inverters</h5>\n<div class=\"ics-vendor-version-status\">\n<div class=\"ics-vendor\"><strong>Vendor:</strong><br />Siemens</div>\n<div class=\"ics-version\"><strong>Product Version:</strong><br />blueplanet 100 NX3 M8, blueplanet 100 TL3 GEN2, blueplanet 105 TL3, blueplanet 105 TL3 GEN2, blueplanet 110 TL3, blueplanet 125 NX3 M11, blueplanet 125 TL3, blueplanet 125 TL3 GEN2, blueplanet 137 TL3, blueplanet 150 TL3, blueplanet 150 TL3 GEN2, blueplanet 155 TL3, blueplanet 155 TL3 GEN2, blueplanet 165 TL3, blueplanet 165 TL3 GEN2, blueplanet 87.0 TL3, blueplanet 87.0 TL3 GEN2, blueplanet 92.0 TL3, blueplanet 92.0 TL3 GEN2, blueplanet gridsafe 110 TL3-S, blueplanet gridsafe 137 TL3-S, blueplanet gridsafe 92.0 TL3-S</div>\n<div class=\"ics-status\"><strong>Product Status:</strong><br />known_affected, known_not_affected</div>\n</div>\n<div class=\"ics-remediations\">\n<h6>Remediations</h6>\n<p><strong>None available</strong><br />Currently no fix is available</p>\n</div>\n<p><strong>Relevant CWE:</strong> <a href=\"https://cwe.mitre.org/data/definitions/89.html\">CWE-89 Improper Neutralization of Special Elements used in an SQL Command ('SQL Injection')</a></p>\n<hr />\n<h4>Metrics</h4>\n<div class=\"csaf-table csaf-metrics-table\">\n<table class=\"tablesaw tablesaw-stack\">\n<thead>\n<tr>\n<th>CVSS Version</th>\n<th>Base Score</th>\n<th>Base Severity</th>\n<th>Vector String</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>3.1</td>\n<td>6</td>\n<td>MEDIUM</td>\n<td><a href=\"https://www.first.org/cvss/calculator/3.1#CVSS:3.1/AV:A/AC:H/PR:H/UI:N/S:U/C:L/I:H/A:H\">CVSS:3.1/AV:A/AC:H/PR:H/UI:N/S:U/C:L/I:H/A:H</a></td>\n</tr>\n</tbody>\n</table>\n</div>\n</div>\n</div>\n</div>\n<hr />\n<h2>Acknowledgments</h2>\n<ul>\n<li>Siemens ProductCERT reported these vulnerabilities to CISA.</li>\n<li>Ruben Santamarta of Reversemode reported these vulnerabilities to Siemens</li>\n</ul>\n<hr />\n<h2>General Recommendations</h2>\n<p>Operators of critical power systems (e.g. TSOs or DSOs) worldwide are usually required by regulations to build resilience into the power grids by applying multi-level redundant secondary protection schemes. It is therefore recommended that the operators check whether appropriate resilient protection measures are in place. The risk of cyber incidents impacting the grid's reliability can thus be minimized by virtue of the grid design. Siemens strongly recommends applying the provided security updates using the corresponding tooling and documented procedures made available with the product. If supported by the product, an automated means to apply the security updates across multiple product instances may be used. Siemens strongly recommends prior validation of any security update before being applied, and supervision by trained staff of the update process in the target environment. As a general security measure Siemens strongly recommends to protect network access with appropriate mechanisms (e.g. firewalls, segmentation, VPN). It is advised to configure the environment according to our operational guidelines in order to run the devices in a protected IT environment. Recommended security guidelines can be found at: https://www.siemens.com/gridsecurity</p>\n<hr />\n<h2>Additional Resources</h2>\n<p>For further inquiries on security vulnerabilities in Siemens products and solutions, please contact the Siemens ProductCERT: https://www.siemens.com/cert/advisories</p>\n<hr />\n<h2>Terms of Use</h2>\n<p>The use of Siemens Security Advisories is subject to the terms and conditions listed on: https://www.siemens.com/productcert/terms-of-use.</p>\n<hr />\n<h2>Legal Notice and Terms of Use</h2>\n<p>This product is provided subject to this Notification (https://www.cisa.gov/notification) and this Privacy &amp; Use policy (https://www.cisa.gov/privacy-policy).</p>\n<hr />\n<h2>Recommended Practices</h2>\n<p>CISA recommends users take defensive measures to minimize the exploitation risk of this vulnerability.</p>\n<p>Minimize network exposure for all control system devices and/or systems, and ensure they are not accessible from the internet.</p>\n<p>Locate control system networks and remote devices behind firewalls and isolate them from business networks.</p>\n<p>When remote access is required, use more secure methods, such as Virtual Private Networks (VPNs), recognizing VPNs may have vulnerabilities and should be updated to the most recent version available. Also recognize VPN is only as secure as its connected devices.</p>\n<p>CISA reminds organizations to perform proper impact analysis and risk assessment prior to deploying defensive measures.</p>\n<p>CISA also provides a section for control systems security recommended practices on the ICS webpage on cisa.gov. Several CISA products detailing cyber defense best practices are available for reading and download, including Improving Industrial Control Systems Cybersecurity with Defense-in-Depth Strategies.</p>\n<p>CISA encourages organizations to implement recommended cybersecurity strategies for proactive defense of ICS assets. Additional mitigation guidance and recommended practices are publicly available on the ICS webpage at cisa.gov in the technical information paper, ICS-TIP-12-146-01B--Targeted Cyber Intrusion Detection and Mitigation Strategies.</p>\n<p>Organizations observing suspected malicious activity should follow established internal procedures and report findings to CISA for tracking and correlation against other incidents.</p>\n<hr />\n<h2>Advisory Conversion Disclaimer</h2>\n<p>This ICSA is a verbatim republication of Siemens ProductCERT SSA-545643 from a direct conversion of the vendor's Common Security Advisory Framework (CSAF) advisory. This is republished to CISA's website as a means of increasing visibility and is provided \"as-is\" for informational purposes only. CISA is not responsible for the editorial or technical accuracy of republished advisories and provides no warranties of any kind regarding any information contained within this advisory. Further, CISA does not endorse any commercial product or service. Please contact Siemens ProductCERT directly for any questions regarding this advisory.</p>\n<h2>Revision History</h2>\n<ul>\n<li><strong>Initial Release Date: </strong>2026-05-12</li>\n</ul>\n<table class=\"tablesaw tablesaw-stack\">\n<thead>\n<tr>\n<th>Date</th>\n<th>Revision</th>\n<th>Summary</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>2026-05-12</td>\n<td>1</td>\n<td>Publication Date</td>\n</tr>\n<tr>\n<td>2026-06-09</td>\n<td>2</td>\n<td>Initial CISA Republication of Siemens ProductCERT SSA-545643 advisory</td>\n</tr>\n</tbody>\n</table>\n<hr />\n<h2>Legal Notice and Terms of Use</h2>",
+          "published": "Tue, 09 Jun 26 12:00:00 +0000",
+          "id": "/node/25006",
+          "_category": "NEWS"
+        },
+        {
+          "title": "Schneider Electric EcoStruxure Panel Server",
+          "link": "https://www.cisa.gov/news-events/ics-advisories/icsa-26-160-03",
+          "summary": "<p><a href=\"https://github.com/cisagov/CSAF/blob/develop/csaf_files/OT/white/2026/icsa-26-160-03.json\"><strong>View CSAF</strong></a></p>\n<h2>Summary</h2>\n<p><strong>Schneider Electric is aware of its vulnerability in its EcoStruxure Panel Server offer. The EcoStruxure Panel Server is a high performance, modular gateway with enhanced cybersecurity that provides easy and fast connections to multiple concurrent edge control or cloud applications. Failure to apply the remediations provided below may risk unauthorized authentication, which could lead to access to sensitive information.</strong></p>\n<p>The following versions of Schneider Electric EcoStruxure Panel Server are affected:</p>\n<ul>\n<li>EcoStruxure Panel Server PAS800 vers:intdot/&lt;=002.005.000&nbsp;</li>\n<li>EcoStruxure Panel Server PAS800 vers:intdot/=002.006.000&nbsp;</li>\n<li>EcoStruxure Panel Server PAS800V2 vers:intdot/&lt;=002.005.000</li>\n<li>EcoStruxure Panel Server PAS800V2 vers:intdot/=002.006.000&nbsp;</li>\n<li>EcoStruxure Panel Server PAS600 vers:intdot/&lt;=002.005.000&nbsp;</li>\n<li>EcoStruxure Panel Server PAS600 vers:intdot/=002.006.000&nbsp;</li>\n<li>EcoStruxure Panel Server PAS600V2 vers:intdot/&lt;=002.005.000</li>\n<li>EcoStruxure Panel Server PAS600V2 vers:intdot/=002.006.000&nbsp;</li>\n<li>EcoStruxure Panel Server PAS400 vers:intdot/&lt;=002.005.000&nbsp;</li>\n<li>EcoStruxure Panel Server PAS400 vers:intdot/=002.006.000&nbsp;</li>\n</ul>\n<div class=\"csaf-table\">\n<table class=\"tablesaw tablesaw-stack\">\n<thead>\n<tr>\n<th>CVSS</th>\n<th>Vendor</th>\n<th>Equipment</th>\n<th>Vulnerabilities</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>v3 7.5</td>\n<td>Schneider Electric</td>\n<td>Schneider Electric EcoStruxure Panel Server</td>\n<td>Initialization of a Resource with an Insecure Default</td>\n</tr>\n</tbody>\n</table>\n</div>\n<h3>Background</h3>\n<ul>\n<li><strong>Critical Infrastructure Sectors: </strong>Commercial Facilities, Critical Manufacturing, Energy</li>\n<li><strong>Countries/Areas Deployed: </strong>Worldwide</li>\n<li><strong>Company Headquarters Location: </strong>France</li>\n</ul>\n<hr />\n<h2>Vulnerabilities</h2>\n<div class=\"csaf-accordion\">\n<p><a class=\"csaf-accordion-toggle-all\" href=\"https://www.cisa.gov/\">Expand All +</a></p>\n<div class=\"csaf-accordion-item\">\n<h3><a class=\"csaf-accordion-toggle\" href=\"https://www.cisa.gov/\">CVE-2026-6866</a></h3>\n<div class=\"csaf-accordion-content\">\n<p>CWE-1188 Initialization of a Resource with an Insecure Default vulnerability exists that could cause unauthorized disclosure of sensitive information when credentials revert to initial settings in rare circumstances, enabling unauthorized authentication using known credentials</p>\n<p><a href=\"https://www.cve.org/CVERecord?id=CVE-2026-6866\">View CVE Details</a></p>\n<hr />\n<h4>Affected Products</h4>\n<h5>Schneider Electric EcoStruxure Panel Server</h5>\n<div class=\"ics-vendor-version-status\">\n<div class=\"ics-vendor\"><strong>Vendor:</strong><br />Schneider Electric</div>\n<div class=\"ics-version\"><strong>Product Version:</strong><br />EcoStruxure Panel Server PAS800 Versions 002.005.000 and prior, EcoStruxure Panel Server PAS800V2 Versions 002.005.000 and prior, EcoStruxure Panel Server PAS600 Versions 002.005.000 and prior, EcoStruxure Panel Server PAS600V2 Versions 002.005.000 and prior, EcoStruxure Panel Server PAS400 Versions 002.005.000 and prior</div>\n<div class=\"ics-status\"><strong>Product Status:</strong><br />fixed, known_affected</div>\n</div>\n<div class=\"ics-remediations\">\n<h6>Remediations</h6>\n<p><strong>Vendor fix</strong><br />Version 002.006.000 of EcoStruxure Panel Server includes a fix for this vulnerability and is available for download here: \u2022 https://www.se.com/ww/en/download/document/PAS800_Fir mware_Package/ \u2022 Reboot needed: Yes<br /><a href=\"https://www.se.com/ww/en/download/document/PAS800_Firmware_Package/\">https://www.se.com/ww/en/download/document/PAS800_Firmware_Package/</a></p>\n<p><strong>Vendor fix</strong><br />Version 002.006.000 of EcoStruxure Panel Server includes a fix for this vulnerability and is available for download here: \u2022 https://www.se.com/ww/en/download/document/PAS800V2_F irmware_Package/ \u2022 Reboot needed: Yes<br /><a href=\"https://www.se.com/ww/en/download/document/PAS800V2_Firmware_Package/\">https://www.se.com/ww/en/download/document/PAS800V2_Firmware_Package/</a></p>\n<p><strong>Vendor fix</strong><br />Version 002.006.000 of EcoStruxure Panel Server includes a fix for this vulnerability and is available for download here: \u2022 https://www.se.com/ww/en/download/document/PAS600_Fir mware_Package/ \u2022 Reboot needed: Yes<br /><a href=\"https://www.se.com/ww/en/download/document/PAS600_Firmware_Package/\">https://www.se.com/ww/en/download/document/PAS600_Firmware_Package/</a></p>\n<p><strong>Vendor fix</strong><br />Version 002.006.000 of EcoStruxure Panel Server includes a fix for this vulnerability and is available for download here: \u2022 https://www.se.com/ww/en/download/document/PAS600V2_ Firmware_Package/ \u2022 Reboot needed: Yes<br /><a href=\"https://www.se.com/ww/en/download/document/PAS600V2_Firmware_Package/\">https://www.se.com/ww/en/download/document/PAS600V2_Firmware_Package/</a></p>\n<p><strong>Vendor fix</strong><br />Version 002.006.000 of EcoStruxure Panel Server includes a fix for this vulnerability and is available for download here: \u2022 https://www.se.com/ww/en/download/document/PAS400_Fir mware_Package/ \u2022 Reboot needed: Yes<br /><a href=\"https://www.se.com/ww/en/download/document/PAS400_Firmware_Package/\">https://www.se.com/ww/en/download/document/PAS400_Firmware_Package/</a></p>\n</div>\n<p><strong>Relevant CWE:</strong> <a href=\"https://cwe.mitre.org/data/definitions/1188.html\">CWE-1188 Initialization of a Resource with an Insecure Default</a></p>\n<hr />\n<h4>Metrics</h4>\n<div class=\"csaf-table csaf-metrics-table\">\n<table class=\"tablesaw tablesaw-stack\">\n<thead>\n<tr>\n<th>CVSS Version</th>\n<th>Base Score</th>\n<th>Base Severity</th>\n<th>Vector String</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>3.1</td>\n<td>7.5</td>\n<td>HIGH</td>\n<td><a href=\"https://www.first.org/cvss/calculator/3.1#CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:N/A:N\">CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:N/A:N</a></td>\n</tr>\n</tbody>\n</table>\n</div>\n</div>\n</div>\n</div>\n<hr />\n<h2>Acknowledgments</h2>\n<ul>\n<li>Schneider Electric CPCERT reported this vulnerability to CISA.</li>\n<li>A Schneider Electric Partner reported this vulnerability to Schneider Electric.</li>\n</ul>\n<hr />\n<h2>General Security Recommendations</h2>\n<p>We strongly recommend the following industry cybersecurity best practices. * Locate control and safety system networks and remote devices behind firewalls and isolate them from the business network. * Install physical controls so no unauthorized personnel can access your industrial control and safety systems, components, peripheral equipment, and networks. * Place all controllers in locked cabinets and never leave them in the \u201cProgram\u201d mode. * Never connect programming software to any network other than the network intended for that device. * Scan all methods of mobile data exchange with the isolated network such as CDs, USB drives, etc. before use in the terminals or any node connected to these networks. * Never allow mobile devices that have connected to any other network besides the intended network to connect to the safety or control networks without proper sanitation. * Minimize network exposure for all control system devices and systems and ensure that they are not accessible from the Internet. * When remote access is required, use secure methods, such as Virtual Private Networks (VPNs). Recognize that VPNs may have vulnerabilities and should be updated to the most current version available. Also, understand that VPNs are only as secure as the connected devices. For more information refer to the Schneider Electric [Recommended Cybersecurity Best Practices](https://www.se.com/us/en/download/document/7EN52-0390/) document.</p>\n<hr />\n<h2>For More Information</h2>\n<p>This document provides an overview of the identified vulnerability or vulnerabilities and actions required to mitigate. For more details and assistance on how to protect your installation, contact your local Schneider Electric representative or Schneider Electric Industrial Cybersecurity Services: https://www.se.com/ww/en/work/solutions/cybersecurity/. These organizations will be fully aware of this situation and can support you through the process. For further information related to cybersecurity in Schneider Electric's products, visit the company's cybersecurity support portal page: https://www.se.com/ww/en/work/support/cybersecurity/overview.jsp</p>\n<hr />\n<h2>LEGAL DISCLAIMER</h2>\n<p>THIS NOTIFICATION DOCUMENT, THE INFORMATION CONTAINED HEREIN, AND ANY MATERIALS LINKED FROM IT (COLLECTIVELY, THIS \u201cNOTIFICATION\u201d) ARE INTENDED TO HELP PROVIDE AN OVERVIEW OF THE IDENTIFIED SITUATION AND SUGGESTED MITIGATION ACTIONS, REMEDIATION, FIX, AND/OR GENERAL SECURITY RECOMMENDATIONS AND IS PROVIDED ON AN \u201cAS-IS\u201d BASIS WITHOUT WARRANTY OR GUARANTEE OF ANY KIND. SCHNEIDER ELECTRIC DISCLAIMS ALL WARRANTIES RELATING TO THIS NOTIFICATION, EITHER EXPRESS OR IMPLIED, INCLUDING WARRANTIES OF MERCHANTABILITY OR FITNESS FOR A PARTICULAR PURPOSE. SCHNEIDER ELECTRIC MAKES NO WARRANTY THAT THE NOTIFICATION WILL RESOLVE THE IDENTIFIED SITUATION. IN NO EVENT SHALL SCHNEIDER ELECTRIC BE LIABLE FOR ANY DAMAGES OR LOSSES WHATSOEVER IN CONNECTION WITH THIS NOTIFICATION, INCLUDING DIRECT, INDIRECT, INCIDENTAL, CONSEQUENTIAL, LOSS OF BUSINESS PROFITS OR SPECIAL DAMAGES, EVEN IF SCHNEIDER ELECTRIC HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES. YOUR USE OF THIS NOTIFICATION IS AT YOUR OWN RISK, AND YOU ARE SOLELY LIABLE FOR ANY DAMAGES TO YOUR SYSTEMS OR ASSETS OR OTHER LOSSES THAT MAY RESULT FROM YOUR USE OF THIS NOTIFICATION. SCHNEIDER ELECTRIC RESERVES THE RIGHT TO UPDATE OR CHANGE THIS NOTIFICATION AT ANY TIME AND IN ITS SOLE DISCRETION</p>\n<hr />\n<h2>About Schneider Electric</h2>\n<p>Schneider's purpose is to create Impact by empowering all to make the most of our energy and resources, bridging progress and sustainability for all. We call this Life Is On. Our mission is to be the trusted partner in Sustainability and Efficiency. We are a global industrial technology leader bringing world-leading expertise in electrification, automation and digitization to smart industries, resilient infrastructure, future-proof data centers, intelligent buildings, and intuitive homes. Anchored by our deep domain expertise, we provide integrated end-to-end lifecycle AI enabled Industrial IoT solutions with connected products, automation, software and services, delivering digital twins to enable profitable growth for our customers. We are a people company with an ecosystem of 150,000 colleagues and more than a million partners operating in over 100 countries to ensure proximity to our customers and stakeholders. We embrace diversity and inclusion in everything we do, guided by our meaningful purpose of a sustainable future for all. www.se.com</p>\n<hr />\n<h2>Legal Notice and Terms of Use</h2>\n<p>This product is provided subject to this Notification (https://www.cisa.gov/notification) and this Privacy &amp; Use policy (https://www.cisa.gov/privacy-policy).</p>\n<hr />\n<h2>Recommended Practices</h2>\n<p>CISA recommends users take defensive measures to minimize the exploitation risk of these vulnerabilities.</p>\n<p>Minimize network exposure for all control system devices and/or systems, and ensure they are not accessible from the internet.</p>\n<p>Locate control system networks and remote devices behind firewalls and isolate them from business networks.</p>\n<p>When remote access is required, use more secure methods, such as Virtual Private Networks (VPNs), recognizing VPNs may have vulnerabilities and should be updated to the most recent version available. Also recognize VPN is only as secure as its connected devices.</p>\n<p>CISA reminds organizations to perform proper impact analysis and risk assessment prior to deploying defensive measures.</p>\n<p>CISA also provides a section for control systems security recommended practices on the ICS webpage on cisa.gov. Several CISA products detailing cyber defense best practices are available for reading and download, including Improving Industrial Control Systems Cybersecurity with Defense-in-Depth Strategies.</p>\n<p>CISA encourages organizations to implement recommended cybersecurity strategies for proactive defense of ICS assets. Additional mitigation guidance and recommended practices are publicly available on the ICS webpage at cisa.gov in the technical information paper, ICS-TIP-12-146-01B--Targeted Cyber Intrusion Detection and Mitigation Strategies.</p>\n<p>Organizations observing suspected malicious activity should follow established internal procedures and report findings to CISA for tracking and correlation against other incidents.</p>\n<hr />\n<h2>Advisory Conversion Disclaimer</h2>\n<p>This ICSA is a verbatim republication of Schneider Electric CPCERT SEVD-2026-132-04 from a direct conversion of the vendor's Common Security Advisory Framework (CSAF) advisory. This is republished to CISA's website as a means of increasing visibility and is provided \"as-is\" for informational purposes only. CISA is not responsible for the editorial or technical accuracy of republished advisories and provides no warranties of any kind regarding any information contained within this advisory. Further, CISA does not endorse any commercial product or service. Please contact Schneider Electric CPCERT directly for any questions regarding this advisory.</p>\n<h2>Revision History</h2>\n<ul>\n<li><strong>Initial Release Date: </strong>2026-05-12</li>\n</ul>\n<table class=\"tablesaw tablesaw-stack\">\n<thead>\n<tr>\n<th>Date</th>\n<th>Revision</th>\n<th>Summary</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>2026-05-12</td>\n<td>1</td>\n<td>Original Release</td>\n</tr>\n<tr>\n<td>2026-06-09</td>\n<td>2</td>\n<td>Initial CISA Republication of Schneider Electric CPCERT SEVD-2026-132-04 advisory</td>\n</tr>\n</tbody>\n</table>\n<hr />\n<h2>Legal Notice and Terms of Use</h2>",
+          "published": "Tue, 09 Jun 26 12:00:00 +0000",
+          "id": "/node/25007",
+          "_category": "NEWS"
+        },
+        {
+          "title": "Schneider Electric Modicon Network Managed Switches",
+          "link": "https://www.cisa.gov/news-events/ics-advisories/icsa-26-160-01",
+          "summary": "<p><a href=\"https://github.com/cisagov/CSAF/blob/develop/csaf_files/OT/white/2026/icsa-26-160-01.json\"><strong>View CSAF</strong></a></p>\n<h2>Summary</h2>\n<p><strong>Schneider Electric is aware of a RADIUS protocol vulnerability affecting its Modicon Network Managed Switch product. The Modicon Network Managed Switch product provides connectivity for multiple Ethernet devices, network management, enhanced cyber security and more advanced switching features. Failure to apply the mitigation provided below may risk forgery attacks in RADIUS Protocol, which could result in modification of any valid Response (Access-Accept, Access-Reject, or Access-Challenge) to any other response which could result in the possibility of denial of service and loss of confidentiality, integrity of the devices connected to the switch.</strong></p>\n<p>The following versions of Schneider Electric Modicon Network Managed Switches are affected:</p>\n<ul>\n<li>Connexium Managed Switches vers:all/*&nbsp;</li>\n<li>Modicon Managed Switches vers:all/*&nbsp;</li>\n<li>Modicon Redundancy Switches vers:all/*&nbsp;</li>\n</ul>\n<div class=\"csaf-table\">\n<table class=\"tablesaw tablesaw-stack\">\n<thead>\n<tr>\n<th>CVSS</th>\n<th>Vendor</th>\n<th>Equipment</th>\n<th>Vulnerabilities</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>v3 9</td>\n<td>Schneider Electric</td>\n<td>Schneider Electric Modicon Network Managed Switches</td>\n<td>Improper Enforcement of Message Integrity During Transmission in a Communication Channel</td>\n</tr>\n</tbody>\n</table>\n</div>\n<h3>Background</h3>\n<ul>\n<li><strong>Critical Infrastructure Sectors: </strong>Commercial Facilities, Energy, Food and Agriculture, Government Services and Facilities, Transportation Systems, Water and Wastewater</li>\n<li><strong>Countries/Areas Deployed: </strong>Worldwide</li>\n<li><strong>Company Headquarters Location: </strong>France</li>\n</ul>\n<hr />\n<h2>Vulnerabilities</h2>\n<div class=\"csaf-accordion\">\n<p><a class=\"csaf-accordion-toggle-all\" href=\"https://www.cisa.gov/\">Expand All +</a></p>\n<div class=\"csaf-accordion-item\">\n<h3><a class=\"csaf-accordion-toggle\" href=\"https://www.cisa.gov/\">CVE-2024-3596</a></h3>\n<div class=\"csaf-accordion-content\">\n<p>Additional information about CVE-2024-3596 can be found here:https://www.cve.org/CVERecord?id=CVE-2024-3596</p>\n<p><a href=\"https://www.cve.org/CVERecord?id=CVE-2024-3596\">View CVE Details</a></p>\n<hr />\n<h4>Affected Products</h4>\n<h5>Schneider Electric Modicon Network Managed Switches</h5>\n<div class=\"ics-vendor-version-status\">\n<div class=\"ics-vendor\"><strong>Vendor:</strong><br />Schneider Electric</div>\n<div class=\"ics-version\"><strong>Product Version:</strong><br />Connexium Managed Switches All Versions, Modicon Managed Switches All Versions, Modicon Redundancy Switches All Versions</div>\n<div class=\"ics-status\"><strong>Product Status:</strong><br />known_affected</div>\n</div>\n<div class=\"ics-remediations\">\n<h6>Remediations</h6>\n<p><strong>Mitigation</strong><br />The default RADIUS configuration is not vulnerable. However, if the RADIUS Server Message Authenticator option is disabled, the product becomes vulnerable. We advise keeping this parameter in its default (enabled) state. This parameter can be configured via CLI and SNMP:TCSESM* CLI: radius server msgauthMIB: hmAgentRadiusServerMsgAuth</p>\n<p><strong>Mitigation</strong><br />The default RADIUS configuration is not vulnerable. However, if the RADIUS Server Message Authenticator option is disabled, the product becomes vulnerable. We advise keeping this parameter in its default (enabled) state. This parameter can be configured via CLI and SNMP:MCSESM*, MCSESP* CLI: radius server auth modify msgauth MIB: hm2AgentRadiusServerMsgAuth</p>\n<p><strong>Mitigation</strong><br />The default RADIUS configuration is not vulnerable. However, if the RADIUS Server Message Authenticator option is disabled, the product becomes vulnerable. We advise keeping this parameter in its default (enabled) state. This parameter can be configured via CLI and SNMP:MCSESR* CLI: radius server auth modify msgauth MIB: hm2AgentRadiusServerMsgAuth</p>\n</div>\n<p><strong>Relevant CWE:</strong> <a href=\"https://cwe.mitre.org/data/definitions/924.html\">CWE-924 Improper Enforcement of Message Integrity During Transmission in a Communication Channel</a></p>\n<hr />\n<h4>Metrics</h4>\n<div class=\"csaf-table csaf-metrics-table\">\n<table class=\"tablesaw tablesaw-stack\">\n<thead>\n<tr>\n<th>CVSS Version</th>\n<th>Base Score</th>\n<th>Base Severity</th>\n<th>Vector String</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>3.1</td>\n<td>9</td>\n<td>CRITICAL</td>\n<td><a href=\"https://www.first.org/cvss/calculator/3.1#CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:C/C:H/I:H/A:H\">CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:C/C:H/I:H/A:H</a></td>\n</tr>\n</tbody>\n</table>\n</div>\n</div>\n</div>\n</div>\n<hr />\n<h2>Acknowledgments</h2>\n<ul>\n<li>Schneider Electric CPCERT reported this vulnerability to CISA.</li>\n</ul>\n<hr />\n<h2>General Security Recommendations</h2>\n<p>We strongly recommend the following industry cybersecurity best practices. * Locate control and safety system networks and remote devices behind firewalls and isolate them from the business network. * Install physical controls so no unauthorized personnel can access your industrial control and safety systems, components, peripheral equipment, and networks. * Place all controllers in locked cabinets and never leave them in the \u201cProgram\u201d mode. * Never connect programming software to any network other than the network intended for that device. * Scan all methods of mobile data exchange with the isolated network such as CDs, USB drives, etc. before use in the terminals or any node connected to these networks. * Never allow mobile devices that have connected to any other network besides the intended network to connect to the safety or control networks without proper sanitation. * Minimize network exposure for all control system devices and systems and ensure that they are not accessible from the Internet. * When remote access is required, use secure methods, such as Virtual Private Networks (VPNs). Recognize that VPNs may have vulnerabilities and should be updated to the most current version available. Also, understand that VPNs are only as secure as the connected devices. For more information refer to the Schneider Electric [Recommended Cybersecurity Best Practices](https://www.se.com/us/en/download/document/7EN52-0390/) document.</p>\n<hr />\n<h2>For More Information</h2>\n<p>This document provides an overview of the identified vulnerability or vulnerabilities and actions required to mitigate. For more details and assistance on how to protect your installation, contact your local Schneider Electric representative or Schneider Electric Industrial Cybersecurity Services: https://www.se.com/ww/en/work/solutions/cybersecurity/. These organizations will be fully aware of this situation and can support you through the process. For further information related to cybersecurity in Schneider Electric's products, visit the company's cybersecurity support portal page: https://www.se.com/ww/en/work/support/cybersecurity/overview.jsp</p>\n<hr />\n<h2>LEGAL DISCLAIMER</h2>\n<p>THIS NOTIFICATION DOCUMENT, THE INFORMATION CONTAINED HEREIN, AND ANY MATERIALS LINKED FROM IT (COLLECTIVELY, THIS \u201cNOTIFICATION\u201d) ARE INTENDED TO HELP PROVIDE AN OVERVIEW OF THE IDENTIFIED SITUATION AND SUGGESTED MITIGATION ACTIONS, REMEDIATION, FIX, AND/OR GENERAL SECURITY RECOMMENDATIONS AND IS PROVIDED ON AN \u201cAS-IS\u201d BASIS WITHOUT WARRANTY OR GUARANTEE OF ANY KIND. SCHNEIDER ELECTRIC DISCLAIMS ALL WARRANTIES RELATING TO THIS NOTIFICATION, EITHER EXPRESS OR IMPLIED, INCLUDING WARRANTIES OF MERCHANTABILITY OR FITNESS FOR A PARTICULAR PURPOSE. SCHNEIDER ELECTRIC MAKES NO WARRANTY THAT THE NOTIFICATION WILL RESOLVE THE IDENTIFIED SITUATION. IN NO EVENT SHALL SCHNEIDER ELECTRIC BE LIABLE FOR ANY DAMAGES OR LOSSES WHATSOEVER IN CONNECTION WITH THIS NOTIFICATION, INCLUDING DIRECT, INDIRECT, INCIDENTAL, CONSEQUENTIAL, LOSS OF BUSINESS PROFITS OR SPECIAL DAMAGES, EVEN IF SCHNEIDER ELECTRIC HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES. YOUR USE OF THIS NOTIFICATION IS AT YOUR OWN RISK, AND YOU ARE SOLELY LIABLE FOR ANY DAMAGES TO YOUR SYSTEMS OR ASSETS OR OTHER LOSSES THAT MAY RESULT FROM YOUR USE OF THIS NOTIFICATION. SCHNEIDER ELECTRIC RESERVES THE RIGHT TO UPDATE OR CHANGE THIS NOTIFICATION AT ANY TIME AND IN ITS SOLE DISCRETION</p>\n<hr />\n<h2>About Schneider Electric</h2>\n<p>Schneider's purpose is to create Impact by empowering all to make the most of our energy and resources, bridging progress and sustainability for all. We call this Life Is On. Our mission is to be the trusted partner in Sustainability and Efficiency. We are a global industrial technology leader bringing world-leading expertise in electrification, automation and digitization to smart industries, resilient infrastructure, future-proof data centers, intelligent buildings, and intuitive homes. Anchored by our deep domain expertise, we provide integrated end-to-end lifecycle AI enabled Industrial IoT solutions with connected products, automation, software and services, delivering digital twins to enable profitable growth for our customers. We are a people company with an ecosystem of 150,000 colleagues and more than a million partners operating in over 100 countries to ensure proximity to our customers and stakeholders. We embrace diversity and inclusion in everything we do, guided by our meaningful purpose of a sustainable future for all. www.se.com</p>\n<hr />\n<h2>Legal Notice and Terms of Use</h2>\n<p>This product is provided subject to this Notification (https://www.cisa.gov/notification) and this Privacy &amp; Use policy (https://www.cisa.gov/privacy-policy).</p>\n<hr />\n<h2>Recommended Practices</h2>\n<p>CISA recommends users take defensive measures to minimize the exploitation risk of these vulnerabilities.</p>\n<p>Minimize network exposure for all control system devices and/or systems, and ensure they are not accessible from the internet.</p>\n<p>Locate control system networks and remote devices behind firewalls and isolate them from business networks.</p>\n<p>When remote access is required, use more secure methods, such as Virtual Private Networks (VPNs), recognizing VPNs may have vulnerabilities and should be updated to the most recent version available. Also recognize VPN is only as secure as its connected devices.</p>\n<p>CISA reminds organizations to perform proper impact analysis and risk assessment prior to deploying defensive measures.</p>\n<p>CISA also provides a section for control systems security recommended practices on the ICS webpage on cisa.gov. Several CISA products detailing cyber defense best practices are available for reading and download, including Improving Industrial Control Systems Cybersecurity with Defense-in-Depth Strategies.</p>\n<p>CISA encourages organizations to implement recommended cybersecurity strategies for proactive defense of ICS assets. Additional mitigation guidance and recommended practices are publicly available on the ICS webpage at cisa.gov in the technical information paper, ICS-TIP-12-146-01B--Targeted Cyber Intrusion Detection and Mitigation Strategies.</p>\n<p>Organizations observing suspected malicious activity should follow established internal procedures and report findings to CISA for tracking and correlation against other incidents.</p>\n<hr />\n<h2>Advisory Conversion Disclaimer</h2>\n<p>This ICSA is a verbatim republication of Schneider Electric CPCERT SEVD-2026-104-02 from a direct conversion of the vendor's Common Security Advisory Framework (CSAF) advisory. This is republished to CISA's website as a means of increasing visibility and is provided \"as-is\" for informational purposes only. CISA is not responsible for the editorial or technical accuracy of republished advisories and provides no warranties of any kind regarding any information contained within this advisory. Further, CISA does not endorse any commercial product or service. Please contact Schneider Electric CPCERT directly for any questions regarding this advisory.</p>\n<h2>Revision History</h2>\n<ul>\n<li><strong>Initial Release Date: </strong>2026-04-14</li>\n</ul>\n<table class=\"tablesaw tablesaw-stack\">\n<thead>\n<tr>\n<th>Date</th>\n<th>Revision</th>\n<th>Summary</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>2026-04-14</td>\n<td>1</td>\n<td>Original Release</td>\n</tr>\n<tr>\n<td>2026-06-09</td>\n<td>2</td>\n<td>Initial CISA Republication of Schneider Electric CPCERT SEVD-2026-104-02 advisory</td>\n</tr>\n</tbody>\n</table>\n<hr />\n<h2>Legal Notice and Terms of Use</h2>",
+          "published": "Tue, 09 Jun 26 12:00:00 +0000",
+          "id": "/node/25005",
+          "_category": "NEWS"
+        }
+      ]
+    }
+  },
+  "cc_crypto": {
+    "pages": {}
+  },
+  "nist": {
+    "pages": {},
+    "cmvp_mip": {
+      "added": [],
+      "removed": [],
+      "status_changes": []
+    },
+    "feeds": {
+      "NIST Information Technology News": [
+        {
+          "title": "NCCoE Cybersecurity Connections Event: Accelerating the Adoption of Mobile Driver&#039;s Licenses",
+          "link": "https://www.nist.gov/news-events/events/2026/07/nccoe-cybersecurity-connections-event-accelerating-adoption-mobile",
+          "summary": "Event Date: July 21, 2026 Event Time: 11:00 A.M. \u2013 1:30 P.M. EDT The NIST National Cybersecurity Center of Excellence (NCCoE) is proud to host a quarterly Cybersecurity Connections event and networking lunch in partnership with the Maryland",
+          "published": "Tue, 21 Jul 2026 11:00:00 -0400",
+          "id": "https://www.nist.gov/node/1914091",
+          "_category": "EVENT"
+        },
+        {
+          "title": "NIST Mathematical Proof Supports Transition to a Continuous-Monitor-and-Update Security Model for AI Systems",
+          "link": "https://www.nist.gov/news-events/news/2026/06/nist-mathematical-proof-supports-transition-continuous-monitor-and-update",
+          "summary": "The proof extends to AI the logic used by famed mathematician Kurt G\u00f6del, whose incompleteness theorems have had a profound effect on math for nearly a century.",
+          "published": "Tue, 09 Jun 2026 12:00:00 +0000",
+          "id": "https://www.nist.gov/node/1912201",
+          "_category": "NIST"
+        }
+      ]
+    }
+  },
+  "nato": {
+    "pages": {},
+    "cisco_added": [],
+    "cisco_removed": []
+  },
+  "eucc": {
+    "pages": {},
+    "cisco_added": [],
+    "cisco_removed": []
+  },
+  "alerts": [
+    {
+      "source": "NIST Feed: NIST Information Technology News",
+      "kind": "news",
+      "title": "NCCoE Cybersecurity Connections Event: Accelerating the Adoption of Mobile Driver&#039;s Licenses",
+      "url": "https://www.nist.gov/news-events/events/2026/07/nccoe-cybersecurity-connections-event-accelerating-adoption-mobile",
+      "detail": "Feed: NIST Information Technology News \u00b7 Published: Tue, 21 Jul 2026",
+      "matched_keywords": [],
+      "tab": "us"
+    },
+    {
+      "source": "NIST Feed: NIST Information Technology News",
+      "kind": "news",
+      "title": "NIST Mathematical Proof Supports Transition to a Continuous-Monitor-and-Update Security Model for AI Systems",
+      "url": "https://www.nist.gov/news-events/news/2026/06/nist-mathematical-proof-supports-transition-continuous-monitor-and-update",
+      "detail": "Feed: NIST Information Technology News \u00b7 Published: Tue, 09 Jun 2026",
+      "matched_keywords": [],
+      "tab": "us"
+    }
+  ]
+}
