@@ -179,7 +179,7 @@
   <span class="nav-title">CC Pulse Dashboard</span>
   <span class="nav-spacer"></span>
   <div class="ham-wrap">
-    <span class="nav-meta">Last run: 2026-06-10 03:29 ET</span>
+    <span class="nav-meta">Last run: 2026-06-11 03:41 ET</span>
     <button class="ham-btn" id="ham-btn" onclick="toggleHamMenu()" aria-expanded="false" aria-haspopup="true" title="Open menu">&#9776;</button>
     <div class="ham-menu" id="ham-menu" role="menu">
       <a class="ham-item" href="https://kr15tyk.github.io/CC-pulse/cc_dashboard.html" role="menuitem"><span class="ham-icon">&#127968;</span>Home</a>
@@ -255,7 +255,7 @@
 <div class="sticky-top">
   <div class="trend-bar">
     <div class="stat"><a href="#sec-niap-pp" onclick="navigateTo('sec-niap-pp');return false;">
-      <div class="stat-num active-num">7</div>
+      <div class="stat-num active-num">5</div>
       <div class="stat-lbl">NIAP Changes</div>
     </a></div>
     <div class="stat"><a href="#sec-csfc" onclick="navigateTo('sec-csfc');return false;">
@@ -263,11 +263,11 @@
       <div class="stat-lbl">CSfC Selection Updates</div>
     </a></div>
     <div class="stat"><a href="#sec-nist" onclick="navigateTo('sec-nist');return false;">
-      <div class="stat-num ">0</div>
+      <div class="stat-num active-num">2</div>
       <div class="stat-lbl">NIST Doc Updates</div>
     </a></div>
     <div class="stat"><a href="#sec-cc-portal" onclick="navigateTo('sec-cc-portal');return false;">
-      <div class="stat-num ">0</div>
+      <div class="stat-num active-num">1</div>
       <div class="stat-lbl">CC Portal</div>
     </a></div>
     <div class="stat"><a href="#sec-nato" onclick="navigateTo('sec-nato');return false;">
@@ -275,7 +275,7 @@
       <div class="stat-lbl">NATO NIAPCL</div>
     </a></div>
     <div class="stat"><a href="#sec-cctl" onclick="navigateTo('sec-cctl');return false;">
-      <div class="stat-num active-num">1</div>
+      <div class="stat-num ">0</div>
       <div class="stat-lbl">CCTL Updates</div>
     </a></div>
     <div class="stat"><a href="#sec-eucc-req" onclick="navigateTo('sec-eucc-req');return false;">
@@ -283,7 +283,7 @@
       <div class="stat-lbl">EUCC Changes</div>
     </a></div>
     <div class="stat"><a href="#sec-alerts" onclick="navigateTo('sec-alerts');return false;">
-      <div class="stat-num alert-num">2</div>
+      <div class="stat-num alert-num">3</div>
       <div class="stat-lbl">Alerts</div>
     </a></div>
   </div>
@@ -314,28 +314,37 @@
 <div class="card card-alert" id="sec-alerts">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>Alerts</span>
-    <span class="card-count">2 alerts</div>
+    <span class="card-count">3 alerts</div>
 </span>
     <span class="toggle-icon">&#9660;</span>
   </div>
   <div class="card-body">
     <div class="alert-monitoring">FIPS 186-4, FIPS 186-5, NDcPP, CPP_ND, TLS 1.3, SSH, PP-Module_VPN, PP-Module_WLAN, labgram, valgram, emergency, CSfC, Commercial Solutions for Classified, CSfC APL, CSfC component selections, NSA CSfC, NATO NIAPC, NIAPCL, EUCC, ENISA, CCDB-018, Crypto Catalog, cryptography working group, Specification of Functional Requirements for Cryptography, FCS_CKM, FCS_COP, FCS_RBG, CAVP, CMVP, FIPS 140-3, FIPS 203, FIPS 204, FIPS 205, SP 800-131A, SP 800-57, NIST IR 8547, post-quantum cryptography, PQC migration, ML-KEM, ML-DSA, SLH-DSA, algorithm transition, CMVP validated, modules in process</div>
     
-        <div class="item-row alert-item" data-alert-key="NIST Feed: NIST Information Technology News-NCCoE_Cybersecurity_Connections_Event:_Accelerating_the_Adoption_of_Mobile_Driver&#039;s_Licenses" data-tab="us">
+        <div class="item-row alert-item" data-alert-key="NIAP TD-FIT_Technical_Decision:_Addition_of_AES-XTS_in_FCS_COP.1(g)" data-tab="us">
           
-          <a class="item-link" href="https://www.nist.gov/news-events/events/2026/07/nccoe-cybersecurity-connections-event-accelerating-adoption-mobile" target="_blank">NIST Feed: NIST Information Technology News: NCCoE Cybersecurity Connections Event: Accelerating the Adoption of Mobile Driver&#039;s Licenses</a>
+          <a class="item-link" href="https://www.niap-ccevs.org/technical-decisions/TD1046" target="_blank">NIAP TD: FIT Technical Decision: Addition of AES-XTS in FCS_COP.1(g)</a>
           
-          <span class="item-meta">news &middot; </span>
-          <div class="item-sub">Feed: NIST Information Technology News · Published: Tue, 21 Jul 2026</div>
+          <span class="item-meta">new &middot; FCS_COP</span>
+          <div class="item-sub">TD1046</div>
           <button class="dismiss-btn" onclick="dismissAlert(this)" title="Mark as seen">&#10003; Seen</button>
         </div>
         
-        <div class="item-row alert-item" data-alert-key="NIST Feed: NIST Information Technology News-NIST_Mathematical_Proof_Supports_Transition_to_a_Continuous-Monitor-and-Update_Security_Model_for_AI_Systems" data-tab="us">
+        <div class="item-row alert-item" data-alert-key="CC Crypto: news-The_HCD_iTC_has_released_their_collaborative_Protection_Profile_and_Supporting_Document_V2.0_draft_for_Public_Review" data-tab="us">
           
-          <a class="item-link" href="https://www.nist.gov/news-events/news/2026/06/nist-mathematical-proof-supports-transition-continuous-monitor-and-update" target="_blank">NIST Feed: NIST Information Technology News: NIST Mathematical Proof Supports Transition to a Continuous-Monitor-and-Update Security Model for AI Systems</a>
+          <a class="item-link" href="https://www.commoncriteriaportal.org/news/index.cfm" target="_blank">CC Crypto: news: The HCD iTC has released their collaborative Protection Profile and Supporting Document V2.0 draft for Public Review</a>
           
-          <span class="item-meta">news &middot; </span>
-          <div class="item-sub">Feed: NIST Information Technology News · Published: Tue, 09 Jun 2026</div>
+          <span class="item-meta">publication &middot; </span>
+          <div class="item-sub">New item on CC Crypto news page</div>
+          <button class="dismiss-btn" onclick="dismissAlert(this)" title="Mark as seen">&#10003; Seen</button>
+        </div>
+        
+        <div class="item-row alert-item" data-alert-key="CC Crypto: news-Please_visit_the_HCD_iTC_home_page_for_more_information_about_reviewing_the_draft_and_how_to_provide_comments._This_revi" data-tab="us">
+          
+          <a class="item-link" href="https://hcd-itc.github.io/" target="_blank">CC Crypto: news: Please visit the HCD iTC home page for more information about reviewing the draft and how to provide comments. This revi</a>
+          
+          <span class="item-meta">publication &middot; </span>
+          <div class="item-sub">New item on CC Crypto news page</div>
           <button class="dismiss-btn" onclick="dismissAlert(this)" title="Mark as seen">&#10003; Seen</button>
         </div>
         
@@ -370,38 +379,22 @@
 </div>
 
   <!-- NIAP In-Evaluation -->
-<div class="card card-new" id="sec-niap-inevaluation" data-has-changes="4">
+<div class="card card-new" id="sec-niap-inevaluation" data-has-changes="2">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>NIAP In-Evaluation Products</span>
-    <span class="card-count">4 changes</span>
+    <span class="card-count">2 changes</span>
     </span>
   </div>
   <div class="card-body ">
     
-    <div class="sub-hdr sub-new">Newly In Evaluation (3)</div>
+    <div class="sub-hdr sub-new">Newly In Evaluation (1)</div>
     
     <div class="item-row" data-source="niap-inevaluation" data-kind="new">
-      <span class="item-link">High Sec Labs, Inc. -- High Sec Labs SK41D-4TR KVM</span>
-      <span class="item-meta">Acumen Security</span>
+      <span class="item-link">Zebra Technologies Corporation -- Zebra 4490/5430/6490 Devices on Android 15</span>
+      <span class="item-meta">Gossamer Security Solutions</span>
     </div>
     
-    <div class="item-sub">Peripheral Switch</div>
-    
-    
-    <div class="item-row" data-source="niap-inevaluation" data-kind="new">
-      <span class="item-link">Vertiv IT Systems -- Vertiv CYBEX™ SC820DPH, SC840DPH, SC920DPH, SC940DPH, SC840DPHC, SC940DPHC Firmware Version 44404-E7E7 Peripheral Sharing Devices</span>
-      <span class="item-meta">Acumen Security</span>
-    </div>
-    
-    <div class="item-sub">Peripheral Switch</div>
-    
-    
-    <div class="item-row" data-source="niap-inevaluation" data-kind="new">
-      <span class="item-link">Vertiv IT Systems -- Vertiv CYBEX™ SC845DPH, SC885DPH, SC945DPH, SC845DPHC, SC945DPHC, SCM145DPH, SCM185DPH, SC985DPH, SCMV245DPH, SCMV285DPH Firmware Version 44444-E7E7 Peripheral Sharing Devices</span>
-      <span class="item-meta">Acumen Security</span>
-    </div>
-    
-    <div class="item-sub">Peripheral Switch</div>
+    <div class="item-sub">Mobility</div>
     
     
     
@@ -409,7 +402,7 @@
     <div class="sub-hdr sub-removed">Left Evaluation (1)</div>
     
     <div class="item-row" data-source="niap-inevaluation" data-kind="removed">
-      <span class="item-link">General Dynamics Mission Systems -- GovShield Version 1.60.05</span>
+      <span class="item-link">HPE Juniper Networking -- Juniper Networks Junos OS 24.2R2 for EX4400</span>
       <span class="item-meta">Completed or Withdrawn</span>
     </div>
     
@@ -436,38 +429,22 @@
 </div>
 
   <!-- NIAP PCL — All Certifications -->
-<div class="card card-new" id="sec-niap-pcl" data-has-changes="3">
+<div class="card card-new" id="sec-niap-pcl" data-has-changes="1">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>NIAP PCL — All Certifications</span>
-    <span class="card-count">3 changes</span>
+    <span class="card-count">1 change</span>
     </span>
   </div>
   <div class="card-body ">
     
-    <div class="sub-hdr sub-new">New Certifications (3)</div>
+    <div class="sub-hdr sub-new">New Certifications (1)</div>
     
     <div class="item-row" data-source="niap-pcl" data-kind="new">
-      <span class="item-link">High Sec Labs, Inc. -- High Sec Labs SK41D-4TR KVM</span>
+      <span class="item-link">Zebra Technologies Corporation -- Zebra 4490/5430/6490 Devices on Android 15</span>
       <span class="item-meta"></span>
     </div>
     
-    <div class="item-sub">PP_PSD_V4.0, MOD_KM_V1.0, MOD_VI_V1.0</div>
-    
-    
-    <div class="item-row" data-source="niap-pcl" data-kind="new">
-      <span class="item-link">Vertiv IT Systems -- Vertiv CYBEX™ SC845DPH, SC885DPH, SC945DPH, SC845DPHC, SC945DPHC, SCM145DPH, SCM185DPH, SC985DPH, SCMV245DPH, SCMV285DPH Firmware Version 44444-E7E7 Peripheral Sharing Devices</span>
-      <span class="item-meta"></span>
-    </div>
-    
-    <div class="item-sub">PP_PSD_V4.0, MOD_AO_V1.0, MOD_UA_V1.0, MOD_KM_V1.0, MOD_VI_V1.0</div>
-    
-    
-    <div class="item-row" data-source="niap-pcl" data-kind="new">
-      <span class="item-link">Vertiv IT Systems -- Vertiv CYBEX™ SC820DPH, SC840DPH, SC920DPH, SC940DPH, SC840DPHC, SC940DPHC Firmware Version 44404-E7E7 Peripheral Sharing Devices</span>
-      <span class="item-meta"></span>
-    </div>
-    
-    <div class="item-sub">PP_PSD_V4.0, MOD_AO_V1.0, MOD_KM_V1.0, MOD_VI_V1.0</div>
+    <div class="item-sub">MOD_BT_V1.0, PKG_TLS_V1.1, MOD_WLANC_v1.0, PP_MDF_V3.3</div>
     
     
     
@@ -495,17 +472,36 @@
 </div>
 
   <!-- NIAP TDs -->
-<div class="card " id="sec-niap-td" data-has-changes="0">
+<div class="card card-new" id="sec-niap-td" data-has-changes="2">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>NIAP Technical Decisions</span>
-    <span class="card-count">0 changes</span>
+    <span class="card-count">2 changes</span>
     </span>
-    <span class="toggle-icon">&#9658;</span>
+    <span class="toggle-icon">&#9660;</span>
   </div>
-  <div class="card-body collapsed">
+  <div class="card-body ">
+    
+    <div class="sub-hdr sub-new">New TDs (2)</div>
+    
+    <div class="item-row" data-source="niap-td" data-kind="new">
+      <a class="item-link" href="https://www.niap-ccevs.org/technical-decisions/TD1045" target="_blank">TD1045 &mdash; FIT Technical Decision: Arbitrary Test Pattern in FDP_DSK_EXT.1:1</a>
+      <span class="item-meta">2026-06-10</span>
+    </div>
+    
+    <div class="item-sub">Applies to: CPP_FDE_EE_V3.0</div>
     
     
-    <p class="no-change">No changes detected. <span class="last-active">(last: 2026-05-16)</span></p>
+    <div class="item-row" data-source="niap-td" data-kind="new">
+      <a class="item-link" href="https://www.niap-ccevs.org/technical-decisions/TD1046" target="_blank">TD1046 &mdash; FIT Technical Decision: Addition of AES-XTS in FCS_COP.1(g)</a>
+      <span class="item-meta">2026-06-10</span>
+    </div>
+    
+    <div class="item-sub">Applies to: CPP_FDE_AA_V2.0E, CPP_FDE_EE_V2.0E</div>
+    
+    
+    
+    
+    
   </div>
 </div>
 </div>
@@ -531,16 +527,28 @@
 <div class="section-group">
   <div class="section-label">Documentation</div>
   <!-- CC Crypto Docs -->
-<div class="card " id="sec-cc-crypto" data-has-changes="0">
+<div class="card card-updated" id="sec-cc-crypto" data-has-changes="2">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>CC Crypto Documentation</span>
-    <span class="card-count">0 updates</span>
+    <span class="card-count">2 updates</span>
     </span>
-    <span class="toggle-icon">&#9658;</span>
+    <span class="toggle-icon">&#9660;</span>
   </div>
-  <div class="card-body collapsed">
+  <div class="card-body ">
     
-    <p class="no-change">No changes detected.</p>
+      
+      <div class="item-row" data-source="cc-crypto" data-kind="updated">
+        <a class="item-link" href="https://www.commoncriteriaportal.org/" target="_blank">The HCD iTC has released their collaborative Protection Profile and Supporting Document V2.0 draft for Public Review</a>
+        <span class="item-meta">news</span>
+      </div>
+      
+      <div class="item-row" data-source="cc-crypto" data-kind="updated">
+        <a class="item-link" href="https://hcd-itc.github.io/" target="_blank">Please visit the HCD iTC home page for more information about reviewing the draft and how to provide comments. This review period will end on July 1, 2026.</a>
+        <span class="item-meta">news</span>
+      </div>
+      
+    
+    
   </div>
 </div>
 
@@ -564,18 +572,26 @@
 <div class="section-group">
   <div class="section-label">CC Portal</div>
   <!-- CC Portal (international) -->
-<div class="card " id="sec-cc-portal" data-has-changes="0">
+<div class="card card-new" id="sec-cc-portal" data-has-changes="1">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>CC Portal (International)</span>
-    <span class="card-count">0 new items</span>
+    <span class="card-count">1 new item</span>
     </span>
-    <span class="toggle-icon">&#9658;</span>
+    <span class="toggle-icon">&#9660;</span>
   </div>
-  <div class="card-body collapsed">
+  <div class="card-body ">
+    
+    <div class="sub-hdr sub-new">News (1)</div>
+    
+    <div class="item-row" data-source="cc-portal" data-kind="new">
+      <a class="item-link" href="https://hcd-itc.github.io/" target="_blank">Please visit theHCD iTC home pagefor more information about reviewing the draft and how to provide comments. This review period will end on July 1, 2026.</a>
+      <span class="item-meta"></span>
+    </div>
     
     
     
-    <p class="no-change">No new international items.</p>
+    
+    
   </div>
 </div><!-- NATO NIAPCL -->
         <div class="card " id="sec-nato" data-has-changes="0">
@@ -594,34 +610,16 @@
 <div class="section-group">
   <div class="section-label">CCTL</div>
   <!-- CCTL Updates -->
-<div class="card card-new" id="sec-cctl" data-has-changes="1">
+<div class="card " id="sec-cctl" data-has-changes="0">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>CCTL Updates</span>
-    <span class="card-count">1 new item</span>
+    <span class="card-count">0 new items</span>
     </span>
     <span class="toggle-icon collapsed">▼</span>
   </div>
-  <div class="card-body ">
+  <div class="card-body collapsed">
     
-    
-    <div class="lab-row">
-      <div class="lab-hdr" onclick="toggleLab(this)">
-        <span class="lab-name">atsec</span>
-        <span class="lab-cnt">1 item</span>
-        <span class="lab-toggle">▼</span>
-      </div>
-      <div class="lab-body collapsed">
-        
-        <div class="item-row" data-source="cctl" data-kind="new">
-          <a class="item-link" href="https://www.atsec.com/atsec-holds-successful-pci-security-standards-training-in-beijing/" target="_blank">atsec Holds Successful PCI Security Standards Training in Beijing</a>
-          <span class="item-meta"></span>
-        </div>
-        
-      </div>
-    </div>
-    
-    
-    
+    <p class="no-change">No new items.</p>
   </div>
 </div>
 </div>      
@@ -1035,7 +1033,7 @@
 </div><!-- /main-content -->
 <footer>
   <span>CC Pulse &middot; Auto-refreshes daily (01:00 EST) &middot; NIAP, CSfC, NIST, CC Portal, NATO NIAPCL, EUCC / ENISA</span>
-  <span>Last run: 2026-06-10 03:29 ET</span>
+  <span>Last run: 2026-06-11 03:41 ET</span>
 </footer>
 
 <script>
