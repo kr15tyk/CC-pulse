@@ -1,0 +1,378 @@
+{
+  "period_start": "2026-06-10T07:29:54.398338+00:00",
+  "period_end": "2026-06-11T07:41:16.853881+00:00",
+  "niap": {
+    "pps": {
+      "added": [],
+      "removed": [],
+      "sunset_changes": [],
+      "status_changes": []
+    },
+    "tds": {
+      "added": [
+        {
+          "td_id": 1045,
+          "identifier": "TD1045",
+          "title": "FIT Technical Decision: Arbitrary Test Pattern in FDP_DSK_EXT.1:1",
+          "protection_profile": [
+            {
+              "pp_id": 536,
+              "pp_name": "collaborative Protection Profile for Full Drive Encryption - Encryption Engine Version 3.0",
+              "pp_common_name": "collaborative Protection Profile for Full Drive Encryption - Encryption Engine Version 3.0",
+              "cc_version": "CC:2022",
+              "mr_version": null,
+              "pp_date": "2026-03-25T00:00:00Z",
+              "entrydate": "2026-03-23T13:04:31.275000Z",
+              "tech_type": "Encrypted Storage",
+              "pp_sponsor_id": "FDE iTC",
+              "community_id": null,
+              "status": "Publishing",
+              "sunset_date": null,
+              "pp_overview": "<p>The purpose of the Collaborative Protection Profiles (cPPs) for Full Drive Encryption (FDE): Authorization Acquisition (AA) and Encryption Engine (EE) is to provide requirements for Data-at-Rest protection for a lost device that contains storage. These cPPs allow FDE solutions based in software and/or hardware to meet the requirements. The form factor for a storage device may vary, but could include: system hard drives/solid state drives in servers, workstations, laptops, mobile devices, tablets, and external media. A hardware solution could be a Self-Encrypting Drive or other hardware-based solutions; the interface (USB, SATA, etc.) used to connect the storage device to the host machine is outside the scope of this cPP.<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>Full Drive Encryption encrypts all data (with certain exceptions) on the storage device and permits access to the data only after successful authorization to the FDE solution. The exceptions include the necessity to leave a portion of the storage device (the size may vary based on implementation) unencrypted for such things as the Master Boot Record (MBR) or other AA/EE pre-authentication software. These FDE cPPs interpret the term &ldquo;full drive encryption&rdquo; to allow FDE solutions to leave a portion of the storage device unencrypted so long as it does not contain plaintext user or plaintext authorization data.<br><br>The FDE cPP - Encryption Engine describes the requirements for the Encryption Engine piece and details the necessary security requirements and assurance activities for the actual encryption/decryption of the data by the DEK. Each cPP will also have a set of core requirements for management functions, proper handling of cryptographic keys, updates performed in a trusted manner, audit and self-tests.&nbsp;</p>",
+              "security_evaluation_summary": "",
+              "environmental_strengths": "",
+              "pp_priority": null,
+              "created_on": null,
+              "removed_on": null,
+              "archived": false,
+              "assurance_maintenance": null,
+              "pp_estcompletion": null,
+              "pp_estcompletiondate": null,
+              "pp_transition": null,
+              "revised_on": null,
+              "pp_short_name": "CPP_FDE_EE_V3.0",
+              "dod_compliant": false,
+              "csfceligible": true,
+              "constraint": null,
+              "predecessor_id": 438,
+              "successor_id": null,
+              "creator": 620,
+              "remover": null,
+              "editor": null
+            }
+          ],
+          "sunset_protection_profile": [],
+          "related_to": "FDP_DSK_EXT.1:1",
+          "publication_date": "2026-06-10T13:19:10.696000Z",
+          "removed_on": null,
+          "status": "Published"
+        },
+        {
+          "td_id": 1046,
+          "identifier": "TD1046",
+          "title": "FIT Technical Decision: Addition of AES-XTS in FCS_COP.1(g)",
+          "protection_profile": [
+            {
+              "pp_id": 437,
+              "pp_name": "collaborative Protection Profile for Full Drive Encryption - Authorization Acquisition Version 2.0 + Errata 20190201",
+              "pp_common_name": "collaborative Protection Profile for Full Drive Encryption - Authorization Acquisition Version 2.0 + Errata 20190201",
+              "cc_version": "3.1",
+              "mr_version": "",
+              "pp_date": "2019-02-01T00:00:00Z",
+              "entrydate": "2019-02-07T13:04:20Z",
+              "tech_type": "Encrypted Storage",
+              "pp_sponsor_id": "FDE iTC",
+              "community_id": null,
+              "status": "Publishing",
+              "sunset_date": "2026-09-25T00:00:00Z",
+              "pp_overview": "<p>The purpose of the Collaborative Protection Profiles (cPPs) for Full Drive Encryption (FDE): Authorization Acquisition (AA) and Encryption Engine (EE) is to provide requirements for Data-at-Rest protection for a lost device that contains storage. These cPPs allow FDE solutions based in software and/or hardware to meet the requirements. The form factor for a storage device may vary, but could include: system hard drives/solid state drives in servers, workstations, laptops, mobile devices, tablets, and external media. A hardware solution could be a Self-Encrypting Drive or other hardware-based solutions; the interface (USB, SATA, etc.) used to connect the storage device to the host machine is outside the scope of this cPP.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <br /><br />Full Drive Encryption encrypts all data (with certain exceptions) on the storage device and permits access to the data only after successful authorization to the FDE solution. The exceptions include the necessity to leave a portion of the storage device (the size may vary based on implementation) unencrypted for such things as the Master Boot Record (MBR) or other AA/EE pre-authentication software. These FDE cPPs interpret the term &ldquo;full drive encryption&rdquo; to allow FDE solutions to leave a portion of the storage device unencrypted so long as it does not contain plaintext user or plaintext authorization data.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <br /><br />The FDE cPP - Authorization Acquisition describes the requirements for the Authorization Acquisition piece and details the security requirements and assurance activities necessary to interact with a user and result in the availability of sending a Border Encryption Value (BEV) to the Encryption Engine.</p>",
+              "security_evaluation_summary": "",
+              "environmental_strengths": "",
+              "pp_priority": "",
+              "created_on": "2019-02-07T13:04:20Z",
+              "removed_on": null,
+              "archived": false,
+              "assurance_maintenance": "",
+              "pp_estcompletion": "",
+              "pp_estcompletiondate": null,
+              "pp_transition": "2019-02-01T00:00:00Z",
+              "revised_on": "2022-11-17T10:06:35Z",
+              "pp_short_name": "CPP_FDE_AA_V2.0E",
+              "dod_compliant": false,
+              "csfceligible": true,
+              "constraint": "",
+              "predecessor_id": 406,
+              "successor_id": null,
+              "creator": 409,
+              "remover": null,
+              "editor": 409
+            },
+            {
+              "pp_id": 438,
+              "pp_name": "collaborative Protection Profile for Full Drive Encryption - Encryption Engine Version 2.0 + Errata 20190201",
+              "pp_common_name": "collaborative Protection Profile for Full Drive Encryption - Encryption Engine Version 2.0 + Errata 20190201",
+              "cc_version": "3.1",
+              "mr_version": "",
+              "pp_date": "2019-02-01T00:00:00Z",
+              "entrydate": "2019-02-07T13:07:10Z",
+              "tech_type": "Encrypted Storage",
+              "pp_sponsor_id": "FDE iTC",
+              "community_id": null,
+              "status": "Publishing",
+              "sunset_date": "2026-09-25T00:00:00Z",
+              "pp_overview": "<p>The purpose of the Collaborative Protection Profiles (cPPs) for Full Drive Encryption (FDE): Authorization Acquisition (AA) and Encryption Engine (EE) is to provide requirements for Data-at-Rest protection for a lost device that contains storage. These cPPs allow FDE solutions based in software and/or hardware to meet the requirements. The form factor for a storage device may vary, but could include: system hard drives/solid state drives in servers, workstations, laptops, mobile devices, tablets, and external media. A hardware solution could be a Self-Encrypting Drive or other hardware-based solutions; the interface (USB, SATA, etc.) used to connect the storage device to the host machine is outside the scope of this cPP.<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <br />Full Drive Encryption encrypts all data (with certain exceptions) on the storage device and permits access to the data only after successful authorization to the FDE solution. The exceptions include the necessity to leave a portion of the storage device (the size may vary based on implementation) unencrypted for such things as the Master Boot Record (MBR) or other AA/EE pre-authentication software. These FDE cPPs interpret the term &ldquo;full drive encryption&rdquo; to allow FDE solutions to leave a portion of the storage device unencrypted so long as it does not contain plaintext user or plaintext authorization data.<br /><br />The FDE cPP - Encryption Engine describes the requirements for the Encryption Engine piece and details the necessary security requirements and assurance activities for the actual encryption/decryption of the data by the DEK. Each cPP will also have a set of core requirements for management functions, proper handling of cryptographic keys, updates performed in a trusted manner, audit and self-tests.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>",
+              "security_evaluation_summary": "",
+              "environmental_strengths": "",
+              "pp_priority": "",
+              "created_on": "2019-02-07T13:07:10Z",
+              "removed_on": null,
+              "archived": false,
+              "assurance_maintenance": "",
+              "pp_estcompletion": "",
+              "pp_estcompletiondate": null,
+              "pp_transition": "2019-02-01T00:00:00Z",
+              "revised_on": "2022-11-17T10:06:46Z",
+              "pp_short_name": "CPP_FDE_EE_V2.0E",
+              "dod_compliant": false,
+              "csfceligible": true,
+              "constraint": "",
+              "predecessor_id": 407,
+              "successor_id": null,
+              "creator": 409,
+              "remover": null,
+              "editor": 409
+            }
+          ],
+          "sunset_protection_profile": [],
+          "related_to": "FCS_COP.1(g), CPP_FDE_AA_V2.0E-SD, CPP_FDE_EE_V2.0E-SD",
+          "publication_date": "2026-06-10T14:55:40.748000Z",
+          "removed_on": null,
+          "status": "Published"
+        }
+      ],
+      "removed": []
+    },
+    "cisco_ndcpp": {
+      "added": [],
+      "removed": [],
+      "newly_archived": []
+    },
+    "pcl_all": {
+      "added": [
+        {
+          "active_maintenances": [],
+          "am_sort": null,
+          "assigned_lab_name": "Gossamer Security Solutions",
+          "certification_date": null,
+          "from_cc_portal": false,
+          "product_id": 11706,
+          "product_name": "Zebra 4490/5430/6490 Devices on Android 15",
+          "protection_profiles": [
+            {
+              "pp_id": 425,
+              "pp_name": "PP-Module for Bluetooth Version 1.0",
+              "pp_short_name": "MOD_BT_V1.0"
+            },
+            {
+              "pp_id": 439,
+              "pp_name": "Functional Package for TLS Version 1.1",
+              "pp_short_name": "PKG_TLS_V1.1"
+            },
+            {
+              "pp_id": 463,
+              "pp_name": "PP-Module for Wireless Local Area Network (WLAN) Client Version 1.0",
+              "pp_short_name": "MOD_WLANC_v1.0"
+            },
+            {
+              "pp_id": 468,
+              "pp_name": "Protection Profile for Mobile Device Fundamentals Version 3.3",
+              "pp_short_name": "PP_MDF_V3.3"
+            }
+          ],
+          "status_sort": "In Progress",
+          "submitting_country_id_code": "US",
+          "submitting_country_id_name": "United States",
+          "sunset_date": null,
+          "tech_types": [
+            "Mobility"
+          ],
+          "vendor_id_name": "Zebra Technologies Corporation",
+          "v_id": 11706,
+          "kicked_off_date": "2026-06-10T09:59:44.817000Z"
+        }
+      ],
+      "removed": [],
+      "newly_archived": []
+    },
+    "in_evaluation": {
+      "added": [
+        {
+          "active_maintenances": [],
+          "am_sort": null,
+          "assigned_lab_name": "Gossamer Security Solutions",
+          "certification_date": null,
+          "from_cc_portal": false,
+          "product_id": 11706,
+          "product_name": "Zebra 4490/5430/6490 Devices on Android 15",
+          "protection_profiles": [
+            {
+              "pp_id": 425,
+              "pp_name": "PP-Module for Bluetooth Version 1.0",
+              "pp_short_name": "MOD_BT_V1.0"
+            },
+            {
+              "pp_id": 439,
+              "pp_name": "Functional Package for TLS Version 1.1",
+              "pp_short_name": "PKG_TLS_V1.1"
+            },
+            {
+              "pp_id": 463,
+              "pp_name": "PP-Module for Wireless Local Area Network (WLAN) Client Version 1.0",
+              "pp_short_name": "MOD_WLANC_v1.0"
+            },
+            {
+              "pp_id": 468,
+              "pp_name": "Protection Profile for Mobile Device Fundamentals Version 3.3",
+              "pp_short_name": "PP_MDF_V3.3"
+            }
+          ],
+          "status_sort": "In Progress",
+          "submitting_country_id_code": "US",
+          "submitting_country_id_name": "United States",
+          "sunset_date": null,
+          "tech_types": [
+            "Mobility"
+          ],
+          "vendor_id_name": "Zebra Technologies Corporation",
+          "v_id": 11706,
+          "kicked_off_date": "2026-06-10T09:59:44.817000Z"
+        }
+      ],
+      "removed": [
+        {
+          "active_maintenances": [],
+          "am_sort": null,
+          "assigned_lab_name": "Lightship Security USA, Inc.",
+          "certification_date": null,
+          "from_cc_portal": false,
+          "product_id": 11622,
+          "product_name": "Juniper Networks Junos OS 24.2R2 for EX4400",
+          "protection_profiles": [
+            {
+              "pp_id": 459,
+              "pp_name": "Functional Package for SSH Version 1.0",
+              "pp_short_name": "PKG_SSH_V1.0"
+            },
+            {
+              "pp_id": 480,
+              "pp_name": "PP-Module for MACsec Ethernet Encryption Version 1.0",
+              "pp_short_name": "MOD_MACSEC_V1.0"
+            },
+            {
+              "pp_id": 482,
+              "pp_name": "collaborative Protection Profile for Network Devices Version 3.0e",
+              "pp_short_name": "CPP_ND_V3.0E"
+            }
+          ],
+          "status_sort": "In Progress",
+          "submitting_country_id_code": "US",
+          "submitting_country_id_name": "United States",
+          "sunset_date": null,
+          "tech_types": [
+            "Network Device",
+            "Network Encryption"
+          ],
+          "vendor_id_name": "HPE Juniper Networking",
+          "v_id": 11622,
+          "kicked_off_date": "2025-12-10T14:37:10.137000Z"
+        }
+      ],
+      "current_count": 25
+    },
+    "news": {
+      "added": []
+    },
+    "events": {
+      "added": []
+    }
+  },
+  "cc_portal": {
+    "news": {
+      "added": [
+        {
+          "text": "Please visit theHCD iTC home pagefor more information about reviewing the draft and how to provide comments. This review period will end on July 1, 2026.",
+          "link": "https://hcd-itc.github.io/"
+        }
+      ]
+    },
+    "pps": {
+      "added": []
+    },
+    "products": {
+      "added": []
+    }
+  },
+  "cctl_labs": {},
+  "csfc": {
+    "pages": {},
+    "selection_links": {},
+    "feeds": {}
+  },
+  "cc_crypto": {
+    "pages": {
+      "news": {
+        "added": [
+          {
+            "text": "The HCD iTC has released their collaborative Protection Profile and Supporting Document V2.0 draft for Public Review",
+            "href": ""
+          },
+          {
+            "text": "Please visit the HCD iTC home page for more information about reviewing the draft and how to provide comments. This review period will end on July 1, 2026.",
+            "href": "https://hcd-itc.github.io/"
+          }
+        ],
+        "removed": []
+      }
+    }
+  },
+  "nist": {
+    "pages": {},
+    "cmvp_mip": {
+      "added": [],
+      "removed": [],
+      "status_changes": []
+    },
+    "feeds": {}
+  },
+  "nato": {
+    "pages": {},
+    "cisco_added": [],
+    "cisco_removed": []
+  },
+  "eucc": {
+    "pages": {},
+    "cisco_added": [],
+    "cisco_removed": []
+  },
+  "alerts": [
+    {
+      "source": "NIAP TD",
+      "kind": "new",
+      "title": "FIT Technical Decision: Addition of AES-XTS in FCS_COP.1(g)",
+      "url": "https://www.niap-ccevs.org/technical-decisions/TD1046",
+      "detail": "TD1046",
+      "matched_keywords": [
+        "FCS_COP"
+      ],
+      "tab": "us"
+    },
+    {
+      "source": "CC Crypto: news",
+      "kind": "publication",
+      "title": "The HCD iTC has released their collaborative Protection Profile and Supporting Document V2.0 draft for Public Review",
+      "url": "https://www.commoncriteriaportal.org/news/index.cfm",
+      "detail": "New item on CC Crypto news page",
+      "matched_keywords": [],
+      "tab": "us"
+    },
+    {
+      "source": "CC Crypto: news",
+      "kind": "publication",
+      "title": "Please visit the HCD iTC home page for more information about reviewing the draft and how to provide comments. This revi",
+      "url": "https://hcd-itc.github.io/",
+      "detail": "New item on CC Crypto news page",
+      "matched_keywords": [],
+      "tab": "us"
+    }
+  ]
+}
