@@ -1,0 +1,254 @@
+{
+  "period_start": "2026-06-12T07:38:32.050362+00:00",
+  "period_end": "2026-06-13T07:20:19.044956+00:00",
+  "niap": {
+    "pps": {
+      "added": [],
+      "removed": [],
+      "sunset_changes": [],
+      "status_changes": []
+    },
+    "tds": {
+      "added": [],
+      "removed": []
+    },
+    "cisco_ndcpp": {
+      "added": [],
+      "removed": [],
+      "newly_archived": []
+    },
+    "pcl_all": {
+      "added": [
+        {
+          "active_maintenances": [],
+          "am_sort": null,
+          "assigned_lab_name": "Gossamer Security Solutions",
+          "certification_date": null,
+          "from_cc_portal": false,
+          "product_id": 11713,
+          "product_name": "Samsung Knox File Encryption 1.8.0 - Spring",
+          "protection_profiles": [
+            {
+              "pp_id": 415,
+              "pp_name": "PP-Module for File Encryption Version 1.0",
+              "pp_short_name": "MOD_FE_V1.0"
+            },
+            {
+              "pp_id": 462,
+              "pp_name": "Protection Profile for Application Software Version 1.4",
+              "pp_short_name": "PP_APP_v1.4"
+            }
+          ],
+          "status_sort": "In Progress",
+          "submitting_country_id_code": "US",
+          "submitting_country_id_name": "United States",
+          "sunset_date": null,
+          "tech_types": [
+            "Encrypted Storage"
+          ],
+          "vendor_id_name": "Samsung Electronics Co., Ltd.",
+          "v_id": 11713,
+          "kicked_off_date": "2026-06-12T14:14:11.460000Z"
+        },
+        {
+          "active_maintenances": [],
+          "am_sort": null,
+          "assigned_lab_name": "Gossamer Security Solutions",
+          "certification_date": null,
+          "from_cc_portal": false,
+          "product_id": 11711,
+          "product_name": "Samsung Electronics Co., Ltd. Samsung Galaxy Devices on Android 16 - Spring",
+          "protection_profiles": [
+            {
+              "pp_id": 425,
+              "pp_name": "PP-Module for Bluetooth Version 1.0",
+              "pp_short_name": "MOD_BT_V1.0"
+            },
+            {
+              "pp_id": 439,
+              "pp_name": "Functional Package for TLS Version 1.1",
+              "pp_short_name": "PKG_TLS_V1.1"
+            },
+            {
+              "pp_id": 463,
+              "pp_name": "PP-Module for Wireless Local Area Network (WLAN) Client Version 1.0",
+              "pp_short_name": "MOD_WLANC_v1.0"
+            },
+            {
+              "pp_id": 468,
+              "pp_name": "Protection Profile for Mobile Device Fundamentals Version 3.3",
+              "pp_short_name": "PP_MDF_V3.3"
+            },
+            {
+              "pp_id": 476,
+              "pp_name": "collaborative Protection Profile Module for Biometric enrolment and verification - for unlocking the device v1.1",
+              "pp_short_name": "MOD_CPP_BIO_V1.1"
+            },
+            {
+              "pp_id": 487,
+              "pp_name": "PP-Module for VPN Client, Version 2.5",
+              "pp_short_name": "MOD_VPNC_V2.5"
+            }
+          ],
+          "status_sort": "In Progress",
+          "submitting_country_id_code": "US",
+          "submitting_country_id_name": "United States",
+          "sunset_date": null,
+          "tech_types": [
+            "Mobility"
+          ],
+          "vendor_id_name": "Samsung Electronics Co., Ltd.",
+          "v_id": 11711,
+          "kicked_off_date": "2026-06-12T14:09:38.845000Z"
+        }
+      ],
+      "removed": [],
+      "newly_archived": []
+    },
+    "in_evaluation": {
+      "added": [
+        {
+          "active_maintenances": [],
+          "am_sort": null,
+          "assigned_lab_name": "Gossamer Security Solutions",
+          "certification_date": null,
+          "from_cc_portal": false,
+          "product_id": 11713,
+          "product_name": "Samsung Knox File Encryption 1.8.0 - Spring",
+          "protection_profiles": [
+            {
+              "pp_id": 415,
+              "pp_name": "PP-Module for File Encryption Version 1.0",
+              "pp_short_name": "MOD_FE_V1.0"
+            },
+            {
+              "pp_id": 462,
+              "pp_name": "Protection Profile for Application Software Version 1.4",
+              "pp_short_name": "PP_APP_v1.4"
+            }
+          ],
+          "status_sort": "In Progress",
+          "submitting_country_id_code": "US",
+          "submitting_country_id_name": "United States",
+          "sunset_date": null,
+          "tech_types": [
+            "Encrypted Storage"
+          ],
+          "vendor_id_name": "Samsung Electronics Co., Ltd.",
+          "v_id": 11713,
+          "kicked_off_date": "2026-06-12T14:14:11.460000Z"
+        },
+        {
+          "active_maintenances": [],
+          "am_sort": null,
+          "assigned_lab_name": "Gossamer Security Solutions",
+          "certification_date": null,
+          "from_cc_portal": false,
+          "product_id": 11711,
+          "product_name": "Samsung Electronics Co., Ltd. Samsung Galaxy Devices on Android 16 - Spring",
+          "protection_profiles": [
+            {
+              "pp_id": 425,
+              "pp_name": "PP-Module for Bluetooth Version 1.0",
+              "pp_short_name": "MOD_BT_V1.0"
+            },
+            {
+              "pp_id": 439,
+              "pp_name": "Functional Package for TLS Version 1.1",
+              "pp_short_name": "PKG_TLS_V1.1"
+            },
+            {
+              "pp_id": 463,
+              "pp_name": "PP-Module for Wireless Local Area Network (WLAN) Client Version 1.0",
+              "pp_short_name": "MOD_WLANC_v1.0"
+            },
+            {
+              "pp_id": 468,
+              "pp_name": "Protection Profile for Mobile Device Fundamentals Version 3.3",
+              "pp_short_name": "PP_MDF_V3.3"
+            },
+            {
+              "pp_id": 476,
+              "pp_name": "collaborative Protection Profile Module for Biometric enrolment and verification - for unlocking the device v1.1",
+              "pp_short_name": "MOD_CPP_BIO_V1.1"
+            },
+            {
+              "pp_id": 487,
+              "pp_name": "PP-Module for VPN Client, Version 2.5",
+              "pp_short_name": "MOD_VPNC_V2.5"
+            }
+          ],
+          "status_sort": "In Progress",
+          "submitting_country_id_code": "US",
+          "submitting_country_id_name": "United States",
+          "sunset_date": null,
+          "tech_types": [
+            "Mobility"
+          ],
+          "vendor_id_name": "Samsung Electronics Co., Ltd.",
+          "v_id": 11711,
+          "kicked_off_date": "2026-06-12T14:09:38.845000Z"
+        }
+      ],
+      "removed": [],
+      "current_count": 28
+    },
+    "news": {
+      "added": []
+    },
+    "events": {
+      "added": []
+    }
+  },
+  "cc_portal": {
+    "news": {
+      "added": []
+    },
+    "pps": {
+      "added": []
+    },
+    "products": {
+      "added": []
+    }
+  },
+  "cctl_labs": {},
+  "csfc": {
+    "pages": {},
+    "selection_links": {},
+    "feeds": {
+      "CISA Alerts": [
+        {
+          "title": "CISA Adds One Known Exploited Vulnerability to Catalog",
+          "link": "https://www.cisa.gov/news-events/alerts/2026/06/12/cisa-adds-one-known-exploited-vulnerability-catalog",
+          "summary": "<p>CISA has added one new vulnerability to its <a href=\"https://www.cisa.gov/known-exploited-vulnerabilities-catalog\">Known Exploited Vulnerabilities (KEV) Catalog</a>, based on evidence of active exploitation.</p>\n<ul>\n<li><a href=\"https://www.cve.org/CVERecord?id=CVE-2026-35273\" target=\"_blank\">CVE-2026-35273</a> Oracle PeopleSoft Enterprise PeopleTools Missing Authentication for Critical Function Vulnerability</li>\n</ul>\n<p>This type of vulnerability is a frequent attack vector for malicious cyber actors and poses significant risks to the federal enterprise.</p>\n<p><a href=\"https://www.cisa.gov/news-events/directives/bod-26-04-implementation-guidance-prioritizing-security-updates-based-risk\">Binding Operational Directive (BOD) 26-04: Prioritizing Security Updates Based on Risk</a> establishes vulnerability management requirements for Federal Civilian Executive Branch (FCEB) agencies, updating <a href=\"https://www.cisa.gov/news-events/directives/bod-22-01-reducing-significant-risk-known-exploited-vulnerabilities-revoked\">BOD 22-01</a>. BOD 26-04 reinforces the importance of the KEV catalog and requires federal agencies to prioritize rapid remediation of high-risk vulnerabilities, specifically those identified by Common Vulnerabilities and Exposures (CVEs) listed in CISA\u2019s Known Exploited Vulnerabilities (KEV) catalog on publicly exposed assets that grant total control of the asset post-exploitation, while deferring action for lower-risk vulnerabilities. BOD 26-04 further establishes basic expectations for when agencies must check whether threat actors compromised the system before the patch was applied.</p>\n<p>While BOD 26-04 applies only to FCEB agencies, CISA encourages all organizations to adopt risk-based vulnerability management and prioritize remediation of <a href=\"https://www.cisa.gov/known-exploited-vulnerabilities-catalog\">KEV catalog vulnerabilities</a>. CISA will continue to add vulnerabilities to the catalog that meet the <a href=\"https://www.cisa.gov/known-exploited-vulnerabilities-catalog/reducing-significant-risk-known-exploited-vulnerabilities\">specified criteria</a>.</p>\n<p>Aware of an exploited vulnerability not currently listed in the KEV catalog? Submit for potential addition: <a href=\"https://cisasurvey.gov1.qualtrics.com/jfe/form/SV_1Zwu52kgK2OYf3w\" target=\"_blank\">KEV Nomination Form</a>. Potential KEV additions must have a CVE ID, evidence of exploitation, and clear mitigation guidance.&nbsp;</p>",
+          "published": "Fri, 12 Jun 26 12:00:00 +0000",
+          "id": "/node/25021",
+          "_category": "CISA"
+        }
+      ]
+    }
+  },
+  "cc_crypto": {
+    "pages": {}
+  },
+  "nist": {
+    "pages": {},
+    "cmvp_mip": {
+      "added": [],
+      "removed": [],
+      "status_changes": []
+    },
+    "feeds": {}
+  },
+  "nato": {
+    "pages": {},
+    "cisco_added": [],
+    "cisco_removed": []
+  },
+  "eucc": {
+    "pages": {},
+    "cisco_added": [],
+    "cisco_removed": []
+  },
+  "alerts": []
+}
