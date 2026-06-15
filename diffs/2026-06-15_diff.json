@@ -1,0 +1,98 @@
+{
+  "period_start": "2026-06-14T07:37:21.143259+00:00",
+  "period_end": "2026-06-15T08:36:18.474801+00:00",
+  "niap": {
+    "pps": {
+      "added": [],
+      "removed": [],
+      "sunset_changes": [],
+      "status_changes": []
+    },
+    "tds": {
+      "added": [],
+      "removed": []
+    },
+    "cisco_ndcpp": {
+      "added": [],
+      "removed": [],
+      "newly_archived": []
+    },
+    "pcl_all": {
+      "added": [],
+      "removed": [],
+      "newly_archived": []
+    },
+    "in_evaluation": {
+      "added": [],
+      "removed": [],
+      "current_count": 28
+    },
+    "news": {
+      "added": []
+    },
+    "events": {
+      "added": []
+    }
+  },
+  "cc_portal": {
+    "news": {
+      "added": []
+    },
+    "pps": {
+      "added": []
+    },
+    "products": {
+      "added": []
+    }
+  },
+  "cctl_labs": {},
+  "csfc": {
+    "pages": {},
+    "selection_links": {},
+    "feeds": {}
+  },
+  "cc_crypto": {
+    "pages": {}
+  },
+  "nist": {
+    "pages": {},
+    "cmvp_mip": {
+      "added": [],
+      "removed": [],
+      "status_changes": []
+    },
+    "feeds": {
+      "NIST Information Technology News": [
+        {
+          "title": "Now Available: Practical Guidelines for Preventing and Mitigating Ransomware",
+          "link": "https://www.nist.gov/news-events/news/2026/06/now-available-practical-guidelines-preventing-and-mitigating-ransomware",
+          "summary": "The NIST NCCoE has published the final version of NIST Interagency Report (IR) 8374 Revision 1, Ransomware Risk Management: A Cybersecurity Framework (CSF) 2.0 Community Profile. This resource translates the NIST CSF 2.0 into practical actions",
+          "published": "Thu, 11 Jun 2026 12:00:00 +0000",
+          "id": "https://www.nist.gov/node/1914406",
+          "_category": "EVENT"
+        }
+      ]
+    }
+  },
+  "nato": {
+    "pages": {},
+    "cisco_added": [],
+    "cisco_removed": []
+  },
+  "eucc": {
+    "pages": {},
+    "cisco_added": [],
+    "cisco_removed": []
+  },
+  "alerts": [
+    {
+      "source": "NIST Feed: NIST Information Technology News",
+      "kind": "news",
+      "title": "Now Available: Practical Guidelines for Preventing and Mitigating Ransomware",
+      "url": "https://www.nist.gov/news-events/news/2026/06/now-available-practical-guidelines-preventing-and-mitigating-ransomware",
+      "detail": "Feed: NIST Information Technology News \u00b7 Published: Thu, 11 Jun 2026",
+      "matched_keywords": [],
+      "tab": "us"
+    }
+  ]
+}
