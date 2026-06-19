@@ -179,7 +179,7 @@
   <span class="nav-title">CC Pulse Dashboard</span>
   <span class="nav-spacer"></span>
   <div class="ham-wrap">
-    <span class="nav-meta">Last run: 2026-06-18 03:41 ET</span>
+    <span class="nav-meta">Last run: 2026-06-19 03:53 ET</span>
     <button class="ham-btn" id="ham-btn" onclick="toggleHamMenu()" aria-expanded="false" aria-haspopup="true" title="Open menu">&#9776;</button>
     <div class="ham-menu" id="ham-menu" role="menu">
       <a class="ham-item" href="https://kr15tyk.github.io/CC-pulse/cc_dashboard.html" role="menuitem"><span class="ham-icon">&#127968;</span>Home</a>
@@ -255,7 +255,7 @@
 <div class="sticky-top">
   <div class="trend-bar">
     <div class="stat"><a href="#sec-niap-pp" onclick="navigateTo('sec-niap-pp');return false;">
-      <div class="stat-num active-num">2</div>
+      <div class="stat-num ">0</div>
       <div class="stat-lbl">NIAP Changes</div>
     </a></div>
     <div class="stat"><a href="#sec-csfc" onclick="navigateTo('sec-csfc');return false;">
@@ -279,11 +279,11 @@
       <div class="stat-lbl">CCTL Updates</div>
     </a></div>
     <div class="stat"><a href="#sec-eucc-req" onclick="navigateTo('sec-eucc-req');return false;">
-      <div class="stat-num ">0</div>
+      <div class="stat-num active-num">70</div>
       <div class="stat-lbl">EUCC Changes</div>
     </a></div>
     <div class="stat"><a href="#sec-alerts" onclick="navigateTo('sec-alerts');return false;">
-      <div class="stat-num ">0</div>
+      <div class="stat-num alert-num">41</div>
       <div class="stat-lbl">Alerts</div>
     </a></div>
   </div>
@@ -309,6 +309,389 @@
       
       
 <!-- Alerts -->
+
+<div class="section-group">
+<div class="card card-alert" id="sec-alerts">
+  <div class="card-hdr" onclick="toggleCard(this)">
+    <span>Alerts</span>
+    <span class="card-count">41 alerts</div>
+</span>
+    <span class="toggle-icon">&#9660;</span>
+  </div>
+  <div class="card-body">
+    <div class="alert-monitoring">FIPS 186-4, FIPS 186-5, NDcPP, CPP_ND, TLS 1.3, SSH, PP-Module_VPN, PP-Module_WLAN, labgram, valgram, emergency, CSfC, Commercial Solutions for Classified, CSfC APL, CSfC component selections, NSA CSfC, NATO NIAPC, NIAPCL, EUCC, ENISA, CCDB-018, Crypto Catalog, cryptography working group, Specification of Functional Requirements for Cryptography, FCS_CKM, FCS_COP, FCS_RBG, CAVP, CMVP, FIPS 140-3, FIPS 203, FIPS 204, FIPS 205, SP 800-131A, SP 800-57, NIST IR 8547, post-quantum cryptography, PQC migration, ML-KEM, ML-DSA, SLH-DSA, algorithm transition, CMVP validated, modules in process</div>
+    
+        <div class="item-row alert-item" data-alert-key="NIST Feed: NIST Information Technology News-NCCoE_Two-Pager_Now_Available:_Effective_OT_Backup_Management" data-tab="us">
+          
+          <a class="item-link" href="https://www.nist.gov/news-events/news/2026/06/nccoe-two-pager-now-available-effective-ot-backup-management" target="_blank">NIST Feed: NIST Information Technology News: NCCoE Two-Pager Now Available: Effective OT Backup Management</a>
+          
+          <span class="item-meta">news &middot; </span>
+          <div class="item-sub">Feed: NIST Information Technology News · Published: Wed, 17 Jun 2026</div>
+          <button class="dismiss-btn" onclick="dismissAlert(this)" title="Mark as seen">&#10003; Seen</button>
+        </div>
+        
+        <div class="item-row alert-item" data-alert-key="EUCC Requirements-The_EUCC_scheme_allows_ICT_suppliers_who_wish_to_showcase_proof_of_assurance_to_go_through_an_EU_commonly_understood_ass…" data-tab="eu">
+          
+          <a class="item-link" href="https://certification.enisa.europa.eu/browse-topic/eucc_en" target="_blank">EUCC Requirements: The EUCC scheme allows ICT suppliers who wish to showcase proof of assurance to go through an EU commonly understood ass…</a>
+          
+          <span class="item-meta">updated &middot; EUCC</span>
+          <div class="item-sub">New item on EUCC requirements / scheme page</div>
+          <button class="dismiss-btn" onclick="dismissAlert(this)" title="Mark as seen">&#10003; Seen</button>
+        </div>
+        
+        <div class="item-row alert-item" data-alert-key="EUCC Requirements-With_EUCC,_the_EU_commonly_agreed_on_assessment_process_to_certify_ICT_products_such_as_technological_components,_hardwa…" data-tab="eu">
+          
+          <a class="item-link" href="https://certification.enisa.europa.eu/browse-topic/eucc_en" target="_blank">EUCC Requirements: With EUCC, the EU commonly agreed on assessment process to certify ICT products such as technological components, hardwa…</a>
+          
+          <span class="item-meta">updated &middot; EUCC</span>
+          <div class="item-sub">New item on EUCC requirements / scheme page</div>
+          <button class="dismiss-btn" onclick="dismissAlert(this)" title="Mark as seen">&#10003; Seen</button>
+        </div>
+        
+        <div class="item-row alert-item" data-alert-key="EUCC Requirements-EUCC_in_Application" data-tab="eu">
+          
+          <a class="item-link" href="https://certification.enisa.europa.eu/browse-topic/eucc_en" target="_blank">EUCC Requirements: EUCC in Application</a>
+          
+          <span class="item-meta">updated &middot; EUCC</span>
+          <div class="item-sub">New item on EUCC requirements / scheme page</div>
+          <button class="dismiss-btn" onclick="dismissAlert(this)" title="Mark as seen">&#10003; Seen</button>
+        </div>
+        
+        <div class="item-row alert-item" data-alert-key="EUCC Requirements-The_scope_of_EUCC" data-tab="eu">
+          
+          <a class="item-link" href="https://certification.enisa.europa.eu/browse-topic/eucc_en" target="_blank">EUCC Requirements: The scope of EUCC</a>
+          
+          <span class="item-meta">updated &middot; EUCC</span>
+          <div class="item-sub">New item on EUCC requirements / scheme page</div>
+          <button class="dismiss-btn" onclick="dismissAlert(this)" title="Mark as seen">&#10003; Seen</button>
+        </div>
+        
+        <div class="item-row alert-item" data-alert-key="EUCC Requirements-These_requirements_also_allow_for_an_assurance_level_to_be_indicated:_the_EUCC_covers_two,_substantial_and_high_,_that_h…" data-tab="eu">
+          
+          <a class="item-link" href="https://certification.enisa.europa.eu/browse-topic/eucc_en" target="_blank">EUCC Requirements: These requirements also allow for an assurance level to be indicated: the EUCC covers two, substantial and high , that h…</a>
+          
+          <span class="item-meta">updated &middot; EUCC</span>
+          <div class="item-sub">New item on EUCC requirements / scheme page</div>
+          <button class="dismiss-btn" onclick="dismissAlert(this)" title="Mark as seen">&#10003; Seen</button>
+        </div>
+        
+        <div class="item-row alert-item" data-alert-key="EUCC Requirements-EUCC_Certificates" data-tab="eu">
+          
+          <a class="item-link" href="https://certification.enisa.europa.eu/browse-topic/eucc_en" target="_blank">EUCC Requirements: EUCC Certificates</a>
+          
+          <span class="item-meta">updated &middot; EUCC</span>
+          <div class="item-sub">New item on EUCC requirements / scheme page</div>
+          <button class="dismiss-btn" onclick="dismissAlert(this)" title="Mark as seen">&#10003; Seen</button>
+        </div>
+        
+        <div class="item-row alert-item" data-alert-key="EUCC Requirements-Since_February_2025,_EUCC_Certificates_can_be_issued_._Certificates_are_issued_by_Certification_Bodies_based_on_an_evalu…" data-tab="eu">
+          
+          <a class="item-link" href="https://certification.enisa.europa.eu/browse-topic/eucc_en" target="_blank">EUCC Requirements: Since February 2025, EUCC Certificates can be issued . Certificates are issued by Certification Bodies based on an evalu…</a>
+          
+          <span class="item-meta">updated &middot; EUCC</span>
+          <div class="item-sub">New item on EUCC requirements / scheme page</div>
+          <button class="dismiss-btn" onclick="dismissAlert(this)" title="Mark as seen">&#10003; Seen</button>
+        </div>
+        
+        <div class="item-row alert-item" data-alert-key="EUCC Requirements-The_ENISA_website_dedicated_to_certification_will_present_EUCC_certificates_and_other_EU_certificates_issued_under_the_C…" data-tab="eu">
+          
+          <a class="item-link" href="https://certification.enisa.europa.eu/browse-topic/eucc_en" target="_blank">EUCC Requirements: The ENISA website dedicated to certification will present EUCC certificates and other EU certificates issued under the C…</a>
+          
+          <span class="item-meta">updated &middot; EUCC, ENISA</span>
+          <div class="item-sub">New item on EUCC requirements / scheme page</div>
+          <button class="dismiss-btn" onclick="dismissAlert(this)" title="Mark as seen">&#10003; Seen</button>
+        </div>
+        
+        <div class="item-row alert-item" data-alert-key="EUCC Requirements-EUCC_a_live_scheme" data-tab="eu">
+          
+          <a class="item-link" href="https://certification.enisa.europa.eu/browse-topic/eucc_en" target="_blank">EUCC Requirements: EUCC a live scheme</a>
+          
+          <span class="item-meta">updated &middot; EUCC</span>
+          <div class="item-sub">New item on EUCC requirements / scheme page</div>
+          <button class="dismiss-btn" onclick="dismissAlert(this)" title="Mark as seen">&#10003; Seen</button>
+        </div>
+        
+        <div class="item-row alert-item" data-alert-key="EUCC Requirements-ENISA_developed_a_candidate_scheme_first_in_2020,_with_the_support_of_an_ad_hoc_Working_Group,_and_reused_widely_the_exp…" data-tab="eu">
+          
+          <a class="item-link" href="https://certification.enisa.europa.eu/browse-topic/eucc_en" target="_blank">EUCC Requirements: ENISA developed a candidate scheme first in 2020, with the support of an ad hoc Working Group, and reused widely the exp…</a>
+          
+          <span class="item-meta">updated &middot; ENISA</span>
+          <div class="item-sub">New item on EUCC requirements / scheme page</div>
+          <button class="dismiss-btn" onclick="dismissAlert(this)" title="Mark as seen">&#10003; Seen</button>
+        </div>
+        
+        <div class="item-row alert-item" data-alert-key="EUCC Requirements-The_EUCC_scheme,_adopted_in_2024_and_amended_since_then,_is_now_in_operation_and_under_regular_maintenance." data-tab="eu">
+          
+          <a class="item-link" href="https://certification.enisa.europa.eu/browse-topic/eucc_en" target="_blank">EUCC Requirements: The EUCC scheme, adopted in 2024 and amended since then, is now in operation and under regular maintenance.</a>
+          
+          <span class="item-meta">updated &middot; EUCC</span>
+          <div class="item-sub">New item on EUCC requirements / scheme page</div>
+          <button class="dismiss-btn" onclick="dismissAlert(this)" title="Mark as seen">&#10003; Seen</button>
+        </div>
+        
+        <div class="item-row alert-item" data-alert-key="EUCC Requirements-Access_EUCC_Library" data-tab="eu">
+          
+          <a class="item-link" href="https://certification.enisa.europa.eu/browse-topic/eucc_en" target="_blank">EUCC Requirements: Access EUCC Library</a>
+          
+          <span class="item-meta">updated &middot; EUCC</span>
+          <div class="item-sub">New item on EUCC requirements / scheme page</div>
+          <button class="dismiss-btn" onclick="dismissAlert(this)" title="Mark as seen">&#10003; Seen</button>
+        </div>
+        
+        <div class="item-row alert-item" data-alert-key="EUCC Requirements-EUCC_is_composed_of_a_rich_list_of_documents_from_the_Implementing_Act_and_its_amendments_to_state-of-the-art_documents…" data-tab="eu">
+          
+          <a class="item-link" href="https://certification.enisa.europa.eu/browse-topic/eucc_en" target="_blank">EUCC Requirements: EUCC is composed of a rich list of documents from the Implementing Act and its amendments to state-of-the-art documents…</a>
+          
+          <span class="item-meta">updated &middot; EUCC</span>
+          <div class="item-sub">New item on EUCC requirements / scheme page</div>
+          <button class="dismiss-btn" onclick="dismissAlert(this)" title="Mark as seen">&#10003; Seen</button>
+        </div>
+        
+        <div class="item-row alert-item" data-alert-key="EUCC Requirements-EUCC_Certification_scheme_Documents" data-tab="eu">
+          
+          <a class="item-link" href="https://certification.enisa.europa.eu/browse-topic/eucc_en" target="_blank">EUCC Requirements: EUCC Certification scheme Documents</a>
+          
+          <span class="item-meta">updated &middot; EUCC</span>
+          <div class="item-sub">New item on EUCC requirements / scheme page</div>
+          <button class="dismiss-btn" onclick="dismissAlert(this)" title="Mark as seen">&#10003; Seen</button>
+        </div>
+        
+        <div class="item-row alert-item" data-alert-key="EUCC Requirements-This_section_displays_Frequently_Asked_Questions_on_EUCC_Scheme" data-tab="eu">
+          
+          <a class="item-link" href="https://certification.enisa.europa.eu/browse-topic/eucc_en" target="_blank">EUCC Requirements: This section displays Frequently Asked Questions on EUCC Scheme</a>
+          
+          <span class="item-meta">updated &middot; EUCC</span>
+          <div class="item-sub">New item on EUCC requirements / scheme page</div>
+          <button class="dismiss-btn" onclick="dismissAlert(this)" title="Mark as seen">&#10003; Seen</button>
+        </div>
+        
+        <div class="item-row alert-item" data-alert-key="EUCC Requirements-Commission_Implementing_Regulation_(EU) 2024/482_of_31_January_2024_(EUCC_Implementing_Regulation)_made_reference_to ISO…" data-tab="eu">
+          
+          <a class="item-link" href="https://eur-lex.europa.eu/eli/reg_impl/2024/482/oj" target="_blank">EUCC Requirements: Commission Implementing Regulation (EU) 2024/482 of 31 January 2024 (EUCC Implementing Regulation) made reference to ISO…</a>
+          
+          <span class="item-meta">updated &middot; EUCC</span>
+          <div class="item-sub">New item on EUCC requirements / scheme page</div>
+          <button class="dismiss-btn" onclick="dismissAlert(this)" title="Mark as seen">&#10003; Seen</button>
+        </div>
+        
+        <div class="item-row alert-item" data-alert-key="EUCC Requirements-In_line_with_the_amended_Articles_2_and_3_of_the_EUCC_Implementing_Regulation,_the_following_standards_shall_apply_to_ev…" data-tab="eu">
+          
+          <a class="item-link" href="https://certification.enisa.europa.eu/browse-topic/eucc_en" target="_blank">EUCC Requirements: In line with the amended Articles 2 and 3 of the EUCC Implementing Regulation, the following standards shall apply to ev…</a>
+          
+          <span class="item-meta">updated &middot; EUCC</span>
+          <div class="item-sub">New item on EUCC requirements / scheme page</div>
+          <button class="dismiss-btn" onclick="dismissAlert(this)" title="Mark as seen">&#10003; Seen</button>
+        </div>
+        
+        <div class="item-row alert-item" data-alert-key="EUCC Requirements-Furthermore,_the_transition_rules_between_the_former_and_latest_version_of_the_above-mentioned_standards_were_defined_in…" data-tab="eu">
+          
+          <a class="item-link" href="https://certification.enisa.europa.eu/browse-topic/eucc_en" target="_blank">EUCC Requirements: Furthermore, the transition rules between the former and latest version of the above-mentioned standards were defined in…</a>
+          
+          <span class="item-meta">updated &middot; EUCC</span>
+          <div class="item-sub">New item on EUCC requirements / scheme page</div>
+          <button class="dismiss-btn" onclick="dismissAlert(this)" title="Mark as seen">&#10003; Seen</button>
+        </div>
+        
+        <div class="item-row alert-item" data-alert-key="EUCC Requirements-“2._Until_31_December_2027,_a_certificate_may_be_issued_under_the_EUCC_scheme_applying_either_of_the_following_standards…" data-tab="eu">
+          
+          <a class="item-link" href="https://certification.enisa.europa.eu/browse-topic/eucc_en" target="_blank">EUCC Requirements: “2. Until 31 December 2027, a certificate may be issued under the EUCC scheme applying either of the following standards…</a>
+          
+          <span class="item-meta">updated &middot; EUCC</span>
+          <div class="item-sub">New item on EUCC requirements / scheme page</div>
+          <button class="dismiss-btn" onclick="dismissAlert(this)" title="Mark as seen">&#10003; Seen</button>
+        </div>
+        
+        <div class="item-row alert-item" data-alert-key="EUCC Requirements-3._Until_31_December_2027,_a_certificate_applying_the_standards_referred_to_in_paragraph_1_may_be_issued_under_the_EUCC…" data-tab="eu">
+          
+          <a class="item-link" href="https://certification.enisa.europa.eu/browse-topic/eucc_en" target="_blank">EUCC Requirements: 3. Until 31 December 2027, a certificate applying the standards referred to in paragraph 1 may be issued under the EUCC…</a>
+          
+          <span class="item-meta">updated &middot; EUCC</span>
+          <div class="item-sub">New item on EUCC requirements / scheme page</div>
+          <button class="dismiss-btn" onclick="dismissAlert(this)" title="Mark as seen">&#10003; Seen</button>
+        </div>
+        
+        <div class="item-row alert-item" data-alert-key="EUCC Requirements-4._A_certificate_applying_the_standards_referred_to_in_paragraph_1_may_also_be_issued_under_the_EUCC_scheme_claiming_con…" data-tab="eu">
+          
+          <a class="item-link" href="https://certification.enisa.europa.eu/browse-topic/eucc_en" target="_blank">EUCC Requirements: 4. A certificate applying the standards referred to in paragraph 1 may also be issued under the EUCC scheme claiming con…</a>
+          
+          <span class="item-meta">updated &middot; EUCC</span>
+          <div class="item-sub">New item on EUCC requirements / scheme page</div>
+          <button class="dismiss-btn" onclick="dismissAlert(this)" title="Mark as seen">&#10003; Seen</button>
+        </div>
+        
+        <div class="item-row alert-item" data-alert-key="EUCC Requirements-A_consolidated_version_of_the_EUCC_Implementing_Regulation_that_includes_the_amendments_made_to_the_scheme_with_Regulati…" data-tab="eu">
+          
+          <a class="item-link" href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A02024R0482-20250108%20" target="_blank">EUCC Requirements: A consolidated version of the EUCC Implementing Regulation that includes the amendments made to the scheme with Regulati…</a>
+          
+          <span class="item-meta">updated &middot; EUCC</span>
+          <div class="item-sub">New item on EUCC requirements / scheme page</div>
+          <button class="dismiss-btn" onclick="dismissAlert(this)" title="Mark as seen">&#10003; Seen</button>
+        </div>
+        
+        <div class="item-row alert-item" data-alert-key="EUCC Requirements-A_presentation_of_the_EUCC_scheme_review,_including_clarifications_on_the_applicable_standards_and_the_transition_rules,…" data-tab="eu">
+          
+          <a class="item-link" href="https://certification.enisa.europa.eu/publications/eucc-amendment-presentation_en%20" target="_blank">EUCC Requirements: A presentation of the EUCC scheme review, including clarifications on the applicable standards and the transition rules,…</a>
+          
+          <span class="item-meta">updated &middot; EUCC</span>
+          <div class="item-sub">New item on EUCC requirements / scheme page</div>
+          <button class="dismiss-btn" onclick="dismissAlert(this)" title="Mark as seen">&#10003; Seen</button>
+        </div>
+        
+        <div class="item-row alert-item" data-alert-key="EUCC Requirements-The_general_rule_is_that_a_new_or_updated_version_of_a_SotA_should_be_applied_to_certification_processes_initiated_after…" data-tab="eu">
+          
+          <a class="item-link" href="https://certification.enisa.europa.eu/certification-library/eucc-certification-scheme_en#state-of-the-art-documents-for-eucc" target="_blank">EUCC Requirements: The general rule is that a new or updated version of a SotA should be applied to certification processes initiated after…</a>
+          
+          <span class="item-meta">updated &middot; EUCC</span>
+          <div class="item-sub">New item on EUCC requirements / scheme page</div>
+          <button class="dismiss-btn" onclick="dismissAlert(this)" title="Mark as seen">&#10003; Seen</button>
+        </div>
+        
+        <div class="item-row alert-item" data-alert-key="EUCC Requirements-Pursuant_to_Article_9(1)_of_the_EUCC_Implementing_Regulation,_the_certification_bodies_shall_issue_an_EUCC_certificate_u…" data-tab="eu">
+          
+          <a class="item-link" href="https://certification.enisa.europa.eu/browse-topic/eucc_en" target="_blank">EUCC Requirements: Pursuant to Article 9(1) of the EUCC Implementing Regulation, the certification bodies shall issue an EUCC certificate u…</a>
+          
+          <span class="item-meta">updated &middot; EUCC</span>
+          <div class="item-sub">New item on EUCC requirements / scheme page</div>
+          <button class="dismiss-btn" onclick="dismissAlert(this)" title="Mark as seen">&#10003; Seen</button>
+        </div>
+        
+        <div class="item-row alert-item" data-alert-key="EUCC Requirements-“1._A_certification_body_shall_be_authorised_by_the_national_cybersecurity_certification_authority_to_issue_EUCC_certifi…" data-tab="eu">
+          
+          <a class="item-link" href="https://certification.enisa.europa.eu/browse-topic/eucc_en" target="_blank">EUCC Requirements: “1. A certification body shall be authorised by the national cybersecurity certification authority to issue EUCC certifi…</a>
+          
+          <span class="item-meta">updated &middot; EUCC</span>
+          <div class="item-sub">New item on EUCC requirements / scheme page</div>
+          <button class="dismiss-btn" onclick="dismissAlert(this)" title="Mark as seen">&#10003; Seen</button>
+        </div>
+        
+        <div class="item-row alert-item" data-alert-key="EUCC Requirements-Article_5(1)_of_the_EUCC_Implementing_Regulation_sets_out_the_following:" data-tab="eu">
+          
+          <a class="item-link" href="https://certification.enisa.europa.eu/browse-topic/eucc_en" target="_blank">EUCC Requirements: Article 5(1) of the EUCC Implementing Regulation sets out the following:</a>
+          
+          <span class="item-meta">updated &middot; EUCC</span>
+          <div class="item-sub">New item on EUCC requirements / scheme page</div>
+          <button class="dismiss-btn" onclick="dismissAlert(this)" title="Mark as seen">&#10003; Seen</button>
+        </div>
+        
+        <div class="item-row alert-item" data-alert-key="EUCC Requirements-Therefore,_the_EUCC_Implementing_Regulation_allows_the_following_options:" data-tab="eu">
+          
+          <a class="item-link" href="https://certification.enisa.europa.eu/browse-topic/eucc_en" target="_blank">EUCC Requirements: Therefore, the EUCC Implementing Regulation allows the following options:</a>
+          
+          <span class="item-meta">updated &middot; EUCC</span>
+          <div class="item-sub">New item on EUCC requirements / scheme page</div>
+          <button class="dismiss-btn" onclick="dismissAlert(this)" title="Mark as seen">&#10003; Seen</button>
+        </div>
+        
+        <div class="item-row alert-item" data-alert-key="EUCC Requirements-to_develop_a_security_target_which_refers_to_a_non-EUCC_certified_PP,_and_still_assess_conformance_to_the_PP_into_the_ce…" data-tab="eu">
+          
+          <a class="item-link" href="https://certification.enisa.europa.eu/browse-topic/eucc_en" target="_blank">EUCC Requirements: to develop a security target which refers to a non-EUCC certified PP, and still assess conformance to the PP into the ce…</a>
+          
+          <span class="item-meta">updated &middot; EUCC</span>
+          <div class="item-sub">New item on EUCC requirements / scheme page</div>
+          <button class="dismiss-btn" onclick="dismissAlert(this)" title="Mark as seen">&#10003; Seen</button>
+        </div>
+        
+        <div class="item-row alert-item" data-alert-key="EUCC Requirements-incorporating_an_EUCC-certified_PP." data-tab="eu">
+          
+          <a class="item-link" href="https://certification.enisa.europa.eu/browse-topic/eucc_en" target="_blank">EUCC Requirements: incorporating an EUCC-certified PP.</a>
+          
+          <span class="item-meta">updated &middot; EUCC</span>
+          <div class="item-sub">New item on EUCC requirements / scheme page</div>
+          <button class="dismiss-btn" onclick="dismissAlert(this)" title="Mark as seen">&#10003; Seen</button>
+        </div>
+        
+        <div class="item-row alert-item" data-alert-key="EUCC Requirements-In_case_the_applicant_defines_the_security_target_based_on_a_non-EUCC_certified_PP_(option_b), the_certification_body_(C…" data-tab="eu">
+          
+          <a class="item-link" href="https://certification.enisa.europa.eu/browse-topic/eucc_en" target="_blank">EUCC Requirements: In case the applicant defines the security target based on a non-EUCC certified PP (option b), the certification body (C…</a>
+          
+          <span class="item-meta">updated &middot; EUCC</span>
+          <div class="item-sub">New item on EUCC requirements / scheme page</div>
+          <button class="dismiss-btn" onclick="dismissAlert(this)" title="Mark as seen">&#10003; Seen</button>
+        </div>
+        
+        <div class="item-row alert-item" data-alert-key="EUCC Requirements-According_to_Article_7(1)(e)_of_the_EUCC_Implementing_Regulation,_the_PPs_listed_in_Annex_II_shall_apply_in_the_case_the…" data-tab="eu">
+          
+          <a class="item-link" href="https://certification.enisa.europa.eu/browse-topic/eucc_en" target="_blank">EUCC Requirements: According to Article 7(1)(e) of the EUCC Implementing Regulation, the PPs listed in Annex II shall apply in the case the…</a>
+          
+          <span class="item-meta">updated &middot; EUCC</span>
+          <div class="item-sub">New item on EUCC requirements / scheme page</div>
+          <button class="dismiss-btn" onclick="dismissAlert(this)" title="Mark as seen">&#10003; Seen</button>
+        </div>
+        
+        <div class="item-row alert-item" data-alert-key="EUCC Requirements-Protection_profiles_listed_in_Annex_III_are_recommended,_as_per_recital_(31)_of_the_EUCC_Implementing_Regulation." data-tab="eu">
+          
+          <a class="item-link" href="https://certification.enisa.europa.eu/browse-topic/eucc_en" target="_blank">EUCC Requirements: Protection profiles listed in Annex III are recommended, as per recital (31) of the EUCC Implementing Regulation.</a>
+          
+          <span class="item-meta">updated &middot; EUCC</span>
+          <div class="item-sub">New item on EUCC requirements / scheme page</div>
+          <button class="dismiss-btn" onclick="dismissAlert(this)" title="Mark as seen">&#10003; Seen</button>
+        </div>
+        
+        <div class="item-row alert-item" data-alert-key="EUCC Requirements-Yes,_the_CCRA_(non-EU)_participants_will_recognise_EUCC_certificates_under_the_conditions_outlined_in_the_following_docu…" data-tab="eu">
+          
+          <a class="item-link" href="https://certification.enisa.europa.eu/browse-topic/eucc_en" target="_blank">EUCC Requirements: Yes, the CCRA (non-EU) participants will recognise EUCC certificates under the conditions outlined in the following docu…</a>
+          
+          <span class="item-meta">updated &middot; EUCC</span>
+          <div class="item-sub">New item on EUCC requirements / scheme page</div>
+          <button class="dismiss-btn" onclick="dismissAlert(this)" title="Mark as seen">&#10003; Seen</button>
+        </div>
+        
+        <div class="item-row alert-item" data-alert-key="EUCC Requirements-https://www.commoncriteriaportal.org/files/supdocs/CCMC-011-v1.0-2025-Mar-19-CCRA%20and%20EUCC%20Co-existence.pdf_." data-tab="eu">
+          
+          <a class="item-link" href="https://www.commoncriteriaportal.org/files/supdocs/CCMC-011-v1.0-2025-Mar-19-CCRA%20and%20EUCC%20Co-existence.pdf" target="_blank">EUCC Requirements: https://www.commoncriteriaportal.org/files/supdocs/CCMC-011-v1.0-2025-Mar-19-CCRA%20and%20EUCC%20Co-existence.pdf .</a>
+          
+          <span class="item-meta">updated &middot; EUCC</span>
+          <div class="item-sub">New item on EUCC requirements / scheme page</div>
+          <button class="dismiss-btn" onclick="dismissAlert(this)" title="Mark as seen">&#10003; Seen</button>
+        </div>
+        
+        <div class="item-row alert-item" data-alert-key="EUCC Requirements-EUCC_certificates_emitted_by_a_European_public_Certification_Body_(CB)_that_is_also_a_CCRA_authorising_participant_will…" data-tab="eu">
+          
+          <a class="item-link" href="https://certification.enisa.europa.eu/browse-topic/eucc_en" target="_blank">EUCC Requirements: EUCC certificates emitted by a European public Certification Body (CB) that is also a CCRA authorising participant will…</a>
+          
+          <span class="item-meta">updated &middot; EUCC</span>
+          <div class="item-sub">New item on EUCC requirements / scheme page</div>
+          <button class="dismiss-btn" onclick="dismissAlert(this)" title="Mark as seen">&#10003; Seen</button>
+        </div>
+        
+        <div class="item-row alert-item" data-alert-key="EUCC Requirements-EUCC_certificates_emitted_by_a_private/_commercial_CB_shall_meet_additional_requirements_related_to_per-certificate_over…" data-tab="eu">
+          
+          <a class="item-link" href="https://certification.enisa.europa.eu#_ftn1" target="_blank">EUCC Requirements: EUCC certificates emitted by a private/ commercial CB shall meet additional requirements related to per-certificate over…</a>
+          
+          <span class="item-meta">updated &middot; EUCC</span>
+          <div class="item-sub">New item on EUCC requirements / scheme page</div>
+          <button class="dismiss-btn" onclick="dismissAlert(this)" title="Mark as seen">&#10003; Seen</button>
+        </div>
+        
+        <div class="item-row alert-item" data-alert-key="EUCC Requirements-While_mutual_recognition_has_not_yet_been_established,_this_voluntary_approach_enables_EU_Member_States_active_in_the_CC…" data-tab="eu">
+          
+          <a class="item-link" href="https://certification.enisa.europa.eu/browse-topic/eucc_en" target="_blank">EUCC Requirements: While mutual recognition has not yet been established, this voluntary approach enables EU Member States active in the CC…</a>
+          
+          <span class="item-meta">updated &middot; EUCC</span>
+          <div class="item-sub">New item on EUCC requirements / scheme page</div>
+          <button class="dismiss-btn" onclick="dismissAlert(this)" title="Mark as seen">&#10003; Seen</button>
+        </div>
+        
+        <div class="item-row alert-item" data-alert-key="EUCC Requirements-[1]_The_trusted_public-private_certification_model_deployed_by_the_Netherlands_can_be_used_as_a_reference._See_further_i…" data-tab="eu">
+          
+          <a class="item-link" href="https://certification.enisa.europa.eu#_ftnref1" target="_blank">EUCC Requirements: [1] The trusted public-private certification model deployed by the Netherlands can be used as a reference. See further i…</a>
+          
+          <span class="item-meta">updated &middot; EUCC</span>
+          <div class="item-sub">New item on EUCC requirements / scheme page</div>
+          <button class="dismiss-btn" onclick="dismissAlert(this)" title="Mark as seen">&#10003; Seen</button>
+        </div>
+        
+        <div class="item-row alert-item" data-alert-key="EUCC Certificates-ENISA,_the_European_Union_Agency_for_Cybersecurity_is_in_charge_of_publishing_European_cybersecurity_certificates." data-tab="eu">
+          
+          <a class="item-link" href="https://certification.enisa.europa.eu/certificates_en" target="_blank">EUCC Certificates: ENISA, the European Union Agency for Cybersecurity is in charge of publishing European cybersecurity certificates.</a>
+          
+          <span class="item-meta">new_cert &middot; ENISA</span>
+          <div class="item-sub">New EUCC certified product</div>
+          <button class="dismiss-btn" onclick="dismissAlert(this)" title="Mark as seen">&#10003; Seen</button>
+        </div>
+        
+  </div>
+</div>
 
 <div class="tab-nav" id="region-tabs">
         <button class="tab-btn active" data-tab="us" onclick="switchTab(this)">&#127482;&#127480; US (NIAP / CSfC / NIST)</button>
@@ -338,26 +721,17 @@
 </div>
 
   <!-- NIAP In-Evaluation -->
-<div class="card card-new" id="sec-niap-inevaluation" data-has-changes="1">
+<div class="card " id="sec-niap-inevaluation" data-has-changes="0">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>NIAP In-Evaluation Products</span>
-    <span class="card-count">1 change</span>
+    <span class="card-count">31 active</span>
     </span>
   </div>
-  <div class="card-body ">
-    
-    <div class="sub-hdr sub-new">Newly In Evaluation (1)</div>
-    
-    <div class="item-row" data-source="niap-inevaluation" data-kind="new">
-      <span class="item-link">Red Hat, Inc. -- Red Hat Enterprise Linux 9.6</span>
-      <span class="item-meta">Lightship Security USA, Inc.</span>
-    </div>
-    
-    <div class="item-sub">Operating System</div>
+  <div class="card-body collapsed">
     
     
     
-    
+    <p class="no-change">No evaluation changes detected. 31 products currently in evaluation.</p>
     
   </div>
 </div>
@@ -380,28 +754,17 @@
 </div>
 
   <!-- NIAP PCL — All Certifications -->
-<div class="card card-new" id="sec-niap-pcl" data-has-changes="1">
+<div class="card " id="sec-niap-pcl" data-has-changes="0">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>NIAP PCL — All Certifications</span>
-    <span class="card-count">1 change</span>
+    <span class="card-count">0 changes</span>
     </span>
   </div>
-  <div class="card-body ">
-    
-    <div class="sub-hdr sub-new">New Certifications (1)</div>
-    
-    <div class="item-row" data-source="niap-pcl" data-kind="new">
-      <span class="item-link">Red Hat, Inc. -- Red Hat Enterprise Linux 9.6</span>
-      <span class="item-meta"></span>
-    </div>
-    
-    <div class="item-sub">PKG_TLS_V1.1, PKG_SSH_V1.0, PP_OS_V4.3</div>
+  <div class="card-body collapsed">
     
     
     
-    
-    
-    
+    <p class="no-change">No changes detected. <span class="last-active">(last: 2026-05-16)</span></p>
   </div>
 </div>
 
@@ -541,32 +904,382 @@
       <div class="section-group" id="tab-pane-eu" data-tab="eu">
         <div class="section-label">EU (EUCC / ENISA)</div>
         <!-- EUCC Requirements -->
-        <div class="card " id="sec-eucc-req" data-has-changes="0">
+        <div class="card card-updated" id="sec-eucc-req" data-has-changes="67">
           <div class="card-hdr" onclick="toggleCard(this)">
             <span>EUCC Requirements &amp; Scheme Updates</span>
-            <span class="card-count">0 changes</span>
-            <span class="toggle-icon">&#9658;</span>
+            <span class="card-count">67 changes</span>
+            <span class="toggle-icon">&#9660;</span>
           </div>
-          <div class="card-body collapsed">
+          <div class="card-body ">
+            
+            
+            <div class="item-row" data-source="eucc" data-kind="updated">
+              <a class="item-link" href="#" target="_blank">The EUCC scheme allows ICT suppliers who wish to showcase proof of assurance to go through an EU commonly understood assessment process to certify ICT products such as technological components (chips, smartcards), hardware and software.</a>
+              <span class="item-meta"></span>
+            </div>
+            
+            <div class="item-row" data-source="eucc" data-kind="updated">
+              <a class="item-link" href="#" target="_blank">With EUCC, the EU commonly agreed on assessment process to certify ICT products such as technological components, hardware and software. The scheme is based on Common Criteria, an international standard (ISO/IEC 15408) broadly used internationally.</a>
+              <span class="item-meta"></span>
+            </div>
+            
+            <div class="item-row" data-source="eucc" data-kind="updated">
+              <a class="item-link" href="#" target="_blank">Some regulations might require Common Criteria certification, but in all cases, such a certificate provides a competitive advantage by giving trust to customers and users .</a>
+              <span class="item-meta"></span>
+            </div>
+            
+            <div class="item-row" data-source="eucc" data-kind="updated">
+              <a class="item-link" href="#" target="_blank">EUCC in Application</a>
+              <span class="item-meta"></span>
+            </div>
+            
+            <div class="item-row" data-source="eucc" data-kind="updated">
+              <a class="item-link" href="#" target="_blank">The scope of EUCC</a>
+              <span class="item-meta"></span>
+            </div>
+            
+            <div class="item-row" data-source="eucc" data-kind="updated">
+              <a class="item-link" href="#" target="_blank">The vendor or manufacturer can specify the security functional requirements (SFRs) and security assurance requirements (SARs) against which their ICT products will be assessed. The methodology offers to define Protection Profiles corresponding to product Categories.</a>
+              <span class="item-meta"></span>
+            </div>
+            
+            <div class="item-row" data-source="eucc" data-kind="updated">
+              <a class="item-link" href="#" target="_blank">These requirements also allow for an assurance level to be indicated: the EUCC covers two, substantial and high , that have been mapped with AVA_VAN, the vulnerability assessment class of the Common Criteria.</a>
+              <span class="item-meta"></span>
+            </div>
+            
+            <div class="item-row" data-source="eucc" data-kind="updated">
+              <a class="item-link" href="#" target="_blank">EUCC Certificates</a>
+              <span class="item-meta"></span>
+            </div>
+            
+            <div class="item-row" data-source="eucc" data-kind="updated">
+              <a class="item-link" href="#" target="_blank">Since February 2025, EUCC Certificates can be issued . Certificates are issued by Certification Bodies based on an evaluation process carried out by an accredited and, where necessary, authorised laboratory. The laboratory performs documental and technical assessment activities defined by the Common Criteria standard.</a>
+              <span class="item-meta"></span>
+            </div>
+            
+            <div class="item-row" data-source="eucc" data-kind="updated">
+              <a class="item-link" href="#" target="_blank">During the validity period of their certificate, ICT products are subject to monitoring, vulnerability management, and disclosure procedures .</a>
+              <span class="item-meta"></span>
+            </div>
+            
+            <div class="item-row" data-source="eucc" data-kind="updated">
+              <a class="item-link" href="#" target="_blank">The ENISA website dedicated to certification will present EUCC certificates and other EU certificates issued under the CSA.</a>
+              <span class="item-meta"></span>
+            </div>
+            
+            <div class="item-row" data-source="eucc" data-kind="updated">
+              <a class="item-link" href="#" target="_blank">EUCC a live scheme</a>
+              <span class="item-meta"></span>
+            </div>
+            
+            <div class="item-row" data-source="eucc" data-kind="updated">
+              <a class="item-link" href="#" target="_blank">ENISA developed a candidate scheme first in 2020, with the support of an ad hoc Working Group, and reused widely the experience of the SOG-IS Mutual Recognition Agreement.</a>
+              <span class="item-meta"></span>
+            </div>
+            
+            <div class="item-row" data-source="eucc" data-kind="updated">
+              <a class="item-link" href="#" target="_blank">The EUCC scheme, adopted in 2024 and amended since then, is now in operation and under regular maintenance.</a>
+              <span class="item-meta"></span>
+            </div>
+            
+            <div class="item-row" data-source="eucc" data-kind="updated">
+              <a class="item-link" href="#" target="_blank">Access EUCC Library</a>
+              <span class="item-meta"></span>
+            </div>
+            
+            <div class="item-row" data-source="eucc" data-kind="updated">
+              <a class="item-link" href="#" target="_blank">EUCC is composed of a rich list of documents from the Implementing Act and its amendments to state-of-the-art documents and guidelines.</a>
+              <span class="item-meta"></span>
+            </div>
+            
+            <div class="item-row" data-source="eucc" data-kind="updated">
+              <a class="item-link" href="#" target="_blank">EUCC Certification scheme Documents</a>
+              <span class="item-meta"></span>
+            </div>
+            
+            <div class="item-row" data-source="eucc" data-kind="updated">
+              <a class="item-link" href="#" target="_blank">This section displays Frequently Asked Questions on EUCC Scheme</a>
+              <span class="item-meta"></span>
+            </div>
+            
+            <div class="item-row" data-source="eucc" data-kind="updated">
+              <a class="item-link" href="https://eur-lex.europa.eu/eli/reg_impl/2024/482/oj" target="_blank">Commission Implementing Regulation (EU) 2024/482 of 31 January 2024 (EUCC Implementing Regulation) made reference to ISO/IEC standards, but didn’t specify the applicable version of those standards. Commission Implementing Regulation (EU) 2024/3144 of 18 December 2024 (EUCC amendment) therefore specified which version of the standards applies for certificates issued under the EUCC, and defined tran</a>
+              <span class="item-meta"></span>
+            </div>
+            
+            <div class="item-row" data-source="eucc" data-kind="updated">
+              <a class="item-link" href="#" target="_blank">In line with the amended Articles 2 and 3 of the EUCC Implementing Regulation, the following standards shall apply to evaluations performed under the EUCC scheme:</a>
+              <span class="item-meta"></span>
+            </div>
+            
+            <div class="item-row" data-source="eucc" data-kind="updated">
+              <a class="item-link" href="#" target="_blank">the Common Criteria, as set out in standards ISO/IEC 15408-1:2022, ISO/IEC 15408-2:2022, ISO/IEC 15408-3:2022, ISO/IEC 15408-4:2022 or ISO/IEC 15408-5:2022, or set out in Common Criteria for Information Technology Security Evaluation, version CC:2022, Parts 1 through 5, published by the participants of the Arrangement on the Recognition of Common Criteria Certificates in the field of IT Security;</a>
+              <span class="item-meta"></span>
+            </div>
+            
+            <div class="item-row" data-source="eucc" data-kind="updated">
+              <a class="item-link" href="#" target="_blank">the Common Evaluation Methodology, as set out in standard ISO/IEC 18045:2022, or the Common Methodology for Information Technology Security Evaluation, version CEM:2022, published by the participants of the Arrangement on the Recognition of Common Criteria Certificates in the field of IT Security.</a>
+              <span class="item-meta"></span>
+            </div>
+            
+            <div class="item-row" data-source="eucc" data-kind="updated">
+              <a class="item-link" href="https://commoncriteriaportal.org/cc/index.cfm" target="_blank">In addition, the use of the errata to CC:2022 and CEM:2022 available on the CCRA portal is not mandatory but is recommended to allow consistency in the interpretations with the CCRA.</a>
+              <span class="item-meta"></span>
+            </div>
+            
+            <div class="item-row" data-source="eucc" data-kind="updated">
+              <a class="item-link" href="#" target="_blank">Furthermore, the transition rules between the former and latest version of the above-mentioned standards were defined in Article 3 of the EUCC Implementing Regulation. Such rules enable the use of the older standard versions within the defined timeframe and ensure sufficient time to update relevant protection profiles as appropriate. More specifically, the amended Article 3 reads as follows:</a>
+              <span class="item-meta"></span>
+            </div>
+            
+            <div class="item-row" data-source="eucc" data-kind="updated">
+              <a class="item-link" href="#" target="_blank">“2. Until 31 December 2027, a certificate may be issued under the EUCC scheme applying either of the following standards:</a>
+              <span class="item-meta"></span>
+            </div>
+            
+            <div class="item-row" data-source="eucc" data-kind="updated">
+              <a class="item-link" href="#" target="_blank">ISO/IEC 15408-1:2009, ISO/IEC 15408-2:2008 or ISO/IEC 15408-3:2008;</a>
+              <span class="item-meta"></span>
+            </div>
+            
+            <div class="item-row" data-source="eucc" data-kind="updated">
+              <a class="item-link" href="#" target="_blank">Common Criteria for Information Technology Security Evaluation, version 3.1, revision 5, published by the participants of the Arrangement on the Recognition of Common Criteria Certificates in the field of IT Security;</a>
+              <span class="item-meta"></span>
+            </div>
+            
+            <div class="item-row" data-source="eucc" data-kind="updated">
+              <a class="item-link" href="#" target="_blank">ISO/IEC 18045:2008;</a>
+              <span class="item-meta"></span>
+            </div>
+            
+            <div class="item-row" data-source="eucc" data-kind="updated">
+              <a class="item-link" href="#" target="_blank">Common Methodology for Information Technology Security Evaluation, revision 5, version 3.1, published by the participants of the Arrangement on the Recognition of Common Criteria Certificates in the field of IT Security.</a>
+              <span class="item-meta"></span>
+            </div>
+            
+            <div class="item-row" data-source="eucc" data-kind="updated">
+              <a class="item-link" href="#" target="_blank">3. Until 31 December 2027, a certificate applying the standards referred to in paragraph 1 may be issued under the EUCC scheme claiming conformance to a protection profile that has applied the standards listed in paragraph 2.</a>
+              <span class="item-meta"></span>
+            </div>
+            
+            <div class="item-row" data-source="eucc" data-kind="updated">
+              <a class="item-link" href="#" target="_blank">4. A certificate applying the standards referred to in paragraph 1 may also be issued under the EUCC scheme claiming conformance to a protection profile that has applied either of the following standards, provided that the use of such protection profile is required under Commission Implementing Regulation (EU) 2016/799, Regulation (EU) No 910/2014 of the European Parliament and of the Council or C</a>
+              <span class="item-meta"></span>
+            </div>
+            
+            <div class="item-row" data-source="eucc" data-kind="updated">
+              <a class="item-link" href="#" target="_blank">Common Methodology for Information Technology Security Evaluation, version 3.1., revision 1 to 4, published by the participants of the Arrangement on the Recognition of Common Criteria Certificates in the field of IT Security.”</a>
+              <span class="item-meta"></span>
+            </div>
+            
+            <div class="item-row" data-source="eucc" data-kind="updated">
+              <a class="item-link" href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A02024R0482-20250108%20" target="_blank">A consolidated version of the EUCC Implementing Regulation that includes the amendments made to the scheme with Regulation (EU) 2024/3144 can be found here (please note that the consolidated text is meant purely as a documentation tool and has no legal effect).</a>
+              <span class="item-meta"></span>
+            </div>
+            
+            <div class="item-row" data-source="eucc" data-kind="updated">
+              <a class="item-link" href="https://certification.enisa.europa.eu/publications/eucc-amendment-presentation_en%20" target="_blank">A presentation of the EUCC scheme review, including clarifications on the applicable standards and the transition rules, is provided here .</a>
+              <span class="item-meta"></span>
+            </div>
+            
+            <div class="item-row" data-source="eucc" data-kind="updated">
+              <a class="item-link" href="https://certification.enisa.europa.eu/certification-library/eucc-certification-scheme_en#state-of-the-art-documents-for-eucc" target="_blank">The general rule is that a new or updated version of a SotA should be applied to certification processes initiated after the SotAs become applicable through the adoption of the amendment to the EUCC. However, considering Common Criteria (CC) mandate the use of the most recent versions of the vulnerability assessment and attack potential methodologies by ITSEFs, it is highly recommended to use the </a>
+              <span class="item-meta"></span>
+            </div>
+            
+            <div class="item-row" data-source="eucc" data-kind="updated">
+              <a class="item-link" href="#" target="_blank">Accreditation is mandatory to perform evaluation and certification activities at assurance level ‘substantial’, and authorisation, in addition, is required to perform similar activities at assurance level ‘high’.</a>
+              <span class="item-meta"></span>
+            </div>
+            
+            <div class="item-row" data-source="eucc" data-kind="updated">
+              <a class="item-link" href="#" target="_blank">Pursuant to Article 9(1) of the EUCC Implementing Regulation, the certification bodies shall issue an EUCC certificate under certain conditions listed there, one of which is that:</a>
+              <span class="item-meta"></span>
+            </div>
+            
+            <div class="item-row" data-source="eucc" data-kind="updated">
+              <a class="item-link" href="#" target="_blank">“the category of ICT product falls within the scope of the accreditation, and where applicable of the authorisation, of the certification body and the ITSEF involved in the certification” (point (a) of Article 9(1)).</a>
+              <span class="item-meta"></span>
+            </div>
+            
+            <div class="item-row" data-source="eucc" data-kind="updated">
+              <a class="item-link" href="#" target="_blank">In addition, Article 21(1) outlines additional or specific requirements for a certification body which read like that:</a>
+              <span class="item-meta"></span>
+            </div>
+            
+            <div class="item-row" data-source="eucc" data-kind="updated">
+              <a class="item-link" href="#" target="_blank">“1. A certification body shall be authorised by the national cybersecurity certification authority to issue EUCC certificates at assurance level ‘high’ where that body demonstrates that, in addition to meeting the requirements laid down in Article 60(1) and the Annex to Regulation (EU) 2019/881 regarding accreditation of conformity assessment bodies, the following:</a>
+              <span class="item-meta"></span>
+            </div>
+            
+            <div class="item-row" data-source="eucc" data-kind="updated">
+              <a class="item-link" href="#" target="_blank">it has the expertise and competences required for the certification decision at assurance level ‘high’;</a>
+              <span class="item-meta"></span>
+            </div>
+            
+            <div class="item-row" data-source="eucc" data-kind="updated">
+              <a class="item-link" href="#" target="_blank">it conducts its certification activities in cooperation with an ITSEF authorised in accordance with Article 22; and</a>
+              <span class="item-meta"></span>
+            </div>
+            
+            <div class="item-row" data-source="eucc" data-kind="updated">
+              <a class="item-link" href="#" target="_blank">it has the requisite competences and put in place appropriate technical and operational measures to effectively protect confidential and sensitive information for assurance level ‘high’, in addition to the requirements set out in Article 43.”,</a>
+              <span class="item-meta"></span>
+            </div>
+            
+            <div class="item-row" data-source="eucc" data-kind="updated">
+              <a class="item-link" href="#" target="_blank">whereas Article 22(1) sets out additional or specific requirements for an ITSEF:</a>
+              <span class="item-meta"></span>
+            </div>
+            
+            <div class="item-row" data-source="eucc" data-kind="updated">
+              <a class="item-link" href="#" target="_blank">“1. An ITSEF shall be authorised by the national cybersecurity certification authority to carry out the evaluation of ICT products which are subject to certification under the assurance level ‘high’, where the ITSEF demonstrates that, in addition to meeting the requirements laid down in Article 60(1) and the Annex to Regulation (EU) 2019/881 regarding accreditation of conformity assessment bodies,</a>
+              <span class="item-meta"></span>
+            </div>
+            
+            <div class="item-row" data-source="eucc" data-kind="updated">
+              <a class="item-link" href="#" target="_blank">it has the necessary expertise for performing the evaluation activities to determine the resistance to state-of-the-art cyberattacks carried out by actors with significant skills and resources;</a>
+              <span class="item-meta"></span>
+            </div>
+            
+            <div class="item-row" data-source="eucc" data-kind="updated">
+              <a class="item-link" href="#" target="_blank">for the technical domains and protection profiles, which are part of the ICT process for those ICT products, it has: the expertise to perform the specific evaluation activities necessary to methodically determine a target of evaluation’s resistance against skilled attackers in its operational environment assuming an attack potential of ‘moderate’ or ‘high’ as set out in the standards referred to i</a>
+              <span class="item-meta"></span>
+            </div>
+            
+            <div class="item-row" data-source="eucc" data-kind="updated">
+              <a class="item-link" href="#" target="_blank">the expertise to perform the specific evaluation activities necessary to methodically determine a target of evaluation’s resistance against skilled attackers in its operational environment assuming an attack potential of ‘moderate’ or ‘high’ as set out in the standards referred to in Article 3;</a>
+              <span class="item-meta"></span>
+            </div>
+            
+            <div class="item-row" data-source="eucc" data-kind="updated">
+              <a class="item-link" href="#" target="_blank">the technical competences as specified in the state-of-the-art documents listed in Annex I;</a>
+              <span class="item-meta"></span>
+            </div>
+            
+            <div class="item-row" data-source="eucc" data-kind="updated">
+              <a class="item-link" href="#" target="_blank">Article 5(1) of the EUCC Implementing Regulation sets out the following:</a>
+              <span class="item-meta"></span>
+            </div>
+            
+            <div class="item-row" data-source="eucc" data-kind="updated">
+              <a class="item-link" href="#" target="_blank">“1. Certification of an ICT product shall be carried out against its security target:</a>
+              <span class="item-meta"></span>
+            </div>
+            
+            <div class="item-row" data-source="eucc" data-kind="updated">
+              <a class="item-link" href="#" target="_blank">as defined by the applicant; or</a>
+              <span class="item-meta"></span>
+            </div>
+            
+            <div class="item-row" data-source="eucc" data-kind="updated">
+              <a class="item-link" href="#" target="_blank">incorporating a certified protection profile as part of the ICT process, where the ICT product falls in the ICT product category covered by that protection profile.”</a>
+              <span class="item-meta"></span>
+            </div>
+            
+            <div class="item-row" data-source="eucc" data-kind="updated">
+              <a class="item-link" href="#" target="_blank">Therefore, the EUCC Implementing Regulation allows the following options:</a>
+              <span class="item-meta"></span>
+            </div>
+            
+            <div class="item-row" data-source="eucc" data-kind="updated">
+              <a class="item-link" href="#" target="_blank">to develop a security target which does not refer to any PP;</a>
+              <span class="item-meta"></span>
+            </div>
+            
+            <div class="item-row" data-source="eucc" data-kind="updated">
+              <a class="item-link" href="#" target="_blank">to develop a security target which refers to a non-EUCC certified PP, and still assess conformance to the PP into the certification report; or</a>
+              <span class="item-meta"></span>
+            </div>
+            
+            <div class="item-row" data-source="eucc" data-kind="updated">
+              <a class="item-link" href="#" target="_blank">incorporating an EUCC-certified PP.</a>
+              <span class="item-meta"></span>
+            </div>
+            
+            <div class="item-row" data-source="eucc" data-kind="updated">
+              <a class="item-link" href="#" target="_blank">In case the applicant defines the security target based on a non-EUCC certified PP (option b), the certification body (CB) takes full responsibility for the certification results. It is hence up to the CB to ensure that all relevant and necessary activities have been performed and the results of the certification against this PP are in line with the EUCC requirements.</a>
+              <span class="item-meta"></span>
+            </div>
+            
+            <div class="item-row" data-source="eucc" data-kind="updated">
+              <a class="item-link" href="#" target="_blank">According to Article 7(1)(e) of the EUCC Implementing Regulation, the PPs listed in Annex II shall apply in the case the ICT product submitted to evaluation falls into the category of the PP.</a>
+              <span class="item-meta"></span>
+            </div>
+            
+            <div class="item-row" data-source="eucc" data-kind="updated">
+              <a class="item-link" href="#" target="_blank">Protection profiles listed in Annex III are recommended, as per recital (31) of the EUCC Implementing Regulation.</a>
+              <span class="item-meta"></span>
+            </div>
+            
+            <div class="item-row" data-source="eucc" data-kind="updated">
+              <a class="item-link" href="#" target="_blank">Yes, the CCRA (non-EU) participants will recognise EUCC certificates under the conditions outlined in the following document:</a>
+              <span class="item-meta"></span>
+            </div>
+            
+            <div class="item-row" data-source="eucc" data-kind="updated">
+              <a class="item-link" href="https://www.commoncriteriaportal.org/files/supdocs/CCMC-011-v1.0-2025-Mar-19-CCRA%20and%20EUCC%20Co-existence.pdf" target="_blank">https://www.commoncriteriaportal.org/files/supdocs/CCMC-011-v1.0-2025-Mar-19-CCRA%20and%20EUCC%20Co-existence.pdf .</a>
+              <span class="item-meta"></span>
+            </div>
+            
+            <div class="item-row" data-source="eucc" data-kind="updated">
+              <a class="item-link" href="#" target="_blank">EUCC certificates emitted by a European public Certification Body (CB) that is also a CCRA authorising participant will be recognised by other CCRA members as before EUCC entered into application.</a>
+              <span class="item-meta"></span>
+            </div>
+            
+            <div class="item-row" data-source="eucc" data-kind="updated">
+              <a class="item-link" href="https://certification.enisa.europa.eu#_ftn1" target="_blank">EUCC certificates emitted by a private/ commercial CB shall meet additional requirements related to per-certificate oversight process for CCRA recognition by the NCCA [1] and can be flexible and conducted throughout or at the end of the process.</a>
+              <span class="item-meta"></span>
+            </div>
+            
+            <div class="item-row" data-source="eucc" data-kind="updated">
+              <a class="item-link" href="#" target="_blank">While mutual recognition has not yet been established, this voluntary approach enables EU Member States active in the CCRA to issue EUCC certificates, which additionally carry the CCRA mark. This is a short-term solution and additional efforts will be required to allow full mutual recognition. In the meantime, CCRA certificates will continue to be recognised in accordance with the CCRA by EU Membe</a>
+              <span class="item-meta"></span>
+            </div>
+            
+            <div class="item-row" data-source="eucc" data-kind="updated">
+              <a class="item-link" href="https://certification.enisa.europa.eu#_ftnref1" target="_blank">[1] The trusted public-private certification model deployed by the Netherlands can be used as a reference. See further information here: https://www.dutchncca.nl/documents/schemedoc/np/002/eucc-processes-v2.0#9c5889430a</a>
+              <span class="item-meta"></span>
+            </div>
+            
+            <div class="item-row" data-source="eucc" data-kind="updated">
+              <a class="item-link" href="#" target="_blank">More FAQs on certification and contact us to ask a question or raise an issue.</a>
+              <span class="item-meta"></span>
+            </div>
             
             
             
-            <p class="no-change">No EUCC requirement changes detected.</p>
           </div>
         </div>
         <!-- EUCC Certificates -->
-        <div class="card " id="sec-eucc-certs" data-has-changes="0">
+        <div class="card card-new" id="sec-eucc-certs" data-has-changes="3">
           <div class="card-hdr" onclick="toggleCard(this)">
             <span>EUCC Certified Products</span>
-            <span class="card-count">0 new items</span>
-            <span class="toggle-icon">&#9658;</span>
+            <span class="card-count">3 new items</span>
+            <span class="toggle-icon">&#9660;</span>
           </div>
-          <div class="card-body collapsed">
+          <div class="card-body ">
             
             
             
+            <div class="item-row" data-source="eucc" data-kind="new">
+              <a class="item-link" href="#" target="_blank">ENISA, the European Union Agency for Cybersecurity is in charge of publishing European cybersecurity certificates.</a>
+              <span class="item-meta"></span>
+            </div>
             
-            <p class="no-change">No new EUCC certified products.</p>
+            <div class="item-row" data-source="eucc" data-kind="new">
+              <a class="item-link" href="#" target="_blank">Certificates are published along with associated certification reports, and their validity status will also be highlighted.</a>
+              <span class="item-meta"></span>
+            </div>
+            
+            <div class="item-row" data-source="eucc" data-kind="new">
+              <a class="item-link" href="#" target="_blank">EU Cybersecurity Certificates (38)</a>
+              <span class="item-meta"></span>
+            </div>
+            
+            
+            
           </div>
         </div>
       </div>
@@ -949,7 +1662,7 @@
 </div><!-- /main-content -->
 <footer>
   <span>CC Pulse &middot; Auto-refreshes daily (01:00 EST) &middot; NIAP, CSfC, NIST, CC Portal, NATO NIAPCL, EUCC / ENISA</span>
-  <span>Last run: 2026-06-18 03:41 ET</span>
+  <span>Last run: 2026-06-19 03:53 ET</span>
 </footer>
 
 <script>
