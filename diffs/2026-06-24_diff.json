@@ -1,0 +1,332 @@
+{
+  "period_start": "2026-06-23T07:16:08.837694+00:00",
+  "period_end": "2026-06-24T07:13:12.018774+00:00",
+  "niap": {
+    "pps": {
+      "added": [],
+      "removed": [],
+      "sunset_changes": [],
+      "status_changes": []
+    },
+    "tds": {
+      "added": [
+        {
+          "td_id": 1047,
+          "identifier": "TD1047",
+          "title": "Correction to FAU_SAA.1 Test 11",
+          "protection_profile": [
+            {
+              "pp_id": 443,
+              "pp_name": "PP-Module for Wireless Intrusion Detection/Prevention Systems (WIDS/WIPS) Version 1.0",
+              "pp_common_name": "PP-Module for Wireless Intrusion Detection/Prevention Systems (WIDS/WIPS) Version 1.0",
+              "cc_version": "3.1",
+              "mr_version": "",
+              "pp_date": "2020-09-30T00:00:00Z",
+              "entrydate": "2019-09-18T11:16:51Z",
+              "tech_type": "Wireless Monitoring",
+              "pp_sponsor_id": "NIAP",
+              "community_id": null,
+              "status": "Publishing",
+              "sunset_date": "2026-07-21T00:00:00Z",
+              "pp_overview": "<p>This PP-Module specifically addresses Wireless Intrusion Detection/Prevention Systems (WIDS/WIPS). A conformant WIDS/WIPS is a product that can monitor, collect, inspect,&nbsp; and analyze real-time network traffic and alert the administrator of policy violations.&nbsp; WIPS functionality is not required to conform to this PP-Module, and it is optional for the TOE to have the additional ability to react in real-time to potentially malicious wireless (IEEE 802.11) network traffic. A WIDS/WIPS TOE consists of multiple sensors that passively scan the RF environment on the WLAN radio frequency spectrum and a centralized mechanism such as a Server or Controller that processes the data collected by the sensors. Conformant TOEs must use a secure communication path(s) between WIDS/WIPS components. The WIDS/WIPS could use an Embedded (be part of the WLAN infrastructure) or Overlay (independent from WLAN) architecture depending on vendor implementation.<br /><br />This PP-Module is focused on inspecting layers 1 and 2 of the OSI network model as the traffic that the WIDS/WIPS monitors is wireless frames in the RF spectrum utilized by IEEE 802.11 a, b, g, n, and ac. Requirements for other technologies (e.g., cellular) and protocols are optional.</p>\r\n<p>&nbsp;</p>\r\n<p style=\"margin-bottom: 0.6em; margin-top: 0.2em; font-family: 'Times New Roman';\">&nbsp;</p>",
+              "security_evaluation_summary": "",
+              "environmental_strengths": "",
+              "pp_priority": "",
+              "created_on": "2019-09-18T11:16:51Z",
+              "removed_on": null,
+              "archived": false,
+              "assurance_maintenance": "",
+              "pp_estcompletion": "CY 2020, Q1",
+              "pp_estcompletiondate": null,
+              "pp_transition": null,
+              "revised_on": "2020-10-27T10:02:20Z",
+              "pp_short_name": "MOD_WIDS_V1.0",
+              "dod_compliant": false,
+              "csfceligible": false,
+              "constraint": "",
+              "predecessor_id": 395,
+              "successor_id": 528,
+              "creator": 18,
+              "remover": null,
+              "editor": 18
+            }
+          ],
+          "sunset_protection_profile": [],
+          "related_to": "FAU_SAA.1, MOD_WIDS_V1.0-SD",
+          "publication_date": "2026-06-23T08:59:00.696000Z",
+          "removed_on": null,
+          "status": "Published"
+        },
+        {
+          "td_id": 1042,
+          "identifier": "TD1042",
+          "title": "FIT Technical Decision: Replacing FIPS 186-4 with 186-5",
+          "protection_profile": [
+            {
+              "pp_id": 437,
+              "pp_name": "collaborative Protection Profile for Full Drive Encryption - Authorization Acquisition Version 2.0 + Errata 20190201",
+              "pp_common_name": "collaborative Protection Profile for Full Drive Encryption - Authorization Acquisition Version 2.0 + Errata 20190201",
+              "cc_version": "3.1",
+              "mr_version": "",
+              "pp_date": "2019-02-01T00:00:00Z",
+              "entrydate": "2019-02-07T13:04:20Z",
+              "tech_type": "Encrypted Storage",
+              "pp_sponsor_id": "FDE iTC",
+              "community_id": null,
+              "status": "Publishing",
+              "sunset_date": "2026-09-25T00:00:00Z",
+              "pp_overview": "<p>The purpose of the Collaborative Protection Profiles (cPPs) for Full Drive Encryption (FDE): Authorization Acquisition (AA) and Encryption Engine (EE) is to provide requirements for Data-at-Rest protection for a lost device that contains storage. These cPPs allow FDE solutions based in software and/or hardware to meet the requirements. The form factor for a storage device may vary, but could include: system hard drives/solid state drives in servers, workstations, laptops, mobile devices, tablets, and external media. A hardware solution could be a Self-Encrypting Drive or other hardware-based solutions; the interface (USB, SATA, etc.) used to connect the storage device to the host machine is outside the scope of this cPP.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <br /><br />Full Drive Encryption encrypts all data (with certain exceptions) on the storage device and permits access to the data only after successful authorization to the FDE solution. The exceptions include the necessity to leave a portion of the storage device (the size may vary based on implementation) unencrypted for such things as the Master Boot Record (MBR) or other AA/EE pre-authentication software. These FDE cPPs interpret the term &ldquo;full drive encryption&rdquo; to allow FDE solutions to leave a portion of the storage device unencrypted so long as it does not contain plaintext user or plaintext authorization data.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <br /><br />The FDE cPP - Authorization Acquisition describes the requirements for the Authorization Acquisition piece and details the security requirements and assurance activities necessary to interact with a user and result in the availability of sending a Border Encryption Value (BEV) to the Encryption Engine.</p>",
+              "security_evaluation_summary": "",
+              "environmental_strengths": "",
+              "pp_priority": "",
+              "created_on": "2019-02-07T13:04:20Z",
+              "removed_on": null,
+              "archived": false,
+              "assurance_maintenance": "",
+              "pp_estcompletion": "",
+              "pp_estcompletiondate": null,
+              "pp_transition": "2019-02-01T00:00:00Z",
+              "revised_on": "2022-11-17T10:06:35Z",
+              "pp_short_name": "CPP_FDE_AA_V2.0E",
+              "dod_compliant": false,
+              "csfceligible": true,
+              "constraint": "",
+              "predecessor_id": 406,
+              "successor_id": null,
+              "creator": 409,
+              "remover": null,
+              "editor": 409
+            },
+            {
+              "pp_id": 438,
+              "pp_name": "collaborative Protection Profile for Full Drive Encryption - Encryption Engine Version 2.0 + Errata 20190201",
+              "pp_common_name": "collaborative Protection Profile for Full Drive Encryption - Encryption Engine Version 2.0 + Errata 20190201",
+              "cc_version": "3.1",
+              "mr_version": "",
+              "pp_date": "2019-02-01T00:00:00Z",
+              "entrydate": "2019-02-07T13:07:10Z",
+              "tech_type": "Encrypted Storage",
+              "pp_sponsor_id": "FDE iTC",
+              "community_id": null,
+              "status": "Publishing",
+              "sunset_date": "2026-09-25T00:00:00Z",
+              "pp_overview": "<p>The purpose of the Collaborative Protection Profiles (cPPs) for Full Drive Encryption (FDE): Authorization Acquisition (AA) and Encryption Engine (EE) is to provide requirements for Data-at-Rest protection for a lost device that contains storage. These cPPs allow FDE solutions based in software and/or hardware to meet the requirements. The form factor for a storage device may vary, but could include: system hard drives/solid state drives in servers, workstations, laptops, mobile devices, tablets, and external media. A hardware solution could be a Self-Encrypting Drive or other hardware-based solutions; the interface (USB, SATA, etc.) used to connect the storage device to the host machine is outside the scope of this cPP.<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <br />Full Drive Encryption encrypts all data (with certain exceptions) on the storage device and permits access to the data only after successful authorization to the FDE solution. The exceptions include the necessity to leave a portion of the storage device (the size may vary based on implementation) unencrypted for such things as the Master Boot Record (MBR) or other AA/EE pre-authentication software. These FDE cPPs interpret the term &ldquo;full drive encryption&rdquo; to allow FDE solutions to leave a portion of the storage device unencrypted so long as it does not contain plaintext user or plaintext authorization data.<br /><br />The FDE cPP - Encryption Engine describes the requirements for the Encryption Engine piece and details the necessary security requirements and assurance activities for the actual encryption/decryption of the data by the DEK. Each cPP will also have a set of core requirements for management functions, proper handling of cryptographic keys, updates performed in a trusted manner, audit and self-tests.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>",
+              "security_evaluation_summary": "",
+              "environmental_strengths": "",
+              "pp_priority": "",
+              "created_on": "2019-02-07T13:07:10Z",
+              "removed_on": null,
+              "archived": false,
+              "assurance_maintenance": "",
+              "pp_estcompletion": "",
+              "pp_estcompletiondate": null,
+              "pp_transition": "2019-02-01T00:00:00Z",
+              "revised_on": "2022-11-17T10:06:46Z",
+              "pp_short_name": "CPP_FDE_EE_V2.0E",
+              "dod_compliant": false,
+              "csfceligible": true,
+              "constraint": "",
+              "predecessor_id": 407,
+              "successor_id": null,
+              "creator": 409,
+              "remover": null,
+              "editor": 409
+            }
+          ],
+          "sunset_protection_profile": [],
+          "related_to": "FCS_CKM.1.1(a), FCS_COP.1.1(a), Appendix H, CPP_FDE_AA_V2.0E-SD, CPP_FDE_EE_V2.0E-SD",
+          "publication_date": "2026-06-23T08:30:34.186000Z",
+          "removed_on": null,
+          "status": "Published"
+        }
+      ],
+      "removed": []
+    },
+    "cisco_ndcpp": {
+      "added": [],
+      "removed": [],
+      "newly_archived": []
+    },
+    "pcl_all": {
+      "added": [
+        {
+          "active_maintenances": [],
+          "am_sort": null,
+          "assigned_lab_name": "Lightship Security USA, Inc.",
+          "certification_date": null,
+          "from_cc_portal": false,
+          "product_id": 11675,
+          "product_name": "Cisco Catalyst 9800 Series Wireless Controllers and Access Points 17.18",
+          "protection_profiles": [
+            {
+              "pp_id": 459,
+              "pp_name": "Functional Package for SSH Version 1.0",
+              "pp_short_name": "PKG_SSH_V1.0"
+            },
+            {
+              "pp_id": 464,
+              "pp_name": "PP-Module for Wireless Local Area Network (WLAN) Access System Version 1.0",
+              "pp_short_name": "MOD_WLAN_AS_v1.0"
+            },
+            {
+              "pp_id": 482,
+              "pp_name": "collaborative Protection Profile for Network Devices Version 3.0e",
+              "pp_short_name": "CPP_ND_V3.0E"
+            }
+          ],
+          "status_sort": "In Progress",
+          "submitting_country_id_code": "US",
+          "submitting_country_id_name": "United States",
+          "sunset_date": null,
+          "tech_types": [
+            "Network Device",
+            "Wireless LAN"
+          ],
+          "vendor_id_name": "Cisco Systems, Inc.",
+          "v_id": 11675,
+          "kicked_off_date": "2026-06-23T14:25:28.734000Z"
+        },
+        {
+          "active_maintenances": [],
+          "am_sort": "2028-04-29T00:00:00Z",
+          "assigned_lab_name": "Viden Labs",
+          "certification_date": "2026-04-29T00:00:00Z",
+          "from_cc_portal": true,
+          "product_id": "2026.1186",
+          "product_name": "Cogito Jellyfish Certificate Authority Version 7.0",
+          "protection_profiles": [
+            {
+              "pp_id": 420,
+              "pp_name": "Protection Profile for Certification Authorities Version 2.1",
+              "pp_short_name": "PP_CA_V2.1"
+            }
+          ],
+          "status_sort": "Certified",
+          "submitting_country_id_code": "AU",
+          "submitting_country_id_name": "Australia",
+          "sunset_date": "2031-04-29T00:00:00Z",
+          "tech_types": [
+            "Other Devices and Systems"
+          ],
+          "vendor_id_name": "Cogito Group",
+          "v_id": "2026.1186",
+          "kicked_off_date": null
+        }
+      ],
+      "removed": [],
+      "newly_archived": []
+    },
+    "in_evaluation": {
+      "added": [
+        {
+          "active_maintenances": [],
+          "am_sort": null,
+          "assigned_lab_name": "Lightship Security USA, Inc.",
+          "certification_date": null,
+          "from_cc_portal": false,
+          "product_id": 11675,
+          "product_name": "Cisco Catalyst 9800 Series Wireless Controllers and Access Points 17.18",
+          "protection_profiles": [
+            {
+              "pp_id": 459,
+              "pp_name": "Functional Package for SSH Version 1.0",
+              "pp_short_name": "PKG_SSH_V1.0"
+            },
+            {
+              "pp_id": 464,
+              "pp_name": "PP-Module for Wireless Local Area Network (WLAN) Access System Version 1.0",
+              "pp_short_name": "MOD_WLAN_AS_v1.0"
+            },
+            {
+              "pp_id": 482,
+              "pp_name": "collaborative Protection Profile for Network Devices Version 3.0e",
+              "pp_short_name": "CPP_ND_V3.0E"
+            }
+          ],
+          "status_sort": "In Progress",
+          "submitting_country_id_code": "US",
+          "submitting_country_id_name": "United States",
+          "sunset_date": null,
+          "tech_types": [
+            "Network Device",
+            "Wireless LAN"
+          ],
+          "vendor_id_name": "Cisco Systems, Inc.",
+          "v_id": 11675,
+          "kicked_off_date": "2026-06-23T14:25:28.734000Z"
+        }
+      ],
+      "removed": [],
+      "current_count": 32
+    },
+    "news": {
+      "added": []
+    },
+    "events": {
+      "added": []
+    }
+  },
+  "cc_portal": {
+    "news": {
+      "added": []
+    },
+    "pps": {
+      "added": []
+    },
+    "products": {
+      "added": []
+    }
+  },
+  "cctl_labs": {},
+  "csfc": {
+    "pages": {},
+    "selection_links": {},
+    "feeds": {
+      "NSA Cybersecurity Advisories": [
+        {
+          "title": "Five Eyes Cyber Security Agencies Statement",
+          "link": "http://www.nsa.gov/Press-Room/News-Highlights/Article/Article/4523810/five-eyes-cyber-security-agencies-statement/",
+          "summary": "<p>As the leaders of the Five Eyes cyber security agencies, we are united in our call to action: the evolving landscape of artificial intelligence (AI) is rapidly transforming cyber risk, and we must act swiftly to remain ahead.</p>\n<br />",
+          "published": "Mon, 22 Jun 2026 13:29:00 GMT",
+          "id": "http://www.nsa.gov/Press-Room/News-Highlights/Article/Article/4523810/five-eyes-cyber-security-agencies-statement/",
+          "_category": "NEWS"
+        }
+      ]
+    }
+  },
+  "cc_crypto": {
+    "pages": {}
+  },
+  "nist": {
+    "pages": {},
+    "cmvp_mip": {
+      "added": [],
+      "removed": [],
+      "status_changes": []
+    },
+    "feeds": {}
+  },
+  "nato": {
+    "pages": {},
+    "cisco_added": [],
+    "cisco_removed": []
+  },
+  "eucc": {
+    "pages": {},
+    "cisco_added": [],
+    "cisco_removed": []
+  },
+  "alerts": [
+    {
+      "source": "NIAP TD",
+      "kind": "new",
+      "title": "FIT Technical Decision: Replacing FIPS 186-4 with 186-5",
+      "url": "https://www.niap-ccevs.org/technical-decisions/TD1042",
+      "detail": "TD1042",
+      "matched_keywords": [
+        "FIPS 186-4"
+      ],
+      "tab": "us"
+    }
+  ]
+}
