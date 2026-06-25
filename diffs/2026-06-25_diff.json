@@ -1,0 +1,273 @@
+{
+  "period_start": "2026-06-24T07:13:12.018774+00:00",
+  "period_end": "2026-06-25T07:13:13.633033+00:00",
+  "niap": {
+    "pps": {
+      "added": [],
+      "removed": [],
+      "sunset_changes": [],
+      "status_changes": []
+    },
+    "tds": {
+      "added": [
+        {
+          "td_id": 1049,
+          "identifier": "TD1049",
+          "title": "Consistency Rationale for Assumptions in MOD_FEEM_V2.0",
+          "protection_profile": [
+            {
+              "pp_id": 521,
+              "pp_name": "PP-Module for File Encryption Enterprise Management Version 2.0",
+              "pp_common_name": "PP-Module for File Encryption Enterprise Management Version 2.0",
+              "cc_version": "CC:2022",
+              "mr_version": null,
+              "pp_date": "2025-09-29T00:00:00Z",
+              "entrydate": "2025-10-01T12:49:05.802000Z",
+              "tech_type": "Encrypted Storage",
+              "pp_sponsor_id": "NIAP",
+              "community_id": null,
+              "status": "Publishing",
+              "sunset_date": null,
+              "pp_overview": "<p>The scope of the File Encryption Enterprise Management PP-Module is to describe the security functionality of a file encryption enterprise management product in terms of [<a class=\"abbr\" href=\"https://commoncriteria.github.io/pp/fileencryption-enterprisemgmt/fileencryption-enterprisemgmt-release.html#abbr_CC\"><abbr title=\"Common Criteria\">CC</abbr></a>] and to define functional and assurance requirements for such products.</p>\r\n<p>The use case for a product conforming to the File Encryption PP-Module is to protect data at rest on a device that is lost or stolen while powered off without any prior access by an adversary. The use case where an adversary obtains a device that is in a powered state and is able to make modifications to the environment or the TOE itself (e.g., evil maid attacks) is not addressed by that module. The module does contain protections to mitigate the potential for attack with a powered on device, but they are not sufficient to protect data from a skilled adversary with physical access.<br><br>While that use case is still true for the Enterprise Management PP-Module, this PP-module also expands the use case to include protecting the communications between the Enterprise Management Server and the client device through the use of a trusted channel. It also expands the use case to include the optional abilities of the EM to interact with clients (with proper authorization), to direct it to perform sanitation of keys and material on the device, to manage and store parts of the key chain required for decryption on the client, or to issue a recovery credential to reset the authentication factor if it has been lost.</p>",
+              "security_evaluation_summary": null,
+              "environmental_strengths": "",
+              "pp_priority": null,
+              "created_on": null,
+              "removed_on": null,
+              "archived": false,
+              "assurance_maintenance": null,
+              "pp_estcompletion": null,
+              "pp_estcompletiondate": null,
+              "pp_transition": "2026-03-29T00:00:00Z",
+              "revised_on": null,
+              "pp_short_name": "MOD_FEEM_V2.0",
+              "dod_compliant": false,
+              "csfceligible": false,
+              "constraint": null,
+              "predecessor_id": null,
+              "successor_id": null,
+              "creator": 620,
+              "remover": null,
+              "editor": null
+            }
+          ],
+          "sunset_protection_profile": [],
+          "related_to": "Section 6.1.2.",
+          "publication_date": "2026-06-24T13:23:56.783000Z",
+          "removed_on": null,
+          "status": "Published"
+        },
+        {
+          "td_id": 1048,
+          "identifier": "TD1048",
+          "title": "Consistency Rationale for Assumptions in MOD_FE_V2.0",
+          "protection_profile": [
+            {
+              "pp_id": 520,
+              "pp_name": "PP-Module for File Encryption Version 2.0",
+              "pp_common_name": "PP-Module for File Encryption Version 2.0",
+              "cc_version": "CC:2022",
+              "mr_version": null,
+              "pp_date": "2025-09-29T00:00:00Z",
+              "entrydate": "2025-10-01T12:39:20.149000Z",
+              "tech_type": "Encrypted Storage",
+              "pp_sponsor_id": "NIAP",
+              "community_id": null,
+              "status": "Publishing",
+              "sunset_date": null,
+              "pp_overview": "<p>This PP-Module specifically addresses encryption of a set of data. This PP-Module addresses the primary threat that an unauthorized user will obtain access to a host machine containing encrypted information and be able to extract the sensitive data through the process of decryption. The Target of Evaluation (TOE) defined in this PP-Module is an encryption product that will inherently encrypt all of that data that the user selects to encrypt. For ease of explanation, \"file\" will frequently be used to refer to the object that is encrypted (however, it could be any number of things - folders, volumes, containers, etc.).</p>",
+              "security_evaluation_summary": "",
+              "environmental_strengths": "",
+              "pp_priority": null,
+              "created_on": null,
+              "removed_on": null,
+              "archived": false,
+              "assurance_maintenance": null,
+              "pp_estcompletion": null,
+              "pp_estcompletiondate": null,
+              "pp_transition": "2026-03-29T00:00:00Z",
+              "revised_on": null,
+              "pp_short_name": "MOD_FE_V2.0",
+              "dod_compliant": false,
+              "csfceligible": false,
+              "constraint": null,
+              "predecessor_id": 415,
+              "successor_id": null,
+              "creator": 620,
+              "remover": null,
+              "editor": null
+            }
+          ],
+          "sunset_protection_profile": [],
+          "related_to": "Section 6.1.2",
+          "publication_date": "2026-06-24T13:24:03.086000Z",
+          "removed_on": null,
+          "status": "Published"
+        },
+        {
+          "td_id": 1050,
+          "identifier": "TD1050",
+          "title": "Clarification to App Note for FPT_LIB_EXT.1.1",
+          "protection_profile": [
+            {
+              "pp_id": 516,
+              "pp_name": "Protection Profile for Application Software Version 2.0",
+              "pp_common_name": "Protection Profile for Application Software Version 2.0",
+              "cc_version": "CC:2022",
+              "mr_version": null,
+              "pp_date": "2025-06-16T00:00:00Z",
+              "entrydate": "2025-06-16T08:19:53.748000Z",
+              "tech_type": "Application Software",
+              "pp_sponsor_id": "NIAP",
+              "community_id": null,
+              "status": "Publishing",
+              "sunset_date": null,
+              "pp_overview": "<p>The scope of this Protection Profile (PP) is to describe the security functionality of application software in terms of [CC] and to define functional and assurance requirements for such software. In recent years, software attacks have shifted from targeting operating systems to targeting applications. This has been the natural response to improvements in operating system security and development processes. As a result, it is paramount that the security of applications be improved to reduce the risk of compromise.</p>",
+              "security_evaluation_summary": "<p>The requirements in this document apply to application software which runs on any type of platform. Some application types are covered by more specific PPs, which may be expressed as PP-Modules of this PP. Such applications are subject to the requirements of both this PP and the PP-Module that addresses their special functionality. PPs for some particularly specialized applications may not be expressed as PP-Modules at this time, though the requirements in this document should be seen as objectives for those highly specialized applications.&nbsp;</p>",
+              "environmental_strengths": "",
+              "pp_priority": null,
+              "created_on": null,
+              "removed_on": null,
+              "archived": false,
+              "assurance_maintenance": "",
+              "pp_estcompletion": null,
+              "pp_estcompletiondate": null,
+              "pp_transition": "2026-01-01T00:00:00Z",
+              "revised_on": null,
+              "pp_short_name": "PP_APP_v2.0",
+              "dod_compliant": false,
+              "csfceligible": true,
+              "constraint": null,
+              "predecessor_id": 462,
+              "successor_id": null,
+              "creator": 620,
+              "remover": null,
+              "editor": null
+            }
+          ],
+          "sunset_protection_profile": [],
+          "related_to": "FPT_LIB_EXT.1.1",
+          "publication_date": "2026-06-24T13:06:47.959000Z",
+          "removed_on": null,
+          "status": "Published"
+        }
+      ],
+      "removed": []
+    },
+    "cisco_ndcpp": {
+      "added": [],
+      "removed": [],
+      "newly_archived": []
+    },
+    "pcl_all": {
+      "added": [],
+      "removed": [],
+      "newly_archived": [
+        {
+          "active_maintenances": [],
+          "am_sort": "2026-06-25T00:00:00Z",
+          "assigned_lab_name": "Gossamer Security Solutions",
+          "certification_date": "2024-06-25T00:00:00Z",
+          "from_cc_portal": false,
+          "product_id": 11439,
+          "product_name": "Cisco Secure Client - AnyConnect 5.1 for Red Hat Enterprise Linux 8.2",
+          "protection_profiles": [
+            {
+              "pp_id": 462,
+              "pp_name": "Protection Profile for Application Software Version 1.4",
+              "pp_short_name": "PP_APP_v1.4"
+            },
+            {
+              "pp_id": 467,
+              "pp_name": "PP-Module for VPN Client, Version 2.4",
+              "pp_short_name": "MOD_VPNC_V2.4"
+            }
+          ],
+          "status_sort": "Archived",
+          "submitting_country_id_code": "US",
+          "submitting_country_id_name": "United States",
+          "sunset_date": "2026-06-25T00:00:00Z",
+          "tech_types": [
+            "Application Software",
+            " Virtual Private Network"
+          ],
+          "vendor_id_name": "Cisco Systems, Inc.",
+          "v_id": 11439,
+          "kicked_off_date": "2024-01-10T00:00:00Z"
+        }
+      ]
+    },
+    "in_evaluation": {
+      "added": [],
+      "removed": [],
+      "current_count": 32
+    },
+    "news": {
+      "added": []
+    },
+    "events": {
+      "added": []
+    }
+  },
+  "cc_portal": {
+    "news": {
+      "added": []
+    },
+    "pps": {
+      "added": []
+    },
+    "products": {
+      "added": []
+    }
+  },
+  "cctl_labs": {},
+  "csfc": {
+    "pages": {},
+    "selection_links": {},
+    "feeds": {}
+  },
+  "cc_crypto": {
+    "pages": {}
+  },
+  "nist": {
+    "pages": {},
+    "cmvp_mip": {
+      "added": [],
+      "removed": [],
+      "status_changes": []
+    },
+    "feeds": {
+      "NIST Cybersecurity Insights Blog": [
+        {
+          "title": "Advancing Product Security: New IoT Guidance and New Engagement",
+          "link": "https://www.nist.gov/blogs/cybersecurity-insights/advancing-product-security-new-iot-guidance-and-new-engagement",
+          "summary": "It may be summertime, but the NIST Cybersecurity for the Internet of Things (IoT) Program isn\u2019t hitting the hammock! Organizations are managing growing device complexity, evolving threats, and pressure to turn guidance into operational decisions\u2026so we remain focused on helping stakeholders apply security guidance in ways that are practical and actionable. What\u2019s Been Happening Lately? An initial public draft (IPD) of NIST SP 800-213 Revision 1, IoT Product Cybersecurity Guidelines for the Federal Government: Establishing IoT Product Cybersecurity Requirements is out now for your review and",
+          "published": "Wed, 24 Jun 2026 12:00:00 +0000",
+          "id": "https://www.nist.gov/node/1915191",
+          "_category": "NEWS"
+        }
+      ]
+    }
+  },
+  "nato": {
+    "pages": {},
+    "cisco_added": [],
+    "cisco_removed": []
+  },
+  "eucc": {
+    "pages": {},
+    "cisco_added": [],
+    "cisco_removed": []
+  },
+  "alerts": [
+    {
+      "source": "NIST Feed: NIST Cybersecurity Insights Blog",
+      "kind": "news",
+      "title": "Advancing Product Security: New IoT Guidance and New Engagement",
+      "url": "https://www.nist.gov/blogs/cybersecurity-insights/advancing-product-security-new-iot-guidance-and-new-engagement",
+      "detail": "Feed: NIST Cybersecurity Insights Blog \u00b7 Published: Wed, 24 Jun 2026",
+      "matched_keywords": [],
+      "tab": "us"
+    }
+  ]
+}
