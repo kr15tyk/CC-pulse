@@ -2,8 +2,9 @@
 <rss version="2.0"><channel>
 <title>CC Pulse</title>
 <link>https://kr15tyk.github.io/CC-pulse/cc_dashboard.html</link>
-<description>Common Criteria monitoring - 2026-06-24 03:13 ET</description>
-<item><title>New TD: TD1047</title><link>https://www.niap-ccevs.org/</link><description></description></item>
-<item><title>New TD: TD1042</title><link>https://www.niap-ccevs.org/</link><description></description></item>
-<item><title>ALERT: NIAP TD â FIT Technical Decision: Replacing FIPS 186-4 with 186-5</title><link>https://kr15tyk.github.io/CC-pulse/cc_dashboard.html</link><description>Kind: new | Keywords: FIPS 186-4</description></item>
+<description>Common Criteria monitoring - 2026-06-25 03:13 ET</description>
+<item><title>New TD: TD1049</title><link>https://www.niap-ccevs.org/</link><description></description></item>
+<item><title>New TD: TD1048</title><link>https://www.niap-ccevs.org/</link><description></description></item>
+<item><title>New TD: TD1050</title><link>https://www.niap-ccevs.org/</link><description></description></item>
+<item><title>ALERT: NIST Feed: NIST Cybersecurity Insights Blog â Advancing Product Security: New IoT Guidance and New Engagement</title><link>https://kr15tyk.github.io/CC-pulse/cc_dashboard.html</link><description>Kind: news | Keywords: </description></item>
 </channel></rss>
