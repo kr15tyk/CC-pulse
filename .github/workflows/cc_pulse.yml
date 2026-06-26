@@ -107,7 +107,7 @@ jobs:
       # Upload the partial JSON as a workflow artifact so the merge job can
       # download all of them in a single step regardless of job ordering.
       - name: Upload partial snapshot
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: partial-${{ matrix.domain }}
           path: snapshots/partial/${{ matrix.domain }}.json
