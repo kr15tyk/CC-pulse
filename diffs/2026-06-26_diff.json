@@ -1,0 +1,161 @@
+{
+  "period_start": "2026-06-25T07:13:13.633033+00:00",
+  "period_end": "2026-06-26T07:19:29.545889+00:00",
+  "niap": {
+    "pps": {
+      "added": [],
+      "removed": [],
+      "sunset_changes": [],
+      "status_changes": []
+    },
+    "tds": {
+      "added": [],
+      "removed": []
+    },
+    "cisco_ndcpp": {
+      "added": [],
+      "removed": [],
+      "newly_archived": []
+    },
+    "pcl_all": {
+      "added": [
+        {
+          "active_maintenances": [],
+          "am_sort": null,
+          "assigned_lab_name": "atsec information security corporation",
+          "certification_date": null,
+          "from_cc_portal": false,
+          "product_id": 11695,
+          "product_name": "Apple macOS 26 Tahoe",
+          "protection_profiles": [
+            {
+              "pp_id": 425,
+              "pp_name": "PP-Module for Bluetooth Version 1.0",
+              "pp_short_name": "MOD_BT_V1.0"
+            },
+            {
+              "pp_id": 439,
+              "pp_name": "Functional Package for TLS Version 1.1",
+              "pp_short_name": "PKG_TLS_V1.1"
+            },
+            {
+              "pp_id": 463,
+              "pp_name": "PP-Module for Wireless Local Area Network (WLAN) Client Version 1.0",
+              "pp_short_name": "MOD_WLANC_v1.0"
+            },
+            {
+              "pp_id": 469,
+              "pp_name": "Protection Profile for General Purpose Operating Systems Version 4.3",
+              "pp_short_name": "PP_OS_V4.3"
+            }
+          ],
+          "status_sort": "In Progress",
+          "submitting_country_id_code": "US",
+          "submitting_country_id_name": "United States",
+          "sunset_date": null,
+          "tech_types": [
+            "Operating System"
+          ],
+          "vendor_id_name": "Apple Inc.",
+          "v_id": 11695,
+          "kicked_off_date": "2026-06-25T10:06:43.431000Z"
+        }
+      ],
+      "removed": [],
+      "newly_archived": []
+    },
+    "in_evaluation": {
+      "added": [
+        {
+          "active_maintenances": [],
+          "am_sort": null,
+          "assigned_lab_name": "atsec information security corporation",
+          "certification_date": null,
+          "from_cc_portal": false,
+          "product_id": 11695,
+          "product_name": "Apple macOS 26 Tahoe",
+          "protection_profiles": [
+            {
+              "pp_id": 425,
+              "pp_name": "PP-Module for Bluetooth Version 1.0",
+              "pp_short_name": "MOD_BT_V1.0"
+            },
+            {
+              "pp_id": 439,
+              "pp_name": "Functional Package for TLS Version 1.1",
+              "pp_short_name": "PKG_TLS_V1.1"
+            },
+            {
+              "pp_id": 463,
+              "pp_name": "PP-Module for Wireless Local Area Network (WLAN) Client Version 1.0",
+              "pp_short_name": "MOD_WLANC_v1.0"
+            },
+            {
+              "pp_id": 469,
+              "pp_name": "Protection Profile for General Purpose Operating Systems Version 4.3",
+              "pp_short_name": "PP_OS_V4.3"
+            }
+          ],
+          "status_sort": "In Progress",
+          "submitting_country_id_code": "US",
+          "submitting_country_id_name": "United States",
+          "sunset_date": null,
+          "tech_types": [
+            "Operating System"
+          ],
+          "vendor_id_name": "Apple Inc.",
+          "v_id": 11695,
+          "kicked_off_date": "2026-06-25T10:06:43.431000Z"
+        }
+      ],
+      "removed": [],
+      "current_count": 33
+    },
+    "news": {
+      "added": []
+    },
+    "events": {
+      "added": []
+    }
+  },
+  "cc_portal": {
+    "news": {
+      "added": []
+    },
+    "pps": {
+      "added": []
+    },
+    "products": {
+      "added": []
+    }
+  },
+  "cctl_labs": {},
+  "csfc": {
+    "pages": {},
+    "selection_links": {},
+    "feeds": {}
+  },
+  "cc_crypto": {
+    "pages": {}
+  },
+  "nist": {
+    "pages": {},
+    "cmvp_mip": {
+      "added": [],
+      "removed": [],
+      "status_changes": []
+    },
+    "feeds": {}
+  },
+  "nato": {
+    "pages": {},
+    "cisco_added": [],
+    "cisco_removed": []
+  },
+  "eucc": {
+    "pages": {},
+    "cisco_added": [],
+    "cisco_removed": []
+  },
+  "alerts": []
+}
