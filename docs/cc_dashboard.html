@@ -179,7 +179,7 @@
   <span class="nav-title">CC Pulse Dashboard</span>
   <span class="nav-spacer"></span>
   <div class="ham-wrap">
-    <span class="nav-meta">Last run: 2026-06-26 03:19 ET</span>
+    <span class="nav-meta">Last run: 2026-06-27 03:06 ET</span>
     <button class="ham-btn" id="ham-btn" onclick="toggleHamMenu()" aria-expanded="false" aria-haspopup="true" title="Open menu">&#9776;</button>
     <div class="ham-menu" id="ham-menu" role="menu">
       <a class="ham-item" href="https://kr15tyk.github.io/CC-pulse/cc_dashboard.html" role="menuitem"><span class="ham-icon">&#127968;</span>Home</a>
@@ -255,7 +255,7 @@
 <div class="sticky-top">
   <div class="trend-bar">
     <div class="stat"><a href="#sec-niap-pp" onclick="navigateTo('sec-niap-pp');return false;">
-      <div class="stat-num active-num">2</div>
+      <div class="stat-num active-num">5</div>
       <div class="stat-lbl">NIAP Changes</div>
     </a></div>
     <div class="stat"><a href="#sec-csfc" onclick="navigateTo('sec-csfc');return false;">
@@ -338,22 +338,30 @@
 </div>
 
   <!-- NIAP In-Evaluation -->
-<div class="card card-new" id="sec-niap-inevaluation" data-has-changes="1">
+<div class="card card-new" id="sec-niap-inevaluation" data-has-changes="2">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>NIAP In-Evaluation Products</span>
-    <span class="card-count">1 change</span>
+    <span class="card-count">2 changes</span>
     </span>
   </div>
   <div class="card-body ">
     
-    <div class="sub-hdr sub-new">Newly In Evaluation (1)</div>
+    <div class="sub-hdr sub-new">Newly In Evaluation (2)</div>
     
     <div class="item-row" data-source="niap-inevaluation" data-kind="new">
-      <span class="item-link">Apple Inc. -- Apple macOS 26 Tahoe</span>
-      <span class="item-meta">atsec information security corporation</span>
+      <span class="item-link">Cisco Systems, Inc. -- Cisco Catalyst 9200/9200L Series Switches 17.18</span>
+      <span class="item-meta">Gossamer Security Solutions</span>
     </div>
     
-    <div class="item-sub">Operating System</div>
+    <div class="item-sub">Network Device, Network Encryption</div>
+    
+    
+    <div class="item-row" data-source="niap-inevaluation" data-kind="new">
+      <span class="item-link">Cisco Systems, Inc. -- Cisco Catalyst 9300/9300L/9300LM/9400/9500/9600 Series Switches 17.18</span>
+      <span class="item-meta">Gossamer Security Solutions</span>
+    </div>
+    
+    <div class="item-sub">Network Device, Network Encryption</div>
     
     
     
@@ -380,22 +388,38 @@
 </div>
 
   <!-- NIAP PCL — All Certifications -->
-<div class="card card-new" id="sec-niap-pcl" data-has-changes="1">
+<div class="card card-new" id="sec-niap-pcl" data-has-changes="3">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>NIAP PCL — All Certifications</span>
-    <span class="card-count">1 change</span>
+    <span class="card-count">3 changes</span>
     </span>
   </div>
   <div class="card-body ">
     
-    <div class="sub-hdr sub-new">New Certifications (1)</div>
+    <div class="sub-hdr sub-new">New Certifications (3)</div>
     
     <div class="item-row" data-source="niap-pcl" data-kind="new">
-      <span class="item-link">Apple Inc. -- Apple macOS 26 Tahoe</span>
+      <span class="item-link">FUJIFILM Business Innovation Corp. -- FUJIFILM Apeos C4030 / C3530 models with Copy, Print, Fax, Scan and Overwrite Storage Controller ROM Ver. 1.50.5</span>
+      <span class="item-meta">2026-05-14</span>
+    </div>
+    
+    <div class="item-sub">PP_HCD_V1.0</div>
+    
+    
+    <div class="item-row" data-source="niap-pcl" data-kind="new">
+      <span class="item-link">Cisco Systems, Inc. -- Cisco Catalyst 9200/9200L Series Switches 17.18</span>
       <span class="item-meta"></span>
     </div>
     
-    <div class="item-sub">MOD_BT_V1.0, PKG_TLS_V1.1, MOD_WLANC_v1.0, PP_OS_V4.3</div>
+    <div class="item-sub">PKG_SSH_V1.0, MOD_MACSEC_V1.0, CPP_ND_V3.0E</div>
+    
+    
+    <div class="item-row" data-source="niap-pcl" data-kind="new">
+      <span class="item-link">Cisco Systems, Inc. -- Cisco Catalyst 9300/9300L/9300LM/9400/9500/9600 Series Switches 17.18</span>
+      <span class="item-meta"></span>
+    </div>
+    
+    <div class="item-sub">PKG_SSH_V1.0, MOD_MACSEC_V1.0, CPP_ND_V3.0E</div>
     
     
     
@@ -945,7 +969,7 @@
 </div><!-- /main-content -->
 <footer>
   <span>CC Pulse &middot; Auto-refreshes daily (01:00 EST) &middot; NIAP, CSfC, NIST, CC Portal, NATO NIAPCL, EUCC / ENISA</span>
-  <span>Last run: 2026-06-26 03:19 ET</span>
+  <span>Last run: 2026-06-27 03:06 ET</span>
 </footer>
 
 <script>
