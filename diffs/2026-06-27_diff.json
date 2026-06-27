@@ -1,0 +1,253 @@
+{
+  "period_start": "2026-06-26T07:19:29.545889+00:00",
+  "period_end": "2026-06-27T07:06:30.253298+00:00",
+  "niap": {
+    "pps": {
+      "added": [],
+      "removed": [],
+      "sunset_changes": [],
+      "status_changes": []
+    },
+    "tds": {
+      "added": [],
+      "removed": []
+    },
+    "cisco_ndcpp": {
+      "added": [],
+      "removed": [],
+      "newly_archived": []
+    },
+    "pcl_all": {
+      "added": [
+        {
+          "active_maintenances": [],
+          "am_sort": "2027-04-23T00:00:00Z",
+          "assigned_lab_name": "Information Technology Security Center Evaluation Department",
+          "certification_date": "2026-05-14T00:00:00Z",
+          "from_cc_portal": true,
+          "product_id": "2026.1213",
+          "product_name": "FUJIFILM Apeos C4030 / C3530 models with Copy, Print, Fax, Scan and Overwrite Storage Controller ROM Ver. 1.50.5",
+          "protection_profiles": [
+            {
+              "pp_id": 317,
+              "pp_name": "Protection Profile for Hardcopy Devices Version 1.0",
+              "pp_short_name": "PP_HCD_V1.0"
+            }
+          ],
+          "status_sort": "Certified",
+          "submitting_country_id_code": "JP",
+          "submitting_country_id_name": "Japan",
+          "sunset_date": "2031-05-14T00:00:00Z",
+          "tech_types": [
+            "Multi-Function Devices"
+          ],
+          "vendor_id_name": "FUJIFILM Business Innovation Corp.",
+          "v_id": "2026.1213",
+          "kicked_off_date": null
+        },
+        {
+          "active_maintenances": [],
+          "am_sort": null,
+          "assigned_lab_name": "Gossamer Security Solutions",
+          "certification_date": null,
+          "from_cc_portal": false,
+          "product_id": 11728,
+          "product_name": "Cisco Catalyst 9200/9200L Series Switches 17.18",
+          "protection_profiles": [
+            {
+              "pp_id": 459,
+              "pp_name": "Functional Package for SSH Version 1.0",
+              "pp_short_name": "PKG_SSH_V1.0"
+            },
+            {
+              "pp_id": 480,
+              "pp_name": "PP-Module for MACsec Ethernet Encryption Version 1.0",
+              "pp_short_name": "MOD_MACSEC_V1.0"
+            },
+            {
+              "pp_id": 482,
+              "pp_name": "collaborative Protection Profile for Network Devices Version 3.0e",
+              "pp_short_name": "CPP_ND_V3.0E"
+            }
+          ],
+          "status_sort": "In Progress",
+          "submitting_country_id_code": "US",
+          "submitting_country_id_name": "United States",
+          "sunset_date": null,
+          "tech_types": [
+            "Network Device",
+            "Network Encryption"
+          ],
+          "vendor_id_name": "Cisco Systems, Inc.",
+          "v_id": 11728,
+          "kicked_off_date": "2026-06-26T14:50:45.199000Z"
+        },
+        {
+          "active_maintenances": [],
+          "am_sort": null,
+          "assigned_lab_name": "Gossamer Security Solutions",
+          "certification_date": null,
+          "from_cc_portal": false,
+          "product_id": 11729,
+          "product_name": "Cisco Catalyst 9300/9300L/9300LM/9400/9500/9600 Series Switches 17.18",
+          "protection_profiles": [
+            {
+              "pp_id": 459,
+              "pp_name": "Functional Package for SSH Version 1.0",
+              "pp_short_name": "PKG_SSH_V1.0"
+            },
+            {
+              "pp_id": 480,
+              "pp_name": "PP-Module for MACsec Ethernet Encryption Version 1.0",
+              "pp_short_name": "MOD_MACSEC_V1.0"
+            },
+            {
+              "pp_id": 482,
+              "pp_name": "collaborative Protection Profile for Network Devices Version 3.0e",
+              "pp_short_name": "CPP_ND_V3.0E"
+            }
+          ],
+          "status_sort": "In Progress",
+          "submitting_country_id_code": "US",
+          "submitting_country_id_name": "United States",
+          "sunset_date": null,
+          "tech_types": [
+            "Network Device",
+            "Network Encryption"
+          ],
+          "vendor_id_name": "Cisco Systems, Inc.",
+          "v_id": 11729,
+          "kicked_off_date": "2026-06-26T14:56:08.174000Z"
+        }
+      ],
+      "removed": [],
+      "newly_archived": []
+    },
+    "in_evaluation": {
+      "added": [
+        {
+          "active_maintenances": [],
+          "am_sort": null,
+          "assigned_lab_name": "Gossamer Security Solutions",
+          "certification_date": null,
+          "from_cc_portal": false,
+          "product_id": 11728,
+          "product_name": "Cisco Catalyst 9200/9200L Series Switches 17.18",
+          "protection_profiles": [
+            {
+              "pp_id": 459,
+              "pp_name": "Functional Package for SSH Version 1.0",
+              "pp_short_name": "PKG_SSH_V1.0"
+            },
+            {
+              "pp_id": 480,
+              "pp_name": "PP-Module for MACsec Ethernet Encryption Version 1.0",
+              "pp_short_name": "MOD_MACSEC_V1.0"
+            },
+            {
+              "pp_id": 482,
+              "pp_name": "collaborative Protection Profile for Network Devices Version 3.0e",
+              "pp_short_name": "CPP_ND_V3.0E"
+            }
+          ],
+          "status_sort": "In Progress",
+          "submitting_country_id_code": "US",
+          "submitting_country_id_name": "United States",
+          "sunset_date": null,
+          "tech_types": [
+            "Network Device",
+            "Network Encryption"
+          ],
+          "vendor_id_name": "Cisco Systems, Inc.",
+          "v_id": 11728,
+          "kicked_off_date": "2026-06-26T14:50:45.199000Z"
+        },
+        {
+          "active_maintenances": [],
+          "am_sort": null,
+          "assigned_lab_name": "Gossamer Security Solutions",
+          "certification_date": null,
+          "from_cc_portal": false,
+          "product_id": 11729,
+          "product_name": "Cisco Catalyst 9300/9300L/9300LM/9400/9500/9600 Series Switches 17.18",
+          "protection_profiles": [
+            {
+              "pp_id": 459,
+              "pp_name": "Functional Package for SSH Version 1.0",
+              "pp_short_name": "PKG_SSH_V1.0"
+            },
+            {
+              "pp_id": 480,
+              "pp_name": "PP-Module for MACsec Ethernet Encryption Version 1.0",
+              "pp_short_name": "MOD_MACSEC_V1.0"
+            },
+            {
+              "pp_id": 482,
+              "pp_name": "collaborative Protection Profile for Network Devices Version 3.0e",
+              "pp_short_name": "CPP_ND_V3.0E"
+            }
+          ],
+          "status_sort": "In Progress",
+          "submitting_country_id_code": "US",
+          "submitting_country_id_name": "United States",
+          "sunset_date": null,
+          "tech_types": [
+            "Network Device",
+            "Network Encryption"
+          ],
+          "vendor_id_name": "Cisco Systems, Inc.",
+          "v_id": 11729,
+          "kicked_off_date": "2026-06-26T14:56:08.174000Z"
+        }
+      ],
+      "removed": [],
+      "current_count": 35
+    },
+    "news": {
+      "added": []
+    },
+    "events": {
+      "added": []
+    }
+  },
+  "cc_portal": {
+    "news": {
+      "added": []
+    },
+    "pps": {
+      "added": []
+    },
+    "products": {
+      "added": []
+    }
+  },
+  "cctl_labs": {},
+  "csfc": {
+    "pages": {},
+    "selection_links": {},
+    "feeds": {}
+  },
+  "cc_crypto": {
+    "pages": {}
+  },
+  "nist": {
+    "pages": {},
+    "cmvp_mip": {
+      "added": [],
+      "removed": [],
+      "status_changes": []
+    },
+    "feeds": {}
+  },
+  "nato": {
+    "pages": {},
+    "cisco_added": [],
+    "cisco_removed": []
+  },
+  "eucc": {
+    "pages": {},
+    "cisco_added": [],
+    "cisco_removed": []
+  },
+  "alerts": []
+}
