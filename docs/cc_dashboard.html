@@ -179,7 +179,7 @@
   <span class="nav-title">CC Pulse Dashboard</span>
   <span class="nav-spacer"></span>
   <div class="ham-wrap">
-    <span class="nav-meta">Last run: 2026-06-29 04:45 ET</span>
+    <span class="nav-meta">Last run: 2026-06-30 03:19 ET</span>
     <button class="ham-btn" id="ham-btn" onclick="toggleHamMenu()" aria-expanded="false" aria-haspopup="true" title="Open menu">&#9776;</button>
     <div class="ham-menu" id="ham-menu" role="menu">
       <a class="ham-item" href="https://kr15tyk.github.io/CC-pulse/cc_dashboard.html" role="menuitem"><span class="ham-icon">&#127968;</span>Home</a>
@@ -255,7 +255,7 @@
 <div class="sticky-top">
   <div class="trend-bar">
     <div class="stat"><a href="#sec-niap-pp" onclick="navigateTo('sec-niap-pp');return false;">
-      <div class="stat-num ">0</div>
+      <div class="stat-num active-num">3</div>
       <div class="stat-lbl">NIAP Changes</div>
     </a></div>
     <div class="stat"><a href="#sec-csfc" onclick="navigateTo('sec-csfc');return false;">
@@ -338,50 +338,77 @@
 </div>
 
   <!-- NIAP In-Evaluation -->
-<div class="card " id="sec-niap-inevaluation" data-has-changes="0">
+<div class="card card-new" id="sec-niap-inevaluation" data-has-changes="1">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>NIAP In-Evaluation Products</span>
-    <span class="card-count">35 active</span>
+    <span class="card-count">1 change</span>
     </span>
   </div>
-  <div class="card-body collapsed">
+  <div class="card-body ">
+    
+    <div class="sub-hdr sub-new">Newly In Evaluation (1)</div>
+    
+    <div class="item-row" data-source="niap-inevaluation" data-kind="new">
+      <span class="item-link">Apple Inc. -- Apple macOS 26 Tahoe: FileVault</span>
+      <span class="item-meta">atsec information security corporation</span>
+    </div>
+    
+    <div class="item-sub">Encrypted Storage</div>
     
     
     
-    <p class="no-change">No evaluation changes detected. 35 products currently in evaluation.</p>
+    
     
   </div>
 </div>
 
   <!-- NIAP News -->
-<div class="card " id="sec-niap-news" data-has-changes="0">
+<div class="card card-new" id="sec-niap-news" data-has-changes="1">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>NIAP News &amp; Announcements</span>
-    <span class="card-count">0 new items</span>
+    <span class="card-count">1 new item</span>
     </span>
-    <span class="toggle-icon">&#9658;</span>
+    <span class="toggle-icon">&#9660;</span>
   </div>
-  <div class="card-body collapsed">
+  <div class="card-body ">
+    
+    
+    <div class="item-row" data-source="niap-news" data-kind="new">
+      <a class="item-link" href="#" target="_blank">NIAP's First Quarter 2026 Progress Report</a>
+      <span class="item-meta"></span>
+    </div>
     
     
     
     
-    <p class="no-change">No new items.</p>
+    
+    
   </div>
 </div>
 
   <!-- NIAP PCL — All Certifications -->
-<div class="card " id="sec-niap-pcl" data-has-changes="0">
+<div class="card card-new" id="sec-niap-pcl" data-has-changes="1">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>NIAP PCL — All Certifications</span>
-    <span class="card-count">0 changes</span>
+    <span class="card-count">1 change</span>
     </span>
   </div>
-  <div class="card-body collapsed">
+  <div class="card-body ">
+    
+    <div class="sub-hdr sub-new">New Certifications (1)</div>
+    
+    <div class="item-row" data-source="niap-pcl" data-kind="new">
+      <span class="item-link">Apple Inc. -- Apple macOS 26 Tahoe: FileVault</span>
+      <span class="item-meta"></span>
+    </div>
+    
+    <div class="item-sub">CPP_FDE_AA_V2.0E, CPP_FDE_EE_V2.0E</div>
     
     
     
-    <p class="no-change">No changes detected. <span class="last-active">(last: 2026-05-16)</span></p>
+    
+    
+    
   </div>
 </div>
 
@@ -925,7 +952,7 @@
 </div><!-- /main-content -->
 <footer>
   <span>CC Pulse &middot; Auto-refreshes daily (01:00 EST) &middot; NIAP, CSfC, NIST, CC Portal, NATO NIAPCL, EUCC / ENISA</span>
-  <span>Last run: 2026-06-29 04:45 ET</span>
+  <span>Last run: 2026-06-30 03:19 ET</span>
 </footer>
 
 <script>
