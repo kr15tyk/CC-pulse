@@ -1,0 +1,135 @@
+{
+  "period_start": "2026-06-30T07:19:19.838346+00:00",
+  "period_end": "2026-07-01T07:31:27.003715+00:00",
+  "niap": {
+    "pps": {
+      "added": [],
+      "removed": [],
+      "sunset_changes": [],
+      "status_changes": []
+    },
+    "tds": {
+      "added": [],
+      "removed": []
+    },
+    "cisco_ndcpp": {
+      "added": [],
+      "removed": [],
+      "newly_archived": []
+    },
+    "pcl_all": {
+      "added": [],
+      "removed": [],
+      "newly_archived": []
+    },
+    "in_evaluation": {
+      "added": [],
+      "removed": [],
+      "current_count": 36
+    },
+    "news": {
+      "added": []
+    },
+    "events": {
+      "added": []
+    }
+  },
+  "cc_portal": {
+    "news": {
+      "added": [
+        {
+          "text": "The DBMS iTC has made available for public review their collaborative Protection Profile and Supporting Documents v2.0 in support of CC:2022. Please visit the iTC review pagePublic Review Draft 1 for DBMS cPP and Supporting Document Version 2.0to access the draft documents and supporting information.",
+          "link": "https://gcc02.safelinks.protection.outlook.com/?url=https%3A%2F%2Fdbms-itc.github.io%2Fpublic-review%2Fv2.0%2F&data=05%7C02%7Cdsteven%40uwe.nsa.gov%7C2f576f871f2e4bc66dfc08ded6039e71%7Cd61e9a6ffc164f848a3e6eeff33e136b%7C0%7C0%7C639183508226262827%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C0%7C%7C%7C&sdata=j5793cIsNtx6PJRPiAH%2BG1RGQ4wHAERulHCLRsu4qHE%3D&reserved=0"
+        }
+      ]
+    },
+    "pps": {
+      "added": []
+    },
+    "products": {
+      "added": []
+    }
+  },
+  "cctl_labs": {},
+  "csfc": {
+    "pages": {},
+    "selection_links": {},
+    "feeds": {}
+  },
+  "cc_crypto": {
+    "pages": {
+      "news": {
+        "added": [
+          {
+            "text": "The DBMS iTC has made available their collaborative Protection Profile and Supporting Documents v2.0 for Public Review",
+            "href": ""
+          },
+          {
+            "text": "The DBMS iTC has made available for public review their collaborative Protection Profile and Supporting Documents v2.0 in support of CC:2022. Please visit the iTC review page Public Review Draft 1 for DBMS cPP and Supporting Document Version 2.0 to access the draft documents and supporting information.",
+            "href": "https://gcc02.safelinks.protection.outlook.com/?url=https%3A%2F%2Fdbms-itc.github.io%2Fpublic-review%2Fv2.0%2F&data=05%7C02%7Cdsteven%40uwe.nsa.gov%7C2f576f871f2e4bc66dfc08ded6039e71%7Cd61e9a6ffc164f848a3e6eeff33e136b%7C0%7C0%7C639183508226262827%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C0%7C%7C%7C&sdata=j5793cIsNtx6PJRPiAH%2BG1RGQ4wHAERulHCLRsu4qHE%3D&reserved=0"
+          }
+        ],
+        "removed": []
+      }
+    }
+  },
+  "nist": {
+    "pages": {},
+    "cmvp_mip": {
+      "added": [],
+      "removed": [],
+      "status_changes": []
+    },
+    "feeds": {
+      "NIST Cybersecurity Insights Blog": [
+        {
+          "title": "Verifiable Digital Credential Presentment",
+          "link": "https://www.nist.gov/blogs/cybersecurity-insights/verifiable-digital-credential-presentment",
+          "summary": "This blog post is #4 in our series on Verifiable Digital Credentials (VDCs). Our other posts can be found via Post #1, Post #2, and Post #3. In earlier posts, we discussed how verifiable digital credentials (VDCs) are issued and compared the underlying credential formats (ISO/IEC \u201cmdoc\u201d vs. W3C Verifiable Credentials). In this post, we turn to the other side of the story: presentation; that is, how a holder shows their VDC to a verifier at runtime in both in-person and online contexts. We\u2019ll again explore the mobile driver\u2019s license (mDL) use case, consider the differences between ISO/IEC",
+          "published": "Tue, 30 Jun 2026 12:00:00 +0000",
+          "id": "https://www.nist.gov/node/1915391",
+          "_category": "NEWS"
+        }
+      ]
+    }
+  },
+  "nato": {
+    "pages": {},
+    "cisco_added": [],
+    "cisco_removed": []
+  },
+  "eucc": {
+    "pages": {},
+    "cisco_added": [],
+    "cisco_removed": []
+  },
+  "alerts": [
+    {
+      "source": "CC Crypto: news",
+      "kind": "publication",
+      "title": "The DBMS iTC has made available their collaborative Protection Profile and Supporting Documents v2.0 for Public Review",
+      "url": "https://www.commoncriteriaportal.org/news/index.cfm",
+      "detail": "New item on CC Crypto news page",
+      "matched_keywords": [],
+      "tab": "us"
+    },
+    {
+      "source": "CC Crypto: news",
+      "kind": "publication",
+      "title": "The DBMS iTC has made available for public review their collaborative Protection Profile and Supporting Documents v2.0 i",
+      "url": "https://gcc02.safelinks.protection.outlook.com/?url=https%3A%2F%2Fdbms-itc.github.io%2Fpublic-review%2Fv2.0%2F&data=05%7C02%7Cdsteven%40uwe.nsa.gov%7C2f576f871f2e4bc66dfc08ded6039e71%7Cd61e9a6ffc164f848a3e6eeff33e136b%7C0%7C0%7C639183508226262827%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C0%7C%7C%7C&sdata=j5793cIsNtx6PJRPiAH%2BG1RGQ4wHAERulHCLRsu4qHE%3D&reserved=0",
+      "detail": "New item on CC Crypto news page",
+      "matched_keywords": [],
+      "tab": "us"
+    },
+    {
+      "source": "NIST Feed: NIST Cybersecurity Insights Blog",
+      "kind": "news",
+      "title": "Verifiable Digital Credential Presentment",
+      "url": "https://www.nist.gov/blogs/cybersecurity-insights/verifiable-digital-credential-presentment",
+      "detail": "Feed: NIST Cybersecurity Insights Blog \u00b7 Published: Tue, 30 Jun 2026",
+      "matched_keywords": [],
+      "tab": "us"
+    }
+  ]
+}
