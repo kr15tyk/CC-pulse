@@ -1285,7 +1285,7 @@ function initEnhancements() {
         b.addEventListener('click', function() { setHistoryView(b); });
       });
       histSec.insertBefore(navDiv, card);
-      setHistoryView(navDiv.querySelector('[data-hist-view="week"]'));
+      setHistoryView(navDiv.querySelector('[data-hist-view="all"]'));
     }
   }
 }
