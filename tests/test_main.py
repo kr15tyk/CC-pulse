@@ -541,7 +541,8 @@ class TestRunDailyFirstRun:
         assert diff["eucc"]["cisco_added"] == [], "eucc.cisco_added not cleared on first run (fix #23)"
         assert diff["alerts"] == [], "Alerts not suppressed on first run"
         assert diff["niap"]["pps"]["added"] == [], "niap.pps.added not cleared on first run"
-        assert diff["cctl_labs"] == {}, "cctl_labs not cleared on first run"
+        assert diff["cctl_labs"] == {"LabA": []}
+        assert not any(diff["cctl_labs"].values()), "CCTL first-run changes were not cleared"
 
     def test_first_run_suppresses_all_alerts(self):
         diff = self._make_diff_with_changes()

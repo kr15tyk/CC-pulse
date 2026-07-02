@@ -388,43 +388,42 @@ class TestHeadersChanged:
 
 
 # ===========================================================================
-# _diff_selection_hashes
+# _diff_selection_links
 # ===========================================================================
 
-class TestDiffSelectionHashes:
+class TestDiffSelectionLinks:
 
-    def test_hash_change_detected(self):
-        old = {"MyDoc": {"url": "https://x.com/doc.pdf", "hash": "aaa", "fetch_error": ""}}
-        new = {"MyDoc": {"url": "https://x.com/doc.pdf", "hash": "bbb", "fetch_error": ""}}
-        result = differ._diff_selection_hashes(old, new)
+    def test_versioned_link_change_detected(self):
+        old = {"MyDoc": "https://x.com/doc.pdf?ver=1"}
+        new = {"MyDoc": "https://x.com/doc.pdf?ver=2"}
+        result = differ._diff_selection_links(old, new)
         assert "MyDoc" in result
         assert result["MyDoc"]["changed"] is True
+        assert result["MyDoc"]["old_href"].endswith("ver=1")
+        assert result["MyDoc"]["new_href"].endswith("ver=2")
 
-    def test_same_hash_not_flagged(self):
-        entry = {"url": "https://x.com/doc.pdf", "hash": "abc", "fetch_error": ""}
-        result = differ._diff_selection_hashes({"Doc": entry}, {"Doc": entry.copy()})
+    def test_same_link_not_flagged(self):
+        link = "https://x.com/doc.pdf?ver=1"
+        result = differ._diff_selection_links({"Doc": link}, {"Doc": link})
         assert result == {}
 
-    def test_fetch_error_skipped(self):
-        """A fetch error on either side should suppress the diff."""
-        old = {"Doc": {"hash": "aaa", "fetch_error": ""}}
-        new = {"Doc": {"hash": "bbb", "fetch_error": "timeout"}}
-        result = differ._diff_selection_hashes(old, new)
-        assert "Doc" not in result
+    def test_removed_link_detected(self):
+        result = differ._diff_selection_links(
+            {"Doc": "https://x.com/doc.pdf"}, {}
+        )
+        assert result["Doc"]["old_href"] == "https://x.com/doc.pdf"
+        assert result["Doc"]["new_href"] == ""
 
-    def test_missing_hash_not_flagged(self):
-        """Empty hashes (never fetched) should not produce a false positive."""
-        old = {"Doc": {"hash": "", "fetch_error": ""}}
-        new = {"Doc": {"hash": "", "fetch_error": ""}}
-        result = differ._diff_selection_hashes(old, new)
+    def test_both_missing_not_flagged(self):
+        result = differ._diff_selection_links({}, {})
         assert result == {}
 
-    def test_new_doc_added_without_old(self):
-        old = {}
-        new = {"NewDoc": {"hash": "zzz", "fetch_error": ""}}
-        # No old hash to compare against — should not flag (empty old_hash)
-        result = differ._diff_selection_hashes(old, new)
-        assert "NewDoc" not in result
+    def test_new_link_detected(self):
+        result = differ._diff_selection_links(
+            {}, {"NewDoc": "https://x.com/new.pdf?ver=1"}
+        )
+        assert result["NewDoc"]["old_href"] == ""
+        assert result["NewDoc"]["new_href"].endswith("ver=1")
 
 
 # ===========================================================================

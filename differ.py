@@ -910,6 +910,12 @@ def merge_weekly_diffs(diffs: list[Snapshot]) -> Snapshot:
         "policies": {"added": [], "revised": [], "archived": [], "reactivated": [], "removed": []},
     }.items():
         weekly["niap"].setdefault(key, copy.deepcopy(default))
+    weekly.setdefault("nist", {})
+    weekly["nist"].setdefault("pages", {})
+    weekly["nist"].setdefault(
+        "cmvp_mip", {"added": [], "removed": [], "status_changes": []}
+    )
+    weekly["nist"].setdefault("feeds", {})
     for d in diffs[1:]:
         # Health is point-in-time metadata; the latest day wins.
         if "source_health" in d:
