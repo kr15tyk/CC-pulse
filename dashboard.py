@@ -31,7 +31,7 @@ log = logging.getLogger(__name__)
 
 def _load_recent_diffs(n: int = 7) -> list:
     """Load the most recent N daily diff files for sparkline data."""
-    pattern = os.path.join("snapshots", "diffs", "*_diff.json")
+    pattern = os.path.join(config.DIFF_DIR, "*_diff.json")
     paths = sorted(glob.glob(pattern))[-n:]
     diffs = []
     for p in paths:
@@ -58,7 +58,7 @@ def _build_history(n: int = 90) -> list:
       url       - optional link
     Returned sorted newest-first.
     """
-    pattern = os.path.join("snapshots", "diffs", "*_diff.json")
+    pattern = os.path.join(config.DIFF_DIR, "*_diff.json")
     paths = sorted(glob.glob(pattern))[-n:]
     entries = []
 
@@ -128,6 +128,35 @@ def _build_history(n: int = 90) -> list:
                 "url": f"https://www.niap-ccevs.org/technical-decisions/{td.get('identifier') or td.get('td_id') or ''}",
             })
 
+        # NIAP announcements, events, and policy-letter changes
+        for section, kinds in (
+            ("news", ("added", "revised", "deactivated", "reactivated", "removed")),
+            ("events", ("added", "revised", "deactivated", "reactivated", "removed")),
+            ("policies", ("added", "revised", "archived", "reactivated", "removed")),
+        ):
+            for change_kind in kinds:
+                for item in niap.get(section, {}).get(change_kind, []):
+                    title = (
+                        item.get("title") or item.get("policy_title")
+                        or item.get("name") or f"NIAP {section.rstrip('s')}"
+                    )
+                    entries.append({
+                        "date": date,
+                        "category": f"niap_{section}",
+                        "kind": (
+                            "new" if change_kind in ("added", "reactivated")
+                            else "removed" if change_kind in ("removed", "deactivated", "archived")
+                            else "updated"
+                        ),
+                        "title": f"NIAP {section.rstrip('s').title()} {change_kind}: {title}",
+                        "detail": "",
+                        "url": item.get("url") or item.get("link") or (
+                            "https://www.niap-ccevs.org/policies"
+                            if section == "policies" else
+                            "https://www.niap-ccevs.org/announcements"
+                        ),
+                    })
+
         # NATO NIAPCL Cisco additions
         for item in d.get("nato", {}).get("cisco_added", []):
             name = item.get("name") or item.get("raw_text", "")[:80] or "Unknown"
@@ -191,6 +220,25 @@ def _build_history(n: int = 90) -> list:
                     "url": "https://www.nsa.gov/Resources/Commercial-Solutions-for-Classified-Program/Components-List/",
                 })
 
+        # CSfC Components List and Announcements changes
+        for page_key in ("apl", "announcements"):
+            page_diff = d.get("csfc", {}).get("pages", {}).get(page_key, {})
+            for kind in ("added", "removed"):
+                for item in page_diff.get(kind, []):
+                    label = "Component" if page_key == "apl" else "Announcement"
+                    entries.append({
+                        "date": date,
+                        "category": "csfc_change",
+                        "kind": "new" if kind == "added" else "removed",
+                        "title": f"CSfC {label}: {(item.get('text') or '')[:80]}",
+                        "detail": "",
+                        "url": item.get("href") or (
+                            "https://www.nsa.gov/Resources/Commercial-Solutions-for-Classified-Program/Components-List/"
+                            if page_key == "apl" else
+                            "https://www.nsa.gov/Resources/Commercial-Solutions-for-Classified-Program/Announcements/"
+                        ),
+                    })
+
     # Sort newest-first
     entries.sort(key=lambda e: e["date"], reverse=True)
     return entries
@@ -208,12 +256,26 @@ def _section_daily_counts(diffs: list, section_key: str) -> list:
             tds = d.get("niap", {}).get("tds", {})
             n = len(tds.get("added", [])) + len(tds.get("removed", []))
         elif section_key == "niap_news":
-            n = len(d.get("niap", {}).get("news", {}).get("added", []))
+            niap = d.get("niap", {})
+            n = sum(
+                len(niap.get(section, {}).get(kind, []))
+                for section, kinds in (
+                    ("news", ("added", "revised", "deactivated", "reactivated", "removed")),
+                    ("events", ("added", "revised", "deactivated", "reactivated", "removed")),
+                    ("policies", ("added", "revised", "archived", "reactivated", "removed")),
+                )
+                for kind in kinds
+            )
         elif section_key == "cctl":
             n = sum(len(v) for v in d.get("cctl_labs", {}).values() if v)
         elif section_key == "csfc":
-            n = sum(1 for cp in d.get("csfc", {}).get("selection_links", {}).values()
-                    if cp.get("changed"))
+            csfc = d.get("csfc", {})
+            n = sum(1 for cp in csfc.get("selection_links", {}).values() if cp.get("changed"))
+            n += sum(
+                len(page_diff.get("added", [])) + len(page_diff.get("removed", []))
+                for page_key, page_diff in csfc.get("pages", {}).items()
+                if page_key in ("apl", "announcements") and isinstance(page_diff, dict)
+            )
         elif section_key == "cc_crypto":
             n = sum(len(p.get("added", [])) for p in d.get("cc_crypto", {}).get("pages", {}).values() if isinstance(p, dict))
         elif section_key == "nist":
@@ -435,6 +497,7 @@ DASHBOARD_TEMPLATE = """
         <div class="sources-item"><span class="src-label">Protection Profiles:</span><a href="https://www.niap-ccevs.org/api/protection-profile/public_pps_all/" target="_blank" rel="noopener">niap-ccevs.org &mdash; Protection Profiles API</a></div>
         <div class="sources-item"><span class="src-label">Technical Decisions:</span><a href="https://www.niap-ccevs.org/api/technical-decision/frontend_tds/" target="_blank" rel="noopener">niap-ccevs.org &mdash; Technical Decisions API</a></div>
         <div class="sources-item"><span class="src-label">News &amp; Events:</span><a href="https://www.niap-ccevs.org/api/publish/announcements/get_news_frontend/" target="_blank" rel="noopener">niap-ccevs.org &mdash; Announcements API</a></div>
+        <div class="sources-item"><span class="src-label">Policy Letters:</span><a href="https://www.niap-ccevs.org/policies" target="_blank" rel="noopener">niap-ccevs.org &mdash; Policies</a></div>
       </div>
       <div class="sources-group">
         <div class="sources-group-title">🇳🇮 CSfC (Commercial Solutions for Classified)</div>
@@ -521,7 +584,6 @@ DASHBOARD_TEMPLATE = """
   </div>
 </div><!-- /sticky-top -->
 <div class="main-content">
-<!-- Source health summary -->
 <div class="ctrl-bar">
   <button class="ctrl-btn" onclick="expandAll()" title="Expand all cards [E]">[E] Expand All</button>
   <button class="ctrl-btn" onclick="collapseAll()" title="Collapse all cards [C]">[C] Collapse All</button>
@@ -659,44 +721,52 @@ DASHBOARD_TEMPLATE = """
   </div>
 </div>
 
-  <!-- NIAP News -->
-<div class="card {% if niap_news_total > 0 or diff.niap.events.added %}card-new{% endif %}" id="sec-niap-news" data-has-changes="{{ niap_news_total }}">
+  <!-- NIAP announcements and events -->
+<div class="card {% if niap_news_total > 0 %}card-new{% endif %}" id="sec-niap-news" data-has-changes="{{ niap_news_total }}">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>NIAP News &amp; Announcements</span>
-    <span class="card-count">{{ niap_news_total }} new item{% if niap_news_total != 1 %}s{% endif %}</span>
+    <span class="card-count">{{ niap_news_total }} change{% if niap_news_total != 1 %}s{% endif %}</span>
     </span>
-    <span class="toggle-icon">{% if niap_news_total == 0 and not diff.niap.events.added %}&#9658;{% else %}&#9660;{% endif %}</span>
+    <span class="toggle-icon">{% if niap_news_total == 0 %}&#9658;{% else %}&#9660;{% endif %}</span>
   </div>
-  <div class="card-body {% if niap_news_total == 0 and not diff.niap.events.added %}collapsed{% endif %}">
-    {% if diff.niap.news.added %}
-    {% for item in diff.niap.news.added %}
-    <div class="item-row" data-source="niap-news" data-kind="new">
-      <a class="item-link" href="{{ item.link or item.url or '#' }}" target="_blank">{{ item.title }}</a>
-      <span class="item-meta">{{ item.date }}</span>
-    </div>
+  <div class="card-body {% if niap_news_total == 0 %}collapsed{% endif %}">
+    {% for group_name, changes in [("News", diff.niap.news), ("Events", diff.niap.events)] %}
+      {% for kind, label, css_kind in [("added", "Added", "new"), ("revised", "Revised", "updated"), ("reactivated", "Reactivated", "new"), ("deactivated", "Deactivated", "removed"), ("removed", "Removed", "removed")] %}
+        {% if changes.get(kind, []) %}
+        <div class="sub-hdr sub-{{ css_kind }}">{{ group_name }} — {{ label }} ({{ changes.get(kind, []) | length }})</div>
+        {% for item in changes.get(kind, []) %}
+        <div class="item-row" data-source="niap-news" data-kind="{{ css_kind }}">
+          <a class="item-link" href="{{ item.link or item.url or 'https://www.niap-ccevs.org/announcements' }}" target="_blank">{{ item.title or item.name or 'NIAP item' }}</a>
+          <span class="item-meta">{{ (item.posted or item.date or item.start_date or item.moddate or '')[:10] }}</span>
+        </div>
+        {% endfor %}
+        {% endif %}
+      {% endfor %}
     {% endfor %}
-    {% endif %}
-    {% if diff.niap.events.added %}
-    <div class="sub-hdr sub-new">Events ({{ diff.niap.events.added | length }})</div>
-    {% for ev in diff.niap.events.added %}
-    <div class="item-row" data-source="niap-news" data-kind="new">
-      <span class="item-link">{{ ev.title or ev.name or ev }}</span>
-      <span class="item-meta">{{ ev.date or ev.start_date or '' }}</span>
-    </div>
+    {% if niap_news_total == 0 %}<p class="no-change">No announcement or event changes.</p>{% endif %}
+  </div>
+</div>
+
+  <!-- NIAP policy letters -->
+<div class="card {% if niap_policy_total > 0 %}card-new{% endif %}" id="sec-niap-policies" data-has-changes="{{ niap_policy_total }}">
+  <div class="card-hdr" onclick="toggleCard(this)">
+    <span>NIAP Policy Letters</span>
+    <span class="card-count">{{ niap_policy_total }} change{% if niap_policy_total != 1 %}s{% endif %}</span>
+    <span class="toggle-icon">{% if niap_policy_total == 0 %}&#9658;{% else %}&#9660;{% endif %}</span>
+  </div>
+  <div class="card-body {% if niap_policy_total == 0 %}collapsed{% endif %}">
+    {% for kind, label, css_kind in [("added", "Added", "new"), ("revised", "Revised", "updated"), ("reactivated", "Reactivated", "new"), ("archived", "Archived", "removed"), ("removed", "Removed", "removed")] %}
+      {% if diff.niap.policies.get(kind, []) %}
+      <div class="sub-hdr sub-{{ css_kind }}">{{ label }} ({{ diff.niap.policies.get(kind, []) | length }})</div>
+      {% for policy in diff.niap.policies.get(kind, []) %}
+      <div class="item-row" data-source="niap-policies" data-kind="{{ css_kind }}">
+        <a class="item-link" href="{{ policy.url or 'https://www.niap-ccevs.org/policies' }}" target="_blank">Policy {{ policy.policy_num }}{% if policy.update_num %}, Update {{ policy.update_num }}{% endif %} — {{ policy.policy_title or policy.title }}</a>
+        <span class="item-meta">{{ (policy.policy_date or policy.moddate or '')[:10] }}</span>
+      </div>
+      {% endfor %}
+      {% endif %}
     {% endfor %}
-    {% endif %}
-    {% set policy_items = diff.niap.news.added | selectattr("_category", "equalto", "POLICY") | list %}
-    {% if policy_items %}
-    <div class="sub-hdr sub-updated">Policy Letters &amp; Updates ({{ policy_items | length }})</div>
-    {% for item in policy_items %}
-    <div class="item-row" data-source="niap-news" data-kind="new">
-      {% if item.link %}<a class="item-link" href="{{ item.link }}" target="_blank">{{ item.title }}</a>
-      {% else %}<span class="item-link">{{ item.title }}</span>{% endif %}
-      <span class="item-meta">{% if item.posted %}{{ item.posted[:10] }}{% elif item.date %}{{ item.date[:10] }}{% endif %}</span>
-    </div>
-    {% endfor %}
-    {% endif %}
-    {% if niap_news_total == 0 and not diff.niap.events.added %}<p class="no-change">No new items.</p>{% endif %}
+    {% if niap_policy_total == 0 %}<p class="no-change">No policy-letter changes.</p>{% endif %}
   </div>
 </div>
 
@@ -835,10 +905,10 @@ DASHBOARD_TEMPLATE = """
 
 <div class="section-group">
   <div class="section-label">CSfC</div>
-  <!-- CSfC Component Selections -->
+  <!-- CSfC Components, Announcements, and Selection Documents -->
 <div class="card {% if csfc_total > 0 %}card-updated{% endif %}" id="sec-csfc" data-has-changes="{{ csfc_total }}">
   <div class="card-hdr" onclick="toggleCard(this)">
-    <span>CSfC Component Selections</span>
+    <span>CSfC Components &amp; Announcements</span>
     <span class="card-count">{{ csfc_total }} update{% if csfc_total != 1 %}s{% endif %}</span>
     </span>
     <span class="toggle-icon">{% if csfc_total == 0 %}&#9658;{% else %}&#9660;{% endif %}</span>
@@ -847,12 +917,28 @@ DASHBOARD_TEMPLATE = """
     {% for cp_name, cp in diff.csfc.selection_links.items() %}
     {% if cp.changed %}
     <div class="cp-row" data-source="csfc" data-kind="updated">
-      <a class="item-link" href="{{ cp.url }}" target="_blank">{{ cp_name }}</a>
+      <a class="item-link" href="{{ cp.new_href or cp.old_href or config_csfc_components_url }}" target="_blank">{{ cp_name }}</a>
       <div class="cp-detail">
-        <span class="cp-date">Content hash changed</span>
+        <span class="cp-date">Selection document link changed</span>
       </div>
     </div>
     {% endif %}
+    {% endfor %}
+    {% for page_key, page_diff in diff.csfc.pages.items() %}
+      {% if page_key in ['apl', 'announcements'] %}
+        {% for item in page_diff.added %}
+        <div class="item-row" data-source="csfc" data-kind="new">
+          <a class="item-link" href="{{ item.href or (config_csfc_components_url if page_key == 'apl' else config_csfc_announcements_url) }}" target="_blank">{{ item.text }}</a>
+          <span class="item-meta">{% if page_key == 'apl' %}component added{% else %}announcement added{% endif %}</span>
+        </div>
+        {% endfor %}
+        {% for item in page_diff.removed %}
+        <div class="item-row" data-source="csfc" data-kind="removed">
+          <a class="item-link" href="{{ item.href or (config_csfc_components_url if page_key == 'apl' else config_csfc_announcements_url) }}" target="_blank">{{ item.text }}</a>
+          <span class="item-meta">{% if page_key == 'apl' %}component removed{% else %}announcement removed{% endif %}</span>
+        </div>
+        {% endfor %}
+      {% endif %}
     {% endfor %}
     {% if csfc_total == 0 %}<p class="no-change">No changes detected.{% if last_active.csfc %} <span class="last-active">(last: {{ last_active.csfc }})</span>{% endif %}</p>{% endif %}
   </div>
@@ -1419,13 +1505,32 @@ def _build_rss(diff: dict, generated_at: str) -> str:
             f"<description>{xml_escape(td.get('pp_short_name', ''))}</description></item>"
         )
 
-    for item in diff.get("niap", {}).get("news", {}).get("added", []):
-        title = item.get("title", "NIAP News")
-        link  = item.get("link") or item.get("url") or "https://www.niap-ccevs.org/"
-        items_xml.append(
-            f"<item><title>{xml_escape(title)}</title><link>{link}</link>"
-            f"<description>{xml_escape(item.get('date', ''))}</description></item>"
-        )
+    niap_content = diff.get("niap", {})
+    for section, kinds in (
+        ("news", ("added", "revised", "deactivated", "reactivated", "removed")),
+        ("events", ("added", "revised", "deactivated", "reactivated", "removed")),
+        ("policies", ("added", "revised", "archived", "reactivated", "removed")),
+    ):
+        for kind in kinds:
+            for item in niap_content.get(section, {}).get(kind, []):
+                item_title = (
+                    item.get("title") or item.get("policy_title")
+                    or item.get("name") or f"NIAP {section.rstrip('s')}"
+                )
+                title = f"NIAP {section.rstrip('s').title()} {kind}: {item_title}"
+                link = item.get("link") or item.get("url") or (
+                    "https://www.niap-ccevs.org/policies"
+                    if section == "policies" else
+                    "https://www.niap-ccevs.org/announcements"
+                )
+                date = (
+                    item.get("date") or item.get("posted")
+                    or item.get("policy_date") or item.get("moddate") or ""
+                )
+                items_xml.append(
+                    f"<item><title>{xml_escape(title)}</title><link>{xml_escape(link)}</link>"
+                    f"<description>{xml_escape(date)}</description></item>"
+                )
 
     for lab, lab_items in diff.get("cctl_labs", {}).items():
         for it in (lab_items or []):
@@ -1438,12 +1543,34 @@ def _build_rss(diff: dict, generated_at: str) -> str:
 
     for cp_name, cp in diff.get("csfc", {}).get("selection_links", {}).items():
         if cp.get("changed"):
-            link = cp.get("url", "https://www.nsa.gov/Resources/Commercial-Solutions-for-Classified-Program/Components-List/")
+            link = (
+                cp.get("new_href") or cp.get("old_href")
+                or "https://www.nsa.gov/Resources/Commercial-Solutions-for-Classified-Program/Components-List/"
+            )
             items_xml.append(
                 f"<item><title>{xml_escape('CSfC Selection Updated: ' + cp_name)}</title>"
-                f"<link>{link}</link>"
+                f"<link>{xml_escape(link)}</link>"
                 f"<description>Component selection document updated.</description></item>"
             )
+
+    csfc_urls = {
+        "apl": "https://www.nsa.gov/Resources/Commercial-Solutions-for-Classified-Program/Components-List/",
+        "announcements": "https://www.nsa.gov/Resources/Commercial-Solutions-for-Classified-Program/Announcements/",
+    }
+    for page_key, page_diff in diff.get("csfc", {}).get("pages", {}).items():
+        if page_key not in csfc_urls:
+            continue
+        for kind in ("added", "removed"):
+            for item in page_diff.get(kind, []):
+                label = "Component" if page_key == "apl" else "Announcement"
+                change_label = "Added" if kind == "added" else "Removed"
+                title = f"CSfC {label} {change_label}: {(item.get('text') or '')[:80]}"
+                link = item.get("href") or csfc_urls[page_key]
+                items_xml.append(
+                    f"<item><title>{xml_escape(title)}</title>"
+                    f"<link>{xml_escape(link)}</link>"
+                    f"<description>CSfC {xml_escape(page_key)} item {change_label.lower()}.</description></item>"
+                )
 
     for page_key, page_diff in diff.get("nist", {}).get("pages", {}).items():
         for item in page_diff.get("added", []):
@@ -1491,12 +1618,24 @@ def render_dashboard(diff: dict, output_dir: str = "docs") -> None:
 
     # Compute totals
     niap         = diff.get("niap", {})
+    # Mixed-version history is expected during rollout. Seed the newer NIAP
+    # content shapes so old diff files can still be re-rendered safely.
+    for section, kinds in {
+        "news": ("added", "revised", "deactivated", "reactivated", "removed"),
+        "events": ("added", "revised", "deactivated", "reactivated", "removed"),
+        "policies": ("added", "revised", "archived", "reactivated", "removed"),
+    }.items():
+        changes = niap.setdefault(section, {})
+        for kind in kinds:
+            changes.setdefault(kind, [])
     pps          = niap.get("pps", {})
     tds          = niap.get("tds", {})
     cisco        = niap.get("cisco_ndcpp", {})
     pcl_all      = niap.get("pcl_all", {})
     in_eval      = niap.get("in_evaluation", {})
     news         = niap.get("news", {})
+    events       = niap.get("events", {})
+    policies     = niap.get("policies", {})
 
     niap_pp_total   = (len(pps.get("added", [])) + len(pps.get("removed", [])) +
                        len(pps.get("sunset_changes", [])) + len(pps.get("status_changes", [])))
@@ -1509,16 +1648,33 @@ def render_dashboard(diff: dict, output_dir: str = "docs") -> None:
     in_eval_removed = len(in_eval.get("removed", []))
     in_eval_total   = in_eval_added + in_eval_removed
     in_eval_current = in_eval.get("current_count", 0)
-    niap_news_total = len(news.get("added", []))
+    niap_news_total = sum(
+        len(collection.get(kind, []))
+        for collection in (news, events)
+        for kind in ("added", "revised", "deactivated", "reactivated", "removed")
+    )
+    niap_policy_total = sum(
+        len(policies.get(kind, []))
+        for kind in ("added", "revised", "archived", "reactivated", "removed")
+    )
 
     cctl_total      = sum(len(v) for v in diff.get("cctl_labs", {}).values() if v)
-    csfc_total      = sum(1 for cp in diff.get("csfc", {}).get("selection_links", {}).values()
+    csfc_diff       = diff.get("csfc", {})
+    csfc_total      = sum(1 for cp in csfc_diff.get("selection_links", {}).values()
                           if cp.get("changed"))
+    csfc_total     += sum(
+        len(page_diff.get("added", [])) + len(page_diff.get("removed", []))
+        for page_key, page_diff in csfc_diff.get("pages", {}).items()
+        if page_key in ("apl", "announcements") and isinstance(page_diff, dict)
+    )
     cc_crypto_total = sum(len(p.get("added", [])) for p in diff.get("cc_crypto", {}).get("pages", {}).values() if isinstance(p, dict))
     nist_total      = sum(len(p.get("added", [])) for p in diff.get("nist", {}).get("pages", {}).values() if isinstance(p, dict))
     alert_total     = len(diff.get("alerts", []))
 
-    niap_total_stat = niap_pp_total + niap_td_total + cisco_total + pcl_all_total + in_eval_total + niap_news_total
+    niap_total_stat = (
+        niap_pp_total + niap_td_total + cisco_total + pcl_all_total
+        + in_eval_total + niap_news_total + niap_policy_total
+    )
     cctl_total_stat = cctl_total
     csfc_total_stat = csfc_total
     nist_total_stat = nist_total + cc_crypto_total
@@ -1576,6 +1732,7 @@ def render_dashboard(diff: dict, output_dir: str = "docs") -> None:
         niap_td_total   = niap_td_total,
         cisco_total     = cisco_total,
         niap_news_total = niap_news_total,
+        niap_policy_total = niap_policy_total,
         cctl_total      = cctl_total,
         csfc_total      = csfc_total,
         cc_crypto_total = cc_crypto_total,
@@ -1604,6 +1761,8 @@ def render_dashboard(diff: dict, output_dir: str = "docs") -> None:
         config_nato_url      = config.NATO_NIAPCL_URL,
         config_eucc_req_url  = config.EUCC_REQUIREMENTS_URL,
         config_eucc_cert_url = config.EUCC_CERTIFICATES_URL,
+        config_csfc_components_url = config.CSFC_PRODUCT_LIST_URL,
+        config_csfc_announcements_url = config.CSFC_BASE + config.CSFC_PAGES["announcements"],
         noindex_meta         = '<meta name="robots" content="noindex, nofollow">' if config.STAGING_DIR in output_dir else '',
     )
 
@@ -1617,6 +1776,3 @@ def render_dashboard(diff: dict, output_dir: str = "docs") -> None:
     with open(rss_path, "w", encoding="utf-8") as fh:
         fh.write(rss)
     log.info("RSS feed written to %s", rss_path)
-
-
-

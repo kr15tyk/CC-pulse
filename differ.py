@@ -8,6 +8,7 @@ per-source change lists and keyword alerts.
 from __future__ import annotations
 
 import copy
+import json
 import logging
 import re
 from typing import Any
@@ -50,6 +51,65 @@ def _ids(records: Records, key: str) -> set[str]:
 def byid(records: Records, key: str) -> dict[str, Any]:
     """Index a list of records by a string key field."""
     return {str(r[key]): r for r in records if key in r}
+
+
+def _record_fingerprint(record: dict) -> str:
+    """Return a deterministic representation excluding derived diff fields."""
+    clean = {
+        key: value
+        for key, value in record.items()
+        if not key.startswith("_")
+    }
+    return json.dumps(clean, sort_keys=True, default=str, separators=(",", ":"))
+
+
+def _diff_revision_records(
+    old_records: Records,
+    new_records: Records,
+    identity,
+) -> dict[str, list[dict]]:
+    """Diff API records by identity and detect content revisions/removals."""
+    old_map = {
+        str(identity(record)): record
+        for record in old_records
+        if identity(record) not in (None, "")
+    }
+    new_map = {
+        str(identity(record)): record
+        for record in new_records
+        if identity(record) not in (None, "")
+    }
+    old_ids = set(old_map)
+    new_ids = set(new_map)
+    added = [copy.deepcopy(new_map[key]) for key in new_ids - old_ids]
+    removed = [copy.deepcopy(old_map[key]) for key in old_ids - new_ids]
+    revised = []
+    deactivated = []
+    reactivated = []
+    for key in old_ids & new_ids:
+        old_item = old_map[key]
+        new_item = new_map[key]
+        old_active = old_item.get("active")
+        new_active = new_item.get("active")
+        if old_active is True and new_active is False:
+            changed = copy.deepcopy(new_item)
+            changed["_old_active"] = True
+            deactivated.append(changed)
+        elif old_active is False and new_active is True:
+            changed = copy.deepcopy(new_item)
+            changed["_old_active"] = False
+            reactivated.append(changed)
+        elif _record_fingerprint(old_item) != _record_fingerprint(new_item):
+            changed = copy.deepcopy(new_item)
+            changed["_old_moddate"] = old_item.get("moddate", "")
+            revised.append(changed)
+    return {
+        "added": added,
+        "revised": revised,
+        "deactivated": deactivated,
+        "reactivated": reactivated,
+        "removed": removed,
+    }
 
 def categorize_news(title: str) -> str:
     """Map a news/feed item title to a category using NEWS_CATEGORY_KEYWORDS."""
@@ -102,7 +162,10 @@ def flag_alerts(diff: Snapshot) -> list[dict]:
 
     def _scan_items(source: str, items: list[dict], url_key: str = "url", tab: str = "us") -> None:
         for item in items:
-            title = item.get("title", "") or item.get("name", "")
+            title = (
+                item.get("title", "") or item.get("policy_title", "")
+                or item.get("name", "")
+            )
             detail = item.get("detail", "") or item.get("description", "")
             url = item.get(url_key, "") or item.get("url", "")
             hits = _matches(title + " " + detail)
@@ -111,9 +174,13 @@ def flag_alerts(diff: Snapshot) -> list[dict]:
                      url=url, detail=detail, keywords=hits, tab=tab)
 
     def _add_text(source: str, kind: str, text: str,
-                  url: str = "", detail: str = "", tab: str = "us") -> None:
+                  url: str = "", detail: str = "", tab: str = "us",
+                  additional_keywords: list[str] | None = None) -> None:
         """Scan a raw scraped text blob (lower-signal) against _matches only."""
         hits = _matches(text)
+        for keyword in additional_keywords or []:
+            if keyword.lower() in text.lower() and keyword not in hits:
+                hits.append(keyword)
         if hits:
             truncated = text[:120].rstrip() + ("…" if len(text) > 120 else "")
             _add(alerts, source, kind, truncated, url=url, detail=detail, keywords=hits, tab=tab)
@@ -140,8 +207,23 @@ def flag_alerts(diff: Snapshot) -> list[dict]:
             _add(alerts, "NIAP TD", "new", title,
                  url=url, detail=detail, keywords=hits, tab="us")
 
-    # NIAP News
-    _scan_items("NIAP News", diff.get("niap", {}).get("news", {}).get("added", []), tab="us")
+    # NIAP announcements and policy letters
+    for kind in ("added", "revised", "reactivated"):
+        _scan_items(
+            "NIAP News",
+            diff.get("niap", {}).get("news", {}).get(kind, []),
+            tab="us",
+        )
+        _scan_items(
+            "NIAP Events",
+            diff.get("niap", {}).get("events", {}).get(kind, []),
+            tab="us",
+        )
+        _scan_items(
+            "NIAP Policies",
+            diff.get("niap", {}).get("policies", {}).get(kind, []),
+            tab="us",
+        )
 
     # CC Portal
     _scan_items("CC Portal", diff.get("cc_portal", {}).get("news", {}).get("added", []), tab="intl")
@@ -181,6 +263,7 @@ def flag_alerts(diff: Snapshot) -> list[dict]:
     }
     for page_key, page_diff in diff.get("csfc", {}).get("pages", {}).items():
         for item in page_diff.get("added", []):
+            vendor_keywords = config.CISCO_VENDOR_KEYWORDS if page_key == "apl" else []
             _add_text(
                 "CSfC APL" if page_key == "apl" else f"CSfC: {page_key}",
                 "new_cert" if page_key == "apl" else "new",
@@ -188,6 +271,18 @@ def flag_alerts(diff: Snapshot) -> list[dict]:
                 url=item.get("href") or item.get("link") or _csfc_page_urls.get(page_key, config.CSFC_PRODUCT_LIST_URL),
                 detail=f"New item on CSfC {page_key.replace('_', ' ')} page",
                 tab="us",
+                additional_keywords=vendor_keywords,
+            )
+        for item in page_diff.get("removed", []):
+            vendor_keywords = config.CISCO_VENDOR_KEYWORDS if page_key == "apl" else []
+            _add_text(
+                "CSfC APL" if page_key == "apl" else f"CSfC: {page_key}",
+                "removed",
+                item.get("text", ""),
+                url=item.get("href") or item.get("link") or _csfc_page_urls.get(page_key, config.CSFC_PRODUCT_LIST_URL),
+                detail=f"Item removed from CSfC {page_key.replace('_', ' ')} page",
+                tab="us",
+                additional_keywords=vendor_keywords,
             )
 
     # CC Crypto Catalog page changes — fire unconditionally for publications (fix #27)
@@ -399,19 +494,112 @@ def diff_niap_in_evaluation(old_pcl: Records, new_pcl: Records) -> dict[str, Any
     return {"added": added, "removed": removed, "current_count": len(new_ie)}
 
 def diff_niap_news(old_news: Records, new_news: Records) -> dict[str, Any]:
-    old_ids = _ids(old_news, "id")
-    new_ids = _ids(new_news, "id")
-    new_map = byid(new_news, "id")
-    added = [new_map[i] for i in new_ids - old_ids]
-    for item in added:
-        item["_category"] = categorize_news(item.get("title", ""))
-    return {"added": added}
+    result = _diff_revision_records(old_news, new_news, lambda item: item.get("id"))
+    for kind in ("added", "revised", "deactivated", "reactivated", "removed"):
+        for item in result[kind]:
+            item["_category"] = categorize_news(item.get("title", ""))
+            item["_change_kind"] = kind
+    return result
 
 def diff_niap_events(old_events: Records, new_events: Records) -> dict[str, Any]:
-    old_ids = _ids(old_events, "id")
-    new_ids = _ids(new_events, "id")
-    new_map = byid(new_events, "id")
-    return {"added": [new_map[i] for i in new_ids - old_ids]}
+    result = _diff_revision_records(old_events, new_events, lambda item: item.get("id"))
+    for kind, items in result.items():
+        for item in items:
+            item["_change_kind"] = kind
+    return result
+
+
+def _policy_identity(item: dict) -> str | int | None:
+    policy_number = item.get("policy_id") or item.get("policy_num")
+    if policy_number in (None, ""):
+        return None
+    return f"{policy_number}|{'archived' if item.get('archived') else 'active'}"
+
+
+def diff_niap_policies(old_policies: Records, new_policies: Records) -> dict[str, Any]:
+    """Detect new, revised, archived, reactivated, and removed policies."""
+    result = _diff_revision_records(old_policies, new_policies, _policy_identity)
+    revised = list(result.pop("revised"))
+    archived = list(result.pop("deactivated"))
+    reactivated = list(result.pop("reactivated"))
+
+    # Public policy records have no stable ID and active/archived versions can
+    # share a policy number. Pair status-qualified additions/removals so a move
+    # between the two lists is reported as a transition, not two unrelated
+    # changes.
+    def policy_num(item: dict) -> str:
+        return str(item.get("policy_id") or item.get("policy_num") or "")
+
+    removed_active = {
+        policy_num(item): item for item in result["removed"]
+        if not item.get("archived")
+    }
+    added_archived = {
+        policy_num(item): item for item in result["added"]
+        if item.get("archived")
+    }
+    for number in set(removed_active) & set(added_archived):
+        archived.append(added_archived[number])
+        result["removed"].remove(removed_active[number])
+        result["added"].remove(added_archived[number])
+
+    # If an older archived version already existed, the archived row is a
+    # revision rather than an addition. Pair that with the disappearing active
+    # row as the same archive transition.
+    removed_active = {
+        policy_num(item): item for item in result["removed"]
+        if not item.get("archived")
+    }
+    revised_archived = {
+        policy_num(item): item for item in revised
+        if item.get("archived")
+    }
+    for number in set(removed_active) & set(revised_archived):
+        archived.append(revised_archived[number])
+        result["removed"].remove(removed_active[number])
+        revised.remove(revised_archived[number])
+
+    removed_archived = {
+        policy_num(item): item for item in result["removed"]
+        if item.get("archived")
+    }
+    added_active = {
+        policy_num(item): item for item in result["added"]
+        if not item.get("archived")
+    }
+    for number in set(removed_archived) & set(added_active):
+        reactivated.append(added_active[number])
+        result["removed"].remove(removed_archived[number])
+        result["added"].remove(added_active[number])
+
+    removed_archived = {
+        policy_num(item): item for item in result["removed"]
+        if item.get("archived")
+    }
+    revised_active = {
+        policy_num(item): item for item in revised
+        if not item.get("archived")
+    }
+    for number in set(removed_archived) & set(revised_active):
+        reactivated.append(revised_active[number])
+        result["removed"].remove(removed_archived[number])
+        revised.remove(revised_active[number])
+    for kind, items in {
+        "added": result["added"],
+        "revised": revised,
+        "archived": archived,
+        "reactivated": reactivated,
+        "removed": result["removed"],
+    }.items():
+        for item in items:
+            item["_change_kind"] = kind
+    return {
+        "added": result["added"],
+        "revised": revised,
+        "archived": archived,
+        "reactivated": reactivated,
+        "removed": result["removed"],
+    }
 # -- CC Portal diffs -----------------------------------------------------------
 def diff_cc_news(old_items: Records, new_items: Records) -> dict[str, Any]:
     old_texts = {i["text"][:80] for i in old_items}
@@ -641,6 +829,7 @@ def compute_diff(old_snapshot: Snapshot, new_snapshot: Snapshot) -> Snapshot:
             "in_evaluation": diff_niap_in_evaluation(old_n.get("pcl", []), new_n.get("pcl", [])),
             "news": diff_niap_news(old_n.get("news", []), new_n.get("news", [])),
             "events": diff_niap_events(old_n.get("events", []), new_n.get("events", [])),
+            "policies": diff_niap_policies(old_n.get("policies", []), new_n.get("policies", [])),
         },
         "cc_portal": {
             "news": diff_cc_news(old_c.get("news", []), new_c.get("news", [])),
@@ -653,6 +842,7 @@ def compute_diff(old_snapshot: Snapshot, new_snapshot: Snapshot) -> Snapshot:
         "nist": diff_nist(old_ni, new_ni),
         "nato": diff_nato(old_na, new_na),
         "eucc": diff_eucc(old_eu, new_eu),
+        "source_health": new_snapshot.get("source_health", {}),
     }
 
     diff["alerts"] = flag_alerts(diff)
@@ -696,8 +886,9 @@ def merge_weekly_diffs(diffs: list[Snapshot]) -> Snapshot:
         ("niap", {"pps": {"added":[], "removed":[], "sunset_changes":[], "status_changes":[]},
                   "tds": {"added":[], "removed":[]},
                   "cisco_ndcpp": {"added":[], "removed":[], "newly_archived":[]},
-                  "news": {"added":[]},
-                  "events": {"added":[]}}),
+                  "news": {"added":[], "revised":[], "deactivated":[], "reactivated":[], "removed":[]},
+                  "events": {"added":[], "revised":[], "deactivated":[], "reactivated":[], "removed":[]},
+                  "policies": {"added":[], "revised":[], "archived":[], "reactivated":[], "removed":[]}}),
         ("cc_portal", {"news": {"added":[]}, "pps": {"added":[]}, "products": {"added":[]}}),
         ("cctl_labs", {}),
         ("csfc", {"feeds": {}, "pages": {}, "selection_links": {}}),
@@ -709,7 +900,20 @@ def merge_weekly_diffs(diffs: list[Snapshot]) -> Snapshot:
     ]:
         if domain_key not in weekly:
             weekly[domain_key] = default
+    # Older daily diffs can have a NIAP section without the newer content
+    # subcollections. Seed nested defaults so mixed-version weekly windows are
+    # safe during rollout.
+    weekly.setdefault("niap", {})
+    for key, default in {
+        "news": {"added": [], "revised": [], "deactivated": [], "reactivated": [], "removed": []},
+        "events": {"added": [], "revised": [], "deactivated": [], "reactivated": [], "removed": []},
+        "policies": {"added": [], "revised": [], "archived": [], "reactivated": [], "removed": []},
+    }.items():
+        weekly["niap"].setdefault(key, copy.deepcopy(default))
     for d in diffs[1:]:
+        # Health is point-in-time metadata; the latest day wins.
+        if "source_health" in d:
+            weekly["source_health"] = copy.deepcopy(d["source_health"])
         # NIAP
         for key in ("added", "removed", "sunset_changes", "status_changes"):
             if key in weekly["niap"]["pps"] and key in d.get("niap", {}).get("pps", {}):
@@ -723,12 +927,17 @@ def merge_weekly_diffs(diffs: list[Snapshot]) -> Snapshot:
             weekly["niap"]["cisco_ndcpp"][key] = merge_lists(
                 weekly["niap"]["cisco_ndcpp"].get(key, []),
                 d.get("niap", {}).get("cisco_ndcpp", {}).get(key, []))
-        weekly["niap"]["news"]["added"] = merge_lists(
-            weekly["niap"]["news"]["added"],
-            d.get("niap", {}).get("news", {}).get("added", []))
-        weekly["niap"]["events"]["added"] = merge_lists(
-            weekly["niap"]["events"]["added"],
-            d.get("niap", {}).get("events", {}).get("added", []))
+        for key in ("added", "revised", "deactivated", "reactivated", "removed"):
+            weekly["niap"]["news"][key] = merge_lists(
+                weekly["niap"]["news"].get(key, []),
+                d.get("niap", {}).get("news", {}).get(key, []))
+            weekly["niap"]["events"][key] = merge_lists(
+                weekly["niap"]["events"].get(key, []),
+                d.get("niap", {}).get("events", {}).get(key, []))
+        for key in ("added", "revised", "archived", "reactivated", "removed"):
+            weekly["niap"]["policies"][key] = merge_lists(
+                weekly["niap"]["policies"].get(key, []),
+                d.get("niap", {}).get("policies", {}).get(key, []))
 
         # CC Portal
         weekly["cc_portal"]["news"]["added"] = merge_lists(

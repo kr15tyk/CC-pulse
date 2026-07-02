@@ -456,16 +456,25 @@ def build_email_html(weekly_diff: dict) -> str:
         rows.append(_row("REMOVED", f"<b>{p.get('product_name','')}</b>", "#F87171", "#1E1B4B"))
     parts.append(_section("Cisco NDcPP PCL Changes", rows))
 
-    # ── NIAP News ──────────────────────────────────────────────────────────
-    news = weekly_diff.get("niap", {}).get("news", {})
+    # ── NIAP announcements, events, and policy letters ─────────────────────
     rows = []
-    for item in news.get("added", []):
-        cat   = item.get("_category", "NEWS")
-        link  = item.get("url", "")
-        title = item.get("title", "")
-        txt   = f'<a href="{link}">{title}</a>' if link else title
-        rows.append(_row(cat, txt, "#60A5FA", "#12102E"))
-    parts.append(_section("NIAP - News and Announcements", rows))
+    niap_content = weekly_diff.get("niap", {})
+    for section, kinds in (
+        ("news", ("added", "revised", "deactivated", "reactivated", "removed")),
+        ("events", ("added", "revised", "deactivated", "reactivated", "removed")),
+        ("policies", ("added", "revised", "archived", "reactivated", "removed")),
+    ):
+        for kind in kinds:
+            for item in niap_content.get(section, {}).get(kind, []):
+                category = item.get("_category") or section.rstrip("s").upper()
+                link = item.get("url", "") or item.get("link", "")
+                title = (
+                    item.get("title") or item.get("policy_title")
+                    or item.get("name") or f"NIAP {section.rstrip('s')}"
+                )
+                txt = f'<a href="{link}">{title}</a>' if link else title
+                rows.append(_row(f"{kind.upper()} {category}", txt, "#60A5FA", "#12102E"))
+    parts.append(_section("NIAP - Announcements, Events, and Policies", rows))
 
     # ── CCTL Labs ──────────────────────────────────────────────────────────
     labs = weekly_diff.get("cctl_labs", {})
@@ -1011,13 +1020,14 @@ def send_new_pps_webex(new_pps: list[dict], pp_sunsets: list[dict]) -> None:
 
 
 def send_niap_news_webex(new_news: list[dict]) -> None:
-    """Post a Webex notification for new NIAP news and announcements.
+    """Post a Webex notification for genuine NIAP content changes.
 
-    Fires unconditionally whenever new items appear in the NIAP news feed
-    in the daily diff, regardless of keyword matches.
+    Operational collection failures are intentionally excluded; those use the
+    internal source-health email path instead.
 
     Args:
-        new_news: List of news dicts from diff["niap"]["news"]["added"].
+        new_news: Announcement, event, or policy records annotated with
+            ``_change_kind`` and ``_content_type``.
     """
     token = config.WEBEX_BOT_TOKEN
     room_id = config.WEBEX_ROOM_ID
@@ -1032,22 +1042,41 @@ def send_niap_news_webex(new_news: list[dict]) -> None:
 
     lines = []
     for item in new_news:
-        title = item.get("title", "")
-        url = item.get("url", "") or item.get("link", "") or "https://www.niap-ccevs.org/"
+        title = (
+            item.get("title", "") or item.get("policy_title", "")
+            or item.get("name", "") or "NIAP content"
+        )
+        content_type = item.get("_content_type", "news").rstrip("s").upper()
+        change_kind = item.get("_change_kind", "added").upper()
+        fallback_url = (
+            "https://www.niap-ccevs.org/policies"
+            if item.get("_content_type") == "policies"
+            else "https://www.niap-ccevs.org/announcements"
+        )
+        url = item.get("url", "") or item.get("link", "") or fallback_url
         category = item.get("_category", "") or item.get("category", "NEWS")
-        date = (item.get("date") or item.get("published") or "")[:10]
-        label = f"[{category.upper()}]" if category else "[NEWS]"
+        date = (
+            item.get("date") or item.get("published") or item.get("posted")
+            or item.get("policy_date") or ""
+        )[:10]
+        label = f"[{change_kind} {content_type}]"
+        if content_type == "NEWS" and category:
+            label = f"[{change_kind} {category.upper()}]"
         link_text = f"[{title}]({url})" if url else title
         line = f"**{label}** {link_text}"
         if date:
-            line += f" _(published {date})_"
+            line += f" _({date})_"
         lines.append(line)
 
     header = (
-        f"## 📰 NIAP — {count} New News {item_word}\n"
-        f"_CC Pulse detected new content on the NIAP news and announcements page._\n"
+        f"## 📰 NIAP — {count} Content {item_word}\n"
+        f"_CC Pulse detected changes to NIAP announcements, events, or policies._\n"
     )
-    footer = "\n\n[View NIAP News & Announcements](https://www.niap-ccevs.org/) · [Full dashboard](https://kr15tyk.github.io/CC-pulse/cc_dashboard.html)"
+    footer = (
+        "\n\n[View NIAP Announcements](https://www.niap-ccevs.org/announcements)"
+        " · [View NIAP Policies](https://www.niap-ccevs.org/policies)"
+        " · [Full dashboard](https://kr15tyk.github.io/CC-pulse/cc_dashboard.html)"
+    )
 
     body = "\n\n---\n".join(lines)
     payload = json.dumps({
@@ -1066,7 +1095,7 @@ def send_niap_news_webex(new_news: list[dict]) -> None:
     )
     try:
         with urllib.request.urlopen(req, timeout=10) as resp:
-            log.info("[Webex] NIAP news notification sent for %d item(s) (HTTP %d).", count, resp.status)
+            log.info("[Webex] NIAP content notification sent for %d item(s) (HTTP %d).", count, resp.status)
     except urllib.error.URLError as exc:
         log.warning("[Webex] Failed to send NIAP news notification: %s", exc)
 
@@ -1412,6 +1441,36 @@ No diff or alert emails were sent.</p>
     _send_email(subject, html)
 
 
+def send_source_health_email(source_health: dict[str, dict]) -> None:
+    """Email newly failed or persistently stale source details to operators."""
+    if not source_health:
+        return
+
+    html_rows = []
+    for source, health in sorted(source_health.items()):
+        label = health.get("label") or source.replace("_", " ").title()
+        status = health.get("status", "failed").upper()
+        failures = health.get("consecutive_failures", 1)
+        detail = health.get("detail", "collector returned unusable data")
+        fallback = " Last-known-good data is being retained." if health.get("using_last_known_good") else ""
+        html_rows.append(
+            f"<li><strong>{label}</strong> — {status} for {failures} run(s): "
+            f"{detail}.{fallback}</li>"
+        )
+
+    subject = f"⚠️ CC Pulse — {len(source_health)} source health issue(s)"
+    html = f"""
+<html><body style="font-family:sans-serif;color:#222;max-width:680px;margin:auto">
+<h2 style="color:#c0392b">⚠️ CC Pulse — Source Health Alert</h2>
+<p>The run completed, but these monitored sources returned unusable data:</p>
+<ul>{''.join(html_rows)}</ul>
+<p><a href="https://kr15tyk.github.io/CC-pulse/cc_dashboard.html">View dashboard →</a></p>
+<hr style="border:none;border-top:1px solid #eee">
+<p style="font-size:11px;color:#999">Escalations fire on the third failed run, then every seventh run.</p>
+</body></html>"""
+    _send_email(subject, html)
+
+
 def send_daily_status_email(diff: dict, run_date: str = "") -> None:
     """Send a brief daily status email summarising what CC Pulse found today.
 
@@ -1451,8 +1510,29 @@ def send_daily_status_email(diff: dict, run_date: str = "") -> None:
     niap_pp_changes = len(diff.get("niap", {}).get("pps", {}).get("added", [])) + \
                       len(diff.get("niap", {}).get("pps", {}).get("sunset_changes", []))
     total_changes = len(alerts) + len(new_tds) + len(new_certs) + len(nato_adds) + len(eucc_adds) + nist_news + cc_crypto_new + niap_pp_changes
+    unhealthy_sources = {
+        source: health for source, health in diff.get("source_health", {}).items()
+        if health.get("status") in ("stale", "failed")
+    }
 
-    if total_changes == 0:
+    if unhealthy_sources:
+        status_icon = "⚠️"
+        status_label = f"{len(unhealthy_sources)} source(s) degraded"
+        status_color = "#DC2626"
+        health_lines = []
+        for source, health in sorted(unhealthy_sources.items()):
+            label = health.get("label") or source.replace("_", " ").title()
+            fallback = " (last-known-good data retained)" if health.get("using_last_known_good") else ""
+            health_lines.append(
+                f"{label}: {health.get('status', 'failed')} — {health.get('detail', '')}{fallback}"
+            )
+        body_detail = (
+            "<p style='margin:0 0 12px;color:#94a3b8;font-size:14px;'>"
+            "The run completed, but monitoring coverage is degraded:<br><br>"
+            + "<br>".join("&bull; " + line for line in health_lines)
+            + "</p>"
+        )
+    elif total_changes == 0:
         status_icon  = "✅"
         status_label = "No changes detected"
         status_color = "#16A34A"

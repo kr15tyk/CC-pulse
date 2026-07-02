@@ -59,6 +59,7 @@ RETRY_BACKOFF_BASE = 2
 SANITY_MIN_PCL = 50
 SANITY_MIN_PPS = 10
 SANITY_MIN_CSFC_APL = 5
+SANITY_MIN_CSFC_ANNOUNCEMENTS = 1
 SANITY_MIN_CC_CRYPTO_PUBS = 5
 SANITY_MIN_NIST_NEWS = 10
 
@@ -71,7 +72,13 @@ NIAP_ENDPOINTS = {
     "events_curr": "/api/publish/announcements/get_events_frontend/?limit=200&offset=0&current=true",
     "events_prev": "/api/publish/announcements/get_events_frontend/?limit=200&offset=0&previous=true",
     "news": "/api/publish/announcements/get_news_frontend/?limit=500&offset=0",
+    "policies_active": "/api/publish/policies/get_public_policies/?archived=false",
+    "policies_archived": "/api/publish/policies/get_public_policies/?archived=true",
 }
+NIAP_ANNOUNCEMENTS_URL = NIAP_BASE + "/announcements"
+NIAP_POLICIES_URL = NIAP_BASE + "/policies"
+SANITY_MIN_NIAP_NEWS = 1
+SANITY_MIN_NIAP_POLICIES = 1
 
 # -- CC Portal --------------------------------------------------------------
 CC_PORTAL_BASE = "https://www.commoncriteriaportal.org"
@@ -332,4 +339,3 @@ NIST_NEWS_KEYWORDS = [
     "ml-kem", "ml-dsa", "slh-dsa", "algorithm transition",
     "key management", "cryptographic module", "csrc",
 ]
-

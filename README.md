@@ -12,7 +12,7 @@ CC Pulse monitors these sources daily:
 
 | Source | What's tracked |
 |---|---|
-| **NIAP** | Certified products (PCL), Protection Profiles, Technical Decisions, CCTLs, and news/events |
+| **NIAP** | Certified products (PCL), Protection Profiles, Technical Decisions, paginated announcements/events, and active/archived policy letters with PDF hashes |
 | **CSfC / NSA** | Approved Products List and Component Selection documents |
 | **NATO NIAPCL** | NATO Information Assurance Product Catalogue — certified products and components |
 | **EUCC / ENISA** | EU Common Criteria certification scheme — requirements pages and issued certificates |
@@ -51,7 +51,7 @@ Cisco-relevant alerts appear first (🔵), followed by standards/NIST items (�
 | `removed` | An item was removed from a list |
 | `sunset` | A Protection Profile has been sunsetted |
 | `archived` | A certified product has been archived |
-| `updated` | An existing item was modified |
+| `updated` | An existing announcement, event, policy, or other item was modified |
 | `advisory` | A new advisory or policy was published |
 | `publication` | A new document or standard was published |
 
@@ -131,7 +131,8 @@ What you'll find in the cards:
 
 - **NIAP Cisco NDcPP Certifications** — New or archived Cisco NDcPP products
 - **NIAP In-Evaluation Products** — Products that newly entered NIAP evaluation
-- **NIAP News & Announcements** — Policy letters, events, and news from NIAP
+- **NIAP News & Announcements** — Added, revised, deactivated, reactivated, or removed NIAP news and events
+- **NIAP Policy Letters** — Added, revised, archived, reactivated, or removed policies, including same-filename PDF replacements detected by SHA-256
 - **NIAP PCL — All Certifications** — New certifications and archived products across all vendors
 - **NIAP Protection Profiles** — New, updated, or sunsetted PPs
 - **NIAP Technical Decisions** — New or updated TDs
@@ -156,13 +157,19 @@ Card borders are colour-coded by what's inside:
 
 When keyword matches exist, an amber banner appears at the very top of the dashboard: "N keyword alerts — see Alerts section below." This is intentionally low-key — it's a pointer, not an alarm. The full detail is in the Alerts card.
 
+### Source Health
+
+CC Pulse validates every monitored domain before diffing it. If a source returns suspiciously little data and a valid earlier collection exists, CC Pulse retains that domain's last-known-good data so a temporary fetch failure cannot create false removal alerts.
+
+Source-health warnings are kept internal and do not appear on the public dashboard or in Webex. Operational email escalation begins on the third consecutive failed run, then repeats every seventh run while the problem persists. The daily status email identifies degraded sources from the first failure onward, and every failure is recorded in the workflow logs.
+
 ### Alerts Card — Mark All Seen
 
 The Alerts card shows a **"Mark All Seen"** button when there are unseen alerts. Clicking it marks all current alerts as seen (stored in localStorage) so they no longer appear as new on your next visit.
 
 ### History Tab
 
-The History tab shows a full timeline of all changes across recent daily runs. By default it shows the **last 7 days**; use the **Last 7 Days** / **Last 30 Days** / **All History** navigation buttons to switch views. Entries that are new since your last visit are tagged with a **NEW** badge.
+The History tab shows a full timeline of all changes across recent daily runs. By default it shows **All History**; use the **Last 7 Days** / **Last 30 Days** / **All History** navigation buttons to switch views. Entries that are new since your last visit are tagged with a **NEW** badge.
 
 ---
 

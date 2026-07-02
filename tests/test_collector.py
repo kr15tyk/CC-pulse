@@ -23,6 +23,7 @@ _cfg.RETRY_BACKOFF_BASE = 2
 _cfg.SANITY_MIN_PCL = 50
 _cfg.SANITY_MIN_PPS = 10
 _cfg.SANITY_MIN_CSFC_APL = 5
+_cfg.SANITY_MIN_CSFC_ANNOUNCEMENTS = 1
 _cfg.SANITY_MIN_CC_CRYPTO_PUBS = 5
 _cfg.SANITY_MIN_NIST_NEWS = 10
 _cfg.CSFC_BASE = "https://www.nsa.gov"
@@ -33,6 +34,7 @@ _cfg.CSFC_PAGES = {
 _cfg.CSFC_APL_COMPONENT_KEYWORDS = {"TLS/VPN": ["tls", "vpn"]}
 _cfg.CSFC_COMPONENT_SELECTIONS = {}
 _cfg.CSFC_FEEDS = []
+_cfg.NIAP_BASE = "https://www.niap-ccevs.org"
 sys.modules["config"] = _cfg
 # Also stub heavy deps
 for _mod in ("requests", "feedparser", "bs4", "lxml"):
@@ -50,10 +52,78 @@ def _snap(pcl_count=60, pps_count=15):
     pps = [{"pp_id": str(i)} for i in range(pps_count)]
     return {
         "niap": {"pcl": pcl, "pps": pps},
-        "csfc": {"pages": {"apl": []}, "component_selection_hashes": {}},
+        "csfc": {"pages": {"apl": [], "announcements": []}, "component_selection_hashes": {}},
         "cc_crypto": {"pages": {"publications": [{"text": f"pub{i}", "href": ""} for i in range(6)]}},
         "nist": {"pages": {"news": [{"text": f"news{i}"} for i in range(12)]}},
     }
+
+
+# ===========================================================================
+# NIAP paginated feeds and policy records
+# ===========================================================================
+
+class TestNiapCollections:
+
+    def test_paginated_results_follow_every_page(self):
+        first = {
+            "count": 3,
+            "next": "http://www.niap-ccevs.org/api/items/?offset=2",
+            "results": [{"id": 1}, {"id": 2}],
+        }
+        second = {"count": 3, "next": None, "results": [{"id": 3}]}
+        with patch.object(collector, "get_json", side_effect=[first, second]) as get_json:
+            items, health = collector._get_paginated_results(
+                "https://www.niap-ccevs.org/api/items/"
+            )
+
+        assert [item["id"] for item in items] == [1, 2, 3]
+        assert health["success"] is True
+        assert health["complete"] is True
+        assert health["pages"] == 2
+        assert get_json.call_args_list[1].args[0].startswith("https://")
+
+    def test_paginated_results_reject_partial_failure(self):
+        first = {
+            "count": 3,
+            "next": "https://www.niap-ccevs.org/api/items/?offset=2",
+            "results": [{"id": 1}, {"id": 2}],
+        }
+        with patch.object(collector, "get_json", side_effect=[first, None]):
+            items, health = collector._get_paginated_results(
+                "https://www.niap-ccevs.org/api/items/"
+            )
+
+        assert len(items) == 2
+        assert health["success"] is False
+        assert health["complete"] is False
+
+    def test_policy_record_includes_parent_and_addendum_urls(self):
+        record = {
+            "policy_id": 30,
+            "policy_num": 30,
+            "filename": "policy-30.pdf",
+            "addendums": [{"addendum_num": 1, "filename": "policy-30-add1.pdf"}],
+        }
+
+        policy = collector._policy_record(record, archived=False)
+
+        assert policy["archived"] is False
+        assert policy["url"].endswith("/Policy/policy-30.pdf")
+        assert policy["addendums"][0]["url"].endswith("/Policy/policy-30-add1.pdf")
+
+    def test_policy_document_hashes_cover_parent_and_addendum(self):
+        policies = [{
+            "url": "https://example.test/policy.pdf",
+            "addendums": [{"url": "https://example.test/addendum.pdf"}],
+        }]
+        with patch.object(collector, "_hash_policy_document", side_effect=["aaa", "bbb"]):
+            health = collector._attach_policy_document_hashes(policies)
+
+        assert health["complete"] is True
+        assert health["hashed_documents"] == 2
+        assert policies[0]["document_sha256"] in ("aaa", "bbb")
+        assert policies[0]["addendums"][0]["document_sha256"] in ("aaa", "bbb")
+        assert policies[0]["document_sha256"] != policies[0]["addendums"][0]["document_sha256"]
 
 
 # ===========================================================================
@@ -155,6 +225,22 @@ class TestGetHtml:
             collector.get_html("https://example.com")
         mock_retry.assert_called_once()
 
+    def test_nsa_403_uses_chrome_impersonation_fallback(self):
+        blocked = MagicMock()
+        blocked.status_code = 403
+        browser_response = MagicMock()
+        browser_response.text = "<html><main>CSfC content</main></html>"
+
+        with patch.object(collector.SESSION, "get", return_value=blocked):
+            with patch.object(
+                collector.curl_requests, "get", return_value=browser_response
+            ) as fallback:
+                collector._do_get_html(_cfg.CSFC_BASE + "/components-list/")
+
+        fallback.assert_called_once()
+        assert fallback.call_args.kwargs["impersonate"] == "chrome"
+        browser_response.raise_for_status.assert_called_once()
+
 
 # ===========================================================================
 # collect_csfc — fix #24: APL page fetched once, soup reused
@@ -175,9 +261,8 @@ class TestCollectCsfc:
             return mock_soup
 
         with patch.object(collector, "get_html", side_effect=_mock_get_html):
-            with patch.object(collector, "_hash_csfc_selections", return_value={}):
-                with patch.object(collector, "get_rss", return_value=[]):
-                    collector.collect_csfc()
+            with patch.object(collector, "get_rss", return_value=[]):
+                collector.collect_csfc()
 
         # One get_html call per page key (home + apl = 2 total, but apl only once)
         # The important assertion: apl URL is NOT fetched twice
@@ -195,9 +280,8 @@ class TestCollectCsfc:
         mock_soup.find_all.return_value = []
 
         with patch.object(collector, "get_html", return_value=mock_soup):
-            with patch.object(collector, "_hash_csfc_selections", return_value={}):
-                with patch.object(collector, "get_rss", return_value=[]):
-                    result = collector.collect_csfc()
+            with patch.object(collector, "get_rss", return_value=[]):
+                result = collector.collect_csfc()
 
         assert "apl_structured" in result
 
@@ -256,3 +340,96 @@ class TestScrapeCsfcPageFromSoup:
         soup = self._make_soup([long_text, long_text])
         result = collector._scrape_csfc_page_from_soup(soup)
         assert len(result) == 1
+
+    def test_announcement_table_row_is_extracted(self):
+        date_cell = MagicMock()
+        date_cell.get_text.return_value = "5/20/25"
+        notice_cell = MagicMock()
+        notice_cell.get_text.return_value = "New CSfC guidance has been published"
+        row = MagicMock()
+        row.name = "tr"
+        row.find_all.return_value = [date_cell, notice_cell]
+        row.find.return_value = None
+        content = MagicMock()
+        content.find_all.return_value = [row]
+        soup = MagicMock()
+        soup.find.return_value = content
+
+        result = collector._scrape_csfc_page_from_soup(soup)
+
+        assert result == [{
+            "text": "5/20/25 | New CSfC guidance has been published",
+            "href": "",
+        }]
+
+
+class TestParseCsfcAplStructured:
+
+    def test_all_component_tables_are_parsed(self):
+        def make_table(category, vendor, model):
+            headers = []
+            for value in ("Vendor", "Model", "Version"):
+                header = MagicMock()
+                header.get_text.return_value = value
+                headers.append(header)
+            header_row = MagicMock()
+            vendor_cell = MagicMock()
+            vendor_cell.get_text.return_value = vendor
+            model_cell = MagicMock()
+            model_cell.get_text.return_value = model
+            version_cell = MagicMock()
+            version_cell.get_text.return_value = "1.0"
+            data_row = MagicMock()
+            data_row.find_all.return_value = [vendor_cell, model_cell, version_cell]
+            data_row.find.return_value = None
+            heading = MagicMock()
+            heading.get_text.return_value = category
+            table = MagicMock()
+            table.find_all.side_effect = lambda name: (
+                headers if name == "th" else [header_row, data_row]
+            )
+            table.find_previous.return_value = heading
+            return table
+
+        soup = MagicMock()
+        soup.find_all.return_value = [
+            make_table("VPN Gateway", "Cisco", "Secure Firewall"),
+            make_table("WLAN", "Example", "Wireless Controller"),
+        ]
+
+        result = collector._parse_csfc_apl_structured(soup)
+
+        assert len(result) == 2
+        assert result[0]["vendor"] == "Cisco"
+        assert result[0]["type"] == "VPN Gateway"
+        assert result[1]["name"] == "Wireless Controller"
+
+
+class TestScrapeCsfcAnnouncements:
+
+    def test_only_dated_announcement_rows_are_returned(self):
+        header_row = MagicMock()
+        header_row.find_all.return_value = []
+        date_cell = MagicMock()
+        date_cell.get_text.return_value = "5/20/25"
+        notice_cell = MagicMock()
+        notice_cell.get_text.return_value = "New CSfC guidance has been published"
+        row = MagicMock()
+        row.find_all.return_value = [date_cell, notice_cell]
+        row.find.return_value = None
+        table = MagicMock()
+        table.get_text.return_value = "CSfC Announcements"
+        table.find_all.return_value = [header_row, row]
+        main_content = MagicMock()
+        main_content.find_all.return_value = [table]
+        soup = MagicMock()
+        soup.find.side_effect = lambda name, *args, **kwargs: (
+            main_content if name == "main" else None
+        )
+
+        result = collector._scrape_csfc_announcements(soup)
+
+        assert result == [{
+            "text": "5/20/25 | New CSfC guidance has been published",
+            "href": "",
+        }]

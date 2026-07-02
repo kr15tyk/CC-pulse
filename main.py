@@ -10,6 +10,7 @@ Features:
 - Snapshot rotation: keeps last 30 daily snapshots + diffs (fix #4)
 - Guard against double-run overwriting today's snapshot (fix #7)
 - Matrix merge mode: assemble full snapshot from per-domain partial JSONs (issue #20)
+- Per-domain health metadata with last-known-good fallback and escalation
 
 Usage:
   python main.py                  # Daily pulse check
@@ -85,6 +86,390 @@ def _latest_prior_snapshot() -> str | None:
 # ── Snapshot rotation (fix #4) ──────────────────────────────────────────────────────────────────────
 KEEP_SNAPSHOTS = 30  # days
 
+DOMAIN_KEYS = (
+    "niap", "cc_portal", "cctl_labs", "csfc",
+    "cc_crypto", "nist", "nato", "eucc",
+)
+
+DOMAIN_LABELS = {
+    "niap": "NIAP",
+    "cc_portal": "CC Portal",
+    "cctl_labs": "CCTL Labs",
+    "csfc": "CSfC",
+    "cc_crypto": "CC Crypto",
+    "nist": "NIST CSRC",
+    "nato": "NATO NIAPCL",
+    "eucc": "EUCC / ENISA",
+}
+
+NIAP_SUBCOLLECTION_LABELS = {
+    "news": "News announcements",
+    "events": "Events",
+    "policies": "Policy letters",
+}
+
+
+def _config_minimum(name: str, default: int) -> int:
+    value = getattr(config, name, default)
+    return value if isinstance(value, int) else default
+
+
+def _apply_niap_subcollection_health(
+    new_snapshot: dict,
+    prior_snapshot: dict,
+) -> dict[str, dict]:
+    """Validate and selectively retain NIAP announcements and policies.
+
+    NIAP's products, announcements, events, and policies are separate API
+    calls.  Treating them as one all-or-nothing domain either accepts an empty
+    feed or freezes healthy product data.  This helper applies last-known-good
+    fallback only to a failed subcollection.
+    """
+    new_niap = new_snapshot.setdefault("niap", {})
+    prior_niap = prior_snapshot.get("niap", {})
+    metadata = new_niap.get("_collection_health")
+    if not isinstance(metadata, dict):
+        # Legacy/manual snapshots have no request outcome metadata. Preserve
+        # backward compatibility rather than guessing whether an empty list is
+        # a successful response.
+        return {}
+
+    prior_metadata = prior_niap.get("_collection_health", {})
+    prior_subhealth = (
+        prior_snapshot.get("source_health", {})
+        .get("niap", {})
+        .get("subcollections", {})
+    )
+    minimums = {
+        "news": _config_minimum("SANITY_MIN_NIAP_NEWS", 1),
+        "events": 0,  # a successful events query can legitimately be empty
+        "policies": _config_minimum("SANITY_MIN_NIAP_POLICIES", 1),
+    }
+    result: dict[str, dict] = {}
+
+    for key, label in NIAP_SUBCOLLECTION_LABELS.items():
+        current_items = new_niap.get(key, [])
+        prior_items = prior_niap.get(key, [])
+        meta = metadata.get(key, {}) if isinstance(metadata.get(key), dict) else {}
+        prior_meta = (
+            prior_metadata.get(key, {})
+            if isinstance(prior_metadata.get(key), dict) else {}
+        )
+        observed = len(current_items) if isinstance(current_items, list) else 0
+        prior_count = len(prior_items) if isinstance(prior_items, list) else 0
+        minimum = minimums[key]
+
+        successful = meta.get("success") is True and meta.get("complete", True) is True
+        enough = observed >= minimum
+        suspicious_drop = (
+            key in ("news", "policies")
+            and prior_count >= 10
+            and observed < max(minimum, prior_count // 2)
+        )
+        current_ok = successful and enough and not suspicious_drop
+
+        if current_ok:
+            result[key] = {
+                "label": label,
+                "status": "healthy",
+                "observed": observed,
+                "consecutive_failures": 0,
+                "using_last_known_good": False,
+            }
+            continue
+
+        previous = prior_subhealth.get(key, {})
+        previous_failures = (
+            previous.get("consecutive_failures", 0)
+            if previous.get("status") in ("stale", "failed") else 0
+        )
+        prior_was_successful = (
+            previous.get("status") == "healthy"
+            or prior_meta.get("success") is True
+            or prior_count >= max(1, minimum)
+        )
+        # Events can be a valid empty collection, but only when a previous run
+        # explicitly recorded that successful state.
+        if key == "events" and prior_count == 0:
+            prior_was_successful = (
+                previous.get("status") == "healthy"
+                or prior_meta.get("success") is True
+            )
+        if prior_was_successful:
+            new_niap[key] = copy.deepcopy(prior_items)
+
+        reasons = []
+        if not successful:
+            reasons.append(meta.get("detail") or "request failed or was incomplete")
+        if not enough:
+            reasons.append(f"returned {observed}; minimum expected {minimum}")
+        if suspicious_drop:
+            reasons.append(f"suspicious drop from {prior_count} to {observed}")
+        result[key] = {
+            "label": label,
+            "status": "stale" if prior_was_successful else "failed",
+            "observed": observed,
+            "consecutive_failures": previous_failures + 1,
+            "using_last_known_good": prior_was_successful,
+            "detail": "; ".join(reasons),
+        }
+        log.warning(
+            "[Health] NIAP %s is %s (failure #%d): %s",
+            key,
+            result[key]["status"],
+            result[key]["consecutive_failures"],
+            result[key]["detail"],
+        )
+
+    return result
+
+
+def _source_health_checks(snapshot: dict) -> dict[str, list[dict]]:
+    """Return the minimum viable collection checks for every source domain.
+
+    These checks deliberately measure stable, representative collections rather
+    than every page/feed. A failed check marks the domain unusable for diffing;
+    callers can then retain the last-known-good domain data instead of treating
+    a fetch failure as a real mass removal.
+    """
+    niap = snapshot.get("niap", {})
+    cc_portal = snapshot.get("cc_portal", {})
+    cctl_labs = snapshot.get("cctl_labs", {})
+    csfc = snapshot.get("csfc", {})
+    cc_crypto = snapshot.get("cc_crypto", {})
+    nist = snapshot.get("nist", {})
+    nato = snapshot.get("nato", {})
+    eucc = snapshot.get("eucc", {})
+
+    return {
+        "niap": [
+            {"name": "PCL products", "observed": len(niap.get("pcl", [])),
+             "minimum": config.SANITY_MIN_PCL},
+            {"name": "Protection Profiles", "observed": len(niap.get("pps", [])),
+             "minimum": config.SANITY_MIN_PPS},
+        ],
+        "cc_portal": [
+            {"name": "portal records", "observed": sum(
+                len(cc_portal.get(key, [])) for key in ("news", "pps", "products")
+            ), "minimum": 1},
+        ],
+        "cctl_labs": [
+            {"name": "lab feed items", "observed": sum(
+                len(items) for items in cctl_labs.values() if isinstance(items, list)
+            ), "minimum": 1},
+        ],
+        "csfc": [
+            {"name": "APL items", "observed": len(csfc.get("pages", {}).get("apl", [])),
+             "minimum": config.SANITY_MIN_CSFC_APL},
+            {"name": "announcements", "observed": len(
+                csfc.get("pages", {}).get("announcements", [])
+            ), "minimum": config.SANITY_MIN_CSFC_ANNOUNCEMENTS},
+        ],
+        "cc_crypto": [
+            {"name": "publications", "observed": len(
+                cc_crypto.get("pages", {}).get("publications", [])
+            ), "minimum": config.SANITY_MIN_CC_CRYPTO_PUBS},
+        ],
+        "nist": [
+            {"name": "CSRC news items", "observed": len(
+                nist.get("pages", {}).get("news", [])
+            ), "minimum": config.SANITY_MIN_NIST_NEWS},
+        ],
+        "nato": [
+            {"name": "NIAPCL products", "observed": len(
+                nato.get("pages", {}).get("all_products", [])
+            ), "minimum": config.SANITY_MIN_NATO_PRODUCTS},
+        ],
+        "eucc": [
+            {"name": "certificates", "observed": len(
+                eucc.get("pages", {}).get("certificates", [])
+            ), "minimum": config.SANITY_MIN_EUCC_CERTS},
+        ],
+    }
+
+
+def _checks_pass(checks: list[dict]) -> bool:
+    return bool(checks) and all(
+        check.get("observed", 0) >= check.get("minimum", 1)
+        for check in checks
+    )
+
+
+def _apply_source_health(
+    new_snapshot: dict,
+    prior_snapshot: dict | None = None,
+    collection_errors: set[str] | None = None,
+) -> dict:
+    """Attach health metadata and retain last-known-good failed domains.
+
+    Status meanings:
+      healthy -- current collection passed its minimum checks
+      stale   -- current collection failed; prior healthy data was retained
+      failed  -- current collection failed and no usable prior data exists
+    """
+    collection_errors = collection_errors or set()
+    prior_snapshot = prior_snapshot or {}
+    niap_subcollections = _apply_niap_subcollection_health(
+        new_snapshot, prior_snapshot
+    )
+    current_checks = _source_health_checks(new_snapshot)
+    prior_checks = _source_health_checks(prior_snapshot)
+    prior_health = prior_snapshot.get("source_health", {})
+    checked_at = new_snapshot.get("collected_at", datetime.now(timezone.utc).isoformat())
+    source_health: dict[str, dict] = {}
+
+    for domain in DOMAIN_KEYS:
+        checks = current_checks[domain]
+        current_ok = domain not in collection_errors and _checks_pass(checks)
+        partial_failures = {
+            key: health
+            for key, health in niap_subcollections.items()
+            if health.get("status") != "healthy"
+        } if domain == "niap" else {}
+        if current_ok and partial_failures:
+            previous = prior_health.get(domain, {})
+            previous_failures = (
+                previous.get("consecutive_failures", 0)
+                if previous.get("status") in ("stale", "failed") else 0
+            )
+            all_have_fallback = all(
+                health.get("using_last_known_good")
+                for health in partial_failures.values()
+            )
+            source_health[domain] = {
+                "label": DOMAIN_LABELS[domain],
+                "status": "stale" if all_have_fallback else "failed",
+                "checks": checks,
+                "subcollections": niap_subcollections,
+                "consecutive_failures": previous_failures + 1,
+                "using_last_known_good": any(
+                    health.get("using_last_known_good")
+                    for health in partial_failures.values()
+                ),
+                "detail": "; ".join(
+                    f"{health['label']}: {health.get('detail', health['status'])}"
+                    for health in partial_failures.values()
+                ),
+                "checked_at": checked_at,
+            }
+            continue
+        if current_ok:
+            source_health[domain] = {
+                "label": DOMAIN_LABELS[domain],
+                "status": "healthy",
+                "checks": checks,
+                "consecutive_failures": 0,
+                "using_last_known_good": False,
+                "checked_at": checked_at,
+            }
+            if domain == "niap" and niap_subcollections:
+                source_health[domain]["subcollections"] = niap_subcollections
+            continue
+
+        previous = prior_health.get(domain, {})
+        previous_failures = (
+            previous.get("consecutive_failures", 0)
+            if previous.get("status") in ("stale", "failed") else 0
+        )
+        has_last_known_good = (
+            domain in prior_snapshot
+            and _checks_pass(prior_checks.get(domain, []))
+        )
+        if has_last_known_good:
+            new_snapshot[domain] = copy.deepcopy(prior_snapshot[domain])
+
+        failed_checks = [
+            f"{check['name']} {check['observed']}/{check['minimum']}"
+            for check in checks
+            if check.get("observed", 0) < check.get("minimum", 1)
+        ]
+        if domain in collection_errors:
+            failed_checks.insert(0, "collector output missing or unreadable")
+
+        source_health[domain] = {
+            "label": DOMAIN_LABELS[domain],
+            "status": "stale" if has_last_known_good else "failed",
+            "checks": checks,
+            "consecutive_failures": previous_failures + 1,
+            "using_last_known_good": has_last_known_good,
+            "detail": "; ".join(failed_checks) or "collector failed",
+            "checked_at": checked_at,
+        }
+        if domain == "niap" and niap_subcollections:
+            source_health[domain]["subcollections"] = niap_subcollections
+        log.warning(
+            "[Health] %s is %s (failure #%d): %s",
+            domain,
+            source_health[domain]["status"],
+            source_health[domain]["consecutive_failures"],
+            source_health[domain]["detail"],
+        )
+
+    new_snapshot["source_health"] = source_health
+    return new_snapshot
+
+
+def _diff_baseline_with_recoveries(old_snapshot: dict, new_snapshot: dict) -> dict:
+    """Baseline a source's first healthy collection instead of alerting it all.
+
+    If the prior snapshot did not meet a domain's minimum checks, there is no
+    trustworthy prior dataset to diff against. Treat the newly healthy data as
+    that domain's baseline; subsequent runs will report real changes normally.
+    """
+    old_checks = _source_health_checks(old_snapshot)
+    new_checks = _source_health_checks(new_snapshot)
+    recovered = {
+        domain for domain in DOMAIN_KEYS
+        if not _checks_pass(old_checks[domain]) and _checks_pass(new_checks[domain])
+    }
+    baseline = copy.deepcopy(old_snapshot)
+    for domain in recovered:
+        baseline[domain] = copy.deepcopy(new_snapshot[domain])
+        log.info(
+            "[Health] %s produced its first healthy collection; baselining without alerts.",
+            domain,
+        )
+
+    # Baseline a newly introduced NIAP subcollection once. A recovery that
+    # already has retained last-known-good data is intentionally *not*
+    # baselined, so changes that happened during the outage are still detected.
+    old_niap = old_snapshot.get("niap", {})
+    new_niap = new_snapshot.get("niap", {})
+    old_subhealth = (
+        old_snapshot.get("source_health", {}).get("niap", {}).get("subcollections", {})
+    )
+    old_collection_metadata = old_niap.get("_collection_health", {})
+    new_subhealth = (
+        new_snapshot.get("source_health", {}).get("niap", {}).get("subcollections", {})
+    )
+    for key in NIAP_SUBCOLLECTION_LABELS:
+        new_ok = new_subhealth.get(key, {}).get("status") == "healthy"
+        old_health = old_subhealth.get(key, {})
+        old_meta = (
+            old_collection_metadata.get(key, {})
+            if isinstance(old_collection_metadata.get(key), dict) else {}
+        )
+        no_trustworthy_baseline = (
+            key not in old_niap
+            or (
+                old_health.get("status") == "failed"
+                and not old_health.get("using_last_known_good")
+            )
+            or (
+                old_meta.get("success") is False
+                and not old_health.get("using_last_known_good")
+            )
+        )
+        if new_ok and no_trustworthy_baseline:
+            baseline.setdefault("niap", {})[key] = copy.deepcopy(new_niap.get(key, []))
+            log.info(
+                "[Health] NIAP %s produced its first healthy collection; "
+                "baselining without alerts.",
+                key,
+            )
+
+    return baseline if recovered or baseline != old_snapshot else old_snapshot
+
 def _rotate_old_files() -> None:
     """Delete snapshot and diff files older than KEEP_SNAPSHOTS days."""
     for pattern in (
@@ -106,7 +491,7 @@ def _empty_snapshot() -> dict:
     return {
         "schema_version": config.SNAPSHOT_SCHEMA_VERSION,
         "collected_at": "",
-        "niap": {"pcl": [], "pps": [], "tds": [], "events": [], "news": []},  # fix #26: removed dead "cctls" key
+        "niap": {"pcl": [], "pps": [], "tds": [], "events": [], "news": [], "policies": []},  # fix #26: removed dead "cctls" key
         "cc_portal": {"news": [], "pps": [], "products": [], "communities": [], "publications": [], "pp_rss": []},
         "cctl_labs": {},
         "csfc":      {"pages": {}, "capability_package_headers": {}, "feeds": {}},
@@ -114,6 +499,7 @@ def _empty_snapshot() -> dict:
         "nist":      {"pages": {}, "cmvp_mip": {"added": [], "removed": [], "status_changes": []}, "feeds": {}},
         "nato":      {"pages": {}, "cisco_added": [], "cisco_removed": []},
         "eucc":      {"pages": {}, "cisco_added": [], "cisco_removed": []},
+        "source_health": {},
     }
 
 # ── Shared alert-firing logic ──────────────────────────────────────────────────────────────────────────
@@ -129,6 +515,40 @@ def _fire_alerts(diff: dict, emailer) -> None:
                  len(diff.get("niap", {}).get("tds", {}).get("added", [])),
                  len(diff.get("niap", {}).get("cisco_ndcpp", {}).get("added", [])))
         return
+    source_health = diff.get("source_health", {})
+    def reached_threshold(health: dict) -> bool:
+        failures = health.get("consecutive_failures", 0)
+        return (
+            health.get("status") in ("stale", "failed")
+            and (
+                failures == 3
+                or (failures >= 7 and failures % 7 == 0)
+            )
+        )
+
+    health_escalations = {}
+    for domain, health in source_health.items():
+        subcollections = health.get("subcollections", {})
+        failed_subcollections = {
+            key: subhealth for key, subhealth in subcollections.items()
+            if subhealth.get("status") in ("stale", "failed")
+        }
+        if failed_subcollections:
+            for key, subhealth in failed_subcollections.items():
+                if reached_threshold(subhealth):
+                    health_escalations[f"{domain}.{key}"] = {
+                        **subhealth,
+                        "label": f"{health.get('label', domain)} — {subhealth.get('label', key)}",
+                    }
+        elif reached_threshold(health):
+            health_escalations[domain] = health
+    if health_escalations:
+        log.warning(
+            "%d source-health issue(s) reached a notification threshold.",
+            len(health_escalations),
+        )
+        emailer.send_source_health_email(health_escalations)
+
     alerts = diff.get("alerts", [])
     if alerts:
         log.warning("%d keyword alert(s) — firing notifications...", len(alerts))
@@ -153,6 +573,7 @@ def _fire_alerts(diff: dict, emailer) -> None:
     new_cisco_csfc_alerts = [
         a for a in diff.get("alerts", [])
         if "CSfC" in a.get("source", "") and
+        a.get("kind") in ("new", "new_cert") and
         any(kw in a.get("title", "").lower() for kw in config.CISCO_VENDOR_KEYWORDS)
     ]
     if new_cisco_csfc_alerts:
@@ -182,11 +603,28 @@ def _fire_alerts(diff: dict, emailer) -> None:
         )
         emailer.send_new_pps_webex(new_pps, pp_sunsets)
 
-    # -- NIAP News items (new announcements) -----------------------------------
-    new_news = diff.get("niap", {}).get("news", {}).get("added", [])
-    if new_news:
-        log.info("%d new NIAP news item(s) — sending Webex notification...", len(new_news))
-        emailer.send_niap_news_webex(new_news)
+    # -- NIAP announcement and policy content changes --------------------------
+    # These are genuine source-content updates, not operational health warnings.
+    # Collector failures remain internal-only via send_source_health_email().
+    niap_content_changes = []
+    niap_diff = diff.get("niap", {})
+    for section, kinds in (
+        ("news", ("added", "revised", "deactivated", "reactivated", "removed")),
+        ("events", ("added", "revised", "deactivated", "reactivated", "removed")),
+        ("policies", ("added", "revised", "archived", "reactivated", "removed")),
+    ):
+        for kind in kinds:
+            for original in niap_diff.get(section, {}).get(kind, []):
+                item = copy.deepcopy(original)
+                item.setdefault("_change_kind", kind)
+                item["_content_type"] = section
+                niap_content_changes.append(item)
+    if niap_content_changes:
+        log.info(
+            "%d NIAP announcement/policy content change(s) — sending Webex notification...",
+            len(niap_content_changes),
+        )
+        emailer.send_niap_news_webex(niap_content_changes)
 
     # -- NIST CMVP MIP changes (fix #27) ------------------------------------------
     cmvp_mip = diff.get("nist", {}).get("cmvp_mip", {})
@@ -220,13 +658,11 @@ def run_daily(output_dir: str = None) -> None:
         sys.exit(0)
 
     try:
-        new_snap = collector.collect_all()
+        new_snap = collector.collect_all(validate=False)
     except collector.SanityError as exc:
         log.error("Snapshot rejected by sanity check: %s", exc)
         log.error("Aborting — no files written.")
         sys.exit(1)
-    _save_json(new_snap, today_path)
-
     prior_path = _latest_prior_snapshot()
     first_run = prior_path is None
     if first_run:
@@ -236,7 +672,17 @@ def run_daily(output_dir: str = None) -> None:
         log.info("Diffing against: %s", prior_path)
         old_snap = _load_json(prior_path)
 
-    diff = differ.compute_diff(old_snap, new_snap)
+    _apply_source_health(new_snap, None if first_run else old_snap)
+    try:
+        collector.validate_snapshot(new_snap)
+    except collector.SanityError as exc:
+        log.error("Snapshot rejected by sanity check after fallback: %s", exc)
+        log.error("Aborting — no files written.")
+        sys.exit(1)
+    _save_json(new_snap, today_path)
+
+    old_for_diff = old_snap if first_run else _diff_baseline_with_recoveries(old_snap, new_snap)
+    diff = differ.compute_diff(old_for_diff, new_snap)
     if first_run:
         log.warning("First run: suppressing all changes from diff (baseline snapshot, not a real diff).")
         def _clear_lists(obj):
@@ -271,9 +717,9 @@ def run_merge(partial_dir: str = "snapshots/partial", output_dir: str = None) ->
     4. Write the full snapshot to snapshots/YYYY-MM-DD.json.
     5. Diff, render dashboard, fire alerts.
 
-    Missing domain files are tolerated with an empty fallback so a single
-    slow/failed matrix job does not block the whole pipeline.  The sanity
-    check in step 3 still catches critically broken snapshots.
+    Missing or suspiciously empty domains use last-known-good data when it is
+    available, so a single slow/failed collector does not create false removal
+    events. Source health metadata keeps that degraded state visible.
     """
     _setup_logging()
     collector, differ, dashboard, emailer = _imports()
@@ -325,15 +771,6 @@ def run_merge(partial_dir: str = "snapshots/partial", output_dir: str = None) ->
         "eucc":      domain_data.get("eucc", {}),
     }
 
-    try:
-        collector.validate_snapshot(new_snap)
-    except collector.SanityError as exc:
-        log.error("[Merge] Snapshot failed sanity check: %s", exc)
-        log.error("[Merge] Aborting — no files written.")
-        sys.exit(1)
-
-    _save_json(new_snap, today_path)
-
     prior_path = _latest_prior_snapshot()
     first_run = prior_path is None
     if first_run:
@@ -343,7 +780,23 @@ def run_merge(partial_dir: str = "snapshots/partial", output_dir: str = None) ->
         log.info("[Merge] Diffing against: %s", prior_path)
         old_snap = _load_json(prior_path)
 
-    diff = differ.compute_diff(old_snap, new_snap)
+    _apply_source_health(
+        new_snap,
+        None if first_run else old_snap,
+        collection_errors=set(missing),
+    )
+
+    try:
+        collector.validate_snapshot(new_snap)
+    except collector.SanityError as exc:
+        log.error("[Merge] Snapshot failed sanity check: %s", exc)
+        log.error("[Merge] Aborting — no files written.")
+        sys.exit(1)
+
+    _save_json(new_snap, today_path)
+
+    old_for_diff = old_snap if first_run else _diff_baseline_with_recoveries(old_snap, new_snap)
+    diff = differ.compute_diff(old_for_diff, new_snap)
     if first_run:
         def _clear_lists(obj):  # fix #23
             if isinstance(obj, list):

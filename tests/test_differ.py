@@ -73,7 +73,7 @@ def _empty_snap():
     return {
         "schema_version": 2,
         "collected_at": "2024-06-01T06:00:00+00:00",
-        "niap": {"pcl": [], "pps": [], "tds": [], "events": [], "news": []},
+        "niap": {"pcl": [], "pps": [], "tds": [], "events": [], "news": [], "policies": []},
         "cc_portal": {"news": [], "pps": [], "products": [], "communities": [], "pp_rss": []},
         "cctl_labs": {},
         "csfc": {"pages": {}, "component_selection_hashes": {}, "feeds": {}},
@@ -82,6 +82,78 @@ def _empty_snap():
         "nato": {"pages": {}, "cisco_products": []},
         "eucc": {"pages": {}, "cisco_certs": []},
     }
+
+
+# ===========================================================================
+# NIAP announcement and policy revisions
+# ===========================================================================
+
+class TestNiapContentDiffs:
+
+    def test_news_revision_detected_for_existing_id(self):
+        old = [{"id": 7, "title": "Policy update", "announcement": "old", "active": True}]
+        new = [{"id": 7, "title": "Policy update", "announcement": "revised", "active": True,
+                "moddate": "2026-07-02T12:00:00Z"}]
+
+        result = differ.diff_niap_news(old, new)
+
+        assert result["added"] == []
+        assert len(result["revised"]) == 1
+        assert result["revised"][0]["_category"] == "POLICY"
+
+    def test_news_deactivation_and_removal_are_distinct(self):
+        old = [
+            {"id": 1, "title": "One", "active": True},
+            {"id": 2, "title": "Two", "active": True},
+        ]
+        new = [{"id": 1, "title": "One", "active": False}]
+
+        result = differ.diff_niap_news(old, new)
+
+        assert [item["id"] for item in result["deactivated"]] == [1]
+        assert [item["id"] for item in result["removed"]] == [2]
+
+    def test_policy_addendum_filename_change_is_revision(self):
+        old = [{
+            "policy_id": 30, "policy_num": 30, "policy_title": "SBOM",
+            "archived": False,
+            "addendums": [{"addendum_num": 1, "filename": "old.pdf"}],
+        }]
+        new = [{
+            "policy_id": 30, "policy_num": 30, "policy_title": "SBOM",
+            "archived": False,
+            "addendums": [{"addendum_num": 1, "filename": "new.pdf"}],
+        }]
+
+        result = differ.diff_niap_policies(old, new)
+
+        assert len(result["revised"]) == 1
+        assert result["archived"] == []
+
+    def test_policy_pdf_hash_change_is_revision(self):
+        old = [{
+            "policy_num": 12, "policy_title": "Continuity",
+            "archived": False, "filename": "policy-12.pdf",
+            "document_sha256": "old-hash",
+        }]
+        new = [{
+            "policy_num": 12, "policy_title": "Continuity",
+            "archived": False, "filename": "policy-12.pdf",
+            "document_sha256": "new-hash",
+        }]
+
+        result = differ.diff_niap_policies(old, new)
+
+        assert len(result["revised"]) == 1
+
+    def test_policy_active_to_archived_is_archive_transition(self):
+        old = [{"policy_id": 5, "policy_num": 5, "policy_title": "Old", "archived": False}]
+        new = [{"policy_id": 5, "policy_num": 5, "policy_title": "Old", "archived": True}]
+
+        result = differ.diff_niap_policies(old, new)
+
+        assert len(result["archived"]) == 1
+        assert result["removed"] == []
 
 
 # ===========================================================================
@@ -130,6 +202,23 @@ class TestFlagAlerts:
         # The page text containing "CSfC" should fire an alert
         matched_kw_flat = [kw for a in diff["alerts"] for kw in a["matched_keywords"]]
         assert any("CSfC" in kw for kw in matched_kw_flat)
+
+    def test_removed_csfc_component_can_trigger_alert(self):
+        diff = _diff_with_alerts([])
+        diff["csfc"] = {
+            "selection_links": {},
+            "feeds": {},
+            "pages": {
+                "apl": {
+                    "added": [],
+                    "removed": [{"text": "Cisco VPN component", "href": ""}],
+                },
+            },
+        }
+
+        alerts = differ.flag_alerts(diff)
+
+        assert any(alert["kind"] == "removed" for alert in alerts)
 
 
 # ===========================================================================
@@ -463,3 +552,14 @@ class TestComputeDiff:
         diff = differ.compute_diff(snap, copy.deepcopy(snap))
         assert "nato" in diff
         assert "eucc" in diff
+
+    def test_source_health_is_carried_into_diff(self):
+        old = _empty_snap()
+        new = copy.deepcopy(old)
+        new["source_health"] = {
+            "nist": {"status": "stale", "consecutive_failures": 3}
+        }
+
+        diff = differ.compute_diff(old, new)
+
+        assert diff["source_health"] == new["source_health"]

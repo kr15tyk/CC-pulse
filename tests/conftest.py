@@ -54,6 +54,7 @@ def _make_snapshot(
             "tds": tds or [],
             "events": [],
             "news": news or [],
+            "policies": [],
         },
         "cc_portal": {"news": [], "pps": [], "products": [], "communities": [], "publications": [], "pp_rss": []},
         "cctl_labs": {},

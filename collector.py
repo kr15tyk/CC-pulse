@@ -14,12 +14,14 @@ Features:
 """
 
 import hashlib
+import copy
 import logging
 import time
 from concurrent.futures import ThreadPoolExecutor, as_completed
 
 import feedparser
 import requests
+from curl_cffi import requests as curl_requests
 from bs4 import BeautifulSoup
 from urllib.parse import urljoin
 from datetime import datetime, timezone
@@ -79,6 +81,16 @@ def _do_get_html(url):
             "(bot-detection, IP reputation, or missing browser headers)",
             url,
         )
+        if url.lower().startswith(config.CSFC_BASE.lower()):
+            log.info("Retrying NSA page with a Chrome-compatible TLS fingerprint...")
+            browser_response = curl_requests.get(
+                url,
+                impersonate="chrome",
+                timeout=30,
+                allow_redirects=True,
+            )
+            browser_response.raise_for_status()
+            return BeautifulSoup(browser_response.text, "lxml")
     r.raise_for_status()
     return BeautifulSoup(r.text, "lxml")
 
@@ -189,6 +201,179 @@ def _poll_doc_headers(doc_dict: dict, domain_tag: str) -> dict:
 
 
 # ── NIAP ──────────────────────────────────────────────────────────────────────
+def _get_browser_json(url: str):
+    """Fetch JSON with a browser TLS fingerprint for NIAP WAF-sensitive APIs."""
+    def _fetch(target: str):
+        response = curl_requests.get(
+            target,
+            impersonate="chrome",
+            timeout=30,
+            allow_redirects=True,
+            headers={"Accept": "application/json"},
+        )
+        response.raise_for_status()
+        return response.json()
+
+    result = _fetch_with_retry(_fetch, url)
+    if result is None:
+        log.warning("browser JSON fetch returning None for %s", url)
+    return result
+
+
+def _get_paginated_results(url: str, fetch_json=None) -> tuple[list[dict], dict]:
+    """Fetch every page from a DRF-style list endpoint.
+
+    The returned metadata deliberately distinguishes a valid empty result from
+    a failed or incomplete request.  The orchestrator uses it to retain only
+    the affected NIAP subcollection's last-known-good data.
+    """
+    fetch_json = fetch_json or get_json
+    items: list[dict] = []
+    seen_urls: set[str] = set()
+    next_url: str | None = url
+    reported_count: int | None = None
+    pages = 0
+
+    while next_url:
+        # NIAP currently emits http:// pagination links even though the public
+        # site is HTTPS.  Normalize them before following the next page.
+        if next_url.startswith("http://www.niap-ccevs.org/"):
+            next_url = "https://www.niap-ccevs.org/" + next_url.split(
+                "http://www.niap-ccevs.org/", 1
+            )[1]
+        if next_url in seen_urls:
+            return items, {
+                "success": False,
+                "complete": False,
+                "observed": len(items),
+                "reported_count": reported_count,
+                "pages": pages,
+                "detail": "pagination loop detected",
+            }
+        seen_urls.add(next_url)
+
+        payload = fetch_json(next_url)
+        if payload is None:
+            return items, {
+                "success": False,
+                "complete": False,
+                "observed": len(items),
+                "reported_count": reported_count,
+                "pages": pages,
+                "detail": "request failed",
+            }
+        pages += 1
+
+        if isinstance(payload, list):
+            page_items = payload
+            next_url = None
+            if reported_count is None:
+                reported_count = len(payload)
+        elif isinstance(payload, dict) and isinstance(payload.get("results"), list):
+            page_items = payload["results"]
+            if reported_count is None and isinstance(payload.get("count"), int):
+                reported_count = payload["count"]
+            next_url = payload.get("next")
+        else:
+            return items, {
+                "success": False,
+                "complete": False,
+                "observed": len(items),
+                "reported_count": reported_count,
+                "pages": pages,
+                "detail": "unexpected response shape",
+            }
+        items.extend(item for item in page_items if isinstance(item, dict))
+
+    complete = reported_count is None or len(items) >= reported_count
+    return items, {
+        "success": complete,
+        "complete": complete,
+        "observed": len(items),
+        "reported_count": reported_count,
+        "pages": pages,
+        "detail": "" if complete else "reported count exceeds collected records",
+    }
+
+
+def _policy_record(record: dict, archived: bool) -> dict:
+    """Return a public policy record annotated with stable document URLs."""
+    policy = copy.deepcopy(record)
+    policy["archived"] = archived
+    filename = policy.get("filename") or policy.get("attachment_file") or ""
+    if filename:
+        policy["url"] = urljoin(config.NIAP_BASE, f"/Policy/{filename}")
+    for addendum in policy.get("addendums") or []:
+        addendum["archived"] = archived
+        addendum_filename = addendum.get("filename") or addendum.get("attachment_file") or ""
+        if addendum_filename:
+            addendum["url"] = urljoin(config.NIAP_BASE, f"/Policy/{addendum_filename}")
+    return policy
+
+
+def _hash_policy_document(url: str) -> str:
+    """Download a NIAP policy PDF and return its full SHA-256 digest."""
+    def _fetch(target: str) -> str:
+        response = curl_requests.get(
+            target,
+            impersonate="chrome",
+            timeout=30,
+            allow_redirects=True,
+        )
+        if response.status_code in (403, 404):
+            log.warning(
+                "[NIAP] Policy document is not publicly retrievable (HTTP %d): %s",
+                response.status_code,
+                target,
+            )
+            return ""
+        response.raise_for_status()
+        return hashlib.sha256(response.content).hexdigest()
+
+    return _fetch_with_retry(_fetch, url) or ""
+
+
+def _attach_policy_document_hashes(policies: list[dict]) -> dict:
+    """Attach full PDF hashes to policy and addendum records in parallel."""
+    targets: dict[str, list[dict]] = {}
+    for policy in policies:
+        if policy.get("url"):
+            targets.setdefault(policy["url"], []).append(policy)
+        for addendum in policy.get("addendums") or []:
+            if addendum.get("url"):
+                targets.setdefault(addendum["url"], []).append(addendum)
+
+    hashes: dict[str, str] = {}
+    if targets:
+        with ThreadPoolExecutor(max_workers=min(8, len(targets)), thread_name_prefix="niap_policy") as executor:
+            futures = {
+                executor.submit(_hash_policy_document, url): url
+                for url in targets
+            }
+            for future in as_completed(futures):
+                url = futures[future]
+                try:
+                    hashes[url] = future.result()
+                except Exception as exc:
+                    log.warning("[NIAP] Policy document hash failed for %s: %s", url, exc)
+                    hashes[url] = ""
+
+    for url, records in targets.items():
+        digest = hashes.get(url, "")
+        if digest:
+            for record in records:
+                record["document_sha256"] = digest
+
+    hashed = sum(1 for digest in hashes.values() if digest)
+    failed = len(targets) - hashed
+    return {
+        "expected_documents": len(targets),
+        "hashed_documents": hashed,
+        "failed_documents": failed,
+        "complete": failed == 0,
+    }
+
+
 def collect_niap():
     log.info("[NIAP] Collecting...")
     base = config.NIAP_BASE
@@ -208,21 +393,68 @@ def collect_niap():
     data["tds"] = tds or []
 
 
+    collection_health = {}
+
     log.info("  Events...")
-    ev_curr = get_json(base + eps["events_curr"])
-    ev_prev = get_json(base + eps["events_prev"])
-    curr = ev_curr.get("results", []) if ev_curr else []
-    prev = ev_prev.get("results", []) if ev_prev else []
-    data["events"] = curr + prev
+    curr, curr_health = _get_paginated_results(base + eps["events_curr"])
+    prev, prev_health = _get_paginated_results(base + eps["events_prev"])
+    event_map = {
+        str(item.get("id")): item
+        for item in curr + prev
+        if item.get("id") is not None
+    }
+    data["events"] = list(event_map.values())
+    collection_health["events"] = {
+        "success": curr_health["success"] and prev_health["success"],
+        "complete": curr_health["complete"] and prev_health["complete"],
+        "observed": len(data["events"]),
+        "detail": "; ".join(filter(None, [curr_health.get("detail"), prev_health.get("detail")])),
+    }
 
     log.info("  News & Announcements...")
-    news_raw = get_json(base + eps["news"])
-    data["news"] = news_raw.get("results", []) if news_raw else []
+    data["news"], collection_health["news"] = _get_paginated_results(base + eps["news"])
+
+    log.info("  Policy Letters...")
+    active_policies, active_health = _get_paginated_results(
+        base + eps["policies_active"], fetch_json=_get_browser_json
+    )
+    archived_policies, archived_health = _get_paginated_results(
+        base + eps["policies_archived"], fetch_json=_get_browser_json
+    )
+    policies = [
+        *(_policy_record(item, False) for item in active_policies),
+        *(_policy_record(item, True) for item in archived_policies),
+    ]
+    policy_map = {
+        f"{item.get('policy_id') or item.get('policy_num')}|{'archived' if item.get('archived') else 'active'}": item
+        for item in policies
+        if item.get("policy_id") is not None or item.get("policy_num") is not None
+    }
+    data["policies"] = list(policy_map.values())
+    document_health = _attach_policy_document_hashes(data["policies"])
+    collection_health["policies"] = {
+        **document_health,
+        # API completeness controls last-known-good fallback. Some historical
+        # archived PDFs are permanently 403/404; retain their metadata while
+        # reporting hash coverage rather than making policies stale forever.
+        "success": active_health["success"] and archived_health["success"],
+        "complete": active_health["complete"] and archived_health["complete"],
+        "observed": len(data["policies"]),
+        "document_hash_complete": document_health["complete"],
+        "detail": "; ".join(filter(None, [
+            active_health.get("detail"), archived_health.get("detail"),
+            (
+                f"{document_health['failed_documents']} policy document hash(es) failed"
+                if document_health["failed_documents"] else ""
+            ),
+        ])),
+    }
+    data["_collection_health"] = collection_health
 
     log.info(
-        "[NIAP] PCL:%d PPs:%d TDs:%d Events:%d News:%d",
+        "[NIAP] PCL:%d PPs:%d TDs:%d Events:%d News:%d Policies:%d",
         len(data["pcl"]), len(data["pps"]), len(data["tds"]),
-        len(data["events"]), len(data["news"]),
+        len(data["events"]), len(data["news"]), len(data["policies"]),
     )
     return data
 
@@ -415,6 +647,17 @@ def validate_snapshot(snapshot):
             csfc_apl_count, config.SANITY_MIN_CSFC_APL,
         )
 
+    csfc_announcements_count = len(
+        snapshot.get("csfc", {}).get("pages", {}).get("announcements", [])
+    )
+    if csfc_announcements_count < config.SANITY_MIN_CSFC_ANNOUNCEMENTS:
+        log.warning(
+            "CSfC Announcements returned only %d items (minimum expected: %d). "
+            "NSA site may be down or blocking — snapshot kept but flagged.",
+            csfc_announcements_count,
+            config.SANITY_MIN_CSFC_ANNOUNCEMENTS,
+        )
+
     crypto_pubs_count = len(
         snapshot.get("cc_crypto", {}).get("pages", {}).get("publications", [])
     )
@@ -437,8 +680,9 @@ def validate_snapshot(snapshot):
 
     log.info(
         "[Validation] Sanity checks passed "
-        "(PCL:%d PPs:%d CSfC-APL:%d CryptoPubs:%d NISTNews:%d).",
-        pcl_count, pps_count, csfc_apl_count, crypto_pubs_count, nist_news_count,
+        "(PCL:%d PPs:%d CSfC-APL:%d CSfC-Announcements:%d CryptoPubs:%d NISTNews:%d).",
+        pcl_count, pps_count, csfc_apl_count, csfc_announcements_count,
+        crypto_pubs_count, nist_news_count,
     )
 
 
@@ -629,9 +873,12 @@ def collect_eucc() -> dict:
 
 
 # ── Master snapshot — parallel collection (fix #16) ──────────────────────────
-def collect_all():
-    """Collect all domains concurrently, validate, and return a timestamped
-    snapshot dict.
+def collect_all(validate: bool = True):
+    """Collect all domains concurrently and return a timestamped snapshot.
+
+    Validation is enabled by default. Orchestrators that can apply a
+    last-known-good fallback may pass ``validate=False`` and validate after
+    fallback selection.
 
     The five top-level collector functions are dispatched in parallel via
     ThreadPoolExecutor (I/O-bound, safe for concurrent HTTP). Each runs
@@ -687,38 +934,81 @@ def collect_all():
         "eucc":           results.get("eucc",      {}),
     }
 
-    validate_snapshot(snapshot)  # raises SanityError on bad NIAP data
+    if validate:
+        validate_snapshot(snapshot)  # raises SanityError on bad NIAP data
     return snapshot
 
 
 # ── CSfC (Commercial Solutions for Classified) ────────────────────────────────
-def _scrape_csfc_page_from_soup(soup) -> list:
-    """Scrape a pre-fetched NSA CSfC page soup and return a list of text/link items.
-    Used by collect_csfc() for the APL page so soup is only fetched once (fix #24).
-    """
+def _extract_csfc_page_items(soup) -> list:
+    """Extract meaningful text/link records, including NSA table rows."""
     if not soup:
         return []
-    items = []
     content = (
-        soup.find("div", {"id": "ContentPane"})
+        soup.find("div", {"id": "dnn_ContentPane"})
+        or soup.find("div", {"id": "ContentPane"})
         or soup.find("main")
         or soup.find("div", class_="field-items")
         or soup
     )
-    for tag in content.find_all(["p", "li", "h2", "h3", "h4"]):
-        text = tag.get_text(separator=" ", strip=True)
+    items = []
+    for tag in content.find_all(["p", "li", "h2", "h3", "h4", "tr"]):
+        if getattr(tag, "name", "") == "tr":
+            cells = [td.get_text(separator=" ", strip=True) for td in tag.find_all("td")]
+            if not cells:
+                continue
+            text = " | ".join(cells)
+        else:
+            text = tag.get_text(separator=" ", strip=True)
         link = tag.find("a")
         href = link["href"] if link and link.get("href") else ""
+        if href:
+            href = urljoin(config.CSFC_BASE, href)
         if len(text) > 15:
-            items.append({"text": text[:400], "href": href})
+            items.append({"text": text[:1000], "href": href})
+
     seen: set = set()
     unique: list = []
     for item in items:
-        key = item["text"][:80]
+        key = item["text"][:240]
         if key not in seen:
             seen.add(key)
             unique.append(item)
     return unique
+
+
+def _scrape_csfc_page_from_soup(soup) -> list:
+    """Scrape a pre-fetched NSA CSfC page soup and return a list of text/link items.
+    Used by collect_csfc() for the APL page so soup is only fetched once (fix #24).
+    """
+    return _extract_csfc_page_items(soup)
+
+
+def _scrape_csfc_announcements(soup) -> list:
+    """Extract only dated rows from the CSfC Announcements table."""
+    if not soup:
+        return []
+    main = soup.find("main") or soup.find("div", {"id": "dnn_ContentPane"}) or soup
+    items = []
+    for table in main.find_all("table"):
+        heading = table.get_text(" ", strip=True)
+        if "CSfC Announcements" not in heading:
+            continue
+        for row in table.find_all("tr"):
+            cells = [cell.get_text(" ", strip=True) for cell in row.find_all("td")]
+            if len(cells) < 2:
+                continue
+            link = row.find("a")
+            href = link["href"] if link and link.get("href") else ""
+            if href:
+                href = urljoin(config.CSFC_BASE, href)
+            items.append({
+                "text": f"{cells[0]} | {cells[1]}"[:1000],
+                "href": href,
+            })
+        if items:
+            break
+    return items
 
 
 def _scrape_csfc_selection_links(soup) -> dict:
@@ -763,28 +1053,7 @@ def _scrape_csfc_page(path: str) -> list:
     soup = get_html(url)
     if not soup:
         return []
-    items = []
-    content = (
-        soup.find("div", {"id": "ContentPane"})
-        or soup.find("main")
-        or soup.find("div", class_="field-items")
-        or soup
-    )
-    for tag in content.find_all(["p", "li", "h2", "h3", "h4"]):
-        text = tag.get_text(separator=" ", strip=True)
-        link = tag.find("a")
-        href = link["href"] if link and link.get("href") else ""
-        if len(text) > 15:
-            items.append({"text": text[:400], "href": href})
-    # Deduplicate by text prefix
-    seen: set = set()
-    unique: list = []
-    for item in items:
-        key = item["text"][:80]
-        if key not in seen:
-            seen.add(key)
-            unique.append(item)
-    return unique
+    return _extract_csfc_page_items(soup)
 
 
 def _parse_csfc_apl_structured(soup) -> list:
@@ -796,17 +1065,29 @@ def _parse_csfc_apl_structured(soup) -> list:
     if not soup:
         return []
     items = []
-    # Try table-based layout first
-    table = soup.find("table")
-    if table:
+    # The Components List has one table per component category.
+    for table in soup.find_all("table"):
         headers = [th.get_text(strip=True).lower() for th in table.find_all("th")]
         for tr in table.find_all("tr")[1:]:
-            cells = [td.get_text(strip=True) for td in tr.find_all("td")]
+            cells = [td.get_text(separator=" ", strip=True) for td in tr.find_all("td")]
             if not cells:
                 continue
             link_tag = tr.find("a")
             href = link_tag["href"] if link_tag and link_tag.get("href") else ""
-            record: dict = {"name": "", "type": "", "vendor": "", "link": href, "raw_text": " | ".join(cells[:4])}
+            if href:
+                href = urljoin(config.CSFC_BASE, href)
+            heading_tag = table.find_previous(["h2", "h3"])
+            category = heading_tag.get_text(" ", strip=True) if heading_tag else ""
+            raw_text = " | ".join(([category] if category else []) + cells)
+            record: dict = {
+                "name": cells[1] if len(cells) > 1 else cells[0],
+                "type": category,
+                "vendor": cells[0],
+                "link": href,
+                "href": href,
+                "raw_text": raw_text,
+                "text": raw_text,
+            }
             for i, h in enumerate(headers):
                 if i >= len(cells):
                     break
@@ -818,8 +1099,8 @@ def _parse_csfc_apl_structured(soup) -> list:
                     record["vendor"] = cells[i]
             if record["name"] or record["raw_text"]:
                 items.append(record)
-        if items:
-            return items
+    if items:
+        return items
     # Fallback: use existing _scrape_csfc_page-style text items, augmented with type detection
     content = (
         soup.find("div", {"id": "ContentPane"})
@@ -855,7 +1136,7 @@ def _parse_csfc_apl_structured(soup) -> list:
 def collect_csfc() -> dict:
     """Collect all CSfC monitoring data:
     - NSA CSfC page snapshots (home, APL, components list, FAQ, etc.)
-    - SHA-256 content hashes of Component Selections PDFs
+    - Component Selection PDF links and version tokens
     - CSfC-tagged RSS / news feeds
     """
     log.info("[CSfC] Collecting...")
@@ -881,13 +1162,17 @@ def collect_csfc() -> dict:
             # fix #24: fetch APL page once; reuse soup for both parsers to avoid
             # double GET on a WAF-protected NSA URL that intermittently 403s.
             apl_soup = get_html(config.CSFC_BASE + path)
-            data["pages"][page_key] = _scrape_csfc_page_from_soup(apl_soup)
             data["apl_structured"] = _parse_csfc_apl_structured(apl_soup)
+            data["pages"][page_key] = data["apl_structured"] or _scrape_csfc_page_from_soup(apl_soup)
             log.debug("    -> %d items, %d structured APL records",
                       len(data["pages"][page_key]), len(data["apl_structured"]))
             # Scrape Component Selection links from the already-fetched APL soup (fix #25)
             data["selection_links"] = _scrape_csfc_selection_links(apl_soup)
             log.debug(" -> %d selection links", len(data["selection_links"]))
+        elif page_key == "announcements":
+            announcements_soup = get_html(config.CSFC_BASE + path)
+            data["pages"][page_key] = _scrape_csfc_announcements(announcements_soup)
+            log.debug("    -> %d dated announcements", len(data["pages"][page_key]))
         else:
             data["pages"][page_key] = _scrape_csfc_page(path)
             log.debug("    -> %d items", len(data["pages"][page_key]))
