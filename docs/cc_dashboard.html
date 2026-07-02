@@ -1091,14 +1091,14 @@ function initEnhancements() {
       const navDiv = document.createElement('div');
       navDiv.className = 'hist-nav';
       navDiv.innerHTML = '<span style="font-size:.75rem;color:var(--muted);font-weight:600">View:</span>' +
-        '<button class="hist-nav-btn active" data-hist-view="week">Last 7 Days</button>' +
+        '<button class="hist-nav-btn" data-hist-view="week">Last 7 Days</button>' +
         '<button class="hist-nav-btn" data-hist-view="month">Last 30 Days</button>' +
-        '<button class="hist-nav-btn" data-hist-view="all">All History</button>';
+        '<button class="hist-nav-btn active" data-hist-view="all">All History</button>';
       navDiv.querySelectorAll('.hist-nav-btn').forEach(function(b) {
         b.addEventListener('click', function() { setHistoryView(b); });
       });
       histSec.insertBefore(navDiv, card);
-      setHistoryView(navDiv.querySelector('[data-hist-view="week"]'));
+      setHistoryView(navDiv.querySelector('[data-hist-view="all"]'));
     }
   }
 }
