@@ -179,7 +179,7 @@
   <span class="nav-title">CC Pulse Dashboard</span>
   <span class="nav-spacer"></span>
   <div class="ham-wrap">
-    <span class="nav-meta">Last run: 2026-07-01 03:31 ET</span>
+    <span class="nav-meta">Last run: 2026-07-02 03:09 ET</span>
     <button class="ham-btn" id="ham-btn" onclick="toggleHamMenu()" aria-expanded="false" aria-haspopup="true" title="Open menu">&#9776;</button>
     <div class="ham-menu" id="ham-menu" role="menu">
       <a class="ham-item" href="https://kr15tyk.github.io/CC-pulse/cc_dashboard.html" role="menuitem"><span class="ham-icon">&#127968;</span>Home</a>
@@ -255,7 +255,7 @@
 <div class="sticky-top">
   <div class="trend-bar">
     <div class="stat"><a href="#sec-niap-pp" onclick="navigateTo('sec-niap-pp');return false;">
-      <div class="stat-num ">0</div>
+      <div class="stat-num active-num">1</div>
       <div class="stat-lbl">NIAP Changes</div>
     </a></div>
     <div class="stat"><a href="#sec-csfc" onclick="navigateTo('sec-csfc');return false;">
@@ -263,11 +263,11 @@
       <div class="stat-lbl">CSfC Selection Updates</div>
     </a></div>
     <div class="stat"><a href="#sec-nist" onclick="navigateTo('sec-nist');return false;">
-      <div class="stat-num active-num">2</div>
+      <div class="stat-num ">0</div>
       <div class="stat-lbl">NIST Doc Updates</div>
     </a></div>
     <div class="stat"><a href="#sec-cc-portal" onclick="navigateTo('sec-cc-portal');return false;">
-      <div class="stat-num active-num">1</div>
+      <div class="stat-num ">0</div>
       <div class="stat-lbl">CC Portal</div>
     </a></div>
     <div class="stat"><a href="#sec-nato" onclick="navigateTo('sec-nato');return false;">
@@ -283,7 +283,7 @@
       <div class="stat-lbl">EUCC Changes</div>
     </a></div>
     <div class="stat"><a href="#sec-alerts" onclick="navigateTo('sec-alerts');return false;">
-      <div class="stat-num alert-num">3</div>
+      <div class="stat-num ">0</div>
       <div class="stat-lbl">Alerts</div>
     </a></div>
   </div>
@@ -309,47 +309,6 @@
       
       
 <!-- Alerts -->
-
-<div class="section-group">
-<div class="card card-alert" id="sec-alerts">
-  <div class="card-hdr" onclick="toggleCard(this)">
-    <span>Alerts</span>
-    <span class="card-count">3 alerts</div>
-</span>
-    <span class="toggle-icon">&#9660;</span>
-  </div>
-  <div class="card-body">
-    <div class="alert-monitoring">FIPS 186-4, FIPS 186-5, NDcPP, CPP_ND, TLS 1.3, SSH, PP-Module_VPN, PP-Module_WLAN, labgram, valgram, emergency, CSfC, Commercial Solutions for Classified, CSfC APL, CSfC component selections, NSA CSfC, NATO NIAPC, NIAPCL, EUCC, ENISA, CCDB-018, Crypto Catalog, cryptography working group, Specification of Functional Requirements for Cryptography, FCS_CKM, FCS_COP, FCS_RBG, CAVP, CMVP, FIPS 140-3, FIPS 203, FIPS 204, FIPS 205, SP 800-131A, SP 800-57, NIST IR 8547, post-quantum cryptography, PQC migration, ML-KEM, ML-DSA, SLH-DSA, algorithm transition, CMVP validated, modules in process</div>
-    
-        <div class="item-row alert-item" data-alert-key="CC Crypto: news-The_DBMS_iTC_has_made_available_their_collaborative_Protection_Profile_and_Supporting_Documents_v2.0_for_Public_Review" data-tab="us">
-          
-          <a class="item-link" href="https://www.commoncriteriaportal.org/news/index.cfm" target="_blank">CC Crypto: news: The DBMS iTC has made available their collaborative Protection Profile and Supporting Documents v2.0 for Public Review</a>
-          
-          <span class="item-meta">publication &middot; </span>
-          <div class="item-sub">New item on CC Crypto news page</div>
-          <button class="dismiss-btn" onclick="dismissAlert(this)" title="Mark as seen">&#10003; Seen</button>
-        </div>
-        
-        <div class="item-row alert-item" data-alert-key="CC Crypto: news-The_DBMS_iTC_has_made_available_for_public_review_their_collaborative_Protection_Profile_and_Supporting_Documents_v2.0_i" data-tab="us">
-          
-          <a class="item-link" href="https://gcc02.safelinks.protection.outlook.com/?url=https%3A%2F%2Fdbms-itc.github.io%2Fpublic-review%2Fv2.0%2F&data=05%7C02%7Cdsteven%40uwe.nsa.gov%7C2f576f871f2e4bc66dfc08ded6039e71%7Cd61e9a6ffc164f848a3e6eeff33e136b%7C0%7C0%7C639183508226262827%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C0%7C%7C%7C&sdata=j5793cIsNtx6PJRPiAH%2BG1RGQ4wHAERulHCLRsu4qHE%3D&reserved=0" target="_blank">CC Crypto: news: The DBMS iTC has made available for public review their collaborative Protection Profile and Supporting Documents v2.0 i</a>
-          
-          <span class="item-meta">publication &middot; </span>
-          <div class="item-sub">New item on CC Crypto news page</div>
-          <button class="dismiss-btn" onclick="dismissAlert(this)" title="Mark as seen">&#10003; Seen</button>
-        </div>
-        
-        <div class="item-row alert-item" data-alert-key="NIST Feed: NIST Cybersecurity Insights Blog-Verifiable_Digital_Credential_Presentment" data-tab="us">
-          
-          <a class="item-link" href="https://www.nist.gov/blogs/cybersecurity-insights/verifiable-digital-credential-presentment" target="_blank">NIST Feed: NIST Cybersecurity Insights Blog: Verifiable Digital Credential Presentment</a>
-          
-          <span class="item-meta">news &middot; </span>
-          <div class="item-sub">Feed: NIST Cybersecurity Insights Blog · Published: Tue, 30 Jun 2026</div>
-          <button class="dismiss-btn" onclick="dismissAlert(this)" title="Mark as seen">&#10003; Seen</button>
-        </div>
-        
-  </div>
-</div>
 
 <div class="tab-nav" id="region-tabs">
         <button class="tab-btn active" data-tab="us" onclick="switchTab(this)">&#127482;&#127480; US (NIAP / CSfC / NIST)</button>
@@ -379,17 +338,23 @@
 </div>
 
   <!-- NIAP In-Evaluation -->
-<div class="card " id="sec-niap-inevaluation" data-has-changes="0">
+<div class="card card-new" id="sec-niap-inevaluation" data-has-changes="1">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>NIAP In-Evaluation Products</span>
-    <span class="card-count">36 active</span>
+    <span class="card-count">1 change</span>
     </span>
   </div>
-  <div class="card-body collapsed">
+  <div class="card-body ">
     
     
+    <div class="sub-hdr sub-removed">Left Evaluation (1)</div>
     
-    <p class="no-change">No evaluation changes detected. 36 products currently in evaluation.</p>
+    <div class="item-row" data-source="niap-inevaluation" data-kind="removed">
+      <span class="item-link">HPE Juniper Networking -- Junos 24.4R2 for MX240/480/960 Routers and EX9204/9208/9214 Switches</span>
+      <span class="item-meta">Completed or Withdrawn</span>
+    </div>
+    
+    
     
   </div>
 </div>
@@ -480,28 +445,16 @@
 <div class="section-group">
   <div class="section-label">Documentation</div>
   <!-- CC Crypto Docs -->
-<div class="card card-updated" id="sec-cc-crypto" data-has-changes="2">
+<div class="card " id="sec-cc-crypto" data-has-changes="0">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>CC Crypto Documentation</span>
-    <span class="card-count">2 updates</span>
+    <span class="card-count">0 updates</span>
     </span>
-    <span class="toggle-icon">&#9660;</span>
+    <span class="toggle-icon">&#9658;</span>
   </div>
-  <div class="card-body ">
+  <div class="card-body collapsed">
     
-      
-      <div class="item-row" data-source="cc-crypto" data-kind="updated">
-        <a class="item-link" href="https://www.commoncriteriaportal.org/" target="_blank">The DBMS iTC has made available their collaborative Protection Profile and Supporting Documents v2.0 for Public Review</a>
-        <span class="item-meta">news</span>
-      </div>
-      
-      <div class="item-row" data-source="cc-crypto" data-kind="updated">
-        <a class="item-link" href="https://gcc02.safelinks.protection.outlook.com/?url=https%3A%2F%2Fdbms-itc.github.io%2Fpublic-review%2Fv2.0%2F&data=05%7C02%7Cdsteven%40uwe.nsa.gov%7C2f576f871f2e4bc66dfc08ded6039e71%7Cd61e9a6ffc164f848a3e6eeff33e136b%7C0%7C0%7C639183508226262827%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C0%7C%7C%7C&sdata=j5793cIsNtx6PJRPiAH%2BG1RGQ4wHAERulHCLRsu4qHE%3D&reserved=0" target="_blank">The DBMS iTC has made available for public review their collaborative Protection Profile and Supporting Documents v2.0 in support of CC:2022. Please visit the iTC review page Public Review Draft 1 for DBMS cPP and Supporting Document Version 2.0 to access the draft documents and supporting information.</a>
-        <span class="item-meta">news</span>
-      </div>
-      
-    
-    
+    <p class="no-change">No changes detected.</p>
   </div>
 </div>
 
@@ -525,26 +478,18 @@
 <div class="section-group">
   <div class="section-label">CC Portal</div>
   <!-- CC Portal (international) -->
-<div class="card card-new" id="sec-cc-portal" data-has-changes="1">
+<div class="card " id="sec-cc-portal" data-has-changes="0">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>CC Portal (International)</span>
-    <span class="card-count">1 new item</span>
+    <span class="card-count">0 new items</span>
     </span>
-    <span class="toggle-icon">&#9660;</span>
+    <span class="toggle-icon">&#9658;</span>
   </div>
-  <div class="card-body ">
-    
-    <div class="sub-hdr sub-new">News (1)</div>
-    
-    <div class="item-row" data-source="cc-portal" data-kind="new">
-      <a class="item-link" href="https://gcc02.safelinks.protection.outlook.com/?url=https%3A%2F%2Fdbms-itc.github.io%2Fpublic-review%2Fv2.0%2F&data=05%7C02%7Cdsteven%40uwe.nsa.gov%7C2f576f871f2e4bc66dfc08ded6039e71%7Cd61e9a6ffc164f848a3e6eeff33e136b%7C0%7C0%7C639183508226262827%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C0%7C%7C%7C&sdata=j5793cIsNtx6PJRPiAH%2BG1RGQ4wHAERulHCLRsu4qHE%3D&reserved=0" target="_blank">The DBMS iTC has made available for public review their collaborative Protection Profile and Supporting Documents v2.0 in support of CC:2022. Please visit the iTC review pagePublic Review Draft 1 for DBMS cPP and Supporting Document Version 2.0to access the draft documents and supporting information.</a>
-      <span class="item-meta"></span>
-    </div>
+  <div class="card-body collapsed">
     
     
     
-    
-    
+    <p class="no-change">No new international items.</p>
   </div>
 </div><!-- NATO NIAPCL -->
         <div class="card " id="sec-nato" data-has-changes="0">
@@ -986,7 +931,7 @@
 </div><!-- /main-content -->
 <footer>
   <span>CC Pulse &middot; Auto-refreshes daily (01:00 EST) &middot; NIAP, CSfC, NIST, CC Portal, NATO NIAPCL, EUCC / ENISA</span>
-  <span>Last run: 2026-07-01 03:31 ET</span>
+  <span>Last run: 2026-07-02 03:09 ET</span>
 </footer>
 
 <script>
