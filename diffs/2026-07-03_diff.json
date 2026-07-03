@@ -142,7 +142,13 @@
   },
   "csfc": {
     "pages": {},
-    "selection_links": {},
+    "selection_links": {
+      "IPsec VPN Gateway": {
+        "changed": true,
+        "old_href": "https://www.nsa.gov/portals/75/documents/resources/everyone/csfc/components-list/selections/vpn-gateways.pdf",
+        "new_href": "https://www.nsa.gov/Portals/75/documents/CSfC Selections Updates 2026/CSfC Selections for IPsec VPN Gateway-2026-06-30.pdf?ver=Bnk8rb63lv3yXoYu9GUEsQ%3d%3d"
+      }
+    },
     "feeds": {}
   },
   "cc_crypto": {
@@ -321,12 +327,23 @@
       "source": "CCTL Labs",
       "kind": "alert",
       "title": "Our First EUCC Certificate",
-      "url": "",
+      "url": "https://www.atsec.com/our-first-eucc-certificate/",
       "detail": "",
       "matched_keywords": [
         "EUCC"
       ],
       "tab": "intl"
+    },
+    {
+      "source": "CSfC Component Selections",
+      "kind": "updated",
+      "title": "IPsec VPN Gateway",
+      "url": "https://www.nsa.gov/Portals/75/documents/CSfC Selections Updates 2026/CSfC Selections for IPsec VPN Gateway-2026-06-30.pdf?ver=Bnk8rb63lv3yXoYu9GUEsQ%3d%3d",
+      "detail": "NSA updated a component selection document for this role",
+      "matched_keywords": [
+        "CSfC"
+      ],
+      "tab": "us"
     }
   ]
 }
