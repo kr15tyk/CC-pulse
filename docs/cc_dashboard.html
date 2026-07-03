@@ -179,7 +179,7 @@
   <span class="nav-title">CC Pulse Dashboard</span>
   <span class="nav-spacer"></span>
   <div class="ham-wrap">
-    <span class="nav-meta">Last run: 2026-07-02 03:09 ET</span>
+    <span class="nav-meta">Last run: 2026-07-03 04:54 ET</span>
     <button class="ham-btn" id="ham-btn" onclick="toggleHamMenu()" aria-expanded="false" aria-haspopup="true" title="Open menu">&#9776;</button>
     <div class="ham-menu" id="ham-menu" role="menu">
       <a class="ham-item" href="https://kr15tyk.github.io/CC-pulse/cc_dashboard.html" role="menuitem"><span class="ham-icon">&#127968;</span>Home</a>
@@ -203,6 +203,7 @@
         <div class="sources-item"><span class="src-label">Protection Profiles:</span><a href="https://www.niap-ccevs.org/api/protection-profile/public_pps_all/" target="_blank" rel="noopener">niap-ccevs.org &mdash; Protection Profiles API</a></div>
         <div class="sources-item"><span class="src-label">Technical Decisions:</span><a href="https://www.niap-ccevs.org/api/technical-decision/frontend_tds/" target="_blank" rel="noopener">niap-ccevs.org &mdash; Technical Decisions API</a></div>
         <div class="sources-item"><span class="src-label">News &amp; Events:</span><a href="https://www.niap-ccevs.org/api/publish/announcements/get_news_frontend/" target="_blank" rel="noopener">niap-ccevs.org &mdash; Announcements API</a></div>
+        <div class="sources-item"><span class="src-label">Policy Letters:</span><a href="https://www.niap-ccevs.org/policies" target="_blank" rel="noopener">niap-ccevs.org &mdash; Policies</a></div>
       </div>
       <div class="sources-group">
         <div class="sources-group-title">🇳🇮 CSfC (Commercial Solutions for Classified)</div>
@@ -255,7 +256,7 @@
 <div class="sticky-top">
   <div class="trend-bar">
     <div class="stat"><a href="#sec-niap-pp" onclick="navigateTo('sec-niap-pp');return false;">
-      <div class="stat-num active-num">1</div>
+      <div class="stat-num active-num">2</div>
       <div class="stat-lbl">NIAP Changes</div>
     </a></div>
     <div class="stat"><a href="#sec-csfc" onclick="navigateTo('sec-csfc');return false;">
@@ -275,7 +276,7 @@
       <div class="stat-lbl">NATO NIAPCL</div>
     </a></div>
     <div class="stat"><a href="#sec-cctl" onclick="navigateTo('sec-cctl');return false;">
-      <div class="stat-num ">0</div>
+      <div class="stat-num active-num">1</div>
       <div class="stat-lbl">CCTL Updates</div>
     </a></div>
     <div class="stat"><a href="#sec-eucc-req" onclick="navigateTo('sec-eucc-req');return false;">
@@ -283,13 +284,12 @@
       <div class="stat-lbl">EUCC Changes</div>
     </a></div>
     <div class="stat"><a href="#sec-alerts" onclick="navigateTo('sec-alerts');return false;">
-      <div class="stat-num ">0</div>
+      <div class="stat-num alert-num">1</div>
       <div class="stat-lbl">Alerts</div>
     </a></div>
   </div>
 </div><!-- /sticky-top -->
 <div class="main-content">
-<!-- Source health summary -->
 <div class="ctrl-bar">
   <button class="ctrl-btn" onclick="expandAll()" title="Expand all cards [E]">[E] Expand All</button>
   <button class="ctrl-btn" onclick="collapseAll()" title="Collapse all cards [C]">[C] Collapse All</button>
@@ -309,6 +309,28 @@
       
       
 <!-- Alerts -->
+
+<div class="section-group">
+<div class="card card-alert" id="sec-alerts">
+  <div class="card-hdr" onclick="toggleCard(this)">
+    <span>Alerts</span>
+    <span class="card-count">1 alert</span>
+    <span class="toggle-icon">&#9660;</span>
+  </div>
+  <div class="card-body">
+    <div class="alert-monitoring">FIPS 186-4, FIPS 186-5, NDcPP, CPP_ND, TLS 1.3, SSH, PP-Module_VPN, PP-Module_WLAN, labgram, valgram, emergency, CSfC, Commercial Solutions for Classified, CSfC APL, CSfC component selections, NSA CSfC, NATO NIAPC, NIAPCL, EUCC, ENISA, CCDB-018, Crypto Catalog, cryptography working group, Specification of Functional Requirements for Cryptography, FCS_CKM, FCS_COP, FCS_RBG, CAVP, CMVP, FIPS 140-3, FIPS 203, FIPS 204, FIPS 205, SP 800-131A, SP 800-57, NIST IR 8547, post-quantum cryptography, PQC migration, ML-KEM, ML-DSA, SLH-DSA, algorithm transition, CMVP validated, modules in process</div>
+    
+        <div class="item-row alert-item" data-alert-key="CCTL Labs-Our_First_EUCC_Certificate" data-tab="intl">
+          
+          <span class="item-link">CCTL Labs: Our First EUCC Certificate</span>
+          
+          <span class="item-meta">alert &middot; EUCC</span>
+          
+          <button class="dismiss-btn" onclick="dismissAlert(this)" title="Mark as seen">&#10003; Seen</button>
+        </div>
+        
+  </div>
+</div>
 
 <div class="tab-nav" id="region-tabs">
         <button class="tab-btn active" data-tab="us" onclick="switchTab(this)">&#127482;&#127480; US (NIAP / CSfC / NIST)</button>
@@ -333,24 +355,29 @@
     
     
     
-    <p class="no-change">No changes detected. <span class="last-active">(last: 2026-05-16)</span></p>
+    <p class="no-change">No changes detected. <span class="last-active">(last: 2026-06-30)</span></p>
   </div>
 </div>
 
   <!-- NIAP In-Evaluation -->
-<div class="card card-new" id="sec-niap-inevaluation" data-has-changes="1">
+<div class="card card-new" id="sec-niap-inevaluation" data-has-changes="2">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>NIAP In-Evaluation Products</span>
-    <span class="card-count">1 change</span>
+    <span class="card-count">2 changes</span>
     </span>
   </div>
   <div class="card-body ">
     
     
-    <div class="sub-hdr sub-removed">Left Evaluation (1)</div>
+    <div class="sub-hdr sub-removed">Left Evaluation (2)</div>
     
     <div class="item-row" data-source="niap-inevaluation" data-kind="removed">
-      <span class="item-link">HPE Juniper Networking -- Junos 24.4R2 for MX240/480/960 Routers and EX9204/9208/9214 Switches</span>
+      <span class="item-link">Cigent Technology, Inc. -- Cigent Technology, Inc. Secure SSD U.2 and E3.S Self Encrypting Drives</span>
+      <span class="item-meta">Completed or Withdrawn</span>
+    </div>
+    
+    <div class="item-row" data-source="niap-inevaluation" data-kind="removed">
+      <span class="item-link">RUCKUS Wireless LLC -- RUCKUS SmartZone Controller and Access Points, R7.1</span>
       <span class="item-meta">Completed or Withdrawn</span>
     </div>
     
@@ -359,20 +386,64 @@
   </div>
 </div>
 
-  <!-- NIAP News -->
+  <!-- NIAP announcements and events -->
 <div class="card " id="sec-niap-news" data-has-changes="0">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>NIAP News &amp; Announcements</span>
-    <span class="card-count">0 new items</span>
+    <span class="card-count">0 changes</span>
     </span>
     <span class="toggle-icon">&#9658;</span>
   </div>
   <div class="card-body collapsed">
     
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
     
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
     
+    <p class="no-change">No announcement or event changes.</p>
+  </div>
+</div>
+
+  <!-- NIAP policy letters -->
+<div class="card " id="sec-niap-policies" data-has-changes="0">
+  <div class="card-hdr" onclick="toggleCard(this)">
+    <span>NIAP Policy Letters</span>
+    <span class="card-count">0 changes</span>
+    <span class="toggle-icon">&#9658;</span>
+  </div>
+  <div class="card-body collapsed">
     
-    <p class="no-change">No new items.</p>
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+    <p class="no-change">No policy-letter changes.</p>
   </div>
 </div>
 
@@ -387,7 +458,7 @@
     
     
     
-    <p class="no-change">No changes detected. <span class="last-active">(last: 2026-05-16)</span></p>
+    <p class="no-change">No changes detected. <span class="last-active">(last: 2026-06-30)</span></p>
   </div>
 </div>
 
@@ -404,7 +475,7 @@
     
     
     
-    <p class="no-change">No changes detected. <span class="last-active">(last: 2026-05-16)</span></p>
+    <p class="no-change">No changes detected.</p>
   </div>
 </div>
 
@@ -419,7 +490,7 @@
   <div class="card-body collapsed">
     
     
-    <p class="no-change">No changes detected. <span class="last-active">(last: 2026-05-16)</span></p>
+    <p class="no-change">No changes detected.</p>
   </div>
 </div>
 </div>
@@ -427,15 +498,16 @@
 
 <div class="section-group">
   <div class="section-label">CSfC</div>
-  <!-- CSfC Component Selections -->
+  <!-- CSfC Components, Announcements, and Selection Documents -->
 <div class="card " id="sec-csfc" data-has-changes="0">
   <div class="card-hdr" onclick="toggleCard(this)">
-    <span>CSfC Component Selections</span>
+    <span>CSfC Components &amp; Announcements</span>
     <span class="card-count">0 updates</span>
     </span>
     <span class="toggle-icon">&#9658;</span>
   </div>
   <div class="card-body collapsed">
+    
     
     <p class="no-change">No changes detected.</p>
   </div>
@@ -454,7 +526,7 @@
   </div>
   <div class="card-body collapsed">
     
-    <p class="no-change">No changes detected.</p>
+    <p class="no-change">No changes detected. <span class="last-active">(last: 2026-07-01)</span></p>
   </div>
 </div>
 
@@ -508,16 +580,34 @@
 <div class="section-group">
   <div class="section-label">CCTL</div>
   <!-- CCTL Updates -->
-<div class="card " id="sec-cctl" data-has-changes="0">
+<div class="card card-new" id="sec-cctl" data-has-changes="1">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>CCTL Updates</span>
-    <span class="card-count">0 new items</span>
+    <span class="card-count">1 new item</span>
     </span>
     <span class="toggle-icon collapsed">▼</span>
   </div>
-  <div class="card-body collapsed">
+  <div class="card-body ">
     
-    <p class="no-change">No new items.</p>
+    
+    <div class="lab-row">
+      <div class="lab-hdr" onclick="toggleLab(this)">
+        <span class="lab-name">atsec</span>
+        <span class="lab-cnt">1 item</span>
+        <span class="lab-toggle">▼</span>
+      </div>
+      <div class="lab-body collapsed">
+        
+        <div class="item-row" data-source="cctl" data-kind="new">
+          <a class="item-link" href="https://www.atsec.com/our-first-eucc-certificate/" target="_blank">Our First EUCC Certificate</a>
+          <span class="item-meta"></span>
+        </div>
+        
+      </div>
+    </div>
+    
+    
+    
   </div>
 </div>
 </div>      
@@ -560,7 +650,7 @@
 <div class="card card-new" id="sec-history" data-has-changes="1">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>Change History</span>
-    <span class="card-count">31 events</span>
+    <span class="card-count">29 events</span>
     <span class="toggle-icon">▼</span>
   </div>
   <div class="card-body">
@@ -580,344 +670,322 @@
     <div class="timeline" id="history-timeline">
     
       
-      <div class="tl-entry" data-cat="td_new">
-        <div class="tl-date">2026-05-16</div>
+      <div class="tl-entry" data-cat="niap_news">
+        <div class="tl-date">2026-06-30</div>
         <div class="tl-body">
           <div class="tl-title">
             <span class="tl-badge new">new</span>
-            <a href="https://www.niap-ccevs.org/technical-decisions/TD0919" target="_blank">New TD: TD0919</a>
-          </div>
-          <div class="tl-detail">FDP_ACF_EXT.1 Clarifications</div>
-        </div>
-      </div>
-      
-      <div class="tl-entry" data-cat="pcl_cert">
-        <div class="tl-date">2026-05-16</div>
-        <div class="tl-body">
-          <div class="tl-title">
-            <span class="tl-badge new">new</span>
-            <a href="https://www.niap-ccevs.org/products/2026.1171" target="_blank">Belkin International, Inc. — Belkin F1DN102KVM-UN-4, F1DN102KVM-UN4Z, F1DN102KVM-UN4C, F1DN202KVM-UN-4, F1DN202KVM-UN4Z, F1DN202KVM-UN4C, F1DN104KVM-UN-4, F1DN104KVM-UN4Z, F1DN104KVM-UN4C, F1DN104KVM-UN4W, F1DN204KVM-UN-4, F1DN204KVM-UN4Z, F1DN204KVM-UN4C, F1DN204KVM-UN4W, F1DN204KVM-UN4M, F1DN108KVM-UN-4, F1DN108KVM-UN4Z, F1DN108KVM-UN4W, F1DN208KVM-UN-4, F1DN208KVM-UN4Z, F1DN208KVM-UN4W, F1DN116KVM-UN-4 Firmware Version 44444-E7E7</a>
-          </div>
-          <div class="tl-detail">Certified 2026-04-24 · EWA - Canada · PP_PSD_V4.0, MOD_AO_V1.0, MOD_UA_V1.0, MOD_KM_V1.0, MOD_VI_V1.0</div>
-        </div>
-      </div>
-      
-      <div class="tl-entry" data-cat="pcl_cert">
-        <div class="tl-date">2026-05-16</div>
-        <div class="tl-body">
-          <div class="tl-title">
-            <span class="tl-badge new">new</span>
-            <a href="https://www.niap-ccevs.org/products/2026.1044" target="_blank">F5 Networks, Inc. — F5 BIG-IP 17.5.0 including APM</a>
-          </div>
-          <div class="tl-detail">Certified 2026-02-10 · atsec information security AB · CPP_ND_V3.0E</div>
-        </div>
-      </div>
-      
-      <div class="tl-entry" data-cat="pcl_cert">
-        <div class="tl-date">2026-05-16</div>
-        <div class="tl-body">
-          <div class="tl-title">
-            <span class="tl-badge new">new</span>
-            <a href="https://www.niap-ccevs.org/products/2026.1117" target="_blank">F5 Networks, Inc. — F5 BIG-IP 17.5.0 including SSLO</a>
-          </div>
-          <div class="tl-detail">Certified 2026-02-26 · atsec information security AB · PKG_SSH_V1.0, MOD_STIP_V1.1, CPP_ND_V3.0E</div>
-        </div>
-      </div>
-      
-      <div class="tl-entry" data-cat="cisco_archived">
-        <div class="tl-date">2026-05-15</div>
-        <div class="tl-body">
-          <div class="tl-title">
-            <span class="tl-badge removed">removed</span>
-            <a href="https://www.niap-ccevs.org/" target="_blank">Archived: Cisco Catalyst Industrial Ethernet 3200, 3300, 3400, 3400H (IE3x00) Rugged Series Switches running IOS-XE 17.12</a>
+            <a href="https://www.niap-ccevs.org/announcements" target="_blank">NIAP New added: NIAP's First Quarter 2026 Progress Report</a>
           </div>
           
         </div>
       </div>
       
-      <div class="tl-entry" data-cat="td_new">
-        <div class="tl-date">2026-05-14</div>
+      <div class="tl-entry" data-cat="pcl_cert">
+        <div class="tl-date">2026-06-30</div>
         <div class="tl-body">
           <div class="tl-title">
             <span class="tl-badge new">new</span>
-            <a href="https://www.niap-ccevs.org/technical-decisions/TD1039" target="_blank">New TD: TD1039</a>
+            <a href="https://www.niap-ccevs.org/products/11696" target="_blank">Apple Inc. — Apple macOS 26 Tahoe: FileVault</a>
           </div>
-          <div class="tl-detail">Addition of MOD_LiFi_AS_V1.0 to Conformance Claims</div>
-        </div>
-      </div>
-      
-      <div class="tl-entry" data-cat="td_new">
-        <div class="tl-date">2026-05-14</div>
-        <div class="tl-body">
-          <div class="tl-title">
-            <span class="tl-badge new">new</span>
-            <a href="https://www.niap-ccevs.org/technical-decisions/TD1019" target="_blank">New TD: TD1019</a>
-          </div>
-          <div class="tl-detail">Removal of Physical Attack for CSfC EUD Use Case</div>
-        </div>
-      </div>
-      
-      <div class="tl-entry" data-cat="td_new">
-        <div class="tl-date">2026-05-14</div>
-        <div class="tl-body">
-          <div class="tl-title">
-            <span class="tl-badge new">new</span>
-            <a href="https://www.niap-ccevs.org/technical-decisions/TD0994" target="_blank">New TD: TD0994</a>
-          </div>
-          <div class="tl-detail">Addition of FCS_COP.1/XOF to PP_APP_V2.0</div>
-        </div>
-      </div>
-      
-      <div class="tl-entry" data-cat="td_new">
-        <div class="tl-date">2026-05-14</div>
-        <div class="tl-body">
-          <div class="tl-title">
-            <span class="tl-badge new">new</span>
-            <a href="https://www.niap-ccevs.org/technical-decisions/TD1040" target="_blank">New TD: TD1040</a>
-          </div>
-          <div class="tl-detail">Corrections to Conformance Claims</div>
+          <div class="tl-detail">Certified  · atsec information security corporation · CPP_FDE_AA_V2.0E, CPP_FDE_EE_V2.0E</div>
         </div>
       </div>
       
       <div class="tl-entry" data-cat="pcl_cert">
-        <div class="tl-date">2026-05-12</div>
+        <div class="tl-date">2026-06-27</div>
         <div class="tl-body">
           <div class="tl-title">
             <span class="tl-badge new">new</span>
-            <a href="https://www.niap-ccevs.org/products/2026.1157" target="_blank">Juniper Networks, Inc. — Juniper SRX Series and vSRX for Junos OS 24.4R1</a>
+            <a href="https://www.niap-ccevs.org/products/2026.1213" target="_blank">FUJIFILM Business Innovation Corp. — FUJIFILM Apeos C4030 / C3530 models with Copy, Print, Fax, Scan and Overwrite Storage Controller ROM Ver. 1.50.5</a>
           </div>
-          <div class="tl-detail">Certified 2026-03-30 · Teron Labs · MOD_CPP_FW_v1.4e, PKG_SSH_V1.0, MOD_IPS_V1.0, MOD_VPNGW_v1.3, CPP_ND_V3.0E</div>
-        </div>
-      </div>
-      
-      <div class="tl-entry" data-cat="cisco_cert">
-        <div class="tl-date">2026-05-08</div>
-        <div class="tl-body">
-          <div class="tl-title">
-            <span class="tl-badge new">new</span>
-            <a href="https://www.niap-ccevs.org/products/11662" target="_blank">Cisco Systems, Inc. — Cisco Embedded Services 9300 and 3300 Series Switches (ESS9300 & ESS3300) running IOS-XE 17.15</a>
-          </div>
-          <div class="tl-detail">Certified 2026-04-11 · Gossamer Security Solutions · PKG_SSH_V1.0, MOD_MACSEC_V1.0, CPP_ND_V3.0E</div>
-        </div>
-      </div>
-      
-      <div class="tl-entry" data-cat="td_new">
-        <div class="tl-date">2026-05-07</div>
-        <div class="tl-body">
-          <div class="tl-title">
-            <span class="tl-badge new">new</span>
-            <a href="https://www.niap-ccevs.org/technical-decisions/TD1038" target="_blank">New TD: TD1038</a>
-          </div>
-          <div class="tl-detail">Corrections to Application Notes Regarding Extended Master Secret Extension</div>
-        </div>
-      </div>
-      
-      <div class="tl-entry" data-cat="td_new">
-        <div class="tl-date">2026-05-07</div>
-        <div class="tl-body">
-          <div class="tl-title">
-            <span class="tl-badge new">new</span>
-            <a href="https://www.niap-ccevs.org/technical-decisions/TD1037" target="_blank">New TD: TD1037</a>
-          </div>
-          <div class="tl-detail">Corrections to MOD_ESC_V2.0</div>
+          <div class="tl-detail">Certified 2026-05-14 · Information Technology Security Center Evaluation Department · PP_HCD_V1.0</div>
         </div>
       </div>
       
       <div class="tl-entry" data-cat="pcl_cert">
-        <div class="tl-date">2026-05-07</div>
+        <div class="tl-date">2026-06-27</div>
         <div class="tl-body">
           <div class="tl-title">
             <span class="tl-badge new">new</span>
-            <a href="https://www.niap-ccevs.org/products/2026.1160" target="_blank">Xerox Corporation — Xerox® VersaLink™ C415 / B415 / C625 / B625 with eMMC</a>
+            <a href="https://www.niap-ccevs.org/products/11728" target="_blank">Cisco Systems, Inc. — Cisco Catalyst 9200/9200L Series Switches 17.18</a>
           </div>
-          <div class="tl-detail">Certified 2026-03-26 · Lightship Security · CPP_HCD_V1.0E</div>
+          <div class="tl-detail">Certified  · Gossamer Security Solutions · PKG_SSH_V1.0, MOD_MACSEC_V1.0, CPP_ND_V3.0E</div>
         </div>
       </div>
       
       <div class="tl-entry" data-cat="pcl_cert">
-        <div class="tl-date">2026-05-07</div>
+        <div class="tl-date">2026-06-27</div>
         <div class="tl-body">
           <div class="tl-title">
             <span class="tl-badge new">new</span>
-            <a href="https://www.niap-ccevs.org/products/2026.1159" target="_blank">Ricoh Company, Ltd. — RICOH IM C2510/C3010/C3510/C4510/C6010 Enhanced Security Firmware, version E-1.00-H</a>
+            <a href="https://www.niap-ccevs.org/products/11729" target="_blank">Cisco Systems, Inc. — Cisco Catalyst 9300/9300L/9300LM/9400/9500/9600 Series Switches 17.18</a>
           </div>
-          <div class="tl-detail">Certified 2026-03-26 · Lightship Security · CPP_HCD_V1.0E</div>
+          <div class="tl-detail">Certified  · Gossamer Security Solutions · PKG_SSH_V1.0, MOD_MACSEC_V1.0, CPP_ND_V3.0E</div>
         </div>
       </div>
       
       <div class="tl-entry" data-cat="pcl_cert">
-        <div class="tl-date">2026-05-02</div>
+        <div class="tl-date">2026-06-26</div>
         <div class="tl-body">
           <div class="tl-title">
             <span class="tl-badge new">new</span>
-            <a href="https://www.niap-ccevs.org/products/2026.1161" target="_blank">Xerox Corporation — Xerox® VersaLink™ C415 / B415 / C625 / B625 with HDD</a>
+            <a href="https://www.niap-ccevs.org/products/11695" target="_blank">Apple Inc. — Apple macOS 26 Tahoe</a>
           </div>
-          <div class="tl-detail">Certified 2026-03-27 · Lightship Security · CPP_HCD_V1.0E</div>
+          <div class="tl-detail">Certified  · atsec information security corporation · MOD_BT_V1.0, PKG_TLS_V1.1, MOD_WLANC_v1.0, PP_OS_V4.3</div>
+        </div>
+      </div>
+      
+      <div class="tl-entry" data-cat="td_new">
+        <div class="tl-date">2026-06-25</div>
+        <div class="tl-body">
+          <div class="tl-title">
+            <span class="tl-badge new">new</span>
+            <a href="https://www.niap-ccevs.org/technical-decisions/TD1049" target="_blank">New TD: TD1049</a>
+          </div>
+          <div class="tl-detail">Consistency Rationale for Assumptions in MOD_FEEM_V2.0</div>
+        </div>
+      </div>
+      
+      <div class="tl-entry" data-cat="td_new">
+        <div class="tl-date">2026-06-25</div>
+        <div class="tl-body">
+          <div class="tl-title">
+            <span class="tl-badge new">new</span>
+            <a href="https://www.niap-ccevs.org/technical-decisions/TD1048" target="_blank">New TD: TD1048</a>
+          </div>
+          <div class="tl-detail">Consistency Rationale for Assumptions in MOD_FE_V2.0</div>
+        </div>
+      </div>
+      
+      <div class="tl-entry" data-cat="td_new">
+        <div class="tl-date">2026-06-25</div>
+        <div class="tl-body">
+          <div class="tl-title">
+            <span class="tl-badge new">new</span>
+            <a href="https://www.niap-ccevs.org/technical-decisions/TD1050" target="_blank">New TD: TD1050</a>
+          </div>
+          <div class="tl-detail">Clarification to App Note for FPT_LIB_EXT.1.1</div>
+        </div>
+      </div>
+      
+      <div class="tl-entry" data-cat="td_new">
+        <div class="tl-date">2026-06-24</div>
+        <div class="tl-body">
+          <div class="tl-title">
+            <span class="tl-badge new">new</span>
+            <a href="https://www.niap-ccevs.org/technical-decisions/TD1047" target="_blank">New TD: TD1047</a>
+          </div>
+          <div class="tl-detail">Correction to FAU_SAA.1 Test 11</div>
+        </div>
+      </div>
+      
+      <div class="tl-entry" data-cat="td_new">
+        <div class="tl-date">2026-06-24</div>
+        <div class="tl-body">
+          <div class="tl-title">
+            <span class="tl-badge new">new</span>
+            <a href="https://www.niap-ccevs.org/technical-decisions/TD1042" target="_blank">New TD: TD1042</a>
+          </div>
+          <div class="tl-detail">FIT Technical Decision: Replacing FIPS 186-4 with 186-5</div>
         </div>
       </div>
       
       <div class="tl-entry" data-cat="pcl_cert">
-        <div class="tl-date">2026-05-01</div>
+        <div class="tl-date">2026-06-24</div>
         <div class="tl-body">
           <div class="tl-title">
             <span class="tl-badge new">new</span>
-            <a href="https://www.niap-ccevs.org/products/11692" target="_blank">Broadcom — Carbon Black Endpoint Detection and Response (EDR) System</a>
+            <a href="https://www.niap-ccevs.org/products/11675" target="_blank">Cisco Systems, Inc. — Cisco Catalyst 9800 Series Wireless Controllers and Access Points 17.18</a>
           </div>
-          <div class="tl-detail">Certified  · Booz Allen Hamilton Common Criteria Testing Laboratory · MOD_EDR_V1.0, MOD_HA_V1.0, PP_APP_v1.4</div>
-        </div>
-      </div>
-      
-      <div class="tl-entry" data-cat="td_new">
-        <div class="tl-date">2026-04-29</div>
-        <div class="tl-body">
-          <div class="tl-title">
-            <span class="tl-badge new">new</span>
-            <a href="https://www.niap-ccevs.org/technical-decisions/TD1031" target="_blank">New TD: TD1031</a>
-          </div>
-          <div class="tl-detail">Addition of PP_APP_V1.4 to Base-PPs</div>
-        </div>
-      </div>
-      
-      <div class="tl-entry" data-cat="td_new">
-        <div class="tl-date">2026-04-28</div>
-        <div class="tl-body">
-          <div class="tl-title">
-            <span class="tl-badge new">new</span>
-            <a href="https://www.niap-ccevs.org/technical-decisions/TD1035" target="_blank">New TD: TD1035</a>
-          </div>
-          <div class="tl-detail">Correction to Appendix E reference in FPT_TST.1 TSS Activity</div>
-        </div>
-      </div>
-      
-      <div class="tl-entry" data-cat="td_new">
-        <div class="tl-date">2026-04-25</div>
-        <div class="tl-body">
-          <div class="tl-title">
-            <span class="tl-badge new">new</span>
-            <a href="https://www.niap-ccevs.org/technical-decisions/TD1034" target="_blank">New TD: TD1034</a>
-          </div>
-          <div class="tl-detail">Clarification on RFC 8784 in FIA_PSK_EXT.1</div>
-        </div>
-      </div>
-      
-      <div class="tl-entry" data-cat="td_new">
-        <div class="tl-date">2026-04-25</div>
-        <div class="tl-body">
-          <div class="tl-title">
-            <span class="tl-badge new">new</span>
-            <a href="https://www.niap-ccevs.org/technical-decisions/TD1027" target="_blank">New TD: TD1027</a>
-          </div>
-          <div class="tl-detail">Clarification on RFC 8784 in FIA_PSK_EXT.1</div>
+          <div class="tl-detail">Certified  · Lightship Security USA, Inc. · PKG_SSH_V1.0, MOD_WLAN_AS_v1.0, CPP_ND_V3.0E</div>
         </div>
       </div>
       
       <div class="tl-entry" data-cat="pcl_cert">
-        <div class="tl-date">2026-04-25</div>
+        <div class="tl-date">2026-06-24</div>
         <div class="tl-body">
           <div class="tl-title">
             <span class="tl-badge new">new</span>
-            <a href="https://www.niap-ccevs.org/products/2026.1141" target="_blank">SUSE LLC — SUSE Linux Enterprise Server, Version 15 SP4</a>
+            <a href="https://www.niap-ccevs.org/products/2026.1186" target="_blank">Cogito Group — Cogito Jellyfish Certificate Authority Version 7.0</a>
           </div>
-          <div class="tl-detail">Certified 2026-01-27 · atsec information security GmbH Prüfstelle für IT-Sicherheit · PP_BASE_VIRTUALIZATION_V1.1, MOD_SV_V1.1, PKG_SSH_V1.0</div>
+          <div class="tl-detail">Certified 2026-04-29 · Viden Labs · PP_CA_V2.1</div>
         </div>
       </div>
       
       <div class="tl-entry" data-cat="pcl_cert">
-        <div class="tl-date">2026-04-24</div>
+        <div class="tl-date">2026-06-18</div>
         <div class="tl-body">
           <div class="tl-title">
             <span class="tl-badge new">new</span>
-            <a href="https://www.niap-ccevs.org/products/2026.1146" target="_blank">SUSE LLC — SUSE Linux Enterprise Server, Version 15 SP7</a>
+            <a href="https://www.niap-ccevs.org/products/11701" target="_blank">Red Hat, Inc. — Red Hat Enterprise Linux 9.6</a>
           </div>
-          <div class="tl-detail">Certified 2026-02-24 · atsec information security GmbH Prüfstelle für IT-Sicherheit · PKG_TLS_V1.1, PKG_SSH_V1.0, PP_OS_V4.3</div>
-        </div>
-      </div>
-      
-      <div class="tl-entry" data-cat="pp_new">
-        <div class="tl-date">2026-04-23</div>
-        <div class="tl-body">
-          <div class="tl-title">
-            <span class="tl-badge new">new</span>
-            <a href="https://www.niap-ccevs.org/Profile/PP.cfm?id=539" target="_blank">New PP: PP_GPCP_V2.0</a>
-          </div>
-          <div class="tl-detail">Protection Profile for General Purpose Computing Platform, Version 2.0</div>
-        </div>
-      </div>
-      
-      <div class="tl-entry" data-cat="td_new">
-        <div class="tl-date">2026-04-23</div>
-        <div class="tl-body">
-          <div class="tl-title">
-            <span class="tl-badge new">new</span>
-            <a href="https://www.niap-ccevs.org/technical-decisions/TD1033" target="_blank">New TD: TD1033</a>
-          </div>
-          <div class="tl-detail">Sunset Dates for NDcPP Configurations</div>
-        </div>
-      </div>
-      
-      <div class="tl-entry" data-cat="td_new">
-        <div class="tl-date">2026-04-23</div>
-        <div class="tl-body">
-          <div class="tl-title">
-            <span class="tl-badge new">new</span>
-            <a href="https://www.niap-ccevs.org/technical-decisions/TD1032" target="_blank">New TD: TD1032</a>
-          </div>
-          <div class="tl-detail">Corrections to Application Notes for FTP_ITC.1 Iterations</div>
-        </div>
-      </div>
-      
-      <div class="tl-entry" data-cat="td_new">
-        <div class="tl-date">2026-04-23</div>
-        <div class="tl-body">
-          <div class="tl-title">
-            <span class="tl-badge new">new</span>
-            <a href="https://www.niap-ccevs.org/technical-decisions/TD1030" target="_blank">New TD: TD1030</a>
-          </div>
-          <div class="tl-detail">Correction to FCS_MAC_EXT.2 TSS Activity When FPT_RPL_EXT.1 is Claimed</div>
-        </div>
-      </div>
-      
-      <div class="tl-entry" data-cat="pp_new">
-        <div class="tl-date">2026-04-22</div>
-        <div class="tl-body">
-          <div class="tl-title">
-            <span class="tl-badge new">new</span>
-            <a href="https://www.niap-ccevs.org/Profile/PP.cfm?id=542" target="_blank">New PP: MOD_SDN-Controller_v1.0</a>
-          </div>
-          <div class="tl-detail">PP-Module for SDN Controller Version 1.0</div>
+          <div class="tl-detail">Certified  · Lightship Security USA, Inc. · PKG_TLS_V1.1, PKG_SSH_V1.0, PP_OS_V4.3</div>
         </div>
       </div>
       
       <div class="tl-entry" data-cat="pcl_cert">
-        <div class="tl-date">2026-04-22</div>
+        <div class="tl-date">2026-06-17</div>
         <div class="tl-body">
           <div class="tl-title">
             <span class="tl-badge new">new</span>
-            <a href="https://www.niap-ccevs.org/products/11700" target="_blank">HPE Juniper Networking — Junos 24.4R2 FOR MX240/480/960 Routers and EX9204/9208/9214 Switches</a>
+            <a href="https://www.niap-ccevs.org/products/11651" target="_blank">Red Hat, Inc. — Red Hat Enterprise Linux 10.0</a>
           </div>
-          <div class="tl-detail">Certified  · Acumen Security · PKG_SSH_V1.0, MOD_MACSEC_V1.0, CPP_ND_V3.0E</div>
-        </div>
-      </div>
-      
-      <div class="tl-entry" data-cat="pp_new">
-        <div class="tl-date">2026-04-21</div>
-        <div class="tl-body">
-          <div class="tl-title">
-            <span class="tl-badge new">new</span>
-            <a href="https://www.niap-ccevs.org/Profile/PP.cfm?id=541" target="_blank">New PP: MOD_MACSEC_V2.0</a>
-          </div>
-          <div class="tl-detail">PP-Module for MACsec Ethernet Encryption Version 2.0</div>
+          <div class="tl-detail">Certified  · Lightship Security USA, Inc. · PKG_TLS_V1.1, PKG_SSH_V1.0, PP_OS_V4.3</div>
         </div>
       </div>
       
       <div class="tl-entry" data-cat="pcl_cert">
-        <div class="tl-date">2026-04-21</div>
+        <div class="tl-date">2026-06-16</div>
         <div class="tl-body">
           <div class="tl-title">
             <span class="tl-badge new">new</span>
-            <a href="https://www.niap-ccevs.org/products/2026.1096" target="_blank">Northrop Grumman Corporation — Ad Noctem Connect 2.3</a>
+            <a href="https://www.niap-ccevs.org/products/11705" target="_blank">Getac Technology Corp. — Getac Devices on Android 15</a>
           </div>
-          <div class="tl-detail">Certified 2026-02-26 · Teron Labs · PP_APP_v1.4</div>
+          <div class="tl-detail">Certified  · Gossamer Security Solutions · MOD_BT_V1.0, PKG_TLS_V1.1, MOD_WLANC_v1.0, PP_MDF_V3.3</div>
+        </div>
+      </div>
+      
+      <div class="tl-entry" data-cat="cisco_archived">
+        <div class="tl-date">2026-06-14</div>
+        <div class="tl-body">
+          <div class="tl-title">
+            <span class="tl-badge removed">removed</span>
+            <a href="https://www.niap-ccevs.org/" target="_blank">Archived: Cisco Embedded Services Router (ESR) 6300 v17.12</a>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="tl-entry" data-cat="pcl_cert">
+        <div class="tl-date">2026-06-13</div>
+        <div class="tl-body">
+          <div class="tl-title">
+            <span class="tl-badge new">new</span>
+            <a href="https://www.niap-ccevs.org/products/11713" target="_blank">Samsung Electronics Co., Ltd. — Samsung Knox File Encryption 1.8.0 - Spring</a>
+          </div>
+          <div class="tl-detail">Certified  · Gossamer Security Solutions · MOD_FE_V1.0, PP_APP_v1.4</div>
+        </div>
+      </div>
+      
+      <div class="tl-entry" data-cat="pcl_cert">
+        <div class="tl-date">2026-06-13</div>
+        <div class="tl-body">
+          <div class="tl-title">
+            <span class="tl-badge new">new</span>
+            <a href="https://www.niap-ccevs.org/products/11711" target="_blank">Samsung Electronics Co., Ltd. — Samsung Electronics Co., Ltd. Samsung Galaxy Devices on Android 16 - Spring</a>
+          </div>
+          <div class="tl-detail">Certified  · Gossamer Security Solutions · MOD_BT_V1.0, PKG_TLS_V1.1, MOD_WLANC_v1.0, PP_MDF_V3.3, MOD_CPP_BIO_V1.1, MOD_VPNC_V2.5</div>
+        </div>
+      </div>
+      
+      <div class="tl-entry" data-cat="pcl_cert">
+        <div class="tl-date">2026-06-12</div>
+        <div class="tl-body">
+          <div class="tl-title">
+            <span class="tl-badge new">new</span>
+            <a href="https://www.niap-ccevs.org/products/11703" target="_blank">DigiStor — Certified-Enterprise-Gen5-v1.0</a>
+          </div>
+          <div class="tl-detail">Certified  · Leidos Common Criteria Testing Laboratory · CPP_FDE_EE_V2.0E</div>
+        </div>
+      </div>
+      
+      <div class="tl-entry" data-cat="td_new">
+        <div class="tl-date">2026-06-11</div>
+        <div class="tl-body">
+          <div class="tl-title">
+            <span class="tl-badge new">new</span>
+            <a href="https://www.niap-ccevs.org/technical-decisions/TD1045" target="_blank">New TD: TD1045</a>
+          </div>
+          <div class="tl-detail">FIT Technical Decision: Arbitrary Test Pattern in FDP_DSK_EXT.1:1</div>
+        </div>
+      </div>
+      
+      <div class="tl-entry" data-cat="td_new">
+        <div class="tl-date">2026-06-11</div>
+        <div class="tl-body">
+          <div class="tl-title">
+            <span class="tl-badge new">new</span>
+            <a href="https://www.niap-ccevs.org/technical-decisions/TD1046" target="_blank">New TD: TD1046</a>
+          </div>
+          <div class="tl-detail">FIT Technical Decision: Addition of AES-XTS in FCS_COP.1(g)</div>
+        </div>
+      </div>
+      
+      <div class="tl-entry" data-cat="pcl_cert">
+        <div class="tl-date">2026-06-11</div>
+        <div class="tl-body">
+          <div class="tl-title">
+            <span class="tl-badge new">new</span>
+            <a href="https://www.niap-ccevs.org/products/11706" target="_blank">Zebra Technologies Corporation — Zebra 4490/5430/6490 Devices on Android 15</a>
+          </div>
+          <div class="tl-detail">Certified  · Gossamer Security Solutions · MOD_BT_V1.0, PKG_TLS_V1.1, MOD_WLANC_v1.0, PP_MDF_V3.3</div>
+        </div>
+      </div>
+      
+      <div class="tl-entry" data-cat="pcl_cert">
+        <div class="tl-date">2026-06-10</div>
+        <div class="tl-body">
+          <div class="tl-title">
+            <span class="tl-badge new">new</span>
+            <a href="https://www.niap-ccevs.org/products/11709" target="_blank">High Sec Labs, Inc. — High Sec Labs SK41D-4TR KVM</a>
+          </div>
+          <div class="tl-detail">Certified  · Acumen Security · PP_PSD_V4.0, MOD_KM_V1.0, MOD_VI_V1.0</div>
+        </div>
+      </div>
+      
+      <div class="tl-entry" data-cat="pcl_cert">
+        <div class="tl-date">2026-06-10</div>
+        <div class="tl-body">
+          <div class="tl-title">
+            <span class="tl-badge new">new</span>
+            <a href="https://www.niap-ccevs.org/products/11708" target="_blank">Vertiv IT Systems — Vertiv CYBEX™ SC845DPH, SC885DPH, SC945DPH, SC845DPHC, SC945DPHC, SCM145DPH, SCM185DPH, SC985DPH, SCMV245DPH, SCMV285DPH Firmware Version 44444-E7E7 Peripheral Sharing Devices</a>
+          </div>
+          <div class="tl-detail">Certified  · Acumen Security · PP_PSD_V4.0, MOD_AO_V1.0, MOD_UA_V1.0, MOD_KM_V1.0, MOD_VI_V1.0</div>
+        </div>
+      </div>
+      
+      <div class="tl-entry" data-cat="pcl_cert">
+        <div class="tl-date">2026-06-10</div>
+        <div class="tl-body">
+          <div class="tl-title">
+            <span class="tl-badge new">new</span>
+            <a href="https://www.niap-ccevs.org/products/11707" target="_blank">Vertiv IT Systems — Vertiv CYBEX™ SC820DPH, SC840DPH, SC920DPH, SC940DPH, SC840DPHC, SC940DPHC Firmware Version 44404-E7E7 Peripheral Sharing Devices</a>
+          </div>
+          <div class="tl-detail">Certified  · Acumen Security · PP_PSD_V4.0, MOD_AO_V1.0, MOD_KM_V1.0, MOD_VI_V1.0</div>
+        </div>
+      </div>
+      
+      <div class="tl-entry" data-cat="td_new">
+        <div class="tl-date">2026-06-05</div>
+        <div class="tl-body">
+          <div class="tl-title">
+            <span class="tl-badge new">new</span>
+            <a href="https://www.niap-ccevs.org/technical-decisions/TD1043" target="_blank">New TD: TD1043</a>
+          </div>
+          <div class="tl-detail">FIT Technical Decision: Block Erase in FCS_CKM.6.2/TOEHW</div>
+        </div>
+      </div>
+      
+      <div class="tl-entry" data-cat="td_new">
+        <div class="tl-date">2026-06-05</div>
+        <div class="tl-body">
+          <div class="tl-title">
+            <span class="tl-badge new">new</span>
+            <a href="https://www.niap-ccevs.org/technical-decisions/TD1044" target="_blank">New TD: TD1044</a>
+          </div>
+          <div class="tl-detail">DIT Technical Decision: Updates for CC Errata v1.2</div>
+        </div>
+      </div>
+      
+      <div class="tl-entry" data-cat="pcl_cert">
+        <div class="tl-date">2026-06-04</div>
+        <div class="tl-body">
+          <div class="tl-title">
+            <span class="tl-badge new">new</span>
+            <a href="https://www.niap-ccevs.org/products/2026.1166" target="_blank">Juniper Networks, Inc. — Juniper Junos OS 24.4R1 for SRX300, SRX320, SRX340, SRX345, and SRX345-DUAL-AC</a>
+          </div>
+          <div class="tl-detail">Certified 2026-04-12 · Teron Labs · MOD_CPP_FW_v1.4e, PKG_SSH_V1.0, MOD_IPS_V1.0, MOD_VPNGW_v1.3, CPP_ND_V3.0E</div>
         </div>
       </div>
       
@@ -931,7 +999,7 @@
 </div><!-- /main-content -->
 <footer>
   <span>CC Pulse &middot; Auto-refreshes daily (01:00 EST) &middot; NIAP, CSfC, NIST, CC Portal, NATO NIAPCL, EUCC / ENISA</span>
-  <span>Last run: 2026-07-02 03:09 ET</span>
+  <span>Last run: 2026-07-03 04:54 ET</span>
 </footer>
 
 <script>
@@ -1091,9 +1159,9 @@ function initEnhancements() {
       const navDiv = document.createElement('div');
       navDiv.className = 'hist-nav';
       navDiv.innerHTML = '<span style="font-size:.75rem;color:var(--muted);font-weight:600">View:</span>' +
-        '<button class="hist-nav-btn" data-hist-view="week">Last 7 Days</button>' +
+        '<button class="hist-nav-btn active" data-hist-view="week">Last 7 Days</button>' +
         '<button class="hist-nav-btn" data-hist-view="month">Last 30 Days</button>' +
-        '<button class="hist-nav-btn active" data-hist-view="all">All History</button>';
+        '<button class="hist-nav-btn" data-hist-view="all">All History</button>';
       navDiv.querySelectorAll('.hist-nav-btn').forEach(function(b) {
         b.addEventListener('click', function() { setHistoryView(b); });
       });
