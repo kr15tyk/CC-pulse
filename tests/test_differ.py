@@ -220,6 +220,42 @@ class TestFlagAlerts:
 
         assert any(alert["kind"] == "removed" for alert in alerts)
 
+    def test_csfc_selection_change_alerts_without_keyword_match(self):
+        diff = _diff_with_alerts([])
+        pdf_url = "https://www.nsa.gov/new-ipsec-selection.pdf"
+        diff["csfc"] = {
+            "selection_links": {
+                "IPsec VPN Gateway": {
+                    "changed": True,
+                    "old_href": "https://www.nsa.gov/old-selection.pdf",
+                    "new_href": pdf_url,
+                },
+            },
+            "feeds": {},
+            "pages": {},
+        }
+
+        alerts = differ.flag_alerts(diff)
+
+        assert len(alerts) == 1
+        assert alerts[0]["source"] == "CSfC Component Selections"
+        assert alerts[0]["url"] == pdf_url
+        assert alerts[0]["matched_keywords"] == ["CSfC"]
+
+    def test_cctl_keyword_alert_preserves_article_link(self):
+        diff = _diff_with_alerts([])
+        diff["cctl_labs"] = {
+            "atsec": [{
+                "title": "FIPS 140-3 certificate update",
+                "link": "https://example.test/fips-update",
+            }],
+        }
+
+        alerts = differ.flag_alerts(diff)
+
+        assert len(alerts) == 1
+        assert alerts[0]["url"] == "https://example.test/fips-update"
+
 
 # ===========================================================================
 # diff_cctl_labs — fix #22: returns {lab: [items]}, not {"added": [...]}

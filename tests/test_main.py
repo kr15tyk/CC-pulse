@@ -326,6 +326,33 @@ class TestSourceHealth:
         assert baseline["csfc"] == new["csfc"]
         assert baseline["niap"] == old["niap"]
 
+    def test_recent_dated_csfc_selection_survives_recovery_baseline(self):
+        old = _healthy_snapshot()
+        old["csfc"] = {
+            "pages": {"apl": [], "announcements": []},
+            "selection_links": {},
+        }
+        new = _healthy_snapshot()
+        new["collected_at"] = "2026-07-03T08:54:23+00:00"
+        new["csfc"]["selection_links"] = {
+            "IPsec VPN Gateway": (
+                "https://www.nsa.gov/Portals/75/documents/CSfC%20Selections%20"
+                "Updates%202026/CSfC%20Selections%20for%20IPsec%20VPN%20"
+                "Gateway-2026-06-30.pdf?ver=new"
+            ),
+            "TLS Protected Servers": (
+                "https://www.nsa.gov/Portals/75/documents/CSfC-Selections-"
+                "for-TLS-Protected-Servers-2026-05-15.pdf"
+            ),
+        }
+
+        baseline = main._diff_baseline_with_recoveries(old, new)
+
+        assert "IPsec VPN Gateway" not in baseline["csfc"]["selection_links"]
+        assert baseline["csfc"]["selection_links"]["TLS Protected Servers"].endswith(
+            "2026-05-15.pdf"
+        )
+
     def test_existing_healthy_domain_keeps_prior_diff_baseline(self):
         old = _healthy_snapshot()
         new = _healthy_snapshot()

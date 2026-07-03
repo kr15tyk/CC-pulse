@@ -608,8 +608,7 @@ DASHBOARD_TEMPLATE = """
 <div class="card card-alert" id="sec-alerts">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>Alerts</span>
-    <span class="card-count">{{ alert_total }} alert{% if alert_total != 1 %}s</div>
-{% endif %}</span>
+    <span class="card-count">{{ alert_total }} alert{% if alert_total != 1 %}s{% endif %}</span>
     <span class="toggle-icon">&#9660;</span>
   </div>
   <div class="card-body">
@@ -910,7 +909,6 @@ DASHBOARD_TEMPLATE = """
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>CSfC Components &amp; Announcements</span>
     <span class="card-count">{{ csfc_total }} update{% if csfc_total != 1 %}s{% endif %}</span>
-    </span>
     <span class="toggle-icon">{% if csfc_total == 0 %}&#9658;{% else %}&#9660;{% endif %}</span>
   </div>
   <div class="card-body {% if csfc_total == 0 %}collapsed{% endif %}">

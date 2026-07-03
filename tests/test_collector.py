@@ -35,6 +35,13 @@ _cfg.CSFC_APL_COMPONENT_KEYWORDS = {"TLS/VPN": ["tls", "vpn"]}
 _cfg.CSFC_COMPONENT_SELECTIONS = {}
 _cfg.CSFC_FEEDS = []
 _cfg.NIAP_BASE = "https://www.niap-ccevs.org"
+_cfg.NATO_BASE = "https://www.ia.nato.int"
+_cfg.NATO_NIAPCL_PAGES = {
+    "all_products": "/Search/NIAPC",
+    "cisco_products": "/Search/NIAPC",
+}
+_cfg.NATO_CISCO_KEYWORDS = ["cisco"]
+_cfg.NIST_CSRC_BASE = "https://csrc.nist.gov"
 sys.modules["config"] = _cfg
 # Also stub heavy deps
 for _mod in ("requests", "feedparser", "bs4", "lxml"):
@@ -225,6 +232,12 @@ class TestGetHtml:
             collector.get_html("https://example.com")
         mock_retry.assert_called_once()
 
+    def test_passes_source_specific_timeout_to_fetcher(self):
+        with patch.object(collector, "_fetch_with_retry", return_value=None) as mock_retry:
+            collector.get_html("https://example.com/slow", timeout=120)
+
+        assert mock_retry.call_args.kwargs["timeout"] == 120
+
     def test_nsa_403_uses_chrome_impersonation_fallback(self):
         blocked = MagicMock()
         blocked.status_code = 403
@@ -240,6 +253,107 @@ class TestGetHtml:
         fallback.assert_called_once()
         assert fallback.call_args.kwargs["impersonate"] == "chrome"
         browser_response.raise_for_status.assert_called_once()
+
+    def test_nato_403_uses_chrome_impersonation_fallback(self):
+        blocked = MagicMock()
+        blocked.status_code = 403
+        browser_response = MagicMock()
+        browser_response.text = "<html><main>NATO products</main></html>"
+
+        with patch.object(collector.SESSION, "get", return_value=blocked):
+            with patch.object(
+                collector.curl_requests, "get", return_value=browser_response
+            ) as fallback:
+                collector._do_get_html(_cfg.NATO_BASE + "/Search/NIAPC")
+
+        fallback.assert_called_once()
+        assert fallback.call_args.kwargs["impersonate"] == "chrome"
+        browser_response.raise_for_status.assert_called_once()
+
+
+# ===========================================================================
+# NIST / NATO collector regressions
+# ===========================================================================
+
+class TestInternationalCollectors:
+
+    def test_nato_parser_reads_individual_product_tables(self):
+        def cell(text):
+            result = MagicMock()
+            result.get_text.return_value = text
+            return result
+
+        manufacturer_row = MagicMock()
+        manufacturer_row.find_all.return_value = [
+            cell("Manufacturer :"), cell("Cisco Systems"),
+        ]
+        category_row = MagicMock()
+        category_row.find_all.return_value = [
+            cell("Categories:"), cell("VPN"),
+        ]
+        product_link = MagicMock()
+        product_link.get_text.return_value = "Cisco Router"
+        product_link.get.return_value = "/niapc/Product/Cisco-Router_1"
+        product_table = MagicMock()
+        product_table.find.return_value = product_link
+        product_table.find_all.return_value = [manufacturer_row, category_row]
+        product_table.get_text.return_value = "Cisco Router | Cisco Systems | VPN"
+        soup = MagicMock()
+        soup.select.return_value = [product_table]
+
+        products = collector._parse_nato_niapcl_products(soup)
+
+        assert products == [{
+            "name": "Cisco Router",
+            "manufacturer": "Cisco Systems",
+            "category": "VPN",
+            "link": "https://www.ia.nato.int/niapc/Product/Cisco-Router_1",
+            "raw_text": "Cisco Router | Cisco Systems | VPN",
+        }]
+
+    def test_nist_news_uses_result_cards_below_body_section(self):
+        titles = []
+        for text, href in (
+            ("First cryptography update", "/News/2026/first"),
+            ("Second cryptography update", "/News/2026/second"),
+        ):
+            link = MagicMock()
+            link.get_text.return_value = text
+            link.get.return_value = href
+            title = MagicMock()
+            title.find.return_value = link
+            titles.append(title)
+        soup = MagicMock()
+        soup.select.return_value = titles
+
+        with patch.object(collector, "get_html", return_value=soup):
+            items = collector._scrape_nist_page("/news")
+
+        assert [item["text"] for item in items] == [
+            "First cryptography update",
+            "Second cryptography update",
+        ]
+        assert items[0]["href"] == "https://csrc.nist.gov/News/2026/first"
+
+    def test_nato_duplicate_page_urls_are_fetched_once_with_long_timeout(self):
+        products = [{
+            "name": "Cisco Router",
+            "manufacturer": "Cisco Systems",
+            "category": "Network",
+            "link": "https://example.test/product",
+            "raw_text": "Cisco Router | Cisco Systems",
+        }]
+        with patch.object(collector.SESSION, "get"):
+            with patch.object(collector, "get_html", return_value=object()) as get_html:
+                with patch.object(collector, "_parse_nato_niapcl_products", return_value=products):
+                    result = collector.collect_nato()
+
+        get_html.assert_called_once_with(
+            "https://www.ia.nato.int/Search/NIAPC", timeout=120
+        )
+        assert result["pages"]["all_products"] == products
+        assert result["pages"]["cisco_products"] == products
+        assert result["cisco_products"] == products
 
 
 # ===========================================================================

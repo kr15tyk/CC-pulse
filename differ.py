@@ -167,7 +167,12 @@ def flag_alerts(diff: Snapshot) -> list[dict]:
                 or item.get("name", "")
             )
             detail = item.get("detail", "") or item.get("description", "")
-            url = item.get(url_key, "") or item.get("url", "")
+            url = (
+                item.get(url_key, "")
+                or item.get("url", "")
+                or item.get("link", "")
+                or item.get("href", "")
+            )
             hits = _matches(title + " " + detail)
             if hits:
                 _add(alerts, source, item.get("kind", "alert"), title,
@@ -245,12 +250,16 @@ def flag_alerts(diff: Snapshot) -> list[dict]:
                 else "NSA updated the component selection document for this role"
             )
             pdf_href = new_href or old_href
-            _add_text(
+            # Every Selection-document change is high-value CSfC content; it
+            # should not depend on the role name matching a watch keyword.
+            _add(
+                alerts,
                 "CSfC Component Selections",
                 "updated",
                 sel_name,
-                url=config.CSFC_PRODUCT_LIST_URL,
-                detail=f"{detail} — {pdf_href}" if pdf_href else detail,
+                url=pdf_href or config.CSFC_PRODUCT_LIST_URL,
+                detail=detail,
+                keywords=["CSfC"],
                 tab="us",
             )
 

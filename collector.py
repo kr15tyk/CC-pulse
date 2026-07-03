@@ -73,20 +73,25 @@ def _do_get_json(url, params=None):
     r.raise_for_status()
     return r.json()
 
-def _do_get_html(url):
-    r = SESSION.get(url, timeout=30)
+def _do_get_html(url, timeout=30):
+    r = SESSION.get(url, timeout=timeout)
     if r.status_code == 403:
         log.warning(
             "403 Forbidden for %s — WAF may be blocking this request "
             "(bot-detection, IP reputation, or missing browser headers)",
             url,
         )
-        if url.lower().startswith(config.CSFC_BASE.lower()):
-            log.info("Retrying NSA page with a Chrome-compatible TLS fingerprint...")
+        browser_fallback_bases = tuple(
+            str(getattr(config, name, "")).lower()
+            for name in ("CSFC_BASE", "NATO_BASE")
+            if getattr(config, name, "")
+        )
+        if url.lower().startswith(browser_fallback_bases):
+            log.info("Retrying WAF-protected page with a Chrome-compatible TLS fingerprint...")
             browser_response = curl_requests.get(
                 url,
                 impersonate="chrome",
-                timeout=30,
+                timeout=timeout,
                 allow_redirects=True,
             )
             browser_response.raise_for_status()
@@ -100,8 +105,8 @@ def get_json(url, params=None):
         log.warning("get_json returning None for %s", url)
     return result
 
-def get_html(url):
-    result = _fetch_with_retry(_do_get_html, url)
+def get_html(url, timeout=30):
+    result = _fetch_with_retry(_do_get_html, url, timeout=timeout)
     if result is None:
         log.warning("get_html returning None for %s", url)
     return result
@@ -695,8 +700,49 @@ def _parse_nato_niapcl_products(soup) -> list:
     if not soup:
         return []
     items = []
+
+    # Current NIAPCL result pages render one nested table per product beneath
+    # this ASP.NET ListView container. The first table on the page is only a
+    # layout wrapper, so parsing it as a data table collapses all products into
+    # one unusable record.
+    product_tables = soup.select(
+        "#MainContent_ProductsView_itemPlaceholderContainer table.grid_6.alpha"
+    )
+    for product_table in product_tables:
+        product_link = product_table.find(
+            "a", href=lambda href: href and "/niapc/Product/" in href
+        )
+        if not product_link:
+            continue
+        name = product_link.get_text(" ", strip=True)
+        href = urljoin(config.NATO_BASE, product_link.get("href", ""))
+        manufacturer = ""
+        category = ""
+        for row in product_table.find_all("tr"):
+            cells = row.find_all("td", recursive=False)
+            if len(cells) < 2:
+                continue
+            label = cells[0].get_text(" ", strip=True).lower()
+            value = cells[1].get_text(" ", strip=True)
+            if "manufacturer" in label:
+                manufacturer = value
+            elif "categor" in label:
+                category = value
+        items.append({
+            "name": name,
+            "manufacturer": manufacturer,
+            "category": category,
+            "link": href,
+            "raw_text": product_table.get_text(" | ", strip=True)[:400],
+        })
+    if items:
+        return items
+
     # Try table-based layout
-    table = soup.find("table")
+    table = next(
+        (candidate for candidate in soup.find_all("table") if candidate.find("th")),
+        None,
+    )
     if table:
         headers = [th.get_text(strip=True).lower() for th in table.find_all("th")]
         for tr in table.find_all("tr")[1:]:
@@ -765,11 +811,18 @@ def collect_nato() -> dict:
     except Exception as exc:
         log.warning("[NATO] Session warm-up failed: %s", exc)
 
+    # NATO is consistently much slower than the other monitored sites and the
+    # configured all-products/Cisco views currently share one URL. Fetch each
+    # unique URL once with a source-specific timeout, then reuse the parsed
+    # records for every configured page key.
+    products_by_url: dict[str, list] = {}
     for page_key, path in config.NATO_NIAPCL_PAGES.items():
         url = config.NATO_BASE + path
-        log.info("  [NATO] Fetching page: %s (%s)...", page_key, url)
-        soup = get_html(url)
-        products = _parse_nato_niapcl_products(soup)
+        if url not in products_by_url:
+            log.info("  [NATO] Fetching page: %s (%s)...", page_key, url)
+            soup = get_html(url, timeout=120)
+            products_by_url[url] = _parse_nato_niapcl_products(soup)
+        products = copy.deepcopy(products_by_url[url])
         data["pages"][page_key] = products
         log.info("  -> %d products", len(products))
     # Extract Cisco-specific entries
@@ -1256,8 +1309,27 @@ def _scrape_nist_page(path: str) -> list:
     if not soup:
         return []
     items = []
+
+    # The news page uses result cards below #body-section. A generic
+    # ``.container`` appears much earlier in the government-site header, so
+    # selecting that container first silently produced an empty news snapshot.
+    if path.rstrip("/").lower() == "/news":
+        for title in soup.select(".news-list-title"):
+            link = title.find("a", href=True)
+            text = (
+                link.get_text(" ", strip=True)
+                if link else title.get_text(" ", strip=True)
+            )
+            if not text:
+                continue
+            href = urljoin(url, link.get("href", "")) if link else ""
+            items.append({"text": text[:400], "href": href})
+        if items:
+            return items
+
     content = (
-        soup.find("div", {"id": "main-content"})
+        soup.find("div", {"id": "body-section"})
+        or soup.find("div", {"id": "main-content"})
         or soup.find("main")
         or soup.find("div", {"class": "container"})
         or soup

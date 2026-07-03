@@ -139,11 +139,34 @@ def test_dashboard_renders_revised_announcement_and_policy(tmp_path):
             "news": {"added": []}, "pps": {"added": []},
             "products": {"added": []},
         },
-        "cctl_labs": {}, "csfc": {"pages": {}, "selection_links": {}, "feeds": {}},
+        "cctl_labs": {},
+        "csfc": {
+            "pages": {},
+            "selection_links": {
+                "IPsec VPN Gateway": {
+                    "changed": True,
+                    "old_href": "",
+                    "new_href": "https://example.test/ipsec-selection.pdf",
+                },
+            },
+            "feeds": {},
+        },
         "cc_crypto": {"pages": {}}, "nist": {"pages": {}},
         "nato": {"pages": {}, "cisco_added": [], "cisco_removed": []},
         "eucc": {"pages": {}, "cisco_added": [], "cisco_removed": []},
-        "alerts": [],
+        "alerts": [
+            {
+                "source": "CCTL Labs", "kind": "alert",
+                "title": "Our First EUCC Certificate", "url": "https://example.test/eucc-post",
+                "detail": "", "matched_keywords": ["EUCC"], "tab": "intl",
+            },
+            {
+                "source": "CSfC Component Selections", "kind": "updated",
+                "title": "IPsec VPN Gateway", "url": "https://example.test/ipsec-selection.pdf",
+                "detail": "NSA updated a component selection document",
+                "matched_keywords": ["CSfC"], "tab": "us",
+            },
+        ],
     }
 
     dashboard.render_dashboard(diff, output_dir=str(tmp_path))
@@ -152,3 +175,6 @@ def test_dashboard_renders_revised_announcement_and_policy(tmp_path):
     assert "Revised NIAP announcement" in html
     assert "Software Bill of Materials" in html
     assert "NIAP Policy Letters" in html
+    assert '<span class="card-count">2 alerts</span>' in html
+    assert "2 alerts</div>" not in html
+    assert "CSfC Component Selections: IPsec VPN Gateway" in html

@@ -25,8 +25,10 @@ import glob
 import json
 import logging
 import os
+import re
 import sys
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
+from urllib.parse import unquote
 
 import config
 
@@ -425,6 +427,24 @@ def _diff_baseline_with_recoveries(old_snapshot: dict, new_snapshot: dict) -> di
     baseline = copy.deepcopy(old_snapshot)
     for domain in recovered:
         baseline[domain] = copy.deepcopy(new_snapshot[domain])
+        if domain == "csfc":
+            # A first healthy CSfC collection can follow several days of empty
+            # WAF-blocked snapshots. Baseline the recovered bulk page data to
+            # prevent a flood, but preserve recently dated Selection-document
+            # URLs so genuine updates published during the outage are diffed.
+            recent_selection_updates = _recent_dated_csfc_selection_links(new_snapshot)
+            prior_links = old_snapshot.get("csfc", {}).get("selection_links", {})
+            baseline_links = baseline[domain].get("selection_links", {})
+            for heading in recent_selection_updates:
+                if heading in prior_links:
+                    baseline_links[heading] = prior_links[heading]
+                else:
+                    baseline_links.pop(heading, None)
+                log.info(
+                    "[Health] Preserving recent CSfC Selection update during "
+                    "recovery: %s",
+                    heading,
+                )
         log.info(
             "[Health] %s produced its first healthy collection; baselining without alerts.",
             domain,
@@ -469,6 +489,41 @@ def _diff_baseline_with_recoveries(old_snapshot: dict, new_snapshot: dict) -> di
             )
 
     return baseline if recovered or baseline != old_snapshot else old_snapshot
+
+
+CSFC_RECOVERY_LOOKBACK_DAYS = 14
+_CSFC_DOCUMENT_DATE = re.compile(r"(?<!\d)(20\d{2})[-_](\d{2})[-_](\d{2})(?!\d)")
+
+
+def _recent_dated_csfc_selection_links(snapshot: dict) -> set[str]:
+    """Return CSfC Selection headings whose URL is recently date-stamped.
+
+    NSA includes publication dates in newly issued Selection filenames. This
+    gives recovery runs a narrow way to retain real changes without treating
+    every link from the first healthy scrape as newly added.
+    """
+    collected_at = snapshot.get("collected_at", "")
+    try:
+        collected = datetime.fromisoformat(collected_at.replace("Z", "+00:00"))
+    except (TypeError, ValueError):
+        return set()
+
+    cutoff = collected.date() - timedelta(days=CSFC_RECOVERY_LOOKBACK_DAYS)
+    recent: set[str] = set()
+    links = snapshot.get("csfc", {}).get("selection_links", {})
+    for heading, href in links.items():
+        match = _CSFC_DOCUMENT_DATE.search(unquote(href or ""))
+        if not match:
+            continue
+        try:
+            document_date = datetime(
+                int(match.group(1)), int(match.group(2)), int(match.group(3))
+            ).date()
+        except ValueError:
+            continue
+        if cutoff <= document_date <= collected.date():
+            recent.add(heading)
+    return recent
 
 def _rotate_old_files() -> None:
     """Delete snapshot and diff files older than KEEP_SNAPSHOTS days."""
