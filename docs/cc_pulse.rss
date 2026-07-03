@@ -2,7 +2,9 @@
 <rss version="2.0"><channel>
 <title>CC Pulse</title>
 <link>https://kr15tyk.github.io/CC-pulse/cc_dashboard.html</link>
-<description>Common Criteria monitoring - 2026-07-03 04:54 ET</description>
+<description>Common Criteria monitoring - 2026-07-03 13:46 ET</description>
 <item><title>[atsec] Our First EUCC Certificate</title><link>https://www.atsec.com/our-first-eucc-certificate/</link><description></description></item>
-<item><title>ALERT: CCTL Labs â Our First EUCC Certificate</title><link>https://kr15tyk.github.io/CC-pulse/cc_dashboard.html</link><description>Kind: alert | Keywords: EUCC</description></item>
+<item><title>CSfC Selection Updated: IPsec VPN Gateway</title><link>https://www.nsa.gov/Portals/75/documents/CSfC Selections Updates 2026/CSfC Selections for IPsec VPN Gateway-2026-06-30.pdf?ver=Bnk8rb63lv3yXoYu9GUEsQ%3d%3d</link><description>Component selection document updated.</description></item>
+<item><title>ALERT: CCTL Labs – Our First EUCC Certificate</title><link>https://kr15tyk.github.io/CC-pulse/cc_dashboard.html</link><description>Kind: alert | Keywords: EUCC</description></item>
+<item><title>ALERT: CSfC Component Selections – IPsec VPN Gateway</title><link>https://kr15tyk.github.io/CC-pulse/cc_dashboard.html</link><description>Kind: updated | Keywords: CSfC</description></item>
 </channel></rss>

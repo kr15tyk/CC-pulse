@@ -179,7 +179,7 @@
   <span class="nav-title">CC Pulse Dashboard</span>
   <span class="nav-spacer"></span>
   <div class="ham-wrap">
-    <span class="nav-meta">Last run: 2026-07-03 04:54 ET</span>
+    <span class="nav-meta">Last run: 2026-07-03 13:46 ET</span>
     <button class="ham-btn" id="ham-btn" onclick="toggleHamMenu()" aria-expanded="false" aria-haspopup="true" title="Open menu">&#9776;</button>
     <div class="ham-menu" id="ham-menu" role="menu">
       <a class="ham-item" href="https://kr15tyk.github.io/CC-pulse/cc_dashboard.html" role="menuitem"><span class="ham-icon">&#127968;</span>Home</a>
@@ -260,7 +260,7 @@
       <div class="stat-lbl">NIAP Changes</div>
     </a></div>
     <div class="stat"><a href="#sec-csfc" onclick="navigateTo('sec-csfc');return false;">
-      <div class="stat-num ">0</div>
+      <div class="stat-num active-num">1</div>
       <div class="stat-lbl">CSfC Selection Updates</div>
     </a></div>
     <div class="stat"><a href="#sec-nist" onclick="navigateTo('sec-nist');return false;">
@@ -284,7 +284,7 @@
       <div class="stat-lbl">EUCC Changes</div>
     </a></div>
     <div class="stat"><a href="#sec-alerts" onclick="navigateTo('sec-alerts');return false;">
-      <div class="stat-num alert-num">1</div>
+      <div class="stat-num alert-num">2</div>
       <div class="stat-lbl">Alerts</div>
     </a></div>
   </div>
@@ -314,7 +314,7 @@
 <div class="card card-alert" id="sec-alerts">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>Alerts</span>
-    <span class="card-count">1 alert</span>
+    <span class="card-count">2 alerts</span>
     <span class="toggle-icon">&#9660;</span>
   </div>
   <div class="card-body">
@@ -322,13 +322,22 @@
     
         <div class="item-row alert-item" data-alert-key="CCTL Labs-Our_First_EUCC_Certificate" data-tab="intl">
           
-          <span class="item-link">CCTL Labs: Our First EUCC Certificate</span>
+          <a class="item-link" href="https://www.atsec.com/our-first-eucc-certificate/" target="_blank">CCTL Labs: Our First EUCC Certificate</a>
           
           <span class="item-meta">alert &middot; EUCC</span>
           
           <button class="dismiss-btn" onclick="dismissAlert(this)" title="Mark as seen">&#10003; Seen</button>
         </div>
         
+        <div class="item-row alert-item" data-alert-key="CSfC Component Selections-IPsec_VPN_Gateway" data-tab="us">
+
+          <a class="item-link" href="https://www.nsa.gov/Portals/75/documents/CSfC Selections Updates 2026/CSfC Selections for IPsec VPN Gateway-2026-06-30.pdf?ver=Bnk8rb63lv3yXoYu9GUEsQ%3d%3d" target="_blank">CSfC Component Selections: IPsec VPN Gateway</a>
+
+          <span class="item-meta">updated &middot; CSfC</span>
+          <div class="item-sub">NSA updated a component selection document for this role</div>
+          <button class="dismiss-btn" onclick="dismissAlert(this)" title="Mark as seen">&#10003; Seen</button>
+        </div>
+
   </div>
 </div>
 
@@ -499,17 +508,25 @@
 <div class="section-group">
   <div class="section-label">CSfC</div>
   <!-- CSfC Components, Announcements, and Selection Documents -->
-<div class="card " id="sec-csfc" data-has-changes="0">
+<div class="card card-updated" id="sec-csfc" data-has-changes="1">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>CSfC Components &amp; Announcements</span>
-    <span class="card-count">0 updates</span>
-    </span>
-    <span class="toggle-icon">&#9658;</span>
+    <span class="card-count">1 update</span>
+    <span class="toggle-icon">&#9660;</span>
   </div>
-  <div class="card-body collapsed">
+  <div class="card-body ">
+
+
+    <div class="cp-row" data-source="csfc" data-kind="updated">
+      <a class="item-link" href="https://www.nsa.gov/Portals/75/documents/CSfC Selections Updates 2026/CSfC Selections for IPsec VPN Gateway-2026-06-30.pdf?ver=Bnk8rb63lv3yXoYu9GUEsQ%3d%3d" target="_blank">IPsec VPN Gateway</a>
+      <div class="cp-detail">
+        <span class="cp-date">Selection document link changed</span>
+      </div>
+    </div>
+
+
     
     
-    <p class="no-change">No changes detected.</p>
   </div>
 </div>
 </div>
@@ -650,7 +667,7 @@
 <div class="card card-new" id="sec-history" data-has-changes="1">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>Change History</span>
-    <span class="card-count">29 events</span>
+    <span class="card-count">30 events</span>
     <span class="toggle-icon">▼</span>
   </div>
   <div class="card-body">
@@ -670,6 +687,17 @@
     <div class="timeline" id="history-timeline">
     
       
+      <div class="tl-entry" data-cat="csfc_change">
+        <div class="tl-date">2026-07-03</div>
+        <div class="tl-body">
+          <div class="tl-title">
+            <span class="tl-badge updated">updated</span>
+            <a href="https://www.nsa.gov/Resources/Commercial-Solutions-for-Classified-Program/Components-List/" target="_blank">CSfC Selection updated: IPsec VPN Gateway</a>
+          </div>
+
+        </div>
+      </div>
+
       <div class="tl-entry" data-cat="niap_news">
         <div class="tl-date">2026-06-30</div>
         <div class="tl-body">
@@ -999,7 +1027,7 @@
 </div><!-- /main-content -->
 <footer>
   <span>CC Pulse &middot; Auto-refreshes daily (01:00 EST) &middot; NIAP, CSfC, NIST, CC Portal, NATO NIAPCL, EUCC / ENISA</span>
-  <span>Last run: 2026-07-03 04:54 ET</span>
+  <span>Last run: 2026-07-03 13:46 ET</span>
 </footer>
 
 <script>

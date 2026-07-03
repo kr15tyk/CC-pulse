@@ -91,13 +91,20 @@ def test_rss_includes_csfc_component_and_announcement_changes():
         },
         "nist": {"pages": {}},
         "cc_crypto": {"pages": {}},
-        "alerts": [],
+        "alerts": [{
+            "source": "CSfC Component Selections",
+            "title": "IPsec VPN Gateway",
+            "kind": "updated",
+            "matched_keywords": ["CSfC"],
+        }],
     }
 
     rss = dashboard._build_rss(diff, "2026-07-02 13:00 ET")
 
     assert "CSfC Component Added: Cisco Secure Firewall" in rss
     assert "CSfC Announcement Added: 5/20/25 | New guidance" in rss
+    assert "ALERT: CSfC Component Selections – IPsec VPN Gateway" in rss
+    assert "â" not in rss
 
 
 def test_dashboard_renders_revised_announcement_and_policy(tmp_path):

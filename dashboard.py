@@ -1590,7 +1590,7 @@ def _build_rss(diff: dict, generated_at: str) -> str:
 
     for alert in diff.get("alerts", []):
         items_xml.append(
-            f"<item><title>{xml_escape('ALERT: ' + alert.get('source', '') + ' â ' + alert.get('title', ''))}</title>"
+            f"<item><title>{xml_escape('ALERT: ' + alert.get('source', '') + ' – ' + alert.get('title', ''))}</title>"
             f"<link>https://kr15tyk.github.io/CC-pulse/cc_dashboard.html</link>"
             f"<description>{xml_escape('Kind: ' + alert.get('kind', '') + ' | Keywords: ' + ', '.join(alert.get('matched_keywords', [])))}</description></item>"
         )
