@@ -1,0 +1,95 @@
+name: Send Filtered Stored Alert
+
+on:
+  workflow_dispatch:
+    inputs:
+      date:
+        description: "Stored diff date (YYYY-MM-DD)"
+        required: true
+        type: string
+      source:
+        description: "Exact alert source"
+        required: true
+        type: string
+      title:
+        description: "Exact alert title"
+        required: true
+        type: string
+      dry_run:
+        description: "Validate the match without sending notifications"
+        required: true
+        default: true
+        type: boolean
+
+permissions:
+  contents: read
+
+jobs:
+  send:
+    name: Send one stored alert
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout main
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0
+
+      - name: Checkout snapshots
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0
+        with:
+          ref: snapshots
+          path: snapshot-store
+
+      - name: Set up Python
+        uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Select and send alert
+        env:
+          ALERT_DATE: ${{ inputs.date }}
+          ALERT_SOURCE: ${{ inputs.source }}
+          ALERT_TITLE: ${{ inputs.title }}
+          CC_DRY_RUN: ${{ inputs.dry_run }}
+          CC_EMAIL_PASSWORD: ${{ secrets.CC_EMAIL_PASSWORD }}
+          CC_EMAIL_USERNAME: ${{ secrets.CC_EMAIL_USERNAME }}
+          CC_EMAIL_RECIPIENTS: ${{ secrets.CC_EMAIL_RECIPIENTS }}
+          CC_SMTP_HOST: ${{ secrets.CC_SMTP_HOST }}
+          CC_WEBEX_BOT_TOKEN: ${{ secrets.CC_WEBEX_BOT_TOKEN }}
+          CC_WEBEX_ROOM_ID: ${{ secrets.CC_WEBEX_ROOM_ID }}
+          CC_WEBHOOK_URL: ${{ secrets.CC_WEBHOOK_URL }}
+        run: |
+          python - <<'PY'
+          import json
+          import os
+          from pathlib import Path
+
+          import config
+          import emailer
+
+          diff_path = Path("snapshot-store/diffs") / f"{os.environ['ALERT_DATE']}_diff.json"
+          diff = json.loads(diff_path.read_text(encoding="utf-8"))
+          matches = [
+              alert for alert in diff.get("alerts", [])
+              if alert.get("source") == os.environ["ALERT_SOURCE"]
+              and alert.get("title") == os.environ["ALERT_TITLE"]
+          ]
+          if len(matches) != 1:
+              raise SystemExit(
+                  f"Expected exactly one alert match, found {len(matches)} for "
+                  f"{os.environ['ALERT_SOURCE']!r} / {os.environ['ALERT_TITLE']!r}"
+              )
+
+          alert = matches[0]
+          print(f"Selected one alert: {alert['source']} — {alert['title']}")
+          if config.DRY_RUN:
+              print("Dry run enabled; notification sends skipped.")
+          else:
+              emailer.send_webex_alert(matches)
+              emailer.send_webhook_alert(matches)
+              emailer.send_alert_email(matches)
+              print("Sent Webex, webhook, and immediate email notifications.")
+          PY
