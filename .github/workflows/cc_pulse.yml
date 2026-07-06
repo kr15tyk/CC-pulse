@@ -44,9 +44,12 @@ jobs:
     steps:
       - name: Determine run mode
         id: mode
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          INPUT_MODE: ${{ github.event.inputs.mode }}
         run: |
-          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
-            echo "mode=${{ github.event.inputs.mode || 'daily' }}" >> "$GITHUB_OUTPUT"
+          if [ "$EVENT_NAME" = "workflow_dispatch" ]; then
+            echo "mode=${INPUT_MODE:-daily}" >> "$GITHUB_OUTPUT"
           else
             HOUR=$(date -u +%H)
             MINUTE=$(date -u +%M)

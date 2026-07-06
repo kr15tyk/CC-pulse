@@ -12,10 +12,16 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
       - name: Post maintenance notice
         env:
           CC_WEBEX_BOT_TOKEN: ${{ secrets.CC_WEBEX_BOT_TOKEN }}
           CC_WEBEX_ROOM_ID: ${{ secrets.CC_WEBEX_ROOM_ID }}
-        run: |
-          echo 'aW1wb3J0IG9zLCBqc29uLCB1cmxsaWIucmVxdWVzdCwgdXJsbGliLmVycm9yCgpUT0tFTiAgID0gb3MuZW52aXJvblsiQ0NfV0VCRVhfQk9UX1RPS0VOIl0KUk9PTV9JRCA9IG9zLmVudmlyb25bIkNDX1dFQkVYX1JPT01fSUQiXQoKbXNnID0gIvCflKcgKipNYWludGVuYW5jZSBOb3RpY2UqKlxuVGhlIGZhaWx1cmUgYWxlcnQgYWJvdmUgd2FzIGdlbmVyYXRlZCBkdXJpbmcgcm91dGluZSBtYWludGVuYW5jZSBvbiBDQyBQdWxzZS4gTm8gYWN0aW9uIGlzIG5lZWRlZCDigJQgdGhlIGlzc3VlIGhhcyBiZWVuIHJlc29sdmVkIGFuZCB0aGUgdG9vbCBpcyBydW5uaW5nIG5vcm1hbGx5LiBBcG9sb2dpZXMgZm9yIHRoZSBub2lzZSEiCgpwYXlsb2FkID0ganNvbi5kdW1wcyh7InJvb21JZCI6IFJPT01fSUQsICJtYXJrZG93biI6IG1zZ30pLmVuY29kZSgpCnJlcSA9IHVybGxpYi5yZXF1ZXN0LlJlcXVlc3QoCiAgICAiaHR0cHM6Ly93ZWJleGFwaXMuY29tL3YxL21lc3NhZ2VzIiwKICAgIGRhdGE9cGF5bG9hZCwKICAgIGhlYWRlcnM9eyJBdXRob3JpemF0aW9uIjogZiJCZWFyZXIge1RPS0VOfSIsICJDb250ZW50LVR5cGUiOiAiYXBwbGljYXRpb24vanNvbiJ9LAogICAgbWV0aG9kPSJQT1NUIgopCndpdGggdXJsbGliLnJlcXVlc3QudXJsb3BlbihyZXEpIGFzIHI6CiAgICBib2R5ID0ganNvbi5sb2FkcyhyLnJlYWQoKSkKICAgIHByaW50KGYiUG9zdGVkIG1lc3NhZ2UgSUQ6IHtib2R5WydpZCddfSIpCiAgICBwcmludChmIkhUVFAge3Iuc3RhdHVzfSIpCg==' | base64 -d > post_notice.py
-          python3 post_notice.py
+        run: python3 scripts/webex/post_maintenance_notice.py
