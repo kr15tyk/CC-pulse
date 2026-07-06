@@ -37,6 +37,7 @@ _cfg.SANITY_MIN_NIAP_NEWS = 1
 _cfg.SANITY_MIN_NIAP_POLICIES = 1
 _cfg.SANITY_MIN_NATO_PRODUCTS = 3
 _cfg.SANITY_MIN_EUCC_CERTS = 2
+_cfg.COLLAPSE_MIN_BASELINE = 8
 for _mod in (
     "config", "collector", "differ", "dashboard", "emailer",
     "requests", "feedparser", "bs4",
@@ -590,3 +591,97 @@ class TestRunDailyFirstRun:
         src = inspect.getsource(main.run_merge)
         assert "nato" in src, "run_merge clearing loop missing 'nato' (fix #23)"
         assert "eucc" in src, "run_merge clearing loop missing 'eucc' (fix #23)"
+
+
+# ===========================================================================
+# _apply_collection_collapse_guard — secondary-collection partial-collapse
+# retention. A domain can pass its representative sanity check while a
+# secondary page/feed silently collapses; without this guard that produced
+# false mass-removal diffs.
+# ===========================================================================
+
+class TestCollectionCollapseGuard:
+
+    def _health(self, status="healthy"):
+        return {"label": "X", "status": status,
+                "consecutive_failures": 0, "using_last_known_good": False}
+
+    def test_collapsed_secondary_page_retains_last_known_good(self):
+        prior = {"cc_crypto": {"pages": {
+            "publications": list(range(121)),
+            "news": list(range(278)),
+        }}}
+        new = copy.deepcopy(prior)
+        new["cc_crypto"]["pages"]["news"] = list(range(3))  # 278 -> 3
+        sh = {"cc_crypto": self._health()}
+        main._apply_collection_collapse_guard(new, prior, sh)
+        assert len(new["cc_crypto"]["pages"]["news"]) == 278
+        assert sh["cc_crypto"]["status"] == "stale"
+        assert sh["cc_crypto"]["using_last_known_good"] is True
+        assert sh["cc_crypto"]["consecutive_failures"] == 1
+
+    def test_top_level_list_collapse_is_guarded(self):
+        prior = {"cc_portal": {"news": list(range(176)), "pps": list(range(20))}}
+        new = copy.deepcopy(prior)
+        new["cc_portal"]["news"] = []  # hard collapse to zero
+        sh = {"cc_portal": self._health()}
+        main._apply_collection_collapse_guard(new, prior, sh)
+        assert len(new["cc_portal"]["news"]) == 176
+        assert sh["cc_portal"]["status"] == "stale"
+
+    def test_legitimate_small_shrink_is_not_guarded(self):
+        prior = {"eucc": {"pages": {"certificates": list(range(12))}}}
+        new = copy.deepcopy(prior)
+        new["eucc"]["pages"]["certificates"] = list(range(10))  # above half of 12
+        sh = {"eucc": self._health()}
+        main._apply_collection_collapse_guard(new, prior, sh)
+        assert len(new["eucc"]["pages"]["certificates"]) == 10
+        assert sh["eucc"]["status"] == "healthy"
+
+    def test_below_baseline_collection_is_ignored(self):
+        # prior count under COLLAPSE_MIN_BASELINE (8): small collections fluctuate
+        prior = {"eucc": {"pages": {"certificates": list(range(6))}}}
+        new = copy.deepcopy(prior)
+        new["eucc"]["pages"]["certificates"] = []
+        sh = {"eucc": self._health()}
+        main._apply_collection_collapse_guard(new, prior, sh)
+        assert sh["eucc"]["status"] == "healthy"
+
+    def test_always_empty_collection_does_not_trigger(self):
+        prior = {"nist": {"feeds": {"NIST Cybersecurity News": []}}}
+        new = copy.deepcopy(prior)
+        sh = {"nist": self._health()}
+        main._apply_collection_collapse_guard(new, prior, sh)
+        assert sh["nist"]["status"] == "healthy"
+
+    def test_already_stale_domain_is_skipped(self):
+        # stale/failed domains already reverted wholesale; guard must not touch them
+        prior = {"nist": {"pages": {"news": list(range(50))}}}
+        new = copy.deepcopy(prior)
+        new["nist"]["pages"]["news"] = list(range(2))
+        sh = {"nist": self._health(status="stale")}
+        main._apply_collection_collapse_guard(new, prior, sh)
+        # left as-is: whole-domain LKG already handled it upstream
+        assert len(new["nist"]["pages"]["news"]) == 2
+        assert sh["nist"]["status"] == "stale"
+
+    def test_niap_owned_subcollections_are_not_double_handled(self):
+        # news/events/policies belong to _apply_niap_subcollection_health
+        prior = {"niap": {"news": list(range(30)), "tds": list(range(40))}}
+        new = copy.deepcopy(prior)
+        new["niap"]["news"] = list(range(2))   # owned by subcollection health -> skip
+        new["niap"]["tds"] = list(range(2))    # NOT owned -> must be guarded
+        sh = {"niap": self._health()}
+        main._apply_collection_collapse_guard(new, prior, sh)
+        assert len(new["niap"]["news"]) == 2     # untouched by this guard
+        assert len(new["niap"]["tds"]) == 40     # retained
+        assert sh["niap"]["status"] == "stale"
+
+    def test_consecutive_failures_carry_from_prior(self):
+        prior = {"cc_crypto": {"pages": {"news": list(range(278))}}}
+        new = copy.deepcopy(prior)
+        new["cc_crypto"]["pages"]["news"] = list(range(1))
+        prior["source_health"] = {"cc_crypto": {"status": "stale", "consecutive_failures": 3}}
+        sh = {"cc_crypto": self._health()}
+        main._apply_collection_collapse_guard(new, prior, sh)
+        assert sh["cc_crypto"]["consecutive_failures"] == 4

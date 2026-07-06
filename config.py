@@ -63,6 +63,16 @@ SANITY_MIN_CSFC_ANNOUNCEMENTS = 1
 SANITY_MIN_CC_CRYPTO_PUBS = 5
 SANITY_MIN_NIST_NEWS = 10
 
+# -- Per-collection collapse guard ------------------------------------------
+# A domain can pass its representative sanity check (e.g. NIAP PCL is fine)
+# while a *secondary* collection inside it (a page or feed) silently collapses
+# to near-zero from a partial fetch failure — producing false mass-removal
+# diffs. The collapse guard retains last-known-good for any collection that
+# had at least COLLAPSE_MIN_BASELINE items previously and dropped below half
+# that count. Mirrors the NIAP news/policies suspicious-drop logic, generalised
+# to every domain's pages/feeds/top-level lists.
+COLLAPSE_MIN_BASELINE = 8
+
 # -- NIAP API ---------------------------------------------------------------
 NIAP_BASE = "https://www.niap-ccevs.org"
 NIAP_ENDPOINTS = {

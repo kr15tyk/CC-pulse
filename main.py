@@ -297,6 +297,92 @@ def _checks_pass(checks: list[dict]) -> bool:
     )
 
 
+def _collection_iter(domain_data: dict):
+    """Yield (path, list) for every diffable list collection in a domain:
+    top-level lists plus lists nested one level under `pages` / `feeds`.
+    Dict-of-dict structures (doc_headers, component_selection_hashes) are
+    hash-compared elsewhere, not item-diffed, so they're skipped here."""
+    if not isinstance(domain_data, dict):
+        return
+    for key, val in domain_data.items():
+        if isinstance(val, list):
+            yield (key, val)
+        elif key in ("pages", "feeds") and isinstance(val, dict):
+            for subkey, subval in val.items():
+                if isinstance(subval, list):
+                    yield (f"{key}.{subkey}", subval)
+
+
+def _apply_collection_collapse_guard(
+    new_snapshot: dict,
+    prior_snapshot: dict,
+    source_health: dict[str, dict],
+) -> None:
+    """Retain last-known-good for secondary collections that partially
+    collapsed while their domain still passed its representative check.
+
+    Without this, a domain marked 'healthy' can still emit false mass-removal
+    diffs when one of its pages/feeds silently drops to near-zero. Runs only on
+    healthy domains (stale/failed domains already reverted wholesale). NIAP
+    news/events/policies are excluded — the sub-collection health check owns
+    those with more precise per-request metadata.
+    """
+    if not isinstance(prior_snapshot, dict):
+        return
+    baseline = _config_minimum("COLLAPSE_MIN_BASELINE", 8)
+    niap_owned = {"news", "events", "policies"}
+
+    for domain in DOMAIN_KEYS:
+        health = source_health.get(domain, {})
+        if health.get("status") != "healthy":
+            continue
+        new_data = new_snapshot.get(domain, {})
+        prior_data = prior_snapshot.get(domain, {})
+        if not isinstance(new_data, dict) or not isinstance(prior_data, dict):
+            continue
+
+        prior_counts = {
+            path: len(lst) for path, lst in _collection_iter(prior_data)
+        }
+        collapses = []
+        for path, lst in _collection_iter(new_data):
+            if domain == "niap" and path in niap_owned:
+                continue
+            prior_count = prior_counts.get(path, 0)
+            observed = len(lst)
+            if prior_count >= baseline and observed < prior_count // 2:
+                # Retain the prior collection in place of the collapsed one.
+                if "." in path:
+                    parent, child = path.split(".", 1)
+                    new_data.setdefault(parent, {})[child] = copy.deepcopy(
+                        prior_data.get(parent, {}).get(child, [])
+                    )
+                else:
+                    new_data[path] = copy.deepcopy(prior_data.get(path, []))
+                collapses.append(f"{path} {observed}/{prior_count}")
+
+        if not collapses:
+            continue
+
+        prior_health = prior_snapshot.get("source_health", {}).get(domain, {})
+        previous_failures = (
+            prior_health.get("consecutive_failures", 0)
+            if prior_health.get("status") in ("stale", "failed") else 0
+        )
+        detail = "collection collapse (retained last-known-good): " + "; ".join(collapses)
+        existing_detail = health.get("detail")
+        health.update({
+            "status": "stale",
+            "consecutive_failures": previous_failures + 1,
+            "using_last_known_good": True,
+            "detail": f"{existing_detail}; {detail}" if existing_detail else detail,
+        })
+        log.warning(
+            "[Health] %s degraded to stale (failure #%d): %s",
+            domain, health["consecutive_failures"], detail,
+        )
+
+
 def _apply_source_health(
     new_snapshot: dict,
     prior_snapshot: dict | None = None,
@@ -407,6 +493,7 @@ def _apply_source_health(
             source_health[domain]["detail"],
         )
 
+    _apply_collection_collapse_guard(new_snapshot, prior_snapshot, source_health)
     new_snapshot["source_health"] = source_health
     return new_snapshot
 
