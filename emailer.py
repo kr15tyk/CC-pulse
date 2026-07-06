@@ -14,6 +14,7 @@ Features:
   - Generic webhook / MS Teams delivery via send_webhook_alert()
 - Plain-language change descriptions via _describe_change() (issue #17)
 """
+import html
 import json
 import logging
 import os
@@ -350,6 +351,31 @@ def send_webhook_alert(alerts: list[dict]) -> None:
 # Email HTML helpers
 # ---------------------------------------------------------------------------
 
+def _esc(s) -> str:
+    """HTML-escape a scraped/vendor-controlled value for safe embedding in
+    notification HTML. Neutralises markup injection (e.g. a product name or
+    RSS title containing <script> or "-breakout into an attribute)."""
+    return html.escape("" if s is None else str(s), quote=True)
+
+
+def _safe_url(u) -> str:
+    """Return an escaped URL only if it uses a safe scheme, else ''.
+    Blocks javascript:/data:/vbscript: hrefs that survive plain escaping
+    because they contain no HTML metacharacters."""
+    u = ("" if u is None else str(u)).strip()
+    low = u.lower()
+    if low.startswith(("http://", "https://", "mailto:")) or u.startswith("/"):
+        return html.escape(u, quote=True)
+    return ""
+
+
+def _link(url, title) -> str:
+    """Build an anchor from untrusted url+title, escaping both. Falls back to
+    escaped title text when the URL is missing or uses an unsafe scheme."""
+    safe = _safe_url(url)
+    return f'<a href="{safe}">{_esc(title)}</a>' if safe else _esc(title)
+
+
 def _row(label: str, content: str, color: str = "#22D3EE", bg: str = "#12102E") -> str:
     return (
         f'<tr style="border-bottom:1px solid #312E81">'
@@ -377,6 +403,7 @@ def _section(title: str, rows: list[str]) -> str:
 def build_email_html(weekly_diff: dict) -> str:
     now  = datetime.now(ET)
     date = now.strftime("%B %d, %Y")
+    date_str = date  # fix: alert branch referenced undefined date_str (latent NameError)
     parts: list[str] = []
 
     # ── Keyword alerts (top, sorted by tier) ──────────────────────────────
@@ -384,12 +411,12 @@ def build_email_html(weekly_diff: dict) -> str:
     if alerts:
         alert_rows = []
         for a in sorted(alerts, key=lambda x: (_alert_tier(x), alerts.index(x))):
-            kws    = ", ".join(a.get("matched_keywords", []))
-            title  = a.get("title", "")
-            detail = a.get("detail", "")
-            url    = a.get("url", "")
+            kws    = _esc(", ".join(a.get("matched_keywords", [])))
+            title  = _esc(a.get("title", ""))
+            detail = _esc(a.get("detail", ""))
+            url    = _safe_url(a.get("url", ""))
             kind   = a.get("kind", "")
-            src    = a.get("source", "ALERT")
+            src    = _esc(a.get("source", "ALERT"))
             tier   = _alert_tier(a)
             cisco_badge = (
                 '<span style="background:#3B82F6;color:#fff;padding:1px 6px;'
@@ -426,12 +453,12 @@ def build_email_html(weekly_diff: dict) -> str:
     pp   = weekly_diff.get("niap", {}).get("pps", {})
     rows: list[str] = []
     for p in pp.get("added", []):
-        rows.append(_row("NEW", f"<b>{p.get('pp_short_name','')}</b> - {p.get('pp_name','')}"))
+        rows.append(_row("NEW", f"<b>{_esc(p.get('pp_short_name',''))}</b> - {_esc(p.get('pp_name',''))}"))
     for p in pp.get("removed", []):
-        rows.append(_row("REMOVED", f"<b>{p.get('pp_short_name','')}</b>", "#F87171", "#1E1B4B"))
+        rows.append(_row("REMOVED", f"<b>{_esc(p.get('pp_short_name',''))}</b>", "#F87171", "#1E1B4B"))
     for p in pp.get("sunset_changes", []):
         rows.append(_row("SUNSET",
-            f"<b>{p.get('pp_short_name','')}</b> - Sunset: {p.get('new_sunset','')[:10]}",
+            f"<b>{_esc(p.get('pp_short_name',''))}</b> - Sunset: {_esc(p.get('new_sunset','')[:10])}",
             "#FBBF24", "#1E1B4B"))
     parts.append(_section("NIAP - Protection Profiles", rows))
 
@@ -439,9 +466,9 @@ def build_email_html(weekly_diff: dict) -> str:
     td   = weekly_diff.get("niap", {}).get("tds", {})
     rows = []
     for t in td.get("added", []):
-        rows.append(_row("NEW TD", f"<b>{t.get('identifier','')}</b> - {t.get('title','')}"))
+        rows.append(_row("NEW TD", f"<b>{_esc(t.get('identifier',''))}</b> - {_esc(t.get('title',''))}"))
     for t in td.get("removed", []):
-        rows.append(_row("REMOVED", f"<b>{t.get('identifier','')}</b>", "#F87171", "#1E1B4B"))
+        rows.append(_row("REMOVED", f"<b>{_esc(t.get('identifier',''))}</b>", "#F87171", "#1E1B4B"))
     parts.append(_section("NIAP - Technical Decisions", rows))
 
     # ── Cisco NDcPP ────────────────────────────────────────────────────────
@@ -449,11 +476,11 @@ def build_email_html(weekly_diff: dict) -> str:
     rows = []
     for p in cn.get("added", []):
         rows.append(_row("CERTIFIED",
-            f"<b>{p.get('product_name','')}</b> ({p.get('vendor_id_name','')})"))
+            f"<b>{_esc(p.get('product_name',''))}</b> ({_esc(p.get('vendor_id_name',''))})"))
     for p in cn.get("newly_archived", []):
-        rows.append(_row("ARCHIVED", f"<b>{p.get('product_name','')}</b>", "#FBBF24", "#1E1B4B"))
+        rows.append(_row("ARCHIVED", f"<b>{_esc(p.get('product_name',''))}</b>", "#FBBF24", "#1E1B4B"))
     for p in cn.get("removed", []):
-        rows.append(_row("REMOVED", f"<b>{p.get('product_name','')}</b>", "#F87171", "#1E1B4B"))
+        rows.append(_row("REMOVED", f"<b>{_esc(p.get('product_name',''))}</b>", "#F87171", "#1E1B4B"))
     parts.append(_section("Cisco NDcPP PCL Changes", rows))
 
     # ── NIAP announcements, events, and policy letters ─────────────────────
@@ -472,7 +499,7 @@ def build_email_html(weekly_diff: dict) -> str:
                     item.get("title") or item.get("policy_title")
                     or item.get("name") or f"NIAP {section.rstrip('s')}"
                 )
-                txt = f'<a href="{link}">{title}</a>' if link else title
+                txt = _link(link, title)
                 rows.append(_row(f"{kind.upper()} {category}", txt, "#60A5FA", "#12102E"))
     parts.append(_section("NIAP - Announcements, Events, and Policies", rows))
 
@@ -483,7 +510,7 @@ def build_email_html(weekly_diff: dict) -> str:
         for item in items[:5]:
             link  = item.get("link", "")
             title = item.get("title", "")
-            txt   = f'<a href="{link}">{title}</a>' if link else title
+            txt   = _link(link, title)
             rows.append(_row(lab[:18], txt, "#60A5FA", "#12102E"))
     parts.append(_section("CCTL Lab Intel", rows))
 
@@ -496,9 +523,9 @@ def build_email_html(weekly_diff: dict) -> str:
             new_lm = change.get("new_last_modified", "")
             url    = change.get("url", "")
             detail = f"Last-Modified: {old_lm or '—'} → {new_lm or '—'}"
-            txt    = f'<a href="{url}">{cp_name}</a>' if url else cp_name
+            txt    = _link(url, cp_name)
             rows.append(_row("CP UPDATE",
-                f"<b>{txt}</b><br><small>{detail}</small>", "#FBBF24", "#12102E"))
+                f"<b>{txt}</b><br><small>{_esc(detail)}</small>", "#FBBF24", "#12102E"))
     _csfc_page_urls = {
         "apl":           config.CSFC_PRODUCT_LIST_URL,
         "home":          config.CSFC_BASE + "/Resources/Commercial-Solutions-for-Classified-Program/",
@@ -509,13 +536,13 @@ def build_email_html(weekly_diff: dict) -> str:
         for item in page_diff.get("added", [])[:3]:
             page_url = item.get("href") or item.get("link") or _csfc_page_urls.get(page_key, config.CSFC_PRODUCT_LIST_URL)
             label    = "APL" if page_key == "apl" else page_key[:8]
-            txt      = f'<a href="{page_url}">{item.get("text", "")[:100]}</a>' if page_url else item.get("text", "")[:120]
+            txt      = _link(page_url, item.get("text", "")[:120])
             rows.append(_row(f"NSA:{label}", txt, "#60A5FA", "#12102E"))
     for feed_name, items in csfc.get("feeds", {}).items():
         for item in items[:3]:
             link  = item.get("link", "")
             title = item.get("title", "")
-            txt   = f'<a href="{link}">{title}</a>' if link else title
+            txt   = _link(link, title)
             rows.append(_row("ADVISORY", txt, "#60A5FA", "#12102E"))
     parts.append(_section("CSfC — Capability Packages & APL", rows))
 
@@ -532,7 +559,7 @@ def build_email_html(weekly_diff: dict) -> str:
             continue
         for item in page_diff.get("added", [])[:5]:
             page_url = item.get("href") or _cc_urls.get(page_key, "https://www.commoncriteriaportal.org/cc/index.cfm")
-            txt = f'<a href="{page_url}">{item.get("text","")[:100]}</a>' if page_url else item.get("text","")[:120]
+            txt = _link(page_url, item.get("text", "")[:120])
             label = "CC PUB" if page_key == "publications" else f"CC:{page_key[:6]}"
             rows.append(_row(label, txt, "#60A5FA", "#12102E"))
     parts.append(_section("CC Crypto Catalog & Working Group", rows))
@@ -550,7 +577,7 @@ def build_email_html(weekly_diff: dict) -> str:
         label = f"{name}" + (f" ({vendor})" if vendor else "")
         detail = f"Status: {status}" if status else "New to MIP list"
         rows.append(_row("CMVP NEW",
-            f'<a href="{_cmvp_url}">{label}</a><br><small>{detail}</small>',
+            f'<a href="{_cmvp_url}">{_esc(label)}</a><br><small>{_esc(detail)}</small>',
             "#22D3EE", "#12102E"))
     for item in cmvp_mip.get("status_changes", [])[:5]:
         name = item.get("Module Name") or item.get("name") or item.get("text", "")[:80]
@@ -558,7 +585,7 @@ def build_email_html(weekly_diff: dict) -> str:
         label = f"{name}" + (f" ({vendor})" if vendor else "")
         detail = f"{item.get('old_status','?')} → {item.get('new_status','?')}"
         rows.append(_row("CMVP STATUS",
-            f'<a href="{_cmvp_url}">{label}</a><br><small>{detail}</small>',
+            f'<a href="{_cmvp_url}">{_esc(label)}</a><br><small>{_esc(detail)}</small>',
             "#FBBF24", "#12102E"))
     _nist_page_urls = {
         "news": "https://csrc.nist.gov/news",
@@ -574,45 +601,44 @@ def build_email_html(weekly_diff: dict) -> str:
             continue
         for item in page_diff.get("added", [])[:3]:
             page_url = item.get("href") or _nist_page_urls.get(page_key, "https://csrc.nist.gov/")
-            txt = f'<a href="{page_url}">{item.get("text","")[:100]}</a>' if page_url else item.get("text","")[:120]
+            txt = _link(page_url, item.get("text", "")[:120])
             rows.append(_row(f"NIST:{page_key[:7]}", txt, "#22D3EE", "#12102E"))
     for feed_name, items in nist.get("feeds", {}).items():
         for item in items[:5]:
             link = item.get("link", "")
             title = item.get("title", "")
-            txt = f'<a href="{link}">{title}</a>' if link else title
+            txt = _link(link, title)
             rows.append(_row("NIST FEED", txt, "#22D3EE", "#12102E"))
     parts.append(_section("NIST CSRC — Standards, CMVP & PQC", rows))
 
-    body = (
-        '<div style="background:#12102E;color:#FB923C;padding:14px 18px;border:1px solid #C026D3;'
-        'border-radius:6px;margin-bottom:8px">'
-        f'<b style="font-size:1rem">&#9888; {len(alerts)} KEYWORD ALERT(S) DETECTED</b>'
-        f'<p style="margin:4px 0 0;font-size:0.85rem;opacity:0.85">'
-        f'{date_str} \u2014 immediate notification</p>'
-        f'{tier_note}'
-        '</div>'
-        + _section("Keyword Matches \u2014 Source, Detail & Links", rows)
-        + dashboard_link
+    # Assemble the weekly digest. The alert section (if any) is already the
+    # first entry in `parts`; the previous tail here referenced undefined
+    # locals (date_str/tier_note/dashboard_link/subject) copied from the
+    # immediate-alert sender and never returned, so the weekly email was
+    # effectively dead. Build the outer shell and RETURN the HTML;
+    # send_weekly_email() is responsible for sending.
+    dashboard_link = (
+        '<p style="margin-top:20px"><a '
+        'href="https://kr15tyk.github.io/CC-pulse/cc_dashboard.html" '
+        'style="color:#60A5FA">View full dashboard \u2192</a></p>'
     )
-
     generated = datetime.now(ET).strftime("%Y-%m-%d %H:%M ET")
-    html = (
+    return (
         '<html><body style="font-family:-apple-system,BlinkMacSystemFont,sans-serif;'
         'max-width:720px;margin:0 auto;color:#E0E7FF">'
         '<div style="background:#0B0F1A;color:#FB923C;padding:20px 28px;border-bottom:2px solid #C026D3">'
-        '<h1 style="margin:0;font-size:1.4rem;color:#FB923C;font-family:Courier New,monospace;letter-spacing:0.08em">// CC Pulse &#8212; Immediate Alert</h1>'
-        f'<p style="margin:4px 0 0;opacity:0.75;font-size:0.85rem">{date_str}</p>'
+        '<h1 style="margin:0;font-size:1.4rem;color:#FB923C;font-family:Courier New,monospace;letter-spacing:0.08em">// CC Pulse &#8212; Weekly Digest</h1>'
+        f'<p style="margin:4px 0 0;opacity:0.75;font-size:0.85rem">{date}</p>'
         '</div>'
         '<div style="background:#E0E7FF;padding:20px 28px;border:1px solid #3730A3;'
         'border-top:none;border-radius:0 0 8px 8px">'
-        f'{body}'
-        '<hr style="margin-top:28px;border:none;border-top:1px solid #312E81">'
+        + "".join(parts)
+        + dashboard_link
+        + '<hr style="margin-top:28px;border:none;border-top:1px solid #312E81">'
         f'<p style="color:#6366F1;font-size:0.75rem;margin-top:12px">'
-        f'CC Pulse automated monitoring \u2014 immediate alert<br>Generated {generated}</p>'
+        f'CC Pulse automated monitoring \u2014 weekly digest<br>Generated {generated}</p>'
         '</div></body></html>'
     )
-    _send_email(subject, html)
 
 
 # ---------------------------------------------------------------------------
@@ -666,12 +692,12 @@ def send_alert_email(alerts: list[dict]) -> None:
     )
     rows = []
     for a in sorted(alerts, key=lambda x: (_alert_tier(x), alerts.index(x))):
-        kws = ", ".join(a.get("matched_keywords", []))
-        title = a.get("title", "")
-        detail = a.get("detail", "")
-        url = a.get("url", "")
+        kws = _esc(", ".join(a.get("matched_keywords", [])))
+        title = _esc(a.get("title", ""))
+        detail = _esc(a.get("detail", ""))
+        url = _safe_url(a.get("url", ""))
         kind = a.get("kind", "")
-        src = a.get("source", "ALERT")
+        src = _esc(a.get("source", "ALERT"))
         tier = _alert_tier(a)
         cisco_badge = (
             '<span style="background:#3B82F6;color:#fff;padding:1px 6px;'
@@ -1123,17 +1149,17 @@ def send_cisco_cert_email(new_certs: list[dict]) -> None:
     cert_blocks = []
     for p in new_certs:
         pid         = p.get("product_id", "")
-        name        = p.get("product_name", "Unknown product")
-        vendor      = p.get("vendor_id_name", "Cisco")
-        cert_date   = (p.get("certification_date") or "")[:10]
-        sunset_date = (p.get("sunset_date") or "")[:10]
-        lab         = p.get("assigned_lab_name", "N/A")
-        country     = p.get("submitting_country_id_name", "N/A")
+        name        = _esc(p.get("product_name", "Unknown product"))
+        vendor      = _esc(p.get("vendor_id_name", "Cisco"))
+        cert_date   = _esc((p.get("certification_date") or "")[:10])
+        sunset_date = _esc((p.get("sunset_date") or "")[:10])
+        lab         = _esc(p.get("assigned_lab_name", "N/A"))
+        country     = _esc(p.get("submitting_country_id_name", "N/A"))
         pps         = p.get("protection_profiles", [])
-        pp_names    = ", ".join(
+        pp_names    = _esc(", ".join(
             pp.get("pp_short_name", "") for pp in pps if pp.get("pp_short_name")
-        ) or "N/A"
-        niap_url    = (
+        ) or "N/A")
+        niap_url    = _safe_url(
             f"https://www.niap-ccevs.org/products/{pid}"
             if pid else "https://www.niap-ccevs.org/products"
         )

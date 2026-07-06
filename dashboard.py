@@ -299,7 +299,7 @@ DASHBOARD_TEMPLATE = """
 <meta charset="UTF-8">
 <meta http-equiv="refresh" content="3600">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-{{ noindex_meta }}
+{{ noindex_meta | safe }}
 <title>CC Pulse Dashboard</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
@@ -616,7 +616,7 @@ DASHBOARD_TEMPLATE = """
     {% for alert in diff.alerts %}
         <div class="item-row alert-item" data-alert-key="{{ alert.source }}-{{ alert.title | replace(' ', '_') }}" data-tab="{{ alert.tab }}">
           {% if alert.url %}
-          <a class="item-link" href="{{ alert.url }}" target="_blank">{{ alert.source }}: {{ alert.title }}</a>
+          <a class="item-link" href="{{ (alert.url) | safe_url }}" target="_blank">{{ alert.source }}: {{ alert.title }}</a>
           {% else %}
           <span class="item-link">{{ alert.source }}: {{ alert.title }}</span>
           {% endif %}
@@ -735,7 +735,7 @@ DASHBOARD_TEMPLATE = """
         <div class="sub-hdr sub-{{ css_kind }}">{{ group_name }} — {{ label }} ({{ changes.get(kind, []) | length }})</div>
         {% for item in changes.get(kind, []) %}
         <div class="item-row" data-source="niap-news" data-kind="{{ css_kind }}">
-          <a class="item-link" href="{{ item.link or item.url or 'https://www.niap-ccevs.org/announcements' }}" target="_blank">{{ item.title or item.name or 'NIAP item' }}</a>
+          <a class="item-link" href="{{ (item.link or item.url or 'https://www.niap-ccevs.org/announcements') | safe_url }}" target="_blank">{{ item.title or item.name or 'NIAP item' }}</a>
           <span class="item-meta">{{ (item.posted or item.date or item.start_date or item.moddate or '')[:10] }}</span>
         </div>
         {% endfor %}
@@ -759,7 +759,7 @@ DASHBOARD_TEMPLATE = """
       <div class="sub-hdr sub-{{ css_kind }}">{{ label }} ({{ diff.niap.policies.get(kind, []) | length }})</div>
       {% for policy in diff.niap.policies.get(kind, []) %}
       <div class="item-row" data-source="niap-policies" data-kind="{{ css_kind }}">
-        <a class="item-link" href="{{ policy.url or 'https://www.niap-ccevs.org/policies' }}" target="_blank">Policy {{ policy.policy_num }}{% if policy.update_num %}, Update {{ policy.update_num }}{% endif %} — {{ policy.policy_title or policy.title }}</a>
+        <a class="item-link" href="{{ (policy.url or 'https://www.niap-ccevs.org/policies') | safe_url }}" target="_blank">Policy {{ policy.policy_num }}{% if policy.update_num %}, Update {{ policy.update_num }}{% endif %} — {{ policy.policy_title or policy.title }}</a>
         <span class="item-meta">{{ (policy.policy_date or policy.moddate or '')[:10] }}</span>
       </div>
       {% endfor %}
@@ -915,7 +915,7 @@ DASHBOARD_TEMPLATE = """
     {% for cp_name, cp in diff.csfc.selection_links.items() %}
     {% if cp.changed %}
     <div class="cp-row" data-source="csfc" data-kind="updated">
-      <a class="item-link" href="{{ cp.new_href or cp.old_href or config_csfc_components_url }}" target="_blank">{{ cp_name }}</a>
+      <a class="item-link" href="{{ (cp.new_href or cp.old_href or config_csfc_components_url) | safe_url }}" target="_blank">{{ cp_name }}</a>
       <div class="cp-detail">
         <span class="cp-date">Selection document link changed</span>
       </div>
@@ -926,13 +926,13 @@ DASHBOARD_TEMPLATE = """
       {% if page_key in ['apl', 'announcements'] %}
         {% for item in page_diff.added %}
         <div class="item-row" data-source="csfc" data-kind="new">
-          <a class="item-link" href="{{ item.href or (config_csfc_components_url if page_key == 'apl' else config_csfc_announcements_url) }}" target="_blank">{{ item.text }}</a>
+          <a class="item-link" href="{{ (item.href or (config_csfc_components_url if page_key == 'apl' else config_csfc_announcements_url)) | safe_url }}" target="_blank">{{ item.text }}</a>
           <span class="item-meta">{% if page_key == 'apl' %}component added{% else %}announcement added{% endif %}</span>
         </div>
         {% endfor %}
         {% for item in page_diff.removed %}
         <div class="item-row" data-source="csfc" data-kind="removed">
-          <a class="item-link" href="{{ item.href or (config_csfc_components_url if page_key == 'apl' else config_csfc_announcements_url) }}" target="_blank">{{ item.text }}</a>
+          <a class="item-link" href="{{ (item.href or (config_csfc_components_url if page_key == 'apl' else config_csfc_announcements_url)) | safe_url }}" target="_blank">{{ item.text }}</a>
           <span class="item-meta">{% if page_key == 'apl' %}component removed{% else %}announcement removed{% endif %}</span>
         </div>
         {% endfor %}
@@ -957,7 +957,7 @@ DASHBOARD_TEMPLATE = """
     {% for page_key, page_diff in diff.cc_crypto.pages.items() %}
       {% for item in page_diff.added %}
       <div class="item-row" data-source="cc-crypto" data-kind="updated">
-        <a class="item-link" href="{{ item.href or 'https://www.commoncriteriaportal.org/' }}" target="_blank">{{ item.text or page_key }}</a>
+        <a class="item-link" href="{{ (item.href or 'https://www.commoncriteriaportal.org/') | safe_url }}" target="_blank">{{ item.text or page_key }}</a>
         <span class="item-meta">{{ page_key }}</span>
       </div>
       {% endfor %}
@@ -978,7 +978,7 @@ DASHBOARD_TEMPLATE = """
     {% for page_key, page_diff in diff.nist.pages.items() %}
       {% for item in page_diff.added %}
       <div class="item-row" data-source="nist" data-kind="updated">
-        <a class="item-link" href="{{ item.href or 'https://csrc.nist.gov/' }}" target="_blank">{{ item.text or page_key }}</a>
+        <a class="item-link" href="{{ (item.href or 'https://csrc.nist.gov/') | safe_url }}" target="_blank">{{ item.text or page_key }}</a>
         <span class="item-meta">{{ page_key }}</span>
       </div>
       {% endfor %}
@@ -1005,7 +1005,7 @@ DASHBOARD_TEMPLATE = """
     <div class="sub-hdr sub-new">News ({{ diff.cc_portal.news.added | length }})</div>
     {% for item in diff.cc_portal.news.added %}
     <div class="item-row" data-source="cc-portal" data-kind="new">
-      <a class="item-link" href="{{ item.link or item.url or 'https://www.commoncriteriaportal.org/' }}" target="_blank">{{ item.title or item.text or item }}</a>
+      <a class="item-link" href="{{ (item.link or item.url or 'https://www.commoncriteriaportal.org/') | safe_url }}" target="_blank">{{ item.title or item.text or item }}</a>
       <span class="item-meta">{{ item.date or '' }}</span>
     </div>
     {% endfor %}
@@ -1014,7 +1014,7 @@ DASHBOARD_TEMPLATE = """
     <div class="sub-hdr sub-new">New International PPs ({{ diff.cc_portal.pps.added | length }})</div>
     {% for pp in diff.cc_portal.pps.added %}
     <div class="item-row" data-source="cc-portal" data-kind="new">
-      <a class="item-link" href="{{ pp.link or 'https://www.commoncriteriaportal.org/pps/' }}" target="_blank">{{ pp.title or pp.text or pp }}</a>
+      <a class="item-link" href="{{ (pp.link or 'https://www.commoncriteriaportal.org/pps/') | safe_url }}" target="_blank">{{ pp.title or pp.text or pp }}</a>
       <span class="item-meta"></span>
     </div>
     {% endfor %}
@@ -1042,7 +1042,7 @@ DASHBOARD_TEMPLATE = """
             <div class="sub-hdr sub-new">New Cisco NATO Listings ({{ diff.nato.cisco_added | length }})</div>
             {% for item in diff.nato.cisco_added %}
             <div class="item-row" data-source="nato" data-kind="new">
-              <a class="item-link" href="{{ item.link or config_nato_url }}" target="_blank">{{ item.name or item.raw_text }}</a>
+              <a class="item-link" href="{{ (item.link or config_nato_url) | safe_url }}" target="_blank">{{ item.name or item.raw_text }}</a>
               <span class="item-meta">{{ item.manufacturer or '' }}</span>
             </div>
             {% endfor %}
@@ -1053,7 +1053,7 @@ DASHBOARD_TEMPLATE = """
             <div class="sub-hdr sub-new">{{ page_key }} — New Items ({{ page_diff.added | length }})</div>
             {% for item in page_diff.added %}
             <div class="item-row" data-source="nato" data-kind="new">
-              <a class="item-link" href="{{ item.link or item.href or '#' }}" target="_blank">{{ item.name or item.text or item.raw_text or item }}</a>
+              <a class="item-link" href="{{ (item.link or item.href or '#') | safe_url }}" target="_blank">{{ item.name or item.text or item.raw_text or item }}</a>
               <span class="item-meta"></span>
             </div>
             {% endfor %}
@@ -1086,7 +1086,7 @@ DASHBOARD_TEMPLATE = """
       <div class="lab-body collapsed">
         {% for item in lab_items %}
         <div class="item-row" data-source="cctl" data-kind="new">
-          <a class="item-link" href="{{ item.link }}" target="_blank">{{ item.title }}</a>
+          <a class="item-link" href="{{ (item.link) | safe_url }}" target="_blank">{{ item.title }}</a>
           <span class="item-meta">{{ item.published }}</span>
         </div>
         {% endfor %}
@@ -1114,7 +1114,7 @@ DASHBOARD_TEMPLATE = """
             {% if diff.eucc.pages and diff.eucc.pages.requirements %}
             {% for item in diff.eucc.pages.requirements.added %}
             <div class="item-row" data-source="eucc" data-kind="updated">
-              <a class="item-link" href="{{ item.href or '#' }}" target="_blank">{{ item.text or item.name or item }}</a>
+              <a class="item-link" href="{{ (item.href or '#') | safe_url }}" target="_blank">{{ item.text or item.name or item }}</a>
               <span class="item-meta"></span>
             </div>
             {% endfor %}
@@ -1134,7 +1134,7 @@ DASHBOARD_TEMPLATE = """
             <div class="sub-hdr sub-new">New Cisco EUCC Certifications ({{ diff.eucc.cisco_added | length }})</div>
             {% for item in diff.eucc.cisco_added %}
             <div class="item-row" data-source="eucc" data-kind="new">
-              <a class="item-link" href="{{ item.href or '#' }}" target="_blank">{{ item.name or item.text }}</a>
+              <a class="item-link" href="{{ (item.href or '#') | safe_url }}" target="_blank">{{ item.name or item.text }}</a>
               <span class="item-meta"></span>
             </div>
             {% endfor %}
@@ -1142,7 +1142,7 @@ DASHBOARD_TEMPLATE = """
             {% if diff.eucc.pages and diff.eucc.pages.certificates %}
             {% for item in diff.eucc.pages.certificates.added %}
             <div class="item-row" data-source="eucc" data-kind="new">
-              <a class="item-link" href="{{ item.href or '#' }}" target="_blank">{{ item.name or item.text or item }}</a>
+              <a class="item-link" href="{{ (item.href or '#') | safe_url }}" target="_blank">{{ item.name or item.text or item }}</a>
               <span class="item-meta"></span>
             </div>
             {% endfor %}
@@ -1184,7 +1184,7 @@ DASHBOARD_TEMPLATE = """
         <div class="tl-body">
           <div class="tl-title">
             <span class="tl-badge {{ entry.kind }}">{{ entry.kind }}</span>
-            {% if entry.url %}<a href="{{ entry.url }}" target="_blank">{{ entry.title }}</a>{% else %}{{ entry.title }}{% endif %}
+            {% if entry.url %}<a href="{{ (entry.url) | safe_url }}" target="_blank">{{ entry.title }}</a>{% else %}{{ entry.title }}{% endif %}
           </div>
           {% if entry.detail %}<div class="tl-detail">{{ entry.detail }}</div>{% endif %}
         </div>
@@ -1483,7 +1483,7 @@ def _build_rss(diff: dict, generated_at: str) -> str:
         title = f"New PP: {pp.get('pp_short_name', '')}"
         link  = f"https://www.niap-ccevs.org/Profile/PP.cfm?id={pp.get('pp_id', '')}"
         items_xml.append(
-            f"<item><title>{xml_escape(title)}</title><link>{link}</link>"
+            f"<item><title>{xml_escape(title)}</title><link>{xml_escape(link)}</link>"
             f"<description>{xml_escape(pp.get('pp_name', ''))}</description></item>"
         )
 
@@ -1491,7 +1491,7 @@ def _build_rss(diff: dict, generated_at: str) -> str:
         title = f"Removed PP: {pp.get('pp_short_name', '')}"
         link  = f"https://www.niap-ccevs.org/Profile/PP.cfm?id={pp.get('pp_id', '')}"
         items_xml.append(
-            f"<item><title>{xml_escape(title)}</title><link>{link}</link>"
+            f"<item><title>{xml_escape(title)}</title><link>{xml_escape(link)}</link>"
             f"<description>{xml_escape(pp.get('pp_name', ''))}</description></item>"
         )
 
@@ -1535,7 +1535,7 @@ def _build_rss(diff: dict, generated_at: str) -> str:
             title = f"[{lab}] {it.get('title', '')}"
             link  = it.get("link", "#")
             items_xml.append(
-                f"<item><title>{xml_escape(title)}</title><link>{link}</link>"
+                f"<item><title>{xml_escape(title)}</title><link>{xml_escape(link)}</link>"
                 f"<description>{xml_escape(it.get('summary', '')[:200])}</description></item>"
             )
 
@@ -1575,7 +1575,7 @@ def _build_rss(diff: dict, generated_at: str) -> str:
             link = item.get("href", "https://csrc.nist.gov/")
             items_xml.append(
                 f"<item><title>{xml_escape('NIST ' + page_key + ': ' + (item.get('text') or '')[:60])}</title>"
-                f"<link>{link}</link>"
+                f"<link>{xml_escape(link)}</link>"
                 f"<description>New item on NIST CSRC {xml_escape(page_key)} page.</description></item>"
             )
 
@@ -1584,7 +1584,7 @@ def _build_rss(diff: dict, generated_at: str) -> str:
             link = item.get("href", "https://www.commoncriteriaportal.org/")
             items_xml.append(
                 f"<item><title>{xml_escape('CC Crypto: ' + (item.get('text') or page_key)[:80])}</title>"
-                f"<link>{link}</link>"
+                f"<link>{xml_escape(link)}</link>"
                 f"<description>New item on CC Crypto {xml_escape(page_key)} page.</description></item>"
             )
 
@@ -1720,8 +1720,23 @@ def render_dashboard(diff: dict, output_dir: str = "docs") -> None:
         "cc_crypto","nist","cc_portal","pcl_all","in_eval"
     ]}
 
-    # Render template
-    env = Environment(autoescape=False)
+    # Render template. autoescape=True so scraped/vendor-controlled strings
+    # (product names, RSS titles, hrefs) can't inject markup into the public
+    # dashboard. noindex_meta is the only trusted-HTML variable — marked | safe
+    # at its use site.
+    env = Environment(autoescape=True)
+
+    def _safe_url(u):
+        """Blank out hrefs that don't use a safe scheme. autoescape handles
+        metacharacters, but javascript:/data: URLs contain none and would
+        otherwise render as clickable. Applied via the |safe_url filter."""
+        u = ("" if u is None else str(u)).strip()
+        low = u.lower()
+        if low.startswith(("http://", "https://", "mailto:")) or u.startswith("/"):
+            return u
+        return ""
+
+    env.filters["safe_url"] = _safe_url
     tmpl = env.from_string(DASHBOARD_TEMPLATE)
     html = tmpl.render(
         diff            = diff,
