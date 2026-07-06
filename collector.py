@@ -154,6 +154,8 @@ def _partial_get_hash(url: str, nbytes: int = 2048) -> str:
                 chunk += block
                 if len(chunk) >= nbytes:
                     break
+            # MD5 is a non-security content fingerprint for change detection
+            # only (not an integrity/auth control); collisions are irrelevant here.
             return hashlib.md5(chunk).hexdigest()
         return ""
     except Exception as exc:
