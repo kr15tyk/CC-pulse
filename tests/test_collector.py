@@ -42,6 +42,7 @@ _cfg.NATO_NIAPCL_PAGES = {
 }
 _cfg.NATO_CISCO_KEYWORDS = ["cisco"]
 _cfg.NIST_CSRC_BASE = "https://csrc.nist.gov"
+_cfg.EUCC_BASE = "https://certification.enisa.europa.eu"
 sys.modules["config"] = _cfg
 # Also stub heavy deps
 for _mod in ("requests", "feedparser", "bs4", "lxml"):
@@ -547,3 +548,91 @@ class TestScrapeCsfcAnnouncements:
             "text": "5/20/25 | New CSfC guidance has been published",
             "href": "",
         }]
+
+
+class TestEuccCardParser:
+    """ENISA moved to a Drupal 11 ecl-card grid (~2026-05); the old table/generic
+    scrape silently produced garbage. These tests use real BeautifulSoup to
+    exercise the actual selectors, not mocks."""
+
+    @staticmethod
+    def _soup(html):
+        import sys
+        import importlib
+        stub = sys.modules.pop("bs4", None)
+        try:
+            bs4 = importlib.import_module("bs4")
+            return bs4.BeautifulSoup(html, "html.parser")
+        finally:
+            if stub is not None:
+                sys.modules["bs4"] = stub
+
+    CARD = (
+        '<article class="ecl-card"><div class="ecl-card__body"><div class="ecl-content-block">'
+        '<div class="ecl-content-block__primary-meta-container"><div class="ecl-content-block__primary-meta-item">'
+        '<time datetime="{dt}T12:00:00Z">{label}</time></div></div>'
+        '<div class="ecl-content-block__title"><a href="/certificates/{cid_l}_en" '
+        'class="ecl-link" data-ecl-title-link>{cid}</a></div>'
+        '<div class="ecl-content-block__description">{desc}</div>'
+        '<div class="ecl-content-block__list-container"><dl class="ecl-description-list">'
+        '<dt class="ecl-description-list__term">Certification Scheme</dt>'
+        '<dd class="ecl-description-list__definition">(UE) 2024/482 - EUCC</dd></dl></div>'
+        '</div></div></article>'
+    )
+
+    def _page(self, cards):
+        body = "".join(
+            self.CARD.format(dt=dt, label=label, cid=cid, cid_l=cid.lower(), desc=desc)
+            for dt, label, cid, desc in cards
+        )
+        return self._soup(f'<main>{body}</main>').find("main")
+
+    def test_parses_cards_into_records(self):
+        content = self._page([
+            ("2025-10-16", "16 October 2025", "EUCC-3090-2025-0000000005-00002",
+             "The product evaluated is a microcontroller developed by SAMSUNG."),
+        ])
+        items = collector._parse_eucc_cards(content)
+        assert len(items) == 1
+        rec = items[0]
+        assert rec["name"] == "EUCC-3090-2025-0000000005-00002"
+        assert rec["cert_date"] == "2025-10-16T12:00:00Z"
+        assert rec["href"] == (
+            "https://certification.enisa.europa.eu"
+            "/certificates/eucc-3090-2025-0000000005-00002_en"
+        )
+        assert "SAMSUNG" in rec["description"]
+
+    def test_nbsp_is_normalized(self):
+        content = self._page([
+            ("2025-12-03", "3 December 2025", "EUCC-3110-2025-2500098-01-00000",
+             "The Cisco Nexus 9K Series.&nbsp;Cisco NX-OS is proprietary.&nbsp;"),
+        ])
+        desc = collector._parse_eucc_cards(content)[0]["description"]
+        assert "\xa0" not in desc
+        assert "  " not in desc
+
+    def test_cisco_content_survives_for_keyword_filter(self):
+        content = self._page([
+            ("2025-09-14", "14 September 2025", "EUCC-3110-2025-0002500093-00001",
+             "The certified product is Cisco Intersight Virtual Appliance."),
+        ])
+        rec = collector._parse_eucc_cards(content)[0]
+        assert "cisco" in (rec["name"] + rec["text"]).lower()
+
+    def test_no_cards_returns_empty(self):
+        content = self._soup(
+            "<main><p>random 39 date fragments 14 November 2025</p></main>"
+        ).find("main")
+        assert collector._parse_eucc_cards(content) == []
+
+    def test_certificates_page_does_not_fall_back_to_generic(self):
+        # A page with no cards but plenty of long <p>/<li> text must return empty
+        # for the certificates key, so the sanity floor fires instead of garbage.
+        soup = self._soup(
+            "<main><p>" + "EU Cybersecurity Certificates boilerplate " * 5 + "</p>"
+            "<li>14 November 2025</li><li>17 December 2025</li></main>"
+        )
+        with patch.object(collector, "get_html", return_value=soup):
+            items = collector._scrape_eucc_page("/certificates_en", "certificates")
+        assert items == []

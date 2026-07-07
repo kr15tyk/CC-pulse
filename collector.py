@@ -839,8 +839,61 @@ def collect_nato() -> dict:
 
 
 # ── EUCC / ENISA ─────────────────────────────────────────────────────────────
-def _scrape_eucc_page(path: str) -> list:
-    """Scrape a single ENISA EUCC page and return a list of text/link items."""
+def _parse_eucc_cards(content) -> list:
+    """Parse ENISA EUCC certificate cards (Drupal 11 ``ecl-card`` layout).
+
+    Each certificate renders as::
+
+        <article class="ecl-card">
+          <time datetime="...">16 October 2025</time>
+          <div class="ecl-content-block__title"><a href="...">EUCC-3090-...</a></div>
+          <div class="ecl-content-block__description">The product evaluated is ...</div>
+          <dd class="ecl-description-list__definition">(UE) 2024/482 - EUCC</dd>
+        </article>
+
+    The certificate identifier is the EUCC number; the product/vendor name lives
+    in the description text, so ``text`` folds id + date + description together to
+    keep the existing Cisco keyword filter working. Returns ``[]`` when no cards
+    are present so the caller falls back to the table / generic scrape.
+    """
+    items = []
+    for card in content.find_all("article", class_="ecl-card"):
+        title_tag = card.find(class_="ecl-content-block__title")
+        link_tag = title_tag.find("a") if title_tag else None
+        cert_id = link_tag.get_text(strip=True) if link_tag else ""
+        href = link_tag["href"] if link_tag and link_tag.get("href") else ""
+        if href and not href.startswith("http"):
+            href = config.EUCC_BASE + href
+        desc_tag = card.find(class_="ecl-content-block__description")
+        desc = desc_tag.get_text(" ", strip=True) if desc_tag else ""
+        # ENISA descriptions contain &nbsp; (\xa0); normalize to plain spaces and
+        # collapse runs so stored text is stable and diffs don't churn on whitespace.
+        desc = " ".join(desc.replace("\xa0", " ").split())
+        time_tag = card.find("time")
+        cert_date = time_tag.get("datetime", "") if time_tag else ""
+        date_text = time_tag.get_text(strip=True) if time_tag else ""
+        if not cert_id and not desc:
+            continue
+        items.append({
+            "name": cert_id,
+            "text": f"{cert_id} | {date_text} | {desc}"[:400],
+            "href": href,
+            "cert_date": cert_date,
+            "description": desc[:400],
+        })
+    return items
+
+
+def _scrape_eucc_page(path: str, page_key: str = "") -> list:
+    """Scrape a single ENISA EUCC page and return a list of text/link items.
+
+    The certificates page is cards-only: if the ``ecl-card`` parser returns
+    nothing we return empty rather than falling through to the generic text
+    scrape. That generic scrape is what silently produced garbage (bare dates,
+    page chrome) for weeks when ENISA moved off a <table> — a hard empty makes
+    the sanity floor / collapse guard fire instead of masking the break.
+    Other pages (e.g. requirements) still use table + generic fallback.
+    """
     url = config.EUCC_BASE + path
     soup = get_html(url)
     if not soup:
@@ -852,7 +905,14 @@ def _scrape_eucc_page(path: str) -> list:
         or soup.find("div", {"class": "content"})
         or soup
     )
-    # Try table layout first (certificates page)
+    # Certificates page: Drupal 11 ecl-card grid, cards-or-empty (no fallback).
+    if page_key == "certificates":
+        return _parse_eucc_cards(content)
+    # Other pages: try cards, then table, then generic text scrape.
+    cards = _parse_eucc_cards(content)
+    if cards:
+        return cards
+    # Try table layout next (legacy / other pages)
     table = content.find("table")
     if table:
         headers = [th.get_text(strip=True).lower() for th in table.find_all("th")]
@@ -911,7 +971,7 @@ def collect_eucc() -> dict:
     }
     for page_key, path in config.EUCC_PAGES.items():
         log.info("  [EUCC] Scraping page: %s (%s)...", page_key, path)
-        data["pages"][page_key] = _scrape_eucc_page(path)
+        data["pages"][page_key] = _scrape_eucc_page(path, page_key)
         log.info("  -> %d items", len(data["pages"][page_key]))
     # Extract Cisco-specific certificates
     certs = data["pages"].get("certificates", [])
