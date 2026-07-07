@@ -2,6 +2,8 @@
 
 ## Setup
 
+Requires Python 3.10 or newer. The macOS system `python3` is 3.9 and will fail at import on the `X | None` type syntax; build the venv from a newer interpreter (e.g. `brew install python@3.12`).
+
 ```bash
 python3 -m venv .venv
 . .venv/bin/activate
