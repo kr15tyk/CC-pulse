@@ -28,9 +28,11 @@ Each source domain is validated before diffing. NIAP announcements, events, and 
 
 When a collection fails, is incomplete, or drops suspiciously:
 
-1. The affected domain or NIAP subcollection keeps its last-known-good records.
-2. Healthy domains continue normally.
+1. The affected collection keeps its last-known-good records. This applies at three levels: a whole domain that fails its representative check, a NIAP subcollection (announcements, events, policies) validated independently, and any secondary collection — any domain's `pages`/`feeds`/top-level list — that collapses to below half its prior size from a baseline of at least `COLLAPSE_MIN_BASELINE` items. The last catches partial-fetch collapses in collections that aren't the domain's representative check (for example a NIAP `tds`/`pcl_all`/`in_evaluation` list, or an EUCC/NIST/CSfC secondary page/feed) which would otherwise pass domain-level health while emitting false removals.
+2. Healthy domains continue normally; a collection collapse downgrades only the affected domain to `stale`, carrying its failure counter forward.
 3. The degraded state is recorded in `source_health` metadata and workflow logs.
 4. No false mass-removal diff is generated.
+
+A collapse guard covers *volume* — a collection dropping to near-zero. It does not detect a small-but-corrupt payload that stays above the volume threshold; that class of failure is caught, where it is caught, by per-source validation, not by the collapse guard.
 
 A newly introduced source receives a silent first healthy baseline so deployment does not create an alert flood.

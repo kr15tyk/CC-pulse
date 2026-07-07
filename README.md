@@ -20,6 +20,8 @@ The tool detects additions, revisions, status changes, removals, and document re
 
 ## Quick start
 
+Requires Python 3.10 or newer (the code uses `X | None` type syntax). On macOS the system `python3` is 3.9; install a newer interpreter (e.g. `brew install python@3.12`) and build the venv from it.
+
 ```bash
 python3 -m venv .venv
 . .venv/bin/activate
