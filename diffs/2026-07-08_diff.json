@@ -1,0 +1,2741 @@
+{
+  "period_start": "2026-07-07T09:30:56.358233+00:00",
+  "period_end": "2026-07-08T08:15:08.456482+00:00",
+  "niap": {
+    "pps": {
+      "added": [],
+      "removed": [],
+      "sunset_changes": [],
+      "status_changes": []
+    },
+    "tds": {
+      "added": [],
+      "removed": []
+    },
+    "cisco_ndcpp": {
+      "added": [],
+      "removed": [],
+      "newly_archived": []
+    },
+    "pcl_all": {
+      "added": [],
+      "removed": [],
+      "newly_archived": []
+    },
+    "in_evaluation": {
+      "added": [],
+      "removed": [],
+      "current_count": 37
+    },
+    "news": {
+      "added": [],
+      "revised": [],
+      "deactivated": [],
+      "reactivated": [],
+      "removed": []
+    },
+    "events": {
+      "added": [],
+      "revised": [],
+      "deactivated": [],
+      "reactivated": [],
+      "removed": []
+    },
+    "policies": {
+      "added": [],
+      "revised": [],
+      "archived": [],
+      "reactivated": [],
+      "removed": []
+    }
+  },
+  "cc_portal": {
+    "news": {
+      "added": []
+    },
+    "pps": {
+      "added": []
+    },
+    "products": {
+      "added": []
+    }
+  },
+  "cctl_labs": {},
+  "csfc": {
+    "pages": {},
+    "selection_links": {},
+    "feeds": {}
+  },
+  "cc_crypto": {
+    "pages": {}
+  },
+  "nist": {
+    "pages": {
+      "cmvp_mip": {
+        "added": [
+          {
+            "Module Name": "Samsung NVMe TCG Opal SSC SEDs PM9D3a Series",
+            "Vendor Name": "Samsung Electronics Co., Ltd.View Contacts",
+            "Standard": "FIPS 140-3",
+            "Status": "Comment Resolution - Lab  (7/7/2026)",
+            "href": "#d13614",
+            "text": "Samsung NVMe TCG Opal SSC SEDs PM9D3a Series | Samsung Electronics Co., Ltd.View Contacts | FIPS 140-3 | Comment Resolution - Lab  (7/7/2026)"
+          },
+          {
+            "Module Name": "AWS-LC 4 Cryptographic Module (static)",
+            "Vendor Name": "Amazon Web Services, Inc.View Contacts",
+            "Standard": "FIPS 140-3",
+            "Status": "Pending Resubmission  (7/7/2026)",
+            "href": "#d13709",
+            "text": "AWS-LC 4 Cryptographic Module (static) | Amazon Web Services, Inc.View Contacts | FIPS 140-3 | Pending Resubmission  (7/7/2026)"
+          },
+          {
+            "Module Name": "Barco ICMP-XS Cryptographic Module",
+            "Vendor Name": "Barco n.v.View Contacts",
+            "Standard": "FIPS 140-3",
+            "Status": "Comment Resolution - CMVP  (7/7/2026)",
+            "href": "#d13046",
+            "text": "Barco ICMP-XS Cryptographic Module | Barco n.v.View Contacts | FIPS 140-3 | Comment Resolution - CMVP  (7/7/2026)"
+          },
+          {
+            "Module Name": "Canonical Ltd. Ubuntu 22.04 Strongswan Cryptographic Module",
+            "Vendor Name": "Canonical Ltd.View Contacts",
+            "Standard": "FIPS 140-3",
+            "Status": "Review  (7/7/2026)",
+            "href": "#d-9000",
+            "text": "Canonical Ltd. Ubuntu 22.04 Strongswan Cryptographic Module | Canonical Ltd.View Contacts | FIPS 140-3 | Review  (7/7/2026)"
+          },
+          {
+            "Module Name": "Chainguard FIPS Provider for OpenSSL",
+            "Vendor Name": "Chainguard, Inc.View Contacts",
+            "Standard": "FIPS 140-3",
+            "Status": "Review  (7/7/2026)",
+            "href": "#d13608",
+            "text": "Chainguard FIPS Provider for OpenSSL | Chainguard, Inc.View Contacts | FIPS 140-3 | Review  (7/7/2026)"
+          },
+          {
+            "Module Name": "QASM Cryptographic Module",
+            "Vendor Name": "Crypto4A Technologies Inc.View Contacts",
+            "Standard": "FIPS 140-3",
+            "Status": "Comment Resolution - CMVP  (7/7/2026)",
+            "href": "#d12983",
+            "text": "QASM Cryptographic Module | Crypto4A Technologies Inc.View Contacts | FIPS 140-3 | Comment Resolution - CMVP  (7/7/2026)"
+          },
+          {
+            "Module Name": "Go Cryptographic Module",
+            "Vendor Name": "Geomys LLCView Contacts",
+            "Standard": "FIPS 140-3",
+            "Status": "Pending Review  (7/7/2026)",
+            "href": "#d13601",
+            "text": "Go Cryptographic Module | Geomys LLCView Contacts | FIPS 140-3 | Pending Review  (7/7/2026)"
+          },
+          {
+            "Module Name": "B227 True Random Number Generator (TRNG) Cryptographic Module",
+            "Vendor Name": "Google, LLCView Contacts",
+            "Standard": "FIPS 140-3",
+            "Status": "Comment Resolution - Lab  (7/7/2026)",
+            "href": "#d13663",
+            "text": "B227 True Random Number Generator (TRNG) Cryptographic Module | Google, LLCView Contacts | FIPS 140-3 | Comment Resolution - Lab  (7/7/2026)"
+          },
+          {
+            "Module Name": "HID Applets v4.0 on NXP JCOP 4.5 P71D600",
+            "Vendor Name": "HID GlobalView Contacts",
+            "Standard": "FIPS 140-3",
+            "Status": "Finalization  (7/7/2026)",
+            "href": "#d12930",
+            "text": "HID Applets v4.0 on NXP JCOP 4.5 P71D600 | HID GlobalView Contacts | FIPS 140-3 | Finalization  (7/7/2026)"
+          },
+          {
+            "Module Name": "BC-FJA (Bouncy Castle FIPS Java API)",
+            "Vendor Name": "Legion of the Bouncy Castle Inc.View Contacts",
+            "Standard": "FIPS 140-3",
+            "Status": "Cost Recovery  (7/7/2026)",
+            "href": "#d13813",
+            "text": "BC-FJA (Bouncy Castle FIPS Java API) | Legion of the Bouncy Castle Inc.View Contacts | FIPS 140-3 | Cost Recovery  (7/7/2026)"
+          },
+          {
+            "Module Name": "Nokia-SONiC-MACsec",
+            "Vendor Name": "NokiaView Contacts",
+            "Standard": "FIPS 140-3",
+            "Status": "Comment Resolution - CMVP  (7/7/2026)",
+            "href": "#d13481",
+            "text": "Nokia-SONiC-MACsec | NokiaView Contacts | FIPS 140-3 | Comment Resolution - CMVP  (7/7/2026)"
+          },
+          {
+            "Module Name": "Riverbed Cryptographic Module",
+            "Vendor Name": "Riverbed Technology LLCView Contacts",
+            "Standard": "FIPS 140-3",
+            "Status": "Cost Recovery  (7/7/2026)",
+            "href": "#d13814",
+            "text": "Riverbed Cryptographic Module | Riverbed Technology LLCView Contacts | FIPS 140-3 | Cost Recovery  (7/7/2026)"
+          },
+          {
+            "Module Name": "Samsung Kernel Cryptographic Module",
+            "Vendor Name": "Samsung Electronics Co., Ltd.View Contacts",
+            "Standard": "FIPS 140-3",
+            "Status": "Pending Resubmission  (7/7/2026)",
+            "href": "#d13358",
+            "text": "Samsung Kernel Cryptographic Module | Samsung Electronics Co., Ltd.View Contacts | FIPS 140-3 | Pending Resubmission  (7/7/2026)"
+          },
+          {
+            "Module Name": "Samsung SAS TCG Enterprise SSC SEDs PM1653a Series",
+            "Vendor Name": "Samsung Electronics Co., Ltd.View Contacts",
+            "Standard": "FIPS 140-3",
+            "Status": "Finalization  (7/7/2026)",
+            "href": "#d13543",
+            "text": "Samsung SAS TCG Enterprise SSC SEDs PM1653a Series | Samsung Electronics Co., Ltd.View Contacts | FIPS 140-3 | Finalization  (7/7/2026)"
+          },
+          {
+            "Module Name": "Luna T7",
+            "Vendor Name": "Thales Trusted Cyber TechnologiesView Contacts",
+            "Standard": "FIPS 140-3",
+            "Status": "Comment Resolution - Lab  (7/7/2026)",
+            "href": "#d13015",
+            "text": "Luna T7 | Thales Trusted Cyber TechnologiesView Contacts | FIPS 140-3 | Comment Resolution - Lab  (7/7/2026)"
+          },
+          {
+            "Module Name": "Trellix Intrusion Prevention System Sensor NS3100, NS3200, NS5100 and NS5200",
+            "Vendor Name": "TrellixView Contacts",
+            "Standard": "FIPS 140-3",
+            "Status": "Finalization  (7/7/2026)",
+            "href": "#d13158",
+            "text": "Trellix Intrusion Prevention System Sensor NS3100, NS3200, NS5100 and NS5200 | TrellixView Contacts | FIPS 140-3 | Finalization  (7/7/2026)"
+          },
+          {
+            "Module Name": "Trellix Intrusion Prevention System Sensor NS3600",
+            "Vendor Name": "TrellixView Contacts",
+            "Standard": "FIPS 140-3",
+            "Status": "Finalization  (7/7/2026)",
+            "href": "#d13155",
+            "text": "Trellix Intrusion Prevention System Sensor NS3600 | TrellixView Contacts | FIPS 140-3 | Finalization  (7/7/2026)"
+          },
+          {
+            "Module Name": "Trellix Intrusion Prevention System Sensor NS7150, NS7250 and NS7350",
+            "Vendor Name": "TrellixView Contacts",
+            "Standard": "FIPS 140-3",
+            "Status": "Finalization  (7/7/2026)",
+            "href": "#d13157",
+            "text": "Trellix Intrusion Prevention System Sensor NS7150, NS7250 and NS7350 | TrellixView Contacts | FIPS 140-3 | Finalization  (7/7/2026)"
+          },
+          {
+            "Module Name": "Trellix Intrusion Prevention System Sensor NS7500",
+            "Vendor Name": "TrellixView Contacts",
+            "Standard": "FIPS 140-3",
+            "Status": "Finalization  (7/7/2026)",
+            "href": "#d13153",
+            "text": "Trellix Intrusion Prevention System Sensor NS7500 | TrellixView Contacts | FIPS 140-3 | Finalization  (7/7/2026)"
+          },
+          {
+            "Module Name": "Trellix Intrusion Prevention System Sensor NS7600",
+            "Vendor Name": "TrellixView Contacts",
+            "Standard": "FIPS 140-3",
+            "Status": "Finalization  (7/7/2026)",
+            "href": "#d13156",
+            "text": "Trellix Intrusion Prevention System Sensor NS7600 | TrellixView Contacts | FIPS 140-3 | Finalization  (7/7/2026)"
+          },
+          {
+            "Module Name": "Trellix Intrusion Prevention System Sensor NS9500",
+            "Vendor Name": "TrellixView Contacts",
+            "Standard": "FIPS 140-3",
+            "Status": "Finalization  (7/7/2026)",
+            "href": "#d13154",
+            "text": "Trellix Intrusion Prevention System Sensor NS9500 | TrellixView Contacts | FIPS 140-3 | Finalization  (7/7/2026)"
+          },
+          {
+            "Module Name": "Trellix Intrusion Prevention System Sensor NS9600",
+            "Vendor Name": "TrellixView Contacts",
+            "Standard": "FIPS 140-3",
+            "Status": "Finalization  (7/7/2026)",
+            "href": "#d13209",
+            "text": "Trellix Intrusion Prevention System Sensor NS9600 | TrellixView Contacts | FIPS 140-3 | Finalization  (7/7/2026)"
+          },
+          {
+            "Module Name": "DB Series SSD Drives",
+            "Vendor Name": "UD info Corp.View Contacts",
+            "Standard": "FIPS 140-3",
+            "Status": "Review  (7/7/2026)",
+            "href": "#d13363",
+            "text": "DB Series SSD Drives | UD info Corp.View Contacts | FIPS 140-3 | Review  (7/7/2026)"
+          },
+          {
+            "Module Name": "Displayed",
+            "Vendor Name": "273",
+            "href": "",
+            "text": "Displayed | 273"
+          },
+          {
+            "Module Name": "Total",
+            "Vendor Name": "285",
+            "href": "",
+            "text": "Total | 285"
+          }
+        ],
+        "removed": [
+          {
+            "Module Name": "Samsung NVMe TCG Opal SSC SEDs PM9D3a Series",
+            "Vendor Name": "Samsung Electronics Co., Ltd.View Contacts",
+            "Standard": "FIPS 140-3",
+            "Status": "Review  (5/28/2026)",
+            "href": "#d13624",
+            "text": "Samsung NVMe TCG Opal SSC SEDs PM9D3a Series | Samsung Electronics Co., Ltd.View Contacts | FIPS 140-3 | Review  (5/28/2026)"
+          },
+          {
+            "Module Name": "Samsung NVMe TCG Opal SSC SEDs PM9D3a Series",
+            "Vendor Name": "Samsung Electronics Co., Ltd.View Contacts",
+            "Standard": "FIPS 140-3",
+            "Status": "Review  (6/1/2026)",
+            "href": "#d13614",
+            "text": "Samsung NVMe TCG Opal SSC SEDs PM9D3a Series | Samsung Electronics Co., Ltd.View Contacts | FIPS 140-3 | Review  (6/1/2026)"
+          },
+          {
+            "Module Name": "AWS-LC 4 Cryptographic Module (static)",
+            "Vendor Name": "Amazon Web Services, Inc.View Contacts",
+            "Standard": "FIPS 140-3",
+            "Status": "Pending Review  (5/7/2026)",
+            "href": "#d13709",
+            "text": "AWS-LC 4 Cryptographic Module (static) | Amazon Web Services, Inc.View Contacts | FIPS 140-3 | Pending Review  (5/7/2026)"
+          },
+          {
+            "Module Name": "Barco ICMP-XS Cryptographic Module",
+            "Vendor Name": "Barco n.v.View Contacts",
+            "Standard": "FIPS 140-3",
+            "Status": "Comment Resolution - Lab  (4/9/2026)",
+            "href": "#d13046",
+            "text": "Barco ICMP-XS Cryptographic Module | Barco n.v.View Contacts | FIPS 140-3 | Comment Resolution - Lab  (4/9/2026)"
+          },
+          {
+            "Module Name": "Canonical Ltd. Ubuntu 22.04 Strongswan Cryptographic Module",
+            "Vendor Name": "Canonical Ltd.View Contacts",
+            "Standard": "FIPS 140-3",
+            "Status": "Pending Review  (3/17/2026)",
+            "href": "#d-9000",
+            "text": "Canonical Ltd. Ubuntu 22.04 Strongswan Cryptographic Module | Canonical Ltd.View Contacts | FIPS 140-3 | Pending Review  (3/17/2026)"
+          },
+          {
+            "Module Name": "Chainguard FIPS Provider for OpenSSL",
+            "Vendor Name": "Chainguard, Inc.View Contacts",
+            "Standard": "FIPS 140-3",
+            "Status": "Pending Review  (6/17/2026)",
+            "href": "#d13608",
+            "text": "Chainguard FIPS Provider for OpenSSL | Chainguard, Inc.View Contacts | FIPS 140-3 | Pending Review  (6/17/2026)"
+          },
+          {
+            "Module Name": "TuxCare Kernel Crypto API",
+            "Vendor Name": "Cloud Linux Software, Inc. d/b/a TuxCareView Contacts",
+            "Standard": "FIPS 140-3",
+            "Status": "Comment Resolution - CMVP  (6/23/2026)",
+            "href": "#d13247",
+            "text": "TuxCare Kernel Crypto API | Cloud Linux Software, Inc. d/b/a TuxCareView Contacts | FIPS 140-3 | Comment Resolution - CMVP  (6/23/2026)"
+          },
+          {
+            "Module Name": "TuxCare OpenSSL FIPS Provider",
+            "Vendor Name": "Cloud Linux Software, Inc. d/b/a TuxCareView Contacts",
+            "Standard": "FIPS 140-3",
+            "Status": "Comment Resolution - CMVP  (6/23/2026)",
+            "href": "#d13246",
+            "text": "TuxCare OpenSSL FIPS Provider | Cloud Linux Software, Inc. d/b/a TuxCareView Contacts | FIPS 140-3 | Comment Resolution - CMVP  (6/23/2026)"
+          },
+          {
+            "Module Name": "QASM Cryptographic Module",
+            "Vendor Name": "Crypto4A Technologies Inc.View Contacts",
+            "Standard": "FIPS 140-3",
+            "Status": "Comment Resolution - Lab  (5/25/2026)",
+            "href": "#d12983",
+            "text": "QASM Cryptographic Module | Crypto4A Technologies Inc.View Contacts | FIPS 140-3 | Comment Resolution - Lab  (5/25/2026)"
+          },
+          {
+            "Module Name": "F5OS-C Cryptographic Module",
+            "Vendor Name": "F5, Inc.View Contacts",
+            "Standard": "FIPS 140-3",
+            "Status": "Comment Resolution - CMVP  (7/3/2026)",
+            "href": "#d13017",
+            "text": "F5OS-C Cryptographic Module | F5, Inc.View Contacts | FIPS 140-3 | Comment Resolution - CMVP  (7/3/2026)"
+          },
+          {
+            "Module Name": "Go Cryptographic Module",
+            "Vendor Name": "Geomys LLCView Contacts",
+            "Standard": "FIPS 140-3",
+            "Status": "Pending Resubmission  (7/6/2026)",
+            "href": "#d13601",
+            "text": "Go Cryptographic Module | Geomys LLCView Contacts | FIPS 140-3 | Pending Resubmission  (7/6/2026)"
+          },
+          {
+            "Module Name": "B227 True Random Number Generator (TRNG) Cryptographic Module",
+            "Vendor Name": "Google, LLCView Contacts",
+            "Standard": "FIPS 140-3",
+            "Status": "Review  (5/12/2026)",
+            "href": "#d13501",
+            "text": "B227 True Random Number Generator (TRNG) Cryptographic Module | Google, LLCView Contacts | FIPS 140-3 | Review  (5/12/2026)"
+          },
+          {
+            "Module Name": "HID Applets v4.0 on NXP JCOP 4.5 P71D600",
+            "Vendor Name": "HID GlobalView Contacts",
+            "Standard": "FIPS 140-3",
+            "Status": "Comment Resolution - CMVP  (6/26/2026)",
+            "href": "#d12930",
+            "text": "HID Applets v4.0 on NXP JCOP 4.5 P71D600 | HID GlobalView Contacts | FIPS 140-3 | Comment Resolution - CMVP  (6/26/2026)"
+          },
+          {
+            "Module Name": "BC-FJA (Bouncy Castle FIPS Java API)",
+            "Vendor Name": "Legion of the Bouncy Castle Inc.View Contacts",
+            "Standard": "FIPS 140-3",
+            "Status": "Cost Recovery  (6/30/2026)",
+            "href": "#d13808",
+            "text": "BC-FJA (Bouncy Castle FIPS Java API) | Legion of the Bouncy Castle Inc.View Contacts | FIPS 140-3 | Cost Recovery  (6/30/2026)"
+          },
+          {
+            "Module Name": "Microchip Trust Anchor TA101",
+            "Vendor Name": "Microchip Technology IncView Contacts",
+            "Standard": "FIPS 140-3",
+            "Status": "Comment Resolution - CMVP  (6/23/2026)",
+            "href": "#d13009",
+            "text": "Microchip Trust Anchor TA101 | Microchip Technology IncView Contacts | FIPS 140-3 | Comment Resolution - CMVP  (6/23/2026)"
+          },
+          {
+            "Module Name": "Nokia-SONiC-MACsec",
+            "Vendor Name": "NokiaView Contacts",
+            "Standard": "FIPS 140-3",
+            "Status": "Comment Resolution - Lab  (7/6/2026)",
+            "href": "#d13481",
+            "text": "Nokia-SONiC-MACsec | NokiaView Contacts | FIPS 140-3 | Comment Resolution - Lab  (7/6/2026)"
+          },
+          {
+            "Module Name": "PL-2000GM and PL-2000GA",
+            "Vendor Name": "PacketLight Networks Ltd.View Contacts",
+            "Standard": "FIPS 140-3",
+            "Status": "Comment Resolution - CMVP  (6/26/2026)",
+            "href": "#d13352",
+            "text": "PL-2000GM and PL-2000GA | PacketLight Networks Ltd.View Contacts | FIPS 140-3 | Comment Resolution - CMVP  (6/26/2026)"
+          },
+          {
+            "Module Name": "Samsung Kernel Cryptographic Module",
+            "Vendor Name": "Samsung Electronics Co., Ltd.View Contacts",
+            "Standard": "FIPS 140-3",
+            "Status": "Pending Review  (5/5/2026)",
+            "href": "#d13358",
+            "text": "Samsung Kernel Cryptographic Module | Samsung Electronics Co., Ltd.View Contacts | FIPS 140-3 | Pending Review  (5/5/2026)"
+          },
+          {
+            "Module Name": "Samsung SAS TCG Enterprise SSC SEDs PM1653a Series",
+            "Vendor Name": "Samsung Electronics Co., Ltd.View Contacts",
+            "Standard": "FIPS 140-3",
+            "Status": "Comment Resolution - CMVP  (6/22/2026)",
+            "href": "#d13543",
+            "text": "Samsung SAS TCG Enterprise SSC SEDs PM1653a Series | Samsung Electronics Co., Ltd.View Contacts | FIPS 140-3 | Comment Resolution - CMVP  (6/22/2026)"
+          },
+          {
+            "Module Name": "Luna T7",
+            "Vendor Name": "Thales Trusted Cyber TechnologiesView Contacts",
+            "Standard": "FIPS 140-3",
+            "Status": "Comment Resolution - CMVP  (6/24/2026)",
+            "href": "#d13015",
+            "text": "Luna T7 | Thales Trusted Cyber TechnologiesView Contacts | FIPS 140-3 | Comment Resolution - CMVP  (6/24/2026)"
+          },
+          {
+            "Module Name": "Trellix Intrusion Prevention System Sensor NS3100, NS3200, NS5100 and NS5200",
+            "Vendor Name": "TrellixView Contacts",
+            "Standard": "FIPS 140-3",
+            "Status": "Comment Resolution - CMVP  (7/1/2026)",
+            "href": "#d13158",
+            "text": "Trellix Intrusion Prevention System Sensor NS3100, NS3200, NS5100 and NS5200 | TrellixView Contacts | FIPS 140-3 | Comment Resolution - CMVP  (7/1/2026)"
+          },
+          {
+            "Module Name": "Trellix Intrusion Prevention System Sensor NS3600",
+            "Vendor Name": "TrellixView Contacts",
+            "Standard": "FIPS 140-3",
+            "Status": "Comment Resolution - CMVP  (6/30/2026)",
+            "href": "#d13155",
+            "text": "Trellix Intrusion Prevention System Sensor NS3600 | TrellixView Contacts | FIPS 140-3 | Comment Resolution - CMVP  (6/30/2026)"
+          },
+          {
+            "Module Name": "Trellix Intrusion Prevention System Sensor NS7150, NS7250 and NS7350",
+            "Vendor Name": "TrellixView Contacts",
+            "Standard": "FIPS 140-3",
+            "Status": "Comment Resolution - CMVP  (7/1/2026)",
+            "href": "#d13157",
+            "text": "Trellix Intrusion Prevention System Sensor NS7150, NS7250 and NS7350 | TrellixView Contacts | FIPS 140-3 | Comment Resolution - CMVP  (7/1/2026)"
+          },
+          {
+            "Module Name": "Trellix Intrusion Prevention System Sensor NS7500",
+            "Vendor Name": "TrellixView Contacts",
+            "Standard": "FIPS 140-3",
+            "Status": "Comment Resolution - CMVP  (6/30/2026)",
+            "href": "#d13153",
+            "text": "Trellix Intrusion Prevention System Sensor NS7500 | TrellixView Contacts | FIPS 140-3 | Comment Resolution - CMVP  (6/30/2026)"
+          },
+          {
+            "Module Name": "Trellix Intrusion Prevention System Sensor NS7600",
+            "Vendor Name": "TrellixView Contacts",
+            "Standard": "FIPS 140-3",
+            "Status": "Comment Resolution - CMVP  (6/30/2026)",
+            "href": "#d13156",
+            "text": "Trellix Intrusion Prevention System Sensor NS7600 | TrellixView Contacts | FIPS 140-3 | Comment Resolution - CMVP  (6/30/2026)"
+          },
+          {
+            "Module Name": "Trellix Intrusion Prevention System Sensor NS9500",
+            "Vendor Name": "TrellixView Contacts",
+            "Standard": "FIPS 140-3",
+            "Status": "Comment Resolution - CMVP  (6/30/2026)",
+            "href": "#d13154",
+            "text": "Trellix Intrusion Prevention System Sensor NS9500 | TrellixView Contacts | FIPS 140-3 | Comment Resolution - CMVP  (6/30/2026)"
+          },
+          {
+            "Module Name": "Trellix Intrusion Prevention System Sensor NS9600",
+            "Vendor Name": "TrellixView Contacts",
+            "Standard": "FIPS 140-3",
+            "Status": "Comment Resolution - CMVP  (7/1/2026)",
+            "href": "#d13209",
+            "text": "Trellix Intrusion Prevention System Sensor NS9600 | TrellixView Contacts | FIPS 140-3 | Comment Resolution - CMVP  (7/1/2026)"
+          },
+          {
+            "Module Name": "DB Series SSD Drives",
+            "Vendor Name": "UD info Corp.View Contacts",
+            "Standard": "FIPS 140-3",
+            "Status": "Pending Review  (6/17/2026)",
+            "href": "#d13363",
+            "text": "DB Series SSD Drives | UD info Corp.View Contacts | FIPS 140-3 | Pending Review  (6/17/2026)"
+          },
+          {
+            "Module Name": "Displayed",
+            "Vendor Name": "277",
+            "href": "",
+            "text": "Displayed | 277"
+          },
+          {
+            "Module Name": "Total",
+            "Vendor Name": "289",
+            "href": "",
+            "text": "Total | 289"
+          }
+        ]
+      }
+    },
+    "cmvp_mip": {
+      "added": [
+        {
+          "Module Name": "Riverbed Cryptographic Module",
+          "Vendor Name": "Riverbed Technology LLCView Contacts",
+          "Standard": "FIPS 140-3",
+          "Status": "Cost Recovery  (7/7/2026)",
+          "href": "#d13814",
+          "text": "Riverbed Cryptographic Module | Riverbed Technology LLCView Contacts | FIPS 140-3 | Cost Recovery  (7/7/2026)"
+        }
+      ],
+      "removed": [
+        {
+          "Module Name": "Microchip Trust Anchor TA101",
+          "Vendor Name": "Microchip Technology IncView Contacts",
+          "Standard": "FIPS 140-3",
+          "Status": "Comment Resolution - CMVP  (6/23/2026)",
+          "href": "#d13009",
+          "text": "Microchip Trust Anchor TA101 | Microchip Technology IncView Contacts | FIPS 140-3 | Comment Resolution - CMVP  (6/23/2026)"
+        },
+        {
+          "Module Name": "TuxCare OpenSSL FIPS Provider",
+          "Vendor Name": "Cloud Linux Software, Inc. d/b/a TuxCareView Contacts",
+          "Standard": "FIPS 140-3",
+          "Status": "Comment Resolution - CMVP  (6/23/2026)",
+          "href": "#d13246",
+          "text": "TuxCare OpenSSL FIPS Provider | Cloud Linux Software, Inc. d/b/a TuxCareView Contacts | FIPS 140-3 | Comment Resolution - CMVP  (6/23/2026)"
+        },
+        {
+          "Module Name": "PL-2000GM and PL-2000GA",
+          "Vendor Name": "PacketLight Networks Ltd.View Contacts",
+          "Standard": "FIPS 140-3",
+          "Status": "Comment Resolution - CMVP  (6/26/2026)",
+          "href": "#d13352",
+          "text": "PL-2000GM and PL-2000GA | PacketLight Networks Ltd.View Contacts | FIPS 140-3 | Comment Resolution - CMVP  (6/26/2026)"
+        },
+        {
+          "Module Name": "TuxCare Kernel Crypto API",
+          "Vendor Name": "Cloud Linux Software, Inc. d/b/a TuxCareView Contacts",
+          "Standard": "FIPS 140-3",
+          "Status": "Comment Resolution - CMVP  (6/23/2026)",
+          "href": "#d13247",
+          "text": "TuxCare Kernel Crypto API | Cloud Linux Software, Inc. d/b/a TuxCareView Contacts | FIPS 140-3 | Comment Resolution - CMVP  (6/23/2026)"
+        },
+        {
+          "Module Name": "F5OS-C Cryptographic Module",
+          "Vendor Name": "F5, Inc.View Contacts",
+          "Standard": "FIPS 140-3",
+          "Status": "Comment Resolution - CMVP  (7/3/2026)",
+          "href": "#d13017",
+          "text": "F5OS-C Cryptographic Module | F5, Inc.View Contacts | FIPS 140-3 | Comment Resolution - CMVP  (7/3/2026)"
+        }
+      ],
+      "status_changes": [
+        {
+          "Module Name": "Apple corecrypto Module 18.3 [Apple silicon, Kernel, Software, SL1]",
+          "Vendor Name": "Apple Inc.View Contacts",
+          "Standard": "FIPS 140-3",
+          "Status": "Comment Resolution - CMVP  (7/7/2026)",
+          "href": "#d13200",
+          "text": "Apple corecrypto Module 18.3 [Apple silicon, Kernel, Software, SL1] | Apple Inc.View Contacts | FIPS 140-3 | Comment Resolution - CMVP  (7/7/2026)",
+          "old_status": "Comment Resolution - Lab  (4/30/2026)",
+          "new_status": "Comment Resolution - CMVP  (7/7/2026)"
+        },
+        {
+          "Module Name": "Trellix Intrusion Prevention System Sensor NS7500",
+          "Vendor Name": "TrellixView Contacts",
+          "Standard": "FIPS 140-3",
+          "Status": "Finalization  (7/7/2026)",
+          "href": "#d13153",
+          "text": "Trellix Intrusion Prevention System Sensor NS7500 | TrellixView Contacts | FIPS 140-3 | Finalization  (7/7/2026)",
+          "old_status": "Comment Resolution - CMVP  (6/30/2026)",
+          "new_status": "Finalization  (7/7/2026)"
+        },
+        {
+          "Module Name": "DB Series SSD Drives",
+          "Vendor Name": "UD info Corp.View Contacts",
+          "Standard": "FIPS 140-3",
+          "Status": "Review  (7/7/2026)",
+          "href": "#d13363",
+          "text": "DB Series SSD Drives | UD info Corp.View Contacts | FIPS 140-3 | Review  (7/7/2026)",
+          "old_status": "Pending Review  (6/17/2026)",
+          "new_status": "Review  (7/7/2026)"
+        },
+        {
+          "Module Name": "Trellix Intrusion Prevention System Sensor NS3100, NS3200, NS5100 and NS5200",
+          "Vendor Name": "TrellixView Contacts",
+          "Standard": "FIPS 140-3",
+          "Status": "Finalization  (7/7/2026)",
+          "href": "#d13158",
+          "text": "Trellix Intrusion Prevention System Sensor NS3100, NS3200, NS5100 and NS5200 | TrellixView Contacts | FIPS 140-3 | Finalization  (7/7/2026)",
+          "old_status": "Comment Resolution - CMVP  (7/1/2026)",
+          "new_status": "Finalization  (7/7/2026)"
+        },
+        {
+          "Module Name": "Barco ICMP-XS Cryptographic Module",
+          "Vendor Name": "Barco n.v.View Contacts",
+          "Standard": "FIPS 140-3",
+          "Status": "Comment Resolution - CMVP  (7/7/2026)",
+          "href": "#d13046",
+          "text": "Barco ICMP-XS Cryptographic Module | Barco n.v.View Contacts | FIPS 140-3 | Comment Resolution - CMVP  (7/7/2026)",
+          "old_status": "Comment Resolution - Lab  (4/9/2026)",
+          "new_status": "Comment Resolution - CMVP  (7/7/2026)"
+        },
+        {
+          "Module Name": "Samsung NVMe TCG Opal SSC SEDs PM9D3a Series",
+          "Vendor Name": "Samsung Electronics Co., Ltd.View Contacts",
+          "Standard": "FIPS 140-3",
+          "Status": "Comment Resolution - Lab  (7/7/2026)",
+          "href": "#d13614",
+          "text": "Samsung NVMe TCG Opal SSC SEDs PM9D3a Series | Samsung Electronics Co., Ltd.View Contacts | FIPS 140-3 | Comment Resolution - Lab  (7/7/2026)",
+          "old_status": "Review  (6/1/2026)",
+          "new_status": "Comment Resolution - Lab  (7/7/2026)"
+        },
+        {
+          "Module Name": "Motorola Solutions Advanced Crypto Engine (MACE) HSM - Security Level 2",
+          "Vendor Name": "Motorola Solutions, Inc.View Contacts",
+          "Standard": "FIPS 140-3",
+          "Status": "Review  (7/7/2026)",
+          "href": "#d13224",
+          "text": "Motorola Solutions Advanced Crypto Engine (MACE) HSM - Security Level 2 | Motorola Solutions, Inc.View Contacts | FIPS 140-3 | Review  (7/7/2026)",
+          "old_status": "Pending Review  (5/27/2026)",
+          "new_status": "Review  (7/7/2026)"
+        },
+        {
+          "Module Name": "HID Applets v4.0 on NXP JCOP 4.5 P71D600",
+          "Vendor Name": "HID GlobalView Contacts",
+          "Standard": "FIPS 140-3",
+          "Status": "Finalization  (7/7/2026)",
+          "href": "#d12930",
+          "text": "HID Applets v4.0 on NXP JCOP 4.5 P71D600 | HID GlobalView Contacts | FIPS 140-3 | Finalization  (7/7/2026)",
+          "old_status": "Comment Resolution - CMVP  (6/26/2026)",
+          "new_status": "Finalization  (7/7/2026)"
+        },
+        {
+          "Module Name": "AWS-LC 4 Cryptographic Module (static)",
+          "Vendor Name": "Amazon Web Services, Inc.View Contacts",
+          "Standard": "FIPS 140-3",
+          "Status": "Pending Resubmission  (7/7/2026)",
+          "href": "#d13709",
+          "text": "AWS-LC 4 Cryptographic Module (static) | Amazon Web Services, Inc.View Contacts | FIPS 140-3 | Pending Resubmission  (7/7/2026)",
+          "old_status": "Pending Review  (5/7/2026)",
+          "new_status": "Pending Resubmission  (7/7/2026)"
+        },
+        {
+          "Module Name": "Samsung NVMe TCG Opal SSC SEDs PM1753 Series",
+          "Vendor Name": "Samsung Electronics Co., Ltd.View Contacts",
+          "Standard": "FIPS 140-3",
+          "Status": "Pending Resubmission  (4/30/2026)",
+          "href": "#d13621",
+          "text": "Samsung NVMe TCG Opal SSC SEDs PM1753 Series | Samsung Electronics Co., Ltd.View Contacts | FIPS 140-3 | Pending Resubmission  (4/30/2026)",
+          "old_status": "Pending Resubmission  (4/29/2026)",
+          "new_status": "Pending Resubmission  (4/30/2026)"
+        },
+        {
+          "Module Name": "ST Engineering & i-Engine SAM Applet on NXP P71D600",
+          "Vendor Name": "ST Engineering Urban Solutions Ltd. and i-Engine Pte Ltd.View Contacts",
+          "Standard": "FIPS 140-3",
+          "Status": "Finalization  (7/7/2026)",
+          "href": "#d13082",
+          "text": "ST Engineering & i-Engine SAM Applet on NXP P71D600 | ST Engineering Urban Solutions Ltd. and i-Engine Pte Ltd.View Contacts | FIPS 140-3 | Finalization  (7/7/2026)",
+          "old_status": "Comment Resolution - CMVP  (7/6/2026)",
+          "new_status": "Finalization  (7/7/2026)"
+        },
+        {
+          "Module Name": "Chainguard FIPS Provider for OpenSSL",
+          "Vendor Name": "Chainguard, Inc.View Contacts",
+          "Standard": "FIPS 140-3",
+          "Status": "Review  (7/7/2026)",
+          "href": "#d13608",
+          "text": "Chainguard FIPS Provider for OpenSSL | Chainguard, Inc.View Contacts | FIPS 140-3 | Review  (7/7/2026)",
+          "old_status": "Pending Review  (6/17/2026)",
+          "new_status": "Review  (7/7/2026)"
+        },
+        {
+          "Module Name": "Luna T7",
+          "Vendor Name": "Thales Trusted Cyber TechnologiesView Contacts",
+          "Standard": "FIPS 140-3",
+          "Status": "Comment Resolution - Lab  (7/7/2026)",
+          "href": "#d13015",
+          "text": "Luna T7 | Thales Trusted Cyber TechnologiesView Contacts | FIPS 140-3 | Comment Resolution - Lab  (7/7/2026)",
+          "old_status": "Comment Resolution - CMVP  (6/24/2026)",
+          "new_status": "Comment Resolution - Lab  (7/7/2026)"
+        },
+        {
+          "Module Name": "Code Siren Post-Quantum Cryptographic (PQC) Library for Desktop",
+          "Vendor Name": "Code Siren, LLCView Contacts",
+          "Standard": "FIPS 140-3",
+          "Status": "Pending Resubmission  (7/7/2026)",
+          "href": "#d13675",
+          "text": "Code Siren Post-Quantum Cryptographic (PQC) Library for Desktop | Code Siren, LLCView Contacts | FIPS 140-3 | Pending Resubmission  (7/7/2026)",
+          "old_status": "Pending Review  (2/13/2026)",
+          "new_status": "Pending Resubmission  (7/7/2026)"
+        },
+        {
+          "Module Name": "Nokia-SONiC-MACsec",
+          "Vendor Name": "NokiaView Contacts",
+          "Standard": "FIPS 140-3",
+          "Status": "Comment Resolution - CMVP  (7/7/2026)",
+          "href": "#d13481",
+          "text": "Nokia-SONiC-MACsec | NokiaView Contacts | FIPS 140-3 | Comment Resolution - CMVP  (7/7/2026)",
+          "old_status": "Comment Resolution - Lab  (7/6/2026)",
+          "new_status": "Comment Resolution - CMVP  (7/7/2026)"
+        },
+        {
+          "Module Name": "Trellix Intrusion Prevention System Sensor NS3600",
+          "Vendor Name": "TrellixView Contacts",
+          "Standard": "FIPS 140-3",
+          "Status": "Finalization  (7/7/2026)",
+          "href": "#d13155",
+          "text": "Trellix Intrusion Prevention System Sensor NS3600 | TrellixView Contacts | FIPS 140-3 | Finalization  (7/7/2026)",
+          "old_status": "Comment Resolution - CMVP  (6/30/2026)",
+          "new_status": "Finalization  (7/7/2026)"
+        },
+        {
+          "Module Name": "Trellix Intrusion Prevention System Sensor NS9600",
+          "Vendor Name": "TrellixView Contacts",
+          "Standard": "FIPS 140-3",
+          "Status": "Finalization  (7/7/2026)",
+          "href": "#d13209",
+          "text": "Trellix Intrusion Prevention System Sensor NS9600 | TrellixView Contacts | FIPS 140-3 | Finalization  (7/7/2026)",
+          "old_status": "Comment Resolution - CMVP  (7/1/2026)",
+          "new_status": "Finalization  (7/7/2026)"
+        },
+        {
+          "Module Name": "Samsung NVMe TCG Opal SSC SEDs BM1743 Series",
+          "Vendor Name": "Samsung Electronics Co., Ltd.View Contacts",
+          "Standard": "FIPS 140-3",
+          "Status": "Comment Resolution - Lab  (7/7/2026)",
+          "href": "#d13295",
+          "text": "Samsung NVMe TCG Opal SSC SEDs BM1743 Series | Samsung Electronics Co., Ltd.View Contacts | FIPS 140-3 | Comment Resolution - Lab  (7/7/2026)",
+          "old_status": "Comment Resolution - CMVP  (6/22/2026)",
+          "new_status": "Comment Resolution - Lab  (7/7/2026)"
+        },
+        {
+          "Module Name": "Trellix Intrusion Prevention System Sensor NS7150, NS7250 and NS7350",
+          "Vendor Name": "TrellixView Contacts",
+          "Standard": "FIPS 140-3",
+          "Status": "Finalization  (7/7/2026)",
+          "href": "#d13157",
+          "text": "Trellix Intrusion Prevention System Sensor NS7150, NS7250 and NS7350 | TrellixView Contacts | FIPS 140-3 | Finalization  (7/7/2026)",
+          "old_status": "Comment Resolution - CMVP  (7/1/2026)",
+          "new_status": "Finalization  (7/7/2026)"
+        },
+        {
+          "Module Name": "Trellix Intrusion Prevention System Sensor NS9500",
+          "Vendor Name": "TrellixView Contacts",
+          "Standard": "FIPS 140-3",
+          "Status": "Finalization  (7/7/2026)",
+          "href": "#d13154",
+          "text": "Trellix Intrusion Prevention System Sensor NS9500 | TrellixView Contacts | FIPS 140-3 | Finalization  (7/7/2026)",
+          "old_status": "Comment Resolution - CMVP  (6/30/2026)",
+          "new_status": "Finalization  (7/7/2026)"
+        },
+        {
+          "Module Name": "Trellix Intrusion Prevention System Sensor NS7600",
+          "Vendor Name": "TrellixView Contacts",
+          "Standard": "FIPS 140-3",
+          "Status": "Finalization  (7/7/2026)",
+          "href": "#d13156",
+          "text": "Trellix Intrusion Prevention System Sensor NS7600 | TrellixView Contacts | FIPS 140-3 | Finalization  (7/7/2026)",
+          "old_status": "Comment Resolution - CMVP  (6/30/2026)",
+          "new_status": "Finalization  (7/7/2026)"
+        },
+        {
+          "Module Name": "QASM Cryptographic Module",
+          "Vendor Name": "Crypto4A Technologies Inc.View Contacts",
+          "Standard": "FIPS 140-3",
+          "Status": "Comment Resolution - CMVP  (7/7/2026)",
+          "href": "#d12983",
+          "text": "QASM Cryptographic Module | Crypto4A Technologies Inc.View Contacts | FIPS 140-3 | Comment Resolution - CMVP  (7/7/2026)",
+          "old_status": "Comment Resolution - Lab  (5/25/2026)",
+          "new_status": "Comment Resolution - CMVP  (7/7/2026)"
+        },
+        {
+          "Module Name": "Check Point Gaia OS R82.10 Cryptography Module running on Check Point Firewall models MHO140, MHO175, 3920, 3950, 3970, 3980, 9100, 9200, 9300, 9400, 9700, 9800, 19100, 19200, 29100, 29200, 700S, 700M, 7000L, 7000XL, 7000Ultra, and Cloud Firewall and Cloud Management series VM with VMware ESXi 8.0.0",
+          "Vendor Name": "Check Point Software TechnologiesView Contacts",
+          "Standard": "FIPS 140-3",
+          "Status": "Pending Review  (7/7/2026)",
+          "href": "#d13801",
+          "text": "Check Point Gaia OS R82.10 Cryptography Module running on Check Point Firewall models MHO140, MHO175, 3920, 3950, 3970, 3980, 9100, 9200, 9300, 9400, 9700, 9800, 19100, 19200, 29100, 29200, 700S, 700M, 7000L, 7000XL, 7000Ultra, and Cloud Firewall and Cloud Management series VM with VMware ESXi 8.0.0 | Check Point Software TechnologiesView Contacts | FIPS 140-3 | Pending Review  (7/7/2026)",
+          "old_status": "Cost Recovery  (6/26/2026)",
+          "new_status": "Pending Review  (7/7/2026)"
+        },
+        {
+          "Module Name": "Go Cryptographic Module",
+          "Vendor Name": "Geomys LLCView Contacts",
+          "Standard": "FIPS 140-3",
+          "Status": "Pending Review  (7/7/2026)",
+          "href": "#d13601",
+          "text": "Go Cryptographic Module | Geomys LLCView Contacts | FIPS 140-3 | Pending Review  (7/7/2026)",
+          "old_status": "Pending Resubmission  (7/6/2026)",
+          "new_status": "Pending Review  (7/7/2026)"
+        },
+        {
+          "Module Name": "Hitachi Embedded Storage Manager Kernel Crypto API Cryptographic Module",
+          "Vendor Name": "Hitachi Vantara, Ltd.View Contacts",
+          "Standard": "FIPS 140-3",
+          "Status": "Pending Review  (7/7/2026)",
+          "href": "#d13805",
+          "text": "Hitachi Embedded Storage Manager Kernel Crypto API Cryptographic Module | Hitachi Vantara, Ltd.View Contacts | FIPS 140-3 | Pending Review  (7/7/2026)",
+          "old_status": "Cost Recovery  (6/29/2026)",
+          "new_status": "Pending Review  (7/7/2026)"
+        },
+        {
+          "Module Name": "Canonical Ltd. Ubuntu 22.04 Strongswan Cryptographic Module",
+          "Vendor Name": "Canonical Ltd.View Contacts",
+          "Standard": "FIPS 140-3",
+          "Status": "Review  (7/7/2026)",
+          "href": "#d-9000",
+          "text": "Canonical Ltd. Ubuntu 22.04 Strongswan Cryptographic Module | Canonical Ltd.View Contacts | FIPS 140-3 | Review  (7/7/2026)",
+          "old_status": "Pending Review  (3/17/2026)",
+          "new_status": "Review  (7/7/2026)"
+        },
+        {
+          "Module Name": "B227 True Random Number Generator (TRNG) Cryptographic Module",
+          "Vendor Name": "Google, LLCView Contacts",
+          "Standard": "FIPS 140-3",
+          "Status": "Comment Resolution - Lab  (7/7/2026)",
+          "href": "#d13663",
+          "text": "B227 True Random Number Generator (TRNG) Cryptographic Module | Google, LLCView Contacts | FIPS 140-3 | Comment Resolution - Lab  (7/7/2026)",
+          "old_status": "Review  (5/12/2026)",
+          "new_status": "Comment Resolution - Lab  (7/7/2026)"
+        },
+        {
+          "Module Name": "BC-FJA (Bouncy Castle FIPS Java API)",
+          "Vendor Name": "Legion of the Bouncy Castle Inc.View Contacts",
+          "Standard": "FIPS 140-3",
+          "Status": "Cost Recovery  (7/7/2026)",
+          "href": "#d13813",
+          "text": "BC-FJA (Bouncy Castle FIPS Java API) | Legion of the Bouncy Castle Inc.View Contacts | FIPS 140-3 | Cost Recovery  (7/7/2026)",
+          "old_status": "Cost Recovery  (6/30/2026)",
+          "new_status": "Cost Recovery  (7/7/2026)"
+        },
+        {
+          "Module Name": "Samsung Kernel Cryptographic Module",
+          "Vendor Name": "Samsung Electronics Co., Ltd.View Contacts",
+          "Standard": "FIPS 140-3",
+          "Status": "Pending Resubmission  (7/7/2026)",
+          "href": "#d13358",
+          "text": "Samsung Kernel Cryptographic Module | Samsung Electronics Co., Ltd.View Contacts | FIPS 140-3 | Pending Resubmission  (7/7/2026)",
+          "old_status": "Pending Resubmission  (5/8/2026)",
+          "new_status": "Pending Resubmission  (7/7/2026)"
+        }
+      ]
+    },
+    "feeds": {}
+  },
+  "nato": {
+    "pages": {
+      "all_products": {
+        "added": [
+          {
+            "name": "Cisco ASA 5500-X Series Next-Generation Firewalls",
+            "manufacturer": "Cisco Systems",
+            "category": "Firewall and Mailguard , VPN (Virtual Private Network)",
+            "link": "https://www.ia.nato.int/niapc/Product/Cisco-ASA-5500-X-Series-Next-Generation-Firewalls_589",
+            "raw_text": "Cisco ASA 5500-X Series Next-Generation Firewalls | Manufacturer : | Cisco Systems | Categories: | Firewall and Mailguard | , | VPN (Virtual Private Network) | Security Mechanism Groups: | Boundary Protection Devices and Systems | , | Cryptography | , | Identity Management and Access Protection | , | Interruptibility and Availability | Classification: | NATO RESTRICTED | Country: | United States"
+          },
+          {
+            "name": "AnyConnect 5.0 for Windows 10",
+            "manufacturer": "Cisco Systems",
+            "category": "VPN (Virtual Private Network)",
+            "link": "https://www.ia.nato.int/niapc/Product/AnyConnect-5.0-for-Windows-10_643",
+            "raw_text": "AnyConnect 5.0 for Windows 10 | Manufacturer : | Cisco Systems | Categories: | VPN (Virtual Private Network) | Security Mechanism Groups: | Cryptography | , | Identity Management and Access Protection | Classification: | NATO RESTRICTED | Country: | United States"
+          },
+          {
+            "name": "Cisco ASR 1000 Series (IOS XE 17.15)",
+            "manufacturer": "Cisco Systems",
+            "category": "VPN (Virtual Private Network)",
+            "link": "https://www.ia.nato.int/niapc/Product/Cisco-ASR-1000-Series--IOS-XE-17.15-_722",
+            "raw_text": "Cisco ASR 1000 Series (IOS XE 17.15) | Manufacturer : | Cisco Systems | Categories: | VPN (Virtual Private Network) | Security Mechanism Groups: | Cryptography | , | Identity Management and Access Protection | Classification: | NATO RESTRICTED | Country: | United States"
+          },
+          {
+            "name": "Cisco FirePower 2100 Series (with FMC/FMCv Cisco FTD 7.4)",
+            "manufacturer": "Cisco Systems",
+            "category": "VPN (Virtual Private Network) , Intrusion Detection and Prevention , Firewall and Mailguard , Firewall and Mailguard",
+            "link": "https://www.ia.nato.int/niapc/Product/Cisco-FirePower-2100-Series--with-FMC-FMCv-Cisco-FTD-7.4-_750",
+            "raw_text": "Cisco FirePower 2100 Series (with FMC/FMCv Cisco FTD 7.4) | Manufacturer : | Cisco Systems | Categories: | VPN (Virtual Private Network) | , | Intrusion Detection and Prevention | , | Firewall and Mailguard | , | Firewall and Mailguard | Security Mechanism Groups: | Boundary Protection Devices and Systems | , | Cryptography | , | Identity Management and Access Protection | , | Interruptibility and"
+          },
+          {
+            "name": "Cisco FirePower 4100 Series (with FMC/FMCv Cisco FTD 7.4)",
+            "manufacturer": "Cisco Systems",
+            "category": "Intrusion Detection and Prevention , VPN (Virtual Private Network) , Firewall and Mailguard",
+            "link": "https://www.ia.nato.int/niapc/Product/Cisco-FirePower-4100-Series--with-FMC-FMCv-Cisco-FTD-7.4-_751",
+            "raw_text": "Cisco FirePower 4100 Series (with FMC/FMCv Cisco FTD 7.4) | Manufacturer : | Cisco Systems | Categories: | Intrusion Detection and Prevention | , | VPN (Virtual Private Network) | , | Firewall and Mailguard | Security Mechanism Groups: | Boundary Protection Devices and Systems | , | Cryptography | , | Identity Management and Access Protection | , | Interruptibility and Availability | , | Malware P"
+          },
+          {
+            "name": "Cisco FirePower 9300 Series (with FMC/FMCv Cisco FTD 7.4)",
+            "manufacturer": "Cisco Systems",
+            "category": "Firewall and Mailguard , VPN (Virtual Private Network)",
+            "link": "https://www.ia.nato.int/niapc/Product/Cisco-FirePower-9300-Series--with-FMC-FMCv-Cisco-FTD-7.4-_752",
+            "raw_text": "Cisco FirePower 9300 Series (with FMC/FMCv Cisco FTD 7.4) | Manufacturer : | Cisco Systems | Categories: | Firewall and Mailguard | , | VPN (Virtual Private Network) | Security Mechanism Groups: | Boundary Protection Devices and Systems | , | Cryptography | , | Identity Management and Access Protection | , | Interruptibility and Availability | Classification: | NATO RESTRICTED | Country: | United "
+          },
+          {
+            "name": "CISCO Firepower 1000 Series (with FMC/FMCv Cisco FTD 7.4)",
+            "manufacturer": "Cisco Systems",
+            "category": "Intrusion Detection and Prevention , Communications Encryption , VPN (Virtual Private Network) , Firewall and Mailguard",
+            "link": "https://www.ia.nato.int/niapc/Product/https---www.cisco.com-c-en-us-support-security-firepower-1000-series-series.html_832",
+            "raw_text": "CISCO Firepower 1000 Series (with FMC/FMCv Cisco FTD 7.4) | Manufacturer : | Cisco Systems | Categories: | Intrusion Detection and Prevention | , | Communications Encryption | , | VPN (Virtual Private Network) | , | Firewall and Mailguard | Security Mechanism Groups: | Boundary Protection Devices and Systems | , | Cryptography | , | Identity Management and Access Protection | , | Interruptibility "
+          },
+          {
+            "name": "Cisco APIC",
+            "manufacturer": "Cisco Systems",
+            "category": "Network Security Management",
+            "link": "https://www.ia.nato.int/niapc/Product/Cisco-APIC_897",
+            "raw_text": "Cisco APIC | Manufacturer : | Cisco Systems | Categories: | Network Security Management | Security Mechanism Groups: | Boundary Protection Devices and Systems | , | Compliance and Configuration Control | Country: | United States"
+          },
+          {
+            "name": "Cisco Nexus 9000 Series (NX-OS 10.4)",
+            "manufacturer": "Cisco Systems",
+            "category": "Network Security Management",
+            "link": "https://www.ia.nato.int/niapc/Product/Cisco-Nexus-9000-Series--NX-OS-10.4-_898",
+            "raw_text": "Cisco Nexus 9000 Series (NX-OS 10.4) | Manufacturer : | Cisco Systems | Categories: | Network Security Management | Security Mechanism Groups: | Boundary Protection Devices and Systems | , | Compliance and Configuration Control | Country: | United States"
+          },
+          {
+            "name": "Cisco MDS 9000 Series Switches (NX-OS 9.4)",
+            "manufacturer": "Cisco Systems",
+            "category": "Network Security Management",
+            "link": "https://www.ia.nato.int/niapc/Product/Cisco-MDS-9000-Series-Switches--NX-OS-9.4-_899",
+            "raw_text": "Cisco MDS 9000 Series Switches (NX-OS 9.4) | Manufacturer : | Cisco Systems | Categories: | Network Security Management | Security Mechanism Groups: | Boundary Protection Devices and Systems | , | Compliance and Configuration Control | Country: | United States"
+          },
+          {
+            "name": "Cisco Catalyst 8000 (Cat8K) Series Edge Routers (IOS-XE 17.15)",
+            "manufacturer": "Cisco Systems",
+            "category": "Network Management",
+            "link": "https://www.ia.nato.int/niapc/Product/Cisco-Catalyst-8000--Cat8K--Series-Edge-Routers--IOS-XE-17.15-_900",
+            "raw_text": "Cisco Catalyst 8000 (Cat8K) Series Edge Routers (IOS-XE 17.15) | Manufacturer : | Cisco Systems | Categories: | Network Management | Security Mechanism Groups: | Compliance and Configuration Control | Country: | United States"
+          },
+          {
+            "name": "Cisco Catalyst 8300 Series (IOS-XE 17.6)",
+            "manufacturer": "Cisco Systems",
+            "category": "Network Management",
+            "link": "https://www.ia.nato.int/niapc/Product/Cisco-Catalyst-8300-Series--IOS-XE-17.6-_901",
+            "raw_text": "Cisco Catalyst 8300 Series (IOS-XE 17.6) | Manufacturer : | Cisco Systems | Categories: | Network Management | Security Mechanism Groups: | Compliance and Configuration Control | Country: | United States"
+          },
+          {
+            "name": "Cisco Catalyst 8500 Series Edge Routers (IOS-XE 17.15)",
+            "manufacturer": "Cisco Systems",
+            "category": "Communications Encryption , Network Management",
+            "link": "https://www.ia.nato.int/niapc/Product/Cisco-Catalyst-8500-Series-Edge-Routers--IOS-XE-17.15-_902",
+            "raw_text": "Cisco Catalyst 8500 Series Edge Routers (IOS-XE 17.15) | Manufacturer : | Cisco Systems | Categories: | Communications Encryption | , | Network Management | Security Mechanism Groups: | Compliance and Configuration Control | , | Cryptography | Country: | United States"
+          },
+          {
+            "name": "Cisco Catalyst C9000X/CX Series Switches 17.12",
+            "manufacturer": "Cisco Systems",
+            "category": "Network Management",
+            "link": "https://www.ia.nato.int/niapc/Product/Cisco-Catalyst-C9000X-CX-Series-Switches-17.12_924",
+            "raw_text": "Cisco Catalyst C9000X/CX Series Switches 17.12 | Manufacturer : | Cisco Systems | Categories: | Network Management | Security Mechanism Groups: | Compliance and Configuration Control | Country: | United States"
+          },
+          {
+            "name": "AnyConnect 5.1 for RHEL 8.2",
+            "manufacturer": "Cisco Systems",
+            "category": "VPN (Virtual Private Network)",
+            "link": "https://www.ia.nato.int/niapc/Product/AnyConnect-5.1-for-RHEL-8.2_941",
+            "raw_text": "AnyConnect 5.1 for RHEL 8.2 | Manufacturer : | Cisco Systems | Categories: | VPN (Virtual Private Network) | Security Mechanism Groups: | Cryptography | , | Identity Management and Access Protection | Country: | United States"
+          },
+          {
+            "name": "Cisco Secure Firewall ASA Virtual 9.20",
+            "manufacturer": "Cisco Systems",
+            "category": "VPN (Virtual Private Network) , Firewall and Mailguard",
+            "link": "https://www.ia.nato.int/niapc/Product/Cisco-Secure-Firewall-ASA-Virtual-9.20_942",
+            "raw_text": "Cisco Secure Firewall ASA Virtual 9.20 | Manufacturer : | Cisco Systems | Categories: | VPN (Virtual Private Network) | , | Firewall and Mailguard | Security Mechanism Groups: | Boundary Protection Devices and Systems | , | Cryptography | , | Identity Management and Access Protection | , | Interruptibility and Availability | Country: | United States"
+          },
+          {
+            "name": "Cisco Secure Firewall Threat Defense (FTD) Virtual 7.4 with FMC/FMCv",
+            "manufacturer": "Cisco Systems",
+            "category": "Firewall and Mailguard",
+            "link": "https://www.ia.nato.int/niapc/Product/Cisco-Secure-Firewall-Threat-Defense--FTD--Virtual-7.4-with-FMC-FMCv_943",
+            "raw_text": "Cisco Secure Firewall Threat Defense (FTD) Virtual 7.4 with FMC/FMCv | Manufacturer : | Cisco Systems | Categories: | Firewall and Mailguard | Security Mechanism Groups: | Boundary Protection Devices and Systems | , | Interruptibility and Availability | Country: | United States"
+          },
+          {
+            "name": "Cisco Network Convergence System 1004 (IOS-XR 24.1)",
+            "manufacturer": "Cisco Systems",
+            "category": "Network Management",
+            "link": "https://www.ia.nato.int/niapc/Product/Cisco-Network-Convergence-System-1004--IOS-XR-24.1-_944",
+            "raw_text": "Cisco Network Convergence System 1004 (IOS-XR 24.1) | Manufacturer : | Cisco Systems | Categories: | Network Management | Security Mechanism Groups: | Compliance and Configuration Control | Country: | United States"
+          },
+          {
+            "name": "Cisco Identity Services Engine (ISE) V3.3",
+            "manufacturer": "Cisco Systems",
+            "category": "Authentication",
+            "link": "https://www.ia.nato.int/niapc/Product/Cisco-Identity-Services-Engine--ISE--V3.3_945",
+            "raw_text": "Cisco Identity Services Engine (ISE) V3.3 | Manufacturer : | Cisco Systems | Categories: | Authentication | Security Mechanism Groups: | Identity Management and Access Protection | Country: | United States"
+          },
+          {
+            "name": "Cisco Email Security Appliance with AsyncOS 15.5",
+            "manufacturer": "Cisco Systems",
+            "category": "Firewall and Mailguard",
+            "link": "https://www.ia.nato.int/niapc/Product/Cisco-Email-Security-Appliance-with-AsyncOS-15.5_946",
+            "raw_text": "Cisco Email Security Appliance with AsyncOS 15.5 | Manufacturer : | Cisco Systems | Categories: | Firewall and Mailguard | Security Mechanism Groups: | Boundary Protection Devices and Systems | , | Interruptibility and Availability | Country: | United States"
+          },
+          {
+            "name": "Cisco Embedded Services Switch (ESS) 9300 Series (IOS-XE 17.12)",
+            "manufacturer": "Cisco Systems",
+            "category": "Network Security Management",
+            "link": "https://www.ia.nato.int/niapc/Product/Cisco-Embedded-Services-Switch--ESS--9300-Series--IOS-XE-17.12-_947",
+            "raw_text": "Cisco Embedded Services Switch (ESS) 9300 Series (IOS-XE 17.12) | Manufacturer : | Cisco Systems | Categories: | Network Security Management | Security Mechanism Groups: | Boundary Protection Devices and Systems | , | Compliance and Configuration Control | Country: | United States"
+          },
+          {
+            "name": "Cisco Embedded Services Switch (ESS) 3300 Series (IOS-XE 17.12)",
+            "manufacturer": "Cisco Systems",
+            "category": "Network Security Management",
+            "link": "https://www.ia.nato.int/niapc/Product/Cisco-Embedded-Services-Switch--ESS--3300-Series--IOS-XE-17.12-_948",
+            "raw_text": "Cisco Embedded Services Switch (ESS) 3300 Series (IOS-XE 17.12) | Manufacturer : | Cisco Systems | Categories: | Network Security Management | Security Mechanism Groups: | Boundary Protection Devices and Systems | , | Compliance and Configuration Control | Country: | United States"
+          },
+          {
+            "name": "Cisco Embedded Services Router (ESR) 6300 v17.12",
+            "manufacturer": "Cisco Systems",
+            "category": "Network Security Management",
+            "link": "https://www.ia.nato.int/niapc/Product/Cisco-Embedded-Services-Router--ESR--6300-v17.12_949",
+            "raw_text": "Cisco Embedded Services Router (ESR) 6300 v17.12 | Manufacturer : | Cisco Systems | Categories: | Network Security Management | Security Mechanism Groups: | Boundary Protection Devices and Systems | , | Compliance and Configuration Control | Country: | United States"
+          },
+          {
+            "name": "Cisco Embedded Services Router (ESR) 6300 v17.15",
+            "manufacturer": "Cisco Systems",
+            "category": "Network Security Management",
+            "link": "https://www.ia.nato.int/niapc/Product/Cisco-Embedded-Services-Router--ESR--6300-v17.15_950",
+            "raw_text": "Cisco Embedded Services Router (ESR) 6300 v17.15 | Manufacturer : | Cisco Systems | Categories: | Network Security Management | Security Mechanism Groups: | Boundary Protection Devices and Systems | , | Compliance and Configuration Control | Country: | United States"
+          },
+          {
+            "name": "Cisco Secure Firewall 3100 Series with FMC/FMCv FTD 7.4",
+            "manufacturer": "Cisco Systems",
+            "category": "Firewall and Mailguard",
+            "link": "https://www.ia.nato.int/niapc/Product/Cisco-Secure-Firewall-3100-Series-with-FMC-FMCv-FTD-7.4_951",
+            "raw_text": "Cisco Secure Firewall 3100 Series with FMC/FMCv FTD 7.4 | Manufacturer : | Cisco Systems | Categories: | Firewall and Mailguard | Security Mechanism Groups: | Boundary Protection Devices and Systems | , | Interruptibility and Availability | Country: | United States"
+          },
+          {
+            "name": "Cisco Secure Firewall 4200 Series (with FMC/FMCv Cisco FTD 7.4)",
+            "manufacturer": "Cisco Systems",
+            "category": "Firewall and Mailguard",
+            "link": "https://www.ia.nato.int/niapc/Product/Cisco-Secure-Firewall-4200-Series--with-FMC-FMCv-Cisco-FTD-7.4-_952",
+            "raw_text": "Cisco Secure Firewall 4200 Series (with FMC/FMCv Cisco FTD 7.4) | Manufacturer : | Cisco Systems | Categories: | Firewall and Mailguard | Security Mechanism Groups: | Boundary Protection Devices and Systems | , | Interruptibility and Availability | Country: | United States"
+          },
+          {
+            "name": "Cisco Catalyst 9800 Series Wireless Controllers and Access Points 17.12",
+            "manufacturer": "Cisco Systems",
+            "category": "Access Control",
+            "link": "https://www.ia.nato.int/niapc/Product/Cisco-Catalyst-9800-Series-Wireless-Controllers-and-Access-Points-17.12_953",
+            "raw_text": "Cisco Catalyst 9800 Series Wireless Controllers and Access Points 17.12 | Manufacturer : | Cisco Systems | Categories: | Access Control | Security Mechanism Groups: | Boundary Protection Devices and Systems | , | Identity Management and Access Protection | , | Physical Security | Country: | United States"
+          },
+          {
+            "name": "Cisco Catalyst 9800 Series Wireless Controllers and Access Points 17.6",
+            "manufacturer": "Cisco Systems",
+            "category": "Network Management",
+            "link": "https://www.ia.nato.int/niapc/Product/Cisco-Catalyst-9800-Series-Wireless-Controllers-and-Access-Points-17.6_954",
+            "raw_text": "Cisco Catalyst 9800 Series Wireless Controllers and Access Points 17.6 | Manufacturer : | Cisco Systems | Categories: | Network Management | Security Mechanism Groups: | Compliance and Configuration Control | Country: | United States"
+          },
+          {
+            "name": "Cisco Catalyst Industrial Ethernet 3000 (IE3x00) Rugged Series Switches running IOS-XE 17.12",
+            "manufacturer": "Cisco Systems",
+            "category": "Network Security Management",
+            "link": "https://www.ia.nato.int/niapc/Product/Cisco-Catalyst-Industrial-Ethernet-3000--IE3x00--Rugged-Series-Switches-running-IOS-XE-17.12_955",
+            "raw_text": "Cisco Catalyst Industrial Ethernet 3000 (IE3x00) Rugged Series Switches running IOS-XE 17.12 | Manufacturer : | Cisco Systems | Categories: | Network Security Management | Security Mechanism Groups: | Boundary Protection Devices and Systems | , | Compliance and Configuration Control | Country: | United States"
+          },
+          {
+            "name": "Cisco Catalyst Industrial Ethernet 9300 Rugged Series Switches running IOS-XE 17.12",
+            "manufacturer": "Cisco Systems",
+            "category": "Network Management",
+            "link": "https://www.ia.nato.int/niapc/Product/Cisco-Catalyst-Industrial-Ethernet-9300-Rugged-Series-Switches-running-IOS-XE-17.12_956",
+            "raw_text": "Cisco Catalyst Industrial Ethernet 9300 Rugged Series Switches running IOS-XE 17.12 | Manufacturer : | Cisco Systems | Categories: | Network Management | Security Mechanism Groups: | Compliance and Configuration Control | Country: | United States"
+          }
+        ],
+        "removed": [
+          {
+            "name": "Cisco ASA 5500-X Series Next-Generation Firewalls",
+            "manufacturer": "Cisco Systems",
+            "category": "Firewall and Mailguard , VPN (Virtual Private Network)",
+            "link": "https://www.ia.nato.int/niapc/Product/Cisco-ASA-5500-X-Series-Next-Generation-Firewalls_589",
+            "raw_text": "Cisco ASA 5500-X Series Next-Generation Firewalls | Manufacturer : | Cisco Systems | Categories: | Firewall and Mailguard | , | VPN (Virtual Private Network) | Security Mechanism Groups: | Boundary Protection Devices and Systems | , | Cryptography | , | Identity Management and Access Protection | , | Interruptibility and Availability | Classification: | NATO RESTRICTED | Country: | United States"
+          },
+          {
+            "name": "AnyConnect 5.0 for Windows 10",
+            "manufacturer": "Cisco Systems",
+            "category": "VPN (Virtual Private Network)",
+            "link": "https://www.ia.nato.int/niapc/Product/AnyConnect-5.0-for-Windows-10_643",
+            "raw_text": "AnyConnect 5.0 for Windows 10 | Manufacturer : | Cisco Systems | Categories: | VPN (Virtual Private Network) | Security Mechanism Groups: | Cryptography | , | Identity Management and Access Protection | Classification: | NATO RESTRICTED | Country: | United States"
+          },
+          {
+            "name": "Cisco ASR 1000 Series (IOS XE 17.15)",
+            "manufacturer": "Cisco Systems",
+            "category": "VPN (Virtual Private Network)",
+            "link": "https://www.ia.nato.int/niapc/Product/Cisco-ASR-1000-Series--IOS-XE-17.15-_722",
+            "raw_text": "Cisco ASR 1000 Series (IOS XE 17.15) | Manufacturer : | Cisco Systems | Categories: | VPN (Virtual Private Network) | Security Mechanism Groups: | Cryptography | , | Identity Management and Access Protection | Classification: | NATO RESTRICTED | Country: | United States"
+          },
+          {
+            "name": "Cisco FirePower 2100 Series (with FMC/FMCv Cisco FTD 7.4)",
+            "manufacturer": "Cisco Systems",
+            "category": "VPN (Virtual Private Network) , Intrusion Detection and Prevention , Firewall and Mailguard , Firewall and Mailguard",
+            "link": "https://www.ia.nato.int/niapc/Product/Cisco-FirePower-2100-Series--with-FMC-FMCv-Cisco-FTD-7.4-_750",
+            "raw_text": "Cisco FirePower 2100 Series (with FMC/FMCv Cisco FTD 7.4) | Manufacturer : | Cisco Systems | Categories: | VPN (Virtual Private Network) | , | Intrusion Detection and Prevention | , | Firewall and Mailguard | , | Firewall and Mailguard | Security Mechanism Groups: | Boundary Protection Devices and Systems | , | Cryptography | , | Identity Management and Access Protection | , | Interruptibility and"
+          },
+          {
+            "name": "Cisco FirePower 4100 Series (with FMC/FMCv Cisco FTD 7.4)",
+            "manufacturer": "Cisco Systems",
+            "category": "Intrusion Detection and Prevention , VPN (Virtual Private Network) , Firewall and Mailguard",
+            "link": "https://www.ia.nato.int/niapc/Product/Cisco-FirePower-4100-Series--with-FMC-FMCv-Cisco-FTD-7.4-_751",
+            "raw_text": "Cisco FirePower 4100 Series (with FMC/FMCv Cisco FTD 7.4) | Manufacturer : | Cisco Systems | Categories: | Intrusion Detection and Prevention | , | VPN (Virtual Private Network) | , | Firewall and Mailguard | Security Mechanism Groups: | Boundary Protection Devices and Systems | , | Cryptography | , | Identity Management and Access Protection | , | Interruptibility and Availability | , | Malware P"
+          },
+          {
+            "name": "Cisco FirePower 9300 Series (with FMC/FMCv Cisco FTD 7.4)",
+            "manufacturer": "Cisco Systems",
+            "category": "Firewall and Mailguard , VPN (Virtual Private Network)",
+            "link": "https://www.ia.nato.int/niapc/Product/Cisco-FirePower-9300-Series--with-FMC-FMCv-Cisco-FTD-7.4-_752",
+            "raw_text": "Cisco FirePower 9300 Series (with FMC/FMCv Cisco FTD 7.4) | Manufacturer : | Cisco Systems | Categories: | Firewall and Mailguard | , | VPN (Virtual Private Network) | Security Mechanism Groups: | Boundary Protection Devices and Systems | , | Cryptography | , | Identity Management and Access Protection | , | Interruptibility and Availability | Classification: | NATO RESTRICTED | Country: | United "
+          },
+          {
+            "name": "CISCO Firepower 1000 Series (with FMC/FMCv Cisco FTD 7.4)",
+            "manufacturer": "Cisco Systems",
+            "category": "Intrusion Detection and Prevention , Communications Encryption , VPN (Virtual Private Network) , Firewall and Mailguard",
+            "link": "https://www.ia.nato.int/niapc/Product/https---www.cisco.com-c-en-us-support-security-firepower-1000-series-series.html_832",
+            "raw_text": "CISCO Firepower 1000 Series (with FMC/FMCv Cisco FTD 7.4) | Manufacturer : | Cisco Systems | Categories: | Intrusion Detection and Prevention | , | Communications Encryption | , | VPN (Virtual Private Network) | , | Firewall and Mailguard | Security Mechanism Groups: | Boundary Protection Devices and Systems | , | Cryptography | , | Identity Management and Access Protection | , | Interruptibility "
+          },
+          {
+            "name": "Cisco APIC",
+            "manufacturer": "Cisco Systems",
+            "category": "Network Security Management",
+            "link": "https://www.ia.nato.int/niapc/Product/Cisco-APIC_897",
+            "raw_text": "Cisco APIC | Manufacturer : | Cisco Systems | Categories: | Network Security Management | Security Mechanism Groups: | Boundary Protection Devices and Systems | , | Compliance and Configuration Control | Country: | United States"
+          },
+          {
+            "name": "Cisco Nexus 9000 Series (NX-OS 10.4)",
+            "manufacturer": "Cisco Systems",
+            "category": "Network Security Management",
+            "link": "https://www.ia.nato.int/niapc/Product/Cisco-Nexus-9000-Series--NX-OS-10.4-_898",
+            "raw_text": "Cisco Nexus 9000 Series (NX-OS 10.4) | Manufacturer : | Cisco Systems | Categories: | Network Security Management | Security Mechanism Groups: | Boundary Protection Devices and Systems | , | Compliance and Configuration Control | Country: | United States"
+          },
+          {
+            "name": "Cisco MDS 9000 Series Switches (NX-OS 9.4)",
+            "manufacturer": "Cisco Systems",
+            "category": "Network Security Management",
+            "link": "https://www.ia.nato.int/niapc/Product/Cisco-MDS-9000-Series-Switches--NX-OS-9.4-_899",
+            "raw_text": "Cisco MDS 9000 Series Switches (NX-OS 9.4) | Manufacturer : | Cisco Systems | Categories: | Network Security Management | Security Mechanism Groups: | Boundary Protection Devices and Systems | , | Compliance and Configuration Control | Country: | United States"
+          },
+          {
+            "name": "Cisco Catalyst 8000 (Cat8K) Series Edge Routers (IOS-XE 17.15)",
+            "manufacturer": "Cisco Systems",
+            "category": "Network Management",
+            "link": "https://www.ia.nato.int/niapc/Product/Cisco-Catalyst-8000--Cat8K--Series-Edge-Routers--IOS-XE-17.15-_900",
+            "raw_text": "Cisco Catalyst 8000 (Cat8K) Series Edge Routers (IOS-XE 17.15) | Manufacturer : | Cisco Systems | Categories: | Network Management | Security Mechanism Groups: | Compliance and Configuration Control | Country: | United States"
+          },
+          {
+            "name": "Cisco Catalyst 8300 Series (IOS-XE 17.6)",
+            "manufacturer": "Cisco Systems",
+            "category": "Network Management",
+            "link": "https://www.ia.nato.int/niapc/Product/Cisco-Catalyst-8300-Series--IOS-XE-17.6-_901",
+            "raw_text": "Cisco Catalyst 8300 Series (IOS-XE 17.6) | Manufacturer : | Cisco Systems | Categories: | Network Management | Security Mechanism Groups: | Compliance and Configuration Control | Country: | United States"
+          },
+          {
+            "name": "Cisco Catalyst 8500 Series Edge Routers (IOS-XE 17.15)",
+            "manufacturer": "Cisco Systems",
+            "category": "Communications Encryption , Network Management",
+            "link": "https://www.ia.nato.int/niapc/Product/Cisco-Catalyst-8500-Series-Edge-Routers--IOS-XE-17.15-_902",
+            "raw_text": "Cisco Catalyst 8500 Series Edge Routers (IOS-XE 17.15) | Manufacturer : | Cisco Systems | Categories: | Communications Encryption | , | Network Management | Security Mechanism Groups: | Compliance and Configuration Control | , | Cryptography | Country: | United States"
+          },
+          {
+            "name": "Cisco Catalyst C9000X/CX Series Switches 17.12",
+            "manufacturer": "Cisco Systems",
+            "category": "Network Management",
+            "link": "https://www.ia.nato.int/niapc/Product/Cisco-Catalyst-C9000X-CX-Series-Switches-17.12_924",
+            "raw_text": "Cisco Catalyst C9000X/CX Series Switches 17.12 | Manufacturer : | Cisco Systems | Categories: | Network Management | Security Mechanism Groups: | Compliance and Configuration Control | Country: | United States"
+          },
+          {
+            "name": "AnyConnect 5.1 for RHEL 8.2",
+            "manufacturer": "Cisco Systems",
+            "category": "VPN (Virtual Private Network)",
+            "link": "https://www.ia.nato.int/niapc/Product/AnyConnect-5.1-for-RHEL-8.2_941",
+            "raw_text": "AnyConnect 5.1 for RHEL 8.2 | Manufacturer : | Cisco Systems | Categories: | VPN (Virtual Private Network) | Security Mechanism Groups: | Cryptography | , | Identity Management and Access Protection | Country: | United States"
+          },
+          {
+            "name": "Cisco Secure Firewall ASA Virtual 9.20",
+            "manufacturer": "Cisco Systems",
+            "category": "VPN (Virtual Private Network) , Firewall and Mailguard",
+            "link": "https://www.ia.nato.int/niapc/Product/Cisco-Secure-Firewall-ASA-Virtual-9.20_942",
+            "raw_text": "Cisco Secure Firewall ASA Virtual 9.20 | Manufacturer : | Cisco Systems | Categories: | VPN (Virtual Private Network) | , | Firewall and Mailguard | Security Mechanism Groups: | Boundary Protection Devices and Systems | , | Cryptography | , | Identity Management and Access Protection | , | Interruptibility and Availability | Country: | United States"
+          },
+          {
+            "name": "Cisco Secure Firewall Threat Defense (FTD) Virtual 7.4 with FMC/FMCv",
+            "manufacturer": "Cisco Systems",
+            "category": "Firewall and Mailguard",
+            "link": "https://www.ia.nato.int/niapc/Product/Cisco-Secure-Firewall-Threat-Defense--FTD--Virtual-7.4-with-FMC-FMCv_943",
+            "raw_text": "Cisco Secure Firewall Threat Defense (FTD) Virtual 7.4 with FMC/FMCv | Manufacturer : | Cisco Systems | Categories: | Firewall and Mailguard | Security Mechanism Groups: | Boundary Protection Devices and Systems | , | Interruptibility and Availability | Country: | United States"
+          },
+          {
+            "name": "Cisco Network Convergence System 1004 (IOS-XR 24.1)",
+            "manufacturer": "Cisco Systems",
+            "category": "Network Management",
+            "link": "https://www.ia.nato.int/niapc/Product/Cisco-Network-Convergence-System-1004--IOS-XR-24.1-_944",
+            "raw_text": "Cisco Network Convergence System 1004 (IOS-XR 24.1) | Manufacturer : | Cisco Systems | Categories: | Network Management | Security Mechanism Groups: | Compliance and Configuration Control | Country: | United States"
+          },
+          {
+            "name": "Cisco Identity Services Engine (ISE) V3.3",
+            "manufacturer": "Cisco Systems",
+            "category": "Authentication",
+            "link": "https://www.ia.nato.int/niapc/Product/Cisco-Identity-Services-Engine--ISE--V3.3_945",
+            "raw_text": "Cisco Identity Services Engine (ISE) V3.3 | Manufacturer : | Cisco Systems | Categories: | Authentication | Security Mechanism Groups: | Identity Management and Access Protection | Country: | United States"
+          },
+          {
+            "name": "Cisco Email Security Appliance with AsyncOS 15.5",
+            "manufacturer": "Cisco Systems",
+            "category": "Firewall and Mailguard",
+            "link": "https://www.ia.nato.int/niapc/Product/Cisco-Email-Security-Appliance-with-AsyncOS-15.5_946",
+            "raw_text": "Cisco Email Security Appliance with AsyncOS 15.5 | Manufacturer : | Cisco Systems | Categories: | Firewall and Mailguard | Security Mechanism Groups: | Boundary Protection Devices and Systems | , | Interruptibility and Availability | Country: | United States"
+          },
+          {
+            "name": "Cisco Embedded Services Switch (ESS) 9300 Series (IOS-XE 17.12)",
+            "manufacturer": "Cisco Systems",
+            "category": "Network Security Management",
+            "link": "https://www.ia.nato.int/niapc/Product/Cisco-Embedded-Services-Switch--ESS--9300-Series--IOS-XE-17.12-_947",
+            "raw_text": "Cisco Embedded Services Switch (ESS) 9300 Series (IOS-XE 17.12) | Manufacturer : | Cisco Systems | Categories: | Network Security Management | Security Mechanism Groups: | Boundary Protection Devices and Systems | , | Compliance and Configuration Control | Country: | United States"
+          },
+          {
+            "name": "Cisco Embedded Services Switch (ESS) 3300 Series (IOS-XE 17.12)",
+            "manufacturer": "Cisco Systems",
+            "category": "Network Security Management",
+            "link": "https://www.ia.nato.int/niapc/Product/Cisco-Embedded-Services-Switch--ESS--3300-Series--IOS-XE-17.12-_948",
+            "raw_text": "Cisco Embedded Services Switch (ESS) 3300 Series (IOS-XE 17.12) | Manufacturer : | Cisco Systems | Categories: | Network Security Management | Security Mechanism Groups: | Boundary Protection Devices and Systems | , | Compliance and Configuration Control | Country: | United States"
+          },
+          {
+            "name": "Cisco Embedded Services Router (ESR) 6300 v17.12",
+            "manufacturer": "Cisco Systems",
+            "category": "Network Security Management",
+            "link": "https://www.ia.nato.int/niapc/Product/Cisco-Embedded-Services-Router--ESR--6300-v17.12_949",
+            "raw_text": "Cisco Embedded Services Router (ESR) 6300 v17.12 | Manufacturer : | Cisco Systems | Categories: | Network Security Management | Security Mechanism Groups: | Boundary Protection Devices and Systems | , | Compliance and Configuration Control | Country: | United States"
+          },
+          {
+            "name": "Cisco Embedded Services Router (ESR) 6300 v17.15",
+            "manufacturer": "Cisco Systems",
+            "category": "Network Security Management",
+            "link": "https://www.ia.nato.int/niapc/Product/Cisco-Embedded-Services-Router--ESR--6300-v17.15_950",
+            "raw_text": "Cisco Embedded Services Router (ESR) 6300 v17.15 | Manufacturer : | Cisco Systems | Categories: | Network Security Management | Security Mechanism Groups: | Boundary Protection Devices and Systems | , | Compliance and Configuration Control | Country: | United States"
+          },
+          {
+            "name": "Cisco Secure Firewall 3100 Series with FMC/FMCv FTD 7.4",
+            "manufacturer": "Cisco Systems",
+            "category": "Firewall and Mailguard",
+            "link": "https://www.ia.nato.int/niapc/Product/Cisco-Secure-Firewall-3100-Series-with-FMC-FMCv-FTD-7.4_951",
+            "raw_text": "Cisco Secure Firewall 3100 Series with FMC/FMCv FTD 7.4 | Manufacturer : | Cisco Systems | Categories: | Firewall and Mailguard | Security Mechanism Groups: | Boundary Protection Devices and Systems | , | Interruptibility and Availability | Country: | United States"
+          },
+          {
+            "name": "Cisco Secure Firewall 4200 Series (with FMC/FMCv Cisco FTD 7.4)",
+            "manufacturer": "Cisco Systems",
+            "category": "Firewall and Mailguard",
+            "link": "https://www.ia.nato.int/niapc/Product/Cisco-Secure-Firewall-4200-Series--with-FMC-FMCv-Cisco-FTD-7.4-_952",
+            "raw_text": "Cisco Secure Firewall 4200 Series (with FMC/FMCv Cisco FTD 7.4) | Manufacturer : | Cisco Systems | Categories: | Firewall and Mailguard | Security Mechanism Groups: | Boundary Protection Devices and Systems | , | Interruptibility and Availability | Country: | United States"
+          },
+          {
+            "name": "Cisco Catalyst 9800 Series Wireless Controllers and Access Points 17.12",
+            "manufacturer": "Cisco Systems",
+            "category": "Access Control",
+            "link": "https://www.ia.nato.int/niapc/Product/Cisco-Catalyst-9800-Series-Wireless-Controllers-and-Access-Points-17.12_953",
+            "raw_text": "Cisco Catalyst 9800 Series Wireless Controllers and Access Points 17.12 | Manufacturer : | Cisco Systems | Categories: | Access Control | Security Mechanism Groups: | Boundary Protection Devices and Systems | , | Identity Management and Access Protection | , | Physical Security | Country: | United States"
+          },
+          {
+            "name": "Cisco Catalyst 9800 Series Wireless Controllers and Access Points 17.6",
+            "manufacturer": "Cisco Systems",
+            "category": "Network Management",
+            "link": "https://www.ia.nato.int/niapc/Product/Cisco-Catalyst-9800-Series-Wireless-Controllers-and-Access-Points-17.6_954",
+            "raw_text": "Cisco Catalyst 9800 Series Wireless Controllers and Access Points 17.6 | Manufacturer : | Cisco Systems | Categories: | Network Management | Security Mechanism Groups: | Compliance and Configuration Control | Country: | United States"
+          },
+          {
+            "name": "Cisco Catalyst Industrial Ethernet 3000 (IE3x00) Rugged Series Switches running IOS-XE 17.12",
+            "manufacturer": "Cisco Systems",
+            "category": "Network Security Management",
+            "link": "https://www.ia.nato.int/niapc/Product/Cisco-Catalyst-Industrial-Ethernet-3000--IE3x00--Rugged-Series-Switches-running-IOS-XE-17.12_955",
+            "raw_text": "Cisco Catalyst Industrial Ethernet 3000 (IE3x00) Rugged Series Switches running IOS-XE 17.12 | Manufacturer : | Cisco Systems | Categories: | Network Security Management | Security Mechanism Groups: | Boundary Protection Devices and Systems | , | Compliance and Configuration Control | Country: | United States"
+          },
+          {
+            "name": "Cisco Catalyst Industrial Ethernet 9300 Rugged Series Switches running IOS-XE 17.12",
+            "manufacturer": "Cisco Systems",
+            "category": "Network Management",
+            "link": "https://www.ia.nato.int/niapc/Product/Cisco-Catalyst-Industrial-Ethernet-9300-Rugged-Series-Switches-running-IOS-XE-17.12_956",
+            "raw_text": "Cisco Catalyst Industrial Ethernet 9300 Rugged Series Switches running IOS-XE 17.12 | Manufacturer : | Cisco Systems | Categories: | Network Management | Security Mechanism Groups: | Compliance and Configuration Control | Country: | United States"
+          }
+        ]
+      },
+      "cisco_products": {
+        "added": [
+          {
+            "name": "Cisco ASA 5500-X Series Next-Generation Firewalls",
+            "manufacturer": "Cisco Systems",
+            "category": "Firewall and Mailguard , VPN (Virtual Private Network)",
+            "link": "https://www.ia.nato.int/niapc/Product/Cisco-ASA-5500-X-Series-Next-Generation-Firewalls_589",
+            "raw_text": "Cisco ASA 5500-X Series Next-Generation Firewalls | Manufacturer : | Cisco Systems | Categories: | Firewall and Mailguard | , | VPN (Virtual Private Network) | Security Mechanism Groups: | Boundary Protection Devices and Systems | , | Cryptography | , | Identity Management and Access Protection | , | Interruptibility and Availability | Classification: | NATO RESTRICTED | Country: | United States"
+          },
+          {
+            "name": "AnyConnect 5.0 for Windows 10",
+            "manufacturer": "Cisco Systems",
+            "category": "VPN (Virtual Private Network)",
+            "link": "https://www.ia.nato.int/niapc/Product/AnyConnect-5.0-for-Windows-10_643",
+            "raw_text": "AnyConnect 5.0 for Windows 10 | Manufacturer : | Cisco Systems | Categories: | VPN (Virtual Private Network) | Security Mechanism Groups: | Cryptography | , | Identity Management and Access Protection | Classification: | NATO RESTRICTED | Country: | United States"
+          },
+          {
+            "name": "Cisco ASR 1000 Series (IOS XE 17.15)",
+            "manufacturer": "Cisco Systems",
+            "category": "VPN (Virtual Private Network)",
+            "link": "https://www.ia.nato.int/niapc/Product/Cisco-ASR-1000-Series--IOS-XE-17.15-_722",
+            "raw_text": "Cisco ASR 1000 Series (IOS XE 17.15) | Manufacturer : | Cisco Systems | Categories: | VPN (Virtual Private Network) | Security Mechanism Groups: | Cryptography | , | Identity Management and Access Protection | Classification: | NATO RESTRICTED | Country: | United States"
+          },
+          {
+            "name": "Cisco FirePower 2100 Series (with FMC/FMCv Cisco FTD 7.4)",
+            "manufacturer": "Cisco Systems",
+            "category": "VPN (Virtual Private Network) , Intrusion Detection and Prevention , Firewall and Mailguard , Firewall and Mailguard",
+            "link": "https://www.ia.nato.int/niapc/Product/Cisco-FirePower-2100-Series--with-FMC-FMCv-Cisco-FTD-7.4-_750",
+            "raw_text": "Cisco FirePower 2100 Series (with FMC/FMCv Cisco FTD 7.4) | Manufacturer : | Cisco Systems | Categories: | VPN (Virtual Private Network) | , | Intrusion Detection and Prevention | , | Firewall and Mailguard | , | Firewall and Mailguard | Security Mechanism Groups: | Boundary Protection Devices and Systems | , | Cryptography | , | Identity Management and Access Protection | , | Interruptibility and"
+          },
+          {
+            "name": "Cisco FirePower 4100 Series (with FMC/FMCv Cisco FTD 7.4)",
+            "manufacturer": "Cisco Systems",
+            "category": "Intrusion Detection and Prevention , VPN (Virtual Private Network) , Firewall and Mailguard",
+            "link": "https://www.ia.nato.int/niapc/Product/Cisco-FirePower-4100-Series--with-FMC-FMCv-Cisco-FTD-7.4-_751",
+            "raw_text": "Cisco FirePower 4100 Series (with FMC/FMCv Cisco FTD 7.4) | Manufacturer : | Cisco Systems | Categories: | Intrusion Detection and Prevention | , | VPN (Virtual Private Network) | , | Firewall and Mailguard | Security Mechanism Groups: | Boundary Protection Devices and Systems | , | Cryptography | , | Identity Management and Access Protection | , | Interruptibility and Availability | , | Malware P"
+          },
+          {
+            "name": "Cisco FirePower 9300 Series (with FMC/FMCv Cisco FTD 7.4)",
+            "manufacturer": "Cisco Systems",
+            "category": "Firewall and Mailguard , VPN (Virtual Private Network)",
+            "link": "https://www.ia.nato.int/niapc/Product/Cisco-FirePower-9300-Series--with-FMC-FMCv-Cisco-FTD-7.4-_752",
+            "raw_text": "Cisco FirePower 9300 Series (with FMC/FMCv Cisco FTD 7.4) | Manufacturer : | Cisco Systems | Categories: | Firewall and Mailguard | , | VPN (Virtual Private Network) | Security Mechanism Groups: | Boundary Protection Devices and Systems | , | Cryptography | , | Identity Management and Access Protection | , | Interruptibility and Availability | Classification: | NATO RESTRICTED | Country: | United "
+          },
+          {
+            "name": "CISCO Firepower 1000 Series (with FMC/FMCv Cisco FTD 7.4)",
+            "manufacturer": "Cisco Systems",
+            "category": "Intrusion Detection and Prevention , Communications Encryption , VPN (Virtual Private Network) , Firewall and Mailguard",
+            "link": "https://www.ia.nato.int/niapc/Product/https---www.cisco.com-c-en-us-support-security-firepower-1000-series-series.html_832",
+            "raw_text": "CISCO Firepower 1000 Series (with FMC/FMCv Cisco FTD 7.4) | Manufacturer : | Cisco Systems | Categories: | Intrusion Detection and Prevention | , | Communications Encryption | , | VPN (Virtual Private Network) | , | Firewall and Mailguard | Security Mechanism Groups: | Boundary Protection Devices and Systems | , | Cryptography | , | Identity Management and Access Protection | , | Interruptibility "
+          },
+          {
+            "name": "Cisco APIC",
+            "manufacturer": "Cisco Systems",
+            "category": "Network Security Management",
+            "link": "https://www.ia.nato.int/niapc/Product/Cisco-APIC_897",
+            "raw_text": "Cisco APIC | Manufacturer : | Cisco Systems | Categories: | Network Security Management | Security Mechanism Groups: | Boundary Protection Devices and Systems | , | Compliance and Configuration Control | Country: | United States"
+          },
+          {
+            "name": "Cisco Nexus 9000 Series (NX-OS 10.4)",
+            "manufacturer": "Cisco Systems",
+            "category": "Network Security Management",
+            "link": "https://www.ia.nato.int/niapc/Product/Cisco-Nexus-9000-Series--NX-OS-10.4-_898",
+            "raw_text": "Cisco Nexus 9000 Series (NX-OS 10.4) | Manufacturer : | Cisco Systems | Categories: | Network Security Management | Security Mechanism Groups: | Boundary Protection Devices and Systems | , | Compliance and Configuration Control | Country: | United States"
+          },
+          {
+            "name": "Cisco MDS 9000 Series Switches (NX-OS 9.4)",
+            "manufacturer": "Cisco Systems",
+            "category": "Network Security Management",
+            "link": "https://www.ia.nato.int/niapc/Product/Cisco-MDS-9000-Series-Switches--NX-OS-9.4-_899",
+            "raw_text": "Cisco MDS 9000 Series Switches (NX-OS 9.4) | Manufacturer : | Cisco Systems | Categories: | Network Security Management | Security Mechanism Groups: | Boundary Protection Devices and Systems | , | Compliance and Configuration Control | Country: | United States"
+          },
+          {
+            "name": "Cisco Catalyst 8000 (Cat8K) Series Edge Routers (IOS-XE 17.15)",
+            "manufacturer": "Cisco Systems",
+            "category": "Network Management",
+            "link": "https://www.ia.nato.int/niapc/Product/Cisco-Catalyst-8000--Cat8K--Series-Edge-Routers--IOS-XE-17.15-_900",
+            "raw_text": "Cisco Catalyst 8000 (Cat8K) Series Edge Routers (IOS-XE 17.15) | Manufacturer : | Cisco Systems | Categories: | Network Management | Security Mechanism Groups: | Compliance and Configuration Control | Country: | United States"
+          },
+          {
+            "name": "Cisco Catalyst 8300 Series (IOS-XE 17.6)",
+            "manufacturer": "Cisco Systems",
+            "category": "Network Management",
+            "link": "https://www.ia.nato.int/niapc/Product/Cisco-Catalyst-8300-Series--IOS-XE-17.6-_901",
+            "raw_text": "Cisco Catalyst 8300 Series (IOS-XE 17.6) | Manufacturer : | Cisco Systems | Categories: | Network Management | Security Mechanism Groups: | Compliance and Configuration Control | Country: | United States"
+          },
+          {
+            "name": "Cisco Catalyst 8500 Series Edge Routers (IOS-XE 17.15)",
+            "manufacturer": "Cisco Systems",
+            "category": "Communications Encryption , Network Management",
+            "link": "https://www.ia.nato.int/niapc/Product/Cisco-Catalyst-8500-Series-Edge-Routers--IOS-XE-17.15-_902",
+            "raw_text": "Cisco Catalyst 8500 Series Edge Routers (IOS-XE 17.15) | Manufacturer : | Cisco Systems | Categories: | Communications Encryption | , | Network Management | Security Mechanism Groups: | Compliance and Configuration Control | , | Cryptography | Country: | United States"
+          },
+          {
+            "name": "Cisco Catalyst C9000X/CX Series Switches 17.12",
+            "manufacturer": "Cisco Systems",
+            "category": "Network Management",
+            "link": "https://www.ia.nato.int/niapc/Product/Cisco-Catalyst-C9000X-CX-Series-Switches-17.12_924",
+            "raw_text": "Cisco Catalyst C9000X/CX Series Switches 17.12 | Manufacturer : | Cisco Systems | Categories: | Network Management | Security Mechanism Groups: | Compliance and Configuration Control | Country: | United States"
+          },
+          {
+            "name": "AnyConnect 5.1 for RHEL 8.2",
+            "manufacturer": "Cisco Systems",
+            "category": "VPN (Virtual Private Network)",
+            "link": "https://www.ia.nato.int/niapc/Product/AnyConnect-5.1-for-RHEL-8.2_941",
+            "raw_text": "AnyConnect 5.1 for RHEL 8.2 | Manufacturer : | Cisco Systems | Categories: | VPN (Virtual Private Network) | Security Mechanism Groups: | Cryptography | , | Identity Management and Access Protection | Country: | United States"
+          },
+          {
+            "name": "Cisco Secure Firewall ASA Virtual 9.20",
+            "manufacturer": "Cisco Systems",
+            "category": "VPN (Virtual Private Network) , Firewall and Mailguard",
+            "link": "https://www.ia.nato.int/niapc/Product/Cisco-Secure-Firewall-ASA-Virtual-9.20_942",
+            "raw_text": "Cisco Secure Firewall ASA Virtual 9.20 | Manufacturer : | Cisco Systems | Categories: | VPN (Virtual Private Network) | , | Firewall and Mailguard | Security Mechanism Groups: | Boundary Protection Devices and Systems | , | Cryptography | , | Identity Management and Access Protection | , | Interruptibility and Availability | Country: | United States"
+          },
+          {
+            "name": "Cisco Secure Firewall Threat Defense (FTD) Virtual 7.4 with FMC/FMCv",
+            "manufacturer": "Cisco Systems",
+            "category": "Firewall and Mailguard",
+            "link": "https://www.ia.nato.int/niapc/Product/Cisco-Secure-Firewall-Threat-Defense--FTD--Virtual-7.4-with-FMC-FMCv_943",
+            "raw_text": "Cisco Secure Firewall Threat Defense (FTD) Virtual 7.4 with FMC/FMCv | Manufacturer : | Cisco Systems | Categories: | Firewall and Mailguard | Security Mechanism Groups: | Boundary Protection Devices and Systems | , | Interruptibility and Availability | Country: | United States"
+          },
+          {
+            "name": "Cisco Network Convergence System 1004 (IOS-XR 24.1)",
+            "manufacturer": "Cisco Systems",
+            "category": "Network Management",
+            "link": "https://www.ia.nato.int/niapc/Product/Cisco-Network-Convergence-System-1004--IOS-XR-24.1-_944",
+            "raw_text": "Cisco Network Convergence System 1004 (IOS-XR 24.1) | Manufacturer : | Cisco Systems | Categories: | Network Management | Security Mechanism Groups: | Compliance and Configuration Control | Country: | United States"
+          },
+          {
+            "name": "Cisco Identity Services Engine (ISE) V3.3",
+            "manufacturer": "Cisco Systems",
+            "category": "Authentication",
+            "link": "https://www.ia.nato.int/niapc/Product/Cisco-Identity-Services-Engine--ISE--V3.3_945",
+            "raw_text": "Cisco Identity Services Engine (ISE) V3.3 | Manufacturer : | Cisco Systems | Categories: | Authentication | Security Mechanism Groups: | Identity Management and Access Protection | Country: | United States"
+          },
+          {
+            "name": "Cisco Email Security Appliance with AsyncOS 15.5",
+            "manufacturer": "Cisco Systems",
+            "category": "Firewall and Mailguard",
+            "link": "https://www.ia.nato.int/niapc/Product/Cisco-Email-Security-Appliance-with-AsyncOS-15.5_946",
+            "raw_text": "Cisco Email Security Appliance with AsyncOS 15.5 | Manufacturer : | Cisco Systems | Categories: | Firewall and Mailguard | Security Mechanism Groups: | Boundary Protection Devices and Systems | , | Interruptibility and Availability | Country: | United States"
+          },
+          {
+            "name": "Cisco Embedded Services Switch (ESS) 9300 Series (IOS-XE 17.12)",
+            "manufacturer": "Cisco Systems",
+            "category": "Network Security Management",
+            "link": "https://www.ia.nato.int/niapc/Product/Cisco-Embedded-Services-Switch--ESS--9300-Series--IOS-XE-17.12-_947",
+            "raw_text": "Cisco Embedded Services Switch (ESS) 9300 Series (IOS-XE 17.12) | Manufacturer : | Cisco Systems | Categories: | Network Security Management | Security Mechanism Groups: | Boundary Protection Devices and Systems | , | Compliance and Configuration Control | Country: | United States"
+          },
+          {
+            "name": "Cisco Embedded Services Switch (ESS) 3300 Series (IOS-XE 17.12)",
+            "manufacturer": "Cisco Systems",
+            "category": "Network Security Management",
+            "link": "https://www.ia.nato.int/niapc/Product/Cisco-Embedded-Services-Switch--ESS--3300-Series--IOS-XE-17.12-_948",
+            "raw_text": "Cisco Embedded Services Switch (ESS) 3300 Series (IOS-XE 17.12) | Manufacturer : | Cisco Systems | Categories: | Network Security Management | Security Mechanism Groups: | Boundary Protection Devices and Systems | , | Compliance and Configuration Control | Country: | United States"
+          },
+          {
+            "name": "Cisco Embedded Services Router (ESR) 6300 v17.12",
+            "manufacturer": "Cisco Systems",
+            "category": "Network Security Management",
+            "link": "https://www.ia.nato.int/niapc/Product/Cisco-Embedded-Services-Router--ESR--6300-v17.12_949",
+            "raw_text": "Cisco Embedded Services Router (ESR) 6300 v17.12 | Manufacturer : | Cisco Systems | Categories: | Network Security Management | Security Mechanism Groups: | Boundary Protection Devices and Systems | , | Compliance and Configuration Control | Country: | United States"
+          },
+          {
+            "name": "Cisco Embedded Services Router (ESR) 6300 v17.15",
+            "manufacturer": "Cisco Systems",
+            "category": "Network Security Management",
+            "link": "https://www.ia.nato.int/niapc/Product/Cisco-Embedded-Services-Router--ESR--6300-v17.15_950",
+            "raw_text": "Cisco Embedded Services Router (ESR) 6300 v17.15 | Manufacturer : | Cisco Systems | Categories: | Network Security Management | Security Mechanism Groups: | Boundary Protection Devices and Systems | , | Compliance and Configuration Control | Country: | United States"
+          },
+          {
+            "name": "Cisco Secure Firewall 3100 Series with FMC/FMCv FTD 7.4",
+            "manufacturer": "Cisco Systems",
+            "category": "Firewall and Mailguard",
+            "link": "https://www.ia.nato.int/niapc/Product/Cisco-Secure-Firewall-3100-Series-with-FMC-FMCv-FTD-7.4_951",
+            "raw_text": "Cisco Secure Firewall 3100 Series with FMC/FMCv FTD 7.4 | Manufacturer : | Cisco Systems | Categories: | Firewall and Mailguard | Security Mechanism Groups: | Boundary Protection Devices and Systems | , | Interruptibility and Availability | Country: | United States"
+          },
+          {
+            "name": "Cisco Secure Firewall 4200 Series (with FMC/FMCv Cisco FTD 7.4)",
+            "manufacturer": "Cisco Systems",
+            "category": "Firewall and Mailguard",
+            "link": "https://www.ia.nato.int/niapc/Product/Cisco-Secure-Firewall-4200-Series--with-FMC-FMCv-Cisco-FTD-7.4-_952",
+            "raw_text": "Cisco Secure Firewall 4200 Series (with FMC/FMCv Cisco FTD 7.4) | Manufacturer : | Cisco Systems | Categories: | Firewall and Mailguard | Security Mechanism Groups: | Boundary Protection Devices and Systems | , | Interruptibility and Availability | Country: | United States"
+          },
+          {
+            "name": "Cisco Catalyst 9800 Series Wireless Controllers and Access Points 17.12",
+            "manufacturer": "Cisco Systems",
+            "category": "Access Control",
+            "link": "https://www.ia.nato.int/niapc/Product/Cisco-Catalyst-9800-Series-Wireless-Controllers-and-Access-Points-17.12_953",
+            "raw_text": "Cisco Catalyst 9800 Series Wireless Controllers and Access Points 17.12 | Manufacturer : | Cisco Systems | Categories: | Access Control | Security Mechanism Groups: | Boundary Protection Devices and Systems | , | Identity Management and Access Protection | , | Physical Security | Country: | United States"
+          },
+          {
+            "name": "Cisco Catalyst 9800 Series Wireless Controllers and Access Points 17.6",
+            "manufacturer": "Cisco Systems",
+            "category": "Network Management",
+            "link": "https://www.ia.nato.int/niapc/Product/Cisco-Catalyst-9800-Series-Wireless-Controllers-and-Access-Points-17.6_954",
+            "raw_text": "Cisco Catalyst 9800 Series Wireless Controllers and Access Points 17.6 | Manufacturer : | Cisco Systems | Categories: | Network Management | Security Mechanism Groups: | Compliance and Configuration Control | Country: | United States"
+          },
+          {
+            "name": "Cisco Catalyst Industrial Ethernet 3000 (IE3x00) Rugged Series Switches running IOS-XE 17.12",
+            "manufacturer": "Cisco Systems",
+            "category": "Network Security Management",
+            "link": "https://www.ia.nato.int/niapc/Product/Cisco-Catalyst-Industrial-Ethernet-3000--IE3x00--Rugged-Series-Switches-running-IOS-XE-17.12_955",
+            "raw_text": "Cisco Catalyst Industrial Ethernet 3000 (IE3x00) Rugged Series Switches running IOS-XE 17.12 | Manufacturer : | Cisco Systems | Categories: | Network Security Management | Security Mechanism Groups: | Boundary Protection Devices and Systems | , | Compliance and Configuration Control | Country: | United States"
+          },
+          {
+            "name": "Cisco Catalyst Industrial Ethernet 9300 Rugged Series Switches running IOS-XE 17.12",
+            "manufacturer": "Cisco Systems",
+            "category": "Network Management",
+            "link": "https://www.ia.nato.int/niapc/Product/Cisco-Catalyst-Industrial-Ethernet-9300-Rugged-Series-Switches-running-IOS-XE-17.12_956",
+            "raw_text": "Cisco Catalyst Industrial Ethernet 9300 Rugged Series Switches running IOS-XE 17.12 | Manufacturer : | Cisco Systems | Categories: | Network Management | Security Mechanism Groups: | Compliance and Configuration Control | Country: | United States"
+          }
+        ],
+        "removed": [
+          {
+            "name": "Cisco ASA 5500-X Series Next-Generation Firewalls",
+            "manufacturer": "Cisco Systems",
+            "category": "Firewall and Mailguard , VPN (Virtual Private Network)",
+            "link": "https://www.ia.nato.int/niapc/Product/Cisco-ASA-5500-X-Series-Next-Generation-Firewalls_589",
+            "raw_text": "Cisco ASA 5500-X Series Next-Generation Firewalls | Manufacturer : | Cisco Systems | Categories: | Firewall and Mailguard | , | VPN (Virtual Private Network) | Security Mechanism Groups: | Boundary Protection Devices and Systems | , | Cryptography | , | Identity Management and Access Protection | , | Interruptibility and Availability | Classification: | NATO RESTRICTED | Country: | United States"
+          },
+          {
+            "name": "AnyConnect 5.0 for Windows 10",
+            "manufacturer": "Cisco Systems",
+            "category": "VPN (Virtual Private Network)",
+            "link": "https://www.ia.nato.int/niapc/Product/AnyConnect-5.0-for-Windows-10_643",
+            "raw_text": "AnyConnect 5.0 for Windows 10 | Manufacturer : | Cisco Systems | Categories: | VPN (Virtual Private Network) | Security Mechanism Groups: | Cryptography | , | Identity Management and Access Protection | Classification: | NATO RESTRICTED | Country: | United States"
+          },
+          {
+            "name": "Cisco ASR 1000 Series (IOS XE 17.15)",
+            "manufacturer": "Cisco Systems",
+            "category": "VPN (Virtual Private Network)",
+            "link": "https://www.ia.nato.int/niapc/Product/Cisco-ASR-1000-Series--IOS-XE-17.15-_722",
+            "raw_text": "Cisco ASR 1000 Series (IOS XE 17.15) | Manufacturer : | Cisco Systems | Categories: | VPN (Virtual Private Network) | Security Mechanism Groups: | Cryptography | , | Identity Management and Access Protection | Classification: | NATO RESTRICTED | Country: | United States"
+          },
+          {
+            "name": "Cisco FirePower 2100 Series (with FMC/FMCv Cisco FTD 7.4)",
+            "manufacturer": "Cisco Systems",
+            "category": "VPN (Virtual Private Network) , Intrusion Detection and Prevention , Firewall and Mailguard , Firewall and Mailguard",
+            "link": "https://www.ia.nato.int/niapc/Product/Cisco-FirePower-2100-Series--with-FMC-FMCv-Cisco-FTD-7.4-_750",
+            "raw_text": "Cisco FirePower 2100 Series (with FMC/FMCv Cisco FTD 7.4) | Manufacturer : | Cisco Systems | Categories: | VPN (Virtual Private Network) | , | Intrusion Detection and Prevention | , | Firewall and Mailguard | , | Firewall and Mailguard | Security Mechanism Groups: | Boundary Protection Devices and Systems | , | Cryptography | , | Identity Management and Access Protection | , | Interruptibility and"
+          },
+          {
+            "name": "Cisco FirePower 4100 Series (with FMC/FMCv Cisco FTD 7.4)",
+            "manufacturer": "Cisco Systems",
+            "category": "Intrusion Detection and Prevention , VPN (Virtual Private Network) , Firewall and Mailguard",
+            "link": "https://www.ia.nato.int/niapc/Product/Cisco-FirePower-4100-Series--with-FMC-FMCv-Cisco-FTD-7.4-_751",
+            "raw_text": "Cisco FirePower 4100 Series (with FMC/FMCv Cisco FTD 7.4) | Manufacturer : | Cisco Systems | Categories: | Intrusion Detection and Prevention | , | VPN (Virtual Private Network) | , | Firewall and Mailguard | Security Mechanism Groups: | Boundary Protection Devices and Systems | , | Cryptography | , | Identity Management and Access Protection | , | Interruptibility and Availability | , | Malware P"
+          },
+          {
+            "name": "Cisco FirePower 9300 Series (with FMC/FMCv Cisco FTD 7.4)",
+            "manufacturer": "Cisco Systems",
+            "category": "Firewall and Mailguard , VPN (Virtual Private Network)",
+            "link": "https://www.ia.nato.int/niapc/Product/Cisco-FirePower-9300-Series--with-FMC-FMCv-Cisco-FTD-7.4-_752",
+            "raw_text": "Cisco FirePower 9300 Series (with FMC/FMCv Cisco FTD 7.4) | Manufacturer : | Cisco Systems | Categories: | Firewall and Mailguard | , | VPN (Virtual Private Network) | Security Mechanism Groups: | Boundary Protection Devices and Systems | , | Cryptography | , | Identity Management and Access Protection | , | Interruptibility and Availability | Classification: | NATO RESTRICTED | Country: | United "
+          },
+          {
+            "name": "CISCO Firepower 1000 Series (with FMC/FMCv Cisco FTD 7.4)",
+            "manufacturer": "Cisco Systems",
+            "category": "Intrusion Detection and Prevention , Communications Encryption , VPN (Virtual Private Network) , Firewall and Mailguard",
+            "link": "https://www.ia.nato.int/niapc/Product/https---www.cisco.com-c-en-us-support-security-firepower-1000-series-series.html_832",
+            "raw_text": "CISCO Firepower 1000 Series (with FMC/FMCv Cisco FTD 7.4) | Manufacturer : | Cisco Systems | Categories: | Intrusion Detection and Prevention | , | Communications Encryption | , | VPN (Virtual Private Network) | , | Firewall and Mailguard | Security Mechanism Groups: | Boundary Protection Devices and Systems | , | Cryptography | , | Identity Management and Access Protection | , | Interruptibility "
+          },
+          {
+            "name": "Cisco APIC",
+            "manufacturer": "Cisco Systems",
+            "category": "Network Security Management",
+            "link": "https://www.ia.nato.int/niapc/Product/Cisco-APIC_897",
+            "raw_text": "Cisco APIC | Manufacturer : | Cisco Systems | Categories: | Network Security Management | Security Mechanism Groups: | Boundary Protection Devices and Systems | , | Compliance and Configuration Control | Country: | United States"
+          },
+          {
+            "name": "Cisco Nexus 9000 Series (NX-OS 10.4)",
+            "manufacturer": "Cisco Systems",
+            "category": "Network Security Management",
+            "link": "https://www.ia.nato.int/niapc/Product/Cisco-Nexus-9000-Series--NX-OS-10.4-_898",
+            "raw_text": "Cisco Nexus 9000 Series (NX-OS 10.4) | Manufacturer : | Cisco Systems | Categories: | Network Security Management | Security Mechanism Groups: | Boundary Protection Devices and Systems | , | Compliance and Configuration Control | Country: | United States"
+          },
+          {
+            "name": "Cisco MDS 9000 Series Switches (NX-OS 9.4)",
+            "manufacturer": "Cisco Systems",
+            "category": "Network Security Management",
+            "link": "https://www.ia.nato.int/niapc/Product/Cisco-MDS-9000-Series-Switches--NX-OS-9.4-_899",
+            "raw_text": "Cisco MDS 9000 Series Switches (NX-OS 9.4) | Manufacturer : | Cisco Systems | Categories: | Network Security Management | Security Mechanism Groups: | Boundary Protection Devices and Systems | , | Compliance and Configuration Control | Country: | United States"
+          },
+          {
+            "name": "Cisco Catalyst 8000 (Cat8K) Series Edge Routers (IOS-XE 17.15)",
+            "manufacturer": "Cisco Systems",
+            "category": "Network Management",
+            "link": "https://www.ia.nato.int/niapc/Product/Cisco-Catalyst-8000--Cat8K--Series-Edge-Routers--IOS-XE-17.15-_900",
+            "raw_text": "Cisco Catalyst 8000 (Cat8K) Series Edge Routers (IOS-XE 17.15) | Manufacturer : | Cisco Systems | Categories: | Network Management | Security Mechanism Groups: | Compliance and Configuration Control | Country: | United States"
+          },
+          {
+            "name": "Cisco Catalyst 8300 Series (IOS-XE 17.6)",
+            "manufacturer": "Cisco Systems",
+            "category": "Network Management",
+            "link": "https://www.ia.nato.int/niapc/Product/Cisco-Catalyst-8300-Series--IOS-XE-17.6-_901",
+            "raw_text": "Cisco Catalyst 8300 Series (IOS-XE 17.6) | Manufacturer : | Cisco Systems | Categories: | Network Management | Security Mechanism Groups: | Compliance and Configuration Control | Country: | United States"
+          },
+          {
+            "name": "Cisco Catalyst 8500 Series Edge Routers (IOS-XE 17.15)",
+            "manufacturer": "Cisco Systems",
+            "category": "Communications Encryption , Network Management",
+            "link": "https://www.ia.nato.int/niapc/Product/Cisco-Catalyst-8500-Series-Edge-Routers--IOS-XE-17.15-_902",
+            "raw_text": "Cisco Catalyst 8500 Series Edge Routers (IOS-XE 17.15) | Manufacturer : | Cisco Systems | Categories: | Communications Encryption | , | Network Management | Security Mechanism Groups: | Compliance and Configuration Control | , | Cryptography | Country: | United States"
+          },
+          {
+            "name": "Cisco Catalyst C9000X/CX Series Switches 17.12",
+            "manufacturer": "Cisco Systems",
+            "category": "Network Management",
+            "link": "https://www.ia.nato.int/niapc/Product/Cisco-Catalyst-C9000X-CX-Series-Switches-17.12_924",
+            "raw_text": "Cisco Catalyst C9000X/CX Series Switches 17.12 | Manufacturer : | Cisco Systems | Categories: | Network Management | Security Mechanism Groups: | Compliance and Configuration Control | Country: | United States"
+          },
+          {
+            "name": "AnyConnect 5.1 for RHEL 8.2",
+            "manufacturer": "Cisco Systems",
+            "category": "VPN (Virtual Private Network)",
+            "link": "https://www.ia.nato.int/niapc/Product/AnyConnect-5.1-for-RHEL-8.2_941",
+            "raw_text": "AnyConnect 5.1 for RHEL 8.2 | Manufacturer : | Cisco Systems | Categories: | VPN (Virtual Private Network) | Security Mechanism Groups: | Cryptography | , | Identity Management and Access Protection | Country: | United States"
+          },
+          {
+            "name": "Cisco Secure Firewall ASA Virtual 9.20",
+            "manufacturer": "Cisco Systems",
+            "category": "VPN (Virtual Private Network) , Firewall and Mailguard",
+            "link": "https://www.ia.nato.int/niapc/Product/Cisco-Secure-Firewall-ASA-Virtual-9.20_942",
+            "raw_text": "Cisco Secure Firewall ASA Virtual 9.20 | Manufacturer : | Cisco Systems | Categories: | VPN (Virtual Private Network) | , | Firewall and Mailguard | Security Mechanism Groups: | Boundary Protection Devices and Systems | , | Cryptography | , | Identity Management and Access Protection | , | Interruptibility and Availability | Country: | United States"
+          },
+          {
+            "name": "Cisco Secure Firewall Threat Defense (FTD) Virtual 7.4 with FMC/FMCv",
+            "manufacturer": "Cisco Systems",
+            "category": "Firewall and Mailguard",
+            "link": "https://www.ia.nato.int/niapc/Product/Cisco-Secure-Firewall-Threat-Defense--FTD--Virtual-7.4-with-FMC-FMCv_943",
+            "raw_text": "Cisco Secure Firewall Threat Defense (FTD) Virtual 7.4 with FMC/FMCv | Manufacturer : | Cisco Systems | Categories: | Firewall and Mailguard | Security Mechanism Groups: | Boundary Protection Devices and Systems | , | Interruptibility and Availability | Country: | United States"
+          },
+          {
+            "name": "Cisco Network Convergence System 1004 (IOS-XR 24.1)",
+            "manufacturer": "Cisco Systems",
+            "category": "Network Management",
+            "link": "https://www.ia.nato.int/niapc/Product/Cisco-Network-Convergence-System-1004--IOS-XR-24.1-_944",
+            "raw_text": "Cisco Network Convergence System 1004 (IOS-XR 24.1) | Manufacturer : | Cisco Systems | Categories: | Network Management | Security Mechanism Groups: | Compliance and Configuration Control | Country: | United States"
+          },
+          {
+            "name": "Cisco Identity Services Engine (ISE) V3.3",
+            "manufacturer": "Cisco Systems",
+            "category": "Authentication",
+            "link": "https://www.ia.nato.int/niapc/Product/Cisco-Identity-Services-Engine--ISE--V3.3_945",
+            "raw_text": "Cisco Identity Services Engine (ISE) V3.3 | Manufacturer : | Cisco Systems | Categories: | Authentication | Security Mechanism Groups: | Identity Management and Access Protection | Country: | United States"
+          },
+          {
+            "name": "Cisco Email Security Appliance with AsyncOS 15.5",
+            "manufacturer": "Cisco Systems",
+            "category": "Firewall and Mailguard",
+            "link": "https://www.ia.nato.int/niapc/Product/Cisco-Email-Security-Appliance-with-AsyncOS-15.5_946",
+            "raw_text": "Cisco Email Security Appliance with AsyncOS 15.5 | Manufacturer : | Cisco Systems | Categories: | Firewall and Mailguard | Security Mechanism Groups: | Boundary Protection Devices and Systems | , | Interruptibility and Availability | Country: | United States"
+          },
+          {
+            "name": "Cisco Embedded Services Switch (ESS) 9300 Series (IOS-XE 17.12)",
+            "manufacturer": "Cisco Systems",
+            "category": "Network Security Management",
+            "link": "https://www.ia.nato.int/niapc/Product/Cisco-Embedded-Services-Switch--ESS--9300-Series--IOS-XE-17.12-_947",
+            "raw_text": "Cisco Embedded Services Switch (ESS) 9300 Series (IOS-XE 17.12) | Manufacturer : | Cisco Systems | Categories: | Network Security Management | Security Mechanism Groups: | Boundary Protection Devices and Systems | , | Compliance and Configuration Control | Country: | United States"
+          },
+          {
+            "name": "Cisco Embedded Services Switch (ESS) 3300 Series (IOS-XE 17.12)",
+            "manufacturer": "Cisco Systems",
+            "category": "Network Security Management",
+            "link": "https://www.ia.nato.int/niapc/Product/Cisco-Embedded-Services-Switch--ESS--3300-Series--IOS-XE-17.12-_948",
+            "raw_text": "Cisco Embedded Services Switch (ESS) 3300 Series (IOS-XE 17.12) | Manufacturer : | Cisco Systems | Categories: | Network Security Management | Security Mechanism Groups: | Boundary Protection Devices and Systems | , | Compliance and Configuration Control | Country: | United States"
+          },
+          {
+            "name": "Cisco Embedded Services Router (ESR) 6300 v17.12",
+            "manufacturer": "Cisco Systems",
+            "category": "Network Security Management",
+            "link": "https://www.ia.nato.int/niapc/Product/Cisco-Embedded-Services-Router--ESR--6300-v17.12_949",
+            "raw_text": "Cisco Embedded Services Router (ESR) 6300 v17.12 | Manufacturer : | Cisco Systems | Categories: | Network Security Management | Security Mechanism Groups: | Boundary Protection Devices and Systems | , | Compliance and Configuration Control | Country: | United States"
+          },
+          {
+            "name": "Cisco Embedded Services Router (ESR) 6300 v17.15",
+            "manufacturer": "Cisco Systems",
+            "category": "Network Security Management",
+            "link": "https://www.ia.nato.int/niapc/Product/Cisco-Embedded-Services-Router--ESR--6300-v17.15_950",
+            "raw_text": "Cisco Embedded Services Router (ESR) 6300 v17.15 | Manufacturer : | Cisco Systems | Categories: | Network Security Management | Security Mechanism Groups: | Boundary Protection Devices and Systems | , | Compliance and Configuration Control | Country: | United States"
+          },
+          {
+            "name": "Cisco Secure Firewall 3100 Series with FMC/FMCv FTD 7.4",
+            "manufacturer": "Cisco Systems",
+            "category": "Firewall and Mailguard",
+            "link": "https://www.ia.nato.int/niapc/Product/Cisco-Secure-Firewall-3100-Series-with-FMC-FMCv-FTD-7.4_951",
+            "raw_text": "Cisco Secure Firewall 3100 Series with FMC/FMCv FTD 7.4 | Manufacturer : | Cisco Systems | Categories: | Firewall and Mailguard | Security Mechanism Groups: | Boundary Protection Devices and Systems | , | Interruptibility and Availability | Country: | United States"
+          },
+          {
+            "name": "Cisco Secure Firewall 4200 Series (with FMC/FMCv Cisco FTD 7.4)",
+            "manufacturer": "Cisco Systems",
+            "category": "Firewall and Mailguard",
+            "link": "https://www.ia.nato.int/niapc/Product/Cisco-Secure-Firewall-4200-Series--with-FMC-FMCv-Cisco-FTD-7.4-_952",
+            "raw_text": "Cisco Secure Firewall 4200 Series (with FMC/FMCv Cisco FTD 7.4) | Manufacturer : | Cisco Systems | Categories: | Firewall and Mailguard | Security Mechanism Groups: | Boundary Protection Devices and Systems | , | Interruptibility and Availability | Country: | United States"
+          },
+          {
+            "name": "Cisco Catalyst 9800 Series Wireless Controllers and Access Points 17.12",
+            "manufacturer": "Cisco Systems",
+            "category": "Access Control",
+            "link": "https://www.ia.nato.int/niapc/Product/Cisco-Catalyst-9800-Series-Wireless-Controllers-and-Access-Points-17.12_953",
+            "raw_text": "Cisco Catalyst 9800 Series Wireless Controllers and Access Points 17.12 | Manufacturer : | Cisco Systems | Categories: | Access Control | Security Mechanism Groups: | Boundary Protection Devices and Systems | , | Identity Management and Access Protection | , | Physical Security | Country: | United States"
+          },
+          {
+            "name": "Cisco Catalyst 9800 Series Wireless Controllers and Access Points 17.6",
+            "manufacturer": "Cisco Systems",
+            "category": "Network Management",
+            "link": "https://www.ia.nato.int/niapc/Product/Cisco-Catalyst-9800-Series-Wireless-Controllers-and-Access-Points-17.6_954",
+            "raw_text": "Cisco Catalyst 9800 Series Wireless Controllers and Access Points 17.6 | Manufacturer : | Cisco Systems | Categories: | Network Management | Security Mechanism Groups: | Compliance and Configuration Control | Country: | United States"
+          },
+          {
+            "name": "Cisco Catalyst Industrial Ethernet 3000 (IE3x00) Rugged Series Switches running IOS-XE 17.12",
+            "manufacturer": "Cisco Systems",
+            "category": "Network Security Management",
+            "link": "https://www.ia.nato.int/niapc/Product/Cisco-Catalyst-Industrial-Ethernet-3000--IE3x00--Rugged-Series-Switches-running-IOS-XE-17.12_955",
+            "raw_text": "Cisco Catalyst Industrial Ethernet 3000 (IE3x00) Rugged Series Switches running IOS-XE 17.12 | Manufacturer : | Cisco Systems | Categories: | Network Security Management | Security Mechanism Groups: | Boundary Protection Devices and Systems | , | Compliance and Configuration Control | Country: | United States"
+          },
+          {
+            "name": "Cisco Catalyst Industrial Ethernet 9300 Rugged Series Switches running IOS-XE 17.12",
+            "manufacturer": "Cisco Systems",
+            "category": "Network Management",
+            "link": "https://www.ia.nato.int/niapc/Product/Cisco-Catalyst-Industrial-Ethernet-9300-Rugged-Series-Switches-running-IOS-XE-17.12_956",
+            "raw_text": "Cisco Catalyst Industrial Ethernet 9300 Rugged Series Switches running IOS-XE 17.12 | Manufacturer : | Cisco Systems | Categories: | Network Management | Security Mechanism Groups: | Compliance and Configuration Control | Country: | United States"
+          }
+        ]
+      }
+    },
+    "cisco_added": [],
+    "cisco_removed": []
+  },
+  "eucc": {
+    "pages": {
+      "certificates": {
+        "added": [
+          {
+            "name": "EUCC-3110-2026-2500079-01",
+            "text": "EUCC-3110-2026-2500079-01 | 15 May 2026 | JCOP 8.9 with eUICC extension on SN300 Secure Element supports concurrent execution of multiple JCOP OS instances out of individual and hardware controlled execution domains, running on the Embedded Secure Element of SN300 B5 Secure Element, a single die Secure microcontroller, which also includes...",
+            "href": "https://certification.enisa.europa.eu/certificates/eucc-3110-2026-2500079-01_en",
+            "cert_date": "2026-05-15T12:00:00Z",
+            "description": "JCOP 8.9 with eUICC extension on SN300 Secure Element supports concurrent execution of multiple JCOP OS instances out of individual and hardware controlled execution domains, running on the Embedded Secure Element of SN300 B5 Secure Element, a single die Secure microcontroller, which also includes..."
+          },
+          {
+            "name": "EUCC-3110-2026-2500163-01",
+            "text": "EUCC-3110-2026-2500163-01 | 15 May 2026 | The Target of Evaluation (TOE) is a Network Camera series developed by Hikvision, providing the following functionality:- Management interface,- Video over IP,- Security audit",
+            "href": "https://certification.enisa.europa.eu/certificates/eucc-3110-2026-2500163-01_en",
+            "cert_date": "2026-05-15T12:00:00Z",
+            "description": "The Target of Evaluation (TOE) is a Network Camera series developed by Hikvision, providing the following functionality:- Management interface,- Video over IP,- Security audit"
+          },
+          {
+            "name": "EUCC-3110-2026-2500100-01",
+            "text": "EUCC-3110-2026-2500100-01 | 28 April 2026 | The Cisco Cisco ASR 9000 Series Aggregation Services Routers running IOS-XR 7.11, (ASR9K) is a scalable carrier-class router, which is designed for redundancy, high security and availability, packaging, power, and other requirements needed by service providers. The ASR9K is designed to provide...",
+            "href": "https://certification.enisa.europa.eu/certificates/eucc-3110-2026-2500100-01_en",
+            "cert_date": "2026-04-28T12:00:00Z",
+            "description": "The Cisco Cisco ASR 9000 Series Aggregation Services Routers running IOS-XR 7.11, (ASR9K) is a scalable carrier-class router, which is designed for redundancy, high security and availability, packaging, power, and other requirements needed by service providers. The ASR9K is designed to provide..."
+          },
+          {
+            "name": "EUCC-3110-2026-2500102-01",
+            "text": "EUCC-3110-2026-2500102-01 | 4 July 2026 | The TOE is the ZTE OTN solution aimed to build broadband and intelligent full connection for the ICT field in the 5G era. Based on cloud datacenters (DCs), ZTE OTN solution establishes large-capacity interconnection pipes between DCs and between DCs and services, to implement unified transport of...",
+            "href": "https://certification.enisa.europa.eu/certificates/eucc-3110-2026-2500102-01_en",
+            "cert_date": "2026-07-04T12:00:00Z",
+            "description": "The TOE is the ZTE OTN solution aimed to build broadband and intelligent full connection for the ICT field in the 5G era. Based on cloud datacenters (DCs), ZTE OTN solution establishes large-capacity interconnection pipes between DCs and between DCs and services, to implement unified transport of..."
+          },
+          {
+            "name": "EUCC-3110-2026-2500103-01",
+            "text": "EUCC-3110-2026-2500103-01 | 4 July 2026 | The TOE is focused on the requirements of core Internet nodes, backbone tandem nodes, core egress nodes of large MANs, and data centre gateways. The TOE is widely used in metro network (including core layer, aggregation layer, and access layer) and backbone network. They provide transmission...",
+            "href": "https://certification.enisa.europa.eu/certificates/eucc-3110-2026-2500103-01_en",
+            "cert_date": "2026-07-04T12:00:00Z",
+            "description": "The TOE is focused on the requirements of core Internet nodes, backbone tandem nodes, core egress nodes of large MANs, and data centre gateways. The TOE is widely used in metro network (including core layer, aggregation layer, and access layer) and backbone network. They provide transmission..."
+          },
+          {
+            "name": "EUCC-3110-2025-12-2500098-01",
+            "text": "EUCC-3110-2025-12-2500098-01 | 3 December 2025 | The Cisco Nexus 9K Series are data center-class switches for use as an aggregation switch in the data center.Cisco NX-OS is a Cisco-developed highly configurable proprietary operating system that provides for efficient and effective routing and switching.",
+            "href": "https://certification.enisa.europa.eu/certificates/eucc-3110-2025-12-2500098-01_en",
+            "cert_date": "2025-12-03T12:00:00Z",
+            "description": "The Cisco Nexus 9K Series are data center-class switches for use as an aggregation switch in the data center.Cisco NX-OS is a Cisco-developed highly configurable proprietary operating system that provides for efficient and effective routing and switching."
+          },
+          {
+            "name": "EUCC-3110-2025-11-2500051-01",
+            "text": "EUCC-3110-2025-11-2500051-01 | 14 November 2025 | The TOE is a series of network infrastructure routers including both hardware and software. It is defined as the software running on the hardware corresponding to the following routers: ATN 910C-M, ATN 910C-K and ATN 910D-B. These routers consist of both hardware and software.",
+            "href": "https://certification.enisa.europa.eu/certificates/eucc-3110-2025-11-2500051-01_en",
+            "cert_date": "2025-11-14T12:00:00Z",
+            "description": "The TOE is a series of network infrastructure routers including both hardware and software. It is defined as the software running on the hardware corresponding to the following routers: ATN 910C-M, ATN 910C-K and ATN 910D-B. These routers consist of both hardware and software."
+          },
+          {
+            "name": "EUCC-3110-2026-01-2500076-01",
+            "text": "EUCC-3110-2026-01-2500076-01 | 16 January 2026 | The JCOP 8.x/9.x on SN300 B2 Secure Elemen is a composite platform containing the Java Card OS embedded on the SN300 B2 Secure Element with IC Dedicated Software",
+            "href": "https://certification.enisa.europa.eu/certificates/eucc-3110-2026-01-2500076-01_en",
+            "cert_date": "2026-01-16T12:00:00Z",
+            "description": "The JCOP 8.x/9.x on SN300 B2 Secure Elemen is a composite platform containing the Java Card OS embedded on the SN300 B2 Secure Element with IC Dedicated Software"
+          },
+          {
+            "name": "EUCC-3110-2025-09-2500093-01",
+            "text": "EUCC-3110-2025-09-2500093-01 | 14 September 2025 | The certified product is Cisco Intersight Virtual Appliance 1.0.9 with IMM Fabric 4.3 UCS X-Series Servers and UCS C-Series Servers.",
+            "href": "https://certification.enisa.europa.eu/certificates/eucc-3110-2025-09-2500093-01_en",
+            "cert_date": "2025-09-14T12:00:00Z",
+            "description": "The certified product is Cisco Intersight Virtual Appliance 1.0.9 with IMM Fabric 4.3 UCS X-Series Servers and UCS C-Series Servers."
+          },
+          {
+            "name": "EUCC-3110-2025-08-2500053-01",
+            "text": "EUCC-3110-2025-08-2500053-01 | 29 August 2025 | The certified product is NXP JCOP 8.x/9.x with eUICC extension on SN300 B2 Secure Element.",
+            "href": "https://certification.enisa.europa.eu/certificates/eucc-3110-2025-08-2500053-01_en",
+            "cert_date": "2025-08-29T12:00:00Z",
+            "description": "The certified product is NXP JCOP 8.x/9.x with eUICC extension on SN300 B2 Secure Element."
+          },
+          {
+            "name": "EUCC-3110-2025-08-2500052-01",
+            "text": "EUCC-3110-2025-08-2500052-01 | 19 August 2025 | The certified product is NXP JCOP 7.x with eUICC extension on SN300 B1.1 Secure Element, versions JCOP 7.0 R1.64.0.2, JCOP 7.0 R2.04.0.2, JCOP 7.1 R1.04.0.2, JCOP 7.2 R1.09.0.2, JCOP 7.3 R1.07.0.2 from NXP Semiconductors Netherlands N.V. located in Eindhoven, The Netherlands.",
+            "href": "https://certification.enisa.europa.eu/certificates/eucc-3110-2025-08-2500052-01_en",
+            "cert_date": "2025-08-19T12:00:00Z",
+            "description": "The certified product is NXP JCOP 7.x with eUICC extension on SN300 B1.1 Secure Element, versions JCOP 7.0 R1.64.0.2, JCOP 7.0 R2.04.0.2, JCOP 7.1 R1.04.0.2, JCOP 7.2 R1.09.0.2, JCOP 7.3 R1.07.0.2 from NXP Semiconductors Netherlands N.V. located in Eindhoven, The Netherlands."
+          },
+          {
+            "name": "EUCC-3095-2025-07-01",
+            "text": "EUCC-3095-2025-07-01 | 23 July 2025 | The certified product is the GMV GNSS Cryptographic Module.The GMV GNSS Cryptographic Module consists of a software library for the Linux platform whose main purpose is to provide cryptographic services for GNSS client implementations, requiring, for example, Open Service Navigation Message...",
+            "href": "https://certification.enisa.europa.eu/certificates/eucc-3095-2025-07-01_en",
+            "cert_date": "2025-07-23T12:00:00Z",
+            "description": "The certified product is the GMV GNSS Cryptographic Module.The GMV GNSS Cryptographic Module consists of a software library for the Linux platform whose main purpose is to provide cryptographic services for GNSS client implementations, requiring, for example, Open Service Navigation Message..."
+          }
+        ],
+        "removed": [
+          {
+            "name": "EUCC-3095-2025-0000000001-00000",
+            "text": "EUCC-3095-2025-0000000001-00000 | 23 July 2025 | The certified product is the GMV GNSS Cryptographic Module.The GMV GNSS Cryptographic Module consists of a software library for the Linux platform whose main purpose is to provide cryptographic services for GNSS client implementations, requiring, for example, Open Service Navigation Message...",
+            "href": "https://certification.enisa.europa.eu/certificates/eucc-3095-2025-0000000001-00000_en",
+            "cert_date": "2025-07-23T12:00:00Z",
+            "description": "The certified product is the GMV GNSS Cryptographic Module.The GMV GNSS Cryptographic Module consists of a software library for the Linux platform whose main purpose is to provide cryptographic services for GNSS client implementations, requiring, for example, Open Service Navigation Message..."
+          },
+          {
+            "name": "EUCC-3110-2025-0002500052-00001",
+            "text": "EUCC-3110-2025-0002500052-00001 | 19 August 2025 | The certified product is NXP JCOP 7.x with eUICC extension on SN300 B1.1 Secure Element, versions JCOP 7.0 R1.64.0.2, JCOP 7.0 R2.04.0.2, JCOP 7.1 R1.04.0.2, JCOP 7.2 R1.09.0.2, JCOP 7.3 R1.07.0.2 from NXP Semiconductors Netherlands N.V. located in Eindhoven, The Netherlands.",
+            "href": "https://certification.enisa.europa.eu/certificates/eucc-3110-2025-0002500052-00001_en",
+            "cert_date": "2025-08-19T12:00:00Z",
+            "description": "The certified product is NXP JCOP 7.x with eUICC extension on SN300 B1.1 Secure Element, versions JCOP 7.0 R1.64.0.2, JCOP 7.0 R2.04.0.2, JCOP 7.1 R1.04.0.2, JCOP 7.2 R1.09.0.2, JCOP 7.3 R1.07.0.2 from NXP Semiconductors Netherlands N.V. located in Eindhoven, The Netherlands."
+          },
+          {
+            "name": "EUCC-3110-2025-0002500053-00001",
+            "text": "EUCC-3110-2025-0002500053-00001 | 29 August 2025 | The certified product is NXP JCOP 8.x/9.x with eUICC extension on SN300 B2 Secure Element.",
+            "href": "https://certification.enisa.europa.eu/certificates/eucc-3110-2025-0002500053-00001_en",
+            "cert_date": "2025-08-29T12:00:00Z",
+            "description": "The certified product is NXP JCOP 8.x/9.x with eUICC extension on SN300 B2 Secure Element."
+          },
+          {
+            "name": "EUCC-3110-2025-0002500093-00001",
+            "text": "EUCC-3110-2025-0002500093-00001 | 14 September 2025 | The certified product is Cisco Intersight Virtual Appliance 1.0.9 with IMM Fabric 4.3 UCS X-Series Servers and UCS C-Series Servers.",
+            "href": "https://certification.enisa.europa.eu/certificates/eucc-3110-2025-0002500093-00001_en",
+            "cert_date": "2025-09-14T12:00:00Z",
+            "description": "The certified product is Cisco Intersight Virtual Appliance 1.0.9 with IMM Fabric 4.3 UCS X-Series Servers and UCS C-Series Servers."
+          },
+          {
+            "name": "EUCC-3110-2025-2500051-01-00000",
+            "text": "EUCC-3110-2025-2500051-01-00000 | 14 November 2025 | The TOE is a series of network infrastructure routers including both hardware and software. It is defined as the software running on the hardware corresponding to the following routers: ATN 910C-M, ATN 910C-K and ATN 910D-B. These routers consist of both hardware and software.",
+            "href": "https://certification.enisa.europa.eu/certificates/eucc-3110-2025-2500051-01-00000_en",
+            "cert_date": "2025-11-14T12:00:00Z",
+            "description": "The TOE is a series of network infrastructure routers including both hardware and software. It is defined as the software running on the hardware corresponding to the following routers: ATN 910C-M, ATN 910C-K and ATN 910D-B. These routers consist of both hardware and software."
+          },
+          {
+            "name": "EUCC-3110-2025-2500098-01-00000",
+            "text": "EUCC-3110-2025-2500098-01-00000 | 3 December 2025 | The Cisco Nexus 9K Series are data center-class switches for use as an aggregation switch in the data center.Cisco NX-OS is a Cisco-developed highly configurable proprietary operating system that provides for efficient and effective routing and switching.",
+            "href": "https://certification.enisa.europa.eu/certificates/eucc-3110-2025-2500098-01-00000_en",
+            "cert_date": "2025-12-03T12:00:00Z",
+            "description": "The Cisco Nexus 9K Series are data center-class switches for use as an aggregation switch in the data center.Cisco NX-OS is a Cisco-developed highly configurable proprietary operating system that provides for efficient and effective routing and switching."
+          },
+          {
+            "name": "EUCC-3110-2026-2500076-01-00000",
+            "text": "EUCC-3110-2026-2500076-01-00000 | 16 January 2026 | The JCOP 8.x/9.x on SN300 B2 Secure Elemen is a composite platform containing the Java Card OS embedded on the SN300 B2 Secure Element with IC Dedicated Software",
+            "href": "https://certification.enisa.europa.eu/certificates/eucc-3110-2026-2500076-01-00000_en",
+            "cert_date": "2026-01-16T12:00:00Z",
+            "description": "The JCOP 8.x/9.x on SN300 B2 Secure Elemen is a composite platform containing the Java Card OS embedded on the SN300 B2 Secure Element with IC Dedicated Software"
+          }
+        ]
+      }
+    },
+    "cisco_added": [
+      {
+        "name": "EUCC-3110-2025-09-2500093-01",
+        "text": "EUCC-3110-2025-09-2500093-01 | 14 September 2025 | The certified product is Cisco Intersight Virtual Appliance 1.0.9 with IMM Fabric 4.3 UCS X-Series Servers and UCS C-Series Servers.",
+        "href": "https://certification.enisa.europa.eu/certificates/eucc-3110-2025-09-2500093-01_en",
+        "cert_date": "2025-09-14T12:00:00Z",
+        "description": "The certified product is Cisco Intersight Virtual Appliance 1.0.9 with IMM Fabric 4.3 UCS X-Series Servers and UCS C-Series Servers."
+      },
+      {
+        "name": "EUCC-3110-2025-12-2500098-01",
+        "text": "EUCC-3110-2025-12-2500098-01 | 3 December 2025 | The Cisco Nexus 9K Series are data center-class switches for use as an aggregation switch in the data center.Cisco NX-OS is a Cisco-developed highly configurable proprietary operating system that provides for efficient and effective routing and switching.",
+        "href": "https://certification.enisa.europa.eu/certificates/eucc-3110-2025-12-2500098-01_en",
+        "cert_date": "2025-12-03T12:00:00Z",
+        "description": "The Cisco Nexus 9K Series are data center-class switches for use as an aggregation switch in the data center.Cisco NX-OS is a Cisco-developed highly configurable proprietary operating system that provides for efficient and effective routing and switching."
+      },
+      {
+        "name": "EUCC-3110-2026-2500100-01",
+        "text": "EUCC-3110-2026-2500100-01 | 28 April 2026 | The Cisco Cisco ASR 9000 Series Aggregation Services Routers running IOS-XR 7.11, (ASR9K) is a scalable carrier-class router, which is designed for redundancy, high security and availability, packaging, power, and other requirements needed by service providers. The ASR9K is designed to provide...",
+        "href": "https://certification.enisa.europa.eu/certificates/eucc-3110-2026-2500100-01_en",
+        "cert_date": "2026-04-28T12:00:00Z",
+        "description": "The Cisco Cisco ASR 9000 Series Aggregation Services Routers running IOS-XR 7.11, (ASR9K) is a scalable carrier-class router, which is designed for redundancy, high security and availability, packaging, power, and other requirements needed by service providers. The ASR9K is designed to provide..."
+      }
+    ],
+    "cisco_removed": [
+      {
+        "name": "EUCC-3110-2025-2500098-01-00000",
+        "text": "EUCC-3110-2025-2500098-01-00000 | 3 December 2025 | The Cisco Nexus 9K Series are data center-class switches for use as an aggregation switch in the data center.Cisco NX-OS is a Cisco-developed highly configurable proprietary operating system that provides for efficient and effective routing and switching.",
+        "href": "https://certification.enisa.europa.eu/certificates/eucc-3110-2025-2500098-01-00000_en",
+        "cert_date": "2025-12-03T12:00:00Z",
+        "description": "The Cisco Nexus 9K Series are data center-class switches for use as an aggregation switch in the data center.Cisco NX-OS is a Cisco-developed highly configurable proprietary operating system that provides for efficient and effective routing and switching."
+      },
+      {
+        "name": "EUCC-3110-2025-0002500093-00001",
+        "text": "EUCC-3110-2025-0002500093-00001 | 14 September 2025 | The certified product is Cisco Intersight Virtual Appliance 1.0.9 with IMM Fabric 4.3 UCS X-Series Servers and UCS C-Series Servers.",
+        "href": "https://certification.enisa.europa.eu/certificates/eucc-3110-2025-0002500093-00001_en",
+        "cert_date": "2025-09-14T12:00:00Z",
+        "description": "The certified product is Cisco Intersight Virtual Appliance 1.0.9 with IMM Fabric 4.3 UCS X-Series Servers and UCS C-Series Servers."
+      }
+    ]
+  },
+  "source_health": {
+    "niap": {
+      "label": "NIAP",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "PCL products",
+          "observed": 1734,
+          "minimum": 50
+        },
+        {
+          "name": "Protection Profiles",
+          "observed": 271,
+          "minimum": 10
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-07-08T08:15:08.456482+00:00",
+      "subcollections": {
+        "news": {
+          "label": "News announcements",
+          "status": "healthy",
+          "observed": 353,
+          "consecutive_failures": 0,
+          "using_last_known_good": false
+        },
+        "events": {
+          "label": "Events",
+          "status": "healthy",
+          "observed": 0,
+          "consecutive_failures": 0,
+          "using_last_known_good": false
+        },
+        "policies": {
+          "label": "Policy letters",
+          "status": "healthy",
+          "observed": 39,
+          "consecutive_failures": 0,
+          "using_last_known_good": false
+        }
+      }
+    },
+    "cc_portal": {
+      "label": "CC Portal",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "portal records",
+          "observed": 179,
+          "minimum": 1
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-07-08T08:15:08.456482+00:00"
+    },
+    "cctl_labs": {
+      "label": "CCTL Labs",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "lab feed items",
+          "observed": 19,
+          "minimum": 1
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-07-08T08:15:08.456482+00:00"
+    },
+    "csfc": {
+      "label": "CSfC",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "APL items",
+          "observed": 115,
+          "minimum": 5
+        },
+        {
+          "name": "announcements",
+          "observed": 8,
+          "minimum": 1
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-07-08T08:15:08.456482+00:00"
+    },
+    "cc_crypto": {
+      "label": "CC Crypto",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "publications",
+          "observed": 121,
+          "minimum": 5
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-07-08T08:15:08.456482+00:00"
+    },
+    "nist": {
+      "label": "NIST CSRC",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "CSRC news items",
+          "observed": 25,
+          "minimum": 10
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-07-08T08:15:08.456482+00:00"
+    },
+    "nato": {
+      "label": "NATO NIAPCL",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "NIAPCL products",
+          "observed": 30,
+          "minimum": 3
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-07-08T08:15:08.456482+00:00"
+    },
+    "eucc": {
+      "label": "EUCC / ENISA",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "certificates",
+          "observed": 45,
+          "minimum": 2
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-07-08T08:15:08.456482+00:00"
+    }
+  },
+  "alerts": [
+    {
+      "source": "NIST: cmvp_mip",
+      "kind": "publication",
+      "title": "Samsung NVMe TCG Opal SSC SEDs PM9D3a Series | Samsung Electronics Co., Ltd.View Contacts | FIPS 140-3 | Comment Resolut\u2026",
+      "url": "#d13614",
+      "detail": "New item on NIST CSRC cmvp mip page",
+      "matched_keywords": [
+        "FIPS 140-3"
+      ],
+      "tab": "us"
+    },
+    {
+      "source": "NIST: cmvp_mip",
+      "kind": "publication",
+      "title": "AWS-LC 4 Cryptographic Module (static) | Amazon Web Services, Inc.View Contacts | FIPS 140-3 | Pending Resubmission  (7/\u2026",
+      "url": "#d13709",
+      "detail": "New item on NIST CSRC cmvp mip page",
+      "matched_keywords": [
+        "FIPS 140-3"
+      ],
+      "tab": "us"
+    },
+    {
+      "source": "NIST: cmvp_mip",
+      "kind": "publication",
+      "title": "Barco ICMP-XS Cryptographic Module | Barco n.v.View Contacts | FIPS 140-3 | Comment Resolution - CMVP  (7/7/2026)",
+      "url": "#d13046",
+      "detail": "New item on NIST CSRC cmvp mip page",
+      "matched_keywords": [
+        "CMVP",
+        "FIPS 140-3"
+      ],
+      "tab": "us"
+    },
+    {
+      "source": "NIST: cmvp_mip",
+      "kind": "publication",
+      "title": "Canonical Ltd. Ubuntu 22.04 Strongswan Cryptographic Module | Canonical Ltd.View Contacts | FIPS 140-3 | Review  (7/7/20\u2026",
+      "url": "#d-9000",
+      "detail": "New item on NIST CSRC cmvp mip page",
+      "matched_keywords": [
+        "FIPS 140-3"
+      ],
+      "tab": "us"
+    },
+    {
+      "source": "NIST: cmvp_mip",
+      "kind": "publication",
+      "title": "Chainguard FIPS Provider for OpenSSL | Chainguard, Inc.View Contacts | FIPS 140-3 | Review  (7/7/2026)",
+      "url": "#d13608",
+      "detail": "New item on NIST CSRC cmvp mip page",
+      "matched_keywords": [
+        "FIPS 140-3"
+      ],
+      "tab": "us"
+    },
+    {
+      "source": "NIST: cmvp_mip",
+      "kind": "publication",
+      "title": "QASM Cryptographic Module | Crypto4A Technologies Inc.View Contacts | FIPS 140-3 | Comment Resolution - CMVP  (7/7/2026)",
+      "url": "#d12983",
+      "detail": "New item on NIST CSRC cmvp mip page",
+      "matched_keywords": [
+        "CMVP",
+        "FIPS 140-3"
+      ],
+      "tab": "us"
+    },
+    {
+      "source": "NIST: cmvp_mip",
+      "kind": "publication",
+      "title": "Go Cryptographic Module | Geomys LLCView Contacts | FIPS 140-3 | Pending Review  (7/7/2026)",
+      "url": "#d13601",
+      "detail": "New item on NIST CSRC cmvp mip page",
+      "matched_keywords": [
+        "FIPS 140-3"
+      ],
+      "tab": "us"
+    },
+    {
+      "source": "NIST: cmvp_mip",
+      "kind": "publication",
+      "title": "B227 True Random Number Generator (TRNG) Cryptographic Module | Google, LLCView Contacts | FIPS 140-3 | Comment Resoluti\u2026",
+      "url": "#d13663",
+      "detail": "New item on NIST CSRC cmvp mip page",
+      "matched_keywords": [
+        "FIPS 140-3"
+      ],
+      "tab": "us"
+    },
+    {
+      "source": "NIST: cmvp_mip",
+      "kind": "publication",
+      "title": "HID Applets v4.0 on NXP JCOP 4.5 P71D600 | HID GlobalView Contacts | FIPS 140-3 | Finalization  (7/7/2026)",
+      "url": "#d12930",
+      "detail": "New item on NIST CSRC cmvp mip page",
+      "matched_keywords": [
+        "FIPS 140-3"
+      ],
+      "tab": "us"
+    },
+    {
+      "source": "NIST: cmvp_mip",
+      "kind": "publication",
+      "title": "BC-FJA (Bouncy Castle FIPS Java API) | Legion of the Bouncy Castle Inc.View Contacts | FIPS 140-3 | Cost Recovery  (7/7/\u2026",
+      "url": "#d13813",
+      "detail": "New item on NIST CSRC cmvp mip page",
+      "matched_keywords": [
+        "FIPS 140-3"
+      ],
+      "tab": "us"
+    },
+    {
+      "source": "NIST: cmvp_mip",
+      "kind": "publication",
+      "title": "Nokia-SONiC-MACsec | NokiaView Contacts | FIPS 140-3 | Comment Resolution - CMVP  (7/7/2026)",
+      "url": "#d13481",
+      "detail": "New item on NIST CSRC cmvp mip page",
+      "matched_keywords": [
+        "CMVP",
+        "FIPS 140-3"
+      ],
+      "tab": "us"
+    },
+    {
+      "source": "NIST: cmvp_mip",
+      "kind": "publication",
+      "title": "Riverbed Cryptographic Module | Riverbed Technology LLCView Contacts | FIPS 140-3 | Cost Recovery  (7/7/2026)",
+      "url": "#d13814",
+      "detail": "New item on NIST CSRC cmvp mip page",
+      "matched_keywords": [
+        "FIPS 140-3"
+      ],
+      "tab": "us"
+    },
+    {
+      "source": "NIST: cmvp_mip",
+      "kind": "publication",
+      "title": "Samsung Kernel Cryptographic Module | Samsung Electronics Co., Ltd.View Contacts | FIPS 140-3 | Pending Resubmission  (7\u2026",
+      "url": "#d13358",
+      "detail": "New item on NIST CSRC cmvp mip page",
+      "matched_keywords": [
+        "FIPS 140-3"
+      ],
+      "tab": "us"
+    },
+    {
+      "source": "NIST: cmvp_mip",
+      "kind": "publication",
+      "title": "Samsung SAS TCG Enterprise SSC SEDs PM1653a Series | Samsung Electronics Co., Ltd.View Contacts | FIPS 140-3 | Finalizat\u2026",
+      "url": "#d13543",
+      "detail": "New item on NIST CSRC cmvp mip page",
+      "matched_keywords": [
+        "FIPS 140-3"
+      ],
+      "tab": "us"
+    },
+    {
+      "source": "NIST: cmvp_mip",
+      "kind": "publication",
+      "title": "Luna T7 | Thales Trusted Cyber TechnologiesView Contacts | FIPS 140-3 | Comment Resolution - Lab  (7/7/2026)",
+      "url": "#d13015",
+      "detail": "New item on NIST CSRC cmvp mip page",
+      "matched_keywords": [
+        "FIPS 140-3"
+      ],
+      "tab": "us"
+    },
+    {
+      "source": "NIST: cmvp_mip",
+      "kind": "publication",
+      "title": "Trellix Intrusion Prevention System Sensor NS3100, NS3200, NS5100 and NS5200 | TrellixView Contacts | FIPS 140-3 | Final\u2026",
+      "url": "#d13158",
+      "detail": "New item on NIST CSRC cmvp mip page",
+      "matched_keywords": [
+        "FIPS 140-3"
+      ],
+      "tab": "us"
+    },
+    {
+      "source": "NIST: cmvp_mip",
+      "kind": "publication",
+      "title": "Trellix Intrusion Prevention System Sensor NS3600 | TrellixView Contacts | FIPS 140-3 | Finalization  (7/7/2026)",
+      "url": "#d13155",
+      "detail": "New item on NIST CSRC cmvp mip page",
+      "matched_keywords": [
+        "FIPS 140-3"
+      ],
+      "tab": "us"
+    },
+    {
+      "source": "NIST: cmvp_mip",
+      "kind": "publication",
+      "title": "Trellix Intrusion Prevention System Sensor NS7150, NS7250 and NS7350 | TrellixView Contacts | FIPS 140-3 | Finalization\u2026",
+      "url": "#d13157",
+      "detail": "New item on NIST CSRC cmvp mip page",
+      "matched_keywords": [
+        "FIPS 140-3"
+      ],
+      "tab": "us"
+    },
+    {
+      "source": "NIST: cmvp_mip",
+      "kind": "publication",
+      "title": "Trellix Intrusion Prevention System Sensor NS7500 | TrellixView Contacts | FIPS 140-3 | Finalization  (7/7/2026)",
+      "url": "#d13153",
+      "detail": "New item on NIST CSRC cmvp mip page",
+      "matched_keywords": [
+        "FIPS 140-3"
+      ],
+      "tab": "us"
+    },
+    {
+      "source": "NIST: cmvp_mip",
+      "kind": "publication",
+      "title": "Trellix Intrusion Prevention System Sensor NS7600 | TrellixView Contacts | FIPS 140-3 | Finalization  (7/7/2026)",
+      "url": "#d13156",
+      "detail": "New item on NIST CSRC cmvp mip page",
+      "matched_keywords": [
+        "FIPS 140-3"
+      ],
+      "tab": "us"
+    },
+    {
+      "source": "NIST: cmvp_mip",
+      "kind": "publication",
+      "title": "Trellix Intrusion Prevention System Sensor NS9500 | TrellixView Contacts | FIPS 140-3 | Finalization  (7/7/2026)",
+      "url": "#d13154",
+      "detail": "New item on NIST CSRC cmvp mip page",
+      "matched_keywords": [
+        "FIPS 140-3"
+      ],
+      "tab": "us"
+    },
+    {
+      "source": "NIST: cmvp_mip",
+      "kind": "publication",
+      "title": "Trellix Intrusion Prevention System Sensor NS9600 | TrellixView Contacts | FIPS 140-3 | Finalization  (7/7/2026)",
+      "url": "#d13209",
+      "detail": "New item on NIST CSRC cmvp mip page",
+      "matched_keywords": [
+        "FIPS 140-3"
+      ],
+      "tab": "us"
+    },
+    {
+      "source": "NIST: cmvp_mip",
+      "kind": "publication",
+      "title": "DB Series SSD Drives | UD info Corp.View Contacts | FIPS 140-3 | Review  (7/7/2026)",
+      "url": "#d13363",
+      "detail": "New item on NIST CSRC cmvp mip page",
+      "matched_keywords": [
+        "FIPS 140-3"
+      ],
+      "tab": "us"
+    },
+    {
+      "source": "NIST CMVP MIP",
+      "kind": "new",
+      "title": "Riverbed Cryptographic Module",
+      "url": "https://csrc.nist.gov/projects/cryptographic-module-validation-program/modules-in-process/modules-in-process-list",
+      "detail": "New module in CMVP modules-in-process \u2014 Status: Cost Recovery  (7/7/2026)",
+      "matched_keywords": [],
+      "tab": "us"
+    },
+    {
+      "source": "NIST CMVP MIP",
+      "kind": "updated",
+      "title": "Apple corecrypto Module 18.3 [Apple silicon, Kernel, Software, SL1]",
+      "url": "https://csrc.nist.gov/projects/cryptographic-module-validation-program/modules-in-process/modules-in-process-list",
+      "detail": "CMVP status: Comment Resolution - Lab  (4/30/2026) \u2192 Comment Resolution - CMVP  (7/7/2026)",
+      "matched_keywords": [],
+      "tab": "us"
+    },
+    {
+      "source": "NIST CMVP MIP",
+      "kind": "updated",
+      "title": "Trellix Intrusion Prevention System Sensor NS7500",
+      "url": "https://csrc.nist.gov/projects/cryptographic-module-validation-program/modules-in-process/modules-in-process-list",
+      "detail": "CMVP status: Comment Resolution - CMVP  (6/30/2026) \u2192 Finalization  (7/7/2026)",
+      "matched_keywords": [],
+      "tab": "us"
+    },
+    {
+      "source": "NIST CMVP MIP",
+      "kind": "updated",
+      "title": "DB Series SSD Drives",
+      "url": "https://csrc.nist.gov/projects/cryptographic-module-validation-program/modules-in-process/modules-in-process-list",
+      "detail": "CMVP status: Pending Review  (6/17/2026) \u2192 Review  (7/7/2026)",
+      "matched_keywords": [],
+      "tab": "us"
+    },
+    {
+      "source": "NIST CMVP MIP",
+      "kind": "updated",
+      "title": "Trellix Intrusion Prevention System Sensor NS3100, NS3200, NS5100 and NS5200",
+      "url": "https://csrc.nist.gov/projects/cryptographic-module-validation-program/modules-in-process/modules-in-process-list",
+      "detail": "CMVP status: Comment Resolution - CMVP  (7/1/2026) \u2192 Finalization  (7/7/2026)",
+      "matched_keywords": [],
+      "tab": "us"
+    },
+    {
+      "source": "NIST CMVP MIP",
+      "kind": "updated",
+      "title": "Barco ICMP-XS Cryptographic Module",
+      "url": "https://csrc.nist.gov/projects/cryptographic-module-validation-program/modules-in-process/modules-in-process-list",
+      "detail": "CMVP status: Comment Resolution - Lab  (4/9/2026) \u2192 Comment Resolution - CMVP  (7/7/2026)",
+      "matched_keywords": [],
+      "tab": "us"
+    },
+    {
+      "source": "NIST CMVP MIP",
+      "kind": "updated",
+      "title": "Samsung NVMe TCG Opal SSC SEDs PM9D3a Series",
+      "url": "https://csrc.nist.gov/projects/cryptographic-module-validation-program/modules-in-process/modules-in-process-list",
+      "detail": "CMVP status: Review  (6/1/2026) \u2192 Comment Resolution - Lab  (7/7/2026)",
+      "matched_keywords": [],
+      "tab": "us"
+    },
+    {
+      "source": "NIST CMVP MIP",
+      "kind": "updated",
+      "title": "Motorola Solutions Advanced Crypto Engine (MACE) HSM - Security Level 2",
+      "url": "https://csrc.nist.gov/projects/cryptographic-module-validation-program/modules-in-process/modules-in-process-list",
+      "detail": "CMVP status: Pending Review  (5/27/2026) \u2192 Review  (7/7/2026)",
+      "matched_keywords": [],
+      "tab": "us"
+    },
+    {
+      "source": "NIST CMVP MIP",
+      "kind": "updated",
+      "title": "HID Applets v4.0 on NXP JCOP 4.5 P71D600",
+      "url": "https://csrc.nist.gov/projects/cryptographic-module-validation-program/modules-in-process/modules-in-process-list",
+      "detail": "CMVP status: Comment Resolution - CMVP  (6/26/2026) \u2192 Finalization  (7/7/2026)",
+      "matched_keywords": [],
+      "tab": "us"
+    },
+    {
+      "source": "NIST CMVP MIP",
+      "kind": "updated",
+      "title": "AWS-LC 4 Cryptographic Module (static)",
+      "url": "https://csrc.nist.gov/projects/cryptographic-module-validation-program/modules-in-process/modules-in-process-list",
+      "detail": "CMVP status: Pending Review  (5/7/2026) \u2192 Pending Resubmission  (7/7/2026)",
+      "matched_keywords": [],
+      "tab": "us"
+    },
+    {
+      "source": "NIST CMVP MIP",
+      "kind": "updated",
+      "title": "Samsung NVMe TCG Opal SSC SEDs PM1753 Series",
+      "url": "https://csrc.nist.gov/projects/cryptographic-module-validation-program/modules-in-process/modules-in-process-list",
+      "detail": "CMVP status: Pending Resubmission  (4/29/2026) \u2192 Pending Resubmission  (4/30/2026)",
+      "matched_keywords": [],
+      "tab": "us"
+    },
+    {
+      "source": "NIST CMVP MIP",
+      "kind": "updated",
+      "title": "ST Engineering & i-Engine SAM Applet on NXP P71D600",
+      "url": "https://csrc.nist.gov/projects/cryptographic-module-validation-program/modules-in-process/modules-in-process-list",
+      "detail": "CMVP status: Comment Resolution - CMVP  (7/6/2026) \u2192 Finalization  (7/7/2026)",
+      "matched_keywords": [],
+      "tab": "us"
+    },
+    {
+      "source": "NIST CMVP MIP",
+      "kind": "updated",
+      "title": "Chainguard FIPS Provider for OpenSSL",
+      "url": "https://csrc.nist.gov/projects/cryptographic-module-validation-program/modules-in-process/modules-in-process-list",
+      "detail": "CMVP status: Pending Review  (6/17/2026) \u2192 Review  (7/7/2026)",
+      "matched_keywords": [],
+      "tab": "us"
+    },
+    {
+      "source": "NIST CMVP MIP",
+      "kind": "updated",
+      "title": "Luna T7",
+      "url": "https://csrc.nist.gov/projects/cryptographic-module-validation-program/modules-in-process/modules-in-process-list",
+      "detail": "CMVP status: Comment Resolution - CMVP  (6/24/2026) \u2192 Comment Resolution - Lab  (7/7/2026)",
+      "matched_keywords": [],
+      "tab": "us"
+    },
+    {
+      "source": "NIST CMVP MIP",
+      "kind": "updated",
+      "title": "Code Siren Post-Quantum Cryptographic (PQC) Library for Desktop",
+      "url": "https://csrc.nist.gov/projects/cryptographic-module-validation-program/modules-in-process/modules-in-process-list",
+      "detail": "CMVP status: Pending Review  (2/13/2026) \u2192 Pending Resubmission  (7/7/2026)",
+      "matched_keywords": [],
+      "tab": "us"
+    },
+    {
+      "source": "NIST CMVP MIP",
+      "kind": "updated",
+      "title": "Nokia-SONiC-MACsec",
+      "url": "https://csrc.nist.gov/projects/cryptographic-module-validation-program/modules-in-process/modules-in-process-list",
+      "detail": "CMVP status: Comment Resolution - Lab  (7/6/2026) \u2192 Comment Resolution - CMVP  (7/7/2026)",
+      "matched_keywords": [],
+      "tab": "us"
+    },
+    {
+      "source": "NIST CMVP MIP",
+      "kind": "updated",
+      "title": "Trellix Intrusion Prevention System Sensor NS3600",
+      "url": "https://csrc.nist.gov/projects/cryptographic-module-validation-program/modules-in-process/modules-in-process-list",
+      "detail": "CMVP status: Comment Resolution - CMVP  (6/30/2026) \u2192 Finalization  (7/7/2026)",
+      "matched_keywords": [],
+      "tab": "us"
+    },
+    {
+      "source": "NIST CMVP MIP",
+      "kind": "updated",
+      "title": "Trellix Intrusion Prevention System Sensor NS9600",
+      "url": "https://csrc.nist.gov/projects/cryptographic-module-validation-program/modules-in-process/modules-in-process-list",
+      "detail": "CMVP status: Comment Resolution - CMVP  (7/1/2026) \u2192 Finalization  (7/7/2026)",
+      "matched_keywords": [],
+      "tab": "us"
+    },
+    {
+      "source": "NIST CMVP MIP",
+      "kind": "updated",
+      "title": "Samsung NVMe TCG Opal SSC SEDs BM1743 Series",
+      "url": "https://csrc.nist.gov/projects/cryptographic-module-validation-program/modules-in-process/modules-in-process-list",
+      "detail": "CMVP status: Comment Resolution - CMVP  (6/22/2026) \u2192 Comment Resolution - Lab  (7/7/2026)",
+      "matched_keywords": [],
+      "tab": "us"
+    },
+    {
+      "source": "NIST CMVP MIP",
+      "kind": "updated",
+      "title": "Trellix Intrusion Prevention System Sensor NS7150, NS7250 and NS7350",
+      "url": "https://csrc.nist.gov/projects/cryptographic-module-validation-program/modules-in-process/modules-in-process-list",
+      "detail": "CMVP status: Comment Resolution - CMVP  (7/1/2026) \u2192 Finalization  (7/7/2026)",
+      "matched_keywords": [],
+      "tab": "us"
+    },
+    {
+      "source": "NIST CMVP MIP",
+      "kind": "updated",
+      "title": "Trellix Intrusion Prevention System Sensor NS9500",
+      "url": "https://csrc.nist.gov/projects/cryptographic-module-validation-program/modules-in-process/modules-in-process-list",
+      "detail": "CMVP status: Comment Resolution - CMVP  (6/30/2026) \u2192 Finalization  (7/7/2026)",
+      "matched_keywords": [],
+      "tab": "us"
+    },
+    {
+      "source": "NIST CMVP MIP",
+      "kind": "updated",
+      "title": "Trellix Intrusion Prevention System Sensor NS7600",
+      "url": "https://csrc.nist.gov/projects/cryptographic-module-validation-program/modules-in-process/modules-in-process-list",
+      "detail": "CMVP status: Comment Resolution - CMVP  (6/30/2026) \u2192 Finalization  (7/7/2026)",
+      "matched_keywords": [],
+      "tab": "us"
+    },
+    {
+      "source": "NIST CMVP MIP",
+      "kind": "updated",
+      "title": "QASM Cryptographic Module",
+      "url": "https://csrc.nist.gov/projects/cryptographic-module-validation-program/modules-in-process/modules-in-process-list",
+      "detail": "CMVP status: Comment Resolution - Lab  (5/25/2026) \u2192 Comment Resolution - CMVP  (7/7/2026)",
+      "matched_keywords": [],
+      "tab": "us"
+    },
+    {
+      "source": "NIST CMVP MIP",
+      "kind": "updated",
+      "title": "Check Point Gaia OS R82.10 Cryptography Module running on Check Point Firewall models MHO140, MHO175, 3920, 3950, 3970, 3980, 9100, 9200, 9300, 9400, 9700, 9800, 19100, 19200, 29100, 29200, 700S, 700M, 7000L, 7000XL, 7000Ultra, and Cloud Firewall and Cloud Management series VM with VMware ESXi 8.0.0",
+      "url": "https://csrc.nist.gov/projects/cryptographic-module-validation-program/modules-in-process/modules-in-process-list",
+      "detail": "CMVP status: Cost Recovery  (6/26/2026) \u2192 Pending Review  (7/7/2026)",
+      "matched_keywords": [],
+      "tab": "us"
+    },
+    {
+      "source": "NIST CMVP MIP",
+      "kind": "updated",
+      "title": "Go Cryptographic Module",
+      "url": "https://csrc.nist.gov/projects/cryptographic-module-validation-program/modules-in-process/modules-in-process-list",
+      "detail": "CMVP status: Pending Resubmission  (7/6/2026) \u2192 Pending Review  (7/7/2026)",
+      "matched_keywords": [],
+      "tab": "us"
+    },
+    {
+      "source": "NIST CMVP MIP",
+      "kind": "updated",
+      "title": "Hitachi Embedded Storage Manager Kernel Crypto API Cryptographic Module",
+      "url": "https://csrc.nist.gov/projects/cryptographic-module-validation-program/modules-in-process/modules-in-process-list",
+      "detail": "CMVP status: Cost Recovery  (6/29/2026) \u2192 Pending Review  (7/7/2026)",
+      "matched_keywords": [],
+      "tab": "us"
+    },
+    {
+      "source": "NIST CMVP MIP",
+      "kind": "updated",
+      "title": "Canonical Ltd. Ubuntu 22.04 Strongswan Cryptographic Module",
+      "url": "https://csrc.nist.gov/projects/cryptographic-module-validation-program/modules-in-process/modules-in-process-list",
+      "detail": "CMVP status: Pending Review  (3/17/2026) \u2192 Review  (7/7/2026)",
+      "matched_keywords": [],
+      "tab": "us"
+    },
+    {
+      "source": "NIST CMVP MIP",
+      "kind": "updated",
+      "title": "B227 True Random Number Generator (TRNG) Cryptographic Module",
+      "url": "https://csrc.nist.gov/projects/cryptographic-module-validation-program/modules-in-process/modules-in-process-list",
+      "detail": "CMVP status: Review  (5/12/2026) \u2192 Comment Resolution - Lab  (7/7/2026)",
+      "matched_keywords": [],
+      "tab": "us"
+    },
+    {
+      "source": "NIST CMVP MIP",
+      "kind": "updated",
+      "title": "BC-FJA (Bouncy Castle FIPS Java API)",
+      "url": "https://csrc.nist.gov/projects/cryptographic-module-validation-program/modules-in-process/modules-in-process-list",
+      "detail": "CMVP status: Cost Recovery  (6/30/2026) \u2192 Cost Recovery  (7/7/2026)",
+      "matched_keywords": [],
+      "tab": "us"
+    },
+    {
+      "source": "NIST CMVP MIP",
+      "kind": "updated",
+      "title": "Samsung Kernel Cryptographic Module",
+      "url": "https://csrc.nist.gov/projects/cryptographic-module-validation-program/modules-in-process/modules-in-process-list",
+      "detail": "CMVP status: Pending Resubmission  (5/8/2026) \u2192 Pending Resubmission  (7/7/2026)",
+      "matched_keywords": [],
+      "tab": "us"
+    },
+    {
+      "source": "EUCC Certificates",
+      "kind": "new_cert",
+      "title": "EUCC-3110-2026-2500079-01 | 15 May 2026 | JCOP 8.9 with eUICC extension on SN300 Secure Element supports concurrent exec\u2026",
+      "url": "https://certification.enisa.europa.eu/certificates/eucc-3110-2026-2500079-01_en",
+      "detail": "New EUCC certified product",
+      "matched_keywords": [
+        "EUCC"
+      ],
+      "tab": "eu"
+    },
+    {
+      "source": "EUCC Certificates",
+      "kind": "new_cert",
+      "title": "EUCC-3110-2026-2500163-01 | 15 May 2026 | The Target of Evaluation (TOE) is a Network Camera series developed by Hikvisi\u2026",
+      "url": "https://certification.enisa.europa.eu/certificates/eucc-3110-2026-2500163-01_en",
+      "detail": "New EUCC certified product",
+      "matched_keywords": [
+        "EUCC"
+      ],
+      "tab": "eu"
+    },
+    {
+      "source": "EUCC Certificates",
+      "kind": "new_cert",
+      "title": "EUCC-3110-2026-2500100-01 | 28 April 2026 | The Cisco Cisco ASR 9000 Series Aggregation Services Routers running IOS-XR\u2026",
+      "url": "https://certification.enisa.europa.eu/certificates/eucc-3110-2026-2500100-01_en",
+      "detail": "New EUCC certified product",
+      "matched_keywords": [
+        "EUCC"
+      ],
+      "tab": "eu"
+    },
+    {
+      "source": "EUCC Certificates",
+      "kind": "new_cert",
+      "title": "EUCC-3110-2026-2500102-01 | 4 July 2026 | The TOE is the ZTE OTN solution aimed to build broadband and intelligent full\u2026",
+      "url": "https://certification.enisa.europa.eu/certificates/eucc-3110-2026-2500102-01_en",
+      "detail": "New EUCC certified product",
+      "matched_keywords": [
+        "EUCC"
+      ],
+      "tab": "eu"
+    },
+    {
+      "source": "EUCC Certificates",
+      "kind": "new_cert",
+      "title": "EUCC-3110-2026-2500103-01 | 4 July 2026 | The TOE is focused on the requirements of core Internet nodes, backbone tandem\u2026",
+      "url": "https://certification.enisa.europa.eu/certificates/eucc-3110-2026-2500103-01_en",
+      "detail": "New EUCC certified product",
+      "matched_keywords": [
+        "EUCC"
+      ],
+      "tab": "eu"
+    },
+    {
+      "source": "EUCC Certificates",
+      "kind": "new_cert",
+      "title": "EUCC-3110-2025-12-2500098-01 | 3 December 2025 | The Cisco Nexus 9K Series are data center-class switches for use as an\u2026",
+      "url": "https://certification.enisa.europa.eu/certificates/eucc-3110-2025-12-2500098-01_en",
+      "detail": "New EUCC certified product",
+      "matched_keywords": [
+        "EUCC"
+      ],
+      "tab": "eu"
+    },
+    {
+      "source": "EUCC Certificates",
+      "kind": "new_cert",
+      "title": "EUCC-3110-2025-11-2500051-01 | 14 November 2025 | The TOE is a series of network infrastructure routers including both h\u2026",
+      "url": "https://certification.enisa.europa.eu/certificates/eucc-3110-2025-11-2500051-01_en",
+      "detail": "New EUCC certified product",
+      "matched_keywords": [
+        "EUCC"
+      ],
+      "tab": "eu"
+    },
+    {
+      "source": "EUCC Certificates",
+      "kind": "new_cert",
+      "title": "EUCC-3110-2026-01-2500076-01 | 16 January 2026 | The JCOP 8.x/9.x on SN300 B2 Secure Elemen is a composite platform cont\u2026",
+      "url": "https://certification.enisa.europa.eu/certificates/eucc-3110-2026-01-2500076-01_en",
+      "detail": "New EUCC certified product",
+      "matched_keywords": [
+        "EUCC"
+      ],
+      "tab": "eu"
+    },
+    {
+      "source": "EUCC Certificates",
+      "kind": "new_cert",
+      "title": "EUCC-3110-2025-09-2500093-01 | 14 September 2025 | The certified product is Cisco Intersight Virtual Appliance 1.0.9 wit\u2026",
+      "url": "https://certification.enisa.europa.eu/certificates/eucc-3110-2025-09-2500093-01_en",
+      "detail": "New EUCC certified product",
+      "matched_keywords": [
+        "EUCC"
+      ],
+      "tab": "eu"
+    },
+    {
+      "source": "EUCC Certificates",
+      "kind": "new_cert",
+      "title": "EUCC-3110-2025-08-2500053-01 | 29 August 2025 | The certified product is NXP JCOP 8.x/9.x with eUICC extension on SN300\u2026",
+      "url": "https://certification.enisa.europa.eu/certificates/eucc-3110-2025-08-2500053-01_en",
+      "detail": "New EUCC certified product",
+      "matched_keywords": [
+        "EUCC"
+      ],
+      "tab": "eu"
+    },
+    {
+      "source": "EUCC Certificates",
+      "kind": "new_cert",
+      "title": "EUCC-3110-2025-08-2500052-01 | 19 August 2025 | The certified product is NXP JCOP 7.x with eUICC extension on SN300 B1.1\u2026",
+      "url": "https://certification.enisa.europa.eu/certificates/eucc-3110-2025-08-2500052-01_en",
+      "detail": "New EUCC certified product",
+      "matched_keywords": [
+        "EUCC"
+      ],
+      "tab": "eu"
+    },
+    {
+      "source": "EUCC Certificates",
+      "kind": "new_cert",
+      "title": "EUCC-3095-2025-07-01 | 23 July 2025 | The certified product is the GMV GNSS Cryptographic Module.The GMV GNSS Cryptograp\u2026",
+      "url": "https://certification.enisa.europa.eu/certificates/eucc-3095-2025-07-01_en",
+      "detail": "New EUCC certified product",
+      "matched_keywords": [
+        "EUCC"
+      ],
+      "tab": "eu"
+    },
+    {
+      "source": "EUCC Certificates",
+      "kind": "new_cert",
+      "title": "EUCC-3110-2025-09-2500093-01",
+      "url": "https://certification.enisa.europa.eu/certificates/eucc-3110-2025-09-2500093-01_en",
+      "detail": "New Cisco EUCC certified product",
+      "matched_keywords": [
+        "EUCC"
+      ],
+      "tab": "eu"
+    },
+    {
+      "source": "EUCC Certificates",
+      "kind": "new_cert",
+      "title": "EUCC-3110-2025-12-2500098-01",
+      "url": "https://certification.enisa.europa.eu/certificates/eucc-3110-2025-12-2500098-01_en",
+      "detail": "New Cisco EUCC certified product",
+      "matched_keywords": [
+        "EUCC"
+      ],
+      "tab": "eu"
+    },
+    {
+      "source": "EUCC Certificates",
+      "kind": "new_cert",
+      "title": "EUCC-3110-2026-2500100-01",
+      "url": "https://certification.enisa.europa.eu/certificates/eucc-3110-2026-2500100-01_en",
+      "detail": "New Cisco EUCC certified product",
+      "matched_keywords": [
+        "EUCC"
+      ],
+      "tab": "eu"
+    }
+  ]
+}
