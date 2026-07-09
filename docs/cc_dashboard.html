@@ -179,7 +179,7 @@
   <span class="nav-title">CC Pulse Dashboard</span>
   <span class="nav-spacer"></span>
   <div class="ham-wrap">
-    <span class="nav-meta">Last run: 2026-07-08 04:15 ET</span>
+    <span class="nav-meta">Last run: 2026-07-09 05:38 ET</span>
     <button class="ham-btn" id="ham-btn" onclick="toggleHamMenu()" aria-expanded="false" aria-haspopup="true" title="Open menu">&#9776;</button>
     <div class="ham-menu" id="ham-menu" role="menu">
       <a class="ham-item" href="https://kr15tyk.github.io/CC-pulse/cc_dashboard.html" role="menuitem"><span class="ham-icon">&#127968;</span>Home</a>
@@ -256,7 +256,7 @@
 <div class="sticky-top">
   <div class="trend-bar">
     <div class="stat"><a href="#sec-niap-pp" onclick="navigateTo('sec-niap-pp');return false;">
-      <div class="stat-num ">0</div>
+      <div class="stat-num active-num">5</div>
       <div class="stat-lbl">NIAP Changes</div>
     </a></div>
     <div class="stat"><a href="#sec-csfc" onclick="navigateTo('sec-csfc');return false;">
@@ -264,7 +264,7 @@
       <div class="stat-lbl">CSfC Selection Updates</div>
     </a></div>
     <div class="stat"><a href="#sec-nist" onclick="navigateTo('sec-nist');return false;">
-      <div class="stat-num active-num">25</div>
+      <div class="stat-num active-num">15</div>
       <div class="stat-lbl">NIST Doc Updates</div>
     </a></div>
     <div class="stat"><a href="#sec-cc-portal" onclick="navigateTo('sec-cc-portal');return false;">
@@ -280,11 +280,11 @@
       <div class="stat-lbl">CCTL Updates</div>
     </a></div>
     <div class="stat"><a href="#sec-eucc-req" onclick="navigateTo('sec-eucc-req');return false;">
-      <div class="stat-num active-num">15</div>
+      <div class="stat-num active-num">48</div>
       <div class="stat-lbl">EUCC Changes</div>
     </a></div>
     <div class="stat"><a href="#sec-alerts" onclick="navigateTo('sec-alerts');return false;">
-      <div class="stat-num alert-num">68</div>
+      <div class="stat-num alert-num">22</div>
       <div class="stat-lbl">Alerts</div>
     </a></div>
   </div>
@@ -314,621 +314,207 @@
 <div class="card card-alert" id="sec-alerts">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>Alerts</span>
-    <span class="card-count">68 alerts</span>
+    <span class="card-count">22 alerts</span>
     <span class="toggle-icon">&#9660;</span>
   </div>
   <div class="card-body">
     <div class="alert-monitoring">FIPS 186-4, FIPS 186-5, NDcPP, CPP_ND, TLS 1.3, SSH, PP-Module_VPN, PP-Module_WLAN, labgram, valgram, emergency, CSfC, Commercial Solutions for Classified, CSfC APL, CSfC component selections, NSA CSfC, NATO NIAPC, NIAPCL, EUCC, ENISA, CCDB-018, Crypto Catalog, cryptography working group, Specification of Functional Requirements for Cryptography, FCS_CKM, FCS_COP, FCS_RBG, CAVP, CMVP, FIPS 140-3, FIPS 203, FIPS 204, FIPS 205, SP 800-131A, SP 800-57, NIST IR 8547, post-quantum cryptography, PQC migration, ML-KEM, ML-DSA, SLH-DSA, algorithm transition, CMVP validated, modules in process</div>
     
-        <div class="item-row alert-item" data-alert-key="NIST: cmvp_mip-Samsung_NVMe_TCG_Opal_SSC_SEDs_PM9D3a_Series_|_Samsung_Electronics_Co.,_Ltd.View_Contacts_|_FIPS_140-3_|_Comment_Resolut…" data-tab="us">
+        <div class="item-row alert-item" data-alert-key="NIST: news-NIST_releases_SP_1326" data-tab="us">
           
-          <a class="item-link" href="" target="_blank">NIST: cmvp_mip: Samsung NVMe TCG Opal SSC SEDs PM9D3a Series | Samsung Electronics Co., Ltd.View Contacts | FIPS 140-3 | Comment Resolut…</a>
+          <a class="item-link" href="https://csrc.nist.gov/News/2026/nist-releases-sp-1326" target="_blank">NIST: news: NIST releases SP 1326</a>
+          
+          <span class="item-meta">publication &middot; </span>
+          <div class="item-sub">New item on NIST CSRC news page</div>
+          <button class="dismiss-btn" onclick="dismissAlert(this)" title="Mark as seen">&#10003; Seen</button>
+        </div>
+        
+        <div class="item-row alert-item" data-alert-key="NIST: cmvp_mip-TASS_Crypto_Engine_|_Beijing_JN_TASS_Technology_Co.,_Ltd.View_Contacts_|_FIPS_140-3_|_Pending_Review__(7/8/2026)" data-tab="us">
+          
+          <a class="item-link" href="" target="_blank">NIST: cmvp_mip: TASS Crypto Engine | Beijing JN TASS Technology Co., Ltd.View Contacts | FIPS 140-3 | Pending Review  (7/8/2026)</a>
           
           <span class="item-meta">publication &middot; FIPS 140-3</span>
           <div class="item-sub">New item on NIST CSRC cmvp mip page</div>
           <button class="dismiss-btn" onclick="dismissAlert(this)" title="Mark as seen">&#10003; Seen</button>
         </div>
         
-        <div class="item-row alert-item" data-alert-key="NIST: cmvp_mip-AWS-LC_4_Cryptographic_Module_(static)_|_Amazon_Web_Services,_Inc.View_Contacts_|_FIPS_140-3_|_Pending_Resubmission__(7/…" data-tab="us">
+        <div class="item-row alert-item" data-alert-key="NIST: cmvp_mip-Canonical_Ltd._Ubuntu_22.04_GnuTLS_Cryptographic_Module_|_Canonical_Ltd.View_Contacts_|_FIPS_140-3_|_Review__(7/8/2026)" data-tab="us">
           
-          <a class="item-link" href="" target="_blank">NIST: cmvp_mip: AWS-LC 4 Cryptographic Module (static) | Amazon Web Services, Inc.View Contacts | FIPS 140-3 | Pending Resubmission  (7/…</a>
+          <a class="item-link" href="" target="_blank">NIST: cmvp_mip: Canonical Ltd. Ubuntu 22.04 GnuTLS Cryptographic Module | Canonical Ltd.View Contacts | FIPS 140-3 | Review  (7/8/2026)</a>
           
           <span class="item-meta">publication &middot; FIPS 140-3</span>
           <div class="item-sub">New item on NIST CSRC cmvp mip page</div>
           <button class="dismiss-btn" onclick="dismissAlert(this)" title="Mark as seen">&#10003; Seen</button>
         </div>
         
-        <div class="item-row alert-item" data-alert-key="NIST: cmvp_mip-Barco_ICMP-XS_Cryptographic_Module_|_Barco_n.v.View_Contacts_|_FIPS_140-3_|_Comment_Resolution_-_CMVP__(7/7/2026)" data-tab="us">
+        <div class="item-row alert-item" data-alert-key="NIST: cmvp_mip-Canonical_Ltd._Ubuntu_22.04_Libgcrypt_Cryptographic_Module_|_Canonical_Ltd.View_Contacts_|_FIPS_140-3_|_Review__(7/8/202…" data-tab="us">
           
-          <a class="item-link" href="" target="_blank">NIST: cmvp_mip: Barco ICMP-XS Cryptographic Module | Barco n.v.View Contacts | FIPS 140-3 | Comment Resolution - CMVP  (7/7/2026)</a>
+          <a class="item-link" href="" target="_blank">NIST: cmvp_mip: Canonical Ltd. Ubuntu 22.04 Libgcrypt Cryptographic Module | Canonical Ltd.View Contacts | FIPS 140-3 | Review  (7/8/202…</a>
+          
+          <span class="item-meta">publication &middot; FIPS 140-3</span>
+          <div class="item-sub">New item on NIST CSRC cmvp mip page</div>
+          <button class="dismiss-btn" onclick="dismissAlert(this)" title="Mark as seen">&#10003; Seen</button>
+        </div>
+        
+        <div class="item-row alert-item" data-alert-key="NIST: cmvp_mip-CiscoSSL_FIPS_Provider_|_Cisco_Systems_IncView_Contacts_|_FIPS_140-3_|_Comment_Resolution_-_CMVP__(7/9/2026)" data-tab="us">
+          
+          <a class="item-link" href="" target="_blank">NIST: cmvp_mip: CiscoSSL FIPS Provider | Cisco Systems IncView Contacts | FIPS 140-3 | Comment Resolution - CMVP  (7/9/2026)</a>
           
           <span class="item-meta">publication &middot; CMVP, FIPS 140-3</span>
           <div class="item-sub">New item on NIST CSRC cmvp mip page</div>
           <button class="dismiss-btn" onclick="dismissAlert(this)" title="Mark as seen">&#10003; Seen</button>
         </div>
         
-        <div class="item-row alert-item" data-alert-key="NIST: cmvp_mip-Canonical_Ltd._Ubuntu_22.04_Strongswan_Cryptographic_Module_|_Canonical_Ltd.View_Contacts_|_FIPS_140-3_|_Review__(7/7/20…" data-tab="us">
+        <div class="item-row alert-item" data-alert-key="NIST: cmvp_mip-OpenSSL_FIPS_Provider_for_AlmaLinux_9_|_Cloudlinux_Inc.,_TuxCare_divisionView_Contacts_|_FIPS_140-3_|_Review__(7/8/2026)" data-tab="us">
           
-          <a class="item-link" href="" target="_blank">NIST: cmvp_mip: Canonical Ltd. Ubuntu 22.04 Strongswan Cryptographic Module | Canonical Ltd.View Contacts | FIPS 140-3 | Review  (7/7/20…</a>
-          
-          <span class="item-meta">publication &middot; FIPS 140-3</span>
-          <div class="item-sub">New item on NIST CSRC cmvp mip page</div>
-          <button class="dismiss-btn" onclick="dismissAlert(this)" title="Mark as seen">&#10003; Seen</button>
-        </div>
-        
-        <div class="item-row alert-item" data-alert-key="NIST: cmvp_mip-Chainguard_FIPS_Provider_for_OpenSSL_|_Chainguard,_Inc.View_Contacts_|_FIPS_140-3_|_Review__(7/7/2026)" data-tab="us">
-          
-          <a class="item-link" href="" target="_blank">NIST: cmvp_mip: Chainguard FIPS Provider for OpenSSL | Chainguard, Inc.View Contacts | FIPS 140-3 | Review  (7/7/2026)</a>
+          <a class="item-link" href="" target="_blank">NIST: cmvp_mip: OpenSSL FIPS Provider for AlmaLinux 9 | Cloudlinux Inc., TuxCare divisionView Contacts | FIPS 140-3 | Review  (7/8/2026)</a>
           
           <span class="item-meta">publication &middot; FIPS 140-3</span>
           <div class="item-sub">New item on NIST CSRC cmvp mip page</div>
           <button class="dismiss-btn" onclick="dismissAlert(this)" title="Mark as seen">&#10003; Seen</button>
         </div>
         
-        <div class="item-row alert-item" data-alert-key="NIST: cmvp_mip-QASM_Cryptographic_Module_|_Crypto4A_Technologies_Inc.View_Contacts_|_FIPS_140-3_|_Comment_Resolution_-_CMVP__(7/7/2026)" data-tab="us">
+        <div class="item-row alert-item" data-alert-key="NIST: cmvp_mip-Stinger_Encryption_Module_|_Datum_Systems,_Inc.View_Contacts_|_FIPS_140-3_|_Comment_Resolution_-_CMVP__(7/8/2026)" data-tab="us">
           
-          <a class="item-link" href="" target="_blank">NIST: cmvp_mip: QASM Cryptographic Module | Crypto4A Technologies Inc.View Contacts | FIPS 140-3 | Comment Resolution - CMVP  (7/7/2026)</a>
+          <a class="item-link" href="" target="_blank">NIST: cmvp_mip: Stinger Encryption Module | Datum Systems, Inc.View Contacts | FIPS 140-3 | Comment Resolution - CMVP  (7/8/2026)</a>
           
           <span class="item-meta">publication &middot; CMVP, FIPS 140-3</span>
           <div class="item-sub">New item on NIST CSRC cmvp mip page</div>
           <button class="dismiss-btn" onclick="dismissAlert(this)" title="Mark as seen">&#10003; Seen</button>
         </div>
         
-        <div class="item-row alert-item" data-alert-key="NIST: cmvp_mip-Go_Cryptographic_Module_|_Geomys_LLCView_Contacts_|_FIPS_140-3_|_Pending_Review__(7/7/2026)" data-tab="us">
+        <div class="item-row alert-item" data-alert-key="NIST: cmvp_mip-HPE_Juniper_Networking_SRX1600_Service_Gateway_|_HPE_Juniper_NetworkingView_Contacts_|_FIPS_140-3_|_Finalization__(7/8/2…" data-tab="us">
           
-          <a class="item-link" href="" target="_blank">NIST: cmvp_mip: Go Cryptographic Module | Geomys LLCView Contacts | FIPS 140-3 | Pending Review  (7/7/2026)</a>
-          
-          <span class="item-meta">publication &middot; FIPS 140-3</span>
-          <div class="item-sub">New item on NIST CSRC cmvp mip page</div>
-          <button class="dismiss-btn" onclick="dismissAlert(this)" title="Mark as seen">&#10003; Seen</button>
-        </div>
-        
-        <div class="item-row alert-item" data-alert-key="NIST: cmvp_mip-B227_True_Random_Number_Generator_(TRNG)_Cryptographic_Module_|_Google,_LLCView_Contacts_|_FIPS_140-3_|_Comment_Resoluti…" data-tab="us">
-          
-          <a class="item-link" href="" target="_blank">NIST: cmvp_mip: B227 True Random Number Generator (TRNG) Cryptographic Module | Google, LLCView Contacts | FIPS 140-3 | Comment Resoluti…</a>
+          <a class="item-link" href="" target="_blank">NIST: cmvp_mip: HPE Juniper Networking SRX1600 Service Gateway | HPE Juniper NetworkingView Contacts | FIPS 140-3 | Finalization  (7/8/2…</a>
           
           <span class="item-meta">publication &middot; FIPS 140-3</span>
           <div class="item-sub">New item on NIST CSRC cmvp mip page</div>
           <button class="dismiss-btn" onclick="dismissAlert(this)" title="Mark as seen">&#10003; Seen</button>
         </div>
         
-        <div class="item-row alert-item" data-alert-key="NIST: cmvp_mip-HID_Applets_v4.0_on_NXP_JCOP_4.5_P71D600_|_HID_GlobalView_Contacts_|_FIPS_140-3_|_Finalization__(7/7/2026)" data-tab="us">
+        <div class="item-row alert-item" data-alert-key="NIST: cmvp_mip-Palo_Alto_Networks_Core_Crypto_Module_|_Palo_Alto_NetworksView_Contacts_|_FIPS_140-3_|_Comment_Resolution_-_CMVP__(7/8/2…" data-tab="us">
           
-          <a class="item-link" href="" target="_blank">NIST: cmvp_mip: HID Applets v4.0 on NXP JCOP 4.5 P71D600 | HID GlobalView Contacts | FIPS 140-3 | Finalization  (7/7/2026)</a>
-          
-          <span class="item-meta">publication &middot; FIPS 140-3</span>
-          <div class="item-sub">New item on NIST CSRC cmvp mip page</div>
-          <button class="dismiss-btn" onclick="dismissAlert(this)" title="Mark as seen">&#10003; Seen</button>
-        </div>
-        
-        <div class="item-row alert-item" data-alert-key="NIST: cmvp_mip-BC-FJA_(Bouncy_Castle_FIPS_Java_API)_|_Legion_of_the_Bouncy_Castle_Inc.View_Contacts_|_FIPS_140-3_|_Cost_Recovery__(7/7/…" data-tab="us">
-          
-          <a class="item-link" href="" target="_blank">NIST: cmvp_mip: BC-FJA (Bouncy Castle FIPS Java API) | Legion of the Bouncy Castle Inc.View Contacts | FIPS 140-3 | Cost Recovery  (7/7/…</a>
-          
-          <span class="item-meta">publication &middot; FIPS 140-3</span>
-          <div class="item-sub">New item on NIST CSRC cmvp mip page</div>
-          <button class="dismiss-btn" onclick="dismissAlert(this)" title="Mark as seen">&#10003; Seen</button>
-        </div>
-        
-        <div class="item-row alert-item" data-alert-key="NIST: cmvp_mip-Nokia-SONiC-MACsec_|_NokiaView_Contacts_|_FIPS_140-3_|_Comment_Resolution_-_CMVP__(7/7/2026)" data-tab="us">
-          
-          <a class="item-link" href="" target="_blank">NIST: cmvp_mip: Nokia-SONiC-MACsec | NokiaView Contacts | FIPS 140-3 | Comment Resolution - CMVP  (7/7/2026)</a>
+          <a class="item-link" href="" target="_blank">NIST: cmvp_mip: Palo Alto Networks Core Crypto Module | Palo Alto NetworksView Contacts | FIPS 140-3 | Comment Resolution - CMVP  (7/8/2…</a>
           
           <span class="item-meta">publication &middot; CMVP, FIPS 140-3</span>
           <div class="item-sub">New item on NIST CSRC cmvp mip page</div>
           <button class="dismiss-btn" onclick="dismissAlert(this)" title="Mark as seen">&#10003; Seen</button>
         </div>
         
-        <div class="item-row alert-item" data-alert-key="NIST: cmvp_mip-Riverbed_Cryptographic_Module_|_Riverbed_Technology_LLCView_Contacts_|_FIPS_140-3_|_Cost_Recovery__(7/7/2026)" data-tab="us">
+        <div class="item-row alert-item" data-alert-key="NIST: cmvp_mip-PQCryptoLib-Core_|_PQShield_Ltd.View_Contacts_|_FIPS_140-3_|_Review__(7/8/2026)" data-tab="us">
           
-          <a class="item-link" href="" target="_blank">NIST: cmvp_mip: Riverbed Cryptographic Module | Riverbed Technology LLCView Contacts | FIPS 140-3 | Cost Recovery  (7/7/2026)</a>
-          
-          <span class="item-meta">publication &middot; FIPS 140-3</span>
-          <div class="item-sub">New item on NIST CSRC cmvp mip page</div>
-          <button class="dismiss-btn" onclick="dismissAlert(this)" title="Mark as seen">&#10003; Seen</button>
-        </div>
-        
-        <div class="item-row alert-item" data-alert-key="NIST: cmvp_mip-Samsung_Kernel_Cryptographic_Module_|_Samsung_Electronics_Co.,_Ltd.View_Contacts_|_FIPS_140-3_|_Pending_Resubmission__(7…" data-tab="us">
-          
-          <a class="item-link" href="" target="_blank">NIST: cmvp_mip: Samsung Kernel Cryptographic Module | Samsung Electronics Co., Ltd.View Contacts | FIPS 140-3 | Pending Resubmission  (7…</a>
+          <a class="item-link" href="" target="_blank">NIST: cmvp_mip: PQCryptoLib-Core | PQShield Ltd.View Contacts | FIPS 140-3 | Review  (7/8/2026)</a>
           
           <span class="item-meta">publication &middot; FIPS 140-3</span>
           <div class="item-sub">New item on NIST CSRC cmvp mip page</div>
           <button class="dismiss-btn" onclick="dismissAlert(this)" title="Mark as seen">&#10003; Seen</button>
         </div>
         
-        <div class="item-row alert-item" data-alert-key="NIST: cmvp_mip-Samsung_SAS_TCG_Enterprise_SSC_SEDs_PM1653a_Series_|_Samsung_Electronics_Co.,_Ltd.View_Contacts_|_FIPS_140-3_|_Finalizat…" data-tab="us">
+        <div class="item-row alert-item" data-alert-key="NIST: cmvp_mip-Privoro_SafeCase_Security_Module_|_Privoro_LLCView_Contacts_|_FIPS_140-3_|_Comment_Resolution_-_CMVP__(7/8/2026)" data-tab="us">
           
-          <a class="item-link" href="" target="_blank">NIST: cmvp_mip: Samsung SAS TCG Enterprise SSC SEDs PM1653a Series | Samsung Electronics Co., Ltd.View Contacts | FIPS 140-3 | Finalizat…</a>
+          <a class="item-link" href="" target="_blank">NIST: cmvp_mip: Privoro SafeCase Security Module | Privoro LLCView Contacts | FIPS 140-3 | Comment Resolution - CMVP  (7/8/2026)</a>
+          
+          <span class="item-meta">publication &middot; CMVP, FIPS 140-3</span>
+          <div class="item-sub">New item on NIST CSRC cmvp mip page</div>
+          <button class="dismiss-btn" onclick="dismissAlert(this)" title="Mark as seen">&#10003; Seen</button>
+        </div>
+        
+        <div class="item-row alert-item" data-alert-key="NIST: cmvp_mip-Sunhillo_Cryptographic_Module_|_Sunhillo_CorporationView_Contacts_|_FIPS_140-3_|_Finalization__(7/8/2026)" data-tab="us">
+          
+          <a class="item-link" href="" target="_blank">NIST: cmvp_mip: Sunhillo Cryptographic Module | Sunhillo CorporationView Contacts | FIPS 140-3 | Finalization  (7/8/2026)</a>
           
           <span class="item-meta">publication &middot; FIPS 140-3</span>
           <div class="item-sub">New item on NIST CSRC cmvp mip page</div>
           <button class="dismiss-btn" onclick="dismissAlert(this)" title="Mark as seen">&#10003; Seen</button>
         </div>
         
-        <div class="item-row alert-item" data-alert-key="NIST: cmvp_mip-Luna_T7_|_Thales_Trusted_Cyber_TechnologiesView_Contacts_|_FIPS_140-3_|_Comment_Resolution_-_Lab__(7/7/2026)" data-tab="us">
+        <div class="item-row alert-item" data-alert-key="NIST CMVP MIP-HPE_Juniper_Networking_SRX1600_Service_Gateway" data-tab="us">
           
-          <a class="item-link" href="" target="_blank">NIST: cmvp_mip: Luna T7 | Thales Trusted Cyber TechnologiesView Contacts | FIPS 140-3 | Comment Resolution - Lab  (7/7/2026)</a>
-          
-          <span class="item-meta">publication &middot; FIPS 140-3</span>
-          <div class="item-sub">New item on NIST CSRC cmvp mip page</div>
-          <button class="dismiss-btn" onclick="dismissAlert(this)" title="Mark as seen">&#10003; Seen</button>
-        </div>
-        
-        <div class="item-row alert-item" data-alert-key="NIST: cmvp_mip-Trellix_Intrusion_Prevention_System_Sensor_NS3100,_NS3200,_NS5100_and_NS5200_|_TrellixView_Contacts_|_FIPS_140-3_|_Final…" data-tab="us">
-          
-          <a class="item-link" href="" target="_blank">NIST: cmvp_mip: Trellix Intrusion Prevention System Sensor NS3100, NS3200, NS5100 and NS5200 | TrellixView Contacts | FIPS 140-3 | Final…</a>
-          
-          <span class="item-meta">publication &middot; FIPS 140-3</span>
-          <div class="item-sub">New item on NIST CSRC cmvp mip page</div>
-          <button class="dismiss-btn" onclick="dismissAlert(this)" title="Mark as seen">&#10003; Seen</button>
-        </div>
-        
-        <div class="item-row alert-item" data-alert-key="NIST: cmvp_mip-Trellix_Intrusion_Prevention_System_Sensor_NS3600_|_TrellixView_Contacts_|_FIPS_140-3_|_Finalization__(7/7/2026)" data-tab="us">
-          
-          <a class="item-link" href="" target="_blank">NIST: cmvp_mip: Trellix Intrusion Prevention System Sensor NS3600 | TrellixView Contacts | FIPS 140-3 | Finalization  (7/7/2026)</a>
-          
-          <span class="item-meta">publication &middot; FIPS 140-3</span>
-          <div class="item-sub">New item on NIST CSRC cmvp mip page</div>
-          <button class="dismiss-btn" onclick="dismissAlert(this)" title="Mark as seen">&#10003; Seen</button>
-        </div>
-        
-        <div class="item-row alert-item" data-alert-key="NIST: cmvp_mip-Trellix_Intrusion_Prevention_System_Sensor_NS7150,_NS7250_and_NS7350_|_TrellixView_Contacts_|_FIPS_140-3_|_Finalization…" data-tab="us">
-          
-          <a class="item-link" href="" target="_blank">NIST: cmvp_mip: Trellix Intrusion Prevention System Sensor NS7150, NS7250 and NS7350 | TrellixView Contacts | FIPS 140-3 | Finalization…</a>
-          
-          <span class="item-meta">publication &middot; FIPS 140-3</span>
-          <div class="item-sub">New item on NIST CSRC cmvp mip page</div>
-          <button class="dismiss-btn" onclick="dismissAlert(this)" title="Mark as seen">&#10003; Seen</button>
-        </div>
-        
-        <div class="item-row alert-item" data-alert-key="NIST: cmvp_mip-Trellix_Intrusion_Prevention_System_Sensor_NS7500_|_TrellixView_Contacts_|_FIPS_140-3_|_Finalization__(7/7/2026)" data-tab="us">
-          
-          <a class="item-link" href="" target="_blank">NIST: cmvp_mip: Trellix Intrusion Prevention System Sensor NS7500 | TrellixView Contacts | FIPS 140-3 | Finalization  (7/7/2026)</a>
-          
-          <span class="item-meta">publication &middot; FIPS 140-3</span>
-          <div class="item-sub">New item on NIST CSRC cmvp mip page</div>
-          <button class="dismiss-btn" onclick="dismissAlert(this)" title="Mark as seen">&#10003; Seen</button>
-        </div>
-        
-        <div class="item-row alert-item" data-alert-key="NIST: cmvp_mip-Trellix_Intrusion_Prevention_System_Sensor_NS7600_|_TrellixView_Contacts_|_FIPS_140-3_|_Finalization__(7/7/2026)" data-tab="us">
-          
-          <a class="item-link" href="" target="_blank">NIST: cmvp_mip: Trellix Intrusion Prevention System Sensor NS7600 | TrellixView Contacts | FIPS 140-3 | Finalization  (7/7/2026)</a>
-          
-          <span class="item-meta">publication &middot; FIPS 140-3</span>
-          <div class="item-sub">New item on NIST CSRC cmvp mip page</div>
-          <button class="dismiss-btn" onclick="dismissAlert(this)" title="Mark as seen">&#10003; Seen</button>
-        </div>
-        
-        <div class="item-row alert-item" data-alert-key="NIST: cmvp_mip-Trellix_Intrusion_Prevention_System_Sensor_NS9500_|_TrellixView_Contacts_|_FIPS_140-3_|_Finalization__(7/7/2026)" data-tab="us">
-          
-          <a class="item-link" href="" target="_blank">NIST: cmvp_mip: Trellix Intrusion Prevention System Sensor NS9500 | TrellixView Contacts | FIPS 140-3 | Finalization  (7/7/2026)</a>
-          
-          <span class="item-meta">publication &middot; FIPS 140-3</span>
-          <div class="item-sub">New item on NIST CSRC cmvp mip page</div>
-          <button class="dismiss-btn" onclick="dismissAlert(this)" title="Mark as seen">&#10003; Seen</button>
-        </div>
-        
-        <div class="item-row alert-item" data-alert-key="NIST: cmvp_mip-Trellix_Intrusion_Prevention_System_Sensor_NS9600_|_TrellixView_Contacts_|_FIPS_140-3_|_Finalization__(7/7/2026)" data-tab="us">
-          
-          <a class="item-link" href="" target="_blank">NIST: cmvp_mip: Trellix Intrusion Prevention System Sensor NS9600 | TrellixView Contacts | FIPS 140-3 | Finalization  (7/7/2026)</a>
-          
-          <span class="item-meta">publication &middot; FIPS 140-3</span>
-          <div class="item-sub">New item on NIST CSRC cmvp mip page</div>
-          <button class="dismiss-btn" onclick="dismissAlert(this)" title="Mark as seen">&#10003; Seen</button>
-        </div>
-        
-        <div class="item-row alert-item" data-alert-key="NIST: cmvp_mip-DB_Series_SSD_Drives_|_UD_info_Corp.View_Contacts_|_FIPS_140-3_|_Review__(7/7/2026)" data-tab="us">
-          
-          <a class="item-link" href="" target="_blank">NIST: cmvp_mip: DB Series SSD Drives | UD info Corp.View Contacts | FIPS 140-3 | Review  (7/7/2026)</a>
-          
-          <span class="item-meta">publication &middot; FIPS 140-3</span>
-          <div class="item-sub">New item on NIST CSRC cmvp mip page</div>
-          <button class="dismiss-btn" onclick="dismissAlert(this)" title="Mark as seen">&#10003; Seen</button>
-        </div>
-        
-        <div class="item-row alert-item" data-alert-key="NIST CMVP MIP-Riverbed_Cryptographic_Module" data-tab="us">
-          
-          <a class="item-link" href="https://csrc.nist.gov/projects/cryptographic-module-validation-program/modules-in-process/modules-in-process-list" target="_blank">NIST CMVP MIP: Riverbed Cryptographic Module</a>
-          
-          <span class="item-meta">new &middot; </span>
-          <div class="item-sub">New module in CMVP modules-in-process — Status: Cost Recovery  (7/7/2026)</div>
-          <button class="dismiss-btn" onclick="dismissAlert(this)" title="Mark as seen">&#10003; Seen</button>
-        </div>
-        
-        <div class="item-row alert-item" data-alert-key="NIST CMVP MIP-Apple_corecrypto_Module_18.3_[Apple_silicon,_Kernel,_Software,_SL1]" data-tab="us">
-          
-          <a class="item-link" href="https://csrc.nist.gov/projects/cryptographic-module-validation-program/modules-in-process/modules-in-process-list" target="_blank">NIST CMVP MIP: Apple corecrypto Module 18.3 [Apple silicon, Kernel, Software, SL1]</a>
+          <a class="item-link" href="https://csrc.nist.gov/projects/cryptographic-module-validation-program/modules-in-process/modules-in-process-list" target="_blank">NIST CMVP MIP: HPE Juniper Networking SRX1600 Service Gateway</a>
           
           <span class="item-meta">updated &middot; </span>
-          <div class="item-sub">CMVP status: Comment Resolution - Lab  (4/30/2026) → Comment Resolution - CMVP  (7/7/2026)</div>
+          <div class="item-sub">CMVP status: Comment Resolution - CMVP  (6/25/2026) → Finalization  (7/8/2026)</div>
           <button class="dismiss-btn" onclick="dismissAlert(this)" title="Mark as seen">&#10003; Seen</button>
         </div>
         
-        <div class="item-row alert-item" data-alert-key="NIST CMVP MIP-Trellix_Intrusion_Prevention_System_Sensor_NS7500" data-tab="us">
+        <div class="item-row alert-item" data-alert-key="NIST CMVP MIP-Sunhillo_Cryptographic_Module" data-tab="us">
           
-          <a class="item-link" href="https://csrc.nist.gov/projects/cryptographic-module-validation-program/modules-in-process/modules-in-process-list" target="_blank">NIST CMVP MIP: Trellix Intrusion Prevention System Sensor NS7500</a>
+          <a class="item-link" href="https://csrc.nist.gov/projects/cryptographic-module-validation-program/modules-in-process/modules-in-process-list" target="_blank">NIST CMVP MIP: Sunhillo Cryptographic Module</a>
           
           <span class="item-meta">updated &middot; </span>
-          <div class="item-sub">CMVP status: Comment Resolution - CMVP  (6/30/2026) → Finalization  (7/7/2026)</div>
+          <div class="item-sub">CMVP status: Comment Resolution - CMVP  (6/25/2026) → Finalization  (7/8/2026)</div>
           <button class="dismiss-btn" onclick="dismissAlert(this)" title="Mark as seen">&#10003; Seen</button>
         </div>
         
-        <div class="item-row alert-item" data-alert-key="NIST CMVP MIP-DB_Series_SSD_Drives" data-tab="us">
+        <div class="item-row alert-item" data-alert-key="NIST CMVP MIP-Privoro_SafeCase_Security_Module" data-tab="us">
           
-          <a class="item-link" href="https://csrc.nist.gov/projects/cryptographic-module-validation-program/modules-in-process/modules-in-process-list" target="_blank">NIST CMVP MIP: DB Series SSD Drives</a>
+          <a class="item-link" href="https://csrc.nist.gov/projects/cryptographic-module-validation-program/modules-in-process/modules-in-process-list" target="_blank">NIST CMVP MIP: Privoro SafeCase Security Module</a>
           
           <span class="item-meta">updated &middot; </span>
-          <div class="item-sub">CMVP status: Pending Review  (6/17/2026) → Review  (7/7/2026)</div>
+          <div class="item-sub">CMVP status: Comment Resolution - Lab  (6/8/2026) → Comment Resolution - CMVP  (7/8/2026)</div>
           <button class="dismiss-btn" onclick="dismissAlert(this)" title="Mark as seen">&#10003; Seen</button>
         </div>
         
-        <div class="item-row alert-item" data-alert-key="NIST CMVP MIP-Trellix_Intrusion_Prevention_System_Sensor_NS3100,_NS3200,_NS5100_and_NS5200" data-tab="us">
+        <div class="item-row alert-item" data-alert-key="NIST CMVP MIP-Stinger_Encryption_Module" data-tab="us">
           
-          <a class="item-link" href="https://csrc.nist.gov/projects/cryptographic-module-validation-program/modules-in-process/modules-in-process-list" target="_blank">NIST CMVP MIP: Trellix Intrusion Prevention System Sensor NS3100, NS3200, NS5100 and NS5200</a>
+          <a class="item-link" href="https://csrc.nist.gov/projects/cryptographic-module-validation-program/modules-in-process/modules-in-process-list" target="_blank">NIST CMVP MIP: Stinger Encryption Module</a>
           
           <span class="item-meta">updated &middot; </span>
-          <div class="item-sub">CMVP status: Comment Resolution - CMVP  (7/1/2026) → Finalization  (7/7/2026)</div>
+          <div class="item-sub">CMVP status: Comment Resolution - Lab  (7/6/2026) → Comment Resolution - CMVP  (7/8/2026)</div>
           <button class="dismiss-btn" onclick="dismissAlert(this)" title="Mark as seen">&#10003; Seen</button>
         </div>
         
-        <div class="item-row alert-item" data-alert-key="NIST CMVP MIP-Barco_ICMP-XS_Cryptographic_Module" data-tab="us">
+        <div class="item-row alert-item" data-alert-key="NIST CMVP MIP-Canonical_Ltd._Ubuntu_22.04_GnuTLS_Cryptographic_Module" data-tab="us">
           
-          <a class="item-link" href="https://csrc.nist.gov/projects/cryptographic-module-validation-program/modules-in-process/modules-in-process-list" target="_blank">NIST CMVP MIP: Barco ICMP-XS Cryptographic Module</a>
+          <a class="item-link" href="https://csrc.nist.gov/projects/cryptographic-module-validation-program/modules-in-process/modules-in-process-list" target="_blank">NIST CMVP MIP: Canonical Ltd. Ubuntu 22.04 GnuTLS Cryptographic Module</a>
           
           <span class="item-meta">updated &middot; </span>
-          <div class="item-sub">CMVP status: Comment Resolution - Lab  (4/9/2026) → Comment Resolution - CMVP  (7/7/2026)</div>
+          <div class="item-sub">CMVP status: Pending Review  (3/20/2026) → Review  (7/8/2026)</div>
           <button class="dismiss-btn" onclick="dismissAlert(this)" title="Mark as seen">&#10003; Seen</button>
         </div>
         
-        <div class="item-row alert-item" data-alert-key="NIST CMVP MIP-Samsung_NVMe_TCG_Opal_SSC_SEDs_PM9D3a_Series" data-tab="us">
+        <div class="item-row alert-item" data-alert-key="NIST CMVP MIP-OpenSSL_FIPS_Provider_for_AlmaLinux_9" data-tab="us">
           
-          <a class="item-link" href="https://csrc.nist.gov/projects/cryptographic-module-validation-program/modules-in-process/modules-in-process-list" target="_blank">NIST CMVP MIP: Samsung NVMe TCG Opal SSC SEDs PM9D3a Series</a>
+          <a class="item-link" href="https://csrc.nist.gov/projects/cryptographic-module-validation-program/modules-in-process/modules-in-process-list" target="_blank">NIST CMVP MIP: OpenSSL FIPS Provider for AlmaLinux 9</a>
           
           <span class="item-meta">updated &middot; </span>
-          <div class="item-sub">CMVP status: Review  (6/1/2026) → Comment Resolution - Lab  (7/7/2026)</div>
+          <div class="item-sub">CMVP status: Pending Review  (4/10/2026) → Review  (7/8/2026)</div>
           <button class="dismiss-btn" onclick="dismissAlert(this)" title="Mark as seen">&#10003; Seen</button>
         </div>
         
-        <div class="item-row alert-item" data-alert-key="NIST CMVP MIP-Motorola_Solutions_Advanced_Crypto_Engine_(MACE)_HSM_-_Security_Level_2" data-tab="us">
+        <div class="item-row alert-item" data-alert-key="NIST CMVP MIP-PQCryptoLib-Core" data-tab="us">
           
-          <a class="item-link" href="https://csrc.nist.gov/projects/cryptographic-module-validation-program/modules-in-process/modules-in-process-list" target="_blank">NIST CMVP MIP: Motorola Solutions Advanced Crypto Engine (MACE) HSM - Security Level 2</a>
+          <a class="item-link" href="https://csrc.nist.gov/projects/cryptographic-module-validation-program/modules-in-process/modules-in-process-list" target="_blank">NIST CMVP MIP: PQCryptoLib-Core</a>
           
           <span class="item-meta">updated &middot; </span>
-          <div class="item-sub">CMVP status: Pending Review  (5/27/2026) → Review  (7/7/2026)</div>
+          <div class="item-sub">CMVP status: Pending Review  (6/19/2026) → Review  (7/8/2026)</div>
           <button class="dismiss-btn" onclick="dismissAlert(this)" title="Mark as seen">&#10003; Seen</button>
         </div>
         
-        <div class="item-row alert-item" data-alert-key="NIST CMVP MIP-HID_Applets_v4.0_on_NXP_JCOP_4.5_P71D600" data-tab="us">
+        <div class="item-row alert-item" data-alert-key="NIST CMVP MIP-Palo_Alto_Networks_Core_Crypto_Module" data-tab="us">
           
-          <a class="item-link" href="https://csrc.nist.gov/projects/cryptographic-module-validation-program/modules-in-process/modules-in-process-list" target="_blank">NIST CMVP MIP: HID Applets v4.0 on NXP JCOP 4.5 P71D600</a>
+          <a class="item-link" href="https://csrc.nist.gov/projects/cryptographic-module-validation-program/modules-in-process/modules-in-process-list" target="_blank">NIST CMVP MIP: Palo Alto Networks Core Crypto Module</a>
           
           <span class="item-meta">updated &middot; </span>
-          <div class="item-sub">CMVP status: Comment Resolution - CMVP  (6/26/2026) → Finalization  (7/7/2026)</div>
+          <div class="item-sub">CMVP status: Comment Resolution - Lab  (7/6/2026) → Comment Resolution - CMVP  (7/8/2026)</div>
           <button class="dismiss-btn" onclick="dismissAlert(this)" title="Mark as seen">&#10003; Seen</button>
         </div>
         
-        <div class="item-row alert-item" data-alert-key="NIST CMVP MIP-AWS-LC_4_Cryptographic_Module_(static)" data-tab="us">
+        <div class="item-row alert-item" data-alert-key="NIST CMVP MIP-Canonical_Ltd._Ubuntu_22.04_Libgcrypt_Cryptographic_Module" data-tab="us">
           
-          <a class="item-link" href="https://csrc.nist.gov/projects/cryptographic-module-validation-program/modules-in-process/modules-in-process-list" target="_blank">NIST CMVP MIP: AWS-LC 4 Cryptographic Module (static)</a>
+          <a class="item-link" href="https://csrc.nist.gov/projects/cryptographic-module-validation-program/modules-in-process/modules-in-process-list" target="_blank">NIST CMVP MIP: Canonical Ltd. Ubuntu 22.04 Libgcrypt Cryptographic Module</a>
           
           <span class="item-meta">updated &middot; </span>
-          <div class="item-sub">CMVP status: Pending Review  (5/7/2026) → Pending Resubmission  (7/7/2026)</div>
+          <div class="item-sub">CMVP status: Pending Review  (3/19/2026) → Review  (7/8/2026)</div>
           <button class="dismiss-btn" onclick="dismissAlert(this)" title="Mark as seen">&#10003; Seen</button>
         </div>
         
-        <div class="item-row alert-item" data-alert-key="NIST CMVP MIP-Samsung_NVMe_TCG_Opal_SSC_SEDs_PM1753_Series" data-tab="us">
+        <div class="item-row alert-item" data-alert-key="NIST CMVP MIP-TASS_Crypto_Engine" data-tab="us">
           
-          <a class="item-link" href="https://csrc.nist.gov/projects/cryptographic-module-validation-program/modules-in-process/modules-in-process-list" target="_blank">NIST CMVP MIP: Samsung NVMe TCG Opal SSC SEDs PM1753 Series</a>
+          <a class="item-link" href="https://csrc.nist.gov/projects/cryptographic-module-validation-program/modules-in-process/modules-in-process-list" target="_blank">NIST CMVP MIP: TASS Crypto Engine</a>
           
           <span class="item-meta">updated &middot; </span>
-          <div class="item-sub">CMVP status: Pending Resubmission  (4/29/2026) → Pending Resubmission  (4/30/2026)</div>
-          <button class="dismiss-btn" onclick="dismissAlert(this)" title="Mark as seen">&#10003; Seen</button>
-        </div>
-        
-        <div class="item-row alert-item" data-alert-key="NIST CMVP MIP-ST_Engineering_&amp;_i-Engine_SAM_Applet_on_NXP_P71D600" data-tab="us">
-          
-          <a class="item-link" href="https://csrc.nist.gov/projects/cryptographic-module-validation-program/modules-in-process/modules-in-process-list" target="_blank">NIST CMVP MIP: ST Engineering &amp; i-Engine SAM Applet on NXP P71D600</a>
-          
-          <span class="item-meta">updated &middot; </span>
-          <div class="item-sub">CMVP status: Comment Resolution - CMVP  (7/6/2026) → Finalization  (7/7/2026)</div>
-          <button class="dismiss-btn" onclick="dismissAlert(this)" title="Mark as seen">&#10003; Seen</button>
-        </div>
-        
-        <div class="item-row alert-item" data-alert-key="NIST CMVP MIP-Chainguard_FIPS_Provider_for_OpenSSL" data-tab="us">
-          
-          <a class="item-link" href="https://csrc.nist.gov/projects/cryptographic-module-validation-program/modules-in-process/modules-in-process-list" target="_blank">NIST CMVP MIP: Chainguard FIPS Provider for OpenSSL</a>
-          
-          <span class="item-meta">updated &middot; </span>
-          <div class="item-sub">CMVP status: Pending Review  (6/17/2026) → Review  (7/7/2026)</div>
-          <button class="dismiss-btn" onclick="dismissAlert(this)" title="Mark as seen">&#10003; Seen</button>
-        </div>
-        
-        <div class="item-row alert-item" data-alert-key="NIST CMVP MIP-Luna_T7" data-tab="us">
-          
-          <a class="item-link" href="https://csrc.nist.gov/projects/cryptographic-module-validation-program/modules-in-process/modules-in-process-list" target="_blank">NIST CMVP MIP: Luna T7</a>
-          
-          <span class="item-meta">updated &middot; </span>
-          <div class="item-sub">CMVP status: Comment Resolution - CMVP  (6/24/2026) → Comment Resolution - Lab  (7/7/2026)</div>
-          <button class="dismiss-btn" onclick="dismissAlert(this)" title="Mark as seen">&#10003; Seen</button>
-        </div>
-        
-        <div class="item-row alert-item" data-alert-key="NIST CMVP MIP-Code_Siren_Post-Quantum_Cryptographic_(PQC)_Library_for_Desktop" data-tab="us">
-          
-          <a class="item-link" href="https://csrc.nist.gov/projects/cryptographic-module-validation-program/modules-in-process/modules-in-process-list" target="_blank">NIST CMVP MIP: Code Siren Post-Quantum Cryptographic (PQC) Library for Desktop</a>
-          
-          <span class="item-meta">updated &middot; </span>
-          <div class="item-sub">CMVP status: Pending Review  (2/13/2026) → Pending Resubmission  (7/7/2026)</div>
-          <button class="dismiss-btn" onclick="dismissAlert(this)" title="Mark as seen">&#10003; Seen</button>
-        </div>
-        
-        <div class="item-row alert-item" data-alert-key="NIST CMVP MIP-Nokia-SONiC-MACsec" data-tab="us">
-          
-          <a class="item-link" href="https://csrc.nist.gov/projects/cryptographic-module-validation-program/modules-in-process/modules-in-process-list" target="_blank">NIST CMVP MIP: Nokia-SONiC-MACsec</a>
-          
-          <span class="item-meta">updated &middot; </span>
-          <div class="item-sub">CMVP status: Comment Resolution - Lab  (7/6/2026) → Comment Resolution - CMVP  (7/7/2026)</div>
-          <button class="dismiss-btn" onclick="dismissAlert(this)" title="Mark as seen">&#10003; Seen</button>
-        </div>
-        
-        <div class="item-row alert-item" data-alert-key="NIST CMVP MIP-Trellix_Intrusion_Prevention_System_Sensor_NS3600" data-tab="us">
-          
-          <a class="item-link" href="https://csrc.nist.gov/projects/cryptographic-module-validation-program/modules-in-process/modules-in-process-list" target="_blank">NIST CMVP MIP: Trellix Intrusion Prevention System Sensor NS3600</a>
-          
-          <span class="item-meta">updated &middot; </span>
-          <div class="item-sub">CMVP status: Comment Resolution - CMVP  (6/30/2026) → Finalization  (7/7/2026)</div>
-          <button class="dismiss-btn" onclick="dismissAlert(this)" title="Mark as seen">&#10003; Seen</button>
-        </div>
-        
-        <div class="item-row alert-item" data-alert-key="NIST CMVP MIP-Trellix_Intrusion_Prevention_System_Sensor_NS9600" data-tab="us">
-          
-          <a class="item-link" href="https://csrc.nist.gov/projects/cryptographic-module-validation-program/modules-in-process/modules-in-process-list" target="_blank">NIST CMVP MIP: Trellix Intrusion Prevention System Sensor NS9600</a>
-          
-          <span class="item-meta">updated &middot; </span>
-          <div class="item-sub">CMVP status: Comment Resolution - CMVP  (7/1/2026) → Finalization  (7/7/2026)</div>
-          <button class="dismiss-btn" onclick="dismissAlert(this)" title="Mark as seen">&#10003; Seen</button>
-        </div>
-        
-        <div class="item-row alert-item" data-alert-key="NIST CMVP MIP-Samsung_NVMe_TCG_Opal_SSC_SEDs_BM1743_Series" data-tab="us">
-          
-          <a class="item-link" href="https://csrc.nist.gov/projects/cryptographic-module-validation-program/modules-in-process/modules-in-process-list" target="_blank">NIST CMVP MIP: Samsung NVMe TCG Opal SSC SEDs BM1743 Series</a>
-          
-          <span class="item-meta">updated &middot; </span>
-          <div class="item-sub">CMVP status: Comment Resolution - CMVP  (6/22/2026) → Comment Resolution - Lab  (7/7/2026)</div>
-          <button class="dismiss-btn" onclick="dismissAlert(this)" title="Mark as seen">&#10003; Seen</button>
-        </div>
-        
-        <div class="item-row alert-item" data-alert-key="NIST CMVP MIP-Trellix_Intrusion_Prevention_System_Sensor_NS7150,_NS7250_and_NS7350" data-tab="us">
-          
-          <a class="item-link" href="https://csrc.nist.gov/projects/cryptographic-module-validation-program/modules-in-process/modules-in-process-list" target="_blank">NIST CMVP MIP: Trellix Intrusion Prevention System Sensor NS7150, NS7250 and NS7350</a>
-          
-          <span class="item-meta">updated &middot; </span>
-          <div class="item-sub">CMVP status: Comment Resolution - CMVP  (7/1/2026) → Finalization  (7/7/2026)</div>
-          <button class="dismiss-btn" onclick="dismissAlert(this)" title="Mark as seen">&#10003; Seen</button>
-        </div>
-        
-        <div class="item-row alert-item" data-alert-key="NIST CMVP MIP-Trellix_Intrusion_Prevention_System_Sensor_NS9500" data-tab="us">
-          
-          <a class="item-link" href="https://csrc.nist.gov/projects/cryptographic-module-validation-program/modules-in-process/modules-in-process-list" target="_blank">NIST CMVP MIP: Trellix Intrusion Prevention System Sensor NS9500</a>
-          
-          <span class="item-meta">updated &middot; </span>
-          <div class="item-sub">CMVP status: Comment Resolution - CMVP  (6/30/2026) → Finalization  (7/7/2026)</div>
-          <button class="dismiss-btn" onclick="dismissAlert(this)" title="Mark as seen">&#10003; Seen</button>
-        </div>
-        
-        <div class="item-row alert-item" data-alert-key="NIST CMVP MIP-Trellix_Intrusion_Prevention_System_Sensor_NS7600" data-tab="us">
-          
-          <a class="item-link" href="https://csrc.nist.gov/projects/cryptographic-module-validation-program/modules-in-process/modules-in-process-list" target="_blank">NIST CMVP MIP: Trellix Intrusion Prevention System Sensor NS7600</a>
-          
-          <span class="item-meta">updated &middot; </span>
-          <div class="item-sub">CMVP status: Comment Resolution - CMVP  (6/30/2026) → Finalization  (7/7/2026)</div>
-          <button class="dismiss-btn" onclick="dismissAlert(this)" title="Mark as seen">&#10003; Seen</button>
-        </div>
-        
-        <div class="item-row alert-item" data-alert-key="NIST CMVP MIP-QASM_Cryptographic_Module" data-tab="us">
-          
-          <a class="item-link" href="https://csrc.nist.gov/projects/cryptographic-module-validation-program/modules-in-process/modules-in-process-list" target="_blank">NIST CMVP MIP: QASM Cryptographic Module</a>
-          
-          <span class="item-meta">updated &middot; </span>
-          <div class="item-sub">CMVP status: Comment Resolution - Lab  (5/25/2026) → Comment Resolution - CMVP  (7/7/2026)</div>
-          <button class="dismiss-btn" onclick="dismissAlert(this)" title="Mark as seen">&#10003; Seen</button>
-        </div>
-        
-        <div class="item-row alert-item" data-alert-key="NIST CMVP MIP-Check_Point_Gaia_OS_R82.10_Cryptography_Module_running_on_Check_Point_Firewall_models_MHO140,_MHO175,_3920,_3950,_3970,_3980,_9100,_9200,_9300,_9400,_9700,_9800,_19100,_19200,_29100,_29200,_700S,_700M,_7000L,_7000XL,_7000Ultra,_and_Cloud_Firewall_and_Cloud_Management_series_VM_with_VMware_ESXi_8.0.0" data-tab="us">
-          
-          <a class="item-link" href="https://csrc.nist.gov/projects/cryptographic-module-validation-program/modules-in-process/modules-in-process-list" target="_blank">NIST CMVP MIP: Check Point Gaia OS R82.10 Cryptography Module running on Check Point Firewall models MHO140, MHO175, 3920, 3950, 3970, 3980, 9100, 9200, 9300, 9400, 9700, 9800, 19100, 19200, 29100, 29200, 700S, 700M, 7000L, 7000XL, 7000Ultra, and Cloud Firewall and Cloud Management series VM with VMware ESXi 8.0.0</a>
-          
-          <span class="item-meta">updated &middot; </span>
-          <div class="item-sub">CMVP status: Cost Recovery  (6/26/2026) → Pending Review  (7/7/2026)</div>
-          <button class="dismiss-btn" onclick="dismissAlert(this)" title="Mark as seen">&#10003; Seen</button>
-        </div>
-        
-        <div class="item-row alert-item" data-alert-key="NIST CMVP MIP-Go_Cryptographic_Module" data-tab="us">
-          
-          <a class="item-link" href="https://csrc.nist.gov/projects/cryptographic-module-validation-program/modules-in-process/modules-in-process-list" target="_blank">NIST CMVP MIP: Go Cryptographic Module</a>
-          
-          <span class="item-meta">updated &middot; </span>
-          <div class="item-sub">CMVP status: Pending Resubmission  (7/6/2026) → Pending Review  (7/7/2026)</div>
-          <button class="dismiss-btn" onclick="dismissAlert(this)" title="Mark as seen">&#10003; Seen</button>
-        </div>
-        
-        <div class="item-row alert-item" data-alert-key="NIST CMVP MIP-Hitachi_Embedded_Storage_Manager_Kernel_Crypto_API_Cryptographic_Module" data-tab="us">
-          
-          <a class="item-link" href="https://csrc.nist.gov/projects/cryptographic-module-validation-program/modules-in-process/modules-in-process-list" target="_blank">NIST CMVP MIP: Hitachi Embedded Storage Manager Kernel Crypto API Cryptographic Module</a>
-          
-          <span class="item-meta">updated &middot; </span>
-          <div class="item-sub">CMVP status: Cost Recovery  (6/29/2026) → Pending Review  (7/7/2026)</div>
-          <button class="dismiss-btn" onclick="dismissAlert(this)" title="Mark as seen">&#10003; Seen</button>
-        </div>
-        
-        <div class="item-row alert-item" data-alert-key="NIST CMVP MIP-Canonical_Ltd._Ubuntu_22.04_Strongswan_Cryptographic_Module" data-tab="us">
-          
-          <a class="item-link" href="https://csrc.nist.gov/projects/cryptographic-module-validation-program/modules-in-process/modules-in-process-list" target="_blank">NIST CMVP MIP: Canonical Ltd. Ubuntu 22.04 Strongswan Cryptographic Module</a>
-          
-          <span class="item-meta">updated &middot; </span>
-          <div class="item-sub">CMVP status: Pending Review  (3/17/2026) → Review  (7/7/2026)</div>
-          <button class="dismiss-btn" onclick="dismissAlert(this)" title="Mark as seen">&#10003; Seen</button>
-        </div>
-        
-        <div class="item-row alert-item" data-alert-key="NIST CMVP MIP-B227_True_Random_Number_Generator_(TRNG)_Cryptographic_Module" data-tab="us">
-          
-          <a class="item-link" href="https://csrc.nist.gov/projects/cryptographic-module-validation-program/modules-in-process/modules-in-process-list" target="_blank">NIST CMVP MIP: B227 True Random Number Generator (TRNG) Cryptographic Module</a>
-          
-          <span class="item-meta">updated &middot; </span>
-          <div class="item-sub">CMVP status: Review  (5/12/2026) → Comment Resolution - Lab  (7/7/2026)</div>
-          <button class="dismiss-btn" onclick="dismissAlert(this)" title="Mark as seen">&#10003; Seen</button>
-        </div>
-        
-        <div class="item-row alert-item" data-alert-key="NIST CMVP MIP-BC-FJA_(Bouncy_Castle_FIPS_Java_API)" data-tab="us">
-          
-          <a class="item-link" href="https://csrc.nist.gov/projects/cryptographic-module-validation-program/modules-in-process/modules-in-process-list" target="_blank">NIST CMVP MIP: BC-FJA (Bouncy Castle FIPS Java API)</a>
-          
-          <span class="item-meta">updated &middot; </span>
-          <div class="item-sub">CMVP status: Cost Recovery  (6/30/2026) → Cost Recovery  (7/7/2026)</div>
-          <button class="dismiss-btn" onclick="dismissAlert(this)" title="Mark as seen">&#10003; Seen</button>
-        </div>
-        
-        <div class="item-row alert-item" data-alert-key="NIST CMVP MIP-Samsung_Kernel_Cryptographic_Module" data-tab="us">
-          
-          <a class="item-link" href="https://csrc.nist.gov/projects/cryptographic-module-validation-program/modules-in-process/modules-in-process-list" target="_blank">NIST CMVP MIP: Samsung Kernel Cryptographic Module</a>
-          
-          <span class="item-meta">updated &middot; </span>
-          <div class="item-sub">CMVP status: Pending Resubmission  (5/8/2026) → Pending Resubmission  (7/7/2026)</div>
-          <button class="dismiss-btn" onclick="dismissAlert(this)" title="Mark as seen">&#10003; Seen</button>
-        </div>
-        
-        <div class="item-row alert-item" data-alert-key="EUCC Certificates-EUCC-3110-2026-2500079-01_|_15_May_2026_|_JCOP_8.9_with_eUICC_extension_on_SN300_Secure_Element_supports_concurrent_exec…" data-tab="eu">
-          
-          <a class="item-link" href="https://certification.enisa.europa.eu/certificates/eucc-3110-2026-2500079-01_en" target="_blank">EUCC Certificates: EUCC-3110-2026-2500079-01 | 15 May 2026 | JCOP 8.9 with eUICC extension on SN300 Secure Element supports concurrent exec…</a>
-          
-          <span class="item-meta">new_cert &middot; EUCC</span>
-          <div class="item-sub">New EUCC certified product</div>
-          <button class="dismiss-btn" onclick="dismissAlert(this)" title="Mark as seen">&#10003; Seen</button>
-        </div>
-        
-        <div class="item-row alert-item" data-alert-key="EUCC Certificates-EUCC-3110-2026-2500163-01_|_15_May_2026_|_The_Target_of_Evaluation_(TOE)_is_a_Network_Camera_series_developed_by_Hikvisi…" data-tab="eu">
-          
-          <a class="item-link" href="https://certification.enisa.europa.eu/certificates/eucc-3110-2026-2500163-01_en" target="_blank">EUCC Certificates: EUCC-3110-2026-2500163-01 | 15 May 2026 | The Target of Evaluation (TOE) is a Network Camera series developed by Hikvisi…</a>
-          
-          <span class="item-meta">new_cert &middot; EUCC</span>
-          <div class="item-sub">New EUCC certified product</div>
-          <button class="dismiss-btn" onclick="dismissAlert(this)" title="Mark as seen">&#10003; Seen</button>
-        </div>
-        
-        <div class="item-row alert-item" data-alert-key="EUCC Certificates-EUCC-3110-2026-2500100-01_|_28_April_2026_|_The_Cisco_Cisco_ASR_9000_Series_Aggregation_Services_Routers_running_IOS-XR…" data-tab="eu">
-          
-          <a class="item-link" href="https://certification.enisa.europa.eu/certificates/eucc-3110-2026-2500100-01_en" target="_blank">EUCC Certificates: EUCC-3110-2026-2500100-01 | 28 April 2026 | The Cisco Cisco ASR 9000 Series Aggregation Services Routers running IOS-XR…</a>
-          
-          <span class="item-meta">new_cert &middot; EUCC</span>
-          <div class="item-sub">New EUCC certified product</div>
-          <button class="dismiss-btn" onclick="dismissAlert(this)" title="Mark as seen">&#10003; Seen</button>
-        </div>
-        
-        <div class="item-row alert-item" data-alert-key="EUCC Certificates-EUCC-3110-2026-2500102-01_|_4_July_2026_|_The_TOE_is_the_ZTE_OTN_solution_aimed_to_build_broadband_and_intelligent_full…" data-tab="eu">
-          
-          <a class="item-link" href="https://certification.enisa.europa.eu/certificates/eucc-3110-2026-2500102-01_en" target="_blank">EUCC Certificates: EUCC-3110-2026-2500102-01 | 4 July 2026 | The TOE is the ZTE OTN solution aimed to build broadband and intelligent full…</a>
-          
-          <span class="item-meta">new_cert &middot; EUCC</span>
-          <div class="item-sub">New EUCC certified product</div>
-          <button class="dismiss-btn" onclick="dismissAlert(this)" title="Mark as seen">&#10003; Seen</button>
-        </div>
-        
-        <div class="item-row alert-item" data-alert-key="EUCC Certificates-EUCC-3110-2026-2500103-01_|_4_July_2026_|_The_TOE_is_focused_on_the_requirements_of_core_Internet_nodes,_backbone_tandem…" data-tab="eu">
-          
-          <a class="item-link" href="https://certification.enisa.europa.eu/certificates/eucc-3110-2026-2500103-01_en" target="_blank">EUCC Certificates: EUCC-3110-2026-2500103-01 | 4 July 2026 | The TOE is focused on the requirements of core Internet nodes, backbone tandem…</a>
-          
-          <span class="item-meta">new_cert &middot; EUCC</span>
-          <div class="item-sub">New EUCC certified product</div>
-          <button class="dismiss-btn" onclick="dismissAlert(this)" title="Mark as seen">&#10003; Seen</button>
-        </div>
-        
-        <div class="item-row alert-item" data-alert-key="EUCC Certificates-EUCC-3110-2025-12-2500098-01_|_3_December_2025_|_The_Cisco_Nexus_9K_Series_are_data_center-class_switches_for_use_as_an…" data-tab="eu">
-          
-          <a class="item-link" href="https://certification.enisa.europa.eu/certificates/eucc-3110-2025-12-2500098-01_en" target="_blank">EUCC Certificates: EUCC-3110-2025-12-2500098-01 | 3 December 2025 | The Cisco Nexus 9K Series are data center-class switches for use as an…</a>
-          
-          <span class="item-meta">new_cert &middot; EUCC</span>
-          <div class="item-sub">New EUCC certified product</div>
-          <button class="dismiss-btn" onclick="dismissAlert(this)" title="Mark as seen">&#10003; Seen</button>
-        </div>
-        
-        <div class="item-row alert-item" data-alert-key="EUCC Certificates-EUCC-3110-2025-11-2500051-01_|_14_November_2025_|_The_TOE_is_a_series_of_network_infrastructure_routers_including_both_h…" data-tab="eu">
-          
-          <a class="item-link" href="https://certification.enisa.europa.eu/certificates/eucc-3110-2025-11-2500051-01_en" target="_blank">EUCC Certificates: EUCC-3110-2025-11-2500051-01 | 14 November 2025 | The TOE is a series of network infrastructure routers including both h…</a>
-          
-          <span class="item-meta">new_cert &middot; EUCC</span>
-          <div class="item-sub">New EUCC certified product</div>
-          <button class="dismiss-btn" onclick="dismissAlert(this)" title="Mark as seen">&#10003; Seen</button>
-        </div>
-        
-        <div class="item-row alert-item" data-alert-key="EUCC Certificates-EUCC-3110-2026-01-2500076-01_|_16_January_2026_|_The_JCOP_8.x/9.x_on_SN300_B2_Secure_Elemen_is_a_composite_platform_cont…" data-tab="eu">
-          
-          <a class="item-link" href="https://certification.enisa.europa.eu/certificates/eucc-3110-2026-01-2500076-01_en" target="_blank">EUCC Certificates: EUCC-3110-2026-01-2500076-01 | 16 January 2026 | The JCOP 8.x/9.x on SN300 B2 Secure Elemen is a composite platform cont…</a>
-          
-          <span class="item-meta">new_cert &middot; EUCC</span>
-          <div class="item-sub">New EUCC certified product</div>
-          <button class="dismiss-btn" onclick="dismissAlert(this)" title="Mark as seen">&#10003; Seen</button>
-        </div>
-        
-        <div class="item-row alert-item" data-alert-key="EUCC Certificates-EUCC-3110-2025-09-2500093-01_|_14_September_2025_|_The_certified_product_is_Cisco_Intersight_Virtual_Appliance_1.0.9_wit…" data-tab="eu">
-          
-          <a class="item-link" href="https://certification.enisa.europa.eu/certificates/eucc-3110-2025-09-2500093-01_en" target="_blank">EUCC Certificates: EUCC-3110-2025-09-2500093-01 | 14 September 2025 | The certified product is Cisco Intersight Virtual Appliance 1.0.9 wit…</a>
-          
-          <span class="item-meta">new_cert &middot; EUCC</span>
-          <div class="item-sub">New EUCC certified product</div>
-          <button class="dismiss-btn" onclick="dismissAlert(this)" title="Mark as seen">&#10003; Seen</button>
-        </div>
-        
-        <div class="item-row alert-item" data-alert-key="EUCC Certificates-EUCC-3110-2025-08-2500053-01_|_29_August_2025_|_The_certified_product_is_NXP_JCOP_8.x/9.x_with_eUICC_extension_on_SN300…" data-tab="eu">
-          
-          <a class="item-link" href="https://certification.enisa.europa.eu/certificates/eucc-3110-2025-08-2500053-01_en" target="_blank">EUCC Certificates: EUCC-3110-2025-08-2500053-01 | 29 August 2025 | The certified product is NXP JCOP 8.x/9.x with eUICC extension on SN300…</a>
-          
-          <span class="item-meta">new_cert &middot; EUCC</span>
-          <div class="item-sub">New EUCC certified product</div>
-          <button class="dismiss-btn" onclick="dismissAlert(this)" title="Mark as seen">&#10003; Seen</button>
-        </div>
-        
-        <div class="item-row alert-item" data-alert-key="EUCC Certificates-EUCC-3110-2025-08-2500052-01_|_19_August_2025_|_The_certified_product_is_NXP_JCOP_7.x_with_eUICC_extension_on_SN300_B1.1…" data-tab="eu">
-          
-          <a class="item-link" href="https://certification.enisa.europa.eu/certificates/eucc-3110-2025-08-2500052-01_en" target="_blank">EUCC Certificates: EUCC-3110-2025-08-2500052-01 | 19 August 2025 | The certified product is NXP JCOP 7.x with eUICC extension on SN300 B1.1…</a>
-          
-          <span class="item-meta">new_cert &middot; EUCC</span>
-          <div class="item-sub">New EUCC certified product</div>
-          <button class="dismiss-btn" onclick="dismissAlert(this)" title="Mark as seen">&#10003; Seen</button>
-        </div>
-        
-        <div class="item-row alert-item" data-alert-key="EUCC Certificates-EUCC-3095-2025-07-01_|_23_July_2025_|_The_certified_product_is_the_GMV_GNSS_Cryptographic_Module.The_GMV_GNSS_Cryptograp…" data-tab="eu">
-          
-          <a class="item-link" href="https://certification.enisa.europa.eu/certificates/eucc-3095-2025-07-01_en" target="_blank">EUCC Certificates: EUCC-3095-2025-07-01 | 23 July 2025 | The certified product is the GMV GNSS Cryptographic Module.The GMV GNSS Cryptograp…</a>
-          
-          <span class="item-meta">new_cert &middot; EUCC</span>
-          <div class="item-sub">New EUCC certified product</div>
-          <button class="dismiss-btn" onclick="dismissAlert(this)" title="Mark as seen">&#10003; Seen</button>
-        </div>
-        
-        <div class="item-row alert-item" data-alert-key="EUCC Certificates-EUCC-3110-2025-09-2500093-01" data-tab="eu">
-          
-          <a class="item-link" href="https://certification.enisa.europa.eu/certificates/eucc-3110-2025-09-2500093-01_en" target="_blank">EUCC Certificates: EUCC-3110-2025-09-2500093-01</a>
-          
-          <span class="item-meta">new_cert &middot; EUCC</span>
-          <div class="item-sub">New Cisco EUCC certified product</div>
-          <button class="dismiss-btn" onclick="dismissAlert(this)" title="Mark as seen">&#10003; Seen</button>
-        </div>
-        
-        <div class="item-row alert-item" data-alert-key="EUCC Certificates-EUCC-3110-2025-12-2500098-01" data-tab="eu">
-          
-          <a class="item-link" href="https://certification.enisa.europa.eu/certificates/eucc-3110-2025-12-2500098-01_en" target="_blank">EUCC Certificates: EUCC-3110-2025-12-2500098-01</a>
-          
-          <span class="item-meta">new_cert &middot; EUCC</span>
-          <div class="item-sub">New Cisco EUCC certified product</div>
-          <button class="dismiss-btn" onclick="dismissAlert(this)" title="Mark as seen">&#10003; Seen</button>
-        </div>
-        
-        <div class="item-row alert-item" data-alert-key="EUCC Certificates-EUCC-3110-2026-2500100-01" data-tab="eu">
-          
-          <a class="item-link" href="https://certification.enisa.europa.eu/certificates/eucc-3110-2026-2500100-01_en" target="_blank">EUCC Certificates: EUCC-3110-2026-2500100-01</a>
-          
-          <span class="item-meta">new_cert &middot; EUCC</span>
-          <div class="item-sub">New Cisco EUCC certified product</div>
+          <div class="item-sub">CMVP status: Pending Resubmission  (6/22/2026) → Pending Review  (7/8/2026)</div>
           <button class="dismiss-btn" onclick="dismissAlert(this)" title="Mark as seen">&#10003; Seen</button>
         </div>
         
@@ -958,7 +544,7 @@
     
     
     
-    <p class="no-change">No changes detected. <span class="last-active">(last: 2026-07-07)</span></p>
+    <p class="no-change">No changes detected. <span class="last-active">(last: 2026-07-09)</span></p>
   </div>
 </div>
 
@@ -1040,17 +626,60 @@
 </div>
 
   <!-- NIAP PCL — All Certifications -->
-<div class="card " id="sec-niap-pcl" data-has-changes="0">
+<div class="card card-new" id="sec-niap-pcl" data-has-changes="5">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>NIAP PCL — All Certifications</span>
-    <span class="card-count">0 changes</span>
+    <span class="card-count">5 changes</span>
     </span>
   </div>
-  <div class="card-body collapsed">
+  <div class="card-body ">
+    
+    
+    <div class="sub-hdr sub-updated">Newly Archived (5)</div>
+    
+    <div class="item-row" data-source="niap-pcl" data-kind="archived">
+      <span class="item-link">IPGARD, Inc. -- IPGARD Secure KVM Switch/Isolator (CAC Models)</span>
+      <span class="item-meta">Archived</span>
+    </div>
+    
+    <div class="item-sub">PP_PSD_V4.0, MOD_AO_V1.0, MOD_UA_V1.0, MOD_KM_V1.0, MOD_VI_V1.0</div>
+    
+    
+    <div class="item-row" data-source="niap-pcl" data-kind="archived">
+      <span class="item-link">Belkin International, Inc. -- Belkin F1DN104KVM-UNN4, F1DN204KVM-UNN4, F1DN102KVM-UNN4, F1DN202KVM-UNN4 Firmware Version 44404-E7E7 Peripheral Sharing Devices</span>
+      <span class="item-meta">Archived</span>
+    </div>
+    
+    <div class="item-sub">PP_PSD_V4.0, MOD_AO_V1.0, MOD_KM_V1.0, MOD_VI_V1.0</div>
+    
+    
+    <div class="item-row" data-source="niap-pcl" data-kind="archived">
+      <span class="item-link">IPGARD, Inc. -- IPGARD Secure KM Switches (CAC Models)</span>
+      <span class="item-meta">Archived</span>
+    </div>
+    
+    <div class="item-sub">PP_PSD_V4.0, MOD_AO_V1.0, MOD_UA_V1.0, MOD_KM_V1.0</div>
+    
+    
+    <div class="item-row" data-source="niap-pcl" data-kind="archived">
+      <span class="item-link">IPGARD, Inc. -- IPGARD Secure KVM Switch (Non-CAC Models)</span>
+      <span class="item-meta">Archived</span>
+    </div>
+    
+    <div class="item-sub">PP_PSD_V4.0, MOD_AO_V1.0, MOD_KM_V1.0, MOD_VI_V1.0</div>
+    
+    
+    <div class="item-row" data-source="niap-pcl" data-kind="archived">
+      <span class="item-link">RUCKUS Wireless LLC -- CommScope Technologies LLC, Ruckus FastIron ICX Series Switch/Router 10.0.10</span>
+      <span class="item-meta">Archived</span>
+    </div>
+    
+    <div class="item-sub">CPP_ND_V2.2E</div>
     
     
     
-    <p class="no-change">No changes detected. <span class="last-active">(last: 2026-07-07)</span></p>
+    
+    
   </div>
 </div>
 
@@ -1122,10 +751,10 @@
 </div>
 
   <!-- NIST Docs -->
-<div class="card card-updated" id="sec-nist" data-has-changes="25">
+<div class="card card-updated" id="sec-nist" data-has-changes="15">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>NIST Documentation</span>
-    <span class="card-count">25 updates</span>
+    <span class="card-count">15 updates</span>
     </span>
     <span class="toggle-icon">&#9660;</span>
   </div>
@@ -1133,127 +762,79 @@
     
       
       <div class="item-row" data-source="nist" data-kind="updated">
-        <a class="item-link" href="" target="_blank">Samsung NVMe TCG Opal SSC SEDs PM9D3a Series | Samsung Electronics Co., Ltd.View Contacts | FIPS 140-3 | Comment Resolution - Lab  (7/7/2026)</a>
+        <a class="item-link" href="https://csrc.nist.gov/News/2026/nist-releases-sp-1326" target="_blank">NIST releases SP 1326</a>
+        <span class="item-meta">news</span>
+      </div>
+      
+    
+      
+      <div class="item-row" data-source="nist" data-kind="updated">
+        <a class="item-link" href="" target="_blank">TASS Crypto Engine | Beijing JN TASS Technology Co., Ltd.View Contacts | FIPS 140-3 | Pending Review  (7/8/2026)</a>
         <span class="item-meta">cmvp_mip</span>
       </div>
       
       <div class="item-row" data-source="nist" data-kind="updated">
-        <a class="item-link" href="" target="_blank">AWS-LC 4 Cryptographic Module (static) | Amazon Web Services, Inc.View Contacts | FIPS 140-3 | Pending Resubmission  (7/7/2026)</a>
+        <a class="item-link" href="" target="_blank">Canonical Ltd. Ubuntu 22.04 GnuTLS Cryptographic Module | Canonical Ltd.View Contacts | FIPS 140-3 | Review  (7/8/2026)</a>
         <span class="item-meta">cmvp_mip</span>
       </div>
       
       <div class="item-row" data-source="nist" data-kind="updated">
-        <a class="item-link" href="" target="_blank">Barco ICMP-XS Cryptographic Module | Barco n.v.View Contacts | FIPS 140-3 | Comment Resolution - CMVP  (7/7/2026)</a>
+        <a class="item-link" href="" target="_blank">Canonical Ltd. Ubuntu 22.04 Libgcrypt Cryptographic Module | Canonical Ltd.View Contacts | FIPS 140-3 | Review  (7/8/2026)</a>
         <span class="item-meta">cmvp_mip</span>
       </div>
       
       <div class="item-row" data-source="nist" data-kind="updated">
-        <a class="item-link" href="" target="_blank">Canonical Ltd. Ubuntu 22.04 Strongswan Cryptographic Module | Canonical Ltd.View Contacts | FIPS 140-3 | Review  (7/7/2026)</a>
+        <a class="item-link" href="" target="_blank">CiscoSSL FIPS Provider | Cisco Systems IncView Contacts | FIPS 140-3 | Comment Resolution - CMVP  (7/9/2026)</a>
         <span class="item-meta">cmvp_mip</span>
       </div>
       
       <div class="item-row" data-source="nist" data-kind="updated">
-        <a class="item-link" href="" target="_blank">Chainguard FIPS Provider for OpenSSL | Chainguard, Inc.View Contacts | FIPS 140-3 | Review  (7/7/2026)</a>
+        <a class="item-link" href="" target="_blank">OpenSSL FIPS Provider for AlmaLinux 9 | Cloudlinux Inc., TuxCare divisionView Contacts | FIPS 140-3 | Review  (7/8/2026)</a>
         <span class="item-meta">cmvp_mip</span>
       </div>
       
       <div class="item-row" data-source="nist" data-kind="updated">
-        <a class="item-link" href="" target="_blank">QASM Cryptographic Module | Crypto4A Technologies Inc.View Contacts | FIPS 140-3 | Comment Resolution - CMVP  (7/7/2026)</a>
+        <a class="item-link" href="" target="_blank">Stinger Encryption Module | Datum Systems, Inc.View Contacts | FIPS 140-3 | Comment Resolution - CMVP  (7/8/2026)</a>
         <span class="item-meta">cmvp_mip</span>
       </div>
       
       <div class="item-row" data-source="nist" data-kind="updated">
-        <a class="item-link" href="" target="_blank">Go Cryptographic Module | Geomys LLCView Contacts | FIPS 140-3 | Pending Review  (7/7/2026)</a>
+        <a class="item-link" href="" target="_blank">HPE Juniper Networking SRX1600 Service Gateway | HPE Juniper NetworkingView Contacts | FIPS 140-3 | Finalization  (7/8/2026)</a>
         <span class="item-meta">cmvp_mip</span>
       </div>
       
       <div class="item-row" data-source="nist" data-kind="updated">
-        <a class="item-link" href="" target="_blank">B227 True Random Number Generator (TRNG) Cryptographic Module | Google, LLCView Contacts | FIPS 140-3 | Comment Resolution - Lab  (7/7/2026)</a>
+        <a class="item-link" href="" target="_blank">Palo Alto Networks Core Crypto Module | Palo Alto NetworksView Contacts | FIPS 140-3 | Comment Resolution - CMVP  (7/8/2026)</a>
         <span class="item-meta">cmvp_mip</span>
       </div>
       
       <div class="item-row" data-source="nist" data-kind="updated">
-        <a class="item-link" href="" target="_blank">HID Applets v4.0 on NXP JCOP 4.5 P71D600 | HID GlobalView Contacts | FIPS 140-3 | Finalization  (7/7/2026)</a>
+        <a class="item-link" href="" target="_blank">PQCryptoLib-Core | PQShield Ltd.View Contacts | FIPS 140-3 | Review  (7/8/2026)</a>
         <span class="item-meta">cmvp_mip</span>
       </div>
       
       <div class="item-row" data-source="nist" data-kind="updated">
-        <a class="item-link" href="" target="_blank">BC-FJA (Bouncy Castle FIPS Java API) | Legion of the Bouncy Castle Inc.View Contacts | FIPS 140-3 | Cost Recovery  (7/7/2026)</a>
+        <a class="item-link" href="" target="_blank">Privoro SafeCase Security Module | Privoro LLCView Contacts | FIPS 140-3 | Comment Resolution - CMVP  (7/8/2026)</a>
         <span class="item-meta">cmvp_mip</span>
       </div>
       
       <div class="item-row" data-source="nist" data-kind="updated">
-        <a class="item-link" href="" target="_blank">Nokia-SONiC-MACsec | NokiaView Contacts | FIPS 140-3 | Comment Resolution - CMVP  (7/7/2026)</a>
+        <a class="item-link" href="" target="_blank">Sunhillo Cryptographic Module | Sunhillo CorporationView Contacts | FIPS 140-3 | Finalization  (7/8/2026)</a>
         <span class="item-meta">cmvp_mip</span>
       </div>
       
       <div class="item-row" data-source="nist" data-kind="updated">
-        <a class="item-link" href="" target="_blank">Riverbed Cryptographic Module | Riverbed Technology LLCView Contacts | FIPS 140-3 | Cost Recovery  (7/7/2026)</a>
+        <a class="item-link" href="https://csrc.nist.gov/" target="_blank">Displayed | 263</a>
         <span class="item-meta">cmvp_mip</span>
       </div>
       
       <div class="item-row" data-source="nist" data-kind="updated">
-        <a class="item-link" href="" target="_blank">Samsung Kernel Cryptographic Module | Samsung Electronics Co., Ltd.View Contacts | FIPS 140-3 | Pending Resubmission  (7/7/2026)</a>
+        <a class="item-link" href="https://csrc.nist.gov/" target="_blank">Not Displayed | 11</a>
         <span class="item-meta">cmvp_mip</span>
       </div>
       
       <div class="item-row" data-source="nist" data-kind="updated">
-        <a class="item-link" href="" target="_blank">Samsung SAS TCG Enterprise SSC SEDs PM1653a Series | Samsung Electronics Co., Ltd.View Contacts | FIPS 140-3 | Finalization  (7/7/2026)</a>
-        <span class="item-meta">cmvp_mip</span>
-      </div>
-      
-      <div class="item-row" data-source="nist" data-kind="updated">
-        <a class="item-link" href="" target="_blank">Luna T7 | Thales Trusted Cyber TechnologiesView Contacts | FIPS 140-3 | Comment Resolution - Lab  (7/7/2026)</a>
-        <span class="item-meta">cmvp_mip</span>
-      </div>
-      
-      <div class="item-row" data-source="nist" data-kind="updated">
-        <a class="item-link" href="" target="_blank">Trellix Intrusion Prevention System Sensor NS3100, NS3200, NS5100 and NS5200 | TrellixView Contacts | FIPS 140-3 | Finalization  (7/7/2026)</a>
-        <span class="item-meta">cmvp_mip</span>
-      </div>
-      
-      <div class="item-row" data-source="nist" data-kind="updated">
-        <a class="item-link" href="" target="_blank">Trellix Intrusion Prevention System Sensor NS3600 | TrellixView Contacts | FIPS 140-3 | Finalization  (7/7/2026)</a>
-        <span class="item-meta">cmvp_mip</span>
-      </div>
-      
-      <div class="item-row" data-source="nist" data-kind="updated">
-        <a class="item-link" href="" target="_blank">Trellix Intrusion Prevention System Sensor NS7150, NS7250 and NS7350 | TrellixView Contacts | FIPS 140-3 | Finalization  (7/7/2026)</a>
-        <span class="item-meta">cmvp_mip</span>
-      </div>
-      
-      <div class="item-row" data-source="nist" data-kind="updated">
-        <a class="item-link" href="" target="_blank">Trellix Intrusion Prevention System Sensor NS7500 | TrellixView Contacts | FIPS 140-3 | Finalization  (7/7/2026)</a>
-        <span class="item-meta">cmvp_mip</span>
-      </div>
-      
-      <div class="item-row" data-source="nist" data-kind="updated">
-        <a class="item-link" href="" target="_blank">Trellix Intrusion Prevention System Sensor NS7600 | TrellixView Contacts | FIPS 140-3 | Finalization  (7/7/2026)</a>
-        <span class="item-meta">cmvp_mip</span>
-      </div>
-      
-      <div class="item-row" data-source="nist" data-kind="updated">
-        <a class="item-link" href="" target="_blank">Trellix Intrusion Prevention System Sensor NS9500 | TrellixView Contacts | FIPS 140-3 | Finalization  (7/7/2026)</a>
-        <span class="item-meta">cmvp_mip</span>
-      </div>
-      
-      <div class="item-row" data-source="nist" data-kind="updated">
-        <a class="item-link" href="" target="_blank">Trellix Intrusion Prevention System Sensor NS9600 | TrellixView Contacts | FIPS 140-3 | Finalization  (7/7/2026)</a>
-        <span class="item-meta">cmvp_mip</span>
-      </div>
-      
-      <div class="item-row" data-source="nist" data-kind="updated">
-        <a class="item-link" href="" target="_blank">DB Series SSD Drives | UD info Corp.View Contacts | FIPS 140-3 | Review  (7/7/2026)</a>
-        <span class="item-meta">cmvp_mip</span>
-      </div>
-      
-      <div class="item-row" data-source="nist" data-kind="updated">
-        <a class="item-link" href="https://csrc.nist.gov/" target="_blank">Displayed | 273</a>
-        <span class="item-meta">cmvp_mip</span>
-      </div>
-      
-      <div class="item-row" data-source="nist" data-kind="updated">
-        <a class="item-link" href="https://csrc.nist.gov/" target="_blank">Total | 285</a>
+        <a class="item-link" href="https://csrc.nist.gov/" target="_blank">Total | 274</a>
         <span class="item-meta">cmvp_mip</span>
       </div>
       
@@ -1641,10 +1222,10 @@
           </div>
         </div>
         <!-- EUCC Certificates -->
-        <div class="card card-new" id="sec-eucc-certs" data-has-changes="15">
+        <div class="card card-new" id="sec-eucc-certs" data-has-changes="48">
           <div class="card-hdr" onclick="toggleCard(this)">
             <span>EUCC Certified Products</span>
-            <span class="card-count">15 new items</span>
+            <span class="card-count">48 new items</span>
             <span class="toggle-icon">&#9660;</span>
           </div>
           <div class="card-body ">
@@ -1652,17 +1233,17 @@
             <div class="sub-hdr sub-new">New Cisco EUCC Certifications (3)</div>
             
             <div class="item-row" data-source="eucc" data-kind="new">
-              <a class="item-link" href="https://certification.enisa.europa.eu/certificates/eucc-3110-2025-09-2500093-01_en" target="_blank">EUCC-3110-2025-09-2500093-01</a>
+              <a class="item-link" href="https://certification.enisa.europa.eu/certificates/eucc-3110-2026-2500100-01_en" target="_blank">Cisco ASR 9000 Series Aggregation Services Routers running IOS-XR 7.11</a>
               <span class="item-meta"></span>
             </div>
             
             <div class="item-row" data-source="eucc" data-kind="new">
-              <a class="item-link" href="https://certification.enisa.europa.eu/certificates/eucc-3110-2025-12-2500098-01_en" target="_blank">EUCC-3110-2025-12-2500098-01</a>
+              <a class="item-link" href="https://certification.enisa.europa.eu/certificates/eucc-3110-2025-12-2500098-01_en" target="_blank">Cisco Nexus 9000 Series Switches,  software version Cisco NX-OS version 10.4(5)(M)</a>
               <span class="item-meta"></span>
             </div>
             
             <div class="item-row" data-source="eucc" data-kind="new">
-              <a class="item-link" href="https://certification.enisa.europa.eu/certificates/eucc-3110-2026-2500100-01_en" target="_blank">EUCC-3110-2026-2500100-01</a>
+              <a class="item-link" href="https://certification.enisa.europa.eu/certificates/eucc-3110-2025-09-2500093-01_en" target="_blank">Cisco Intersight Virtual Appliance 1.0.9 with IMM Fabric 4.3 UCS X-Series Servers and UCS C-Series Servers</a>
               <span class="item-meta"></span>
             </div>
             
@@ -1670,62 +1251,227 @@
             
             
             <div class="item-row" data-source="eucc" data-kind="new">
-              <a class="item-link" href="https://certification.enisa.europa.eu/certificates/eucc-3110-2026-2500079-01_en" target="_blank">EUCC-3110-2026-2500079-01</a>
+              <a class="item-link" href="https://certification.enisa.europa.eu/certificates/eucc-3090-2025-0000000005-00002_en" target="_blank">S3NSN6H</a>
               <span class="item-meta"></span>
             </div>
             
             <div class="item-row" data-source="eucc" data-kind="new">
-              <a class="item-link" href="https://certification.enisa.europa.eu/certificates/eucc-3110-2026-2500163-01_en" target="_blank">EUCC-3110-2026-2500163-01</a>
+              <a class="item-link" href="https://certification.enisa.europa.eu/certificates/eucc-3090-2025-0000000006-00000_en" target="_blank">ST31P450</a>
               <span class="item-meta"></span>
             </div>
             
             <div class="item-row" data-source="eucc" data-kind="new">
-              <a class="item-link" href="https://certification.enisa.europa.eu/certificates/eucc-3110-2026-2500100-01_en" target="_blank">EUCC-3110-2026-2500100-01</a>
+              <a class="item-link" href="https://certification.enisa.europa.eu/certificates/eucc-3090-2025-0000000007-00000_en" target="_blank">ST31P450</a>
               <span class="item-meta"></span>
             </div>
             
             <div class="item-row" data-source="eucc" data-kind="new">
-              <a class="item-link" href="https://certification.enisa.europa.eu/certificates/eucc-3110-2026-2500102-01_en" target="_blank">EUCC-3110-2026-2500102-01</a>
+              <a class="item-link" href="https://certification.enisa.europa.eu/certificates/eucc-3090-2025-0000000008-00000_en" target="_blank">ST31P450</a>
               <span class="item-meta"></span>
             </div>
             
             <div class="item-row" data-source="eucc" data-kind="new">
-              <a class="item-link" href="https://certification.enisa.europa.eu/certificates/eucc-3110-2026-2500103-01_en" target="_blank">EUCC-3110-2026-2500103-01</a>
+              <a class="item-link" href="https://certification.enisa.europa.eu/certificates/eucc-3090-2025-0000000009-00000_en" target="_blank">ST31P450</a>
               <span class="item-meta"></span>
             </div>
             
             <div class="item-row" data-source="eucc" data-kind="new">
-              <a class="item-link" href="https://certification.enisa.europa.eu/certificates/eucc-3110-2025-12-2500098-01_en" target="_blank">EUCC-3110-2025-12-2500098-01</a>
+              <a class="item-link" href="https://certification.enisa.europa.eu/certificates/eucc-3090-2025-0000000014-00000_en" target="_blank">S3SSE1A microcontroller</a>
               <span class="item-meta"></span>
             </div>
             
             <div class="item-row" data-source="eucc" data-kind="new">
-              <a class="item-link" href="https://certification.enisa.europa.eu/certificates/eucc-3110-2025-11-2500051-01_en" target="_blank">EUCC-3110-2025-11-2500051-01</a>
+              <a class="item-link" href="https://certification.enisa.europa.eu/certificates/eucc-3090-2026-0000000001-00000_en" target="_blank">CombICAO v3.1 on Cosmo X² (SSCD Configuration)</a>
               <span class="item-meta"></span>
             </div>
             
             <div class="item-row" data-source="eucc" data-kind="new">
-              <a class="item-link" href="https://certification.enisa.europa.eu/certificates/eucc-3110-2026-01-2500076-01_en" target="_blank">EUCC-3110-2026-01-2500076-01</a>
+              <a class="item-link" href="https://certification.enisa.europa.eu/certificates/eucc-3090-2026-0000000003-00000_en" target="_blank">CombICAO v3.1 on Cosmo X² (EAC Configuration)</a>
               <span class="item-meta"></span>
             </div>
             
             <div class="item-row" data-source="eucc" data-kind="new">
-              <a class="item-link" href="https://certification.enisa.europa.eu/certificates/eucc-3110-2025-09-2500093-01_en" target="_blank">EUCC-3110-2025-09-2500093-01</a>
+              <a class="item-link" href="https://certification.enisa.europa.eu/certificates/eucc-3090-2026-0000000004-00000_en" target="_blank">CombICAO v3.1 on Cosmo X² (EAC with PACE Configuration)</a>
               <span class="item-meta"></span>
             </div>
             
             <div class="item-row" data-source="eucc" data-kind="new">
-              <a class="item-link" href="https://certification.enisa.europa.eu/certificates/eucc-3110-2025-08-2500053-01_en" target="_blank">EUCC-3110-2025-08-2500053-01</a>
+              <a class="item-link" href="https://certification.enisa.europa.eu/certificates/eucc-3090-2026-0000000005-00000_en" target="_blank">CombICAO v3.1 on Cosmo X² (EAC with PACE for French ID Configuration)</a>
               <span class="item-meta"></span>
             </div>
             
             <div class="item-row" data-source="eucc" data-kind="new">
-              <a class="item-link" href="https://certification.enisa.europa.eu/certificates/eucc-3110-2025-08-2500052-01_en" target="_blank">EUCC-3110-2025-08-2500052-01</a>
+              <a class="item-link" href="https://certification.enisa.europa.eu/certificates/eucc-3090-2026-0000000012-00000_en" target="_blank">NPCT7xx TPM2.0 rev 1.59</a>
               <span class="item-meta"></span>
             </div>
             
             <div class="item-row" data-source="eucc" data-kind="new">
-              <a class="item-link" href="https://certification.enisa.europa.eu/certificates/eucc-3095-2025-07-01_en" target="_blank">EUCC-3095-2025-07-01</a>
+              <a class="item-link" href="https://certification.enisa.europa.eu/certificates/eucc-3090-2026-0000000013-00000_en" target="_blank">NPCT7xx TPM2.0 rev 1.59</a>
+              <span class="item-meta"></span>
+            </div>
+            
+            <div class="item-row" data-source="eucc" data-kind="new">
+              <a class="item-link" href="https://certification.enisa.europa.eu/certificates/eucc-3090-2026-0000000014-00000_en" target="_blank">NPCT7xx TPM2.0 rev 1.59</a>
+              <span class="item-meta"></span>
+            </div>
+            
+            <div class="item-row" data-source="eucc" data-kind="new">
+              <a class="item-link" href="https://certification.enisa.europa.eu/certificates/eucc-3110-2026-2500077-01-00000_en" target="_blank">NXP JCOP 8.x on SE310 A0 Secure Element</a>
+              <span class="item-meta"></span>
+            </div>
+            
+            <div class="item-row" data-source="eucc" data-kind="new">
+              <a class="item-link" href="https://certification.enisa.europa.eu/certificates/eucc-3090-2025-0000000001-00001_en" target="_blank">ST54J / ST54K</a>
+              <span class="item-meta"></span>
+            </div>
+            
+            <div class="item-row" data-source="eucc" data-kind="new">
+              <a class="item-link" href="https://certification.enisa.europa.eu/certificates/eucc-3095-2026-0000000005-00000_en" target="_blank">Waste container identification and data integrity solution</a>
+              <span class="item-meta"></span>
+            </div>
+            
+            <div class="item-row" data-source="eucc" data-kind="new">
+              <a class="item-link" href="https://certification.enisa.europa.eu/certificates/eucc-3087-2026-0000000002-00000_en" target="_blank">SGH-S</a>
+              <span class="item-meta"></span>
+            </div>
+            
+            <div class="item-row" data-source="eucc" data-kind="new">
+              <a class="item-link" href="https://certification.enisa.europa.eu/certificates/eucc-3087-2026-0000000003-00000_en" target="_blank">L4Re Secure Separation Kernel CC 1.0.2</a>
+              <span class="item-meta"></span>
+            </div>
+            
+            <div class="item-row" data-source="eucc" data-kind="new">
+              <a class="item-link" href="https://certification.enisa.europa.eu/certificates/eucc-3087-2026-0000000004-00000_en" target="_blank">Infineon Technologies AG Smartcard IC IFX_CCI_0000Fh, CCI_000011h, 00001Bh, 00001Eh, 000025h design step G12</a>
+              <span class="item-meta"></span>
+            </div>
+            
+            <div class="item-row" data-source="eucc" data-kind="new">
+              <a class="item-link" href="https://certification.enisa.europa.eu/certificates/eucc-3090-2026-0000000006-00000_en" target="_blank">ST54J / ST54K</a>
+              <span class="item-meta"></span>
+            </div>
+            
+            <div class="item-row" data-source="eucc" data-kind="new">
+              <a class="item-link" href="https://certification.enisa.europa.eu/certificates/eucc-3090-2026-0000000009-00000_en" target="_blank">S3NSN4V</a>
+              <span class="item-meta"></span>
+            </div>
+            
+            <div class="item-row" data-source="eucc" data-kind="new">
+              <a class="item-link" href="https://certification.enisa.europa.eu/certificates/eucc-3090-2026-0000000015-00000_en" target="_blank">TESS v5.2 and TESS v5.2.1 Platform</a>
+              <span class="item-meta"></span>
+            </div>
+            
+            <div class="item-row" data-source="eucc" data-kind="new">
+              <a class="item-link" href="https://certification.enisa.europa.eu/certificates/eucc-3087-2025-0000000001-00000_en" target="_blank">Infineon Security Controllers</a>
+              <span class="item-meta"></span>
+            </div>
+            
+            <div class="item-row" data-source="eucc" data-kind="new">
+              <a class="item-link" href="https://certification.enisa.europa.eu/certificates/eucc-3090-2025-0000000003-00000_en" target="_blank">SCE900U</a>
+              <span class="item-meta"></span>
+            </div>
+            
+            <div class="item-row" data-source="eucc" data-kind="new">
+              <a class="item-link" href="https://certification.enisa.europa.eu/certificates/eucc-3090-2025-0000000004-00002_en" target="_blank">S3NSEN6</a>
+              <span class="item-meta"></span>
+            </div>
+            
+            <div class="item-row" data-source="eucc" data-kind="new">
+              <a class="item-link" href="https://certification.enisa.europa.eu/certificates/eucc-3100-2026-0007001701-00000_en" target="_blank">MF0AES(H)x0, NT2H2xy1G and NT2H2xy1S, release B0</a>
+              <span class="item-meta"></span>
+            </div>
+            
+            <div class="item-row" data-source="eucc" data-kind="new">
+              <a class="item-link" href="https://certification.enisa.europa.eu/certificates/eucc-3110-2026-2500075-01-00000_en" target="_blank">NXP JCOP 7.x on SN300 Secure Element</a>
+              <span class="item-meta"></span>
+            </div>
+            
+            <div class="item-row" data-source="eucc" data-kind="new">
+              <a class="item-link" href="https://certification.enisa.europa.eu/certificates/eucc-3087-2026-0000000006-00000_en" target="_blank">PP SMAERS</a>
+              <span class="item-meta"></span>
+            </div>
+            
+            <div class="item-row" data-source="eucc" data-kind="new">
+              <a class="item-link" href="https://certification.enisa.europa.eu/certificates/eucc-3087-2026-0000000001-00000_en" target="_blank">IFX_CCI_00007Ah/8Fh A11, R11, M11 with optional Crypto Suite</a>
+              <span class="item-meta"></span>
+            </div>
+            
+            <div class="item-row" data-source="eucc" data-kind="new">
+              <a class="item-link" href="https://certification.enisa.europa.eu/certificates/eucc-3135-2026-0000000001-00000_en" target="_blank">ArcMC and SmartConnectors</a>
+              <span class="item-meta"></span>
+            </div>
+            
+            <div class="item-row" data-source="eucc" data-kind="new">
+              <a class="item-link" href="https://certification.enisa.europa.eu/certificates/eucc-3110-2026-2500078-01_en" target="_blank">NXP JCOP 8.9 on SN300 Secure Element</a>
+              <span class="item-meta"></span>
+            </div>
+            
+            <div class="item-row" data-source="eucc" data-kind="new">
+              <a class="item-link" href="https://certification.enisa.europa.eu/certificates/eucc-3110-2026-2500079-01_en" target="_blank">NXP JCOP 8.9 with eUICC extension on SN300 Secure Element</a>
+              <span class="item-meta"></span>
+            </div>
+            
+            <div class="item-row" data-source="eucc" data-kind="new">
+              <a class="item-link" href="https://certification.enisa.europa.eu/certificates/eucc-3110-2026-2500163-01_en" target="_blank">Hikvision Network Camera Series iDS-2CD7x</a>
+              <span class="item-meta"></span>
+            </div>
+            
+            <div class="item-row" data-source="eucc" data-kind="new">
+              <a class="item-link" href="https://certification.enisa.europa.eu/certificates/eucc-3110-2026-2500100-01_en" target="_blank">Cisco ASR 9000 Series Aggregation Services Routers running IOS-XR 7.11</a>
+              <span class="item-meta"></span>
+            </div>
+            
+            <div class="item-row" data-source="eucc" data-kind="new">
+              <a class="item-link" href="https://certification.enisa.europa.eu/certificates/eucc-3110-2026-2500102-01_en" target="_blank">ZTE OTN Solution v1.10</a>
+              <span class="item-meta"></span>
+            </div>
+            
+            <div class="item-row" data-source="eucc" data-kind="new">
+              <a class="item-link" href="https://certification.enisa.europa.eu/certificates/eucc-3110-2026-2500103-01_en" target="_blank">ZTE IPN Solution v1.2</a>
+              <span class="item-meta"></span>
+            </div>
+            
+            <div class="item-row" data-source="eucc" data-kind="new">
+              <a class="item-link" href="https://certification.enisa.europa.eu/certificates/eucc-3087-2026-0011-00000_en" target="_blank">STARCOS 3.7 COS HBA-SMC</a>
+              <span class="item-meta"></span>
+            </div>
+            
+            <div class="item-row" data-source="eucc" data-kind="new">
+              <a class="item-link" href="https://certification.enisa.europa.eu/certificates/eucc-3110-2025-12-2500098-01_en" target="_blank">Cisco Nexus 9000 Series Switches,  software version Cisco NX-OS version 10.4(5)(M)</a>
+              <span class="item-meta"></span>
+            </div>
+            
+            <div class="item-row" data-source="eucc" data-kind="new">
+              <a class="item-link" href="https://certification.enisa.europa.eu/certificates/eucc-3090-2025-0000000001-00002_en" target="_blank">Smart Tachograph G2 on MultiApp V4.0.1</a>
+              <span class="item-meta"></span>
+            </div>
+            
+            <div class="item-row" data-source="eucc" data-kind="new">
+              <a class="item-link" href="https://certification.enisa.europa.eu/certificates/eucc-3110-2025-11-2500051-01_en" target="_blank">Huawei ATN Series Routers</a>
+              <span class="item-meta"></span>
+            </div>
+            
+            <div class="item-row" data-source="eucc" data-kind="new">
+              <a class="item-link" href="https://certification.enisa.europa.eu/certificates/eucc-3110-2026-01-2500076-01_en" target="_blank">NXP JCOP 8.x/9.x on SN300 B2 Secure Element</a>
+              <span class="item-meta"></span>
+            </div>
+            
+            <div class="item-row" data-source="eucc" data-kind="new">
+              <a class="item-link" href="https://certification.enisa.europa.eu/certificates/eucc-3110-2025-09-2500093-01_en" target="_blank">Cisco Intersight Virtual Appliance 1.0.9 with IMM Fabric 4.3 UCS X-Series Servers and UCS C-Series Servers</a>
+              <span class="item-meta"></span>
+            </div>
+            
+            <div class="item-row" data-source="eucc" data-kind="new">
+              <a class="item-link" href="https://certification.enisa.europa.eu/certificates/eucc-3110-2025-08-2500053-01_en" target="_blank">NXP JCOP 8.x/9.x with eUICC extension on SN300 B2 Secure Element</a>
+              <span class="item-meta"></span>
+            </div>
+            
+            <div class="item-row" data-source="eucc" data-kind="new">
+              <a class="item-link" href="https://certification.enisa.europa.eu/certificates/eucc-3110-2025-08-2500052-01_en" target="_blank">NXP JCOP 7.x with eUICC extension on SN300 B1.1 Secure Element</a>
+              <span class="item-meta"></span>
+            </div>
+            
+            <div class="item-row" data-source="eucc" data-kind="new">
+              <a class="item-link" href="https://certification.enisa.europa.eu/certificates/eucc-3095-2025-07-01_en" target="_blank">GMV GNSS Cryptographic Module</a>
               <span class="item-meta"></span>
             </div>
             
@@ -1742,7 +1488,7 @@
 <div class="card card-new" id="sec-history" data-has-changes="1">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>Change History</span>
-    <span class="card-count">86 events</span>
+    <span class="card-count">104 events</span>
     <span class="toggle-icon">▼</span>
   </div>
   <div class="card-body">
@@ -1761,6 +1507,204 @@
     </div>
     <div class="timeline" id="history-timeline">
     
+      
+      <div class="tl-entry" data-cat="eucc_cisco">
+        <div class="tl-date">2026-07-09</div>
+        <div class="tl-body">
+          <div class="tl-title">
+            <span class="tl-badge new">new</span>
+            <a href="https://certification.enisa.europa.eu/certificates/eucc-3110-2026-2500100-01_en" target="_blank">EUCC: Cisco ASR 9000 Series Aggregation Services Routers running IOS-XR 7.11</a>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="tl-entry" data-cat="eucc_cisco">
+        <div class="tl-date">2026-07-09</div>
+        <div class="tl-body">
+          <div class="tl-title">
+            <span class="tl-badge new">new</span>
+            <a href="https://certification.enisa.europa.eu/certificates/eucc-3110-2025-12-2500098-01_en" target="_blank">EUCC: Cisco Nexus 9000 Series Switches,  software version Cisco NX-OS version 10.4(5)(M)</a>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="tl-entry" data-cat="eucc_cisco">
+        <div class="tl-date">2026-07-09</div>
+        <div class="tl-body">
+          <div class="tl-title">
+            <span class="tl-badge new">new</span>
+            <a href="https://certification.enisa.europa.eu/certificates/eucc-3110-2025-09-2500093-01_en" target="_blank">EUCC: Cisco Intersight Virtual Appliance 1.0.9 with IMM Fabric 4.3 UCS X-Series Servers and UCS C-Series Servers</a>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="tl-entry" data-cat="nist_doc">
+        <div class="tl-date">2026-07-09</div>
+        <div class="tl-body">
+          <div class="tl-title">
+            <span class="tl-badge updated">updated</span>
+            <a href="https://csrc.nist.gov/News/2026/nist-releases-sp-1326" target="_blank">NIST news: NIST releases SP 1326</a>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="tl-entry" data-cat="nist_doc">
+        <div class="tl-date">2026-07-09</div>
+        <div class="tl-body">
+          <div class="tl-title">
+            <span class="tl-badge updated">updated</span>
+            <a href="" target="_blank">NIST cmvp_mip: TASS Crypto Engine | Beijing JN TASS Technology Co., Ltd.Vie</a>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="tl-entry" data-cat="nist_doc">
+        <div class="tl-date">2026-07-09</div>
+        <div class="tl-body">
+          <div class="tl-title">
+            <span class="tl-badge updated">updated</span>
+            <a href="" target="_blank">NIST cmvp_mip: Canonical Ltd. Ubuntu 22.04 GnuTLS Cryptographic Module | Ca</a>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="tl-entry" data-cat="nist_doc">
+        <div class="tl-date">2026-07-09</div>
+        <div class="tl-body">
+          <div class="tl-title">
+            <span class="tl-badge updated">updated</span>
+            <a href="" target="_blank">NIST cmvp_mip: Canonical Ltd. Ubuntu 22.04 Libgcrypt Cryptographic Module |</a>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="tl-entry" data-cat="nist_doc">
+        <div class="tl-date">2026-07-09</div>
+        <div class="tl-body">
+          <div class="tl-title">
+            <span class="tl-badge updated">updated</span>
+            <a href="" target="_blank">NIST cmvp_mip: CiscoSSL FIPS Provider | Cisco Systems IncView Contacts | FI</a>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="tl-entry" data-cat="nist_doc">
+        <div class="tl-date">2026-07-09</div>
+        <div class="tl-body">
+          <div class="tl-title">
+            <span class="tl-badge updated">updated</span>
+            <a href="" target="_blank">NIST cmvp_mip: OpenSSL FIPS Provider for AlmaLinux 9 | Cloudlinux Inc., Tux</a>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="tl-entry" data-cat="nist_doc">
+        <div class="tl-date">2026-07-09</div>
+        <div class="tl-body">
+          <div class="tl-title">
+            <span class="tl-badge updated">updated</span>
+            <a href="" target="_blank">NIST cmvp_mip: Stinger Encryption Module | Datum Systems, Inc.View Contacts</a>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="tl-entry" data-cat="nist_doc">
+        <div class="tl-date">2026-07-09</div>
+        <div class="tl-body">
+          <div class="tl-title">
+            <span class="tl-badge updated">updated</span>
+            <a href="" target="_blank">NIST cmvp_mip: HPE Juniper Networking SRX1600 Service Gateway | HPE Juniper</a>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="tl-entry" data-cat="nist_doc">
+        <div class="tl-date">2026-07-09</div>
+        <div class="tl-body">
+          <div class="tl-title">
+            <span class="tl-badge updated">updated</span>
+            <a href="" target="_blank">NIST cmvp_mip: Palo Alto Networks Core Crypto Module | Palo Alto NetworksVi</a>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="tl-entry" data-cat="nist_doc">
+        <div class="tl-date">2026-07-09</div>
+        <div class="tl-body">
+          <div class="tl-title">
+            <span class="tl-badge updated">updated</span>
+            <a href="" target="_blank">NIST cmvp_mip: PQCryptoLib-Core | PQShield Ltd.View Contacts | FIPS 140-3 |</a>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="tl-entry" data-cat="nist_doc">
+        <div class="tl-date">2026-07-09</div>
+        <div class="tl-body">
+          <div class="tl-title">
+            <span class="tl-badge updated">updated</span>
+            <a href="" target="_blank">NIST cmvp_mip: Privoro SafeCase Security Module | Privoro LLCView Contacts </a>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="tl-entry" data-cat="nist_doc">
+        <div class="tl-date">2026-07-09</div>
+        <div class="tl-body">
+          <div class="tl-title">
+            <span class="tl-badge updated">updated</span>
+            <a href="" target="_blank">NIST cmvp_mip: Sunhillo Cryptographic Module | Sunhillo CorporationView Con</a>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="tl-entry" data-cat="nist_doc">
+        <div class="tl-date">2026-07-09</div>
+        <div class="tl-body">
+          <div class="tl-title">
+            <span class="tl-badge updated">updated</span>
+            <a href="https://csrc.nist.gov/" target="_blank">NIST cmvp_mip: Displayed | 263</a>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="tl-entry" data-cat="nist_doc">
+        <div class="tl-date">2026-07-09</div>
+        <div class="tl-body">
+          <div class="tl-title">
+            <span class="tl-badge updated">updated</span>
+            <a href="https://csrc.nist.gov/" target="_blank">NIST cmvp_mip: Not Displayed | 11</a>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="tl-entry" data-cat="nist_doc">
+        <div class="tl-date">2026-07-09</div>
+        <div class="tl-body">
+          <div class="tl-title">
+            <span class="tl-badge updated">updated</span>
+            <a href="https://csrc.nist.gov/" target="_blank">NIST cmvp_mip: Total | 274</a>
+          </div>
+          
+        </div>
+      </div>
       
       <div class="tl-entry" data-cat="eucc_cisco">
         <div class="tl-date">2026-07-08</div>
@@ -2718,7 +2662,7 @@
 </div><!-- /main-content -->
 <footer>
   <span>CC Pulse &middot; Auto-refreshes daily (01:00 EST) &middot; NIAP, CSfC, NIST, CC Portal, NATO NIAPCL, EUCC / ENISA</span>
-  <span>Last run: 2026-07-08 04:15 ET</span>
+  <span>Last run: 2026-07-09 05:38 ET</span>
 </footer>
 
 <script>
