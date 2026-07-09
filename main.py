@@ -709,8 +709,8 @@ def _fire_alerts(diff: dict, emailer) -> None:
     new_cisco_certs = diff.get("niap", {}).get("cisco_ndcpp", {}).get("added", [])
     if new_cisco_certs:
         log.info("%d new Cisco NDcPP certification(s) — sending celebration...", len(new_cisco_certs))
-        emailer.send_cisco_cert_celebration(new_cisco_certs)
-        emailer.send_cisco_cert_email(new_cisco_certs)
+        emailer.send_cisco_cert_celebration(new_cisco_certs, source="niap")
+        emailer.send_cisco_cert_email(new_cisco_certs, source="niap")
 
     new_cisco_csfc_alerts = [
         a for a in diff.get("alerts", [])
@@ -720,20 +720,20 @@ def _fire_alerts(diff: dict, emailer) -> None:
     ]
     if new_cisco_csfc_alerts:
         log.info("%d new Cisco CSfC alert(s) — sending celebration...", len(new_cisco_csfc_alerts))
-        emailer.send_cisco_cert_celebration(new_cisco_csfc_alerts)
-        emailer.send_cisco_cert_email(new_cisco_csfc_alerts)
+        emailer.send_cisco_cert_celebration(new_cisco_csfc_alerts, source="csfc")
+        emailer.send_cisco_cert_email(new_cisco_csfc_alerts, source="csfc")
 
     new_cisco_nato = diff.get("nato", {}).get("cisco_added", [])
     if new_cisco_nato:
         log.info("%d new Cisco NATO NIAPCL listing(s) — sending celebration...", len(new_cisco_nato))
-        emailer.send_cisco_cert_celebration(new_cisco_nato)
-        emailer.send_cisco_cert_email(new_cisco_nato)
+        emailer.send_cisco_cert_celebration(new_cisco_nato, source="nato")
+        emailer.send_cisco_cert_email(new_cisco_nato, source="nato")
 
     new_cisco_eucc = diff.get("eucc", {}).get("cisco_added", [])
     if new_cisco_eucc:
         log.info("%d new Cisco EUCC certification(s) — sending celebration...", len(new_cisco_eucc))
-        emailer.send_cisco_cert_celebration(new_cisco_eucc)
-        emailer.send_cisco_cert_email(new_cisco_eucc)
+        emailer.send_cisco_cert_celebration(new_cisco_eucc, source="eucc")
+        emailer.send_cisco_cert_email(new_cisco_eucc, source="eucc")
 
     # -- NIAP PP changes (new PPs, sunset changes) --------------------------------
     new_pps = diff.get("niap", {}).get("pps", {}).get("added", [])

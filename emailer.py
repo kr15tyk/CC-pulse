@@ -803,56 +803,145 @@ def _cert_meme_url() -> str:
     return _CELEBRATION_MEMES[int(time.time() / 60) % len(_CELEBRATION_MEMES)]
 
 
-def _format_cisco_cert_block(product: dict) -> str:
-    """Format a single Cisco NDcPP PCL certification into a Webex Markdown block.
+# Per-source metadata for Cisco certification notifications. The celebration
+# Webex message and email were originally written for NIAP PCL product dicts
+# only, but main._fire_alerts() also routes CSfC, NATO NIAPCL, and EUCC
+# additions through them. Each source scrapes a different record shape, so
+# every notification must say which registry it came from and link to it.
+CERT_SOURCES: dict[str, dict[str, str]] = {
+    "niap": {
+        "program":        "NDcPP PCL",
+        "list_name":      "NIAP Certified Products List",
+        "added_to":       "NIAP Validated Products List under the NDcPP program",
+        "registry_url":   "https://www.niap-ccevs.org/products",
+        "registry_label": "View Cisco PCL",
+        "link_label":     "View on NIAP PCL",
+    },
+    "csfc": {
+        "program":        "CSfC Components List",
+        "list_name":      "NSA CSfC Components List",
+        "added_to":       "NSA Commercial Solutions for Classified (CSfC) Components List",
+        "registry_url":   config.CSFC_PRODUCT_LIST_URL,
+        "registry_label": "View CSfC Components List",
+        "link_label":     "View on CSfC Components List",
+    },
+    "nato": {
+        "program":        "NATO NIAPCL",
+        "list_name":      "NATO Information Assurance Product Catalogue",
+        "added_to":       "NATO Information Assurance Product Catalogue (NIAPCL)",
+        "registry_url":   config.NATO_NIAPCL_URL,
+        "registry_label": "View NATO NIAPCL",
+        "link_label":     "View on NATO NIAPCL",
+    },
+    "eucc": {
+        "program":        "EUCC",
+        "list_name":      "EUCC Certified Products — ENISA",
+        "added_to":       "EUCC certified products list published by ENISA",
+        "registry_url":   config.EUCC_CERTIFICATES_URL,
+        "registry_label": "View EUCC Certificates",
+        "link_label":     "View EUCC Certificate",
+    },
+}
 
-    Included fields:
-      - Product name (bold, linked to NIAP product page)
-      - Vendor
-      - Certification date
-      - Sunset date
-      - Evaluated against (PP short names)
-      - Evaluating lab
-      - Submitting country
+
+def _normalize_cert_record(product: dict, source: str) -> dict:
+    """Map a source-specific record onto the canonical NIAP-style keys.
+
+    Record shapes per source:
+      niap: product_id, product_name, vendor_id_name, certification_date,
+            sunset_date, assigned_lab_name, submitting_country_id_name,
+            protection_profiles[{pp_short_name}]
+      csfc: keyword-alert dicts — title, url, detail
+      nato: name, manufacturer, category, link, raw_text
+      eucc: name (card title), text, href, cert_date, description
+
+    Returns a dict with product_name, vendor, cert_date, sunset_date, lab,
+    country, pp_names, detail, and url (the product's certification page,
+    falling back to the source registry).
     """
-    pid          = product.get("product_id", "")
-    name         = product.get("product_name", "Unknown product")
-    vendor       = product.get("vendor_id_name", "Cisco")
-    cert_date    = (product.get("certification_date") or "")[:10]
-    sunset_date  = (product.get("sunset_date") or "")[:10]
-    lab          = product.get("assigned_lab_name", "N/A")
-    country      = product.get("submitting_country_id_name", "N/A")
-    pps          = product.get("protection_profiles", [])
-    pp_names     = ", ".join(
-        p.get("pp_short_name", "") for p in pps if p.get("pp_short_name")
-    ) or "N/A"
-    niap_url     = f"https://www.niap-ccevs.org/products/{pid}" if pid else "https://www.niap-ccevs.org/products"
+    meta = CERT_SOURCES.get(source, CERT_SOURCES["niap"])
+    if source == "niap":
+        pid = product.get("product_id", "")
+        url = (
+            f"https://www.niap-ccevs.org/products/{pid}"
+            if pid else meta["registry_url"]
+        )
+    else:
+        url = (
+            product.get("url") or product.get("href")
+            or product.get("link") or meta["registry_url"]
+        )
+    pps = product.get("protection_profiles") or []
+    return {
+        "product_name": (
+            product.get("product_name") or product.get("name")
+            or product.get("title") or (product.get("raw_text") or "")[:120]
+            or "Unknown product"
+        ),
+        "vendor": (
+            product.get("vendor_id_name") or product.get("manufacturer")
+            or "Cisco"
+        ),
+        "cert_date": (
+            product.get("certification_date") or product.get("cert_date") or ""
+        )[:10],
+        "sunset_date": (product.get("sunset_date") or "")[:10],
+        "lab":       product.get("assigned_lab_name") or "",
+        "country":   product.get("submitting_country_id_name") or "",
+        "pp_names":  ", ".join(
+            p.get("pp_short_name", "") for p in pps if p.get("pp_short_name")
+        ),
+        "detail": (
+            product.get("description") or product.get("detail") or ""
+        )[:300],
+        "url": url,
+    }
+
+
+def _format_cisco_cert_block(product: dict, source: str = "niap") -> str:
+    """Format a single Cisco certification into a Webex Markdown block.
+
+    Renders the product name linked to its certification page, then only the
+    detail rows the source actually provides (NIAP has the full set; CSfC,
+    NATO, and EUCC records are sparser — empty rows are omitted rather than
+    shown as blank/N/A).
+    """
+    r = _normalize_cert_record(product, source)
+
+    rows = [("Vendor", r["vendor"])]
+    rows += [
+        (label, value) for label, value in (
+            ("Certified",           r["cert_date"]),
+            ("Valid until",         r["sunset_date"]),
+            ("Evaluated against",   r["pp_names"]),
+            ("Evaluating lab",      r["lab"]),
+            ("Submitting country",  r["country"]),
+            ("Details",             r["detail"]),
+        ) if value
+    ]
+    table = "".join(f"| **{label}** | {value} |\n" for label, value in rows)
 
     return (
-        f"### 🎉 [{name}]({niap_url})\n"
+        f"### 🎉 [{r['product_name']}]({r['url']})\n"
         f"| Field | Value |\n"
         f"|-------|-------|\n"
-        f"| **Vendor** | {vendor} |\n"
-        f"| **Certified** | {cert_date} |\n"
-        f"| **Valid until** | {sunset_date} |\n"
-        f"| **Evaluated against** | {pp_names} |\n"
-        f"| **Evaluating lab** | {lab} |\n"
-        f"| **Submitting country** | {country} |\n"
+        f"{table}"
     )
 
 
-def send_cisco_cert_celebration(new_certs: list[dict]) -> None:
-    """Post a celebration message to Webex for each new Cisco NDcPP PCL certification.
+def send_cisco_cert_celebration(new_certs: list[dict], source: str = "niap") -> None:
+    """Post a celebration message to Webex for each new Cisco certification.
 
-    Fires once per daily run when differ.diff_niap_pcl_cisco() finds new entries
-    in cisco_ndcpp.added. Each new cert gets:
-      - A header banner with confetti emoji
-      - A markdown table with the full certificate details
+    Fires once per daily run for each source with new Cisco entries (NIAP PCL,
+    CSfC Components List, NATO NIAPCL, EUCC). Each new cert gets:
+      - A header banner with confetti emoji naming the source registry
+      - A markdown table with the certificate details the source provides
       - A random celebration meme image
-      - A direct link to the NIAP product page
+      - A direct link to the product's certification page
 
     Args:
-        new_certs: List of product dicts from diff["niap"]["cisco_ndcpp"]["added"].
+        new_certs: List of source-shaped record dicts (see _normalize_cert_record).
+        source: One of CERT_SOURCES — "niap", "csfc", "nato", "eucc".
     """
     token   = config.WEBEX_BOT_TOKEN
     room_id = config.WEBEX_ROOM_ID
@@ -862,24 +951,25 @@ def send_cisco_cert_celebration(new_certs: list[dict]) -> None:
     if not new_certs:
         return
 
+    meta      = CERT_SOURCES.get(source, CERT_SOURCES["niap"])
     count     = len(new_certs)
     meme_url  = _cert_meme_url()
     cert_word = "certification" if count == 1 else "certifications"
 
     header = (
-        f"# 🏆 Cisco NDcPP PCL — {count} New {cert_word.title()}!\n\n"
+        f"# 🏆 Cisco {meta['program']} — {count} New {cert_word.title()}!\n\n"
         f"🎊 🎊 🎊\n\n"
-        f"_CC Pulse detected {count} new Cisco product {cert_word} on the NIAP PCL._\n\n"
+        f"_CC Pulse detected {count} new Cisco product {cert_word} on the {meta['list_name']}._\n\n"
     )
 
     cert_blocks = "\n\n---\n\n".join(
-        _format_cisco_cert_block(p) for p in new_certs
+        _format_cisco_cert_block(p, source) for p in new_certs
     )
 
     footer = (
         f"\n\n---\n\n"
         f"![]({meme_url})\n\n"
-        f"[View Cisco products on NIAP PCL](https://www.niap-ccevs.org/products)"
+        f"[{meta['registry_label']}]({meta['registry_url']})"
         f" · [Full dashboard](https://kr15tyk.github.io/CC-pulse/cc_dashboard.html)"
     )
 
@@ -1126,58 +1216,67 @@ def send_niap_news_webex(new_news: list[dict]) -> None:
         log.warning("[Webex] Failed to send NIAP news notification: %s", exc)
 
 
-def send_cisco_cert_email(new_certs: list[dict]) -> None:
-    """Send a dedicated celebration email for new Cisco NDcPP PCL certifications.
+def send_cisco_cert_email(new_certs: list[dict], source: str = "niap") -> None:
+    """Send a dedicated celebration email for new Cisco certifications.
 
-    Fires once per daily run alongside send_cisco_cert_celebration() (Webex).
-    Each certification gets a full-detail HTML row matching the Webex card:
-    product name (linked), vendor, cert date, valid-until, evaluated PPs,
-    evaluating lab, submitting country.
+    Fires once per daily run alongside send_cisco_cert_celebration() (Webex),
+    for each source with new Cisco entries (NIAP PCL, CSfC Components List,
+    NATO NIAPCL, EUCC). Each certification gets an HTML block matching the
+    Webex card: product name linked to its certification page, plus whichever
+    detail fields the source provides (empty rows are omitted).
 
     Args:
-        new_certs: List of product dicts from diff["niap"]["cisco_ndcpp"]["added"].
+        new_certs: List of source-shaped record dicts (see _normalize_cert_record).
+        source: One of CERT_SOURCES \u2014 "niap", "csfc", "nato", "eucc".
     """
     if not new_certs:
         return
 
+    meta      = CERT_SOURCES.get(source, CERT_SOURCES["niap"])
     date_str  = datetime.now(ET).strftime("%Y-%m-%d")
     count     = len(new_certs)
     cert_word = "Certification" if count == 1 else "Certifications"
-    subject   = f"\U0001f3c6 CC Pulse \u2014 {count} New Cisco NDcPP {cert_word} on {date_str}"
+    subject   = (
+        f"\U0001f3c6 CC Pulse \u2014 {count} New Cisco "
+        f"{meta['program']} {cert_word} on {date_str}"
+    )
 
     # Build one detail block per certified product
     cert_blocks = []
     for p in new_certs:
-        pid         = p.get("product_id", "")
-        name        = _esc(p.get("product_name", "Unknown product"))
-        vendor      = _esc(p.get("vendor_id_name", "Cisco"))
-        cert_date   = _esc((p.get("certification_date") or "")[:10])
-        sunset_date = _esc((p.get("sunset_date") or "")[:10])
-        lab         = _esc(p.get("assigned_lab_name", "N/A"))
-        country     = _esc(p.get("submitting_country_id_name", "N/A"))
-        pps         = p.get("protection_profiles", [])
-        pp_names    = _esc(", ".join(
-            pp.get("pp_short_name", "") for pp in pps if pp.get("pp_short_name")
-        ) or "N/A")
-        niap_url    = _safe_url(
-            f"https://www.niap-ccevs.org/products/{pid}"
-            if pid else "https://www.niap-ccevs.org/products"
+        r        = _normalize_cert_record(p, source)
+        name     = _esc(r["product_name"])
+        cert_url = _safe_url(r["url"])
+
+        rows = [("Vendor", _esc(r["vendor"]))]
+        rows += [
+            (label, _esc(value)) for label, value in (
+                ("Certified",          r["cert_date"]),
+                ("Valid until",        r["sunset_date"]),
+                ("Evaluated against",  r["pp_names"]),
+                ("Evaluating lab",     r["lab"]),
+                ("Submitting country", r["country"]),
+                ("Details",            r["detail"]),
+            ) if value
+        ]
+        row_html = "".join(
+            (
+                f'<tr style="background:#1E1B4B">' if i % 2 == 0 else '<tr>'
+            )
+            + f'<td style="width:160px;font-weight:700;color:#6366F1">{label}</td>'
+            + f'<td>{value}</td></tr>'
+            for i, (label, value) in enumerate(rows)
         )
 
         product_title = (
             f'<h3 style="margin:0 0 8px;font-size:1rem;color:#0B0F1A">'
-            f'<a href="{niap_url}" style="color:#3B82F6;text-decoration:none">'
+            f'<a href="{cert_url}" style="color:#3B82F6;text-decoration:none">'
             f'\U0001f3c5 {name}</a></h3>'
         )
         detail_table = (
             '<table width="100%" cellpadding="6" cellspacing="0" '
             'style="border-collapse:collapse;font-size:13px;margin-bottom:6px">'
-            f'<tr style="background:#1E1B4B"><td style="width:160px;font-weight:700;color:#6366F1">Vendor</td><td>{vendor}</td></tr>'
-            f'<tr><td style="font-weight:700;color:#6366F1">Certified</td><td>{cert_date}</td></tr>'
-            f'<tr style="background:#1E1B4B"><td style="font-weight:700;color:#6366F1">Valid until</td><td>{sunset_date}</td></tr>'
-            f'<tr><td style="font-weight:700;color:#6366F1">Evaluated against</td><td>{pp_names}</td></tr>'
-            f'<tr style="background:#1E1B4B"><td style="font-weight:700;color:#6366F1">Evaluating lab</td><td>{lab}</td></tr>'
-            f'<tr><td style="font-weight:700;color:#6366F1">Submitting country</td><td>{country}</td></tr>'
+            f'{row_html}'
             '</table>'
         )
         cert_blocks.append(
@@ -1185,17 +1284,17 @@ def send_cisco_cert_email(new_certs: list[dict]) -> None:
             'border-radius:4px;padding:14px 16px;margin-bottom:16px">'
             + product_title + detail_table +
             f'<p style="margin:6px 0 0;font-size:12px">'
-            f'<a href="{niap_url}" style="color:#60A5FA">View on NIAP PCL \u2192</a></p>'
+            f'<a href="{cert_url}" style="color:#60A5FA">{meta["link_label"]} \u2192</a></p>'
             '</div>'
         )
 
     certs_html  = "\n".join(cert_blocks)
     pcl_link    = (
         '<p style="margin-top:20px">'
-        '<a href="https://www.niap-ccevs.org/products" '
+        f'<a href="{_safe_url(meta["registry_url"])}" '
         'style="background:#3B82F6;color:#E0E7FF;padding:8px 16px;'
         'border-radius:4px;text-decoration:none;font-size:0.85rem;margin-right:8px">'
-        '\U0001f4cb View Cisco PCL</a>'
+        f'\U0001f4cb {meta["registry_label"]}</a>'
         '<a href="https://kr15tyk.github.io/CC-pulse/cc_dashboard.html" '
         'style="background:#0B0F1A;color:#E0E7FF;padding:8px 16px;'
         'border-radius:4px;text-decoration:none;font-size:0.85rem">'
@@ -1212,8 +1311,8 @@ def send_cisco_cert_email(new_certs: list[dict]) -> None:
         '<div style="background:linear-gradient(135deg,#0B0F1A,#1E1B4B);color:#E0E7FF;'
         'padding:24px 28px;border-radius:8px 8px 0 0">'
         f'<div style="font-size:2rem;margin-bottom:6px">\U0001f3c6</div>'
-        f'<h1 style="margin:0;font-size:1.4rem">Cisco NDcPP PCL \u2014 {count} New {cert_word}</h1>'
-        f'<p style="margin:6px 0 0;opacity:0.8;font-size:0.85rem">{date_str} \u2014 NIAP Certified Products List</p>'
+        f'<h1 style="margin:0;font-size:1.4rem">Cisco {meta["program"]} \u2014 {count} New {cert_word}</h1>'
+        f'<p style="margin:6px 0 0;opacity:0.8;font-size:0.85rem">{date_str} \u2014 {meta["list_name"]}</p>'
         '</div>'
 
         # Body
@@ -1221,12 +1320,12 @@ def send_cisco_cert_email(new_certs: list[dict]) -> None:
         'border-top:none;border-radius:0 0 8px 8px">'
         f'<p style="color:#6366F1;font-size:0.9rem;margin:0 0 16px">'
         f'The following Cisco product{"s have" if count > 1 else " has"} been added to the '
-        f'NIAP Validated Products List under the NDcPP program.</p>'
+        f'{meta["added_to"]}.</p>'
         f'{certs_html}'
         f'{pcl_link}'
         '<hr style="margin-top:28px;border:none;border-top:1px solid #312E81">'
         f'<p style="color:#6366F1;font-size:0.75rem;margin-top:12px">'
-        f'CC Pulse automated monitoring \u2014 Cisco NDcPP alert<br>Generated {generated}</p>'
+        f'CC Pulse automated monitoring \u2014 Cisco {meta["program"]} alert<br>Generated {generated}</p>'
         '</div>'
         '</body></html>'
     )
