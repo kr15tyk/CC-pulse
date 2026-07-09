@@ -328,6 +328,13 @@ def flag_alerts(diff: Snapshot) -> list[dict]:
     }
     _nist_unconditional_pages = {"news", "fips"}  # always notify, no keyword filter needed
     for page_key, page_diff in diff.get("nist", {}).get("pages", {}).items():
+        # cmvp_mip is diffed structurally below (added/status_changes with
+        # meaningful old→new detail). Scanning its raw page text here double-
+        # reported every status change: the changed row text looked like a
+        # "new item" and matched "FIPS 140-3" (present in every MIP row),
+        # producing a second, uninformative alert per module (2026-07-09).
+        if page_key == "cmvp_mip":
+            continue
         if isinstance(page_diff, dict):
             items_to_check = page_diff.get("added", [])
         else:
@@ -345,23 +352,39 @@ def flag_alerts(diff: Snapshot) -> list[dict]:
                           item.get("text", ""),
                           url=page_url, detail=detail, tab="us")
 
-    # CMVP MIP status changes — always alert (fix #27)
+    # CMVP MIP changes — alert on Cisco modules only (fix #27, narrowed).
+    # The full MIP list churns constantly across all vendors; those moves are
+    # visible on the dashboard but only Cisco's own modules warrant an
+    # immediate email/Webex alert.
+    def _is_cisco_module(rec: dict) -> bool:
+        blob = " ".join(
+            str(rec.get(k) or "")
+            for k in ("Module Name", "name", "Vendor", "vendor", "text")
+        ).lower()
+        return any(kw in blob for kw in config.CISCO_VENDOR_KEYWORDS)
+
     cmvp_mip = diff.get("nist", {}).get("cmvp_mip", {})
     for item in cmvp_mip.get("added", []):
+        if not _is_cisco_module(item):
+            continue
         name = item.get("Module Name") or item.get("name") or item.get("text", "")[:80]
         vendor = item.get("Vendor") or item.get("vendor") or ""
         status = item.get("Status") or item.get("status") or ""
         title = f"{name}" + (f" ({vendor})" if vendor else "")
         detail = f"New module in CMVP modules-in-process" + (f" — Status: {status}" if status else "")
         _add(alerts, "NIST CMVP MIP", "new", title,
-             url=_nist_page_urls["cmvp_mip"], detail=detail, tab="us")
+             url=_nist_page_urls["cmvp_mip"], detail=detail,
+             keywords=["cisco", "CMVP"], tab="us")
     for item in cmvp_mip.get("status_changes", []):
+        if not _is_cisco_module(item):
+            continue
         name = item.get("Module Name") or item.get("name") or item.get("text", "")[:80]
         vendor = item.get("Vendor") or item.get("vendor") or ""
         title = f"{name}" + (f" ({vendor})" if vendor else "")
         detail = f"CMVP status: {item.get('old_status', '?')} → {item.get('new_status', '?')}"
         _add(alerts, "NIST CMVP MIP", "updated", title,
-             url=_nist_page_urls["cmvp_mip"], detail=detail, tab="us")
+             url=_nist_page_urls["cmvp_mip"], detail=detail,
+             keywords=["cisco", "CMVP"], tab="us")
 
     # NIST RSS feed new items — always alert (all items are crypto/security relevant)
     for feed_name, items in diff.get("nist", {}).get("feeds", {}).items():

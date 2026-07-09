@@ -36,10 +36,14 @@ log = logging.getLogger(__name__)
 # ---------------------------------------------------------------------------
 
 # Keywords that indicate an alert is directly relevant to Cisco engineers.
-# Covers NDcPP/VPN/WLAN PPs, CSfC programmes Cisco participates in,
-# and the crypto/algorithm standards that drive CC cert requirements.
+# Covers Cisco itself, NDcPP/VPN/WLAN PPs, and CSfC programmes Cisco
+# participates in. Broad standards identifiers (FIPS 140-3 etc.) deliberately
+# do NOT belong here: they appear in boilerplate on pages like the CMVP MIP
+# table, where every vendor's row contains "FIPS 140-3" — that mislabeled
+# TASS/Canonical/Palo Alto modules as "Cisco relevant" (2026-07-09 alert).
 _CISCO_RELEVANT_KEYWORDS = {
     kw.lower() for kw in [
+        "cisco",
         # NDcPP / PP-Modules
         "NDcPP", "CPP_ND", "PP-Module_VPN", "PP-Module_WLAN",
         "TLS 1.3", "SSH",
@@ -50,15 +54,13 @@ _CISCO_RELEVANT_KEYWORDS = {
         "NSA CSfC",
         # Crypto SFRs relevant to Cisco products
         "FCS_CKM", "FCS_COP", "FCS_RBG",
-        # FIPS standards cited in NDcPP / CSfC
-        "FIPS 140-3", "FIPS 186-4", "FIPS 186-5",
-        "SP 800-131A",
     ]
 }
 
 # Tier 2: standards that drive future cert requirements
 _TIER2_KEYWORDS = {
     kw.lower() for kw in [
+        "FIPS 140-3", "FIPS 186-4", "FIPS 186-5", "SP 800-131A",
         "FIPS 203", "FIPS 204", "FIPS 205",
         "SP 800-57", "NIST IR 8547",
         "ML-KEM", "ML-DSA", "SLH-DSA", "post-quantum", "PQC migration",
