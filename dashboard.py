@@ -1206,7 +1206,8 @@ DASHBOARD_TEMPLATE = """
 </footer>
 
 <script>
-function toggleCard(h){const card=h.closest('.card'),b=card.nextElementSibling,i=card.querySelector('.toggle-icon'),c=b.classList.toggle('collapsed');if(i)i.textContent=c?'\u25ba':'\u25bc'}
+function toggleCard(h){const card=h.closest('.card'),b=card.querySelector('.card-body'),i=h.querySelector('.toggle-icon');if(!b)return;const c=b.classList.toggle('collapsed');if(i)i.textContent=c?'\u25ba':'\u25bc'}
+function toggleLab(h){const b=h.nextElementSibling,i=h.querySelector('.lab-toggle');if(!b)return;const c=b.classList.toggle('collapsed');if(i)i.textContent=c?'\u25ba':'\u25bc'}
 function expandAll(){document.querySelectorAll('.card-body').forEach(b=>{b.classList.remove('collapsed');const i=b.previousElementSibling.querySelector('.toggle-icon');if(i)i.textContent='\u25bc'})}
 function collapseAll(){document.querySelectorAll('.card-body').forEach(b=>{b.classList.add('collapsed');const i=b.previousElementSibling.querySelector('.toggle-icon');if(i)i.textContent='\u25ba'})}
 let _zeroHidden=false;
