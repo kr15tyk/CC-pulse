@@ -1,0 +1,28 @@
+name: Correct 2026-07-09 EUCC Webex Post
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  correct:
+    name: Post corrected EUCC celebration and delete bad message
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run correction
+        env:
+          CC_WEBEX_BOT_TOKEN: ${{ secrets.CC_WEBEX_BOT_TOKEN }}
+          CC_WEBEX_ROOM_ID: ${{ secrets.CC_WEBEX_ROOM_ID }}
+        run: python3 scripts/webex/correct_20260709_eucc_celebration.py
