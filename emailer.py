@@ -814,7 +814,6 @@ CERT_SOURCES: dict[str, dict[str, str]] = {
         "list_name":      "NIAP Certified Products List",
         "added_to":       "NIAP Validated Products List under the NDcPP program",
         "registry_url":   "https://www.niap-ccevs.org/products",
-        "registry_label": "View Cisco PCL",
         "link_label":     "View on NIAP PCL",
     },
     "csfc": {
@@ -822,7 +821,6 @@ CERT_SOURCES: dict[str, dict[str, str]] = {
         "list_name":      "NSA CSfC Components List",
         "added_to":       "NSA Commercial Solutions for Classified (CSfC) Components List",
         "registry_url":   config.CSFC_PRODUCT_LIST_URL,
-        "registry_label": "View CSfC Components List",
         "link_label":     "View on CSfC Components List",
     },
     "nato": {
@@ -830,15 +828,13 @@ CERT_SOURCES: dict[str, dict[str, str]] = {
         "list_name":      "NATO Information Assurance Product Catalogue",
         "added_to":       "NATO Information Assurance Product Catalogue (NIAPCL)",
         "registry_url":   config.NATO_NIAPCL_URL,
-        "registry_label": "View NATO NIAPCL",
         "link_label":     "View on NATO NIAPCL",
     },
     "eucc": {
         "program":        "EUCC",
-        "list_name":      "EUCC Certified Products — ENISA",
+        "list_name":      "EUCC Certified Products List (ENISA)",
         "added_to":       "EUCC certified products list published by ENISA",
         "registry_url":   config.EUCC_CERTIFICATES_URL,
-        "registry_label": "View EUCC Certificates",
         "link_label":     "View EUCC Certificate",
     },
 }
@@ -969,8 +965,7 @@ def send_cisco_cert_celebration(new_certs: list[dict], source: str = "niap") -> 
     footer = (
         f"\n\n---\n\n"
         f"![]({meme_url})\n\n"
-        f"[{meta['registry_label']}]({meta['registry_url']})"
-        f" · [Full dashboard](https://kr15tyk.github.io/CC-pulse/cc_dashboard.html)"
+        f"[Full dashboard](https://kr15tyk.github.io/CC-pulse/cc_dashboard.html)"
     )
 
     payload = json.dumps({
@@ -1288,13 +1283,9 @@ def send_cisco_cert_email(new_certs: list[dict], source: str = "niap") -> None:
             '</div>'
         )
 
-    certs_html  = "\n".join(cert_blocks)
-    pcl_link    = (
+    certs_html     = "\n".join(cert_blocks)
+    dashboard_link = (
         '<p style="margin-top:20px">'
-        f'<a href="{_safe_url(meta["registry_url"])}" '
-        'style="background:#3B82F6;color:#E0E7FF;padding:8px 16px;'
-        'border-radius:4px;text-decoration:none;font-size:0.85rem;margin-right:8px">'
-        f'\U0001f4cb {meta["registry_label"]}</a>'
         '<a href="https://kr15tyk.github.io/CC-pulse/cc_dashboard.html" '
         'style="background:#0B0F1A;color:#E0E7FF;padding:8px 16px;'
         'border-radius:4px;text-decoration:none;font-size:0.85rem">'
@@ -1322,7 +1313,7 @@ def send_cisco_cert_email(new_certs: list[dict], source: str = "niap") -> None:
         f'The following Cisco product{"s have" if count > 1 else " has"} been added to the '
         f'{meta["added_to"]}.</p>'
         f'{certs_html}'
-        f'{pcl_link}'
+        f'{dashboard_link}'
         '<hr style="margin-top:28px;border:none;border-top:1px solid #312E81">'
         f'<p style="color:#6366F1;font-size:0.75rem;margin-top:12px">'
         f'CC Pulse automated monitoring \u2014 Cisco {meta["program"]} alert<br>Generated {generated}</p>'

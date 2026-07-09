@@ -99,6 +99,23 @@ def test_email_uses_source_registry_not_niap(monkeypatch):
     assert "NIAP" not in captured["subject"]
 
 
+def test_email_has_no_registry_button(monkeypatch):
+    """The footer 'View Cisco PCL' button was removed — there is no such thing
+    as a Cisco PCL, and every product block already links to its own
+    certification page. Only the dashboard button remains."""
+    captured = {}
+    monkeypatch.setattr(
+        emailer, "_send_email",
+        lambda subject, html: captured.update(subject=subject, html=html),
+    )
+    emailer.send_cisco_cert_email([NIAP], source="niap")
+    assert "View Cisco PCL" not in captured["html"]
+    assert "Full Dashboard" in captured["html"]
+    # Generic (unfiltered) PCL list URL appears nowhere; only the product page
+    assert captured["html"].count("niap-ccevs.org/products") == \
+        captured["html"].count("niap-ccevs.org/products/11111")
+
+
 def test_email_niap_shape_unchanged(monkeypatch):
     captured = {}
     monkeypatch.setattr(
