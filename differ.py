@@ -600,11 +600,33 @@ def diff_niap_pcl_cisco(old_pcl: Records, new_pcl: Records) -> dict[str, Any]:
     return {"added": added, "removed": removed, "newly_archived": newly_archived}
 
 def diff_niap_pcl_all(old_pcl: Records, new_pcl: Records) -> dict[str, Any]:
-    """Diff the full NIAP PCL across all tech types."""
+    """Diff the full NIAP PCL across all tech types — certifications only.
+
+    A PCL listing is not a certification. Products appearing with status
+    "In Progress"/"In Review" belong to the in_evaluation diff and were
+    previously double-reported here as "New Certifications" on the
+    dashboard. "added" therefore means newly certified: brand-new to the
+    list with status Certified, or an existing listing (typically
+    in-evaluation) transitioning to Certified. "removed" likewise excludes
+    in-evaluation listings leaving the list — those are reported as
+    "Left Evaluation" by diff_niap_in_evaluation.
+    """
     old_all = {str(p["product_id"]): p for p in old_pcl}
     new_all = {str(p["product_id"]): p for p in new_pcl}
-    added = [new_all[i] for i in set(new_all) - set(old_all)]
-    removed = [old_all[i] for i in set(old_all) - set(new_all)]
+    brand_new = [
+        new_all[i] for i in set(new_all) - set(old_all)
+        if new_all[i].get("status_sort") == "Certified"
+    ]
+    newly_certified = [
+        new_all[pid] for pid in set(old_all) & set(new_all)
+        if (old_all[pid].get("status_sort") != "Certified"
+            and new_all[pid].get("status_sort") == "Certified")
+    ]
+    added = brand_new + newly_certified
+    removed = [
+        old_all[i] for i in set(old_all) - set(new_all)
+        if old_all[i].get("status_sort") not in ("In Progress", "In Review")
+    ]
     newly_archived = [
         new_all[pid]
         for pid in set(old_all) & set(new_all)

@@ -598,3 +598,50 @@ class TestComputeDiff:
         diff = differ.compute_diff(old, new)
 
         assert diff["source_health"] == new["source_health"]
+
+
+class TestDiffNiapPclAll:
+    """pcl_all reports certifications only; in-evaluation listings belong to
+    diff_niap_in_evaluation. Previously a new In Progress listing appeared in
+    both, showing duplicate dashboard entries (and labeling a non-cert as a
+    'New Certification')."""
+
+    def test_new_in_progress_listing_is_not_a_new_cert(self):
+        new_prod = _pcl(1, vendor="Other Corp", status="In Progress")
+        result = differ.diff_niap_pcl_all([], [new_prod])
+        assert result["added"] == []
+        # ...but it IS a new in-evaluation posting
+        ie = differ.diff_niap_in_evaluation([], [new_prod])
+        assert len(ie["added"]) == 1
+
+    def test_new_certified_listing_is_added(self):
+        result = differ.diff_niap_pcl_all([], [_pcl(1, status="Certified")])
+        assert len(result["added"]) == 1
+
+    def test_in_progress_to_certified_transition_is_added(self):
+        old = [_pcl(1, status="In Progress")]
+        new = [_pcl(1, status="Certified")]
+        result = differ.diff_niap_pcl_all(old, new)
+        assert len(result["added"]) == 1
+        # and it leaves the in-evaluation set
+        ie = differ.diff_niap_in_evaluation(old, new)
+        assert len(ie["removed"]) == 1
+
+    def test_departing_in_evaluation_listing_is_not_a_removed_cert(self):
+        old = [_pcl(1, status="In Progress"), _pcl(2, status="Certified")]
+        result = differ.diff_niap_pcl_all(old, [_pcl(2, status="Certified")])
+        assert result["removed"] == []
+        ie = differ.diff_niap_in_evaluation(old, [_pcl(2, status="Certified")])
+        assert len(ie["removed"]) == 1
+
+    def test_departing_certified_product_is_removed(self):
+        old = [_pcl(1, status="Certified")]
+        result = differ.diff_niap_pcl_all(old, [])
+        assert len(result["removed"]) == 1
+
+    def test_certified_to_archived_still_detected(self):
+        old = [_pcl(1, status="Certified")]
+        new = [_pcl(1, status="Archived")]
+        result = differ.diff_niap_pcl_all(old, new)
+        assert len(result["newly_archived"]) == 1
+        assert result["added"] == []
