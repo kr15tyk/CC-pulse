@@ -79,7 +79,7 @@
         <div class="panel indigo-border p-10 reveal">
           <div class="pill" style="background:rgba(49,46,129,.35); color:#c7d2fe; border:1px solid rgba(99,102,241,.25);">CC Pulse · Team Brief</div>
           <h1 class="hero-title reveal mt-6 font-display text-[clamp(2.8rem,6vw,5.3rem)] font-bold bg-linear-to-r from-blue-400 via-fuchsia-500 to-orange-400 bg-clip-text text-transparent">Common Criteria ecosystem monitoring, without the manual tab-checking.</h1>
-          <p class="reveal mt-6 max-w-4xl text-[clamp(1rem,1.7vw,1.35rem)] text-text-secondary">CC Pulse automates daily monitoring across NIAP, CSfC, CC Portal, CCTL labs, the CC Crypto Catalog, and NIST CSRC, then pushes only meaningful changes to a dashboard, RSS feed, email, Webex, or Teams-compatible webhook.</p>
+          <p class="reveal mt-6 max-w-4xl text-[clamp(1rem,1.7vw,1.35rem)] text-text-secondary">CC Pulse automates daily monitoring across NIAP, CSfC, CC Portal, CCTL labs, the CC Crypto Catalog, NIST CSRC, NATO NIAPCL, EUCC/ENISA, and the ND-iTC, then pushes only meaningful changes to a dashboard, RSS feed, email, Webex, or Teams-compatible webhook.</p>
           <div class="grid-fit desktop-grid mt-8" style="grid-template-columns: 1.2fr .8fr;">
             <div class="panel blue-border p-6 reveal">
               <div class="tiny">Operational rhythm</div>
@@ -120,6 +120,14 @@
               <li>CC Crypto Catalog docs including CCDB-018 and related portal publications.</li>
             </ul>
           </div>
+          <div class="panel indigo-border p-6 reveal">
+            <div class="pill" style="background:rgba(99,102,241,.18); color:#c7d2fe;">International + iTC</div>
+            <ul class="mt-4 space-y-3 text-text-secondary leading-7">
+              <li>NATO NIAPCL certified products with Cisco-specific change detection.</li>
+              <li>EUCC / ENISA scheme requirements and issued certificates.</li>
+              <li>ND-iTC NIT RFIs (the iTC's Technical Decisions — distinct from NIAP TDs) and Allowed-With lists for NDcPP and the FW PP-Module.</li>
+            </ul>
+          </div>
         </div>
       </div>
     </section>
@@ -132,9 +140,9 @@
       <div class="content">
         <h2 class="reveal font-display text-[clamp(2rem,4.5vw,3.1rem)] font-bold">How the pipeline works</h2>
         <div class="grid-fit mt-8" style="grid-template-columns: repeat(5, minmax(0, 1fr));">
-          <div class="panel indigo-border p-5 reveal"><div class="tiny">1</div><div class="mt-2 font-bold text-xl text-indigo-200">Collect</div><div class="mt-2 text-sm text-text-secondary">Six collectors run in parallel; if NIAP looks thin, the run aborts instead of writing bad data.</div></div>
-          <div class="panel blue-border p-5 reveal"><div class="tiny">2</div><div class="mt-2 font-bold text-xl text-blue-300">Diff</div><div class="mt-2 text-sm text-text-secondary">Today is compared to yesterday using stable IDs or text-prefix matching for scraped content.</div></div>
-          <div class="panel orange-border p-5 reveal"><div class="tiny">3</div><div class="mt-2 font-bold text-xl text-orange-300">Scan</div><div class="mt-2 text-sm text-text-secondary">Keyword logic checks structured titles broadly and page blobs narrowly to reduce alert fatigue.</div></div>
+          <div class="panel indigo-border p-5 reveal"><div class="tiny">1</div><div class="mt-2 font-bold text-xl text-indigo-200">Collect</div><div class="mt-2 text-sm text-text-secondary">Nine collectors run in parallel; if NIAP looks thin, the run aborts instead of writing bad data.</div></div>
+          <div class="panel blue-border p-5 reveal"><div class="tiny">2</div><div class="mt-2 font-bold text-xl text-blue-300">Diff</div><div class="mt-2 text-sm text-text-secondary">Today is compared to yesterday using stable IDs or URLs, with text-prefix matching only as a fallback for linkless scraped content.</div></div>
+          <div class="panel orange-border p-5 reveal"><div class="tiny">3</div><div class="mt-2 font-bold text-xl text-orange-300">Scan</div><div class="mt-2 text-sm text-text-secondary">Keyword logic scans titles and text against WATCH_KEYWORDS, with tier ranking and Cisco-only CMVP filtering to reduce alert fatigue.</div></div>
           <div class="panel blue-border p-5 reveal"><div class="tiny">4</div><div class="mt-2 font-bold text-xl text-blue-300">Render</div><div class="mt-2 text-sm text-text-secondary">The diff is rendered into `docs/cc_dashboard.html` and `docs/cc_feed.xml`, then committed to `main`.</div></div>
           <div class="panel magenta-border p-5 reveal"><div class="tiny">5</div><div class="mt-2 font-bold text-xl text-fuchsia-300">Notify</div><div class="mt-2 text-sm text-text-secondary">Webex, webhook, and email fire in parallel when alerts exist, with direct links and matched keywords.</div></div>
         </div>
@@ -152,7 +160,7 @@
           <div class="panel blue-border p-7 reveal">
             <div class="tiny">What stands out fast</div>
             <ul class="mt-4 space-y-3 text-text-secondary leading-7">
-              <li>Six trend tiles summarize NIAP, CCTL, CSfC, NIST, CC Portal, and alert activity.</li>
+              <li>Eight trend tiles summarize NIAP, CSfC, NIST, CC Portal, NATO NIAPCL, CCTL, EUCC, and alert activity.</li>
               <li>Sections map directly to the monitored domains, so the page is easy to scan.</li>
               <li>Links go straight to the original source item for quick follow-up.</li>
             </ul>
@@ -185,11 +193,11 @@
           </div>
           <div class="panel orange-border p-6 reveal">
             <div class="font-bold text-xl text-orange-300">Noise control</div>
-            <p class="mt-3 text-text-secondary">Structured records use the broader `WATCH_KEYWORDS` list, while scraped page prose uses narrower `BODY_WATCH_KEYWORDS` to prevent false positives.</p>
+            <p class="mt-3 text-text-secondary">All keyword matching uses the single `WATCH_KEYWORDS` list, with tiered ranking: Cisco/NDcPP/CSfC keywords rank first, while broad standards identifiers (FIPS 140-3, CMVP) rank as standards-tier so boilerplate can't masquerade as Cisco-relevant. CMVP MIP alerts fire for Cisco modules only, and mass re-detections from source format changes are suppressed as baseline resets.</p>
           </div>
           <div class="panel magenta-border p-6 reveal">
             <div class="font-bold text-xl text-fuchsia-300">Cisco moment</div>
-            <p class="mt-3 text-text-secondary">A new Cisco NDcPP certification triggers its own celebration path with product details, a meme image, Webex delivery, and matching email alongside normal alerts.</p>
+            <p class="mt-3 text-text-secondary">A new Cisco certification on NIAP PCL, CSfC, NATO NIAPCL, or EUCC triggers its own celebration path — source-aware header, each product linked to its actual certification page, a meme image, Webex delivery, and matching email alongside normal alerts.</p>
           </div>
         </div>
 

@@ -1398,6 +1398,7 @@ def send_readme_message() -> None:
         "| **CSfC / NSA** | Approved Products List and Component Selection documents |\n"
         "| **NATO NIAPCL** | NATO Information Assurance Product Catalogue — certified products and components |\n"
         "| **EUCC / ENISA** | EU Common Criteria certification scheme — requirements and issued certificates |\n"
+        "| **ND-iTC** | NIT RFIs (ND-iTC Technical Decisions — distinct from NIAP TDs) and Allowed-With lists |\n"
         "| **CC Portal** | International CC news, Protection Profiles, and certified products |\n"
         "| **CCTL Labs** | New posts from accredited Common Criteria evaluation labs |\n"
         "| **NIST CSRC** | Cryptography news, FIPS publications, CMVP, and post-quantum standards |\n\n"

@@ -533,6 +533,12 @@ DASHBOARD_TEMPLATE = """
         <div class="sources-item"><span class="src-label">Product Catalogue:</span><a href="https://www.ia.nato.int/Search/NIAPC/AND/Category_/Manufacturer_10/Country_/SecurityGroup_" target="_blank" rel="noopener">ia.nato.int &mdash; NIAPCL Search</a></div>
       </div>
       <div class="sources-group">
+        <div class="sources-group-title">🌐 ND-iTC (Network Device iTC)</div>
+        <div class="sources-item"><span class="src-label">NIT RFIs (ND-iTC TDs):</span><a href="https://nd-itc.github.io/TD/tech_dec.html" target="_blank" rel="noopener">nd-itc.github.io &mdash; Technical Decisions</a></div>
+        <div class="sources-item"><span class="src-label">NDcPP Allowed-With:</span><a href="https://nd-itc.github.io/AWL/NDcPP_allowed_with_list.html" target="_blank" rel="noopener">nd-itc.github.io &mdash; NDcPP AWL</a></div>
+        <div class="sources-item"><span class="src-label">FW Module Allowed-With:</span><a href="https://nd-itc.github.io/AWL/FW_allowed_with_list.html" target="_blank" rel="noopener">nd-itc.github.io &mdash; FW AWL</a></div>
+      </div>
+      <div class="sources-group">
         <div class="sources-group-title">🧪 CCTL Labs</div>
         <div class="sources-item"><span class="src-label">Lightship Security:</span><a href="https://lightshipsec.com/blog/" target="_blank" rel="noopener">lightshipsec.com &mdash; Blog (RSS)</a></div>
         <div class="sources-item"><span class="src-label">atsec:</span><a href="https://www.atsec.com/blog/" target="_blank" rel="noopener">atsec.com &mdash; Blog (scraped)</a></div>

@@ -15,6 +15,9 @@ CC Pulse collects public records into dated JSON snapshots and compares each acc
 | NIST CSRC and CC Crypto | New page items, feed items, documents, and CMVP changes |
 | CC Portal and CCTL labs | New international portal records and laboratory posts |
 | NATO NIAPCL and EUCC | Product/certificate additions, removals, and Cisco-specific changes |
+| ND-iTC | NIT RFI additions, status changes, revisions, and archival; Allowed-With list entry additions/removals, version changes, and list-document updates |
+
+ND-iTC Technical Decisions are reported as **NIT RFIs** everywhere in CC Pulse. NIAP also issues "Technical Decisions"; the distinct name prevents the two from being confused in notifications.
 
 ## NIAP announcements and policies
 
@@ -36,3 +39,9 @@ When a collection fails, is incomplete, or drops suspiciously:
 A collapse guard covers *volume* — a collection dropping to near-zero. It does not detect a small-but-corrupt payload that stays above the volume threshold; that class of failure is caught, where it is caught, by per-source validation, not by the collapse guard.
 
 A newly introduced source receives a silent first healthy baseline so deployment does not create an alert flood.
+
+## Record identity and baseline resets
+
+EUCC certificates, NATO NIAPCL products, and ND-iTC Allowed-With entries are keyed by their stable URL (NIT RFIs by their RFI ID), with display text only as a fallback for records without a link. Display text embeds dates and descriptions, so keying on it re-detects the entire list whenever a source reformats — ENISA's card-title change on 2026-07-09 made 45 unchanged certificates look "new."
+
+If most of a previously non-trivial list still re-registers as new (a format change that also alters URLs), the diff is flagged as a **baseline reset**: the changes remain visible on the dashboard, but no Webex, email, or keyword-alert notifications fire for that run.
