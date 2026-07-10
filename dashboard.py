@@ -417,7 +417,7 @@ DASHBOARD_TEMPLATE = """
   .cp-meta{font-size:.7rem;color:var(--muted);margin-top:2px} .cp-detail{font-size:.72rem;color:var(--muted)} .cp-date{font-size:.7rem}
   .new-badge{display:inline-block;background:#00875a;color:#fff;font-size:.55rem;font-weight:700;padding:1px 5px;border-radius:3px;margin-right:.35rem;letter-spacing:.04em;vertical-align:middle;animation:newGlow 2s ease-in-out infinite}
   @keyframes newGlow{0%,100%{box-shadow:0 0 4px rgba(0,135,90,.5)}50%{box-shadow:0 0 10px rgba(0,135,90,.9)}}
-  .last-active{font-size:.65rem;color:var(--muted);opacity:.6;margin-left:.4rem} .card.zero-hidden{display:none}
+  .last-active{font-size:.65rem;color:var(--muted);opacity:.6;margin-left:.4rem} .card.zero-hidden{display:none} .section-group.group-hidden{display:none}
   footer,.site-footer{margin-top:3rem;padding:1.5rem 2rem;border-top:1px solid var(--border);font-size:.75rem;color:var(--muted);display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap;background:var(--card)}
   @media(max-width:768px){
   .main-content{padding:1rem}
@@ -1212,6 +1212,7 @@ function expandAll(){document.querySelectorAll('.card-body').forEach(b=>{b.class
 function collapseAll(){document.querySelectorAll('.card-body').forEach(b=>{b.classList.add('collapsed');const i=b.previousElementSibling.querySelector('.toggle-icon');if(i)i.textContent='\u25ba'})}
 let _zeroHidden=false;
 function toggleZeroFilter(){_zeroHidden=!_zeroHidden;document.querySelectorAll('.card[data-has-changes]').forEach(c=>{const n=parseInt(c.dataset.hasChanges,10)||0;if(n===0)c.classList.toggle('zero-hidden',_zeroHidden)});const b=document.getElementById('filter-btn');if(b)b.textContent=_zeroHidden?'[F] Show All':'[F] Hide Empty';_reconcileGroupVisibility()}
+function _reconcileGroupVisibility(){document.querySelectorAll('.section-group').forEach(g=>{const cards=g.querySelectorAll('.card');if(!cards.length)return;const anyVisible=Array.from(cards).some(c=>!c.classList.contains('zero-hidden'));g.classList.toggle('group-hidden',!anyVisible)})}
 function dismissAlert(btn){const r=btn.closest('.item-row');if(r)r.classList.add('alert-dismissed')}
 function initAlertDismiss(){const stored=JSON.parse(sessionStorage.getItem('dismissed')||'[]');stored.forEach(k=>{const el=document.querySelector('[data-alert-key="'+k+'"]');if(el)el.classList.add('alert-dismissed')});document.querySelectorAll('.dismiss-btn').forEach(btn=>{btn.addEventListener('click',()=>{const r=btn.closest('[data-alert-key]');if(!r)return;const d=JSON.parse(sessionStorage.getItem('dismissed')||'[]');d.push(r.dataset.alertKey);sessionStorage.setItem('dismissed',JSON.stringify(d))})})}
 let _activeKind='all';

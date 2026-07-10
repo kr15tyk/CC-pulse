@@ -12,6 +12,7 @@ in plaintext so it can be reviewed, diffed, and scanned like any other code.
 import json
 import os
 import sys
+import urllib.error
 import urllib.request
 
 TOKEN = os.environ["CC_WEBEX_BOT_TOKEN"]
@@ -27,8 +28,24 @@ HEADERS = {
 def main() -> None:
     url = f"https://webexapis.com/v1/messages?roomId={ROOM_ID}&max=50"
     req = urllib.request.Request(url, headers=HEADERS, method="GET")
-    with urllib.request.urlopen(req) as r:
-        messages = json.loads(r.read())["items"]
+    try:
+        with urllib.request.urlopen(req) as r:
+            messages = json.loads(r.read())["items"]
+    except urllib.error.HTTPError as exc:
+        if exc.code == 403:
+            print(
+                "Webex returned 403: bots cannot list messages in a group "
+                "space (they may only list messages that @mention them), so "
+                "this script cannot scan the room for failure alerts.\n"
+                "To delete a specific bot message: get the message ID by "
+                "listing the room with YOUR personal access token from "
+                "developer.webex.com (valid 12h, not the bot token), then run "
+                "delete_message_by_id.py \u2014 or the 'Delete Webex Message "
+                "(one-time)' workflow \u2014 with that ID. Bots can always delete "
+                "their own messages by explicit ID."
+            )
+            sys.exit(2)
+        raise
 
     to_delete = [
         m["id"]

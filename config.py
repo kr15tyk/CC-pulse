@@ -192,17 +192,10 @@ WATCH_KEYWORDS = [
     "modules in process",
 ]
 
-# -- Body Watch Keywords (page-scrape tier) ----------------------------------
-BODY_WATCH_KEYWORDS = [
-    "FIPS 203", "FIPS 204", "FIPS 205", "NIST IR 8547", "SP 800-131A",
-    "CSfC APL", "CSfC component selections",
-    "CCDB-018",
-    "post-quantum cryptography", "PQC migration",
-    "ML-KEM", "ML-DSA", "SLH-DSA",
-    "EUCC", "ENISA",
-    "NATO NIAPC", "NIAPCL",
-    "cisco",
-]
+# NOTE: BODY_WATCH_KEYWORDS was removed (2026-07-10). It was never referenced
+# by any code — keywords added there (notably "cisco") silently did nothing.
+# The active list is WATCH_KEYWORDS above; Cisco-specific detection uses
+# CISCO_VENDOR_KEYWORDS and the dedicated cisco_added diff paths.
 
 # =============================================================
 # CSfC (Commercial Solutions for Classified) Monitoring

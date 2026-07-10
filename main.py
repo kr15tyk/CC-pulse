@@ -724,13 +724,23 @@ def _fire_alerts(diff: dict, emailer) -> None:
         emailer.send_cisco_cert_email(new_cisco_csfc_alerts, source="csfc")
 
     new_cisco_nato = diff.get("nato", {}).get("cisco_added", [])
-    if new_cisco_nato:
+    if new_cisco_nato and diff.get("nato", {}).get("baseline_reset"):
+        log.warning(
+            "%d Cisco NATO NIAPCL listing(s) detected during a baseline reset "
+            "— celebration suppressed (re-detection, not new listings).",
+            len(new_cisco_nato))
+    elif new_cisco_nato:
         log.info("%d new Cisco NATO NIAPCL listing(s) — sending celebration...", len(new_cisco_nato))
         emailer.send_cisco_cert_celebration(new_cisco_nato, source="nato")
         emailer.send_cisco_cert_email(new_cisco_nato, source="nato")
 
     new_cisco_eucc = diff.get("eucc", {}).get("cisco_added", [])
-    if new_cisco_eucc:
+    if new_cisco_eucc and diff.get("eucc", {}).get("baseline_reset"):
+        log.warning(
+            "%d Cisco EUCC certificate(s) detected during a baseline reset "
+            "— celebration suppressed (re-detection, not new certifications).",
+            len(new_cisco_eucc))
+    elif new_cisco_eucc:
         log.info("%d new Cisco EUCC certification(s) — sending celebration...", len(new_cisco_eucc))
         emailer.send_cisco_cert_celebration(new_cisco_eucc, source="eucc")
         emailer.send_cisco_cert_email(new_cisco_eucc, source="eucc")

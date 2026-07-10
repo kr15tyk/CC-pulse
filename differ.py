@@ -396,46 +396,74 @@ def flag_alerts(diff: Snapshot) -> list[dict]:
                  detail=f"Feed: {feed_name} · Published: {(item.get('published') or '')[:16] or 'N/A'}",
                  tab="us")
 
-    # NATO NIAPCL page changes
-    for page_key, page_diff in diff.get("nato", {}).get("pages", {}).items():
+    # NATO NIAPCL — Cisco additions are alert-worthy by construction (the
+    # list is already Cisco-filtered), so they use unconditional _add with an
+    # explicit "cisco" keyword rather than the keyword-gated _add_text. The
+    # old _add_text gating silently dropped every one of these: "cisco" was
+    # only in the never-referenced BODY_WATCH_KEYWORDS list, so the scan
+    # found no hits and the alert never fired.
+    nato = diff.get("nato", {})
+    nato_baseline = nato.get("baseline_reset", False)
+    nato_cisco_urls = {
+        (item.get("link") or "").strip()
+        for item in nato.get("cisco_added", [])
+    } - {""}
+    if not nato_baseline:
+        for item in nato.get("cisco_added", []):
+            _add(alerts, "NATO NIAPCL", "new_cert",
+                 item.get("name", "") or item.get("raw_text", "")[:80],
+                 url=item.get("link") or config.NATO_NIAPCL_URL,
+                 detail=f"New Cisco product on NATO NIAPCL · {item.get('manufacturer', '')}",
+                 keywords=["cisco"], tab="intl")
+
+    # NATO NIAPCL page changes (skip items already alerted as Cisco adds —
+    # the monitored NIAPCL pages are Cisco-filtered searches, so page items
+    # and cisco_added overlap)
+    for page_key, page_diff in nato.get("pages", {}).items():
         for item in page_diff.get("added", []):
+            if (item.get("link") or "").strip() in nato_cisco_urls:
+                continue
             _add_text(f"NATO NIAPCL: {page_key}", "new",
                       item.get("text", "") or item.get("raw_text", ""),
                       url=item.get("link") or config.NATO_NIAPCL_URL,
                       detail=f"New item on NATO NIAPCL {page_key} page",
                       tab="intl")
 
-    # NATO NIAPCL Cisco-specific additions (Tier 1 EU/NATO)
-    for item in diff.get("nato", {}).get("cisco_added", []):
-        _add_text("NATO NIAPCL", "new_cert",
-                  item.get("name", "") or item.get("raw_text", "")[:80],
-                  url=item.get("link") or config.NATO_NIAPCL_URL,
-                  detail=f"New Cisco product on NATO NIAPCL · {item.get('manufacturer', '')}",
-                  tab="intl")
-
     # EUCC requirements page changes
-    for item in diff.get("eucc", {}).get("pages", {}).get("requirements", {}).get("added", []):
+    eucc = diff.get("eucc", {})
+    eucc_baseline = eucc.get("baseline_reset", False)
+    for item in eucc.get("pages", {}).get("requirements", {}).get("added", []):
         _add_text("EUCC Requirements", "updated",
                   item.get("text", ""),
                   url=item.get("href") or config.EUCC_REQUIREMENTS_URL,
                   detail="New item on EUCC requirements / scheme page",
                   tab="eu")
 
-    # EUCC certificate additions (general)
-    for item in diff.get("eucc", {}).get("pages", {}).get("certificates", {}).get("added", []):
-        _add_text("EUCC Certificates", "new_cert",
-                  item.get("text", "") or item.get("name", ""),
-                  url=item.get("href") or config.EUCC_CERTIFICATES_URL,
-                  detail="New EUCC certified product",
-                  tab="eu")
+    # EUCC Cisco-specific certificates — unconditional, same reasoning as
+    # NATO above. Suppressed on baseline resets (source format change makes
+    # old certificates re-detect as new; see diff_eucc).
+    eucc_cisco_urls = {
+        (item.get("href") or "").strip()
+        for item in eucc.get("cisco_added", [])
+    } - {""}
+    if not eucc_baseline:
+        for item in eucc.get("cisco_added", []):
+            _add(alerts, "EUCC Certificates", "new_cert",
+                 item.get("name", "") or item.get("text", "")[:80],
+                 url=item.get("href") or config.EUCC_CERTIFICATES_URL,
+                 detail="New Cisco EUCC certified product",
+                 keywords=["cisco", "EUCC"], tab="eu")
 
-    # EUCC Cisco-specific certificates (Tier 1 EU)
-    for item in diff.get("eucc", {}).get("cisco_added", []):
-        _add_text("EUCC Certificates", "new_cert",
-                  item.get("name", "") or item.get("text", "")[:80],
-                  url=item.get("href") or config.EUCC_CERTIFICATES_URL,
-                  detail="New Cisco EUCC certified product",
-                  tab="eu")
+        # EUCC certificate additions (general, keyword-gated; skip Cisco
+        # items already alerted above)
+        for item in eucc.get("pages", {}).get("certificates", {}).get("added", []):
+            if (item.get("href") or "").strip() in eucc_cisco_urls:
+                continue
+            _add_text("EUCC Certificates", "new_cert",
+                      item.get("text", "") or item.get("name", ""),
+                      url=item.get("href") or config.EUCC_CERTIFICATES_URL,
+                      detail="New EUCC certified product",
+                      tab="eu")
 
     if alerts:
         log.warning("[Alerts] %d keyword match(es) found!", len(alerts))
@@ -790,22 +818,65 @@ def diff_nato(old_nato: Snapshot, new_nato: Snapshot) -> Snapshot:
 
     pages = _diff_pages(old_pages, new_pages)
 
-    # Diff Cisco products specifically
-    old_cisco = {p.get("raw_text", "")[:80]: p for p in old_nato.get("cisco_products", [])}
-    new_cisco = {p.get("raw_text", "")[:80]: p for p in new_nato.get("cisco_products", [])}
+    # Diff Cisco products specifically (keyed on product URL, fix: raw_text
+    # keys churned on NIAPCL display-format changes)
+    old_cisco = {_record_key(p, url_field="link", text_field="raw_text"): p
+                 for p in old_nato.get("cisco_products", [])}
+    new_cisco = {_record_key(p, url_field="link", text_field="raw_text"): p
+                 for p in new_nato.get("cisco_products", [])}
     cisco_added = [new_cisco[k] for k in set(new_cisco) - set(old_cisco)]
     cisco_removed = [old_cisco[k] for k in set(old_cisco) - set(new_cisco)]
 
+    baseline_reset = _is_baseline_reset(
+        len(old_cisco), len(cisco_added), len(new_cisco),
+    )
+    if baseline_reset:
+        log.warning(
+            "[NATO Diff] %d of %d Cisco products re-detected as new — "
+            "treating as baseline reset; notifications suppressed.",
+            len(cisco_added), len(new_cisco),
+        )
+
     page_changes = sum(len(v.get("added", [])) for v in pages.values())
-    log.info("[NATO Diff] page-items-added:%d cisco-added:%d cisco-removed:%d",
-             page_changes, len(cisco_added), len(cisco_removed))
+    log.info("[NATO Diff] page-items-added:%d cisco-added:%d cisco-removed:%d baseline-reset:%s",
+             page_changes, len(cisco_added), len(cisco_removed), baseline_reset)
     return {
         "pages": pages,
         "cisco_added": cisco_added,
         "cisco_removed": cisco_removed,
+        "baseline_reset": baseline_reset,
     }
 
 # -- EUCC / ENISA diff --------------------------------------------------------
+def _record_key(record: dict, *, url_field: str, text_field: str) -> str:
+    """Stable identity for a scraped record: URL when present, else text prefix.
+
+    Display text embeds dates and descriptions, so keying on it re-detects the
+    entire list whenever the source reformats (ENISA's card-title change on
+    2026-07-09 made 45 old certificates look 'new'). The record's own URL is
+    stable across cosmetic changes; text is kept only as a fallback for
+    records the parser couldn't find a link for.
+    """
+    return (record.get(url_field) or "").strip() or record.get(text_field, "")[:80]
+
+
+def _is_baseline_reset(old_count: int, added_count: int, new_count: int,
+                       min_items: int = 5, frac: float = 0.8) -> bool:
+    """True when a diff looks like a re-keying/format change, not real news.
+
+    Heuristic: a previously non-trivial list where most of today's items
+    register as 'new' means the source (or our keying) changed shape — a new
+    baseline. Callers keep the diff data for the dashboard but suppress
+    notifications.
+    """
+    return (
+        old_count >= min_items
+        and added_count >= min_items
+        and new_count > 0
+        and added_count >= frac * new_count
+    )
+
+
 def diff_eucc(old_eucc: Snapshot, new_eucc: Snapshot) -> Snapshot:
     """Diff two EUCC / ENISA snapshots."""
     old_pages = old_eucc.get("pages", {})
@@ -813,20 +884,38 @@ def diff_eucc(old_eucc: Snapshot, new_eucc: Snapshot) -> Snapshot:
 
     pages = _diff_pages(old_pages, new_pages)
 
-    # Diff Cisco-specific certificates
-    old_cisco = {c.get("text", "")[:80]: c for c in old_eucc.get("cisco_certs", [])}
-    new_cisco = {c.get("text", "")[:80]: c for c in new_eucc.get("cisco_certs", [])}
+    # Diff Cisco-specific certificates (keyed on certificate URL, fix: text
+    # keys churned on ENISA display-format changes)
+    old_cisco = {_record_key(c, url_field="href", text_field="text"): c
+                 for c in old_eucc.get("cisco_certs", [])}
+    new_cisco = {_record_key(c, url_field="href", text_field="text"): c
+                 for c in new_eucc.get("cisco_certs", [])}
     cisco_added = [new_cisco[k] for k in set(new_cisco) - set(old_cisco)]
     cisco_removed = [old_cisco[k] for k in set(old_cisco) - set(new_cisco)]
 
+    # Baseline detection: if most of the certificates page re-registered as
+    # new, this is a format change / re-key, not a wave of certifications.
+    old_cert_page = old_pages.get("certificates", [])
+    new_cert_page = new_pages.get("certificates", [])
+    cert_page_added = len(pages.get("certificates", {}).get("added", []))
+    baseline_reset = _is_baseline_reset(
+        len(old_cert_page), cert_page_added, len(new_cert_page),
+    )
+    if baseline_reset:
+        log.warning(
+            "[EUCC Diff] %d of %d certificate-page items re-detected as new — "
+            "treating as baseline reset; notifications suppressed.",
+            cert_page_added, len(new_cert_page),
+        )
+
     req_changes = len(pages.get("requirements", {}).get("added", []))
-    cert_changes = len(pages.get("certificates", {}).get("added", []))
-    log.info("[EUCC Diff] req-changes:%d cert-additions:%d cisco-added:%d",
-             req_changes, cert_changes, len(cisco_added))
+    log.info("[EUCC Diff] req-changes:%d cert-additions:%d cisco-added:%d baseline-reset:%s",
+             req_changes, cert_page_added, len(cisco_added), baseline_reset)
     return {
         "pages": pages,
         "cisco_added": cisco_added,
         "cisco_removed": cisco_removed,
+        "baseline_reset": baseline_reset,
     }
 # -- Master diff ---------------------------------------------------------------
 def compute_diff(old_snapshot: Snapshot, new_snapshot: Snapshot) -> Snapshot:
