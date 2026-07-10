@@ -14,6 +14,7 @@ CC Pulse monitors public cybersecurity certification and standards sources, comp
 | CC Portal | International news, Protection Profiles, and certified products |
 | NATO NIAPCL | Certified products and Cisco-specific changes |
 | EUCC / ENISA | Scheme requirements and certificates |
+| ND-iTC | NIT RFIs (ND-iTC Technical Decisions, distinct from NIAP TDs) and Allowed-With lists |
 | CCTL labs | New laboratory posts |
 
 The tool detects additions, revisions, status changes, removals, and document replacements. Suspiciously empty or incomplete collections retain their last-known-good data. Operational failures stay out of the public dashboard and Webex; persistent failures are escalated internally.

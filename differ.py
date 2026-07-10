@@ -465,6 +465,74 @@ def flag_alerts(diff: Snapshot) -> list[dict]:
                       detail="New EUCC certified product",
                       tab="eu")
 
+    # ND-iTC — NIT RFIs and Allowed-With lists. Every change alerts,
+    # unconditionally, tagged tier 1 via the NDcPP keyword. "NIT RFI" naming
+    # keeps ND-iTC Technical Decisions distinct from NIAP TDs.
+    nd = diff.get("nd_itc", {})
+    if not nd.get("baseline_reset") and not nd.get("collection_failure"):
+        rfis = nd.get("nit_rfis", {})
+        for item in rfis.get("added", []):
+            _add(alerts, "ND-iTC NIT RFI", "new",
+                 f"{item.get('rfi_id', '')}: {item.get('title', '')}".strip(": "),
+                 url=item.get("href") or config.ND_ITC_TD_URL,
+                 detail=(f"New NIT RFI · Impact: {item.get('impact') or 'N/A'}"
+                         f" · Status: {item.get('status', '')}"),
+                 keywords=["NDcPP"], tab="intl")
+        for item in rfis.get("status_changes", []):
+            _add(alerts, "ND-iTC NIT RFI", "updated",
+                 f"{item.get('rfi_id', '')}: {item.get('title', '')}".strip(": "),
+                 url=item.get("href") or config.ND_ITC_TD_URL,
+                 detail=(f"NIT RFI status: {item.get('old_status', '?')}"
+                         f" → {item.get('new_status', '?')}"),
+                 keywords=["NDcPP"], tab="intl")
+        for item in rfis.get("revised", []):
+            _add(alerts, "ND-iTC NIT RFI", "updated",
+                 f"{item.get('rfi_id', '')}: {item.get('title', '')}".strip(": "),
+                 url=item.get("href") or config.ND_ITC_TD_URL,
+                 detail="NIT RFI revised (title, reference, impact, or PDF changed)",
+                 keywords=["NDcPP"], tab="intl")
+        for item in rfis.get("newly_archived", []):
+            _add(alerts, "ND-iTC NIT RFI", "archived",
+                 f"{item.get('rfi_id', '')}: {item.get('title', '')}".strip(": "),
+                 url=item.get("href") or config.ND_ITC_TD_URL,
+                 detail="NIT RFI moved to the archived Technical Decisions list",
+                 keywords=["NDcPP"], tab="intl")
+
+        awl = nd.get("awl", {})
+
+        def _awl_url(item: dict) -> str:
+            return config.ND_ITC_AWL_URLS.get(
+                item.get("list", ""), config.ND_ITC_BASE)
+
+        for item in awl.get("added", []):
+            _add(alerts, "ND-iTC Allowed-With", "new",
+                 item.get("object_id", ""),
+                 url=_awl_url(item),
+                 detail=(f"Added to the {item.get('section', '')} allowed-with "
+                         f"list · version {item.get('object_version', '')}"),
+                 keywords=["NDcPP"], tab="intl")
+        for item in awl.get("removed", []):
+            _add(alerts, "ND-iTC Allowed-With", "removed",
+                 item.get("object_id", ""),
+                 url=_awl_url(item),
+                 detail=f"Removed from the {item.get('section', '')} allowed-with list",
+                 keywords=["NDcPP"], tab="intl")
+        for item in awl.get("version_changes", []):
+            _add(alerts, "ND-iTC Allowed-With", "updated",
+                 item.get("object_id", ""),
+                 url=_awl_url(item),
+                 detail=(f"{item.get('section', '')} allowed-with entry version: "
+                         f"{item.get('old_version', '?')} → {item.get('new_version', '?')}"),
+                 keywords=["NDcPP"], tab="intl")
+        for item in awl.get("list_updates", []):
+            _add(alerts, "ND-iTC Allowed-With", "updated",
+                 f"Allowed-with list document updated ({item.get('list', '')})",
+                 url=_awl_url(item),
+                 detail=(f"List version: {item.get('old_awl_version', '?')}"
+                         f" → {item.get('awl_version', '?')}"
+                         f" ({item.get('awl_date', '')})"),
+                 keywords=["NDcPP"], tab="intl")
+
     if alerts:
         log.warning("[Alerts] %d keyword match(es) found!", len(alerts))
     return alerts
@@ -917,6 +985,127 @@ def diff_eucc(old_eucc: Snapshot, new_eucc: Snapshot) -> Snapshot:
         "cisco_removed": cisco_removed,
         "baseline_reset": baseline_reset,
     }
+# -- ND-iTC diff ---------------------------------------------------------------
+_EMPTY_ND_ITC_DIFF: dict = {
+    "nit_rfis": {"added": [], "status_changes": [], "revised": [],
+                 "newly_archived": []},
+    "awl": {"added": [], "removed": [], "version_changes": [],
+            "list_updates": []},
+    "baseline_reset": False,
+    "collection_failure": False,
+}
+
+
+def diff_nd_itc(old_nd: Snapshot, new_nd: Snapshot) -> Snapshot:
+    """Diff two ND-iTC snapshots: NIT RFIs and Allowed-With lists.
+
+    The ND-iTC's Technical Decisions are called NIT RFIs throughout to
+    distinguish them from NIAP TDs. First sight of the source (no prior
+    nd_itc data in the old snapshot) establishes a baseline silently —
+    30 existing RFIs must not fire 30 "new RFI" notifications.
+    """
+    import copy as _copy
+    empty = _copy.deepcopy(_EMPTY_ND_ITC_DIFF)
+
+    old_has_data = bool(old_nd.get("nit_rfis") or old_nd.get("awl_entries"))
+    new_has_data = bool(new_nd.get("nit_rfis") or new_nd.get("awl_entries"))
+    if not old_has_data:
+        if new_has_data:
+            log.info("[ND-iTC Diff] No prior ND-iTC data — baseline established, "
+                     "no changes reported.")
+        return empty
+    if not new_has_data:
+        # Fetch/parse failure — do not report the whole list as removed.
+        log.warning("[ND-iTC Diff] Collection returned no data but prior data "
+                    "exists — treating as collection failure.")
+        empty["collection_failure"] = True
+        return empty
+
+    old_rfis = byid(old_nd.get("nit_rfis", []), "rfi_id")
+    new_rfis = byid(new_nd.get("nit_rfis", []), "rfi_id")
+    rfis_added = [new_rfis[k] for k in set(new_rfis) - set(old_rfis)]
+    status_changes = []
+    revised = []
+    for rid in set(old_rfis) & set(new_rfis):
+        o, n = old_rfis[rid], new_rfis[rid]
+        if (o.get("status") or "") != (n.get("status") or ""):
+            status_changes.append({
+                **n,
+                "old_status": o.get("status", ""),
+                "new_status": n.get("status", ""),
+            })
+        elif any((o.get(f) or "") != (n.get(f) or "")
+                 for f in ("title", "href", "reference", "impact",
+                           "publication_date")):
+            revised.append(dict(n))
+
+    # Active → archived transitions
+    old_arch_ids = {r.get("rfi_id") for r in old_nd.get("nit_rfis_archived", [])}
+    new_arch = byid(new_nd.get("nit_rfis_archived", []), "rfi_id")
+    newly_archived = [
+        new_arch[k] for k in set(new_arch) - old_arch_ids if k in old_rfis
+    ]
+
+    # Allowed-With entries keyed by list|section|object id; the tracked
+    # value is the object version.
+    def _awl_key(e: dict) -> str:
+        return f"{e.get('list', '')}|{e.get('section', '')}|{e.get('object_id', '')}"
+
+    old_awl = {_awl_key(e): e for e in old_nd.get("awl_entries", [])}
+    new_awl = {_awl_key(e): e for e in new_nd.get("awl_entries", [])}
+    awl_added = [new_awl[k] for k in set(new_awl) - set(old_awl)]
+    awl_removed = [old_awl[k] for k in set(old_awl) - set(new_awl)]
+    awl_version_changes = [
+        {**new_awl[k],
+         "old_version": old_awl[k].get("object_version", ""),
+         "new_version": new_awl[k].get("object_version", "")}
+        for k in set(old_awl) & set(new_awl)
+        if (old_awl[k].get("object_version") or "")
+        != (new_awl[k].get("object_version") or "")
+    ]
+
+    # Allowed-With list document version bumps (e.g. 4.0r1 → 4.0r2)
+    old_meta = {m.get("list"): m for m in old_nd.get("awl_meta", [])}
+    awl_list_updates = [
+        {**m, "old_awl_version": old_meta[m["list"]].get("awl_version", "")}
+        for m in new_nd.get("awl_meta", [])
+        if m.get("list") in old_meta
+        and (m.get("awl_version") or "")
+        != (old_meta[m["list"]].get("awl_version") or "")
+    ]
+
+    baseline_reset = (
+        _is_baseline_reset(len(old_rfis), len(rfis_added), len(new_rfis))
+        or _is_baseline_reset(len(old_awl), len(awl_added), len(new_awl))
+    )
+    if baseline_reset:
+        log.warning("[ND-iTC Diff] Mass re-detection — treating as baseline "
+                    "reset; notifications suppressed.")
+
+    log.info("[ND-iTC Diff] rfis-added:%d status-changes:%d revised:%d "
+             "archived:%d awl-added:%d awl-removed:%d awl-version-changes:%d "
+             "awl-list-updates:%d baseline-reset:%s",
+             len(rfis_added), len(status_changes), len(revised),
+             len(newly_archived), len(awl_added), len(awl_removed),
+             len(awl_version_changes), len(awl_list_updates), baseline_reset)
+    return {
+        "nit_rfis": {
+            "added": rfis_added,
+            "status_changes": status_changes,
+            "revised": revised,
+            "newly_archived": newly_archived,
+        },
+        "awl": {
+            "added": awl_added,
+            "removed": awl_removed,
+            "version_changes": awl_version_changes,
+            "list_updates": awl_list_updates,
+        },
+        "baseline_reset": baseline_reset,
+        "collection_failure": False,
+    }
+
+
 # -- Master diff ---------------------------------------------------------------
 def compute_diff(old_snapshot: Snapshot, new_snapshot: Snapshot) -> Snapshot:
     """Compare two full snapshots, scan for keyword alerts, return diff."""
@@ -963,6 +1152,8 @@ def compute_diff(old_snapshot: Snapshot, new_snapshot: Snapshot) -> Snapshot:
         "nist": diff_nist(old_ni, new_ni),
         "nato": diff_nato(old_na, new_na),
         "eucc": diff_eucc(old_eu, new_eu),
+        "nd_itc": diff_nd_itc(old_snapshot.get("nd_itc", {}),
+                              new_snapshot.get("nd_itc", {})),
         "source_health": new_snapshot.get("source_health", {}),
     }
 
@@ -1017,6 +1208,7 @@ def merge_weekly_diffs(diffs: list[Snapshot]) -> Snapshot:
         ("nist", {"pages": {}, "cmvp_mip": {"added": [], "removed": [], "status_changes": []}, "feeds": {}}),
         ("nato", {"pages": {}, "cisco_added": [], "cisco_removed": []}),  # fix #23
         ("eucc", {"pages": {}, "cisco_added": [], "cisco_removed": []}),  # fix #23
+        ("nd_itc", copy.deepcopy(_EMPTY_ND_ITC_DIFF)),
         ("alerts", []),
     ]:
         if domain_key not in weekly:
@@ -1145,6 +1337,17 @@ def merge_weekly_diffs(diffs: list[Snapshot]) -> Snapshot:
         weekly["eucc"]["cisco_removed"] = merge_lists(
             weekly["eucc"].get("cisco_removed", []),
             d.get("eucc", {}).get("cisco_removed", []))
+
+        # ND-iTC: merge NIT RFI and Allowed-With change lists
+        nd_daily = d.get("nd_itc", {})
+        for group, keys in (
+            ("nit_rfis", ("added", "status_changes", "revised", "newly_archived")),
+            ("awl", ("added", "removed", "version_changes", "list_updates")),
+        ):
+            for key in keys:
+                weekly["nd_itc"][group][key] = merge_lists(
+                    weekly["nd_itc"][group].get(key, []),
+                    nd_daily.get(group, {}).get(key, []))
 
     return weekly
 # -- CSfC diff -----------------------------------------------------------------

@@ -291,6 +291,39 @@ EUCC_TIER1_KEYWORDS = [
 SANITY_MIN_EUCC_CERTS = 2
 
 # =============================================================
+# ND-iTC (Network Device iTC) Monitoring — nd-itc.github.io
+#
+# Monitors the ND-iTC's Technical Decisions and Allowed-With lists.
+# Naming: the ND-iTC's Technical Decisions are called "NIT RFIs"
+# throughout CC Pulse to distinguish them from NIAP Technical
+# Decisions — both bodies issue "Technical Decisions" and mixing them
+# up in a notification would be actively misleading. The Allowed-With
+# lists are per-PP (NDcPP, FW PP-Module).
+# =============================================================
+ND_ITC_BASE = "https://nd-itc.github.io"
+
+ND_ITC_PAGES = {
+    # Active NIT RFIs (ND-iTC Technical Decisions table)
+    "nit_rfis": "/TD/tech_dec.html",
+    # Archived NIT RFIs — monitored so active→archived moves are detected
+    "nit_rfis_archived": "/TD/tech_dec_arch.html",
+    # Allowed-With list for the Network Device cPP
+    "awl_ndcpp": "/AWL/NDcPP_allowed_with_list.html",
+    # Allowed-With list for the Stateful Traffic Filter Firewall PP-Module
+    "awl_fw": "/AWL/FW_allowed_with_list.html",
+}
+
+# Canonical URLs for alerts and dashboard links
+ND_ITC_TD_URL = ND_ITC_BASE + "/TD/tech_dec.html"
+ND_ITC_AWL_URLS = {
+    "awl_ndcpp": ND_ITC_BASE + "/AWL/NDcPP_allowed_with_list.html",
+    "awl_fw": ND_ITC_BASE + "/AWL/FW_allowed_with_list.html",
+}
+
+# Sanity minimum: the active NIT RFI table has ~30 published entries
+SANITY_MIN_ND_ITC_RFIS = 5
+
+# =============================================================
 # CC Crypto Catalog & Working Group Monitoring
 # =============================================================
 CC_CRYPTO_BASE = "https://www.commoncriteriaportal.org"

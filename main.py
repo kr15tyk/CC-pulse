@@ -90,7 +90,7 @@ KEEP_SNAPSHOTS = 30  # days
 
 DOMAIN_KEYS = (
     "niap", "cc_portal", "cctl_labs", "csfc",
-    "cc_crypto", "nist", "nato", "eucc",
+    "cc_crypto", "nist", "nato", "eucc", "nd_itc",
 )
 
 DOMAIN_LABELS = {
@@ -102,6 +102,7 @@ DOMAIN_LABELS = {
     "nist": "NIST CSRC",
     "nato": "NATO NIAPCL",
     "eucc": "EUCC / ENISA",
+    "nd_itc": "ND-iTC",
 }
 
 NIAP_SUBCOLLECTION_LABELS = {
@@ -286,6 +287,14 @@ def _source_health_checks(snapshot: dict) -> dict[str, list[dict]]:
             {"name": "certificates", "observed": len(
                 eucc.get("pages", {}).get("certificates", [])
             ), "minimum": config.SANITY_MIN_EUCC_CERTS},
+        ],
+        "nd_itc": [
+            {"name": "NIT RFIs", "observed": len(
+                snapshot.get("nd_itc", {}).get("nit_rfis", [])
+            ), "minimum": config.SANITY_MIN_ND_ITC_RFIS},
+            {"name": "Allowed-With entries", "observed": len(
+                snapshot.get("nd_itc", {}).get("awl_entries", [])
+            ), "minimum": 1},
         ],
     }
 
@@ -641,6 +650,8 @@ def _empty_snapshot() -> dict:
         "nist":      {"pages": {}, "cmvp_mip": {"added": [], "removed": [], "status_changes": []}, "feeds": {}},
         "nato":      {"pages": {}, "cisco_added": [], "cisco_removed": []},
         "eucc":      {"pages": {}, "cisco_added": [], "cisco_removed": []},
+        "nd_itc":    {"nit_rfis": [], "nit_rfis_archived": [],
+                      "awl_entries": [], "awl_meta": []},
         "source_health": {},
     }
 

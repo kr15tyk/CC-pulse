@@ -37,6 +37,7 @@ _cfg.SANITY_MIN_NIAP_NEWS = 1
 _cfg.SANITY_MIN_NIAP_POLICIES = 1
 _cfg.SANITY_MIN_NATO_PRODUCTS = 3
 _cfg.SANITY_MIN_EUCC_CERTS = 2
+_cfg.SANITY_MIN_ND_ITC_RFIS = 5
 _cfg.COLLAPSE_MIN_BASELINE = 8
 for _mod in (
     "config", "collector", "differ", "dashboard", "emailer",
@@ -75,7 +76,7 @@ class TestEmptySnapshot:
     def test_all_domain_keys_present(self):
         result = main._empty_snapshot()
         for key in ("niap", "cc_portal", "cctl_labs", "csfc",
-                    "cc_crypto", "nist", "nato", "eucc"):
+                    "cc_crypto", "nist", "nato", "eucc", "nd_itc"):
             assert key in result, f"Missing domain key '{key}' in _empty_snapshot"
 
     def test_schema_version_set(self):
@@ -155,6 +156,10 @@ def _healthy_snapshot():
         "nist": {"pages": {"news": [{"text": str(i)} for i in range(10)]}},
         "nato": {"pages": {"all_products": [{"name": str(i)} for i in range(3)]}},
         "eucc": {"pages": {"certificates": [{"name": str(i)} for i in range(2)]}},
+        "nd_itc": {
+            "nit_rfis": [{"rfi_id": f"RFI#{i}"} for i in range(5)],
+            "awl_entries": [{"object_id": "PP-Module for X"}],
+        },
     }
 
 
@@ -559,7 +564,7 @@ class TestRunDailyFirstRun:
 
         # Simulate the first-run clearing logic from run_daily / run_merge
         for section in ("niap", "cc_portal", "cctl_labs", "csfc",
-                        "cc_crypto", "nist", "nato", "eucc"):
+                        "cc_crypto", "nist", "nato", "eucc", "nd_itc"):
             if section in diff:
                 diff[section] = _clear_lists(diff[section])
         diff["alerts"] = []

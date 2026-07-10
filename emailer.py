@@ -613,6 +613,50 @@ def build_email_html(weekly_diff: dict) -> str:
             rows.append(_row("NIST FEED", txt, "#22D3EE", "#12102E"))
     parts.append(_section("NIST CSRC — Standards, CMVP & PQC", rows))
 
+    # ── ND-iTC (NIT RFIs & Allowed-With lists) ────────────────────────────
+    nd = weekly_diff.get("nd_itc", {})
+    nd_rfis = nd.get("nit_rfis", {})
+    nd_awl = nd.get("awl", {})
+    rows = []
+    for r in nd_rfis.get("added", []):
+        txt = _link(r.get("href", ""), r.get("title", ""))
+        rows.append(_row("NEW RFI",
+            f"<b>{_esc(r.get('rfi_id', ''))}</b> - {txt}"
+            f"<br><small>Impact: {_esc(r.get('impact', '') or 'N/A')}</small>"))
+    for r in nd_rfis.get("status_changes", []):
+        rows.append(_row("RFI STATUS",
+            f"<b>{_esc(r.get('rfi_id', ''))}</b> - "
+            f"{_esc(r.get('old_status', '?'))} → {_esc(r.get('new_status', '?'))}",
+            "#FBBF24", "#12102E"))
+    for r in nd_rfis.get("revised", []):
+        rows.append(_row("RFI REVISED",
+            f"<b>{_esc(r.get('rfi_id', ''))}</b> - {_esc(r.get('title', ''))}",
+            "#FBBF24", "#12102E"))
+    for r in nd_rfis.get("newly_archived", []):
+        rows.append(_row("RFI ARCHIVED",
+            f"<b>{_esc(r.get('rfi_id', ''))}</b> - {_esc(r.get('title', ''))}",
+            "#F87171", "#1E1B4B"))
+    for e in nd_awl.get("added", []):
+        rows.append(_row("AWL ADD",
+            f"<b>{_esc(e.get('object_id', ''))}</b> - added to "
+            f"{_esc(e.get('section', ''))} allowed-with list"))
+    for e in nd_awl.get("removed", []):
+        rows.append(_row("AWL REMOVE",
+            f"<b>{_esc(e.get('object_id', ''))}</b> - removed from "
+            f"{_esc(e.get('section', ''))} allowed-with list",
+            "#F87171", "#1E1B4B"))
+    for e in nd_awl.get("version_changes", []):
+        rows.append(_row("AWL VERSION",
+            f"<b>{_esc(e.get('object_id', ''))}</b> - "
+            f"{_esc(e.get('old_version', '?'))} → {_esc(e.get('new_version', '?'))}",
+            "#FBBF24", "#12102E"))
+    for e in nd_awl.get("list_updates", []):
+        rows.append(_row("AWL UPDATE",
+            f"Allowed-with list {_esc(e.get('list', ''))}: "
+            f"{_esc(e.get('old_awl_version', '?'))} → {_esc(e.get('awl_version', '?'))}",
+            "#FBBF24", "#12102E"))
+    parts.append(_section("ND-iTC — NIT RFIs & Allowed-With Lists", rows))
+
     # Assemble the weekly digest. The alert section (if any) is already the
     # first entry in `parts`; the previous tail here referenced undefined
     # locals (date_str/tier_note/dashboard_link/subject) copied from the

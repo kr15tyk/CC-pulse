@@ -16,6 +16,7 @@ Features:
 import hashlib
 import copy
 import logging
+import re
 import time
 from concurrent.futures import ThreadPoolExecutor, as_completed
 
@@ -987,6 +988,157 @@ def collect_eucc() -> dict:
     return data
 
 
+# ── ND-iTC (Network Device iTC) ──────────────────────────────────────────────
+def _parse_nd_itc_rfi_table(soup) -> list:
+    """Parse the ND-iTC NIT RFI table (active or archived TD page).
+
+    Header-driven: finds the first table whose header row contains 'ID' and
+    'Status', then maps cells by header name so column reordering or extra
+    columns don't break the parse. Returns records:
+      {rfi_id, title, href, reference, publication_date, impact, status}
+    """
+    if not soup:
+        return []
+    for table in soup.find_all("table"):
+        rows = table.find_all("tr")
+        if len(rows) < 2:
+            continue
+        headers = [c.get_text(" ", strip=True).lower()
+                   for c in rows[0].find_all(["th", "td"])]
+        if "id" not in headers or "status" not in headers:
+            continue
+        idx = {h: i for i, h in enumerate(headers)}
+        records = []
+        for tr in rows[1:]:
+            cells = tr.find_all(["td", "th"])
+            if not cells:
+                continue
+
+            def _cell(name: str) -> str:
+                i = idx.get(name)
+                if i is None or i >= len(cells):
+                    return ""
+                return cells[i].get_text(" ", strip=True)
+
+            href = ""
+            title_i = idx.get("title")
+            if title_i is not None and title_i < len(cells):
+                a = cells[title_i].find("a")
+                if a and a.get("href"):
+                    href = urljoin(config.ND_ITC_BASE + "/", a["href"])
+            record = {
+                "rfi_id": _cell("id"),
+                "title": _cell("title"),
+                "href": href,
+                "reference": _cell("reference"),
+                "publication_date": _cell("publication date"),
+                "impact": _cell("impact"),
+                "status": _cell("status"),
+            }
+            if record["rfi_id"] or record["title"]:
+                records.append(record)
+        if records:
+            return records
+    return []
+
+
+# Allowed-With list entries render as "Object ID: ... Object version: ...
+# Owner: ... Notes: ..." runs. Text-pattern extraction is deliberate: it
+# survives Asciidoctor changing list markup (ol/dl/table), which is exactly
+# the kind of cosmetic churn that broke the EUCC parser on 2026-07-09.
+_ND_ITC_AWL_ENTRY_RE = re.compile(
+    r"Object ID:\s*(?P<object_id>.+?)\s*"
+    r"Object version:\s*(?P<object_version>.+?)\s*"
+    r"Owner:\s*(?P<owner>.+?)\s*"
+    r"(?:Notes:\s*(?P<notes>.*?))?"
+    r"(?=\s*(?:\d+\s*\.\s*)?Object ID:|\s*$)"
+)
+
+
+def _parse_nd_itc_awl(soup, list_key: str) -> dict:
+    """Parse an ND-iTC Allowed-With list page.
+
+    Entries are extracted per document section (h2, e.g. 'NDcPP v4.0' vs
+    'NDcPP v3.0e') so the same PP-Module allowed with two cPP versions is
+    tracked separately. Returns:
+      {awl_version, awl_date, entries: [
+          {list, section, object_id, object_version, owner, notes, text}]}
+    """
+    empty = {"awl_version": "", "awl_date": "", "entries": []}
+    if not soup:
+        return empty
+    page_text = " ".join(soup.get_text(" ", strip=True).split())
+    m = re.search(r"Allowed-with list version\s*:?\s*(\S+)", page_text, re.I)
+    awl_version = m.group(1) if m else ""
+    md = re.search(r"\bDate\s*:?\s*(\d{1,2}\s+\w+\s+\d{4})", page_text)
+    awl_date = md.group(1) if md else ""
+
+    # Asciidoctor wraps each h2 section in <div class="sect1">; fall back to
+    # treating the whole page as one section if that structure is absent.
+    sections = []
+    for sect in soup.find_all("div", class_="sect1"):
+        h2 = sect.find("h2")
+        title = h2.get_text(" ", strip=True) if h2 else ""
+        sections.append((title, " ".join(sect.get_text(" ", strip=True).split())))
+    if not sections:
+        sections = [("", page_text)]
+
+    entries = []
+    for section_title, section_text in sections:
+        for em in _ND_ITC_AWL_ENTRY_RE.finditer(section_text):
+            object_id = (em.group("object_id") or "").strip(" .")
+            version = (em.group("object_version") or "").strip()
+            entries.append({
+                "list": list_key,
+                "section": section_title,
+                "object_id": object_id,
+                "object_version": version,
+                "owner": (em.group("owner") or "").strip(),
+                "notes": (em.group("notes") or "").strip(),
+                "text": f"{section_title} | {object_id} | {version}",
+            })
+    return {"awl_version": awl_version, "awl_date": awl_date, "entries": entries}
+
+
+def collect_nd_itc() -> dict:
+    """Collect ND-iTC (nd-itc.github.io) NIT RFIs and Allowed-With lists.
+
+    Monitors:
+    - Active NIT RFIs (the ND-iTC's Technical Decisions — named NIT RFIs in
+      CC Pulse to distinguish them from NIAP TDs)
+    - Archived NIT RFIs (so active→archived transitions are detected)
+    - Allowed-With lists for the NDcPP and the FW PP-Module
+    """
+    log.info("[ND-iTC] Collecting...")
+    data: dict = {"nit_rfis": [], "nit_rfis_archived": [],
+                  "awl_entries": [], "awl_meta": []}
+    for page_key, path in config.ND_ITC_PAGES.items():
+        url = config.ND_ITC_BASE + path
+        log.info("  [ND-iTC] %s (%s)...", page_key, path)
+        soup = get_html(url)
+        if not soup:
+            log.warning("[ND-iTC] Failed to fetch %s", url)
+            continue
+        if page_key.startswith("nit_rfis"):
+            records = _parse_nd_itc_rfi_table(soup)
+            archived = page_key.endswith("archived")
+            for record in records:
+                record["archived"] = archived
+            data[page_key] = records
+        else:
+            parsed = _parse_nd_itc_awl(soup, page_key)
+            data["awl_entries"].extend(parsed["entries"])
+            data["awl_meta"].append({
+                "list": page_key,
+                "awl_version": parsed["awl_version"],
+                "awl_date": parsed["awl_date"],
+            })
+    log.info("[ND-iTC] rfis:%d archived:%d awl-entries:%d awl-lists:%d",
+             len(data["nit_rfis"]), len(data["nit_rfis_archived"]),
+             len(data["awl_entries"]), len(data["awl_meta"]))
+    return data
+
+
 # ── Master snapshot — parallel collection (fix #16) ──────────────────────────
 def collect_all(validate: bool = True):
     """Collect all domains concurrently and return a timestamped snapshot.
@@ -1010,6 +1162,7 @@ def collect_all(validate: bool = True):
         "nist":      collect_nist,
         "nato":      collect_nato,
         "eucc":      collect_eucc,
+        "nd_itc":    collect_nd_itc,
     }
 
     results: dict = {}
@@ -1047,6 +1200,7 @@ def collect_all(validate: bool = True):
         "nist":           results.get("nist",      {}),
         "nato":           results.get("nato",      {}),
         "eucc":           results.get("eucc",      {}),
+        "nd_itc":         results.get("nd_itc",    {}),
     }
 
     if validate:
@@ -1482,6 +1636,7 @@ DOMAIN_COLLECTORS: dict = {
     "nist":      collect_nist,
     "nato":      collect_nato,
     "eucc":      collect_eucc,
+    "nd_itc":    collect_nd_itc,
 }
 
 
