@@ -2,29 +2,6 @@
 <rss version="2.0"><channel>
 <title>CC Pulse</title>
 <link>https://kr15tyk.github.io/CC-pulse/cc_dashboard.html</link>
-<description>Common Criteria monitoring - 2026-07-10 05:24 ET</description>
-<item><title>NIST cmvp_mip: Arista Crypto Module v3.0 [Software, Software IPsec, Web Por</title><link>#d-9000</link><description>New item on NIST CSRC cmvp_mip page.</description></item>
-<item><title>NIST cmvp_mip: Arista Crypto Module v3.0 [Software, Software IPsec] | Arist</title><link>#d-9000</link><description>New item on NIST CSRC cmvp_mip page.</description></item>
-<item><title>NIST cmvp_mip: Arista MACsec data plane accelerator [on-chip-driver] | Aris</title><link>#d13351</link><description>New item on NIST CSRC cmvp_mip page.</description></item>
-<item><title>NIST cmvp_mip: Canonical Ltd. Ubuntu 22.04 Kernel Crypto API Cryptographic </title><link>#d-9000</link><description>New item on NIST CSRC cmvp_mip page.</description></item>
-<item><title>NIST cmvp_mip: Canonical Ltd. Ubuntu 22.04 OpenSSL Cryptographic Module | C</title><link>#d-9000</link><description>New item on NIST CSRC cmvp_mip page.</description></item>
-<item><title>NIST cmvp_mip: CiscoSSL FIPS Provider | Cisco Systems, IncView Contacts | F</title><link>#d-9000</link><description>New item on NIST CSRC cmvp_mip page.</description></item>
-<item><title>NIST cmvp_mip: NetScaler VPX | Cloud Software GroupView Contacts | FIPS 140</title><link>#d13546</link><description>New item on NIST CSRC cmvp_mip page.</description></item>
-<item><title>NIST cmvp_mip: Code Siren Post-Quantum Cryptographic (PQC) Library for Mobi</title><link>#d13676</link><description>New item on NIST CSRC cmvp_mip page.</description></item>
-<item><title>NIST cmvp_mip: TM400ENB | ECI Telecom Ltd / Ribbon communications Operating</title><link>#d13311</link><description>New item on NIST CSRC cmvp_mip page.</description></item>
-<item><title>NIST cmvp_mip: MonoCrypt AES Enhanced Crypto Library | Focus Systems Corpor</title><link>#d13717</link><description>New item on NIST CSRC cmvp_mip page.</description></item>
-<item><title>NIST cmvp_mip: Non-Volatile Memory express (NVMe) Data Path Security Cluste</title><link>#d13600</link><description>New item on NIST CSRC cmvp_mip page.</description></item>
-<item><title>NIST cmvp_mip: Secure Cryptographic Module (SCM) | JVCKENWOOD CorporationVi</title><link>#d13034</link><description>New item on NIST CSRC cmvp_mip page.</description></item>
-<item><title>NIST cmvp_mip: Purity Encryption Module | Pure Storage, Inc.View Contacts |</title><link>#d13536</link><description>New item on NIST CSRC cmvp_mip page.</description></item>
-<item><title>NIST cmvp_mip: RIGFORT Pro Blockchain HSM | RigSec Technology LimitedView C</title><link>#d-9000</link><description>New item on NIST CSRC cmvp_mip page.</description></item>
-<item><title>NIST cmvp_mip: VaultIC408 1.2.4 | SEALSQView Contacts | FIPS 140-3 | Commen</title><link>#d13220</link><description>New item on NIST CSRC cmvp_mip page.</description></item>
-<item><title>NIST cmvp_mip: SUSE Linux Enterprise GnuTLS Cryptographic Module | SUSE, LL</title><link>#d-9000</link><description>New item on NIST CSRC cmvp_mip page.</description></item>
-<item><title>NIST cmvp_mip: SUSE Linux Enterprise Libgcrypt Cryptographic Module | SUSE,</title><link>#d-9000</link><description>New item on NIST CSRC cmvp_mip page.</description></item>
-<item><title>NIST cmvp_mip: SUSE Linux Enterprise OpenSSL Cryptographic Module | SUSE, L</title><link>#d-9000</link><description>New item on NIST CSRC cmvp_mip page.</description></item>
-<item><title>NIST cmvp_mip: Wind River FIPS Object Module | Wind River Systems, Inc.View</title><link>#d13429</link><description>New item on NIST CSRC cmvp_mip page.</description></item>
-<item><title>NIST cmvp_mip: Displayed | 260</title><link></link><description>New item on NIST CSRC cmvp_mip page.</description></item>
-<item><title>NIST cmvp_mip: Not Displayed | 12</title><link></link><description>New item on NIST CSRC cmvp_mip page.</description></item>
-<item><title>NIST cmvp_mip: Total | 272</title><link></link><description>New item on NIST CSRC cmvp_mip page.</description></item>
-<item><title>ALERT: NIST CMVP MIP – CiscoSSL FIPS Provider</title><link>https://kr15tyk.github.io/CC-pulse/cc_dashboard.html</link><description>Kind: updated | Keywords: cisco, CMVP</description></item>
-<item><title>ALERT: NIST CMVP MIP – Firepower Next-Generation IPS Virtual VMware Cryptographic Module</title><link>https://kr15tyk.github.io/CC-pulse/cc_dashboard.html</link><description>Kind: updated | Keywords: cisco, CMVP</description></item>
+<description>Common Criteria monitoring - 2026-07-11 03:45 ET</description>
+
 </channel></rss>
