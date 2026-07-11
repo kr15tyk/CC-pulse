@@ -84,6 +84,7 @@ jobs:
           - nist
           - nato
           - eucc
+          - nd_itc
 
     steps:
       - name: Checkout repository

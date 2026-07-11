@@ -932,6 +932,7 @@ def run_merge(partial_dir: str = "snapshots/partial", output_dir: str = None) ->
         "nist":      domain_data.get("nist", {}),
         "nato":      domain_data.get("nato", {}),
         "eucc":      domain_data.get("eucc", {}),
+        "nd_itc":    domain_data.get("nd_itc", {}),
     }
 
     prior_path = _latest_prior_snapshot()
