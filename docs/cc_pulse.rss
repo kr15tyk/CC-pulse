@@ -2,12 +2,6 @@
 <rss version="2.0"><channel>
 <title>CC Pulse</title>
 <link>https://kr15tyk.github.io/CC-pulse/cc_dashboard.html</link>
-<description>Common Criteria monitoring - 2026-07-13 04:56 ET</description>
-<item><title>NIST cmvp_mip: AWS-LC Cryptographic Module (dynamic) | Amazon Web Services </title><link>#d-9000</link><description>New item on NIST CSRC cmvp_mip page.</description></item>
-<item><title>NIST cmvp_mip: Junos® OS Evolved OpenSSL Cryptographic Module version 3.0 |</title><link>#d13242</link><description>New item on NIST CSRC cmvp_mip page.</description></item>
-<item><title>NIST cmvp_mip: Qualcomm® Inline Crypto Engine (UFS) | Qualcomm Technologies</title><link>#d13464</link><description>New item on NIST CSRC cmvp_mip page.</description></item>
-<item><title>NIST cmvp_mip: Red Hat Enterprise Linux 8 NSS Cryptographic Module | Red Ha</title><link>#d12952</link><description>New item on NIST CSRC cmvp_mip page.</description></item>
-<item><title>NIST cmvp_mip: SUSE Linux Enterprise Libica Cryptographic Module | SUSE LLC</title><link>#d13069</link><description>New item on NIST CSRC cmvp_mip page.</description></item>
-<item><title>NIST cmvp_mip: Displayed | 252</title><link></link><description>New item on NIST CSRC cmvp_mip page.</description></item>
-<item><title>NIST cmvp_mip: Total | 265</title><link></link><description>New item on NIST CSRC cmvp_mip page.</description></item>
+<description>Common Criteria monitoring - 2026-07-14 03:53 ET</description>
+<item><title>[atsec] The Journey Begins: Turning the BSI NESAS Vision into Real-World Security Certification</title><link>https://www.atsec.com/turning-the-bsi-nesas-vision-into-real-assurance/</link><description></description></item>
 </channel></rss>

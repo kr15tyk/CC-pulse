@@ -179,7 +179,7 @@
   <span class="nav-title">CC Pulse Dashboard</span>
   <span class="nav-spacer"></span>
   <div class="ham-wrap">
-    <span class="nav-meta">Last run: 2026-07-13 04:56 ET</span>
+    <span class="nav-meta">Last run: 2026-07-14 03:53 ET</span>
     <button class="ham-btn" id="ham-btn" onclick="toggleHamMenu()" aria-expanded="false" aria-haspopup="true" title="Open menu">&#9776;</button>
     <div class="ham-menu" id="ham-menu" role="menu">
       <a class="ham-item" href="https://kr15tyk.github.io/CC-pulse/cc_dashboard.html" role="menuitem"><span class="ham-icon">&#127968;</span>Home</a>
@@ -270,7 +270,7 @@
       <div class="stat-lbl">CSfC Selection Updates</div>
     </a></div>
     <div class="stat"><a href="#sec-nist" onclick="navigateTo('sec-nist');return false;">
-      <div class="stat-num active-num">7</div>
+      <div class="stat-num ">0</div>
       <div class="stat-lbl">NIST Doc Updates</div>
     </a></div>
     <div class="stat"><a href="#sec-cc-portal" onclick="navigateTo('sec-cc-portal');return false;">
@@ -282,7 +282,7 @@
       <div class="stat-lbl">NATO NIAPCL</div>
     </a></div>
     <div class="stat"><a href="#sec-cctl" onclick="navigateTo('sec-cctl');return false;">
-      <div class="stat-num ">0</div>
+      <div class="stat-num active-num">1</div>
       <div class="stat-lbl">CCTL Updates</div>
     </a></div>
     <div class="stat"><a href="#sec-eucc-req" onclick="navigateTo('sec-eucc-req');return false;">
@@ -503,53 +503,16 @@
 </div>
 
   <!-- NIST Docs -->
-<div class="card card-updated" id="sec-nist" data-has-changes="7">
+<div class="card " id="sec-nist" data-has-changes="0">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>NIST Documentation</span>
-    <span class="card-count">7 updates</span>
+    <span class="card-count">0 updates</span>
     </span>
-    <span class="toggle-icon">&#9660;</span>
+    <span class="toggle-icon">&#9658;</span>
   </div>
-  <div class="card-body ">
+  <div class="card-body collapsed">
     
-      
-      <div class="item-row" data-source="nist" data-kind="updated">
-        <a class="item-link" href="" target="_blank">AWS-LC Cryptographic Module (dynamic) | Amazon Web Services Inc.View Contacts | FIPS 140-3 | Comment Resolution - CMVP  (7/12/2026)</a>
-        <span class="item-meta">cmvp_mip</span>
-      </div>
-      
-      <div class="item-row" data-source="nist" data-kind="updated">
-        <a class="item-link" href="" target="_blank">Junos® OS Evolved OpenSSL Cryptographic Module version 3.0 | HPE Juniper NetworkingView Contacts | FIPS 140-3 | Comment Resolution - CMVP  (7/12/2026)</a>
-        <span class="item-meta">cmvp_mip</span>
-      </div>
-      
-      <div class="item-row" data-source="nist" data-kind="updated">
-        <a class="item-link" href="" target="_blank">Qualcomm® Inline Crypto Engine (UFS) | Qualcomm Technologies, Inc.View Contacts | FIPS 140-3 | Comment Resolution - CMVP  (7/12/2026)</a>
-        <span class="item-meta">cmvp_mip</span>
-      </div>
-      
-      <div class="item-row" data-source="nist" data-kind="updated">
-        <a class="item-link" href="" target="_blank">Red Hat Enterprise Linux 8 NSS Cryptographic Module | Red Hat, Inc.View Contacts | FIPS 140-3 | Comment Resolution - CMVP  (7/12/2026)</a>
-        <span class="item-meta">cmvp_mip</span>
-      </div>
-      
-      <div class="item-row" data-source="nist" data-kind="updated">
-        <a class="item-link" href="" target="_blank">SUSE Linux Enterprise Libica Cryptographic Module | SUSE LLCView Contacts | FIPS 140-3 | Comment Resolution - CMVP  (7/12/2026)</a>
-        <span class="item-meta">cmvp_mip</span>
-      </div>
-      
-      <div class="item-row" data-source="nist" data-kind="updated">
-        <a class="item-link" href="https://csrc.nist.gov/" target="_blank">Displayed | 252</a>
-        <span class="item-meta">cmvp_mip</span>
-      </div>
-      
-      <div class="item-row" data-source="nist" data-kind="updated">
-        <a class="item-link" href="https://csrc.nist.gov/" target="_blank">Total | 265</a>
-        <span class="item-meta">cmvp_mip</span>
-      </div>
-      
-    
-    
+    <p class="no-change">No changes detected. <span class="last-active">(last: 2026-07-13)</span></p>
   </div>
 </div>
 </div>
@@ -584,7 +547,7 @@
             
             
             
-            <div class="sub-hdr sub-new">cisco_products — New Items (30)</div>
+            <div class="sub-hdr sub-new">all_products — New Items (30)</div>
             
             <div class="item-row" data-source="nato" data-kind="new">
               <a class="item-link" href="https://www.ia.nato.int/niapc/Product/Cisco-ASA-5500-X-Series-Next-Generation-Firewalls_589" target="_blank">Cisco ASA 5500-X Series Next-Generation Firewalls</a>
@@ -739,7 +702,7 @@
             
             
             
-            <div class="sub-hdr sub-new">all_products — New Items (30)</div>
+            <div class="sub-hdr sub-new">cisco_products — New Items (30)</div>
             
             <div class="item-row" data-source="nato" data-kind="new">
               <a class="item-link" href="https://www.ia.nato.int/niapc/Product/Cisco-ASA-5500-X-Series-Next-Generation-Firewalls_589" target="_blank">Cisco ASA 5500-X Series Next-Generation Firewalls</a>
@@ -901,16 +864,34 @@
 <div class="section-group">
   <div class="section-label">CCTL</div>
   <!-- CCTL Updates -->
-<div class="card " id="sec-cctl" data-has-changes="0">
+<div class="card card-new" id="sec-cctl" data-has-changes="1">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>CCTL Updates</span>
-    <span class="card-count">0 new items</span>
+    <span class="card-count">1 new item</span>
     </span>
     <span class="toggle-icon collapsed">▼</span>
   </div>
-  <div class="card-body collapsed">
+  <div class="card-body ">
     
-    <p class="no-change">No new items.</p>
+    
+    <div class="lab-row">
+      <div class="lab-hdr" onclick="toggleLab(this)">
+        <span class="lab-name">atsec</span>
+        <span class="lab-cnt">1 item</span>
+        <span class="lab-toggle">▼</span>
+      </div>
+      <div class="lab-body collapsed">
+        
+        <div class="item-row" data-source="cctl" data-kind="new">
+          <a class="item-link" href="https://www.atsec.com/turning-the-bsi-nesas-vision-into-real-assurance/" target="_blank">The Journey Begins: Turning the BSI NESAS Vision into Real-World Security Certification</a>
+          <span class="item-meta"></span>
+        </div>
+        
+      </div>
+    </div>
+    
+    
+    
   </div>
 </div>
 </div>      
@@ -953,7 +934,7 @@
 <div class="card card-new" id="sec-history" data-has-changes="1">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>Change History</span>
-    <span class="card-count">142 events</span>
+    <span class="card-count">141 events</span>
     <span class="toggle-icon">▼</span>
   </div>
   <div class="card-body">
@@ -2524,17 +2505,6 @@
         </div>
       </div>
       
-      <div class="tl-entry" data-cat="cisco_archived">
-        <div class="tl-date">2026-06-14</div>
-        <div class="tl-body">
-          <div class="tl-title">
-            <span class="tl-badge removed">removed</span>
-            <a href="https://www.niap-ccevs.org/" target="_blank">Archived: Cisco Embedded Services Router (ESR) 6300 v17.12</a>
-          </div>
-          
-        </div>
-      </div>
-      
     
     </div>
   </div>
@@ -2545,7 +2515,7 @@
 </div><!-- /main-content -->
 <footer>
   <span>CC Pulse &middot; Auto-refreshes daily (01:00 EST) &middot; NIAP, CSfC, NIST, CC Portal, NATO NIAPCL, EUCC / ENISA</span>
-  <span>Last run: 2026-07-13 04:56 ET</span>
+  <span>Last run: 2026-07-14 03:53 ET</span>
 </footer>
 
 <script>
