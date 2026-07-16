@@ -2,20 +2,27 @@
 <rss version="2.0"><channel>
 <title>CC Pulse</title>
 <link>https://kr15tyk.github.io/CC-pulse/cc_dashboard.html</link>
-<description>Common Criteria monitoring - 2026-07-15 03:56 ET</description>
-<item><title>NIST cmvp_mip: AMD ASP Cryptographic CoProcessor ("Phoenix2") | Advanced Mi</title><link>#d13775</link><description>New item on NIST CSRC cmvp_mip page.</description></item>
-<item><title>NIST cmvp_mip: NetScaler MPX | Cloud Software GroupView Contacts | FIPS 140</title><link>#d-9000</link><description>New item on NIST CSRC cmvp_mip page.</description></item>
-<item><title>NIST cmvp_mip: Port Authority Series | Communication Devices Inc.View Conta</title><link>#d-9000</link><description>New item on NIST CSRC cmvp_mip page.</description></item>
-<item><title>NIST cmvp_mip: Hikvision FIPS Provider | Hangzhou Hikvision Digital Technol</title><link>#d13380</link><description>New item on NIST CSRC cmvp_mip page.</description></item>
-<item><title>NIST cmvp_mip: IBM® Crypto for C | IBM CorporationView Contacts | FIPS 140-</title><link>#d-9000</link><description>New item on NIST CSRC cmvp_mip page.</description></item>
-<item><title>NIST cmvp_mip: Junos® OS Evolved Kernel Cryptographic Module | Juniper Netw</title><link>#d-9000</link><description>New item on NIST CSRC cmvp_mip page.</description></item>
-<item><title>NIST cmvp_mip: Junos® OS Evolved OpenSSL Cryptographic Module | Juniper Net</title><link>#d-9000</link><description>New item on NIST CSRC cmvp_mip page.</description></item>
+<description>Common Criteria monitoring - 2026-07-16 04:02 ET</description>
+<item><title>CSfC Component Added: Certification Authority | Red Hat | Certificate System | v10.4 | NIAP Evaluation</title><link>https://www.niap-ccevs.org/products/11468</link><description>CSfC apl item added.</description></item>
+<item><title>NIST cmvp_mip: Aegis Secure Key 3.0 Cryptographic Module | ApricornView Con</title><link>#d13134</link><description>New item on NIST CSRC cmvp_mip page.</description></item>
+<item><title>NIST cmvp_mip: CiscoSSL FIPS Provider | Cisco Systems IncView Contacts | FI</title><link>#d13119</link><description>New item on NIST CSRC cmvp_mip page.</description></item>
+<item><title>NIST cmvp_mip: Cisco ASA FX-OS on 4K/9K Cryptographic Module | Cisco System</title><link>#d12819</link><description>New item on NIST CSRC cmvp_mip page.</description></item>
+<item><title>NIST cmvp_mip: Stinger Encryption Module | Datum Systems, Inc.View Contacts</title><link>#d13672</link><description>New item on NIST CSRC cmvp_mip page.</description></item>
+<item><title>NIST cmvp_mip: Cryptographic Module for BIG-IP | F5, Inc.View Contacts | FI</title><link>#d-9000</link><description>New item on NIST CSRC cmvp_mip page.</description></item>
+<item><title>NIST cmvp_mip: Knuckle Cryptographic Module | Google, Inc.View Contacts | F</title><link>#d13701</link><description>New item on NIST CSRC cmvp_mip page.</description></item>
+<item><title>NIST cmvp_mip: Non-Volatile Memory express (NVMe) Data Path Security Cluste</title><link>#d13600</link><description>New item on NIST CSRC cmvp_mip page.</description></item>
+<item><title>NIST cmvp_mip: Juniper Express 4 MACsec Cryptographic Module | Juniper Netw</title><link>#d-9000</link><description>New item on NIST CSRC cmvp_mip page.</description></item>
+<item><title>NIST cmvp_mip: Junos® OS Evolved MACsec Cryptographic Library | Juniper Net</title><link>#d-9000</link><description>New item on NIST CSRC cmvp_mip page.</description></item>
 <item><title>NIST cmvp_mip: Cryptographic Primitives Library | Microsoft CorporationView</title><link>#d13141</link><description>New item on NIST CSRC cmvp_mip page.</description></item>
-<item><title>NIST cmvp_mip: GlobalProtect App | Palo Alto NetworksView Contacts | FIPS 1</title><link>#d13670</link><description>New item on NIST CSRC cmvp_mip page.</description></item>
-<item><title>NIST cmvp_mip: Privoro SafeCase Security Module | Privoro LLCView Contacts </title><link>#d13348</link><description>New item on NIST CSRC cmvp_mip page.</description></item>
-<item><title>NIST cmvp_mip: Samsung Kernel Cryptographic Module | Samsung Electronics Co</title><link>#d13555</link><description>New item on NIST CSRC cmvp_mip page.</description></item>
-<item><title>NIST cmvp_mip: SUSE Linux Enterprise NSS Cryptographic Module | SUSE LLCVie</title><link>#d-9000</link><description>New item on NIST CSRC cmvp_mip page.</description></item>
-<item><title>NIST cmvp_mip: Displayed | 249</title><link></link><description>New item on NIST CSRC cmvp_mip page.</description></item>
-<item><title>NIST cmvp_mip: Not Displayed | 12</title><link></link><description>New item on NIST CSRC cmvp_mip page.</description></item>
-<item><title>NIST cmvp_mip: Total | 261</title><link></link><description>New item on NIST CSRC cmvp_mip page.</description></item>
+<item><title>NIST cmvp_mip: Kernel Mode Cryptographic Primitives Library | Microsoft Cor</title><link>#d13140</link><description>New item on NIST CSRC cmvp_mip page.</description></item>
+<item><title>NIST cmvp_mip: Motorola P25 KVL 7000 HSM | Motorola Solutions Inc.View Cont</title><link>#d13763</link><description>New item on NIST CSRC cmvp_mip page.</description></item>
+<item><title>NIST cmvp_mip: WildFire 10.2 WF-500 and WF-500-B | Palo Alto Networks Inc.V</title><link>#d-9000</link><description>New item on NIST CSRC cmvp_mip page.</description></item>
+<item><title>NIST cmvp_mip: VaultIC408 1.2.4 | SEALSQView Contacts | FIPS 140-3 | Commen</title><link>#d13220</link><description>New item on NIST CSRC cmvp_mip page.</description></item>
+<item><title>NIST cmvp_mip: CE Crypto Module | Senetas Corporation Ltd, distributed by T</title><link>#d-9000</link><description>New item on NIST CSRC cmvp_mip page.</description></item>
+<item><title>NIST cmvp_mip: IDPrime930C/3930C | THALESView Contacts | FIPS 140-3 | Pendi</title><link>#d13743</link><description>New item on NIST CSRC cmvp_mip page.</description></item>
+<item><title>NIST cmvp_mip: IDPrime930C/3930C FIDO2.1 | THALESView Contacts | FIPS 140-3</title><link>#d13742</link><description>New item on NIST CSRC cmvp_mip page.</description></item>
+<item><title>NIST cmvp_mip: Displayed | 244</title><link></link><description>New item on NIST CSRC cmvp_mip page.</description></item>
+<item><title>NIST cmvp_mip: Not Displayed | 14</title><link></link><description>New item on NIST CSRC cmvp_mip page.</description></item>
+<item><title>NIST cmvp_mip: Total | 258</title><link></link><description>New item on NIST CSRC cmvp_mip page.</description></item>
+<item><title>ALERT: NIST CMVP MIP – Cisco ASA FX-OS on 4K/9K Cryptographic Module</title><link>https://kr15tyk.github.io/CC-pulse/cc_dashboard.html</link><description>Kind: updated | Keywords: cisco, CMVP</description></item>
 </channel></rss>
