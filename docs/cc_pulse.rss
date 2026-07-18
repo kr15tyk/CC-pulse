@@ -2,20 +2,19 @@
 <rss version="2.0"><channel>
 <title>CC Pulse</title>
 <link>https://kr15tyk.github.io/CC-pulse/cc_dashboard.html</link>
-<description>Common Criteria monitoring - 2026-07-17 03:59 ET</description>
-<item><title>CSfC Component Added: Certification Authority | Red Hat | Certificate System, as detailed in VID 11468</title><link>https://www.niap-ccevs.org/products/11468</link><description>CSfC apl item added.</description></item>
-<item><title>CSfC Component Removed: Certification Authority | Red Hat | Certificate System | v10.4 | NIAP Evaluation</title><link>https://www.niap-ccevs.org/products/11468</link><description>CSfC apl item removed.</description></item>
-<item><title>NIST cmvp_mip: Amazon Linux 2023 OpenSSL FIPS Provider | Amazon Web Service</title><link>#d13484</link><description>New item on NIST CSRC cmvp_mip page.</description></item>
-<item><title>NIST cmvp_mip: AWS-LC 4 Cryptographic Module (static) | Amazon Web Services</title><link>#d13709</link><description>New item on NIST CSRC cmvp_mip page.</description></item>
-<item><title>NIST cmvp_mip: TASS Crypto Engine | Beijing JN TASS Technology Co., Ltd.Vie</title><link>#d13725</link><description>New item on NIST CSRC cmvp_mip page.</description></item>
-<item><title>NIST cmvp_mip: CorSSL | Corsec Security, Inc.View Contacts | FIPS 140-3 | C</title><link>#d13669</link><description>New item on NIST CSRC cmvp_mip page.</description></item>
-<item><title>NIST cmvp_mip: Non-Volatile Memory express (NVMe) Data Path Security Cluste</title><link>#d13600</link><description>New item on NIST CSRC cmvp_mip page.</description></item>
+<description>Common Criteria monitoring - 2026-07-18 03:39 ET</description>
+<item><title>NIST cmvp_mip: AMD ASP Cryptographic CoProcessor ("Phoenix2") | Advanced Mi</title><link>#d13775</link><description>New item on NIST CSRC cmvp_mip page.</description></item>
+<item><title>NIST cmvp_mip: AWS-LC 4 Cryptographic Module (dynamic) | Amazon Web Service</title><link>#d13708</link><description>New item on NIST CSRC cmvp_mip page.</description></item>
+<item><title>NIST cmvp_mip: PTP 700 Point to Point Wireless Ethernet Bridge | Cambium Ne</title><link>#d13356</link><description>New item on NIST CSRC cmvp_mip page.</description></item>
+<item><title>NIST cmvp_mip: FortiGate 7.2 and 7.4 | Fortinet, Inc.View Contacts | FIPS 1</title><link>#d12915</link><description>New item on NIST CSRC cmvp_mip page.</description></item>
+<item><title>NIST cmvp_mip: Go Cryptographic Module | Geomys LLCView Contacts | FIPS 140</title><link>#d13601</link><description>New item on NIST CSRC cmvp_mip page.</description></item>
+<item><title>NIST cmvp_mip: Geotab Extended Cryptographic Module | Geotab Inc.View Conta</title><link>#d13567</link><description>New item on NIST CSRC cmvp_mip page.</description></item>
+<item><title>NIST cmvp_mip: Knuckle Cryptographic Module | Google, Inc.View Contacts | F</title><link>#d13701</link><description>New item on NIST CSRC cmvp_mip page.</description></item>
 <item><title>NIST cmvp_mip: Junos® OS Evolved Kernel Cryptographic Module version 2.1 | </title><link>#d13243</link><description>New item on NIST CSRC cmvp_mip page.</description></item>
-<item><title>NIST cmvp_mip: Marvell LS2 HSM Family | Marvell Semiconductor, Inc.View Con</title><link>#d13636</link><description>New item on NIST CSRC cmvp_mip page.</description></item>
+<item><title>NIST cmvp_mip: FIPS Applet on RookySE | IDEMIAView Contacts | FIPS 140-3 | </title><link>#d13726</link><description>New item on NIST CSRC cmvp_mip page.</description></item>
 <item><title>NIST cmvp_mip: Micron® MTC22-P4 Controller Sub Chip Security Subsystem | Mi</title><link>#d13126</link><description>New item on NIST CSRC cmvp_mip page.</description></item>
-<item><title>NIST cmvp_mip: MolecuLightDX Cryptographic Module | MolecuLight Inc.View Co</title><link>#d13494</link><description>New item on NIST CSRC cmvp_mip page.</description></item>
-<item><title>NIST cmvp_mip: Ad Noctem Connect 2.3 | Northrop Grumman CorporationView Con</title><link>#d13005</link><description>New item on NIST CSRC cmvp_mip page.</description></item>
-<item><title>NIST cmvp_mip: Silvus Streamcaster Series Mesh 4k Radio | Silvus Technologi</title><link>#d13589</link><description>New item on NIST CSRC cmvp_mip page.</description></item>
-<item><title>NIST cmvp_mip: Displayed | 243</title><link></link><description>New item on NIST CSRC cmvp_mip page.</description></item>
-<item><title>NIST cmvp_mip: Total | 257</title><link></link><description>New item on NIST CSRC cmvp_mip page.</description></item>
+<item><title>NIST cmvp_mip: CRYP CARD | Mitsubishi Electric Corporation Kamakura WorksVi</title><link>#d13699</link><description>New item on NIST CSRC cmvp_mip page.</description></item>
+<item><title>NIST cmvp_mip: Motorola P25 KVL 7000 HSM | Motorola Solutions Inc.View Cont</title><link>#d13763</link><description>New item on NIST CSRC cmvp_mip page.</description></item>
+<item><title>NIST cmvp_mip: Displayed | 239</title><link></link><description>New item on NIST CSRC cmvp_mip page.</description></item>
+<item><title>NIST cmvp_mip: Total | 253</title><link></link><description>New item on NIST CSRC cmvp_mip page.</description></item>
 </channel></rss>
