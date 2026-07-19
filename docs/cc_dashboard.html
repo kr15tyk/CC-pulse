@@ -179,7 +179,7 @@
   <span class="nav-title">CC Pulse Dashboard</span>
   <span class="nav-spacer"></span>
   <div class="ham-wrap">
-    <span class="nav-meta">Last run: 2026-07-18 03:39 ET</span>
+    <span class="nav-meta">Last run: 2026-07-19 04:06 ET</span>
     <button class="ham-btn" id="ham-btn" onclick="toggleHamMenu()" aria-expanded="false" aria-haspopup="true" title="Open menu">&#9776;</button>
     <div class="ham-menu" id="ham-menu" role="menu">
       <a class="ham-item" href="https://kr15tyk.github.io/CC-pulse/cc_dashboard.html" role="menuitem"><span class="ham-icon">&#127968;</span>Home</a>
@@ -262,7 +262,7 @@
 <div class="sticky-top">
   <div class="trend-bar">
     <div class="stat"><a href="#sec-niap-pp" onclick="navigateTo('sec-niap-pp');return false;">
-      <div class="stat-num active-num">1</div>
+      <div class="stat-num ">0</div>
       <div class="stat-lbl">NIAP Changes</div>
     </a></div>
     <div class="stat"><a href="#sec-csfc" onclick="navigateTo('sec-csfc');return false;">
@@ -270,7 +270,7 @@
       <div class="stat-lbl">CSfC Selection Updates</div>
     </a></div>
     <div class="stat"><a href="#sec-nist" onclick="navigateTo('sec-nist');return false;">
-      <div class="stat-num active-num">14</div>
+      <div class="stat-num active-num">17</div>
       <div class="stat-lbl">NIST Doc Updates</div>
     </a></div>
     <div class="stat"><a href="#sec-cc-portal" onclick="navigateTo('sec-cc-portal');return false;">
@@ -421,28 +421,17 @@
 </div>
 
   <!-- NIAP PCL — All Certifications -->
-<div class="card card-new" id="sec-niap-pcl" data-has-changes="1">
+<div class="card " id="sec-niap-pcl" data-has-changes="0">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>NIAP PCL — All Certifications</span>
-    <span class="card-count">1 change</span>
+    <span class="card-count">0 changes</span>
     </span>
   </div>
-  <div class="card-body ">
-    
-    
-    <div class="sub-hdr sub-updated">Newly Archived (1)</div>
-    
-    <div class="item-row" data-source="niap-pcl" data-kind="archived">
-      <span class="item-link">Fortinet, Inc. -- Fortinet FortiGate/FortiOS 7.0</span>
-      <span class="item-meta">Archived</span>
-    </div>
-    
-    <div class="item-sub">CPP_ND_V2.2E, MOD_CPP_FW_v1.4e, MOD_VPNGW_v1.3</div>
+  <div class="card-body collapsed">
     
     
     
-    
-    
+    <p class="no-change">No changes detected. <span class="last-active">(last: 2026-07-18)</span></p>
   </div>
 </div>
 
@@ -514,10 +503,10 @@
 </div>
 
   <!-- NIST Docs -->
-<div class="card card-updated" id="sec-nist" data-has-changes="14">
+<div class="card card-updated" id="sec-nist" data-has-changes="17">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>NIST Documentation</span>
-    <span class="card-count">14 updates</span>
+    <span class="card-count">17 updates</span>
     </span>
     <span class="toggle-icon">&#9660;</span>
   </div>
@@ -525,72 +514,87 @@
     
       
       <div class="item-row" data-source="nist" data-kind="updated">
-        <a class="item-link" href="" target="_blank">AMD ASP Cryptographic CoProcessor (&#34;Phoenix2&#34;) | Advanced Micro Devices (AMD)View Contacts | FIPS 140-3 | Pending Review  (7/16/2026)</a>
+        <a class="item-link" href="" target="_blank">AMD ASP Cryptographic CoProcessor (&#34;Phoenix2&#34;) | Advanced Micro Devices (AMD)View Contacts | FIPS 140-3 | Review  (7/17/2026)</a>
         <span class="item-meta">cmvp_mip</span>
       </div>
       
       <div class="item-row" data-source="nist" data-kind="updated">
-        <a class="item-link" href="" target="_blank">AWS-LC 4 Cryptographic Module (dynamic) | Amazon Web Services, Inc.View Contacts | FIPS 140-3 | Pending Review  (7/16/2026)</a>
+        <a class="item-link" href="" target="_blank">AWS-LC 4 Cryptographic Module (dynamic) | Amazon Web Services, Inc.View Contacts | FIPS 140-3 | Review  (7/17/2026)</a>
         <span class="item-meta">cmvp_mip</span>
       </div>
       
       <div class="item-row" data-source="nist" data-kind="updated">
-        <a class="item-link" href="" target="_blank">PTP 700 Point to Point Wireless Ethernet Bridge | Cambium Networks, Ltd.View Contacts | FIPS 140-3 | Pending Review  (7/16/2026)</a>
+        <a class="item-link" href="" target="_blank">AWS-LC 4 Cryptographic Module (static) | Amazon Web Services, Inc.View Contacts | FIPS 140-3 | Review  (7/17/2026)</a>
         <span class="item-meta">cmvp_mip</span>
       </div>
       
       <div class="item-row" data-source="nist" data-kind="updated">
-        <a class="item-link" href="" target="_blank">FortiGate 7.2 and 7.4 | Fortinet, Inc.View Contacts | FIPS 140-3 | Comment Resolution - CMVP  (7/16/2026)</a>
+        <a class="item-link" href="" target="_blank">CorSSL | Corsec Security, Inc.View Contacts | FIPS 140-3 | Finalization  (7/17/2026)</a>
         <span class="item-meta">cmvp_mip</span>
       </div>
       
       <div class="item-row" data-source="nist" data-kind="updated">
-        <a class="item-link" href="" target="_blank">Go Cryptographic Module | Geomys LLCView Contacts | FIPS 140-3 | Review  (7/16/2026)</a>
+        <a class="item-link" href="" target="_blank">GSP4000 Hardware Security Module | Futurex LPView Contacts | FIPS 140-3 | Pending Resubmission  (7/17/2026)</a>
         <span class="item-meta">cmvp_mip</span>
       </div>
       
       <div class="item-row" data-source="nist" data-kind="updated">
-        <a class="item-link" href="" target="_blank">Geotab Extended Cryptographic Module | Geotab Inc.View Contacts | FIPS 140-3 | Review  (7/16/2026)</a>
+        <a class="item-link" href="" target="_blank">Inline Crypto Engine (ICE) | Google, LLCView Contacts | FIPS 140-3 | Comment Resolution - CMVP  (7/17/2026)</a>
         <span class="item-meta">cmvp_mip</span>
       </div>
       
       <div class="item-row" data-source="nist" data-kind="updated">
-        <a class="item-link" href="" target="_blank">Knuckle Cryptographic Module | Google, Inc.View Contacts | FIPS 140-3 | Review  (7/16/2026)</a>
+        <a class="item-link" href="" target="_blank">Non-Volatile Memory express (NVMe) Data Path Security Cluster (DPSC) Module | Google, LLCView Contacts | FIPS 140-3 | Finalization  (7/17/2026)</a>
         <span class="item-meta">cmvp_mip</span>
       </div>
       
       <div class="item-row" data-source="nist" data-kind="updated">
-        <a class="item-link" href="" target="_blank">Junos® OS Evolved Kernel Cryptographic Module version 2.1 | HPE Juniper NetworkingView Contacts | FIPS 140-3 | Comment Resolution - Lab  (7/16/2026)</a>
+        <a class="item-link" href="" target="_blank">Hikvision FIPS Provider | Hangzhou Hikvision Digital Technology Co., LtdView Contacts | FIPS 140-3 | Pending Review  (7/17/2026)</a>
         <span class="item-meta">cmvp_mip</span>
       </div>
       
       <div class="item-row" data-source="nist" data-kind="updated">
-        <a class="item-link" href="" target="_blank">FIPS Applet on RookySE | IDEMIAView Contacts | FIPS 140-3 | Pending Resubmission  (7/16/2026)</a>
+        <a class="item-link" href="" target="_blank">GlobalProtect App | Palo Alto NetworksView Contacts | FIPS 140-3 | Finalization  (7/17/2026)</a>
         <span class="item-meta">cmvp_mip</span>
       </div>
       
       <div class="item-row" data-source="nist" data-kind="updated">
-        <a class="item-link" href="" target="_blank">Micron® MTC22-P4 Controller Sub Chip Security Subsystem | Micron Technology, Inc.View Contacts | FIPS 140-3 | Comment Resolution - Lab  (7/16/2026)</a>
+        <a class="item-link" href="" target="_blank">WildFire 10.2 WF-500 and WF-500-B | Palo Alto Networks Inc.View Contacts | FIPS 140-3 | Comment Resolution - CMVP  (7/17/2026)</a>
         <span class="item-meta">cmvp_mip</span>
       </div>
       
       <div class="item-row" data-source="nist" data-kind="updated">
-        <a class="item-link" href="" target="_blank">CRYP CARD | Mitsubishi Electric Corporation Kamakura WorksView Contacts | FIPS 140-3 | Comment Resolution - Lab  (7/16/2026)</a>
+        <a class="item-link" href="" target="_blank">Qualcomm® Crypto Engine Core | Qualcomm Technologies, Inc.View Contacts | FIPS 140-3 | Review  (7/17/2026)</a>
         <span class="item-meta">cmvp_mip</span>
       </div>
       
       <div class="item-row" data-source="nist" data-kind="updated">
-        <a class="item-link" href="" target="_blank">Motorola P25 KVL 7000 HSM | Motorola Solutions Inc.View Contacts | FIPS 140-3 | Pending Review  (7/16/2026)</a>
+        <a class="item-link" href="" target="_blank">Samsung Kernel Cryptographic Module | Samsung Electronics Co., Ltd.View Contacts | FIPS 140-3 | Finalization  (7/17/2026)</a>
         <span class="item-meta">cmvp_mip</span>
       </div>
       
       <div class="item-row" data-source="nist" data-kind="updated">
-        <a class="item-link" href="https://csrc.nist.gov/" target="_blank">Displayed | 239</a>
+        <a class="item-link" href="" target="_blank">Silvus Streamcaster Series Mesh 4k Radio | Silvus TechnologiesView Contacts | FIPS 140-3 | Pending Review  (7/18/2026)</a>
         <span class="item-meta">cmvp_mip</span>
       </div>
       
       <div class="item-row" data-source="nist" data-kind="updated">
-        <a class="item-link" href="https://csrc.nist.gov/" target="_blank">Total | 253</a>
+        <a class="item-link" href="" target="_blank">Solidigm® P5430 SSD (ADP-RRR EE) | Solidigm Inc.View Contacts | FIPS 140-3 | Pending Review  (7/17/2026)</a>
+        <span class="item-meta">cmvp_mip</span>
+      </div>
+      
+      <div class="item-row" data-source="nist" data-kind="updated">
+        <a class="item-link" href="" target="_blank">SUSE Linux Enterprise OpenSSL Cryptographic Module | SUSE, LLCView Contacts | FIPS 140-3 | Comment Resolution - CMVP  (7/17/2026)</a>
+        <span class="item-meta">cmvp_mip</span>
+      </div>
+      
+      <div class="item-row" data-source="nist" data-kind="updated">
+        <a class="item-link" href="https://csrc.nist.gov/" target="_blank">Not Displayed | 12</a>
+        <span class="item-meta">cmvp_mip</span>
+      </div>
+      
+      <div class="item-row" data-source="nist" data-kind="updated">
+        <a class="item-link" href="https://csrc.nist.gov/" target="_blank">Total | 251</a>
         <span class="item-meta">cmvp_mip</span>
       </div>
       
@@ -999,7 +1003,7 @@
 <div class="card card-new" id="sec-history" data-has-changes="1">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>Change History</span>
-    <span class="card-count">203 events</span>
+    <span class="card-count">220 events</span>
     <span class="toggle-icon">▼</span>
   </div>
   <div class="card-body">
@@ -1018,6 +1022,193 @@
     </div>
     <div class="timeline" id="history-timeline">
     
+      
+      <div class="tl-entry" data-cat="nist_doc">
+        <div class="tl-date">2026-07-19</div>
+        <div class="tl-body">
+          <div class="tl-title">
+            <span class="tl-badge updated">updated</span>
+            <a href="" target="_blank">NIST cmvp_mip: AMD ASP Cryptographic CoProcessor (&#34;Phoenix2&#34;) | Advanced Mi</a>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="tl-entry" data-cat="nist_doc">
+        <div class="tl-date">2026-07-19</div>
+        <div class="tl-body">
+          <div class="tl-title">
+            <span class="tl-badge updated">updated</span>
+            <a href="" target="_blank">NIST cmvp_mip: AWS-LC 4 Cryptographic Module (dynamic) | Amazon Web Service</a>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="tl-entry" data-cat="nist_doc">
+        <div class="tl-date">2026-07-19</div>
+        <div class="tl-body">
+          <div class="tl-title">
+            <span class="tl-badge updated">updated</span>
+            <a href="" target="_blank">NIST cmvp_mip: AWS-LC 4 Cryptographic Module (static) | Amazon Web Services</a>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="tl-entry" data-cat="nist_doc">
+        <div class="tl-date">2026-07-19</div>
+        <div class="tl-body">
+          <div class="tl-title">
+            <span class="tl-badge updated">updated</span>
+            <a href="" target="_blank">NIST cmvp_mip: CorSSL | Corsec Security, Inc.View Contacts | FIPS 140-3 | F</a>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="tl-entry" data-cat="nist_doc">
+        <div class="tl-date">2026-07-19</div>
+        <div class="tl-body">
+          <div class="tl-title">
+            <span class="tl-badge updated">updated</span>
+            <a href="" target="_blank">NIST cmvp_mip: GSP4000 Hardware Security Module | Futurex LPView Contacts |</a>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="tl-entry" data-cat="nist_doc">
+        <div class="tl-date">2026-07-19</div>
+        <div class="tl-body">
+          <div class="tl-title">
+            <span class="tl-badge updated">updated</span>
+            <a href="" target="_blank">NIST cmvp_mip: Inline Crypto Engine (ICE) | Google, LLCView Contacts | FIPS</a>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="tl-entry" data-cat="nist_doc">
+        <div class="tl-date">2026-07-19</div>
+        <div class="tl-body">
+          <div class="tl-title">
+            <span class="tl-badge updated">updated</span>
+            <a href="" target="_blank">NIST cmvp_mip: Non-Volatile Memory express (NVMe) Data Path Security Cluste</a>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="tl-entry" data-cat="nist_doc">
+        <div class="tl-date">2026-07-19</div>
+        <div class="tl-body">
+          <div class="tl-title">
+            <span class="tl-badge updated">updated</span>
+            <a href="" target="_blank">NIST cmvp_mip: Hikvision FIPS Provider | Hangzhou Hikvision Digital Technol</a>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="tl-entry" data-cat="nist_doc">
+        <div class="tl-date">2026-07-19</div>
+        <div class="tl-body">
+          <div class="tl-title">
+            <span class="tl-badge updated">updated</span>
+            <a href="" target="_blank">NIST cmvp_mip: GlobalProtect App | Palo Alto NetworksView Contacts | FIPS 1</a>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="tl-entry" data-cat="nist_doc">
+        <div class="tl-date">2026-07-19</div>
+        <div class="tl-body">
+          <div class="tl-title">
+            <span class="tl-badge updated">updated</span>
+            <a href="" target="_blank">NIST cmvp_mip: WildFire 10.2 WF-500 and WF-500-B | Palo Alto Networks Inc.V</a>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="tl-entry" data-cat="nist_doc">
+        <div class="tl-date">2026-07-19</div>
+        <div class="tl-body">
+          <div class="tl-title">
+            <span class="tl-badge updated">updated</span>
+            <a href="" target="_blank">NIST cmvp_mip: Qualcomm® Crypto Engine Core | Qualcomm Technologies, Inc.Vi</a>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="tl-entry" data-cat="nist_doc">
+        <div class="tl-date">2026-07-19</div>
+        <div class="tl-body">
+          <div class="tl-title">
+            <span class="tl-badge updated">updated</span>
+            <a href="" target="_blank">NIST cmvp_mip: Samsung Kernel Cryptographic Module | Samsung Electronics Co</a>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="tl-entry" data-cat="nist_doc">
+        <div class="tl-date">2026-07-19</div>
+        <div class="tl-body">
+          <div class="tl-title">
+            <span class="tl-badge updated">updated</span>
+            <a href="" target="_blank">NIST cmvp_mip: Silvus Streamcaster Series Mesh 4k Radio | Silvus Technologi</a>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="tl-entry" data-cat="nist_doc">
+        <div class="tl-date">2026-07-19</div>
+        <div class="tl-body">
+          <div class="tl-title">
+            <span class="tl-badge updated">updated</span>
+            <a href="" target="_blank">NIST cmvp_mip: Solidigm® P5430 SSD (ADP-RRR EE) | Solidigm Inc.View Contact</a>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="tl-entry" data-cat="nist_doc">
+        <div class="tl-date">2026-07-19</div>
+        <div class="tl-body">
+          <div class="tl-title">
+            <span class="tl-badge updated">updated</span>
+            <a href="" target="_blank">NIST cmvp_mip: SUSE Linux Enterprise OpenSSL Cryptographic Module | SUSE, L</a>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="tl-entry" data-cat="nist_doc">
+        <div class="tl-date">2026-07-19</div>
+        <div class="tl-body">
+          <div class="tl-title">
+            <span class="tl-badge updated">updated</span>
+            <a href="https://csrc.nist.gov/" target="_blank">NIST cmvp_mip: Not Displayed | 12</a>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="tl-entry" data-cat="nist_doc">
+        <div class="tl-date">2026-07-19</div>
+        <div class="tl-body">
+          <div class="tl-title">
+            <span class="tl-badge updated">updated</span>
+            <a href="https://csrc.nist.gov/" target="_blank">NIST cmvp_mip: Total | 251</a>
+          </div>
+          
+        </div>
+      </div>
       
       <div class="tl-entry" data-cat="nist_doc">
         <div class="tl-date">2026-07-18</div>
@@ -3262,7 +3453,7 @@
 </div><!-- /main-content -->
 <footer>
   <span>CC Pulse &middot; Auto-refreshes daily (01:00 EST) &middot; NIAP, CSfC, NIST, CC Portal, NATO NIAPCL, EUCC / ENISA</span>
-  <span>Last run: 2026-07-18 03:39 ET</span>
+  <span>Last run: 2026-07-19 04:06 ET</span>
 </footer>
 
 <script>

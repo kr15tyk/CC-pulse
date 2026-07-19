@@ -2,19 +2,22 @@
 <rss version="2.0"><channel>
 <title>CC Pulse</title>
 <link>https://kr15tyk.github.io/CC-pulse/cc_dashboard.html</link>
-<description>Common Criteria monitoring - 2026-07-18 03:39 ET</description>
+<description>Common Criteria monitoring - 2026-07-19 04:06 ET</description>
 <item><title>NIST cmvp_mip: AMD ASP Cryptographic CoProcessor ("Phoenix2") | Advanced Mi</title><link>#d13775</link><description>New item on NIST CSRC cmvp_mip page.</description></item>
 <item><title>NIST cmvp_mip: AWS-LC 4 Cryptographic Module (dynamic) | Amazon Web Service</title><link>#d13708</link><description>New item on NIST CSRC cmvp_mip page.</description></item>
-<item><title>NIST cmvp_mip: PTP 700 Point to Point Wireless Ethernet Bridge | Cambium Ne</title><link>#d13356</link><description>New item on NIST CSRC cmvp_mip page.</description></item>
-<item><title>NIST cmvp_mip: FortiGate 7.2 and 7.4 | Fortinet, Inc.View Contacts | FIPS 1</title><link>#d12915</link><description>New item on NIST CSRC cmvp_mip page.</description></item>
-<item><title>NIST cmvp_mip: Go Cryptographic Module | Geomys LLCView Contacts | FIPS 140</title><link>#d13601</link><description>New item on NIST CSRC cmvp_mip page.</description></item>
-<item><title>NIST cmvp_mip: Geotab Extended Cryptographic Module | Geotab Inc.View Conta</title><link>#d13567</link><description>New item on NIST CSRC cmvp_mip page.</description></item>
-<item><title>NIST cmvp_mip: Knuckle Cryptographic Module | Google, Inc.View Contacts | F</title><link>#d13701</link><description>New item on NIST CSRC cmvp_mip page.</description></item>
-<item><title>NIST cmvp_mip: Junos® OS Evolved Kernel Cryptographic Module version 2.1 | </title><link>#d13243</link><description>New item on NIST CSRC cmvp_mip page.</description></item>
-<item><title>NIST cmvp_mip: FIPS Applet on RookySE | IDEMIAView Contacts | FIPS 140-3 | </title><link>#d13726</link><description>New item on NIST CSRC cmvp_mip page.</description></item>
-<item><title>NIST cmvp_mip: Micron® MTC22-P4 Controller Sub Chip Security Subsystem | Mi</title><link>#d13126</link><description>New item on NIST CSRC cmvp_mip page.</description></item>
-<item><title>NIST cmvp_mip: CRYP CARD | Mitsubishi Electric Corporation Kamakura WorksVi</title><link>#d13699</link><description>New item on NIST CSRC cmvp_mip page.</description></item>
-<item><title>NIST cmvp_mip: Motorola P25 KVL 7000 HSM | Motorola Solutions Inc.View Cont</title><link>#d13763</link><description>New item on NIST CSRC cmvp_mip page.</description></item>
-<item><title>NIST cmvp_mip: Displayed | 239</title><link></link><description>New item on NIST CSRC cmvp_mip page.</description></item>
-<item><title>NIST cmvp_mip: Total | 253</title><link></link><description>New item on NIST CSRC cmvp_mip page.</description></item>
+<item><title>NIST cmvp_mip: AWS-LC 4 Cryptographic Module (static) | Amazon Web Services</title><link>#d13709</link><description>New item on NIST CSRC cmvp_mip page.</description></item>
+<item><title>NIST cmvp_mip: CorSSL | Corsec Security, Inc.View Contacts | FIPS 140-3 | F</title><link>#d13669</link><description>New item on NIST CSRC cmvp_mip page.</description></item>
+<item><title>NIST cmvp_mip: GSP4000 Hardware Security Module | Futurex LPView Contacts |</title><link>#d13084</link><description>New item on NIST CSRC cmvp_mip page.</description></item>
+<item><title>NIST cmvp_mip: Inline Crypto Engine (ICE) | Google, LLCView Contacts | FIPS</title><link>#d13497</link><description>New item on NIST CSRC cmvp_mip page.</description></item>
+<item><title>NIST cmvp_mip: Non-Volatile Memory express (NVMe) Data Path Security Cluste</title><link>#d13600</link><description>New item on NIST CSRC cmvp_mip page.</description></item>
+<item><title>NIST cmvp_mip: Hikvision FIPS Provider | Hangzhou Hikvision Digital Technol</title><link>#d13380</link><description>New item on NIST CSRC cmvp_mip page.</description></item>
+<item><title>NIST cmvp_mip: GlobalProtect App | Palo Alto NetworksView Contacts | FIPS 1</title><link>#d13670</link><description>New item on NIST CSRC cmvp_mip page.</description></item>
+<item><title>NIST cmvp_mip: WildFire 10.2 WF-500 and WF-500-B | Palo Alto Networks Inc.V</title><link>#d-9000</link><description>New item on NIST CSRC cmvp_mip page.</description></item>
+<item><title>NIST cmvp_mip: Qualcomm® Crypto Engine Core | Qualcomm Technologies, Inc.Vi</title><link>#d13766</link><description>New item on NIST CSRC cmvp_mip page.</description></item>
+<item><title>NIST cmvp_mip: Samsung Kernel Cryptographic Module | Samsung Electronics Co</title><link>#d13555</link><description>New item on NIST CSRC cmvp_mip page.</description></item>
+<item><title>NIST cmvp_mip: Silvus Streamcaster Series Mesh 4k Radio | Silvus Technologi</title><link>#d13589</link><description>New item on NIST CSRC cmvp_mip page.</description></item>
+<item><title>NIST cmvp_mip: Solidigm® P5430 SSD (ADP-RRR EE) | Solidigm Inc.View Contact</title><link>#d13575</link><description>New item on NIST CSRC cmvp_mip page.</description></item>
+<item><title>NIST cmvp_mip: SUSE Linux Enterprise OpenSSL Cryptographic Module | SUSE, L</title><link>#d-9000</link><description>New item on NIST CSRC cmvp_mip page.</description></item>
+<item><title>NIST cmvp_mip: Not Displayed | 12</title><link></link><description>New item on NIST CSRC cmvp_mip page.</description></item>
+<item><title>NIST cmvp_mip: Total | 251</title><link></link><description>New item on NIST CSRC cmvp_mip page.</description></item>
 </channel></rss>
