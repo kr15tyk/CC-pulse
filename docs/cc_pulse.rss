@@ -2,22 +2,8 @@
 <rss version="2.0"><channel>
 <title>CC Pulse</title>
 <link>https://kr15tyk.github.io/CC-pulse/cc_dashboard.html</link>
-<description>Common Criteria monitoring - 2026-07-19 04:06 ET</description>
-<item><title>NIST cmvp_mip: AMD ASP Cryptographic CoProcessor ("Phoenix2") | Advanced Mi</title><link>#d13775</link><description>New item on NIST CSRC cmvp_mip page.</description></item>
-<item><title>NIST cmvp_mip: AWS-LC 4 Cryptographic Module (dynamic) | Amazon Web Service</title><link>#d13708</link><description>New item on NIST CSRC cmvp_mip page.</description></item>
-<item><title>NIST cmvp_mip: AWS-LC 4 Cryptographic Module (static) | Amazon Web Services</title><link>#d13709</link><description>New item on NIST CSRC cmvp_mip page.</description></item>
-<item><title>NIST cmvp_mip: CorSSL | Corsec Security, Inc.View Contacts | FIPS 140-3 | F</title><link>#d13669</link><description>New item on NIST CSRC cmvp_mip page.</description></item>
-<item><title>NIST cmvp_mip: GSP4000 Hardware Security Module | Futurex LPView Contacts |</title><link>#d13084</link><description>New item on NIST CSRC cmvp_mip page.</description></item>
-<item><title>NIST cmvp_mip: Inline Crypto Engine (ICE) | Google, LLCView Contacts | FIPS</title><link>#d13497</link><description>New item on NIST CSRC cmvp_mip page.</description></item>
-<item><title>NIST cmvp_mip: Non-Volatile Memory express (NVMe) Data Path Security Cluste</title><link>#d13600</link><description>New item on NIST CSRC cmvp_mip page.</description></item>
-<item><title>NIST cmvp_mip: Hikvision FIPS Provider | Hangzhou Hikvision Digital Technol</title><link>#d13380</link><description>New item on NIST CSRC cmvp_mip page.</description></item>
-<item><title>NIST cmvp_mip: GlobalProtect App | Palo Alto NetworksView Contacts | FIPS 1</title><link>#d13670</link><description>New item on NIST CSRC cmvp_mip page.</description></item>
-<item><title>NIST cmvp_mip: WildFire 10.2 WF-500 and WF-500-B | Palo Alto Networks Inc.V</title><link>#d-9000</link><description>New item on NIST CSRC cmvp_mip page.</description></item>
-<item><title>NIST cmvp_mip: Qualcomm® Crypto Engine Core | Qualcomm Technologies, Inc.Vi</title><link>#d13766</link><description>New item on NIST CSRC cmvp_mip page.</description></item>
-<item><title>NIST cmvp_mip: Samsung Kernel Cryptographic Module | Samsung Electronics Co</title><link>#d13555</link><description>New item on NIST CSRC cmvp_mip page.</description></item>
-<item><title>NIST cmvp_mip: Silvus Streamcaster Series Mesh 4k Radio | Silvus Technologi</title><link>#d13589</link><description>New item on NIST CSRC cmvp_mip page.</description></item>
-<item><title>NIST cmvp_mip: Solidigm® P5430 SSD (ADP-RRR EE) | Solidigm Inc.View Contact</title><link>#d13575</link><description>New item on NIST CSRC cmvp_mip page.</description></item>
-<item><title>NIST cmvp_mip: SUSE Linux Enterprise OpenSSL Cryptographic Module | SUSE, L</title><link>#d-9000</link><description>New item on NIST CSRC cmvp_mip page.</description></item>
-<item><title>NIST cmvp_mip: Not Displayed | 12</title><link></link><description>New item on NIST CSRC cmvp_mip page.</description></item>
-<item><title>NIST cmvp_mip: Total | 251</title><link></link><description>New item on NIST CSRC cmvp_mip page.</description></item>
+<description>Common Criteria monitoring - 2026-07-20 04:47 ET</description>
+<item><title>NIST cmvp_mip: Samsung SAS TCG Enterprise SSC SEDs PM1653a Series | Samsung</title><link>#d13543</link><description>New item on NIST CSRC cmvp_mip page.</description></item>
+<item><title>NIST cmvp_mip: Displayed | 238</title><link></link><description>New item on NIST CSRC cmvp_mip page.</description></item>
+<item><title>NIST cmvp_mip: Total | 250</title><link></link><description>New item on NIST CSRC cmvp_mip page.</description></item>
 </channel></rss>
