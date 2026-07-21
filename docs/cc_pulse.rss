@@ -2,8 +2,29 @@
 <rss version="2.0"><channel>
 <title>CC Pulse</title>
 <link>https://kr15tyk.github.io/CC-pulse/cc_dashboard.html</link>
-<description>Common Criteria monitoring - 2026-07-20 04:47 ET</description>
-<item><title>NIST cmvp_mip: Samsung SAS TCG Enterprise SSC SEDs PM1653a Series | Samsung</title><link>#d13543</link><description>New item on NIST CSRC cmvp_mip page.</description></item>
-<item><title>NIST cmvp_mip: Displayed | 238</title><link></link><description>New item on NIST CSRC cmvp_mip page.</description></item>
-<item><title>NIST cmvp_mip: Total | 250</title><link></link><description>New item on NIST CSRC cmvp_mip page.</description></item>
+<description>Common Criteria monitoring - 2026-07-21 04:14 ET</description>
+<item><title>NIST cmvp_mip: AMD ASP Cryptographic CoProcessor ("Granite Ridge") | Advanc</title><link>#d13776</link><description>New item on NIST CSRC cmvp_mip page.</description></item>
+<item><title>NIST cmvp_mip: Amazon Linux 2023 GnuTLS Cryptographic Module | Amazon Web S</title><link>#d13483</link><description>New item on NIST CSRC cmvp_mip page.</description></item>
+<item><title>NIST cmvp_mip: Arista MACsec data plane accelerator [on-chip-driver] | Aris</title><link>#d13351</link><description>New item on NIST CSRC cmvp_mip page.</description></item>
+<item><title>NIST cmvp_mip: Canonical Ltd. Ubuntu 22.04 GnuTLS Cryptographic Module | Ca</title><link>#d-9000</link><description>New item on NIST CSRC cmvp_mip page.</description></item>
+<item><title>NIST cmvp_mip: Canonical Ltd. Ubuntu 22.04 Libgcrypt Cryptographic Module |</title><link>#d-9000</link><description>New item on NIST CSRC cmvp_mip page.</description></item>
+<item><title>NIST cmvp_mip: Canonical Ltd. Ubuntu 22.04 Strongswan Cryptographic Module </title><link>#d-9000</link><description>New item on NIST CSRC cmvp_mip page.</description></item>
+<item><title>NIST cmvp_mip: HiCOS PKI Applet V4 on IDEMIA ID-One Cosmo X | Chunghwa Tele</title><link>#d13716</link><description>New item on NIST CSRC cmvp_mip page.</description></item>
+<item><title>NIST cmvp_mip: Dell BSAFE™ Crypto Module for C | Dell Australia Pty Limited</title><link>#d-9000</link><description>New item on NIST CSRC cmvp_mip page.</description></item>
+<item><title>NIST cmvp_mip: Dell BSAFE Crypto Module for Java | Dell Inc., BSAFE Product</title><link>#d-9000</link><description>New item on NIST CSRC cmvp_mip page.</description></item>
+<item><title>NIST cmvp_mip: MonoCrypt AES Enhanced Crypto Library | Focus Systems Corpor</title><link>#d13717</link><description>New item on NIST CSRC cmvp_mip page.</description></item>
+<item><title>NIST cmvp_mip: Fortanix DSM Appliance | Fortanix, Inc.View Contacts | FIPS </title><link>#d13635</link><description>New item on NIST CSRC cmvp_mip page.</description></item>
+<item><title>NIST cmvp_mip: HPE Juniper Networking EX4400 Ethernet Switch | HPE Juniper </title><link>#d13774</link><description>New item on NIST CSRC cmvp_mip page.</description></item>
+<item><title>NIST cmvp_mip: HPE Juniper Networking MX10004, MX10008 and MX10016 with MAC</title><link>#d13437</link><description>New item on NIST CSRC cmvp_mip page.</description></item>
+<item><title>NIST cmvp_mip: Juniper Networks vSRX Virtual Firewall | Juniper Networks, I</title><link>#d13252</link><description>New item on NIST CSRC cmvp_mip page.</description></item>
+<item><title>NIST cmvp_mip: Motorola Solutions Cryptographic Software Module | Motorola </title><link>#d-9000</link><description>New item on NIST CSRC cmvp_mip page.</description></item>
+<item><title>NIST cmvp_mip: X5 Postal Security Device (PSD) | Pitney Bowes, Inc.View Con</title><link>#d-9000</link><description>New item on NIST CSRC cmvp_mip page.</description></item>
+<item><title>NIST cmvp_mip: ENFORCER R2 | Private Machines Inc.View Contacts | FIPS 140-</title><link>#d12936</link><description>New item on NIST CSRC cmvp_mip page.</description></item>
+<item><title>NIST cmvp_mip: Privoro SafeCase Security Module | Privoro LLCView Contacts </title><link>#d13348</link><description>New item on NIST CSRC cmvp_mip page.</description></item>
+<item><title>NIST cmvp_mip: CE Crypto Module | Senetas Corporation Ltd, distributed by T</title><link>#d-9000</link><description>New item on NIST CSRC cmvp_mip page.</description></item>
+<item><title>NIST cmvp_mip: Luna T7 | Thales Trusted Cyber TechnologiesView Contacts | F</title><link>#d13015</link><description>New item on NIST CSRC cmvp_mip page.</description></item>
+<item><title>NIST cmvp_mip: Trellix Core Cryptographic AES Module | TrellixView Contacts</title><link>#d13469</link><description>New item on NIST CSRC cmvp_mip page.</description></item>
+<item><title>NIST cmvp_mip: Displayed | 233</title><link></link><description>New item on NIST CSRC cmvp_mip page.</description></item>
+<item><title>NIST cmvp_mip: Not Displayed | 13</title><link></link><description>New item on NIST CSRC cmvp_mip page.</description></item>
+<item><title>NIST cmvp_mip: Total | 246</title><link></link><description>New item on NIST CSRC cmvp_mip page.</description></item>
 </channel></rss>
