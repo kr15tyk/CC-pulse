@@ -255,21 +255,16 @@ class TestGetHtml:
         assert fallback.call_args.kwargs["impersonate"] == "chrome"
         browser_response.raise_for_status.assert_called_once()
 
-    def test_nato_403_uses_chrome_impersonation_fallback(self):
+    def test_nato_403_fails_gracefully_without_retry_or_bypass(self):
         blocked = MagicMock()
         blocked.status_code = 403
-        browser_response = MagicMock()
-        browser_response.text = "<html><main>NATO products</main></html>"
 
         with patch.object(collector.SESSION, "get", return_value=blocked):
-            with patch.object(
-                collector.curl_requests, "get", return_value=browser_response
-            ) as fallback:
-                collector._do_get_html(_cfg.NATO_BASE + "/Search/NIAPC")
+            with patch.object(collector, "curl_requests") as fallback:
+                result = collector._do_get_html(_cfg.NATO_BASE + "/Search/NIAPC")
 
-        fallback.assert_called_once()
-        assert fallback.call_args.kwargs["impersonate"] == "chrome"
-        browser_response.raise_for_status.assert_called_once()
+        assert result is None
+        fallback.get.assert_not_called()
 
 
 # ===========================================================================
