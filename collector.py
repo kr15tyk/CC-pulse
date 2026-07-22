@@ -82,12 +82,18 @@ def _do_get_html(url, timeout=30):
             "(bot-detection, IP reputation, or missing browser headers)",
             url,
         )
-        browser_fallback_bases = tuple(
-            str(getattr(config, name, "")).lower()
-            for name in ("CSFC_BASE", "NATO_BASE")
-            if getattr(config, name, "")
-        )
-        if url.lower().startswith(browser_fallback_bases):
+        nato_base = str(getattr(config, "NATO_BASE", "")).lower()
+        if nato_base and url.lower().startswith(nato_base):
+            log.warning(
+                "NATO NIAPCL blocked this request (403) and its own error "
+                "page threatens forensic action against automated access. "
+                "Failing gracefully without retrying or attempting to "
+                "bypass the block; this source will report as stale until "
+                "access is authorized through an official channel."
+            )
+            return None
+        csfc_base = str(getattr(config, "CSFC_BASE", "")).lower()
+        if csfc_base and url.lower().startswith(csfc_base):
             log.info("Retrying WAF-protected page with a Chrome-compatible TLS fingerprint...")
             browser_response = curl_requests.get(
                 url,
