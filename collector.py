@@ -1,6 +1,6 @@
 """
 collector.py — Pulls all data from NIAP APIs, CC Portal, CCTL labs,
-              CSfC pages, CC Crypto Catalog, and NIST CSRC.
+              CSfC pages, CC Crypto Catalog.
 
 Features:
   - Exponential-backoff retry on every HTTP call
@@ -10,7 +10,6 @@ Features:
   - Sanity-check validation before accepting a snapshot
   - Structured CSfC APL records with component type tagging (fix #18)
   - CCTL scraper health warnings for empty-result detectors (fix #19)
-  - Structured CMVP MIP table parsing with named fields (fix #20)
 """
 
 import hashlib
@@ -142,7 +141,7 @@ def _partial_get_hash(url: str, nbytes: int = 2048) -> str:
     """Fetch the first `nbytes` bytes of a URL and return an MD5 hex-digest.
 
     Used as a fallback when a server does not return useful Last-Modified /
-    ETag headers (common for NSA and NIST PDF servers behind CDNs/WAFs).
+    ETag headers (common for NSA PDF servers behind CDNs/WAFs).
     If the partial GET fails, returns an empty string so the diff logic
     still works without crashing.
     """
@@ -681,22 +680,11 @@ def validate_snapshot(snapshot):
             "CC Portal may be down — snapshot kept but flagged.",
             crypto_pubs_count, config.SANITY_MIN_CC_CRYPTO_PUBS,
         )
-
-    nist_news_count = len(
-        snapshot.get("nist", {}).get("pages", {}).get("news", [])
-    )
-    if nist_news_count < config.SANITY_MIN_NIST_NEWS:
-        log.warning(
-            "NIST CSRC news page returned only %d items (minimum expected: %d). "
-            "NIST CSRC may be down or blocking — snapshot kept but flagged.",
-            nist_news_count, config.SANITY_MIN_NIST_NEWS,
-        )
-
     log.info(
         "[Validation] Sanity checks passed "
-        "(PCL:%d PPs:%d CSfC-APL:%d CSfC-Announcements:%d CryptoPubs:%d NISTNews:%d).",
+        "(PCL:%d PPs:%d CSfC-APL:%d CSfC-Announcements:%d CryptoPubs:%d).",
         pcl_count, pps_count, csfc_apl_count, csfc_announcements_count,
-        crypto_pubs_count, nist_news_count,
+        crypto_pubs_count,
     )
 
 
@@ -1165,7 +1153,6 @@ def collect_all(validate: bool = True):
         "cctl_labs": collect_cctl_labs,
         "csfc":      collect_csfc,
         "cc_crypto": collect_cc_crypto,
-        "nist":      collect_nist,
         "nato":      collect_nato,
         "eucc":      collect_eucc,
         "nd_itc":    collect_nd_itc,
@@ -1203,7 +1190,6 @@ def collect_all(validate: bool = True):
         "cctl_labs":      results.get("cctl_labs", {}),
         "csfc":           results.get("csfc",      {}),
         "cc_crypto":      results.get("cc_crypto", {}),
-        "nist":           results.get("nist",      {}),
         "nato":           results.get("nato",      {}),
         "eucc":           results.get("eucc",      {}),
         "nd_itc":         results.get("nd_itc",    {}),
@@ -1523,111 +1509,8 @@ def collect_cc_crypto() -> dict:
     return data
 
 
-# ── NIST CSRC Monitoring ──────────────────────────────────────────────────────
-def _scrape_nist_page(path: str) -> list:
-    """Scrape a NIST CSRC page and return a list of text/link items."""
-    url  = config.NIST_CSRC_BASE + path
-    soup = get_html(url)
-    if not soup:
-        return []
-    items = []
 
-    # The news page uses result cards below #body-section. A generic
-    # ``.container`` appears much earlier in the government-site header, so
-    # selecting that container first silently produced an empty news snapshot.
-    if path.rstrip("/").lower() == "/news":
-        for title in soup.select(".news-list-title"):
-            link = title.find("a", href=True)
-            text = (
-                link.get_text(" ", strip=True)
-                if link else title.get_text(" ", strip=True)
-            )
-            if not text:
-                continue
-            href = urljoin(url, link.get("href", "")) if link else ""
-            items.append({"text": text[:400], "href": href})
-        if items:
-            return items
-
-    content = (
-        soup.find("div", {"id": "body-section"})
-        or soup.find("div", {"id": "main-content"})
-        or soup.find("main")
-        or soup.find("div", {"class": "container"})
-        or soup
-    )
-    # CMVP MIP page uses a table — extract rows as structured records (fix #20)
-    # Columns (as of 2024): Vendor | Module Name | FIPS Cert # | Validation Auth Date | Status
-    table = content.find("table") if content else None
-    if table:
-        headers_raw = [th.get_text(strip=True) for th in table.find_all("th")]
-        for tr in table.find_all("tr")[1:]:
-            cells = [td.get_text(strip=True) for td in tr.find_all("td")]
-            if not cells:
-                continue
-            link_tag = tr.find("a")
-            href = link_tag["href"] if link_tag and link_tag.get("href") else ""
-            # Build a named-field record when headers are available
-            if headers_raw and len(headers_raw) >= len(cells):
-                record = dict(zip(headers_raw, cells))
-                record["href"] = href
-                # Also include a text summary for backwards compat with existing diff logic
-                record["text"] = " | ".join(cells[:4])[:400]
-            else:
-                record = {"text": " | ".join(cells[:4])[:400], "href": href}
-            items.append(record)
-    else:
-        for tag in content.find_all(["h2", "h3", "h4", "p", "li", "td"]):
-            text = tag.get_text(separator=" ", strip=True)
-            link = tag.find("a")
-            href = link["href"] if link and link.get("href") else ""
-            if len(text) > 20:
-                items.append({"text": text[:400], "href": href})
-    seen:   set = set()
-    unique: list = []
-    for item in items:
-        key = item["text"][:120]
-        if key not in seen:
-            seen.add(key)
-            unique.append(item)
-    return unique
-
-def collect_nist() -> dict:
-    """Collect NIST CSRC monitoring data:
-      - CSRC page snapshots (news, FIPS, CMVP MIP, PQC project, crypto standards)
-      - HTTP header polling of key NIST crypto PDFs (with partial-GET fallback)
-      - NIST cybersecurity RSS feeds
-    """
-    log.info("[NIST] Collecting...")
-    data: dict = {
-        "pages": {},
-        "feeds": {},
-    }
-
-    for page_key, path in config.NIST_CSRC_PAGES.items():
-        log.debug("  [NIST] Scraping page: %s (%s)...", page_key, path)
-        data["pages"][page_key] = _scrape_nist_page(path)
-        log.debug("    -> %d items", len(data["pages"][page_key]))
-
-    for feed in config.NIST_FEEDS:
-        name = feed["name"]
-        log.debug("  [NIST] Feed: %s...", name)
-        if feed.get("rss"):
-            items = get_rss(feed["rss"])
-        elif feed.get("scrape") and feed.get("url"):
-            items = scrapelab_items(feed["url"])
-        else:
-            items = []
-        data["feeds"][name] = items
-        log.debug("    -> %d items", len(items))
-
-    news_count = len(data["pages"].get("news", []))
-    mip_count  = len(data["pages"].get("cmvp_mip", []))
-    log.info("[NIST] news-items:%d cmvp-mip-modules:%d", news_count, mip_count)
-    return data
-
-
-# ── Per-domain CLI entry point (issue #20 — parallel matrix support) ─────────────────
+# ── Per-domain CLI entry point (issue #20 — parallel matrix support) ─────────────────────────────────────────
 
 #: Maps domain name → collector function.
 #: Used by `collect_domain()` and the `--domain` CLI flag so that each
@@ -1639,7 +1522,6 @@ DOMAIN_COLLECTORS: dict = {
     "cctl_labs": collect_cctl_labs,
     "csfc":      collect_csfc,
     "cc_crypto": collect_cc_crypto,
-    "nist":      collect_nist,
     "nato":      collect_nato,
     "eucc":      collect_eucc,
     "nd_itc":    collect_nd_itc,
@@ -1653,7 +1535,7 @@ def collect_domain(name: str, out_dir: str = "snapshots/partial") -> dict:
     matrix job.  The partial file is later merged by `main.py --merge`.
 
     Args:
-        name:    One of the keys in DOMAIN_COLLECTORS (e.g. "niap", "nist").
+        name:    One of the keys in DOMAIN_COLLECTORS (e.g. "niap", "csfc").
         out_dir: Directory in which to write `<name>.json`.  Created if absent.
 
     Returns:
@@ -1704,7 +1586,7 @@ if __name__ == "__main__":
         "--domain",
         required=True,
         choices=sorted(DOMAIN_COLLECTORS),
-        help="Domain to collect (e.g. niap, nist, nato).",
+        help="Domain to collect (e.g. niap, csfc, nato).",
     )
     parser.add_argument(
         "--out-dir",
