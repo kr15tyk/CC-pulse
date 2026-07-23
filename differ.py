@@ -314,88 +314,6 @@ def flag_alerts(diff: Snapshot) -> list[dict]:
                 _add_text(f"CC Crypto: {page_key}", "publication",
                           item.get("text", ""),
                           url=page_url, detail=detail, tab="us")
-
-    # NIST page changes — fire unconditionally for high-value pages (fix #27)
-    # FIPS publications and CSRC news are always worth notifying on.
-    # Other pages (PQC, crypto standards, CMVP validated) still keyword-filter.
-    _nist_page_urls = {
-        "news": "https://csrc.nist.gov/news",
-        "fips": "https://csrc.nist.gov/publications/fips",
-        "cmvp_mip": "https://csrc.nist.gov/projects/cryptographic-module-validation-program/modules-in-process/modules-in-process-list",
-        "pqc": "https://csrc.nist.gov/projects/post-quantum-cryptography",
-        "crypto_standards":"https://csrc.nist.gov/projects/cryptographic-standards-and-guidelines",
-        "cmvp_validated": "https://csrc.nist.gov/projects/cryptographic-module-validation-program/validated-modules",
-    }
-    _nist_unconditional_pages = {"news", "fips"}  # always notify, no keyword filter needed
-    for page_key, page_diff in diff.get("nist", {}).get("pages", {}).items():
-        # cmvp_mip is diffed structurally below (added/status_changes with
-        # meaningful old→new detail). Scanning its raw page text here double-
-        # reported every status change: the changed row text looked like a
-        # "new item" and matched "FIPS 140-3" (present in every MIP row),
-        # producing a second, uninformative alert per module (2026-07-09).
-        if page_key == "cmvp_mip":
-            continue
-        if isinstance(page_diff, dict):
-            items_to_check = page_diff.get("added", [])
-        else:
-            items_to_check = []
-        for item in items_to_check:
-            page_url = item.get("href") or _nist_page_urls.get(page_key, "https://csrc.nist.gov/")
-            detail = f"New item on NIST CSRC {page_key.replace('_', ' ')} page"
-            if page_key in _nist_unconditional_pages:
-                # Always alert — no keyword filter
-                title = item.get("text", "")[:120]
-                _add(alerts, f"NIST: {page_key}", "publication", title,
-                     url=page_url, detail=detail, tab="us")
-            else:
-                _add_text(f"NIST: {page_key}", "publication",
-                          item.get("text", ""),
-                          url=page_url, detail=detail, tab="us")
-
-    # CMVP MIP changes — alert on Cisco modules only (fix #27, narrowed).
-    # The full MIP list churns constantly across all vendors; those moves are
-    # visible on the dashboard but only Cisco's own modules warrant an
-    # immediate email/Webex alert.
-    def _is_cisco_module(rec: dict) -> bool:
-        blob = " ".join(
-            str(rec.get(k) or "")
-            for k in ("Module Name", "name", "Vendor", "vendor", "text")
-        ).lower()
-        return any(kw in blob for kw in config.CISCO_VENDOR_KEYWORDS)
-
-    cmvp_mip = diff.get("nist", {}).get("cmvp_mip", {})
-    for item in cmvp_mip.get("added", []):
-        if not _is_cisco_module(item):
-            continue
-        name = item.get("Module Name") or item.get("name") or item.get("text", "")[:80]
-        vendor = item.get("Vendor") or item.get("vendor") or ""
-        status = item.get("Status") or item.get("status") or ""
-        title = f"{name}" + (f" ({vendor})" if vendor else "")
-        detail = f"New module in CMVP modules-in-process" + (f" — Status: {status}" if status else "")
-        _add(alerts, "NIST CMVP MIP", "new", title,
-             url=_nist_page_urls["cmvp_mip"], detail=detail,
-             keywords=["cisco", "CMVP"], tab="us")
-    for item in cmvp_mip.get("status_changes", []):
-        if not _is_cisco_module(item):
-            continue
-        name = item.get("Module Name") or item.get("name") or item.get("text", "")[:80]
-        vendor = item.get("Vendor") or item.get("vendor") or ""
-        title = f"{name}" + (f" ({vendor})" if vendor else "")
-        detail = f"CMVP status: {item.get('old_status', '?')} → {item.get('new_status', '?')}"
-        _add(alerts, "NIST CMVP MIP", "updated", title,
-             url=_nist_page_urls["cmvp_mip"], detail=detail,
-             keywords=["cisco", "CMVP"], tab="us")
-
-    # NIST RSS feed new items — always alert (all items are crypto/security relevant)
-    for feed_name, items in diff.get("nist", {}).get("feeds", {}).items():
-        for item in items:
-            title = item.get("title", "")
-            _add(alerts, f"NIST Feed: {feed_name}", "news",
-                 title,
-                 url=item.get("link") or "https://csrc.nist.gov/",
-                 detail=f"Feed: {feed_name} · Published: {(item.get('published') or '')[:16] or 'N/A'}",
-                 tab="us")
-
     # NATO NIAPCL — Cisco additions are alert-worthy by construction (the
     # list is already Cisco-filtered), so they use unconditional _add with an
     # explicit "cisco" keyword rather than the keyword-gated _add_text. The
@@ -806,43 +724,6 @@ def _diff_doc_headers(old_docs: dict, new_docs: dict) -> dict:
             }
     return result
 
-def _diff_cmvp_mip(old_mip: list, new_mip: list) -> dict:
-    """Diff CMVP modules-in-process by module name.
-
-    Tracks:
-    - added: new modules appearing in MIP list
-    - removed: modules that left the MIP list (validated or withdrawn)
-    - status_changes: modules whose validation status changed
-
-    Each record is expected to have 'Module Name' and 'Status' fields
-    (from the structured CMVP MIP table parser in collector.py).
-    Returns a dict with 'added', 'removed', 'status_changes' lists.
-    """
-    def _key(r: dict) -> str:
-        return (r.get("Module Name") or r.get("name") or r.get("text") or "").strip().lower()
-
-    old_map = {_key(r): r for r in old_mip if _key(r)}
-    new_map = {_key(r): r for r in new_mip if _key(r)}
-
-    added = [new_map[k] for k in set(new_map) - set(old_map)]
-    removed = [old_map[k] for k in set(old_map) - set(new_map)]
-
-    status_changes = []
-    for k in set(old_map) & set(new_map):
-        old_status = (old_map[k].get("Status") or old_map[k].get("status") or "").strip()
-        new_status = (new_map[k].get("Status") or new_map[k].get("status") or "").strip()
-        if old_status and new_status and old_status != new_status:
-            status_changes.append({
-                **new_map[k],
-                "old_status": old_status,
-                "new_status": new_status,
-            })
-
-    log.debug("[CMVP MIP Diff] added:%d removed:%d status_changes:%d",
-              len(added), len(removed), len(status_changes))
-    return {"added": added, "removed": removed, "status_changes": status_changes}
-
-
 def _diff_selection_links(old_links: dict, new_links: dict) -> dict:
     """Diff two {category_heading: full_href} dicts.
 
@@ -1143,8 +1024,6 @@ def compute_diff(old_snapshot: Snapshot, new_snapshot: Snapshot) -> Snapshot:
     new_cs = new_snapshot.get("csfc", {})
     old_cc = old_snapshot.get("cc_crypto", {})
     new_cc = new_snapshot.get("cc_crypto", {})
-    old_ni = old_snapshot.get("nist", {})
-    new_ni = new_snapshot.get("nist", {})
     old_na = old_snapshot.get("nato", {})
     new_na = new_snapshot.get("nato", {})
     old_eu = old_snapshot.get("eucc", {})
@@ -1171,7 +1050,6 @@ def compute_diff(old_snapshot: Snapshot, new_snapshot: Snapshot) -> Snapshot:
         "cctl_labs": diff_cctl_labs(old_l, new_l),
         "csfc": diff_csfc(old_cs, new_cs),
         "cc_crypto": diff_cc_crypto(old_cc, new_cc),
-        "nist": diff_nist(old_ni, new_ni),
         "nato": diff_nato(old_na, new_na),
         "eucc": diff_eucc(old_eu, new_eu),
         "nd_itc": diff_nd_itc(old_snapshot.get("nd_itc", {}),
@@ -1227,7 +1105,6 @@ def merge_weekly_diffs(diffs: list[Snapshot]) -> Snapshot:
         ("cctl_labs", {}),
         ("csfc", {"feeds": {}, "pages": {}, "selection_links": {}}),
         ("cc_crypto", {"pages": {}}),
-        ("nist", {"pages": {}, "cmvp_mip": {"added": [], "removed": [], "status_changes": []}, "feeds": {}}),
         ("nato", {"pages": {}, "cisco_added": [], "cisco_removed": []}),  # fix #23
         ("eucc", {"pages": {}, "cisco_added": [], "cisco_removed": []}),  # fix #23
         ("nd_itc", copy.deepcopy(_EMPTY_ND_ITC_DIFF)),
@@ -1245,12 +1122,6 @@ def merge_weekly_diffs(diffs: list[Snapshot]) -> Snapshot:
         "policies": {"added": [], "revised": [], "archived": [], "reactivated": [], "removed": []},
     }.items():
         weekly["niap"].setdefault(key, copy.deepcopy(default))
-    weekly.setdefault("nist", {})
-    weekly["nist"].setdefault("pages", {})
-    weekly["nist"].setdefault(
-        "cmvp_mip", {"added": [], "removed": [], "status_changes": []}
-    )
-    weekly["nist"].setdefault("feeds", {})
     for d in diffs[1:]:
         # Health is point-in-time metadata; the latest day wins.
         if "source_health" in d:
@@ -1317,21 +1188,6 @@ def merge_weekly_diffs(diffs: list[Snapshot]) -> Snapshot:
                 weekly["cc_crypto"]["pages"][page_key]["added"] = merge_lists(
                     weekly["cc_crypto"]["pages"][page_key]["added"], page_diff["added"])
 
-        # NIST
-        for page_key, page_diff in d.get("nist", {}).get("pages", {}).items():
-            if isinstance(page_diff, dict) and "added" in page_diff:
-                if page_key not in weekly["nist"]["pages"]:
-                    weekly["nist"]["pages"][page_key] = {"added": []}
-                weekly["nist"]["pages"][page_key]["added"] = merge_lists(
-                    weekly["nist"]["pages"][page_key]["added"], page_diff["added"])
-        # cmvp_mip: take latest status_changes / added (last day wins — avoid duplicates)
-        for key in ("added", "removed", "status_changes"):
-            weekly["nist"]["cmvp_mip"][key] = merge_lists(
-                weekly["nist"].get("cmvp_mip", {}).get(key, []),
-                d.get("nist", {}).get("cmvp_mip", {}).get(key, []))
-        for feed_name, items in d.get("nist", {}).get("feeds", {}).items():
-            weekly["nist"]["feeds"][feed_name] = merge_lists(
-                weekly["nist"]["feeds"].get(feed_name, []), items)
         # NATO -- fix #23: merge nato pages and cisco_added/removed
         for page_key, page_diff in d.get("nato", {}).get("pages", {}).items():
             if isinstance(page_diff, dict) and "added" in page_diff:
@@ -1407,36 +1263,3 @@ def diff_cc_crypto(old_cc: Snapshot, new_cc: Snapshot) -> Snapshot:
     page_changes = sum(len(v.get("added", [])) for v in pages.values())
     log.info("[CC Crypto Diff] page-items-added:%d", page_changes)
     return {"pages": pages}
-
-# -- NIST CSRC diff ------------------------------------------------------------
-def diff_nist(old_nist: Snapshot, new_nist: Snapshot) -> Snapshot:
-    """Diff two NIST CSRC snapshots.
-
-    Doc header polling removed (fix #27): CDN header rotation produced
-    false positives with no actionable signal. NIST changes are now
-    tracked via page scrapes (news, FIPS, CMVP MIP) and RSS feeds.
-    CMVP MIP is diffed as a structured list to track module status changes.
-    """
-    pages = _diff_pages(old_nist.get("pages", {}), new_nist.get("pages", {}))
-    feeds = _diff_feeds(
-        old_nist.get("feeds", {}),
-        new_nist.get("feeds", {}),
-        categorize=True,
-    )
-    # Structured CMVP MIP diff (fix #27)
-    old_mip = old_nist.get("pages", {}).get("cmvp_mip", [])
-    new_mip = new_nist.get("pages", {}).get("cmvp_mip", [])
-    # cmvp_mip pages entry is a list of structured records from the table parser
-    if isinstance(old_mip, dict):
-        old_mip = old_mip.get("added", [])
-    if isinstance(new_mip, dict):
-        new_mip = new_mip.get("added", [])
-    cmvp_mip = _diff_cmvp_mip(old_mip, new_mip)
-
-    page_changes = sum(len(v.get("added", [])) for v in pages.values() if isinstance(v, dict))
-    feed_new = sum(len(v) for v in feeds.values())
-    log.info(
-        "[NIST Diff] page-items-added:%d cmvp-added:%d cmvp-status-changes:%d feed-new:%d",
-        page_changes, len(cmvp_mip["added"]), len(cmvp_mip["status_changes"]), feed_new,
-    )
-    return {"pages": pages, "cmvp_mip": cmvp_mip, "feeds": feeds}
