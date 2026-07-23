@@ -90,7 +90,7 @@ KEEP_SNAPSHOTS = 30  # days
 
 DOMAIN_KEYS = (
     "niap", "cc_portal", "cctl_labs", "csfc",
-    "cc_crypto", "nist", "nato", "eucc", "nd_itc",
+    "cc_crypto", "nato", "eucc", "nd_itc",
 )
 
 DOMAIN_LABELS = {
@@ -99,7 +99,6 @@ DOMAIN_LABELS = {
     "cctl_labs": "CCTL Labs",
     "csfc": "CSfC",
     "cc_crypto": "CC Crypto",
-    "nist": "NIST CSRC",
     "nato": "NATO NIAPCL",
     "eucc": "EUCC / ENISA",
     "nd_itc": "ND-iTC",
@@ -240,7 +239,6 @@ def _source_health_checks(snapshot: dict) -> dict[str, list[dict]]:
     cctl_labs = snapshot.get("cctl_labs", {})
     csfc = snapshot.get("csfc", {})
     cc_crypto = snapshot.get("cc_crypto", {})
-    nist = snapshot.get("nist", {})
     nato = snapshot.get("nato", {})
     eucc = snapshot.get("eucc", {})
 
@@ -272,11 +270,6 @@ def _source_health_checks(snapshot: dict) -> dict[str, list[dict]]:
             {"name": "publications", "observed": len(
                 cc_crypto.get("pages", {}).get("publications", [])
             ), "minimum": config.SANITY_MIN_CC_CRYPTO_PUBS},
-        ],
-        "nist": [
-            {"name": "CSRC news items", "observed": len(
-                nist.get("pages", {}).get("news", [])
-            ), "minimum": config.SANITY_MIN_NIST_NEWS},
         ],
         "nato": [
             {"name": "NIAPCL products", "observed": len(
@@ -647,7 +640,6 @@ def _empty_snapshot() -> dict:
         "cctl_labs": {},
         "csfc":      {"pages": {}, "capability_package_headers": {}, "feeds": {}},
         "cc_crypto": {"pages": {}},
-        "nist":      {"pages": {}, "cmvp_mip": {"added": [], "removed": [], "status_changes": []}, "feeds": {}},
         "nato":      {"pages": {}, "cisco_added": [], "cisco_removed": []},
         "eucc":      {"pages": {}, "cisco_added": [], "cisco_removed": []},
         "nd_itc":    {"nit_rfis": [], "nit_rfis_archived": [],
@@ -789,16 +781,7 @@ def _fire_alerts(diff: dict, emailer) -> None:
         )
         emailer.send_niap_news_webex(niap_content_changes)
 
-    # -- NIST CMVP MIP changes (fix #27) ------------------------------------------
-    cmvp_mip = diff.get("nist", {}).get("cmvp_mip", {})
-    if cmvp_mip.get("added") or cmvp_mip.get("status_changes"):
-        log.info(
-            "%d CMVP MIP addition(s), %d status change(s) — sending Webex notification...",
-            len(cmvp_mip.get("added", [])), len(cmvp_mip.get("status_changes", [])),
-        )
-        emailer.send_nist_cmvp_webex(cmvp_mip)
-
-        # -- Daily status heartbeat (always fires unless DRY_RUN) ----------------
+    # -- Daily status heartbeat (always fires unless DRY_RUN) ----------------
     emailer.send_daily_status_email(diff)
 
 # ── Run modes ─────────────────────────────────────────────────────────────────────────────────────
@@ -854,7 +837,7 @@ def run_daily(output_dir: str = None) -> None:
             if isinstance(obj, dict):
                 return {k: _clear_lists(v) for k, v in obj.items()}
             return obj
-        for section in ("niap", "cc_portal", "cctl_labs", "csfc", "cc_crypto", "nist", "nato", "eucc"):  # fix #23
+        for section in ("niap", "cc_portal", "cctl_labs", "csfc", "cc_crypto", "nato", "eucc"):  # fix #23
             if section in diff:
                 diff[section] = _clear_lists(diff[section])
         diff["alerts"] = []
@@ -929,8 +912,7 @@ def run_merge(partial_dir: str = "snapshots/partial", output_dir: str = None) ->
         "cctl_labs": domain_data.get("cctl_labs", {}),
         "csfc":      domain_data.get("csfc", {}),
         "cc_crypto": domain_data.get("cc_crypto", {}),
-        "nist":      domain_data.get("nist", {}),
-        "nato":      domain_data.get("nato", {}),
+                "nato":      domain_data.get("nato", {}),
         "eucc":      domain_data.get("eucc", {}),
         "nd_itc":    domain_data.get("nd_itc", {}),
     }
@@ -968,7 +950,7 @@ def run_merge(partial_dir: str = "snapshots/partial", output_dir: str = None) ->
             if isinstance(obj, dict):
                 return {k: _clear_lists(v) for k, v in obj.items()}
             return obj
-        for section in ("niap", "cc_portal", "cctl_labs", "csfc", "cc_crypto", "nist", "nato", "eucc"):
+        for section in ("niap", "cc_portal", "cctl_labs", "csfc", "cc_crypto", "nato", "eucc"):
             if section in diff:
                 diff[section] = _clear_lists(diff[section])
         diff["alerts"] = []
