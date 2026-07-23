@@ -179,7 +179,7 @@
   <span class="nav-title">CC Pulse Dashboard</span>
   <span class="nav-spacer"></span>
   <div class="ham-wrap">
-    <span class="nav-meta">Last run: 2026-07-22 04:15 ET</span>
+    <span class="nav-meta">Last run: 2026-07-23 04:19 ET</span>
     <button class="ham-btn" id="ham-btn" onclick="toggleHamMenu()" aria-expanded="false" aria-haspopup="true" title="Open menu">&#9776;</button>
     <div class="ham-menu" id="ham-menu" role="menu">
       <a class="ham-item" href="https://kr15tyk.github.io/CC-pulse/cc_dashboard.html" role="menuitem"><span class="ham-icon">&#127968;</span>Home</a>
@@ -262,7 +262,7 @@
 <div class="sticky-top">
   <div class="trend-bar">
     <div class="stat"><a href="#sec-niap-pp" onclick="navigateTo('sec-niap-pp');return false;">
-      <div class="stat-num active-num">7</div>
+      <div class="stat-num active-num">3</div>
       <div class="stat-lbl">NIAP Changes</div>
     </a></div>
     <div class="stat"><a href="#sec-csfc" onclick="navigateTo('sec-csfc');return false;">
@@ -270,7 +270,7 @@
       <div class="stat-lbl">CSfC Selection Updates</div>
     </a></div>
     <div class="stat"><a href="#sec-nist" onclick="navigateTo('sec-nist');return false;">
-      <div class="stat-num active-num">12</div>
+      <div class="stat-num active-num">9</div>
       <div class="stat-lbl">NIST Doc Updates</div>
     </a></div>
     <div class="stat"><a href="#sec-cc-portal" onclick="navigateTo('sec-cc-portal');return false;">
@@ -290,7 +290,7 @@
       <div class="stat-lbl">EUCC Changes</div>
     </a></div>
     <div class="stat"><a href="#sec-alerts" onclick="navigateTo('sec-alerts');return false;">
-      <div class="stat-num ">0</div>
+      <div class="stat-num alert-num">2</div>
       <div class="stat-lbl">Alerts</div>
     </a></div>
   </div>
@@ -316,6 +316,37 @@
       
 <!-- Alerts -->
 
+<div class="section-group">
+<div class="card card-alert" id="sec-alerts">
+  <div class="card-hdr" onclick="toggleCard(this)">
+    <span>Alerts</span>
+    <span class="card-count">2 alerts</span>
+    <span class="toggle-icon">&#9660;</span>
+  </div>
+  <div class="card-body">
+    <div class="alert-monitoring">FIPS 186-4, FIPS 186-5, NDcPP, CPP_ND, TLS 1.3, SSH, PP-Module_VPN, PP-Module_WLAN, labgram, valgram, emergency, CSfC, Commercial Solutions for Classified, CSfC APL, CSfC component selections, NSA CSfC, NATO NIAPC, NIAPCL, EUCC, ENISA, CCDB-018, Crypto Catalog, cryptography working group, Specification of Functional Requirements for Cryptography, FCS_CKM, FCS_COP, FCS_RBG, CAVP, CMVP, FIPS 140-3, FIPS 203, FIPS 204, FIPS 205, SP 800-131A, SP 800-57, NIST IR 8547, post-quantum cryptography, PQC migration, ML-KEM, ML-DSA, SLH-DSA, algorithm transition, CMVP validated, modules in process</div>
+    
+        <div class="item-row alert-item" data-alert-key="NIST: news-Security_Guidelines_for_Storage_Infrastructure" data-tab="us">
+          
+          <a class="item-link" href="https://csrc.nist.gov/News/2026/security-guidelines-storage-infrastructure-draft" target="_blank">NIST: news: Security Guidelines for Storage Infrastructure</a>
+          
+          <span class="item-meta">publication &middot; </span>
+          <div class="item-sub">New item on NIST CSRC news page</div>
+          <button class="dismiss-btn" onclick="dismissAlert(this)" title="Mark as seen">&#10003; Seen</button>
+        </div>
+        
+        <div class="item-row alert-item" data-alert-key="NIST Feed: NIST Information Technology News-Back_to_Basics:_Foundational_Cybersecurity_Practices_for_Small_Businesses" data-tab="us">
+          
+          <a class="item-link" href="https://www.nist.gov/news-events/events/2026/08/back-basics-foundational-cybersecurity-practices-small-businesses" target="_blank">NIST Feed: NIST Information Technology News: Back to Basics: Foundational Cybersecurity Practices for Small Businesses</a>
+          
+          <span class="item-meta">news &middot; </span>
+          <div class="item-sub">Feed: NIST Information Technology News · Published: Thu, 20 Aug 2026</div>
+          <button class="dismiss-btn" onclick="dismissAlert(this)" title="Mark as seen">&#10003; Seen</button>
+        </div>
+        
+  </div>
+</div>
+
 <div class="tab-nav" id="region-tabs">
         <button class="tab-btn active" data-tab="us" onclick="switchTab(this)">&#127482;&#127480; US (NIAP / CSfC / NIST)</button>
         <button class="tab-btn" data-tab="intl" onclick="switchTab(this)">&#127760; International</button>
@@ -339,49 +370,22 @@
     
     
     
-    <p class="no-change">No changes detected. <span class="last-active">(last: 2026-07-22)</span></p>
+    <p class="no-change">No changes detected. <span class="last-active">(last: 2026-07-23)</span></p>
   </div>
 </div>
 
   <!-- NIAP In-Evaluation -->
-<div class="card card-new" id="sec-niap-inevaluation" data-has-changes="4">
+<div class="card " id="sec-niap-inevaluation" data-has-changes="0">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>NIAP In-Evaluation Products</span>
-    <span class="card-count">4 changes</span>
+    <span class="card-count">39 active</span>
     </span>
   </div>
-  <div class="card-body ">
-    
-    <div class="sub-hdr sub-new">Newly In Evaluation (1)</div>
-    
-    <div class="item-row" data-source="niap-inevaluation" data-kind="new">
-      <span class="item-link">Arista Networks, Inc. -- Arista Networks IPsec Routing Platforms with EOS/CloudEOS v4.35: AWE 7200R Series Routers and Virtual Appliances</span>
-      <span class="item-meta">Lightship Security USA, Inc.</span>
-    </div>
-    
-    <div class="item-sub">Network Device, Network Encryption, Virtual Private Network</div>
+  <div class="card-body collapsed">
     
     
     
-    
-    <div class="sub-hdr sub-removed">Left Evaluation (3)</div>
-    
-    <div class="item-row" data-source="niap-inevaluation" data-kind="removed">
-      <span class="item-link">RedData, an RPI-CS, Inc. division -- RedData PCIe Gen3 NVMe 1.3 &amp; SATA III SED SSDs</span>
-      <span class="item-meta">Completed or Withdrawn</span>
-    </div>
-    
-    <div class="item-row" data-source="niap-inevaluation" data-kind="removed">
-      <span class="item-link">Apple Inc. -- Apple macOS 26 Tahoe</span>
-      <span class="item-meta">Completed or Withdrawn</span>
-    </div>
-    
-    <div class="item-row" data-source="niap-inevaluation" data-kind="removed">
-      <span class="item-link">Progress Software Technologies Ltd -- Progress LoadMaster</span>
-      <span class="item-meta">Completed or Withdrawn</span>
-    </div>
-    
-    
+    <p class="no-change">No evaluation changes detected. 39 products currently in evaluation.</p>
     
   </div>
 </div>
@@ -448,39 +452,23 @@
 </div>
 
   <!-- NIAP PCL — All Certifications -->
-<div class="card card-new" id="sec-niap-pcl" data-has-changes="3">
+<div class="card card-new" id="sec-niap-pcl" data-has-changes="1">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>NIAP PCL — All Certifications</span>
-    <span class="card-count">3 changes</span>
+    <span class="card-count">1 change</span>
     </span>
   </div>
   <div class="card-body ">
     
-    <div class="sub-hdr sub-new">New Certifications (3)</div>
     
-    <div class="item-row" data-source="niap-pcl" data-kind="new">
-      <span class="item-link">RedData, an RPI-CS, Inc. division -- RedData PCIe Gen3 NVMe 1.3 &amp; SATA III SED SSDs</span>
-      <span class="item-meta">2026-07-14</span>
+    <div class="sub-hdr sub-updated">Newly Archived (1)</div>
+    
+    <div class="item-row" data-source="niap-pcl" data-kind="archived">
+      <span class="item-link">RUCKUS Wireless LLC -- CommScope Technologies LLC, Ruckus FastIron ICX Series Switch/Router 10.0.10 with MACsec</span>
+      <span class="item-meta">Archived</span>
     </div>
     
-    <div class="item-sub">CPP_FDE_EE_V2.0E</div>
-    
-    
-    <div class="item-row" data-source="niap-pcl" data-kind="new">
-      <span class="item-link">Progress Software Technologies Ltd -- Progress LoadMaster</span>
-      <span class="item-meta">2026-07-08</span>
-    </div>
-    
-    <div class="item-sub">CPP_ND_V3.0E</div>
-    
-    
-    <div class="item-row" data-source="niap-pcl" data-kind="new">
-      <span class="item-link">Apple Inc. -- Apple macOS 26 Tahoe</span>
-      <span class="item-meta">2026-07-17</span>
-    </div>
-    
-    <div class="item-sub">MOD_BT_V1.0, PKG_TLS_V1.1, MOD_WLANC_v1.0, PP_OS_V4.3</div>
-    
+    <div class="item-sub">CPP_ND_V2.2E, MOD_MACSEC_V1.0</div>
     
     
     
@@ -507,17 +495,36 @@
 </div>
 
   <!-- NIAP TDs -->
-<div class="card " id="sec-niap-td" data-has-changes="0">
+<div class="card card-new" id="sec-niap-td" data-has-changes="2">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>NIAP Technical Decisions</span>
-    <span class="card-count">0 changes</span>
+    <span class="card-count">2 changes</span>
     </span>
-    <span class="toggle-icon">&#9658;</span>
+    <span class="toggle-icon">&#9660;</span>
   </div>
-  <div class="card-body collapsed">
+  <div class="card-body ">
+    
+    <div class="sub-hdr sub-new">New TDs (2)</div>
+    
+    <div class="item-row" data-source="niap-td" data-kind="new">
+      <a class="item-link" href="https://www.niap-ccevs.org/technical-decisions/TD1052" target="_blank">TD1052 &mdash; NIT Technical Decision: Separation of Test Definitions for DTLSv1.2 and v1.3 (Renegotiation)</a>
+      <span class="item-meta">2026-07-22</span>
+    </div>
+    
+    <div class="item-sub">Applies to: CPP_ND_V3.0E</div>
     
     
-    <p class="no-change">No changes detected.</p>
+    <div class="item-row" data-source="niap-td" data-kind="new">
+      <a class="item-link" href="https://www.niap-ccevs.org/technical-decisions/TD1054" target="_blank">TD1054 &mdash; Correction to FIPS Pub 186-5 Appendix References</a>
+      <span class="item-meta">2026-07-22</span>
+    </div>
+    
+    <div class="item-sub">Applies to: MOD_VPNGW_v2.0</div>
+    
+    
+    
+    
+    
   </div>
 </div>
 </div>
@@ -557,10 +564,10 @@
 </div>
 
   <!-- NIST Docs -->
-<div class="card card-updated" id="sec-nist" data-has-changes="12">
+<div class="card card-updated" id="sec-nist" data-has-changes="9">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>NIST Documentation</span>
-    <span class="card-count">12 updates</span>
+    <span class="card-count">9 updates</span>
     </span>
     <span class="toggle-icon">&#9660;</span>
   </div>
@@ -568,63 +575,50 @@
     
       
       <div class="item-row" data-source="nist" data-kind="updated">
-        <a class="item-link" href="" target="_blank">Amazon Linux 2023 OpenSSL FIPS Provider | Amazon Web Services, Inc.View Contacts | FIPS 140-3 | Comment Resolution - CMVP  (7/21/2026)</a>
+        <a class="item-link" href="" target="_blank">Chainguard FIPS Provider for OpenSSL | Chainguard, Inc.View Contacts | FIPS 140-3 | Pending Resubmission  (7/22/2026)</a>
         <span class="item-meta">cmvp_mip</span>
       </div>
       
       <div class="item-row" data-source="nist" data-kind="updated">
-        <a class="item-link" href="" target="_blank">PTP 700 Point to Point Wireless Ethernet Bridge | Cambium Networks, Ltd.View Contacts | FIPS 140-3 | Review  (7/21/2026)</a>
+        <a class="item-link" href="" target="_blank">FUJIFILM BI Cryptographic Kernel Module for WRL | FUJIFILM Business Innovation Corp.View Contacts | FIPS 140-3 | Review  (7/22/2026)</a>
         <span class="item-meta">cmvp_mip</span>
       </div>
       
       <div class="item-row" data-source="nist" data-kind="updated">
-        <a class="item-link" href="" target="_blank">Google Tensor 6th Gen UFS Inline Storage Encryption Engine | Google LLCView Contacts | FIPS 140-3 | Pending Review  (7/21/2026)</a>
+        <a class="item-link" href="" target="_blank">Harris AES Load Module | L3Harris Technologies, Inc.View Contacts | FIPS 140-3 | Pending Resubmission  (7/22/2026)</a>
         <span class="item-meta">cmvp_mip</span>
       </div>
       
       <div class="item-row" data-source="nist" data-kind="updated">
-        <a class="item-link" href="" target="_blank">B227 True Random Number Generator (TRNG) Cryptographic Module | Google, LLCView Contacts | FIPS 140-3 | Finalization  (7/21/2026)</a>
+        <a class="item-link" href="" target="_blank">Motorola P25 KVL 7000 HSM | Motorola Solutions Inc.View Contacts | FIPS 140-3 | Review  (7/22/2026)</a>
         <span class="item-meta">cmvp_mip</span>
       </div>
       
       <div class="item-row" data-source="nist" data-kind="updated">
-        <a class="item-link" href="" target="_blank">HPE Juniper Networking SRX2300/4120/4700 Services Gateways | HPE Juniper NetworkingView Contacts | FIPS 140-3 | Cost Recovery  (7/22/2026)</a>
+        <a class="item-link" href="" target="_blank">H100 Tensor Core GPU | Nvidia CorporationView Contacts | FIPS 140-3 | Review  (7/22/2026)</a>
         <span class="item-meta">cmvp_mip</span>
       </div>
       
       <div class="item-row" data-source="nist" data-kind="updated">
-        <a class="item-link" href="" target="_blank">FIPS Applet on RookySE | IDEMIAView Contacts | FIPS 140-3 | Pending Resubmission  (7/21/2026)</a>
+        <a class="item-link" href="" target="_blank">Ruckus Networks SmartZone (vSZ) | Ruckus Wireless LLCView Contacts | FIPS 140-3 | Comment Resolution - CMVP  (7/22/2026)</a>
         <span class="item-meta">cmvp_mip</span>
       </div>
       
       <div class="item-row" data-source="nist" data-kind="updated">
-        <a class="item-link" href="" target="_blank">Juniper Networks SRX1K/4K/5K/2300/4300 Services Gateways | Juniper Networks, IncView Contacts | FIPS 140-3 | Pending Resubmission  (7/21/2026)</a>
+        <a class="item-link" href="" target="_blank">CryptoComply 140-3 FIPS Provider with PQC | SafeLogic, Inc.View Contacts | FIPS 140-3 | Review  (7/22/2026)</a>
         <span class="item-meta">cmvp_mip</span>
       </div>
       
       <div class="item-row" data-source="nist" data-kind="updated">
-        <a class="item-link" href="" target="_blank">GlobalProtect App | Palo Alto NetworksView Contacts | FIPS 140-3 | Review  (7/21/2026)</a>
+        <a class="item-link" href="" target="_blank">IDPrime PIV 4.1 FIDO 2.1 on IDcore 3230 | ThalesView Contacts | FIPS 140-3 | Cost Recovery  (7/22/2026)</a>
         <span class="item-meta">cmvp_mip</span>
       </div>
       
-      <div class="item-row" data-source="nist" data-kind="updated">
-        <a class="item-link" href="" target="_blank">Quadient Postal Security Device | Quadient Technologies FranceView Contacts | FIPS 140-3 | Comment Resolution - CMVP  (7/21/2026)</a>
-        <span class="item-meta">cmvp_mip</span>
-      </div>
+    
       
       <div class="item-row" data-source="nist" data-kind="updated">
-        <a class="item-link" href="" target="_blank">Solidigm® P5336 SSD (ADP-RRR VE) | Solidigm Inc.View Contacts | FIPS 140-3 | Pending Review  (7/21/2026)</a>
-        <span class="item-meta">cmvp_mip</span>
-      </div>
-      
-      <div class="item-row" data-source="nist" data-kind="updated">
-        <a class="item-link" href="https://csrc.nist.gov/" target="_blank">Displayed | 230</a>
-        <span class="item-meta">cmvp_mip</span>
-      </div>
-      
-      <div class="item-row" data-source="nist" data-kind="updated">
-        <a class="item-link" href="https://csrc.nist.gov/" target="_blank">Total | 243</a>
-        <span class="item-meta">cmvp_mip</span>
+        <a class="item-link" href="https://csrc.nist.gov/News/2026/security-guidelines-storage-infrastructure-draft" target="_blank">Security Guidelines for Storage Infrastructure</a>
+        <span class="item-meta">news</span>
       </div>
       
     
@@ -663,7 +657,7 @@
             
             
             
-            <div class="sub-hdr sub-new">cisco_products — New Items (30)</div>
+            <div class="sub-hdr sub-new">all_products — New Items (30)</div>
             
             <div class="item-row" data-source="nato" data-kind="new">
               <a class="item-link" href="https://www.ia.nato.int/niapc/Product/Cisco-ASA-5500-X-Series-Next-Generation-Firewalls_589" target="_blank">Cisco ASA 5500-X Series Next-Generation Firewalls</a>
@@ -818,7 +812,7 @@
             
             
             
-            <div class="sub-hdr sub-new">all_products — New Items (30)</div>
+            <div class="sub-hdr sub-new">cisco_products — New Items (30)</div>
             
             <div class="item-row" data-source="nato" data-kind="new">
               <a class="item-link" href="https://www.ia.nato.int/niapc/Product/Cisco-ASA-5500-X-Series-Next-Generation-Firewalls_589" target="_blank">Cisco ASA 5500-X Series Next-Generation Firewalls</a>
@@ -1032,7 +1026,7 @@
 <div class="card card-new" id="sec-history" data-has-changes="1">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>Change History</span>
-    <span class="card-count">262 events</span>
+    <span class="card-count">273 events</span>
     <span class="toggle-icon">▼</span>
   </div>
   <div class="card-body">
@@ -1051,6 +1045,127 @@
     </div>
     <div class="timeline" id="history-timeline">
     
+      
+      <div class="tl-entry" data-cat="td_new">
+        <div class="tl-date">2026-07-23</div>
+        <div class="tl-body">
+          <div class="tl-title">
+            <span class="tl-badge new">new</span>
+            <a href="https://www.niap-ccevs.org/technical-decisions/TD1052" target="_blank">New TD: TD1052</a>
+          </div>
+          <div class="tl-detail">NIT Technical Decision: Separation of Test Definitions for DTLSv1.2 and v1.3 (Renegotiation)</div>
+        </div>
+      </div>
+      
+      <div class="tl-entry" data-cat="td_new">
+        <div class="tl-date">2026-07-23</div>
+        <div class="tl-body">
+          <div class="tl-title">
+            <span class="tl-badge new">new</span>
+            <a href="https://www.niap-ccevs.org/technical-decisions/TD1054" target="_blank">New TD: TD1054</a>
+          </div>
+          <div class="tl-detail">Correction to FIPS Pub 186-5 Appendix References</div>
+        </div>
+      </div>
+      
+      <div class="tl-entry" data-cat="nist_doc">
+        <div class="tl-date">2026-07-23</div>
+        <div class="tl-body">
+          <div class="tl-title">
+            <span class="tl-badge updated">updated</span>
+            <a href="" target="_blank">NIST cmvp_mip: Chainguard FIPS Provider for OpenSSL | Chainguard, Inc.View </a>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="tl-entry" data-cat="nist_doc">
+        <div class="tl-date">2026-07-23</div>
+        <div class="tl-body">
+          <div class="tl-title">
+            <span class="tl-badge updated">updated</span>
+            <a href="" target="_blank">NIST cmvp_mip: FUJIFILM BI Cryptographic Kernel Module for WRL | FUJIFILM B</a>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="tl-entry" data-cat="nist_doc">
+        <div class="tl-date">2026-07-23</div>
+        <div class="tl-body">
+          <div class="tl-title">
+            <span class="tl-badge updated">updated</span>
+            <a href="" target="_blank">NIST cmvp_mip: Harris AES Load Module | L3Harris Technologies, Inc.View Con</a>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="tl-entry" data-cat="nist_doc">
+        <div class="tl-date">2026-07-23</div>
+        <div class="tl-body">
+          <div class="tl-title">
+            <span class="tl-badge updated">updated</span>
+            <a href="" target="_blank">NIST cmvp_mip: Motorola P25 KVL 7000 HSM | Motorola Solutions Inc.View Cont</a>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="tl-entry" data-cat="nist_doc">
+        <div class="tl-date">2026-07-23</div>
+        <div class="tl-body">
+          <div class="tl-title">
+            <span class="tl-badge updated">updated</span>
+            <a href="" target="_blank">NIST cmvp_mip: H100 Tensor Core GPU | Nvidia CorporationView Contacts | FIP</a>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="tl-entry" data-cat="nist_doc">
+        <div class="tl-date">2026-07-23</div>
+        <div class="tl-body">
+          <div class="tl-title">
+            <span class="tl-badge updated">updated</span>
+            <a href="" target="_blank">NIST cmvp_mip: Ruckus Networks SmartZone (vSZ) | Ruckus Wireless LLCView Co</a>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="tl-entry" data-cat="nist_doc">
+        <div class="tl-date">2026-07-23</div>
+        <div class="tl-body">
+          <div class="tl-title">
+            <span class="tl-badge updated">updated</span>
+            <a href="" target="_blank">NIST cmvp_mip: CryptoComply 140-3 FIPS Provider with PQC | SafeLogic, Inc.V</a>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="tl-entry" data-cat="nist_doc">
+        <div class="tl-date">2026-07-23</div>
+        <div class="tl-body">
+          <div class="tl-title">
+            <span class="tl-badge updated">updated</span>
+            <a href="" target="_blank">NIST cmvp_mip: IDPrime PIV 4.1 FIDO 2.1 on IDcore 3230 | ThalesView Contact</a>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="tl-entry" data-cat="nist_doc">
+        <div class="tl-date">2026-07-23</div>
+        <div class="tl-body">
+          <div class="tl-title">
+            <span class="tl-badge updated">updated</span>
+            <a href="https://csrc.nist.gov/News/2026/security-guidelines-storage-infrastructure-draft" target="_blank">NIST news: Security Guidelines for Storage Infrastructure</a>
+          </div>
+          
+        </div>
+      </div>
       
       <div class="tl-entry" data-cat="pcl_cert">
         <div class="tl-date">2026-07-22</div>
@@ -3944,7 +4059,7 @@
 </div><!-- /main-content -->
 <footer>
   <span>CC Pulse &middot; Auto-refreshes daily (01:00 EST) &middot; NIAP, CSfC, NIST, CC Portal, NATO NIAPCL, EUCC / ENISA</span>
-  <span>Last run: 2026-07-22 04:15 ET</span>
+  <span>Last run: 2026-07-23 04:19 ET</span>
 </footer>
 
 <script>
