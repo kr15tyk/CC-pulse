@@ -12,7 +12,7 @@ CC Pulse collects public records into dated JSON snapshots and compares each acc
 | NIAP announcements and events | Additions, revisions, deactivations, reactivations, and removals |
 | NIAP policies | Active/archived transitions, metadata revisions, addendum changes, removals, and PDF SHA-256 changes |
 | NSA CSfC | Components List additions/removals, announcements, and selection-link version changes |
-| NIST CSRC and CC Crypto | New page items, feed items, documents, and CMVP changes |
+| CC Crypto | New page items, feed items, and documents |
 | CC Portal and CCTL labs | New international portal records and laboratory posts |
 | NATO NIAPCL and EUCC | Product/certificate additions, removals, and Cisco-specific changes |
 | ND-iTC | NIT RFI additions, status changes, revisions, and archival; Allowed-With list entry additions/removals, version changes, and list-document updates |
@@ -31,7 +31,7 @@ Each source domain is validated before diffing. NIAP announcements, events, and 
 
 When a collection fails, is incomplete, or drops suspiciously:
 
-1. The affected collection keeps its last-known-good records. This applies at three levels: a whole domain that fails its representative check, a NIAP subcollection (announcements, events, policies) validated independently, and any secondary collection — any domain's `pages`/`feeds`/top-level list — that collapses to below half its prior size from a baseline of at least `COLLAPSE_MIN_BASELINE` items. The last catches partial-fetch collapses in collections that aren't the domain's representative check (for example a NIAP `tds`/`pcl_all`/`in_evaluation` list, or an EUCC/NIST/CSfC secondary page/feed) which would otherwise pass domain-level health while emitting false removals.
+1. The affected collection keeps its last-known-good records. This applies at three levels: a whole domain that fails its representative check, a NIAP subcollection (announcements, events, policies) validated independently, and any secondary collection — any domain's `pages`/`feeds`/top-level list — that collapses to below half its prior size from a baseline of at least `COLLAPSE_MIN_BASELINE` items. The last catches partial-fetch collapses in collections that aren't the domain's representative check (for example a NIAP `tds`/`pcl_all`/`in_evaluation` list, or an EUCC/CSfC secondary page/feed) which would otherwise pass domain-level health while emitting false removals.
 2. Healthy domains continue normally; a collection collapse downgrades only the affected domain to `stale`, carrying its failure counter forward.
 3. The degraded state is recorded in `source_health` metadata and workflow logs.
 4. No false mass-removal diff is generated.

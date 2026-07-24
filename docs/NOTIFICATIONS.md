@@ -22,12 +22,8 @@ Notices are suppressed when the source diff is flagged as a baseline reset (see 
 Alert emails and Webex messages sort matches into three tiers:
 
 1. **Cisco-relevant** — a matched keyword names Cisco itself, NDcPP/PP-Modules, CSfC programmes, or FCS_* crypto SFRs. Broad standards identifiers (FIPS 140-3, FIPS 186-x, SP 800-131A) deliberately do *not* confer this tier: they appear in boilerplate (every CMVP MIP row contains "FIPS 140-3") and previously mislabeled other vendors' modules as Cisco-relevant.
-2. **Standards/NIST** — standards identifiers and transition keywords (FIPS 140-3/203/204/205, CMVP, CAVP, PQC terms).
+2. **Standards** — standards identifiers and transition keywords (FIPS 140-3/203/204/205, PQC terms).
 3. **General** — everything else that matched a watch keyword.
-
-## CMVP Modules-in-Process
-
-Only **Cisco modules** on the CMVP MIP list generate alerts (new entries and status changes, with old → new detail). All vendors' MIP movements remain visible on the dashboard; they are deliberately excluded from email/Webex because the full list churns daily.
 
 ## ND-iTC
 

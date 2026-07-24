@@ -61,7 +61,6 @@ SANITY_MIN_PPS = 10
 SANITY_MIN_CSFC_APL = 5
 SANITY_MIN_CSFC_ANNOUNCEMENTS = 1
 SANITY_MIN_CC_CRYPTO_PUBS = 5
-SANITY_MIN_NIST_NEWS = 10
 
 # -- Per-collection collapse guard ------------------------------------------
 # A domain can pass its representative sanity check (e.g. NIAP PCL is fine)
@@ -130,12 +129,7 @@ NEWS_CATEGORY_KEYWORDS = {
         "key establishment", "digital signature", "hash function",
         "random bit generator", "rbg", "algorithm transition",
     ],
-    "NIST": [
-        "nist", "fips 140", "fips 186", "fips 197", "fips 203", "fips 204", "fips 205",
-        "sp 800", "cmvp", "cavp", "post-quantum", "pqc",
-        "ml-kem", "ml-dsa", "slh-dsa", "csrc",
-    ],
-    "NEWS": [],
+        "NEWS": [],
 }
 
 # -- Watch Keywords (high-priority alert terms) -----------------------------
@@ -172,24 +166,6 @@ WATCH_KEYWORDS = [
     "FCS_CKM",
     "FCS_COP",
     "FCS_RBG",
-    "CAVP",
-    "CMVP",
-    # -- NIST / CSRC ---------------------------------------------------
-    "FIPS 140-3",
-    "FIPS 203",
-    "FIPS 204",
-    "FIPS 205",
-    "SP 800-131A",
-    "SP 800-57",
-    "NIST IR 8547",
-    "post-quantum cryptography",
-    "PQC migration",
-    "ML-KEM",
-    "ML-DSA",
-    "SLH-DSA",
-    "algorithm transition",
-    "CMVP validated",
-    "modules in process",
 ]
 
 # NOTE: BODY_WATCH_KEYWORDS was removed (2026-07-10). It was never referenced
@@ -345,33 +321,3 @@ CC_CRYPTO_NEWS_KEYWORDS = [
     "digital signature", "hash function", "random bit generator", "rbg",
 ]
 
-# =============================================================
-# NIST CSRC Monitoring
-# =============================================================
-NIST_CSRC_BASE = "https://csrc.nist.gov"
-NIST_BASE = "https://www.nist.gov"
-
-NIST_CSRC_PAGES = {
-    "news": "/news",
-    "fips": "/publications/fips",
-    "cmvp_mip": "/projects/cryptographic-module-validation-program/modules-in-process/modules-in-process-list",
-    "pqc": "/projects/post-quantum-cryptography",
-    "crypto_standards":"/projects/cryptographic-standards-and-guidelines",
-    "cmvp_validated": "/projects/cryptographic-module-validation-program/validated-modules",
-}
-
-# NIST_CRYPTO_DOCS removed (fix #27): doc header polling was unreliable.
-# NIST changes are tracked via NIST_CSRC_PAGES scrapes and NIST_FEEDS RSS.
-
-NIST_FEEDS = [
-    {"name": "NIST Cybersecurity News", "rss": "https://www.nist.gov/news-events/cybersecurity/rss.xml", "scrape": False},
-    {"name": "NIST Information Technology News", "rss": "https://www.nist.gov/news-events/information%20technology/rss.xml", "scrape": False},
-    {"name": "NIST Cybersecurity Insights Blog", "rss": "https://www.nist.gov/blogs/cybersecurity-insights/rss.xml", "scrape": False},
-]
-
-NIST_NEWS_KEYWORDS = [
-    "nist", "fips 140", "fips 186", "fips 197", "fips 203", "fips 204", "fips 205",
-    "sp 800", "cmvp", "cavp", "post-quantum", "pqc",
-    "ml-kem", "ml-dsa", "slh-dsa", "algorithm transition",
-    "key management", "cryptographic module", "csrc",
-]
