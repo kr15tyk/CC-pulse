@@ -10,7 +10,6 @@ CC Pulse monitors public cybersecurity certification and standards sources, comp
 |---|---|
 | NIAP | Products, Protection Profiles, Technical Decisions, announcements, events, and policy letters |
 | NSA CSfC | Components List, announcements, capability packages, and selection documents |
-| NIST CSRC | News, FIPS publications, CMVP, and post-quantum standards |
 | CC Portal | International news, Protection Profiles, and certified products |
 | NATO NIAPCL | Certified products and Cisco-specific changes |
 | EUCC / ENISA | Scheme requirements and certificates |
