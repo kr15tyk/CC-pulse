@@ -3,7 +3,7 @@ dashboard.py -- Renders the daily HTML dashboard and RSS feed.
 
 Features:
   - Keyword alert banner (red, top of page)
-  - Trend summary stats panel with anchor links (NIAP + CSfC + CC Crypto + NIST)
+  - Trend summary stats panel with anchor links (NIAP + CSfC + CC Crypto)
   - Collapsible cards (empty sections auto-collapsed)
   - Color-coded section headers (green=new, amber=updated, red=removed/alert)
   - Clickable source links on all items
@@ -51,7 +51,7 @@ def _build_history(n: int = 90) -> list:
       date      - YYYY-MM-DD string
       category  - one of: cisco_cert, cisco_archived, pp_new, pp_removed,
                           td_new, nato_cisco, eucc_cisco, in_eval_new,
-                          in_eval_removed, csfc_change, nist_doc, pcl_cert
+                          in_eval_removed, csfc_change, pcl_cert
       kind      - 'new' | 'removed' | 'updated'
       title     - human-readable one-liner
       detail    - optional sub-text (lab, PPs, etc.)
@@ -199,17 +199,6 @@ def _build_history(n: int = 90) -> list:
                 "url": url,
             })
 
-        # NIST page changes
-        for page_key, page_diff in d.get("nist", {}).get("pages", {}).items():
-            if isinstance(page_diff, dict):
-                for item in page_diff.get("added", []):
-                    entries.append({
-                        "date": date, "category": "nist_doc", "kind": "updated",
-                        "title": f"NIST {page_key}: {(item.get('text') or '')[:60]}",
-                        "detail": "",
-                        "url": item.get("href") or "https://csrc.nist.gov/",
-                    })
-
         # CSfC component selection changes
         for sel_name, sel_data in d.get("csfc", {}).get("selection_links", {}).items():
             if sel_data.get("changed"):
@@ -278,8 +267,6 @@ def _section_daily_counts(diffs: list, section_key: str) -> list:
             )
         elif section_key == "cc_crypto":
             n = sum(len(p.get("added", [])) for p in d.get("cc_crypto", {}).get("pages", {}).values() if isinstance(p, dict))
-        elif section_key == "nist":
-            n = sum(len(p.get("added", [])) for p in d.get("nist", {}).get("pages", {}).values() if isinstance(p, dict))
         elif section_key == "pcl_all":
             pa = d.get("niap", {}).get("pcl_all", {})
             n = (len(pa.get("added", [])) + len(pa.get("removed", [])) +
@@ -508,14 +495,6 @@ DASHBOARD_TEMPLATE = """
         <div class="sources-item"><span class="src-label">CISA Alerts (RSS):</span><a href="https://www.cisa.gov/cybersecurity-advisories/all.xml" target="_blank" rel="noopener">cisa.gov &mdash; All Advisories</a></div>
       </div>
       <div class="sources-group">
-        <div class="sources-group-title">🇳🇮 NIST CSRC</div>
-        <div class="sources-item"><span class="src-label">News:</span><a href="https://csrc.nist.gov/news" target="_blank" rel="noopener">csrc.nist.gov &mdash; CSRC News</a></div>
-        <div class="sources-item"><span class="src-label">FIPS Publications:</span><a href="https://csrc.nist.gov/publications/fips" target="_blank" rel="noopener">csrc.nist.gov &mdash; FIPS Pubs</a></div>
-        <div class="sources-item"><span class="src-label">CMVP (Modules In Process):</span><a href="https://csrc.nist.gov/projects/cryptographic-module-validation-program/modules-in-process/modules-in-process-list" target="_blank" rel="noopener">csrc.nist.gov &mdash; CMVP MIP</a></div>
-        <div class="sources-item"><span class="src-label">Post-Quantum Crypto:</span><a href="https://csrc.nist.gov/projects/post-quantum-cryptography" target="_blank" rel="noopener">csrc.nist.gov &mdash; PQC Project</a></div>
-        <div class="sources-item"><span class="src-label">NIST News (RSS):</span><a href="https://www.nist.gov/news-events/cybersecurity/rss.xml" target="_blank" rel="noopener">nist.gov &mdash; Cybersecurity RSS (⚠️ empty feed)</a></div>
-      </div>
-      <div class="sources-group">
         <div class="sources-group-title">🌐 CC Portal (International)</div>
         <div class="sources-item"><span class="src-label">News:</span><a href="https://www.commoncriteriaportal.org/news/index.cfm" target="_blank" rel="noopener">commoncriteriaportal.org &mdash; News</a></div>
         <div class="sources-item"><span class="src-label">Products:</span><a href="https://www.commoncriteriaportal.org/products/index.cfm" target="_blank" rel="noopener">commoncriteriaportal.org &mdash; Products</a></div>
@@ -562,10 +541,6 @@ DASHBOARD_TEMPLATE = """
     <div class="stat"><a href="#sec-csfc" onclick="navigateTo('sec-csfc');return false;">
       <div class="stat-num {% if csfc_total_stat > 0 %}active-num{% endif %}">{{ csfc_total_stat }}</div>
       <div class="stat-lbl">CSfC Selection Updates</div>
-    </a></div>
-    <div class="stat"><a href="#sec-nist" onclick="navigateTo('sec-nist');return false;">
-      <div class="stat-num {% if nist_total_stat > 0 %}active-num{% endif %}">{{ nist_total_stat }}</div>
-      <div class="stat-lbl">NIST Doc Updates</div>
     </a></div>
     <div class="stat"><a href="#sec-cc-portal" onclick="navigateTo('sec-cc-portal');return false;">
       <div class="stat-num {% if cc_portal_total_stat > 0 %}active-num{% endif %}">{{ cc_portal_total_stat }}</div>
@@ -635,7 +610,7 @@ DASHBOARD_TEMPLATE = """
 </div>
 {% endif %}
 <div class="tab-nav" id="region-tabs">
-        <button class="tab-btn active" data-tab="us" onclick="switchTab(this)">&#127482;&#127480; US (NIAP / CSfC / NIST)</button>
+        <button class="tab-btn active" data-tab="us" onclick="switchTab(this)">&#127482;&#127480; US (NIAP / CSfC)</button>
         <button class="tab-btn" data-tab="intl" onclick="switchTab(this)">&#127760; International</button>
         <button class="tab-btn" data-tab="eu" onclick="switchTab(this)">&#127466;&#127482; EU (EUCC / ENISA)</button>
       
@@ -972,26 +947,6 @@ DASHBOARD_TEMPLATE = """
   </div>
 </div>
 
-  <!-- NIST Docs -->
-<div class="card {% if nist_total > 0 %}card-updated{% endif %}" id="sec-nist" data-has-changes="{{ nist_total }}">
-  <div class="card-hdr" onclick="toggleCard(this)">
-    <span>NIST Documentation</span>
-    <span class="card-count">{{ nist_total }} update{% if nist_total != 1 %}s{% endif %}</span>
-    </span>
-    <span class="toggle-icon">{% if nist_total == 0 %}&#9658;{% else %}&#9660;{% endif %}</span>
-  </div>
-  <div class="card-body {% if nist_total == 0 %}collapsed{% endif %}">
-    {% for page_key, page_diff in diff.nist.pages.items() %}
-      {% for item in page_diff.added %}
-      <div class="item-row" data-source="nist" data-kind="updated">
-        <a class="item-link" href="{{ (item.href or 'https://csrc.nist.gov/') | safe_url }}" target="_blank">{{ item.text or page_key }}</a>
-        <span class="item-meta">{{ page_key }}</span>
-      </div>
-      {% endfor %}
-    {% endfor %}
-    {% if nist_total == 0 %}<p class="no-change">No changes detected.{% if last_active.nist %} <span class="last-active">(last: {{ last_active.nist }})</span>{% endif %}</p>{% endif %}
-  </div>
-</div>
 </div>
 <div class="section-group" id="tab-pane-intl" data-tab="intl">
         <div class="section-label">International</div>
@@ -1180,8 +1135,7 @@ DASHBOARD_TEMPLATE = """
       <button class="tl-filter-btn" data-cat="nato_cisco" onclick="filterHistory(this)">🛡 NATO</button>
       <button class="tl-filter-btn" data-cat="eucc_cisco" onclick="filterHistory(this)">🇪🇺 EUCC</button>
       <button class="tl-filter-btn" data-cat="csfc_change" onclick="filterHistory(this)">🔒 CSfC</button>
-      <button class="tl-filter-btn" data-cat="nist_doc" onclick="filterHistory(this)">📐 NIST</button>
-    </div>
+      div>
     <div class="timeline" id="history-timeline">
     {% if history_entries %}
       {% for entry in history_entries %}
@@ -1207,7 +1161,7 @@ DASHBOARD_TEMPLATE = """
 
 </div><!-- /main-content -->
 <footer>
-  <span>CC Pulse &middot; Auto-refreshes daily (01:00 EST) &middot; NIAP, CSfC, NIST, CC Portal, NATO NIAPCL, EUCC / ENISA</span>
+  <span>CC Pulse &middot; Auto-refreshes daily (01:00 EST) &middot; NIAP, CSfC, CC Portal, NATO NIAPCL, EUCC / ENISA</span>
   <span>Last run: {{ generated_at }}</span>
 </footer>
 
@@ -1578,15 +1532,6 @@ def _build_rss(diff: dict, generated_at: str) -> str:
                     f"<description>CSfC {xml_escape(page_key)} item {change_label.lower()}.</description></item>"
                 )
 
-    for page_key, page_diff in diff.get("nist", {}).get("pages", {}).items():
-        for item in page_diff.get("added", []):
-            link = item.get("href", "https://csrc.nist.gov/")
-            items_xml.append(
-                f"<item><title>{xml_escape('NIST ' + page_key + ': ' + (item.get('text') or '')[:60])}</title>"
-                f"<link>{xml_escape(link)}</link>"
-                f"<description>New item on NIST CSRC {xml_escape(page_key)} page.</description></item>"
-            )
-
     for page_key, page_diff in diff.get("cc_crypto", {}).get("pages", {}).items():
         for item in page_diff.get("added", []):
             link = item.get("href", "https://www.commoncriteriaportal.org/")
@@ -1674,7 +1619,6 @@ def render_dashboard(diff: dict, output_dir: str = "docs") -> None:
         if page_key in ("apl", "announcements") and isinstance(page_diff, dict)
     )
     cc_crypto_total = sum(len(p.get("added", [])) for p in diff.get("cc_crypto", {}).get("pages", {}).values() if isinstance(p, dict))
-    nist_total      = sum(len(p.get("added", [])) for p in diff.get("nist", {}).get("pages", {}).values() if isinstance(p, dict))
     alert_total     = len(diff.get("alerts", []))
 
     niap_total_stat = (
@@ -1683,7 +1627,6 @@ def render_dashboard(diff: dict, output_dir: str = "docs") -> None:
     )
     cctl_total_stat = cctl_total
     csfc_total_stat = csfc_total
-    nist_total_stat = nist_total + cc_crypto_total
 
 
     # CC Portal totals
@@ -1725,7 +1668,7 @@ def render_dashboard(diff: dict, output_dir: str = "docs") -> None:
         return None
     last_active = {k: _last_active(k) for k in [
         "niap_pp","niap_td","niap_news","cctl","csfc",
-        "cc_crypto","nist","cc_portal","pcl_all","in_eval"
+        "cc_crypto","cc_portal","pcl_all","in_eval"
     ]}
 
     # Render template. autoescape=True so scraped/vendor-controlled strings
@@ -1757,12 +1700,10 @@ def render_dashboard(diff: dict, output_dir: str = "docs") -> None:
         cctl_total      = cctl_total,
         csfc_total      = csfc_total,
         cc_crypto_total = cc_crypto_total,
-        nist_total      = nist_total,
         alert_total     = alert_total,
         niap_total_stat = niap_total_stat,
         cctl_total_stat = cctl_total_stat,
         csfc_total_stat = csfc_total_stat,
-        nist_total_stat = nist_total_stat,
         cc_portal_total      = cc_portal_total,
         cc_portal_total_stat = cc_portal_total_stat,
         period_start         = diff.get("period_start", ""),
