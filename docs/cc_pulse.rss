@@ -2,18 +2,13 @@
 <rss version="2.0"><channel>
 <title>CC Pulse</title>
 <link>https://kr15tyk.github.io/CC-pulse/cc_dashboard.html</link>
-<description>Common Criteria monitoring - 2026-07-23 04:19 ET</description>
-<item><title>New TD: TD1052</title><link>https://www.niap-ccevs.org/</link><description></description></item>
-<item><title>New TD: TD1054</title><link>https://www.niap-ccevs.org/</link><description></description></item>
-<item><title>NIST cmvp_mip: Chainguard FIPS Provider for OpenSSL | Chainguard, Inc.View </title><link>#d13780</link><description>New item on NIST CSRC cmvp_mip page.</description></item>
-<item><title>NIST cmvp_mip: FUJIFILM BI Cryptographic Kernel Module for WRL | FUJIFILM B</title><link>#d-9000</link><description>New item on NIST CSRC cmvp_mip page.</description></item>
-<item><title>NIST cmvp_mip: Harris AES Load Module | L3Harris Technologies, Inc.View Con</title><link>#d13369</link><description>New item on NIST CSRC cmvp_mip page.</description></item>
-<item><title>NIST cmvp_mip: Motorola P25 KVL 7000 HSM | Motorola Solutions Inc.View Cont</title><link>#d13763</link><description>New item on NIST CSRC cmvp_mip page.</description></item>
-<item><title>NIST cmvp_mip: H100 Tensor Core GPU | Nvidia CorporationView Contacts | FIP</title><link>#d13537</link><description>New item on NIST CSRC cmvp_mip page.</description></item>
-<item><title>NIST cmvp_mip: Ruckus Networks SmartZone (vSZ) | Ruckus Wireless LLCView Co</title><link>#d13180</link><description>New item on NIST CSRC cmvp_mip page.</description></item>
-<item><title>NIST cmvp_mip: CryptoComply 140-3 FIPS Provider with PQC | SafeLogic, Inc.V</title><link>#d13604</link><description>New item on NIST CSRC cmvp_mip page.</description></item>
-<item><title>NIST cmvp_mip: IDPrime PIV 4.1 FIDO 2.1 on IDcore 3230 | ThalesView Contact</title><link>#d13772</link><description>New item on NIST CSRC cmvp_mip page.</description></item>
-<item><title>NIST news: Security Guidelines for Storage Infrastructure</title><link>https://csrc.nist.gov/News/2026/security-guidelines-storage-infrastructure-draft</link><description>New item on NIST CSRC news page.</description></item>
-<item><title>ALERT: NIST: news – Security Guidelines for Storage Infrastructure</title><link>https://kr15tyk.github.io/CC-pulse/cc_dashboard.html</link><description>Kind: publication | Keywords: </description></item>
-<item><title>ALERT: NIST Feed: NIST Information Technology News – Back to Basics: Foundational Cybersecurity Practices for Small Businesses</title><link>https://kr15tyk.github.io/CC-pulse/cc_dashboard.html</link><description>Kind: news | Keywords: </description></item>
+<description>Common Criteria monitoring - 2026-07-24 04:14 ET</description>
+<item><title>CSfC Selection Updated: Traffic Filtering Firewall</title><link>https://www.nsa.gov/Portals/75/documents/CSfC Selections Updates 2026/CSfC Selections for Traffic Filtering Firewall 2026-07-22.pdf?ver=V_Bv7VgsDvD0ZmPNdL6Y1w%3d%3d</link><description>Component selection document updated.</description></item>
+<item><title>CSfC Component Added: IPsec VPN Gateway | Cisco | FTD 7.4 on FP 4100 and 9300 Series with FMC-FMCv, as</title><link>https://www.niap-ccevs.org/products/11516</link><description>CSfC apl item added.</description></item>
+<item><title>CSfC Component Removed: IPsec VPN Client | Cisco | Secure Client- AnyConnect 5.1 for Red Hat Enterprise </title><link>https://www.niap-ccevs.org/products/11439</link><description>CSfC apl item removed.</description></item>
+<item><title>CSfC Component Removed: IPsec VPN Gateway | Cisco | Embedded Services Router (ESR) 6300 v17.12 (ESR-6300</title><link>https://www.niap-ccevs.org/products/11483</link><description>CSfC apl item removed.</description></item>
+<item><title>ALERT: CSfC Component Selections – Traffic Filtering Firewall</title><link>https://kr15tyk.github.io/CC-pulse/cc_dashboard.html</link><description>Kind: updated | Keywords: CSfC</description></item>
+<item><title>ALERT: CSfC APL – IPsec VPN Gateway | Cisco | FTD 7.4 on FP 4100 and 9300 Series with FMC-FMCv, as detailed in VID 11516 | FTD 7.4 | NIAP…</title><link>https://kr15tyk.github.io/CC-pulse/cc_dashboard.html</link><description>Kind: new_cert | Keywords: cisco</description></item>
+<item><title>ALERT: CSfC APL – IPsec VPN Client | Cisco | Secure Client- AnyConnect 5.1 for Red Hat Enterprise Linux 8.2 | AnyConnect 5.1 for Red Hat E…</title><link>https://kr15tyk.github.io/CC-pulse/cc_dashboard.html</link><description>Kind: removed | Keywords: cisco</description></item>
+<item><title>ALERT: CSfC APL – IPsec VPN Gateway | Cisco | Embedded Services Router (ESR) 6300 v17.12 (ESR-6300-CON-K9, ESR-6300-NCP-K9) | v17.12 | NIA…</title><link>https://kr15tyk.github.io/CC-pulse/cc_dashboard.html</link><description>Kind: removed | Keywords: cisco</description></item>
 </channel></rss>

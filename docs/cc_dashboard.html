@@ -179,7 +179,7 @@
   <span class="nav-title">CC Pulse Dashboard</span>
   <span class="nav-spacer"></span>
   <div class="ham-wrap">
-    <span class="nav-meta">Last run: 2026-07-23 04:19 ET</span>
+    <span class="nav-meta">Last run: 2026-07-24 04:14 ET</span>
     <button class="ham-btn" id="ham-btn" onclick="toggleHamMenu()" aria-expanded="false" aria-haspopup="true" title="Open menu">&#9776;</button>
     <div class="ham-menu" id="ham-menu" role="menu">
       <a class="ham-item" href="https://kr15tyk.github.io/CC-pulse/cc_dashboard.html" role="menuitem"><span class="ham-icon">&#127968;</span>Home</a>
@@ -262,15 +262,15 @@
 <div class="sticky-top">
   <div class="trend-bar">
     <div class="stat"><a href="#sec-niap-pp" onclick="navigateTo('sec-niap-pp');return false;">
-      <div class="stat-num active-num">3</div>
+      <div class="stat-num ">0</div>
       <div class="stat-lbl">NIAP Changes</div>
     </a></div>
     <div class="stat"><a href="#sec-csfc" onclick="navigateTo('sec-csfc');return false;">
-      <div class="stat-num ">0</div>
+      <div class="stat-num active-num">4</div>
       <div class="stat-lbl">CSfC Selection Updates</div>
     </a></div>
     <div class="stat"><a href="#sec-nist" onclick="navigateTo('sec-nist');return false;">
-      <div class="stat-num active-num">9</div>
+      <div class="stat-num ">0</div>
       <div class="stat-lbl">NIST Doc Updates</div>
     </a></div>
     <div class="stat"><a href="#sec-cc-portal" onclick="navigateTo('sec-cc-portal');return false;">
@@ -290,7 +290,7 @@
       <div class="stat-lbl">EUCC Changes</div>
     </a></div>
     <div class="stat"><a href="#sec-alerts" onclick="navigateTo('sec-alerts');return false;">
-      <div class="stat-num alert-num">2</div>
+      <div class="stat-num alert-num">4</div>
       <div class="stat-lbl">Alerts</div>
     </a></div>
   </div>
@@ -320,27 +320,45 @@
 <div class="card card-alert" id="sec-alerts">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>Alerts</span>
-    <span class="card-count">2 alerts</span>
+    <span class="card-count">4 alerts</span>
     <span class="toggle-icon">&#9660;</span>
   </div>
   <div class="card-body">
     <div class="alert-monitoring">FIPS 186-4, FIPS 186-5, NDcPP, CPP_ND, TLS 1.3, SSH, PP-Module_VPN, PP-Module_WLAN, labgram, valgram, emergency, CSfC, Commercial Solutions for Classified, CSfC APL, CSfC component selections, NSA CSfC, NATO NIAPC, NIAPCL, EUCC, ENISA, CCDB-018, Crypto Catalog, cryptography working group, Specification of Functional Requirements for Cryptography, FCS_CKM, FCS_COP, FCS_RBG, CAVP, CMVP, FIPS 140-3, FIPS 203, FIPS 204, FIPS 205, SP 800-131A, SP 800-57, NIST IR 8547, post-quantum cryptography, PQC migration, ML-KEM, ML-DSA, SLH-DSA, algorithm transition, CMVP validated, modules in process</div>
     
-        <div class="item-row alert-item" data-alert-key="NIST: news-Security_Guidelines_for_Storage_Infrastructure" data-tab="us">
+        <div class="item-row alert-item" data-alert-key="CSfC Component Selections-Traffic_Filtering_Firewall" data-tab="us">
           
-          <a class="item-link" href="https://csrc.nist.gov/News/2026/security-guidelines-storage-infrastructure-draft" target="_blank">NIST: news: Security Guidelines for Storage Infrastructure</a>
+          <a class="item-link" href="https://www.nsa.gov/Portals/75/documents/CSfC Selections Updates 2026/CSfC Selections for Traffic Filtering Firewall 2026-07-22.pdf?ver=V_Bv7VgsDvD0ZmPNdL6Y1w%3d%3d" target="_blank">CSfC Component Selections: Traffic Filtering Firewall</a>
           
-          <span class="item-meta">publication &middot; </span>
-          <div class="item-sub">New item on NIST CSRC news page</div>
+          <span class="item-meta">updated &middot; CSfC</span>
+          <div class="item-sub">NSA updated the component selection document for this role</div>
           <button class="dismiss-btn" onclick="dismissAlert(this)" title="Mark as seen">&#10003; Seen</button>
         </div>
         
-        <div class="item-row alert-item" data-alert-key="NIST Feed: NIST Information Technology News-Back_to_Basics:_Foundational_Cybersecurity_Practices_for_Small_Businesses" data-tab="us">
+        <div class="item-row alert-item" data-alert-key="CSfC APL-IPsec_VPN_Gateway_|_Cisco_|_FTD_7.4_on FP_4100_and_9300_Series_with_FMC-FMCv,_as_detailed_in_VID_11516_|_FTD_7.4_|_NIAP…" data-tab="us">
           
-          <a class="item-link" href="https://www.nist.gov/news-events/events/2026/08/back-basics-foundational-cybersecurity-practices-small-businesses" target="_blank">NIST Feed: NIST Information Technology News: Back to Basics: Foundational Cybersecurity Practices for Small Businesses</a>
+          <a class="item-link" href="https://www.niap-ccevs.org/products/11516" target="_blank">CSfC APL: IPsec VPN Gateway | Cisco | FTD 7.4 on FP 4100 and 9300 Series with FMC-FMCv, as detailed in VID 11516 | FTD 7.4 | NIAP…</a>
           
-          <span class="item-meta">news &middot; </span>
-          <div class="item-sub">Feed: NIST Information Technology News · Published: Thu, 20 Aug 2026</div>
+          <span class="item-meta">new_cert &middot; cisco</span>
+          <div class="item-sub">New item on CSfC apl page</div>
+          <button class="dismiss-btn" onclick="dismissAlert(this)" title="Mark as seen">&#10003; Seen</button>
+        </div>
+        
+        <div class="item-row alert-item" data-alert-key="CSfC APL-IPsec_VPN_Client_|_Cisco_|_Secure_Client-_AnyConnect_5.1_for_Red_Hat_Enterprise_Linux_8.2_|_AnyConnect_5.1_for_Red_Hat_E…" data-tab="us">
+          
+          <a class="item-link" href="https://www.niap-ccevs.org/products/11439" target="_blank">CSfC APL: IPsec VPN Client | Cisco | Secure Client- AnyConnect 5.1 for Red Hat Enterprise Linux 8.2 | AnyConnect 5.1 for Red Hat E…</a>
+          
+          <span class="item-meta">removed &middot; cisco</span>
+          <div class="item-sub">Item removed from CSfC apl page</div>
+          <button class="dismiss-btn" onclick="dismissAlert(this)" title="Mark as seen">&#10003; Seen</button>
+        </div>
+        
+        <div class="item-row alert-item" data-alert-key="CSfC APL-IPsec_VPN_Gateway_|_Cisco_|_Embedded_Services_Router_(ESR)_6300_v17.12_(ESR-6300-CON-K9,_ESR-6300-NCP-K9)_|_v17.12_|_NIA…" data-tab="us">
+          
+          <a class="item-link" href="https://www.niap-ccevs.org/products/11483" target="_blank">CSfC APL: IPsec VPN Gateway | Cisco | Embedded Services Router (ESR) 6300 v17.12 (ESR-6300-CON-K9, ESR-6300-NCP-K9) | v17.12 | NIA…</a>
+          
+          <span class="item-meta">removed &middot; cisco</span>
+          <div class="item-sub">Item removed from CSfC apl page</div>
           <button class="dismiss-btn" onclick="dismissAlert(this)" title="Mark as seen">&#10003; Seen</button>
         </div>
         
@@ -452,28 +470,17 @@
 </div>
 
   <!-- NIAP PCL — All Certifications -->
-<div class="card card-new" id="sec-niap-pcl" data-has-changes="1">
+<div class="card " id="sec-niap-pcl" data-has-changes="0">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>NIAP PCL — All Certifications</span>
-    <span class="card-count">1 change</span>
+    <span class="card-count">0 changes</span>
     </span>
   </div>
-  <div class="card-body ">
-    
-    
-    <div class="sub-hdr sub-updated">Newly Archived (1)</div>
-    
-    <div class="item-row" data-source="niap-pcl" data-kind="archived">
-      <span class="item-link">RUCKUS Wireless LLC -- CommScope Technologies LLC, Ruckus FastIron ICX Series Switch/Router 10.0.10 with MACsec</span>
-      <span class="item-meta">Archived</span>
-    </div>
-    
-    <div class="item-sub">CPP_ND_V2.2E, MOD_MACSEC_V1.0</div>
+  <div class="card-body collapsed">
     
     
     
-    
-    
+    <p class="no-change">No changes detected. <span class="last-active">(last: 2026-07-23)</span></p>
   </div>
 </div>
 
@@ -495,36 +502,17 @@
 </div>
 
   <!-- NIAP TDs -->
-<div class="card card-new" id="sec-niap-td" data-has-changes="2">
+<div class="card " id="sec-niap-td" data-has-changes="0">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>NIAP Technical Decisions</span>
-    <span class="card-count">2 changes</span>
+    <span class="card-count">0 changes</span>
     </span>
-    <span class="toggle-icon">&#9660;</span>
+    <span class="toggle-icon">&#9658;</span>
   </div>
-  <div class="card-body ">
-    
-    <div class="sub-hdr sub-new">New TDs (2)</div>
-    
-    <div class="item-row" data-source="niap-td" data-kind="new">
-      <a class="item-link" href="https://www.niap-ccevs.org/technical-decisions/TD1052" target="_blank">TD1052 &mdash; NIT Technical Decision: Separation of Test Definitions for DTLSv1.2 and v1.3 (Renegotiation)</a>
-      <span class="item-meta">2026-07-22</span>
-    </div>
-    
-    <div class="item-sub">Applies to: CPP_ND_V3.0E</div>
+  <div class="card-body collapsed">
     
     
-    <div class="item-row" data-source="niap-td" data-kind="new">
-      <a class="item-link" href="https://www.niap-ccevs.org/technical-decisions/TD1054" target="_blank">TD1054 &mdash; Correction to FIPS Pub 186-5 Appendix References</a>
-      <span class="item-meta">2026-07-22</span>
-    </div>
-    
-    <div class="item-sub">Applies to: MOD_VPNGW_v2.0</div>
-    
-    
-    
-    
-    
+    <p class="no-change">No changes detected. <span class="last-active">(last: 2026-07-23)</span></p>
   </div>
 </div>
 </div>
@@ -533,16 +521,45 @@
 <div class="section-group">
   <div class="section-label">CSfC</div>
   <!-- CSfC Components, Announcements, and Selection Documents -->
-<div class="card " id="sec-csfc" data-has-changes="0">
+<div class="card card-updated" id="sec-csfc" data-has-changes="4">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>CSfC Components &amp; Announcements</span>
-    <span class="card-count">0 updates</span>
-    <span class="toggle-icon">&#9658;</span>
+    <span class="card-count">4 updates</span>
+    <span class="toggle-icon">&#9660;</span>
   </div>
-  <div class="card-body collapsed">
+  <div class="card-body ">
     
     
-    <p class="no-change">No changes detected. <span class="last-active">(last: 2026-07-17)</span></p>
+    <div class="cp-row" data-source="csfc" data-kind="updated">
+      <a class="item-link" href="https://www.nsa.gov/Portals/75/documents/CSfC Selections Updates 2026/CSfC Selections for Traffic Filtering Firewall 2026-07-22.pdf?ver=V_Bv7VgsDvD0ZmPNdL6Y1w%3d%3d" target="_blank">Traffic Filtering Firewall</a>
+      <div class="cp-detail">
+        <span class="cp-date">Selection document link changed</span>
+      </div>
+    </div>
+    
+    
+    
+      
+        
+        <div class="item-row" data-source="csfc" data-kind="new">
+          <a class="item-link" href="https://www.niap-ccevs.org/products/11516" target="_blank">IPsec VPN Gateway | Cisco | FTD 7.4 on FP 4100 and 9300 Series with FMC-FMCv, as detailed in VID 11516 | FTD 7.4 | NIAP Validation Completed (at Gossamer) | 2025.02.27 | </a>
+          <span class="item-meta">component added</span>
+        </div>
+        
+        
+        <div class="item-row" data-source="csfc" data-kind="removed">
+          <a class="item-link" href="https://www.niap-ccevs.org/products/11439" target="_blank">IPsec VPN Client | Cisco | Secure Client- AnyConnect 5.1 for Red Hat Enterprise Linux 8.2 | AnyConnect 5.1 for Red Hat Enterprise Linux 8.2 | NIAP Validation Completed (at Gossamer) | 2024.06.25 | </a>
+          <span class="item-meta">component removed</span>
+        </div>
+        
+        <div class="item-row" data-source="csfc" data-kind="removed">
+          <a class="item-link" href="https://www.niap-ccevs.org/products/11483" target="_blank">IPsec VPN Gateway | Cisco | Embedded Services Router (ESR) 6300 v17.12 (ESR-6300-CON-K9, ESR-6300-NCP-K9) | v17.12 | NIAP Validation Completed (at Gossamer) | 2024.06.14 | </a>
+          <span class="item-meta">component removed</span>
+        </div>
+        
+      
+    
+    
   </div>
 </div>
 </div>
@@ -564,65 +581,16 @@
 </div>
 
   <!-- NIST Docs -->
-<div class="card card-updated" id="sec-nist" data-has-changes="9">
+<div class="card " id="sec-nist" data-has-changes="0">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>NIST Documentation</span>
-    <span class="card-count">9 updates</span>
+    <span class="card-count">0 updates</span>
     </span>
-    <span class="toggle-icon">&#9660;</span>
+    <span class="toggle-icon">&#9658;</span>
   </div>
-  <div class="card-body ">
+  <div class="card-body collapsed">
     
-      
-      <div class="item-row" data-source="nist" data-kind="updated">
-        <a class="item-link" href="" target="_blank">Chainguard FIPS Provider for OpenSSL | Chainguard, Inc.View Contacts | FIPS 140-3 | Pending Resubmission  (7/22/2026)</a>
-        <span class="item-meta">cmvp_mip</span>
-      </div>
-      
-      <div class="item-row" data-source="nist" data-kind="updated">
-        <a class="item-link" href="" target="_blank">FUJIFILM BI Cryptographic Kernel Module for WRL | FUJIFILM Business Innovation Corp.View Contacts | FIPS 140-3 | Review  (7/22/2026)</a>
-        <span class="item-meta">cmvp_mip</span>
-      </div>
-      
-      <div class="item-row" data-source="nist" data-kind="updated">
-        <a class="item-link" href="" target="_blank">Harris AES Load Module | L3Harris Technologies, Inc.View Contacts | FIPS 140-3 | Pending Resubmission  (7/22/2026)</a>
-        <span class="item-meta">cmvp_mip</span>
-      </div>
-      
-      <div class="item-row" data-source="nist" data-kind="updated">
-        <a class="item-link" href="" target="_blank">Motorola P25 KVL 7000 HSM | Motorola Solutions Inc.View Contacts | FIPS 140-3 | Review  (7/22/2026)</a>
-        <span class="item-meta">cmvp_mip</span>
-      </div>
-      
-      <div class="item-row" data-source="nist" data-kind="updated">
-        <a class="item-link" href="" target="_blank">H100 Tensor Core GPU | Nvidia CorporationView Contacts | FIPS 140-3 | Review  (7/22/2026)</a>
-        <span class="item-meta">cmvp_mip</span>
-      </div>
-      
-      <div class="item-row" data-source="nist" data-kind="updated">
-        <a class="item-link" href="" target="_blank">Ruckus Networks SmartZone (vSZ) | Ruckus Wireless LLCView Contacts | FIPS 140-3 | Comment Resolution - CMVP  (7/22/2026)</a>
-        <span class="item-meta">cmvp_mip</span>
-      </div>
-      
-      <div class="item-row" data-source="nist" data-kind="updated">
-        <a class="item-link" href="" target="_blank">CryptoComply 140-3 FIPS Provider with PQC | SafeLogic, Inc.View Contacts | FIPS 140-3 | Review  (7/22/2026)</a>
-        <span class="item-meta">cmvp_mip</span>
-      </div>
-      
-      <div class="item-row" data-source="nist" data-kind="updated">
-        <a class="item-link" href="" target="_blank">IDPrime PIV 4.1 FIDO 2.1 on IDcore 3230 | ThalesView Contacts | FIPS 140-3 | Cost Recovery  (7/22/2026)</a>
-        <span class="item-meta">cmvp_mip</span>
-      </div>
-      
-    
-      
-      <div class="item-row" data-source="nist" data-kind="updated">
-        <a class="item-link" href="https://csrc.nist.gov/News/2026/security-guidelines-storage-infrastructure-draft" target="_blank">Security Guidelines for Storage Infrastructure</a>
-        <span class="item-meta">news</span>
-      </div>
-      
-    
-    
+    <p class="no-change">No changes detected. <span class="last-active">(last: 2026-07-23)</span></p>
   </div>
 </div>
 </div>
@@ -1045,6 +1013,50 @@
     </div>
     <div class="timeline" id="history-timeline">
     
+      
+      <div class="tl-entry" data-cat="csfc_change">
+        <div class="tl-date">2026-07-24</div>
+        <div class="tl-body">
+          <div class="tl-title">
+            <span class="tl-badge updated">updated</span>
+            <a href="https://www.nsa.gov/Resources/Commercial-Solutions-for-Classified-Program/Components-List/" target="_blank">CSfC Selection updated: Traffic Filtering Firewall</a>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="tl-entry" data-cat="csfc_change">
+        <div class="tl-date">2026-07-24</div>
+        <div class="tl-body">
+          <div class="tl-title">
+            <span class="tl-badge new">new</span>
+            <a href="https://www.niap-ccevs.org/products/11516" target="_blank">CSfC Component: IPsec VPN Gateway | Cisco | FTD 7.4 on FP 4100 and 9300 Series with FMC-FMCv, as</a>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="tl-entry" data-cat="csfc_change">
+        <div class="tl-date">2026-07-24</div>
+        <div class="tl-body">
+          <div class="tl-title">
+            <span class="tl-badge removed">removed</span>
+            <a href="https://www.niap-ccevs.org/products/11439" target="_blank">CSfC Component: IPsec VPN Client | Cisco | Secure Client- AnyConnect 5.1 for Red Hat Enterprise </a>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="tl-entry" data-cat="csfc_change">
+        <div class="tl-date">2026-07-24</div>
+        <div class="tl-body">
+          <div class="tl-title">
+            <span class="tl-badge removed">removed</span>
+            <a href="https://www.niap-ccevs.org/products/11483" target="_blank">CSfC Component: IPsec VPN Gateway | Cisco | Embedded Services Router (ESR) 6300 v17.12 (ESR-6300</a>
+          </div>
+          
+        </div>
+      </div>
       
       <div class="tl-entry" data-cat="td_new">
         <div class="tl-date">2026-07-23</div>
@@ -4005,50 +4017,6 @@
         </div>
       </div>
       
-      <div class="tl-entry" data-cat="td_new">
-        <div class="tl-date">2026-06-24</div>
-        <div class="tl-body">
-          <div class="tl-title">
-            <span class="tl-badge new">new</span>
-            <a href="https://www.niap-ccevs.org/technical-decisions/TD1047" target="_blank">New TD: TD1047</a>
-          </div>
-          <div class="tl-detail">Correction to FAU_SAA.1 Test 11</div>
-        </div>
-      </div>
-      
-      <div class="tl-entry" data-cat="td_new">
-        <div class="tl-date">2026-06-24</div>
-        <div class="tl-body">
-          <div class="tl-title">
-            <span class="tl-badge new">new</span>
-            <a href="https://www.niap-ccevs.org/technical-decisions/TD1042" target="_blank">New TD: TD1042</a>
-          </div>
-          <div class="tl-detail">FIT Technical Decision: Replacing FIPS 186-4 with 186-5</div>
-        </div>
-      </div>
-      
-      <div class="tl-entry" data-cat="pcl_cert">
-        <div class="tl-date">2026-06-24</div>
-        <div class="tl-body">
-          <div class="tl-title">
-            <span class="tl-badge new">new</span>
-            <a href="https://www.niap-ccevs.org/products/11675" target="_blank">Cisco Systems, Inc. — Cisco Catalyst 9800 Series Wireless Controllers and Access Points 17.18</a>
-          </div>
-          <div class="tl-detail">Certified  · Lightship Security USA, Inc. · PKG_SSH_V1.0, MOD_WLAN_AS_v1.0, CPP_ND_V3.0E</div>
-        </div>
-      </div>
-      
-      <div class="tl-entry" data-cat="pcl_cert">
-        <div class="tl-date">2026-06-24</div>
-        <div class="tl-body">
-          <div class="tl-title">
-            <span class="tl-badge new">new</span>
-            <a href="https://www.niap-ccevs.org/products/2026.1186" target="_blank">Cogito Group — Cogito Jellyfish Certificate Authority Version 7.0</a>
-          </div>
-          <div class="tl-detail">Certified 2026-04-29 · Viden Labs · PP_CA_V2.1</div>
-        </div>
-      </div>
-      
     
     </div>
   </div>
@@ -4059,7 +4027,7 @@
 </div><!-- /main-content -->
 <footer>
   <span>CC Pulse &middot; Auto-refreshes daily (01:00 EST) &middot; NIAP, CSfC, NIST, CC Portal, NATO NIAPCL, EUCC / ENISA</span>
-  <span>Last run: 2026-07-23 04:19 ET</span>
+  <span>Last run: 2026-07-24 04:14 ET</span>
 </footer>
 
 <script>
