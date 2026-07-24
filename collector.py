@@ -23,7 +23,7 @@ import feedparser
 import requests
 from curl_cffi import requests as curl_requests
 from bs4 import BeautifulSoup
-from urllib.parse import urljoin
+from urllib.parse import urljoin, quote
 from datetime import datetime, timezone
 
 import config
@@ -1304,7 +1304,7 @@ def _scrape_csfc_selection_links(soup) -> dict:
         # Build absolute URL if needed
         if href.startswith("/"):
             href = config.CSFC_BASE + href
-        results[heading] = href
+        results[heading] = quote(href, safe=":/?=&%")
     log.debug("[CSfC Selections] Scraped %d selection links from Components List page.", len(results))
     return results
 
