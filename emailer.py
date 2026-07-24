@@ -532,7 +532,7 @@ def build_email_html(weekly_diff: dict) -> str:
     }
     for page_key, page_diff in csfc.get("pages", {}).items():
         for item in page_diff.get("added", [])[:3]:
-            page_url = item.get("href") or item.get("link") or _csfc_page_urls.get(page_key, config.CSFC_PRODUCT_LIST_URL)
+            page_url = (_csfc_page_urls.get(page_key, config.CSFC_PRODUCT_LIST_URL) if page_key == "apl" else item.get("href") or item.get("link") or _csfc_page_urls.get(page_key, config.CSFC_PRODUCT_LIST_URL))
             label    = "APL" if page_key == "apl" else page_key[:8]
             txt      = _link(page_url, item.get("text", "")[:120])
             rows.append(_row(f"NSA:{label}", txt, "#60A5FA", "#12102E"))
