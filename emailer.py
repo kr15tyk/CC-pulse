@@ -7,8 +7,8 @@ Features:
     - Cisco-relevant alerts tagged and sorted to top (Tier 1)
     - Kind label promoted to front of each alert line
     - CSfC Capability Package changes show direct PDF link prominently
-    - Tier-sorted output: Cisco/NDcPP > NIST/standards > general
-  - Weekly digest covering NIAP, CC Portal, CCTL labs, CSfC, CC Crypto, NIST
+    - Tier-sorted output: Cisco/NDcPP > standards > general
+  - Weekly digest covering NIAP, CC Portal, CCTL labs, CSfC, CC Crypto
   - Immediate alert email (send_alert_email) for same-day keyword matches
   - Structured logging
   - Generic webhook / MS Teams delivery via send_webhook_alert()
@@ -62,9 +62,9 @@ _TIER2_KEYWORDS = {
     kw.lower() for kw in [
         "FIPS 140-3", "FIPS 186-4", "FIPS 186-5", "SP 800-131A",
         "FIPS 203", "FIPS 204", "FIPS 205",
-        "SP 800-57", "NIST IR 8547",
+        "SP 800-57",
         "ML-KEM", "ML-DSA", "SLH-DSA", "post-quantum", "PQC migration",
-        "CMVP", "CAVP", "algorithm transition", "CCDB-018",
+        "algorithm transition", "CCDB-018",
     ]
 }
 
@@ -76,7 +76,7 @@ def _is_cisco_relevant(alert: dict) -> bool:
 
 
 def _alert_tier(alert: dict) -> int:
-    """Return sort tier: 1 = Cisco/NDcPP direct, 2 = standards/NIST, 3 = general."""
+    """Return sort tier: 1 = Cisco/NDcPP direct, 2 = standards, 3 = general."""
     if _is_cisco_relevant(alert):
         return 1
     hits = {kw.lower() for kw in alert.get("matched_keywords", [])}
@@ -128,10 +128,6 @@ _CHANGE_DESCRIPTIONS: dict[tuple[str, str], str] = {
     ("updated",        "NIAP PP"): "An existing Protection Profile has been revised. Products in evaluation against it may be affected.",
     # Technical Decisions
     ("new",            "NIAP TD"): "A new NIAP Technical Decision (TD) has been issued. TDs clarify how a specific requirement in a Protection Profile should be interpreted by labs and vendors.",
-    # NIST / standards
-    ("publication",    "NIST"):  "A new or updated NIST cryptography publication has appeared. NIST standards often drive future Common Criteria and CSfC requirements.",
-    ("news",           "NIST"):  "New content has appeared on the NIST CSRC website (news, FIPS, CMVP, or post-quantum standards).",
-    ("updated",        "NIST"):  "A NIST standards document has been revised. Review the link for what changed.",
     # CSfC
     ("updated", "CSfC Component Selections"): (
         "NSA has updated a Component Selection document. "
@@ -176,7 +172,7 @@ def _describe_change(kind: str, source: str) -> str:
 
     Args:
         kind:   The change kind string (e.g. "new_cert", "sunset", "updated").
-        source: The source label (e.g. "NIAP PP", "NIST: fips", "CCTL Labs").
+        source: The source label (e.g. "NIAP PP", "CCTL Labs").
 
     Returns:
         A single sentence suitable for appending to a Webex or email alert.
@@ -205,7 +201,7 @@ def _format_alert_lines(alerts: list[dict], max_items: int = 15) -> list[str]:
     """Format alert objects into Markdown lines for Webex / webhook.
 
     Improvements for Cisco engineers:
-    - Alerts sorted by tier: Cisco-relevant first, then NIST/standards, then general.
+    - Alerts sorted by tier: Cisco-relevant first, then standards, then general.
     - Cisco-relevant alerts prefixed with a blue tag.
     - Kind label promoted to the front of each line (bold, uppercase).
     - CSfC Capability Package changes surface the direct PDF URL prominently.
@@ -259,7 +255,7 @@ def send_webex_alert(alerts: list[dict]) -> None:
     Message structure:
       - Header with total count and tier breakdown summary
       - Tier 1 (Cisco-relevant) alerts listed first
-      - Tier 2 (standards/NIST) next
+      - Tier 2 (standards) next
       - Tier 3 (general) last
       - Dashboard link footer
     """
@@ -279,7 +275,7 @@ def send_webex_alert(alerts: list[dict]) -> None:
     if tier_counts[1]:
         tier_parts.append(f"🔵 {tier_counts[1]} Cisco-relevant")
     if tier_counts[2]:
-        tier_parts.append(f"📐 {tier_counts[2]} standards/NIST")
+        tier_parts.append(f"📐 {tier_counts[2]} standards")
     if tier_counts[3]:
         tier_parts.append(f"📋 {tier_counts[3]} general")
 
@@ -566,53 +562,6 @@ def build_email_html(weekly_diff: dict) -> str:
             rows.append(_row(label, txt, "#60A5FA", "#12102E"))
     parts.append(_section("CC Crypto Catalog & Working Group", rows))
 
-    # ── NIST CSRC ────────────────────────────────────────────────────────────
-    nist = weekly_diff.get("nist", {})
-    rows = []
-    # CMVP MIP structured changes (fix #27)
-    cmvp_mip = nist.get("cmvp_mip", {})
-    _cmvp_url = "https://csrc.nist.gov/projects/cryptographic-module-validation-program/modules-in-process/modules-in-process-list"
-    for item in cmvp_mip.get("added", [])[:5]:
-        name = item.get("Module Name") or item.get("name") or item.get("text", "")[:80]
-        vendor = item.get("Vendor") or item.get("vendor") or ""
-        status = item.get("Status") or item.get("status") or ""
-        label = f"{name}" + (f" ({vendor})" if vendor else "")
-        detail = f"Status: {status}" if status else "New to MIP list"
-        rows.append(_row("CMVP NEW",
-            f'<a href="{_cmvp_url}">{_esc(label)}</a><br><small>{_esc(detail)}</small>',
-            "#22D3EE", "#12102E"))
-    for item in cmvp_mip.get("status_changes", [])[:5]:
-        name = item.get("Module Name") or item.get("name") or item.get("text", "")[:80]
-        vendor = item.get("Vendor") or item.get("vendor") or ""
-        label = f"{name}" + (f" ({vendor})" if vendor else "")
-        detail = f"{item.get('old_status','?')} → {item.get('new_status','?')}"
-        rows.append(_row("CMVP STATUS",
-            f'<a href="{_cmvp_url}">{_esc(label)}</a><br><small>{_esc(detail)}</small>',
-            "#FBBF24", "#12102E"))
-    _nist_page_urls = {
-        "news": "https://csrc.nist.gov/news",
-        "fips": "https://csrc.nist.gov/publications/fips",
-        "pqc": "https://csrc.nist.gov/projects/post-quantum-cryptography",
-        "crypto_standards": "https://csrc.nist.gov/projects/cryptographic-standards-and-guidelines",
-        "cmvp_validated": "https://csrc.nist.gov/projects/cryptographic-module-validation-program/validated-modules",
-    }
-    for page_key, page_diff in nist.get("pages", {}).items():
-        if page_key == "cmvp_mip":
-            continue
-        if not isinstance(page_diff, dict):
-            continue
-        for item in page_diff.get("added", [])[:3]:
-            page_url = item.get("href") or _nist_page_urls.get(page_key, "https://csrc.nist.gov/")
-            txt = _link(page_url, item.get("text", "")[:120])
-            rows.append(_row(f"NIST:{page_key[:7]}", txt, "#22D3EE", "#12102E"))
-    for feed_name, items in nist.get("feeds", {}).items():
-        for item in items[:5]:
-            link = item.get("link", "")
-            title = item.get("title", "")
-            txt = _link(link, title)
-            rows.append(_row("NIST FEED", txt, "#22D3EE", "#12102E"))
-    parts.append(_section("NIST CSRC — Standards, CMVP & PQC", rows))
-
     # ── ND-iTC (NIT RFIs & Allowed-With lists) ────────────────────────────
     nd = weekly_diff.get("nd_itc", {})
     nd_rfis = nd.get("nit_rfis", {})
@@ -777,7 +726,7 @@ def send_alert_email(alerts: list[dict]) -> None:
     tier_note = (
         f'<p style="margin:6px 0 0;font-size:0.8rem;opacity:0.85">'
         f'\U0001f535 {tier1_count} Cisco-relevant \u00b7 '
-        f'\U0001f4d0 {sum(1 for a in alerts if _alert_tier(a)==2)} standards/NIST \u00b7 '
+        f'\U0001f4d0 {sum(1 for a in alerts if _alert_tier(a)==2)} standards \u00b7 '
         f'\U0001f4cb {sum(1 for a in alerts if _alert_tier(a)==3)} general</p>'
     ) if tier1_count else ""
     dashboard_link = (
@@ -1401,12 +1350,11 @@ def send_readme_message() -> None:
         "| **ND-iTC** | NIT RFIs (ND-iTC Technical Decisions — distinct from NIAP TDs) and Allowed-With lists |\n"
         "| **CC Portal** | International CC news, Protection Profiles, and certified products |\n"
         "| **CCTL Labs** | New posts from accredited Common Criteria evaluation labs |\n"
-        "| **NIST CSRC** | Cryptography news, FIPS publications, CMVP, and post-quantum standards |\n\n"
-        "Runs automatically every day at **06:00 UTC / 01:00 ET** (adjusts for EDT in summer) and posts here only when something relevant is found.\n\n"
+                "Runs automatically every day at **06:00 UTC / 01:00 ET** (adjusts for EDT in summer) and posts here only when something relevant is found.\n\n"
         "---\n\n"
         "## Dashboard Navigation\n\n"
         "The dashboard has three tabs:\n\n"
-        "- 🇺🇸 **US (NIAP / CSfC / NIST)** — All NIAP, CSfC, NIST, CC Portal, and CCTL cards\n"
+        "- 🇺🇸 **US (NIAP / CSfC)** — All NIAP, CSfC, CC Portal, and CCTL cards\n"
         "- 🌐 **NATO NIAPCL** — Changes to the NATO Information Assurance Product Catalogue\n"
         "- 🇪🇺 **EU (EUCC)** — Changes to EUCC requirements and certificates from ENISA\n\n"
         "---\n\n"
@@ -1417,7 +1365,7 @@ def send_readme_message() -> None:
         "---\n\n"
         "## Questions?\n\n"
         "Click any direct link in an alert — it goes straight to the source page "
-        "(NIAP, NIST, NSA, NATO, ENISA). No login required."
+        "(NIAP, NSA, NATO, ENISA). No login required."
     )
 
     payload = {"roomId": room_id, "markdown": msg}
@@ -1431,91 +1379,6 @@ def send_readme_message() -> None:
         log.info("[Webex] README posted successfully (id=%s). Pin it in the space.", resp.json().get("id"))
     else:
         log.error("[Webex] Failed to post README: %s %s", resp.status_code, resp.text)
-
-
-# ---------------------------------------------------------------------------
-# NIST CMVP MIP notification (fix #27)
-# ---------------------------------------------------------------------------
-
-def send_nist_cmvp_webex(cmvp_mip: dict) -> None:
-    """Post a Webex notification for CMVP Modules-in-Process additions and status changes.
-
-    Fires unconditionally whenever new modules are added to the CMVP MIP list
-    or existing modules change status (e.g. 'Review Pending' -> 'In Review').
-    This mirrors the send_new_tds_webex pattern for NIAP TDs.
-
-    Args:
-        cmvp_mip: The cmvp_mip sub-dict from diff["nist"]["cmvp_mip"],
-                  containing "added" and "status_changes" lists.
-    """
-    token = config.WEBEX_BOT_TOKEN
-    room_id = config.WEBEX_ROOM_ID
-    if not token or not room_id:
-        log.debug("[Webex] Bot token or Room ID not configured — skipping CMVP MIP notification.")
-        return
-
-    added = cmvp_mip.get("added", [])
-    status_changes = cmvp_mip.get("status_changes", [])
-    if not added and not status_changes:
-        return
-
-    mip_url = (
-        "https://csrc.nist.gov/projects/cryptographic-module-validation-program"
-        "/modules-in-process/modules-in-process-list"
-    )
-
-    lines = []
-
-    if added:
-        lines.append(f"### U0001f195 {len(added)} New Module(s) on CMVP MIP List")
-        for item in added:
-            name = item.get("Module Name") or item.get("name") or item.get("text", "Unknown module")
-            vendor = item.get("Vendor") or item.get("vendor") or ""
-            status = item.get("Status") or item.get("status") or ""
-            label = f"{name}" + (f" ({vendor})" if vendor else "")
-            status_str = f" — Status: *{status}*" if status else ""
-            lines.append(f"**[CMVP NEW]** [{label}]({mip_url}){status_str}")
-
-    if status_changes:
-        lines.append(f"### U0001f504 {len(status_changes)} Module Status Change(s)")
-        for item in status_changes:
-            name = item.get("Module Name") or item.get("name") or item.get("text", "Unknown module")
-            vendor = item.get("Vendor") or item.get("vendor") or ""
-            old_s = item.get("old_status", "?")
-            new_s = item.get("new_status", "?")
-            label = f"{name}" + (f" ({vendor})" if vendor else "")
-            lines.append(f"**[CMVP STATUS]** [{label}]({mip_url})\n  ↳ {old_s} → {new_s}")
-
-    total = len(added) + len(status_changes)
-    header = (
-        f"## U0001f510 NIST CMVP — {total} Module{{'s' if total != 1 else ''}} in Process Update{{'s' if total != 1 else ''}}\n"
-        f"_CC Pulse detected CMVP Modules-in-Process changes._\n"
-    )
-    footer = f"\n\n[View CMVP MIP List]({mip_url}) · [Full dashboard](https://kr15tyk.github.io/CC-pulse/cc_dashboard.html)"
-
-    body = "\n\n".join(lines)
-    payload = json.dumps({
-        "roomId": room_id,
-        "markdown": header + body + footer,
-    }).encode("utf-8")
-
-    req = urllib.request.Request(
-        "https://webexapis.com/v1/messages",
-        data=payload,
-        headers={
-            "Content-Type": "application/json",
-            "Authorization": f"Bearer {token}",
-        },
-        method="POST",
-    )
-    try:
-        with urllib.request.urlopen(req, timeout=10) as resp:
-            log.info(
-                "[Webex] CMVP MIP notification sent: %d added, %d status changes (HTTP %d).",
-                len(added), len(status_changes), resp.status,
-            )
-    except urllib.error.URLError as exc:
-        log.warning("[Webex] Failed to send CMVP MIP notification: %s", exc)
 
 
 # ---------------------------------------------------------------------------
@@ -1660,19 +1523,13 @@ def send_daily_status_email(diff: dict, run_date: str = "") -> None:
     nato_adds  = diff.get("nato", {}).get("cisco_added", [])
     eucc_adds  = diff.get("eucc", {}).get("cisco_added", [])
 
-    nist_news = sum(
-        len(v.get("added", [])) for v in diff.get("nist", {}).get("pages", {}).values()
-        if isinstance(v, dict)
-    ) + sum(len(v) for v in diff.get("nist", {}).get("feeds", {}).values()) + \
-        len(diff.get("nist", {}).get("cmvp_mip", {}).get("added", [])) + \
-        len(diff.get("nist", {}).get("cmvp_mip", {}).get("status_changes", []))
     cc_crypto_new = sum(
         len(v.get("added", [])) for v in diff.get("cc_crypto", {}).get("pages", {}).values()
         if isinstance(v, dict)
     )
     niap_pp_changes = len(diff.get("niap", {}).get("pps", {}).get("added", [])) + \
                       len(diff.get("niap", {}).get("pps", {}).get("sunset_changes", []))
-    total_changes = len(alerts) + len(new_tds) + len(new_certs) + len(nato_adds) + len(eucc_adds) + nist_news + cc_crypto_new + niap_pp_changes
+    total_changes = len(alerts) + len(new_tds) + len(new_certs) + len(nato_adds) + len(eucc_adds) + cc_crypto_new + niap_pp_changes
     unhealthy_sources = {
         source: health for source, health in diff.get("source_health", {}).items()
         if health.get("status") in ("stale", "failed")
@@ -1713,8 +1570,7 @@ def send_daily_status_email(diff: dict, run_date: str = "") -> None:
         if new_certs: lines_detail.append(f"{len(new_certs)} new Cisco NDcPP cert(s)")
         if nato_adds: lines_detail.append(f"{len(nato_adds)} new Cisco NATO listing(s)")
         if eucc_adds: lines_detail.append(f"{len(eucc_adds)} new Cisco EUCC cert(s)")
-        if nist_news: lines_detail.append(f"{nist_news} NIST update(s) (news/FIPS/CMVP)")
-        if cc_crypto_new: lines_detail.append(f"{cc_crypto_new} CC Crypto publication(s)")
+                if cc_crypto_new: lines_detail.append(f"{cc_crypto_new} CC Crypto publication(s)")
         if niap_pp_changes: lines_detail.append(f"{niap_pp_changes} new/updated NIAP PP(s)")
         body_detail  = ("<p style='margin:0 0 12px;color:#94a3b8;font-size:14px;'>"
                         "CC Pulse detected new activity and sent the appropriate alerts:"
