@@ -781,13 +781,35 @@ def _diff_feeds(old_feeds: dict, new_feeds: dict, categorize: bool = False) -> d
         if added:
             result[feed_name] = added
     return result
+def _diff_nato_pages(old_pages: dict, new_pages: dict) -> dict:
+  """Diff two NATO {page_key: [product_records]} dicts.
+
+  NATO product records use link/raw_text (not the generic 'text' field
+  _diff_pages() expects), so keying on 'text' matches nothing and every
+  retained product re-appears as "new" every run regardless of real
+  change. Key the same way the Cisco-specific diff below already does.
+  """
+  result = {}
+  for page_key in set(old_pages) | set(new_pages):
+    old_items = old_pages.get(page_key, [])
+    new_items = new_pages.get(page_key, [])
+    old_keys = {_record_key(p, url_field="link", text_field="raw_text") for p in old_items}
+    new_keys = {_record_key(p, url_field="link", text_field="raw_text") for p in new_items}
+    added = [p for p in new_items
+             if _record_key(p, url_field="link", text_field="raw_text") not in old_keys]
+    removed = [p for p in old_items
+               if _record_key(p, url_field="link", text_field="raw_text") not in new_keys]
+    if added or removed:
+      result[page_key] = {"added": added, "removed": removed}
+  return result
+
 # -- NATO NIAPCL diff ---------------------------------------------------------
 def diff_nato(old_nato: Snapshot, new_nato: Snapshot) -> Snapshot:
     """Diff two NATO NIAPCL snapshots."""
     old_pages = old_nato.get("pages", {})
     new_pages = new_nato.get("pages", {})
 
-    pages = _diff_pages(old_pages, new_pages)
+    pages = _diff_nato_pages(old_pages, new_pages)
 
     # Diff Cisco products specifically (keyed on product URL, fix: raw_text
     # keys churned on NIAPCL display-format changes)
