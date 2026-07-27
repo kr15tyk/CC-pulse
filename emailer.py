@@ -1570,7 +1570,7 @@ def send_daily_status_email(diff: dict, run_date: str = "") -> None:
         if new_certs: lines_detail.append(f"{len(new_certs)} new Cisco NDcPP cert(s)")
         if nato_adds: lines_detail.append(f"{len(nato_adds)} new Cisco NATO listing(s)")
         if eucc_adds: lines_detail.append(f"{len(eucc_adds)} new Cisco EUCC cert(s)")
-                if cc_crypto_new: lines_detail.append(f"{cc_crypto_new} CC Crypto publication(s)")
+        if cc_crypto_new: lines_detail.append(f"{cc_crypto_new} CC Crypto publication(s)")
         if niap_pp_changes: lines_detail.append(f"{niap_pp_changes} new/updated NIAP PP(s)")
         body_detail  = ("<p style='margin:0 0 12px;color:#94a3b8;font-size:14px;'>"
                         "CC Pulse detected new activity and sent the appropriate alerts:"
