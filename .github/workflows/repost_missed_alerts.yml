@@ -14,6 +14,13 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+
+      - name: Checkout snapshots branch as worktree
+        run: |
+          git fetch origin snapshots
+          git worktree add snapshot-store snapshots
 
       - name: Set up Python
         uses: actions/setup-python@v7
@@ -26,32 +33,29 @@ jobs:
       - name: Repost missed alerts from stored diffs
         env:
           CC_WEBEX_BOT_TOKEN: ${{ secrets.CC_WEBEX_BOT_TOKEN }}
-          CC_WEBEX_ROOM_ID:   ${{ secrets.CC_WEBEX_ROOM_ID }}
-          CC_WEBHOOK_URL:     ${{ secrets.CC_WEBHOOK_URL }}
+          CC_WEBEX_ROOM_ID: ${{ secrets.CC_WEBEX_ROOM_ID }}
+          CC_WEBHOOK_URL: ${{ secrets.CC_WEBHOOK_URL }}
+          CC_SNAPSHOT_DIR: snapshot-store
+          CC_DIFF_DIR: snapshot-store/diffs
           DATES: ${{ github.event.inputs.dates }}
         run: |
           python3 << 'PYEOF'
           import os, json, sys, glob
           import config, differ, emailer
-
           dates = [d.strip() for d in os.environ.get('DATES', '').split(',') if d.strip()]
           if not dates:
               print("No dates provided, exiting.")
               sys.exit(0)
-
           for date in dates:
-              diff_path = f"snapshots/diffs/{date}_diff.json"
+              diff_path = os.path.join(config.DIFF_DIR, f"{date}_diff.json")
               if not os.path.exists(diff_path):
                   print(f"[{date}] Diff file not found: {diff_path} -- skipping.")
                   continue
-
               with open(diff_path) as f:
                   diff = json.load(f)
-
               # Re-run flag_alerts with the now-fixed code
               alerts = differ.flag_alerts(diff)
               print(f"[{date}] flag_alerts found {len(alerts)} alert(s).")
-
               if alerts:
                   print(f"[{date}] Sending Webex alert...")
                   # Prepend date label to header so it's clear this is a backfill
