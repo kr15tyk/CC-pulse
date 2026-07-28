@@ -2,18 +2,8 @@
 <rss version="2.0"><channel>
 <title>CC Pulse</title>
 <link>https://kr15tyk.github.io/CC-pulse/cc_dashboard.html</link>
-<description>Common Criteria monitoring - 2026-07-27 10:29 ET</description>
-<item><title>CSfC Selection Updated: File Encryption</title><link>https://www.nsa.gov/Portals/75/documents/resources/everyone/csfc/components-list/General%20Purpose%20Compute%20Platform%20Selectors.pdf?ver=_F1nlN-BoArFWlDUGCDEeQ%3d%3d</link><description>Component selection document updated.</description></item>
-<item><title>CSfC Selection Updated: TLS Protected Servers</title><link>https://www.nsa.gov/Portals/75/documents/CSfC%20Selections%20Updates%202026/CSfC%20Selections%20for%20TLS%20Protected%20Servers-2026-05-15.pdf?ver=Yw5dCz8sBF6PUyVF67J08g%3d%3d</link><description>Component selection document updated.</description></item>
-<item><title>CSfC Selection Updated: End User Device / Mobile Platform</title><link>https://www.nsa.gov/portals/75/documents/resources/everyone/csfc/capability-packages/CSfC%20Selections%20for%20End%20User%20Devices%20and%20Mobile%20Platform_Nov%202018.pdf?ver=2018-11-29-092200-213</link><description>Component selection document updated.</description></item>
-<item><title>CSfC Selection Updated: TLS Software Applications</title><link>https://www.nsa.gov/Portals/75/documents/resources/everyone/csfc/components-list/selections/CSfC%20Selections%20for%20TLS%20Software%20Application-2022-11-03.pdf?ver=w971KKfVKjBfgT6ak8iJhQ%3d%3d</link><description>Component selection document updated.</description></item>
-<item><title>CSfC Selection Updated: Traffic Filtering Firewall</title><link>https://www.nsa.gov/Portals/75/documents/CSfC%20Selections%20Updates%202026/CSfC%20Selections%20for%20Traffic%20Filtering%20Firewall%202026-07-22.pdf?ver=V_Bv7VgsDvD0ZmPNdL6Y1w%3d%3d</link><description>Component selection document updated.</description></item>
-<item><title>CSfC Selection Updated: IPsec VPN Gateway</title><link>https://www.nsa.gov/Portals/75/documents/CSfC%20Selections%20Updates%202026/CSfC%20Selections%20for%20IPsec%20VPN%20Gateway-2026-06-30.pdf?ver=Bnk8rb63lv3yXoYu9GUEsQ%3d%3d</link><description>Component selection document updated.</description></item>
-<item><title>ALERT: CSfC Component Selections – File Encryption</title><link>https://kr15tyk.github.io/CC-pulse/cc_dashboard.html</link><description>Kind: updated | Keywords: CSfC</description></item>
-<item><title>ALERT: CSfC Component Selections – TLS Protected Servers</title><link>https://kr15tyk.github.io/CC-pulse/cc_dashboard.html</link><description>Kind: updated | Keywords: CSfC</description></item>
-<item><title>ALERT: CSfC Component Selections – End User Device / Mobile Platform</title><link>https://kr15tyk.github.io/CC-pulse/cc_dashboard.html</link><description>Kind: updated | Keywords: CSfC</description></item>
-<item><title>ALERT: CSfC Component Selections – TLS Software Applications</title><link>https://kr15tyk.github.io/CC-pulse/cc_dashboard.html</link><description>Kind: updated | Keywords: CSfC</description></item>
-<item><title>ALERT: CSfC Component Selections – Traffic Filtering Firewall</title><link>https://kr15tyk.github.io/CC-pulse/cc_dashboard.html</link><description>Kind: updated | Keywords: CSfC</description></item>
-<item><title>ALERT: CSfC Component Selections – IPsec VPN Gateway</title><link>https://kr15tyk.github.io/CC-pulse/cc_dashboard.html</link><description>Kind: updated | Keywords: CSfC</description></item>
-<item><title>ALERT: ND-iTC NIT RFI – RFI#202609: Separation of Test Definitions for DTLSv1.2 and v1.3 (renegotiation)</title><link>https://kr15tyk.github.io/CC-pulse/cc_dashboard.html</link><description>Kind: new | Keywords: NDcPP</description></item>
+<description>Common Criteria monitoring - 2026-07-28 04:23 ET</description>
+<item><title>New TD: TD1051</title><link>https://www.niap-ccevs.org/</link><description></description></item>
+<item><title>[atsec] Crypto-V Alliance Launches Official Website</title><link>https://www.atsec.com/crypto-v-alliance-launches-official-website/</link><description></description></item>
+<item><title>ALERT: NIAP TD – Correction to FIPS 186-5 Section references in FCS_COP.1.1/Sig</title><link>https://kr15tyk.github.io/CC-pulse/cc_dashboard.html</link><description>Kind: new | Keywords: FIPS 186-5, FCS_COP</description></item>
 </channel></rss>

@@ -179,7 +179,7 @@
   <span class="nav-title">CC Pulse Dashboard</span>
   <span class="nav-spacer"></span>
   <div class="ham-wrap">
-    <span class="nav-meta">Last run: 2026-07-27 10:29 ET</span>
+    <span class="nav-meta">Last run: 2026-07-28 04:23 ET</span>
     <button class="ham-btn" id="ham-btn" onclick="toggleHamMenu()" aria-expanded="false" aria-haspopup="true" title="Open menu">&#9776;</button>
     <div class="ham-menu" id="ham-menu" role="menu">
       <a class="ham-item" href="https://kr15tyk.github.io/CC-pulse/cc_dashboard.html" role="menuitem"><span class="ham-icon">&#127968;</span>Home</a>
@@ -254,11 +254,11 @@
 <div class="sticky-top">
   <div class="trend-bar">
     <div class="stat"><a href="#sec-niap-pp" onclick="navigateTo('sec-niap-pp');return false;">
-      <div class="stat-num active-num">8</div>
+      <div class="stat-num active-num">3</div>
       <div class="stat-lbl">NIAP Changes</div>
     </a></div>
     <div class="stat"><a href="#sec-csfc" onclick="navigateTo('sec-csfc');return false;">
-      <div class="stat-num active-num">6</div>
+      <div class="stat-num ">0</div>
       <div class="stat-lbl">CSfC Selection Updates</div>
     </a></div>
     <div class="stat"><a href="#sec-cc-portal" onclick="navigateTo('sec-cc-portal');return false;">
@@ -266,11 +266,11 @@
       <div class="stat-lbl">CC Portal</div>
     </a></div>
     <div class="stat"><a href="#sec-nato" onclick="navigateTo('sec-nato');return false;">
-      <div class="stat-num active-num">60</div>
+      <div class="stat-num ">0</div>
       <div class="stat-lbl">NATO NIAPCL</div>
     </a></div>
     <div class="stat"><a href="#sec-cctl" onclick="navigateTo('sec-cctl');return false;">
-      <div class="stat-num ">0</div>
+      <div class="stat-num active-num">1</div>
       <div class="stat-lbl">CCTL Updates</div>
     </a></div>
     <div class="stat"><a href="#sec-eucc-req" onclick="navigateTo('sec-eucc-req');return false;">
@@ -278,7 +278,7 @@
       <div class="stat-lbl">EUCC Changes</div>
     </a></div>
     <div class="stat"><a href="#sec-alerts" onclick="navigateTo('sec-alerts');return false;">
-      <div class="stat-num alert-num">7</div>
+      <div class="stat-num alert-num">1</div>
       <div class="stat-lbl">Alerts</div>
     </a></div>
   </div>
@@ -308,72 +308,18 @@
 <div class="card card-alert" id="sec-alerts">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>Alerts</span>
-    <span class="card-count">7 alerts</span>
+    <span class="card-count">1 alert</span>
     <span class="toggle-icon">&#9660;</span>
   </div>
   <div class="card-body">
     <div class="alert-monitoring">FIPS 186-4, FIPS 186-5, NDcPP, CPP_ND, TLS 1.3, SSH, PP-Module_VPN, PP-Module_WLAN, labgram, valgram, emergency, CSfC, Commercial Solutions for Classified, CSfC APL, CSfC component selections, NSA CSfC, NATO NIAPC, NIAPCL, EUCC, ENISA, CCDB-018, Crypto Catalog, cryptography working group, Specification of Functional Requirements for Cryptography, FCS_CKM, FCS_COP, FCS_RBG</div>
     
-        <div class="item-row alert-item" data-alert-key="CSfC Component Selections-File_Encryption" data-tab="us">
+        <div class="item-row alert-item" data-alert-key="NIAP TD-Correction_to_FIPS_186-5_Section_references_in_FCS_COP.1.1/Sig" data-tab="us">
           
-          <a class="item-link" href="https://www.nsa.gov/Portals/75/documents/resources/everyone/csfc/components-list/General%20Purpose%20Compute%20Platform%20Selectors.pdf?ver=_F1nlN-BoArFWlDUGCDEeQ%3d%3d" target="_blank">CSfC Component Selections: File Encryption</a>
+          <a class="item-link" href="https://www.niap-ccevs.org/technical-decisions/TD1051" target="_blank">NIAP TD: Correction to FIPS 186-5 Section references in FCS_COP.1.1/Sig</a>
           
-          <span class="item-meta">updated &middot; CSfC</span>
-          <div class="item-sub">NSA updated the component selection document for this role</div>
-          <button class="dismiss-btn" onclick="dismissAlert(this)" title="Mark as seen">&#10003; Seen</button>
-        </div>
-        
-        <div class="item-row alert-item" data-alert-key="CSfC Component Selections-TLS_Protected_Servers" data-tab="us">
-          
-          <a class="item-link" href="https://www.nsa.gov/Portals/75/documents/CSfC%20Selections%20Updates%202026/CSfC%20Selections%20for%20TLS%20Protected%20Servers-2026-05-15.pdf?ver=Yw5dCz8sBF6PUyVF67J08g%3d%3d" target="_blank">CSfC Component Selections: TLS Protected Servers</a>
-          
-          <span class="item-meta">updated &middot; CSfC</span>
-          <div class="item-sub">NSA updated the component selection document for this role</div>
-          <button class="dismiss-btn" onclick="dismissAlert(this)" title="Mark as seen">&#10003; Seen</button>
-        </div>
-        
-        <div class="item-row alert-item" data-alert-key="CSfC Component Selections-End_User_Device_/_Mobile_Platform" data-tab="us">
-          
-          <a class="item-link" href="https://www.nsa.gov/portals/75/documents/resources/everyone/csfc/capability-packages/CSfC%20Selections%20for%20End%20User%20Devices%20and%20Mobile%20Platform_Nov%202018.pdf?ver=2018-11-29-092200-213" target="_blank">CSfC Component Selections: End User Device / Mobile Platform</a>
-          
-          <span class="item-meta">updated &middot; CSfC</span>
-          <div class="item-sub">NSA updated the component selection document for this role</div>
-          <button class="dismiss-btn" onclick="dismissAlert(this)" title="Mark as seen">&#10003; Seen</button>
-        </div>
-        
-        <div class="item-row alert-item" data-alert-key="CSfC Component Selections-TLS_Software_Applications" data-tab="us">
-          
-          <a class="item-link" href="https://www.nsa.gov/Portals/75/documents/resources/everyone/csfc/components-list/selections/CSfC%20Selections%20for%20TLS%20Software%20Application-2022-11-03.pdf?ver=w971KKfVKjBfgT6ak8iJhQ%3d%3d" target="_blank">CSfC Component Selections: TLS Software Applications</a>
-          
-          <span class="item-meta">updated &middot; CSfC</span>
-          <div class="item-sub">NSA updated the component selection document for this role</div>
-          <button class="dismiss-btn" onclick="dismissAlert(this)" title="Mark as seen">&#10003; Seen</button>
-        </div>
-        
-        <div class="item-row alert-item" data-alert-key="CSfC Component Selections-Traffic_Filtering_Firewall" data-tab="us">
-          
-          <a class="item-link" href="https://www.nsa.gov/Portals/75/documents/CSfC%20Selections%20Updates%202026/CSfC%20Selections%20for%20Traffic%20Filtering%20Firewall%202026-07-22.pdf?ver=V_Bv7VgsDvD0ZmPNdL6Y1w%3d%3d" target="_blank">CSfC Component Selections: Traffic Filtering Firewall</a>
-          
-          <span class="item-meta">updated &middot; CSfC</span>
-          <div class="item-sub">NSA updated the component selection document for this role</div>
-          <button class="dismiss-btn" onclick="dismissAlert(this)" title="Mark as seen">&#10003; Seen</button>
-        </div>
-        
-        <div class="item-row alert-item" data-alert-key="CSfC Component Selections-IPsec_VPN_Gateway" data-tab="us">
-          
-          <a class="item-link" href="https://www.nsa.gov/Portals/75/documents/CSfC%20Selections%20Updates%202026/CSfC%20Selections%20for%20IPsec%20VPN%20Gateway-2026-06-30.pdf?ver=Bnk8rb63lv3yXoYu9GUEsQ%3d%3d" target="_blank">CSfC Component Selections: IPsec VPN Gateway</a>
-          
-          <span class="item-meta">updated &middot; CSfC</span>
-          <div class="item-sub">NSA updated the component selection document for this role</div>
-          <button class="dismiss-btn" onclick="dismissAlert(this)" title="Mark as seen">&#10003; Seen</button>
-        </div>
-        
-        <div class="item-row alert-item" data-alert-key="ND-iTC NIT RFI-RFI#202609:_Separation_of_Test_Definitions_for_DTLSv1.2_and_v1.3_(renegotiation)" data-tab="intl">
-          
-          <a class="item-link" href="https://nd-itc.github.io/TD/2026/NITDecisionRfi202609.pdf" target="_blank">ND-iTC NIT RFI: RFI#202609: Separation of Test Definitions for DTLSv1.2 and v1.3 (renegotiation)</a>
-          
-          <span class="item-meta">new &middot; NDcPP</span>
-          <div class="item-sub">New NIT RFI · Impact: NDSDv3.0e · Status: Published</div>
+          <span class="item-meta">new &middot; FIPS 186-5, FCS_COP</span>
+          <div class="item-sub">TD1051</div>
           <button class="dismiss-btn" onclick="dismissAlert(this)" title="Mark as seen">&#10003; Seen</button>
         </div>
         
@@ -393,77 +339,39 @@
 <div class="section-group">
   <div class="section-label">NIAP</div>
   <!-- Cisco NDcPP -->
-<div class="card card-new" id="sec-cisco" data-has-changes="2">
+<div class="card " id="sec-cisco" data-has-changes="0">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>Cisco NDcPP Certifications</span>
-    <span class="card-count">2 changes</span>
-    <span class="toggle-icon">&#9660;</span>
+    <span class="card-count">0 changes</span>
+    <span class="toggle-icon">&#9658;</span>
   </div>
-  <div class="card-body ">
-    
-    <div class="sub-hdr sub-new">New Certifications (1)</div>
-    
-    <div class="item-row" data-source="cisco" data-kind="new">
-      <span class="item-link">Cisco Systems, Inc. &mdash; Cisco Secure Network Analytics (SNA) 7.5</span>
-      <span class="item-meta">2026-07-17</span>
-    </div>
-    
-    <div class="item-sub">CPP_ND_V3.0E</div>
+  <div class="card-body collapsed">
     
     
     
-    
-    
-    <div class="sub-hdr sub-updated">Newly Archived (1)</div>
-    
-    <div class="item-row" data-source="cisco" data-kind="archived">
-      <span class="item-link">Cisco Systems, Inc. &mdash; Cisco Catalyst 9200/9200L Series Switches 17.12</span>
-      <span class="item-meta">Archived</span>
-    </div>
-    
-    <div class="item-sub">CPP_ND_V2.2E, MOD_MACSEC_V1.0</div>
-    
-    
-    
-    
+    <p class="no-change">No changes detected. <span class="last-active">(last: 2026-07-28)</span></p>
   </div>
 </div>
 
   <!-- NIAP In-Evaluation -->
-<div class="card card-new" id="sec-niap-inevaluation" data-has-changes="3">
+<div class="card card-new" id="sec-niap-inevaluation" data-has-changes="1">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>NIAP In-Evaluation Products</span>
-    <span class="card-count">3 changes</span>
+    <span class="card-count">1 change</span>
     </span>
   </div>
   <div class="card-body ">
     
-    <div class="sub-hdr sub-new">Newly In Evaluation (2)</div>
+    <div class="sub-hdr sub-new">Newly In Evaluation (1)</div>
     
     <div class="item-row" data-source="niap-inevaluation" data-kind="new">
-      <span class="item-link">SonicWall, Inc. -- SonicWall Secure Mobile Access (SMA)</span>
-      <span class="item-meta">DEKRA Cybersecurity Certification Laboratory</span>
+      <span class="item-link">Palo Alto Networks, Inc. -- Palo Alto Networks SD-WAN Instant-On Network (ION) Devices ION 1200, ION 1200-S, ION 3200, ION 5200, ION 9200, and Controller running 6.5</span>
+      <span class="item-meta">Gossamer Security Solutions</span>
     </div>
     
     <div class="item-sub">Network Device</div>
     
     
-    <div class="item-row" data-source="niap-inevaluation" data-kind="new">
-      <span class="item-link">Evertz Microsystems -- MMA10G-EXE Series</span>
-      <span class="item-meta">Acumen Security</span>
-    </div>
-    
-    <div class="item-sub">Network Device</div>
-    
-    
-    
-    
-    <div class="sub-hdr sub-removed">Left Evaluation (1)</div>
-    
-    <div class="item-row" data-source="niap-inevaluation" data-kind="removed">
-      <span class="item-link">Cisco Systems, Inc. -- Cisco Secure Network Analytics (SNA) 7.5</span>
-      <span class="item-meta">Completed or Withdrawn</span>
-    </div>
     
     
     
@@ -532,10 +440,10 @@
 </div>
 
   <!-- NIAP PCL — All Certifications -->
-<div class="card card-new" id="sec-niap-pcl" data-has-changes="3">
+<div class="card card-new" id="sec-niap-pcl" data-has-changes="1">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>NIAP PCL — All Certifications</span>
-    <span class="card-count">3 changes</span>
+    <span class="card-count">1 change</span>
     </span>
   </div>
   <div class="card-body ">
@@ -543,31 +451,12 @@
     <div class="sub-hdr sub-new">New Certifications (1)</div>
     
     <div class="item-row" data-source="niap-pcl" data-kind="new">
-      <span class="item-link">Cisco Systems, Inc. -- Cisco Secure Network Analytics (SNA) 7.5</span>
-      <span class="item-meta">2026-07-17</span>
+      <span class="item-link">KONICA MINOLTA, INC. -- KONICA MINOLTA bizhub C4751i G00-S2</span>
+      <span class="item-meta">2025-10-02</span>
     </div>
     
-    <div class="item-sub">CPP_ND_V3.0E</div>
+    <div class="item-sub">PP_HCD_V1.0</div>
     
-    
-    
-    
-    <div class="sub-hdr sub-updated">Newly Archived (2)</div>
-    
-    <div class="item-row" data-source="niap-pcl" data-kind="archived">
-      <span class="item-link">Cisco Systems, Inc. -- Cisco Catalyst 9200/9200L Series Switches 17.12</span>
-      <span class="item-meta">Archived</span>
-    </div>
-    
-    <div class="item-sub">CPP_ND_V2.2E, MOD_MACSEC_V1.0</div>
-    
-    
-    <div class="item-row" data-source="niap-pcl" data-kind="archived">
-      <span class="item-link">Fortinet, Inc. -- FortiMail 7.4</span>
-      <span class="item-meta">Archived</span>
-    </div>
-    
-    <div class="item-sub">CPP_ND_V2.2E</div>
     
     
     
@@ -594,17 +483,26 @@
 </div>
 
   <!-- NIAP TDs -->
-<div class="card " id="sec-niap-td" data-has-changes="0">
+<div class="card card-new" id="sec-niap-td" data-has-changes="1">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>NIAP Technical Decisions</span>
-    <span class="card-count">0 changes</span>
+    <span class="card-count">1 change</span>
     </span>
-    <span class="toggle-icon">&#9658;</span>
+    <span class="toggle-icon">&#9660;</span>
   </div>
-  <div class="card-body collapsed">
+  <div class="card-body ">
+    
+    <div class="sub-hdr sub-new">New TDs (1)</div>
+    
+    <div class="item-row" data-source="niap-td" data-kind="new">
+      <a class="item-link" href="https://www.niap-ccevs.org/technical-decisions/TD1051" target="_blank">TD1051 &mdash; Correction to FIPS 186-5 Section references in FCS_COP.1.1/Sig</a>
+      <span class="item-meta">2026-07-27</span>
+    </div>
     
     
-    <p class="no-change">No changes detected. <span class="last-active">(last: 2026-07-23)</span></p>
+    
+    
+    
   </div>
 </div>
 </div>
@@ -613,70 +511,16 @@
 <div class="section-group">
   <div class="section-label">CSfC</div>
   <!-- CSfC Components, Announcements, and Selection Documents -->
-<div class="card card-updated" id="sec-csfc" data-has-changes="6">
+<div class="card " id="sec-csfc" data-has-changes="0">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>CSfC Components &amp; Announcements</span>
-    <span class="card-count">6 updates</span>
-    <span class="toggle-icon">&#9660;</span>
+    <span class="card-count">0 updates</span>
+    <span class="toggle-icon">&#9658;</span>
   </div>
-  <div class="card-body ">
+  <div class="card-body collapsed">
     
     
-    <div class="cp-row" data-source="csfc" data-kind="updated">
-      <a class="item-link" href="https://www.nsa.gov/Portals/75/documents/resources/everyone/csfc/components-list/General%20Purpose%20Compute%20Platform%20Selectors.pdf?ver=_F1nlN-BoArFWlDUGCDEeQ%3d%3d" target="_blank">File Encryption</a>
-      <div class="cp-detail">
-        <span class="cp-date">Selection document link changed</span>
-      </div>
-    </div>
-    
-    
-    
-    <div class="cp-row" data-source="csfc" data-kind="updated">
-      <a class="item-link" href="https://www.nsa.gov/Portals/75/documents/CSfC%20Selections%20Updates%202026/CSfC%20Selections%20for%20TLS%20Protected%20Servers-2026-05-15.pdf?ver=Yw5dCz8sBF6PUyVF67J08g%3d%3d" target="_blank">TLS Protected Servers</a>
-      <div class="cp-detail">
-        <span class="cp-date">Selection document link changed</span>
-      </div>
-    </div>
-    
-    
-    
-    <div class="cp-row" data-source="csfc" data-kind="updated">
-      <a class="item-link" href="https://www.nsa.gov/portals/75/documents/resources/everyone/csfc/capability-packages/CSfC%20Selections%20for%20End%20User%20Devices%20and%20Mobile%20Platform_Nov%202018.pdf?ver=2018-11-29-092200-213" target="_blank">End User Device / Mobile Platform</a>
-      <div class="cp-detail">
-        <span class="cp-date">Selection document link changed</span>
-      </div>
-    </div>
-    
-    
-    
-    <div class="cp-row" data-source="csfc" data-kind="updated">
-      <a class="item-link" href="https://www.nsa.gov/Portals/75/documents/resources/everyone/csfc/components-list/selections/CSfC%20Selections%20for%20TLS%20Software%20Application-2022-11-03.pdf?ver=w971KKfVKjBfgT6ak8iJhQ%3d%3d" target="_blank">TLS Software Applications</a>
-      <div class="cp-detail">
-        <span class="cp-date">Selection document link changed</span>
-      </div>
-    </div>
-    
-    
-    
-    <div class="cp-row" data-source="csfc" data-kind="updated">
-      <a class="item-link" href="https://www.nsa.gov/Portals/75/documents/CSfC%20Selections%20Updates%202026/CSfC%20Selections%20for%20Traffic%20Filtering%20Firewall%202026-07-22.pdf?ver=V_Bv7VgsDvD0ZmPNdL6Y1w%3d%3d" target="_blank">Traffic Filtering Firewall</a>
-      <div class="cp-detail">
-        <span class="cp-date">Selection document link changed</span>
-      </div>
-    </div>
-    
-    
-    
-    <div class="cp-row" data-source="csfc" data-kind="updated">
-      <a class="item-link" href="https://www.nsa.gov/Portals/75/documents/CSfC%20Selections%20Updates%202026/CSfC%20Selections%20for%20IPsec%20VPN%20Gateway-2026-06-30.pdf?ver=Bnk8rb63lv3yXoYu9GUEsQ%3d%3d" target="_blank">IPsec VPN Gateway</a>
-      <div class="cp-detail">
-        <span class="cp-date">Selection document link changed</span>
-      </div>
-    </div>
-    
-    
-    
-    
+    <p class="no-change">No changes detected. <span class="last-active">(last: 2026-07-27)</span></p>
   </div>
 </div>
 </div>
@@ -718,344 +562,50 @@
     <p class="no-change">No new international items.</p>
   </div>
 </div><!-- NATO NIAPCL -->
-        <div class="card card-new" id="sec-nato" data-has-changes="60">
+        <div class="card " id="sec-nato" data-has-changes="0">
           <div class="card-hdr" onclick="toggleCard(this)">
             <span>NATO NIAPCL Products</span>
-            <span class="card-count">60 changes</span>
-            <span class="toggle-icon">&#9660;</span>
+            <span class="card-count">0 changes</span>
+            <span class="toggle-icon">&#9658;</span>
           </div>
-          <div class="card-body ">
+          <div class="card-body collapsed">
             
             
-            
-            
-            <div class="sub-hdr sub-new">cisco_products — New Items (30)</div>
-            
-            <div class="item-row" data-source="nato" data-kind="new">
-              <a class="item-link" href="https://www.ia.nato.int/niapc/Product/Cisco-ASA-5500-X-Series-Next-Generation-Firewalls_589" target="_blank">Cisco ASA 5500-X Series Next-Generation Firewalls</a>
-              <span class="item-meta"></span>
-            </div>
-            
-            <div class="item-row" data-source="nato" data-kind="new">
-              <a class="item-link" href="https://www.ia.nato.int/niapc/Product/AnyConnect-5.0-for-Windows-10_643" target="_blank">AnyConnect 5.0 for Windows 10</a>
-              <span class="item-meta"></span>
-            </div>
-            
-            <div class="item-row" data-source="nato" data-kind="new">
-              <a class="item-link" href="https://www.ia.nato.int/niapc/Product/Cisco-ASR-1000-Series--IOS-XE-17.15-_722" target="_blank">Cisco ASR 1000 Series (IOS XE 17.15)</a>
-              <span class="item-meta"></span>
-            </div>
-            
-            <div class="item-row" data-source="nato" data-kind="new">
-              <a class="item-link" href="https://www.ia.nato.int/niapc/Product/Cisco-FirePower-2100-Series--with-FMC-FMCv-Cisco-FTD-7.4-_750" target="_blank">Cisco FirePower 2100 Series (with FMC/FMCv Cisco FTD 7.4)</a>
-              <span class="item-meta"></span>
-            </div>
-            
-            <div class="item-row" data-source="nato" data-kind="new">
-              <a class="item-link" href="https://www.ia.nato.int/niapc/Product/Cisco-FirePower-4100-Series--with-FMC-FMCv-Cisco-FTD-7.4-_751" target="_blank">Cisco FirePower 4100 Series (with FMC/FMCv Cisco FTD 7.4)</a>
-              <span class="item-meta"></span>
-            </div>
-            
-            <div class="item-row" data-source="nato" data-kind="new">
-              <a class="item-link" href="https://www.ia.nato.int/niapc/Product/Cisco-FirePower-9300-Series--with-FMC-FMCv-Cisco-FTD-7.4-_752" target="_blank">Cisco FirePower 9300 Series (with FMC/FMCv Cisco FTD 7.4)</a>
-              <span class="item-meta"></span>
-            </div>
-            
-            <div class="item-row" data-source="nato" data-kind="new">
-              <a class="item-link" href="https://www.ia.nato.int/niapc/Product/https---www.cisco.com-c-en-us-support-security-firepower-1000-series-series.html_832" target="_blank">CISCO Firepower 1000 Series (with FMC/FMCv Cisco FTD 7.4)</a>
-              <span class="item-meta"></span>
-            </div>
-            
-            <div class="item-row" data-source="nato" data-kind="new">
-              <a class="item-link" href="https://www.ia.nato.int/niapc/Product/Cisco-APIC_897" target="_blank">Cisco APIC</a>
-              <span class="item-meta"></span>
-            </div>
-            
-            <div class="item-row" data-source="nato" data-kind="new">
-              <a class="item-link" href="https://www.ia.nato.int/niapc/Product/Cisco-Nexus-9000-Series--NX-OS-10.4-_898" target="_blank">Cisco Nexus 9000 Series (NX-OS 10.4)</a>
-              <span class="item-meta"></span>
-            </div>
-            
-            <div class="item-row" data-source="nato" data-kind="new">
-              <a class="item-link" href="https://www.ia.nato.int/niapc/Product/Cisco-MDS-9000-Series-Switches--NX-OS-9.4-_899" target="_blank">Cisco MDS 9000 Series Switches (NX-OS 9.4)</a>
-              <span class="item-meta"></span>
-            </div>
-            
-            <div class="item-row" data-source="nato" data-kind="new">
-              <a class="item-link" href="https://www.ia.nato.int/niapc/Product/Cisco-Catalyst-8000--Cat8K--Series-Edge-Routers--IOS-XE-17.15-_900" target="_blank">Cisco Catalyst 8000 (Cat8K) Series Edge Routers (IOS-XE 17.15)</a>
-              <span class="item-meta"></span>
-            </div>
-            
-            <div class="item-row" data-source="nato" data-kind="new">
-              <a class="item-link" href="https://www.ia.nato.int/niapc/Product/Cisco-Catalyst-8300-Series--IOS-XE-17.6-_901" target="_blank">Cisco Catalyst 8300 Series (IOS-XE 17.6)</a>
-              <span class="item-meta"></span>
-            </div>
-            
-            <div class="item-row" data-source="nato" data-kind="new">
-              <a class="item-link" href="https://www.ia.nato.int/niapc/Product/Cisco-Catalyst-8500-Series-Edge-Routers--IOS-XE-17.15-_902" target="_blank">Cisco Catalyst 8500 Series Edge Routers (IOS-XE 17.15)</a>
-              <span class="item-meta"></span>
-            </div>
-            
-            <div class="item-row" data-source="nato" data-kind="new">
-              <a class="item-link" href="https://www.ia.nato.int/niapc/Product/Cisco-Catalyst-C9000X-CX-Series-Switches-17.12_924" target="_blank">Cisco Catalyst C9000X/CX Series Switches 17.12</a>
-              <span class="item-meta"></span>
-            </div>
-            
-            <div class="item-row" data-source="nato" data-kind="new">
-              <a class="item-link" href="https://www.ia.nato.int/niapc/Product/AnyConnect-5.1-for-RHEL-8.2_941" target="_blank">AnyConnect 5.1 for RHEL 8.2</a>
-              <span class="item-meta"></span>
-            </div>
-            
-            <div class="item-row" data-source="nato" data-kind="new">
-              <a class="item-link" href="https://www.ia.nato.int/niapc/Product/Cisco-Secure-Firewall-ASA-Virtual-9.20_942" target="_blank">Cisco Secure Firewall ASA Virtual 9.20</a>
-              <span class="item-meta"></span>
-            </div>
-            
-            <div class="item-row" data-source="nato" data-kind="new">
-              <a class="item-link" href="https://www.ia.nato.int/niapc/Product/Cisco-Secure-Firewall-Threat-Defense--FTD--Virtual-7.4-with-FMC-FMCv_943" target="_blank">Cisco Secure Firewall Threat Defense (FTD) Virtual 7.4 with FMC/FMCv</a>
-              <span class="item-meta"></span>
-            </div>
-            
-            <div class="item-row" data-source="nato" data-kind="new">
-              <a class="item-link" href="https://www.ia.nato.int/niapc/Product/Cisco-Network-Convergence-System-1004--IOS-XR-24.1-_944" target="_blank">Cisco Network Convergence System 1004 (IOS-XR 24.1)</a>
-              <span class="item-meta"></span>
-            </div>
-            
-            <div class="item-row" data-source="nato" data-kind="new">
-              <a class="item-link" href="https://www.ia.nato.int/niapc/Product/Cisco-Identity-Services-Engine--ISE--V3.3_945" target="_blank">Cisco Identity Services Engine (ISE) V3.3</a>
-              <span class="item-meta"></span>
-            </div>
-            
-            <div class="item-row" data-source="nato" data-kind="new">
-              <a class="item-link" href="https://www.ia.nato.int/niapc/Product/Cisco-Email-Security-Appliance-with-AsyncOS-15.5_946" target="_blank">Cisco Email Security Appliance with AsyncOS 15.5</a>
-              <span class="item-meta"></span>
-            </div>
-            
-            <div class="item-row" data-source="nato" data-kind="new">
-              <a class="item-link" href="https://www.ia.nato.int/niapc/Product/Cisco-Embedded-Services-Switch--ESS--9300-Series--IOS-XE-17.12-_947" target="_blank">Cisco Embedded Services Switch (ESS) 9300 Series (IOS-XE 17.12)</a>
-              <span class="item-meta"></span>
-            </div>
-            
-            <div class="item-row" data-source="nato" data-kind="new">
-              <a class="item-link" href="https://www.ia.nato.int/niapc/Product/Cisco-Embedded-Services-Switch--ESS--3300-Series--IOS-XE-17.12-_948" target="_blank">Cisco Embedded Services Switch (ESS) 3300 Series (IOS-XE 17.12)</a>
-              <span class="item-meta"></span>
-            </div>
-            
-            <div class="item-row" data-source="nato" data-kind="new">
-              <a class="item-link" href="https://www.ia.nato.int/niapc/Product/Cisco-Embedded-Services-Router--ESR--6300-v17.12_949" target="_blank">Cisco Embedded Services Router (ESR) 6300 v17.12</a>
-              <span class="item-meta"></span>
-            </div>
-            
-            <div class="item-row" data-source="nato" data-kind="new">
-              <a class="item-link" href="https://www.ia.nato.int/niapc/Product/Cisco-Embedded-Services-Router--ESR--6300-v17.15_950" target="_blank">Cisco Embedded Services Router (ESR) 6300 v17.15</a>
-              <span class="item-meta"></span>
-            </div>
-            
-            <div class="item-row" data-source="nato" data-kind="new">
-              <a class="item-link" href="https://www.ia.nato.int/niapc/Product/Cisco-Secure-Firewall-3100-Series-with-FMC-FMCv-FTD-7.4_951" target="_blank">Cisco Secure Firewall 3100 Series with FMC/FMCv FTD 7.4</a>
-              <span class="item-meta"></span>
-            </div>
-            
-            <div class="item-row" data-source="nato" data-kind="new">
-              <a class="item-link" href="https://www.ia.nato.int/niapc/Product/Cisco-Secure-Firewall-4200-Series--with-FMC-FMCv-Cisco-FTD-7.4-_952" target="_blank">Cisco Secure Firewall 4200 Series (with FMC/FMCv Cisco FTD 7.4)</a>
-              <span class="item-meta"></span>
-            </div>
-            
-            <div class="item-row" data-source="nato" data-kind="new">
-              <a class="item-link" href="https://www.ia.nato.int/niapc/Product/Cisco-Catalyst-9800-Series-Wireless-Controllers-and-Access-Points-17.12_953" target="_blank">Cisco Catalyst 9800 Series Wireless Controllers and Access Points 17.12</a>
-              <span class="item-meta"></span>
-            </div>
-            
-            <div class="item-row" data-source="nato" data-kind="new">
-              <a class="item-link" href="https://www.ia.nato.int/niapc/Product/Cisco-Catalyst-9800-Series-Wireless-Controllers-and-Access-Points-17.6_954" target="_blank">Cisco Catalyst 9800 Series Wireless Controllers and Access Points 17.6</a>
-              <span class="item-meta"></span>
-            </div>
-            
-            <div class="item-row" data-source="nato" data-kind="new">
-              <a class="item-link" href="https://www.ia.nato.int/niapc/Product/Cisco-Catalyst-Industrial-Ethernet-3000--IE3x00--Rugged-Series-Switches-running-IOS-XE-17.12_955" target="_blank">Cisco Catalyst Industrial Ethernet 3000 (IE3x00) Rugged Series Switches running IOS-XE 17.12</a>
-              <span class="item-meta"></span>
-            </div>
-            
-            <div class="item-row" data-source="nato" data-kind="new">
-              <a class="item-link" href="https://www.ia.nato.int/niapc/Product/Cisco-Catalyst-Industrial-Ethernet-9300-Rugged-Series-Switches-running-IOS-XE-17.12_956" target="_blank">Cisco Catalyst Industrial Ethernet 9300 Rugged Series Switches running IOS-XE 17.12</a>
-              <span class="item-meta"></span>
-            </div>
-            
-            
-            
-            
-            <div class="sub-hdr sub-new">all_products — New Items (30)</div>
-            
-            <div class="item-row" data-source="nato" data-kind="new">
-              <a class="item-link" href="https://www.ia.nato.int/niapc/Product/Cisco-ASA-5500-X-Series-Next-Generation-Firewalls_589" target="_blank">Cisco ASA 5500-X Series Next-Generation Firewalls</a>
-              <span class="item-meta"></span>
-            </div>
-            
-            <div class="item-row" data-source="nato" data-kind="new">
-              <a class="item-link" href="https://www.ia.nato.int/niapc/Product/AnyConnect-5.0-for-Windows-10_643" target="_blank">AnyConnect 5.0 for Windows 10</a>
-              <span class="item-meta"></span>
-            </div>
-            
-            <div class="item-row" data-source="nato" data-kind="new">
-              <a class="item-link" href="https://www.ia.nato.int/niapc/Product/Cisco-ASR-1000-Series--IOS-XE-17.15-_722" target="_blank">Cisco ASR 1000 Series (IOS XE 17.15)</a>
-              <span class="item-meta"></span>
-            </div>
-            
-            <div class="item-row" data-source="nato" data-kind="new">
-              <a class="item-link" href="https://www.ia.nato.int/niapc/Product/Cisco-FirePower-2100-Series--with-FMC-FMCv-Cisco-FTD-7.4-_750" target="_blank">Cisco FirePower 2100 Series (with FMC/FMCv Cisco FTD 7.4)</a>
-              <span class="item-meta"></span>
-            </div>
-            
-            <div class="item-row" data-source="nato" data-kind="new">
-              <a class="item-link" href="https://www.ia.nato.int/niapc/Product/Cisco-FirePower-4100-Series--with-FMC-FMCv-Cisco-FTD-7.4-_751" target="_blank">Cisco FirePower 4100 Series (with FMC/FMCv Cisco FTD 7.4)</a>
-              <span class="item-meta"></span>
-            </div>
-            
-            <div class="item-row" data-source="nato" data-kind="new">
-              <a class="item-link" href="https://www.ia.nato.int/niapc/Product/Cisco-FirePower-9300-Series--with-FMC-FMCv-Cisco-FTD-7.4-_752" target="_blank">Cisco FirePower 9300 Series (with FMC/FMCv Cisco FTD 7.4)</a>
-              <span class="item-meta"></span>
-            </div>
-            
-            <div class="item-row" data-source="nato" data-kind="new">
-              <a class="item-link" href="https://www.ia.nato.int/niapc/Product/https---www.cisco.com-c-en-us-support-security-firepower-1000-series-series.html_832" target="_blank">CISCO Firepower 1000 Series (with FMC/FMCv Cisco FTD 7.4)</a>
-              <span class="item-meta"></span>
-            </div>
-            
-            <div class="item-row" data-source="nato" data-kind="new">
-              <a class="item-link" href="https://www.ia.nato.int/niapc/Product/Cisco-APIC_897" target="_blank">Cisco APIC</a>
-              <span class="item-meta"></span>
-            </div>
-            
-            <div class="item-row" data-source="nato" data-kind="new">
-              <a class="item-link" href="https://www.ia.nato.int/niapc/Product/Cisco-Nexus-9000-Series--NX-OS-10.4-_898" target="_blank">Cisco Nexus 9000 Series (NX-OS 10.4)</a>
-              <span class="item-meta"></span>
-            </div>
-            
-            <div class="item-row" data-source="nato" data-kind="new">
-              <a class="item-link" href="https://www.ia.nato.int/niapc/Product/Cisco-MDS-9000-Series-Switches--NX-OS-9.4-_899" target="_blank">Cisco MDS 9000 Series Switches (NX-OS 9.4)</a>
-              <span class="item-meta"></span>
-            </div>
-            
-            <div class="item-row" data-source="nato" data-kind="new">
-              <a class="item-link" href="https://www.ia.nato.int/niapc/Product/Cisco-Catalyst-8000--Cat8K--Series-Edge-Routers--IOS-XE-17.15-_900" target="_blank">Cisco Catalyst 8000 (Cat8K) Series Edge Routers (IOS-XE 17.15)</a>
-              <span class="item-meta"></span>
-            </div>
-            
-            <div class="item-row" data-source="nato" data-kind="new">
-              <a class="item-link" href="https://www.ia.nato.int/niapc/Product/Cisco-Catalyst-8300-Series--IOS-XE-17.6-_901" target="_blank">Cisco Catalyst 8300 Series (IOS-XE 17.6)</a>
-              <span class="item-meta"></span>
-            </div>
-            
-            <div class="item-row" data-source="nato" data-kind="new">
-              <a class="item-link" href="https://www.ia.nato.int/niapc/Product/Cisco-Catalyst-8500-Series-Edge-Routers--IOS-XE-17.15-_902" target="_blank">Cisco Catalyst 8500 Series Edge Routers (IOS-XE 17.15)</a>
-              <span class="item-meta"></span>
-            </div>
-            
-            <div class="item-row" data-source="nato" data-kind="new">
-              <a class="item-link" href="https://www.ia.nato.int/niapc/Product/Cisco-Catalyst-C9000X-CX-Series-Switches-17.12_924" target="_blank">Cisco Catalyst C9000X/CX Series Switches 17.12</a>
-              <span class="item-meta"></span>
-            </div>
-            
-            <div class="item-row" data-source="nato" data-kind="new">
-              <a class="item-link" href="https://www.ia.nato.int/niapc/Product/AnyConnect-5.1-for-RHEL-8.2_941" target="_blank">AnyConnect 5.1 for RHEL 8.2</a>
-              <span class="item-meta"></span>
-            </div>
-            
-            <div class="item-row" data-source="nato" data-kind="new">
-              <a class="item-link" href="https://www.ia.nato.int/niapc/Product/Cisco-Secure-Firewall-ASA-Virtual-9.20_942" target="_blank">Cisco Secure Firewall ASA Virtual 9.20</a>
-              <span class="item-meta"></span>
-            </div>
-            
-            <div class="item-row" data-source="nato" data-kind="new">
-              <a class="item-link" href="https://www.ia.nato.int/niapc/Product/Cisco-Secure-Firewall-Threat-Defense--FTD--Virtual-7.4-with-FMC-FMCv_943" target="_blank">Cisco Secure Firewall Threat Defense (FTD) Virtual 7.4 with FMC/FMCv</a>
-              <span class="item-meta"></span>
-            </div>
-            
-            <div class="item-row" data-source="nato" data-kind="new">
-              <a class="item-link" href="https://www.ia.nato.int/niapc/Product/Cisco-Network-Convergence-System-1004--IOS-XR-24.1-_944" target="_blank">Cisco Network Convergence System 1004 (IOS-XR 24.1)</a>
-              <span class="item-meta"></span>
-            </div>
-            
-            <div class="item-row" data-source="nato" data-kind="new">
-              <a class="item-link" href="https://www.ia.nato.int/niapc/Product/Cisco-Identity-Services-Engine--ISE--V3.3_945" target="_blank">Cisco Identity Services Engine (ISE) V3.3</a>
-              <span class="item-meta"></span>
-            </div>
-            
-            <div class="item-row" data-source="nato" data-kind="new">
-              <a class="item-link" href="https://www.ia.nato.int/niapc/Product/Cisco-Email-Security-Appliance-with-AsyncOS-15.5_946" target="_blank">Cisco Email Security Appliance with AsyncOS 15.5</a>
-              <span class="item-meta"></span>
-            </div>
-            
-            <div class="item-row" data-source="nato" data-kind="new">
-              <a class="item-link" href="https://www.ia.nato.int/niapc/Product/Cisco-Embedded-Services-Switch--ESS--9300-Series--IOS-XE-17.12-_947" target="_blank">Cisco Embedded Services Switch (ESS) 9300 Series (IOS-XE 17.12)</a>
-              <span class="item-meta"></span>
-            </div>
-            
-            <div class="item-row" data-source="nato" data-kind="new">
-              <a class="item-link" href="https://www.ia.nato.int/niapc/Product/Cisco-Embedded-Services-Switch--ESS--3300-Series--IOS-XE-17.12-_948" target="_blank">Cisco Embedded Services Switch (ESS) 3300 Series (IOS-XE 17.12)</a>
-              <span class="item-meta"></span>
-            </div>
-            
-            <div class="item-row" data-source="nato" data-kind="new">
-              <a class="item-link" href="https://www.ia.nato.int/niapc/Product/Cisco-Embedded-Services-Router--ESR--6300-v17.12_949" target="_blank">Cisco Embedded Services Router (ESR) 6300 v17.12</a>
-              <span class="item-meta"></span>
-            </div>
-            
-            <div class="item-row" data-source="nato" data-kind="new">
-              <a class="item-link" href="https://www.ia.nato.int/niapc/Product/Cisco-Embedded-Services-Router--ESR--6300-v17.15_950" target="_blank">Cisco Embedded Services Router (ESR) 6300 v17.15</a>
-              <span class="item-meta"></span>
-            </div>
-            
-            <div class="item-row" data-source="nato" data-kind="new">
-              <a class="item-link" href="https://www.ia.nato.int/niapc/Product/Cisco-Secure-Firewall-3100-Series-with-FMC-FMCv-FTD-7.4_951" target="_blank">Cisco Secure Firewall 3100 Series with FMC/FMCv FTD 7.4</a>
-              <span class="item-meta"></span>
-            </div>
-            
-            <div class="item-row" data-source="nato" data-kind="new">
-              <a class="item-link" href="https://www.ia.nato.int/niapc/Product/Cisco-Secure-Firewall-4200-Series--with-FMC-FMCv-Cisco-FTD-7.4-_952" target="_blank">Cisco Secure Firewall 4200 Series (with FMC/FMCv Cisco FTD 7.4)</a>
-              <span class="item-meta"></span>
-            </div>
-            
-            <div class="item-row" data-source="nato" data-kind="new">
-              <a class="item-link" href="https://www.ia.nato.int/niapc/Product/Cisco-Catalyst-9800-Series-Wireless-Controllers-and-Access-Points-17.12_953" target="_blank">Cisco Catalyst 9800 Series Wireless Controllers and Access Points 17.12</a>
-              <span class="item-meta"></span>
-            </div>
-            
-            <div class="item-row" data-source="nato" data-kind="new">
-              <a class="item-link" href="https://www.ia.nato.int/niapc/Product/Cisco-Catalyst-9800-Series-Wireless-Controllers-and-Access-Points-17.6_954" target="_blank">Cisco Catalyst 9800 Series Wireless Controllers and Access Points 17.6</a>
-              <span class="item-meta"></span>
-            </div>
-            
-            <div class="item-row" data-source="nato" data-kind="new">
-              <a class="item-link" href="https://www.ia.nato.int/niapc/Product/Cisco-Catalyst-Industrial-Ethernet-3000--IE3x00--Rugged-Series-Switches-running-IOS-XE-17.12_955" target="_blank">Cisco Catalyst Industrial Ethernet 3000 (IE3x00) Rugged Series Switches running IOS-XE 17.12</a>
-              <span class="item-meta"></span>
-            </div>
-            
-            <div class="item-row" data-source="nato" data-kind="new">
-              <a class="item-link" href="https://www.ia.nato.int/niapc/Product/Cisco-Catalyst-Industrial-Ethernet-9300-Rugged-Series-Switches-running-IOS-XE-17.12_956" target="_blank">Cisco Catalyst Industrial Ethernet 9300 Rugged Series Switches running IOS-XE 17.12</a>
-              <span class="item-meta"></span>
-            </div>
-            
-            
-            
-            
-            
+            <p class="no-change">No NATO NIAPCL changes detected.</p>
           </div>
         </div>
 
 <div class="section-group">
   <div class="section-label">CCTL</div>
   <!-- CCTL Updates -->
-<div class="card " id="sec-cctl" data-has-changes="0">
+<div class="card card-new" id="sec-cctl" data-has-changes="1">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>CCTL Updates</span>
-    <span class="card-count">0 new items</span>
+    <span class="card-count">1 new item</span>
     </span>
     <span class="toggle-icon collapsed">▼</span>
   </div>
-  <div class="card-body collapsed">
+  <div class="card-body ">
     
-    <p class="no-change">No new items.</p>
+    
+    <div class="lab-row">
+      <div class="lab-hdr" onclick="toggleLab(this)">
+        <span class="lab-name">atsec</span>
+        <span class="lab-cnt">1 item</span>
+        <span class="lab-toggle">▼</span>
+      </div>
+      <div class="lab-body collapsed">
+        
+        <div class="item-row" data-source="cctl" data-kind="new">
+          <a class="item-link" href="https://www.atsec.com/crypto-v-alliance-launches-official-website/" target="_blank">Crypto-V Alliance Launches Official Website</a>
+          <span class="item-meta"></span>
+        </div>
+        
+      </div>
+    </div>
+    
+    
+    
   </div>
 </div>
 </div>      
@@ -1098,7 +648,7 @@
 <div class="card card-new" id="sec-history" data-has-changes="1">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>Change History</span>
-    <span class="card-count">43 events</span>
+    <span class="card-count">44 events</span>
     <span class="toggle-icon">▼</span>
   </div>
   <div class="card-body">
@@ -1116,6 +666,28 @@
       div>
     <div class="timeline" id="history-timeline">
     
+      
+      <div class="tl-entry" data-cat="td_new">
+        <div class="tl-date">2026-07-28</div>
+        <div class="tl-body">
+          <div class="tl-title">
+            <span class="tl-badge new">new</span>
+            <a href="https://www.niap-ccevs.org/technical-decisions/TD1051" target="_blank">New TD: TD1051</a>
+          </div>
+          <div class="tl-detail">Correction to FIPS 186-5 Section references in FCS_COP.1.1/Sig</div>
+        </div>
+      </div>
+      
+      <div class="tl-entry" data-cat="pcl_cert">
+        <div class="tl-date">2026-07-28</div>
+        <div class="tl-body">
+          <div class="tl-title">
+            <span class="tl-badge new">new</span>
+            <a href="https://www.niap-ccevs.org/products/2025.1408" target="_blank">KONICA MINOLTA, INC. — KONICA MINOLTA bizhub C4751i G00-S2</a>
+          </div>
+          <div class="tl-detail">Certified 2025-10-02 · ECSEC Laboratory Inc. Evaluation Center · PP_HCD_V1.0</div>
+        </div>
+      </div>
       
       <div class="tl-entry" data-cat="cisco_cert">
         <div class="tl-date">2026-07-27</div>
@@ -1579,17 +1151,6 @@
         </div>
       </div>
       
-      <div class="tl-entry" data-cat="pcl_cert">
-        <div class="tl-date">2026-06-26</div>
-        <div class="tl-body">
-          <div class="tl-title">
-            <span class="tl-badge new">new</span>
-            <a href="https://www.niap-ccevs.org/products/11695" target="_blank">Apple Inc. — Apple macOS 26 Tahoe</a>
-          </div>
-          <div class="tl-detail">Certified  · atsec information security corporation · MOD_BT_V1.0, PKG_TLS_V1.1, MOD_WLANC_v1.0, PP_OS_V4.3</div>
-        </div>
-      </div>
-      
     
     </div>
   </div>
@@ -1600,7 +1161,7 @@
 </div><!-- /main-content -->
 <footer>
   <span>CC Pulse &middot; Auto-refreshes daily (01:00 EST) &middot; NIAP, CSfC, CC Portal, NATO NIAPCL, EUCC / ENISA</span>
-  <span>Last run: 2026-07-27 10:29 ET</span>
+  <span>Last run: 2026-07-28 04:23 ET</span>
 </footer>
 
 <script>
