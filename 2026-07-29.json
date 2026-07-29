@@ -128669,6 +128669,76 @@
           "category": "Network Management",
           "link": "https://www.ia.nato.int/niapc/Product/Cisco-Catalyst-Industrial-Ethernet-9300-Rugged-Series-Switches-running-IOS-XE-17.12_956",
           "raw_text": "Cisco Catalyst Industrial Ethernet 9300 Rugged Series Switches running IOS-XE 17.12 | Manufacturer : | Cisco Systems | Categories: | Network Management | Security Mechanism Groups: | Compliance and Configuration Control | Country: | United States"
+        },
+        {
+          "name": "Cisco Aggregation Services Router 9000 (ASR9K) (IOS-XR 7.11)",
+          "manufacturer": "Cisco Systems",
+          "category": "Network Management , Communications Encryption",
+          "link": null,
+          "raw_text": "Cisco Aggregation Services Router 9000 (ASR9K) (IOS-XR 7.11)"
+        },
+        {
+          "name": "Cisco Catalyst 9000X/CX Series Switches IOS-XE 17.15",
+          "manufacturer": "Cisco Systems",
+          "category": "Network Management , Communications Encryption , Network Security Management",
+          "link": null,
+          "raw_text": "Cisco Catalyst 9000X/CX Series Switches IOS-XE 17.15"
+        },
+        {
+          "name": "Cisco Catalyst 9200/9200L Series Switches (IOS-XE17.15)",
+          "manufacturer": "Cisco Systems",
+          "category": "Network Management , Communications Encryption",
+          "link": null,
+          "raw_text": "Cisco Catalyst 9200/9200L Series Switches (IOS-XE17.15)"
+        },
+        {
+          "name": "Cisco Firepower 1000 Series (running ASA 9.20)",
+          "manufacturer": "Cisco Systems",
+          "category": "Firewall and Mailguard , Communications Encryption , Intrusion Detection and Prevention , VPN (Virtual Private Network)",
+          "link": null,
+          "raw_text": "Cisco Firepower 1000 Series (running ASA 9.20)"
+        },
+        {
+          "name": "Cisco Firepower 2100 Series (running ASA 9.20)",
+          "manufacturer": "Cisco Systems",
+          "category": "Firewall and Mailguard , Communications Encryption , Intrusion Detection and Prevention , VPN (Virtual Private Network)",
+          "link": null,
+          "raw_text": "Cisco Firepower 2100 Series (running ASA 9.20)"
+        },
+        {
+          "name": "Cisco Firepower 4100 Security Appliances (running ASA 9.20)",
+          "manufacturer": "Cisco Systems",
+          "category": "Firewall and Mailguard",
+          "link": null,
+          "raw_text": "Cisco Firepower 4100 Security Appliances (running ASA 9.20)"
+        },
+        {
+          "name": "Cisco Firepower 9300 Security Appliances (running ASA 9.20)",
+          "manufacturer": "Cisco Systems",
+          "category": "Firewall and Mailguard , Communications Encryption , Intrusion Detection and Prevention , VPN (Virtual Private Network)",
+          "link": null,
+          "raw_text": "Cisco Firepower 9300 Security Appliances (running ASA 9.20)"
+        },
+        {
+          "name": "Cisco Secure Firewall 3100 Series (Running ASA 9.20)",
+          "manufacturer": "Cisco Systems",
+          "category": "Firewall and Mailguard , Communications Encryption , VPN (Virtual Private Network)",
+          "link": null,
+          "raw_text": "Cisco Secure Firewall 3100 Series (Running ASA 9.20)"
+        },
+        {
+          "name": "Cisco Secure Firewall 4200 Series (running ASA 9.20)",
+          "manufacturer": "Cisco Systems",
+          "category": "Firewall and Mailguard , Communications Encryption , Intrusion Detection and Prevention , VPN (Virtual Private Network)",
+          "link": null,
+          "raw_text": "Cisco Secure Firewall 4200 Series (running ASA 9.20)"
+        },
+        {
+          "name": "The Cisco Catalyst C8000 Series Edge Routers (IOS-XE 17.18)",
+          "manufacturer": "Cisco Systems",
+          "category": "Network Management",
+          "link": null,
+          "raw_text": "The Cisco Catalyst C8000 Series Edge Routers (IOS-XE 17.18)"
         }
       ],
       "cisco_products": [
@@ -129094,6 +129164,76 @@
         "category": "Network Management",
         "link": "https://www.ia.nato.int/niapc/Product/Cisco-Catalyst-Industrial-Ethernet-9300-Rugged-Series-Switches-running-IOS-XE-17.12_956",
         "raw_text": "Cisco Catalyst Industrial Ethernet 9300 Rugged Series Switches running IOS-XE 17.12 | Manufacturer : | Cisco Systems | Categories: | Network Management | Security Mechanism Groups: | Compliance and Configuration Control | Country: | United States"
+      },
+      {
+        "name": "Cisco Aggregation Services Router 9000 (ASR9K) (IOS-XR 7.11)",
+        "manufacturer": "Cisco Systems",
+        "category": "Network Management , Communications Encryption",
+        "link": null,
+        "raw_text": "Cisco Aggregation Services Router 9000 (ASR9K) (IOS-XR 7.11)"
+      },
+      {
+        "name": "Cisco Catalyst 9000X/CX Series Switches IOS-XE 17.15",
+        "manufacturer": "Cisco Systems",
+        "category": "Network Management , Communications Encryption , Network Security Management",
+        "link": null,
+        "raw_text": "Cisco Catalyst 9000X/CX Series Switches IOS-XE 17.15"
+      },
+      {
+        "name": "Cisco Catalyst 9200/9200L Series Switches (IOS-XE17.15)",
+        "manufacturer": "Cisco Systems",
+        "category": "Network Management , Communications Encryption",
+        "link": null,
+        "raw_text": "Cisco Catalyst 9200/9200L Series Switches (IOS-XE17.15)"
+      },
+      {
+        "name": "Cisco Firepower 1000 Series (running ASA 9.20)",
+        "manufacturer": "Cisco Systems",
+        "category": "Firewall and Mailguard , Communications Encryption , Intrusion Detection and Prevention , VPN (Virtual Private Network)",
+        "link": null,
+        "raw_text": "Cisco Firepower 1000 Series (running ASA 9.20)"
+      },
+      {
+        "name": "Cisco Firepower 2100 Series (running ASA 9.20)",
+        "manufacturer": "Cisco Systems",
+        "category": "Firewall and Mailguard , Communications Encryption , Intrusion Detection and Prevention , VPN (Virtual Private Network)",
+        "link": null,
+        "raw_text": "Cisco Firepower 2100 Series (running ASA 9.20)"
+      },
+      {
+        "name": "Cisco Firepower 4100 Security Appliances (running ASA 9.20)",
+        "manufacturer": "Cisco Systems",
+        "category": "Firewall and Mailguard",
+        "link": null,
+        "raw_text": "Cisco Firepower 4100 Security Appliances (running ASA 9.20)"
+      },
+      {
+        "name": "Cisco Firepower 9300 Security Appliances (running ASA 9.20)",
+        "manufacturer": "Cisco Systems",
+        "category": "Firewall and Mailguard , Communications Encryption , Intrusion Detection and Prevention , VPN (Virtual Private Network)",
+        "link": null,
+        "raw_text": "Cisco Firepower 9300 Security Appliances (running ASA 9.20)"
+      },
+      {
+        "name": "Cisco Secure Firewall 3100 Series (Running ASA 9.20)",
+        "manufacturer": "Cisco Systems",
+        "category": "Firewall and Mailguard , Communications Encryption , VPN (Virtual Private Network)",
+        "link": null,
+        "raw_text": "Cisco Secure Firewall 3100 Series (Running ASA 9.20)"
+      },
+      {
+        "name": "Cisco Secure Firewall 4200 Series (running ASA 9.20)",
+        "manufacturer": "Cisco Systems",
+        "category": "Firewall and Mailguard , Communications Encryption , Intrusion Detection and Prevention , VPN (Virtual Private Network)",
+        "link": null,
+        "raw_text": "Cisco Secure Firewall 4200 Series (running ASA 9.20)"
+      },
+      {
+        "name": "The Cisco Catalyst C8000 Series Edge Routers (IOS-XE 17.18)",
+        "manufacturer": "Cisco Systems",
+        "category": "Network Management",
+        "link": null,
+        "raw_text": "The Cisco Catalyst C8000 Series Edge Routers (IOS-XE 17.18)"
       }
     ]
   },
