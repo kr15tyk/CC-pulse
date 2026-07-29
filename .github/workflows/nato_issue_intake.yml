@@ -1,0 +1,101 @@
+name: NATO Cisco Issue Intake
+
+# Triggered when a "NATO Cisco Baseline Update" issue (see
+# .github/ISSUE_TEMPLATE/nato-cisco-update.yml) is opened. Never contacts
+# ia.nato.int -- it only parses text the user manually pasted into the issue.
+on:
+  issues:
+    types: [opened]
+  workflow_dispatch:
+    inputs:
+      issue_number:
+        description: "Issue number to (re)process"
+        required: true
+        type: string
+
+permissions:
+  contents: write
+  issues: write
+
+jobs:
+  process:
+    name: Process NATO Cisco Update Issue
+    runs-on: ubuntu-latest
+    if: >-
+      (github.event_name == 'issues' && contains(github.event.issue.labels.*.name, 'nato-cisco-update')) ||
+      github.event_name == 'workflow_dispatch'
+    steps:
+      - name: Checkout repository (main)
+        # actions/checkout v6.0.2
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0
+        with:
+          fetch-depth: 0
+
+      - name: Checkout snapshots branch as worktree
+        run: |
+          git fetch origin snapshots
+          git worktree add snapshot-store snapshots
+
+      - name: Set up Python
+        # actions/setup-python v6.2.0
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Resolve issue number and body
+        id: issue
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          EVENT_NAME: ${{ github.event_name }}
+          DISPATCH_ISSUE: ${{ github.event.inputs.issue_number }}
+          EVENT_ISSUE: ${{ github.event.issue.number }}
+        run: |
+          if [ "$EVENT_NAME" = "workflow_dispatch" ]; then
+            NUM="$DISPATCH_ISSUE"
+          else
+            NUM="$EVENT_ISSUE"
+          fi
+          echo "number=$NUM" >> "$GITHUB_OUTPUT"
+          gh issue view "$NUM" --repo "$GITHUB_REPOSITORY" --json body -q .body > issue_body.txt
+
+      - name: Process submission
+        id: run
+        env:
+          CC_EMAIL_PASSWORD: ${{ secrets.CC_EMAIL_PASSWORD }}
+          CC_WEBEX_BOT_TOKEN: ${{ secrets.CC_WEBEX_BOT_TOKEN }}
+          CC_WEBEX_ROOM_ID: ${{ secrets.CC_WEBEX_ROOM_ID }}
+          CC_EMAIL_USERNAME: ${{ secrets.CC_EMAIL_USERNAME }}
+          CC_EMAIL_RECIPIENTS: ${{ secrets.CC_EMAIL_RECIPIENTS }}
+          CC_SMTP_HOST: ${{ secrets.CC_SMTP_HOST }}
+          CC_LOG_LEVEL: INFO
+          CC_DRY_RUN: "false"
+          CC_SNAPSHOT_DIR: snapshot-store
+        run: |
+          export ISSUE_BODY="$(cat issue_body.txt)"
+          python scripts/nato_issue_intake.py
+
+      - name: Commit snapshot to snapshots branch
+        run: |
+          cd snapshot-store
+          git config user.name "cc-pulse-bot"
+          git config user.email "cc-pulse-bot@users.noreply.github.com"
+          git add -A
+          git diff --cached --quiet || git commit -m "chore: NATO Cisco baseline update via issue #${{ steps.issue.outputs.number }} [skip ci]"
+          git diff --cached --quiet || git push origin snapshots
+
+      - name: Comment on issue
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh issue comment "${{ steps.issue.outputs.number }}" --repo "$GITHUB_REPOSITORY" --body-file nato_issue_summary.txt
+
+      - name: Close issue
+        if: steps.run.outputs.applied == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh issue close "${{ steps.issue.outputs.number }}" --repo "$GITHUB_REPOSITORY"
