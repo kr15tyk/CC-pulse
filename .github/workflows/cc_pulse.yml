@@ -186,6 +186,7 @@ jobs:
         run: python main.py --merge
 
       - name: Commit snapshots to snapshots branch
+        if: always()
         run: |
           cd snapshot-store
           git config user.name "cc-pulse-bot"
@@ -195,6 +196,7 @@ jobs:
           git push origin snapshots
 
       - name: Commit dashboard to main
+        if: always()
         # stefanzweifel/git-auto-commit-action v7.1.0
         uses: stefanzweifel/git-auto-commit-action@4a55954c782fc1ea30b9056cd3e7a2b40ca8887d
         with:
@@ -263,6 +265,7 @@ jobs:
           esac
 
       - name: Commit snapshots to snapshots branch
+        if: always()
         run: |
           cd snapshot-store
           git config user.name "cc-pulse-bot"
@@ -272,6 +275,7 @@ jobs:
           git push origin snapshots
 
       - name: Commit dashboard to main
+        if: always()
         # stefanzweifel/git-auto-commit-action v7.1.0
         uses: stefanzweifel/git-auto-commit-action@4a55954c782fc1ea30b9056cd3e7a2b40ca8887d
         with:
