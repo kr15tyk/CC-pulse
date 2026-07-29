@@ -1,0 +1,43 @@
+name: NATO Capture Reminder (Fridays)
+
+# Sends a weekly reminder email prompting a human to manually visit the NATO
+# NIAPCL Cisco-filtered search and submit the data via the GitHub Issue
+# template. Never contacts ia.nato.int itself.
+on:
+  schedule:
+    # 12:00 UTC = 8:00am US Eastern (EDT). Note: during EST (winter, UTC-5)
+    # this lands at 7:00am Eastern instead, since cron does not shift for DST.
+    - cron: "0 12 * * 5"
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+
+jobs:
+  send-reminder:
+    name: Send NATO Capture Reminder Email
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        # actions/checkout v6.0.2
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0
+        with:
+          fetch-depth: 1
+
+      - name: Set up Python
+        # actions/setup-python v6.2.0
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Send reminder email
+        env:
+          CC_EMAIL_PASSWORD: ${{ secrets.CC_EMAIL_PASSWORD }}
+          CC_EMAIL_USERNAME: ${{ secrets.CC_EMAIL_USERNAME }}
+          CC_SMTP_HOST: ${{ secrets.CC_SMTP_HOST }}
+          CC_LOG_LEVEL: INFO
+        run: python scripts/send_nato_capture_reminder.py
