@@ -3,6 +3,9 @@ name: Patch NATO Cisco Baseline (one-time)
 on:
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
   patch:
     runs-on: ubuntu-latest
