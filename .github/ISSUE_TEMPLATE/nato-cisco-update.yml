@@ -1,0 +1,41 @@
+name: NATO Cisco Baseline Update
+description: Submit a manually-copied snapshot of the NATO NIAPCL Cisco-filtered product listing for automated diffing and notification.
+title: "[NATO Cisco Update] "
+labels: ["nato-cisco-update"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this after manually visiting the NATO NIAPCL Cisco-filtered product search in your own browser. Select all the products on each results page and copy the visible text, then paste it below. Do not paste "View Page Source" output -- it does not reflect pagination.
+  - type: input
+    id: capture_date
+    attributes:
+      label: Capture date
+      description: The date you visited the site (YYYY-MM-DD)
+      placeholder: "2026-08-05"
+    validations:
+      required: true
+  - type: input
+    id: total_count
+    attributes:
+      label: Total product count shown on site
+      description: The "N product(s) registered for this manufacturer" number shown on the page
+      placeholder: "40"
+    validations:
+      required: false
+  - type: textarea
+    id: page1_text
+    attributes:
+      label: Page 1 product text
+      description: Select all products on page 1 and paste the copied text here.
+      render: text
+    validations:
+      required: true
+  - type: textarea
+    id: page2_text
+    attributes:
+      label: Page 2 product text (if applicable)
+      description: Select all products on page 2 and paste the copied text here. Leave blank if there is only one page.
+      render: text
+    validations:
+      required: false
