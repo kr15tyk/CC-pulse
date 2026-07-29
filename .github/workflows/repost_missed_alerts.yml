@@ -8,12 +8,16 @@ on:
         required: true
         default: '2026-04-23,2026-04-24'
 
+permissions:
+  contents: read
+
 jobs:
   repost:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v7
+        # actions/checkout v6.0.2
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0
         with:
           fetch-depth: 0
 
@@ -23,7 +27,8 @@ jobs:
           git worktree add snapshot-store snapshots
 
       - name: Set up Python
-        uses: actions/setup-python@v7
+        # actions/setup-python v6.2.0
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
         with:
           python-version: '3.12'
 
