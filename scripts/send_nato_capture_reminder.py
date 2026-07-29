@@ -8,8 +8,14 @@ from __future__ import annotations
 
 import os
 import smtplib
+import sys
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
+
+# Running as `python scripts/send_nato_capture_reminder.py` only puts this
+# file's own directory (scripts/) on sys.path, not the repo root -- add the
+# root explicitly so `import config` (which lives at the repo root) works.
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 import config
 
