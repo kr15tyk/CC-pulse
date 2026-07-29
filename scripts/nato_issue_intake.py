@@ -16,7 +16,14 @@ from __future__ import annotations
 import glob
 import json
 import os
+import sys
 from datetime import datetime, timezone
+
+# Running as `python scripts/nato_issue_intake.py` only puts this file's own
+# directory (scripts/) on sys.path, not the repo root -- add the root
+# explicitly so `import config`/`differ`/`emailer` (which live at the repo
+# root) work.
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 import config
 import differ
