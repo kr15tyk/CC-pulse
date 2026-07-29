@@ -2,8 +2,6 @@
 <rss version="2.0"><channel>
 <title>CC Pulse</title>
 <link>https://kr15tyk.github.io/CC-pulse/cc_dashboard.html</link>
-<description>Common Criteria monitoring - 2026-07-28 04:23 ET</description>
-<item><title>New TD: TD1051</title><link>https://www.niap-ccevs.org/</link><description></description></item>
-<item><title>[atsec] Crypto-V Alliance Launches Official Website</title><link>https://www.atsec.com/crypto-v-alliance-launches-official-website/</link><description></description></item>
-<item><title>ALERT: NIAP TD – Correction to FIPS 186-5 Section references in FCS_COP.1.1/Sig</title><link>https://kr15tyk.github.io/CC-pulse/cc_dashboard.html</link><description>Kind: new | Keywords: FIPS 186-5, FCS_COP</description></item>
+<description>Common Criteria monitoring - 2026-07-29 04:30 ET</description>
+<item><title>[Lightship Security] FIPS Revalidation Scenarios: Mapping the Right Path for Your Module Changes</title><link>https://lightshipsec.com/fips-revalidation-scenarios-mapping-the-right-path-for-your-module-changes/</link><description>Why the Revalidation Path You Choose Determines Your Cost,&amp;#160;Effort and&amp;#160;Timeline! Achieving&amp;#160;an initial&amp;#160;FIPS validation is a major milestone, but&amp;#160;it&amp;#160;may&amp;#160;not&amp;#160;be&amp;#16</description></item>
 </channel></rss>
