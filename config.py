@@ -41,7 +41,6 @@ DRY_RUN = os.environ.get("CC_DRY_RUN", "").lower() in ("1", "true", "yes")
 DASHBOARD_DIR = "docs"
 STAGING_DIR = "docs/staging"
 DASHBOARD_FILENAME = "cc_dashboard.html"
-DASHBOARD_RSS = "cc_feed.xml"
 
 # -- Snapshots --------------------------------------------------------------
 # CC_SNAPSHOT_DIR / CC_DIFF_DIR allow the Actions workflow to redirect
