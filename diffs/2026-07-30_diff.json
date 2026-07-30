@@ -1,0 +1,366 @@
+{
+  "period_start": "2026-07-29T08:30:13.249433+00:00",
+  "period_end": "2026-07-30T08:13:02.624705+00:00",
+  "niap": {
+    "pps": {
+      "added": [],
+      "removed": [],
+      "sunset_changes": [],
+      "status_changes": []
+    },
+    "tds": {
+      "added": [],
+      "removed": []
+    },
+    "cisco_ndcpp": {
+      "added": [],
+      "removed": [],
+      "newly_archived": []
+    },
+    "pcl_all": {
+      "added": [
+        {
+          "active_maintenances": [],
+          "am_sort": "2028-07-24T00:00:00Z",
+          "assigned_lab_name": "Gossamer Security Solutions",
+          "certification_date": "2026-07-24T00:00:00Z",
+          "from_cc_portal": false,
+          "product_id": 11653,
+          "product_name": "Hewlett Packard Enterprise\u2019s CX-4100i, CX-5420, CX-6100, CX-6200, CX-6300, CX-6400, CX-8100, CX-8320, CX-8325, CX-8325H, CX-8360, CX-8400, CX-9300, CX-9300s, and CX-10000 Switch Series running AOS-CX version 10.16",
+          "protection_profiles": [
+            {
+              "pp_id": 459,
+              "pp_name": "Functional Package for SSH Version 1.0",
+              "pp_short_name": "PKG_SSH_V1.0"
+            },
+            {
+              "pp_id": 482,
+              "pp_name": "collaborative Protection Profile for Network Devices Version 3.0e",
+              "pp_short_name": "CPP_ND_V3.0E"
+            }
+          ],
+          "status_sort": "Certified",
+          "submitting_country_id_code": "US",
+          "submitting_country_id_name": "United States",
+          "sunset_date": null,
+          "tech_types": [
+            "Network Device"
+          ],
+          "vendor_id_name": "HPE Aruba Networking",
+          "v_id": 11653,
+          "kicked_off_date": "2026-01-28T11:29:35.637000Z"
+        }
+      ],
+      "removed": [],
+      "newly_archived": [
+        {
+          "active_maintenances": [],
+          "am_sort": "2026-07-29T00:00:00Z",
+          "assigned_lab_name": "Lightship Security, Inc.",
+          "certification_date": "2024-07-29T00:00:00Z",
+          "from_cc_portal": true,
+          "product_id": "2024.1199",
+          "product_name": "RICOH IM C7010, version JE-1.00-H",
+          "protection_profiles": [
+            {
+              "pp_id": 317,
+              "pp_name": "Protection Profile for Hardcopy Devices Version 1.0",
+              "pp_short_name": "PP_HCD_V1.0"
+            }
+          ],
+          "status_sort": "Archived",
+          "submitting_country_id_code": "CA",
+          "submitting_country_id_name": "Canada",
+          "sunset_date": "2029-07-29T00:00:00Z",
+          "tech_types": [
+            "Multi-Function Devices"
+          ],
+          "vendor_id_name": "Ricoh Company, Ltd.",
+          "v_id": "2024.1199",
+          "kicked_off_date": null
+        }
+      ]
+    },
+    "in_evaluation": {
+      "added": [],
+      "removed": [
+        {
+          "active_maintenances": [],
+          "am_sort": null,
+          "assigned_lab_name": "Gossamer Security Solutions",
+          "certification_date": null,
+          "from_cc_portal": false,
+          "product_id": 11653,
+          "product_name": "Hewlett Packard Enterprise\u2019s CX-4100i, CX-5420, CX-6100, CX-6200, CX-6300, CX-6400, CX-8100, CX-8320, CX-8325, CX-8325H, CX-8360, CX-8400, CX-9300, CX-9300s, and CX-10000 Switch Series running AOS-CX version 10.16",
+          "protection_profiles": [
+            {
+              "pp_id": 459,
+              "pp_name": "Functional Package for SSH Version 1.0",
+              "pp_short_name": "PKG_SSH_V1.0"
+            },
+            {
+              "pp_id": 482,
+              "pp_name": "collaborative Protection Profile for Network Devices Version 3.0e",
+              "pp_short_name": "CPP_ND_V3.0E"
+            }
+          ],
+          "status_sort": "In Progress",
+          "submitting_country_id_code": "US",
+          "submitting_country_id_name": "United States",
+          "sunset_date": null,
+          "tech_types": [
+            "Network Device"
+          ],
+          "vendor_id_name": "HPE Aruba Networking",
+          "v_id": 11653,
+          "kicked_off_date": "2026-01-28T11:29:35.637000Z"
+        }
+      ],
+      "current_count": 39
+    },
+    "news": {
+      "added": [],
+      "revised": [],
+      "deactivated": [],
+      "reactivated": [],
+      "removed": []
+    },
+    "events": {
+      "added": [],
+      "revised": [],
+      "deactivated": [],
+      "reactivated": [],
+      "removed": []
+    },
+    "policies": {
+      "added": [],
+      "revised": [],
+      "archived": [],
+      "reactivated": [],
+      "removed": []
+    }
+  },
+  "cc_portal": {
+    "news": {
+      "added": []
+    },
+    "pps": {
+      "added": []
+    },
+    "products": {
+      "added": []
+    }
+  },
+  "cctl_labs": {},
+  "csfc": {
+    "pages": {},
+    "selection_links": {},
+    "feeds": {}
+  },
+  "cc_crypto": {
+    "pages": {}
+  },
+  "nato": {
+    "pages": {},
+    "cisco_added": [],
+    "cisco_removed": [],
+    "baseline_reset": false
+  },
+  "eucc": {
+    "pages": {
+      "certificates": {
+        "added": [
+          {
+            "name": "Infineon Technologies AG Smartcard IC IFX_CCI_000011h IFX_CCI_00001Bh IFX_CCI_00001Eh IFX_CCI_000025h G12",
+            "text": "Infineon Technologies AG Smartcard IC IFX_CCI_000011h IFX_CCI_00001Bh IFX_CCI_00001Eh IFX_CCI_000025h G12 | 27 April 2026 | Infineon Technologies AG Smartcard IC IFX_CCI_0000Fh, CCI_000011h, 00001Bh, 00001Eh, 000025h design step G12",
+            "href": "https://certification.enisa.europa.eu/certificates/eucc-3087-2026-0000000004-00000_en",
+            "cert_date": "2026-04-27T12:00:00Z",
+            "description": "Infineon Technologies AG Smartcard IC IFX_CCI_0000Fh, CCI_000011h, 00001Bh, 00001Eh, 000025h design step G12"
+          }
+        ],
+        "removed": [
+          {
+            "name": "Infineon Technologies AG Smartcard IC IFX_CCI_0000Fh, CCI_000011h, 00001Bh, 00001Eh, 000025h design step G12",
+            "text": "Infineon Technologies AG Smartcard IC IFX_CCI_0000Fh, CCI_000011h, 00001Bh, 00001Eh, 000025h design step G12 | 27 April 2026 | Infineon Technologies AG Smartcard IC IFX_CCI_0000Fh, CCI_000011h, 00001Bh, 00001Eh, 000025h design step G12",
+            "href": "https://certification.enisa.europa.eu/certificates/eucc-3087-2026-0000000004-00000_en",
+            "cert_date": "2026-04-27T12:00:00Z",
+            "description": "Infineon Technologies AG Smartcard IC IFX_CCI_0000Fh, CCI_000011h, 00001Bh, 00001Eh, 000025h design step G12"
+          }
+        ]
+      }
+    },
+    "cisco_added": [],
+    "cisco_removed": [],
+    "baseline_reset": false
+  },
+  "nd_itc": {
+    "nit_rfis": {
+      "added": [],
+      "status_changes": [],
+      "revised": [],
+      "newly_archived": []
+    },
+    "awl": {
+      "added": [],
+      "removed": [],
+      "version_changes": [],
+      "list_updates": []
+    },
+    "baseline_reset": false,
+    "collection_failure": false
+  },
+  "source_health": {
+    "niap": {
+      "label": "NIAP",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "PCL products",
+          "observed": 1743,
+          "minimum": 50
+        },
+        {
+          "name": "Protection Profiles",
+          "observed": 271,
+          "minimum": 10
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-07-30T08:13:02.624705+00:00",
+      "subcollections": {
+        "news": {
+          "label": "News announcements",
+          "status": "healthy",
+          "observed": 353,
+          "consecutive_failures": 0,
+          "using_last_known_good": false
+        },
+        "events": {
+          "label": "Events",
+          "status": "healthy",
+          "observed": 0,
+          "consecutive_failures": 0,
+          "using_last_known_good": false
+        },
+        "policies": {
+          "label": "Policy letters",
+          "status": "healthy",
+          "observed": 39,
+          "consecutive_failures": 0,
+          "using_last_known_good": false
+        }
+      }
+    },
+    "cc_portal": {
+      "label": "CC Portal",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "portal records",
+          "observed": 179,
+          "minimum": 1
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-07-30T08:13:02.624705+00:00"
+    },
+    "cctl_labs": {
+      "label": "CCTL Labs",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "lab feed items",
+          "observed": 19,
+          "minimum": 1
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-07-30T08:13:02.624705+00:00"
+    },
+    "csfc": {
+      "label": "CSfC",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "APL items",
+          "observed": 115,
+          "minimum": 5
+        },
+        {
+          "name": "announcements",
+          "observed": 8,
+          "minimum": 1
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-07-30T08:13:02.624705+00:00"
+    },
+    "cc_crypto": {
+      "label": "CC Crypto",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "publications",
+          "observed": 121,
+          "minimum": 5
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-07-30T08:13:02.624705+00:00"
+    },
+    "nato": {
+      "label": "NATO NIAPCL",
+      "status": "stale",
+      "checks": [
+        {
+          "name": "NIAPCL products",
+          "observed": 0,
+          "minimum": 3
+        }
+      ],
+      "consecutive_failures": 15,
+      "using_last_known_good": true,
+      "detail": "NIAPCL products 0/3",
+      "checked_at": "2026-07-30T08:13:02.624705+00:00"
+    },
+    "eucc": {
+      "label": "EUCC / ENISA",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "certificates",
+          "observed": 50,
+          "minimum": 2
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-07-30T08:13:02.624705+00:00"
+    },
+    "nd_itc": {
+      "label": "ND-iTC",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "NIT RFIs",
+          "observed": 32,
+          "minimum": 5
+        },
+        {
+          "name": "Allowed-With entries",
+          "observed": 22,
+          "minimum": 1
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-07-30T08:13:02.624705+00:00"
+    }
+  },
+  "alerts": []
+}
