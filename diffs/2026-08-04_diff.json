@@ -1,0 +1,444 @@
+{
+  "period_start": "2026-08-03T09:32:36.912617+00:00",
+  "period_end": "2026-08-04T08:27:43.797564+00:00",
+  "niap": {
+    "pps": {
+      "added": [],
+      "removed": [],
+      "sunset_changes": [],
+      "status_changes": []
+    },
+    "tds": {
+      "added": [],
+      "removed": []
+    },
+    "cisco_ndcpp": {
+      "added": [],
+      "removed": [],
+      "newly_archived": []
+    },
+    "pcl_all": {
+      "added": [],
+      "removed": [],
+      "newly_archived": []
+    },
+    "in_evaluation": {
+      "added": [
+        {
+          "active_maintenances": [],
+          "am_sort": null,
+          "assigned_lab_name": "Gossamer Security Solutions",
+          "certification_date": null,
+          "from_cc_portal": false,
+          "product_id": 11716,
+          "product_name": "Palo Alto Networks Cortex XSOAR Engine 6.14",
+          "protection_profiles": [
+            {
+              "pp_id": 511,
+              "pp_name": "Functional Package for X.509 Version 1.0",
+              "pp_short_name": "PKG_X509_v1.0"
+            },
+            {
+              "pp_id": 516,
+              "pp_name": "Protection Profile for Application Software Version 2.0",
+              "pp_short_name": "PP_APP_v2.0"
+            },
+            {
+              "pp_id": 519,
+              "pp_name": "Functional Package for Transport Layer Security (TLS) Version 2.1",
+              "pp_short_name": "PKG_TLS_V2.1"
+            }
+          ],
+          "status_sort": "In Progress",
+          "submitting_country_id_code": "US",
+          "submitting_country_id_name": "United States",
+          "sunset_date": null,
+          "tech_types": [
+            "Application Software"
+          ],
+          "vendor_id_name": "Palo Alto Networks, Inc.",
+          "v_id": 11716,
+          "kicked_off_date": "2026-08-03T14:45:44.462000Z"
+        },
+        {
+          "active_maintenances": [],
+          "am_sort": null,
+          "assigned_lab_name": "Gossamer Security Solutions",
+          "certification_date": null,
+          "from_cc_portal": false,
+          "product_id": 11715,
+          "product_name": "Palo Alto Networks Cortex XSOAR Server 6.14",
+          "protection_profiles": [
+            {
+              "pp_id": 511,
+              "pp_name": "Functional Package for X.509 Version 1.0",
+              "pp_short_name": "PKG_X509_v1.0"
+            },
+            {
+              "pp_id": 516,
+              "pp_name": "Protection Profile for Application Software Version 2.0",
+              "pp_short_name": "PP_APP_v2.0"
+            },
+            {
+              "pp_id": 519,
+              "pp_name": "Functional Package for Transport Layer Security (TLS) Version 2.1",
+              "pp_short_name": "PKG_TLS_V2.1"
+            }
+          ],
+          "status_sort": "In Progress",
+          "submitting_country_id_code": "US",
+          "submitting_country_id_name": "United States",
+          "sunset_date": null,
+          "tech_types": [
+            "Application Software"
+          ],
+          "vendor_id_name": "Palo Alto Networks, Inc.",
+          "v_id": 11715,
+          "kicked_off_date": "2026-08-03T14:40:12.783000Z"
+        }
+      ],
+      "removed": [],
+      "current_count": 40
+    },
+    "news": {
+      "added": [],
+      "revised": [],
+      "deactivated": [],
+      "reactivated": [],
+      "removed": []
+    },
+    "events": {
+      "added": [],
+      "revised": [],
+      "deactivated": [],
+      "reactivated": [],
+      "removed": []
+    },
+    "policies": {
+      "added": [],
+      "revised": [],
+      "archived": [],
+      "reactivated": [],
+      "removed": []
+    }
+  },
+  "cc_portal": {
+    "news": {
+      "added": [
+        {
+          "text": "Please visit theHCDiTChome pagefor more information and to access the published documents.",
+          "link": "https://hcd-itc.github.io/"
+        }
+      ]
+    },
+    "pps": {
+      "added": []
+    },
+    "products": {
+      "added": []
+    }
+  },
+  "cctl_labs": {},
+  "csfc": {
+    "pages": {
+      "apl": {
+        "added": [
+          {
+            "name": "NetApp Volume Encryption (NVE)",
+            "type": "Software Full Drive Encryption",
+            "vendor": "NetApp",
+            "link": "https://www.niap-ccevs.org/products/11573",
+            "href": "https://www.niap-ccevs.org/products/11573",
+            "raw_text": "Software Full Drive Encryption | NetApp | NetApp Volume Encryption (NVE) | ONTAP 9.16.1 | NIAP Validation Completed (at Lightship Security) | 2026.02.26 | AA",
+            "text": "Software Full Drive Encryption | NetApp | NetApp Volume Encryption (NVE) | ONTAP 9.16.1 | NIAP Validation Completed (at Lightship Security) | 2026.02.26 | AA"
+          },
+          {
+            "name": "Orchestrator and EdgeConnect - VID 2025.1080",
+            "type": "Traffic Filtering Firewall",
+            "vendor": "HPE Aruba Networking",
+            "link": "https://www.niap-ccevs.org/products/international-product/2025.1080",
+            "href": "https://www.niap-ccevs.org/products/international-product/2025.1080",
+            "raw_text": "Traffic Filtering Firewall | HPE Aruba Networking | Orchestrator and EdgeConnect - VID 2025.1080 | Release 9.4.2 | NIAP Validation Completed (at Teron Labs) | 2025.03.07 | ",
+            "text": "Traffic Filtering Firewall | HPE Aruba Networking | Orchestrator and EdgeConnect - VID 2025.1080 | Release 9.4.2 | NIAP Validation Completed (at Teron Labs) | 2025.03.07 | "
+          }
+        ],
+        "removed": [
+          {
+            "name": "Catalyst 9200/9200L Series Switches",
+            "type": "MACSEC Ethernet Encryption Devices",
+            "vendor": "Cisco",
+            "link": "https://www.niap-ccevs.org/products/11462",
+            "href": "https://www.niap-ccevs.org/products/11462",
+            "raw_text": "MACSEC Ethernet Encryption Devices | Cisco | Catalyst 9200/9200L Series Switches | IOS-XE 17.12 | NIAP Validation Completed (at Gossamer) | 2024.07.26 | ",
+            "text": "MACSEC Ethernet Encryption Devices | Cisco | Catalyst 9200/9200L Series Switches | IOS-XE 17.12 | NIAP Validation Completed (at Gossamer) | 2024.07.26 | "
+          },
+          {
+            "name": "Ruckus FastIron ICX Series Switch/Router (ICX7550-48ZP, ICX7550-48P, ICX7550-48P, ICX-48F, ICX7650-48ZP, ICX7650-48P, ICX7650-48F, ICX7850-48FS)",
+            "type": "MACSEC Ethernet Encryption Devices",
+            "vendor": "CommScope Technologies LLC",
+            "link": "https://www.niap-ccevs.org/products/11492",
+            "href": "https://www.niap-ccevs.org/products/11492",
+            "raw_text": "MACSEC Ethernet Encryption Devices | CommScope Technologies LLC | Ruckus FastIron ICX Series Switch/Router (ICX7550-48ZP, ICX7550-48P, ICX7550-48P, ICX-48F, ICX7650-48ZP, ICX7650-48P, ICX7650-48F, ICX7850-48FS) | 10.0.10 | NIAP Validation Completed (at Gossamer) | 2024.07.23 | ",
+            "text": "MACSEC Ethernet Encryption Devices | CommScope Technologies LLC | Ruckus FastIron ICX Series Switch/Router (ICX7550-48ZP, ICX7550-48P, ICX7550-48P, ICX-48F, ICX7650-48ZP, ICX7650-48P, ICX7650-48F, ICX7850-48FS) | 10.0.10 | NIAP Validation Completed (at Gossamer) | 2024.07.23 | "
+          }
+        ]
+      }
+    },
+    "selection_links": {
+      "TLS Software Applications": {
+        "changed": true,
+        "old_href": "https://www.nsa.gov/Portals/75/documents/resources/everyone/csfc/components-list/selections/CSfC%20Selections%20for%20TLS%20Software%20Application-2022-11-03.pdf?ver=w971KKfVKjBfgT6ak8iJhQ%3d%3d",
+        "new_href": "https://www.nsa.gov/Portals/75/documents/CSfC%20Selections%20Updates%202026/CSfC%20Selections%20for%20TLS%20Software%20Applications-2026-08-03.pdf?ver=FKjqseL0EZtX07788YdvyA%3d%3d"
+      }
+    },
+    "feeds": {}
+  },
+  "cc_crypto": {
+    "pages": {
+      "news": {
+        "added": [
+          {
+            "text": "The HCD iTC has published their collaborative Protection Profile and Supporting Document v2.0",
+            "href": ""
+          }
+        ],
+        "removed": []
+      }
+    }
+  },
+  "nato": {
+    "pages": {},
+    "cisco_added": [],
+    "cisco_removed": [],
+    "baseline_reset": false
+  },
+  "eucc": {
+    "pages": {
+      "certificates": {
+        "added": [
+          {
+            "name": "TactiGuard PG",
+            "text": "TactiGuard PG | 18 July 2026 | The TOE is a Software for Data Transfer and Content Filtering. It is used to separate a system into sub-systems with different classification level. A higher classified sub-system might need to exchange information with lower or non-classified subsystems and requires a security mechanism with high a",
+            "href": "https://certification.enisa.europa.eu/certificates/eucc-3087-2026-0007_en",
+            "cert_date": "2026-07-18T12:00:00Z",
+            "description": "The TOE is a Software for Data Transfer and Content Filtering. It is used to separate a system into sub-systems with different classification level. A higher classified sub-system might need to exchange information with lower or non-classified subsystems and requires a security mechanism with high a"
+          }
+        ],
+        "removed": [
+          {
+            "name": "ST54J / ST54K",
+            "text": "ST54J / ST54K | 2 April 2025 | The evaluated product is \u201cST54J / ST54K, A07\u201d developed by STMICROELECTRONICS.",
+            "href": "https://certification.enisa.europa.eu/certificates/eucc-3090-2025-0000000001-00001_en",
+            "cert_date": "2025-04-02T12:00:00Z",
+            "description": "The evaluated product is \u201cST54J / ST54K, A07\u201d developed by STMICROELECTRONICS."
+          }
+        ]
+      }
+    },
+    "cisco_added": [],
+    "cisco_removed": [],
+    "baseline_reset": false
+  },
+  "nd_itc": {
+    "nit_rfis": {
+      "added": [],
+      "status_changes": [],
+      "revised": [],
+      "newly_archived": []
+    },
+    "awl": {
+      "added": [],
+      "removed": [],
+      "version_changes": [],
+      "list_updates": []
+    },
+    "baseline_reset": false,
+    "collection_failure": false
+  },
+  "source_health": {
+    "niap": {
+      "label": "NIAP",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "PCL products",
+          "observed": 1745,
+          "minimum": 50
+        },
+        {
+          "name": "Protection Profiles",
+          "observed": 271,
+          "minimum": 10
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-08-04T08:27:43.797564+00:00",
+      "subcollections": {
+        "news": {
+          "label": "News announcements",
+          "status": "healthy",
+          "observed": 353,
+          "consecutive_failures": 0,
+          "using_last_known_good": false
+        },
+        "events": {
+          "label": "Events",
+          "status": "healthy",
+          "observed": 0,
+          "consecutive_failures": 0,
+          "using_last_known_good": false
+        },
+        "policies": {
+          "label": "Policy letters",
+          "status": "healthy",
+          "observed": 39,
+          "consecutive_failures": 0,
+          "using_last_known_good": false
+        }
+      }
+    },
+    "cc_portal": {
+      "label": "CC Portal",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "portal records",
+          "observed": 180,
+          "minimum": 1
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-08-04T08:27:43.797564+00:00"
+    },
+    "cctl_labs": {
+      "label": "CCTL Labs",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "lab feed items",
+          "observed": 19,
+          "minimum": 1
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-08-04T08:27:43.797564+00:00"
+    },
+    "csfc": {
+      "label": "CSfC",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "APL items",
+          "observed": 117,
+          "minimum": 5
+        },
+        {
+          "name": "announcements",
+          "observed": 8,
+          "minimum": 1
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-08-04T08:27:43.797564+00:00"
+    },
+    "cc_crypto": {
+      "label": "CC Crypto",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "publications",
+          "observed": 121,
+          "minimum": 5
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-08-04T08:27:43.797564+00:00"
+    },
+    "nato": {
+      "label": "NATO NIAPCL",
+      "status": "stale",
+      "checks": [
+        {
+          "name": "NIAPCL products",
+          "observed": 0,
+          "minimum": 3
+        }
+      ],
+      "consecutive_failures": 20,
+      "using_last_known_good": true,
+      "detail": "NIAPCL products 0/3",
+      "checked_at": "2026-08-04T08:27:43.797564+00:00"
+    },
+    "eucc": {
+      "label": "EUCC / ENISA",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "certificates",
+          "observed": 50,
+          "minimum": 2
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-08-04T08:27:43.797564+00:00"
+    },
+    "nd_itc": {
+      "label": "ND-iTC",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "NIT RFIs",
+          "observed": 32,
+          "minimum": 5
+        },
+        {
+          "name": "Allowed-With entries",
+          "observed": 22,
+          "minimum": 1
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-08-04T08:27:43.797564+00:00"
+    }
+  },
+  "alerts": [
+    {
+      "source": "CSfC Component Selections",
+      "kind": "updated",
+      "title": "TLS Software Applications",
+      "url": "https://www.nsa.gov/Portals/75/documents/CSfC%20Selections%20Updates%202026/CSfC%20Selections%20for%20TLS%20Software%20Applications-2026-08-03.pdf?ver=FKjqseL0EZtX07788YdvyA%3d%3d",
+      "detail": "NSA updated the component selection document for this role",
+      "matched_keywords": [
+        "CSfC"
+      ],
+      "tab": "us"
+    },
+    {
+      "source": "CSfC APL",
+      "kind": "removed",
+      "title": "MACSEC Ethernet Encryption Devices | Cisco | Catalyst 9200/9200L Series Switches | IOS-XE 17.12 | NIAP Validation Comple\u2026",
+      "url": "https://www.nsa.gov/Resources/Commercial-Solutions-for-Classified-Program/Components-List/",
+      "detail": "Item removed from CSfC apl page",
+      "matched_keywords": [
+        "cisco"
+      ],
+      "tab": "us"
+    },
+    {
+      "source": "CC Crypto: news",
+      "kind": "publication",
+      "title": "The HCD iTC has published their collaborative Protection Profile and Supporting Document v2.0",
+      "url": "https://www.commoncriteriaportal.org/news/index.cfm",
+      "detail": "New item on CC Crypto news page",
+      "matched_keywords": [],
+      "tab": "us"
+    }
+  ]
+}
