@@ -1,0 +1,443 @@
+{
+  "period_start": "2026-08-04T08:27:43.797564+00:00",
+  "period_end": "2026-08-05T08:25:50.274259+00:00",
+  "niap": {
+    "pps": {
+      "added": [],
+      "removed": [],
+      "sunset_changes": [],
+      "status_changes": []
+    },
+    "tds": {
+      "added": [
+        {
+          "td_id": 1056,
+          "identifier": "TD1056",
+          "title": "User review of audit records optional for GPCP 2.0",
+          "protection_profile": [
+            {
+              "pp_id": 539,
+              "pp_name": "Protection Profile for General Purpose Computing Platform, Version 2.0",
+              "pp_common_name": "Protection Profile for General Purpose Computing Platform, Version 2.0",
+              "cc_version": "CC:2022",
+              "mr_version": null,
+              "pp_date": "2026-04-22T00:00:00Z",
+              "entrydate": "2026-03-31T08:47:14.901000Z",
+              "tech_type": "Hardware Platform and Components",
+              "pp_sponsor_id": "NIAP",
+              "community_id": null,
+              "status": "Publishing",
+              "sunset_date": null,
+              "pp_overview": "<p style=\"margin-top: 0in; background: white; margin-right: 0in; margin-left: 0in; font-size: 12pt; font-family: 'Times New Roman', serif;\"><span style=\"font-family: Helvetica, sans-serif; color: #212529;\">The scope of this Protection Profile (PP) is to describe the security functionality of General-Purpose Computing Platforms in terms of the Common Criteria and to define functional and assurance requirements for such products.</span></p>\r\n<p style=\"margin: 0in 0in 1rem; background: white; box-sizing: border-box; font-variant-ligatures: normal; text-align: start; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; font-size: 12pt; font-family: 'Times New Roman', serif;\"><span style=\"font-family: Helvetica, sans-serif; color: #212529;\">A platform is a collection of hardware devices and firmware that provide the functional capabilities and services needed by tenant software. Such components typically include embedded controllers, trusted platform modules, management controllers, host processors, network interface controllers, graphics processing units, flash memory, storage controllers, storage devices, boot firmware, runtime firmware, human interface devices, and a power supply.</span></p>\r\n<p style=\"margin: 0in 0in 1rem; background: white; box-sizing: border-box; font-variant-ligatures: normal; text-align: start; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; font-size: 12pt; font-family: 'Times New Roman', serif;\"><span style=\"font-family: Helvetica, sans-serif; color: #212529;\">This Protection Profile for General-Purpose Computing Platforms derives requirements from the following documents:</span></p>\r\n<p style=\"margin: 0in 0in 1rem; background: white; box-sizing: border-box; font-variant-ligatures: normal; text-align: start; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; font-size: 12pt; font-family: 'Times New Roman', serif;\"><span style=\"font-family: Helvetica, sans-serif; color: #212529;\">-NIAP, BIOS Update for PC Client Devices protection Profile, Version 1.0, 12 Feb 2013</span></p>\r\n<p style=\"margin: 0in 0in 1rem; background: white; box-sizing: border-box; font-variant-ligatures: normal; text-align: start; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; font-size: 12pt; font-family: 'Times New Roman', serif;\"><span style=\"font-family: Helvetica, sans-serif; color: #212529;\">-NIST SP 800-147 BIOS Protection Guidelines, April 2011</span></p>\r\n<p style=\"margin: 0in 0in 1rem; background: white; box-sizing: border-box; font-variant-ligatures: normal; text-align: start; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; font-size: 12pt; font-family: 'Times New Roman', serif;\"><span style=\"font-family: Helvetica, sans-serif; color: #212529;\">-NIST SP 800-147B BIOS Protection Guidelines for Servers, August 2014</span></p>\r\n<p style=\"margin: 0in 0in 1rem; background: white; box-sizing: border-box; font-variant-ligatures: normal; text-align: start; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; font-size: 12pt; font-family: 'Times New Roman', serif;\"><span style=\"font-family: Helvetica, sans-serif; color: #212529;\">-NIST SP 800-193 Platform Firmware Resiliency Guidelines</span></p>\r\n<p style=\"margin: 0in 0in 1rem; background: white; box-sizing: border-box; font-variant-ligatures: normal; text-align: start; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; font-size: 12pt; font-family: 'Times New Roman', serif;\"><span style=\"font-family: Helvetica, sans-serif; color: #212529;\">Additionally, the following specifications and standards may be relevant to requirements in this PP:</span></p>\r\n<p style=\"margin: 0in 0in 1rem; background: white; box-sizing: border-box; font-variant-ligatures: normal; text-align: start; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; font-size: 12pt; font-family: 'Times New Roman', serif;\"><span style=\"font-family: Helvetica, sans-serif; color: #212529;\">-NIST SP 800-155 (Draft) BIOS Integrity Measurement Guidelines (Draft), December 2011</span></p>\r\n<p style=\"margin: 0in 0in 1rem; background: white; box-sizing: border-box; font-variant-ligatures: normal; text-align: start; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; font-size: 12pt; font-family: 'Times New Roman', serif;\"><span style=\"font-family: Helvetica, sans-serif; color: #212529;\">-NIST SP 1800-34 (Draft) Validating the Integrity of Computing Devices (Preliminary Draft), 2021</span></p>\r\n<p style=\"margin: 0in 0in 1rem; background: white; box-sizing: border-box; font-variant-ligatures: normal; text-align: start; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; font-size: 12pt; font-family: 'Times New Roman', serif;\"><span style=\"font-family: Helvetica, sans-serif; color: #212529;\">-Trusted Computing Group, TCG PC Client Platform Firmware Integrity Measurement Version 1.0 Revision Specification 43 Family 2.0, May 7, 2021</span></p>\r\n<p style=\"margin: 0in 0in 1rem; background: white; box-sizing: border-box; font-variant-ligatures: normal; text-align: start; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; font-size: 12pt; font-family: 'Times New Roman', serif;\"><span style=\"font-family: Helvetica, sans-serif; color: #212529;\">-IEEE Std 802.1AR-2018, Secure Device Identity&nbsp;</span></p>",
+              "security_evaluation_summary": "",
+              "environmental_strengths": "",
+              "pp_priority": null,
+              "created_on": null,
+              "removed_on": null,
+              "archived": false,
+              "assurance_maintenance": null,
+              "pp_estcompletion": null,
+              "pp_estcompletiondate": null,
+              "pp_transition": null,
+              "revised_on": null,
+              "pp_short_name": "PP_GPCP_V2.0",
+              "dod_compliant": false,
+              "csfceligible": false,
+              "constraint": null,
+              "predecessor_id": 451,
+              "successor_id": null,
+              "creator": 504,
+              "remover": null,
+              "editor": null
+            }
+          ],
+          "sunset_protection_profile": [],
+          "related_to": "FMT_SMF.1.1",
+          "publication_date": "2026-08-04T07:56:19.245000Z",
+          "removed_on": null,
+          "status": "Published"
+        }
+      ],
+      "removed": []
+    },
+    "cisco_ndcpp": {
+      "added": [],
+      "removed": [],
+      "newly_archived": []
+    },
+    "pcl_all": {
+      "added": [
+        {
+          "active_maintenances": [],
+          "am_sort": "2031-07-02T00:00:00Z",
+          "assigned_lab_name": "EWA - Canada",
+          "certification_date": "2026-07-02T00:00:00Z",
+          "from_cc_portal": true,
+          "product_id": "2026.1238",
+          "product_name": "Belkin F1DN102KVM-UNN4, F1DN202KVM-UNN4, F1DN104KVM-UNN4, F1DN204KVM-UNN4, F1DN202KVMUNN4M, F1DN204KVMUNN4M, F1DN104KVMUNN4Z, F1DN204KVMUNN4Z Firmware Version 44404-E7E7 Peripheral Sharing Devices",
+          "protection_profiles": [
+            {
+              "pp_id": 412,
+              "pp_name": "Protection Profile for Peripheral Sharing Device Version 4.0",
+              "pp_short_name": "PP_PSD_V4.0"
+            },
+            {
+              "pp_id": 433,
+              "pp_name": "PP-Module for Analog Audio Output Devices Version 1.0",
+              "pp_short_name": "MOD_AO_V1.0"
+            },
+            {
+              "pp_id": 435,
+              "pp_name": "PP-Module for Keyboard/Mouse Devices Version 1.0",
+              "pp_short_name": "MOD_KM_V1.0"
+            },
+            {
+              "pp_id": 436,
+              "pp_name": "PP-Module for Video/Display Devices Version 1.0",
+              "pp_short_name": "MOD_VI_V1.0"
+            }
+          ],
+          "status_sort": "Certified",
+          "submitting_country_id_code": "CA",
+          "submitting_country_id_name": "Canada",
+          "sunset_date": "2031-07-02T00:00:00Z",
+          "tech_types": [
+            "Other Devices and Systems"
+          ],
+          "vendor_id_name": "Belkin International, Inc.",
+          "v_id": "2026.1238",
+          "kicked_off_date": null
+        },
+        {
+          "active_maintenances": [],
+          "am_sort": "2028-07-02T00:00:00Z",
+          "assigned_lab_name": "Lightship Security",
+          "certification_date": "2026-06-23T00:00:00Z",
+          "from_cc_portal": true,
+          "product_id": "2026.1235",
+          "product_name": "NetApp E-Series and EF-Series with SANtricity v11.90R5",
+          "protection_profiles": [
+            {
+              "pp_id": 482,
+              "pp_name": "collaborative Protection Profile for Network Devices Version 3.0e",
+              "pp_short_name": "CPP_ND_V3.0E"
+            }
+          ],
+          "status_sort": "Certified",
+          "submitting_country_id_code": "CA",
+          "submitting_country_id_name": "Canada",
+          "sunset_date": "2031-07-02T00:00:00Z",
+          "tech_types": [
+            "Network and Network-Related Devices and Systems"
+          ],
+          "vendor_id_name": "NetApp, Inc.",
+          "v_id": "2026.1235",
+          "kicked_off_date": null
+        },
+        {
+          "active_maintenances": [],
+          "am_sort": "2031-06-30T00:00:00Z",
+          "assigned_lab_name": "Teron Labs",
+          "certification_date": "2026-06-30T00:00:00Z",
+          "from_cc_portal": true,
+          "product_id": "2026.1234",
+          "product_name": "ADT WASP - ADTKVM2mDP",
+          "protection_profiles": [
+            {
+              "pp_id": 412,
+              "pp_name": "Protection Profile for Peripheral Sharing Device Version 4.0",
+              "pp_short_name": "PP_PSD_V4.0"
+            },
+            {
+              "pp_id": 435,
+              "pp_name": "PP-Module for Keyboard/Mouse Devices Version 1.0",
+              "pp_short_name": "MOD_KM_V1.0"
+            },
+            {
+              "pp_id": 436,
+              "pp_name": "PP-Module for Video/Display Devices Version 1.0",
+              "pp_short_name": "MOD_VI_V1.0"
+            }
+          ],
+          "status_sort": "Certified",
+          "submitting_country_id_code": "AU",
+          "submitting_country_id_name": "Australia",
+          "sunset_date": "2031-06-30T00:00:00Z",
+          "tech_types": [
+            "Other Devices and Systems"
+          ],
+          "vendor_id_name": "Advanced Design Technology (ADT)",
+          "v_id": "2026.1234",
+          "kicked_off_date": null
+        }
+      ],
+      "removed": [],
+      "newly_archived": []
+    },
+    "in_evaluation": {
+      "added": [
+        {
+          "active_maintenances": [],
+          "am_sort": null,
+          "assigned_lab_name": "Booz Allen Hamilton Common Criteria Testing Laboratory",
+          "certification_date": null,
+          "from_cc_portal": false,
+          "product_id": 11725,
+          "product_name": "Splunk Enterprise 10",
+          "protection_profiles": [
+            {
+              "pp_id": 511,
+              "pp_name": "Functional Package for X.509 Version 1.0",
+              "pp_short_name": "PKG_X509_v1.0"
+            },
+            {
+              "pp_id": 516,
+              "pp_name": "Protection Profile for Application Software Version 2.0",
+              "pp_short_name": "PP_APP_v2.0"
+            },
+            {
+              "pp_id": 519,
+              "pp_name": "Functional Package for Transport Layer Security (TLS) Version 2.1",
+              "pp_short_name": "PKG_TLS_V2.1"
+            }
+          ],
+          "status_sort": "In Progress",
+          "submitting_country_id_code": "US",
+          "submitting_country_id_name": "United States",
+          "sunset_date": null,
+          "tech_types": [
+            "Application Software"
+          ],
+          "vendor_id_name": "Splunk LLC",
+          "v_id": 11725,
+          "kicked_off_date": "2026-08-04T09:40:52.355000Z"
+        }
+      ],
+      "removed": [],
+      "current_count": 41
+    },
+    "news": {
+      "added": [],
+      "revised": [],
+      "deactivated": [],
+      "reactivated": [],
+      "removed": []
+    },
+    "events": {
+      "added": [],
+      "revised": [],
+      "deactivated": [],
+      "reactivated": [],
+      "removed": []
+    },
+    "policies": {
+      "added": [],
+      "revised": [],
+      "archived": [],
+      "reactivated": [],
+      "removed": []
+    }
+  },
+  "cc_portal": {
+    "news": {
+      "added": []
+    },
+    "pps": {
+      "added": []
+    },
+    "products": {
+      "added": []
+    }
+  },
+  "cctl_labs": {},
+  "csfc": {
+    "pages": {},
+    "selection_links": {},
+    "feeds": {}
+  },
+  "cc_crypto": {
+    "pages": {}
+  },
+  "nato": {
+    "pages": {},
+    "cisco_added": [],
+    "cisco_removed": [],
+    "baseline_reset": false
+  },
+  "eucc": {
+    "pages": {},
+    "cisco_added": [],
+    "cisco_removed": [],
+    "baseline_reset": false
+  },
+  "nd_itc": {
+    "nit_rfis": {
+      "added": [],
+      "status_changes": [],
+      "revised": [],
+      "newly_archived": []
+    },
+    "awl": {
+      "added": [],
+      "removed": [],
+      "version_changes": [],
+      "list_updates": []
+    },
+    "baseline_reset": false,
+    "collection_failure": false
+  },
+  "source_health": {
+    "niap": {
+      "label": "NIAP",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "PCL products",
+          "observed": 1749,
+          "minimum": 50
+        },
+        {
+          "name": "Protection Profiles",
+          "observed": 271,
+          "minimum": 10
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-08-05T08:25:50.274259+00:00",
+      "subcollections": {
+        "news": {
+          "label": "News announcements",
+          "status": "healthy",
+          "observed": 353,
+          "consecutive_failures": 0,
+          "using_last_known_good": false
+        },
+        "events": {
+          "label": "Events",
+          "status": "healthy",
+          "observed": 0,
+          "consecutive_failures": 0,
+          "using_last_known_good": false
+        },
+        "policies": {
+          "label": "Policy letters",
+          "status": "healthy",
+          "observed": 39,
+          "consecutive_failures": 0,
+          "using_last_known_good": false
+        }
+      }
+    },
+    "cc_portal": {
+      "label": "CC Portal",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "portal records",
+          "observed": 180,
+          "minimum": 1
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-08-05T08:25:50.274259+00:00"
+    },
+    "cctl_labs": {
+      "label": "CCTL Labs",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "lab feed items",
+          "observed": 19,
+          "minimum": 1
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-08-05T08:25:50.274259+00:00"
+    },
+    "csfc": {
+      "label": "CSfC",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "APL items",
+          "observed": 117,
+          "minimum": 5
+        },
+        {
+          "name": "announcements",
+          "observed": 8,
+          "minimum": 1
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-08-05T08:25:50.274259+00:00"
+    },
+    "cc_crypto": {
+      "label": "CC Crypto",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "publications",
+          "observed": 121,
+          "minimum": 5
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-08-05T08:25:50.274259+00:00"
+    },
+    "nato": {
+      "label": "NATO NIAPCL",
+      "status": "stale",
+      "checks": [
+        {
+          "name": "NIAPCL products",
+          "observed": 0,
+          "minimum": 3
+        }
+      ],
+      "consecutive_failures": 21,
+      "using_last_known_good": true,
+      "detail": "NIAPCL products 0/3",
+      "checked_at": "2026-08-05T08:25:50.274259+00:00"
+    },
+    "eucc": {
+      "label": "EUCC / ENISA",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "certificates",
+          "observed": 50,
+          "minimum": 2
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-08-05T08:25:50.274259+00:00"
+    },
+    "nd_itc": {
+      "label": "ND-iTC",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "NIT RFIs",
+          "observed": 32,
+          "minimum": 5
+        },
+        {
+          "name": "Allowed-With entries",
+          "observed": 22,
+          "minimum": 1
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-08-05T08:25:50.274259+00:00"
+    }
+  },
+  "alerts": []
+}
