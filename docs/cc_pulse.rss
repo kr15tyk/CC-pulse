@@ -2,14 +2,6 @@
 <rss version="2.0"><channel>
 <title>CC Pulse</title>
 <link>https://kr15tyk.github.io/CC-pulse/cc_dashboard.html</link>
-<description>Common Criteria monitoring - 2026-08-04 04:27 ET</description>
-<item><title>CSfC Selection Updated: TLS Software Applications</title><link>https://www.nsa.gov/Portals/75/documents/CSfC%20Selections%20Updates%202026/CSfC%20Selections%20for%20TLS%20Software%20Applications-2026-08-03.pdf?ver=FKjqseL0EZtX07788YdvyA%3d%3d</link><description>Component selection document updated.</description></item>
-<item><title>CSfC Component Added: Software Full Drive Encryption | NetApp | NetApp Volume Encryption (NVE) | ONTAP</title><link>https://www.niap-ccevs.org/products/11573</link><description>CSfC apl item added.</description></item>
-<item><title>CSfC Component Added: Traffic Filtering Firewall | HPE Aruba Networking | Orchestrator and EdgeConnect</title><link>https://www.niap-ccevs.org/products/international-product/2025.1080</link><description>CSfC apl item added.</description></item>
-<item><title>CSfC Component Removed: MACSEC Ethernet Encryption Devices | Cisco | Catalyst 9200/9200L Series Switches</title><link>https://www.niap-ccevs.org/products/11462</link><description>CSfC apl item removed.</description></item>
-<item><title>CSfC Component Removed: MACSEC Ethernet Encryption Devices | CommScope Technologies LLC | Ruckus FastIro</title><link>https://www.niap-ccevs.org/products/11492</link><description>CSfC apl item removed.</description></item>
-<item><title>CC Crypto: The HCD iTC has published their collaborative Protection Profile and Supporting </title><link></link><description>New item on CC Crypto news page.</description></item>
-<item><title>ALERT: CSfC Component Selections – TLS Software Applications</title><link>https://kr15tyk.github.io/CC-pulse/cc_dashboard.html</link><description>Kind: updated | Keywords: CSfC</description></item>
-<item><title>ALERT: CSfC APL – MACSEC Ethernet Encryption Devices | Cisco | Catalyst 9200/9200L Series Switches | IOS-XE 17.12 | NIAP Validation Comple…</title><link>https://kr15tyk.github.io/CC-pulse/cc_dashboard.html</link><description>Kind: removed | Keywords: cisco</description></item>
-<item><title>ALERT: CC Crypto: news – The HCD iTC has published their collaborative Protection Profile and Supporting Document v2.0</title><link>https://kr15tyk.github.io/CC-pulse/cc_dashboard.html</link><description>Kind: publication | Keywords: </description></item>
+<description>Common Criteria monitoring - 2026-08-05 04:25 ET</description>
+<item><title>New TD: TD1056</title><link>https://www.niap-ccevs.org/</link><description></description></item>
 </channel></rss>

@@ -179,7 +179,7 @@
   <span class="nav-title">CC Pulse Dashboard</span>
   <span class="nav-spacer"></span>
   <div class="ham-wrap">
-    <span class="nav-meta">Last run: 2026-08-04 04:27 ET</span>
+    <span class="nav-meta">Last run: 2026-08-05 04:25 ET</span>
     <button class="ham-btn" id="ham-btn" onclick="toggleHamMenu()" aria-expanded="false" aria-haspopup="true" title="Open menu">&#9776;</button>
     <div class="ham-menu" id="ham-menu" role="menu">
       <a class="ham-item" href="https://kr15tyk.github.io/CC-pulse/cc_dashboard.html" role="menuitem"><span class="ham-icon">&#127968;</span>Home</a>
@@ -254,15 +254,15 @@
 <div class="sticky-top">
   <div class="trend-bar">
     <div class="stat"><a href="#sec-niap-pp" onclick="navigateTo('sec-niap-pp');return false;">
-      <div class="stat-num active-num">2</div>
+      <div class="stat-num active-num">5</div>
       <div class="stat-lbl">NIAP Changes</div>
     </a></div>
     <div class="stat"><a href="#sec-csfc" onclick="navigateTo('sec-csfc');return false;">
-      <div class="stat-num active-num">5</div>
+      <div class="stat-num ">0</div>
       <div class="stat-lbl">CSfC Selection Updates</div>
     </a></div>
     <div class="stat"><a href="#sec-cc-portal" onclick="navigateTo('sec-cc-portal');return false;">
-      <div class="stat-num active-num">1</div>
+      <div class="stat-num ">0</div>
       <div class="stat-lbl">CC Portal</div>
     </a></div>
     <div class="stat"><a href="#sec-nato" onclick="navigateTo('sec-nato');return false;">
@@ -274,11 +274,11 @@
       <div class="stat-lbl">CCTL Updates</div>
     </a></div>
     <div class="stat"><a href="#sec-eucc-req" onclick="navigateTo('sec-eucc-req');return false;">
-      <div class="stat-num active-num">1</div>
+      <div class="stat-num ">0</div>
       <div class="stat-lbl">EUCC Changes</div>
     </a></div>
     <div class="stat"><a href="#sec-alerts" onclick="navigateTo('sec-alerts');return false;">
-      <div class="stat-num alert-num">3</div>
+      <div class="stat-num ">0</div>
       <div class="stat-lbl">Alerts</div>
     </a></div>
   </div>
@@ -304,46 +304,6 @@
       
 <!-- Alerts -->
 
-<div class="section-group">
-<div class="card card-alert" id="sec-alerts">
-  <div class="card-hdr" onclick="toggleCard(this)">
-    <span>Alerts</span>
-    <span class="card-count">3 alerts</span>
-    <span class="toggle-icon">&#9660;</span>
-  </div>
-  <div class="card-body">
-    <div class="alert-monitoring">FIPS 186-4, FIPS 186-5, NDcPP, CPP_ND, TLS 1.3, SSH, PP-Module_VPN, PP-Module_WLAN, labgram, valgram, emergency, CSfC, Commercial Solutions for Classified, CSfC APL, CSfC component selections, NSA CSfC, NATO NIAPC, NIAPCL, EUCC, ENISA, CCDB-018, Crypto Catalog, cryptography working group, Specification of Functional Requirements for Cryptography, FCS_CKM, FCS_COP, FCS_RBG</div>
-    
-        <div class="item-row alert-item" data-alert-key="CSfC Component Selections-TLS_Software_Applications" data-tab="us">
-          
-          <a class="item-link" href="https://www.nsa.gov/Portals/75/documents/CSfC%20Selections%20Updates%202026/CSfC%20Selections%20for%20TLS%20Software%20Applications-2026-08-03.pdf?ver=FKjqseL0EZtX07788YdvyA%3d%3d" target="_blank">CSfC Component Selections: TLS Software Applications</a>
-          
-          <span class="item-meta">updated &middot; CSfC</span>
-          <div class="item-sub">NSA updated the component selection document for this role</div>
-          <button class="dismiss-btn" onclick="dismissAlert(this)" title="Mark as seen">&#10003; Seen</button>
-        </div>
-        
-        <div class="item-row alert-item" data-alert-key="CSfC APL-MACSEC_Ethernet_Encryption_Devices_|_Cisco_|_Catalyst_9200/9200L_Series_Switches_|_IOS-XE_17.12_|_NIAP_Validation_Comple…" data-tab="us">
-          
-          <a class="item-link" href="https://www.nsa.gov/Resources/Commercial-Solutions-for-Classified-Program/Components-List/" target="_blank">CSfC APL: MACSEC Ethernet Encryption Devices | Cisco | Catalyst 9200/9200L Series Switches | IOS-XE 17.12 | NIAP Validation Comple…</a>
-          
-          <span class="item-meta">removed &middot; cisco</span>
-          <div class="item-sub">Item removed from CSfC apl page</div>
-          <button class="dismiss-btn" onclick="dismissAlert(this)" title="Mark as seen">&#10003; Seen</button>
-        </div>
-        
-        <div class="item-row alert-item" data-alert-key="CC Crypto: news-The_HCD_iTC_has_published_their_collaborative_Protection_Profile_and_Supporting_Document_v2.0" data-tab="us">
-          
-          <a class="item-link" href="https://www.commoncriteriaportal.org/news/index.cfm" target="_blank">CC Crypto: news: The HCD iTC has published their collaborative Protection Profile and Supporting Document v2.0</a>
-          
-          <span class="item-meta">publication &middot; </span>
-          <div class="item-sub">New item on CC Crypto news page</div>
-          <button class="dismiss-btn" onclick="dismissAlert(this)" title="Mark as seen">&#10003; Seen</button>
-        </div>
-        
-  </div>
-</div>
-
 <div class="tab-nav" id="region-tabs">
         <button class="tab-btn active" data-tab="us" onclick="switchTab(this)">&#127482;&#127480; US (NIAP / CSfC)</button>
         <button class="tab-btn" data-tab="intl" onclick="switchTab(this)">&#127760; International</button>
@@ -367,32 +327,24 @@
     
     
     
-    <p class="no-change">No changes detected. <span class="last-active">(last: 2026-07-31)</span></p>
+    <p class="no-change">No changes detected. <span class="last-active">(last: 2026-08-05)</span></p>
   </div>
 </div>
 
   <!-- NIAP In-Evaluation -->
-<div class="card card-new" id="sec-niap-inevaluation" data-has-changes="2">
+<div class="card card-new" id="sec-niap-inevaluation" data-has-changes="1">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>NIAP In-Evaluation Products</span>
-    <span class="card-count">2 changes</span>
+    <span class="card-count">1 change</span>
     </span>
   </div>
   <div class="card-body ">
     
-    <div class="sub-hdr sub-new">Newly In Evaluation (2)</div>
+    <div class="sub-hdr sub-new">Newly In Evaluation (1)</div>
     
     <div class="item-row" data-source="niap-inevaluation" data-kind="new">
-      <span class="item-link">Palo Alto Networks, Inc. -- Palo Alto Networks Cortex XSOAR Engine 6.14</span>
-      <span class="item-meta">Gossamer Security Solutions</span>
-    </div>
-    
-    <div class="item-sub">Application Software</div>
-    
-    
-    <div class="item-row" data-source="niap-inevaluation" data-kind="new">
-      <span class="item-link">Palo Alto Networks, Inc. -- Palo Alto Networks Cortex XSOAR Server 6.14</span>
-      <span class="item-meta">Gossamer Security Solutions</span>
+      <span class="item-link">Splunk LLC -- Splunk Enterprise 10</span>
+      <span class="item-meta">Booz Allen Hamilton Common Criteria Testing Laboratory</span>
     </div>
     
     <div class="item-sub">Application Software</div>
@@ -466,17 +418,44 @@
 </div>
 
   <!-- NIAP PCL — All Certifications -->
-<div class="card " id="sec-niap-pcl" data-has-changes="0">
+<div class="card card-new" id="sec-niap-pcl" data-has-changes="3">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>NIAP PCL — All Certifications</span>
-    <span class="card-count">0 changes</span>
+    <span class="card-count">3 changes</span>
     </span>
   </div>
-  <div class="card-body collapsed">
+  <div class="card-body ">
+    
+    <div class="sub-hdr sub-new">New Certifications (3)</div>
+    
+    <div class="item-row" data-source="niap-pcl" data-kind="new">
+      <span class="item-link">Belkin International, Inc. -- Belkin F1DN102KVM-UNN4, F1DN202KVM-UNN4, F1DN104KVM-UNN4, F1DN204KVM-UNN4, F1DN202KVMUNN4M, F1DN204KVMUNN4M, F1DN104KVMUNN4Z, F1DN204KVMUNN4Z Firmware Version 44404-E7E7 Peripheral Sharing Devices</span>
+      <span class="item-meta">2026-07-02</span>
+    </div>
+    
+    <div class="item-sub">PP_PSD_V4.0, MOD_AO_V1.0, MOD_KM_V1.0, MOD_VI_V1.0</div>
+    
+    
+    <div class="item-row" data-source="niap-pcl" data-kind="new">
+      <span class="item-link">NetApp, Inc. -- NetApp E-Series and EF-Series with SANtricity v11.90R5</span>
+      <span class="item-meta">2026-06-23</span>
+    </div>
+    
+    <div class="item-sub">CPP_ND_V3.0E</div>
+    
+    
+    <div class="item-row" data-source="niap-pcl" data-kind="new">
+      <span class="item-link">Advanced Design Technology (ADT) -- ADT WASP - ADTKVM2mDP</span>
+      <span class="item-meta">2026-06-30</span>
+    </div>
+    
+    <div class="item-sub">PP_PSD_V4.0, MOD_KM_V1.0, MOD_VI_V1.0</div>
     
     
     
-    <p class="no-change">No changes detected. <span class="last-active">(last: 2026-07-31)</span></p>
+    
+    
+    
   </div>
 </div>
 
@@ -498,17 +477,28 @@
 </div>
 
   <!-- NIAP TDs -->
-<div class="card " id="sec-niap-td" data-has-changes="0">
+<div class="card card-new" id="sec-niap-td" data-has-changes="1">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>NIAP Technical Decisions</span>
-    <span class="card-count">0 changes</span>
+    <span class="card-count">1 change</span>
     </span>
-    <span class="toggle-icon">&#9658;</span>
+    <span class="toggle-icon">&#9660;</span>
   </div>
-  <div class="card-body collapsed">
+  <div class="card-body ">
+    
+    <div class="sub-hdr sub-new">New TDs (1)</div>
+    
+    <div class="item-row" data-source="niap-td" data-kind="new">
+      <a class="item-link" href="https://www.niap-ccevs.org/technical-decisions/TD1056" target="_blank">TD1056 &mdash; User review of audit records optional for GPCP 2.0</a>
+      <span class="item-meta">2026-08-04</span>
+    </div>
+    
+    <div class="item-sub">Applies to: PP_GPCP_V2.0</div>
     
     
-    <p class="no-change">No changes detected.</p>
+    
+    
+    
   </div>
 </div>
 </div>
@@ -517,50 +507,16 @@
 <div class="section-group">
   <div class="section-label">CSfC</div>
   <!-- CSfC Components, Announcements, and Selection Documents -->
-<div class="card card-updated" id="sec-csfc" data-has-changes="5">
+<div class="card " id="sec-csfc" data-has-changes="0">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>CSfC Components &amp; Announcements</span>
-    <span class="card-count">5 updates</span>
-    <span class="toggle-icon">&#9660;</span>
+    <span class="card-count">0 updates</span>
+    <span class="toggle-icon">&#9658;</span>
   </div>
-  <div class="card-body ">
+  <div class="card-body collapsed">
     
     
-    <div class="cp-row" data-source="csfc" data-kind="updated">
-      <a class="item-link" href="https://www.nsa.gov/Portals/75/documents/CSfC%20Selections%20Updates%202026/CSfC%20Selections%20for%20TLS%20Software%20Applications-2026-08-03.pdf?ver=FKjqseL0EZtX07788YdvyA%3d%3d" target="_blank">TLS Software Applications</a>
-      <div class="cp-detail">
-        <span class="cp-date">Selection document link changed</span>
-      </div>
-    </div>
-    
-    
-    
-      
-        
-        <div class="item-row" data-source="csfc" data-kind="new">
-          <a class="item-link" href="https://www.niap-ccevs.org/products/11573" target="_blank">Software Full Drive Encryption | NetApp | NetApp Volume Encryption (NVE) | ONTAP 9.16.1 | NIAP Validation Completed (at Lightship Security) | 2026.02.26 | AA</a>
-          <span class="item-meta">component added</span>
-        </div>
-        
-        <div class="item-row" data-source="csfc" data-kind="new">
-          <a class="item-link" href="https://www.niap-ccevs.org/products/international-product/2025.1080" target="_blank">Traffic Filtering Firewall | HPE Aruba Networking | Orchestrator and EdgeConnect - VID 2025.1080 | Release 9.4.2 | NIAP Validation Completed (at Teron Labs) | 2025.03.07 | </a>
-          <span class="item-meta">component added</span>
-        </div>
-        
-        
-        <div class="item-row" data-source="csfc" data-kind="removed">
-          <a class="item-link" href="https://www.niap-ccevs.org/products/11462" target="_blank">MACSEC Ethernet Encryption Devices | Cisco | Catalyst 9200/9200L Series Switches | IOS-XE 17.12 | NIAP Validation Completed (at Gossamer) | 2024.07.26 | </a>
-          <span class="item-meta">component removed</span>
-        </div>
-        
-        <div class="item-row" data-source="csfc" data-kind="removed">
-          <a class="item-link" href="https://www.niap-ccevs.org/products/11492" target="_blank">MACSEC Ethernet Encryption Devices | CommScope Technologies LLC | Ruckus FastIron ICX Series Switch/Router (ICX7550-48ZP, ICX7550-48P, ICX7550-48P, ICX-48F, ICX7650-48ZP, ICX7650-48P, ICX7650-48F, ICX7850-48FS) | 10.0.10 | NIAP Validation Completed (at Gossamer) | 2024.07.23 | </a>
-          <span class="item-meta">component removed</span>
-        </div>
-        
-      
-    
-    
+    <p class="no-change">No changes detected. <span class="last-active">(last: 2026-08-04)</span></p>
   </div>
 </div>
 </div>
@@ -568,23 +524,16 @@
 <div class="section-group">
   <div class="section-label">Documentation</div>
   <!-- CC Crypto Docs -->
-<div class="card card-updated" id="sec-cc-crypto" data-has-changes="1">
+<div class="card " id="sec-cc-crypto" data-has-changes="0">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>CC Crypto Documentation</span>
-    <span class="card-count">1 update</span>
+    <span class="card-count">0 updates</span>
     </span>
-    <span class="toggle-icon">&#9660;</span>
+    <span class="toggle-icon">&#9658;</span>
   </div>
-  <div class="card-body ">
+  <div class="card-body collapsed">
     
-      
-      <div class="item-row" data-source="cc-crypto" data-kind="updated">
-        <a class="item-link" href="https://www.commoncriteriaportal.org/" target="_blank">The HCD iTC has published their collaborative Protection Profile and Supporting Document v2.0</a>
-        <span class="item-meta">news</span>
-      </div>
-      
-    
-    
+    <p class="no-change">No changes detected. <span class="last-active">(last: 2026-08-04)</span></p>
   </div>
 </div>
 
@@ -595,26 +544,18 @@
 <div class="section-group">
   <div class="section-label">CC Portal</div>
   <!-- CC Portal (international) -->
-<div class="card card-new" id="sec-cc-portal" data-has-changes="1">
+<div class="card " id="sec-cc-portal" data-has-changes="0">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>CC Portal (International)</span>
-    <span class="card-count">1 new item</span>
+    <span class="card-count">0 new items</span>
     </span>
-    <span class="toggle-icon">&#9660;</span>
+    <span class="toggle-icon">&#9658;</span>
   </div>
-  <div class="card-body ">
-    
-    <div class="sub-hdr sub-new">News (1)</div>
-    
-    <div class="item-row" data-source="cc-portal" data-kind="new">
-      <a class="item-link" href="https://hcd-itc.github.io/" target="_blank">Please visit theHCDiTChome pagefor more information and to access the published documents.</a>
-      <span class="item-meta"></span>
-    </div>
+  <div class="card-body collapsed">
     
     
     
-    
-    
+    <p class="no-change">No new international items.</p>
   </div>
 </div><!-- NATO NIAPCL -->
         <div class="card " id="sec-nato" data-has-changes="0">
@@ -642,7 +583,7 @@
   </div>
   <div class="card-body collapsed">
     
-    <p class="no-change">No new items. <span class="last-active">Last: 2026-07-29</span></p>
+    <p class="no-change">No new items.</p>
   </div>
 </div>
 </div>      
@@ -664,23 +605,16 @@
           </div>
         </div>
         <!-- EUCC Certificates -->
-        <div class="card card-new" id="sec-eucc-certs" data-has-changes="1">
+        <div class="card " id="sec-eucc-certs" data-has-changes="0">
           <div class="card-hdr" onclick="toggleCard(this)">
             <span>EUCC Certified Products</span>
-            <span class="card-count">1 new item</span>
-            <span class="toggle-icon">&#9660;</span>
+            <span class="card-count">0 new items</span>
+            <span class="toggle-icon">&#9658;</span>
           </div>
-          <div class="card-body ">
+          <div class="card-body collapsed">
             
             
-            
-            <div class="item-row" data-source="eucc" data-kind="new">
-              <a class="item-link" href="https://certification.enisa.europa.eu/certificates/eucc-3087-2026-0007_en" target="_blank">TactiGuard PG</a>
-              <span class="item-meta"></span>
-            </div>
-            
-            
-            
+            <p class="no-change">No new EUCC certified products.</p>
           </div>
         </div>
       </div>
@@ -692,7 +626,7 @@
 <div class="card card-new" id="sec-history" data-has-changes="1">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>Change History</span>
-    <span class="card-count">46 events</span>
+    <span class="card-count">50 events</span>
     <span class="toggle-icon">▼</span>
   </div>
   <div class="card-body">
@@ -710,6 +644,50 @@
       div>
     <div class="timeline" id="history-timeline">
     
+      
+      <div class="tl-entry" data-cat="td_new">
+        <div class="tl-date">2026-08-05</div>
+        <div class="tl-body">
+          <div class="tl-title">
+            <span class="tl-badge new">new</span>
+            <a href="https://www.niap-ccevs.org/technical-decisions/TD1056" target="_blank">New TD: TD1056</a>
+          </div>
+          <div class="tl-detail">User review of audit records optional for GPCP 2.0</div>
+        </div>
+      </div>
+      
+      <div class="tl-entry" data-cat="pcl_cert">
+        <div class="tl-date">2026-08-05</div>
+        <div class="tl-body">
+          <div class="tl-title">
+            <span class="tl-badge new">new</span>
+            <a href="https://www.niap-ccevs.org/products/2026.1238" target="_blank">Belkin International, Inc. — Belkin F1DN102KVM-UNN4, F1DN202KVM-UNN4, F1DN104KVM-UNN4, F1DN204KVM-UNN4, F1DN202KVMUNN4M, F1DN204KVMUNN4M, F1DN104KVMUNN4Z, F1DN204KVMUNN4Z Firmware Version 44404-E7E7 Peripheral Sharing Devices</a>
+          </div>
+          <div class="tl-detail">Certified 2026-07-02 · EWA - Canada · PP_PSD_V4.0, MOD_AO_V1.0, MOD_KM_V1.0, MOD_VI_V1.0</div>
+        </div>
+      </div>
+      
+      <div class="tl-entry" data-cat="pcl_cert">
+        <div class="tl-date">2026-08-05</div>
+        <div class="tl-body">
+          <div class="tl-title">
+            <span class="tl-badge new">new</span>
+            <a href="https://www.niap-ccevs.org/products/2026.1235" target="_blank">NetApp, Inc. — NetApp E-Series and EF-Series with SANtricity v11.90R5</a>
+          </div>
+          <div class="tl-detail">Certified 2026-06-23 · Lightship Security · CPP_ND_V3.0E</div>
+        </div>
+      </div>
+      
+      <div class="tl-entry" data-cat="pcl_cert">
+        <div class="tl-date">2026-08-05</div>
+        <div class="tl-body">
+          <div class="tl-title">
+            <span class="tl-badge new">new</span>
+            <a href="https://www.niap-ccevs.org/products/2026.1234" target="_blank">Advanced Design Technology (ADT) — ADT WASP - ADTKVM2mDP</a>
+          </div>
+          <div class="tl-detail">Certified 2026-06-30 · Teron Labs · PP_PSD_V4.0, MOD_KM_V1.0, MOD_VI_V1.0</div>
+        </div>
+      </div>
       
       <div class="tl-entry" data-cat="csfc_change">
         <div class="tl-date">2026-08-04</div>
@@ -1227,7 +1205,7 @@
 </div><!-- /main-content -->
 <footer>
   <span>CC Pulse &middot; Auto-refreshes daily (01:00 EST) &middot; NIAP, CSfC, CC Portal, NATO NIAPCL, EUCC / ENISA</span>
-  <span>Last run: 2026-08-04 04:27 ET</span>
+  <span>Last run: 2026-08-05 04:25 ET</span>
 </footer>
 
 <script>
