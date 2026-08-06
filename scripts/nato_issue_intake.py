@@ -50,7 +50,19 @@ def _parse_issue_body(body: str) -> dict:
 
 def _clean(value: str) -> str:
     value = value.strip()
-    return "" if value in ("", "_No response_") else value
+    if value in ("", "_No response_"):
+        return ""
+    if value.startswith("```"):
+        # GitHub Issue Forms wraps "render"-style textarea fields in a
+        # fenced code block (e.g. ```text ... ```). Strip that wrapper
+        # so it doesn't get parsed as if it were pasted product text.
+        lines = value.split("\n")
+        if lines and lines[0].startswith("```"):
+            lines = lines[1:]
+        if lines and lines[-1].strip() == "```":
+            lines = lines[:-1]
+        value = "\n".join(lines).strip()
+    return value
 
 def _parse_product_text(text: str) -> list:
     """Parse a pasted select-all-and-copy block of the Cisco NIAPCL listing.
@@ -186,7 +198,7 @@ def main() -> None:
         json.dump(full_snapshot, f, indent=2, default=str)
 
     summary_lines.append(
-            f"Baseline updated: `{out_path}` now holds {len(parsed)} Cisco product(s)."    
+        f"Baseline updated: `{out_path}` now holds {len(parsed)} Cisco product(s)."
     )
     _write_outputs(applied=True, summary="\n\n".join(summary_lines))
 
