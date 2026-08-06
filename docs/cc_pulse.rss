@@ -2,6 +2,16 @@
 <rss version="2.0"><channel>
 <title>CC Pulse</title>
 <link>https://kr15tyk.github.io/CC-pulse/cc_dashboard.html</link>
-<description>Common Criteria monitoring - 2026-08-05 04:25 ET</description>
-<item><title>New TD: TD1056</title><link>https://www.niap-ccevs.org/</link><description></description></item>
+<description>Common Criteria monitoring - 2026-08-06 04:23 ET</description>
+<item><title>CSfC Component Added: Certification Authority | Information Security Corporation | CertAgent/Dhuma | v</title><link>https://www.niap-ccevs.org/products/11457</link><description>CSfC apl item added.</description></item>
+<item><title>CSfC Component Added: File Encryption | Samsung Electronics Co., Ltd. | Knox File Encryption v1.6.0 - </title><link>https://www.niap-ccevs.org/products/11540</link><description>CSfC apl item added.</description></item>
+<item><title>CSfC Component Added: File Encryption | Samsung Electronics Co., Ltd. | Knox File Encryption v1.7.0 - </title><link>https://www.niap-ccevs.org/products/11594</link><description>CSfC apl item added.</description></item>
+<item><title>CSfC Component Added: File Encryption | Samsung Electronics Co., Ltd. | Knox File Encryption v1.8.0 - </title><link>https://www.niap-ccevs.org/Products/11665</link><description>CSfC apl item added.</description></item>
+<item><title>CSfC Component Added: IPsec VPN Gateway | HPE Aruba Networking | Orchestrator and EdgeConnect, as deta</title><link>https://www.niap-ccevs.org/products/international-product/2025.1080</link><description>CSfC apl item added.</description></item>
+<item><title>CSfC Component Added: MACSEC Ethernet Encryption Devices | HPE Juniper | QFX5120-48YM Switch, as detai</title><link>https://www.niap-ccevs.org/products/11650</link><description>CSfC apl item added.</description></item>
+<item><title>CSfC Component Added: Traffic Filtering Firewall | HPE Aruba Networking | Orchestrator and EdgeConnect</title><link>https://www.niap-ccevs.org/products/international-product/2025.1080</link><description>CSfC apl item added.</description></item>
+<item><title>CSfC Component Removed: Certification Authority | Information Security Corporation | CertAgent/Dhuma | v</title><link>https://www.niap-ccevs.org/products/11457</link><description>CSfC apl item removed.</description></item>
+<item><title>CSfC Component Removed: File Encryption | Samsung Electronics Co., Ltd | Samsung Knox File Encryption v1</title><link>https://www.niap-ccevs.org/products/11540</link><description>CSfC apl item removed.</description></item>
+<item><title>CSfC Component Removed: File Encryption | Samsung Electronics Co., Ltd | Knox File Encryption v1.7.0 - S</title><link>https://www.niap-ccevs.org/products/11594</link><description>CSfC apl item removed.</description></item>
+<item><title>CSfC Component Removed: Traffic Filtering Firewall | HPE Aruba Networking | Orchestrator and EdgeConnect</title><link>https://www.niap-ccevs.org/products/international-product/2025.1080</link><description>CSfC apl item removed.</description></item>
 </channel></rss>
