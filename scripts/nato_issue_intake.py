@@ -31,7 +31,6 @@ import emailer
 
 DOMAIN_KEY = "nato"
 
-
 def _parse_issue_body(body: str) -> dict:
     """Split a GitHub Issue Form body into {field_label: value} pairs."""
     fields = {}
@@ -49,34 +48,53 @@ def _parse_issue_body(body: str) -> dict:
         fields[current] = "\n".join(buf).strip()
     return fields
 
-
 def _clean(value: str) -> str:
     value = value.strip()
     return "" if value in ("", "_No response_") else value
 
-
 def _parse_product_text(text: str) -> list:
     """Parse a pasted select-all-and-copy block of the Cisco NIAPCL listing.
 
-    Assumes the site renders each product as two consecutive non-blank lines:
-    the product name, followed by its category. This matches the format
-    confirmed against the 2026-07-29 manual baseline capture. If the site
-    layout differs, the reported-total cross-check below flags a low-
-    confidence parse instead of silently committing bad data.
+    Each product entry spans a variable number of lines: a name line
+    followed by one or more labeled field lines (e.g. "Manufacturer :",
+    "Categories:", "Security Mechanism Groups:", "Classification:",
+    "Country:"). A new product starts whenever a line does NOT match one
+    of those known field-label prefixes. This replaces the old fixed
+    two-line-per-product assumption, which broke once entries started
+    having a variable number of field lines (e.g. some products have no
+    Classification line), causing products to be split into multiple
+    bogus entries.
     """
+    FIELD_PREFIXES = (
+        "Manufacturer",
+        "Categories:",
+        "Security Mechanism Groups:",
+        "Classification:",
+        "Country:",
+    )
     lines = [ln.strip() for ln in text.splitlines() if ln.strip()]
     products = []
-    for i in range(0, len(lines) - 1, 2):
-        name, category = lines[i], lines[i + 1]
-        products.append({
-            "name": name,
-            "manufacturer": "Cisco",
-            "category": category,
-            "link": None,
-            "raw_text": name,
-        })
+    current = None
+    for line in lines:
+        if line.startswith(FIELD_PREFIXES):
+            if current is None:
+                # Stray field line before any product name -- ignore.
+                continue
+            if line.startswith("Categories:"):
+                current["category"] = line.split(":", 1)[1].strip()
+        else:
+            if current is not None:
+                products.append(current)
+            current = {
+                "name": line,
+                "manufacturer": "Cisco",
+                "category": "",
+                "link": None,
+                "raw_text": line,
+            }
+    if current is not None:
+        products.append(current)
     return products
-
 
 def _load_latest_snapshot(snapshot_dir: str):
     files = sorted(glob.glob(os.path.join(snapshot_dir, "*.json")))
@@ -85,7 +103,6 @@ def _load_latest_snapshot(snapshot_dir: str):
     path = files[-1]
     with open(path, encoding="utf-8") as f:
         return path, json.load(f)
-
 
 def _write_outputs(applied: bool, summary: str) -> None:
     with open("nato_issue_summary.txt", "w", encoding="utf-8") as f:
@@ -96,7 +113,6 @@ def _write_outputs(applied: bool, summary: str) -> None:
             flag = "true" if applied else "false"
             f.write(f"applied={flag}\n")
     print(summary)
-
 
 def main() -> None:
     issue_body = os.environ["ISSUE_BODY"]
@@ -170,10 +186,9 @@ def main() -> None:
         json.dump(full_snapshot, f, indent=2, default=str)
 
     summary_lines.append(
-        f"Baseline updated: `{out_path}` now holds {len(parsed)} Cisco product(s)."
+            f"Baseline updated: `{out_path}` now holds {len(parsed)} Cisco product(s)."    
     )
     _write_outputs(applied=True, summary="\n\n".join(summary_lines))
-
 
 if __name__ == "__main__":
     main()
