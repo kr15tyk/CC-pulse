@@ -1,0 +1,756 @@
+{
+  "period_start": "2026-08-07T07:05:04.751265+00:00",
+  "period_end": "2026-08-08T06:40:23.659889+00:00",
+  "niap": {
+    "pps": {
+      "added": [],
+      "removed": [],
+      "sunset_changes": [],
+      "status_changes": []
+    },
+    "tds": {
+      "added": [
+        {
+          "td_id": 1057,
+          "identifier": "TD1057",
+          "title": "Clarification RE Signing in FIA_X509_EXT.1.1",
+          "protection_profile": [
+            {
+              "pp_id": 511,
+              "pp_name": "Functional Package for X.509 Version 1.0",
+              "pp_common_name": "Functional Package for X.509 Version 1.0",
+              "cc_version": "CC:2022",
+              "mr_version": null,
+              "pp_date": "2024-10-22T00:00:00Z",
+              "entrydate": "2024-10-22T17:33:33.617000Z",
+              "tech_type": "Certificate Authority",
+              "pp_sponsor_id": "NIAP",
+              "community_id": null,
+              "status": "Publishing",
+              "sunset_date": null,
+              "pp_overview": "<p>X.509 is an International Telecommunication Union Telecommunication Standardization Sector (ITU-T)&nbsp;standard for public key certificates. Public key certificates are used as authentication mechanisms for trusted&nbsp;communications protocols and as integrity verification methods.</p>\r\n<p>This Functional Package (FP) for X.509 provides a collection of X.509 Security Functional Requirements (SFRs) and Evaluation Activities (EAs) for the verification and assertion identities of X.509 certificates, for the limited issuance of certificates used locally by TOE functions, and for the generation and provision of certificate status information of such TOE-issued certificates to the TOE functions that rely on such TOEissued certificates. The intent of this FP is to provide Protection Profile (PP), collaborative Protection Profile (cPP), and Protection Profile Module (PP-Module) authors with a readily consumable collection of SFRs and EAs to be integrated into their documents.</p>",
+              "security_evaluation_summary": null,
+              "environmental_strengths": null,
+              "pp_priority": null,
+              "created_on": null,
+              "removed_on": null,
+              "archived": false,
+              "assurance_maintenance": "<ul>\r\n<li>&nbsp;</li>\r\n</ul>",
+              "pp_estcompletion": null,
+              "pp_estcompletiondate": "2024-10-22T00:00:00Z",
+              "pp_transition": null,
+              "revised_on": null,
+              "pp_short_name": "PKG_X509_v1.0",
+              "dod_compliant": false,
+              "csfceligible": true,
+              "constraint": null,
+              "predecessor_id": null,
+              "successor_id": null,
+              "creator": 620,
+              "remover": null,
+              "editor": null
+            }
+          ],
+          "sunset_protection_profile": [],
+          "related_to": "FIA_X509_EXT.1.1",
+          "publication_date": "2026-08-07T14:29:37.174000Z",
+          "removed_on": null,
+          "status": "Published"
+        },
+        {
+          "td_id": 1058,
+          "identifier": "TD1058",
+          "title": "Corrections to FCS_SSH_EXT.1.1",
+          "protection_profile": [
+            {
+              "pp_id": 515,
+              "pp_name": "Functional Package for SSH Version 2.0",
+              "pp_common_name": "Functional Package for SSH Version 2.0",
+              "cc_version": "CC:2022",
+              "mr_version": null,
+              "pp_date": "2024-12-12T00:00:00Z",
+              "entrydate": "2024-12-12T12:24:20.959000Z",
+              "tech_type": "Remote Access",
+              "pp_sponsor_id": "NIAP",
+              "community_id": null,
+              "status": "Publishing",
+              "sunset_date": null,
+              "pp_overview": "<p>&nbsp;</p>\r\n<table>\r\n<tbody>\r\n<tr>\r\n<td style=\"width: 999px;\">\r\n<p>Secure Shell (SSH) is a protocol for secure remote login and other secure network services over an untrusted network. SSH software can act as a client, server, or both.</p>\r\n<p>This Functional Package for Secure Shell provides a collection of Secure Shell (SSH) protocol related SFRs and Evaluation Activities (EAs) covering audit, authentication, cryptographic algorithms, and protocol negotiation. The intent of this package is to provide PP, cPP, and PP-Module authors with a readily consumable collection of SFRs and EAs to be integrated into their documents.</p>\r\n<p>The contents of this Package must be appropriately combined with a PP or PP-Module. When this Package is instantiated by a PP or PP-Module, the Package must include selection-based requirements in accordance with the selections or assignments indicated in the PP or PP-Module.</p>\r\n<p>Since this Package is constructed using CC:2022, it cannot be used in conjunction with any PPs using CC 3.1, just as its predecessor cannot be used in conjunction with any PPs using CC:2022. As a result, the transition date for this Package will be the sunset date of its predecessor, which will only happen after all PPs claiming conformance to it have also sunset.</p>\r\n</td>\r\n</tr>\r\n</tbody>\r\n</table>",
+              "security_evaluation_summary": null,
+              "environmental_strengths": null,
+              "pp_priority": null,
+              "created_on": null,
+              "removed_on": null,
+              "archived": false,
+              "assurance_maintenance": null,
+              "pp_estcompletion": null,
+              "pp_estcompletiondate": "2024-12-05T00:00:00Z",
+              "pp_transition": null,
+              "revised_on": null,
+              "pp_short_name": "PKG_SSH_V2.0",
+              "dod_compliant": false,
+              "csfceligible": true,
+              "constraint": null,
+              "predecessor_id": 459,
+              "successor_id": null,
+              "creator": 409,
+              "remover": null,
+              "editor": null
+            }
+          ],
+          "sunset_protection_profile": [],
+          "related_to": "FCS_SSH_EXT.1.1",
+          "publication_date": "2026-08-07T15:34:01.947000Z",
+          "removed_on": null,
+          "status": "Published"
+        },
+        {
+          "td_id": 1055,
+          "identifier": "TD1055",
+          "title": "Clarification regarding Public-Key-Based Authentication for GPCP",
+          "protection_profile": [
+            {
+              "pp_id": 539,
+              "pp_name": "Protection Profile for General Purpose Computing Platform, Version 2.0",
+              "pp_common_name": "Protection Profile for General Purpose Computing Platform, Version 2.0",
+              "cc_version": "CC:2022",
+              "mr_version": null,
+              "pp_date": "2026-04-22T00:00:00Z",
+              "entrydate": "2026-03-31T08:47:14.901000Z",
+              "tech_type": "Hardware Platform and Components",
+              "pp_sponsor_id": "NIAP",
+              "community_id": null,
+              "status": "Publishing",
+              "sunset_date": null,
+              "pp_overview": "<p style=\"margin-top: 0in; background: white; margin-right: 0in; margin-left: 0in; font-size: 12pt; font-family: 'Times New Roman', serif;\"><span style=\"font-family: Helvetica, sans-serif; color: #212529;\">The scope of this Protection Profile (PP) is to describe the security functionality of General-Purpose Computing Platforms in terms of the Common Criteria and to define functional and assurance requirements for such products.</span></p>\r\n<p style=\"margin: 0in 0in 1rem; background: white; box-sizing: border-box; font-variant-ligatures: normal; text-align: start; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; font-size: 12pt; font-family: 'Times New Roman', serif;\"><span style=\"font-family: Helvetica, sans-serif; color: #212529;\">A platform is a collection of hardware devices and firmware that provide the functional capabilities and services needed by tenant software. Such components typically include embedded controllers, trusted platform modules, management controllers, host processors, network interface controllers, graphics processing units, flash memory, storage controllers, storage devices, boot firmware, runtime firmware, human interface devices, and a power supply.</span></p>\r\n<p style=\"margin: 0in 0in 1rem; background: white; box-sizing: border-box; font-variant-ligatures: normal; text-align: start; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; font-size: 12pt; font-family: 'Times New Roman', serif;\"><span style=\"font-family: Helvetica, sans-serif; color: #212529;\">This Protection Profile for General-Purpose Computing Platforms derives requirements from the following documents:</span></p>\r\n<p style=\"margin: 0in 0in 1rem; background: white; box-sizing: border-box; font-variant-ligatures: normal; text-align: start; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; font-size: 12pt; font-family: 'Times New Roman', serif;\"><span style=\"font-family: Helvetica, sans-serif; color: #212529;\">-NIAP, BIOS Update for PC Client Devices protection Profile, Version 1.0, 12 Feb 2013</span></p>\r\n<p style=\"margin: 0in 0in 1rem; background: white; box-sizing: border-box; font-variant-ligatures: normal; text-align: start; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; font-size: 12pt; font-family: 'Times New Roman', serif;\"><span style=\"font-family: Helvetica, sans-serif; color: #212529;\">-NIST SP 800-147 BIOS Protection Guidelines, April 2011</span></p>\r\n<p style=\"margin: 0in 0in 1rem; background: white; box-sizing: border-box; font-variant-ligatures: normal; text-align: start; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; font-size: 12pt; font-family: 'Times New Roman', serif;\"><span style=\"font-family: Helvetica, sans-serif; color: #212529;\">-NIST SP 800-147B BIOS Protection Guidelines for Servers, August 2014</span></p>\r\n<p style=\"margin: 0in 0in 1rem; background: white; box-sizing: border-box; font-variant-ligatures: normal; text-align: start; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; font-size: 12pt; font-family: 'Times New Roman', serif;\"><span style=\"font-family: Helvetica, sans-serif; color: #212529;\">-NIST SP 800-193 Platform Firmware Resiliency Guidelines</span></p>\r\n<p style=\"margin: 0in 0in 1rem; background: white; box-sizing: border-box; font-variant-ligatures: normal; text-align: start; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; font-size: 12pt; font-family: 'Times New Roman', serif;\"><span style=\"font-family: Helvetica, sans-serif; color: #212529;\">Additionally, the following specifications and standards may be relevant to requirements in this PP:</span></p>\r\n<p style=\"margin: 0in 0in 1rem; background: white; box-sizing: border-box; font-variant-ligatures: normal; text-align: start; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; font-size: 12pt; font-family: 'Times New Roman', serif;\"><span style=\"font-family: Helvetica, sans-serif; color: #212529;\">-NIST SP 800-155 (Draft) BIOS Integrity Measurement Guidelines (Draft), December 2011</span></p>\r\n<p style=\"margin: 0in 0in 1rem; background: white; box-sizing: border-box; font-variant-ligatures: normal; text-align: start; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; font-size: 12pt; font-family: 'Times New Roman', serif;\"><span style=\"font-family: Helvetica, sans-serif; color: #212529;\">-NIST SP 1800-34 (Draft) Validating the Integrity of Computing Devices (Preliminary Draft), 2021</span></p>\r\n<p style=\"margin: 0in 0in 1rem; background: white; box-sizing: border-box; font-variant-ligatures: normal; text-align: start; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; font-size: 12pt; font-family: 'Times New Roman', serif;\"><span style=\"font-family: Helvetica, sans-serif; color: #212529;\">-Trusted Computing Group, TCG PC Client Platform Firmware Integrity Measurement Version 1.0 Revision Specification 43 Family 2.0, May 7, 2021</span></p>\r\n<p style=\"margin: 0in 0in 1rem; background: white; box-sizing: border-box; font-variant-ligatures: normal; text-align: start; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; font-size: 12pt; font-family: 'Times New Roman', serif;\"><span style=\"font-family: Helvetica, sans-serif; color: #212529;\">-IEEE Std 802.1AR-2018, Secure Device Identity&nbsp;</span></p>",
+              "security_evaluation_summary": "",
+              "environmental_strengths": "",
+              "pp_priority": null,
+              "created_on": null,
+              "removed_on": null,
+              "archived": false,
+              "assurance_maintenance": null,
+              "pp_estcompletion": null,
+              "pp_estcompletiondate": null,
+              "pp_transition": null,
+              "revised_on": null,
+              "pp_short_name": "PP_GPCP_V2.0",
+              "dod_compliant": false,
+              "csfceligible": false,
+              "constraint": null,
+              "predecessor_id": 451,
+              "successor_id": null,
+              "creator": 504,
+              "remover": null,
+              "editor": null
+            }
+          ],
+          "sunset_protection_profile": [],
+          "related_to": "FIA_AFL_EXT.1",
+          "publication_date": "2026-08-07T14:49:09.887000Z",
+          "removed_on": null,
+          "status": "Published"
+        }
+      ],
+      "removed": []
+    },
+    "cisco_ndcpp": {
+      "added": [],
+      "removed": [],
+      "newly_archived": []
+    },
+    "pcl_all": {
+      "added": [
+        {
+          "active_maintenances": [],
+          "am_sort": "2028-07-29T00:00:00Z",
+          "assigned_lab_name": "atsec information security corporation",
+          "certification_date": "2026-07-29T00:00:00Z",
+          "from_cc_portal": false,
+          "product_id": 11696,
+          "product_name": "Apple macOS 26 Tahoe: FileVault",
+          "protection_profiles": [
+            {
+              "pp_id": 437,
+              "pp_name": "collaborative Protection Profile for Full Drive Encryption - Authorization Acquisition Version 2.0 + Errata 20190201",
+              "pp_short_name": "CPP_FDE_AA_V2.0E"
+            },
+            {
+              "pp_id": 438,
+              "pp_name": "collaborative Protection Profile for Full Drive Encryption - Encryption Engine Version 2.0 + Errata 20190201",
+              "pp_short_name": "CPP_FDE_EE_V2.0E"
+            }
+          ],
+          "status_sort": "Certified",
+          "submitting_country_id_code": "US",
+          "submitting_country_id_name": "United States",
+          "sunset_date": null,
+          "tech_types": [
+            "Encrypted Storage"
+          ],
+          "vendor_id_name": "Apple Inc.",
+          "v_id": 11696,
+          "kicked_off_date": "2026-06-29T10:00:13.742000Z"
+        }
+      ],
+      "removed": [],
+      "newly_archived": [
+        {
+          "active_maintenances": [
+            {
+              "maintenance_id": 1596,
+              "title": "Zebra Devices on Android 13",
+              "completion_date": "2025-03-25T00:00:00+00:00"
+            }
+          ],
+          "am_sort": "2026-08-08T00:00:00Z",
+          "assigned_lab_name": "Gossamer Security Solutions",
+          "certification_date": "2024-08-08T00:00:00Z",
+          "from_cc_portal": false,
+          "product_id": 11486,
+          "product_name": "Zebra Devices on Android 13",
+          "protection_profiles": [
+            {
+              "pp_id": 425,
+              "pp_name": "PP-Module for Bluetooth Version 1.0",
+              "pp_short_name": "MOD_BT_V1.0"
+            },
+            {
+              "pp_id": 439,
+              "pp_name": "Functional Package for TLS Version 1.1",
+              "pp_short_name": "PKG_TLS_V1.1"
+            },
+            {
+              "pp_id": 463,
+              "pp_name": "PP-Module for Wireless Local Area Network (WLAN) Client Version 1.0",
+              "pp_short_name": "MOD_WLANC_v1.0"
+            },
+            {
+              "pp_id": 468,
+              "pp_name": "Protection Profile for Mobile Device Fundamentals Version 3.3",
+              "pp_short_name": "PP_MDF_V3.3"
+            }
+          ],
+          "status_sort": "Archived",
+          "submitting_country_id_code": "US",
+          "submitting_country_id_name": "United States",
+          "sunset_date": null,
+          "tech_types": [
+            "Mobility",
+            " Network Encryption",
+            " Wireless LAN"
+          ],
+          "vendor_id_name": "Zebra Technologies Corporation",
+          "v_id": 11486,
+          "kicked_off_date": "2024-04-29T00:00:00Z"
+        }
+      ]
+    },
+    "in_evaluation": {
+      "added": [],
+      "removed": [
+        {
+          "active_maintenances": [],
+          "am_sort": null,
+          "assigned_lab_name": "atsec information security corporation",
+          "certification_date": null,
+          "from_cc_portal": false,
+          "product_id": 11696,
+          "product_name": "Apple macOS 26 Tahoe: FileVault",
+          "protection_profiles": [
+            {
+              "pp_id": 437,
+              "pp_name": "collaborative Protection Profile for Full Drive Encryption - Authorization Acquisition Version 2.0 + Errata 20190201",
+              "pp_short_name": "CPP_FDE_AA_V2.0E"
+            },
+            {
+              "pp_id": 438,
+              "pp_name": "collaborative Protection Profile for Full Drive Encryption - Encryption Engine Version 2.0 + Errata 20190201",
+              "pp_short_name": "CPP_FDE_EE_V2.0E"
+            }
+          ],
+          "status_sort": "In Progress",
+          "submitting_country_id_code": "US",
+          "submitting_country_id_name": "United States",
+          "sunset_date": null,
+          "tech_types": [
+            "Encrypted Storage"
+          ],
+          "vendor_id_name": "Apple Inc.",
+          "v_id": 11696,
+          "kicked_off_date": "2026-06-29T10:00:13.742000Z"
+        }
+      ],
+      "current_count": 41
+    },
+    "news": {
+      "added": [],
+      "revised": [],
+      "deactivated": [],
+      "reactivated": [],
+      "removed": []
+    },
+    "events": {
+      "added": [],
+      "revised": [],
+      "deactivated": [],
+      "reactivated": [],
+      "removed": []
+    },
+    "policies": {
+      "added": [],
+      "revised": [],
+      "archived": [],
+      "reactivated": [],
+      "removed": []
+    }
+  },
+  "cc_portal": {
+    "news": {
+      "added": []
+    },
+    "pps": {
+      "added": []
+    },
+    "products": {
+      "added": []
+    }
+  },
+  "cctl_labs": {},
+  "csfc": {
+    "pages": {
+      "apl": {
+        "added": [
+          {
+            "name": "SRX1600, as detailed in VID 2025.1096",
+            "type": "IPsec VPN Gateway",
+            "vendor": "Juniper",
+            "link": "https://www.niap-ccevs.org/products/international-product/2025.1096",
+            "href": "https://www.niap-ccevs.org/products/international-product/2025.1096",
+            "raw_text": "IPsec VPN Gateway | Juniper | SRX1600, as detailed in VID 2025.1096 | Junos OS 23.4R1 | NIAP Validation Completed (at Teron) | 2025.03.18 | ",
+            "text": "IPsec VPN Gateway | Juniper | SRX1600, as detailed in VID 2025.1096 | Junos OS 23.4R1 | NIAP Validation Completed (at Teron) | 2025.03.18 | "
+          },
+          {
+            "name": "Firepower 4100 and 9300 Security Appliances\u00a0 (4112, 4115, 4125, 4145, SM-40, SM-48, SM-56), as detailed in VID 11512",
+            "type": "IPsec VPN Gateway",
+            "vendor": "Cisco",
+            "link": "https://www.niap-ccevs.org/products/11512",
+            "href": "https://www.niap-ccevs.org/products/11512",
+            "raw_text": "IPsec VPN Gateway | Cisco | Firepower 4100 and 9300 Security Appliances\u00a0 (4112, 4115, 4125, 4145, SM-40, SM-48, SM-56), as detailed in VID 11512 | ASA 9.20 | NIAP Validation Completed (at Gossamer) | 2025.01.10 | CSfC solution owners should deploy this component on ESXi 8.0 (VID 11533) and submit a deviation request for the applicable NIAP-evaluated configuration Product Selection Capability Package requirement.",
+            "text": "IPsec VPN Gateway | Cisco | Firepower 4100 and 9300 Security Appliances\u00a0 (4112, 4115, 4125, 4145, SM-40, SM-48, SM-56), as detailed in VID 11512 | ASA 9.20 | NIAP Validation Completed (at Gossamer) | 2025.01.10 | CSfC solution owners should deploy this component on ESXi 8.0 (VID 11533) and submit a deviation request for the applicable NIAP-evaluated configuration Product Selection Capability Package requirement."
+          },
+          {
+            "name": "Catalyst 8500 Series Edge Router (C8500-20X6C), as detailed in VID 11637",
+            "type": "IPsec VPN Gateway",
+            "vendor": "Cisco",
+            "link": "https://www.niap-ccevs.org/products/11637",
+            "href": "https://www.niap-ccevs.org/products/11637",
+            "raw_text": "IPsec VPN Gateway | Cisco | Catalyst 8500 Series Edge Router (C8500-20X6C), as detailed in VID 11637 | IOS-XE 17.15 | NIAP Validation Completed (at Lightship Security) | 2025.08.29 | ",
+            "text": "IPsec VPN Gateway | Cisco | Catalyst 8500 Series Edge Router (C8500-20X6C), as detailed in VID 11637 | IOS-XE 17.15 | NIAP Validation Completed (at Lightship Security) | 2025.08.29 | "
+          },
+          {
+            "name": "Catalyst 8500 Series Edge Routers (C8500-20X6C), as detailed in VID 11637",
+            "type": "MACSEC Ethernet Encryption Devices",
+            "vendor": "Cisco",
+            "link": "https://www.niap-ccevs.org/products/11637",
+            "href": "https://www.niap-ccevs.org/products/11637",
+            "raw_text": "MACSEC Ethernet Encryption Devices | Cisco | Catalyst 8500 Series Edge Routers (C8500-20X6C), as detailed in VID 11637 | IOS-XE 17.15 | NIAP Validation Completed (at Lightship Security) | 2025.08.29 | ",
+            "text": "MACSEC Ethernet Encryption Devices | Cisco | Catalyst 8500 Series Edge Routers (C8500-20X6C), as detailed in VID 11637 | IOS-XE 17.15 | NIAP Validation Completed (at Lightship Security) | 2025.08.29 | "
+          },
+          {
+            "name": "NetApp Volume Encryption (NVE), as detailed in VID 11574",
+            "type": "Software Full Drive Encryption",
+            "vendor": "NetApp",
+            "link": "https://www.niap-ccevs.org/products/11574",
+            "href": "https://www.niap-ccevs.org/products/11574",
+            "raw_text": "Software Full Drive Encryption | NetApp | NetApp Volume Encryption (NVE), as detailed in VID 11574 | ONTAP 9.16.1 | NIAP Validation Completed (at Lightship Security) | 2026.02.26 | AA and EE",
+            "text": "Software Full Drive Encryption | NetApp | NetApp Volume Encryption (NVE), as detailed in VID 11574 | ONTAP 9.16.1 | NIAP Validation Completed (at Lightship Security) | 2026.02.26 | AA and EE"
+          },
+          {
+            "name": "SRX1600, as detailed in VID 2025.1096",
+            "type": "Traffic Filtering Firewall",
+            "vendor": "Juniper",
+            "link": "https://www.niap-ccevs.org/products/international-product/2025.1096",
+            "href": "https://www.niap-ccevs.org/products/international-product/2025.1096",
+            "raw_text": "Traffic Filtering Firewall | Juniper | SRX1600, as detailed in VID 2025.1096 | Junos OS 23.4R1 | NIAP Validation Completed (at Teron) | 2025.03.18 | ",
+            "text": "Traffic Filtering Firewall | Juniper | SRX1600, as detailed in VID 2025.1096 | Junos OS 23.4R1 | NIAP Validation Completed (at Teron) | 2025.03.18 | "
+          },
+          {
+            "name": "SonicWall OS/X v7.0.1 with VPN and IPS on NSsp 15700, as detailed in VID\u00a011528",
+            "type": "Traffic Filtering Firewall",
+            "vendor": "SonicWall",
+            "link": "https://www.niap-ccevs.org/products/11528",
+            "href": "https://www.niap-ccevs.org/products/11528",
+            "raw_text": "Traffic Filtering Firewall | SonicWall | SonicWall OS/X v7.0.1 with VPN and IPS on NSsp 15700, as detailed in VID\u00a011528 | Sonic\u00a0OS/X v7.0.1 | NIAP Validation Completed (at Acumen) | 2025.04.25 | ",
+            "text": "Traffic Filtering Firewall | SonicWall | SonicWall OS/X v7.0.1 with VPN and IPS on NSsp 15700, as detailed in VID\u00a011528 | Sonic\u00a0OS/X v7.0.1 | NIAP Validation Completed (at Acumen) | 2025.04.25 | "
+          }
+        ],
+        "removed": [
+          {
+            "name": "SRX1600",
+            "type": "IPsec VPN Gateway",
+            "vendor": "Juniper",
+            "link": "https://www.niap-ccevs.org/products/international-product/2025.1096",
+            "href": "https://www.niap-ccevs.org/products/international-product/2025.1096",
+            "raw_text": "IPsec VPN Gateway | Juniper | SRX1600 | Junos OS 23.4R1 | NIAP Validation Completed (at Teron) | 2025.03.18 | ",
+            "text": "IPsec VPN Gateway | Juniper | SRX1600 | Junos OS 23.4R1 | NIAP Validation Completed (at Teron) | 2025.03.18 | "
+          },
+          {
+            "name": "Firepower 4100 and 9300 Security Appliances\u00a0 (4112, 4115, 4125, 4145, SM-40, SM-48, SM-56 as detailed in VID 11512)",
+            "type": "IPsec VPN Gateway",
+            "vendor": "Cisco",
+            "link": "https://www.niap-ccevs.org/products/11512",
+            "href": "https://www.niap-ccevs.org/products/11512",
+            "raw_text": "IPsec VPN Gateway | Cisco | Firepower 4100 and 9300 Security Appliances\u00a0 (4112, 4115, 4125, 4145, SM-40, SM-48, SM-56 as detailed in VID 11512) | ASA 9.20 | NIAP Validation Completed (at Gossamer) | 2025.01.10 | CSfC solution owners should deploy this component on ESXi 8.0 (VID 11533) and submit a deviation request for the applicable NIAP-evaluated configuration Product Selection Capability Package requirement.",
+            "text": "IPsec VPN Gateway | Cisco | Firepower 4100 and 9300 Security Appliances\u00a0 (4112, 4115, 4125, 4145, SM-40, SM-48, SM-56 as detailed in VID 11512) | ASA 9.20 | NIAP Validation Completed (at Gossamer) | 2025.01.10 | CSfC solution owners should deploy this component on ESXi 8.0 (VID 11533) and submit a deviation request for the applicable NIAP-evaluated configuration Product Selection Capability Package requirement."
+          },
+          {
+            "name": "Catalyst 8500 Series Edge Router (C8500-20X6C)",
+            "type": "IPsec VPN Gateway",
+            "vendor": "Cisco",
+            "link": "https://www.niap-ccevs.org/products/11637",
+            "href": "https://www.niap-ccevs.org/products/11637",
+            "raw_text": "IPsec VPN Gateway | Cisco | Catalyst 8500 Series Edge Router (C8500-20X6C) | IOS-XE 17.15 | NIAP Validation Completed (at Lightship Security) | 2025.08.29 | ",
+            "text": "IPsec VPN Gateway | Cisco | Catalyst 8500 Series Edge Router (C8500-20X6C) | IOS-XE 17.15 | NIAP Validation Completed (at Lightship Security) | 2025.08.29 | "
+          },
+          {
+            "name": "Catalyst 8500 Series Edge Routers (C8500-20X6C) as detailed in VID 11637",
+            "type": "MACSEC Ethernet Encryption Devices",
+            "vendor": "Cisco",
+            "link": "https://www.niap-ccevs.org/products/11637",
+            "href": "https://www.niap-ccevs.org/products/11637",
+            "raw_text": "MACSEC Ethernet Encryption Devices | Cisco | Catalyst 8500 Series Edge Routers (C8500-20X6C) as detailed in VID 11637 | IOS-XE 17.15 | NIAP Validation Completed (at Lightship Security) | 2025.08.29 | ",
+            "text": "MACSEC Ethernet Encryption Devices | Cisco | Catalyst 8500 Series Edge Routers (C8500-20X6C) as detailed in VID 11637 | IOS-XE 17.15 | NIAP Validation Completed (at Lightship Security) | 2025.08.29 | "
+          },
+          {
+            "name": "NetApp Volume Encryption (NVE)",
+            "type": "Software Full Drive Encryption",
+            "vendor": "NetApp",
+            "link": "https://www.niap-ccevs.org/products/11574",
+            "href": "https://www.niap-ccevs.org/products/11574",
+            "raw_text": "Software Full Drive Encryption | NetApp | NetApp Volume Encryption (NVE) | ONTAP 9.16.1 | NIAP Validation Completed (at Lightship Security) | 2026.02.26 | AA and EE",
+            "text": "Software Full Drive Encryption | NetApp | NetApp Volume Encryption (NVE) | ONTAP 9.16.1 | NIAP Validation Completed (at Lightship Security) | 2026.02.26 | AA and EE"
+          },
+          {
+            "name": "SRX1600",
+            "type": "Traffic Filtering Firewall",
+            "vendor": "Juniper",
+            "link": "https://www.niap-ccevs.org/products/international-product/2025.1096",
+            "href": "https://www.niap-ccevs.org/products/international-product/2025.1096",
+            "raw_text": "Traffic Filtering Firewall | Juniper | SRX1600 | Junos OS 23.4R1 | NIAP Validation Completed (at Teron) | 2025.03.18 | ",
+            "text": "Traffic Filtering Firewall | Juniper | SRX1600 | Junos OS 23.4R1 | NIAP Validation Completed (at Teron) | 2025.03.18 | "
+          },
+          {
+            "name": "SonicWall OS/X v7.0.1 with VPN and IPS on NSsp 15700 as detailed in VID\u00a011528",
+            "type": "Traffic Filtering Firewall",
+            "vendor": "SonicWall",
+            "link": "https://www.niap-ccevs.org/products/11528",
+            "href": "https://www.niap-ccevs.org/products/11528",
+            "raw_text": "Traffic Filtering Firewall | SonicWall | SonicWall OS/X v7.0.1 with VPN and IPS on NSsp 15700 as detailed in VID\u00a011528 | Sonic\u00a0OS/X v7.0.1 | NIAP Validation Completed (at Acumen) | 2025.04.25 | ",
+            "text": "Traffic Filtering Firewall | SonicWall | SonicWall OS/X v7.0.1 with VPN and IPS on NSsp 15700 as detailed in VID\u00a011528 | Sonic\u00a0OS/X v7.0.1 | NIAP Validation Completed (at Acumen) | 2025.04.25 | "
+          }
+        ]
+      }
+    },
+    "selection_links": {
+      "MACSEC Ethernet Encryption Devices": {
+        "changed": true,
+        "old_href": "https://www.nsa.gov/portals/75/documents/resources/everyone/csfc/components-list/selections/macsec.pdf",
+        "new_href": "https://www.nsa.gov/Portals/75/documents/CSfC%20Selections%20Updates%202026/CSfC_Selections_for_MACsec_Ethernet_Encryption_Devices-2026-08-04.pdf?ver=txzdbbEQuHQyfhgvPk3NcQ%3d%3d"
+      },
+      "IPsec VPN Client": {
+        "changed": true,
+        "old_href": "https://www.nsa.gov/portals/75/documents/resources/everyone/csfc/components-list/selections/vpn-clients.pdf",
+        "new_href": "https://www.nsa.gov/Portals/75/documents/CSfC%20Selections%20Updates%202026/CSfC_Selections_for_IPsec_VPN_Client-2026-08-04.pdf?ver=txzdbbEQuHQyfhgvPk3NcQ%3d%3d"
+      }
+    },
+    "feeds": {}
+  },
+  "cc_crypto": {
+    "pages": {}
+  },
+  "nato": {
+    "pages": {},
+    "cisco_added": [],
+    "cisco_removed": [],
+    "baseline_reset": false
+  },
+  "eucc": {
+    "pages": {},
+    "cisco_added": [],
+    "cisco_removed": [],
+    "baseline_reset": false
+  },
+  "nd_itc": {
+    "nit_rfis": {
+      "added": [],
+      "status_changes": [],
+      "revised": [],
+      "newly_archived": []
+    },
+    "awl": {
+      "added": [],
+      "removed": [],
+      "version_changes": [],
+      "list_updates": []
+    },
+    "baseline_reset": false,
+    "collection_failure": false
+  },
+  "source_health": {
+    "niap": {
+      "label": "NIAP",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "PCL products",
+          "observed": 1750,
+          "minimum": 50
+        },
+        {
+          "name": "Protection Profiles",
+          "observed": 271,
+          "minimum": 10
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-08-08T06:40:23.659889+00:00",
+      "subcollections": {
+        "news": {
+          "label": "News announcements",
+          "status": "healthy",
+          "observed": 353,
+          "consecutive_failures": 0,
+          "using_last_known_good": false
+        },
+        "events": {
+          "label": "Events",
+          "status": "healthy",
+          "observed": 0,
+          "consecutive_failures": 0,
+          "using_last_known_good": false
+        },
+        "policies": {
+          "label": "Policy letters",
+          "status": "healthy",
+          "observed": 39,
+          "consecutive_failures": 0,
+          "using_last_known_good": false
+        }
+      }
+    },
+    "cc_portal": {
+      "label": "CC Portal",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "portal records",
+          "observed": 180,
+          "minimum": 1
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-08-08T06:40:23.659889+00:00"
+    },
+    "cctl_labs": {
+      "label": "CCTL Labs",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "lab feed items",
+          "observed": 19,
+          "minimum": 1
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-08-08T06:40:23.659889+00:00"
+    },
+    "csfc": {
+      "label": "CSfC",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "APL items",
+          "observed": 120,
+          "minimum": 5
+        },
+        {
+          "name": "announcements",
+          "observed": 8,
+          "minimum": 1
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-08-08T06:40:23.659889+00:00"
+    },
+    "cc_crypto": {
+      "label": "CC Crypto",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "publications",
+          "observed": 121,
+          "minimum": 5
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-08-08T06:40:23.659889+00:00"
+    },
+    "nato": {
+      "label": "NATO NIAPCL",
+      "status": "stale",
+      "checks": [
+        {
+          "name": "NIAPCL products",
+          "observed": 0,
+          "minimum": 3
+        }
+      ],
+      "consecutive_failures": 24,
+      "using_last_known_good": true,
+      "detail": "NIAPCL products 0/3",
+      "checked_at": "2026-08-08T06:40:23.659889+00:00"
+    },
+    "eucc": {
+      "label": "EUCC / ENISA",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "certificates",
+          "observed": 50,
+          "minimum": 2
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-08-08T06:40:23.659889+00:00"
+    },
+    "nd_itc": {
+      "label": "ND-iTC",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "NIT RFIs",
+          "observed": 32,
+          "minimum": 5
+        },
+        {
+          "name": "Allowed-With entries",
+          "observed": 22,
+          "minimum": 1
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-08-08T06:40:23.659889+00:00"
+    }
+  },
+  "alerts": [
+    {
+      "source": "NIAP TD",
+      "kind": "new",
+      "title": "Corrections to FCS_SSH_EXT.1.1",
+      "url": "https://www.niap-ccevs.org/technical-decisions/TD1058",
+      "detail": "TD1058",
+      "matched_keywords": [
+        "SSH"
+      ],
+      "tab": "us"
+    },
+    {
+      "source": "CSfC Component Selections",
+      "kind": "updated",
+      "title": "MACSEC Ethernet Encryption Devices",
+      "url": "https://www.nsa.gov/Portals/75/documents/CSfC%20Selections%20Updates%202026/CSfC_Selections_for_MACsec_Ethernet_Encryption_Devices-2026-08-04.pdf?ver=txzdbbEQuHQyfhgvPk3NcQ%3d%3d",
+      "detail": "NSA updated the component selection document for this role",
+      "matched_keywords": [
+        "CSfC"
+      ],
+      "tab": "us"
+    },
+    {
+      "source": "CSfC Component Selections",
+      "kind": "updated",
+      "title": "IPsec VPN Client",
+      "url": "https://www.nsa.gov/Portals/75/documents/CSfC%20Selections%20Updates%202026/CSfC_Selections_for_IPsec_VPN_Client-2026-08-04.pdf?ver=txzdbbEQuHQyfhgvPk3NcQ%3d%3d",
+      "detail": "NSA updated the component selection document for this role",
+      "matched_keywords": [
+        "CSfC"
+      ],
+      "tab": "us"
+    },
+    {
+      "source": "CSfC APL",
+      "kind": "new_cert",
+      "title": "IPsec VPN Gateway | Cisco | Firepower 4100 and 9300 Security Appliances\u00a0 (4112, 4115, 4125, 4145, SM-40, SM-48, SM-56),\u2026",
+      "url": "https://www.nsa.gov/Resources/Commercial-Solutions-for-Classified-Program/Components-List/",
+      "detail": "New item on CSfC apl page",
+      "matched_keywords": [
+        "CSfC",
+        "cisco"
+      ],
+      "tab": "us"
+    },
+    {
+      "source": "CSfC APL",
+      "kind": "new_cert",
+      "title": "IPsec VPN Gateway | Cisco | Catalyst 8500 Series Edge Router (C8500-20X6C), as detailed in VID 11637 | IOS-XE 17.15 | NI\u2026",
+      "url": "https://www.nsa.gov/Resources/Commercial-Solutions-for-Classified-Program/Components-List/",
+      "detail": "New item on CSfC apl page",
+      "matched_keywords": [
+        "cisco"
+      ],
+      "tab": "us"
+    },
+    {
+      "source": "CSfC APL",
+      "kind": "new_cert",
+      "title": "MACSEC Ethernet Encryption Devices | Cisco | Catalyst 8500 Series Edge Routers (C8500-20X6C), as detailed in VID 11637 |\u2026",
+      "url": "https://www.nsa.gov/Resources/Commercial-Solutions-for-Classified-Program/Components-List/",
+      "detail": "New item on CSfC apl page",
+      "matched_keywords": [
+        "cisco"
+      ],
+      "tab": "us"
+    },
+    {
+      "source": "CSfC APL",
+      "kind": "removed",
+      "title": "IPsec VPN Gateway | Cisco | Firepower 4100 and 9300 Security Appliances\u00a0 (4112, 4115, 4125, 4145, SM-40, SM-48, SM-56 as\u2026",
+      "url": "https://www.nsa.gov/Resources/Commercial-Solutions-for-Classified-Program/Components-List/",
+      "detail": "Item removed from CSfC apl page",
+      "matched_keywords": [
+        "CSfC",
+        "cisco"
+      ],
+      "tab": "us"
+    },
+    {
+      "source": "CSfC APL",
+      "kind": "removed",
+      "title": "IPsec VPN Gateway | Cisco | Catalyst 8500 Series Edge Router (C8500-20X6C) | IOS-XE 17.15 | NIAP Validation Completed (a\u2026",
+      "url": "https://www.nsa.gov/Resources/Commercial-Solutions-for-Classified-Program/Components-List/",
+      "detail": "Item removed from CSfC apl page",
+      "matched_keywords": [
+        "cisco"
+      ],
+      "tab": "us"
+    },
+    {
+      "source": "CSfC APL",
+      "kind": "removed",
+      "title": "MACSEC Ethernet Encryption Devices | Cisco | Catalyst 8500 Series Edge Routers (C8500-20X6C) as detailed in VID 11637 |\u2026",
+      "url": "https://www.nsa.gov/Resources/Commercial-Solutions-for-Classified-Program/Components-List/",
+      "detail": "Item removed from CSfC apl page",
+      "matched_keywords": [
+        "cisco"
+      ],
+      "tab": "us"
+    }
+  ]
+}
