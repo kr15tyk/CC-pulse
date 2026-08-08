@@ -2,6 +2,33 @@
 <rss version="2.0"><channel>
 <title>CC Pulse</title>
 <link>https://kr15tyk.github.io/CC-pulse/cc_dashboard.html</link>
-<description>Common Criteria monitoring - 2026-08-07 03:05 ET</description>
-
+<description>Common Criteria monitoring - 2026-08-08 02:40 ET</description>
+<item><title>New TD: TD1057</title><link>https://www.niap-ccevs.org/</link><description></description></item>
+<item><title>New TD: TD1058</title><link>https://www.niap-ccevs.org/</link><description></description></item>
+<item><title>New TD: TD1055</title><link>https://www.niap-ccevs.org/</link><description></description></item>
+<item><title>CSfC Selection Updated: MACSEC Ethernet Encryption Devices</title><link>https://www.nsa.gov/Portals/75/documents/CSfC%20Selections%20Updates%202026/CSfC_Selections_for_MACsec_Ethernet_Encryption_Devices-2026-08-04.pdf?ver=txzdbbEQuHQyfhgvPk3NcQ%3d%3d</link><description>Component selection document updated.</description></item>
+<item><title>CSfC Selection Updated: IPsec VPN Client</title><link>https://www.nsa.gov/Portals/75/documents/CSfC%20Selections%20Updates%202026/CSfC_Selections_for_IPsec_VPN_Client-2026-08-04.pdf?ver=txzdbbEQuHQyfhgvPk3NcQ%3d%3d</link><description>Component selection document updated.</description></item>
+<item><title>CSfC Component Added: IPsec VPN Gateway | Juniper | SRX1600, as detailed in VID 2025.1096 | Junos OS 2</title><link>https://www.niap-ccevs.org/products/international-product/2025.1096</link><description>CSfC apl item added.</description></item>
+<item><title>CSfC Component Added: IPsec VPN Gateway | Cisco | Firepower 4100 and 9300 Security Appliances  (4112, </title><link>https://www.niap-ccevs.org/products/11512</link><description>CSfC apl item added.</description></item>
+<item><title>CSfC Component Added: IPsec VPN Gateway | Cisco | Catalyst 8500 Series Edge Router (C8500-20X6C), as d</title><link>https://www.niap-ccevs.org/products/11637</link><description>CSfC apl item added.</description></item>
+<item><title>CSfC Component Added: MACSEC Ethernet Encryption Devices | Cisco | Catalyst 8500 Series Edge Routers (</title><link>https://www.niap-ccevs.org/products/11637</link><description>CSfC apl item added.</description></item>
+<item><title>CSfC Component Added: Software Full Drive Encryption | NetApp | NetApp Volume Encryption (NVE), as det</title><link>https://www.niap-ccevs.org/products/11574</link><description>CSfC apl item added.</description></item>
+<item><title>CSfC Component Added: Traffic Filtering Firewall | Juniper | SRX1600, as detailed in VID 2025.1096 | J</title><link>https://www.niap-ccevs.org/products/international-product/2025.1096</link><description>CSfC apl item added.</description></item>
+<item><title>CSfC Component Added: Traffic Filtering Firewall | SonicWall | SonicWall OS/X v7.0.1 with VPN and IPS </title><link>https://www.niap-ccevs.org/products/11528</link><description>CSfC apl item added.</description></item>
+<item><title>CSfC Component Removed: IPsec VPN Gateway | Juniper | SRX1600 | Junos OS 23.4R1 | NIAP Validation Comple</title><link>https://www.niap-ccevs.org/products/international-product/2025.1096</link><description>CSfC apl item removed.</description></item>
+<item><title>CSfC Component Removed: IPsec VPN Gateway | Cisco | Firepower 4100 and 9300 Security Appliances  (4112, </title><link>https://www.niap-ccevs.org/products/11512</link><description>CSfC apl item removed.</description></item>
+<item><title>CSfC Component Removed: IPsec VPN Gateway | Cisco | Catalyst 8500 Series Edge Router (C8500-20X6C) | IOS</title><link>https://www.niap-ccevs.org/products/11637</link><description>CSfC apl item removed.</description></item>
+<item><title>CSfC Component Removed: MACSEC Ethernet Encryption Devices | Cisco | Catalyst 8500 Series Edge Routers (</title><link>https://www.niap-ccevs.org/products/11637</link><description>CSfC apl item removed.</description></item>
+<item><title>CSfC Component Removed: Software Full Drive Encryption | NetApp | NetApp Volume Encryption (NVE) | ONTAP</title><link>https://www.niap-ccevs.org/products/11574</link><description>CSfC apl item removed.</description></item>
+<item><title>CSfC Component Removed: Traffic Filtering Firewall | Juniper | SRX1600 | Junos OS 23.4R1 | NIAP Validati</title><link>https://www.niap-ccevs.org/products/international-product/2025.1096</link><description>CSfC apl item removed.</description></item>
+<item><title>CSfC Component Removed: Traffic Filtering Firewall | SonicWall | SonicWall OS/X v7.0.1 with VPN and IPS </title><link>https://www.niap-ccevs.org/products/11528</link><description>CSfC apl item removed.</description></item>
+<item><title>ALERT: NIAP TD – Corrections to FCS_SSH_EXT.1.1</title><link>https://kr15tyk.github.io/CC-pulse/cc_dashboard.html</link><description>Kind: new | Keywords: SSH</description></item>
+<item><title>ALERT: CSfC Component Selections – MACSEC Ethernet Encryption Devices</title><link>https://kr15tyk.github.io/CC-pulse/cc_dashboard.html</link><description>Kind: updated | Keywords: CSfC</description></item>
+<item><title>ALERT: CSfC Component Selections – IPsec VPN Client</title><link>https://kr15tyk.github.io/CC-pulse/cc_dashboard.html</link><description>Kind: updated | Keywords: CSfC</description></item>
+<item><title>ALERT: CSfC APL – IPsec VPN Gateway | Cisco | Firepower 4100 and 9300 Security Appliances  (4112, 4115, 4125, 4145, SM-40, SM-48, SM-56),…</title><link>https://kr15tyk.github.io/CC-pulse/cc_dashboard.html</link><description>Kind: new_cert | Keywords: CSfC, cisco</description></item>
+<item><title>ALERT: CSfC APL – IPsec VPN Gateway | Cisco | Catalyst 8500 Series Edge Router (C8500-20X6C), as detailed in VID 11637 | IOS-XE 17.15 | NI…</title><link>https://kr15tyk.github.io/CC-pulse/cc_dashboard.html</link><description>Kind: new_cert | Keywords: cisco</description></item>
+<item><title>ALERT: CSfC APL – MACSEC Ethernet Encryption Devices | Cisco | Catalyst 8500 Series Edge Routers (C8500-20X6C), as detailed in VID 11637 |…</title><link>https://kr15tyk.github.io/CC-pulse/cc_dashboard.html</link><description>Kind: new_cert | Keywords: cisco</description></item>
+<item><title>ALERT: CSfC APL – IPsec VPN Gateway | Cisco | Firepower 4100 and 9300 Security Appliances  (4112, 4115, 4125, 4145, SM-40, SM-48, SM-56 as…</title><link>https://kr15tyk.github.io/CC-pulse/cc_dashboard.html</link><description>Kind: removed | Keywords: CSfC, cisco</description></item>
+<item><title>ALERT: CSfC APL – IPsec VPN Gateway | Cisco | Catalyst 8500 Series Edge Router (C8500-20X6C) | IOS-XE 17.15 | NIAP Validation Completed (a…</title><link>https://kr15tyk.github.io/CC-pulse/cc_dashboard.html</link><description>Kind: removed | Keywords: cisco</description></item>
+<item><title>ALERT: CSfC APL – MACSEC Ethernet Encryption Devices | Cisco | Catalyst 8500 Series Edge Routers (C8500-20X6C) as detailed in VID 11637 |…</title><link>https://kr15tyk.github.io/CC-pulse/cc_dashboard.html</link><description>Kind: removed | Keywords: cisco</description></item>
 </channel></rss>

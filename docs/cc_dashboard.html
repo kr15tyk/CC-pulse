@@ -179,7 +179,7 @@
   <span class="nav-title">CC Pulse Dashboard</span>
   <span class="nav-spacer"></span>
   <div class="ham-wrap">
-    <span class="nav-meta">Last run: 2026-08-07 03:05 ET</span>
+    <span class="nav-meta">Last run: 2026-08-08 02:40 ET</span>
     <button class="ham-btn" id="ham-btn" onclick="toggleHamMenu()" aria-expanded="false" aria-haspopup="true" title="Open menu">&#9776;</button>
     <div class="ham-menu" id="ham-menu" role="menu">
       <a class="ham-item" href="https://kr15tyk.github.io/CC-pulse/cc_dashboard.html" role="menuitem"><span class="ham-icon">&#127968;</span>Home</a>
@@ -254,11 +254,11 @@
 <div class="sticky-top">
   <div class="trend-bar">
     <div class="stat"><a href="#sec-niap-pp" onclick="navigateTo('sec-niap-pp');return false;">
-      <div class="stat-num active-num">1</div>
+      <div class="stat-num active-num">6</div>
       <div class="stat-lbl">NIAP Changes</div>
     </a></div>
     <div class="stat"><a href="#sec-csfc" onclick="navigateTo('sec-csfc');return false;">
-      <div class="stat-num ">0</div>
+      <div class="stat-num active-num">16</div>
       <div class="stat-lbl">CSfC Selection Updates</div>
     </a></div>
     <div class="stat"><a href="#sec-cc-portal" onclick="navigateTo('sec-cc-portal');return false;">
@@ -278,7 +278,7 @@
       <div class="stat-lbl">EUCC Changes</div>
     </a></div>
     <div class="stat"><a href="#sec-alerts" onclick="navigateTo('sec-alerts');return false;">
-      <div class="stat-num ">0</div>
+      <div class="stat-num alert-num">9</div>
       <div class="stat-lbl">Alerts</div>
     </a></div>
   </div>
@@ -304,6 +304,100 @@
       
 <!-- Alerts -->
 
+<div class="section-group">
+<div class="card card-alert" id="sec-alerts">
+  <div class="card-hdr" onclick="toggleCard(this)">
+    <span>Alerts</span>
+    <span class="card-count">9 alerts</span>
+    <span class="toggle-icon">&#9660;</span>
+  </div>
+  <div class="card-body">
+    <div class="alert-monitoring">FIPS 186-4, FIPS 186-5, NDcPP, CPP_ND, TLS 1.3, SSH, PP-Module_VPN, PP-Module_WLAN, labgram, valgram, emergency, CSfC, Commercial Solutions for Classified, CSfC APL, CSfC component selections, NSA CSfC, NATO NIAPC, NIAPCL, EUCC, ENISA, CCDB-018, Crypto Catalog, cryptography working group, Specification of Functional Requirements for Cryptography, FCS_CKM, FCS_COP, FCS_RBG</div>
+    
+        <div class="item-row alert-item" data-alert-key="NIAP TD-Corrections_to_FCS_SSH_EXT.1.1" data-tab="us">
+          
+          <a class="item-link" href="https://www.niap-ccevs.org/technical-decisions/TD1058" target="_blank">NIAP TD: Corrections to FCS_SSH_EXT.1.1</a>
+          
+          <span class="item-meta">new &middot; SSH</span>
+          <div class="item-sub">TD1058</div>
+          <button class="dismiss-btn" onclick="dismissAlert(this)" title="Mark as seen">&#10003; Seen</button>
+        </div>
+        
+        <div class="item-row alert-item" data-alert-key="CSfC Component Selections-MACSEC_Ethernet_Encryption_Devices" data-tab="us">
+          
+          <a class="item-link" href="https://www.nsa.gov/Portals/75/documents/CSfC%20Selections%20Updates%202026/CSfC_Selections_for_MACsec_Ethernet_Encryption_Devices-2026-08-04.pdf?ver=txzdbbEQuHQyfhgvPk3NcQ%3d%3d" target="_blank">CSfC Component Selections: MACSEC Ethernet Encryption Devices</a>
+          
+          <span class="item-meta">updated &middot; CSfC</span>
+          <div class="item-sub">NSA updated the component selection document for this role</div>
+          <button class="dismiss-btn" onclick="dismissAlert(this)" title="Mark as seen">&#10003; Seen</button>
+        </div>
+        
+        <div class="item-row alert-item" data-alert-key="CSfC Component Selections-IPsec_VPN_Client" data-tab="us">
+          
+          <a class="item-link" href="https://www.nsa.gov/Portals/75/documents/CSfC%20Selections%20Updates%202026/CSfC_Selections_for_IPsec_VPN_Client-2026-08-04.pdf?ver=txzdbbEQuHQyfhgvPk3NcQ%3d%3d" target="_blank">CSfC Component Selections: IPsec VPN Client</a>
+          
+          <span class="item-meta">updated &middot; CSfC</span>
+          <div class="item-sub">NSA updated the component selection document for this role</div>
+          <button class="dismiss-btn" onclick="dismissAlert(this)" title="Mark as seen">&#10003; Seen</button>
+        </div>
+        
+        <div class="item-row alert-item" data-alert-key="CSfC APL-IPsec_VPN_Gateway_|_Cisco_|_Firepower_4100_and_9300_Security_Appliances _(4112,_4115,_4125,_4145,_SM-40,_SM-48,_SM-56),…" data-tab="us">
+          
+          <a class="item-link" href="https://www.nsa.gov/Resources/Commercial-Solutions-for-Classified-Program/Components-List/" target="_blank">CSfC APL: IPsec VPN Gateway | Cisco | Firepower 4100 and 9300 Security Appliances  (4112, 4115, 4125, 4145, SM-40, SM-48, SM-56),…</a>
+          
+          <span class="item-meta">new_cert &middot; CSfC, cisco</span>
+          <div class="item-sub">New item on CSfC apl page</div>
+          <button class="dismiss-btn" onclick="dismissAlert(this)" title="Mark as seen">&#10003; Seen</button>
+        </div>
+        
+        <div class="item-row alert-item" data-alert-key="CSfC APL-IPsec_VPN_Gateway_|_Cisco_|_Catalyst_8500_Series_Edge_Router_(C8500-20X6C),_as_detailed_in_VID_11637_|_IOS-XE_17.15_|_NI…" data-tab="us">
+          
+          <a class="item-link" href="https://www.nsa.gov/Resources/Commercial-Solutions-for-Classified-Program/Components-List/" target="_blank">CSfC APL: IPsec VPN Gateway | Cisco | Catalyst 8500 Series Edge Router (C8500-20X6C), as detailed in VID 11637 | IOS-XE 17.15 | NI…</a>
+          
+          <span class="item-meta">new_cert &middot; cisco</span>
+          <div class="item-sub">New item on CSfC apl page</div>
+          <button class="dismiss-btn" onclick="dismissAlert(this)" title="Mark as seen">&#10003; Seen</button>
+        </div>
+        
+        <div class="item-row alert-item" data-alert-key="CSfC APL-MACSEC_Ethernet_Encryption_Devices_|_Cisco_|_Catalyst_8500_Series_Edge_Routers_(C8500-20X6C),_as_detailed_in_VID_11637_|…" data-tab="us">
+          
+          <a class="item-link" href="https://www.nsa.gov/Resources/Commercial-Solutions-for-Classified-Program/Components-List/" target="_blank">CSfC APL: MACSEC Ethernet Encryption Devices | Cisco | Catalyst 8500 Series Edge Routers (C8500-20X6C), as detailed in VID 11637 |…</a>
+          
+          <span class="item-meta">new_cert &middot; cisco</span>
+          <div class="item-sub">New item on CSfC apl page</div>
+          <button class="dismiss-btn" onclick="dismissAlert(this)" title="Mark as seen">&#10003; Seen</button>
+        </div>
+        
+        <div class="item-row alert-item" data-alert-key="CSfC APL-IPsec_VPN_Gateway_|_Cisco_|_Firepower_4100_and_9300_Security_Appliances _(4112,_4115,_4125,_4145,_SM-40,_SM-48,_SM-56_as…" data-tab="us">
+          
+          <a class="item-link" href="https://www.nsa.gov/Resources/Commercial-Solutions-for-Classified-Program/Components-List/" target="_blank">CSfC APL: IPsec VPN Gateway | Cisco | Firepower 4100 and 9300 Security Appliances  (4112, 4115, 4125, 4145, SM-40, SM-48, SM-56 as…</a>
+          
+          <span class="item-meta">removed &middot; CSfC, cisco</span>
+          <div class="item-sub">Item removed from CSfC apl page</div>
+          <button class="dismiss-btn" onclick="dismissAlert(this)" title="Mark as seen">&#10003; Seen</button>
+        </div>
+        
+        <div class="item-row alert-item" data-alert-key="CSfC APL-IPsec_VPN_Gateway_|_Cisco_|_Catalyst_8500_Series_Edge_Router_(C8500-20X6C)_|_IOS-XE_17.15_|_NIAP_Validation_Completed_(a…" data-tab="us">
+          
+          <a class="item-link" href="https://www.nsa.gov/Resources/Commercial-Solutions-for-Classified-Program/Components-List/" target="_blank">CSfC APL: IPsec VPN Gateway | Cisco | Catalyst 8500 Series Edge Router (C8500-20X6C) | IOS-XE 17.15 | NIAP Validation Completed (a…</a>
+          
+          <span class="item-meta">removed &middot; cisco</span>
+          <div class="item-sub">Item removed from CSfC apl page</div>
+          <button class="dismiss-btn" onclick="dismissAlert(this)" title="Mark as seen">&#10003; Seen</button>
+        </div>
+        
+        <div class="item-row alert-item" data-alert-key="CSfC APL-MACSEC_Ethernet_Encryption_Devices_|_Cisco_|_Catalyst_8500_Series_Edge_Routers_(C8500-20X6C)_as_detailed_in_VID_11637_|…" data-tab="us">
+          
+          <a class="item-link" href="https://www.nsa.gov/Resources/Commercial-Solutions-for-Classified-Program/Components-List/" target="_blank">CSfC APL: MACSEC Ethernet Encryption Devices | Cisco | Catalyst 8500 Series Edge Routers (C8500-20X6C) as detailed in VID 11637 |…</a>
+          
+          <span class="item-meta">removed &middot; cisco</span>
+          <div class="item-sub">Item removed from CSfC apl page</div>
+          <button class="dismiss-btn" onclick="dismissAlert(this)" title="Mark as seen">&#10003; Seen</button>
+        </div>
+        
+  </div>
+</div>
+
 <div class="tab-nav" id="region-tabs">
         <button class="tab-btn active" data-tab="us" onclick="switchTab(this)">&#127482;&#127480; US (NIAP / CSfC)</button>
         <button class="tab-btn" data-tab="intl" onclick="switchTab(this)">&#127760; International</button>
@@ -327,7 +421,7 @@
     
     
     
-    <p class="no-change">No changes detected. <span class="last-active">(last: 2026-08-05)</span></p>
+    <p class="no-change">No changes detected. <span class="last-active">(last: 2026-08-08)</span></p>
   </div>
 </div>
 
@@ -340,16 +434,13 @@
   </div>
   <div class="card-body ">
     
-    <div class="sub-hdr sub-new">Newly In Evaluation (1)</div>
     
-    <div class="item-row" data-source="niap-inevaluation" data-kind="new">
-      <span class="item-link">CAE Inc. -- MPIC2 v4.3</span>
-      <span class="item-meta">Lightship Security USA, Inc.</span>
+    <div class="sub-hdr sub-removed">Left Evaluation (1)</div>
+    
+    <div class="item-row" data-source="niap-inevaluation" data-kind="removed">
+      <span class="item-link">Apple Inc. -- Apple macOS 26 Tahoe: FileVault</span>
+      <span class="item-meta">Completed or Withdrawn</span>
     </div>
-    
-    <div class="item-sub">Network Device, Remote Access</div>
-    
-    
     
     
     
@@ -418,17 +509,39 @@
 </div>
 
   <!-- NIAP PCL — All Certifications -->
-<div class="card " id="sec-niap-pcl" data-has-changes="0">
+<div class="card card-new" id="sec-niap-pcl" data-has-changes="2">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>NIAP PCL — All Certifications</span>
-    <span class="card-count">0 changes</span>
+    <span class="card-count">2 changes</span>
     </span>
   </div>
-  <div class="card-body collapsed">
+  <div class="card-body ">
+    
+    <div class="sub-hdr sub-new">New Certifications (1)</div>
+    
+    <div class="item-row" data-source="niap-pcl" data-kind="new">
+      <span class="item-link">Apple Inc. -- Apple macOS 26 Tahoe: FileVault</span>
+      <span class="item-meta">2026-07-29</span>
+    </div>
+    
+    <div class="item-sub">CPP_FDE_AA_V2.0E, CPP_FDE_EE_V2.0E</div>
     
     
     
-    <p class="no-change">No changes detected. <span class="last-active">(last: 2026-08-05)</span></p>
+    
+    <div class="sub-hdr sub-updated">Newly Archived (1)</div>
+    
+    <div class="item-row" data-source="niap-pcl" data-kind="archived">
+      <span class="item-link">Zebra Technologies Corporation -- Zebra Devices on Android 13</span>
+      <span class="item-meta">Archived</span>
+    </div>
+    
+    <div class="item-sub">MOD_BT_V1.0, PKG_TLS_V1.1, MOD_WLANC_v1.0, PP_MDF_V3.3</div>
+    
+    
+    
+    
+    
   </div>
 </div>
 
@@ -450,17 +563,44 @@
 </div>
 
   <!-- NIAP TDs -->
-<div class="card " id="sec-niap-td" data-has-changes="0">
+<div class="card card-new" id="sec-niap-td" data-has-changes="3">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>NIAP Technical Decisions</span>
-    <span class="card-count">0 changes</span>
+    <span class="card-count">3 changes</span>
     </span>
-    <span class="toggle-icon">&#9658;</span>
+    <span class="toggle-icon">&#9660;</span>
   </div>
-  <div class="card-body collapsed">
+  <div class="card-body ">
+    
+    <div class="sub-hdr sub-new">New TDs (3)</div>
+    
+    <div class="item-row" data-source="niap-td" data-kind="new">
+      <a class="item-link" href="https://www.niap-ccevs.org/technical-decisions/TD1057" target="_blank">TD1057 &mdash; Clarification RE Signing in FIA_X509_EXT.1.1</a>
+      <span class="item-meta">2026-08-07</span>
+    </div>
+    
+    <div class="item-sub">Applies to: PKG_X509_v1.0</div>
     
     
-    <p class="no-change">No changes detected. <span class="last-active">(last: 2026-08-05)</span></p>
+    <div class="item-row" data-source="niap-td" data-kind="new">
+      <a class="item-link" href="https://www.niap-ccevs.org/technical-decisions/TD1058" target="_blank">TD1058 &mdash; Corrections to FCS_SSH_EXT.1.1</a>
+      <span class="item-meta">2026-08-07</span>
+    </div>
+    
+    <div class="item-sub">Applies to: PKG_SSH_V2.0</div>
+    
+    
+    <div class="item-row" data-source="niap-td" data-kind="new">
+      <a class="item-link" href="https://www.niap-ccevs.org/technical-decisions/TD1055" target="_blank">TD1055 &mdash; Clarification regarding Public-Key-Based Authentication for GPCP</a>
+      <span class="item-meta">2026-08-07</span>
+    </div>
+    
+    <div class="item-sub">Applies to: PP_GPCP_V2.0</div>
+    
+    
+    
+    
+    
   </div>
 </div>
 </div>
@@ -469,16 +609,109 @@
 <div class="section-group">
   <div class="section-label">CSfC</div>
   <!-- CSfC Components, Announcements, and Selection Documents -->
-<div class="card " id="sec-csfc" data-has-changes="0">
+<div class="card card-updated" id="sec-csfc" data-has-changes="16">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>CSfC Components &amp; Announcements</span>
-    <span class="card-count">0 updates</span>
-    <span class="toggle-icon">&#9658;</span>
+    <span class="card-count">16 updates</span>
+    <span class="toggle-icon">&#9660;</span>
   </div>
-  <div class="card-body collapsed">
+  <div class="card-body ">
     
     
-    <p class="no-change">No changes detected. <span class="last-active">(last: 2026-08-06)</span></p>
+    <div class="cp-row" data-source="csfc" data-kind="updated">
+      <a class="item-link" href="https://www.nsa.gov/Portals/75/documents/CSfC%20Selections%20Updates%202026/CSfC_Selections_for_MACsec_Ethernet_Encryption_Devices-2026-08-04.pdf?ver=txzdbbEQuHQyfhgvPk3NcQ%3d%3d" target="_blank">MACSEC Ethernet Encryption Devices</a>
+      <div class="cp-detail">
+        <span class="cp-date">Selection document link changed</span>
+      </div>
+    </div>
+    
+    
+    
+    <div class="cp-row" data-source="csfc" data-kind="updated">
+      <a class="item-link" href="https://www.nsa.gov/Portals/75/documents/CSfC%20Selections%20Updates%202026/CSfC_Selections_for_IPsec_VPN_Client-2026-08-04.pdf?ver=txzdbbEQuHQyfhgvPk3NcQ%3d%3d" target="_blank">IPsec VPN Client</a>
+      <div class="cp-detail">
+        <span class="cp-date">Selection document link changed</span>
+      </div>
+    </div>
+    
+    
+    
+      
+        
+        <div class="item-row" data-source="csfc" data-kind="new">
+          <a class="item-link" href="https://www.niap-ccevs.org/products/international-product/2025.1096" target="_blank">IPsec VPN Gateway | Juniper | SRX1600, as detailed in VID 2025.1096 | Junos OS 23.4R1 | NIAP Validation Completed (at Teron) | 2025.03.18 | </a>
+          <span class="item-meta">component added</span>
+        </div>
+        
+        <div class="item-row" data-source="csfc" data-kind="new">
+          <a class="item-link" href="https://www.niap-ccevs.org/products/11512" target="_blank">IPsec VPN Gateway | Cisco | Firepower 4100 and 9300 Security Appliances  (4112, 4115, 4125, 4145, SM-40, SM-48, SM-56), as detailed in VID 11512 | ASA 9.20 | NIAP Validation Completed (at Gossamer) | 2025.01.10 | CSfC solution owners should deploy this component on ESXi 8.0 (VID 11533) and submit a deviation request for the applicable NIAP-evaluated configuration Product Selection Capability Package requirement.</a>
+          <span class="item-meta">component added</span>
+        </div>
+        
+        <div class="item-row" data-source="csfc" data-kind="new">
+          <a class="item-link" href="https://www.niap-ccevs.org/products/11637" target="_blank">IPsec VPN Gateway | Cisco | Catalyst 8500 Series Edge Router (C8500-20X6C), as detailed in VID 11637 | IOS-XE 17.15 | NIAP Validation Completed (at Lightship Security) | 2025.08.29 | </a>
+          <span class="item-meta">component added</span>
+        </div>
+        
+        <div class="item-row" data-source="csfc" data-kind="new">
+          <a class="item-link" href="https://www.niap-ccevs.org/products/11637" target="_blank">MACSEC Ethernet Encryption Devices | Cisco | Catalyst 8500 Series Edge Routers (C8500-20X6C), as detailed in VID 11637 | IOS-XE 17.15 | NIAP Validation Completed (at Lightship Security) | 2025.08.29 | </a>
+          <span class="item-meta">component added</span>
+        </div>
+        
+        <div class="item-row" data-source="csfc" data-kind="new">
+          <a class="item-link" href="https://www.niap-ccevs.org/products/11574" target="_blank">Software Full Drive Encryption | NetApp | NetApp Volume Encryption (NVE), as detailed in VID 11574 | ONTAP 9.16.1 | NIAP Validation Completed (at Lightship Security) | 2026.02.26 | AA and EE</a>
+          <span class="item-meta">component added</span>
+        </div>
+        
+        <div class="item-row" data-source="csfc" data-kind="new">
+          <a class="item-link" href="https://www.niap-ccevs.org/products/international-product/2025.1096" target="_blank">Traffic Filtering Firewall | Juniper | SRX1600, as detailed in VID 2025.1096 | Junos OS 23.4R1 | NIAP Validation Completed (at Teron) | 2025.03.18 | </a>
+          <span class="item-meta">component added</span>
+        </div>
+        
+        <div class="item-row" data-source="csfc" data-kind="new">
+          <a class="item-link" href="https://www.niap-ccevs.org/products/11528" target="_blank">Traffic Filtering Firewall | SonicWall | SonicWall OS/X v7.0.1 with VPN and IPS on NSsp 15700, as detailed in VID 11528 | Sonic OS/X v7.0.1 | NIAP Validation Completed (at Acumen) | 2025.04.25 | </a>
+          <span class="item-meta">component added</span>
+        </div>
+        
+        
+        <div class="item-row" data-source="csfc" data-kind="removed">
+          <a class="item-link" href="https://www.niap-ccevs.org/products/international-product/2025.1096" target="_blank">IPsec VPN Gateway | Juniper | SRX1600 | Junos OS 23.4R1 | NIAP Validation Completed (at Teron) | 2025.03.18 | </a>
+          <span class="item-meta">component removed</span>
+        </div>
+        
+        <div class="item-row" data-source="csfc" data-kind="removed">
+          <a class="item-link" href="https://www.niap-ccevs.org/products/11512" target="_blank">IPsec VPN Gateway | Cisco | Firepower 4100 and 9300 Security Appliances  (4112, 4115, 4125, 4145, SM-40, SM-48, SM-56 as detailed in VID 11512) | ASA 9.20 | NIAP Validation Completed (at Gossamer) | 2025.01.10 | CSfC solution owners should deploy this component on ESXi 8.0 (VID 11533) and submit a deviation request for the applicable NIAP-evaluated configuration Product Selection Capability Package requirement.</a>
+          <span class="item-meta">component removed</span>
+        </div>
+        
+        <div class="item-row" data-source="csfc" data-kind="removed">
+          <a class="item-link" href="https://www.niap-ccevs.org/products/11637" target="_blank">IPsec VPN Gateway | Cisco | Catalyst 8500 Series Edge Router (C8500-20X6C) | IOS-XE 17.15 | NIAP Validation Completed (at Lightship Security) | 2025.08.29 | </a>
+          <span class="item-meta">component removed</span>
+        </div>
+        
+        <div class="item-row" data-source="csfc" data-kind="removed">
+          <a class="item-link" href="https://www.niap-ccevs.org/products/11637" target="_blank">MACSEC Ethernet Encryption Devices | Cisco | Catalyst 8500 Series Edge Routers (C8500-20X6C) as detailed in VID 11637 | IOS-XE 17.15 | NIAP Validation Completed (at Lightship Security) | 2025.08.29 | </a>
+          <span class="item-meta">component removed</span>
+        </div>
+        
+        <div class="item-row" data-source="csfc" data-kind="removed">
+          <a class="item-link" href="https://www.niap-ccevs.org/products/11574" target="_blank">Software Full Drive Encryption | NetApp | NetApp Volume Encryption (NVE) | ONTAP 9.16.1 | NIAP Validation Completed (at Lightship Security) | 2026.02.26 | AA and EE</a>
+          <span class="item-meta">component removed</span>
+        </div>
+        
+        <div class="item-row" data-source="csfc" data-kind="removed">
+          <a class="item-link" href="https://www.niap-ccevs.org/products/international-product/2025.1096" target="_blank">Traffic Filtering Firewall | Juniper | SRX1600 | Junos OS 23.4R1 | NIAP Validation Completed (at Teron) | 2025.03.18 | </a>
+          <span class="item-meta">component removed</span>
+        </div>
+        
+        <div class="item-row" data-source="csfc" data-kind="removed">
+          <a class="item-link" href="https://www.niap-ccevs.org/products/11528" target="_blank">Traffic Filtering Firewall | SonicWall | SonicWall OS/X v7.0.1 with VPN and IPS on NSsp 15700 as detailed in VID 11528 | Sonic OS/X v7.0.1 | NIAP Validation Completed (at Acumen) | 2025.04.25 | </a>
+          <span class="item-meta">component removed</span>
+        </div>
+        
+      
+    
+    
   </div>
 </div>
 </div>
@@ -588,7 +821,7 @@
 <div class="card card-new" id="sec-history" data-has-changes="1">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>Change History</span>
-    <span class="card-count">61 events</span>
+    <span class="card-count">75 events</span>
     <span class="toggle-icon">▼</span>
   </div>
   <div class="card-body">
@@ -606,6 +839,226 @@
       div>
     <div class="timeline" id="history-timeline">
     
+      
+      <div class="tl-entry" data-cat="td_new">
+        <div class="tl-date">2026-08-08</div>
+        <div class="tl-body">
+          <div class="tl-title">
+            <span class="tl-badge new">new</span>
+            <a href="https://www.niap-ccevs.org/technical-decisions/TD1057" target="_blank">New TD: TD1057</a>
+          </div>
+          <div class="tl-detail">Clarification RE Signing in FIA_X509_EXT.1.1</div>
+        </div>
+      </div>
+      
+      <div class="tl-entry" data-cat="td_new">
+        <div class="tl-date">2026-08-08</div>
+        <div class="tl-body">
+          <div class="tl-title">
+            <span class="tl-badge new">new</span>
+            <a href="https://www.niap-ccevs.org/technical-decisions/TD1058" target="_blank">New TD: TD1058</a>
+          </div>
+          <div class="tl-detail">Corrections to FCS_SSH_EXT.1.1</div>
+        </div>
+      </div>
+      
+      <div class="tl-entry" data-cat="td_new">
+        <div class="tl-date">2026-08-08</div>
+        <div class="tl-body">
+          <div class="tl-title">
+            <span class="tl-badge new">new</span>
+            <a href="https://www.niap-ccevs.org/technical-decisions/TD1055" target="_blank">New TD: TD1055</a>
+          </div>
+          <div class="tl-detail">Clarification regarding Public-Key-Based Authentication for GPCP</div>
+        </div>
+      </div>
+      
+      <div class="tl-entry" data-cat="pcl_cert">
+        <div class="tl-date">2026-08-08</div>
+        <div class="tl-body">
+          <div class="tl-title">
+            <span class="tl-badge new">new</span>
+            <a href="https://www.niap-ccevs.org/products/11696" target="_blank">Apple Inc. — Apple macOS 26 Tahoe: FileVault</a>
+          </div>
+          <div class="tl-detail">Certified 2026-07-29 · atsec information security corporation · CPP_FDE_AA_V2.0E, CPP_FDE_EE_V2.0E</div>
+        </div>
+      </div>
+      
+      <div class="tl-entry" data-cat="csfc_change">
+        <div class="tl-date">2026-08-08</div>
+        <div class="tl-body">
+          <div class="tl-title">
+            <span class="tl-badge updated">updated</span>
+            <a href="https://www.nsa.gov/Resources/Commercial-Solutions-for-Classified-Program/Components-List/" target="_blank">CSfC Selection updated: MACSEC Ethernet Encryption Devices</a>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="tl-entry" data-cat="csfc_change">
+        <div class="tl-date">2026-08-08</div>
+        <div class="tl-body">
+          <div class="tl-title">
+            <span class="tl-badge updated">updated</span>
+            <a href="https://www.nsa.gov/Resources/Commercial-Solutions-for-Classified-Program/Components-List/" target="_blank">CSfC Selection updated: IPsec VPN Client</a>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="tl-entry" data-cat="csfc_change">
+        <div class="tl-date">2026-08-08</div>
+        <div class="tl-body">
+          <div class="tl-title">
+            <span class="tl-badge new">new</span>
+            <a href="https://www.niap-ccevs.org/products/international-product/2025.1096" target="_blank">CSfC Component: IPsec VPN Gateway | Juniper | SRX1600, as detailed in VID 2025.1096 | Junos OS 2</a>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="tl-entry" data-cat="csfc_change">
+        <div class="tl-date">2026-08-08</div>
+        <div class="tl-body">
+          <div class="tl-title">
+            <span class="tl-badge new">new</span>
+            <a href="https://www.niap-ccevs.org/products/11512" target="_blank">CSfC Component: IPsec VPN Gateway | Cisco | Firepower 4100 and 9300 Security Appliances  (4112, </a>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="tl-entry" data-cat="csfc_change">
+        <div class="tl-date">2026-08-08</div>
+        <div class="tl-body">
+          <div class="tl-title">
+            <span class="tl-badge new">new</span>
+            <a href="https://www.niap-ccevs.org/products/11637" target="_blank">CSfC Component: IPsec VPN Gateway | Cisco | Catalyst 8500 Series Edge Router (C8500-20X6C), as d</a>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="tl-entry" data-cat="csfc_change">
+        <div class="tl-date">2026-08-08</div>
+        <div class="tl-body">
+          <div class="tl-title">
+            <span class="tl-badge new">new</span>
+            <a href="https://www.niap-ccevs.org/products/11637" target="_blank">CSfC Component: MACSEC Ethernet Encryption Devices | Cisco | Catalyst 8500 Series Edge Routers (</a>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="tl-entry" data-cat="csfc_change">
+        <div class="tl-date">2026-08-08</div>
+        <div class="tl-body">
+          <div class="tl-title">
+            <span class="tl-badge new">new</span>
+            <a href="https://www.niap-ccevs.org/products/11574" target="_blank">CSfC Component: Software Full Drive Encryption | NetApp | NetApp Volume Encryption (NVE), as det</a>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="tl-entry" data-cat="csfc_change">
+        <div class="tl-date">2026-08-08</div>
+        <div class="tl-body">
+          <div class="tl-title">
+            <span class="tl-badge new">new</span>
+            <a href="https://www.niap-ccevs.org/products/international-product/2025.1096" target="_blank">CSfC Component: Traffic Filtering Firewall | Juniper | SRX1600, as detailed in VID 2025.1096 | J</a>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="tl-entry" data-cat="csfc_change">
+        <div class="tl-date">2026-08-08</div>
+        <div class="tl-body">
+          <div class="tl-title">
+            <span class="tl-badge new">new</span>
+            <a href="https://www.niap-ccevs.org/products/11528" target="_blank">CSfC Component: Traffic Filtering Firewall | SonicWall | SonicWall OS/X v7.0.1 with VPN and IPS </a>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="tl-entry" data-cat="csfc_change">
+        <div class="tl-date">2026-08-08</div>
+        <div class="tl-body">
+          <div class="tl-title">
+            <span class="tl-badge removed">removed</span>
+            <a href="https://www.niap-ccevs.org/products/international-product/2025.1096" target="_blank">CSfC Component: IPsec VPN Gateway | Juniper | SRX1600 | Junos OS 23.4R1 | NIAP Validation Comple</a>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="tl-entry" data-cat="csfc_change">
+        <div class="tl-date">2026-08-08</div>
+        <div class="tl-body">
+          <div class="tl-title">
+            <span class="tl-badge removed">removed</span>
+            <a href="https://www.niap-ccevs.org/products/11512" target="_blank">CSfC Component: IPsec VPN Gateway | Cisco | Firepower 4100 and 9300 Security Appliances  (4112, </a>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="tl-entry" data-cat="csfc_change">
+        <div class="tl-date">2026-08-08</div>
+        <div class="tl-body">
+          <div class="tl-title">
+            <span class="tl-badge removed">removed</span>
+            <a href="https://www.niap-ccevs.org/products/11637" target="_blank">CSfC Component: IPsec VPN Gateway | Cisco | Catalyst 8500 Series Edge Router (C8500-20X6C) | IOS</a>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="tl-entry" data-cat="csfc_change">
+        <div class="tl-date">2026-08-08</div>
+        <div class="tl-body">
+          <div class="tl-title">
+            <span class="tl-badge removed">removed</span>
+            <a href="https://www.niap-ccevs.org/products/11637" target="_blank">CSfC Component: MACSEC Ethernet Encryption Devices | Cisco | Catalyst 8500 Series Edge Routers (</a>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="tl-entry" data-cat="csfc_change">
+        <div class="tl-date">2026-08-08</div>
+        <div class="tl-body">
+          <div class="tl-title">
+            <span class="tl-badge removed">removed</span>
+            <a href="https://www.niap-ccevs.org/products/11574" target="_blank">CSfC Component: Software Full Drive Encryption | NetApp | NetApp Volume Encryption (NVE) | ONTAP</a>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="tl-entry" data-cat="csfc_change">
+        <div class="tl-date">2026-08-08</div>
+        <div class="tl-body">
+          <div class="tl-title">
+            <span class="tl-badge removed">removed</span>
+            <a href="https://www.niap-ccevs.org/products/international-product/2025.1096" target="_blank">CSfC Component: Traffic Filtering Firewall | Juniper | SRX1600 | Junos OS 23.4R1 | NIAP Validati</a>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="tl-entry" data-cat="csfc_change">
+        <div class="tl-date">2026-08-08</div>
+        <div class="tl-body">
+          <div class="tl-title">
+            <span class="tl-badge removed">removed</span>
+            <a href="https://www.niap-ccevs.org/products/11528" target="_blank">CSfC Component: Traffic Filtering Firewall | SonicWall | SonicWall OS/X v7.0.1 with VPN and IPS </a>
+          </div>
+          
+        </div>
+      </div>
       
       <div class="tl-entry" data-cat="csfc_change">
         <div class="tl-date">2026-08-06</div>
@@ -1212,72 +1665,6 @@
         </div>
       </div>
       
-      <div class="tl-entry" data-cat="eucc_cisco">
-        <div class="tl-date">2026-07-07</div>
-        <div class="tl-body">
-          <div class="tl-title">
-            <span class="tl-badge new">new</span>
-            <a href="https://certification.enisa.europa.eu/certificates/eucc-3110-2025-2500098-01-00000_en" target="_blank">EUCC: EUCC-3110-2025-2500098-01-00000</a>
-          </div>
-          
-        </div>
-      </div>
-      
-      <div class="tl-entry" data-cat="eucc_cisco">
-        <div class="tl-date">2026-07-07</div>
-        <div class="tl-body">
-          <div class="tl-title">
-            <span class="tl-badge new">new</span>
-            <a href="https://certification.enisa.europa.eu/certificates/eucc-3110-2025-0002500093-00001_en" target="_blank">EUCC: EUCC-3110-2025-0002500093-00001</a>
-          </div>
-          
-        </div>
-      </div>
-      
-      <div class="tl-entry" data-cat="pcl_cert">
-        <div class="tl-date">2026-07-07</div>
-        <div class="tl-body">
-          <div class="tl-title">
-            <span class="tl-badge new">new</span>
-            <a href="https://www.niap-ccevs.org/products/11704" target="_blank">Broadcom — VMware NSX</a>
-          </div>
-          <div class="tl-detail">Certified  · Leidos Common Criteria Testing Laboratory · MOD_CPP_FW_v1.4e, CPP_ND_V3.0E</div>
-        </div>
-      </div>
-      
-      <div class="tl-entry" data-cat="pcl_cert">
-        <div class="tl-date">2026-07-07</div>
-        <div class="tl-body">
-          <div class="tl-title">
-            <span class="tl-badge new">new</span>
-            <a href="https://www.niap-ccevs.org/products/11710" target="_blank">ALE USA Inc — Alcatel-Lucent Enterprise OmniAccess Stellar Wireless Access Points with AWOS 5.0</a>
-          </div>
-          <div class="tl-detail">Certified  · Acumen Security · MOD_WLAN_AS_v1.0, CPP_ND_V3.0E</div>
-        </div>
-      </div>
-      
-      <div class="tl-entry" data-cat="pcl_cert">
-        <div class="tl-date">2026-07-07</div>
-        <div class="tl-body">
-          <div class="tl-title">
-            <span class="tl-badge new">new</span>
-            <a href="https://www.niap-ccevs.org/products/11686" target="_blank">DigiStor — DIGISTOR TCG OPAL SSC FIPS SSD Series, Firmware Version SCQM15.A / ECQM15.A</a>
-          </div>
-          <div class="tl-detail">Certified  · Lightship Security USA, Inc. · CPP_FDE_EE_V2.0E</div>
-        </div>
-      </div>
-      
-      <div class="tl-entry" data-cat="pcl_cert">
-        <div class="tl-date">2026-07-07</div>
-        <div class="tl-body">
-          <div class="tl-title">
-            <span class="tl-badge new">new</span>
-            <a href="https://www.niap-ccevs.org/products/11679" target="_blank">Dell Technologies Inc. — Dell Networking SmartFabric OS10.6</a>
-          </div>
-          <div class="tl-detail">Certified  · Lightship Security USA, Inc. · PKG_SSH_V1.0, CPP_ND_V3.0E</div>
-        </div>
-      </div>
-      
     
     </div>
   </div>
@@ -1288,7 +1675,7 @@
 </div><!-- /main-content -->
 <footer>
   <span>CC Pulse &middot; Auto-refreshes daily (01:00 EST) &middot; NIAP, CSfC, CC Portal, NATO NIAPCL, EUCC / ENISA</span>
-  <span>Last run: 2026-08-07 03:05 ET</span>
+  <span>Last run: 2026-08-08 02:40 ET</span>
 </footer>
 
 <script>
