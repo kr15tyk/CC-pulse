@@ -35,7 +35,7 @@ _cfg.SANITY_MIN_CC_CRYPTO_PUBS = 5
 _cfg.SANITY_MIN_NIST_NEWS = 10
 _cfg.SANITY_MIN_NIAP_NEWS = 1
 _cfg.SANITY_MIN_NIAP_POLICIES = 1
-_cfg.SANITY_MIN_NATO_PRODUCTS = 3
+_cfg.MANUAL_DOMAINS = frozenset({"nato"})
 _cfg.SANITY_MIN_EUCC_CERTS = 2
 _cfg.SANITY_MIN_ND_ITC_RFIS = 5
 _cfg.COLLAPSE_MIN_BASELINE = 8
@@ -154,7 +154,11 @@ def _healthy_snapshot():
         }},
         "cc_crypto": {"pages": {"publications": [{"text": str(i)} for i in range(5)]}},
         "nist": {"pages": {"news": [{"text": str(i)} for i in range(10)]}},
-        "nato": {"pages": {"all_products": [{"name": str(i)} for i in range(3)]}},
+        # Manual-only domain: intake-shaped baseline, never collected.
+        "nato": {
+            "pages": {"cisco_products": [{"name": "Cisco Router"}]},
+            "cisco_products": [{"name": "Cisco Router"}],
+        },
         "eucc": {"pages": {"certificates": [{"name": str(i)} for i in range(2)]}},
         "nd_itc": {
             "nit_rfis": [{"rfi_id": f"RFI#{i}"} for i in range(5)],
@@ -189,14 +193,46 @@ class TestSourceHealth:
 
     def test_failed_domain_without_prior_data_is_failed(self):
         current = _healthy_snapshot()
-        current["nato"] = {"pages": {"all_products": []}}
+        current["eucc"] = {"pages": {"certificates": []}}
+
+        main._apply_source_health(current)
+
+        health = current["source_health"]["eucc"]
+        assert health["status"] == "failed"
+        assert health["consecutive_failures"] == 1
+        assert health["using_last_known_good"] is False
+
+    def test_manual_domain_is_healthy_without_collection(self):
+        """NATO is manual-only: empty collected data must not degrade it."""
+        current = _healthy_snapshot()
+        current["nato"] = {}
 
         main._apply_source_health(current)
 
         health = current["source_health"]["nato"]
-        assert health["status"] == "failed"
-        assert health["consecutive_failures"] == 1
-        assert health["using_last_known_good"] is False
+        assert health["status"] == "healthy"
+        assert health["mode"] == "manual"
+        assert health["consecutive_failures"] == 0
+
+    def test_manual_domain_carries_prior_baseline_forward(self):
+        """The stored NATO baseline (updated via issue intake) survives the
+        daily run even though no collector ever repopulates it."""
+        prior = _healthy_snapshot()
+        prior["nato"] = {
+            "pages": {"cisco_products": [{"name": "Cisco Catalyst"}]},
+            "cisco_products": [{"name": "Cisco Catalyst"}],
+        }
+        main._apply_source_health(prior)
+        current = _healthy_snapshot()
+        current["nato"] = {}
+
+        main._apply_source_health(current, prior)
+
+        assert current["nato"] == prior["nato"]
+        health = current["source_health"]["nato"]
+        assert health["status"] == "healthy"
+        assert health["mode"] == "manual"
+        assert "1 Cisco product(s)" in health["detail"]
 
     def test_consecutive_failures_increment_across_stale_snapshots(self):
         prior = _healthy_snapshot()
@@ -236,8 +272,12 @@ class TestSourceHealth:
 
         assert all(
             health["status"] == "stale"
-            for health in current["source_health"].values()
+            for domain, health in current["source_health"].items()
+            # Manual domains carry their baseline forward and stay healthy
+            # even when every automated collector fails.
+            if domain not in _cfg.MANUAL_DOMAINS
         )
+        assert current["source_health"]["nato"]["status"] == "healthy"
         for domain in main.DOMAIN_KEYS:
             assert current[domain] == prior[domain]
 

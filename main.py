@@ -239,7 +239,6 @@ def _source_health_checks(snapshot: dict) -> dict[str, list[dict]]:
     cctl_labs = snapshot.get("cctl_labs", {})
     csfc = snapshot.get("csfc", {})
     cc_crypto = snapshot.get("cc_crypto", {})
-    nato = snapshot.get("nato", {})
     eucc = snapshot.get("eucc", {})
 
     return {
@@ -271,11 +270,8 @@ def _source_health_checks(snapshot: dict) -> dict[str, list[dict]]:
                 cc_crypto.get("pages", {}).get("publications", [])
             ), "minimum": config.SANITY_MIN_CC_CRYPTO_PUBS},
         ],
-        "nato": [
-            {"name": "NIAPCL products", "observed": len(
-                nato.get("pages", {}).get("all_products", [])
-            ), "minimum": config.SANITY_MIN_NATO_PRODUCTS},
-        ],
+        # "nato" is deliberately absent: manual-only domain
+        # (config.MANUAL_DOMAINS) — no fetch-based health check applies.
         "eucc": [
             {"name": "certificates", "observed": len(
                 eucc.get("pages", {}).get("certificates", [])
@@ -335,6 +331,10 @@ def _apply_collection_collapse_guard(
     niap_owned = {"news", "events", "policies"}
 
     for domain in DOMAIN_KEYS:
+        if domain in config.MANUAL_DOMAINS:
+            # Manual baselines are carried forward verbatim; a shrink there
+            # is a deliberate human update, never a scrape collapse.
+            continue
         health = source_health.get(domain, {})
         if health.get("status") != "healthy":
             continue
@@ -409,6 +409,31 @@ def _apply_source_health(
     source_health: dict[str, dict] = {}
 
     for domain in DOMAIN_KEYS:
+        if domain in config.MANUAL_DOMAINS:
+            # Manual-only domain (e.g. NATO NIAPCL): never collected
+            # automatically, so fetch-based health checks don't apply.
+            # Carry the stored baseline forward from the prior snapshot
+            # (the GitHub issue intake updates it out-of-band) and report
+            # healthy so the daily status email doesn't flag it degraded.
+            prior_data = prior_snapshot.get(domain)
+            if prior_data:
+                new_snapshot[domain] = copy.deepcopy(prior_data)
+            baseline = new_snapshot.get(domain) or {}
+            baseline_count = len(baseline.get("cisco_products", []))
+            source_health[domain] = {
+                "label": DOMAIN_LABELS[domain],
+                "status": "healthy",
+                "mode": "manual",
+                "checks": [],
+                "consecutive_failures": 0,
+                "using_last_known_good": False,
+                "detail": (
+                    f"manual baseline ({baseline_count} Cisco product(s)); "
+                    "updated via the NATO capture GitHub issue workflow"
+                ),
+                "checked_at": checked_at,
+            }
+            continue
         checks = current_checks[domain]
         current_ok = domain not in collection_errors and _checks_pass(checks)
         partial_failures = {
@@ -511,7 +536,10 @@ def _diff_baseline_with_recoveries(old_snapshot: dict, new_snapshot: dict) -> di
     new_checks = _source_health_checks(new_snapshot)
     recovered = {
         domain for domain in DOMAIN_KEYS
-        if not _checks_pass(old_checks[domain]) and _checks_pass(new_checks[domain])
+        # Manual domains (no fetch-based checks) never "recover".
+        if domain not in config.MANUAL_DOMAINS
+        and not _checks_pass(old_checks[domain])
+        and _checks_pass(new_checks[domain])
     }
     baseline = copy.deepcopy(old_snapshot)
     for domain in recovered:
@@ -912,7 +940,9 @@ def run_merge(partial_dir: str = "snapshots/partial", output_dir: str = None) ->
         "cctl_labs": domain_data.get("cctl_labs", {}),
         "csfc":      domain_data.get("csfc", {}),
         "cc_crypto": domain_data.get("cc_crypto", {}),
-                "nato":      domain_data.get("nato", {}),
+        # Manual-only domain: no partial file exists; _apply_source_health
+        # carries the stored baseline forward from the prior snapshot.
+        "nato":      domain_data.get("nato", {}),
         "eucc":      domain_data.get("eucc", {}),
         "nd_itc":    domain_data.get("nd_itc", {}),
     }

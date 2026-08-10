@@ -81,16 +81,6 @@ def _do_get_html(url, timeout=30):
             "(bot-detection, IP reputation, or missing browser headers)",
             url,
         )
-        nato_base = str(getattr(config, "NATO_BASE", "")).lower()
-        if nato_base and url.lower().startswith(nato_base):
-            log.warning(
-                "NATO NIAPCL blocked this request (403) and its own error "
-                "page threatens forensic action against automated access. "
-                "Failing gracefully without retrying or attempting to "
-                "bypass the block; this source will report as stale until "
-                "access is authorized through an official channel."
-            )
-            return None
         csfc_base = str(getattr(config, "CSFC_BASE", "")).lower()
         if csfc_base and url.lower().startswith(csfc_base):
             log.info("Retrying WAF-protected page with a Chrome-compatible TLS fingerprint...")
@@ -690,147 +680,11 @@ def validate_snapshot(snapshot):
 
 
 # ── NATO NIAPCL ──────────────────────────────────────────────────────────────
-def _parse_nato_niapcl_products(soup) -> list:
-    """Parse the NATO NIAPCL product listing page into structured records.
-    Each record: {name, manufacturer, category, link, raw_text}
-    """
-    if not soup:
-        return []
-    items = []
-
-    # Current NIAPCL result pages render one nested table per product beneath
-    # this ASP.NET ListView container. The first table on the page is only a
-    # layout wrapper, so parsing it as a data table collapses all products into
-    # one unusable record.
-    product_tables = soup.select(
-        "#MainContent_ProductsView_itemPlaceholderContainer table.grid_6.alpha"
-    )
-    for product_table in product_tables:
-        product_link = product_table.find(
-            "a", href=lambda href: href and "/niapc/Product/" in href
-        )
-        if not product_link:
-            continue
-        name = product_link.get_text(" ", strip=True)
-        href = urljoin(config.NATO_BASE, product_link.get("href", ""))
-        manufacturer = ""
-        category = ""
-        for row in product_table.find_all("tr"):
-            cells = row.find_all("td", recursive=False)
-            if len(cells) < 2:
-                continue
-            label = cells[0].get_text(" ", strip=True).lower()
-            value = cells[1].get_text(" ", strip=True)
-            if "manufacturer" in label:
-                manufacturer = value
-            elif "categor" in label:
-                category = value
-        items.append({
-            "name": name,
-            "manufacturer": manufacturer,
-            "category": category,
-            "link": href,
-            "raw_text": product_table.get_text(" | ", strip=True)[:400],
-        })
-    if items:
-        return items
-
-    # Try table-based layout
-    table = next(
-        (candidate for candidate in soup.find_all("table") if candidate.find("th")),
-        None,
-    )
-    if table:
-        headers = [th.get_text(strip=True).lower() for th in table.find_all("th")]
-        for tr in table.find_all("tr")[1:]:
-            cells = [td.get_text(strip=True) for td in tr.find_all("td")]
-            if not cells:
-                continue
-            link_tag = tr.find("a")
-            href = link_tag["href"] if link_tag and link_tag.get("href") else ""
-            if href and not href.startswith("http"):
-                href = config.NATO_BASE + href
-            record: dict = {
-                "name": "", "manufacturer": "", "category": "",
-                "link": href, "raw_text": " | ".join(cells[:4])
-            }
-            for i, h in enumerate(headers):
-                if i >= len(cells):
-                    break
-                if "product" in h or "name" in h:
-                    record["name"] = cells[i]
-                elif "manufactur" in h or "vendor" in h or "company" in h:
-                    record["manufacturer"] = cells[i]
-                elif "categor" in h or "type" in h:
-                    record["category"] = cells[i]
-            if record["name"] or record["raw_text"]:
-                items.append(record)
-        if items:
-            return items
-    # Fallback: generic scrape
-    content = soup.find("main") or soup.find("div", {"id": "content"}) or soup
-    for tag in content.find_all(["li", "tr", "div", "p"]):
-        text = tag.get_text(separator=" ", strip=True)
-        link_tag = tag.find("a")
-        href = link_tag["href"] if link_tag and link_tag.get("href") else ""
-        if href and not href.startswith("http"):
-            href = config.NATO_BASE + href
-        if len(text) > 10:
-            items.append({"name": text[:200], "manufacturer": "", "category": "", "link": href, "raw_text": text[:400]})
-    # Deduplicate
-    seen: set = set()
-    unique: list = []
-    for item in items:
-        key = item["raw_text"][:80]
-        if key not in seen:
-            seen.add(key)
-            unique.append(item)
-    return unique
-
-
-def collect_nato() -> dict:
-    """Collect NATO NIAPCL product listings.
-    Monitors the NATO Information Assurance Product Catalogue for:
-    - New Cisco product listings (triggers Cisco celebration alert)
-    - General product additions / removals
-    """
-    log.info("[NATO NIAPCL] Collecting...")
-    data: dict = {
-        "pages": {},
-        "cisco_products": [],
-    }
-
-    # Warm up the session on the NATO base domain to pick up any required
-    # cookies before hitting the NIAPCL search pages (helps bypass WAF/bot filters).
-    log.info("[NATO NIAPCL] Warming up session on NATO base domain...")
-    try:
-        SESSION.get("https://www.ia.nato.int/", timeout=15)
-    except Exception as exc:
-        log.warning("[NATO] Session warm-up failed: %s", exc)
-
-    # NATO is consistently much slower than the other monitored sites and the
-    # configured all-products/Cisco views currently share one URL. Fetch each
-    # unique URL once with a source-specific timeout, then reuse the parsed
-    # records for every configured page key.
-    products_by_url: dict[str, list] = {}
-    for page_key, path in config.NATO_NIAPCL_PAGES.items():
-        url = config.NATO_BASE + path
-        if url not in products_by_url:
-            log.info("  [NATO] Fetching page: %s (%s)...", page_key, url)
-            soup = get_html(url, timeout=120)
-            products_by_url[url] = _parse_nato_niapcl_products(soup)
-        products = copy.deepcopy(products_by_url[url])
-        data["pages"][page_key] = products
-        log.info("  -> %d products", len(products))
-    # Extract Cisco-specific entries
-    all_products = data["pages"].get("all_products", [])
-    data["cisco_products"] = [
-        p for p in all_products
-        if any(kw in (p.get("manufacturer", "") + p.get("name", "") + p.get("raw_text", "")).lower()
-               for kw in config.NATO_CISCO_KEYWORDS)
-    ]
-    log.info("[NATO NIAPCL] total:%d cisco:%d", len(all_products), len(data["cisco_products"]))
-    return data
+# NATO NIAPCL is a manual-only domain: ia.nato.int blocks automated access,
+# so there is no collector for it. The Cisco baseline is maintained via the
+# "NATO Cisco Baseline Update" GitHub Issue workflow
+# (scripts/nato_issue_intake.py); the daily pipeline carries the stored
+# baseline forward in main._apply_source_health(). See config.MANUAL_DOMAINS.
 
 
 # ── EUCC / ENISA ─────────────────────────────────────────────────────────────
@@ -1147,13 +1001,15 @@ def collect_all(validate: bool = True):
     """
     log.info("[Collect] Starting parallel collection across all domains...")
 
+    # "nato" is deliberately absent: it is a manual-only domain
+    # (config.MANUAL_DOMAINS) whose baseline enters via the GitHub issue
+    # intake workflow, never by fetching ia.nato.int.
     domain_collectors = {
         "niap":      collect_niap,
         "cc_portal": collect_cc_portal,
         "cctl_labs": collect_cctl_labs,
         "csfc":      collect_csfc,
         "cc_crypto": collect_cc_crypto,
-        "nato":      collect_nato,
         "eucc":      collect_eucc,
         "nd_itc":    collect_nd_itc,
     }
@@ -1516,13 +1372,14 @@ def collect_cc_crypto() -> dict:
 #: Used by `collect_domain()` and the `--domain` CLI flag so that each
 #: GitHub Actions matrix job can collect exactly one domain and write a
 #: partial snapshot to `snapshots/partial/<domain>.json`.
+#: "nato" is deliberately absent: manual-only domain (config.MANUAL_DOMAINS),
+#: maintained via the GitHub issue intake workflow.
 DOMAIN_COLLECTORS: dict = {
     "niap":      collect_niap,
     "cc_portal": collect_cc_portal,
     "cctl_labs": collect_cctl_labs,
     "csfc":      collect_csfc,
     "cc_crypto": collect_cc_crypto,
-    "nato":      collect_nato,
     "eucc":      collect_eucc,
     "nd_itc":    collect_nd_itc,
 }
@@ -1586,7 +1443,7 @@ if __name__ == "__main__":
         "--domain",
         required=True,
         choices=sorted(DOMAIN_COLLECTORS),
-        help="Domain to collect (e.g. niap, csfc, nato).",
+        help="Domain to collect (e.g. niap, csfc, eucc).",
     )
     parser.add_argument(
         "--out-dir",

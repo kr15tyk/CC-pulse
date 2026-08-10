@@ -11,7 +11,7 @@ CC Pulse monitors public cybersecurity certification and standards sources, comp
 | NIAP | Products, Protection Profiles, Technical Decisions, announcements, events, and policy letters |
 | NSA CSfC | Components List, announcements, capability packages, and selection documents |
 | CC Portal | International news, Protection Profiles, and certified products |
-| NATO NIAPCL | Certified products and Cisco-specific changes |
+| NATO NIAPCL | Cisco listings, maintained manually via the weekly capture reminder and GitHub issue intake (ia.nato.int blocks automated access) |
 | EUCC / ENISA | Scheme requirements and certificates |
 | ND-iTC | NIT RFIs (ND-iTC Technical Decisions, distinct from NIAP TDs) and Allowed-With lists |
 | CCTL labs | New laboratory posts |

@@ -210,26 +210,31 @@ CSFC_APL_COMPONENT_KEYWORDS = {
 }
 
 # =============================================================
-# NATO NIAPCL Monitoring
-# Monitors NATO's Information Assurance Product Catalogue for
-# new Cisco listings and general changes.
+# NATO NIAPCL Monitoring (manual-only domain)
+# NATO's Information Assurance Product Catalogue blocks automated
+# access (403 + warnings against scraping), so CC Pulse never
+# contacts ia.nato.int. The Cisco baseline is maintained entirely
+# by hand:
+#   1. Weekly reminder email (scripts/send_nato_capture_reminder.py)
+#      prompts a human to visit the Cisco-filtered NIAPCL search.
+#   2. The copied product text is submitted via the "NATO Cisco
+#      Baseline Update" GitHub Issue Form.
+#   3. scripts/nato_issue_intake.py diffs it against the stored
+#      baseline, fires the normal Cisco alerts, and updates the
+#      latest snapshot.
+# The daily pipeline carries the stored baseline forward unchanged
+# and reports the domain as healthy/manual (see MANUAL_DOMAINS).
 # =============================================================
-NATO_BASE = "https://www.ia.nato.int"
 
-# Main NIAPCL search page filtered to show all products
-NATO_NIAPCL_PAGES = {
-    "all_products": "/Search/NIAPC/AND/Category_/Manufacturer_10/Country_/SecurityGroup_",
-    "cisco_products": "/Search/NIAPC/AND/Category_/Manufacturer_10/Country_/SecurityGroup_",
-}
-
-# Canonical URL for NATO NIAPCL alerts and dashboard links
+# Canonical URL for NATO NIAPCL alerts, dashboard links, and the
+# manual capture reminder. Never fetched by CC Pulse itself.
 NATO_NIAPCL_URL = "https://www.ia.nato.int/Search/NIAPC/AND/Category_/Manufacturer_10/Country_/SecurityGroup_"
 
-# Vendor keywords to identify Cisco in NATO listings
-NATO_CISCO_KEYWORDS = ["cisco"]
-
-# Sanity minimum: NATO NIAPCL typically lists dozens of products
-SANITY_MIN_NATO_PRODUCTS = 3
+# Domains whose snapshot data is maintained by a human workflow rather
+# than automated collection. These are excluded from daily collection
+# and from fetch-based source-health checks: the prior snapshot's data
+# is carried forward and the domain is reported as healthy ("manual").
+MANUAL_DOMAINS = frozenset({"nato"})
 
 # =============================================================
 # EUCC (EU Common Criteria) / ENISA Monitoring
