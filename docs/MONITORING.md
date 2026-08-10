@@ -14,7 +14,8 @@ CC Pulse collects public records into dated JSON snapshots and compares each acc
 | NSA CSfC | Components List additions/removals, announcements, and selection-link version changes |
 | CC Crypto | New page items, feed items, and documents |
 | CC Portal and CCTL labs | New international portal records and laboratory posts |
-| NATO NIAPCL and EUCC | Product/certificate additions, removals, and Cisco-specific changes |
+| EUCC | Certificate additions, removals, and Cisco-specific changes |
+| NATO NIAPCL | Cisco listing additions/removals — manual-only domain: ia.nato.int blocks automated access, so the baseline is updated by a human via the weekly capture reminder and the "NATO Cisco Baseline Update" issue form (`scripts/nato_issue_intake.py`) |
 | ND-iTC | NIT RFI additions, status changes, revisions, and archival; Allowed-With list entry additions/removals, version changes, and list-document updates |
 
 ND-iTC Technical Decisions are reported as **NIT RFIs** everywhere in CC Pulse. NIAP also issues "Technical Decisions"; the distinct name prevents the two from being confused in notifications.
@@ -39,6 +40,10 @@ When a collection fails, is incomplete, or drops suspiciously:
 A collapse guard covers *volume* — a collection dropping to near-zero. It does not detect a small-but-corrupt payload that stays above the volume threshold; that class of failure is caught, where it is caught, by per-source validation, not by the collapse guard.
 
 A newly introduced source receives a silent first healthy baseline so deployment does not create an alert flood.
+
+## Manual domains
+
+Domains listed in `config.MANUAL_DOMAINS` (currently NATO NIAPCL) are never collected automatically and have no fetch-based health checks. Each daily run carries the stored baseline forward unchanged and records the domain as `healthy` with `mode: manual` in `source_health`, so it never appears in the degraded-sources status email. The baseline changes only when the issue-intake workflow applies a manually captured update, which diffs against the stored baseline and fires the normal Cisco alerts itself.
 
 ## Record identity and baseline resets
 
