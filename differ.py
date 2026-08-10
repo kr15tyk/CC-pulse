@@ -263,7 +263,7 @@ def flag_alerts(diff: Snapshot) -> list[dict]:
                 tab="us",
             )
 
-    # CSfC APL page changes — new items on the Components List page
+    # CSfC Components List page changes — new items on the Components List page
     _csfc_page_urls = {
         "apl":           config.CSFC_PRODUCT_LIST_URL,
         "home":          config.CSFC_BASE + "/Resources/Commercial-Solutions-for-Classified-Program/",
@@ -274,7 +274,7 @@ def flag_alerts(diff: Snapshot) -> list[dict]:
         for item in page_diff.get("added", []):
             vendor_keywords = config.CISCO_VENDOR_KEYWORDS if page_key == "apl" else []
             _add_text(
-                "CSfC APL" if page_key == "apl" else f"CSfC: {page_key}",
+                "CSfC Components List" if page_key == "apl" else f"CSfC: {page_key}",
                 "new_cert" if page_key == "apl" else "new",
                 item.get("text", ""),
                 url=(_csfc_page_urls.get(page_key, config.CSFC_PRODUCT_LIST_URL) if page_key == "apl" else item.get("href") or item.get("link") or _csfc_page_urls.get(page_key, config.CSFC_PRODUCT_LIST_URL)),
@@ -285,7 +285,7 @@ def flag_alerts(diff: Snapshot) -> list[dict]:
         for item in page_diff.get("removed", []):
             vendor_keywords = config.CISCO_VENDOR_KEYWORDS if page_key == "apl" else []
             _add_text(
-                "CSfC APL" if page_key == "apl" else f"CSfC: {page_key}",
+                "CSfC Components List" if page_key == "apl" else f"CSfC: {page_key}",
                 "removed",
                 item.get("text", ""),
                 url=(_csfc_page_urls.get(page_key, config.CSFC_PRODUCT_LIST_URL) if page_key == "apl" else item.get("href") or item.get("link") or _csfc_page_urls.get(page_key, config.CSFC_PRODUCT_LIST_URL)),
@@ -297,7 +297,7 @@ def flag_alerts(diff: Snapshot) -> list[dict]:
         for item in page_diff.get("updated", []):
             vendor_keywords = config.CISCO_VENDOR_KEYWORDS if page_key == "apl" else []
             _add_text(
-                "CSfC APL" if page_key == "apl" else f"CSfC: {page_key}",
+                "CSfC Components List" if page_key == "apl" else f"CSfC: {page_key}",
                 "updated",
                 item.get("text", ""),
                 url=item.get("href") or item.get("link") or _csfc_page_urls.get(page_key, config.CSFC_PRODUCT_LIST_URL),
@@ -773,9 +773,9 @@ def _diff_pages(old_pages: dict, new_pages: dict) -> dict:
     return result
 
 
-# -- CSfC APL diff helper (keyed by stable link, not text prefix) ------------
+# -- CSfC Components List diff helper (keyed by stable link, not text prefix) ------------
 def _diff_csfc_apl(old_items: list, new_items: list) -> dict:
-    """Diff CSfC Components List (APL) entries, keyed by their NIAP link.
+    """Diff CSfC Components List entries, keyed by their NIAP link.
 
     _diff_pages() keys purely on the first 120 chars of display text, so an
     edit to an existing listing's wording (a cert-date tweak, a description

@@ -113,7 +113,7 @@ def _kind_label(kind: str) -> str:
 _CHANGE_DESCRIPTIONS: dict[tuple[str, str], str] = {
     # New certifications
     ("new_cert",       "NIAP"):  "A product has been newly certified on the NIAP Validated Products List.",
-    ("new_cert",       "CSfC"):  "A product has been added to the NSA Commercial Solutions for Classified (CSfC) Approved Products List.",
+    ("new_cert",       "CSfC"):  "A product has been added to the NSA Commercial Solutions for Classified (CSfC) Components List.",
     ("new_cert",       "NATO"):  "A product has received a new listing on the NATO Information Assurance Product Catalogue (NIAPCL).",
     ("new_cert",       "EUCC"):  "A product has received a new EU Common Criteria (EUCC) certificate from ENISA.",
     # Products entering evaluation
@@ -136,8 +136,8 @@ _CHANGE_DESCRIPTIONS: dict[tuple[str, str], str] = {
         "Review the Components List page to see what changed and check whether any "
         "approved products relevant to your program have been added or removed."
     ),
-    ("updated", "CSfC APL"): (
-        "An existing CSfC Components List (APL) entry was revised \u2014 the underlying "
+    ("updated", "CSfC Components List"): (
+        "An existing CSfC Components List entry was revised \u2014 the underlying "
         "product/VID is unchanged, but the listing text (description, cert date, etc.) "
         "was edited. This is not a new product being added or an approved product "
         "losing approval."
@@ -539,12 +539,12 @@ def build_email_html(weekly_diff: dict) -> str:
     for page_key, page_diff in csfc.get("pages", {}).items():
         for item in page_diff.get("added", [])[:3]:
             page_url = (_csfc_page_urls.get(page_key, config.CSFC_PRODUCT_LIST_URL) if page_key == "apl" else item.get("href") or item.get("link") or _csfc_page_urls.get(page_key, config.CSFC_PRODUCT_LIST_URL))
-            label    = "APL" if page_key == "apl" else page_key[:8]
+            label     = "Components List" if page_key == "apl" else page_key[:8]
             txt      = _link(page_url, item.get("text", "")[:120])
             rows.append(_row(f"NSA:{label}", txt, "#60A5FA", "#12102E"))
         for item in page_diff.get("updated", [])[:3]:
             item_url = item.get("href") or item.get("link") or _csfc_page_urls.get(page_key, config.CSFC_PRODUCT_LIST_URL)
-            label    = "APL" if page_key == "apl" else page_key[:8]
+            label     = "Components List" if page_key == "apl" else page_key[:8]
             txt      = _link(item_url, item.get("text", "")[:120])
             rows.append(_row(f"NSA:{label}-UPD", txt, "#FBBF24", "#12102E"))
     for feed_name, items in csfc.get("feeds", {}).items():
@@ -553,7 +553,7 @@ def build_email_html(weekly_diff: dict) -> str:
             title = item.get("title", "")
             txt   = _link(link, title)
             rows.append(_row("ADVISORY", txt, "#60A5FA", "#12102E"))
-    parts.append(_section("CSfC — Capability Packages & APL", rows))
+    parts.append(_section("CSfC — Capability Packages & Components List", rows))
 
     # ── CC Crypto Catalog ──────────────────────────────────────────────────────
     cc_crypto = weekly_diff.get("cc_crypto", {})
@@ -1355,7 +1355,7 @@ def send_readme_message() -> None:
         "| Source | What's tracked |\n"
         "|---|---|\n"
         "| **NIAP** | Certified products (PCL), Protection Profiles, Technical Decisions, CCTLs, news/events |\n"
-        "| **CSfC / NSA** | Approved Products List and Component Selection documents |\n"
+        "| **CSfC / NSA** | Components List and Component Selection documents |\n"
         "| **NATO NIAPCL** | NATO Information Assurance Product Catalogue — certified products and components |\n"
         "| **EUCC / ENISA** | EU Common Criteria certification scheme — requirements and issued certificates |\n"
         "| **ND-iTC** | NIT RFIs (ND-iTC Technical Decisions — distinct from NIAP TDs) and Allowed-With lists |\n"

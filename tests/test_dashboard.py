@@ -185,3 +185,112 @@ def test_dashboard_renders_revised_announcement_and_policy(tmp_path):
     assert '<span class="card-count">2 alerts</span>' in html
     assert "2 alerts</div>" not in html
     assert "CSfC Component Selections: IPsec VPN Gateway" in html
+
+
+def test_csfc_counts_include_updated_bucket():
+    diff = {
+        "csfc": {
+            "selection_links": {},
+            "pages": {
+                "apl": {
+                    "added": [],
+                    "removed": [],
+                    "updated": [{"text": "Component listing revised"}],
+                },
+            },
+        },
+    }
+
+    assert dashboard._section_daily_counts([diff], "csfc") == [1]
+
+def test_history_includes_csfc_component_updated_entries(tmp_path):
+    old_dir = dashboard.config.DIFF_DIR
+    dashboard.config.DIFF_DIR = str(tmp_path)
+    try:
+        payload = {
+            "period_end": "2026-07-02T06:00:00+00:00",
+            "niap": {
+                "cisco_ndcpp": {"added": []},
+                "pps": {"added": [], "removed": []},
+                "tds": {"added": []},
+                "pcl_all": {"added": []},
+                "in_evaluation": {"added": [], "removed": []},
+            },
+            "nato": {"cisco_added": []},
+            "eucc": {"cisco_added": []},
+            "csfc": {
+                "selection_links": {},
+                "pages": {
+                    "apl": {
+                        "added": [],
+                        "removed": [],
+                        "updated": [{
+                            "text": "Cisco Secure Firewall listing revised",
+                            "href": "https://example.test/component",
+                        }],
+                    },
+                },
+            },
+            "nist": {"pages": {}},
+        }
+        (tmp_path / "2026-07-02_diff.json").write_text(json.dumps(payload))
+
+        history = dashboard._build_history()
+
+        updated_entries = [
+            h for h in history
+            if h["category"] == "csfc_change" and h["kind"] == "updated"
+        ]
+        assert len(updated_entries) == 1
+        assert "updated" in updated_entries[0]["title"].lower()
+        assert "Cisco Secure Firewall" in updated_entries[0]["title"]
+    finally:
+        dashboard.config.DIFF_DIR = old_dir
+
+def test_dashboard_renders_csfc_component_updated_item(tmp_path):
+    dashboard.config.DIFF_DIR = str(tmp_path / "diffs")
+    dashboard.config.STAGING_DIR = "docs/staging"
+    dashboard.config.WATCH_KEYWORDS = []
+    dashboard.config.NATO_NIAPCL_URL = "https://example.test/nato"
+    dashboard.config.EUCC_REQUIREMENTS_URL = "https://example.test/eucc"
+    dashboard.config.EUCC_CERTIFICATES_URL = "https://example.test/eucc-certs"
+    dashboard.config.CSFC_PRODUCT_LIST_URL = "https://example.test/csfc"
+    dashboard.config.CSFC_BASE = "https://example.test"
+    dashboard.config.CSFC_PAGES = {"announcements": "/announcements"}
+    diff = {
+        "period_start": "2026-07-01T00:00:00Z",
+        "period_end": "2026-07-02T00:00:00Z",
+        "niap": {
+            "pps": {}, "tds": {}, "cisco_ndcpp": {}, "pcl_all": {},
+            "in_evaluation": {},
+            "news": {key: [] for key in ("added", "revised", "deactivated", "reactivated", "removed")},
+            "events": {key: [] for key in ("added", "revised", "deactivated", "reactivated", "removed")},
+            "policies": {key: [] for key in ("added", "revised", "archived", "reactivated", "removed")},
+        },
+        "cc_portal": {"news": {"added": []}, "pps": {"added": []}, "products": {"added": []}},
+        "cctl_labs": {},
+        "csfc": {
+            "pages": {
+                "apl": {
+                    "added": [],
+                    "removed": [],
+                    "updated": [{
+                        "text": "Cisco Secure Firewall listing revised",
+                        "href": "https://example.test/component",
+                    }],
+                },
+            },
+            "selection_links": {},
+            "feeds": {},
+        },
+        "cc_crypto": {"pages": {}}, "nist": {"pages": {}},
+        "nato": {"pages": {}, "cisco_added": [], "cisco_removed": []},
+        "eucc": {"pages": {}, "cisco_added": [], "cisco_removed": []},
+        "alerts": [],
+    }
+
+    dashboard.render_dashboard(diff, output_dir=str(tmp_path))
+    html = (tmp_path / "cc_dashboard.html").read_text()
+
+    assert "Cisco Secure Firewall listing revised" in html
+    assert "component updated" in html
