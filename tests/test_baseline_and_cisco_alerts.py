@@ -13,7 +13,7 @@ Background (2026-07-09/10 findings):
 """
 import sys
 
-# Configure the shared config stub (see test_cmvp_alert_filtering.py for why
+# Configure the shared config stub (see test_alert_tiering.py for why
 # this must happen before importing differ/emailer).
 _cfg = sys.modules["config"]
 for _name, _value in {

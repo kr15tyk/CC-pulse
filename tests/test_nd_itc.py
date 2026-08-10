@@ -8,7 +8,7 @@ import sys
 from unittest.mock import MagicMock
 
 # Configure the shared config stub before importing project modules (see
-# test_cmvp_alert_filtering.py for the module-cache rationale).
+# test_alert_tiering.py for the module-cache rationale).
 _cfg = sys.modules["config"]
 _CONFIG_VALUES = {
     "WATCH_KEYWORDS": ["NDcPP", "CSfC", "FIPS 140-3"],

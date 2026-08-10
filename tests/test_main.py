@@ -32,7 +32,6 @@ _cfg.SANITY_MIN_PPS = 10
 _cfg.SANITY_MIN_CSFC_APL = 5
 _cfg.SANITY_MIN_CSFC_ANNOUNCEMENTS = 1
 _cfg.SANITY_MIN_CC_CRYPTO_PUBS = 5
-_cfg.SANITY_MIN_NIST_NEWS = 10
 _cfg.SANITY_MIN_NIAP_NEWS = 1
 _cfg.SANITY_MIN_NIAP_POLICIES = 1
 _cfg.MANUAL_DOMAINS = frozenset({"nato"})
@@ -76,7 +75,7 @@ class TestEmptySnapshot:
     def test_all_domain_keys_present(self):
         result = main._empty_snapshot()
         for key in ("niap", "cc_portal", "cctl_labs", "csfc",
-                    "cc_crypto", "nist", "nato", "eucc", "nd_itc"):
+                    "cc_crypto", "nato", "eucc", "nd_itc"):
             assert key in result, f"Missing domain key '{key}' in _empty_snapshot"
 
     def test_schema_version_set(self):
@@ -153,7 +152,6 @@ def _healthy_snapshot():
             "announcements": [{"text": "5/20/25 | Published guidance"}],
         }},
         "cc_crypto": {"pages": {"publications": [{"text": str(i)} for i in range(5)]}},
-        "nist": {"pages": {"news": [{"text": str(i)} for i in range(10)]}},
         # Manual-only domain: intake-shaped baseline, never collected.
         "nato": {
             "pages": {"cisco_products": [{"name": "Cisco Router"}]},
@@ -237,14 +235,14 @@ class TestSourceHealth:
     def test_consecutive_failures_increment_across_stale_snapshots(self):
         prior = _healthy_snapshot()
         prior["source_health"] = {
-            "nist": {"status": "stale", "consecutive_failures": 2}
+            "cc_crypto": {"status": "stale", "consecutive_failures": 2}
         }
         current = _healthy_snapshot()
-        current["nist"] = {"pages": {"news": []}}
+        current["cc_crypto"] = {"pages": {"publications": []}}
 
         main._apply_source_health(current, prior)
 
-        assert current["source_health"]["nist"]["consecutive_failures"] == 3
+        assert current["source_health"]["cc_crypto"]["consecutive_failures"] == 3
 
     def test_explicit_collection_error_is_not_treated_as_healthy(self):
         prior = _healthy_snapshot()
@@ -285,15 +283,15 @@ class TestSourceHealth:
         prior = _healthy_snapshot()
         main._apply_source_health(prior)
         current = _healthy_snapshot()
-        current["nist"] = {"pages": {"news": []}}
+        current["cc_crypto"] = {"pages": {"publications": []}}
 
         main._apply_source_health(current, prior)
 
-        assert current["source_health"]["nist"]["status"] == "stale"
+        assert current["source_health"]["cc_crypto"]["status"] == "stale"
         assert all(
             current["source_health"][domain]["status"] == "healthy"
             for domain in main.DOMAIN_KEYS
-            if domain != "nist"
+            if domain != "cc_crypto"
         )
 
     def test_failed_niap_news_retains_only_news_last_known_good(self):

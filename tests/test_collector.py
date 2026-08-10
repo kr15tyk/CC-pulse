@@ -25,7 +25,6 @@ _cfg.SANITY_MIN_PPS = 10
 _cfg.SANITY_MIN_CSFC_APL = 5
 _cfg.SANITY_MIN_CSFC_ANNOUNCEMENTS = 1
 _cfg.SANITY_MIN_CC_CRYPTO_PUBS = 5
-_cfg.SANITY_MIN_NIST_NEWS = 10
 _cfg.CSFC_BASE = "https://www.nsa.gov"
 _cfg.CSFC_PAGES = {
     "home": "/csfc/",
@@ -35,7 +34,6 @@ _cfg.CSFC_APL_COMPONENT_KEYWORDS = {"TLS/VPN": ["tls", "vpn"]}
 _cfg.CSFC_COMPONENT_SELECTIONS = {}
 _cfg.CSFC_FEEDS = []
 _cfg.NIAP_BASE = "https://www.niap-ccevs.org"
-_cfg.NIST_CSRC_BASE = "https://csrc.nist.gov"
 _cfg.EUCC_BASE = "https://certification.enisa.europa.eu"
 sys.modules["config"] = _cfg
 # Also stub heavy deps
@@ -56,7 +54,6 @@ def _snap(pcl_count=60, pps_count=15):
         "niap": {"pcl": pcl, "pps": pps},
         "csfc": {"pages": {"apl": [], "announcements": []}, "component_selection_hashes": {}},
         "cc_crypto": {"pages": {"publications": [{"text": f"pub{i}", "href": ""} for i in range(6)]}},
-        "nist": {"pages": {"news": [{"text": f"news{i}"} for i in range(12)]}},
     }
 
 
@@ -248,36 +245,6 @@ class TestGetHtml:
         fallback.assert_called_once()
         assert fallback.call_args.kwargs["impersonate"] == "chrome"
         browser_response.raise_for_status.assert_called_once()
-
-# ===========================================================================
-# NIST collector regressions
-# ===========================================================================
-
-class TestInternationalCollectors:
-
-    def test_nist_news_uses_result_cards_below_body_section(self):
-        titles = []
-        for text, href in (
-            ("First cryptography update", "/News/2026/first"),
-            ("Second cryptography update", "/News/2026/second"),
-        ):
-            link = MagicMock()
-            link.get_text.return_value = text
-            link.get.return_value = href
-            title = MagicMock()
-            title.find.return_value = link
-            titles.append(title)
-        soup = MagicMock()
-        soup.select.return_value = titles
-
-        with patch.object(collector, "get_html", return_value=soup):
-            items = collector._scrape_nist_page("/news")
-
-        assert [item["text"] for item in items] == [
-            "First cryptography update",
-            "Second cryptography update",
-        ]
-        assert items[0]["href"] == "https://csrc.nist.gov/News/2026/first"
 
 # ===========================================================================
 # collect_csfc — fix #24: APL page fetched once, soup reused

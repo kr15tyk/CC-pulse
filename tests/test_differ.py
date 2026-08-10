@@ -578,7 +578,7 @@ class TestComputeDiff:
     def test_all_top_level_keys_present(self):
         snap = _empty_snap()
         diff = differ.compute_diff(snap, copy.deepcopy(snap))
-        for key in ("niap", "cc_portal", "cctl_labs", "csfc", "cc_crypto", "nist", "nato", "eucc", "alerts"):
+        for key in ("niap", "cc_portal", "cctl_labs", "csfc", "cc_crypto", "nato", "eucc", "alerts"):
             assert key in diff, f"Missing key '{key}' in compute_diff output"
 
     def test_nato_and_eucc_in_diff_output(self):
