@@ -212,14 +212,20 @@ def _build_history(n: int = 90) -> list:
         # CSfC Components List and Announcements changes
         for page_key in ("apl", "announcements"):
             page_diff = d.get("csfc", {}).get("pages", {}).get(page_key, {})
-            for kind in ("added", "removed"):
+            for kind in ("added", "removed", "updated"):
                 for item in page_diff.get(kind, []):
                     label = "Component" if page_key == "apl" else "Announcement"
+                    if kind == "updated":
+                        change_kind = "updated"
+                        title = f"CSfC {label} updated: {(item.get('text') or '')[:80]}"
+                    else:
+                        change_kind = "new" if kind == "added" else "removed"
+                        title = f"CSfC {label}: {(item.get('text') or '')[:80]}"
                     entries.append({
                         "date": date,
                         "category": "csfc_change",
-                        "kind": "new" if kind == "added" else "removed",
-                        "title": f"CSfC {label}: {(item.get('text') or '')[:80]}",
+                        "kind": change_kind,
+                        "title": title,
                         "detail": "",
                         "url": item.get("href") or (
                             "https://www.nsa.gov/Resources/Commercial-Solutions-for-Classified-Program/Components-List/"
@@ -261,7 +267,7 @@ def _section_daily_counts(diffs: list, section_key: str) -> list:
             csfc = d.get("csfc", {})
             n = sum(1 for cp in csfc.get("selection_links", {}).values() if cp.get("changed"))
             n += sum(
-                len(page_diff.get("added", [])) + len(page_diff.get("removed", []))
+                len(page_diff.get("added", [])) + len(page_diff.get("removed", [])) + len(page_diff.get("updated", []))
                 for page_key, page_diff in csfc.get("pages", {}).items()
                 if page_key in ("apl", "announcements") and isinstance(page_diff, dict)
             )
@@ -915,6 +921,12 @@ DASHBOARD_TEMPLATE = """
         <div class="item-row" data-source="csfc" data-kind="removed">
           <a class="item-link" href="{{ (item.href or (config_csfc_components_url if page_key == 'apl' else config_csfc_announcements_url)) | safe_url }}" target="_blank">{{ item.text }}</a>
           <span class="item-meta">{% if page_key == 'apl' %}component removed{% else %}announcement removed{% endif %}</span>
+        </div>
+        {% endfor %}
+        {% for item in page_diff.get('updated', []) %}
+        <div class="item-row" data-source="csfc" data-kind="updated">
+          <a class="item-link" href="{{ (item.href or (config_csfc_components_url if page_key == 'apl' else config_csfc_announcements_url)) | safe_url }}" target="_blank">{{ item.text }}</a>
+          <span class="item-meta">{% if page_key == 'apl' %}component updated{% else %}announcement updated{% endif %}</span>
         </div>
         {% endfor %}
       {% endif %}
@@ -1614,7 +1626,7 @@ def render_dashboard(diff: dict, output_dir: str = "docs") -> None:
     csfc_total      = sum(1 for cp in csfc_diff.get("selection_links", {}).values()
                           if cp.get("changed"))
     csfc_total     += sum(
-        len(page_diff.get("added", [])) + len(page_diff.get("removed", []))
+        len(page_diff.get("added", [])) + len(page_diff.get("removed", [])) + len(page_diff.get("updated", []))
         for page_key, page_diff in csfc_diff.get("pages", {}).items()
         if page_key in ("apl", "announcements") and isinstance(page_diff, dict)
     )

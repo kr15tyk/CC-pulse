@@ -136,6 +136,12 @@ _CHANGE_DESCRIPTIONS: dict[tuple[str, str], str] = {
         "Review the Components List page to see what changed and check whether any "
         "approved products relevant to your program have been added or removed."
     ),
+    ("updated", "CSfC APL"): (
+        "An existing CSfC Components List (APL) entry was revised \u2014 the underlying "
+        "product/VID is unchanged, but the listing text (description, cert date, etc.) "
+        "was edited. This is not a new product being added or an approved product "
+        "losing approval."
+    ),
     ("updated",        "CSfC"):  "A CSfC Capability Package or Component Selection document has changed. These documents define the approved architectures for handling classified information.",
     ("advisory",       "CSfC"):  "A new CSfC advisory or policy document has been published by the NSA.",
     # CC Portal
@@ -536,6 +542,11 @@ def build_email_html(weekly_diff: dict) -> str:
             label    = "APL" if page_key == "apl" else page_key[:8]
             txt      = _link(page_url, item.get("text", "")[:120])
             rows.append(_row(f"NSA:{label}", txt, "#60A5FA", "#12102E"))
+        for item in page_diff.get("updated", [])[:3]:
+            item_url = item.get("href") or item.get("link") or _csfc_page_urls.get(page_key, config.CSFC_PRODUCT_LIST_URL)
+            label    = "APL" if page_key == "apl" else page_key[:8]
+            txt      = _link(item_url, item.get("text", "")[:120])
+            rows.append(_row(f"NSA:{label}-UPD", txt, "#FBBF24", "#12102E"))
     for feed_name, items in csfc.get("feeds", {}).items():
         for item in items[:3]:
             link  = item.get("link", "")

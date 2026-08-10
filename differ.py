@@ -294,6 +294,18 @@ def flag_alerts(diff: Snapshot) -> list[dict]:
                 additional_keywords=vendor_keywords,
             )
 
+        for item in page_diff.get("updated", []):
+            vendor_keywords = config.CISCO_VENDOR_KEYWORDS if page_key == "apl" else []
+            _add_text(
+                "CSfC APL" if page_key == "apl" else f"CSfC: {page_key}",
+                "updated",
+                item.get("text", ""),
+                url=item.get("href") or item.get("link") or _csfc_page_urls.get(page_key, config.CSFC_PRODUCT_LIST_URL),
+                detail=f"Listing updated on CSfC {page_key.replace('_', ' ')} page",
+                tab="us",
+                additional_keywords=vendor_keywords,
+            )
+
     # CC Crypto Catalog page changes — fire unconditionally for publications (fix #27)
     # The publications page is curated CC crypto content; all new items are relevant.
     _cc_crypto_urls = {
@@ -760,6 +772,43 @@ def _diff_pages(old_pages: dict, new_pages: dict) -> dict:
             result[page_key] = {"added": added, "removed": removed}
     return result
 
+
+# -- CSfC APL diff helper (keyed by stable link, not text prefix) ------------
+def _diff_csfc_apl(old_items: list, new_items: list) -> dict:
+    """Diff CSfC Components List (APL) entries, keyed by their NIAP link.
+
+    _diff_pages() keys purely on the first 120 chars of display text, so an
+    edit to an existing listing's wording (a cert-date tweak, a description
+    reformat) with the underlying product/VID unchanged shows up as a
+    spurious removed+added pair. APL records carry a stable href to the
+    underlying NIAP product page (collector._parse_csfc_apl_structured), so
+    key on that instead (falling back to the text prefix for any record
+    without one) and report same-key text changes as "updated".
+    """
+    old_by_key = {
+        _record_key(item, url_field="href", text_field="text"): item
+        for item in old_items
+    }
+    new_by_key = {
+        _record_key(item, url_field="href", text_field="text"): item
+        for item in new_items
+    }
+    old_keys = set(old_by_key)
+    new_keys = set(new_by_key)
+
+    added = [new_by_key[k] for k in new_keys - old_keys]
+    removed = [old_by_key[k] for k in old_keys - new_keys]
+    updated = []
+    for k in old_keys & new_keys:
+        old_item = old_by_key[k]
+        new_item = new_by_key[k]
+        if (old_item.get("text") or "") != (new_item.get("text") or ""):
+            changed = copy.deepcopy(new_item)
+            changed["_old_text"] = old_item.get("text") or ""
+            updated.append(changed)
+
+    return {"added": added, "removed": removed, "updated": updated}
+
 # -- Generic feed diff helper ---------------------------------------------------
 def _diff_feeds(old_feeds: dict, new_feeds: dict, categorize: bool = False) -> dict:
     """Diff two {feed_name: [items]} dicts by id/title/link key."""
@@ -1199,6 +1248,10 @@ def merge_weekly_diffs(diffs: list[Snapshot]) -> Snapshot:
                     weekly["csfc"]["pages"][page_key] = {"added": []}
                 weekly["csfc"]["pages"][page_key]["added"] = merge_lists(
                     weekly["csfc"]["pages"][page_key]["added"], page_diff["added"])
+            if "updated" in page_diff:
+                weekly["csfc"]["pages"][page_key]["updated"] = merge_lists(
+                    weekly["csfc"]["pages"][page_key].get("updated", []),
+                    page_diff["updated"])
         for sel_name, sel_data in d.get("csfc", {}).get("selection_links", {}).items():
             weekly["csfc"]["selection_links"][sel_name] = sel_data
 
@@ -1253,7 +1306,14 @@ def merge_weekly_diffs(diffs: list[Snapshot]) -> Snapshot:
 # -- CSfC diff -----------------------------------------------------------------
 def diff_csfc(old_csfc: Snapshot, new_csfc: Snapshot) -> Snapshot:
     """Diff two CSfC snapshots."""
-    pages = _diff_pages(old_csfc.get("pages", {}), new_csfc.get("pages", {}))
+    old_pages = old_csfc.get("pages", {})
+    new_pages = new_csfc.get("pages", {})
+    non_apl_old = {k: v for k, v in old_pages.items() if k != "apl"}
+    non_apl_new = {k: v for k, v in new_pages.items() if k != "apl"}
+    pages = _diff_pages(non_apl_old, non_apl_new)
+    apl_diff = _diff_csfc_apl(old_pages.get("apl", []), new_pages.get("apl", []))
+    if apl_diff["added"] or apl_diff["removed"] or apl_diff["updated"]:
+        pages["apl"] = apl_diff
     selection_links = _diff_selection_links(
         old_csfc.get("selection_links", {}),
         new_csfc.get("selection_links", {}),
@@ -1266,9 +1326,10 @@ def diff_csfc(old_csfc: Snapshot, new_csfc: Snapshot) -> Snapshot:
     page_changes = sum(len(v.get("added", [])) for v in pages.values())
     sel_changes = len(selection_links)
     feed_new = sum(len(v) for v in feeds.values())
+    apl_updated = len(apl_diff["updated"])
     log.info(
-        "[CSfC Diff] page-items-added:%d selection-link-changes:%d feed-new:%d",
-        page_changes, sel_changes, feed_new,
+        "[CSfC Diff] page-items-added:%d apl-updated:%d selection-link-changes:%d feed-new:%d",
+        page_changes, apl_updated, sel_changes, feed_new,
     )
     return {"pages": pages, "selection_links": selection_links, "feeds": feeds}
 
