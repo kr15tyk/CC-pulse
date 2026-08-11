@@ -645,3 +645,211 @@ class TestDiffNiapPclAll:
         result = differ.diff_niap_pcl_all(old, new)
         assert len(result["newly_archived"]) == 1
         assert result["added"] == []
+
+
+
+# ===========================================================================
+# _diff_csfc_apl -- link-keyed diff (avoids false removed+added on reformats)
+# ===========================================================================
+
+class TestDiffCsfcApl:
+
+    def test_new_link_is_added(self):
+        result = differ._diff_csfc_apl([], [{"href": "https://x/1", "text": "New component"}])
+        assert len(result["added"]) == 1
+        assert result["removed"] == []
+        assert result["updated"] == []
+
+    def test_missing_link_is_removed(self):
+        old = [{"href": "https://x/1", "text": "Old component"}]
+        result = differ._diff_csfc_apl(old, [])
+        assert len(result["removed"]) == 1
+        assert result["added"] == []
+        assert result["updated"] == []
+
+    def test_unchanged_entry_is_not_reported(self):
+        item = {"href": "https://x/1", "text": "Stable component"}
+        result = differ._diff_csfc_apl([item], [dict(item)])
+        assert result == {"added": [], "removed": [], "updated": []}
+
+    def test_text_reformat_on_same_link_is_updated_not_removed_added(self):
+        """The bug this helper fixes: a cosmetic listing edit (cert-date tweak,
+        description reformat) must not appear as a spurious removed+added pair."""
+        old = [{"href": "https://x/1", "text": "Cisco ASA 5500, VID 12345 -- certified Jan 2024"}]
+        new = [{"href": "https://x/1", "text": "Cisco ASA 5500 (VID 12345), cert. Jan 2024"}]
+        result = differ._diff_csfc_apl(old, new)
+        assert result["added"] == []
+        assert result["removed"] == []
+        assert len(result["updated"]) == 1
+        assert result["updated"][0]["_old_text"] == old[0]["text"]
+        assert result["updated"][0]["text"] == new[0]["text"]
+
+    def test_falls_back_to_text_prefix_when_no_href(self):
+        """Records without a stable href fall back to keying on the text prefix."""
+        old = [{"text": "Component without a link"}]
+        new = [{"text": "Component without a link"}]
+        result = differ._diff_csfc_apl(old, new)
+        assert result == {"added": [], "removed": [], "updated": []}
+
+    def test_different_link_same_text_prefix_is_added_and_removed(self):
+        """Two different products should never collapse into a single 'updated'."""
+        old = [{"href": "https://x/1", "text": "Component A"}]
+        new = [{"href": "https://x/2", "text": "Component A"}]
+        result = differ._diff_csfc_apl(old, new)
+        assert len(result["added"]) == 1
+        assert len(result["removed"]) == 1
+        assert result["updated"] == []
+
+
+# ===========================================================================
+# diff_csfc -- routes the "apl" page through _diff_csfc_apl(); other CSfC
+# pages keep the generic text-prefix diff
+# ===========================================================================
+
+class TestDiffCsfc:
+
+    def test_apl_reformat_is_updated_not_removed_added(self):
+        old_csfc = {"pages": {"apl": [{"href": "https://x/1", "text": "Old wording"}]}}
+        new_csfc = {"pages": {"apl": [{"href": "https://x/1", "text": "New wording"}]}}
+        result = differ.diff_csfc(old_csfc, new_csfc)
+        apl = result["pages"]["apl"]
+        assert apl["added"] == []
+        assert apl["removed"] == []
+        assert len(apl["updated"]) == 1
+
+    def test_non_apl_page_reformat_still_uses_generic_text_diff(self):
+        """Only the apl page gets link-keyed diffing; other CSfC pages are
+        unaffected by this change and keep their existing text-prefix behaviour."""
+        old_csfc = {"pages": {"announcements": [{"href": "https://x/a", "text": "Old wording"}]}}
+        new_csfc = {"pages": {"announcements": [{"href": "https://x/a", "text": "New wording"}]}}
+        result = differ.diff_csfc(old_csfc, new_csfc)
+        announcements = result["pages"]["announcements"]
+        assert len(announcements["added"]) == 1
+        assert len(announcements["removed"]) == 1
+        assert "updated" not in announcements
+
+    def test_apl_key_absent_when_no_changes(self):
+        old_csfc = {"pages": {"apl": [{"href": "https://x/1", "text": "Same"}]}}
+        new_csfc = {"pages": {"apl": [{"href": "https://x/1", "text": "Same"}]}}
+        result = differ.diff_csfc(old_csfc, new_csfc)
+        assert "apl" not in result["pages"]
+
+
+# ===========================================================================
+# flag_alerts -- CSfC "updated" bucket (this feature)
+# ===========================================================================
+
+class TestFlagAlertsCsfcUpdated:
+
+    def test_updated_csfc_apl_item_triggers_alert(self):
+        diff = _diff_with_alerts([])
+        diff["csfc"] = {
+            "selection_links": {},
+            "feeds": {},
+            "pages": {
+                "apl": {
+                    "added": [],
+                    "removed": [],
+                    "updated": [{"text": "CSfC listing revised: Cisco Secure Firewall", "href": "https://example.test/item"}],
+                },
+            },
+        }
+
+        alerts = differ.flag_alerts(diff)
+
+        updated_alerts = [a for a in alerts if a["kind"] == "updated" and a["source"] == "CSfC Components List"]
+        assert len(updated_alerts) == 1
+        assert updated_alerts[0]["url"] == "https://example.test/item"
+
+    def test_updated_item_url_falls_back_to_page_url_when_no_href(self):
+        diff = _diff_with_alerts([])
+        diff["csfc"] = {
+            "selection_links": {},
+            "feeds": {},
+            "pages": {
+                "apl": {
+                    "added": [],
+                    "removed": [],
+                    "updated": [{"text": "CSfC listing revised: Cisco Secure Firewall"}],
+                },
+            },
+        }
+
+        alerts = differ.flag_alerts(diff)
+
+        updated_alerts = [a for a in alerts if a["kind"] == "updated" and a["source"] == "CSfC Components List"]
+        assert len(updated_alerts) == 1
+        assert updated_alerts[0]["url"] == _cfg.CSFC_PRODUCT_LIST_URL
+
+    def test_missing_updated_key_does_not_break_flag_alerts(self):
+        """Backward compatibility: page diffs produced before this feature have
+        no 'updated' key at all. flag_alerts() must not raise on them."""
+        diff = _diff_with_alerts([])
+        diff["csfc"] = {
+            "selection_links": {},
+            "feeds": {},
+            "pages": {
+                "apl": {
+                    "added": [{"text": "New CSfC component added", "href": ""}],
+                    "removed": [],
+                },
+            },
+        }
+
+        alerts = differ.flag_alerts(diff)  # should not raise
+
+        assert any(a["kind"] == "new_cert" for a in alerts)
+        assert not any(a["kind"] == "updated" for a in alerts)
+
+
+# ===========================================================================
+# merge_weekly_diffs -- CSfC APL "updated" bucket merge behaviour
+# ===========================================================================
+
+class TestMergeWeeklyDiffsCsfcUpdated:
+
+    def _make_diff_with_apl_updated(self, updated_items=None):
+        return {
+            "niap": {
+                "pps": {"added": [], "removed": [], "sunset_changes": [], "status_changes": []},
+                "tds": {"added": [], "removed": []},
+                "cisco_ndcpp": {"added": [], "removed": [], "newly_archived": []},
+                "news": {"added": []},
+                "events": {"added": []},
+            },
+            "cc_portal": {"news": {"added": []}, "pps": {"added": []}, "products": {"added": []}},
+            "cctl_labs": {},
+            "csfc": {
+                "feeds": {},
+                "pages": {"apl": {"added": [], "removed": [], "updated": updated_items or []}},
+                "selection_links": {},
+            },
+            "cc_crypto": {"pages": {}, "doc_headers": {}},
+            "nist": {"pages": {}, "doc_headers": {}, "feeds": {}},
+            "nato": {"pages": {}, "cisco_added": [], "cisco_removed": []},
+            "eucc": {"pages": {}, "cisco_added": [], "cisco_removed": []},
+            "alerts": [],
+        }
+
+    def test_updated_bucket_merged_across_days(self):
+        item_a = {"href": "https://x/1", "text": "Component A revised"}
+        item_b = {"href": "https://x/2", "text": "Component B revised"}
+        d1 = self._make_diff_with_apl_updated([item_a])
+        d2 = self._make_diff_with_apl_updated([item_b])
+
+        result = differ.merge_weekly_diffs([d1, d2])
+
+        assert len(result["csfc"]["pages"]["apl"]["updated"]) == 2
+
+    def test_missing_updated_key_in_daily_diff_does_not_break_merge(self):
+        """Backward compatibility: daily diffs produced before this feature have
+        no 'updated' key. merge_weekly_diffs() must not raise, and must not
+        fabricate an 'updated' key that was never present."""
+        d1 = self._make_diff_with_apl_updated()
+        d1["csfc"]["pages"]["apl"] = {"added": [{"href": "https://x/1", "text": "New"}], "removed": []}
+        d2 = self._make_diff_with_apl_updated()
+        d2["csfc"]["pages"] = {}
+
+        result = differ.merge_weekly_diffs([d1, d2])  # should not raise
+
+        assert "updated" not in result["csfc"]["pages"]["apl"]
