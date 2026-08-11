@@ -179,7 +179,7 @@
   <span class="nav-title">CC Pulse Dashboard</span>
   <span class="nav-spacer"></span>
   <div class="ham-wrap">
-    <span class="nav-meta">Last run: 2026-08-10 04:41 ET</span>
+    <span class="nav-meta">Last run: 2026-08-11 02:55 ET</span>
     <button class="ham-btn" id="ham-btn" onclick="toggleHamMenu()" aria-expanded="false" aria-haspopup="true" title="Open menu">&#9776;</button>
     <div class="ham-menu" id="ham-menu" role="menu">
       <a class="ham-item" href="https://kr15tyk.github.io/CC-pulse/cc_dashboard.html" role="menuitem"><span class="ham-icon">&#127968;</span>Home</a>
@@ -254,7 +254,7 @@
 <div class="sticky-top">
   <div class="trend-bar">
     <div class="stat"><a href="#sec-niap-pp" onclick="navigateTo('sec-niap-pp');return false;">
-      <div class="stat-num ">0</div>
+      <div class="stat-num active-num">2</div>
       <div class="stat-lbl">NIAP Changes</div>
     </a></div>
     <div class="stat"><a href="#sec-csfc" onclick="navigateTo('sec-csfc');return false;">
@@ -327,7 +327,7 @@
     
     
     
-    <p class="no-change">No changes detected. <span class="last-active">(last: 2026-08-08)</span></p>
+    <p class="no-change">No changes detected. <span class="last-active">(last: 2026-08-11)</span></p>
   </div>
 </div>
 
@@ -409,17 +409,36 @@
 </div>
 
   <!-- NIAP PCL — All Certifications -->
-<div class="card " id="sec-niap-pcl" data-has-changes="0">
+<div class="card card-new" id="sec-niap-pcl" data-has-changes="2">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>NIAP PCL — All Certifications</span>
-    <span class="card-count">0 changes</span>
+    <span class="card-count">2 changes</span>
     </span>
   </div>
-  <div class="card-body collapsed">
+  <div class="card-body ">
+    
+    
+    <div class="sub-hdr sub-updated">Newly Archived (2)</div>
+    
+    <div class="item-row" data-source="niap-pcl" data-kind="archived">
+      <span class="item-link">Veeam Software Corporation -- Veeam Backup &amp; Replication v12</span>
+      <span class="item-meta">Archived</span>
+    </div>
+    
+    <div class="item-sub">PP_APP_v1.4</div>
+    
+    
+    <div class="item-row" data-source="niap-pcl" data-kind="archived">
+      <span class="item-link">Veeam Software Corporation -- Veeam ONE v12</span>
+      <span class="item-meta">Archived</span>
+    </div>
+    
+    <div class="item-sub">PP_APP_v1.4</div>
     
     
     
-    <p class="no-change">No changes detected. <span class="last-active">(last: 2026-08-08)</span></p>
+    
+    
   </div>
 </div>
 
@@ -486,7 +505,7 @@
   </div>
   <div class="card-body collapsed">
     
-    <p class="no-change">No changes detected. <span class="last-active">(last: 2026-08-04)</span></p>
+    <p class="no-change">No changes detected.</p>
   </div>
 </div>
 
@@ -579,7 +598,7 @@
 <div class="card card-new" id="sec-history" data-has-changes="1">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>Change History</span>
-    <span class="card-count">69 events</span>
+    <span class="card-count">67 events</span>
     <span class="toggle-icon">▼</span>
   </div>
   <div class="card-body">
@@ -1335,28 +1354,6 @@
         </div>
       </div>
       
-      <div class="tl-entry" data-cat="pcl_cert">
-        <div class="tl-date">2026-07-10</div>
-        <div class="tl-body">
-          <div class="tl-title">
-            <span class="tl-badge new">new</span>
-            <a href="https://www.niap-ccevs.org/products/11734" target="_blank">Cisco Systems, Inc. — Cisco Catalyst Industrial Ethernet 9300 Rugged Series Switches Running IOS-XE 17.18</a>
-          </div>
-          <div class="tl-detail">Certified  · Gossamer Security Solutions · PKG_SSH_V1.0, MOD_MACSEC_V1.0, CPP_ND_V3.0E</div>
-        </div>
-      </div>
-      
-      <div class="tl-entry" data-cat="pcl_cert">
-        <div class="tl-date">2026-07-10</div>
-        <div class="tl-body">
-          <div class="tl-title">
-            <span class="tl-badge new">new</span>
-            <a href="https://www.niap-ccevs.org/products/11733" target="_blank">HPE Aruba Networking — HPE Aruba Networking Gateways and Mobility Controllers running software version 8.13.2</a>
-          </div>
-          <div class="tl-detail">Certified  · Gossamer Security Solutions · MOD_CPP_FW_v1.4e, PKG_SSH_V1.0, MOD_WLAN_AS_v1.0, MOD_VPNGW_v1.3, CPP_ND_V3.0E</div>
-        </div>
-      </div>
-      
     
     </div>
   </div>
@@ -1367,7 +1364,7 @@
 </div><!-- /main-content -->
 <footer>
   <span>CC Pulse &middot; Auto-refreshes daily (01:00 EST) &middot; NIAP, CSfC, CC Portal, NATO NIAPCL, EUCC / ENISA</span>
-  <span>Last run: 2026-08-10 04:41 ET</span>
+  <span>Last run: 2026-08-11 02:55 ET</span>
 </footer>
 
 <script>
