@@ -2,6 +2,7 @@
 <rss version="2.0"><channel>
 <title>CC Pulse</title>
 <link>https://kr15tyk.github.io/CC-pulse/cc_dashboard.html</link>
-<description>Common Criteria monitoring - 2026-08-14 03:16 ET</description>
-
+<description>Common Criteria monitoring - 2026-08-15 02:27 ET</description>
+<item><title>CSfC Selection Updated: TLS Software Applications</title><link>https://www.nsa.gov/Portals/75/documents/CSfC%20Selections%20Updates%202026/CSfC%20Selections%20for%20TLS%20Software%20Applications-2026-08-13.pdf?ver=kE0lwbjh_6yiiYgjbltn2g%3d%3d</link><description>Component selection document updated.</description></item>
+<item><title>ALERT: CSfC Component Selections – TLS Software Applications</title><link>https://kr15tyk.github.io/CC-pulse/cc_dashboard.html</link><description>Kind: updated | Keywords: CSfC</description></item>
 </channel></rss>
