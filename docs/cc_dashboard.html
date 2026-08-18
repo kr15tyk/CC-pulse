@@ -179,7 +179,7 @@
   <span class="nav-title">CC Pulse Dashboard</span>
   <span class="nav-spacer"></span>
   <div class="ham-wrap">
-    <span class="nav-meta">Last run: 2026-08-17 02:40 ET</span>
+    <span class="nav-meta">Last run: 2026-08-18 02:31 ET</span>
     <button class="ham-btn" id="ham-btn" onclick="toggleHamMenu()" aria-expanded="false" aria-haspopup="true" title="Open menu">&#9776;</button>
     <div class="ham-menu" id="ham-menu" role="menu">
       <a class="ham-item" href="https://kr15tyk.github.io/CC-pulse/cc_dashboard.html" role="menuitem"><span class="ham-icon">&#127968;</span>Home</a>
@@ -254,7 +254,7 @@
 <div class="sticky-top">
   <div class="trend-bar">
     <div class="stat"><a href="#sec-niap-pp" onclick="navigateTo('sec-niap-pp');return false;">
-      <div class="stat-num ">0</div>
+      <div class="stat-num active-num">2</div>
       <div class="stat-lbl">NIAP Changes</div>
     </a></div>
     <div class="stat"><a href="#sec-csfc" onclick="navigateTo('sec-csfc');return false;">
@@ -332,17 +332,34 @@
 </div>
 
   <!-- NIAP In-Evaluation -->
-<div class="card " id="sec-niap-inevaluation" data-has-changes="0">
+<div class="card card-new" id="sec-niap-inevaluation" data-has-changes="2">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>NIAP In-Evaluation Products</span>
-    <span class="card-count">43 active</span>
+    <span class="card-count">2 changes</span>
     </span>
   </div>
-  <div class="card-body collapsed">
+  <div class="card-body ">
+    
+    <div class="sub-hdr sub-new">Newly In Evaluation (2)</div>
+    
+    <div class="item-row" data-source="niap-inevaluation" data-kind="new">
+      <span class="item-link">Corelight, Inc. -- Corelight Sensors with BroLin v29</span>
+      <span class="item-meta">Gossamer Security Solutions</span>
+    </div>
+    
+    <div class="item-sub">Network Device</div>
+    
+    
+    <div class="item-row" data-source="niap-inevaluation" data-kind="new">
+      <span class="item-link">Infoblox Inc. -- Infoblox Trinzic Appliances with NIOS v9.0</span>
+      <span class="item-meta">Leidos Common Criteria Testing Laboratory</span>
+    </div>
+    
+    <div class="item-sub">Network Device</div>
     
     
     
-    <p class="no-change">No evaluation changes detected. 43 products currently in evaluation.</p>
+    
     
   </div>
 </div>
@@ -579,7 +596,7 @@
 <div class="card card-new" id="sec-history" data-has-changes="1">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>Change History</span>
-    <span class="card-count">69 events</span>
+    <span class="card-count">67 events</span>
     <span class="toggle-icon">▼</span>
   </div>
   <div class="card-body">
@@ -1335,28 +1352,6 @@
         </div>
       </div>
       
-      <div class="tl-entry" data-cat="csfc_change">
-        <div class="tl-date">2026-07-17</div>
-        <div class="tl-body">
-          <div class="tl-title">
-            <span class="tl-badge new">new</span>
-            <a href="https://www.niap-ccevs.org/products/11468" target="_blank">CSfC Component: Certification Authority | Red Hat | Certificate System, as detailed in VID 11468</a>
-          </div>
-          
-        </div>
-      </div>
-      
-      <div class="tl-entry" data-cat="csfc_change">
-        <div class="tl-date">2026-07-17</div>
-        <div class="tl-body">
-          <div class="tl-title">
-            <span class="tl-badge removed">removed</span>
-            <a href="https://www.niap-ccevs.org/products/11468" target="_blank">CSfC Component: Certification Authority | Red Hat | Certificate System | v10.4 | NIAP Evaluation</a>
-          </div>
-          
-        </div>
-      </div>
-      
     
     </div>
   </div>
@@ -1367,7 +1362,7 @@
 </div><!-- /main-content -->
 <footer>
   <span>CC Pulse &middot; Auto-refreshes daily (01:00 EST) &middot; NIAP, CSfC, CC Portal, NATO NIAPCL, EUCC / ENISA</span>
-  <span>Last run: 2026-08-17 02:40 ET</span>
+  <span>Last run: 2026-08-18 02:31 ET</span>
 </footer>
 
 <script>
