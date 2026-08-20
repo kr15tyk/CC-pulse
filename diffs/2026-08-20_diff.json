@@ -1,0 +1,394 @@
+{
+  "period_start": "2026-08-19T06:32:42.738615+00:00",
+  "period_end": "2026-08-20T06:34:48.445698+00:00",
+  "niap": {
+    "pps": {
+      "added": [],
+      "removed": [],
+      "sunset_changes": [],
+      "status_changes": []
+    },
+    "tds": {
+      "added": [],
+      "removed": []
+    },
+    "cisco_ndcpp": {
+      "added": [],
+      "removed": [],
+      "newly_archived": [
+        {
+          "active_maintenances": [],
+          "am_sort": "2026-08-20T00:00:00Z",
+          "assigned_lab_name": "Gossamer Security Solutions",
+          "certification_date": "2024-08-20T00:00:00Z",
+          "from_cc_portal": false,
+          "product_id": 11463,
+          "product_name": "Cisco Catalyst 9300/9300L/9400/9500/9600 Series Switches 17.12",
+          "protection_profiles": [
+            {
+              "pp_id": 447,
+              "pp_name": "collaborative Protection Profile for Network Devices Version 2.2e",
+              "pp_short_name": "CPP_ND_V2.2E"
+            },
+            {
+              "pp_id": 480,
+              "pp_name": "PP-Module for MACsec Ethernet Encryption Version 1.0",
+              "pp_short_name": "MOD_MACSEC_V1.0"
+            }
+          ],
+          "status_sort": "Archived",
+          "submitting_country_id_code": "US",
+          "submitting_country_id_name": "United States",
+          "sunset_date": null,
+          "tech_types": [
+            "Network Device",
+            " Network Encryption"
+          ],
+          "vendor_id_name": "Cisco Systems, Inc.",
+          "v_id": 11463,
+          "kicked_off_date": "2024-03-08T00:00:00Z"
+        }
+      ]
+    },
+    "pcl_all": {
+      "added": [],
+      "removed": [],
+      "newly_archived": [
+        {
+          "active_maintenances": [],
+          "am_sort": "2026-08-19T00:00:00Z",
+          "assigned_lab_name": "ECSEC Laboratory Inc. Evaluation Center",
+          "certification_date": "2024-08-19T00:00:00Z",
+          "from_cc_portal": true,
+          "product_id": "2024.1269",
+          "product_name": "KONICA MINOLTA bizhub C4051i/bizhub C3351i with FK-517, DEVELOP ineo+ 4051i/ineo+ 3351i with FK-517 G00-R2",
+          "protection_profiles": [
+            {
+              "pp_id": 317,
+              "pp_name": "Protection Profile for Hardcopy Devices Version 1.0",
+              "pp_short_name": "PP_HCD_V1.0"
+            }
+          ],
+          "status_sort": "Archived",
+          "submitting_country_id_code": "JP",
+          "submitting_country_id_name": "Japan",
+          "sunset_date": "2029-08-19T00:00:00Z",
+          "tech_types": [
+            "Multi-Function Devices"
+          ],
+          "vendor_id_name": "KONICA MINOLTA, INC.",
+          "v_id": "2024.1269",
+          "kicked_off_date": null
+        },
+        {
+          "active_maintenances": [],
+          "am_sort": "2026-08-20T00:00:00Z",
+          "assigned_lab_name": "Acumen Security",
+          "certification_date": "2024-08-20T00:00:00Z",
+          "from_cc_portal": false,
+          "product_id": 11474,
+          "product_name": "MMA10G-EXE Series II",
+          "protection_profiles": [
+            {
+              "pp_id": 447,
+              "pp_name": "collaborative Protection Profile for Network Devices Version 2.2e",
+              "pp_short_name": "CPP_ND_V2.2E"
+            }
+          ],
+          "status_sort": "Archived",
+          "submitting_country_id_code": "US",
+          "submitting_country_id_name": "United States",
+          "sunset_date": null,
+          "tech_types": [
+            "Network Device"
+          ],
+          "vendor_id_name": "Evertz Microsystems",
+          "v_id": 11474,
+          "kicked_off_date": "2024-03-14T00:00:00Z"
+        },
+        {
+          "active_maintenances": [],
+          "am_sort": "2026-08-20T00:00:00Z",
+          "assigned_lab_name": "Gossamer Security Solutions",
+          "certification_date": "2024-08-20T00:00:00Z",
+          "from_cc_portal": false,
+          "product_id": 11463,
+          "product_name": "Cisco Catalyst 9300/9300L/9400/9500/9600 Series Switches 17.12",
+          "protection_profiles": [
+            {
+              "pp_id": 447,
+              "pp_name": "collaborative Protection Profile for Network Devices Version 2.2e",
+              "pp_short_name": "CPP_ND_V2.2E"
+            },
+            {
+              "pp_id": 480,
+              "pp_name": "PP-Module for MACsec Ethernet Encryption Version 1.0",
+              "pp_short_name": "MOD_MACSEC_V1.0"
+            }
+          ],
+          "status_sort": "Archived",
+          "submitting_country_id_code": "US",
+          "submitting_country_id_name": "United States",
+          "sunset_date": null,
+          "tech_types": [
+            "Network Device",
+            " Network Encryption"
+          ],
+          "vendor_id_name": "Cisco Systems, Inc.",
+          "v_id": 11463,
+          "kicked_off_date": "2024-03-08T00:00:00Z"
+        },
+        {
+          "active_maintenances": [],
+          "am_sort": "2026-08-19T00:00:00Z",
+          "assigned_lab_name": "ECSEC Laboratory Inc. Evaluation Center",
+          "certification_date": "2024-08-19T00:00:00Z",
+          "from_cc_portal": true,
+          "product_id": "2024.1268",
+          "product_name": "KONICA MINOLTA bizhub 4751i/bizhub 4051i with FK-517, DEVELOP ineo 4751i/ineo 4051i with FK-517 G00-R2",
+          "protection_profiles": [
+            {
+              "pp_id": 317,
+              "pp_name": "Protection Profile for Hardcopy Devices Version 1.0",
+              "pp_short_name": "PP_HCD_V1.0"
+            }
+          ],
+          "status_sort": "Archived",
+          "submitting_country_id_code": "JP",
+          "submitting_country_id_name": "Japan",
+          "sunset_date": "2029-08-19T00:00:00Z",
+          "tech_types": [
+            "Multi-Function Devices"
+          ],
+          "vendor_id_name": "KONICA MINOLTA, INC.",
+          "v_id": "2024.1268",
+          "kicked_off_date": null
+        }
+      ]
+    },
+    "in_evaluation": {
+      "added": [],
+      "removed": [],
+      "current_count": 45
+    },
+    "news": {
+      "added": [],
+      "revised": [],
+      "deactivated": [],
+      "reactivated": [],
+      "removed": []
+    },
+    "events": {
+      "added": [],
+      "revised": [],
+      "deactivated": [],
+      "reactivated": [],
+      "removed": []
+    },
+    "policies": {
+      "added": [],
+      "revised": [],
+      "archived": [],
+      "reactivated": [],
+      "removed": []
+    }
+  },
+  "cc_portal": {
+    "news": {
+      "added": []
+    },
+    "pps": {
+      "added": []
+    },
+    "products": {
+      "added": []
+    }
+  },
+  "cctl_labs": {},
+  "csfc": {
+    "pages": {},
+    "selection_links": {},
+    "feeds": {}
+  },
+  "cc_crypto": {
+    "pages": {}
+  },
+  "nato": {
+    "pages": {},
+    "cisco_added": [],
+    "cisco_removed": [],
+    "baseline_reset": false
+  },
+  "eucc": {
+    "pages": {},
+    "cisco_added": [],
+    "cisco_removed": [],
+    "baseline_reset": false
+  },
+  "nd_itc": {
+    "nit_rfis": {
+      "added": [],
+      "status_changes": [],
+      "revised": [],
+      "newly_archived": []
+    },
+    "awl": {
+      "added": [],
+      "removed": [],
+      "version_changes": [],
+      "list_updates": []
+    },
+    "baseline_reset": false,
+    "collection_failure": false
+  },
+  "source_health": {
+    "niap": {
+      "label": "NIAP",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "PCL products",
+          "observed": 1757,
+          "minimum": 50
+        },
+        {
+          "name": "Protection Profiles",
+          "observed": 271,
+          "minimum": 10
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-08-20T06:34:48.445698+00:00",
+      "subcollections": {
+        "news": {
+          "label": "News announcements",
+          "status": "healthy",
+          "observed": 354,
+          "consecutive_failures": 0,
+          "using_last_known_good": false
+        },
+        "events": {
+          "label": "Events",
+          "status": "healthy",
+          "observed": 0,
+          "consecutive_failures": 0,
+          "using_last_known_good": false
+        },
+        "policies": {
+          "label": "Policy letters",
+          "status": "healthy",
+          "observed": 39,
+          "consecutive_failures": 0,
+          "using_last_known_good": false
+        }
+      }
+    },
+    "cc_portal": {
+      "label": "CC Portal",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "portal records",
+          "observed": 180,
+          "minimum": 1
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-08-20T06:34:48.445698+00:00"
+    },
+    "cctl_labs": {
+      "label": "CCTL Labs",
+      "status": "stale",
+      "checks": [
+        {
+          "name": "lab feed items",
+          "observed": 9,
+          "minimum": 1
+        }
+      ],
+      "consecutive_failures": 1,
+      "using_last_known_good": true,
+      "checked_at": "2026-08-20T06:34:48.445698+00:00",
+      "detail": "collection collapse (retained last-known-good): Lightship Security 0/10"
+    },
+    "csfc": {
+      "label": "CSfC",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "APL items",
+          "observed": 120,
+          "minimum": 5
+        },
+        {
+          "name": "announcements",
+          "observed": 8,
+          "minimum": 1
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-08-20T06:34:48.445698+00:00"
+    },
+    "cc_crypto": {
+      "label": "CC Crypto",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "publications",
+          "observed": 121,
+          "minimum": 5
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-08-20T06:34:48.445698+00:00"
+    },
+    "nato": {
+      "label": "NATO NIAPCL",
+      "status": "healthy",
+      "mode": "manual",
+      "checks": [],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "detail": "manual baseline (40 Cisco product(s)); updated via the NATO capture GitHub issue workflow",
+      "checked_at": "2026-08-20T06:34:48.445698+00:00"
+    },
+    "eucc": {
+      "label": "EUCC / ENISA",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "certificates",
+          "observed": 50,
+          "minimum": 2
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-08-20T06:34:48.445698+00:00"
+    },
+    "nd_itc": {
+      "label": "ND-iTC",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "NIT RFIs",
+          "observed": 32,
+          "minimum": 5
+        },
+        {
+          "name": "Allowed-With entries",
+          "observed": 22,
+          "minimum": 1
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-08-20T06:34:48.445698+00:00"
+    }
+  },
+  "alerts": []
+}
