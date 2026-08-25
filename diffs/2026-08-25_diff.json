@@ -1,0 +1,743 @@
+{
+  "period_start": "2026-08-24T06:42:42.675340+00:00",
+  "period_end": "2026-08-25T06:35:18.463982+00:00",
+  "niap": {
+    "pps": {
+      "added": [],
+      "removed": [],
+      "sunset_changes": [],
+      "status_changes": []
+    },
+    "tds": {
+      "added": [],
+      "removed": []
+    },
+    "cisco_ndcpp": {
+      "added": [],
+      "removed": [],
+      "newly_archived": []
+    },
+    "pcl_all": {
+      "added": [],
+      "removed": [],
+      "newly_archived": []
+    },
+    "in_evaluation": {
+      "added": [
+        {
+          "active_maintenances": [],
+          "am_sort": null,
+          "assigned_lab_name": "Gossamer Security Solutions",
+          "certification_date": null,
+          "from_cc_portal": false,
+          "product_id": 11737,
+          "product_name": "Cisco Embedded Services 9300 and 3300 Series Switches (ESS9300 & ESS3300) running IOS-XE 17.18",
+          "protection_profiles": [
+            {
+              "pp_id": 459,
+              "pp_name": "Functional Package for SSH Version 1.0",
+              "pp_short_name": "PKG_SSH_V1.0"
+            },
+            {
+              "pp_id": 480,
+              "pp_name": "PP-Module for MACsec Ethernet Encryption Version 1.0",
+              "pp_short_name": "MOD_MACSEC_V1.0"
+            },
+            {
+              "pp_id": 482,
+              "pp_name": "collaborative Protection Profile for Network Devices Version 3.0e",
+              "pp_short_name": "CPP_ND_V3.0E"
+            }
+          ],
+          "status_sort": "In Progress",
+          "submitting_country_id_code": "US",
+          "submitting_country_id_name": "United States",
+          "sunset_date": null,
+          "tech_types": [
+            "Network Device",
+            "Network Encryption"
+          ],
+          "vendor_id_name": "Cisco Systems, Inc.",
+          "v_id": 11737,
+          "kicked_off_date": "2026-08-24T13:24:44.260000Z"
+        }
+      ],
+      "removed": [],
+      "current_count": 45
+    },
+    "news": {
+      "added": [],
+      "revised": [],
+      "deactivated": [],
+      "reactivated": [],
+      "removed": []
+    },
+    "events": {
+      "added": [],
+      "revised": [],
+      "deactivated": [],
+      "reactivated": [],
+      "removed": []
+    },
+    "policies": {
+      "added": [],
+      "revised": [],
+      "archived": [],
+      "reactivated": [],
+      "removed": []
+    }
+  },
+  "cc_portal": {
+    "news": {
+      "added": []
+    },
+    "pps": {
+      "added": []
+    },
+    "products": {
+      "added": []
+    }
+  },
+  "cctl_labs": {},
+  "csfc": {
+    "pages": {},
+    "selection_links": {},
+    "feeds": {}
+  },
+  "cc_crypto": {
+    "pages": {}
+  },
+  "nato": {
+    "pages": {},
+    "cisco_added": [],
+    "cisco_removed": [],
+    "baseline_reset": false
+  },
+  "eucc": {
+    "pages": {
+      "certificates": {
+        "added": [
+          {
+            "name": "Cryptographic Library NesLib-PQML 2.1 on ST33K1M5A and ST33K1M5M B04",
+            "text": "Cryptographic Library NesLib-PQML 2.1 on ST33K1M5A and ST33K1M5M B04 | 17 July 2026 | STMicroelectronics Cryptographic Library NesLib-PQML 2.1 on ST33K1M5A and ST33K1M5M B04 is a cryptographic library on microcontroller for smart cards.",
+            "href": "https://certification.enisa.europa.eu/certificates/eucc-3090-2026-0067_en",
+            "cert_date": "2026-07-17T12:00:00Z",
+            "description": "STMicroelectronics Cryptographic Library NesLib-PQML 2.1 on ST33K1M5A and ST33K1M5M B04 is a cryptographic library on microcontroller for smart cards."
+          },
+          {
+            "name": "Cryptographic Library NesLib-PQML 2.1 on ST33K1M5C and ST33K1M5T C03",
+            "text": "Cryptographic Library NesLib-PQML 2.1 on ST33K1M5C and ST33K1M5T C03 | 17 July 2026 | STMicroelectronics Cryptographic Library NesLib-PQML 2.1 on ST33K1M5C and ST33K1M5T C03 is a cryptographic library on microcontroller for smart cards.",
+            "href": "https://certification.enisa.europa.eu/certificates/eucc-3090-2026-0066_en",
+            "cert_date": "2026-07-17T12:00:00Z",
+            "description": "STMicroelectronics Cryptographic Library NesLib-PQML 2.1 on ST33K1M5C and ST33K1M5T C03 is a cryptographic library on microcontroller for smart cards."
+          },
+          {
+            "name": "ST33KTPM2XSPI & ST33KTPM2X",
+            "text": "ST33KTPM2XSPI & ST33KTPM2X | 17 July 2026 | The product evaluated is \u00abST33KTPM2XSPI & ST33KTPM2X, TPM FIRMWARE 9.528 \u00bb developed by STMICROELECTRONICS.",
+            "href": "https://certification.enisa.europa.eu/certificates/eucc-3090-2026-0064_en",
+            "cert_date": "2026-07-17T12:00:00Z",
+            "description": "The product evaluated is \u00abST33KTPM2XSPI & ST33KTPM2X, TPM FIRMWARE 9.528 \u00bb developed by STMICROELECTRONICS."
+          },
+          {
+            "name": "ST33TPHF2XSPI & ST33TPHF2XI2C",
+            "text": "ST33TPHF2XSPI & ST33TPHF2XI2C | 17 July 2026 | The product evaluated is \u00ab ST33TPHF2XSPI & ST33TPHF2XI2C, ST33TPHF2XSPI : FW v.1.771;ST33TPHF2XI2C : FW v.2.771 \u00bb developed by STMICROELECTRONICS.",
+            "href": "https://certification.enisa.europa.eu/certificates/eucc-3090-2026-0068_en",
+            "cert_date": "2026-07-17T12:00:00Z",
+            "description": "The product evaluated is \u00ab ST33TPHF2XSPI & ST33TPHF2XI2C, ST33TPHF2XSPI : FW v.1.771;ST33TPHF2XI2C : FW v.2.771 \u00bb developed by STMICROELECTRONICS."
+          },
+          {
+            "name": "CombICAO Applet v2.2 in BAC and CA configuration on ID-ONE Cosmo V9.1",
+            "text": "CombICAO Applet v2.2 in BAC and CA configuration on ID-ONE Cosmo V9.1 | 26 June 2026 | The product evaluated implements electronic travel document functions in accordance with the specifications of the International Civil Aviation Organization (ICAO).",
+            "href": "https://certification.enisa.europa.eu/certificates/eucc-3090-2026-0039_en",
+            "cert_date": "2026-06-26T12:00:00Z",
+            "description": "The product evaluated implements electronic travel document functions in accordance with the specifications of the International Civil Aviation Organization (ICAO)."
+          },
+          {
+            "name": "ST31R480 with Random Number Generator software library",
+            "text": "ST31R480 with Random Number Generator software library | 23 June 2026 | STMicroelectronics' ST31R480 with Random Number Generator software library is a microcontroller for smart cards (ID, banking, transport, etc.).",
+            "href": "https://certification.enisa.europa.eu/certificates/eucc-3090-2026-0058_en",
+            "cert_date": "2026-06-23T12:00:00Z",
+            "description": "STMicroelectronics' ST31R480 with Random Number Generator software library is a microcontroller for smart cards (ID, banking, transport, etc.)."
+          },
+          {
+            "name": "Cryptographic library NESLIB 6.11.3 on ST31R480",
+            "text": "Cryptographic library NESLIB 6.11.3 on ST31R480 | 23 June 2026 | STMicroelectronics Cryptographic library NESLIB 6.11.3 on ST31R480 is a cryptographic library on microcontroller for smart cards (ID, banking, transport, etc.).",
+            "href": "https://certification.enisa.europa.eu/certificates/eucc-3090-2026-0056_en",
+            "cert_date": "2026-06-23T12:00:00Z",
+            "description": "STMicroelectronics Cryptographic library NESLIB 6.11.3 on ST31R480 is a cryptographic library on microcontroller for smart cards (ID, banking, transport, etc.)."
+          },
+          {
+            "name": "Cryptographic library NESLIB 6.11.3 on ST31R480",
+            "text": "Cryptographic library NESLIB 6.11.3 on ST31R480 | 23 June 2026 | STMicroelectronics Cryptographic library NESLIB 6.11.3 on ST31R480 is a cryptographic library on microcontroller for smart cards (ID, banking, transport, etc.).",
+            "href": "https://certification.enisa.europa.eu/certificates/eucc-3090-2026-0057_en",
+            "cert_date": "2026-06-23T12:00:00Z",
+            "description": "STMicroelectronics Cryptographic library NESLIB 6.11.3 on ST31R480 is a cryptographic library on microcontroller for smart cards (ID, banking, transport, etc.)."
+          },
+          {
+            "name": "IAS Classic v5.0 with MOC Server v3.0 on MultiApp v4.2",
+            "text": "IAS Classic v5.0 with MOC Server v3.0 on MultiApp v4.2 | 23 June 2026 | The product evaluated is intended to be used as a secure signature creation device (SSCD), which can be used by different documents (Identity cards, health cards, etc.).",
+            "href": "https://certification.enisa.europa.eu/certificates/eucc-3090-2026-0061_en",
+            "cert_date": "2026-06-23T12:00:00Z",
+            "description": "The product evaluated is intended to be used as a secure signature creation device (SSCD), which can be used by different documents (Identity cards, health cards, etc.)."
+          },
+          {
+            "name": "Java Card MultiApp V4.2 platform in open configuration on IC IFX_CCI_000010h",
+            "text": "Java Card MultiApp V4.2 platform in open configuration on IC IFX_CCI_000010h | 22 June 2026 | The product evaluated is \u00abJava Card MultiApp V4.2 platform in open configuration on IC IFX_CCI_000010h, 4.2.0.1 \u00bb developed by THALES DIS FRANCE SAS.",
+            "href": "https://certification.enisa.europa.eu/certificates/eucc-3090-2026-0060_en",
+            "cert_date": "2026-06-22T12:00:00Z",
+            "description": "The product evaluated is \u00abJava Card MultiApp V4.2 platform in open configuration on IC IFX_CCI_000010h, 4.2.0.1 \u00bb developed by THALES DIS FRANCE SAS."
+          },
+          {
+            "name": "CombICAO Applet v2.2 in EAC configuration on ID-ONE Cosmo V9.1",
+            "text": "CombICAO Applet v2.2 in EAC configuration on ID-ONE Cosmo V9.1 | 8 June 2026 | The evaluated product implements electronic travel document functions in accordance with the specifications of the International Civil Aviation Organization (ICAO).",
+            "href": "https://certification.enisa.europa.eu/certificates/eucc-3090-2026-0065_en",
+            "cert_date": "2026-06-08T12:00:00Z",
+            "description": "The evaluated product implements electronic travel document functions in accordance with the specifications of the International Civil Aviation Organization (ICAO)."
+          },
+          {
+            "name": "CombICAO Applet v3 in SSCD configuration on ID-One Cosmo X",
+            "text": "CombICAO Applet v3 in SSCD configuration on ID-One Cosmo X | 4 June 2026 | The product evaluated is a smart card that can be used in both contact and contactless modes. It is intended to be used as a secure signature creation device (SSCD).",
+            "href": "https://certification.enisa.europa.eu/certificates/eucc-3090-2026-0048_en",
+            "cert_date": "2026-06-04T12:00:00Z",
+            "description": "The product evaluated is a smart card that can be used in both contact and contactless modes. It is intended to be used as a secure signature creation device (SSCD)."
+          },
+          {
+            "name": "CombICAO Applet v3 in EAC with PACE configuration for French ID on ID-One Cosmo X",
+            "text": "CombICAO Applet v3 in EAC with PACE configuration for French ID on ID-One Cosmo X | 4 June 2026 | The evaluated product implements electronic travel document functions in accordance with the specifications of the International Civil Aviation Organization (ICAO).",
+            "href": "https://certification.enisa.europa.eu/certificates/eucc-3090-2026-0047_en",
+            "cert_date": "2026-06-04T12:00:00Z",
+            "description": "The evaluated product implements electronic travel document functions in accordance with the specifications of the International Civil Aviation Organization (ICAO)."
+          },
+          {
+            "name": "CombICAO Applet v3 in EAC configuration on ID-One Cosmo X",
+            "text": "CombICAO Applet v3 in EAC configuration on ID-One Cosmo X | 4 June 2026 | The evaluated product implements electronic travel document functions in accordance with the specifications of the International Civil Aviation Organization (ICAO).",
+            "href": "https://certification.enisa.europa.eu/certificates/eucc-3090-2026-0045_en",
+            "cert_date": "2026-06-04T12:00:00Z",
+            "description": "The evaluated product implements electronic travel document functions in accordance with the specifications of the International Civil Aviation Organization (ICAO)."
+          },
+          {
+            "name": "CombICAO Applet v3 in EAC with PACE configuration on ID-One Cosmo X",
+            "text": "CombICAO Applet v3 in EAC with PACE configuration on ID-One Cosmo X | 4 June 2026 | The evaluated product implements electronic travel document functions in accordance with the specifications of the International Civil Aviation Organization (ICAO).",
+            "href": "https://certification.enisa.europa.eu/certificates/eucc-3090-2026-0046_en",
+            "cert_date": "2026-06-04T12:00:00Z",
+            "description": "The evaluated product implements electronic travel document functions in accordance with the specifications of the International Civil Aviation Organization (ICAO)."
+          },
+          {
+            "name": "CombICAO Applet v3 in BAC and CA configuration on ID-One Cosmo X",
+            "text": "CombICAO Applet v3 in BAC and CA configuration on ID-One Cosmo X | 1 June 2026 | The product evaluated implements electronic travel document functions in accordance with the specifications of the International Civil Aviation Organization (ICAO).",
+            "href": "https://certification.enisa.europa.eu/certificates/eucc-3090-2026-0049_en",
+            "cert_date": "2026-06-01T12:00:00Z",
+            "description": "The product evaluated implements electronic travel document functions in accordance with the specifications of the International Civil Aviation Organization (ICAO)."
+          },
+          {
+            "name": "CombICAO Applet v2.2 in EAC with PACE configuration for French ID on ID-ONE Cosmo V9.1",
+            "text": "CombICAO Applet v2.2 in EAC with PACE configuration for French ID on ID-ONE Cosmo V9.1 | 27 May 2026 | The evaluated product implements electronic travel document functions in accordance with the specifications of the International Civil Aviation Organization (ICAO).",
+            "href": "https://certification.enisa.europa.eu/certificates/eucc-3090-2026-0037_en",
+            "cert_date": "2026-05-27T12:00:00Z",
+            "description": "The evaluated product implements electronic travel document functions in accordance with the specifications of the International Civil Aviation Organization (ICAO)."
+          },
+          {
+            "name": "CombICAO Applet v2.2 in SSCD configuration on ID-ONE Cosmo V9.1",
+            "text": "CombICAO Applet v2.2 in SSCD configuration on ID-ONE Cosmo V9.1 | 27 May 2026 | The product evaluated is a smart card that can be used in both contact and contactless modes. It is intended to be used as a secure signature creation device (SSCD).",
+            "href": "https://certification.enisa.europa.eu/certificates/eucc-3090-2026-0038_en",
+            "cert_date": "2026-05-27T12:00:00Z",
+            "description": "The product evaluated is a smart card that can be used in both contact and contactless modes. It is intended to be used as a secure signature creation device (SSCD)."
+          },
+          {
+            "name": "CombICAO Applet v2.2 in EAC with PACE configuration on ID-ONE Cosmo V9.1",
+            "text": "CombICAO Applet v2.2 in EAC with PACE configuration on ID-ONE Cosmo V9.1 | 27 May 2026 | The evaluated product implements electronic travel document functions in accordance with the specifications of the International Civil Aviation Organization (ICAO).",
+            "href": "https://certification.enisa.europa.eu/certificates/eucc-3090-2026-0036_en",
+            "cert_date": "2026-05-27T12:00:00Z",
+            "description": "The evaluated product implements electronic travel document functions in accordance with the specifications of the International Civil Aviation Organization (ICAO)."
+          },
+          {
+            "name": "CombICAO Applet v2.1 and v2.2 in EAC configuration on ID-ONE Cosmo V9.2",
+            "text": "CombICAO Applet v2.1 and v2.2 in EAC configuration on ID-ONE Cosmo V9.2 | 26 May 2026 | The evaluated product implements electronic travel document functions in accordance with the specifications of the International Civil Aviation Organization (ICAO).",
+            "href": "https://certification.enisa.europa.eu/certificates/eucc-3090-2026-0040_en",
+            "cert_date": "2026-05-26T12:00:00Z",
+            "description": "The evaluated product implements electronic travel document functions in accordance with the specifications of the International Civil Aviation Organization (ICAO)."
+          },
+          {
+            "name": "CombICAO Applet v2.1 and v2.2 in EAC with PACE configuration on ID-ONE Cosmo V9.2",
+            "text": "CombICAO Applet v2.1 and v2.2 in EAC with PACE configuration on ID-ONE Cosmo V9.2 | 26 May 2026 | The evaluated product implements electronic travel document functions in accordance with the specifications of the International Civil Aviation Organization (ICAO).",
+            "href": "https://certification.enisa.europa.eu/certificates/eucc-3090-2026-0041_en",
+            "cert_date": "2026-05-26T12:00:00Z",
+            "description": "The evaluated product implements electronic travel document functions in accordance with the specifications of the International Civil Aviation Organization (ICAO)."
+          },
+          {
+            "name": "CombICAO Applet v2.1 and v2.2 in EAC with PACE configuration for French ID on ID-ONE Cosmo V9.2",
+            "text": "CombICAO Applet v2.1 and v2.2 in EAC with PACE configuration for French ID on ID-ONE Cosmo V9.2 | 26 May 2026 | The evaluated product implements electronic travel document functions in accordance with the specifications of the International Civil Aviation Organization (ICAO).",
+            "href": "https://certification.enisa.europa.eu/certificates/eucc-3090-2026-0042_en",
+            "cert_date": "2026-05-26T12:00:00Z",
+            "description": "The evaluated product implements electronic travel document functions in accordance with the specifications of the International Civil Aviation Organization (ICAO)."
+          },
+          {
+            "name": "CombICAO Applet v2.1 and v2.2 in SSCD configuration on ID-ONE Cosmo V9.2",
+            "text": "CombICAO Applet v2.1 and v2.2 in SSCD configuration on ID-ONE Cosmo V9.2 | 26 May 2026 | The product evaluated is a smart card that can be used in both contact and contactless modes. It is intended to be used as a secure signature creation device (SSCD).",
+            "href": "https://certification.enisa.europa.eu/certificates/eucc-3090-2026-0043_en",
+            "cert_date": "2026-05-26T12:00:00Z",
+            "description": "The product evaluated is a smart card that can be used in both contact and contactless modes. It is intended to be used as a secure signature creation device (SSCD)."
+          },
+          {
+            "name": "CombICAO Applet v2.1 and v2.2 in BAC and CA configuration on ID-ONE Cosmo V9.2",
+            "text": "CombICAO Applet v2.1 and v2.2 in BAC and CA configuration on ID-ONE Cosmo V9.2 | 26 May 2026 | The product evaluated implements electronic travel document functions in accordance with the specifications of the International Civil Aviation Organization (ICAO).",
+            "href": "https://certification.enisa.europa.eu/certificates/eucc-3090-2026-0044_en",
+            "cert_date": "2026-05-26T12:00:00Z",
+            "description": "The product evaluated implements electronic travel document functions in accordance with the specifications of the International Civil Aviation Organization (ICAO)."
+          },
+          {
+            "name": "ST31R480 with Random Number Generator software library",
+            "text": "ST31R480 with Random Number Generator software library | 13 May 2026 | STMicroelectronics' ST31R480 with Random Number Generator software library is a microcontroller for smart cards (ID, banking, transport, etc.).",
+            "href": "https://certification.enisa.europa.eu/certificates/eucc-3090-2026-0030_en",
+            "cert_date": "2026-05-13T12:00:00Z",
+            "description": "STMicroelectronics' ST31R480 with Random Number Generator software library is a microcontroller for smart cards (ID, banking, transport, etc.)."
+          },
+          {
+            "name": "Nokia 1830 Photonic Service Switch",
+            "text": "Nokia 1830 Photonic Service Switch | 13 May 2026 | The 1830 PSS product is a DWDM platform that supports aggregation for Ethernet, Fibre Channel and other protocols.",
+            "href": "https://certification.enisa.europa.eu/certificates/eucc-3090-2026-0031_en",
+            "cert_date": "2026-05-13T12:00:00Z",
+            "description": "The 1830 PSS product is a DWDM platform that supports aggregation for Ethernet, Fibre Channel and other protocols."
+          },
+          {
+            "name": "ST31R480",
+            "text": "ST31R480 | 13 May 2026 | STMicroelectronics' ST31R480 (A02) is a microcontroller for smart cards (ID, banking, transport, etc.).",
+            "href": "https://certification.enisa.europa.eu/certificates/eucc-3090-2026-0029_en",
+            "cert_date": "2026-05-13T12:00:00Z",
+            "description": "STMicroelectronics' ST31R480 (A02) is a microcontroller for smart cards (ID, banking, transport, etc.)."
+          },
+          {
+            "name": "Cryptographic library NesLib 6.11.3 on ST31N600 A04",
+            "text": "Cryptographic library NesLib 6.11.3 on ST31N600 A04 | 6 May 2026 | STMicroelectronics Cryptographic library NesLib 6.11.3 on ST31N600 A04 is a cryptographic library on microcontroller for smart cards (ID, banking, transport, etc.).",
+            "href": "https://certification.enisa.europa.eu/certificates/eucc-3090-2026-0025_en",
+            "cert_date": "2026-05-06T12:00:00Z",
+            "description": "STMicroelectronics Cryptographic library NesLib 6.11.3 on ST31N600 A04 is a cryptographic library on microcontroller for smart cards (ID, banking, transport, etc.)."
+          },
+          {
+            "name": "ID-A v1.0 on ID-One Cosmo X",
+            "text": "ID-A v1.0 on ID-One Cosmo X | 4 May 2026 | The product is a smart card with an embedded software compliant to IAS ECC v21 specification, and a secure microcontroller with contact and contactless interfaces.",
+            "href": "https://certification.enisa.europa.eu/certificates/eucc-3090-2026-0024_en",
+            "cert_date": "2026-05-04T12:00:00Z",
+            "description": "The product is a smart card with an embedded software compliant to IAS ECC v21 specification, and a secure microcontroller with contact and contactless interfaces."
+          },
+          {
+            "name": "ST33J2M0",
+            "text": "ST33J2M0 | 27 April 2026 | STMicroelectronics' ST33J2M0 (C05) is a microcontroller for smart cards (ID, banking, transport, etc.).",
+            "href": "https://certification.enisa.europa.eu/certificates/eucc-3090-2026-0022_en",
+            "cert_date": "2026-04-27T12:00:00Z",
+            "description": "STMicroelectronics' ST33J2M0 (C05) is a microcontroller for smart cards (ID, banking, transport, etc.)."
+          },
+          {
+            "name": "ST33J2M0 including optional cryptographic library NESLIB",
+            "text": "ST33J2M0 including optional cryptographic library NESLIB | 27 April 2026 | STMicroelectronics' ST33J2M0 including optional cryptographic library NESLIB (F03) is a microcontroller for smart cards (ID, banking, transport, etc.).",
+            "href": "https://certification.enisa.europa.eu/certificates/eucc-3090-2026-0023_en",
+            "cert_date": "2026-04-27T12:00:00Z",
+            "description": "STMicroelectronics' ST33J2M0 including optional cryptographic library NESLIB (F03) is a microcontroller for smart cards (ID, banking, transport, etc.)."
+          }
+        ],
+        "removed": [
+          {
+            "name": "L4Re Secure Separation Kernel CC 1.0.2",
+            "text": "L4Re Secure Separation Kernel CC 1.0.2 | 16 April 2026 | L4Re SSK is a distribution of the open-source L4Re Operating System Framework. As such it is based on the L4Re Microkernel. The L4Re Microkernel is a 3rd-generation microkernel with a state-of-the-art capability-based mandatory access control security model.",
+            "href": "https://certification.enisa.europa.eu/certificates/eucc-3087-2026-04-0003_en",
+            "cert_date": "2026-04-16T12:00:00Z",
+            "description": "L4Re SSK is a distribution of the open-source L4Re Operating System Framework. As such it is based on the L4Re Microkernel. The L4Re Microkernel is a 3rd-generation microkernel with a state-of-the-art capability-based mandatory access control security model."
+          },
+          {
+            "name": "Infineon Technologies Security Controller M9900 A22/C22/D22, M9905 A11, M9906 A11",
+            "text": "Infineon Technologies Security Controller M9900 A22/C22/D22, M9905 A11, M9906 A11 | 13 April 2026 | Infineon smart card IC (Security Controller) M9900 A22/C22/D22, M9905 A11, M9906 A11",
+            "href": "https://certification.enisa.europa.eu/certificates/eucc-3087-2026-04-0005_en",
+            "cert_date": "2026-04-13T12:00:00Z",
+            "description": "Infineon smart card IC (Security Controller) M9900 A22/C22/D22, M9905 A11, M9906 A11"
+          },
+          {
+            "name": "MF0AES(H)x0, NT2H2xy1G and NT2H2xy1S, release B0",
+            "text": "MF0AES(H)x0, NT2H2xy1G and NT2H2xy1S, release B0 | 10 April 2026 | The innovative NTAG and MIFARE brand adds the benefits of contactless technology to security and/or high-volume applications. Our NTAG and MIFARE solutions are a key enabler for today\u2019s consumer, industrial segments of the IoT as well as hospitality and ticketing, driving new value throughout a full",
+            "href": "https://certification.enisa.europa.eu/certificates/eucc-3100-2026-0007001701-00000_en",
+            "cert_date": "2026-04-10T12:00:00Z",
+            "description": "The innovative NTAG and MIFARE brand adds the benefits of contactless technology to security and/or high-volume applications. Our NTAG and MIFARE solutions are a key enabler for today\u2019s consumer, industrial segments of the IoT as well as hospitality and ticketing, driving new value throughout a full"
+          },
+          {
+            "name": "SGH-S",
+            "text": "SGH-S | 20 March 2026 | The TOE is the security functionality of a Smart Meter Gateway that serves as the communication unit between devices of private and commercial consumers and commodity industry service providers (e.g., electricity, gas, water, etc.).",
+            "href": "https://certification.enisa.europa.eu/certificates/eucc-3087-2026-03-0002_en",
+            "cert_date": "2026-03-20T12:00:00Z",
+            "description": "The TOE is the security functionality of a Smart Meter Gateway that serves as the communication unit between devices of private and commercial consumers and commodity industry service providers (e.g., electricity, gas, water, etc.)."
+          },
+          {
+            "name": "TESS v5.2 and TESS v5.2.1 Platform",
+            "text": "TESS v5.2 and TESS v5.2.1 Platform | 12 March 2026 | The product evaluated is \u00abTESS v5.2 and TESS v5.2.1 Platform, Revision 1.0.2 \u00bb developed by THALES DIS FRANCE SAS.",
+            "href": "https://certification.enisa.europa.eu/certificates/eucc-3090-2026-0000000015-00000_en",
+            "cert_date": "2026-03-12T12:00:00Z",
+            "description": "The product evaluated is \u00abTESS v5.2 and TESS v5.2.1 Platform, Revision 1.0.2 \u00bb developed by THALES DIS FRANCE SAS."
+          },
+          {
+            "name": "NXP JCOP 7.x on SN300 Secure Element",
+            "text": "NXP JCOP 7.x on SN300 Secure Element | 5 March 2026 | The TOE is a platform containing the Java Card OS embedded on the SN300 Secure Element with IC Dedicated Software",
+            "href": "https://certification.enisa.europa.eu/certificates/eucc-3110-2026-2500075-01-00000_en",
+            "cert_date": "2026-03-05T12:00:00Z",
+            "description": "The TOE is a platform containing the Java Card OS embedded on the SN300 Secure Element with IC Dedicated Software"
+          },
+          {
+            "name": "S3NSN4V",
+            "text": "S3NSN4V | 19 February 2026 | The product evaluated is \u00abS3NSN4V, S3NSN4V _20250407 \u00bb developed by SAMSUNG ELECTRONICS CO. LTD.. This product is intended to be used for smartcards applications.",
+            "href": "https://certification.enisa.europa.eu/certificates/eucc-3090-2026-0000000009-00000_en",
+            "cert_date": "2026-02-19T12:00:00Z",
+            "description": "The product evaluated is \u00abS3NSN4V, S3NSN4V _20250407 \u00bb developed by SAMSUNG ELECTRONICS CO. LTD.. This product is intended to be used for smartcards applications."
+          },
+          {
+            "name": "CombICAO v3.1 on Cosmo X\u00b2 (EAC with PACE for French ID Configuration)",
+            "text": "CombICAO v3.1 on Cosmo X\u00b2 (EAC with PACE for French ID Configuration) | 18 February 2026 | The evaluated product is a \"smart card\" type device that can be used in two modes: contact and contactless. It implements electronic travel document functions in accordance with the specifications of the International Civil Aviation Organization (ICAO).",
+            "href": "https://certification.enisa.europa.eu/certificates/eucc-3090-2026-0000000005-00000_en",
+            "cert_date": "2026-02-18T12:00:00Z",
+            "description": "The evaluated product is a \"smart card\" type device that can be used in two modes: contact and contactless. It implements electronic travel document functions in accordance with the specifications of the International Civil Aviation Organization (ICAO)."
+          },
+          {
+            "name": "NPCT7xx TPM2.0 rev 1.59",
+            "text": "NPCT7xx TPM2.0 rev 1.59 | 18 February 2026 | This product is a TPM (Trusted Platform Module). It is designed to guarantee the hardware and software integrity of trusted platforms (servers, computers, etc.) in accordance with TPM2.0 functional specifications.",
+            "href": "https://certification.enisa.europa.eu/certificates/eucc-3090-2026-0000000012-00000_en",
+            "cert_date": "2026-02-18T12:00:00Z",
+            "description": "This product is a TPM (Trusted Platform Module). It is designed to guarantee the hardware and software integrity of trusted platforms (servers, computers, etc.) in accordance with TPM2.0 functional specifications."
+          },
+          {
+            "name": "NPCT7xx TPM2.0 rev 1.59",
+            "text": "NPCT7xx TPM2.0 rev 1.59 | 18 February 2026 | This product is a TPM (Trusted Platform Module). It is designed to guarantee the hardware and software integrity of trusted platforms (servers, computers, etc.) in accordance with TPM2.0 functional specifications.",
+            "href": "https://certification.enisa.europa.eu/certificates/eucc-3090-2026-0000000013-00000_en",
+            "cert_date": "2026-02-18T12:00:00Z",
+            "description": "This product is a TPM (Trusted Platform Module). It is designed to guarantee the hardware and software integrity of trusted platforms (servers, computers, etc.) in accordance with TPM2.0 functional specifications."
+          },
+          {
+            "name": "NPCT7xx TPM2.0 rev 1.59",
+            "text": "NPCT7xx TPM2.0 rev 1.59 | 18 February 2026 | This product is a TPM (Trusted Platform Module). It is designed to guarantee the hardware and software integrity of trusted platforms (servers, computers, etc.) in accordance with TPM2.0 functional specifications.",
+            "href": "https://certification.enisa.europa.eu/certificates/eucc-3090-2026-0000000014-00000_en",
+            "cert_date": "2026-02-18T12:00:00Z",
+            "description": "This product is a TPM (Trusted Platform Module). It is designed to guarantee the hardware and software integrity of trusted platforms (servers, computers, etc.) in accordance with TPM2.0 functional specifications."
+          },
+          {
+            "name": "CombICAO v3.1 on Cosmo X\u00b2 (SSCD Configuration)",
+            "text": "CombICAO v3.1 on Cosmo X\u00b2 (SSCD Configuration) | 18 February 2026 | The evaluated product is a \"smart card\" type device that can be used in two modes: contact and contactless. It is intended for use as a secure signature creation device (SSCD).",
+            "href": "https://certification.enisa.europa.eu/certificates/eucc-3090-2026-0000000001-00000_en",
+            "cert_date": "2026-02-18T12:00:00Z",
+            "description": "The evaluated product is a \"smart card\" type device that can be used in two modes: contact and contactless. It is intended for use as a secure signature creation device (SSCD)."
+          },
+          {
+            "name": "CombICAO v3.1 on Cosmo X\u00b2 (EAC Configuration)",
+            "text": "CombICAO v3.1 on Cosmo X\u00b2 (EAC Configuration) | 18 February 2026 | The evaluated product is a \"smart card\" type device that can be used in two modes: contact and contactless. It is intended for use as a secure signature creation device (SSCD).",
+            "href": "https://certification.enisa.europa.eu/certificates/eucc-3090-2026-0000000003-00000_en",
+            "cert_date": "2026-02-18T12:00:00Z",
+            "description": "The evaluated product is a \"smart card\" type device that can be used in two modes: contact and contactless. It is intended for use as a secure signature creation device (SSCD)."
+          },
+          {
+            "name": "CombICAO v3.1 on Cosmo X\u00b2 (EAC with PACE Configuration)",
+            "text": "CombICAO v3.1 on Cosmo X\u00b2 (EAC with PACE Configuration) | 18 February 2026 | The evaluated product is a \"smart card\" type device that can be used in two modes: contact and contactless. It is intended for use as a secure signature creation device (SSCD).",
+            "href": "https://certification.enisa.europa.eu/certificates/eucc-3090-2026-0000000004-00000_en",
+            "cert_date": "2026-02-18T12:00:00Z",
+            "description": "The evaluated product is a \"smart card\" type device that can be used in two modes: contact and contactless. It is intended for use as a secure signature creation device (SSCD)."
+          },
+          {
+            "name": "IFX_CCI_00007Ah/8Fh A11, R11, M11 with optional Crypto Suite",
+            "text": "IFX_CCI_00007Ah/8Fh A11, R11, M11 with optional Crypto Suite | 17 February 2026 | The Target of Evaluation (TOE) is the Infineon Security Controller IFX_CCI_00007Ah A11 / R11 / M11, IFX_CCI_00008Fh R11 / M11 with firmware, optional Crypto Suite and user guidance documents. The TOE can communicate using contact-based and contactless interfaces. The TOE provides a 32-bit Armv8-M CP...",
+            "href": "https://certification.enisa.europa.eu/certificates/eucc-3087-2026-02-0001_en",
+            "cert_date": "2026-02-17T12:00:00Z",
+            "description": "The Target of Evaluation (TOE) is the Infineon Security Controller IFX_CCI_00007Ah A11 / R11 / M11, IFX_CCI_00008Fh R11 / M11 with firmware, optional Crypto Suite and user guidance documents. The TOE can communicate using contact-based and contactless interfaces. The TOE provides a 32-bit Armv8-M CP..."
+          },
+          {
+            "name": "ST54J / ST54K",
+            "text": "ST54J / ST54K | 16 February 2026 | The product evaluated is \u00abST54J / ST54K, A08 \u00bb developed by STMICROELECTRONICS. This product is intended to be used for smartcards applications.",
+            "href": "https://certification.enisa.europa.eu/certificates/eucc-3090-2026-0000000006-00000_en",
+            "cert_date": "2026-02-16T12:00:00Z",
+            "description": "The product evaluated is \u00abST54J / ST54K, A08 \u00bb developed by STMICROELECTRONICS. This product is intended to be used for smartcards applications."
+          },
+          {
+            "name": "NXP JCOP 8.x/9.x on SN300 B2 Secure Element",
+            "text": "NXP JCOP 8.x/9.x on SN300 B2 Secure Element | 16 January 2026 | The JCOP 8.x/9.x on SN300 B2 Secure Elemen is a composite platform containing the Java Card OS embedded on the SN300 B2 Secure Element with IC Dedicated Software",
+            "href": "https://certification.enisa.europa.eu/certificates/eucc-3110-2026-01-2500076-01_en",
+            "cert_date": "2026-01-16T12:00:00Z",
+            "description": "The JCOP 8.x/9.x on SN300 B2 Secure Elemen is a composite platform containing the Java Card OS embedded on the SN300 B2 Secure Element with IC Dedicated Software"
+          },
+          {
+            "name": "NXP JCOP 8.x on SE310 A0 Secure Element",
+            "text": "NXP JCOP 8.x on SE310 A0 Secure Element | 16 January 2026 | The TOE is a composite platform containing the Java Card OS embedded on the SE310 A0 Secure Element with IC Dedicated Software.",
+            "href": "https://certification.enisa.europa.eu/certificates/eucc-3110-2026-2500077-01-00000_en",
+            "cert_date": "2026-01-16T12:00:00Z",
+            "description": "The TOE is a composite platform containing the Java Card OS embedded on the SE310 A0 Secure Element with IC Dedicated Software."
+          },
+          {
+            "name": "Infineon Security Controllers",
+            "text": "Infineon Security Controllers | 19 December 2025 | Evaluation of Infineon Security Controller IFX_CCI_00000Fh, IFX_CCI_000010h, IFX_CCI_000026h, IFX_CCI_000027h, IFX_CCI_000028h, IFX_CCI_000029h, IFX_CCI_00002Ah, IFX_CCI_00002Bh, IFX_CCI_00002Ch in the design step G12.",
+            "href": "https://certification.enisa.europa.eu/certificates/eucc-3087-2025-0000000001-00000_en",
+            "cert_date": "2025-12-19T12:00:00Z",
+            "description": "Evaluation of Infineon Security Controller IFX_CCI_00000Fh, IFX_CCI_000010h, IFX_CCI_000026h, IFX_CCI_000027h, IFX_CCI_000028h, IFX_CCI_000029h, IFX_CCI_00002Ah, IFX_CCI_00002Bh, IFX_CCI_00002Ch in the design step G12."
+          },
+          {
+            "name": "ST31P450",
+            "text": "ST31P450 | 17 December 2025 | The product evaluated is the family of micro-controlers \u00abS3D384C/S3D352C/S3D300C/S3D264C/S3D232C/S3K384C, S3D384C_20250630 \u00bb developed by SAMSUNG ELECTRONICS CO. LTD.",
+            "href": "https://certification.enisa.europa.eu/certificates/eucc-3090-2025-0000000006-00000_en",
+            "cert_date": "2025-12-17T12:00:00Z",
+            "description": "The product evaluated is the family of micro-controlers \u00abS3D384C/S3D352C/S3D300C/S3D264C/S3D232C/S3K384C, S3D384C_20250630 \u00bb developed by SAMSUNG ELECTRONICS CO. LTD."
+          },
+          {
+            "name": "ST31P450",
+            "text": "ST31P450 | 15 December 2025 | The product evaluated is the family of micro-controlers \u00abS3D384E/S3D352E/S3D300E/S3D264E/S3D232E/S3K384E, S3D384E_20250730\u00bb developed by SAMSUNG ELECTRONICS CO. LTD.",
+            "href": "https://certification.enisa.europa.eu/certificates/eucc-3090-2025-0000000007-00000_en",
+            "cert_date": "2025-12-15T12:00:00Z",
+            "description": "The product evaluated is the family of micro-controlers \u00abS3D384E/S3D352E/S3D300E/S3D264E/S3D232E/S3K384E, S3D384E_20250730\u00bb developed by SAMSUNG ELECTRONICS CO. LTD."
+          },
+          {
+            "name": "S3SSE1A microcontroller",
+            "text": "S3SSE1A microcontroller | 15 December 2025 | The S3SSE1A microcontroller is a smartcard integrated circuit which is composed of a processing unit, security components, contact based I/O ports, hardware circuit for testing purpose during the manufacturing process and volatile and non-volatile memories (hardware).",
+            "href": "https://certification.enisa.europa.eu/certificates/eucc-3090-2025-0000000014-00000_en",
+            "cert_date": "2025-12-15T12:00:00Z",
+            "description": "The S3SSE1A microcontroller is a smartcard integrated circuit which is composed of a processing unit, security components, contact based I/O ports, hardware circuit for testing purpose during the manufacturing process and volatile and non-volatile memories (hardware)."
+          },
+          {
+            "name": "ST31P450",
+            "text": "ST31P450 | 10 December 2025 | The product evaluated is \u00ab ST31P450, A08 \u00bb developed by STMICROELECTRONICS.",
+            "href": "https://certification.enisa.europa.eu/certificates/eucc-3090-2025-0000000008-00000_en",
+            "cert_date": "2025-12-10T12:00:00Z",
+            "description": "The product evaluated is \u00ab ST31P450, A08 \u00bb developed by STMICROELECTRONICS."
+          },
+          {
+            "name": "ST31P450",
+            "text": "ST31P450 | 10 December 2025 | The product evaluated is \u00ab ST31P450 including optional cryptographic library NESLIB, C03 \u00bb developed by STMICROELECTRONICS.",
+            "href": "https://certification.enisa.europa.eu/certificates/eucc-3090-2025-0000000009-00000_en",
+            "cert_date": "2025-12-10T12:00:00Z",
+            "description": "The product evaluated is \u00ab ST31P450 including optional cryptographic library NESLIB, C03 \u00bb developed by STMICROELECTRONICS."
+          },
+          {
+            "name": "Cisco Nexus 9000 Series Switches,  software version Cisco NX-OS version 10.4(5)(M)",
+            "text": "Cisco Nexus 9000 Series Switches,  software version Cisco NX-OS version 10.4(5)(M) | 3 December 2025 | The Cisco Nexus 9K Series are data center-class switches for use as an aggregation switch in the data center. Cisco NX-OS is a Cisco-developed highly configurable proprietary operating system that provides for efficient and effective routing and switching.",
+            "href": "https://certification.enisa.europa.eu/certificates/eucc-3110-2025-12-2500098-01_en",
+            "cert_date": "2025-12-03T12:00:00Z",
+            "description": "The Cisco Nexus 9K Series are data center-class switches for use as an aggregation switch in the data center. Cisco NX-OS is a Cisco-developed highly configurable proprietary operating system that provides for efficient and effective routing and switching."
+          },
+          {
+            "name": "Huawei ATN Series Routers",
+            "text": "Huawei ATN Series Routers | 14 November 2025 | Huawei ATN Series Routers. The TOE is a series of network infrastructure routers including both hardware and software. It is defined as the software running on the hardware corresponding to the following routers: ATN 910C-M, ATN 910C-K and ATN 910D-B.",
+            "href": "https://certification.enisa.europa.eu/certificates/eucc-3110-2025-11-2500051-01_en",
+            "cert_date": "2025-11-14T12:00:00Z",
+            "description": "Huawei ATN Series Routers. The TOE is a series of network infrastructure routers including both hardware and software. It is defined as the software running on the hardware corresponding to the following routers: ATN 910C-M, ATN 910C-K and ATN 910D-B."
+          },
+          {
+            "name": "S3NSEN6",
+            "text": "S3NSEN6 | 16 October 2025 | The product evaluated is \u00abS3NSEN6, S3NSEN6_20250630 \u00bb microcontroller, developed by SAMSUNG ELECTRONICS CO. LTD.",
+            "href": "https://certification.enisa.europa.eu/certificates/eucc-3090-2025-0000000004-00002_en",
+            "cert_date": "2025-10-16T12:00:00Z",
+            "description": "The product evaluated is \u00abS3NSEN6, S3NSEN6_20250630 \u00bb microcontroller, developed by SAMSUNG ELECTRONICS CO. LTD."
+          },
+          {
+            "name": "S3NSN6H",
+            "text": "S3NSN6H | 16 October 2025 | The product evaluated is \u00abS3NSN6H, S3NSN6H_20250630\u00bb microcontroller, developed by SAMSUNG ELECTRONICS CO. LTD.",
+            "href": "https://certification.enisa.europa.eu/certificates/eucc-3090-2025-0000000005-00002_en",
+            "cert_date": "2025-10-16T12:00:00Z",
+            "description": "The product evaluated is \u00abS3NSN6H, S3NSN6H_20250630\u00bb microcontroller, developed by SAMSUNG ELECTRONICS CO. LTD."
+          },
+          {
+            "name": "SCE900U",
+            "text": "SCE900U | 15 October 2025 | The product evaluated is \u00abSCE900U, version A \u00bb developed by IDEMIA.",
+            "href": "https://certification.enisa.europa.eu/certificates/eucc-3090-2025-0000000003-00000_en",
+            "cert_date": "2025-10-15T12:00:00Z",
+            "description": "The product evaluated is \u00abSCE900U, version A \u00bb developed by IDEMIA."
+          },
+          {
+            "name": "Cisco Intersight Virtual Appliance 1.0.9 with IMM Fabric 4.3 UCS X-Series Servers and UCS C-Series Servers",
+            "text": "Cisco Intersight Virtual Appliance 1.0.9 with IMM Fabric 4.3 UCS X-Series Servers and UCS C-Series Servers | 14 September 2025 | The certified product is Cisco Intersight Virtual Appliance 1.0.9 with IMM Fabric 4.3 UCS X-Series Servers and UCS C-Series Servers.",
+            "href": "https://certification.enisa.europa.eu/certificates/eucc-3110-2025-09-2500093-01_en",
+            "cert_date": "2025-09-14T12:00:00Z",
+            "description": "The certified product is Cisco Intersight Virtual Appliance 1.0.9 with IMM Fabric 4.3 UCS X-Series Servers and UCS C-Series Servers."
+          },
+          {
+            "name": "NXP JCOP 8.x/9.x with eUICC extension on SN300 B2 Secure Element",
+            "text": "NXP JCOP 8.x/9.x with eUICC extension on SN300 B2 Secure Element | 29 August 2025 | The certified product is NXP JCOP 8.x/9.x with eUICC extension on SN300 B2 Secure Element.",
+            "href": "https://certification.enisa.europa.eu/certificates/eucc-3110-2025-08-2500053-01_en",
+            "cert_date": "2025-08-29T12:00:00Z",
+            "description": "The certified product is NXP JCOP 8.x/9.x with eUICC extension on SN300 B2 Secure Element."
+          }
+        ]
+      }
+    },
+    "cisco_added": [],
+    "cisco_removed": [
+      {
+        "name": "Cisco Intersight Virtual Appliance 1.0.9 with IMM Fabric 4.3 UCS X-Series Servers and UCS C-Series Servers",
+        "text": "Cisco Intersight Virtual Appliance 1.0.9 with IMM Fabric 4.3 UCS X-Series Servers and UCS C-Series Servers | 14 September 2025 | The certified product is Cisco Intersight Virtual Appliance 1.0.9 with IMM Fabric 4.3 UCS X-Series Servers and UCS C-Series Servers.",
+        "href": "https://certification.enisa.europa.eu/certificates/eucc-3110-2025-09-2500093-01_en",
+        "cert_date": "2025-09-14T12:00:00Z",
+        "description": "The certified product is Cisco Intersight Virtual Appliance 1.0.9 with IMM Fabric 4.3 UCS X-Series Servers and UCS C-Series Servers."
+      },
+      {
+        "name": "Cisco Nexus 9000 Series Switches,  software version Cisco NX-OS version 10.4(5)(M)",
+        "text": "Cisco Nexus 9000 Series Switches,  software version Cisco NX-OS version 10.4(5)(M) | 3 December 2025 | The Cisco Nexus 9K Series are data center-class switches for use as an aggregation switch in the data center. Cisco NX-OS is a Cisco-developed highly configurable proprietary operating system that provides for efficient and effective routing and switching.",
+        "href": "https://certification.enisa.europa.eu/certificates/eucc-3110-2025-12-2500098-01_en",
+        "cert_date": "2025-12-03T12:00:00Z",
+        "description": "The Cisco Nexus 9K Series are data center-class switches for use as an aggregation switch in the data center. Cisco NX-OS is a Cisco-developed highly configurable proprietary operating system that provides for efficient and effective routing and switching."
+      }
+    ],
+    "baseline_reset": false
+  },
+  "nd_itc": {
+    "nit_rfis": {
+      "added": [],
+      "status_changes": [],
+      "revised": [],
+      "newly_archived": []
+    },
+    "awl": {
+      "added": [],
+      "removed": [],
+      "version_changes": [],
+      "list_updates": []
+    },
+    "baseline_reset": false,
+    "collection_failure": false
+  },
+  "source_health": {
+    "niap": {
+      "label": "NIAP",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "PCL products",
+          "observed": 1758,
+          "minimum": 50
+        },
+        {
+          "name": "Protection Profiles",
+          "observed": 271,
+          "minimum": 10
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-08-25T06:35:18.463982+00:00",
+      "subcollections": {
+        "news": {
+          "label": "News announcements",
+          "status": "healthy",
+          "observed": 354,
+          "consecutive_failures": 0,
+          "using_last_known_good": false
+        },
+        "events": {
+          "label": "Events",
+          "status": "healthy",
+          "observed": 0,
+          "consecutive_failures": 0,
+          "using_last_known_good": false
+        },
+        "policies": {
+          "label": "Policy letters",
+          "status": "healthy",
+          "observed": 39,
+          "consecutive_failures": 0,
+          "using_last_known_good": false
+        }
+      }
+    },
+    "cc_portal": {
+      "label": "CC Portal",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "portal records",
+          "observed": 180,
+          "minimum": 1
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-08-25T06:35:18.463982+00:00"
+    },
+    "cctl_labs": {
+      "label": "CCTL Labs",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "lab feed items",
+          "observed": 19,
+          "minimum": 1
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-08-25T06:35:18.463982+00:00"
+    },
+    "csfc": {
+      "label": "CSfC",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "APL items",
+          "observed": 120,
+          "minimum": 5
+        },
+        {
+          "name": "announcements",
+          "observed": 8,
+          "minimum": 1
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-08-25T06:35:18.463982+00:00"
+    },
+    "cc_crypto": {
+      "label": "CC Crypto",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "publications",
+          "observed": 121,
+          "minimum": 5
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-08-25T06:35:18.463982+00:00"
+    },
+    "nato": {
+      "label": "NATO NIAPCL",
+      "status": "healthy",
+      "mode": "manual",
+      "checks": [],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "detail": "manual baseline (40 Cisco product(s)); updated via the NATO capture GitHub issue workflow",
+      "checked_at": "2026-08-25T06:35:18.463982+00:00"
+    },
+    "eucc": {
+      "label": "EUCC / ENISA",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "certificates",
+          "observed": 50,
+          "minimum": 2
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-08-25T06:35:18.463982+00:00"
+    },
+    "nd_itc": {
+      "label": "ND-iTC",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "NIT RFIs",
+          "observed": 32,
+          "minimum": 5
+        },
+        {
+          "name": "Allowed-With entries",
+          "observed": 22,
+          "minimum": 1
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-08-25T06:35:18.463982+00:00"
+    }
+  },
+  "alerts": []
+}
