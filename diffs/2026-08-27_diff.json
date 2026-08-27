@@ -1,0 +1,356 @@
+{
+  "period_start": "2026-08-26T06:37:09.765495+00:00",
+  "period_end": "2026-08-27T17:12:56.596071+00:00",
+  "niap": {
+    "pps": {
+      "added": [],
+      "removed": [],
+      "sunset_changes": [],
+      "status_changes": []
+    },
+    "tds": {
+      "added": [],
+      "removed": []
+    },
+    "cisco_ndcpp": {
+      "added": [],
+      "removed": [],
+      "newly_archived": []
+    },
+    "pcl_all": {
+      "added": [],
+      "removed": [],
+      "newly_archived": [
+        {
+          "active_maintenances": [
+            {
+              "maintenance_id": 1522,
+              "title": "Vertiv CYBEX\u2122 SCMV2160DPH, SC840DVIE, SC940DVIE, SC840HE, SC940HE, SC840DPE, SC940DPE Firmware Version 44404-E7E7 Peripheral Sharing Devices",
+              "completion_date": "2022-01-25T00:00:00+00:00"
+            }
+          ],
+          "am_sort": "2026-08-27T00:00:00Z",
+          "assigned_lab_name": "Acumen Security",
+          "certification_date": "2021-08-27T00:00:00Z",
+          "from_cc_portal": false,
+          "product_id": 11122,
+          "product_name": "Vertiv CYBEX\u2122 SCMV2160DPH, SC840DVIE, SC940DVIE, SC840HE, SC940HE, SC840DPE, SC940DPE Firmware Version 44404-E7E7 Peripheral Sharing Devices",
+          "protection_profiles": [
+            {
+              "pp_id": 412,
+              "pp_name": "Protection Profile for Peripheral Sharing Device Version 4.0",
+              "pp_short_name": "PP_PSD_V4.0"
+            },
+            {
+              "pp_id": 435,
+              "pp_name": "PP-Module for Keyboard/Mouse Devices Version 1.0",
+              "pp_short_name": "MOD_KM_V1.0"
+            },
+            {
+              "pp_id": 436,
+              "pp_name": "PP-Module for Video/Display Devices Version 1.0",
+              "pp_short_name": "MOD_VI_V1.0"
+            }
+          ],
+          "status_sort": "Archived",
+          "submitting_country_id_code": "US",
+          "submitting_country_id_name": "United States",
+          "sunset_date": "2026-08-27T00:00:00Z",
+          "tech_types": [
+            "Peripheral Switch"
+          ],
+          "vendor_id_name": "Vertiv IT Systems",
+          "v_id": 11122,
+          "kicked_off_date": "2021-03-09T00:00:00Z"
+        }
+      ]
+    },
+    "in_evaluation": {
+      "added": [],
+      "removed": [],
+      "current_count": 44
+    },
+    "news": {
+      "added": [],
+      "revised": [],
+      "deactivated": [],
+      "reactivated": [],
+      "removed": []
+    },
+    "events": {
+      "added": [],
+      "revised": [],
+      "deactivated": [],
+      "reactivated": [],
+      "removed": []
+    },
+    "policies": {
+      "added": [],
+      "revised": [],
+      "archived": [],
+      "reactivated": [],
+      "removed": []
+    }
+  },
+  "cc_portal": {
+    "news": {
+      "added": []
+    },
+    "pps": {
+      "added": []
+    },
+    "products": {
+      "added": []
+    }
+  },
+  "cctl_labs": {},
+  "csfc": {
+    "pages": {},
+    "selection_links": {},
+    "feeds": {}
+  },
+  "cc_crypto": {
+    "pages": {}
+  },
+  "nato": {
+    "pages": {},
+    "cisco_added": [],
+    "cisco_removed": [],
+    "baseline_reset": false
+  },
+  "eucc": {
+    "pages": {
+      "certificates": {
+        "added": [
+          {
+            "name": "S3FT9MF/S3FT9MT/S3FT9MS",
+            "text": "S3FT9MF/S3FT9MT/S3FT9MS | 27 April 2026 | The product evaluated is \u00ab S3FT9MF/S3FT9MT/S3FT9MS \u00bb developed by SAMSUNG. This product is intended to be used for smartcards applications.",
+            "href": "https://certification.enisa.europa.eu/certificates/eucc-3090-2026-000001-i-00-25_en",
+            "cert_date": "2026-04-27T12:00:00Z",
+            "description": "The product evaluated is \u00ab S3FT9MF/S3FT9MT/S3FT9MS \u00bb developed by SAMSUNG. This product is intended to be used for smartcards applications."
+          },
+          {
+            "name": "S3FT9MH/S3FT9MV/S3FT9MG",
+            "text": "S3FT9MH/S3FT9MV/S3FT9MG | 27 April 2026 | The product evaluated is \u00ab S3FT9MH/S3FT9MV/S3FT9MG \u00bb developed by SAMSUNG. This product is intended to be used for smartcards applications.",
+            "href": "https://certification.enisa.europa.eu/certificates/eucc-3090-2026-000001-i-00-26_en",
+            "cert_date": "2026-04-27T12:00:00Z",
+            "description": "The product evaluated is \u00ab S3FT9MH/S3FT9MV/S3FT9MG \u00bb developed by SAMSUNG. This product is intended to be used for smartcards applications."
+          }
+        ],
+        "removed": [
+          {
+            "name": "Infineon Technologies AG Smartcard IC IFX_CCI_000011h IFX_CCI_00001Bh IFX_CCI_00001Eh IFX_CCI_000025h G12",
+            "text": "Infineon Technologies AG Smartcard IC IFX_CCI_000011h IFX_CCI_00001Bh IFX_CCI_00001Eh IFX_CCI_000025h G12 | 27 April 2026 | Infineon Technologies AG Smartcard IC IFX_CCI_000011h IFX_CCI_00001Bh IFX_CCI_00001Eh IFX_CCI_000025h G12",
+            "href": "https://certification.enisa.europa.eu/certificates/eucc-3087-2026-04-0004_en",
+            "cert_date": "2026-04-27T12:00:00Z",
+            "description": "Infineon Technologies AG Smartcard IC IFX_CCI_000011h IFX_CCI_00001Bh IFX_CCI_00001Eh IFX_CCI_000025h G12"
+          },
+          {
+            "name": "ArcMC and SmartConnectors",
+            "text": "ArcMC and SmartConnectors | 27 April 2026 | The ArcSight Management Center (ARcMC) is a a centralized management software tool that supports security policy configuration, deployment maintenance, and monitoring. It provides a single management interface to administer ArcMC managed nodes, including Loggers, SmartConnectors, Event Brokers, and",
+            "href": "https://certification.enisa.europa.eu/certificates/eucc-3135-2026-0000000001-00000_en",
+            "cert_date": "2026-04-27T12:00:00Z",
+            "description": "The ArcSight Management Center (ARcMC) is a a centralized management software tool that supports security policy configuration, deployment maintenance, and monitoring. It provides a single management interface to administer ArcMC managed nodes, including Loggers, SmartConnectors, Event Brokers, and"
+          }
+        ]
+      }
+    },
+    "cisco_added": [
+      {
+        "name": "Cisco ASR 9000 Series Aggregation Services Routers running IOS-XR 7.11",
+        "text": "Cisco ASR 9000 Series Aggregation Services Routers running IOS-XR 7.11 | 28 April 2026 | The Cisco Cisco ASR 9000 Series Aggregation Services Routers running IOS-XR 7.11, (ASR9K) is a scalable carrier-class router, which is designed for redundancy, high security and availability, packaging, power, and other requirements needed by service providers. The ASR9K is designed to provide conti",
+        "href": "https://certification.enisa.europa.eu/certificates/eucc-3110-2026-000001-i-00-5_en",
+        "cert_date": "2026-04-28T12:00:00Z",
+        "description": "The Cisco Cisco ASR 9000 Series Aggregation Services Routers running IOS-XR 7.11, (ASR9K) is a scalable carrier-class router, which is designed for redundancy, high security and availability, packaging, power, and other requirements needed by service providers. The ASR9K is designed to provide conti"
+      }
+    ],
+    "cisco_removed": [
+      {
+        "name": "Cisco ASR 9000 Series Aggregation Services Routers running IOS-XR 7.11",
+        "text": "Cisco ASR 9000 Series Aggregation Services Routers running IOS-XR 7.11 | 28 April 2026 | The Cisco Cisco ASR 9000 Series Aggregation Services Routers running IOS-XR 7.11, (ASR9K) is a scalable carrier-class router, which is designed for redundancy, high security and availability, packaging, power, and other requirements needed by service providers. The ASR9K is designed to provide conti",
+        "href": "https://certification.enisa.europa.eu/certificates/eucc-3110-2026-2500100-01_en",
+        "cert_date": "2026-04-28T12:00:00Z",
+        "description": "The Cisco Cisco ASR 9000 Series Aggregation Services Routers running IOS-XR 7.11, (ASR9K) is a scalable carrier-class router, which is designed for redundancy, high security and availability, packaging, power, and other requirements needed by service providers. The ASR9K is designed to provide conti"
+      }
+    ],
+    "baseline_reset": false
+  },
+  "nd_itc": {
+    "nit_rfis": {
+      "added": [],
+      "status_changes": [],
+      "revised": [],
+      "newly_archived": []
+    },
+    "awl": {
+      "added": [],
+      "removed": [],
+      "version_changes": [],
+      "list_updates": []
+    },
+    "baseline_reset": false,
+    "collection_failure": false
+  },
+  "source_health": {
+    "niap": {
+      "label": "NIAP",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "PCL products",
+          "observed": 1757,
+          "minimum": 50
+        },
+        {
+          "name": "Protection Profiles",
+          "observed": 271,
+          "minimum": 10
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-08-27T17:12:56.596071+00:00",
+      "subcollections": {
+        "news": {
+          "label": "News announcements",
+          "status": "healthy",
+          "observed": 354,
+          "consecutive_failures": 0,
+          "using_last_known_good": false
+        },
+        "events": {
+          "label": "Events",
+          "status": "healthy",
+          "observed": 0,
+          "consecutive_failures": 0,
+          "using_last_known_good": false
+        },
+        "policies": {
+          "label": "Policy letters",
+          "status": "healthy",
+          "observed": 39,
+          "consecutive_failures": 0,
+          "using_last_known_good": false
+        }
+      }
+    },
+    "cc_portal": {
+      "label": "CC Portal",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "portal records",
+          "observed": 180,
+          "minimum": 1
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-08-27T17:12:56.596071+00:00"
+    },
+    "cctl_labs": {
+      "label": "CCTL Labs",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "lab feed items",
+          "observed": 19,
+          "minimum": 1
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-08-27T17:12:56.596071+00:00"
+    },
+    "csfc": {
+      "label": "CSfC",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "APL items",
+          "observed": 120,
+          "minimum": 5
+        },
+        {
+          "name": "announcements",
+          "observed": 8,
+          "minimum": 1
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-08-27T17:12:56.596071+00:00"
+    },
+    "cc_crypto": {
+      "label": "CC Crypto",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "publications",
+          "observed": 121,
+          "minimum": 5
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-08-27T17:12:56.596071+00:00"
+    },
+    "nato": {
+      "label": "NATO NIAPCL",
+      "status": "healthy",
+      "mode": "manual",
+      "checks": [],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "detail": "manual baseline (40 Cisco product(s)); updated via the NATO capture GitHub issue workflow",
+      "checked_at": "2026-08-27T17:12:56.596071+00:00"
+    },
+    "eucc": {
+      "label": "EUCC / ENISA",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "certificates",
+          "observed": 50,
+          "minimum": 2
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-08-27T17:12:56.596071+00:00"
+    },
+    "nd_itc": {
+      "label": "ND-iTC",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "NIT RFIs",
+          "observed": 32,
+          "minimum": 5
+        },
+        {
+          "name": "Allowed-With entries",
+          "observed": 22,
+          "minimum": 1
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-08-27T17:12:56.596071+00:00"
+    }
+  },
+  "alerts": [
+    {
+      "source": "EUCC Certificates",
+      "kind": "new_cert",
+      "title": "Cisco ASR 9000 Series Aggregation Services Routers running IOS-XR 7.11",
+      "url": "https://certification.enisa.europa.eu/certificates/eucc-3110-2026-000001-i-00-5_en",
+      "detail": "New Cisco EUCC certified product",
+      "matched_keywords": [
+        "cisco",
+        "EUCC"
+      ],
+      "tab": "eu"
+    }
+  ]
+}
