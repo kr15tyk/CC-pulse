@@ -34,9 +34,14 @@ _cfg.SANITY_MIN_CSFC_ANNOUNCEMENTS = 1
 _cfg.SANITY_MIN_CC_CRYPTO_PUBS = 5
 _cfg.SANITY_MIN_NIAP_NEWS = 1
 _cfg.SANITY_MIN_NIAP_POLICIES = 1
+_cfg.SANITY_MIN_NIAP_PQC_PP_FILES = 1
+_cfg.SANITY_MIN_NIAP_PQC_PP_HASHES = 1
 _cfg.MANUAL_DOMAINS = frozenset({"nato"})
 _cfg.SANITY_MIN_EUCC_CERTS = 2
 _cfg.SANITY_MIN_ND_ITC_RFIS = 5
+_cfg.SANITY_MIN_IETF_CNSA_DOCUMENTS = 5
+_cfg.SANITY_MIN_IEEE_PQC_RECORDS = 1
+_cfg.SANITY_MIN_CSFC_PQC_DOCUMENTS = 5
 _cfg.COLLAPSE_MIN_BASELINE = 8
 for _mod in (
     "config", "collector", "differ", "dashboard", "emailer",
@@ -75,7 +80,8 @@ class TestEmptySnapshot:
     def test_all_domain_keys_present(self):
         result = main._empty_snapshot()
         for key in ("niap", "cc_portal", "cctl_labs", "csfc",
-                    "cc_crypto", "nato", "eucc", "nd_itc"):
+                    "cc_crypto", "nato", "eucc", "nd_itc",
+                    "ietf_cnsa", "ieee_pqc"):
             assert key in result, f"Missing domain key '{key}' in _empty_snapshot"
 
     def test_schema_version_set(self):
@@ -143,13 +149,24 @@ def _healthy_snapshot():
         "collected_at": "2026-07-02T06:00:00+00:00",
         "niap": {
             "pcl": [{"product_id": i} for i in range(50)],
-            "pps": [{"pp_id": i} for i in range(10)],
+            "pps": [
+                {
+                    "pp_id": i,
+                    **({
+                        "document_file_id": 100,
+                        "document_sha256": "pp-hash",
+                    } if i == 0 else {}),
+                }
+                for i in range(10)
+            ],
         },
         "cc_portal": {"news": [{"id": 1}], "pps": [], "products": []},
         "cctl_labs": {"Test Lab": [{"title": "post"}]},
         "csfc": {"pages": {
             "apl": [{"text": str(i)} for i in range(5)],
             "announcements": [{"text": "5/20/25 | Published guidance"}],
+        }, "documents": {
+            f"doc-{i}": {"sha256": f"csfc-hash-{i}"} for i in range(5)
         }},
         "cc_crypto": {"pages": {"publications": [{"text": str(i)} for i in range(5)]}},
         # Manual-only domain: intake-shaped baseline, never collected.
@@ -162,6 +179,13 @@ def _healthy_snapshot():
             "nit_rfis": [{"rfi_id": f"RFI#{i}"} for i in range(5)],
             "awl_entries": [{"object_id": "PP-Module for X"}],
         },
+        "ietf_cnsa": {"documents": [
+            {"name": f"doc-{i}", "content_sha256": f"hash-{i}"}
+            for i in range(5)
+        ]},
+        "ieee_pqc": {"projects": [
+            {"project": "P802.11bt", "timeline_sha256": "timeline-hash"}
+        ]},
     }
 
 
@@ -405,6 +429,26 @@ class TestSourceHealth:
         baseline = main._diff_baseline_with_recoveries(old, new)
 
         assert baseline is old
+
+    def test_new_standards_domains_are_baselined_on_first_healthy_collection(self):
+        old = _healthy_snapshot()
+        old["ietf_cnsa"] = {"documents": []}
+        old["ieee_pqc"] = {"projects": []}
+        new = _healthy_snapshot()
+
+        baseline = main._diff_baseline_with_recoveries(old, new)
+
+        assert baseline["ietf_cnsa"] == new["ietf_cnsa"]
+        assert baseline["ieee_pqc"] == new["ieee_pqc"]
+
+    def test_missing_ietf_full_text_hash_fails_health_check(self):
+        snapshot = _healthy_snapshot()
+        snapshot["ietf_cnsa"]["documents"][0]["content_sha256"] = ""
+
+        main._apply_source_health(snapshot)
+
+        assert snapshot["source_health"]["ietf_cnsa"]["status"] == "failed"
+        assert "CNSA full-text hashes" in snapshot["source_health"]["ietf_cnsa"]["detail"]
 
     def test_third_failure_triggers_operational_notification(self):
         _cfg.DRY_RUN = False

@@ -294,3 +294,30 @@ def test_dashboard_renders_csfc_component_updated_item(tmp_path):
 
     assert "Cisco Secure Firewall listing revised" in html
     assert "component updated" in html
+
+
+def test_rss_includes_ietf_rfc_transition_and_ieee_milestone():
+    diff = {
+        "niap": {"pps": {}, "tds": {}, "news": {}},
+        "cctl_labs": {}, "csfc": {"selection_links": {}, "pages": {}},
+        "cc_crypto": {"pages": {}}, "alerts": [],
+        "ietf_cnsa": {
+            "added": [], "removed": [], "updated": [],
+            "rfc9846_adoption": [{
+                "document_url": "https://datatracker.ietf.org/doc/draft-becker-cnsa2-tls-profile/"
+            }],
+        },
+        "ieee_pqc": {
+            "added": [], "removed": [],
+            "updated": [{
+                "project": "P802.11bt", "draft": "D2.0",
+                "status_text": "Working Group ballot",
+                "timeline_url": "https://www.ieee802.org/11/Reports/802.11_Timelines.htm",
+            }],
+        },
+    }
+
+    rss = dashboard._build_rss(diff, "2026-08-28 09:00 ET")
+
+    assert "RFC 9846 adopted by the CNSA 2.0 TLS profile" in rss
+    assert "IEEE 802.11bt Updated: D2.0" in rss

@@ -200,6 +200,27 @@ def flag_alerts(diff: Snapshot) -> list[dict]:
     # NIAP Protection Profiles
     _scan_items("NIAP PP", diff.get("niap", {}).get("pps", {}).get("added", []), tab="us")
     _scan_items("NIAP PP", diff.get("niap", {}).get("pps", {}).get("sunset_changes", []))
+    for item in diff.get("niap", {}).get("pps", {}).get("revised", []):
+        title = item.get("pp_short_name") or item.get("pp_name") or "Protection Profile"
+        _add(
+            alerts, "NIAP PP", "updated", title,
+            url=item.get("document_url") or config.NIAP_BASE + "/protection-profiles",
+            detail="Protection Profile metadata revised: " + ", ".join(item.get("changed_fields", [])),
+            keywords=["CNSA/PQC"] if item.get("document_url") else [], tab="us",
+        )
+    for item in diff.get("niap", {}).get("pps", {}).get("content_changes", []):
+        title = item.get("pp_short_name") or item.get("pp_name") or "Protection Profile"
+        markers = ", ".join(item.get("cnsa_markers") or []) or "no detected CNSA markers"
+        _add(
+            alerts, "NIAP PP Document", "updated", title,
+            url=item.get("document_url") or config.NIAP_BASE + "/protection-profiles",
+            detail=(
+                ("Published PP document content changed" if item.get("hash_changed")
+                 else "Published PP file version changed")
+                + f" · markers: {markers}"
+            ),
+            keywords=["CNSA", "PQC"], tab="us",
+        )
 
     # NIAP Technical Decisions
     _TD_BASE = "https://www.niap-ccevs.org/technical-decisions"
@@ -250,8 +271,6 @@ def flag_alerts(diff: Snapshot) -> list[dict]:
                 else "NSA updated the component selection document for this role"
             )
             pdf_href = new_href or old_href
-            # Every Selection-document change is high-value CSfC content; it
-            # should not depend on the role name matching a watch keyword.
             _add(
                 alerts,
                 "CSfC Component Selections",
@@ -260,6 +279,21 @@ def flag_alerts(diff: Snapshot) -> list[dict]:
                 url=pdf_href or config.CSFC_PRODUCT_LIST_URL,
                 detail=detail,
                 keywords=["CSfC"],
+                tab="us",
+            )
+
+    for kind in ("added", "removed", "updated"):
+        for item in diff.get("csfc", {}).get("documents", {}).get(kind, []):
+            _add(
+                alerts,
+                "CSfC Capability Package",
+                kind,
+                item.get("label") or item.get("key") or "Capability package",
+                url=item.get("url") or item.get("old_url") or (
+                    config.CSFC_BASE + config.CSFC_PAGES["cap_packages"]
+                ),
+                detail="Tracked CSfC capability-package document changed",
+                keywords=["CSfC", "CNSA", "PQC"],
                 tab="us",
             )
 
@@ -395,9 +429,7 @@ def flag_alerts(diff: Snapshot) -> list[dict]:
                       detail="New EUCC certified product",
                       tab="eu")
 
-    # ND-iTC — NIT RFIs and Allowed-With lists. Every change alerts,
-    # unconditionally, tagged tier 1 via the NDcPP keyword. "NIT RFI" naming
-    # keeps ND-iTC Technical Decisions distinct from NIAP TDs.
+    # ND-iTC — NIT RFIs and Allowed-With lists. Every change alerts.
     nd = diff.get("nd_itc", {})
     if not nd.get("baseline_reset") and not nd.get("collection_failure"):
         rfis = nd.get("nit_rfis", {})
@@ -431,25 +463,21 @@ def flag_alerts(diff: Snapshot) -> list[dict]:
         awl = nd.get("awl", {})
 
         def _awl_url(item: dict) -> str:
-            return config.ND_ITC_AWL_URLS.get(
-                item.get("list", ""), config.ND_ITC_BASE)
+            return config.ND_ITC_AWL_URLS.get(item.get("list", ""), config.ND_ITC_BASE)
 
         for item in awl.get("added", []):
-            _add(alerts, "ND-iTC Allowed-With", "new",
-                 item.get("object_id", ""),
+            _add(alerts, "ND-iTC Allowed-With", "new", item.get("object_id", ""),
                  url=_awl_url(item),
                  detail=(f"Added to the {item.get('section', '')} allowed-with "
                          f"list · version {item.get('object_version', '')}"),
                  keywords=["NDcPP"], tab="intl")
         for item in awl.get("removed", []):
-            _add(alerts, "ND-iTC Allowed-With", "removed",
-                 item.get("object_id", ""),
+            _add(alerts, "ND-iTC Allowed-With", "removed", item.get("object_id", ""),
                  url=_awl_url(item),
                  detail=f"Removed from the {item.get('section', '')} allowed-with list",
                  keywords=["NDcPP"], tab="intl")
         for item in awl.get("version_changes", []):
-            _add(alerts, "ND-iTC Allowed-With", "updated",
-                 item.get("object_id", ""),
+            _add(alerts, "ND-iTC Allowed-With", "updated", item.get("object_id", ""),
                  url=_awl_url(item),
                  detail=(f"{item.get('section', '')} allowed-with entry version: "
                          f"{item.get('old_version', '?')} → {item.get('new_version', '?')}"),
@@ -462,6 +490,41 @@ def flag_alerts(diff: Snapshot) -> list[dict]:
                          f" → {item.get('awl_version', '?')}"
                          f" ({item.get('awl_date', '')})"),
                  keywords=["NDcPP"], tab="intl")
+
+    # IETF CNSA profiles and the RFC 8446 -> RFC 9846 transition are direct,
+    # high-value standards signals and do not depend on keyword matching.
+    ietf = diff.get("ietf_cnsa", {})
+    for kind in ("added", "removed", "updated"):
+        for item in ietf.get(kind, []):
+            detail = "IETF CNSA profile metadata or full text changed"
+            if item.get("changed_fields"):
+                detail += ": " + ", ".join(item["changed_fields"])
+            _add(alerts, "IETF CNSA", kind,
+                 item.get("title") or item.get("name") or "CNSA profile",
+                 url=item.get("document_url") or config.IETF_DATATRACKER_BASE,
+                 detail=detail, keywords=["CNSA", "PQC"], tab="us")
+    for item in ietf.get("rfc9846_adoption", []):
+        detail = (
+            "TLS CNSA profile replaced RFC 8446 with RFC 9846"
+            if item.get("replaced_rfc8446")
+            else "TLS CNSA profile now references RFC 9846"
+        )
+        _add(alerts, "IETF CNSA TLS", "rfc_transition",
+             "RFC 9846 adopted by the CNSA 2.0 TLS profile",
+             url=item.get("document_url") or config.IETF_DATATRACKER_BASE,
+             detail=detail, keywords=["CNSA", "RFC 9846", "TLS"], tab="us")
+
+    ieee = diff.get("ieee_pqc", {})
+    for kind in ("added", "removed", "updated"):
+        for item in ieee.get(kind, []):
+            draft_change = ""
+            if item.get("old_draft") != item.get("draft"):
+                draft_change = f" · draft {item.get('old_draft') or '?'} → {item.get('draft') or '?'}"
+            _add(alerts, "IEEE 802.11bt", kind,
+                 f"{item.get('project', 'P802.11bt')} {item.get('title', 'Post-Quantum Cryptography')}",
+                 url=item.get("timeline_url") or config.IEEE_80211_TIMELINE_URL,
+                 detail="IEEE 802.11bt milestone/status changed" + draft_change,
+                 keywords=["PQC", "802.11bt"], tab="us")
 
     if alerts:
         log.warning("[Alerts] %d keyword match(es) found!", len(alerts))
@@ -490,11 +553,62 @@ def diff_niap_pps(old_pps: Records, new_pps: Records) -> dict[str, Any]:
         if old_st != new_st:
             status_changes.append({**new_map[pid], "old_status": old_st, "new_status": new_st})
 
+    metadata_fields = (
+        "pp_short_name", "pp_name", "pp_date", "pp_transition",
+        "cc_version", "tech_type", "pp_sponsor_id",
+    )
+    revised = []
+    content_changes = []
+    for pid in old_ids & new_ids:
+        old_item = old_map[pid]
+        new_item = new_map[pid]
+        changed_fields = [
+            field for field in metadata_fields
+            if old_item.get(field) != new_item.get(field)
+        ]
+        if changed_fields:
+            revised.append({
+                **new_item,
+                "changed_fields": changed_fields,
+                "old_values": {field: old_item.get(field) for field in changed_fields},
+            })
+
+        old_hash = old_item.get("document_sha256") or ""
+        new_hash = new_item.get("document_sha256") or ""
+        hash_changed = bool(old_hash and new_hash and old_hash != new_hash)
+        markers_comparable = "cnsa_markers" in old_item and "cnsa_markers" in new_item
+        markers_changed = (
+            markers_comparable
+            and sorted(old_item.get("cnsa_markers") or [])
+            != sorted(new_item.get("cnsa_markers") or [])
+        )
+        old_file_id = old_item.get("document_file_id")
+        new_file_id = new_item.get("document_file_id")
+        old_filename = old_item.get("document_filename") or ""
+        new_filename = new_item.get("document_filename") or ""
+        file_changed = bool(
+            old_file_id not in (None, "") and new_file_id not in (None, "")
+            and str(old_file_id) != str(new_file_id)
+        ) or bool(old_filename and new_filename and old_filename != new_filename)
+        if hash_changed or markers_changed or file_changed:
+            content_changes.append({
+                **new_item,
+                "old_document_sha256": old_hash,
+                "old_cnsa_markers": old_item.get("cnsa_markers") or [],
+                "hash_changed": hash_changed,
+                "markers_changed": markers_changed,
+                "file_changed": file_changed,
+                "old_document_file_id": old_file_id,
+                "old_document_filename": old_filename,
+            })
+
     return {
         "added": added,
         "removed": removed,
         "sunset_changes": sunset_changes,
         "status_changes": status_changes,
+        "revised": revised,
+        "content_changes": content_changes,
     }
 
 def diff_niap_tds(old_tds: Records, new_tds: Records) -> dict[str, Any]:
@@ -773,6 +887,81 @@ def _diff_pages(old_pages: dict, new_pages: dict) -> dict:
     return result
 
 
+def _diff_pages_with_updates(old_pages: dict, new_pages: dict) -> dict:
+    """Diff pages by stable text prefix and report same-record revisions.
+
+    Full-content hashes are compared only when both snapshots contain them;
+    that makes adding the hash field backwards compatible during rollout.
+    """
+    result = {}
+    for page_key in set(old_pages) | set(new_pages):
+        old_items = old_pages.get(page_key, [])
+        new_items = new_pages.get(page_key, [])
+        old_map = {
+            item.get("text", "")[:120]: item
+            for item in old_items if item.get("text")
+        }
+        new_map = {
+            item.get("text", "")[:120]: item
+            for item in new_items if item.get("text")
+        }
+        old_keys = set(old_map)
+        new_keys = set(new_map)
+        added = [new_map[key] for key in new_keys - old_keys]
+        removed = [old_map[key] for key in old_keys - new_keys]
+        updated = []
+        for key in old_keys & new_keys:
+            old_item = old_map[key]
+            new_item = new_map[key]
+            old_hash = old_item.get("content_sha256") or ""
+            new_hash = new_item.get("content_sha256") or ""
+            hash_changed = bool(old_hash and new_hash and old_hash != new_hash)
+            text_changed = (old_item.get("text") or "") != (new_item.get("text") or "")
+            href_changed = (
+                (old_item.get("href") or old_item.get("link") or "")
+                != (new_item.get("href") or new_item.get("link") or "")
+            )
+            if hash_changed or text_changed or href_changed:
+                changed = copy.deepcopy(new_item)
+                changed["_old_text"] = old_item.get("text") or ""
+                changed["_old_content_sha256"] = old_hash
+                updated.append(changed)
+        if added or removed or updated:
+            result[page_key] = {"added": added, "removed": removed}
+            if updated:
+                result[page_key]["updated"] = updated
+    return result
+
+
+def _diff_named_documents(old_docs: dict, new_docs: dict) -> dict:
+    """Diff stable-name document mappings with rollout-safe hash comparison."""
+    old_keys = set(old_docs)
+    new_keys = set(new_docs)
+    added = [{"key": key, **new_docs[key]} for key in new_keys - old_keys]
+    removed = [{"key": key, **old_docs[key]} for key in old_keys - new_keys]
+    updated = []
+    for key in old_keys & new_keys:
+        old_item = old_docs[key]
+        new_item = new_docs[key]
+        old_hash = old_item.get("sha256") or ""
+        new_hash = new_item.get("sha256") or ""
+        hash_changed = bool(old_hash and new_hash and old_hash != new_hash)
+        url_changed = bool(
+            old_item.get("url") and new_item.get("url")
+            and old_item.get("url") != new_item.get("url")
+        )
+        if hash_changed or url_changed:
+            updated.append({
+                "key": key,
+                **new_item,
+                "old_url": old_item.get("url", ""),
+                "old_sha256": old_hash,
+                "hash_changed": hash_changed,
+                "url_changed": url_changed,
+            })
+    return {"added": added, "removed": removed, "updated": updated}
+
+
 # -- CSfC Components List diff helper (keyed by stable link, not text prefix) ------------
 def _diff_csfc_apl(old_items: list, new_items: list) -> dict:
     """Diff CSfC Components List entries, keyed by their NIAP link.
@@ -902,6 +1091,74 @@ def _record_key(record: dict, *, url_field: str, text_field: str) -> str:
     return (record.get(url_field) or "").strip() or record.get(text_field, "")[:80]
 
 
+def _eucc_metadata_key(record: dict) -> str | None:
+    """Return metadata identity for an EUCC certificate when available.
+
+    ENISA has migrated certificate detail URLs while retaining the same
+    product metadata and certification date.  A URL-only key turns that
+    migration into a false removal/addition pair and can fire a duplicate
+    Cisco celebration.  Product name + certificate date identifies the
+    certificate across that URL churn. Records without both fields return
+    ``None`` and are reconciled by URL/text identity instead.
+    """
+    product_name = re.sub(r"\s+", " ", str(record.get("name") or "").strip()).casefold()
+    cert_date = re.sub(r"\s+", " ", str(record.get("cert_date") or "").strip()).casefold()
+    if product_name and cert_date:
+        return f"metadata:{product_name}|{cert_date}"
+    return None
+
+
+def _diff_eucc_certificates(
+    old_records: Records,
+    new_records: Records,
+) -> tuple[list[dict], list[dict]]:
+    """Return EUCC additions/removals with URL and metadata reconciliation.
+
+    Exact URLs are matched first to preserve the existing revision behavior.
+    Only records left unmatched are paired by product name + certificate date,
+    which handles detail-URL migrations without hiding genuine new dates.
+    """
+    unmatched_old = set(range(len(old_records)))
+    unmatched_new = set(range(len(new_records)))
+    new_by_url: dict[str, list[int]] = {}
+    for index, record in enumerate(new_records):
+        url = (record.get("href") or "").strip()
+        if url:
+            new_by_url.setdefault(url, []).append(index)
+
+    # Preserve URL identity wherever it still exists.
+    for old_index, record in enumerate(old_records):
+        url = (record.get("href") or "").strip()
+        if not url:
+            continue
+        for new_index in new_by_url.get(url, []):
+            if new_index in unmatched_new:
+                unmatched_old.discard(old_index)
+                unmatched_new.discard(new_index)
+                break
+
+    old_by_metadata: dict[str, list[int]] = {}
+    new_by_metadata: dict[str, list[int]] = {}
+    for index in unmatched_old:
+        key = _eucc_metadata_key(old_records[index])
+        if key:
+            old_by_metadata.setdefault(key, []).append(index)
+    for index in unmatched_new:
+        key = _eucc_metadata_key(new_records[index])
+        if key:
+            new_by_metadata.setdefault(key, []).append(index)
+
+    # Reconcile only unmatched records so an exact URL match always wins.
+    for key in old_by_metadata.keys() & new_by_metadata.keys():
+        for old_index, new_index in zip(old_by_metadata[key], new_by_metadata[key]):
+            unmatched_old.discard(old_index)
+            unmatched_new.discard(new_index)
+
+    added = [copy.deepcopy(new_records[index]) for index in unmatched_new]
+    removed = [copy.deepcopy(old_records[index]) for index in unmatched_old]
+    return added, removed
+
+
 def _is_baseline_reset(old_count: int, added_count: int, new_count: int,
                        min_items: int = 5, frac: float = 0.8) -> bool:
     """True when a diff looks like a re-keying/format change, not real news.
@@ -926,14 +1183,12 @@ def diff_eucc(old_eucc: Snapshot, new_eucc: Snapshot) -> Snapshot:
 
     pages = _diff_pages(old_pages, new_pages)
 
-    # Diff Cisco-specific certificates (keyed on certificate URL, fix: text
-    # keys churned on ENISA display-format changes)
-    old_cisco = {_record_key(c, url_field="href", text_field="text"): c
-                 for c in old_eucc.get("cisco_certs", [])}
-    new_cisco = {_record_key(c, url_field="href", text_field="text"): c
-                 for c in new_eucc.get("cisco_certs", [])}
-    cisco_added = [new_cisco[k] for k in set(new_cisco) - set(old_cisco)]
-    cisco_removed = [old_cisco[k] for k in set(old_cisco) - set(new_cisco)]
+    # Diff Cisco-specific certificates by URL first, then product metadata/date
+    # so ENISA URL migrations do not look like new certifications.
+    cisco_added, cisco_removed = _diff_eucc_certificates(
+        old_eucc.get("cisco_certs", []),
+        new_eucc.get("cisco_certs", []),
+    )
 
     # Baseline detection: if most of the certificates page re-registered as
     # new, this is a format change / re-key, not a wave of certifications.
@@ -1080,6 +1335,93 @@ def diff_nd_itc(old_nd: Snapshot, new_nd: Snapshot) -> Snapshot:
     }
 
 
+# -- IETF CNSA and IEEE PQC diffs ---------------------------------------------
+def diff_ietf_cnsa(old_ietf: Snapshot, new_ietf: Snapshot) -> Snapshot:
+    old_map = byid(old_ietf.get("documents", []), "name")
+    new_map = byid(new_ietf.get("documents", []), "name")
+    old_names = set(old_map)
+    new_names = set(new_map)
+    added = [copy.deepcopy(new_map[name]) for name in new_names - old_names]
+    removed = [copy.deepcopy(old_map[name]) for name in old_names - new_names]
+    updated = []
+    rfc9846_adoption = []
+    metadata_fields = (
+        "revision", "expires", "rfc_number",
+        "workflow_state", "states", "relations", "cnsa_markers",
+    )
+    for name in old_names & new_names:
+        old_item = old_map[name]
+        new_item = new_map[name]
+        changed_fields = [
+            field for field in metadata_fields
+            if old_item.get(field) != new_item.get(field)
+        ]
+        old_hash = old_item.get("content_sha256") or ""
+        new_hash = new_item.get("content_sha256") or ""
+        if old_hash and new_hash and old_hash != new_hash:
+            changed_fields.append("content_sha256")
+        for field in ("references_rfc8446", "references_rfc9846"):
+            if field in old_item and field in new_item and old_item[field] != new_item[field]:
+                changed_fields.append(field)
+        if changed_fields:
+            updated.append({
+                **copy.deepcopy(new_item),
+                "changed_fields": changed_fields,
+                "old_revision": old_item.get("revision", ""),
+                "old_workflow_state": old_item.get("workflow_state", ""),
+                "old_expires": old_item.get("expires", ""),
+                "old_content_sha256": old_hash,
+            })
+        if (
+            name == "draft-becker-cnsa2-tls-profile"
+            and old_item.get("references_rfc9846") is False
+            and new_item.get("references_rfc9846") is True
+        ):
+            rfc9846_adoption.append({
+                **copy.deepcopy(new_item),
+                "replaced_rfc8446": (
+                    old_item.get("references_rfc8446") is True
+                    and new_item.get("references_rfc8446") is False
+                ),
+            })
+    return {
+        "added": added,
+        "removed": removed,
+        "updated": updated,
+        "rfc9846_adoption": rfc9846_adoption,
+    }
+
+
+def diff_ieee_pqc(old_ieee: Snapshot, new_ieee: Snapshot) -> Snapshot:
+    old_map = byid(old_ieee.get("projects", []), "project")
+    new_map = byid(new_ieee.get("projects", []), "project")
+    old_names = set(old_map)
+    new_names = set(new_map)
+    added = [copy.deepcopy(new_map[name]) for name in new_names - old_names]
+    removed = [copy.deepcopy(old_map[name]) for name in old_names - new_names]
+    updated = []
+    for name in old_names & new_names:
+        old_item = old_map[name]
+        new_item = new_map[name]
+        changed_fields = []
+        for field in ("draft", "dates", "status_text"):
+            if old_item.get(field) != new_item.get(field):
+                changed_fields.append(field)
+        for field in ("timeline_sha256", "status_sha256"):
+            old_hash = old_item.get(field) or ""
+            new_hash = new_item.get(field) or ""
+            if old_hash and new_hash and old_hash != new_hash and field not in changed_fields:
+                changed_fields.append(field)
+        if changed_fields:
+            updated.append({
+                **copy.deepcopy(new_item),
+                "changed_fields": changed_fields,
+                "old_draft": old_item.get("draft", ""),
+                "old_status_text": old_item.get("status_text", ""),
+            })
+    return {"added": added, "removed": removed, "updated": updated}
+
+
 # -- Master diff ---------------------------------------------------------------
 def compute_diff(old_snapshot: Snapshot, new_snapshot: Snapshot) -> Snapshot:
     """Compare two full snapshots, scan for keyword alerts, return diff."""
@@ -1125,6 +1467,12 @@ def compute_diff(old_snapshot: Snapshot, new_snapshot: Snapshot) -> Snapshot:
         "eucc": diff_eucc(old_eu, new_eu),
         "nd_itc": diff_nd_itc(old_snapshot.get("nd_itc", {}),
                               new_snapshot.get("nd_itc", {})),
+        "ietf_cnsa": diff_ietf_cnsa(
+            old_snapshot.get("ietf_cnsa", {}), new_snapshot.get("ietf_cnsa", {})
+        ),
+        "ieee_pqc": diff_ieee_pqc(
+            old_snapshot.get("ieee_pqc", {}), new_snapshot.get("ieee_pqc", {})
+        ),
         "source_health": new_snapshot.get("source_health", {}),
     }
 
@@ -1166,7 +1514,8 @@ def merge_weekly_diffs(diffs: list[Snapshot]) -> Snapshot:
 
     # Ensure all top-level domain keys exist on weekly -- fix #23: added nato, eucc
     for domain_key, default in [
-        ("niap", {"pps": {"added":[], "removed":[], "sunset_changes":[], "status_changes":[]},
+        ("niap", {"pps": {"added":[], "removed":[], "sunset_changes":[], "status_changes":[],
+                            "revised":[], "content_changes":[]},
                   "tds": {"added":[], "removed":[]},
                   "cisco_ndcpp": {"added":[], "removed":[], "newly_archived":[]},
                   "news": {"added":[], "revised":[], "deactivated":[], "reactivated":[], "removed":[]},
@@ -1174,11 +1523,14 @@ def merge_weekly_diffs(diffs: list[Snapshot]) -> Snapshot:
                   "policies": {"added":[], "revised":[], "archived":[], "reactivated":[], "removed":[]}}),
         ("cc_portal", {"news": {"added":[]}, "pps": {"added":[]}, "products": {"added":[]}}),
         ("cctl_labs", {}),
-        ("csfc", {"feeds": {}, "pages": {}, "selection_links": {}}),
+        ("csfc", {"feeds": {}, "pages": {}, "selection_links": {},
+                  "documents": {"added": [], "removed": [], "updated": []}}),
         ("cc_crypto", {"pages": {}}),
         ("nato", {"pages": {}, "cisco_added": [], "cisco_removed": []}),  # fix #23
         ("eucc", {"pages": {}, "cisco_added": [], "cisco_removed": []}),  # fix #23
         ("nd_itc", copy.deepcopy(_EMPTY_ND_ITC_DIFF)),
+        ("ietf_cnsa", {"added": [], "removed": [], "updated": [], "rfc9846_adoption": []}),
+        ("ieee_pqc", {"added": [], "removed": [], "updated": []}),
         ("alerts", []),
     ]:
         if domain_key not in weekly:
@@ -1188,6 +1540,8 @@ def merge_weekly_diffs(diffs: list[Snapshot]) -> Snapshot:
     # safe during rollout.
     weekly.setdefault("niap", {})
     for key, default in {
+        "pps": {"added": [], "removed": [], "sunset_changes": [], "status_changes": [],
+                "revised": [], "content_changes": []},
         "news": {"added": [], "revised": [], "deactivated": [], "reactivated": [], "removed": []},
         "events": {"added": [], "revised": [], "deactivated": [], "reactivated": [], "removed": []},
         "policies": {"added": [], "revised": [], "archived": [], "reactivated": [], "removed": []},
@@ -1198,7 +1552,7 @@ def merge_weekly_diffs(diffs: list[Snapshot]) -> Snapshot:
         if "source_health" in d:
             weekly["source_health"] = copy.deepcopy(d["source_health"])
         # NIAP
-        for key in ("added", "removed", "sunset_changes", "status_changes"):
+        for key in ("added", "removed", "sunset_changes", "status_changes", "revised", "content_changes"):
             if key in weekly["niap"]["pps"] and key in d.get("niap", {}).get("pps", {}):
                 weekly["niap"]["pps"][key] = merge_lists(
                     weekly["niap"]["pps"][key], d["niap"]["pps"][key])
@@ -1243,17 +1597,26 @@ def merge_weekly_diffs(diffs: list[Snapshot]) -> Snapshot:
             weekly["csfc"]["feeds"][feed_name] = merge_lists(
                 weekly["csfc"]["feeds"].get(feed_name, []), items)
         for page_key, page_diff in d.get("csfc", {}).get("pages", {}).items():
-            if isinstance(page_diff, dict) and "added" in page_diff:
-                if page_key not in weekly["csfc"]["pages"]:
-                    weekly["csfc"]["pages"][page_key] = {"added": []}
-                weekly["csfc"]["pages"][page_key]["added"] = merge_lists(
-                    weekly["csfc"]["pages"][page_key]["added"], page_diff["added"])
-            if "updated" in page_diff:
-                weekly["csfc"]["pages"][page_key]["updated"] = merge_lists(
-                    weekly["csfc"]["pages"][page_key].get("updated", []),
-                    page_diff["updated"])
+            if not isinstance(page_diff, dict):
+                continue
+            for kind in ("added", "removed", "updated"):
+                if kind not in page_diff:
+                    continue
+                weekly["csfc"]["pages"].setdefault(page_key, {})
+                weekly["csfc"]["pages"][page_key][kind] = merge_lists(
+                    weekly["csfc"]["pages"][page_key].get(kind, []),
+                    page_diff[kind],
+                )
         for sel_name, sel_data in d.get("csfc", {}).get("selection_links", {}).items():
             weekly["csfc"]["selection_links"][sel_name] = sel_data
+        weekly["csfc"].setdefault(
+            "documents", {"added": [], "removed": [], "updated": []}
+        )
+        for key in ("added", "removed", "updated"):
+            weekly["csfc"]["documents"][key] = merge_lists(
+                weekly["csfc"]["documents"].get(key, []),
+                d.get("csfc", {}).get("documents", {}).get(key, []),
+            )
 
         # CC Crypto
         for page_key, page_diff in d.get("cc_crypto", {}).get("pages", {}).items():
@@ -1302,6 +1665,17 @@ def merge_weekly_diffs(diffs: list[Snapshot]) -> Snapshot:
                     weekly["nd_itc"][group].get(key, []),
                     nd_daily.get(group, {}).get(key, []))
 
+        for key in ("added", "removed", "updated", "rfc9846_adoption"):
+            weekly["ietf_cnsa"][key] = merge_lists(
+                weekly["ietf_cnsa"].get(key, []),
+                d.get("ietf_cnsa", {}).get(key, []),
+            )
+        for key in ("added", "removed", "updated"):
+            weekly["ieee_pqc"][key] = merge_lists(
+                weekly["ieee_pqc"].get(key, []),
+                d.get("ieee_pqc", {}).get(key, []),
+            )
+
     return weekly
 # -- CSfC diff -----------------------------------------------------------------
 def diff_csfc(old_csfc: Snapshot, new_csfc: Snapshot) -> Snapshot:
@@ -1310,7 +1684,7 @@ def diff_csfc(old_csfc: Snapshot, new_csfc: Snapshot) -> Snapshot:
     new_pages = new_csfc.get("pages", {})
     non_apl_old = {k: v for k, v in old_pages.items() if k != "apl"}
     non_apl_new = {k: v for k, v in new_pages.items() if k != "apl"}
-    pages = _diff_pages(non_apl_old, non_apl_new)
+    pages = _diff_pages_with_updates(non_apl_old, non_apl_new)
     apl_diff = _diff_csfc_apl(old_pages.get("apl", []), new_pages.get("apl", []))
     if apl_diff["added"] or apl_diff["removed"] or apl_diff["updated"]:
         pages["apl"] = apl_diff
@@ -1323,6 +1697,9 @@ def diff_csfc(old_csfc: Snapshot, new_csfc: Snapshot) -> Snapshot:
         new_csfc.get("feeds", {}),
         categorize=True,
     )
+    documents = _diff_named_documents(
+        old_csfc.get("documents", {}), new_csfc.get("documents", {})
+    )
     page_changes = sum(len(v.get("added", [])) for v in pages.values())
     sel_changes = len(selection_links)
     feed_new = sum(len(v) for v in feeds.values())
@@ -1331,7 +1708,12 @@ def diff_csfc(old_csfc: Snapshot, new_csfc: Snapshot) -> Snapshot:
         "[CSfC Diff] page-items-added:%d apl-updated:%d selection-link-changes:%d feed-new:%d",
         page_changes, apl_updated, sel_changes, feed_new,
     )
-    return {"pages": pages, "selection_links": selection_links, "feeds": feeds}
+    return {
+        "pages": pages,
+        "selection_links": selection_links,
+        "documents": documents,
+        "feeds": feeds,
+    }
 
 # -- CC Crypto Catalog diff ----------------------------------------------------
 def diff_cc_crypto(old_cc: Snapshot, new_cc: Snapshot) -> Snapshot:
