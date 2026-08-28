@@ -179,7 +179,7 @@
   <span class="nav-title">CC Pulse Dashboard</span>
   <span class="nav-spacer"></span>
   <div class="ham-wrap">
-    <span class="nav-meta">Last run: 2026-08-10 04:41 ET</span>
+    <span class="nav-meta">Last run: 2026-08-27 13:12 ET</span>
     <button class="ham-btn" id="ham-btn" onclick="toggleHamMenu()" aria-expanded="false" aria-haspopup="true" title="Open menu">&#9776;</button>
     <div class="ham-menu" id="ham-menu" role="menu">
       <a class="ham-item" href="https://kr15tyk.github.io/CC-pulse/cc_dashboard.html" role="menuitem"><span class="ham-icon">&#127968;</span>Home</a>
@@ -208,7 +208,7 @@
       <div class="sources-group">
         <div class="sources-group-title">🇳🇮 CSfC (Commercial Solutions for Classified)</div>
         <div class="sources-item"><span class="src-label">Main:</span><a href="https://www.nsa.gov/Resources/Commercial-Solutions-for-Classified-Program/" target="_blank" rel="noopener">nsa.gov &mdash; CSfC Home</a></div>
-        <div class="sources-item"><span class="src-label">Components List:</span><a href="https://www.nsa.gov/Resources/Commercial-Solutions-for-Classified-Program/Components-List/" target="_blank" rel="noopener">nsa.gov &mdash; CSfC APL Components</a></div>
+        <div class="sources-item"><span class="src-label">Components List:</span><a href="https://www.nsa.gov/Resources/Commercial-Solutions-for-Classified-Program/Components-List/" target="_blank" rel="noopener">nsa.gov &mdash; CSfC Components List</a></div>
         <div class="sources-item"><span class="src-label">Capability Packages:</span><a href="https://www.nsa.gov/Resources/Commercial-Solutions-for-Classified-Program/Capability-Packages/" target="_blank" rel="noopener">nsa.gov &mdash; Capability Packages</a></div>
         <div class="sources-item"><span class="src-label">NSA Advisories (RSS):</span><a href="https://www.nsa.gov/DesktopModules/ArticleCS/RSS.ashx?ContentType=1&amp;Site=1282&amp;max=20" target="_blank" rel="noopener">nsa.gov &mdash; NSA News RSS</a></div>
         <div class="sources-item"><span class="src-label">CISA Alerts (RSS):</span><a href="https://www.cisa.gov/cybersecurity-advisories/all.xml" target="_blank" rel="noopener">cisa.gov &mdash; All Advisories</a></div>
@@ -254,7 +254,7 @@
 <div class="sticky-top">
   <div class="trend-bar">
     <div class="stat"><a href="#sec-niap-pp" onclick="navigateTo('sec-niap-pp');return false;">
-      <div class="stat-num ">0</div>
+      <div class="stat-num active-num">1</div>
       <div class="stat-lbl">NIAP Changes</div>
     </a></div>
     <div class="stat"><a href="#sec-csfc" onclick="navigateTo('sec-csfc');return false;">
@@ -274,11 +274,11 @@
       <div class="stat-lbl">CCTL Updates</div>
     </a></div>
     <div class="stat"><a href="#sec-eucc-req" onclick="navigateTo('sec-eucc-req');return false;">
-      <div class="stat-num ">0</div>
+      <div class="stat-num active-num">3</div>
       <div class="stat-lbl">EUCC Changes</div>
     </a></div>
     <div class="stat"><a href="#sec-alerts" onclick="navigateTo('sec-alerts');return false;">
-      <div class="stat-num ">0</div>
+      <div class="stat-num alert-num">1</div>
       <div class="stat-lbl">Alerts</div>
     </a></div>
   </div>
@@ -304,6 +304,28 @@
       
 <!-- Alerts -->
 
+<div class="section-group">
+<div class="card card-alert" id="sec-alerts">
+  <div class="card-hdr" onclick="toggleCard(this)">
+    <span>Alerts</span>
+    <span class="card-count">1 alert</span>
+    <span class="toggle-icon">&#9660;</span>
+  </div>
+  <div class="card-body">
+    <div class="alert-monitoring">FIPS 186-4, FIPS 186-5, NDcPP, CPP_ND, TLS 1.3, SSH, PP-Module_VPN, PP-Module_WLAN, labgram, valgram, emergency, CSfC, Commercial Solutions for Classified, CSfC APL, CSfC component selections, NSA CSfC, NATO NIAPC, NIAPCL, EUCC, ENISA, CCDB-018, Crypto Catalog, cryptography working group, Specification of Functional Requirements for Cryptography, FCS_CKM, FCS_COP, FCS_RBG</div>
+    
+        <div class="item-row alert-item" data-alert-key="EUCC Certificates-Cisco_ASR_9000_Series_Aggregation_Services_Routers_running_IOS-XR_7.11" data-tab="eu">
+          
+          <a class="item-link" href="https://certification.enisa.europa.eu/certificates/eucc-3110-2026-000001-i-00-5_en" target="_blank">EUCC Certificates: Cisco ASR 9000 Series Aggregation Services Routers running IOS-XR 7.11</a>
+          
+          <span class="item-meta">new_cert &middot; cisco, EUCC</span>
+          <div class="item-sub">New Cisco EUCC certified product</div>
+          <button class="dismiss-btn" onclick="dismissAlert(this)" title="Mark as seen">&#10003; Seen</button>
+        </div>
+        
+  </div>
+</div>
+
 <div class="tab-nav" id="region-tabs">
         <button class="tab-btn active" data-tab="us" onclick="switchTab(this)">&#127482;&#127480; US (NIAP / CSfC)</button>
         <button class="tab-btn" data-tab="intl" onclick="switchTab(this)">&#127760; International</button>
@@ -327,7 +349,7 @@
     
     
     
-    <p class="no-change">No changes detected. <span class="last-active">(last: 2026-08-08)</span></p>
+    <p class="no-change">No changes detected. <span class="last-active">(last: 2026-08-27)</span></p>
   </div>
 </div>
 
@@ -335,14 +357,14 @@
 <div class="card " id="sec-niap-inevaluation" data-has-changes="0">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>NIAP In-Evaluation Products</span>
-    <span class="card-count">41 active</span>
+    <span class="card-count">44 active</span>
     </span>
   </div>
   <div class="card-body collapsed">
     
     
     
-    <p class="no-change">No evaluation changes detected. 41 products currently in evaluation.</p>
+    <p class="no-change">No evaluation changes detected. 44 products currently in evaluation.</p>
     
   </div>
 </div>
@@ -409,17 +431,28 @@
 </div>
 
   <!-- NIAP PCL — All Certifications -->
-<div class="card " id="sec-niap-pcl" data-has-changes="0">
+<div class="card card-new" id="sec-niap-pcl" data-has-changes="1">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>NIAP PCL — All Certifications</span>
-    <span class="card-count">0 changes</span>
+    <span class="card-count">1 change</span>
     </span>
   </div>
-  <div class="card-body collapsed">
+  <div class="card-body ">
+    
+    
+    <div class="sub-hdr sub-updated">Newly Archived (1)</div>
+    
+    <div class="item-row" data-source="niap-pcl" data-kind="archived">
+      <span class="item-link">Vertiv IT Systems -- Vertiv CYBEX™ SCMV2160DPH, SC840DVIE, SC940DVIE, SC840HE, SC940HE, SC840DPE, SC940DPE Firmware Version 44404-E7E7 Peripheral Sharing Devices</span>
+      <span class="item-meta">Archived</span>
+    </div>
+    
+    <div class="item-sub">PP_PSD_V4.0, MOD_KM_V1.0, MOD_VI_V1.0</div>
     
     
     
-    <p class="no-change">No changes detected. <span class="last-active">(last: 2026-08-08)</span></p>
+    
+    
   </div>
 </div>
 
@@ -451,7 +484,7 @@
   <div class="card-body collapsed">
     
     
-    <p class="no-change">No changes detected. <span class="last-active">(last: 2026-08-08)</span></p>
+    <p class="no-change">No changes detected.</p>
   </div>
 </div>
 </div>
@@ -469,7 +502,7 @@
   <div class="card-body collapsed">
     
     
-    <p class="no-change">No changes detected. <span class="last-active">(last: 2026-08-08)</span></p>
+    <p class="no-change">No changes detected.</p>
   </div>
 </div>
 </div>
@@ -486,7 +519,7 @@
   </div>
   <div class="card-body collapsed">
     
-    <p class="no-change">No changes detected. <span class="last-active">(last: 2026-08-04)</span></p>
+    <p class="no-change">No changes detected.</p>
   </div>
 </div>
 
@@ -558,16 +591,36 @@
           </div>
         </div>
         <!-- EUCC Certificates -->
-        <div class="card " id="sec-eucc-certs" data-has-changes="0">
+        <div class="card card-new" id="sec-eucc-certs" data-has-changes="3">
           <div class="card-hdr" onclick="toggleCard(this)">
             <span>EUCC Certified Products</span>
-            <span class="card-count">0 new items</span>
-            <span class="toggle-icon">&#9658;</span>
+            <span class="card-count">3 new items</span>
+            <span class="toggle-icon">&#9660;</span>
           </div>
-          <div class="card-body collapsed">
+          <div class="card-body ">
+            
+            <div class="sub-hdr sub-new">New Cisco EUCC Certifications (1)</div>
+            
+            <div class="item-row" data-source="eucc" data-kind="new">
+              <a class="item-link" href="https://certification.enisa.europa.eu/certificates/eucc-3110-2026-000001-i-00-5_en" target="_blank">Cisco ASR 9000 Series Aggregation Services Routers running IOS-XR 7.11</a>
+              <span class="item-meta"></span>
+            </div>
             
             
-            <p class="no-change">No new EUCC certified products.</p>
+            
+            
+            <div class="item-row" data-source="eucc" data-kind="new">
+              <a class="item-link" href="https://certification.enisa.europa.eu/certificates/eucc-3090-2026-000001-i-00-25_en" target="_blank">S3FT9MF/S3FT9MT/S3FT9MS</a>
+              <span class="item-meta"></span>
+            </div>
+            
+            <div class="item-row" data-source="eucc" data-kind="new">
+              <a class="item-link" href="https://certification.enisa.europa.eu/certificates/eucc-3090-2026-000001-i-00-26_en" target="_blank">S3FT9MH/S3FT9MV/S3FT9MG</a>
+              <span class="item-meta"></span>
+            </div>
+            
+            
+            
           </div>
         </div>
       </div>
@@ -579,7 +632,7 @@
 <div class="card card-new" id="sec-history" data-has-changes="1">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>Change History</span>
-    <span class="card-count">69 events</span>
+    <span class="card-count">53 events</span>
     <span class="toggle-icon">▼</span>
   </div>
   <div class="card-body">
@@ -597,6 +650,116 @@
       div>
     <div class="timeline" id="history-timeline">
     
+      
+      <div class="tl-entry" data-cat="eucc_cisco">
+        <div class="tl-date">2026-08-27</div>
+        <div class="tl-body">
+          <div class="tl-title">
+            <span class="tl-badge new">new</span>
+            <a href="https://certification.enisa.europa.eu/certificates/eucc-3110-2026-000001-i-00-5_en" target="_blank">EUCC: Cisco ASR 9000 Series Aggregation Services Routers running IOS-XR 7.11</a>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="tl-entry" data-cat="pcl_cert">
+        <div class="tl-date">2026-08-22</div>
+        <div class="tl-body">
+          <div class="tl-title">
+            <span class="tl-badge new">new</span>
+            <a href="https://www.niap-ccevs.org/products/11671" target="_blank">HPE Aruba Networking — Hewlett Packard Enterprise’s CX-5420, CX-6200M, CX-6300, CX-6400, CX-8360, and CX-9300s Switch Series MACsec running AOS-CX version 10.16</a>
+          </div>
+          <div class="tl-detail">Certified 2026-08-19 · Gossamer Security Solutions · PKG_SSH_V1.0, MOD_MACSEC_V1.0, CPP_ND_V3.0E</div>
+        </div>
+      </div>
+      
+      <div class="tl-entry" data-cat="cisco_archived">
+        <div class="tl-date">2026-08-20</div>
+        <div class="tl-body">
+          <div class="tl-title">
+            <span class="tl-badge removed">removed</span>
+            <a href="https://www.niap-ccevs.org/" target="_blank">Archived: Cisco Catalyst 9300/9300L/9400/9500/9600 Series Switches 17.12</a>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="tl-entry" data-cat="td_new">
+        <div class="tl-date">2026-08-19</div>
+        <div class="tl-body">
+          <div class="tl-title">
+            <span class="tl-badge new">new</span>
+            <a href="https://www.niap-ccevs.org/technical-decisions/TD1053" target="_blank">New TD: TD1053</a>
+          </div>
+          <div class="tl-detail">Correction to FHA ECD Entry</div>
+        </div>
+      </div>
+      
+      <div class="tl-entry" data-cat="niap_news">
+        <div class="tl-date">2026-08-19</div>
+        <div class="tl-body">
+          <div class="tl-title">
+            <span class="tl-badge new">new</span>
+            <a href="https://www.niap-ccevs.org/technical-communities" target="_blank">NIAP New added: Call for Participants in the PSD Technical Community and Kick-off Announcement</a>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="tl-entry" data-cat="pcl_cert">
+        <div class="tl-date">2026-08-15</div>
+        <div class="tl-body">
+          <div class="tl-title">
+            <span class="tl-badge new">new</span>
+            <a href="https://www.niap-ccevs.org/products/11667" target="_blank">Motorola Mobility LLC — Motorola Mobility LLC Mobile Devices on Android 15</a>
+          </div>
+          <div class="tl-detail">Certified 2026-08-11 · Gossamer Security Solutions · MOD_BT_V1.0, PKG_TLS_V1.1, MOD_WLANC_v1.0, PP_MDF_V3.3, MOD_CPP_BIO_V1.1</div>
+        </div>
+      </div>
+      
+      <div class="tl-entry" data-cat="csfc_change">
+        <div class="tl-date">2026-08-15</div>
+        <div class="tl-body">
+          <div class="tl-title">
+            <span class="tl-badge updated">updated</span>
+            <a href="https://www.nsa.gov/Resources/Commercial-Solutions-for-Classified-Program/Components-List/" target="_blank">CSfC Selection updated: TLS Software Applications</a>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="tl-entry" data-cat="pcl_cert">
+        <div class="tl-date">2026-08-14</div>
+        <div class="tl-body">
+          <div class="tl-title">
+            <span class="tl-badge new">new</span>
+            <a href="https://www.niap-ccevs.org/products/2026.1245" target="_blank">Belkin International, Inc. — Belkin F1DN102MOD-BA-4, F1DN202MOD-BA-4, F1DN104MOD-BA-4, F1DN204MOD-BA-4, F1DN108MOD-BA-4, F1DN208MOD-BA-4, F1DN102MOD-HH-4, F1DN102MOD-PP-4, F1DN202MOD-HH-4, F1DN202MOD-PP-4, F1DN104MOD-HH-4, F1DN104MOD-PP-4, F1DN108MOD-PP-4, F1DN204MOD-HH-4, F1DN204MOD-PP-4, F1DN208MOD-PP-4, F1DN104MOD-XX-4, F1DN204MOD-XX-4 Firmware Version 44404-E7E7 Peripheral Sharing Devices</a>
+          </div>
+          <div class="tl-detail">Certified 2026-07-17 · EWA - Canada · PP_PSD_V4.0, MOD_KM_V1.0, MOD_VI_V1.0</div>
+        </div>
+      </div>
+      
+      <div class="tl-entry" data-cat="cisco_archived">
+        <div class="tl-date">2026-08-12</div>
+        <div class="tl-body">
+          <div class="tl-title">
+            <span class="tl-badge removed">removed</span>
+            <a href="https://www.niap-ccevs.org/" target="_blank">Archived: Cisco Catalyst Industrial Ethernet 9300 Rugged Series Switches running IOS-XE 17.12</a>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="tl-entry" data-cat="pcl_cert">
+        <div class="tl-date">2026-08-12</div>
+        <div class="tl-body">
+          <div class="tl-title">
+            <span class="tl-badge new">new</span>
+            <a href="https://www.niap-ccevs.org/products/11703" target="_blank">DigiStor — DigiStor Enterprise PCIe Gen 5 SSD Self Encrypting Drives</a>
+          </div>
+          <div class="tl-detail">Certified 2026-08-05 · Leidos Common Criteria Testing Laboratory · CPP_FDE_EE_V2.0E</div>
+        </div>
+      </div>
       
       <div class="tl-entry" data-cat="td_new">
         <div class="tl-date">2026-08-08</div>
@@ -1071,292 +1234,6 @@
         </div>
       </div>
       
-      <div class="tl-entry" data-cat="td_new">
-        <div class="tl-date">2026-07-28</div>
-        <div class="tl-body">
-          <div class="tl-title">
-            <span class="tl-badge new">new</span>
-            <a href="https://www.niap-ccevs.org/technical-decisions/TD1051" target="_blank">New TD: TD1051</a>
-          </div>
-          <div class="tl-detail">Correction to FIPS 186-5 Section references in FCS_COP.1.1/Sig</div>
-        </div>
-      </div>
-      
-      <div class="tl-entry" data-cat="pcl_cert">
-        <div class="tl-date">2026-07-28</div>
-        <div class="tl-body">
-          <div class="tl-title">
-            <span class="tl-badge new">new</span>
-            <a href="https://www.niap-ccevs.org/products/2025.1408" target="_blank">KONICA MINOLTA, INC. — KONICA MINOLTA bizhub C4751i G00-S2</a>
-          </div>
-          <div class="tl-detail">Certified 2025-10-02 · ECSEC Laboratory Inc. Evaluation Center · PP_HCD_V1.0</div>
-        </div>
-      </div>
-      
-      <div class="tl-entry" data-cat="cisco_cert">
-        <div class="tl-date">2026-07-27</div>
-        <div class="tl-body">
-          <div class="tl-title">
-            <span class="tl-badge new">new</span>
-            <a href="https://www.niap-ccevs.org/products/11672" target="_blank">Cisco Systems, Inc. — Cisco Secure Network Analytics (SNA) 7.5</a>
-          </div>
-          <div class="tl-detail">Certified 2026-07-17 · Gossamer Security Solutions · CPP_ND_V3.0E</div>
-        </div>
-      </div>
-      
-      <div class="tl-entry" data-cat="cisco_archived">
-        <div class="tl-date">2026-07-27</div>
-        <div class="tl-body">
-          <div class="tl-title">
-            <span class="tl-badge removed">removed</span>
-            <a href="https://www.niap-ccevs.org/" target="_blank">Archived: Cisco Catalyst 9200/9200L Series Switches 17.12</a>
-          </div>
-          
-        </div>
-      </div>
-      
-      <div class="tl-entry" data-cat="csfc_change">
-        <div class="tl-date">2026-07-27</div>
-        <div class="tl-body">
-          <div class="tl-title">
-            <span class="tl-badge updated">updated</span>
-            <a href="https://www.nsa.gov/Resources/Commercial-Solutions-for-Classified-Program/Components-List/" target="_blank">CSfC Selection updated: File Encryption</a>
-          </div>
-          
-        </div>
-      </div>
-      
-      <div class="tl-entry" data-cat="csfc_change">
-        <div class="tl-date">2026-07-27</div>
-        <div class="tl-body">
-          <div class="tl-title">
-            <span class="tl-badge updated">updated</span>
-            <a href="https://www.nsa.gov/Resources/Commercial-Solutions-for-Classified-Program/Components-List/" target="_blank">CSfC Selection updated: TLS Protected Servers</a>
-          </div>
-          
-        </div>
-      </div>
-      
-      <div class="tl-entry" data-cat="csfc_change">
-        <div class="tl-date">2026-07-27</div>
-        <div class="tl-body">
-          <div class="tl-title">
-            <span class="tl-badge updated">updated</span>
-            <a href="https://www.nsa.gov/Resources/Commercial-Solutions-for-Classified-Program/Components-List/" target="_blank">CSfC Selection updated: End User Device / Mobile Platform</a>
-          </div>
-          
-        </div>
-      </div>
-      
-      <div class="tl-entry" data-cat="csfc_change">
-        <div class="tl-date">2026-07-27</div>
-        <div class="tl-body">
-          <div class="tl-title">
-            <span class="tl-badge updated">updated</span>
-            <a href="https://www.nsa.gov/Resources/Commercial-Solutions-for-Classified-Program/Components-List/" target="_blank">CSfC Selection updated: TLS Software Applications</a>
-          </div>
-          
-        </div>
-      </div>
-      
-      <div class="tl-entry" data-cat="csfc_change">
-        <div class="tl-date">2026-07-27</div>
-        <div class="tl-body">
-          <div class="tl-title">
-            <span class="tl-badge updated">updated</span>
-            <a href="https://www.nsa.gov/Resources/Commercial-Solutions-for-Classified-Program/Components-List/" target="_blank">CSfC Selection updated: Traffic Filtering Firewall</a>
-          </div>
-          
-        </div>
-      </div>
-      
-      <div class="tl-entry" data-cat="csfc_change">
-        <div class="tl-date">2026-07-27</div>
-        <div class="tl-body">
-          <div class="tl-title">
-            <span class="tl-badge updated">updated</span>
-            <a href="https://www.nsa.gov/Resources/Commercial-Solutions-for-Classified-Program/Components-List/" target="_blank">CSfC Selection updated: IPsec VPN Gateway</a>
-          </div>
-          
-        </div>
-      </div>
-      
-      <div class="tl-entry" data-cat="csfc_change">
-        <div class="tl-date">2026-07-24</div>
-        <div class="tl-body">
-          <div class="tl-title">
-            <span class="tl-badge updated">updated</span>
-            <a href="https://www.nsa.gov/Resources/Commercial-Solutions-for-Classified-Program/Components-List/" target="_blank">CSfC Selection updated: Traffic Filtering Firewall</a>
-          </div>
-          
-        </div>
-      </div>
-      
-      <div class="tl-entry" data-cat="csfc_change">
-        <div class="tl-date">2026-07-24</div>
-        <div class="tl-body">
-          <div class="tl-title">
-            <span class="tl-badge new">new</span>
-            <a href="https://www.niap-ccevs.org/products/11516" target="_blank">CSfC Component: IPsec VPN Gateway | Cisco | FTD 7.4 on FP 4100 and 9300 Series with FMC-FMCv, as</a>
-          </div>
-          
-        </div>
-      </div>
-      
-      <div class="tl-entry" data-cat="csfc_change">
-        <div class="tl-date">2026-07-24</div>
-        <div class="tl-body">
-          <div class="tl-title">
-            <span class="tl-badge removed">removed</span>
-            <a href="https://www.niap-ccevs.org/products/11439" target="_blank">CSfC Component: IPsec VPN Client | Cisco | Secure Client- AnyConnect 5.1 for Red Hat Enterprise </a>
-          </div>
-          
-        </div>
-      </div>
-      
-      <div class="tl-entry" data-cat="csfc_change">
-        <div class="tl-date">2026-07-24</div>
-        <div class="tl-body">
-          <div class="tl-title">
-            <span class="tl-badge removed">removed</span>
-            <a href="https://www.niap-ccevs.org/products/11483" target="_blank">CSfC Component: IPsec VPN Gateway | Cisco | Embedded Services Router (ESR) 6300 v17.12 (ESR-6300</a>
-          </div>
-          
-        </div>
-      </div>
-      
-      <div class="tl-entry" data-cat="td_new">
-        <div class="tl-date">2026-07-23</div>
-        <div class="tl-body">
-          <div class="tl-title">
-            <span class="tl-badge new">new</span>
-            <a href="https://www.niap-ccevs.org/technical-decisions/TD1052" target="_blank">New TD: TD1052</a>
-          </div>
-          <div class="tl-detail">NIT Technical Decision: Separation of Test Definitions for DTLSv1.2 and v1.3 (Renegotiation)</div>
-        </div>
-      </div>
-      
-      <div class="tl-entry" data-cat="td_new">
-        <div class="tl-date">2026-07-23</div>
-        <div class="tl-body">
-          <div class="tl-title">
-            <span class="tl-badge new">new</span>
-            <a href="https://www.niap-ccevs.org/technical-decisions/TD1054" target="_blank">New TD: TD1054</a>
-          </div>
-          <div class="tl-detail">Correction to FIPS Pub 186-5 Appendix References</div>
-        </div>
-      </div>
-      
-      <div class="tl-entry" data-cat="pcl_cert">
-        <div class="tl-date">2026-07-22</div>
-        <div class="tl-body">
-          <div class="tl-title">
-            <span class="tl-badge new">new</span>
-            <a href="https://www.niap-ccevs.org/products/11680" target="_blank">RedData, an RPI-CS, Inc. division — RedData PCIe Gen3 NVMe 1.3 &amp; SATA III SED SSDs</a>
-          </div>
-          <div class="tl-detail">Certified 2026-07-14 · Lightship Security USA, Inc. · CPP_FDE_EE_V2.0E</div>
-        </div>
-      </div>
-      
-      <div class="tl-entry" data-cat="pcl_cert">
-        <div class="tl-date">2026-07-22</div>
-        <div class="tl-body">
-          <div class="tl-title">
-            <span class="tl-badge new">new</span>
-            <a href="https://www.niap-ccevs.org/products/11691" target="_blank">Progress Software Technologies Ltd — Progress LoadMaster</a>
-          </div>
-          <div class="tl-detail">Certified 2026-07-08 · Acumen Security · CPP_ND_V3.0E</div>
-        </div>
-      </div>
-      
-      <div class="tl-entry" data-cat="pcl_cert">
-        <div class="tl-date">2026-07-22</div>
-        <div class="tl-body">
-          <div class="tl-title">
-            <span class="tl-badge new">new</span>
-            <a href="https://www.niap-ccevs.org/products/11695" target="_blank">Apple Inc. — Apple macOS 26 Tahoe</a>
-          </div>
-          <div class="tl-detail">Certified 2026-07-17 · atsec information security corporation · MOD_BT_V1.0, PKG_TLS_V1.1, MOD_WLANC_v1.0, PP_OS_V4.3</div>
-        </div>
-      </div>
-      
-      <div class="tl-entry" data-cat="csfc_change">
-        <div class="tl-date">2026-07-17</div>
-        <div class="tl-body">
-          <div class="tl-title">
-            <span class="tl-badge new">new</span>
-            <a href="https://www.niap-ccevs.org/products/11468" target="_blank">CSfC Component: Certification Authority | Red Hat | Certificate System, as detailed in VID 11468</a>
-          </div>
-          
-        </div>
-      </div>
-      
-      <div class="tl-entry" data-cat="csfc_change">
-        <div class="tl-date">2026-07-17</div>
-        <div class="tl-body">
-          <div class="tl-title">
-            <span class="tl-badge removed">removed</span>
-            <a href="https://www.niap-ccevs.org/products/11468" target="_blank">CSfC Component: Certification Authority | Red Hat | Certificate System | v10.4 | NIAP Evaluation</a>
-          </div>
-          
-        </div>
-      </div>
-      
-      <div class="tl-entry" data-cat="csfc_change">
-        <div class="tl-date">2026-07-16</div>
-        <div class="tl-body">
-          <div class="tl-title">
-            <span class="tl-badge new">new</span>
-            <a href="https://www.niap-ccevs.org/products/11468" target="_blank">CSfC Component: Certification Authority | Red Hat | Certificate System | v10.4 | NIAP Evaluation</a>
-          </div>
-          
-        </div>
-      </div>
-      
-      <div class="tl-entry" data-cat="pcl_cert">
-        <div class="tl-date">2026-07-11</div>
-        <div class="tl-body">
-          <div class="tl-title">
-            <span class="tl-badge new">new</span>
-            <a href="https://www.niap-ccevs.org/products/2026.1214" target="_blank">FUJIFILM Business Innovation Corp. — FUJIFILM Apeos C5240 model with Copy, Print, Fax, Scan and Overwrite Storage Controller ROM Ver. 1.50.5</a>
-          </div>
-          <div class="tl-detail">Certified 2026-05-14 · Information Technology Security Center Evaluation Department · PP_HCD_V1.0</div>
-        </div>
-      </div>
-      
-      <div class="tl-entry" data-cat="pcl_cert">
-        <div class="tl-date">2026-07-11</div>
-        <div class="tl-body">
-          <div class="tl-title">
-            <span class="tl-badge new">new</span>
-            <a href="https://www.niap-ccevs.org/products/11635" target="_blank">Cisco Systems, Inc. — Cisco Jabber 15.2</a>
-          </div>
-          <div class="tl-detail">Certified 2026-06-25 · Gossamer Security Solutions · PKG_TLS_V1.1, MOD_VVOIP_V1.0, PP_APP_v1.4</div>
-        </div>
-      </div>
-      
-      <div class="tl-entry" data-cat="pcl_cert">
-        <div class="tl-date">2026-07-10</div>
-        <div class="tl-body">
-          <div class="tl-title">
-            <span class="tl-badge new">new</span>
-            <a href="https://www.niap-ccevs.org/products/11734" target="_blank">Cisco Systems, Inc. — Cisco Catalyst Industrial Ethernet 9300 Rugged Series Switches Running IOS-XE 17.18</a>
-          </div>
-          <div class="tl-detail">Certified  · Gossamer Security Solutions · PKG_SSH_V1.0, MOD_MACSEC_V1.0, CPP_ND_V3.0E</div>
-        </div>
-      </div>
-      
-      <div class="tl-entry" data-cat="pcl_cert">
-        <div class="tl-date">2026-07-10</div>
-        <div class="tl-body">
-          <div class="tl-title">
-            <span class="tl-badge new">new</span>
-            <a href="https://www.niap-ccevs.org/products/11733" target="_blank">HPE Aruba Networking — HPE Aruba Networking Gateways and Mobility Controllers running software version 8.13.2</a>
-          </div>
-          <div class="tl-detail">Certified  · Gossamer Security Solutions · MOD_CPP_FW_v1.4e, PKG_SSH_V1.0, MOD_WLAN_AS_v1.0, MOD_VPNGW_v1.3, CPP_ND_V3.0E</div>
-        </div>
-      </div>
-      
     
     </div>
   </div>
@@ -1367,7 +1244,7 @@
 </div><!-- /main-content -->
 <footer>
   <span>CC Pulse &middot; Auto-refreshes daily (01:00 EST) &middot; NIAP, CSfC, CC Portal, NATO NIAPCL, EUCC / ENISA</span>
-  <span>Last run: 2026-08-10 04:41 ET</span>
+  <span>Last run: 2026-08-27 13:12 ET</span>
 </footer>
 
 <script>
