@@ -44,7 +44,7 @@ def _nato_product(link, raw):
             "category": "Routers", "link": link, "raw_text": raw}
 
 
-# ── URL keying: display-format changes are not "new" ────────────────────────
+# ── EUCC identity: display/URL changes are not "new" ─────────────────────────
 
 def test_eucc_text_change_same_href_is_not_new():
     old = {"cisco_certs": [_eucc_cert("https://enisa.eu/c/1", "EUCC-3110-01 | old title")],
@@ -53,6 +53,38 @@ def test_eucc_text_change_same_href_is_not_new():
            "pages": {}}
     d = differ.diff_eucc(old, new)
     assert d["cisco_added"] == []
+    assert d["cisco_removed"] == []
+
+
+def test_eucc_same_product_and_date_with_changed_href_is_not_new():
+    old = {"cisco_certs": [_eucc_cert(
+        "https://enisa.eu/c/old-url",
+        "Cisco ASR 9000 Series Aggregation Services Routers running IOS-XR 7.11",
+    )], "pages": {}}
+    new = {"cisco_certs": [_eucc_cert(
+        "https://enisa.eu/c/new-url",
+        "Cisco ASR 9000 Series Aggregation Services Routers running IOS-XR 7.11",
+    )], "pages": {}}
+    d = differ.diff_eucc(old, new)
+    assert d["cisco_added"] == []
+    assert d["cisco_removed"] == []
+
+
+def test_eucc_same_product_on_different_date_is_new():
+    old_cert = _eucc_cert(
+        "https://enisa.eu/c/old-cert",
+        "Cisco ASR 9000 Series Aggregation Services Routers running IOS-XR 7.11",
+    )
+    new_cert = _eucc_cert(
+        "https://enisa.eu/c/new-cert",
+        "Cisco ASR 9000 Series Aggregation Services Routers running IOS-XR 7.11",
+    )
+    new_cert["cert_date"] = "2026-02-01"
+    old = {"cisco_certs": [old_cert], "pages": {}}
+    new = {"cisco_certs": [old_cert, new_cert], "pages": {}}
+    d = differ.diff_eucc(old, new)
+    assert len(d["cisco_added"]) == 1
+    assert d["cisco_added"][0]["href"] == "https://enisa.eu/c/new-cert"
     assert d["cisco_removed"] == []
 
 

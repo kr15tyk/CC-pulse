@@ -119,6 +119,15 @@ def _build_history(n: int = 90) -> list:
                 "url": "https://www.niap-ccevs.org/",
             })
 
+        for kind in ("revised", "content_changes"):
+            for pp in niap.get("pps", {}).get(kind, []):
+                entries.append({
+                    "date": date, "category": "pp_new", "kind": "updated",
+                    "title": f"Revised PP: {pp.get('pp_short_name') or pp.get('pp_name') or '?'}",
+                    "detail": ", ".join(pp.get("changed_fields", [])) or "published document changed",
+                    "url": pp.get("document_url") or "https://www.niap-ccevs.org/protection-profiles",
+                })
+
         # New Technical Decisions
         for td in niap.get("tds", {}).get("added", []):
             entries.append({
@@ -234,6 +243,31 @@ def _build_history(n: int = 90) -> list:
                         ),
                     })
 
+        for kind in ("added", "removed", "updated"):
+            for document in d.get("csfc", {}).get("documents", {}).get(kind, []):
+                entries.append({
+                    "date": date, "category": "csfc_change", "kind": kind,
+                    "title": f"CSfC capability package {kind}: {document.get('label') or document.get('key', '')}",
+                    "detail": "full-document fingerprint",
+                    "url": document.get("url") or document.get("old_url") or "https://www.nsa.gov/Resources/Commercial-Solutions-for-Classified-Program/Capability-Packages/",
+                })
+
+        for kind in ("added", "removed", "updated"):
+            for document in d.get("ietf_cnsa", {}).get(kind, []):
+                entries.append({
+                    "date": date, "category": "pp_new", "kind": kind,
+                    "title": f"IETF CNSA {kind}: {document.get('title') or document.get('name', '')}",
+                    "detail": ", ".join(document.get("changed_fields", [])),
+                    "url": document.get("document_url") or "https://datatracker.ietf.org/",
+                })
+        for project in d.get("ieee_pqc", {}).get("updated", []):
+            entries.append({
+                "date": date, "category": "pp_new", "kind": "updated",
+                "title": f"IEEE {project.get('project', 'P802.11bt')} milestone",
+                "detail": f"{project.get('old_draft', '')} → {project.get('draft', '')}",
+                "url": project.get("timeline_url") or "https://www.ieee802.org/11/Reports/802.11_Timelines.htm",
+            })
+
     # Sort newest-first
     entries.sort(key=lambda e: e["date"], reverse=True)
     return entries
@@ -246,7 +280,8 @@ def _section_daily_counts(diffs: list, section_key: str) -> list:
         if section_key == "niap_pp":
             pps = d.get("niap", {}).get("pps", {})
             n = (len(pps.get("added", [])) + len(pps.get("removed", [])) +
-                 len(pps.get("sunset_changes", [])) + len(pps.get("status_changes", [])))
+                 len(pps.get("sunset_changes", [])) + len(pps.get("status_changes", [])) +
+                 len(pps.get("revised", [])) + len(pps.get("content_changes", [])))
         elif section_key == "niap_td":
             tds = d.get("niap", {}).get("tds", {})
             n = len(tds.get("added", [])) + len(tds.get("removed", []))
@@ -271,6 +306,15 @@ def _section_daily_counts(diffs: list, section_key: str) -> list:
                 for page_key, page_diff in csfc.get("pages", {}).items()
                 if page_key in ("apl", "announcements") and isinstance(page_diff, dict)
             )
+            n += sum(
+                len(csfc.get("documents", {}).get(kind, []))
+                for kind in ("added", "removed", "updated")
+            )
+        elif section_key == "standards":
+            ietf = d.get("ietf_cnsa", {})
+            ieee = d.get("ieee_pqc", {})
+            n = sum(len(ietf.get(kind, [])) for kind in ("added", "removed", "updated", "rfc9846_adoption"))
+            n += sum(len(ieee.get(kind, [])) for kind in ("added", "removed", "updated"))
         elif section_key == "cc_crypto":
             n = sum(len(p.get("added", [])) for p in d.get("cc_crypto", {}).get("pages", {}).values() if isinstance(p, dict))
         elif section_key == "pcl_all":
@@ -524,6 +568,15 @@ DASHBOARD_TEMPLATE = """
         <div class="sources-item"><span class="src-label">FW Module Allowed-With:</span><a href="https://nd-itc.github.io/AWL/FW_allowed_with_list.html" target="_blank" rel="noopener">nd-itc.github.io &mdash; FW AWL</a></div>
       </div>
       <div class="sources-group">
+        <div class="sources-group-title">🔐 CNSA 2.0 / Post-Quantum Standards</div>
+        <div class="sources-item"><span class="src-label">IPsec Profile:</span><a href="https://datatracker.ietf.org/doc/draft-guthrie-cnsa2-ipsec-profile/" target="_blank" rel="noopener">IETF Datatracker &mdash; CNSA 2.0 IPsec</a></div>
+        <div class="sources-item"><span class="src-label">TLS Profile:</span><a href="https://datatracker.ietf.org/doc/draft-becker-cnsa2-tls-profile/" target="_blank" rel="noopener">IETF Datatracker &mdash; CNSA 2.0 TLS</a></div>
+        <div class="sources-item"><span class="src-label">SSH Profile:</span><a href="https://datatracker.ietf.org/doc/draft-becker-cnsa2-ssh-profile/" target="_blank" rel="noopener">IETF Datatracker &mdash; CNSA 2.0 SSH</a></div>
+        <div class="sources-item"><span class="src-label">PKIX Profile:</span><a href="https://datatracker.ietf.org/doc/draft-jenkins-cnsa2-pkix-profile/" target="_blank" rel="noopener">IETF Datatracker &mdash; CNSA 2.0 PKIX</a></div>
+        <div class="sources-item"><span class="src-label">TLS 1.3 RFC:</span><a href="https://datatracker.ietf.org/doc/rfc9846/" target="_blank" rel="noopener">IETF Datatracker &mdash; RFC 9846</a></div>
+        <div class="sources-item"><span class="src-label">WLAN PQC:</span><a href="https://www.ieee802.org/11/Reports/802.11_Timelines.htm" target="_blank" rel="noopener">IEEE 802.11 &mdash; P802.11bt timeline</a></div>
+      </div>
+      <div class="sources-group">
         <div class="sources-group-title">🧪 CCTL Labs</div>
         <div class="sources-item"><span class="src-label">Lightship Security:</span><a href="https://lightshipsec.com/blog/" target="_blank" rel="noopener">lightshipsec.com &mdash; Blog (RSS)</a></div>
         <div class="sources-item"><span class="src-label">atsec:</span><a href="https://www.atsec.com/blog/" target="_blank" rel="noopener">atsec.com &mdash; Blog (scraped)</a></div>
@@ -563,6 +616,10 @@ DASHBOARD_TEMPLATE = """
     <div class="stat"><a href="#sec-eucc-req" onclick="navigateTo('sec-eucc-req');return false;">
       <div class="stat-num {% if eucc_total > 0 %}active-num{% endif %}">{{ eucc_total }}</div>
       <div class="stat-lbl">EUCC Changes</div>
+    </a></div>
+    <div class="stat"><a href="#sec-ietf-cnsa" onclick="navigateTo('sec-ietf-cnsa');return false;">
+      <div class="stat-num {% if standards_total > 0 %}active-num{% endif %}">{{ standards_total }}</div>
+      <div class="stat-lbl">CNSA / PQC Standards</div>
     </a></div>
     <div class="stat"><a href="#sec-alerts" onclick="navigateTo('sec-alerts');return false;">
       <div class="stat-num {% if alert_total > 0 %}alert-num{% endif %}">{{ alert_total }}</div>
@@ -846,6 +903,24 @@ DASHBOARD_TEMPLATE = """
     </div>
     {% endfor %}
     {% endif %}
+    {% if diff.niap.pps.revised %}
+    <div class="sub-hdr sub-updated">Metadata Revisions ({{ diff.niap.pps.revised | length }})</div>
+    {% for pp in diff.niap.pps.revised %}
+    <div class="item-row" data-source="niap-pp" data-kind="updated">
+      <a class="item-link" href="{{ (pp.document_url or ('https://www.niap-ccevs.org/Profile/PP.cfm?id=' ~ pp.pp_id)) | safe_url }}" target="_blank">{{ pp.pp_short_name }}</a>
+      <span class="item-meta">{{ pp.changed_fields | join(', ') }}</span>
+    </div>
+    {% endfor %}
+    {% endif %}
+    {% if diff.niap.pps.content_changes %}
+    <div class="sub-hdr sub-updated">Document Revisions ({{ diff.niap.pps.content_changes | length }})</div>
+    {% for pp in diff.niap.pps.content_changes %}
+    <div class="item-row" data-source="niap-pp" data-kind="updated">
+      <a class="item-link" href="{{ (pp.document_url or ('https://www.niap-ccevs.org/Profile/PP.cfm?id=' ~ pp.pp_id)) | safe_url }}" target="_blank">{{ pp.pp_short_name }}</a>
+      <span class="item-meta">{% if pp.hash_changed %}full-content SHA-256 changed{% else %}published file version changed{% endif %}{% if pp.cnsa_markers %} &middot; {{ pp.cnsa_markers | join(', ') }}{% endif %}</span>
+    </div>
+    {% endfor %}
+    {% endif %}
     {% if niap_pp_total == 0 %}<p class="no-change">No changes detected.{% if last_active.niap_pp %} <span class="last-active">(last: {{ last_active.niap_pp }})</span>{% endif %}</p>{% endif %}
   </div>
 </div>
@@ -931,9 +1006,64 @@ DASHBOARD_TEMPLATE = """
         {% endfor %}
       {% endif %}
     {% endfor %}
+    {% for kind in ['added', 'removed', 'updated'] %}
+      {% for doc in diff.csfc.documents.get(kind, []) %}
+      <div class="item-row" data-source="csfc" data-kind="{{ kind }}">
+        <a class="item-link" href="{{ (doc.url or doc.old_url or config_csfc_cap_packages_url) | safe_url }}" target="_blank">{{ doc.label or doc.key }}</a>
+        <span class="item-meta">capability package {{ kind }}</span>
+      </div>
+      {% endfor %}
+    {% endfor %}
     {% if csfc_total == 0 %}<p class="no-change">No changes detected.{% if last_active.csfc %} <span class="last-active">(last: {{ last_active.csfc }})</span>{% endif %}</p>{% endif %}
   </div>
 </div>
+</div>
+
+<div class="section-group">
+  <div class="section-label">CNSA 2.0 &amp; Post-Quantum Standards</div>
+  <div class="card {% if ietf_total > 0 %}card-updated{% endif %}" id="sec-ietf-cnsa" data-has-changes="{{ ietf_total }}">
+    <div class="card-hdr" onclick="toggleCard(this)">
+      <span>IETF CNSA 2.0 Profiles</span>
+      <span class="card-count">{{ ietf_total }} update{% if ietf_total != 1 %}s{% endif %}</span>
+      <span class="toggle-icon">{% if ietf_total == 0 %}&#9658;{% else %}&#9660;{% endif %}</span>
+    </div>
+    <div class="card-body {% if ietf_total == 0 %}collapsed{% endif %}">
+      {% for kind in ['added', 'removed', 'updated'] %}
+        {% for doc in diff.ietf_cnsa.get(kind, []) %}
+        <div class="item-row" data-source="ietf-cnsa" data-kind="{{ kind }}">
+          <a class="item-link" href="{{ doc.document_url | safe_url }}" target="_blank">{{ doc.title or doc.name }}</a>
+          <span class="item-meta">{% if doc.old_revision != doc.revision %}{{ doc.old_revision or '?' }} &rarr; {{ doc.revision or '?' }}{% else %}{{ doc.workflow_state }}{% endif %}</span>
+        </div>
+        {% endfor %}
+      {% endfor %}
+      {% for doc in diff.ietf_cnsa.rfc9846_adoption %}
+      <div class="item-row" data-source="ietf-cnsa" data-kind="updated">
+        <a class="item-link" href="{{ doc.document_url | safe_url }}" target="_blank">RFC 9846 adopted by the CNSA 2.0 TLS profile</a>
+        <span class="item-meta">{% if doc.replaced_rfc8446 %}RFC 8446 replaced{% else %}new RFC 9846 reference{% endif %}</span>
+      </div>
+      {% endfor %}
+      {% if ietf_total == 0 %}<p class="no-change">No changes detected.</p>{% endif %}
+    </div>
+  </div>
+
+  <div class="card {% if ieee_total > 0 %}card-updated{% endif %}" id="sec-ieee-pqc" data-has-changes="{{ ieee_total }}">
+    <div class="card-hdr" onclick="toggleCard(this)">
+      <span>IEEE 802.11bt Post-Quantum Cryptography</span>
+      <span class="card-count">{{ ieee_total }} update{% if ieee_total != 1 %}s{% endif %}</span>
+      <span class="toggle-icon">{% if ieee_total == 0 %}&#9658;{% else %}&#9660;{% endif %}</span>
+    </div>
+    <div class="card-body {% if ieee_total == 0 %}collapsed{% endif %}">
+      {% for kind in ['added', 'removed', 'updated'] %}
+        {% for project in diff.ieee_pqc.get(kind, []) %}
+        <div class="item-row" data-source="ieee-pqc" data-kind="{{ kind }}">
+          <a class="item-link" href="{{ project.timeline_url | safe_url }}" target="_blank">{{ project.project }} &mdash; {{ project.title }}</a>
+          <span class="item-meta">{% if project.old_draft != project.draft %}{{ project.old_draft or '?' }} &rarr; {{ project.draft or '?' }}{% else %}status/timeline updated{% endif %}</span>
+        </div>
+        {% endfor %}
+      {% endfor %}
+      {% if ieee_total == 0 %}<p class="no-change">No changes detected.</p>{% endif %}
+    </div>
+  </div>
 </div>
 
 <div class="section-group">
@@ -1469,6 +1599,18 @@ def _build_rss(diff: dict, generated_at: str) -> str:
             f"<description>{xml_escape(pp.get('pp_name', ''))}</description></item>"
         )
 
+    for kind in ("revised", "content_changes"):
+        for pp in diff.get("niap", {}).get("pps", {}).get(kind, []):
+            title = f"NIAP PP Revised: {pp.get('pp_short_name', '')}"
+            link = pp.get("document_url") or (
+                f"https://www.niap-ccevs.org/Profile/PP.cfm?id={pp.get('pp_id', '')}"
+            )
+            detail = ", ".join(pp.get("changed_fields", [])) or "published document changed"
+            items_xml.append(
+                f"<item><title>{xml_escape(title)}</title><link>{xml_escape(link)}</link>"
+                f"<description>{xml_escape(detail)}</description></item>"
+            )
+
     for td in diff.get("niap", {}).get("tds", {}).get("added", []):
         title = f"New TD: {td.get('identifier', '')}"
         items_xml.append(
@@ -1544,6 +1686,15 @@ def _build_rss(diff: dict, generated_at: str) -> str:
                     f"<description>CSfC {xml_escape(page_key)} item {change_label.lower()}.</description></item>"
                 )
 
+    for kind in ("added", "removed", "updated"):
+        for document in diff.get("csfc", {}).get("documents", {}).get(kind, []):
+            title = f"CSfC Capability Package {kind.title()}: {document.get('label') or document.get('key', '')}"
+            link = document.get("url") or document.get("old_url") or "https://www.nsa.gov/Resources/Commercial-Solutions-for-Classified-Program/Capability-Packages/"
+            items_xml.append(
+                f"<item><title>{xml_escape(title)}</title><link>{xml_escape(link)}</link>"
+                f"<description>Tracked capability-package document changed.</description></item>"
+            )
+
     for page_key, page_diff in diff.get("cc_crypto", {}).get("pages", {}).items():
         for item in page_diff.get("added", []):
             link = item.get("href", "https://www.commoncriteriaportal.org/")
@@ -1551,6 +1702,29 @@ def _build_rss(diff: dict, generated_at: str) -> str:
                 f"<item><title>{xml_escape('CC Crypto: ' + (item.get('text') or page_key)[:80])}</title>"
                 f"<link>{xml_escape(link)}</link>"
                 f"<description>New item on CC Crypto {xml_escape(page_key)} page.</description></item>"
+            )
+
+    for kind in ("added", "removed", "updated"):
+        for document in diff.get("ietf_cnsa", {}).get(kind, []):
+            title = f"IETF CNSA {kind.title()}: {document.get('title') or document.get('name', '')}"
+            link = document.get("document_url") or "https://datatracker.ietf.org/"
+            items_xml.append(
+                f"<item><title>{xml_escape(title)}</title><link>{xml_escape(link)}</link>"
+                f"<description>{xml_escape(', '.join(document.get('changed_fields', [])))}</description></item>"
+            )
+    for document in diff.get("ietf_cnsa", {}).get("rfc9846_adoption", []):
+        items_xml.append(
+            f"<item><title>RFC 9846 adopted by the CNSA 2.0 TLS profile</title>"
+            f"<link>{xml_escape(document.get('document_url') or 'https://datatracker.ietf.org/doc/rfc9846/')}</link>"
+            f"<description>TLS profile reference transition detected.</description></item>"
+        )
+    for kind in ("added", "removed", "updated"):
+        for project in diff.get("ieee_pqc", {}).get(kind, []):
+            title = f"IEEE 802.11bt {kind.title()}: {project.get('draft') or 'status update'}"
+            link = project.get("timeline_url") or "https://www.ieee802.org/11/Reports/802.11_Timelines.htm"
+            items_xml.append(
+                f"<item><title>{xml_escape(title)}</title><link>{xml_escape(link)}</link>"
+                f"<description>{xml_escape(project.get('status_text', ''))}</description></item>"
             )
 
     for alert in diff.get("alerts", []):
@@ -1592,6 +1766,8 @@ def render_dashboard(diff: dict, output_dir: str = "docs") -> None:
         for kind in kinds:
             changes.setdefault(kind, [])
     pps          = niap.get("pps", {})
+    for kind in ("added", "removed", "sunset_changes", "status_changes", "revised", "content_changes"):
+        pps.setdefault(kind, [])
     tds          = niap.get("tds", {})
     cisco        = niap.get("cisco_ndcpp", {})
     pcl_all      = niap.get("pcl_all", {})
@@ -1601,7 +1777,8 @@ def render_dashboard(diff: dict, output_dir: str = "docs") -> None:
     policies     = niap.get("policies", {})
 
     niap_pp_total   = (len(pps.get("added", [])) + len(pps.get("removed", [])) +
-                       len(pps.get("sunset_changes", [])) + len(pps.get("status_changes", [])))
+                       len(pps.get("sunset_changes", [])) + len(pps.get("status_changes", [])) +
+                       len(pps.get("revised", [])) + len(pps.get("content_changes", [])))
     niap_td_total   = len(tds.get("added", [])) + len(tds.get("removed", []))
     cisco_total     = (len(cisco.get("added", [])) + len(cisco.get("removed", [])) +
                        len(cisco.get("newly_archived", [])))
@@ -1623,6 +1800,7 @@ def render_dashboard(diff: dict, output_dir: str = "docs") -> None:
 
     cctl_total      = sum(len(v) for v in diff.get("cctl_labs", {}).values() if v)
     csfc_diff       = diff.get("csfc", {})
+    csfc_diff.setdefault("documents", {"added": [], "removed": [], "updated": []})
     csfc_total      = sum(1 for cp in csfc_diff.get("selection_links", {}).values()
                           if cp.get("changed"))
     csfc_total     += sum(
@@ -1630,8 +1808,21 @@ def render_dashboard(diff: dict, output_dir: str = "docs") -> None:
         for page_key, page_diff in csfc_diff.get("pages", {}).items()
         if page_key in ("apl", "announcements") and isinstance(page_diff, dict)
     )
+    csfc_total     += sum(
+        len(csfc_diff["documents"].get(kind, []))
+        for kind in ("added", "removed", "updated")
+    )
     cc_crypto_total = sum(len(p.get("added", [])) for p in diff.get("cc_crypto", {}).get("pages", {}).values() if isinstance(p, dict))
     alert_total     = len(diff.get("alerts", []))
+
+    ietf_diff = diff.setdefault(
+        "ietf_cnsa", {"added": [], "removed": [], "updated": [], "rfc9846_adoption": []}
+    )
+    ieee_diff = diff.setdefault("ieee_pqc", {"added": [], "removed": [], "updated": []})
+    ietf_total = sum(len(ietf_diff.get(kind, [])) for kind in ("added", "removed", "updated"))
+    ietf_total += len(ietf_diff.get("rfc9846_adoption", []))
+    ieee_total = sum(len(ieee_diff.get(kind, [])) for kind in ("added", "removed", "updated"))
+    standards_total = ietf_total + ieee_total
 
     niap_total_stat = (
         niap_pp_total + niap_td_total + cisco_total + pcl_all_total
@@ -1712,6 +1903,9 @@ def render_dashboard(diff: dict, output_dir: str = "docs") -> None:
         cctl_total      = cctl_total,
         csfc_total      = csfc_total,
         cc_crypto_total = cc_crypto_total,
+        ietf_total      = ietf_total,
+        ieee_total      = ieee_total,
+        standards_total = standards_total,
         alert_total     = alert_total,
         niap_total_stat = niap_total_stat,
         cctl_total_stat = cctl_total_stat,
@@ -1737,6 +1931,7 @@ def render_dashboard(diff: dict, output_dir: str = "docs") -> None:
         config_eucc_cert_url = config.EUCC_CERTIFICATES_URL,
         config_csfc_components_url = config.CSFC_PRODUCT_LIST_URL,
         config_csfc_announcements_url = config.CSFC_BASE + config.CSFC_PAGES["announcements"],
+        config_csfc_cap_packages_url = config.CSFC_BASE + config.CSFC_PAGES.get("cap_packages", "/Resources/Commercial-Solutions-for-Classified-Program/Capability-Packages/"),
         noindex_meta         = '<meta name="robots" content="noindex, nofollow">' if config.STAGING_DIR in output_dir else '',
     )
 

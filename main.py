@@ -90,7 +90,7 @@ KEEP_SNAPSHOTS = 30  # days
 
 DOMAIN_KEYS = (
     "niap", "cc_portal", "cctl_labs", "csfc",
-    "cc_crypto", "nato", "eucc", "nd_itc",
+    "cc_crypto", "nato", "eucc", "nd_itc", "ietf_cnsa", "ieee_pqc",
 )
 
 DOMAIN_LABELS = {
@@ -102,6 +102,8 @@ DOMAIN_LABELS = {
     "nato": "NATO NIAPCL",
     "eucc": "EUCC / ENISA",
     "nd_itc": "ND-iTC",
+    "ietf_cnsa": "IETF CNSA 2.0",
+    "ieee_pqc": "IEEE 802.11bt",
 }
 
 NIAP_SUBCOLLECTION_LABELS = {
@@ -240,6 +242,8 @@ def _source_health_checks(snapshot: dict) -> dict[str, list[dict]]:
     csfc = snapshot.get("csfc", {})
     cc_crypto = snapshot.get("cc_crypto", {})
     eucc = snapshot.get("eucc", {})
+    ietf_cnsa = snapshot.get("ietf_cnsa", {})
+    ieee_pqc = snapshot.get("ieee_pqc", {})
 
     return {
         "niap": [
@@ -247,6 +251,14 @@ def _source_health_checks(snapshot: dict) -> dict[str, list[dict]]:
              "minimum": config.SANITY_MIN_PCL},
             {"name": "Protection Profiles", "observed": len(niap.get("pps", [])),
              "minimum": config.SANITY_MIN_PPS},
+            {"name": "PQC PP file-version records", "observed": sum(
+                item.get("document_file_id") not in (None, "")
+                for item in niap.get("pps", []) if isinstance(item, dict)
+            ), "minimum": _config_minimum("SANITY_MIN_NIAP_PQC_PP_FILES", 1)},
+            {"name": "PQC PP full-content hashes", "observed": sum(
+                bool(item.get("document_sha256"))
+                for item in niap.get("pps", []) if isinstance(item, dict)
+            ), "minimum": _config_minimum("SANITY_MIN_NIAP_PQC_PP_HASHES", 1)},
         ],
         "cc_portal": [
             {"name": "portal records", "observed": sum(
@@ -264,6 +276,14 @@ def _source_health_checks(snapshot: dict) -> dict[str, list[dict]]:
             {"name": "announcements", "observed": len(
                 csfc.get("pages", {}).get("announcements", [])
             ), "minimum": config.SANITY_MIN_CSFC_ANNOUNCEMENTS},
+            {"name": "tracked capability packages", "observed": len(
+                csfc.get("documents", {})
+            ), "minimum": _config_minimum("SANITY_MIN_CSFC_PQC_DOCUMENTS", 5)},
+            {"name": "capability-package hashes", "observed": sum(
+                bool(item.get("sha256"))
+                for item in csfc.get("documents", {}).values()
+                if isinstance(item, dict)
+            ), "minimum": _config_minimum("SANITY_MIN_CSFC_PQC_DOCUMENTS", 5)},
         ],
         "cc_crypto": [
             {"name": "publications", "observed": len(
@@ -284,6 +304,26 @@ def _source_health_checks(snapshot: dict) -> dict[str, list[dict]]:
             {"name": "Allowed-With entries", "observed": len(
                 snapshot.get("nd_itc", {}).get("awl_entries", [])
             ), "minimum": 1},
+        ],
+        "ietf_cnsa": [
+            {"name": "CNSA profile/RFC records", "observed": len(
+                ietf_cnsa.get("documents", [])
+            ), "minimum": _config_minimum("SANITY_MIN_IETF_CNSA_DOCUMENTS", 5)},
+            {"name": "CNSA full-text hashes", "observed": sum(
+                bool(item.get("content_sha256"))
+                for item in ietf_cnsa.get("documents", [])
+                if isinstance(item, dict)
+            ), "minimum": _config_minimum("SANITY_MIN_IETF_CNSA_DOCUMENTS", 5)},
+        ],
+        "ieee_pqc": [
+            {"name": "P802.11bt project records", "observed": len(
+                ieee_pqc.get("projects", [])
+            ), "minimum": _config_minimum("SANITY_MIN_IEEE_PQC_RECORDS", 1)},
+            {"name": "P802.11bt timeline hashes", "observed": sum(
+                bool(item.get("timeline_sha256"))
+                for item in ieee_pqc.get("projects", [])
+                if isinstance(item, dict)
+            ), "minimum": _config_minimum("SANITY_MIN_IEEE_PQC_RECORDS", 1)},
         ],
     }
 
@@ -672,6 +712,8 @@ def _empty_snapshot() -> dict:
         "eucc":      {"pages": {}, "cisco_added": [], "cisco_removed": []},
         "nd_itc":    {"nit_rfis": [], "nit_rfis_archived": [],
                       "awl_entries": [], "awl_meta": []},
+        "ietf_cnsa": {"documents": []},
+        "ieee_pqc":  {"projects": []},
         "source_health": {},
     }
 
@@ -865,7 +907,7 @@ def run_daily(output_dir: str = None) -> None:
             if isinstance(obj, dict):
                 return {k: _clear_lists(v) for k, v in obj.items()}
             return obj
-        for section in ("niap", "cc_portal", "cctl_labs", "csfc", "cc_crypto", "nato", "eucc"):  # fix #23
+        for section in ("niap", "cc_portal", "cctl_labs", "csfc", "cc_crypto", "nato", "eucc", "nd_itc", "ietf_cnsa", "ieee_pqc"):
             if section in diff:
                 diff[section] = _clear_lists(diff[section])
         diff["alerts"] = []
@@ -945,6 +987,8 @@ def run_merge(partial_dir: str = "snapshots/partial", output_dir: str = None) ->
         "nato":      domain_data.get("nato", {}),
         "eucc":      domain_data.get("eucc", {}),
         "nd_itc":    domain_data.get("nd_itc", {}),
+        "ietf_cnsa": domain_data.get("ietf_cnsa", {}),
+        "ieee_pqc":  domain_data.get("ieee_pqc", {}),
     }
 
     prior_path = _latest_prior_snapshot()
@@ -980,7 +1024,7 @@ def run_merge(partial_dir: str = "snapshots/partial", output_dir: str = None) ->
             if isinstance(obj, dict):
                 return {k: _clear_lists(v) for k, v in obj.items()}
             return obj
-        for section in ("niap", "cc_portal", "cctl_labs", "csfc", "cc_crypto", "nato", "eucc"):
+        for section in ("niap", "cc_portal", "cctl_labs", "csfc", "cc_crypto", "nato", "eucc", "nd_itc", "ietf_cnsa", "ieee_pqc"):
             if section in diff:
                 diff[section] = _clear_lists(diff[section])
         diff["alerts"] = []

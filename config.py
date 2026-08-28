@@ -88,6 +88,28 @@ NIAP_POLICIES_URL = NIAP_BASE + "/policies"
 SANITY_MIN_NIAP_NEWS = 1
 SANITY_MIN_NIAP_POLICIES = 1
 
+# Protection Profiles whose published documents can carry CNSA/PQC-relevant
+# requirements for network products. S/MIME and CMC are intentionally excluded:
+# they are not CC Pulse monitoring targets.
+NIAP_PQC_PP_PATTERNS = (
+    "CPP_ND",
+    "PP_APP",
+    "PKG_TLS",
+    "PKG_SSH",
+    "PKG_X509",
+    "MOD_VPNGW",
+    "MOD_MACSEC",
+    "MOD_WLAN",
+)
+NIAP_PP_FILES_ENDPOINT = (
+    "/api/file/get_public_files_by_type_and_type_id/"
+    "?file_type=protection-profile&file_type_id={pp_id}"
+)
+NIAP_PP_STATIC_PATH = "/static_html/protection-profile/{pp_id}/{filename}"
+NIAP_PP_DOCUMENT_MAX_BYTES = 10 * 1024 * 1024
+SANITY_MIN_NIAP_PQC_PP_FILES = 1
+SANITY_MIN_NIAP_PQC_PP_HASHES = 1
+
 # -- CC Portal --------------------------------------------------------------
 CC_PORTAL_BASE = "https://www.commoncriteriaportal.org"
 CC_PORTAL_PAGES = {
@@ -142,6 +164,13 @@ WATCH_KEYWORDS = [
     "SSH",
     "PP-Module_VPN",
     "PP-Module_WLAN",
+    "CNSA 2.0",
+    "ML-KEM",
+    "ML-DSA",
+    "SLH-DSA",
+    "post-quantum",
+    "RFC 9846",
+    "802.11bt",
     "labgram",
     "valgram",
     "emergency",
@@ -208,6 +237,18 @@ CSFC_APL_COMPONENT_KEYWORDS = {
     "VoIP": ["voip", "sip", "voice over"],
     "Multi-Site": ["wan", "multi-site", "sd-wan"],
 }
+
+# Stable capability-package identities used to find and hash the current NSA
+# documents even when their CDN URLs or version tokens change.
+CSFC_PQC_DOCUMENT_LABELS = {
+    "mobile_access": "Mobile Access Capability Package",
+    "campus_wlan": "Campus WLAN Capability Package",
+    "multi_site_connectivity": "Multi-Site Connectivity Capability Package",
+    "key_management_requirements": "Key Management Requirements Annex",
+    "symmetric_key_management_requirements": "Symmetric Key Management Requirements Annex",
+}
+CSFC_DOCUMENT_MAX_BYTES = 30 * 1024 * 1024
+SANITY_MIN_CSFC_PQC_DOCUMENTS = len(CSFC_PQC_DOCUMENT_LABELS)
 
 # =============================================================
 # NATO NIAPCL Monitoring (manual-only domain)
@@ -304,6 +345,32 @@ ND_ITC_AWL_URLS = {
 SANITY_MIN_ND_ITC_RFIS = 5
 
 # =============================================================
+# CNSA 2.0 IETF profile monitoring
+# =============================================================
+IETF_DATATRACKER_BASE = "https://datatracker.ietf.org"
+IETF_DATATRACKER_API = IETF_DATATRACKER_BASE + "/api/v1/doc"
+IETF_DRAFT_ARCHIVE_BASE = "https://www.ietf.org/archive/id"
+RFC_EDITOR_BASE = "https://www.rfc-editor.org/rfc"
+
+# PKIX applies to CC. S/MIME and CMC profiles are deliberately not monitored.
+IETF_CNSA_DOCUMENTS = (
+    "draft-guthrie-cnsa2-ipsec-profile",
+    "draft-becker-cnsa2-tls-profile",
+    "draft-becker-cnsa2-ssh-profile",
+    "draft-jenkins-cnsa2-pkix-profile",
+    "rfc9846",
+)
+IETF_TEXT_MAX_BYTES = 2 * 1024 * 1024
+SANITY_MIN_IETF_CNSA_DOCUMENTS = len(IETF_CNSA_DOCUMENTS)
+
+# =============================================================
+# IEEE 802.11bt post-quantum cryptography monitoring
+# =============================================================
+IEEE_80211_TIMELINE_URL = "https://www.ieee802.org/11/Reports/802.11_Timelines.htm"
+IEEE_80211_HOME_URL = "https://www.ieee802.org/11/"
+SANITY_MIN_IEEE_PQC_RECORDS = 1
+
+# =============================================================
 # CC Crypto Catalog & Working Group Monitoring
 # =============================================================
 CC_CRYPTO_BASE = "https://www.commoncriteriaportal.org"
@@ -324,4 +391,3 @@ CC_CRYPTO_NEWS_KEYWORDS = [
     "fcs_", "algorithm", "key establishment", "key generation",
     "digital signature", "hash function", "random bit generator", "rbg",
 ]
-

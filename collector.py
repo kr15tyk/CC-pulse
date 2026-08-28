@@ -14,6 +14,7 @@ Features:
 
 import hashlib
 import copy
+import json
 import logging
 import re
 import time
@@ -23,7 +24,7 @@ import feedparser
 import requests
 from curl_cffi import requests as curl_requests
 from bs4 import BeautifulSoup
-from urllib.parse import urljoin, quote
+from urllib.parse import urljoin, quote, urlsplit
 from datetime import datetime, timezone
 
 import config
@@ -124,6 +125,91 @@ def get_rss(url):
         ]
     result = _fetch_with_retry(_parse, url)
     return result if result is not None else []
+
+
+def _fetch_fixed_source(
+    url: str,
+    *,
+    allowed_hosts: set[str] | frozenset[str],
+    max_bytes: int,
+    timeout: int = 30,
+    accept: str = "*/*",
+    browser_fallback: bool = False,
+) -> dict:
+    """Fetch one fixed public source with HTTPS/host and size enforcement.
+
+    Callers construct URLs only from constants and validated identifiers.  The
+    allow-list is still enforced before and after redirects so a compromised
+    upstream page cannot turn document monitoring into an SSRF primitive.
+    """
+    parsed = urlsplit(url)
+    if parsed.scheme != "https" or parsed.hostname not in allowed_hosts:
+        raise ValueError(f"Refusing non-allow-listed source URL: {url}")
+    if not isinstance(max_bytes, int) or max_bytes <= 0:
+        raise ValueError("max_bytes must be a positive integer")
+
+    def _consume(response) -> dict:
+        final_url = str(response.url)
+        final = urlsplit(final_url)
+        if final.scheme != "https" or final.hostname not in allowed_hosts:
+            response.close()
+            raise ValueError(f"Redirect left the allow-listed source: {final_url}")
+        content_length = response.headers.get("Content-Length", "")
+        if content_length:
+            try:
+                parsed_length = int(content_length)
+            except (TypeError, ValueError):
+                parsed_length = 0
+            if parsed_length > max_bytes:
+                response.close()
+                raise ValueError(f"Source exceeds {max_bytes} byte limit")
+
+        body = bytearray()
+        for block in response.iter_content(chunk_size=64 * 1024):
+            if not block:
+                continue
+            body.extend(block)
+            if len(body) > max_bytes:
+                response.close()
+                raise ValueError(f"Source exceeds {max_bytes} byte limit")
+        response.close()
+        payload = bytes(body)
+        return {
+            "url": final_url,
+            "content": payload,
+            "sha256": hashlib.sha256(payload).hexdigest(),
+            "size": len(payload),
+            "etag": response.headers.get("ETag", ""),
+            "last_modified": response.headers.get("Last-Modified", ""),
+            "content_type": response.headers.get("Content-Type", ""),
+        }
+
+    def _fetch(target: str) -> dict:
+        request_headers = {"Accept": accept, "Accept-Encoding": "identity"}
+        response = SESSION.get(
+            target,
+            timeout=timeout,
+            allow_redirects=True,
+            stream=True,
+            # Keep the byte cap meaningful and avoid optional Brotli/Zstandard
+            # decoding differences across runner environments.
+            headers=request_headers,
+        )
+        if response.status_code == 403 and browser_fallback:
+            response.close()
+            response = curl_requests.get(
+                target,
+                impersonate="chrome",
+                timeout=timeout,
+                allow_redirects=True,
+                stream=True,
+                headers=request_headers,
+            )
+        response.raise_for_status()
+        return _consume(response)
+
+    result = _fetch_with_retry(_fetch, url)
+    return result or {}
 
 
 # ── Partial-GET content-hash fallback (fix #10) ───────────────────────────────
@@ -377,6 +463,151 @@ def _attach_policy_document_hashes(policies: list[dict]) -> dict:
     }
 
 
+_CNSA_MARKER_PATTERNS = {
+    "CNSA 2.0": re.compile(r"\bCNSA\s*2(?:\.0)?\b", re.IGNORECASE),
+    "ML-KEM": re.compile(r"\bML[- ]KEM\b", re.IGNORECASE),
+    "ML-DSA": re.compile(r"\bML[- ]DSA\b", re.IGNORECASE),
+    "SLH-DSA": re.compile(r"\bSLH[- ]DSA\b", re.IGNORECASE),
+    "LMS": re.compile(r"\bLMS\b", re.IGNORECASE),
+    "XMSS": re.compile(r"\bXMSS\b", re.IGNORECASE),
+    "post-quantum": re.compile(r"\bpost[- ]quantum\b", re.IGNORECASE),
+}
+
+
+def _cnsa_markers(text: str) -> list[str]:
+    """Return stable CNSA/PQC markers present in bounded public text."""
+    return sorted(label for label, pattern in _CNSA_MARKER_PATTERNS.items() if pattern.search(text))
+
+
+def _targeted_niap_pp(record: dict) -> bool:
+    short_name = str(record.get("pp_short_name") or "").upper()
+    family_match = any(
+        short_name.startswith(pattern.upper() + "_V")
+        or (pattern.upper() == "MOD_WLAN" and short_name.startswith("MOD_WLAN"))
+        for pattern in config.NIAP_PQC_PP_PATTERNS
+    )
+    if not family_match:
+        return False
+    sunset = str(record.get("sunset_date") or "")
+    if sunset:
+        try:
+            if datetime.fromisoformat(sunset.replace("Z", "+00:00")) < datetime.now(timezone.utc):
+                return False
+        except ValueError:
+            pass
+    return True
+
+
+def _fetch_niap_pp_document(record: dict) -> dict:
+    """Find and fingerprint the published HTML document for one targeted PP."""
+    pp_id = str(record.get("pp_id") or "")
+    if not re.fullmatch(r"\d+", pp_id):
+        return {}
+    files_url = config.NIAP_BASE + config.NIAP_PP_FILES_ENDPOINT.format(pp_id=pp_id)
+    files = _get_browser_json(files_url)
+    if not isinstance(files, list):
+        return {}
+    html_candidates = [
+        item for item in files
+        if isinstance(item, dict)
+        and not item.get("isFolder")
+        and (
+            str(item.get("file_mime_type") or "").lower() == "text/html"
+            or str(item.get("file_name") or "").lower().endswith((".html", ".htm"))
+        )
+    ]
+    pdf_candidates = [
+        item for item in files
+        if isinstance(item, dict)
+        and not item.get("isFolder")
+        and str(item.get("file_mime_type") or "").lower() == "application/pdf"
+        and "protection profile" in str(item.get("file_display_name") or "").lower()
+    ]
+    candidates = html_candidates or pdf_candidates
+    if not candidates:
+        return {}
+    candidates.sort(key=lambda item: (
+        "protection profile" not in str(item.get("file_display_name") or "").lower(),
+        str(item.get("file_name") or ""),
+    ))
+    selected = candidates[0]
+    filename = str(selected.get("file_name") or "")
+    if not filename or "/" in filename or "\\" in filename:
+        return {}
+    file_metadata = {
+        "document_file_id": selected.get("file_id"),
+        "document_filename": filename,
+        "document_mime_type": str(selected.get("file_mime_type") or ""),
+    }
+    if selected in pdf_candidates and selected not in html_candidates:
+        # NIAP exposes current PDF metadata publicly but its download endpoint
+        # requires authentication. Preserve the stable file id/name as a
+        # version signal; full hashing remains available for published HTML.
+        return file_metadata
+    document_url = config.NIAP_BASE + config.NIAP_PP_STATIC_PATH.format(
+        pp_id=pp_id,
+        filename=quote(filename, safe=""),
+    )
+    fetched = _fetch_fixed_source(
+        document_url,
+        allowed_hosts={"www.niap-ccevs.org"},
+        max_bytes=config.NIAP_PP_DOCUMENT_MAX_BYTES,
+    )
+    if not fetched:
+        return {**file_metadata, "document_url": document_url}
+    text = fetched["content"].decode("utf-8", errors="ignore")
+    return {
+        **file_metadata,
+        "document_url": fetched["url"],
+        "document_sha256": fetched["sha256"],
+        "document_size": fetched["size"],
+        "document_etag": fetched["etag"],
+        "document_last_modified": fetched["last_modified"],
+        "cnsa_markers": _cnsa_markers(text),
+    }
+
+
+def _attach_niap_pp_document_hashes(pps: list[dict]) -> dict:
+    """Attach full-content hashes to CNSA/PQC-relevant NIAP PP records."""
+    targets = [record for record in pps if _targeted_niap_pp(record)]
+    results: dict[str, dict] = {}
+    if targets:
+        with ThreadPoolExecutor(
+            max_workers=min(6, len(targets)), thread_name_prefix="niap_pp"
+        ) as executor:
+            futures = {executor.submit(_fetch_niap_pp_document, record): record for record in targets}
+            for future in as_completed(futures):
+                record = futures[future]
+                key = str(record.get("pp_id") or "")
+                try:
+                    results[key] = future.result()
+                except Exception as exc:
+                    log.warning("[NIAP] PP document fingerprint failed for %s: %s", key, exc)
+                    results[key] = {}
+    for record in targets:
+        record.update(results.get(str(record.get("pp_id") or ""), {}))
+    hashed = sum(1 for result in results.values() if result.get("document_sha256"))
+    versioned = sum(
+        1 for result in results.values()
+        if result.get("document_file_id") not in (None, "")
+    )
+    missing = len(targets) - versioned
+    return {
+        "success": True,
+        "complete": missing == 0,
+        "observed": len(targets),
+        "expected_documents": len(targets),
+        "versioned_documents": versioned,
+        "hashed_documents": hashed,
+        "failed_documents": missing,
+        "detail": (
+            f"{hashed}/{len(targets)} full-content hashes; "
+            f"{len(targets) - hashed} PDF-only profile(s) tracked by public file id/name"
+            if not missing else f"{missing} PP document metadata lookup(s) failed"
+        ),
+    }
+
+
 def collect_niap():
     log.info("[NIAP] Collecting...")
     base = config.NIAP_BASE
@@ -396,7 +627,9 @@ def collect_niap():
     data["tds"] = tds or []
 
 
-    collection_health = {}
+    collection_health = {
+        "pp_documents": _attach_niap_pp_document_hashes(data["pps"]),
+    }
 
     log.info("  Events...")
     curr, curr_health = _get_paginated_results(base + eps["events_curr"])
@@ -987,6 +1220,230 @@ def collect_nd_itc() -> dict:
     return data
 
 
+# ── IETF CNSA 2.0 profiles ───────────────────────────────────────────────────
+def _fixed_json(url: str, *, allowed_hosts: set[str], max_bytes: int) -> dict:
+    fetched = _fetch_fixed_source(
+        url, allowed_hosts=allowed_hosts, max_bytes=max_bytes,
+        accept="application/json",
+    )
+    if not fetched:
+        return {}
+    try:
+        payload = json.loads(fetched["content"].decode("utf-8"))
+    except (UnicodeDecodeError, json.JSONDecodeError) as exc:
+        log.warning("Invalid JSON from %s: %s", url, exc)
+        return {}
+    return payload if isinstance(payload, dict) else {}
+
+
+def _api_uri_tail(value) -> str:
+    if not isinstance(value, str):
+        return ""
+    return value.strip("/").rsplit("/", 1)[-1]
+
+
+def _ietf_state_map() -> dict[str, dict]:
+    payload = _fixed_json(
+        config.IETF_DATATRACKER_API + "/state/?limit=500",
+        allowed_hosts={"datatracker.ietf.org"},
+        max_bytes=config.IETF_TEXT_MAX_BYTES,
+    )
+    objects = payload.get("objects", [])
+    if not isinstance(objects, list):
+        return {}
+    states = {}
+    for item in objects:
+        if not isinstance(item, dict) or not isinstance(item.get("resource_uri"), str):
+            continue
+        states[item["resource_uri"]] = {
+            "type": _api_uri_tail(item.get("type")),
+            "slug": str(item.get("slug") or ""),
+            "name": str(item.get("name") or ""),
+        }
+    return states
+
+
+def _ietf_relations(document_name: str) -> list[dict]:
+    if not re.fullmatch(r"(?:draft-[a-z0-9-]+|rfc\d+)", document_name):
+        return []
+    url = (
+        config.IETF_DATATRACKER_API
+        + f"/relateddocument/?source__name={document_name}&limit=100"
+    )
+    payload = _fixed_json(
+        url,
+        allowed_hosts={"datatracker.ietf.org"},
+        max_bytes=config.IETF_TEXT_MAX_BYTES,
+    )
+    objects = payload.get("objects", [])
+    if not isinstance(objects, list):
+        return []
+    relations = []
+    for item in objects:
+        if not isinstance(item, dict):
+            continue
+        relationship = _api_uri_tail(item.get("relationship"))
+        target = _api_uri_tail(item.get("target"))
+        if relationship in {"obs", "updates"} and target:
+            relations.append({"relationship": relationship, "target": target})
+    return sorted(relations, key=lambda item: (item["relationship"], item["target"]))
+
+
+def _collect_ietf_document(name: str, state_map: dict[str, dict]) -> dict:
+    if name not in config.IETF_CNSA_DOCUMENTS:
+        raise ValueError(f"Unconfigured IETF document: {name}")
+    api_url = config.IETF_DATATRACKER_API + f"/document/{name}/"
+    payload = _fixed_json(
+        api_url,
+        allowed_hosts={"datatracker.ietf.org"},
+        max_bytes=config.IETF_TEXT_MAX_BYTES,
+    )
+    if not payload or payload.get("name") != name:
+        return {}
+
+    state_records = [
+        state_map[uri]
+        for uri in payload.get("states", [])
+        if isinstance(uri, str) and uri in state_map
+    ]
+    state_records.sort(key=lambda item: (item.get("type", ""), item.get("name", "")))
+    workflow_candidates = [
+        item for item in state_records
+        if item.get("type", "").startswith("draft-stream-")
+    ] or [item for item in state_records if item.get("type") == "draft-iesg"] \
+      or [item for item in state_records if item.get("type") == "draft"] \
+      or state_records
+
+    revision = str(payload.get("rev") or "")
+    if name.startswith("draft-") and re.fullmatch(r"\d{2}", revision):
+        text_url = f"{config.IETF_DRAFT_ARCHIVE_BASE}/{name}-{revision}.txt"
+        allowed_hosts = {"www.ietf.org"}
+    elif name.startswith("rfc"):
+        text_url = f"{config.RFC_EDITOR_BASE}/{name}.txt"
+        allowed_hosts = {"www.rfc-editor.org"}
+    else:
+        text_url = ""
+        allowed_hosts = set()
+
+    fetched = {}
+    if text_url:
+        fetched = _fetch_fixed_source(
+            text_url,
+            allowed_hosts=allowed_hosts,
+            max_bytes=config.IETF_TEXT_MAX_BYTES,
+        )
+    full_text = fetched.get("content", b"").decode("utf-8", errors="ignore")
+    record = {
+        "name": name,
+        "title": str(payload.get("title") or name),
+        "revision": revision,
+        "expires": str(payload.get("expires") or ""),
+        "updated_at": str(payload.get("time") or ""),
+        "rfc_number": payload.get("rfc_number"),
+        "document_url": f"{config.IETF_DATATRACKER_BASE}/doc/{name}/",
+        "text_url": fetched.get("url", text_url),
+        "content_sha256": fetched.get("sha256", ""),
+        "content_size": fetched.get("size", 0),
+        "content_etag": fetched.get("etag", ""),
+        "content_last_modified": fetched.get("last_modified", ""),
+        "states": state_records,
+        "workflow_state": workflow_candidates[0].get("name", "") if workflow_candidates else "",
+        "references_rfc8446": bool(re.search(r"\bRFC\s*8446\b", full_text, re.IGNORECASE)),
+        "references_rfc9846": bool(re.search(r"\bRFC\s*9846\b", full_text, re.IGNORECASE)),
+        "cnsa_markers": _cnsa_markers(full_text),
+        "relations": _ietf_relations(name) if name == "rfc9846" else [],
+    }
+    return record
+
+
+def collect_ietf_cnsa() -> dict:
+    """Collect official metadata and full-text fingerprints for CNSA profiles."""
+    log.info("[IETF CNSA] Collecting %d profiles/RFCs...", len(config.IETF_CNSA_DOCUMENTS))
+    state_map = _ietf_state_map()
+    documents = []
+    for name in config.IETF_CNSA_DOCUMENTS:
+        try:
+            record = _collect_ietf_document(name, state_map)
+        except Exception as exc:
+            log.warning("[IETF CNSA] Collection failed for %s: %s", name, exc)
+            record = {}
+        if record:
+            documents.append(record)
+    log.info(
+        "[IETF CNSA] documents:%d hashed:%d",
+        len(documents), sum(bool(item.get("content_sha256")) for item in documents),
+    )
+    return {"documents": documents}
+
+
+# ── IEEE 802.11bt post-quantum cryptography ──────────────────────────────────
+def _parse_ieee_80211bt(timeline_soup, home_soup) -> list[dict]:
+    if not timeline_soup:
+        return []
+    timeline_candidates = []
+    for row in timeline_soup.find_all("tr"):
+        text = " ".join(row.get_text(" ", strip=True).split())
+        if "P802.11bt" in text or re.search(r"\b802\.11bt\b", text, re.IGNORECASE):
+            timeline_candidates.append(text)
+    if not timeline_candidates:
+        return []
+    timeline_text = max(timeline_candidates, key=len)
+
+    status_candidates = []
+    if home_soup:
+        for tag in home_soup.find_all(["li", "p", "td"]):
+            text = " ".join(tag.get_text(" ", strip=True).split())
+            if ("TGbt" in text or "P802.11bt" in text) and "quantum" in text.lower():
+                status_candidates.append(text)
+    detailed_status = [
+        text for text in status_candidates
+        if re.search(r"\b(approved|draft|ballot|recirculation|published)\b", text, re.IGNORECASE)
+    ]
+    status_text = (
+        min(detailed_status, key=len) if detailed_status
+        else max(status_candidates, key=len) if status_candidates
+        else ""
+    )
+    draft_match = re.search(r"\bD\d+(?:\.\d+)?\b", timeline_text)
+    if not draft_match:
+        draft_match = re.search(r"\bD\d+(?:\.\d+)?\b", status_text)
+    dates = sorted(set(re.findall(r"\b20\d{2}-\d{2}-\d{2}\b", timeline_text)))
+    return [{
+        "project": "P802.11bt",
+        "title": "Post-Quantum Cryptography",
+        "draft": draft_match.group(0) if draft_match else "",
+        "timeline_url": config.IEEE_80211_TIMELINE_URL,
+        "status_url": config.IEEE_80211_HOME_URL,
+        "timeline_text": timeline_text[:2000],
+        "status_text": status_text[:1000],
+        "timeline_sha256": hashlib.sha256(timeline_text.encode("utf-8")).hexdigest(),
+        "status_sha256": (
+            hashlib.sha256(status_text.encode("utf-8")).hexdigest() if status_text else ""
+        ),
+        "dates": dates,
+    }]
+
+
+def collect_ieee_pqc() -> dict:
+    """Collect the official IEEE 802.11bt timeline and task-group status."""
+    log.info("[IEEE PQC] Collecting P802.11bt...")
+    timeline = _fetch_fixed_source(
+        config.IEEE_80211_TIMELINE_URL,
+        allowed_hosts={"www.ieee802.org"},
+        max_bytes=config.IETF_TEXT_MAX_BYTES,
+    )
+    home = _fetch_fixed_source(
+        config.IEEE_80211_HOME_URL,
+        allowed_hosts={"www.ieee802.org"},
+        max_bytes=config.IETF_TEXT_MAX_BYTES,
+    )
+    timeline_soup = BeautifulSoup(timeline["content"], "lxml") if timeline else None
+    home_soup = BeautifulSoup(home["content"], "lxml") if home else None
+    records = _parse_ieee_80211bt(timeline_soup, home_soup)
+    log.info("[IEEE PQC] records:%d", len(records))
+    return {"projects": records}
+
+
 # ── Master snapshot — parallel collection (fix #16) ──────────────────────────
 def collect_all(validate: bool = True):
     """Collect all domains concurrently and return a timestamped snapshot.
@@ -1012,6 +1469,8 @@ def collect_all(validate: bool = True):
         "cc_crypto": collect_cc_crypto,
         "eucc":      collect_eucc,
         "nd_itc":    collect_nd_itc,
+        "ietf_cnsa": collect_ietf_cnsa,
+        "ieee_pqc":  collect_ieee_pqc,
     }
 
     results: dict = {}
@@ -1049,6 +1508,8 @@ def collect_all(validate: bool = True):
         "nato":           results.get("nato",      {}),
         "eucc":           results.get("eucc",      {}),
         "nd_itc":         results.get("nd_itc",    {}),
+        "ietf_cnsa":      results.get("ietf_cnsa", {}),
+        "ieee_pqc":       results.get("ieee_pqc",  {}),
     }
 
     if validate:
@@ -1082,7 +1543,11 @@ def _extract_csfc_page_items(soup) -> list:
         if href:
             href = urljoin(config.CSFC_BASE, href)
         if len(text) > 15:
-            items.append({"text": text[:1000], "href": href})
+            items.append({
+                "text": text[:1000],
+                "href": href,
+                "content_sha256": hashlib.sha256(text.encode("utf-8")).hexdigest(),
+            })
 
     seen: set = set()
     unique: list = []
@@ -1122,6 +1587,9 @@ def _scrape_csfc_announcements(soup) -> list:
             items.append({
                 "text": f"{cells[0]} | {cells[1]}"[:1000],
                 "href": href,
+                "content_sha256": hashlib.sha256(
+                    f"{cells[0]} | {cells[1]}".encode("utf-8")
+                ).hexdigest(),
             })
         if items:
             break
@@ -1204,6 +1672,7 @@ def _parse_csfc_apl_structured(soup) -> list:
                 "href": href,
                 "raw_text": raw_text,
                 "text": raw_text,
+                "content_sha256": hashlib.sha256(raw_text.encode("utf-8")).hexdigest(),
             }
             for i, h in enumerate(headers):
                 if i >= len(cells):
@@ -1238,7 +1707,11 @@ def _parse_csfc_apl_structured(soup) -> list:
             if any(kw in raw_lower for kw in kws):
                 comp_type = cat
                 break
-        items.append({"name": raw[:200], "type": comp_type, "vendor": "", "link": href, "raw_text": raw[:400]})
+        items.append({
+            "name": raw[:200], "type": comp_type, "vendor": "", "link": href,
+            "href": href, "raw_text": raw[:400], "text": raw[:1000],
+            "content_sha256": hashlib.sha256(raw.encode("utf-8")).hexdigest(),
+        })
     # Deduplicate
     seen: set = set()
     unique: list = []
@@ -1248,6 +1721,73 @@ def _parse_csfc_apl_structured(soup) -> list:
             seen.add(key)
             unique.append(item)
     return unique
+
+
+def _find_csfc_capability_documents(soup) -> dict:
+    """Resolve current relevant capability-package PDFs by stable identity."""
+    if not soup:
+        return {}
+    anchors = []
+    for anchor in soup.find_all("a", href=True):
+        href = urljoin(config.CSFC_BASE, anchor.get("href", ""))
+        if ".pdf" not in href.lower() and "/portals/" not in href.lower():
+            continue
+        anchor_text = " ".join(anchor.get_text(" ", strip=True).split())
+        parent_text = anchor.parent.get_text(" ", strip=True) if anchor.parent else ""
+        text = anchor_text or parent_text
+        lowered = anchor_text.lower()
+        if any(excluded in lowered for excluded in ("mapped to", "mapping", "cnssi")):
+            continue
+        anchors.append((text, href))
+
+    documents = {}
+    for key, label in config.CSFC_PQC_DOCUMENT_LABELS.items():
+        normalize = lambda value: value.lower().replace("capability package", "cp")
+        label_lower = normalize(label)
+        candidates = [entry for entry in anchors if label_lower in normalize(entry[0])]
+        if key == "key_management_requirements":
+            candidates = [entry for entry in candidates if "symmetric" not in entry[0].lower()]
+        if not candidates:
+            continue
+        candidates.sort(key=lambda entry: (len(entry[0]), entry[1]))
+        documents[key] = {"label": label, "url": quote(candidates[0][1], safe=":/?=&%")}
+    return documents
+
+
+def _fingerprint_csfc_documents(documents: dict) -> dict:
+    """Attach bounded full-document SHA-256 fingerprints to CSfC PDFs."""
+    if not documents:
+        return {}
+    output = copy.deepcopy(documents)
+    with ThreadPoolExecutor(
+        max_workers=min(5, len(documents)), thread_name_prefix="csfc_doc"
+    ) as executor:
+        futures = {
+            executor.submit(
+                _fetch_fixed_source,
+                document["url"],
+                allowed_hosts={"www.nsa.gov", "media.defense.gov"},
+                max_bytes=config.CSFC_DOCUMENT_MAX_BYTES,
+                browser_fallback=True,
+            ): key
+            for key, document in documents.items()
+        }
+        for future in as_completed(futures):
+            key = futures[future]
+            try:
+                fetched = future.result()
+            except Exception as exc:
+                log.warning("[CSfC] Capability document fingerprint failed for %s: %s", key, exc)
+                continue
+            if fetched:
+                output[key].update({
+                    "url": fetched["url"],
+                    "sha256": fetched["sha256"],
+                    "size": fetched["size"],
+                    "etag": fetched["etag"],
+                    "last_modified": fetched["last_modified"],
+                })
+    return output
 
 
 def collect_csfc() -> dict:
@@ -1261,6 +1801,7 @@ def collect_csfc() -> dict:
         "pages": {},
         "apl_structured": [],           # structured APL records (fix #18)
         "selection_links": {},
+        "documents": {},
         "feeds": {},
     }
 
@@ -1290,6 +1831,15 @@ def collect_csfc() -> dict:
             announcements_soup = get_html(config.CSFC_BASE + path)
             data["pages"][page_key] = _scrape_csfc_announcements(announcements_soup)
             log.debug("    -> %d dated announcements", len(data["pages"][page_key]))
+        elif page_key == "cap_packages":
+            packages_soup = get_html(config.CSFC_BASE + path)
+            data["pages"][page_key] = _scrape_csfc_page_from_soup(packages_soup)
+            documents = _find_csfc_capability_documents(packages_soup)
+            data["documents"] = _fingerprint_csfc_documents(documents)
+            log.debug(
+                "    -> %d page items, %d capability documents",
+                len(data["pages"][page_key]), len(data["documents"]),
+            )
         else:
             data["pages"][page_key] = _scrape_csfc_page(path)
             log.debug("    -> %d items", len(data["pages"][page_key]))
@@ -1382,6 +1932,8 @@ DOMAIN_COLLECTORS: dict = {
     "cc_crypto": collect_cc_crypto,
     "eucc":      collect_eucc,
     "nd_itc":    collect_nd_itc,
+    "ietf_cnsa": collect_ietf_cnsa,
+    "ieee_pqc":  collect_ieee_pqc,
 }
 
 

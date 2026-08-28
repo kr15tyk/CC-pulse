@@ -31,9 +31,14 @@ _cfg.NEWS_CATEGORY_KEYWORDS = {
 _cfg.CISCO_VENDOR_KEYWORDS = ["cisco"]
 _cfg.NDCPP_PP_KEYWORDS = ["CPP_ND"]
 _cfg.CSFC_PRODUCT_LIST_URL = "https://nsa.gov/csfc"
+_cfg.CSFC_BASE = "https://www.nsa.gov"
+_cfg.CSFC_PAGES = {"cap_packages": "/capability-packages/"}
 _cfg.NATO_NIAPCL_URL = "https://nato.int/niapcl"
 _cfg.EUCC_REQUIREMENTS_URL = "https://enisa.eu/eucc"
 _cfg.EUCC_CERTIFICATES_URL = "https://enisa.eu/certs"
+_cfg.NIAP_BASE = "https://www.niap-ccevs.org"
+_cfg.IETF_DATATRACKER_BASE = "https://datatracker.ietf.org"
+_cfg.IEEE_80211_TIMELINE_URL = "https://www.ieee802.org/11/Reports/802.11_Timelines.htm"
 sys.modules["config"] = _cfg
 
 import differ  # noqa: E402 — must come after config stub
@@ -61,11 +66,13 @@ def _diff_with_alerts(alerts_list):
                  "tds": {"added": []}, "news": {"added": []}, "events": {"added": []}},
         "cc_portal": {"news": {"added": []}, "pps": {"added": []}, "products": {"added": []}},
         "cctl_labs": {},
-        "csfc": {"component_selections": {}, "pages": {}, "feeds": {}},
+        "csfc": {"component_selections": {}, "pages": {}, "documents": {}, "feeds": {}},
         "cc_crypto": {"pages": {}, "doc_headers": {}},
         "nist": {"pages": {}, "doc_headers": {}, "feeds": {}},
         "nato": {"pages": {}, "cisco_added": [], "cisco_removed": []},
         "eucc": {"pages": {}, "cisco_added": [], "cisco_removed": []},
+        "ietf_cnsa": {"added": [], "removed": [], "updated": [], "rfc9846_adoption": []},
+        "ieee_pqc": {"added": [], "removed": [], "updated": []},
     }
 
 
@@ -76,11 +83,13 @@ def _empty_snap():
         "niap": {"pcl": [], "pps": [], "tds": [], "events": [], "news": [], "policies": []},
         "cc_portal": {"news": [], "pps": [], "products": [], "communities": [], "pp_rss": []},
         "cctl_labs": {},
-        "csfc": {"pages": {}, "component_selection_hashes": {}, "feeds": {}},
+        "csfc": {"pages": {}, "component_selection_hashes": {}, "documents": {}, "feeds": {}},
         "cc_crypto": {"pages": {}, "doc_headers": {}},
         "nist": {"pages": {}, "doc_headers": {}, "feeds": {}},
         "nato": {"pages": {}, "cisco_products": []},
         "eucc": {"pages": {}, "cisco_certs": []},
+        "ietf_cnsa": {"documents": []},
+        "ieee_pqc": {"projects": []},
     }
 
 
@@ -578,7 +587,7 @@ class TestComputeDiff:
     def test_all_top_level_keys_present(self):
         snap = _empty_snap()
         diff = differ.compute_diff(snap, copy.deepcopy(snap))
-        for key in ("niap", "cc_portal", "cctl_labs", "csfc", "cc_crypto", "nato", "eucc", "alerts"):
+        for key in ("niap", "cc_portal", "cctl_labs", "csfc", "cc_crypto", "nato", "eucc", "ietf_cnsa", "ieee_pqc", "alerts"):
             assert key in diff, f"Missing key '{key}' in compute_diff output"
 
     def test_nato_and_eucc_in_diff_output(self):
@@ -853,3 +862,100 @@ class TestMergeWeeklyDiffsCsfcUpdated:
         result = differ.merge_weekly_diffs([d1, d2])  # should not raise
 
         assert "updated" not in result["csfc"]["pages"]["apl"]
+
+
+class TestCnsaPqcMonitoringDiffs:
+
+    def test_niap_pp_metadata_revision_detected(self):
+        old = [{"pp_id": "511", "pp_short_name": "PKG_X509_v1.0", "pp_date": "2025-01-01"}]
+        new = [{"pp_id": "511", "pp_short_name": "PKG_X509_v1.0", "pp_date": "2026-01-01"}]
+
+        result = differ.diff_niap_pps(old, new)
+
+        assert result["revised"][0]["changed_fields"] == ["pp_date"]
+
+    def test_niap_pp_hash_change_detected_but_hash_rollout_is_not(self):
+        base = {"pp_id": "511", "pp_short_name": "PKG_X509_v1.0"}
+        rollout = differ.diff_niap_pps(
+            [base], [{**base, "document_sha256": "new", "cnsa_markers": []}]
+        )
+        changed = differ.diff_niap_pps(
+            [{**base, "document_sha256": "old", "cnsa_markers": ["ML-KEM"]}],
+            [{**base, "document_sha256": "new", "cnsa_markers": ["ML-KEM", "ML-DSA"]}],
+        )
+
+        assert rollout["content_changes"] == []
+        assert changed["content_changes"][0]["hash_changed"] is True
+        assert changed["content_changes"][0]["markers_changed"] is True
+
+    def test_niap_pdf_file_id_change_is_a_version_signal(self):
+        old = [{"pp_id": "524", "pp_short_name": "CPP_ND_V4.0", "document_file_id": 100}]
+        new = [{"pp_id": "524", "pp_short_name": "CPP_ND_V4.0", "document_file_id": 101}]
+
+        result = differ.diff_niap_pps(old, new)
+
+        assert result["content_changes"][0]["file_changed"] is True
+
+    def test_csfc_same_prefix_suffix_change_is_updated(self):
+        prefix = "A" * 120
+        result = differ._diff_pages_with_updates(
+            {"cap_packages": [{"text": prefix + " old", "href": "https://x/doc"}]},
+            {"cap_packages": [{"text": prefix + " new", "href": "https://x/doc"}]},
+        )
+
+        assert result["cap_packages"]["added"] == []
+        assert result["cap_packages"]["removed"] == []
+        assert len(result["cap_packages"]["updated"]) == 1
+
+    def test_csfc_document_hash_change_and_rollout_behavior(self):
+        rollout = differ._diff_named_documents(
+            {"campus_wlan": {"url": "https://x/doc"}},
+            {"campus_wlan": {"url": "https://x/doc", "sha256": "new"}},
+        )
+        changed = differ._diff_named_documents(
+            {"campus_wlan": {"url": "https://x/doc", "sha256": "old"}},
+            {"campus_wlan": {"url": "https://x/doc", "sha256": "new"}},
+        )
+
+        assert rollout["updated"] == []
+        assert changed["updated"][0]["hash_changed"] is True
+
+    def test_tls_profile_rfc9846_adoption_is_semantic_event(self):
+        old = {"documents": [{
+            "name": "draft-becker-cnsa2-tls-profile",
+            "references_rfc8446": True,
+            "references_rfc9846": False,
+            "content_sha256": "old",
+        }]}
+        new = {"documents": [{
+            "name": "draft-becker-cnsa2-tls-profile",
+            "title": "CNSA 2.0 TLS Profile",
+            "document_url": "https://datatracker.ietf.org/doc/draft-becker-cnsa2-tls-profile/",
+            "references_rfc8446": False,
+            "references_rfc9846": True,
+            "content_sha256": "new",
+        }]}
+
+        result = differ.diff_ietf_cnsa(old, new)
+        alerts = differ.flag_alerts({
+            **_diff_with_alerts([]),
+            "ietf_cnsa": result,
+        })
+
+        assert result["rfc9846_adoption"][0]["replaced_rfc8446"] is True
+        assert any(alert["kind"] == "rfc_transition" for alert in alerts)
+
+    def test_ieee_draft_milestone_change_detected(self):
+        old = {"projects": [{
+            "project": "P802.11bt", "draft": "D1.0",
+            "timeline_sha256": "old", "status_text": "Initial ballot",
+        }]}
+        new = {"projects": [{
+            "project": "P802.11bt", "draft": "D2.0",
+            "timeline_sha256": "new", "status_text": "Recirculation ballot",
+        }]}
+
+        result = differ.diff_ieee_pqc(old, new)
+
+        assert result["updated"][0]["old_draft"] == "D1.0"
+        assert "draft" in result["updated"][0]["changed_fields"]

@@ -58,11 +58,13 @@ def _make_snapshot(
         },
         "cc_portal": {"news": [], "pps": [], "products": [], "communities": [], "publications": [], "pp_rss": []},
         "cctl_labs": {},
-        "csfc": {"pages": {}, "component_selection_hashes": {}, "feeds": {}},
+        "csfc": {"pages": {}, "component_selection_hashes": {}, "documents": {}, "feeds": {}},
         "cc_crypto": {"pages": {}, "doc_headers": {}},
         "nist": {"pages": {}, "doc_headers": {}, "feeds": {}},
         "nato": {"pages": {}, "cisco_products": nato_products or []},
         "eucc": {"pages": {}, "cisco_certs": eucc_certs or []},
+        "ietf_cnsa": {"documents": []},
+        "ieee_pqc": {"projects": []},
     }
 
 

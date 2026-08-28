@@ -34,7 +34,21 @@ _cfg.CSFC_APL_COMPONENT_KEYWORDS = {"TLS/VPN": ["tls", "vpn"]}
 _cfg.CSFC_COMPONENT_SELECTIONS = {}
 _cfg.CSFC_FEEDS = []
 _cfg.NIAP_BASE = "https://www.niap-ccevs.org"
+_cfg.NIAP_PQC_PP_PATTERNS = ("PKG_X509", "PKG_TLS")
+_cfg.NIAP_PP_FILES_ENDPOINT = "/api/file/files/?file_type_id={pp_id}"
+_cfg.NIAP_PP_STATIC_PATH = "/static_html/protection-profile/{pp_id}/{filename}"
+_cfg.NIAP_PP_DOCUMENT_MAX_BYTES = 1024 * 1024
 _cfg.EUCC_BASE = "https://certification.enisa.europa.eu"
+_cfg.IETF_DATATRACKER_BASE = "https://datatracker.ietf.org"
+_cfg.IETF_DATATRACKER_API = "https://datatracker.ietf.org/api/v1/doc"
+_cfg.IETF_DRAFT_ARCHIVE_BASE = "https://www.ietf.org/archive/id"
+_cfg.RFC_EDITOR_BASE = "https://www.rfc-editor.org/rfc"
+_cfg.IETF_CNSA_DOCUMENTS = (
+    "draft-becker-cnsa2-tls-profile", "rfc9846",
+)
+_cfg.IETF_TEXT_MAX_BYTES = 2 * 1024 * 1024
+_cfg.IEEE_80211_TIMELINE_URL = "https://www.ieee802.org/11/Reports/802.11_Timelines.htm"
+_cfg.IEEE_80211_HOME_URL = "https://www.ieee802.org/11/"
 sys.modules["config"] = _cfg
 # Also stub heavy deps
 for _mod in ("requests", "feedparser", "bs4", "lxml"):
@@ -364,6 +378,9 @@ class TestScrapeCsfcPageFromSoup:
         assert result == [{
             "text": "5/20/25 | New CSfC guidance has been published",
             "href": "",
+            "content_sha256": hashlib.sha256(
+                b"5/20/25 | New CSfC guidance has been published"
+            ).hexdigest(),
         }]
 
 
@@ -436,6 +453,9 @@ class TestScrapeCsfcAnnouncements:
         assert result == [{
             "text": "5/20/25 | New CSfC guidance has been published",
             "href": "",
+            "content_sha256": hashlib.sha256(
+                b"5/20/25 | New CSfC guidance has been published"
+            ).hexdigest(),
         }]
 
 
@@ -525,3 +545,90 @@ class TestEuccCardParser:
         with patch.object(collector, "get_html", return_value=soup):
             items = collector._scrape_eucc_page("/certificates_en", "certificates")
         assert items == []
+
+
+class TestCnsaPqcCollectors:
+
+    @pytest.mark.parametrize("url", [
+        "http://www.ietf.org/archive/id/draft.txt",
+        "https://example.test/redirect-target",
+    ])
+    def test_fixed_source_rejects_non_https_or_non_allowlisted_hosts(self, url):
+        with pytest.raises(ValueError, match="non-allow-listed"):
+            collector._fetch_fixed_source(
+                url, allowed_hosts={"www.ietf.org"}, max_bytes=1024
+            )
+
+    def test_ietf_document_normalizes_state_hash_and_rfc_references(self):
+        payload = {
+            "name": "draft-becker-cnsa2-tls-profile",
+            "title": "CNSA 2.0 TLS Profile",
+            "rev": "07",
+            "expires": "2027-01-01T00:00:00Z",
+            "time": "2026-08-01T00:00:00Z",
+            "states": ["/api/v1/doc/state/72/"],
+            "rfc_number": None,
+        }
+        state_map = {
+            "/api/v1/doc/state/72/": {
+                "type": "draft-stream-ise", "slug": "iesg-rev", "name": "In IESG Review"
+            }
+        }
+        fetched = {
+            "url": "https://www.ietf.org/archive/id/draft-becker-cnsa2-tls-profile-07.txt",
+            "content": b"Updates the RFC 8446 profile with CNSA 2.0 and ML-KEM.",
+            "sha256": "abc123", "size": 61, "etag": "", "last_modified": "",
+        }
+        with patch.object(collector, "_fixed_json", return_value=payload), \
+             patch.object(collector, "_fetch_fixed_source", return_value=fetched):
+            record = collector._collect_ietf_document(
+                "draft-becker-cnsa2-tls-profile", state_map
+            )
+
+        assert record["revision"] == "07"
+        assert record["workflow_state"] == "In IESG Review"
+        assert record["content_sha256"] == "abc123"
+        assert record["references_rfc8446"] is True
+        assert record["references_rfc9846"] is False
+        assert record["cnsa_markers"] == ["CNSA 2.0", "ML-KEM"]
+
+    def test_niap_pp_html_document_gets_full_hash_and_markers(self):
+        record = {"pp_id": 511, "pp_short_name": "PKG_X509_v1.0"}
+        files = [{
+            "file_mime_type": "text/html",
+            "file_display_name": "Protection Profile (HTML)",
+            "file_name": "Functional Package for X.509_v1.0.html",
+            "isFolder": False,
+        }]
+        fetched = {
+            "url": "https://www.niap-ccevs.org/static_html/protection-profile/511/doc.html",
+            "content": b"CNSA 2.0 uses ML-DSA and ML-KEM",
+            "sha256": "full-hash", "size": 34, "etag": "e", "last_modified": "date",
+        }
+        with patch.object(collector, "_get_browser_json", return_value=files), \
+             patch.object(collector, "_fetch_fixed_source", return_value=fetched):
+            result = collector._fetch_niap_pp_document(record)
+
+        assert result["document_sha256"] == "full-hash"
+        assert result["cnsa_markers"] == ["CNSA 2.0", "ML-DSA", "ML-KEM"]
+
+    def test_ieee_parser_extracts_80211bt_draft_and_status(self):
+        row = MagicMock()
+        row.get_text.return_value = (
+            "P802.11bt Post-Quantum Cryptography D1.00 2025-09-10 2029-12-31"
+        )
+        timeline_soup = MagicMock()
+        timeline_soup.find_all.return_value = [row]
+        status = MagicMock()
+        status.get_text.return_value = (
+            "TGbt (Post-Quantum Cryptography): Approved initial draft D1.0 and will start ballot."
+        )
+        home_soup = MagicMock()
+        home_soup.find_all.return_value = [status]
+
+        records = collector._parse_ieee_80211bt(timeline_soup, home_soup)
+
+        assert records[0]["project"] == "P802.11bt"
+        assert records[0]["draft"] == "D1.00"
+        assert records[0]["dates"] == ["2025-09-10", "2029-12-31"]
+        assert records[0]["timeline_sha256"]
