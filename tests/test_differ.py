@@ -920,6 +920,53 @@ class TestCnsaPqcMonitoringDiffs:
         assert rollout["updated"] == []
         assert changed["updated"][0]["hash_changed"] is True
 
+    def test_new_csfc_document_collection_is_baselined_without_alerts(self):
+        result = differ.diff_csfc(
+            {"pages": {}, "selection_links": {}, "feeds": {}},
+            {
+                "pages": {},
+                "selection_links": {},
+                "feeds": {},
+                "documents": {
+                    "campus_wlan": {
+                        "label": "Campus WLAN Capability Package",
+                        "url": "https://example.test/campus-wlan.pdf",
+                        "sha256": "first-rollout-hash",
+                    },
+                },
+            },
+        )
+
+        assert result["documents"] == {
+            "added": [],
+            "removed": [],
+            "updated": [],
+        }
+
+    def test_existing_empty_csfc_document_collection_reports_addition(self):
+        result = differ.diff_csfc(
+            {
+                "pages": {},
+                "selection_links": {},
+                "feeds": {},
+                "documents": {},
+            },
+            {
+                "pages": {},
+                "selection_links": {},
+                "feeds": {},
+                "documents": {
+                    "campus_wlan": {
+                        "label": "Campus WLAN Capability Package",
+                        "url": "https://example.test/campus-wlan.pdf",
+                        "sha256": "new-hash",
+                    },
+                },
+            },
+        )
+
+        assert result["documents"]["added"][0]["key"] == "campus_wlan"
+
     def test_tls_profile_rfc9846_adoption_is_semantic_event(self):
         old = {"documents": [{
             "name": "draft-becker-cnsa2-tls-profile",

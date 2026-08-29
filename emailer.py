@@ -1136,7 +1136,7 @@ def send_new_pps_webex(new_pps: list[dict], pp_sunsets: list[dict]) -> None:
         log.warning("[Webex] Failed to send new PPs notification: %s", exc)
 
 
-def send_niap_news_webex(new_news: list[dict]) -> None:
+def send_niap_news_webex(new_news: list[dict]) -> bool:
     """Post a Webex notification for genuine NIAP content changes.
 
     Operational collection failures are intentionally excluded; those use the
@@ -1150,9 +1150,9 @@ def send_niap_news_webex(new_news: list[dict]) -> None:
     room_id = config.WEBEX_ROOM_ID
     if not token or not room_id:
         log.debug("[Webex] Bot token or Room ID not configured — skipping NIAP news notification.")
-        return
+        return False
     if not new_news:
-        return
+        return False
 
     count = len(new_news)
     item_word = "Item" if count == 1 else "Items"
@@ -1213,8 +1213,10 @@ def send_niap_news_webex(new_news: list[dict]) -> None:
     try:
         with urllib.request.urlopen(req, timeout=10) as resp:
             log.info("[Webex] NIAP content notification sent for %d item(s) (HTTP %d).", count, resp.status)
+            return True
     except urllib.error.URLError as exc:
         log.warning("[Webex] Failed to send NIAP news notification: %s", exc)
+        return False
 
 
 def send_cisco_cert_email(new_certs: list[dict], source: str = "niap") -> None:

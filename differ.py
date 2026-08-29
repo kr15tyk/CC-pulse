@@ -1697,8 +1697,16 @@ def diff_csfc(old_csfc: Snapshot, new_csfc: Snapshot) -> Snapshot:
         new_csfc.get("feeds", {}),
         categorize=True,
     )
-    documents = _diff_named_documents(
-        old_csfc.get("documents", {}), new_csfc.get("documents", {})
+    # Roll out a newly introduced document monitor as its own baseline instead
+    # of baselining the entire, already-healthy CSfC domain. Once the key exists
+    # (including as an explicit empty mapping), additions and revisions are
+    # diffed normally.
+    documents = (
+        _diff_named_documents(
+            old_csfc.get("documents", {}), new_csfc.get("documents", {})
+        )
+        if "documents" in old_csfc
+        else {"added": [], "removed": [], "updated": []}
     )
     page_changes = sum(len(v.get("added", [])) for v in pages.values())
     sel_changes = len(selection_links)

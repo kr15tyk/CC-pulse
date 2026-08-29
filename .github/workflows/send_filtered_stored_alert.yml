@@ -8,11 +8,11 @@ on:
         required: true
         type: string
       source:
-        description: "Exact alert source"
+        description: "Exact alert source, or NIAP News ID"
         required: true
         type: string
       title:
-        description: "Exact alert title"
+        description: "Exact alert title, or numeric NIAP announcement ID"
         required: true
         type: string
       dry_run:
@@ -49,6 +49,7 @@ jobs:
         run: pip install -r requirements.txt
 
       - name: Select and send alert
+        if: ${{ inputs.source != 'NIAP News ID' }}
         env:
           ALERT_DATE: ${{ inputs.date }}
           ALERT_SOURCE: ${{ inputs.source }}
@@ -93,3 +94,28 @@ jobs:
               emailer.send_alert_email(matches)
               print("Sent Webex, webhook, and immediate email notifications.")
           PY
+
+      - name: Validate stored NIAP news item
+        if: ${{ inputs.source == 'NIAP News ID' && inputs.dry_run }}
+        env:
+          BACKFILL_DATE: ${{ inputs.date }}
+          BACKFILL_NEWS_ID: ${{ inputs.title }}
+        run: >-
+          python scripts/webex/backfill_niap_news.py
+          --snapshot-dir snapshot-store
+          --date "$BACKFILL_DATE"
+          --news-id "$BACKFILL_NEWS_ID"
+
+      - name: Send stored NIAP news item
+        if: ${{ inputs.source == 'NIAP News ID' && !inputs.dry_run }}
+        env:
+          BACKFILL_DATE: ${{ inputs.date }}
+          BACKFILL_NEWS_ID: ${{ inputs.title }}
+          CC_WEBEX_BOT_TOKEN: ${{ secrets.CC_WEBEX_BOT_TOKEN }}
+          CC_WEBEX_ROOM_ID: ${{ secrets.CC_WEBEX_ROOM_ID }}
+        run: >-
+          python scripts/webex/backfill_niap_news.py
+          --snapshot-dir snapshot-store
+          --date "$BACKFILL_DATE"
+          --news-id "$BACKFILL_NEWS_ID"
+          --send
