@@ -430,6 +430,60 @@ class TestSourceHealth:
 
         assert baseline is old
 
+    @pytest.mark.parametrize("recorded_health", [False, True])
+    def test_niap_health_rollout_preserves_new_announcement_diff(
+        self,
+        recorded_health,
+    ):
+        """New health metadata must not baseline unrelated NIAP content.
+
+        This reproduces the 2026-08-28 rollout: the prior snapshot had healthy
+        PCL/PP/news data but no PP document IDs or hashes, while the current
+        snapshot introduced those fields and announcement 3429.
+        """
+        old = _healthy_snapshot()
+        old["niap"]["news"] = [{"id": 3428, "title": "Earlier announcement"}]
+        for profile in old["niap"]["pps"]:
+            profile.pop("document_file_id", None)
+            profile.pop("document_sha256", None)
+        if recorded_health:
+            old["source_health"] = {
+                "niap": {
+                    "status": "healthy",
+                    "using_last_known_good": False,
+                },
+            }
+
+        new = copy.deepcopy(old)
+        new["niap"]["pps"][0].update({
+            "document_file_id": 200,
+            "document_sha256": "first-rollout-hash",
+        })
+        new["niap"]["news"].append({
+            "id": 3429,
+            "title": "NIAP's Second Quarter 2026 Progress Report",
+        })
+
+        baseline = main._diff_baseline_with_recoveries(old, new)
+
+        assert baseline["niap"]["news"] == old["niap"]["news"]
+        assert all(item["id"] != 3429 for item in baseline["niap"]["news"])
+
+    def test_rollout_check_failure_retains_legacy_niap_baseline(self):
+        old = _healthy_snapshot()
+        current = copy.deepcopy(old)
+        for snapshot in (old, current):
+            for profile in snapshot["niap"]["pps"]:
+                profile.pop("document_file_id", None)
+                profile.pop("document_sha256", None)
+
+        main._apply_source_health(current, old)
+
+        health = current["source_health"]["niap"]
+        assert health["status"] == "stale"
+        assert health["using_last_known_good"] is True
+        assert current["niap"] == old["niap"]
+
     def test_new_standards_domains_are_baselined_on_first_healthy_collection(self):
         old = _healthy_snapshot()
         old["ietf_cnsa"] = {"documents": []}

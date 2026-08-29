@@ -1,0 +1,72 @@
+name: Backfill One NIAP News Item
+
+on:
+  workflow_dispatch:
+    inputs:
+      snapshot_date:
+        description: "Trusted snapshot date (YYYY-MM-DD)"
+        required: true
+        default: "2026-08-28"
+        type: string
+      news_id:
+        description: "Exact positive NIAP announcement ID"
+        required: true
+        default: "3429"
+        type: string
+      send:
+        description: "Send the validated item to Webex"
+        required: true
+        default: false
+        type: boolean
+
+permissions:
+  contents: read
+
+jobs:
+  backfill:
+    name: Validate or send one NIAP item
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout main code
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+
+      - name: Checkout trusted snapshots
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          ref: snapshots
+          path: snapshot-store
+
+      - name: Set up Python
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Validate stored NIAP item
+        if: ${{ !inputs.send }}
+        env:
+          BACKFILL_DATE: ${{ inputs.snapshot_date }}
+          BACKFILL_NEWS_ID: ${{ inputs.news_id }}
+        run: >-
+          python scripts/webex/backfill_niap_news.py
+          --snapshot-dir snapshot-store
+          --date "$BACKFILL_DATE"
+          --news-id "$BACKFILL_NEWS_ID"
+
+      - name: Send stored NIAP item
+        if: ${{ inputs.send }}
+        env:
+          BACKFILL_DATE: ${{ inputs.snapshot_date }}
+          BACKFILL_NEWS_ID: ${{ inputs.news_id }}
+          CC_WEBEX_BOT_TOKEN: ${{ secrets.CC_WEBEX_BOT_TOKEN }}
+          CC_WEBEX_ROOM_ID: ${{ secrets.CC_WEBEX_ROOM_ID }}
+        run: >-
+          python scripts/webex/backfill_niap_news.py
+          --snapshot-dir snapshot-store
+          --date "$BACKFILL_DATE"
+          --news-id "$BACKFILL_NEWS_ID"
+          --send

@@ -254,11 +254,13 @@ def _source_health_checks(snapshot: dict) -> dict[str, list[dict]]:
             {"name": "PQC PP file-version records", "observed": sum(
                 item.get("document_file_id") not in (None, "")
                 for item in niap.get("pps", []) if isinstance(item, dict)
-            ), "minimum": _config_minimum("SANITY_MIN_NIAP_PQC_PP_FILES", 1)},
+            ), "minimum": _config_minimum("SANITY_MIN_NIAP_PQC_PP_FILES", 1),
+             "required_for_diff_baseline": False},
             {"name": "PQC PP full-content hashes", "observed": sum(
                 bool(item.get("document_sha256"))
                 for item in niap.get("pps", []) if isinstance(item, dict)
-            ), "minimum": _config_minimum("SANITY_MIN_NIAP_PQC_PP_HASHES", 1)},
+            ), "minimum": _config_minimum("SANITY_MIN_NIAP_PQC_PP_HASHES", 1),
+             "required_for_diff_baseline": False},
         ],
         "cc_portal": [
             {"name": "portal records", "observed": sum(
@@ -278,12 +280,14 @@ def _source_health_checks(snapshot: dict) -> dict[str, list[dict]]:
             ), "minimum": config.SANITY_MIN_CSFC_ANNOUNCEMENTS},
             {"name": "tracked capability packages", "observed": len(
                 csfc.get("documents", {})
-            ), "minimum": _config_minimum("SANITY_MIN_CSFC_PQC_DOCUMENTS", 5)},
+            ), "minimum": _config_minimum("SANITY_MIN_CSFC_PQC_DOCUMENTS", 5),
+             "required_for_diff_baseline": False},
             {"name": "capability-package hashes", "observed": sum(
                 bool(item.get("sha256"))
                 for item in csfc.get("documents", {}).values()
                 if isinstance(item, dict)
-            ), "minimum": _config_minimum("SANITY_MIN_CSFC_PQC_DOCUMENTS", 5)},
+            ), "minimum": _config_minimum("SANITY_MIN_CSFC_PQC_DOCUMENTS", 5),
+             "required_for_diff_baseline": False},
         ],
         "cc_crypto": [
             {"name": "publications", "observed": len(
@@ -333,6 +337,33 @@ def _checks_pass(checks: list[dict]) -> bool:
         check.get("observed", 0) >= check.get("minimum", 1)
         for check in checks
     )
+
+
+def _has_trustworthy_diff_baseline(
+    snapshot: dict,
+    domain: str,
+    checks: list[dict],
+) -> bool:
+    """Return whether a prior domain is safe to use as a diff baseline.
+
+    Recorded health takes precedence because a snapshot that was healthy when
+    written must not become retroactively unhealthy when later releases add
+    more health checks. For snapshots predating health metadata, evaluate only
+    the stable core checks; rollout-only enrichment checks are intentionally
+    excluded. Their individual diff functions already suppress missing-to-set
+    metadata transitions while continuing to detect later real revisions.
+    """
+    health = snapshot.get("source_health", {}).get(domain, {})
+    if isinstance(health, dict) and health.get("status"):
+        return health.get("status") == "healthy" or bool(
+            health.get("using_last_known_good")
+        )
+
+    baseline_checks = [
+        check for check in checks
+        if check.get("required_for_diff_baseline", True)
+    ]
+    return _checks_pass(baseline_checks)
 
 
 def _collection_iter(domain_data: dict):
@@ -528,7 +559,11 @@ def _apply_source_health(
         )
         has_last_known_good = (
             domain in prior_snapshot
-            and _checks_pass(prior_checks.get(domain, []))
+            and _has_trustworthy_diff_baseline(
+                prior_snapshot,
+                domain,
+                prior_checks.get(domain, []),
+            )
         )
         if has_last_known_good:
             new_snapshot[domain] = copy.deepcopy(prior_snapshot[domain])
@@ -578,7 +613,11 @@ def _diff_baseline_with_recoveries(old_snapshot: dict, new_snapshot: dict) -> di
         domain for domain in DOMAIN_KEYS
         # Manual domains (no fetch-based checks) never "recover".
         if domain not in config.MANUAL_DOMAINS
-        and not _checks_pass(old_checks[domain])
+        and not _has_trustworthy_diff_baseline(
+            old_snapshot,
+            domain,
+            old_checks[domain],
+        )
         and _checks_pass(new_checks[domain])
     }
     baseline = copy.deepcopy(old_snapshot)
