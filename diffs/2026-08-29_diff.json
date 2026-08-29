@@ -1,0 +1,352 @@
+{
+  "period_start": "2026-08-28T17:59:55.409688+00:00",
+  "period_end": "2026-08-29T12:06:33.692863+00:00",
+  "niap": {
+    "pps": {
+      "added": [],
+      "removed": [],
+      "sunset_changes": [],
+      "status_changes": [],
+      "revised": [],
+      "content_changes": []
+    },
+    "tds": {
+      "added": [],
+      "removed": []
+    },
+    "cisco_ndcpp": {
+      "added": [],
+      "removed": [],
+      "newly_archived": []
+    },
+    "pcl_all": {
+      "added": [],
+      "removed": [],
+      "newly_archived": [
+        {
+          "active_maintenances": [],
+          "am_sort": "2026-08-28T00:00:00Z",
+          "assigned_lab_name": "Lightship Security, Inc.",
+          "certification_date": "2024-08-28T00:00:00Z",
+          "from_cc_portal": true,
+          "product_id": "2024.1227",
+          "product_name": "Xerox\u00ae AltaLink\u2122 C8130, C8135, C8145, C8155, C8170, B8145, B8155 and B8170 with SSD",
+          "protection_profiles": [
+            {
+              "pp_id": 317,
+              "pp_name": "Protection Profile for Hardcopy Devices Version 1.0",
+              "pp_short_name": "PP_HCD_V1.0"
+            }
+          ],
+          "status_sort": "Archived",
+          "submitting_country_id_code": "CA",
+          "submitting_country_id_name": "Canada",
+          "sunset_date": "2029-08-28T00:00:00Z",
+          "tech_types": [
+            "Multi-Function Devices"
+          ],
+          "vendor_id_name": "Xerox Corporation",
+          "v_id": "2024.1227",
+          "kicked_off_date": null
+        }
+      ]
+    },
+    "in_evaluation": {
+      "added": [],
+      "removed": [],
+      "current_count": 44
+    },
+    "news": {
+      "added": [],
+      "revised": [],
+      "deactivated": [],
+      "reactivated": [],
+      "removed": []
+    },
+    "events": {
+      "added": [],
+      "revised": [],
+      "deactivated": [],
+      "reactivated": [],
+      "removed": []
+    },
+    "policies": {
+      "added": [],
+      "revised": [],
+      "archived": [],
+      "reactivated": [],
+      "removed": []
+    }
+  },
+  "cc_portal": {
+    "news": {
+      "added": []
+    },
+    "pps": {
+      "added": []
+    },
+    "products": {
+      "added": []
+    }
+  },
+  "cctl_labs": {},
+  "csfc": {
+    "pages": {},
+    "selection_links": {},
+    "documents": {
+      "added": [],
+      "removed": [],
+      "updated": []
+    },
+    "feeds": {}
+  },
+  "cc_crypto": {
+    "pages": {}
+  },
+  "nato": {
+    "pages": {},
+    "cisco_added": [],
+    "cisco_removed": [],
+    "baseline_reset": false
+  },
+  "eucc": {
+    "pages": {},
+    "cisco_added": [],
+    "cisco_removed": [],
+    "baseline_reset": false
+  },
+  "nd_itc": {
+    "nit_rfis": {
+      "added": [],
+      "status_changes": [],
+      "revised": [],
+      "newly_archived": []
+    },
+    "awl": {
+      "added": [],
+      "removed": [],
+      "version_changes": [],
+      "list_updates": []
+    },
+    "baseline_reset": false,
+    "collection_failure": false
+  },
+  "ietf_cnsa": {
+    "added": [],
+    "removed": [],
+    "updated": [],
+    "rfc9846_adoption": []
+  },
+  "ieee_pqc": {
+    "added": [],
+    "removed": [],
+    "updated": []
+  },
+  "source_health": {
+    "niap": {
+      "label": "NIAP",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "PCL products",
+          "observed": 1757,
+          "minimum": 50
+        },
+        {
+          "name": "Protection Profiles",
+          "observed": 271,
+          "minimum": 10
+        },
+        {
+          "name": "PQC PP file-version records",
+          "observed": 13,
+          "minimum": 1
+        },
+        {
+          "name": "PQC PP full-content hashes",
+          "observed": 7,
+          "minimum": 1
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-08-29T12:06:33.692863+00:00",
+      "subcollections": {
+        "news": {
+          "label": "News announcements",
+          "status": "healthy",
+          "observed": 355,
+          "consecutive_failures": 0,
+          "using_last_known_good": false
+        },
+        "events": {
+          "label": "Events",
+          "status": "healthy",
+          "observed": 0,
+          "consecutive_failures": 0,
+          "using_last_known_good": false
+        },
+        "policies": {
+          "label": "Policy letters",
+          "status": "healthy",
+          "observed": 39,
+          "consecutive_failures": 0,
+          "using_last_known_good": false
+        }
+      }
+    },
+    "cc_portal": {
+      "label": "CC Portal",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "portal records",
+          "observed": 180,
+          "minimum": 1
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-08-29T12:06:33.692863+00:00"
+    },
+    "cctl_labs": {
+      "label": "CCTL Labs",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "lab feed items",
+          "observed": 19,
+          "minimum": 1
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-08-29T12:06:33.692863+00:00"
+    },
+    "csfc": {
+      "label": "CSfC",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "APL items",
+          "observed": 123,
+          "minimum": 5
+        },
+        {
+          "name": "announcements",
+          "observed": 8,
+          "minimum": 1
+        },
+        {
+          "name": "tracked capability packages",
+          "observed": 5,
+          "minimum": 5
+        },
+        {
+          "name": "capability-package hashes",
+          "observed": 5,
+          "minimum": 5
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-08-29T12:06:33.692863+00:00"
+    },
+    "cc_crypto": {
+      "label": "CC Crypto",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "publications",
+          "observed": 121,
+          "minimum": 5
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-08-29T12:06:33.692863+00:00"
+    },
+    "nato": {
+      "label": "NATO NIAPCL",
+      "status": "healthy",
+      "mode": "manual",
+      "checks": [],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "detail": "manual baseline (40 Cisco product(s)); updated via the NATO capture GitHub issue workflow",
+      "checked_at": "2026-08-29T12:06:33.692863+00:00"
+    },
+    "eucc": {
+      "label": "EUCC / ENISA",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "certificates",
+          "observed": 50,
+          "minimum": 2
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-08-29T12:06:33.692863+00:00"
+    },
+    "nd_itc": {
+      "label": "ND-iTC",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "NIT RFIs",
+          "observed": 32,
+          "minimum": 5
+        },
+        {
+          "name": "Allowed-With entries",
+          "observed": 22,
+          "minimum": 1
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-08-29T12:06:33.692863+00:00"
+    },
+    "ietf_cnsa": {
+      "label": "IETF CNSA 2.0",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "CNSA profile/RFC records",
+          "observed": 5,
+          "minimum": 5
+        },
+        {
+          "name": "CNSA full-text hashes",
+          "observed": 5,
+          "minimum": 5
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-08-29T12:06:33.692863+00:00"
+    },
+    "ieee_pqc": {
+      "label": "IEEE 802.11bt",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "P802.11bt project records",
+          "observed": 1,
+          "minimum": 1
+        },
+        {
+          "name": "P802.11bt timeline hashes",
+          "observed": 1,
+          "minimum": 1
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-08-29T12:06:33.692863+00:00"
+    }
+  },
+  "alerts": []
+}
