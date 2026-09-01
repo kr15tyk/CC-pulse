@@ -2,6 +2,7 @@
 <rss version="2.0"><channel>
 <title>CC Pulse</title>
 <link>https://kr15tyk.github.io/CC-pulse/cc_dashboard.html</link>
-<description>Common Criteria monitoring - 2026-08-31 08:23 ET</description>
-
+<description>Common Criteria monitoring - 2026-09-01 06:56 ET</description>
+<item><title>NIAP New added: Policy #33 - Post Quantum Cryptography Implementation</title><link>https://www.niap-ccevs.org/Policy/policy-ltr-33.pdf</link><description>2026-08-31T17:59:30.211000Z</description></item>
+<item><title>NIAP Policie added: Post Quantum Cryptography Implementation</title><link>https://www.niap-ccevs.org/Policy/policy-ltr-33.pdf</link><description>2026-08-31T00:00:00Z</description></item>
 </channel></rss>
