@@ -179,7 +179,7 @@
   <span class="nav-title">CC Pulse Dashboard</span>
   <span class="nav-spacer"></span>
   <div class="ham-wrap">
-    <span class="nav-meta">Last run: 2026-09-02 06:22 ET</span>
+    <span class="nav-meta">Last run: 2026-09-03 06:31 ET</span>
     <button class="ham-btn" id="ham-btn" onclick="toggleHamMenu()" aria-expanded="false" aria-haspopup="true" title="Open menu">&#9776;</button>
     <div class="ham-menu" id="ham-menu" role="menu">
       <a class="ham-item" href="https://kr15tyk.github.io/CC-pulse/cc_dashboard.html" role="menuitem"><span class="ham-icon">&#127968;</span>Home</a>
@@ -263,7 +263,7 @@
 <div class="sticky-top">
   <div class="trend-bar">
     <div class="stat"><a href="#sec-niap-pp" onclick="navigateTo('sec-niap-pp');return false;">
-      <div class="stat-num ">0</div>
+      <div class="stat-num active-num">2</div>
       <div class="stat-lbl">NIAP Changes</div>
     </a></div>
     <div class="stat"><a href="#sec-csfc" onclick="navigateTo('sec-csfc');return false;">
@@ -283,7 +283,7 @@
       <div class="stat-lbl">CCTL Updates</div>
     </a></div>
     <div class="stat"><a href="#sec-eucc-req" onclick="navigateTo('sec-eucc-req');return false;">
-      <div class="stat-num active-num">1</div>
+      <div class="stat-num ">0</div>
       <div class="stat-lbl">EUCC Changes</div>
     </a></div>
     <div class="stat"><a href="#sec-ietf-cnsa" onclick="navigateTo('sec-ietf-cnsa');return false;">
@@ -340,7 +340,7 @@
     
     
     
-    <p class="no-change">No changes detected. <span class="last-active">(last: 2026-09-01)</span></p>
+    <p class="no-change">No changes detected. <span class="last-active">(last: 2026-09-03)</span></p>
   </div>
 </div>
 
@@ -422,17 +422,36 @@
 </div>
 
   <!-- NIAP PCL — All Certifications -->
-<div class="card " id="sec-niap-pcl" data-has-changes="0">
+<div class="card card-new" id="sec-niap-pcl" data-has-changes="2">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>NIAP PCL — All Certifications</span>
-    <span class="card-count">0 changes</span>
+    <span class="card-count">2 changes</span>
     </span>
   </div>
-  <div class="card-body collapsed">
+  <div class="card-body ">
+    
+    
+    <div class="sub-hdr sub-updated">Newly Archived (2)</div>
+    
+    <div class="item-row" data-source="niap-pcl" data-kind="archived">
+      <span class="item-link">StarTech.com Ltd -- Sekuryx Secure KVM Switch (Non-CAC Models)</span>
+      <span class="item-meta">Archived</span>
+    </div>
+    
+    <div class="item-sub">PP_PSD_V4.0, MOD_AO_V1.0, MOD_KM_V1.0, MOD_VI_V1.0</div>
+    
+    
+    <div class="item-row" data-source="niap-pcl" data-kind="archived">
+      <span class="item-link">StarTech.com Ltd -- Sekuryx Secure KVM Switch (CAC Models)</span>
+      <span class="item-meta">Archived</span>
+    </div>
+    
+    <div class="item-sub">PP_PSD_V4.0, MOD_AO_V1.0, MOD_UA_V1.0, MOD_KM_V1.0, MOD_VI_V1.0</div>
     
     
     
-    <p class="no-change">No changes detected. <span class="last-active">(last: 2026-09-01)</span></p>
+    
+    
   </div>
 </div>
 
@@ -620,23 +639,16 @@
           </div>
         </div>
         <!-- EUCC Certificates -->
-        <div class="card card-new" id="sec-eucc-certs" data-has-changes="1">
+        <div class="card " id="sec-eucc-certs" data-has-changes="0">
           <div class="card-hdr" onclick="toggleCard(this)">
             <span>EUCC Certified Products</span>
-            <span class="card-count">1 new item</span>
-            <span class="toggle-icon">&#9660;</span>
+            <span class="card-count">0 new items</span>
+            <span class="toggle-icon">&#9658;</span>
           </div>
-          <div class="card-body ">
+          <div class="card-body collapsed">
             
             
-            
-            <div class="item-row" data-source="eucc" data-kind="new">
-              <a class="item-link" href="https://certification.enisa.europa.eu/certificates/eucc-3087-2026-000007-i-00_en" target="_blank">TactiGuard PG</a>
-              <span class="item-meta"></span>
-            </div>
-            
-            
-            
+            <p class="no-change">No new EUCC certified products.</p>
           </div>
         </div>
       </div>
@@ -648,7 +660,7 @@
 <div class="card card-new" id="sec-history" data-has-changes="1">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>Change History</span>
-    <span class="card-count">52 events</span>
+    <span class="card-count">47 events</span>
     <span class="toggle-icon">▼</span>
   </div>
   <div class="card-body">
@@ -1184,61 +1196,6 @@
         </div>
       </div>
       
-      <div class="tl-entry" data-cat="csfc_change">
-        <div class="tl-date">2026-08-04</div>
-        <div class="tl-body">
-          <div class="tl-title">
-            <span class="tl-badge updated">updated</span>
-            <a href="https://www.nsa.gov/Resources/Commercial-Solutions-for-Classified-Program/Components-List/" target="_blank">CSfC Selection updated: TLS Software Applications</a>
-          </div>
-          
-        </div>
-      </div>
-      
-      <div class="tl-entry" data-cat="csfc_change">
-        <div class="tl-date">2026-08-04</div>
-        <div class="tl-body">
-          <div class="tl-title">
-            <span class="tl-badge new">new</span>
-            <a href="https://www.niap-ccevs.org/products/11573" target="_blank">CSfC Component: Software Full Drive Encryption | NetApp | NetApp Volume Encryption (NVE) | ONTAP</a>
-          </div>
-          
-        </div>
-      </div>
-      
-      <div class="tl-entry" data-cat="csfc_change">
-        <div class="tl-date">2026-08-04</div>
-        <div class="tl-body">
-          <div class="tl-title">
-            <span class="tl-badge new">new</span>
-            <a href="https://www.niap-ccevs.org/products/international-product/2025.1080" target="_blank">CSfC Component: Traffic Filtering Firewall | HPE Aruba Networking | Orchestrator and EdgeConnect</a>
-          </div>
-          
-        </div>
-      </div>
-      
-      <div class="tl-entry" data-cat="csfc_change">
-        <div class="tl-date">2026-08-04</div>
-        <div class="tl-body">
-          <div class="tl-title">
-            <span class="tl-badge removed">removed</span>
-            <a href="https://www.niap-ccevs.org/products/11462" target="_blank">CSfC Component: MACSEC Ethernet Encryption Devices | Cisco | Catalyst 9200/9200L Series Switches</a>
-          </div>
-          
-        </div>
-      </div>
-      
-      <div class="tl-entry" data-cat="csfc_change">
-        <div class="tl-date">2026-08-04</div>
-        <div class="tl-body">
-          <div class="tl-title">
-            <span class="tl-badge removed">removed</span>
-            <a href="https://www.niap-ccevs.org/products/11492" target="_blank">CSfC Component: MACSEC Ethernet Encryption Devices | CommScope Technologies LLC | Ruckus FastIro</a>
-          </div>
-          
-        </div>
-      </div>
-      
     
     </div>
   </div>
@@ -1249,7 +1206,7 @@
 </div><!-- /main-content -->
 <footer>
   <span>CC Pulse &middot; Auto-refreshes daily (01:00 EST) &middot; NIAP, CSfC, CC Portal, NATO NIAPCL, EUCC / ENISA</span>
-  <span>Last run: 2026-09-02 06:22 ET</span>
+  <span>Last run: 2026-09-03 06:31 ET</span>
 </footer>
 
 <script>
