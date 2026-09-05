@@ -1,0 +1,402 @@
+{
+  "period_start": "2026-09-04T10:20:40.534826+00:00",
+  "period_end": "2026-09-05T09:48:23.122594+00:00",
+  "niap": {
+    "pps": {
+      "added": [],
+      "removed": [],
+      "sunset_changes": [],
+      "status_changes": [],
+      "revised": [],
+      "content_changes": []
+    },
+    "tds": {
+      "added": [],
+      "removed": []
+    },
+    "cisco_ndcpp": {
+      "added": [],
+      "removed": [],
+      "newly_archived": []
+    },
+    "pcl_all": {
+      "added": [],
+      "removed": [],
+      "newly_archived": []
+    },
+    "in_evaluation": {
+      "added": [],
+      "removed": [],
+      "current_count": 44
+    },
+    "news": {
+      "added": [],
+      "revised": [],
+      "deactivated": [],
+      "reactivated": [],
+      "removed": []
+    },
+    "events": {
+      "added": [],
+      "revised": [],
+      "deactivated": [],
+      "reactivated": [],
+      "removed": []
+    },
+    "policies": {
+      "added": [],
+      "revised": [],
+      "archived": [],
+      "reactivated": [],
+      "removed": []
+    }
+  },
+  "cc_portal": {
+    "news": {
+      "added": []
+    },
+    "pps": {
+      "added": []
+    },
+    "products": {
+      "added": []
+    }
+  },
+  "cctl_labs": {
+    "atsec": [
+      {
+        "title": "CNSA Compliance to be Mandatory Starting in 2027",
+        "link": "https://www.atsec.com/cnsa-compliance-to-be-mandatory-starting-in-2027/",
+        "published": "",
+        "id": "https://www.atsec.com/cnsa-compliance-to-be-mandatory-starting-in-2027/"
+      }
+    ]
+  },
+  "csfc": {
+    "pages": {},
+    "selection_links": {},
+    "documents": {
+      "added": [],
+      "removed": [],
+      "updated": []
+    },
+    "feeds": {}
+  },
+  "cc_crypto": {
+    "pages": {}
+  },
+  "nato": {
+    "pages": {},
+    "cisco_added": [],
+    "cisco_removed": [],
+    "baseline_reset": false
+  },
+  "eucc": {
+    "pages": {},
+    "cisco_added": [],
+    "cisco_removed": [],
+    "baseline_reset": false
+  },
+  "nd_itc": {
+    "nit_rfis": {
+      "added": [],
+      "status_changes": [],
+      "revised": [],
+      "newly_archived": []
+    },
+    "awl": {
+      "added": [],
+      "removed": [],
+      "version_changes": [],
+      "list_updates": []
+    },
+    "baseline_reset": false,
+    "collection_failure": false
+  },
+  "ietf_cnsa": {
+    "added": [],
+    "removed": [],
+    "updated": [
+      {
+        "name": "draft-becker-cnsa2-tls-profile",
+        "title": "Commercial National Security Algorithm (CNSA) Suite 2.0 Profile for TLS 1.3",
+        "revision": "05",
+        "expires": "2027-01-20T11:28:07Z",
+        "updated_at": "2026-09-04T12:05:31Z",
+        "rfc_number": null,
+        "document_url": "https://datatracker.ietf.org/doc/draft-becker-cnsa2-tls-profile/",
+        "text_url": "https://www.ietf.org/archive/id/draft-becker-cnsa2-tls-profile-05.txt",
+        "content_sha256": "a61f2c851f093c78b7c41d98af0d7e498cd1e3bcd0968c33d221ae1caeecb3e7",
+        "content_size": 27161,
+        "content_etag": "\"6a5cb4c7-6a19\"",
+        "content_last_modified": "Sun, 19 Jul 2026 11:28:07 GMT",
+        "states": [
+          {
+            "type": "draft",
+            "slug": "active",
+            "name": "Active"
+          },
+          {
+            "type": "draft-iesg",
+            "slug": "idexists",
+            "name": "I-D Exists"
+          },
+          {
+            "type": "draft-stream-ise",
+            "slug": "iesg-rev",
+            "name": "In IESG Review"
+          }
+        ],
+        "workflow_state": "In IESG Review",
+        "references_rfc8446": true,
+        "references_rfc9846": false,
+        "cnsa_markers": [
+          "CNSA 2.0",
+          "LMS",
+          "ML-DSA",
+          "ML-KEM",
+          "XMSS"
+        ],
+        "relations": [],
+        "changed_fields": [
+          "workflow_state",
+          "states"
+        ],
+        "old_revision": "05",
+        "old_workflow_state": "In ISE Review",
+        "old_expires": "2027-01-20T11:28:07Z",
+        "old_content_sha256": "a61f2c851f093c78b7c41d98af0d7e498cd1e3bcd0968c33d221ae1caeecb3e7"
+      }
+    ],
+    "rfc9846_adoption": []
+  },
+  "ieee_pqc": {
+    "added": [],
+    "removed": [],
+    "updated": []
+  },
+  "source_health": {
+    "niap": {
+      "label": "NIAP",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "PCL products",
+          "observed": 1757,
+          "minimum": 50
+        },
+        {
+          "name": "Protection Profiles",
+          "observed": 271,
+          "minimum": 10
+        },
+        {
+          "name": "PQC PP file-version records",
+          "observed": 13,
+          "minimum": 1,
+          "required_for_diff_baseline": false
+        },
+        {
+          "name": "PQC PP full-content hashes",
+          "observed": 7,
+          "minimum": 1,
+          "required_for_diff_baseline": false
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-09-05T09:48:23.122594+00:00",
+      "subcollections": {
+        "news": {
+          "label": "News announcements",
+          "status": "healthy",
+          "observed": 356,
+          "consecutive_failures": 0,
+          "using_last_known_good": false
+        },
+        "events": {
+          "label": "Events",
+          "status": "healthy",
+          "observed": 0,
+          "consecutive_failures": 0,
+          "using_last_known_good": false
+        },
+        "policies": {
+          "label": "Policy letters",
+          "status": "healthy",
+          "observed": 40,
+          "consecutive_failures": 0,
+          "using_last_known_good": false
+        }
+      }
+    },
+    "cc_portal": {
+      "label": "CC Portal",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "portal records",
+          "observed": 180,
+          "minimum": 1
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-09-05T09:48:23.122594+00:00"
+    },
+    "cctl_labs": {
+      "label": "CCTL Labs",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "lab feed items",
+          "observed": 19,
+          "minimum": 1
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-09-05T09:48:23.122594+00:00"
+    },
+    "csfc": {
+      "label": "CSfC",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "APL items",
+          "observed": 123,
+          "minimum": 5
+        },
+        {
+          "name": "announcements",
+          "observed": 8,
+          "minimum": 1
+        },
+        {
+          "name": "tracked capability packages",
+          "observed": 5,
+          "minimum": 5,
+          "required_for_diff_baseline": false
+        },
+        {
+          "name": "capability-package hashes",
+          "observed": 5,
+          "minimum": 5,
+          "required_for_diff_baseline": false
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-09-05T09:48:23.122594+00:00"
+    },
+    "cc_crypto": {
+      "label": "CC Crypto",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "publications",
+          "observed": 121,
+          "minimum": 5
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-09-05T09:48:23.122594+00:00"
+    },
+    "nato": {
+      "label": "NATO NIAPCL",
+      "status": "healthy",
+      "mode": "manual",
+      "checks": [],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "detail": "manual baseline (40 Cisco product(s)); updated via the NATO capture GitHub issue workflow",
+      "checked_at": "2026-09-05T09:48:23.122594+00:00"
+    },
+    "eucc": {
+      "label": "EUCC / ENISA",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "certificates",
+          "observed": 50,
+          "minimum": 2
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-09-05T09:48:23.122594+00:00"
+    },
+    "nd_itc": {
+      "label": "ND-iTC",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "NIT RFIs",
+          "observed": 32,
+          "minimum": 5
+        },
+        {
+          "name": "Allowed-With entries",
+          "observed": 22,
+          "minimum": 1
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-09-05T09:48:23.122594+00:00"
+    },
+    "ietf_cnsa": {
+      "label": "IETF CNSA 2.0",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "CNSA profile/RFC records",
+          "observed": 5,
+          "minimum": 5
+        },
+        {
+          "name": "CNSA full-text hashes",
+          "observed": 5,
+          "minimum": 5
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-09-05T09:48:23.122594+00:00"
+    },
+    "ieee_pqc": {
+      "label": "IEEE 802.11bt",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "P802.11bt project records",
+          "observed": 1,
+          "minimum": 1
+        },
+        {
+          "name": "P802.11bt timeline hashes",
+          "observed": 1,
+          "minimum": 1
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-09-05T09:48:23.122594+00:00"
+    }
+  },
+  "alerts": [
+    {
+      "source": "IETF CNSA",
+      "kind": "updated",
+      "title": "Commercial National Security Algorithm (CNSA) Suite 2.0 Profile for TLS 1.3",
+      "url": "https://datatracker.ietf.org/doc/draft-becker-cnsa2-tls-profile/",
+      "detail": "IETF CNSA profile metadata or full text changed: workflow_state, states",
+      "matched_keywords": [
+        "CNSA",
+        "PQC"
+      ],
+      "tab": "us"
+    }
+  ]
+}
