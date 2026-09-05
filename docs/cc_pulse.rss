@@ -2,6 +2,8 @@
 <rss version="2.0"><channel>
 <title>CC Pulse</title>
 <link>https://kr15tyk.github.io/CC-pulse/cc_dashboard.html</link>
-<description>Common Criteria monitoring - 2026-09-04 06:20 ET</description>
-
+<description>Common Criteria monitoring - 2026-09-05 05:48 ET</description>
+<item><title>[atsec] CNSA Compliance to be Mandatory Starting in 2027</title><link>https://www.atsec.com/cnsa-compliance-to-be-mandatory-starting-in-2027/</link><description></description></item>
+<item><title>IETF CNSA Updated: Commercial National Security Algorithm (CNSA) Suite 2.0 Profile for TLS 1.3</title><link>https://datatracker.ietf.org/doc/draft-becker-cnsa2-tls-profile/</link><description>workflow_state, states</description></item>
+<item><title>ALERT: IETF CNSA – Commercial National Security Algorithm (CNSA) Suite 2.0 Profile for TLS 1.3</title><link>https://kr15tyk.github.io/CC-pulse/cc_dashboard.html</link><description>Kind: updated | Keywords: CNSA, PQC</description></item>
 </channel></rss>
