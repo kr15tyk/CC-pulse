@@ -179,7 +179,7 @@
   <span class="nav-title">CC Pulse Dashboard</span>
   <span class="nav-spacer"></span>
   <div class="ham-wrap">
-    <span class="nav-meta">Last run: 2026-09-05 05:48 ET</span>
+    <span class="nav-meta">Last run: 2026-09-06 06:04 ET</span>
     <button class="ham-btn" id="ham-btn" onclick="toggleHamMenu()" aria-expanded="false" aria-haspopup="true" title="Open menu">&#9776;</button>
     <div class="ham-menu" id="ham-menu" role="menu">
       <a class="ham-item" href="https://kr15tyk.github.io/CC-pulse/cc_dashboard.html" role="menuitem"><span class="ham-icon">&#127968;</span>Home</a>
@@ -279,7 +279,7 @@
       <div class="stat-lbl">NATO NIAPCL</div>
     </a></div>
     <div class="stat"><a href="#sec-cctl" onclick="navigateTo('sec-cctl');return false;">
-      <div class="stat-num active-num">1</div>
+      <div class="stat-num ">0</div>
       <div class="stat-lbl">CCTL Updates</div>
     </a></div>
     <div class="stat"><a href="#sec-eucc-req" onclick="navigateTo('sec-eucc-req');return false;">
@@ -287,11 +287,11 @@
       <div class="stat-lbl">EUCC Changes</div>
     </a></div>
     <div class="stat"><a href="#sec-ietf-cnsa" onclick="navigateTo('sec-ietf-cnsa');return false;">
-      <div class="stat-num active-num">1</div>
+      <div class="stat-num ">0</div>
       <div class="stat-lbl">CNSA / PQC Standards</div>
     </a></div>
     <div class="stat"><a href="#sec-alerts" onclick="navigateTo('sec-alerts');return false;">
-      <div class="stat-num alert-num">1</div>
+      <div class="stat-num ">0</div>
       <div class="stat-lbl">Alerts</div>
     </a></div>
   </div>
@@ -316,28 +316,6 @@
       
       
 <!-- Alerts -->
-
-<div class="section-group">
-<div class="card card-alert" id="sec-alerts">
-  <div class="card-hdr" onclick="toggleCard(this)">
-    <span>Alerts</span>
-    <span class="card-count">1 alert</span>
-    <span class="toggle-icon">&#9660;</span>
-  </div>
-  <div class="card-body">
-    <div class="alert-monitoring">FIPS 186-4, FIPS 186-5, NDcPP, CPP_ND, TLS 1.3, SSH, PP-Module_VPN, PP-Module_WLAN, CNSA 2.0, ML-KEM, ML-DSA, SLH-DSA, post-quantum, RFC 9846, 802.11bt, labgram, valgram, emergency, CSfC, Commercial Solutions for Classified, CSfC APL, CSfC component selections, NSA CSfC, NATO NIAPC, NIAPCL, EUCC, ENISA, CCDB-018, Crypto Catalog, cryptography working group, Specification of Functional Requirements for Cryptography, FCS_CKM, FCS_COP, FCS_RBG</div>
-    
-        <div class="item-row alert-item" data-alert-key="IETF CNSA-Commercial_National_Security_Algorithm_(CNSA)_Suite_2.0_Profile_for_TLS_1.3" data-tab="us">
-          
-          <a class="item-link" href="https://datatracker.ietf.org/doc/draft-becker-cnsa2-tls-profile/" target="_blank">IETF CNSA: Commercial National Security Algorithm (CNSA) Suite 2.0 Profile for TLS 1.3</a>
-          
-          <span class="item-meta">updated &middot; CNSA, PQC</span>
-          <div class="item-sub">IETF CNSA profile metadata or full text changed: workflow_state, states</div>
-          <button class="dismiss-btn" onclick="dismissAlert(this)" title="Mark as seen">&#10003; Seen</button>
-        </div>
-        
-  </div>
-</div>
 
 <div class="tab-nav" id="region-tabs">
         <button class="tab-btn active" data-tab="us" onclick="switchTab(this)">&#127482;&#127480; US (NIAP / CSfC)</button>
@@ -520,27 +498,22 @@
 
 <div class="section-group">
   <div class="section-label">CNSA 2.0 &amp; Post-Quantum Standards</div>
-  <div class="card card-updated" id="sec-ietf-cnsa" data-has-changes="1">
+  <div class="card " id="sec-ietf-cnsa" data-has-changes="0">
     <div class="card-hdr" onclick="toggleCard(this)">
       <span>IETF CNSA 2.0 Profiles</span>
-      <span class="card-count">1 update</span>
-      <span class="toggle-icon">&#9660;</span>
+      <span class="card-count">0 updates</span>
+      <span class="toggle-icon">&#9658;</span>
     </div>
-    <div class="card-body ">
+    <div class="card-body collapsed">
       
         
       
         
       
         
-        <div class="item-row" data-source="ietf-cnsa" data-kind="updated">
-          <a class="item-link" href="https://datatracker.ietf.org/doc/draft-becker-cnsa2-tls-profile/" target="_blank">Commercial National Security Algorithm (CNSA) Suite 2.0 Profile for TLS 1.3</a>
-          <span class="item-meta">In IESG Review</span>
-        </div>
-        
       
       
-      
+      <p class="no-change">No changes detected.</p>
     </div>
   </div>
 
@@ -616,34 +589,16 @@
 <div class="section-group">
   <div class="section-label">CCTL</div>
   <!-- CCTL Updates -->
-<div class="card card-new" id="sec-cctl" data-has-changes="1">
+<div class="card " id="sec-cctl" data-has-changes="0">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>CCTL Updates</span>
-    <span class="card-count">1 new item</span>
+    <span class="card-count">0 new items</span>
     </span>
     <span class="toggle-icon collapsed">▼</span>
   </div>
-  <div class="card-body ">
+  <div class="card-body collapsed">
     
-    
-    <div class="lab-row">
-      <div class="lab-hdr" onclick="toggleLab(this)">
-        <span class="lab-name">atsec</span>
-        <span class="lab-cnt">1 item</span>
-        <span class="lab-toggle">▼</span>
-      </div>
-      <div class="lab-body collapsed">
-        
-        <div class="item-row" data-source="cctl" data-kind="new">
-          <a class="item-link" href="https://www.atsec.com/cnsa-compliance-to-be-mandatory-starting-in-2027/" target="_blank">CNSA Compliance to be Mandatory Starting in 2027</a>
-          <span class="item-meta"></span>
-        </div>
-        
-      </div>
-    </div>
-    
-    
-    
+    <p class="no-change">No new items. <span class="last-active">Last: 2026-09-05</span></p>
   </div>
 </div>
 </div>      
@@ -1078,7 +1033,7 @@
 </div><!-- /main-content -->
 <footer>
   <span>CC Pulse &middot; Auto-refreshes daily (01:00 EST) &middot; NIAP, CSfC, CC Portal, NATO NIAPCL, EUCC / ENISA</span>
-  <span>Last run: 2026-09-05 05:48 ET</span>
+  <span>Last run: 2026-09-06 06:04 ET</span>
 </footer>
 
 <script>
