@@ -1,0 +1,368 @@
+{
+  "period_start": "2026-09-08T10:25:30.573281+00:00",
+  "period_end": "2026-09-09T10:35:24.043544+00:00",
+  "niap": {
+    "pps": {
+      "added": [],
+      "removed": [],
+      "sunset_changes": [],
+      "status_changes": [],
+      "revised": [],
+      "content_changes": []
+    },
+    "tds": {
+      "added": [],
+      "removed": []
+    },
+    "cisco_ndcpp": {
+      "added": [],
+      "removed": [],
+      "newly_archived": []
+    },
+    "pcl_all": {
+      "added": [],
+      "removed": [],
+      "newly_archived": []
+    },
+    "in_evaluation": {
+      "added": [],
+      "removed": [],
+      "current_count": 44
+    },
+    "news": {
+      "added": [],
+      "revised": [],
+      "deactivated": [],
+      "reactivated": [],
+      "removed": []
+    },
+    "events": {
+      "added": [],
+      "revised": [],
+      "deactivated": [],
+      "reactivated": [],
+      "removed": []
+    },
+    "policies": {
+      "added": [],
+      "revised": [],
+      "archived": [],
+      "reactivated": [],
+      "removed": []
+    }
+  },
+  "cc_portal": {
+    "news": {
+      "added": []
+    },
+    "pps": {
+      "added": []
+    },
+    "products": {
+      "added": []
+    }
+  },
+  "cctl_labs": {},
+  "csfc": {
+    "pages": {
+      "apl": {
+        "added": [],
+        "removed": [
+          {
+            "name": "Zebra Devices on Android 13",
+            "type": "End User Device / Mobile Platform",
+            "vendor": "Zebra Technologies",
+            "link": "https://www.niap-ccevs.org/products/11486",
+            "href": "https://www.niap-ccevs.org/products/11486",
+            "raw_text": "End User Device / Mobile Platform | Zebra Technologies | Zebra Devices on Android 13 | Android 13 | NIAP Validation Completed (at Gossamer) | 2024.08.08 | ",
+            "text": "End User Device / Mobile Platform | Zebra Technologies | Zebra Devices on Android 13 | Android 13 | NIAP Validation Completed (at Gossamer) | 2024.08.08 | ",
+            "content_sha256": "e0e19800897bcaccbb455bb94b2f7fb5a5ea2ca0347777c9834e0879ad14a1c5"
+          },
+          {
+            "name": "Catalyst 9300/9300L/9400/9500/9600 Series Switches running IOS-XE 17.12 ( C9300L-48T-4G, C9300L-24T-4G, C9300L-24P-4G, C9300L-48P-4G, C9300L-24T-4X, C9300L-48T-4X, C9300L-24P-4X, C9300L-48P-4X, C9300L-48PF-4G, C9300L-48PF-4X, C9300L-24UXG-4X, C9300L-24UXG-2Q, C9300L-48UXG-4X, C9300L-48UXG-2Q, C9407R, C9404R , C9410R, C9400-SUP-1, C9400-SUP-1XL, C9400-SUP-1XL-Y, C9400-LC-48T, C9400-LC-24S, C9400-LC-48S, C9400-LC-24XS, C9400-LC-48P, C9400-LC-48U, C9400-LC-48UX, C9400-LC-48H, C9500-16X, C9500-32C, C9500-32QC, C9500-24Y4C, C9500-48Y4C, C9500-NM-8X, C9500-NM-2Q, C9606R, C9600-SUP-1, C9600-LC-24C,C9600-LC-48YL, C9600-LC-48TX, C9600-LC-24S)",
+            "type": "MACSEC Ethernet Encryption Devices",
+            "vendor": "Cisco",
+            "link": "https://www.niap-ccevs.org/products/11463",
+            "href": "https://www.niap-ccevs.org/products/11463",
+            "raw_text": "MACSEC Ethernet Encryption Devices | Cisco | Catalyst 9300/9300L/9400/9500/9600 Series Switches running IOS-XE 17.12 ( C9300L-48T-4G, C9300L-24T-4G, C9300L-24P-4G, C9300L-48P-4G, C9300L-24T-4X, C9300L-48T-4X, C9300L-24P-4X, C9300L-48P-4X, C9300L-48PF-4G, C9300L-48PF-4X, C9300L-24UXG-4X, C9300L-24UXG-2Q, C9300L-48UXG-4X, C9300L-48UXG-2Q, C9407R, C9404R , C9410R, C9400-SUP-1, C9400-SUP-1XL, C9400-SUP-1XL-Y, C9400-LC-48T, C9400-LC-24S, C9400-LC-48S, C9400-LC-24XS, C9400-LC-48P, C9400-LC-48U, C9400-LC-48UX, C9400-LC-48H, C9500-16X, C9500-32C, C9500-32QC, C9500-24Y4C, C9500-48Y4C, C9500-NM-8X, C9500-NM-2Q, C9606R, C9600-SUP-1, C9600-LC-24C,C9600-LC-48YL, C9600-LC-48TX, C9600-LC-24S) | IOS-XE 17.12 | NIAP Validation Completed (at Gossamer) | 2024.08.20 | ",
+            "text": "MACSEC Ethernet Encryption Devices | Cisco | Catalyst 9300/9300L/9400/9500/9600 Series Switches running IOS-XE 17.12 ( C9300L-48T-4G, C9300L-24T-4G, C9300L-24P-4G, C9300L-48P-4G, C9300L-24T-4X, C9300L-48T-4X, C9300L-24P-4X, C9300L-48P-4X, C9300L-48PF-4G, C9300L-48PF-4X, C9300L-24UXG-4X, C9300L-24UXG-2Q, C9300L-48UXG-4X, C9300L-48UXG-2Q, C9407R, C9404R , C9410R, C9400-SUP-1, C9400-SUP-1XL, C9400-SUP-1XL-Y, C9400-LC-48T, C9400-LC-24S, C9400-LC-48S, C9400-LC-24XS, C9400-LC-48P, C9400-LC-48U, C9400-LC-48UX, C9400-LC-48H, C9500-16X, C9500-32C, C9500-32QC, C9500-24Y4C, C9500-48Y4C, C9500-NM-8X, C9500-NM-2Q, C9606R, C9600-SUP-1, C9600-LC-24C,C9600-LC-48YL, C9600-LC-48TX, C9600-LC-24S) | IOS-XE 17.12 | NIAP Validation Completed (at Gossamer) | 2024.08.20 | ",
+            "content_sha256": "5c19a77e22e1717c73e40f6e1e3bf3cb994920d9655dfbfa99e47f2642decf11"
+          }
+        ],
+        "updated": []
+      }
+    },
+    "selection_links": {},
+    "documents": {
+      "added": [],
+      "removed": [],
+      "updated": []
+    },
+    "feeds": {}
+  },
+  "cc_crypto": {
+    "pages": {}
+  },
+  "nato": {
+    "pages": {},
+    "cisco_added": [],
+    "cisco_removed": [],
+    "baseline_reset": false
+  },
+  "eucc": {
+    "pages": {},
+    "cisco_added": [],
+    "cisco_removed": [],
+    "baseline_reset": false
+  },
+  "nd_itc": {
+    "nit_rfis": {
+      "added": [],
+      "status_changes": [],
+      "revised": [],
+      "newly_archived": []
+    },
+    "awl": {
+      "added": [],
+      "removed": [],
+      "version_changes": [],
+      "list_updates": []
+    },
+    "baseline_reset": false,
+    "collection_failure": false
+  },
+  "ietf_cnsa": {
+    "added": [],
+    "removed": [],
+    "updated": [],
+    "rfc9846_adoption": []
+  },
+  "ieee_pqc": {
+    "added": [],
+    "removed": [],
+    "updated": []
+  },
+  "source_health": {
+    "niap": {
+      "label": "NIAP",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "PCL products",
+          "observed": 1757,
+          "minimum": 50
+        },
+        {
+          "name": "Protection Profiles",
+          "observed": 271,
+          "minimum": 10
+        },
+        {
+          "name": "PQC PP file-version records",
+          "observed": 13,
+          "minimum": 1,
+          "required_for_diff_baseline": false
+        },
+        {
+          "name": "PQC PP full-content hashes",
+          "observed": 7,
+          "minimum": 1,
+          "required_for_diff_baseline": false
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-09-09T10:35:24.043544+00:00",
+      "subcollections": {
+        "news": {
+          "label": "News announcements",
+          "status": "healthy",
+          "observed": 356,
+          "consecutive_failures": 0,
+          "using_last_known_good": false
+        },
+        "events": {
+          "label": "Events",
+          "status": "healthy",
+          "observed": 0,
+          "consecutive_failures": 0,
+          "using_last_known_good": false
+        },
+        "policies": {
+          "label": "Policy letters",
+          "status": "healthy",
+          "observed": 40,
+          "consecutive_failures": 0,
+          "using_last_known_good": false
+        }
+      }
+    },
+    "cc_portal": {
+      "label": "CC Portal",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "portal records",
+          "observed": 180,
+          "minimum": 1
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-09-09T10:35:24.043544+00:00"
+    },
+    "cctl_labs": {
+      "label": "CCTL Labs",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "lab feed items",
+          "observed": 19,
+          "minimum": 1
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-09-09T10:35:24.043544+00:00"
+    },
+    "csfc": {
+      "label": "CSfC",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "APL items",
+          "observed": 121,
+          "minimum": 5
+        },
+        {
+          "name": "announcements",
+          "observed": 8,
+          "minimum": 1
+        },
+        {
+          "name": "tracked capability packages",
+          "observed": 5,
+          "minimum": 5,
+          "required_for_diff_baseline": false
+        },
+        {
+          "name": "capability-package hashes",
+          "observed": 5,
+          "minimum": 5,
+          "required_for_diff_baseline": false
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-09-09T10:35:24.043544+00:00"
+    },
+    "cc_crypto": {
+      "label": "CC Crypto",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "publications",
+          "observed": 121,
+          "minimum": 5
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-09-09T10:35:24.043544+00:00"
+    },
+    "nato": {
+      "label": "NATO NIAPCL",
+      "status": "healthy",
+      "mode": "manual",
+      "checks": [],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "detail": "manual baseline (40 Cisco product(s)); updated via the NATO capture GitHub issue workflow",
+      "checked_at": "2026-09-09T10:35:24.043544+00:00"
+    },
+    "eucc": {
+      "label": "EUCC / ENISA",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "certificates",
+          "observed": 50,
+          "minimum": 2
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-09-09T10:35:24.043544+00:00"
+    },
+    "nd_itc": {
+      "label": "ND-iTC",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "NIT RFIs",
+          "observed": 32,
+          "minimum": 5
+        },
+        {
+          "name": "Allowed-With entries",
+          "observed": 22,
+          "minimum": 1
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-09-09T10:35:24.043544+00:00"
+    },
+    "ietf_cnsa": {
+      "label": "IETF CNSA 2.0",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "CNSA profile/RFC records",
+          "observed": 5,
+          "minimum": 5
+        },
+        {
+          "name": "CNSA full-text hashes",
+          "observed": 5,
+          "minimum": 5
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-09-09T10:35:24.043544+00:00"
+    },
+    "ieee_pqc": {
+      "label": "IEEE 802.11bt",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "P802.11bt project records",
+          "observed": 1,
+          "minimum": 1
+        },
+        {
+          "name": "P802.11bt timeline hashes",
+          "observed": 1,
+          "minimum": 1
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-09-09T10:35:24.043544+00:00"
+    }
+  },
+  "alerts": [
+    {
+      "source": "CSfC Components List",
+      "kind": "removed",
+      "title": "MACSEC Ethernet Encryption Devices | Cisco | Catalyst 9300/9300L/9400/9500/9600 Series Switches running IOS-XE 17.12 ( C\u2026",
+      "url": "https://www.nsa.gov/Resources/Commercial-Solutions-for-Classified-Program/Components-List/",
+      "detail": "Item removed from CSfC apl page",
+      "matched_keywords": [
+        "cisco"
+      ],
+      "tab": "us"
+    }
+  ]
+}
