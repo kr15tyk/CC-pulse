@@ -179,7 +179,7 @@
   <span class="nav-title">CC Pulse Dashboard</span>
   <span class="nav-spacer"></span>
   <div class="ham-wrap">
-    <span class="nav-meta">Last run: 2026-09-08 06:25 ET</span>
+    <span class="nav-meta">Last run: 2026-09-09 06:35 ET</span>
     <button class="ham-btn" id="ham-btn" onclick="toggleHamMenu()" aria-expanded="false" aria-haspopup="true" title="Open menu">&#9776;</button>
     <div class="ham-menu" id="ham-menu" role="menu">
       <a class="ham-item" href="https://kr15tyk.github.io/CC-pulse/cc_dashboard.html" role="menuitem"><span class="ham-icon">&#127968;</span>Home</a>
@@ -267,7 +267,7 @@
       <div class="stat-lbl">NIAP Changes</div>
     </a></div>
     <div class="stat"><a href="#sec-csfc" onclick="navigateTo('sec-csfc');return false;">
-      <div class="stat-num ">0</div>
+      <div class="stat-num active-num">2</div>
       <div class="stat-lbl">CSfC Selection Updates</div>
     </a></div>
     <div class="stat"><a href="#sec-cc-portal" onclick="navigateTo('sec-cc-portal');return false;">
@@ -287,7 +287,7 @@
       <div class="stat-lbl">EUCC Changes</div>
     </a></div>
     <div class="stat"><a href="#sec-ietf-cnsa" onclick="navigateTo('sec-ietf-cnsa');return false;">
-      <div class="stat-num active-num">1</div>
+      <div class="stat-num ">0</div>
       <div class="stat-lbl">CNSA / PQC Standards</div>
     </a></div>
     <div class="stat"><a href="#sec-alerts" onclick="navigateTo('sec-alerts');return false;">
@@ -327,12 +327,12 @@
   <div class="card-body">
     <div class="alert-monitoring">FIPS 186-4, FIPS 186-5, NDcPP, CPP_ND, TLS 1.3, SSH, PP-Module_VPN, PP-Module_WLAN, CNSA 2.0, ML-KEM, ML-DSA, SLH-DSA, post-quantum, RFC 9846, 802.11bt, labgram, valgram, emergency, CSfC, Commercial Solutions for Classified, CSfC APL, CSfC component selections, NSA CSfC, NATO NIAPC, NIAPCL, EUCC, ENISA, CCDB-018, Crypto Catalog, cryptography working group, Specification of Functional Requirements for Cryptography, FCS_CKM, FCS_COP, FCS_RBG</div>
     
-        <div class="item-row alert-item" data-alert-key="IEEE 802.11bt-P802.11bt_Post-Quantum_Cryptography" data-tab="us">
+        <div class="item-row alert-item" data-alert-key="CSfC Components List-MACSEC_Ethernet_Encryption_Devices_|_Cisco_|_Catalyst_9300/9300L/9400/9500/9600_Series_Switches_running_IOS-XE_17.12_(_C…" data-tab="us">
           
-          <a class="item-link" href="https://www.ieee802.org/11/Reports/802.11_Timelines.htm" target="_blank">IEEE 802.11bt: P802.11bt Post-Quantum Cryptography</a>
+          <a class="item-link" href="https://www.nsa.gov/Resources/Commercial-Solutions-for-Classified-Program/Components-List/" target="_blank">CSfC Components List: MACSEC Ethernet Encryption Devices | Cisco | Catalyst 9300/9300L/9400/9500/9600 Series Switches running IOS-XE 17.12 ( C…</a>
           
-          <span class="item-meta">updated &middot; PQC, 802.11bt</span>
-          <div class="item-sub">IEEE 802.11bt milestone/status changed</div>
+          <span class="item-meta">removed &middot; cisco</span>
+          <div class="item-sub">Item removed from CSfC apl page</div>
           <button class="dismiss-btn" onclick="dismissAlert(this)" title="Mark as seen">&#10003; Seen</button>
         </div>
         
@@ -497,14 +497,30 @@
 <div class="section-group">
   <div class="section-label">CSfC</div>
   <!-- CSfC Components, Announcements, and Selection Documents -->
-<div class="card " id="sec-csfc" data-has-changes="0">
+<div class="card card-updated" id="sec-csfc" data-has-changes="2">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>CSfC Components &amp; Announcements</span>
-    <span class="card-count">0 updates</span>
-    <span class="toggle-icon">&#9658;</span>
+    <span class="card-count">2 updates</span>
+    <span class="toggle-icon">&#9660;</span>
   </div>
-  <div class="card-body collapsed">
+  <div class="card-body ">
     
+    
+      
+        
+        
+        <div class="item-row" data-source="csfc" data-kind="removed">
+          <a class="item-link" href="https://www.niap-ccevs.org/products/11486" target="_blank">End User Device / Mobile Platform | Zebra Technologies | Zebra Devices on Android 13 | Android 13 | NIAP Validation Completed (at Gossamer) | 2024.08.08 | </a>
+          <span class="item-meta">component removed</span>
+        </div>
+        
+        <div class="item-row" data-source="csfc" data-kind="removed">
+          <a class="item-link" href="https://www.niap-ccevs.org/products/11463" target="_blank">MACSEC Ethernet Encryption Devices | Cisco | Catalyst 9300/9300L/9400/9500/9600 Series Switches running IOS-XE 17.12 ( C9300L-48T-4G, C9300L-24T-4G, C9300L-24P-4G, C9300L-48P-4G, C9300L-24T-4X, C9300L-48T-4X, C9300L-24P-4X, C9300L-48P-4X, C9300L-48PF-4G, C9300L-48PF-4X, C9300L-24UXG-4X, C9300L-24UXG-2Q, C9300L-48UXG-4X, C9300L-48UXG-2Q, C9407R, C9404R , C9410R, C9400-SUP-1, C9400-SUP-1XL, C9400-SUP-1XL-Y, C9400-LC-48T, C9400-LC-24S, C9400-LC-48S, C9400-LC-24XS, C9400-LC-48P, C9400-LC-48U, C9400-LC-48UX, C9400-LC-48H, C9500-16X, C9500-32C, C9500-32QC, C9500-24Y4C, C9500-48Y4C, C9500-NM-8X, C9500-NM-2Q, C9606R, C9600-SUP-1, C9600-LC-24C,C9600-LC-48YL, C9600-LC-48TX, C9600-LC-24S) | IOS-XE 17.12 | NIAP Validation Completed (at Gossamer) | 2024.08.20 | </a>
+          <span class="item-meta">component removed</span>
+        </div>
+        
+        
+      
     
     
       
@@ -513,7 +529,7 @@
     
       
     
-    <p class="no-change">No changes detected.</p>
+    
   </div>
 </div>
 </div>
@@ -539,26 +555,21 @@
     </div>
   </div>
 
-  <div class="card card-updated" id="sec-ieee-pqc" data-has-changes="1">
+  <div class="card " id="sec-ieee-pqc" data-has-changes="0">
     <div class="card-hdr" onclick="toggleCard(this)">
       <span>IEEE 802.11bt Post-Quantum Cryptography</span>
-      <span class="card-count">1 update</span>
-      <span class="toggle-icon">&#9660;</span>
+      <span class="card-count">0 updates</span>
+      <span class="toggle-icon">&#9658;</span>
     </div>
-    <div class="card-body ">
+    <div class="card-body collapsed">
       
         
       
         
       
         
-        <div class="item-row" data-source="ieee-pqc" data-kind="updated">
-          <a class="item-link" href="https://www.ieee802.org/11/Reports/802.11_Timelines.htm" target="_blank">P802.11bt &mdash; Post-Quantum Cryptography</a>
-          <span class="item-meta">status/timeline updated</span>
-        </div>
-        
       
-      
+      <p class="no-change">No changes detected.</p>
     </div>
   </div>
 </div>
@@ -668,7 +679,7 @@
 <div class="card card-new" id="sec-history" data-has-changes="1">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>Change History</span>
-    <span class="card-count">14 events</span>
+    <span class="card-count">16 events</span>
     <span class="toggle-icon">▼</span>
   </div>
   <div class="card-body">
@@ -686,6 +697,28 @@
       div>
     <div class="timeline" id="history-timeline">
     
+      
+      <div class="tl-entry" data-cat="csfc_change">
+        <div class="tl-date">2026-09-09</div>
+        <div class="tl-body">
+          <div class="tl-title">
+            <span class="tl-badge removed">removed</span>
+            <a href="https://www.niap-ccevs.org/products/11486" target="_blank">CSfC Component: End User Device / Mobile Platform | Zebra Technologies | Zebra Devices on Androi</a>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="tl-entry" data-cat="csfc_change">
+        <div class="tl-date">2026-09-09</div>
+        <div class="tl-body">
+          <div class="tl-title">
+            <span class="tl-badge removed">removed</span>
+            <a href="https://www.niap-ccevs.org/products/11463" target="_blank">CSfC Component: MACSEC Ethernet Encryption Devices | Cisco | Catalyst 9300/9300L/9400/9500/9600 </a>
+          </div>
+          
+        </div>
+      </div>
       
       <div class="tl-entry" data-cat="pp_new">
         <div class="tl-date">2026-09-08</div>
@@ -851,7 +884,7 @@
 </div><!-- /main-content -->
 <footer>
   <span>CC Pulse &middot; Auto-refreshes daily (01:00 EST) &middot; NIAP, CSfC, CC Portal, NATO NIAPCL, EUCC / ENISA</span>
-  <span>Last run: 2026-09-08 06:25 ET</span>
+  <span>Last run: 2026-09-09 06:35 ET</span>
 </footer>
 
 <script>

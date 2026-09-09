@@ -2,7 +2,8 @@
 <rss version="2.0"><channel>
 <title>CC Pulse</title>
 <link>https://kr15tyk.github.io/CC-pulse/cc_dashboard.html</link>
-<description>Common Criteria monitoring - 2026-09-08 06:25 ET</description>
-<item><title>IEEE 802.11bt Updated: D1.00</title><link>https://www.ieee802.org/11/Reports/802.11_Timelines.htm</link><description>TGbt (Post-Quantum Cryptography): Approved initial draft D1.0 and will start WG initial ballot soon.</description></item>
-<item><title>ALERT: IEEE 802.11bt – P802.11bt Post-Quantum Cryptography</title><link>https://kr15tyk.github.io/CC-pulse/cc_dashboard.html</link><description>Kind: updated | Keywords: PQC, 802.11bt</description></item>
+<description>Common Criteria monitoring - 2026-09-09 06:35 ET</description>
+<item><title>CSfC Component Removed: End User Device / Mobile Platform | Zebra Technologies | Zebra Devices on Androi</title><link>https://www.niap-ccevs.org/products/11486</link><description>CSfC apl item removed.</description></item>
+<item><title>CSfC Component Removed: MACSEC Ethernet Encryption Devices | Cisco | Catalyst 9300/9300L/9400/9500/9600 </title><link>https://www.niap-ccevs.org/products/11463</link><description>CSfC apl item removed.</description></item>
+<item><title>ALERT: CSfC Components List – MACSEC Ethernet Encryption Devices | Cisco | Catalyst 9300/9300L/9400/9500/9600 Series Switches running IOS-XE 17.12 ( C…</title><link>https://kr15tyk.github.io/CC-pulse/cc_dashboard.html</link><description>Kind: removed | Keywords: cisco</description></item>
 </channel></rss>
