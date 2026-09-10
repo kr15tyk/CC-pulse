@@ -2,8 +2,6 @@
 <rss version="2.0"><channel>
 <title>CC Pulse</title>
 <link>https://kr15tyk.github.io/CC-pulse/cc_dashboard.html</link>
-<description>Common Criteria monitoring - 2026-09-09 06:35 ET</description>
-<item><title>CSfC Component Removed: End User Device / Mobile Platform | Zebra Technologies | Zebra Devices on Androi</title><link>https://www.niap-ccevs.org/products/11486</link><description>CSfC apl item removed.</description></item>
-<item><title>CSfC Component Removed: MACSEC Ethernet Encryption Devices | Cisco | Catalyst 9300/9300L/9400/9500/9600 </title><link>https://www.niap-ccevs.org/products/11463</link><description>CSfC apl item removed.</description></item>
-<item><title>ALERT: CSfC Components List – MACSEC Ethernet Encryption Devices | Cisco | Catalyst 9300/9300L/9400/9500/9600 Series Switches running IOS-XE 17.12 ( C…</title><link>https://kr15tyk.github.io/CC-pulse/cc_dashboard.html</link><description>Kind: removed | Keywords: cisco</description></item>
+<description>Common Criteria monitoring - 2026-09-10 06:23 ET</description>
+
 </channel></rss>
