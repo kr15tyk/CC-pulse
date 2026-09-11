@@ -179,7 +179,7 @@
   <span class="nav-title">CC Pulse Dashboard</span>
   <span class="nav-spacer"></span>
   <div class="ham-wrap">
-    <span class="nav-meta">Last run: 2026-09-10 06:23 ET</span>
+    <span class="nav-meta">Last run: 2026-09-11 06:24 ET</span>
     <button class="ham-btn" id="ham-btn" onclick="toggleHamMenu()" aria-expanded="false" aria-haspopup="true" title="Open menu">&#9776;</button>
     <div class="ham-menu" id="ham-menu" role="menu">
       <a class="ham-item" href="https://kr15tyk.github.io/CC-pulse/cc_dashboard.html" role="menuitem"><span class="ham-icon">&#127968;</span>Home</a>
@@ -263,7 +263,7 @@
 <div class="sticky-top">
   <div class="trend-bar">
     <div class="stat"><a href="#sec-niap-pp" onclick="navigateTo('sec-niap-pp');return false;">
-      <div class="stat-num active-num">4</div>
+      <div class="stat-num active-num">2</div>
       <div class="stat-lbl">NIAP Changes</div>
     </a></div>
     <div class="stat"><a href="#sec-csfc" onclick="navigateTo('sec-csfc');return false;">
@@ -340,47 +340,22 @@
     
     
     
-    <p class="no-change">No changes detected. <span class="last-active">(last: 2026-09-10)</span></p>
+    <p class="no-change">No changes detected. <span class="last-active">(last: 2026-09-11)</span></p>
   </div>
 </div>
 
   <!-- NIAP In-Evaluation -->
-<div class="card card-new" id="sec-niap-inevaluation" data-has-changes="3">
+<div class="card " id="sec-niap-inevaluation" data-has-changes="0">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>NIAP In-Evaluation Products</span>
-    <span class="card-count">3 changes</span>
+    <span class="card-count">45 active</span>
     </span>
   </div>
-  <div class="card-body ">
-    
-    <div class="sub-hdr sub-new">Newly In Evaluation (2)</div>
-    
-    <div class="item-row" data-source="niap-inevaluation" data-kind="new">
-      <span class="item-link">Cisco Systems, Inc. -- Cisco ASA 9.20 on Cisco Firepower 1000 Series, Cisco Secure Firewall 3100 Series and Cisco Secure Firewall 4200 Series</span>
-      <span class="item-meta">Gossamer Security Solutions</span>
-    </div>
-    
-    <div class="item-sub">Network Device, Firewall, Virtual Private Network</div>
-    
-    
-    <div class="item-row" data-source="niap-inevaluation" data-kind="new">
-      <span class="item-link">Cisco Systems, Inc. -- Cisco FTD v7.4 on Firepower 1000 Series, Cisco Secure Firewall 3100 Series and Cisco Secure Firewall 4200 Series with FMC/FMCv</span>
-      <span class="item-meta">Gossamer Security Solutions</span>
-    </div>
-    
-    <div class="item-sub">Network Device, Firewall, Traffic Monitoring, Virtual Private Network</div>
+  <div class="card-body collapsed">
     
     
     
-    
-    <div class="sub-hdr sub-removed">Left Evaluation (1)</div>
-    
-    <div class="item-row" data-source="niap-inevaluation" data-kind="removed">
-      <span class="item-link">Extreme Networks, Inc. -- Extreme Networks Switching Engine version 33.4.100</span>
-      <span class="item-meta">Completed or Withdrawn</span>
-    </div>
-    
-    
+    <p class="no-change">No evaluation changes detected. 45 products currently in evaluation.</p>
     
   </div>
 </div>
@@ -447,10 +422,10 @@
 </div>
 
   <!-- NIAP PCL — All Certifications -->
-<div class="card card-new" id="sec-niap-pcl" data-has-changes="1">
+<div class="card card-new" id="sec-niap-pcl" data-has-changes="2">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>NIAP PCL — All Certifications</span>
-    <span class="card-count">1 change</span>
+    <span class="card-count">2 changes</span>
     </span>
   </div>
   <div class="card-body ">
@@ -458,12 +433,23 @@
     <div class="sub-hdr sub-new">New Certifications (1)</div>
     
     <div class="item-row" data-source="niap-pcl" data-kind="new">
-      <span class="item-link">Extreme Networks, Inc. -- Extreme Networks Switching Engine version 33.4.100</span>
+      <span class="item-link">Forcepoint LLC -- Forcepoint Network Security Platform 7.3</span>
       <span class="item-meta">2026-09-02</span>
     </div>
     
-    <div class="item-sub">PKG_SSH_V1.0, CPP_ND_V3.0E</div>
+    <div class="item-sub">MOD_CPP_FW_v1.4e, MOD_VPNGW_v1.3, CPP_ND_V3.0E</div>
     
+    
+    
+    
+    <div class="sub-hdr sub-updated">Newly Archived (1)</div>
+    
+    <div class="item-row" data-source="niap-pcl" data-kind="archived">
+      <span class="item-link">Lexmark International, Inc. -- Lexmark MX532, MX632, CX532, and CX635 Multi-Function Printers with Hard Drive and with Firmware Version 222.037</span>
+      <span class="item-meta">Archived</span>
+    </div>
+    
+    <div class="item-sub">CPP_HCD_V1.0E</div>
     
     
     
@@ -677,7 +663,7 @@
 <div class="card card-new" id="sec-history" data-has-changes="1">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>Change History</span>
-    <span class="card-count">17 events</span>
+    <span class="card-count">16 events</span>
     <span class="toggle-icon">▼</span>
   </div>
   <div class="card-body">
@@ -695,6 +681,17 @@
       div>
     <div class="timeline" id="history-timeline">
     
+      
+      <div class="tl-entry" data-cat="pcl_cert">
+        <div class="tl-date">2026-09-11</div>
+        <div class="tl-body">
+          <div class="tl-title">
+            <span class="tl-badge new">new</span>
+            <a href="https://www.niap-ccevs.org/products/11677" target="_blank">Forcepoint LLC — Forcepoint Network Security Platform 7.3</a>
+          </div>
+          <div class="tl-detail">Certified 2026-09-02 · Gossamer Security Solutions · MOD_CPP_FW_v1.4e, MOD_VPNGW_v1.3, CPP_ND_V3.0E</div>
+        </div>
+      </div>
       
       <div class="tl-entry" data-cat="pcl_cert">
         <div class="tl-date">2026-09-10</div>
@@ -861,28 +858,6 @@
         </div>
       </div>
       
-      <div class="tl-entry" data-cat="cisco_archived">
-        <div class="tl-date">2026-08-12</div>
-        <div class="tl-body">
-          <div class="tl-title">
-            <span class="tl-badge removed">removed</span>
-            <a href="https://www.niap-ccevs.org/" target="_blank">Archived: Cisco Catalyst Industrial Ethernet 9300 Rugged Series Switches running IOS-XE 17.12</a>
-          </div>
-          
-        </div>
-      </div>
-      
-      <div class="tl-entry" data-cat="pcl_cert">
-        <div class="tl-date">2026-08-12</div>
-        <div class="tl-body">
-          <div class="tl-title">
-            <span class="tl-badge new">new</span>
-            <a href="https://www.niap-ccevs.org/products/11703" target="_blank">DigiStor — DigiStor Enterprise PCIe Gen 5 SSD Self Encrypting Drives</a>
-          </div>
-          <div class="tl-detail">Certified 2026-08-05 · Leidos Common Criteria Testing Laboratory · CPP_FDE_EE_V2.0E</div>
-        </div>
-      </div>
-      
     
     </div>
   </div>
@@ -893,7 +868,7 @@
 </div><!-- /main-content -->
 <footer>
   <span>CC Pulse &middot; Auto-refreshes daily (01:00 EST) &middot; NIAP, CSfC, CC Portal, NATO NIAPCL, EUCC / ENISA</span>
-  <span>Last run: 2026-09-10 06:23 ET</span>
+  <span>Last run: 2026-09-11 06:24 ET</span>
 </footer>
 
 <script>
