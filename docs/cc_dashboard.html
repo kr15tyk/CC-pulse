@@ -179,7 +179,7 @@
   <span class="nav-title">CC Pulse Dashboard</span>
   <span class="nav-spacer"></span>
   <div class="ham-wrap">
-    <span class="nav-meta">Last run: 2026-09-11 06:24 ET</span>
+    <span class="nav-meta">Last run: 2026-09-12 05:54 ET</span>
     <button class="ham-btn" id="ham-btn" onclick="toggleHamMenu()" aria-expanded="false" aria-haspopup="true" title="Open menu">&#9776;</button>
     <div class="ham-menu" id="ham-menu" role="menu">
       <a class="ham-item" href="https://kr15tyk.github.io/CC-pulse/cc_dashboard.html" role="menuitem"><span class="ham-icon">&#127968;</span>Home</a>
@@ -263,7 +263,7 @@
 <div class="sticky-top">
   <div class="trend-bar">
     <div class="stat"><a href="#sec-niap-pp" onclick="navigateTo('sec-niap-pp');return false;">
-      <div class="stat-num active-num">2</div>
+      <div class="stat-num active-num">4</div>
       <div class="stat-lbl">NIAP Changes</div>
     </a></div>
     <div class="stat"><a href="#sec-csfc" onclick="navigateTo('sec-csfc');return false;">
@@ -330,17 +330,28 @@
 <div class="section-group">
   <div class="section-label">NIAP</div>
   <!-- Cisco NDcPP -->
-<div class="card " id="sec-cisco" data-has-changes="0">
+<div class="card card-new" id="sec-cisco" data-has-changes="1">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>Cisco NDcPP Certifications</span>
-    <span class="card-count">0 changes</span>
-    <span class="toggle-icon">&#9658;</span>
+    <span class="card-count">1 change</span>
+    <span class="toggle-icon">&#9660;</span>
   </div>
-  <div class="card-body collapsed">
+  <div class="card-body ">
     
     
     
-    <p class="no-change">No changes detected. <span class="last-active">(last: 2026-09-11)</span></p>
+    <div class="sub-hdr sub-updated">Newly Archived (1)</div>
+    
+    <div class="item-row" data-source="cisco" data-kind="archived">
+      <span class="item-link">Cisco Systems, Inc. &mdash; Cisco Catalyst Industrial Ethernet  3100 (IE3100) Rugged Series Switches  running IOS-XE 17.12</span>
+      <span class="item-meta">Archived</span>
+    </div>
+    
+    <div class="item-sub">CPP_ND_V2.2E</div>
+    
+    
+    
+    
   </div>
 </div>
 
@@ -361,14 +372,34 @@
 </div>
 
   <!-- NIAP announcements and events -->
-<div class="card " id="sec-niap-news" data-has-changes="0">
+<div class="card card-new" id="sec-niap-news" data-has-changes="1">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>NIAP News &amp; Announcements</span>
-    <span class="card-count">0 changes</span>
+    <span class="card-count">1 change</span>
     </span>
-    <span class="toggle-icon">&#9658;</span>
+    <span class="toggle-icon">&#9660;</span>
   </div>
-  <div class="card-body collapsed">
+  <div class="card-body ">
+    
+      
+        
+        <div class="sub-hdr sub-new">News — Added (1)</div>
+        
+        <div class="item-row" data-source="niap-news" data-kind="new">
+          <a class="item-link" href="https://www.niap-ccevs.org/technical-communities" target="_blank">Call for Participants in the Certificate Authority Technical Community and Kick-off Announcement</a>
+          <span class="item-meta">2026-09-11</span>
+        </div>
+        
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
     
       
         
@@ -382,19 +413,7 @@
         
       
     
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
     
-    <p class="no-change">No announcement or event changes.</p>
   </div>
 </div>
 
@@ -433,11 +452,11 @@
     <div class="sub-hdr sub-new">New Certifications (1)</div>
     
     <div class="item-row" data-source="niap-pcl" data-kind="new">
-      <span class="item-link">Forcepoint LLC -- Forcepoint Network Security Platform 7.3</span>
-      <span class="item-meta">2026-09-02</span>
+      <span class="item-link">Juniper Networks, Inc. -- Juniper Junos OS 24.4R2–S3 for SRX380</span>
+      <span class="item-meta">2026-07-16</span>
     </div>
     
-    <div class="item-sub">MOD_CPP_FW_v1.4e, MOD_VPNGW_v1.3, CPP_ND_V3.0E</div>
+    <div class="item-sub">MOD_CPP_FW_v1.4e, PKG_SSH_V1.0, MOD_IPS_V1.0, MOD_MACSEC_V1.0, MOD_VPNGW_v1.3, CPP_ND_V3.0E</div>
     
     
     
@@ -445,11 +464,11 @@
     <div class="sub-hdr sub-updated">Newly Archived (1)</div>
     
     <div class="item-row" data-source="niap-pcl" data-kind="archived">
-      <span class="item-link">Lexmark International, Inc. -- Lexmark MX532, MX632, CX532, and CX635 Multi-Function Printers with Hard Drive and with Firmware Version 222.037</span>
+      <span class="item-link">Cisco Systems, Inc. -- Cisco Catalyst Industrial Ethernet  3100 (IE3100) Rugged Series Switches  running IOS-XE 17.12</span>
       <span class="item-meta">Archived</span>
     </div>
     
-    <div class="item-sub">CPP_HCD_V1.0E</div>
+    <div class="item-sub">CPP_ND_V2.2E</div>
     
     
     
@@ -620,7 +639,7 @@
   </div>
   <div class="card-body collapsed">
     
-    <p class="no-change">No new items. <span class="last-active">Last: 2026-09-05</span></p>
+    <p class="no-change">No new items.</p>
   </div>
 </div>
 </div>      
@@ -663,7 +682,7 @@
 <div class="card card-new" id="sec-history" data-has-changes="1">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>Change History</span>
-    <span class="card-count">16 events</span>
+    <span class="card-count">19 events</span>
     <span class="toggle-icon">▼</span>
   </div>
   <div class="card-body">
@@ -681,6 +700,39 @@
       div>
     <div class="timeline" id="history-timeline">
     
+      
+      <div class="tl-entry" data-cat="cisco_archived">
+        <div class="tl-date">2026-09-12</div>
+        <div class="tl-body">
+          <div class="tl-title">
+            <span class="tl-badge removed">removed</span>
+            <a href="https://www.niap-ccevs.org/" target="_blank">Archived: Cisco Catalyst Industrial Ethernet  3100 (IE3100) Rugged Series Switches  running IOS-XE 17.12</a>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="tl-entry" data-cat="niap_news">
+        <div class="tl-date">2026-09-12</div>
+        <div class="tl-body">
+          <div class="tl-title">
+            <span class="tl-badge new">new</span>
+            <a href="https://www.niap-ccevs.org/technical-communities" target="_blank">NIAP New added: Call for Participants in the Certificate Authority Technical Community and Kick-off Announcement</a>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="tl-entry" data-cat="pcl_cert">
+        <div class="tl-date">2026-09-12</div>
+        <div class="tl-body">
+          <div class="tl-title">
+            <span class="tl-badge new">new</span>
+            <a href="https://www.niap-ccevs.org/products/2026.1244" target="_blank">Juniper Networks, Inc. — Juniper Junos OS 24.4R2–S3 for SRX380</a>
+          </div>
+          <div class="tl-detail">Certified 2026-07-16 · Teron Labs · MOD_CPP_FW_v1.4e, PKG_SSH_V1.0, MOD_IPS_V1.0, MOD_MACSEC_V1.0, MOD_VPNGW_v1.3, CPP_ND_V3.0E</div>
+        </div>
+      </div>
       
       <div class="tl-entry" data-cat="pcl_cert">
         <div class="tl-date">2026-09-11</div>
@@ -868,7 +920,7 @@
 </div><!-- /main-content -->
 <footer>
   <span>CC Pulse &middot; Auto-refreshes daily (01:00 EST) &middot; NIAP, CSfC, CC Portal, NATO NIAPCL, EUCC / ENISA</span>
-  <span>Last run: 2026-09-11 06:24 ET</span>
+  <span>Last run: 2026-09-12 05:54 ET</span>
 </footer>
 
 <script>
