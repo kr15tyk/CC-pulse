@@ -255,7 +255,7 @@ def _format_alert_lines(alerts: list[dict], max_items: int = 15) -> list[str]:
 # Webex notification
 # ---------------------------------------------------------------------------
 
-def send_webex_alert(alerts: list[dict]) -> None:
+def send_webex_alert(alerts: list[dict]) -> bool:
     """POST an actionable Webex message for high-priority keyword alerts.
 
     Message structure:
@@ -269,9 +269,9 @@ def send_webex_alert(alerts: list[dict]) -> None:
     room_id = config.WEBEX_ROOM_ID
     if not token or not room_id:
         log.debug("[Webex] Bot token or Room ID not configured — skipping.")
-        return
+        return False
     if not alerts:
-        return
+        return False
 
     tier_counts = {1: 0, 2: 0, 3: 0}
     for a in alerts:
@@ -309,8 +309,10 @@ def send_webex_alert(alerts: list[dict]) -> None:
     try:
         with urllib.request.urlopen(req, timeout=10) as resp:
             log.info("[Webex] Alert sent (HTTP %d).", resp.status)
+            return True
     except urllib.error.URLError as exc:
         log.warning("[Webex] Failed to send message: %s", exc)
+        return False
 
 
 # ---------------------------------------------------------------------------
@@ -1510,6 +1512,15 @@ def send_source_health_email(source_health: dict[str, dict]) -> None:
     _send_email(subject, html)
 
 
+def _degraded_source_health(source_health: dict) -> dict:
+    """Return domains whose core collection or auxiliary coverage degraded."""
+    return {
+        source: health for source, health in source_health.items()
+        if health.get("status") in ("stale", "failed")
+        or health.get("auxiliary_status") == "degraded"
+    }
+
+
 def send_daily_status_email(diff: dict, run_date: str = "") -> None:
     """Send a brief daily status email summarising what CC Pulse found today.
 
@@ -1543,10 +1554,7 @@ def send_daily_status_email(diff: dict, run_date: str = "") -> None:
     niap_pp_changes = len(diff.get("niap", {}).get("pps", {}).get("added", [])) + \
                       len(diff.get("niap", {}).get("pps", {}).get("sunset_changes", []))
     total_changes = len(alerts) + len(new_tds) + len(new_certs) + len(nato_adds) + len(eucc_adds) + cc_crypto_new + niap_pp_changes
-    unhealthy_sources = {
-        source: health for source, health in diff.get("source_health", {}).items()
-        if health.get("status") in ("stale", "failed")
-    }
+    unhealthy_sources = _degraded_source_health(diff.get("source_health", {}))
 
     if unhealthy_sources:
         status_icon = "⚠️"
@@ -1556,8 +1564,9 @@ def send_daily_status_email(diff: dict, run_date: str = "") -> None:
         for source, health in sorted(unhealthy_sources.items()):
             label = health.get("label") or source.replace("_", " ").title()
             fallback = " (last-known-good data retained)" if health.get("using_last_known_good") else ""
+            displayed_status = health.get("auxiliary_status") or health.get("status", "failed")
             health_lines.append(
-                f"{label}: {health.get('status', 'failed')} — {health.get('detail', '')}{fallback}"
+                f"{label}: {displayed_status} — {health.get('detail', '')}{fallback}"
             )
         body_detail = (
             "<p style='margin:0 0 12px;color:#94a3b8;font-size:14px;'>"

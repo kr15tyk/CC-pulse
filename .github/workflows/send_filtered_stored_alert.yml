@@ -8,13 +8,22 @@ on:
         required: true
         type: string
       source:
-        description: "Exact alert source, or NIAP News ID"
+        description: "Exact alert source, NIAP News ID, or Snapshot Record"
         required: true
         type: string
       title:
-        description: "Exact alert title, or numeric NIAP announcement ID"
+        description: "Exact title, NIAP ID, or snapshot-record selector"
         required: true
         type: string
+      record_kind:
+        description: "Used only when source is Snapshot Record"
+        required: true
+        default: "cc-portal-pp"
+        type: choice
+        options:
+          - cc-portal-pp
+          - cc-portal-product
+          - csfc-component
       dry_run:
         description: "Validate the match without sending notifications"
         required: true
@@ -49,7 +58,7 @@ jobs:
         run: pip install -r requirements.txt
 
       - name: Select and send alert
-        if: ${{ inputs.source != 'NIAP News ID' }}
+        if: ${{ inputs.source != 'NIAP News ID' && inputs.source != 'Snapshot Record' }}
         env:
           ALERT_DATE: ${{ inputs.date }}
           ALERT_SOURCE: ${{ inputs.source }}
@@ -118,4 +127,33 @@ jobs:
           --snapshot-dir snapshot-store
           --date "$BACKFILL_DATE"
           --news-id "$BACKFILL_NEWS_ID"
+          --send
+
+      - name: Validate stored source record
+        if: ${{ inputs.source == 'Snapshot Record' && inputs.dry_run }}
+        env:
+          BACKFILL_DATE: ${{ inputs.date }}
+          BACKFILL_KIND: ${{ inputs.record_kind }}
+          BACKFILL_SELECTOR: ${{ inputs.title }}
+        run: >-
+          python scripts/webex/backfill_source_record.py
+          --snapshot-dir snapshot-store
+          --date "$BACKFILL_DATE"
+          --kind "$BACKFILL_KIND"
+          --selector "$BACKFILL_SELECTOR"
+
+      - name: Send stored source record
+        if: ${{ inputs.source == 'Snapshot Record' && !inputs.dry_run }}
+        env:
+          BACKFILL_DATE: ${{ inputs.date }}
+          BACKFILL_KIND: ${{ inputs.record_kind }}
+          BACKFILL_SELECTOR: ${{ inputs.title }}
+          CC_WEBEX_BOT_TOKEN: ${{ secrets.CC_WEBEX_BOT_TOKEN }}
+          CC_WEBEX_ROOM_ID: ${{ secrets.CC_WEBEX_ROOM_ID }}
+        run: >-
+          python scripts/webex/backfill_source_record.py
+          --snapshot-dir snapshot-store
+          --date "$BACKFILL_DATE"
+          --kind "$BACKFILL_KIND"
+          --selector "$BACKFILL_SELECTOR"
           --send
