@@ -12,6 +12,7 @@ import json
 import logging
 import re
 from typing import Any
+from urllib.parse import urlsplit, urlunsplit
 
 import config
 
@@ -801,15 +802,32 @@ def diff_cc_news(old_items: Records, new_items: Records) -> dict[str, Any]:
 
 def diff_cc_pps(old_pps: Records, new_pps: Records) -> dict[str, Any]:
     def key(row: dict) -> str:
-        vals = list(row.values())
-        return vals[0] if vals else ""
+        return str(
+            row.get("id")
+            or row.get("pp_id")
+            or row.get("PPID")
+            or row.get("ID")
+            or row.get("link")
+            or row.get("title")
+            or row.get("text")
+            or ""
+        ).strip()
     old_keys = {key(r) for r in old_pps}
     return {"added": [r for r in new_pps if key(r) not in old_keys]}
 
 def diff_cc_products(old_products: Records, new_products: Records) -> dict[str, Any]:
     def key(row: dict) -> str:
-        vals = list(row.values())
-        return " ".join(vals[:2]) if len(vals) >= 2 else (vals[0] if vals else "")
+        product_id = row.get("id") or row.get("product_id") or row.get("ID")
+        if product_id not in (None, ""):
+            return f"id:{str(product_id).strip()}"
+        title = re.sub(
+            r"\s+", " ", str(row.get("title") or row.get("name") or "")
+        ).strip().casefold()
+        cert_date = str(
+            row.get("certificate_date") or row.get("certified") or ""
+        ).strip().casefold()
+        link = str(row.get("link") or row.get("certificate_link") or "").strip()
+        return f"metadata:{title}|{cert_date}" if title else f"url:{link}"
     old_keys = {key(r) for r in old_products}
     return {"added": [r for r in new_products if key(r) not in old_keys]}
 
@@ -962,24 +980,62 @@ def _diff_named_documents(old_docs: dict, new_docs: dict) -> dict:
     return {"added": added, "removed": removed, "updated": updated}
 
 
-# -- CSfC Components List diff helper (keyed by stable link, not text prefix) ------------
+# -- CSfC Components List diff helper -----------------------------------------
+def _normalize_csfc_component_type(value) -> str:
+    return re.sub(r"\s+", " ", str(value or "").replace("\xa0", " ")).strip().casefold()
+
+
+def _csfc_apl_key(item: dict) -> str:
+    """Stable CSfC APL identity: NIAP product plus component role.
+
+    A single NIAP validation can appear under multiple CSfC component types.
+    URL-only identity collapsed those roles into one row and hid additions.
+    NIAP product IDs also survive URL capitalization and international-product
+    path changes better than the raw URL.
+    """
+    component_type = _normalize_csfc_component_type(item.get("type"))
+    href = str(item.get("href") or "").strip()
+    if href:
+        parsed = urlsplit(href)
+        product_match = re.search(
+            r"/products/(?:international-product/)?([0-9]+(?:\.[0-9]+)*)(?:/|$)",
+            parsed.path,
+            flags=re.IGNORECASE,
+        )
+        if product_match and (parsed.hostname or "").casefold().endswith("niap-ccevs.org"):
+            identity = f"niap:{product_match.group(1)}"
+        else:
+            normalized_url = urlunsplit((
+                parsed.scheme.casefold(),
+                parsed.netloc.casefold(),
+                parsed.path.rstrip("/") or "/",
+                "",
+                "",
+            ))
+            identity = f"url:{normalized_url}"
+    else:
+        text = re.sub(r"\s+", " ", str(item.get("text") or "")).strip().casefold()
+        identity = f"text:{text[:120]}"
+    return f"{identity}|type:{component_type}"
+
+
 def _diff_csfc_apl(old_items: list, new_items: list) -> dict:
-    """Diff CSfC Components List entries, keyed by their NIAP link.
+    """Diff CSfC Components List entries by product and component role.
 
     _diff_pages() keys purely on the first 120 chars of display text, so an
     edit to an existing listing's wording (a cert-date tweak, a description
     reformat) with the underlying product/VID unchanged shows up as a
     spurious removed+added pair. APL records carry a stable href to the
     underlying NIAP product page (collector._parse_csfc_apl_structured), so
-    key on that instead (falling back to the text prefix for any record
-    without one) and report same-key text changes as "updated".
+    key on that plus the component type (falling back to the text prefix for
+    any record without a link) and report same-key text changes as "updated".
     """
     old_by_key = {
-        _record_key(item, url_field="href", text_field="text"): item
+        _csfc_apl_key(item): item
         for item in old_items
     }
     new_by_key = {
-        _record_key(item, url_field="href", text_field="text"): item
+        _csfc_apl_key(item): item
         for item in new_items
     }
     old_keys = set(old_by_key)
