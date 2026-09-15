@@ -1,0 +1,460 @@
+{
+  "period_start": "2026-09-14T11:27:12.995189+00:00",
+  "period_end": "2026-09-15T10:50:20.964812+00:00",
+  "niap": {
+    "pps": {
+      "added": [],
+      "removed": [],
+      "sunset_changes": [],
+      "status_changes": [],
+      "revised": [],
+      "content_changes": []
+    },
+    "tds": {
+      "added": [],
+      "removed": []
+    },
+    "cisco_ndcpp": {
+      "added": [],
+      "removed": [],
+      "newly_archived": []
+    },
+    "pcl_all": {
+      "added": [],
+      "removed": [],
+      "newly_archived": [
+        {
+          "active_maintenances": [],
+          "am_sort": "2026-09-15T00:00:00Z",
+          "assigned_lab_name": "Acumen Security",
+          "certification_date": "2021-09-15T00:00:00Z",
+          "from_cc_portal": false,
+          "product_id": 11193,
+          "product_name": "SK41D-4TR KVM, Firmware Version 44404-E7E7",
+          "protection_profiles": [
+            {
+              "pp_id": 412,
+              "pp_name": "Protection Profile for Peripheral Sharing Device Version 4.0",
+              "pp_short_name": "PP_PSD_V4.0"
+            },
+            {
+              "pp_id": 435,
+              "pp_name": "PP-Module for Keyboard/Mouse Devices Version 1.0",
+              "pp_short_name": "MOD_KM_V1.0"
+            },
+            {
+              "pp_id": 436,
+              "pp_name": "PP-Module for Video/Display Devices Version 1.0",
+              "pp_short_name": "MOD_VI_V1.0"
+            }
+          ],
+          "status_sort": "Archived",
+          "submitting_country_id_code": "US",
+          "submitting_country_id_name": "United States",
+          "sunset_date": "2026-09-15T00:00:00Z",
+          "tech_types": [
+            "Peripheral Switch",
+            " Sharing Switch"
+          ],
+          "vendor_id_name": "High Sec Labs, Inc.",
+          "v_id": 11193,
+          "kicked_off_date": "2021-03-24T00:00:00Z"
+        }
+      ]
+    },
+    "in_evaluation": {
+      "added": [],
+      "removed": [],
+      "current_count": 45
+    },
+    "news": {
+      "added": [],
+      "revised": [],
+      "deactivated": [],
+      "reactivated": [],
+      "removed": []
+    },
+    "events": {
+      "added": [],
+      "revised": [],
+      "deactivated": [],
+      "reactivated": [],
+      "removed": []
+    },
+    "policies": {
+      "added": [],
+      "revised": [],
+      "archived": [],
+      "reactivated": [],
+      "removed": []
+    }
+  },
+  "cc_portal": {
+    "news": {
+      "added": []
+    },
+    "pps": {
+      "added": []
+    },
+    "products": {
+      "added": []
+    }
+  },
+  "cctl_labs": {},
+  "csfc": {
+    "pages": {
+      "cap_packages": {
+        "added": [
+          {
+            "text": "EUD Composition Guidance Addendum 2.0 Draft 1.0 The CSfC EUD Composition Guidance Addendum 2.0 Draft 1.0 defines requirements and guidance for implementing hardware separated EUDs within MA, CWLAN, and DAR CPs.\u00a0 The following portions of these CPs will be updated by this addendum:\u00a0 EUD provisioning, multiple security-level requirements, incorporating Retransmission Device Protection Profile requirements, Dedicated Outer (device) requirements and different deployment options for hardware separated EUDs.\u00a0 This document is currently a draft document that is subject to change; any changes to this addendum will result in updates to all CSfC CPs which deal with EUDs. Download: EUD Composition Guidance Addendum 2.0 Draft 1.0 Please send comments to the Wi-Fi@nsa.gov alias. Download: EUD Composition Addendum 2.0 Draft 1.0 Comment Matrix Tactical Capability Package The Tactical Capability Package Version 1.0.0, dated 1 July 2024, has been approved by the Deputy National Manager (DNM) for Nation",
+            "href": "https://www.nsa.gov/Portals/75/documents/CSfC CP Updates 2026/(U) CSfC EUD Composition Guidance Addendum 2.0 Draft 1.0.pdf?ver=-e2rjuN2v7EA11eATR0raw%3d%3d",
+            "content_sha256": "4d4a08f0cd4191fa65e87cb5015acc7513be6523fcd39c39fbcbe6412408668e"
+          }
+        ],
+        "removed": [],
+        "updated": [
+          {
+            "text": "Download the Continuous Monitoring Annex V1.1.0 . Contact the Continuous Monitoring Team . Applicable Forms: NSA provides downloadable resources for assistance with the CSfC process. To request a copy of the Compliance Checklist Workbook, please contact csfc@nsa.gov . Download: Continuous Monitoring Requirements Annex v1.1.0 Requirements Mapping to NIST SP 800-53 Security Controls .",
+            "href": "https://www.nsa.gov/Portals/75/documents/resources/everyone/csfc/capability-packages/(U) Approved Continuous Monitoring Annex v1_1_0 - 2 March 23.pdf?ver=DTH7ErwKqOYB5K4bhGzYUg%3d%3d",
+            "content_sha256": "1b0ad1231ad9a43f965f63c6b0234103e27e70ec705788e98ecbf42a72b0a51c",
+            "_old_text": "Download the Continuous Monitoring Annex V1.1.0 . Contact the Continuous Monitoring Team . Applicable Forms: NSA provides downloadable resources for assistance with the CSfC process. To request a copy of the Compliance Checklist Workbook, please contact csfc@nsa.gov . Download: Continuous Monitoring Requirements Annex v1.1.0 Requirements Mapping to NIST SP 800-53 Security Controls . Tactical Capability Package The Tactical Capability Package Version 1.0.0, dated 1 July 2024, has been approved by the Deputy National Manager (DNM) for National Security Systems (NSS) to meet the need for CSfC customers operating on the Tactical edge. The CP has guidance for CSfC customers deploying portable network infrastructure within tactical edge or battle field environment using the Commercial National Security Algorithm (CNSA) Suite with National Information Assurance Partnership (NIAP) validated products to compose secure tactical solutions. For more information on this CP, please contact the CSfC ",
+            "_old_content_sha256": "b1aecf0432cbbf34462cbcedf6ef6a4aac3ce121214a0f83e592a3c08fc21acd"
+          }
+        ]
+      }
+    },
+    "selection_links": {},
+    "documents": {
+      "added": [],
+      "removed": [],
+      "updated": []
+    },
+    "feeds": {}
+  },
+  "cc_crypto": {
+    "pages": {}
+  },
+  "nato": {
+    "pages": {},
+    "cisco_added": [],
+    "cisco_removed": [],
+    "baseline_reset": false
+  },
+  "eucc": {
+    "pages": {
+      "certificates": {
+        "added": [
+          {
+            "name": "Nokia Lightstpan Access Node MF-2",
+            "text": "Nokia Lightstpan Access Node MF-2 | 10 September 2026 | Nokia Lightspan Access Node MF is a network device that serves as the connection point between the end-user's equipment (like home routers or business gateways) and the core network of a telecom provider",
+            "href": "https://certification.enisa.europa.eu/certificates/eucc-3089-2026-000002-i-00_en",
+            "cert_date": "2026-09-10T12:00:00Z",
+            "description": "Nokia Lightspan Access Node MF is a network device that serves as the connection point between the end-user's equipment (like home routers or business gateways) and the core network of a telecom provider"
+          },
+          {
+            "name": "ST-1506 AFxZ 5.0.0:4.0.0.",
+            "text": "ST-1506 AFxZ 5.0.0:4.0.0. | 17 August 2026 | The Target of Evaluation (TOE) is the eHealth Card Terminal with Touchscreen Display, ST-1506 AFxZ 5.0.0:4.0.0.",
+            "href": "https://certification.enisa.europa.eu/certificates/eucc-3087-2026-000015-i-00_en",
+            "cert_date": "2026-08-17T12:00:00Z",
+            "description": "The Target of Evaluation (TOE) is the eHealth Card Terminal with Touchscreen Display, ST-1506 AFxZ 5.0.0:4.0.0."
+          },
+          {
+            "name": "IFX_CCI_00004Fh",
+            "text": "IFX_CCI_00004Fh | 17 August 2026 | The TOE provides a platform for an operating system and application software used requiring a high level of resistance against attackers",
+            "href": "https://certification.enisa.europa.eu/certificates/eucc-3087-2026-000013-i-00_en",
+            "cert_date": "2026-08-17T12:00:00Z",
+            "description": "The TOE provides a platform for an operating system and application software used requiring a high level of resistance against attackers"
+          }
+        ],
+        "removed": [
+          {
+            "name": "IFX_CCI_00004Fh",
+            "text": "IFX_CCI_00004Fh | 24 July 2026 | The TOE provides a platform for an operating system and application software used requiring a high level of resistance against attackers",
+            "href": "https://certification.enisa.europa.eu/certificates/eucc-3087-2026-000013-i-00_en",
+            "cert_date": "2026-07-24T12:00:00Z",
+            "description": "The TOE provides a platform for an operating system and application software used requiring a high level of resistance against attackers"
+          },
+          {
+            "name": "S3FT9MF/S3FT9MT/S3FT9MS",
+            "text": "S3FT9MF/S3FT9MT/S3FT9MS | 27 April 2026 | The product evaluated is \u00ab S3FT9MF/S3FT9MT/S3FT9MS \u00bb developed by SAMSUNG. This product is intended to be used for smartcards applications.",
+            "href": "https://certification.enisa.europa.eu/certificates/eucc-3090-2026-000027-i-00_en",
+            "cert_date": "2026-04-27T12:00:00Z",
+            "description": "The product evaluated is \u00ab S3FT9MF/S3FT9MT/S3FT9MS \u00bb developed by SAMSUNG. This product is intended to be used for smartcards applications."
+          },
+          {
+            "name": "S3FT9MH/S3FT9MV/S3FT9MG",
+            "text": "S3FT9MH/S3FT9MV/S3FT9MG | 27 April 2026 | The product evaluated is \u00ab S3FT9MH/S3FT9MV/S3FT9MG \u00bb developed by SAMSUNG. This product is intended to be used for smartcards applications.",
+            "href": "https://certification.enisa.europa.eu/certificates/eucc-3090-2026-000028-i-00_en",
+            "cert_date": "2026-04-27T12:00:00Z",
+            "description": "The product evaluated is \u00ab S3FT9MH/S3FT9MV/S3FT9MG \u00bb developed by SAMSUNG. This product is intended to be used for smartcards applications."
+          }
+        ]
+      }
+    },
+    "cisco_added": [],
+    "cisco_removed": [],
+    "baseline_reset": false
+  },
+  "nd_itc": {
+    "nit_rfis": {
+      "added": [],
+      "status_changes": [],
+      "revised": [],
+      "newly_archived": []
+    },
+    "awl": {
+      "added": [],
+      "removed": [],
+      "version_changes": [],
+      "list_updates": []
+    },
+    "baseline_reset": false,
+    "collection_failure": false
+  },
+  "ietf_cnsa": {
+    "added": [],
+    "removed": [],
+    "updated": [],
+    "rfc9846_adoption": []
+  },
+  "ieee_pqc": {
+    "added": [],
+    "removed": [],
+    "updated": []
+  },
+  "source_health": {
+    "niap": {
+      "label": "NIAP",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "PCL products",
+          "observed": 1761,
+          "minimum": 50
+        },
+        {
+          "name": "Protection Profiles",
+          "observed": 271,
+          "minimum": 10
+        },
+        {
+          "name": "PQC PP file-version records",
+          "observed": 13,
+          "minimum": 1,
+          "required_for_diff_baseline": false
+        },
+        {
+          "name": "PQC PP full-content hashes",
+          "observed": 7,
+          "minimum": 1,
+          "required_for_diff_baseline": false
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-09-15T10:50:20.964812+00:00",
+      "subcollections": {
+        "news": {
+          "label": "News announcements",
+          "status": "healthy",
+          "observed": 357,
+          "consecutive_failures": 0,
+          "using_last_known_good": false
+        },
+        "events": {
+          "label": "Events",
+          "status": "healthy",
+          "observed": 0,
+          "consecutive_failures": 0,
+          "using_last_known_good": false
+        },
+        "policies": {
+          "label": "Policy letters",
+          "status": "healthy",
+          "observed": 40,
+          "consecutive_failures": 0,
+          "using_last_known_good": false
+        }
+      }
+    },
+    "cc_portal": {
+      "label": "CC Portal",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "portal records",
+          "observed": 180,
+          "minimum": 1
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-09-15T10:50:20.964812+00:00"
+    },
+    "cctl_labs": {
+      "label": "CCTL Labs",
+      "status": "stale",
+      "checks": [
+        {
+          "name": "lab feed items",
+          "observed": 9,
+          "minimum": 1
+        }
+      ],
+      "consecutive_failures": 1,
+      "using_last_known_good": true,
+      "checked_at": "2026-09-15T10:50:20.964812+00:00",
+      "detail": "collection collapse (retained last-known-good): Lightship Security 0/10"
+    },
+    "csfc": {
+      "label": "CSfC",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "APL items",
+          "observed": 121,
+          "minimum": 5
+        },
+        {
+          "name": "announcements",
+          "observed": 8,
+          "minimum": 1
+        },
+        {
+          "name": "tracked capability packages",
+          "observed": 5,
+          "minimum": 5,
+          "required_for_diff_baseline": false
+        },
+        {
+          "name": "capability-package hashes",
+          "observed": 5,
+          "minimum": 5,
+          "required_for_diff_baseline": false
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-09-15T10:50:20.964812+00:00"
+    },
+    "cc_crypto": {
+      "label": "CC Crypto",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "publications",
+          "observed": 121,
+          "minimum": 5
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-09-15T10:50:20.964812+00:00"
+    },
+    "nato": {
+      "label": "NATO NIAPCL",
+      "status": "healthy",
+      "mode": "manual",
+      "checks": [],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "detail": "manual baseline (40 Cisco product(s)); updated via the NATO capture GitHub issue workflow",
+      "checked_at": "2026-09-15T10:50:20.964812+00:00"
+    },
+    "eucc": {
+      "label": "EUCC / ENISA",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "certificates",
+          "observed": 50,
+          "minimum": 2
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-09-15T10:50:20.964812+00:00"
+    },
+    "nd_itc": {
+      "label": "ND-iTC",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "NIT RFIs",
+          "observed": 32,
+          "minimum": 5
+        },
+        {
+          "name": "Allowed-With entries",
+          "observed": 22,
+          "minimum": 1
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-09-15T10:50:20.964812+00:00"
+    },
+    "ietf_cnsa": {
+      "label": "IETF CNSA 2.0",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "CNSA profile/RFC records",
+          "observed": 5,
+          "minimum": 5
+        },
+        {
+          "name": "CNSA full-text hashes",
+          "observed": 5,
+          "minimum": 5
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-09-15T10:50:20.964812+00:00"
+    },
+    "ieee_pqc": {
+      "label": "IEEE 802.11bt",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "P802.11bt project records",
+          "observed": 1,
+          "minimum": 1
+        },
+        {
+          "name": "P802.11bt timeline hashes",
+          "observed": 1,
+          "minimum": 1
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-09-15T10:50:20.964812+00:00"
+    }
+  },
+  "alerts": [
+    {
+      "source": "CSfC: cap_packages",
+      "kind": "new",
+      "title": "EUD Composition Guidance Addendum 2.0 Draft 1.0 The CSfC EUD Composition Guidance Addendum 2.0 Draft 1.0 defines require\u2026",
+      "url": "https://www.nsa.gov/Portals/75/documents/CSfC CP Updates 2026/(U) CSfC EUD Composition Guidance Addendum 2.0 Draft 1.0.pdf?ver=-e2rjuN2v7EA11eATR0raw%3d%3d",
+      "detail": "New item on CSfC cap packages page",
+      "matched_keywords": [
+        "CSfC"
+      ],
+      "tab": "us"
+    },
+    {
+      "source": "CSfC: cap_packages",
+      "kind": "updated",
+      "title": "Download the Continuous Monitoring Annex V1.1.0 . Contact the Continuous Monitoring Team . Applicable Forms: NSA provide\u2026",
+      "url": "https://www.nsa.gov/Portals/75/documents/resources/everyone/csfc/capability-packages/(U) Approved Continuous Monitoring Annex v1_1_0 - 2 March 23.pdf?ver=DTH7ErwKqOYB5K4bhGzYUg%3d%3d",
+      "detail": "Listing updated on CSfC cap packages page",
+      "matched_keywords": [
+        "CSfC"
+      ],
+      "tab": "us"
+    }
+  ]
+}
