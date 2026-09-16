@@ -2,7 +2,7 @@
 <rss version="2.0"><channel>
 <title>CC Pulse</title>
 <link>https://kr15tyk.github.io/CC-pulse/cc_dashboard.html</link>
-<description>Common Criteria monitoring - 2026-09-15 06:50 ET</description>
-<item><title>ALERT: CSfC: cap_packages – EUD Composition Guidance Addendum 2.0 Draft 1.0 The CSfC EUD Composition Guidance Addendum 2.0 Draft 1.0 defines require…</title><link>https://kr15tyk.github.io/CC-pulse/cc_dashboard.html</link><description>Kind: new | Keywords: CSfC</description></item>
-<item><title>ALERT: CSfC: cap_packages – Download the Continuous Monitoring Annex V1.1.0 . Contact the Continuous Monitoring Team . Applicable Forms: NSA provide…</title><link>https://kr15tyk.github.io/CC-pulse/cc_dashboard.html</link><description>Kind: updated | Keywords: CSfC</description></item>
+<description>Common Criteria monitoring - 2026-09-16 06:40 ET</description>
+<item><title>IETF CNSA Updated: Commercial National Security Algorithm (CNSA) Suite 2.0 Profile for TLS 1.3</title><link>https://datatracker.ietf.org/doc/draft-becker-cnsa2-tls-profile/</link><description>states</description></item>
+<item><title>ALERT: IETF CNSA – Commercial National Security Algorithm (CNSA) Suite 2.0 Profile for TLS 1.3</title><link>https://kr15tyk.github.io/CC-pulse/cc_dashboard.html</link><description>Kind: updated | Keywords: CNSA, PQC</description></item>
 </channel></rss>
