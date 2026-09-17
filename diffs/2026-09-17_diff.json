@@ -1,0 +1,1144 @@
+{
+  "period_start": "2026-09-16T10:40:20.047957+00:00",
+  "period_end": "2026-09-17T10:47:54.405404+00:00",
+  "niap": {
+    "pps": {
+      "added": [],
+      "removed": [],
+      "sunset_changes": [],
+      "status_changes": [],
+      "revised": [],
+      "content_changes": []
+    },
+    "tds": {
+      "added": [
+        {
+          "td_id": 1063,
+          "identifier": "TD1063",
+          "title": "Clarification Regarding Optional Selections Required by RFC8446",
+          "protection_profile": [
+            {
+              "pp_id": 519,
+              "pp_name": "Functional Package for Transport Layer Security (TLS) Version 2.1",
+              "pp_common_name": "Functional Package for Transport Layer Security (TLS) Version 2.1",
+              "cc_version": "CC:2022",
+              "mr_version": null,
+              "pp_date": "2025-09-03T00:00:00Z",
+              "entrydate": "2025-09-03T12:25:21.558000Z",
+              "tech_type": "Network Encryption",
+              "pp_sponsor_id": "NIAP",
+              "community_id": null,
+              "status": "Publishing",
+              "sunset_date": null,
+              "pp_overview": "<p style=\"margin-top: 0in; background: white; margin-right: 0in; margin-left: 0in; font-size: 12pt; font-family: 'Times New Roman', serif;\"><span style=\"font-family: Arial, sans-serif; color: #212529;\">Transport Layer Security (TLS) and the closely-related Datagram TLS (DTLS) are cryptographic protocols designed to provide communications security over IP networks.&nbsp;The primary goal of the TLS protocol is to provide confidentiality and integrity of data transmitted between two communicating endpoints, as well as authentication of at least the server endpoint.</span></p>\r\n<p style=\"margin-top: 0in; background: rgb(255, 255, 253); margin-right: 0in; margin-left: 0in; font-size: 12pt; font-family: 'Times New Roman', serif;\"><span style=\"font-family: Arial, sans-serif; color: #000006;\">This \"Functional Package for Transport Layer Security\" (short name \"TLS-PKG\") defines functional requirements for the implementation of the Transport Layer Security (TLS) and Datagram TLS (DTLS) protocols.&nbsp;The requirements are intended to improve the security of products by enabling their evaluation.</span></p>",
+              "security_evaluation_summary": "<p style=\"margin-top: 0in; background: white; margin-right: 0in; margin-left: 0in; font-size: 12pt; font-family: 'Times New Roman', serif;\"><span style=\"font-family: Arial, sans-serif; color: #212529;\">The Target of Evaluation (TOE) in this Package is a product which acts as a TLS client or server, or both.&nbsp;This Package describes the security functionality of TLS in terms of CC.</span></p>\r\n<p style=\"margin: 0in 0in 1rem; background: white; box-sizing: border-box; font-variant-ligatures: normal; text-align: start; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; font-size: 12pt; font-family: 'Times New Roman', serif;\"><span style=\"font-family: Arial, sans-serif; color: #212529;\">The contents of this Package must be appropriately combined with a PP or PP-Module. When this Package is instantiated by a PP or PP-Module, the Package must include selection-based requirements in accordance with the selections or assignments indicated in the PP or PP-Module.</span></p>",
+              "environmental_strengths": "",
+              "pp_priority": null,
+              "created_on": null,
+              "removed_on": null,
+              "archived": false,
+              "assurance_maintenance": null,
+              "pp_estcompletion": null,
+              "pp_estcompletiondate": null,
+              "pp_transition": "2026-01-01T00:00:00Z",
+              "revised_on": null,
+              "pp_short_name": "PKG_TLS_V2.1",
+              "dod_compliant": false,
+              "csfceligible": true,
+              "constraint": null,
+              "predecessor_id": 465,
+              "successor_id": null,
+              "creator": 504,
+              "remover": null,
+              "editor": null
+            }
+          ],
+          "sunset_protection_profile": [],
+          "related_to": "FCS_TLSC_EXT.1.4",
+          "publication_date": "2026-09-16T15:00:38.175000Z",
+          "removed_on": null,
+          "status": "Published"
+        },
+        {
+          "td_id": 1062,
+          "identifier": "TD1062",
+          "title": "Clarification to Optional Extensions in FCS_TLSC_EXT.1.4 Application Note",
+          "protection_profile": [
+            {
+              "pp_id": 519,
+              "pp_name": "Functional Package for Transport Layer Security (TLS) Version 2.1",
+              "pp_common_name": "Functional Package for Transport Layer Security (TLS) Version 2.1",
+              "cc_version": "CC:2022",
+              "mr_version": null,
+              "pp_date": "2025-09-03T00:00:00Z",
+              "entrydate": "2025-09-03T12:25:21.558000Z",
+              "tech_type": "Network Encryption",
+              "pp_sponsor_id": "NIAP",
+              "community_id": null,
+              "status": "Publishing",
+              "sunset_date": null,
+              "pp_overview": "<p style=\"margin-top: 0in; background: white; margin-right: 0in; margin-left: 0in; font-size: 12pt; font-family: 'Times New Roman', serif;\"><span style=\"font-family: Arial, sans-serif; color: #212529;\">Transport Layer Security (TLS) and the closely-related Datagram TLS (DTLS) are cryptographic protocols designed to provide communications security over IP networks.&nbsp;The primary goal of the TLS protocol is to provide confidentiality and integrity of data transmitted between two communicating endpoints, as well as authentication of at least the server endpoint.</span></p>\r\n<p style=\"margin-top: 0in; background: rgb(255, 255, 253); margin-right: 0in; margin-left: 0in; font-size: 12pt; font-family: 'Times New Roman', serif;\"><span style=\"font-family: Arial, sans-serif; color: #000006;\">This \"Functional Package for Transport Layer Security\" (short name \"TLS-PKG\") defines functional requirements for the implementation of the Transport Layer Security (TLS) and Datagram TLS (DTLS) protocols.&nbsp;The requirements are intended to improve the security of products by enabling their evaluation.</span></p>",
+              "security_evaluation_summary": "<p style=\"margin-top: 0in; background: white; margin-right: 0in; margin-left: 0in; font-size: 12pt; font-family: 'Times New Roman', serif;\"><span style=\"font-family: Arial, sans-serif; color: #212529;\">The Target of Evaluation (TOE) in this Package is a product which acts as a TLS client or server, or both.&nbsp;This Package describes the security functionality of TLS in terms of CC.</span></p>\r\n<p style=\"margin: 0in 0in 1rem; background: white; box-sizing: border-box; font-variant-ligatures: normal; text-align: start; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; font-size: 12pt; font-family: 'Times New Roman', serif;\"><span style=\"font-family: Arial, sans-serif; color: #212529;\">The contents of this Package must be appropriately combined with a PP or PP-Module. When this Package is instantiated by a PP or PP-Module, the Package must include selection-based requirements in accordance with the selections or assignments indicated in the PP or PP-Module.</span></p>",
+              "environmental_strengths": "",
+              "pp_priority": null,
+              "created_on": null,
+              "removed_on": null,
+              "archived": false,
+              "assurance_maintenance": null,
+              "pp_estcompletion": null,
+              "pp_estcompletiondate": null,
+              "pp_transition": "2026-01-01T00:00:00Z",
+              "revised_on": null,
+              "pp_short_name": "PKG_TLS_V2.1",
+              "dod_compliant": false,
+              "csfceligible": true,
+              "constraint": null,
+              "predecessor_id": 465,
+              "successor_id": null,
+              "creator": 504,
+              "remover": null,
+              "editor": null
+            }
+          ],
+          "sunset_protection_profile": [],
+          "related_to": "FCS_TLSC_EXT.1.4",
+          "publication_date": "2026-09-16T14:58:07.053000Z",
+          "removed_on": null,
+          "status": "Published"
+        },
+        {
+          "td_id": 1064,
+          "identifier": "TD1064",
+          "title": "(D)TLS(C/S) Corrections",
+          "protection_profile": [
+            {
+              "pp_id": 519,
+              "pp_name": "Functional Package for Transport Layer Security (TLS) Version 2.1",
+              "pp_common_name": "Functional Package for Transport Layer Security (TLS) Version 2.1",
+              "cc_version": "CC:2022",
+              "mr_version": null,
+              "pp_date": "2025-09-03T00:00:00Z",
+              "entrydate": "2025-09-03T12:25:21.558000Z",
+              "tech_type": "Network Encryption",
+              "pp_sponsor_id": "NIAP",
+              "community_id": null,
+              "status": "Publishing",
+              "sunset_date": null,
+              "pp_overview": "<p style=\"margin-top: 0in; background: white; margin-right: 0in; margin-left: 0in; font-size: 12pt; font-family: 'Times New Roman', serif;\"><span style=\"font-family: Arial, sans-serif; color: #212529;\">Transport Layer Security (TLS) and the closely-related Datagram TLS (DTLS) are cryptographic protocols designed to provide communications security over IP networks.&nbsp;The primary goal of the TLS protocol is to provide confidentiality and integrity of data transmitted between two communicating endpoints, as well as authentication of at least the server endpoint.</span></p>\r\n<p style=\"margin-top: 0in; background: rgb(255, 255, 253); margin-right: 0in; margin-left: 0in; font-size: 12pt; font-family: 'Times New Roman', serif;\"><span style=\"font-family: Arial, sans-serif; color: #000006;\">This \"Functional Package for Transport Layer Security\" (short name \"TLS-PKG\") defines functional requirements for the implementation of the Transport Layer Security (TLS) and Datagram TLS (DTLS) protocols.&nbsp;The requirements are intended to improve the security of products by enabling their evaluation.</span></p>",
+              "security_evaluation_summary": "<p style=\"margin-top: 0in; background: white; margin-right: 0in; margin-left: 0in; font-size: 12pt; font-family: 'Times New Roman', serif;\"><span style=\"font-family: Arial, sans-serif; color: #212529;\">The Target of Evaluation (TOE) in this Package is a product which acts as a TLS client or server, or both.&nbsp;This Package describes the security functionality of TLS in terms of CC.</span></p>\r\n<p style=\"margin: 0in 0in 1rem; background: white; box-sizing: border-box; font-variant-ligatures: normal; text-align: start; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; font-size: 12pt; font-family: 'Times New Roman', serif;\"><span style=\"font-family: Arial, sans-serif; color: #212529;\">The contents of this Package must be appropriately combined with a PP or PP-Module. When this Package is instantiated by a PP or PP-Module, the Package must include selection-based requirements in accordance with the selections or assignments indicated in the PP or PP-Module.</span></p>",
+              "environmental_strengths": "",
+              "pp_priority": null,
+              "created_on": null,
+              "removed_on": null,
+              "archived": false,
+              "assurance_maintenance": null,
+              "pp_estcompletion": null,
+              "pp_estcompletiondate": null,
+              "pp_transition": "2026-01-01T00:00:00Z",
+              "revised_on": null,
+              "pp_short_name": "PKG_TLS_V2.1",
+              "dod_compliant": false,
+              "csfceligible": true,
+              "constraint": null,
+              "predecessor_id": 465,
+              "successor_id": null,
+              "creator": 504,
+              "remover": null,
+              "editor": null
+            }
+          ],
+          "sunset_protection_profile": [],
+          "related_to": "FCS_TLSC_EXT.1, FCS_TLSS_EXT.1, FCS_DTLSC_EXT.1, FCS_DTLSS_EXT.1",
+          "publication_date": "2026-09-16T15:07:08.001000Z",
+          "removed_on": null,
+          "status": "Published"
+        }
+      ],
+      "removed": []
+    },
+    "cisco_ndcpp": {
+      "added": [],
+      "removed": [],
+      "newly_archived": [
+        {
+          "active_maintenances": [],
+          "am_sort": "2026-09-17T00:00:00Z",
+          "assigned_lab_name": "Gossamer Security Solutions",
+          "certification_date": "2024-09-17T00:00:00Z",
+          "from_cc_portal": false,
+          "product_id": 11465,
+          "product_name": "Cisco Catalyst 9400X/9600X Series Switches 17.12",
+          "protection_profiles": [
+            {
+              "pp_id": 447,
+              "pp_name": "collaborative Protection Profile for Network Devices Version 2.2e",
+              "pp_short_name": "CPP_ND_V2.2E"
+            },
+            {
+              "pp_id": 480,
+              "pp_name": "PP-Module for MACsec Ethernet Encryption Version 1.0",
+              "pp_short_name": "MOD_MACSEC_V1.0"
+            }
+          ],
+          "status_sort": "Archived",
+          "submitting_country_id_code": "US",
+          "submitting_country_id_name": "United States",
+          "sunset_date": null,
+          "tech_types": [
+            "Network Device",
+            " Network Encryption"
+          ],
+          "vendor_id_name": "Cisco Systems, Inc.",
+          "v_id": 11465,
+          "kicked_off_date": "2024-03-27T00:00:00Z"
+        },
+        {
+          "active_maintenances": [],
+          "am_sort": "2026-09-17T00:00:00Z",
+          "assigned_lab_name": "Gossamer Security Solutions",
+          "certification_date": "2024-09-17T00:00:00Z",
+          "from_cc_portal": false,
+          "product_id": 11464,
+          "product_name": "Cisco Catalyst 9200CX/9300X/9300LM/9500X Series Switches 17.12",
+          "protection_profiles": [
+            {
+              "pp_id": 447,
+              "pp_name": "collaborative Protection Profile for Network Devices Version 2.2e",
+              "pp_short_name": "CPP_ND_V2.2E"
+            },
+            {
+              "pp_id": 480,
+              "pp_name": "PP-Module for MACsec Ethernet Encryption Version 1.0",
+              "pp_short_name": "MOD_MACSEC_V1.0"
+            }
+          ],
+          "status_sort": "Archived",
+          "submitting_country_id_code": "US",
+          "submitting_country_id_name": "United States",
+          "sunset_date": null,
+          "tech_types": [
+            "Network Device",
+            " Network Encryption"
+          ],
+          "vendor_id_name": "Cisco Systems, Inc.",
+          "v_id": 11464,
+          "kicked_off_date": "2024-04-09T00:00:00Z"
+        }
+      ]
+    },
+    "pcl_all": {
+      "added": [],
+      "removed": [],
+      "newly_archived": [
+        {
+          "active_maintenances": [],
+          "am_sort": "2026-09-17T00:00:00Z",
+          "assigned_lab_name": "Gossamer Security Solutions",
+          "certification_date": "2024-09-17T00:00:00Z",
+          "from_cc_portal": false,
+          "product_id": 11465,
+          "product_name": "Cisco Catalyst 9400X/9600X Series Switches 17.12",
+          "protection_profiles": [
+            {
+              "pp_id": 447,
+              "pp_name": "collaborative Protection Profile for Network Devices Version 2.2e",
+              "pp_short_name": "CPP_ND_V2.2E"
+            },
+            {
+              "pp_id": 480,
+              "pp_name": "PP-Module for MACsec Ethernet Encryption Version 1.0",
+              "pp_short_name": "MOD_MACSEC_V1.0"
+            }
+          ],
+          "status_sort": "Archived",
+          "submitting_country_id_code": "US",
+          "submitting_country_id_name": "United States",
+          "sunset_date": null,
+          "tech_types": [
+            "Network Device",
+            " Network Encryption"
+          ],
+          "vendor_id_name": "Cisco Systems, Inc.",
+          "v_id": 11465,
+          "kicked_off_date": "2024-03-27T00:00:00Z"
+        },
+        {
+          "active_maintenances": [],
+          "am_sort": "2026-09-17T00:00:00Z",
+          "assigned_lab_name": "Gossamer Security Solutions",
+          "certification_date": "2024-09-17T00:00:00Z",
+          "from_cc_portal": false,
+          "product_id": 11464,
+          "product_name": "Cisco Catalyst 9200CX/9300X/9300LM/9500X Series Switches 17.12",
+          "protection_profiles": [
+            {
+              "pp_id": 447,
+              "pp_name": "collaborative Protection Profile for Network Devices Version 2.2e",
+              "pp_short_name": "CPP_ND_V2.2E"
+            },
+            {
+              "pp_id": 480,
+              "pp_name": "PP-Module for MACsec Ethernet Encryption Version 1.0",
+              "pp_short_name": "MOD_MACSEC_V1.0"
+            }
+          ],
+          "status_sort": "Archived",
+          "submitting_country_id_code": "US",
+          "submitting_country_id_name": "United States",
+          "sunset_date": null,
+          "tech_types": [
+            "Network Device",
+            " Network Encryption"
+          ],
+          "vendor_id_name": "Cisco Systems, Inc.",
+          "v_id": 11464,
+          "kicked_off_date": "2024-04-09T00:00:00Z"
+        }
+      ]
+    },
+    "in_evaluation": {
+      "added": [],
+      "removed": [],
+      "current_count": 45
+    },
+    "news": {
+      "added": [],
+      "revised": [],
+      "deactivated": [],
+      "reactivated": [],
+      "removed": []
+    },
+    "events": {
+      "added": [],
+      "revised": [],
+      "deactivated": [],
+      "reactivated": [],
+      "removed": []
+    },
+    "policies": {
+      "added": [],
+      "revised": [],
+      "archived": [],
+      "reactivated": [],
+      "removed": []
+    }
+  },
+  "cc_portal": {
+    "news": {
+      "added": []
+    },
+    "pps": {
+      "added": []
+    },
+    "products": {
+      "added": []
+    }
+  },
+  "cctl_labs": {},
+  "csfc": {
+    "pages": {},
+    "selection_links": {},
+    "documents": {
+      "added": [],
+      "removed": [],
+      "updated": []
+    },
+    "feeds": {}
+  },
+  "cc_crypto": {
+    "pages": {}
+  },
+  "nato": {
+    "pages": {},
+    "cisco_added": [],
+    "cisco_removed": [],
+    "baseline_reset": false
+  },
+  "eucc": {
+    "pages": {},
+    "cisco_added": [],
+    "cisco_removed": [],
+    "baseline_reset": false
+  },
+  "nd_itc": {
+    "nit_rfis": {
+      "added": [],
+      "status_changes": [],
+      "revised": [],
+      "newly_archived": []
+    },
+    "awl": {
+      "added": [
+        {
+          "list": "awl_ndcpp",
+          "section": "NDcPP v4.0",
+          "object_id": "PP-Module for Authentication Servers",
+          "object_version": "2.0 (10 March 2026)",
+          "owner": "NIAP ( niap@niap-ccevs.org )",
+          "notes": "None",
+          "text": "NDcPP v4.0 | PP-Module for Authentication Servers | 2.0 (10 March 2026)"
+        },
+        {
+          "list": "awl_fw",
+          "section": "FW Module 2.0",
+          "object_id": "PP-Module for Enterprise Session Controller (ESC)",
+          "object_version": "2.0 (10 March 2026)",
+          "owner": "NIAP ( niap@niap-ccevs.org )",
+          "notes": "None",
+          "text": "FW Module 2.0 | PP-Module for Enterprise Session Controller (ESC) | 2.0 (10 March 2026)"
+        },
+        {
+          "list": "awl_ndcpp",
+          "section": "NDcPP v4.0",
+          "object_id": "PP-Module for MACsec Ethernet Encryption",
+          "object_version": "2.0 (17 April 2026)",
+          "owner": "NIAP ( niap@niap-ccevs.org )",
+          "notes": "None",
+          "text": "NDcPP v4.0 | PP-Module for MACsec Ethernet Encryption | 2.0 (17 April 2026)"
+        },
+        {
+          "list": "awl_ndcpp",
+          "section": "NDcPP v4.0",
+          "object_id": "PP-Module for Voice/Video over IP (VVoIP) Endpoints",
+          "object_version": "2.0 (17 March 2026)",
+          "owner": "NIAP ( niap@niap-ccevs.org )",
+          "notes": "None",
+          "text": "NDcPP v4.0 | PP-Module for Voice/Video over IP (VVoIP) Endpoints | 2.0 (17 March 2026)"
+        },
+        {
+          "list": "awl_ndcpp",
+          "section": "NDcPP v4.0",
+          "object_id": "PP-Module for Wireless Intrusion Detection/Prevention Systems (WIDS/WIPS)",
+          "object_version": "3.0 (21 January 2026)",
+          "owner": "NIAP ( niap@niap-ccevs.org )",
+          "notes": "None",
+          "text": "NDcPP v4.0 | PP-Module for Wireless Intrusion Detection/Prevention Systems (WIDS/WIPS) | 3.0 (21 January 2026)"
+        },
+        {
+          "list": "awl_ndcpp",
+          "section": "NDcPP v4.0",
+          "object_id": "PP-Module for Session Border Controller (SBC)",
+          "object_version": "2.0 (17 March 2026)",
+          "owner": "NIAP ( niap@niap-ccevs.org )",
+          "notes": "None",
+          "text": "NDcPP v4.0 | PP-Module for Session Border Controller (SBC) | 2.0 (17 March 2026)"
+        },
+        {
+          "list": "awl_fw",
+          "section": "FW Module 2.0",
+          "object_id": "PP-Module for Session Border Controller (SBC)",
+          "object_version": "2.0 (17 March 2026)",
+          "owner": "NIAP ( niap@niap-ccevs.org )",
+          "notes": "None",
+          "text": "FW Module 2.0 | PP-Module for Session Border Controller (SBC) | 2.0 (17 March 2026)"
+        },
+        {
+          "list": "awl_fw",
+          "section": "FW Module 2.0",
+          "object_id": "PP-Module for MACsec Ethernet Encryption",
+          "object_version": "2.0 (17 April 2026)",
+          "owner": "NIAP ( niap@niap-ccevs.org )",
+          "notes": "None",
+          "text": "FW Module 2.0 | PP-Module for MACsec Ethernet Encryption | 2.0 (17 April 2026)"
+        },
+        {
+          "list": "awl_ndcpp",
+          "section": "NDcPP v4.0",
+          "object_id": "PP-Module for Enterprise Session Controller (ESC)",
+          "object_version": "2.0 (10 March 2026)",
+          "owner": "NIAP ( niap@niap-ccevs.org )",
+          "notes": "None",
+          "text": "NDcPP v4.0 | PP-Module for Enterprise Session Controller (ESC) | 2.0 (10 March 2026)"
+        },
+        {
+          "list": "awl_fw",
+          "section": "FW Module 2.0",
+          "object_id": "PP-Module for Virtual Private Network (VPN) Gateways",
+          "object_version": "2.0 (21 January 2026)",
+          "owner": "NIAP ( niap@niap-ccevs.org )",
+          "notes": "None",
+          "text": "FW Module 2.0 | PP-Module for Virtual Private Network (VPN) Gateways | 2.0 (21 January 2026)"
+        },
+        {
+          "list": "awl_fw",
+          "section": "FW Module 2.0",
+          "object_id": "PP-Module for Intrusion Prevention Systems (IPS)",
+          "object_version": "2.0 (10 March 2026)",
+          "owner": "NIAP ( niap@niap-ccevs.org )",
+          "notes": "None",
+          "text": "FW Module 2.0 | PP-Module for Intrusion Prevention Systems (IPS) | 2.0 (10 March 2026)"
+        },
+        {
+          "list": "awl_fw",
+          "section": "FW Module 2.0",
+          "object_id": "PP-Module for Voice/Video over IP (VVoIP) Endpoints",
+          "object_version": "2.0 (17 March 2026)",
+          "owner": "NIAP ( niap@niap-ccevs.org )",
+          "notes": "None",
+          "text": "FW Module 2.0 | PP-Module for Voice/Video over IP (VVoIP) Endpoints | 2.0 (17 March 2026)"
+        },
+        {
+          "list": "awl_ndcpp",
+          "section": "NDcPP v4.0",
+          "object_id": "PP-Module for Virtual Private Network (VPN) Gateways",
+          "object_version": "2.0 (21 January 2026)",
+          "owner": "NIAP ( niap@niap-ccevs.org )",
+          "notes": "None",
+          "text": "NDcPP v4.0 | PP-Module for Virtual Private Network (VPN) Gateways | 2.0 (21 January 2026)"
+        },
+        {
+          "list": "awl_ndcpp",
+          "section": "NDcPP v4.0",
+          "object_id": "PP-Module for Intrusion Prevention Systems (IPS)",
+          "object_version": "2.0 (10 March 2026)",
+          "owner": "NIAP ( niap@niap-ccevs.org )",
+          "notes": "None",
+          "text": "NDcPP v4.0 | PP-Module for Intrusion Prevention Systems (IPS) | 2.0 (10 March 2026)"
+        },
+        {
+          "list": "awl_fw",
+          "section": "FW Module 2.0",
+          "object_id": "PP-Module for Wireless Intrusion Detection/Prevention Systems (WIDS/WIPS)",
+          "object_version": "3.0 (21 January 2026)",
+          "owner": "NIAP ( niap@niap-ccevs.org )",
+          "notes": "None",
+          "text": "FW Module 2.0 | PP-Module for Wireless Intrusion Detection/Prevention Systems (WIDS/WIPS) | 3.0 (21 January 2026)"
+        }
+      ],
+      "removed": [
+        {
+          "list": "awl_ndcpp",
+          "section": "NDcPP v3.0e",
+          "object_id": "PP-Module for Wireless Intrusion Detection/Prevention Systems (WIDS/WIPS)",
+          "object_version": "1.0 (30 September 2020)",
+          "owner": "NIAP ( niap@niap-ccevs.org )",
+          "notes": "None",
+          "text": "NDcPP v3.0e | PP-Module for Wireless Intrusion Detection/Prevention Systems (WIDS/WIPS) | 1.0 (30 September 2020)"
+        },
+        {
+          "list": "awl_fw",
+          "section": "FW Module v1.4e",
+          "object_id": "PP-Module for Virtual Private Network (VPN) Gateways",
+          "object_version": "1.3 (10 August 2023)",
+          "owner": "NIAP ( niap@niap-ccevs.org )",
+          "notes": "None",
+          "text": "FW Module v1.4e | PP-Module for Virtual Private Network (VPN) Gateways | 1.3 (10 August 2023)"
+        },
+        {
+          "list": "awl_ndcpp",
+          "section": "NDcPP v3.0e",
+          "object_id": "PP-Module for Enterprise Session Controller (ESC)",
+          "object_version": "1.0 (19 November 2020)",
+          "owner": "NIAP ( niap@niap-ccevs.org )",
+          "notes": "None",
+          "text": "NDcPP v3.0e | PP-Module for Enterprise Session Controller (ESC) | 1.0 (19 November 2020)"
+        },
+        {
+          "list": "awl_fw",
+          "section": "FW Module v1.4e",
+          "object_id": "PP-Module for Enterprise Session Controller (ESC)",
+          "object_version": "1.0 (19 November 2020)",
+          "owner": "NIAP ( niap@niap-ccevs.org )",
+          "notes": "None",
+          "text": "FW Module v1.4e | PP-Module for Enterprise Session Controller (ESC) | 1.0 (19 November 2020)"
+        },
+        {
+          "list": "awl_fw",
+          "section": "FW Module v1.4e",
+          "object_id": "PP-Module for Intrusion Prevention Systems (IPS)",
+          "object_version": "1.0 (11 May 2021)",
+          "owner": "NIAP ( niap@niap-ccevs.org )",
+          "notes": "None",
+          "text": "FW Module v1.4e | PP-Module for Intrusion Prevention Systems (IPS) | 1.0 (11 May 2021)"
+        },
+        {
+          "list": "awl_fw",
+          "section": "FW Module v1.4e",
+          "object_id": "PP-Module for Wireless Intrusion Detection/Prevention Systems (WIDS/WIPS)",
+          "object_version": "1.0 (30 September 2020)",
+          "owner": "NIAP ( niap@niap-ccevs.org )",
+          "notes": "None",
+          "text": "FW Module v1.4e | PP-Module for Wireless Intrusion Detection/Prevention Systems (WIDS/WIPS) | 1.0 (30 September 2020)"
+        },
+        {
+          "list": "awl_ndcpp",
+          "section": "NDcPP v3.0e",
+          "object_id": "PP-Module for Intrusion Prevention Systems (IPS)",
+          "object_version": "1.0 (11 May 2021)",
+          "owner": "NIAP ( niap@niap-ccevs.org )",
+          "notes": "None",
+          "text": "NDcPP v3.0e | PP-Module for Intrusion Prevention Systems (IPS) | 1.0 (11 May 2021)"
+        },
+        {
+          "list": "awl_ndcpp",
+          "section": "NDcPP v3.0e",
+          "object_id": "PP-Module for Virtual Private Network (VPN) Gateways",
+          "object_version": "1.3 (10 August 2023)",
+          "owner": "NIAP ( niap@niap-ccevs.org )",
+          "notes": "None",
+          "text": "NDcPP v3.0e | PP-Module for Virtual Private Network (VPN) Gateways | 1.3 (10 August 2023)"
+        }
+      ],
+      "version_changes": [
+        {
+          "list": "awl_ndcpp",
+          "section": "NDcPP v3.0e",
+          "object_id": "PP-Module for MACsec Ethernet Encryption",
+          "object_version": "1.0 (2 March 2023)",
+          "owner": "NIAP ( niap@niap-ccevs.org )",
+          "notes": "None",
+          "text": "NDcPP v3.0e | PP-Module for MACsec Ethernet Encryption | 1.0 (2 March 2023)",
+          "old_version": "1.0 (22 December 2022)",
+          "new_version": "1.0 (2 March 2023)"
+        },
+        {
+          "list": "awl_fw",
+          "section": "FW Module v1.4e",
+          "object_id": "PP-Module for MACsec Ethernet Encryption",
+          "object_version": "1.0 (2 March 2023)",
+          "owner": "NIAP ( niap@niap-ccevs.org )",
+          "notes": "None",
+          "text": "FW Module v1.4e | PP-Module for MACsec Ethernet Encryption | 1.0 (2 March 2023)",
+          "old_version": "1.0 (16 December 2023)",
+          "new_version": "1.0 (2 March 2023)"
+        }
+      ],
+      "list_updates": [
+        {
+          "list": "awl_ndcpp",
+          "awl_version": "4.0r2",
+          "awl_date": "16 September 2026",
+          "old_awl_version": "4.0r1"
+        },
+        {
+          "list": "awl_fw",
+          "awl_version": "2.0r1",
+          "awl_date": "16 September 2026",
+          "old_awl_version": "2.0"
+        }
+      ]
+    },
+    "baseline_reset": false,
+    "collection_failure": false
+  },
+  "ietf_cnsa": {
+    "added": [],
+    "removed": [],
+    "updated": [],
+    "rfc9846_adoption": []
+  },
+  "ieee_pqc": {
+    "added": [],
+    "removed": [],
+    "updated": []
+  },
+  "source_health": {
+    "niap": {
+      "label": "NIAP",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "PCL products",
+          "observed": 1761,
+          "minimum": 50
+        },
+        {
+          "name": "Protection Profiles",
+          "observed": 271,
+          "minimum": 10
+        },
+        {
+          "name": "PQC PP file-version records",
+          "observed": 13,
+          "minimum": 1,
+          "required_for_diff_baseline": false
+        },
+        {
+          "name": "PQC PP full-content hashes",
+          "observed": 7,
+          "minimum": 1,
+          "required_for_diff_baseline": false
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-09-17T10:47:54.405404+00:00",
+      "subcollections": {
+        "news": {
+          "label": "News announcements",
+          "status": "healthy",
+          "observed": 357,
+          "consecutive_failures": 0,
+          "using_last_known_good": false
+        },
+        "events": {
+          "label": "Events",
+          "status": "healthy",
+          "observed": 0,
+          "consecutive_failures": 0,
+          "using_last_known_good": false
+        },
+        "policies": {
+          "label": "Policy letters",
+          "status": "healthy",
+          "observed": 40,
+          "consecutive_failures": 0,
+          "using_last_known_good": false
+        }
+      }
+    },
+    "cc_portal": {
+      "label": "CC Portal",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "portal records",
+          "observed": 180,
+          "minimum": 1
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-09-17T10:47:54.405404+00:00"
+    },
+    "cctl_labs": {
+      "label": "CCTL Labs",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "lab feed items",
+          "observed": 19,
+          "minimum": 1
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-09-17T10:47:54.405404+00:00"
+    },
+    "csfc": {
+      "label": "CSfC",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "APL items",
+          "observed": 121,
+          "minimum": 5
+        },
+        {
+          "name": "announcements",
+          "observed": 8,
+          "minimum": 1
+        },
+        {
+          "name": "tracked capability packages",
+          "observed": 5,
+          "minimum": 5,
+          "required_for_diff_baseline": false
+        },
+        {
+          "name": "capability-package hashes",
+          "observed": 5,
+          "minimum": 5,
+          "required_for_diff_baseline": false
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-09-17T10:47:54.405404+00:00"
+    },
+    "cc_crypto": {
+      "label": "CC Crypto",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "publications",
+          "observed": 121,
+          "minimum": 5
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-09-17T10:47:54.405404+00:00"
+    },
+    "nato": {
+      "label": "NATO NIAPCL",
+      "status": "healthy",
+      "mode": "manual",
+      "checks": [],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "detail": "manual baseline (40 Cisco product(s)); updated via the NATO capture GitHub issue workflow",
+      "checked_at": "2026-09-17T10:47:54.405404+00:00"
+    },
+    "eucc": {
+      "label": "EUCC / ENISA",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "certificates",
+          "observed": 50,
+          "minimum": 2
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-09-17T10:47:54.405404+00:00"
+    },
+    "nd_itc": {
+      "label": "ND-iTC",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "NIT RFIs",
+          "observed": 32,
+          "minimum": 5
+        },
+        {
+          "name": "Allowed-With entries",
+          "observed": 28,
+          "minimum": 1
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-09-17T10:47:54.405404+00:00"
+    },
+    "ietf_cnsa": {
+      "label": "IETF CNSA 2.0",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "CNSA profile/RFC records",
+          "observed": 5,
+          "minimum": 5
+        },
+        {
+          "name": "CNSA full-text hashes",
+          "observed": 5,
+          "minimum": 5
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-09-17T10:47:54.405404+00:00"
+    },
+    "ieee_pqc": {
+      "label": "IEEE 802.11bt",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "P802.11bt project records",
+          "observed": 1,
+          "minimum": 1
+        },
+        {
+          "name": "P802.11bt timeline hashes",
+          "observed": 1,
+          "minimum": 1
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-09-17T10:47:54.405404+00:00"
+    }
+  },
+  "alerts": [
+    {
+      "source": "ND-iTC Allowed-With",
+      "kind": "new",
+      "title": "PP-Module for Authentication Servers",
+      "url": "https://nd-itc.github.io/AWL/NDcPP_allowed_with_list.html",
+      "detail": "Added to the NDcPP v4.0 allowed-with list \u00b7 version 2.0 (10 March 2026)",
+      "matched_keywords": [
+        "NDcPP"
+      ],
+      "tab": "intl"
+    },
+    {
+      "source": "ND-iTC Allowed-With",
+      "kind": "new",
+      "title": "PP-Module for Enterprise Session Controller (ESC)",
+      "url": "https://nd-itc.github.io/AWL/FW_allowed_with_list.html",
+      "detail": "Added to the FW Module 2.0 allowed-with list \u00b7 version 2.0 (10 March 2026)",
+      "matched_keywords": [
+        "NDcPP"
+      ],
+      "tab": "intl"
+    },
+    {
+      "source": "ND-iTC Allowed-With",
+      "kind": "new",
+      "title": "PP-Module for MACsec Ethernet Encryption",
+      "url": "https://nd-itc.github.io/AWL/NDcPP_allowed_with_list.html",
+      "detail": "Added to the NDcPP v4.0 allowed-with list \u00b7 version 2.0 (17 April 2026)",
+      "matched_keywords": [
+        "NDcPP"
+      ],
+      "tab": "intl"
+    },
+    {
+      "source": "ND-iTC Allowed-With",
+      "kind": "new",
+      "title": "PP-Module for Voice/Video over IP (VVoIP) Endpoints",
+      "url": "https://nd-itc.github.io/AWL/NDcPP_allowed_with_list.html",
+      "detail": "Added to the NDcPP v4.0 allowed-with list \u00b7 version 2.0 (17 March 2026)",
+      "matched_keywords": [
+        "NDcPP"
+      ],
+      "tab": "intl"
+    },
+    {
+      "source": "ND-iTC Allowed-With",
+      "kind": "new",
+      "title": "PP-Module for Wireless Intrusion Detection/Prevention Systems (WIDS/WIPS)",
+      "url": "https://nd-itc.github.io/AWL/NDcPP_allowed_with_list.html",
+      "detail": "Added to the NDcPP v4.0 allowed-with list \u00b7 version 3.0 (21 January 2026)",
+      "matched_keywords": [
+        "NDcPP"
+      ],
+      "tab": "intl"
+    },
+    {
+      "source": "ND-iTC Allowed-With",
+      "kind": "new",
+      "title": "PP-Module for Session Border Controller (SBC)",
+      "url": "https://nd-itc.github.io/AWL/NDcPP_allowed_with_list.html",
+      "detail": "Added to the NDcPP v4.0 allowed-with list \u00b7 version 2.0 (17 March 2026)",
+      "matched_keywords": [
+        "NDcPP"
+      ],
+      "tab": "intl"
+    },
+    {
+      "source": "ND-iTC Allowed-With",
+      "kind": "new",
+      "title": "PP-Module for Session Border Controller (SBC)",
+      "url": "https://nd-itc.github.io/AWL/FW_allowed_with_list.html",
+      "detail": "Added to the FW Module 2.0 allowed-with list \u00b7 version 2.0 (17 March 2026)",
+      "matched_keywords": [
+        "NDcPP"
+      ],
+      "tab": "intl"
+    },
+    {
+      "source": "ND-iTC Allowed-With",
+      "kind": "new",
+      "title": "PP-Module for MACsec Ethernet Encryption",
+      "url": "https://nd-itc.github.io/AWL/FW_allowed_with_list.html",
+      "detail": "Added to the FW Module 2.0 allowed-with list \u00b7 version 2.0 (17 April 2026)",
+      "matched_keywords": [
+        "NDcPP"
+      ],
+      "tab": "intl"
+    },
+    {
+      "source": "ND-iTC Allowed-With",
+      "kind": "new",
+      "title": "PP-Module for Enterprise Session Controller (ESC)",
+      "url": "https://nd-itc.github.io/AWL/NDcPP_allowed_with_list.html",
+      "detail": "Added to the NDcPP v4.0 allowed-with list \u00b7 version 2.0 (10 March 2026)",
+      "matched_keywords": [
+        "NDcPP"
+      ],
+      "tab": "intl"
+    },
+    {
+      "source": "ND-iTC Allowed-With",
+      "kind": "new",
+      "title": "PP-Module for Virtual Private Network (VPN) Gateways",
+      "url": "https://nd-itc.github.io/AWL/FW_allowed_with_list.html",
+      "detail": "Added to the FW Module 2.0 allowed-with list \u00b7 version 2.0 (21 January 2026)",
+      "matched_keywords": [
+        "NDcPP"
+      ],
+      "tab": "intl"
+    },
+    {
+      "source": "ND-iTC Allowed-With",
+      "kind": "new",
+      "title": "PP-Module for Intrusion Prevention Systems (IPS)",
+      "url": "https://nd-itc.github.io/AWL/FW_allowed_with_list.html",
+      "detail": "Added to the FW Module 2.0 allowed-with list \u00b7 version 2.0 (10 March 2026)",
+      "matched_keywords": [
+        "NDcPP"
+      ],
+      "tab": "intl"
+    },
+    {
+      "source": "ND-iTC Allowed-With",
+      "kind": "new",
+      "title": "PP-Module for Voice/Video over IP (VVoIP) Endpoints",
+      "url": "https://nd-itc.github.io/AWL/FW_allowed_with_list.html",
+      "detail": "Added to the FW Module 2.0 allowed-with list \u00b7 version 2.0 (17 March 2026)",
+      "matched_keywords": [
+        "NDcPP"
+      ],
+      "tab": "intl"
+    },
+    {
+      "source": "ND-iTC Allowed-With",
+      "kind": "new",
+      "title": "PP-Module for Virtual Private Network (VPN) Gateways",
+      "url": "https://nd-itc.github.io/AWL/NDcPP_allowed_with_list.html",
+      "detail": "Added to the NDcPP v4.0 allowed-with list \u00b7 version 2.0 (21 January 2026)",
+      "matched_keywords": [
+        "NDcPP"
+      ],
+      "tab": "intl"
+    },
+    {
+      "source": "ND-iTC Allowed-With",
+      "kind": "new",
+      "title": "PP-Module for Intrusion Prevention Systems (IPS)",
+      "url": "https://nd-itc.github.io/AWL/NDcPP_allowed_with_list.html",
+      "detail": "Added to the NDcPP v4.0 allowed-with list \u00b7 version 2.0 (10 March 2026)",
+      "matched_keywords": [
+        "NDcPP"
+      ],
+      "tab": "intl"
+    },
+    {
+      "source": "ND-iTC Allowed-With",
+      "kind": "new",
+      "title": "PP-Module for Wireless Intrusion Detection/Prevention Systems (WIDS/WIPS)",
+      "url": "https://nd-itc.github.io/AWL/FW_allowed_with_list.html",
+      "detail": "Added to the FW Module 2.0 allowed-with list \u00b7 version 3.0 (21 January 2026)",
+      "matched_keywords": [
+        "NDcPP"
+      ],
+      "tab": "intl"
+    },
+    {
+      "source": "ND-iTC Allowed-With",
+      "kind": "removed",
+      "title": "PP-Module for Wireless Intrusion Detection/Prevention Systems (WIDS/WIPS)",
+      "url": "https://nd-itc.github.io/AWL/NDcPP_allowed_with_list.html",
+      "detail": "Removed from the NDcPP v3.0e allowed-with list",
+      "matched_keywords": [
+        "NDcPP"
+      ],
+      "tab": "intl"
+    },
+    {
+      "source": "ND-iTC Allowed-With",
+      "kind": "removed",
+      "title": "PP-Module for Virtual Private Network (VPN) Gateways",
+      "url": "https://nd-itc.github.io/AWL/FW_allowed_with_list.html",
+      "detail": "Removed from the FW Module v1.4e allowed-with list",
+      "matched_keywords": [
+        "NDcPP"
+      ],
+      "tab": "intl"
+    },
+    {
+      "source": "ND-iTC Allowed-With",
+      "kind": "removed",
+      "title": "PP-Module for Enterprise Session Controller (ESC)",
+      "url": "https://nd-itc.github.io/AWL/NDcPP_allowed_with_list.html",
+      "detail": "Removed from the NDcPP v3.0e allowed-with list",
+      "matched_keywords": [
+        "NDcPP"
+      ],
+      "tab": "intl"
+    },
+    {
+      "source": "ND-iTC Allowed-With",
+      "kind": "removed",
+      "title": "PP-Module for Enterprise Session Controller (ESC)",
+      "url": "https://nd-itc.github.io/AWL/FW_allowed_with_list.html",
+      "detail": "Removed from the FW Module v1.4e allowed-with list",
+      "matched_keywords": [
+        "NDcPP"
+      ],
+      "tab": "intl"
+    },
+    {
+      "source": "ND-iTC Allowed-With",
+      "kind": "removed",
+      "title": "PP-Module for Intrusion Prevention Systems (IPS)",
+      "url": "https://nd-itc.github.io/AWL/FW_allowed_with_list.html",
+      "detail": "Removed from the FW Module v1.4e allowed-with list",
+      "matched_keywords": [
+        "NDcPP"
+      ],
+      "tab": "intl"
+    },
+    {
+      "source": "ND-iTC Allowed-With",
+      "kind": "removed",
+      "title": "PP-Module for Wireless Intrusion Detection/Prevention Systems (WIDS/WIPS)",
+      "url": "https://nd-itc.github.io/AWL/FW_allowed_with_list.html",
+      "detail": "Removed from the FW Module v1.4e allowed-with list",
+      "matched_keywords": [
+        "NDcPP"
+      ],
+      "tab": "intl"
+    },
+    {
+      "source": "ND-iTC Allowed-With",
+      "kind": "removed",
+      "title": "PP-Module for Intrusion Prevention Systems (IPS)",
+      "url": "https://nd-itc.github.io/AWL/NDcPP_allowed_with_list.html",
+      "detail": "Removed from the NDcPP v3.0e allowed-with list",
+      "matched_keywords": [
+        "NDcPP"
+      ],
+      "tab": "intl"
+    },
+    {
+      "source": "ND-iTC Allowed-With",
+      "kind": "removed",
+      "title": "PP-Module for Virtual Private Network (VPN) Gateways",
+      "url": "https://nd-itc.github.io/AWL/NDcPP_allowed_with_list.html",
+      "detail": "Removed from the NDcPP v3.0e allowed-with list",
+      "matched_keywords": [
+        "NDcPP"
+      ],
+      "tab": "intl"
+    },
+    {
+      "source": "ND-iTC Allowed-With",
+      "kind": "updated",
+      "title": "PP-Module for MACsec Ethernet Encryption",
+      "url": "https://nd-itc.github.io/AWL/NDcPP_allowed_with_list.html",
+      "detail": "NDcPP v3.0e allowed-with entry version: 1.0 (22 December 2022) \u2192 1.0 (2 March 2023)",
+      "matched_keywords": [
+        "NDcPP"
+      ],
+      "tab": "intl"
+    },
+    {
+      "source": "ND-iTC Allowed-With",
+      "kind": "updated",
+      "title": "PP-Module for MACsec Ethernet Encryption",
+      "url": "https://nd-itc.github.io/AWL/FW_allowed_with_list.html",
+      "detail": "FW Module v1.4e allowed-with entry version: 1.0 (16 December 2023) \u2192 1.0 (2 March 2023)",
+      "matched_keywords": [
+        "NDcPP"
+      ],
+      "tab": "intl"
+    },
+    {
+      "source": "ND-iTC Allowed-With",
+      "kind": "updated",
+      "title": "Allowed-with list document updated (awl_ndcpp)",
+      "url": "https://nd-itc.github.io/AWL/NDcPP_allowed_with_list.html",
+      "detail": "List version: 4.0r1 \u2192 4.0r2 (16 September 2026)",
+      "matched_keywords": [
+        "NDcPP"
+      ],
+      "tab": "intl"
+    },
+    {
+      "source": "ND-iTC Allowed-With",
+      "kind": "updated",
+      "title": "Allowed-with list document updated (awl_fw)",
+      "url": "https://nd-itc.github.io/AWL/FW_allowed_with_list.html",
+      "detail": "List version: 2.0 \u2192 2.0r1 (16 September 2026)",
+      "matched_keywords": [
+        "NDcPP"
+      ],
+      "tab": "intl"
+    }
+  ]
+}
