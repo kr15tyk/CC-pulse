@@ -2,7 +2,35 @@
 <rss version="2.0"><channel>
 <title>CC Pulse</title>
 <link>https://kr15tyk.github.io/CC-pulse/cc_dashboard.html</link>
-<description>Common Criteria monitoring - 2026-09-16 06:40 ET</description>
-<item><title>IETF CNSA Updated: Commercial National Security Algorithm (CNSA) Suite 2.0 Profile for TLS 1.3</title><link>https://datatracker.ietf.org/doc/draft-becker-cnsa2-tls-profile/</link><description>states</description></item>
-<item><title>ALERT: IETF CNSA – Commercial National Security Algorithm (CNSA) Suite 2.0 Profile for TLS 1.3</title><link>https://kr15tyk.github.io/CC-pulse/cc_dashboard.html</link><description>Kind: updated | Keywords: CNSA, PQC</description></item>
+<description>Common Criteria monitoring - 2026-09-17 06:47 ET</description>
+<item><title>New TD: TD1063</title><link>https://www.niap-ccevs.org/</link><description></description></item>
+<item><title>New TD: TD1062</title><link>https://www.niap-ccevs.org/</link><description></description></item>
+<item><title>New TD: TD1064</title><link>https://www.niap-ccevs.org/</link><description></description></item>
+<item><title>ALERT: ND-iTC Allowed-With – PP-Module for Authentication Servers</title><link>https://kr15tyk.github.io/CC-pulse/cc_dashboard.html</link><description>Kind: new | Keywords: NDcPP</description></item>
+<item><title>ALERT: ND-iTC Allowed-With – PP-Module for Enterprise Session Controller (ESC)</title><link>https://kr15tyk.github.io/CC-pulse/cc_dashboard.html</link><description>Kind: new | Keywords: NDcPP</description></item>
+<item><title>ALERT: ND-iTC Allowed-With – PP-Module for MACsec Ethernet Encryption</title><link>https://kr15tyk.github.io/CC-pulse/cc_dashboard.html</link><description>Kind: new | Keywords: NDcPP</description></item>
+<item><title>ALERT: ND-iTC Allowed-With – PP-Module for Voice/Video over IP (VVoIP) Endpoints</title><link>https://kr15tyk.github.io/CC-pulse/cc_dashboard.html</link><description>Kind: new | Keywords: NDcPP</description></item>
+<item><title>ALERT: ND-iTC Allowed-With – PP-Module for Wireless Intrusion Detection/Prevention Systems (WIDS/WIPS)</title><link>https://kr15tyk.github.io/CC-pulse/cc_dashboard.html</link><description>Kind: new | Keywords: NDcPP</description></item>
+<item><title>ALERT: ND-iTC Allowed-With – PP-Module for Session Border Controller (SBC)</title><link>https://kr15tyk.github.io/CC-pulse/cc_dashboard.html</link><description>Kind: new | Keywords: NDcPP</description></item>
+<item><title>ALERT: ND-iTC Allowed-With – PP-Module for Session Border Controller (SBC)</title><link>https://kr15tyk.github.io/CC-pulse/cc_dashboard.html</link><description>Kind: new | Keywords: NDcPP</description></item>
+<item><title>ALERT: ND-iTC Allowed-With – PP-Module for MACsec Ethernet Encryption</title><link>https://kr15tyk.github.io/CC-pulse/cc_dashboard.html</link><description>Kind: new | Keywords: NDcPP</description></item>
+<item><title>ALERT: ND-iTC Allowed-With – PP-Module for Enterprise Session Controller (ESC)</title><link>https://kr15tyk.github.io/CC-pulse/cc_dashboard.html</link><description>Kind: new | Keywords: NDcPP</description></item>
+<item><title>ALERT: ND-iTC Allowed-With – PP-Module for Virtual Private Network (VPN) Gateways</title><link>https://kr15tyk.github.io/CC-pulse/cc_dashboard.html</link><description>Kind: new | Keywords: NDcPP</description></item>
+<item><title>ALERT: ND-iTC Allowed-With – PP-Module for Intrusion Prevention Systems (IPS)</title><link>https://kr15tyk.github.io/CC-pulse/cc_dashboard.html</link><description>Kind: new | Keywords: NDcPP</description></item>
+<item><title>ALERT: ND-iTC Allowed-With – PP-Module for Voice/Video over IP (VVoIP) Endpoints</title><link>https://kr15tyk.github.io/CC-pulse/cc_dashboard.html</link><description>Kind: new | Keywords: NDcPP</description></item>
+<item><title>ALERT: ND-iTC Allowed-With – PP-Module for Virtual Private Network (VPN) Gateways</title><link>https://kr15tyk.github.io/CC-pulse/cc_dashboard.html</link><description>Kind: new | Keywords: NDcPP</description></item>
+<item><title>ALERT: ND-iTC Allowed-With – PP-Module for Intrusion Prevention Systems (IPS)</title><link>https://kr15tyk.github.io/CC-pulse/cc_dashboard.html</link><description>Kind: new | Keywords: NDcPP</description></item>
+<item><title>ALERT: ND-iTC Allowed-With – PP-Module for Wireless Intrusion Detection/Prevention Systems (WIDS/WIPS)</title><link>https://kr15tyk.github.io/CC-pulse/cc_dashboard.html</link><description>Kind: new | Keywords: NDcPP</description></item>
+<item><title>ALERT: ND-iTC Allowed-With – PP-Module for Wireless Intrusion Detection/Prevention Systems (WIDS/WIPS)</title><link>https://kr15tyk.github.io/CC-pulse/cc_dashboard.html</link><description>Kind: removed | Keywords: NDcPP</description></item>
+<item><title>ALERT: ND-iTC Allowed-With – PP-Module for Virtual Private Network (VPN) Gateways</title><link>https://kr15tyk.github.io/CC-pulse/cc_dashboard.html</link><description>Kind: removed | Keywords: NDcPP</description></item>
+<item><title>ALERT: ND-iTC Allowed-With – PP-Module for Enterprise Session Controller (ESC)</title><link>https://kr15tyk.github.io/CC-pulse/cc_dashboard.html</link><description>Kind: removed | Keywords: NDcPP</description></item>
+<item><title>ALERT: ND-iTC Allowed-With – PP-Module for Enterprise Session Controller (ESC)</title><link>https://kr15tyk.github.io/CC-pulse/cc_dashboard.html</link><description>Kind: removed | Keywords: NDcPP</description></item>
+<item><title>ALERT: ND-iTC Allowed-With – PP-Module for Intrusion Prevention Systems (IPS)</title><link>https://kr15tyk.github.io/CC-pulse/cc_dashboard.html</link><description>Kind: removed | Keywords: NDcPP</description></item>
+<item><title>ALERT: ND-iTC Allowed-With – PP-Module for Wireless Intrusion Detection/Prevention Systems (WIDS/WIPS)</title><link>https://kr15tyk.github.io/CC-pulse/cc_dashboard.html</link><description>Kind: removed | Keywords: NDcPP</description></item>
+<item><title>ALERT: ND-iTC Allowed-With – PP-Module for Intrusion Prevention Systems (IPS)</title><link>https://kr15tyk.github.io/CC-pulse/cc_dashboard.html</link><description>Kind: removed | Keywords: NDcPP</description></item>
+<item><title>ALERT: ND-iTC Allowed-With – PP-Module for Virtual Private Network (VPN) Gateways</title><link>https://kr15tyk.github.io/CC-pulse/cc_dashboard.html</link><description>Kind: removed | Keywords: NDcPP</description></item>
+<item><title>ALERT: ND-iTC Allowed-With – PP-Module for MACsec Ethernet Encryption</title><link>https://kr15tyk.github.io/CC-pulse/cc_dashboard.html</link><description>Kind: updated | Keywords: NDcPP</description></item>
+<item><title>ALERT: ND-iTC Allowed-With – PP-Module for MACsec Ethernet Encryption</title><link>https://kr15tyk.github.io/CC-pulse/cc_dashboard.html</link><description>Kind: updated | Keywords: NDcPP</description></item>
+<item><title>ALERT: ND-iTC Allowed-With – Allowed-with list document updated (awl_ndcpp)</title><link>https://kr15tyk.github.io/CC-pulse/cc_dashboard.html</link><description>Kind: updated | Keywords: NDcPP</description></item>
+<item><title>ALERT: ND-iTC Allowed-With – Allowed-with list document updated (awl_fw)</title><link>https://kr15tyk.github.io/CC-pulse/cc_dashboard.html</link><description>Kind: updated | Keywords: NDcPP</description></item>
 </channel></rss>
