@@ -1,0 +1,559 @@
+{
+  "period_start": "2026-09-21T11:41:41.485440+00:00",
+  "period_end": "2026-09-22T10:45:55.599772+00:00",
+  "niap": {
+    "pps": {
+      "added": [],
+      "removed": [],
+      "sunset_changes": [],
+      "status_changes": [],
+      "revised": [],
+      "content_changes": []
+    },
+    "tds": {
+      "added": [],
+      "removed": []
+    },
+    "cisco_ndcpp": {
+      "added": [
+        {
+          "active_maintenances": [],
+          "am_sort": "2028-09-16T00:00:00Z",
+          "assigned_lab_name": "Gossamer Security Solutions",
+          "certification_date": "2026-09-16T00:00:00Z",
+          "from_cc_portal": false,
+          "product_id": 11683,
+          "product_name": "Cisco Nexus 9000 MACsec Series Switches Running NX-OS 10.4",
+          "protection_profiles": [
+            {
+              "pp_id": 459,
+              "pp_name": "Functional Package for SSH Version 1.0",
+              "pp_short_name": "PKG_SSH_V1.0"
+            },
+            {
+              "pp_id": 480,
+              "pp_name": "PP-Module for MACsec Ethernet Encryption Version 1.0",
+              "pp_short_name": "MOD_MACSEC_V1.0"
+            },
+            {
+              "pp_id": 482,
+              "pp_name": "collaborative Protection Profile for Network Devices Version 3.0e",
+              "pp_short_name": "CPP_ND_V3.0E"
+            }
+          ],
+          "status_sort": "Certified",
+          "submitting_country_id_code": "US",
+          "submitting_country_id_name": "United States",
+          "sunset_date": null,
+          "tech_types": [
+            "Network Device",
+            "Network Encryption",
+            "Remote Access"
+          ],
+          "vendor_id_name": "Cisco Systems, Inc.",
+          "v_id": 11683,
+          "kicked_off_date": "2026-04-08T11:15:53.054000Z"
+        }
+      ],
+      "removed": [],
+      "newly_archived": []
+    },
+    "pcl_all": {
+      "added": [
+        {
+          "active_maintenances": [],
+          "am_sort": "2028-09-16T00:00:00Z",
+          "assigned_lab_name": "Gossamer Security Solutions",
+          "certification_date": "2026-09-16T00:00:00Z",
+          "from_cc_portal": false,
+          "product_id": 11683,
+          "product_name": "Cisco Nexus 9000 MACsec Series Switches Running NX-OS 10.4",
+          "protection_profiles": [
+            {
+              "pp_id": 459,
+              "pp_name": "Functional Package for SSH Version 1.0",
+              "pp_short_name": "PKG_SSH_V1.0"
+            },
+            {
+              "pp_id": 480,
+              "pp_name": "PP-Module for MACsec Ethernet Encryption Version 1.0",
+              "pp_short_name": "MOD_MACSEC_V1.0"
+            },
+            {
+              "pp_id": 482,
+              "pp_name": "collaborative Protection Profile for Network Devices Version 3.0e",
+              "pp_short_name": "CPP_ND_V3.0E"
+            }
+          ],
+          "status_sort": "Certified",
+          "submitting_country_id_code": "US",
+          "submitting_country_id_name": "United States",
+          "sunset_date": null,
+          "tech_types": [
+            "Network Device",
+            "Network Encryption",
+            "Remote Access"
+          ],
+          "vendor_id_name": "Cisco Systems, Inc.",
+          "v_id": 11683,
+          "kicked_off_date": "2026-04-08T11:15:53.054000Z"
+        },
+        {
+          "active_maintenances": [],
+          "am_sort": "2028-09-11T00:00:00Z",
+          "assigned_lab_name": "Gossamer Security Solutions",
+          "certification_date": "2026-09-11T00:00:00Z",
+          "from_cc_portal": false,
+          "product_id": 11705,
+          "product_name": "Getac Devices on Android 15",
+          "protection_profiles": [
+            {
+              "pp_id": 425,
+              "pp_name": "PP-Module for Bluetooth Version 1.0",
+              "pp_short_name": "MOD_BT_V1.0"
+            },
+            {
+              "pp_id": 439,
+              "pp_name": "Functional Package for TLS Version 1.1",
+              "pp_short_name": "PKG_TLS_V1.1"
+            },
+            {
+              "pp_id": 463,
+              "pp_name": "PP-Module for Wireless Local Area Network (WLAN) Client Version 1.0",
+              "pp_short_name": "MOD_WLANC_v1.0"
+            },
+            {
+              "pp_id": 468,
+              "pp_name": "Protection Profile for Mobile Device Fundamentals Version 3.3",
+              "pp_short_name": "PP_MDF_V3.3"
+            }
+          ],
+          "status_sort": "Certified",
+          "submitting_country_id_code": "US",
+          "submitting_country_id_name": "United States",
+          "sunset_date": null,
+          "tech_types": [
+            "Mobility"
+          ],
+          "vendor_id_name": "Getac Technology Corp.",
+          "v_id": 11705,
+          "kicked_off_date": "2026-06-15T14:24:44.273000Z"
+        }
+      ],
+      "removed": [],
+      "newly_archived": []
+    },
+    "in_evaluation": {
+      "added": [],
+      "removed": [
+        {
+          "active_maintenances": [],
+          "am_sort": null,
+          "assigned_lab_name": "Gossamer Security Solutions",
+          "certification_date": null,
+          "from_cc_portal": false,
+          "product_id": 11683,
+          "product_name": "Cisco Nexus 9000 MACsec Series Switches Running NX-OS 10.4",
+          "protection_profiles": [
+            {
+              "pp_id": 459,
+              "pp_name": "Functional Package for SSH Version 1.0",
+              "pp_short_name": "PKG_SSH_V1.0"
+            },
+            {
+              "pp_id": 480,
+              "pp_name": "PP-Module for MACsec Ethernet Encryption Version 1.0",
+              "pp_short_name": "MOD_MACSEC_V1.0"
+            },
+            {
+              "pp_id": 482,
+              "pp_name": "collaborative Protection Profile for Network Devices Version 3.0e",
+              "pp_short_name": "CPP_ND_V3.0E"
+            }
+          ],
+          "status_sort": "In Progress",
+          "submitting_country_id_code": "US",
+          "submitting_country_id_name": "United States",
+          "sunset_date": null,
+          "tech_types": [
+            "Network Device",
+            "Network Encryption",
+            "Remote Access"
+          ],
+          "vendor_id_name": "Cisco Systems, Inc.",
+          "v_id": 11683,
+          "kicked_off_date": "2026-04-08T11:15:53.054000Z"
+        },
+        {
+          "active_maintenances": [],
+          "am_sort": null,
+          "assigned_lab_name": "Gossamer Security Solutions",
+          "certification_date": null,
+          "from_cc_portal": false,
+          "product_id": 11705,
+          "product_name": "Getac Devices on Android 15",
+          "protection_profiles": [
+            {
+              "pp_id": 425,
+              "pp_name": "PP-Module for Bluetooth Version 1.0",
+              "pp_short_name": "MOD_BT_V1.0"
+            },
+            {
+              "pp_id": 439,
+              "pp_name": "Functional Package for TLS Version 1.1",
+              "pp_short_name": "PKG_TLS_V1.1"
+            },
+            {
+              "pp_id": 463,
+              "pp_name": "PP-Module for Wireless Local Area Network (WLAN) Client Version 1.0",
+              "pp_short_name": "MOD_WLANC_v1.0"
+            },
+            {
+              "pp_id": 468,
+              "pp_name": "Protection Profile for Mobile Device Fundamentals Version 3.3",
+              "pp_short_name": "PP_MDF_V3.3"
+            }
+          ],
+          "status_sort": "In Progress",
+          "submitting_country_id_code": "US",
+          "submitting_country_id_name": "United States",
+          "sunset_date": null,
+          "tech_types": [
+            "Mobility"
+          ],
+          "vendor_id_name": "Getac Technology Corp.",
+          "v_id": 11705,
+          "kicked_off_date": "2026-06-15T14:24:44.273000Z"
+        }
+      ],
+      "current_count": 43
+    },
+    "news": {
+      "added": [],
+      "revised": [],
+      "deactivated": [],
+      "reactivated": [],
+      "removed": []
+    },
+    "events": {
+      "added": [],
+      "revised": [],
+      "deactivated": [],
+      "reactivated": [],
+      "removed": []
+    },
+    "policies": {
+      "added": [],
+      "revised": [],
+      "archived": [],
+      "reactivated": [],
+      "removed": []
+    }
+  },
+  "cc_portal": {
+    "news": {
+      "added": []
+    },
+    "pps": {
+      "added": []
+    },
+    "products": {
+      "added": []
+    }
+  },
+  "cctl_labs": {
+    "Lightship Security": [
+      {
+        "title": "NIAP\u2019s Accelerated PQC Transition (Policy Letter 33)",
+        "link": "https://lightshipsec.com/niaps-accelerated-pqc-transition-policy-letter-33/",
+        "summary": "NIAP has published Policy Letter #33, setting certification deadlines for the transition to post-quantum cryptography (PQC). The policy affects products entering NIAP evaluation, products seeking placement on the Product Compliant List (PCL), and products already certified by NIAP or a ... <div><a class=\"more-link\" href=\"https://lightshipsec.com/niaps-accelerated-pqc-transition-policy-letter-33/\">Read More</a></div>",
+        "published": "Mon, 21 Sep 2026 18:03:48 +0000",
+        "id": "https://lightshipsec.com/?p=4376"
+      }
+    ]
+  },
+  "csfc": {
+    "pages": {},
+    "selection_links": {},
+    "documents": {
+      "added": [],
+      "removed": [],
+      "updated": []
+    },
+    "feeds": {}
+  },
+  "cc_crypto": {
+    "pages": {}
+  },
+  "nato": {
+    "pages": {},
+    "cisco_added": [],
+    "cisco_removed": [],
+    "baseline_reset": false
+  },
+  "eucc": {
+    "pages": {
+      "certificates": {
+        "added": [
+          {
+            "name": "IFX_CCI_00006Ah,IFX_CCI_00006Bh, IFX_CCI_00006Ch S12",
+            "text": "IFX_CCI_00006Ah,IFX_CCI_00006Bh, IFX_CCI_00006Ch S12 | 26 August 2026 | The TOE provides a platform for an operating system and application software used requiring a high level of resistance against attackers",
+            "href": "https://certification.enisa.europa.eu/certificates/eucc-3087-2026-000016-i-00_en",
+            "cert_date": "2026-08-26T12:00:00Z",
+            "description": "The TOE provides a platform for an operating system and application software used requiring a high level of resistance against attackers"
+          }
+        ],
+        "removed": [
+          {
+            "name": "Infineon Technologies AG Smartcard IC IFX_CCI_000011h IFX_CCI_00001Bh IFX_CCI_00001Eh IFX_CCI_000025h G12",
+            "text": "Infineon Technologies AG Smartcard IC IFX_CCI_000011h IFX_CCI_00001Bh IFX_CCI_00001Eh IFX_CCI_000025h G12 | 27 April 2026 | Infineon Technologies AG Smartcard IC IFX_CCI_000011h IFX_CCI_00001Bh IFX_CCI_00001Eh IFX_CCI_000025h G12",
+            "href": "https://certification.enisa.europa.eu/certificates/eucc-3087-2026-000001-i-00_en",
+            "cert_date": "2026-04-27T12:00:00Z",
+            "description": "Infineon Technologies AG Smartcard IC IFX_CCI_000011h IFX_CCI_00001Bh IFX_CCI_00001Eh IFX_CCI_000025h G12"
+          }
+        ]
+      }
+    },
+    "cisco_added": [],
+    "cisco_removed": [],
+    "baseline_reset": false
+  },
+  "nd_itc": {
+    "nit_rfis": {
+      "added": [],
+      "status_changes": [],
+      "revised": [],
+      "newly_archived": []
+    },
+    "awl": {
+      "added": [],
+      "removed": [],
+      "version_changes": [],
+      "list_updates": []
+    },
+    "baseline_reset": false,
+    "collection_failure": false
+  },
+  "ietf_cnsa": {
+    "added": [],
+    "removed": [],
+    "updated": [],
+    "rfc9846_adoption": []
+  },
+  "ieee_pqc": {
+    "added": [],
+    "removed": [],
+    "updated": []
+  },
+  "source_health": {
+    "niap": {
+      "label": "NIAP",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "PCL products",
+          "observed": 1762,
+          "minimum": 50
+        },
+        {
+          "name": "Protection Profiles",
+          "observed": 271,
+          "minimum": 10
+        },
+        {
+          "name": "PQC PP file-version records",
+          "observed": 13,
+          "minimum": 1,
+          "required_for_diff_baseline": false
+        },
+        {
+          "name": "PQC PP full-content hashes",
+          "observed": 7,
+          "minimum": 1,
+          "required_for_diff_baseline": false
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-09-22T10:45:55.599772+00:00",
+      "subcollections": {
+        "news": {
+          "label": "News announcements",
+          "status": "healthy",
+          "observed": 357,
+          "consecutive_failures": 0,
+          "using_last_known_good": false
+        },
+        "events": {
+          "label": "Events",
+          "status": "healthy",
+          "observed": 0,
+          "consecutive_failures": 0,
+          "using_last_known_good": false
+        },
+        "policies": {
+          "label": "Policy letters",
+          "status": "healthy",
+          "observed": 40,
+          "consecutive_failures": 0,
+          "using_last_known_good": false
+        }
+      }
+    },
+    "cc_portal": {
+      "label": "CC Portal",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "portal records",
+          "observed": 180,
+          "minimum": 1
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-09-22T10:45:55.599772+00:00"
+    },
+    "cctl_labs": {
+      "label": "CCTL Labs",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "lab feed items",
+          "observed": 19,
+          "minimum": 1
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-09-22T10:45:55.599772+00:00"
+    },
+    "csfc": {
+      "label": "CSfC",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "APL items",
+          "observed": 121,
+          "minimum": 5
+        },
+        {
+          "name": "announcements",
+          "observed": 8,
+          "minimum": 1
+        },
+        {
+          "name": "tracked capability packages",
+          "observed": 5,
+          "minimum": 5,
+          "required_for_diff_baseline": false
+        },
+        {
+          "name": "capability-package hashes",
+          "observed": 5,
+          "minimum": 5,
+          "required_for_diff_baseline": false
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-09-22T10:45:55.599772+00:00"
+    },
+    "cc_crypto": {
+      "label": "CC Crypto",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "publications",
+          "observed": 121,
+          "minimum": 5
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-09-22T10:45:55.599772+00:00"
+    },
+    "nato": {
+      "label": "NATO NIAPCL",
+      "status": "healthy",
+      "mode": "manual",
+      "checks": [],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "detail": "manual baseline (40 Cisco product(s)); updated via the NATO capture GitHub issue workflow",
+      "checked_at": "2026-09-22T10:45:55.599772+00:00"
+    },
+    "eucc": {
+      "label": "EUCC / ENISA",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "certificates",
+          "observed": 50,
+          "minimum": 2
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-09-22T10:45:55.599772+00:00"
+    },
+    "nd_itc": {
+      "label": "ND-iTC",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "NIT RFIs",
+          "observed": 32,
+          "minimum": 5
+        },
+        {
+          "name": "Allowed-With entries",
+          "observed": 28,
+          "minimum": 1
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-09-22T10:45:55.599772+00:00"
+    },
+    "ietf_cnsa": {
+      "label": "IETF CNSA 2.0",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "CNSA profile/RFC records",
+          "observed": 5,
+          "minimum": 5
+        },
+        {
+          "name": "CNSA full-text hashes",
+          "observed": 5,
+          "minimum": 5
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-09-22T10:45:55.599772+00:00"
+    },
+    "ieee_pqc": {
+      "label": "IEEE 802.11bt",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "P802.11bt project records",
+          "observed": 1,
+          "minimum": 1
+        },
+        {
+          "name": "P802.11bt timeline hashes",
+          "observed": 1,
+          "minimum": 1
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-09-22T10:45:55.599772+00:00"
+    }
+  },
+  "alerts": []
+}
