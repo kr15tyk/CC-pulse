@@ -179,7 +179,7 @@
   <span class="nav-title">CC Pulse Dashboard</span>
   <span class="nav-spacer"></span>
   <div class="ham-wrap">
-    <span class="nav-meta">Last run: 2026-09-21 07:41 ET</span>
+    <span class="nav-meta">Last run: 2026-09-22 06:45 ET</span>
     <button class="ham-btn" id="ham-btn" onclick="toggleHamMenu()" aria-expanded="false" aria-haspopup="true" title="Open menu">&#9776;</button>
     <div class="ham-menu" id="ham-menu" role="menu">
       <a class="ham-item" href="https://kr15tyk.github.io/CC-pulse/cc_dashboard.html" role="menuitem"><span class="ham-icon">&#127968;</span>Home</a>
@@ -263,7 +263,7 @@
 <div class="sticky-top">
   <div class="trend-bar">
     <div class="stat"><a href="#sec-niap-pp" onclick="navigateTo('sec-niap-pp');return false;">
-      <div class="stat-num ">0</div>
+      <div class="stat-num active-num">5</div>
       <div class="stat-lbl">NIAP Changes</div>
     </a></div>
     <div class="stat"><a href="#sec-csfc" onclick="navigateTo('sec-csfc');return false;">
@@ -279,11 +279,11 @@
       <div class="stat-lbl">NATO NIAPCL</div>
     </a></div>
     <div class="stat"><a href="#sec-cctl" onclick="navigateTo('sec-cctl');return false;">
-      <div class="stat-num ">0</div>
+      <div class="stat-num active-num">1</div>
       <div class="stat-lbl">CCTL Updates</div>
     </a></div>
     <div class="stat"><a href="#sec-eucc-req" onclick="navigateTo('sec-eucc-req');return false;">
-      <div class="stat-num ">0</div>
+      <div class="stat-num active-num">1</div>
       <div class="stat-lbl">EUCC Changes</div>
     </a></div>
     <div class="stat"><a href="#sec-ietf-cnsa" onclick="navigateTo('sec-ietf-cnsa');return false;">
@@ -330,32 +330,54 @@
 <div class="section-group">
   <div class="section-label">NIAP</div>
   <!-- Cisco NDcPP -->
-<div class="card " id="sec-cisco" data-has-changes="0">
+<div class="card card-new" id="sec-cisco" data-has-changes="1">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>Cisco NDcPP Certifications</span>
-    <span class="card-count">0 changes</span>
-    <span class="toggle-icon">&#9658;</span>
+    <span class="card-count">1 change</span>
+    <span class="toggle-icon">&#9660;</span>
   </div>
-  <div class="card-body collapsed">
+  <div class="card-body ">
+    
+    <div class="sub-hdr sub-new">New Certifications (1)</div>
+    
+    <div class="item-row" data-source="cisco" data-kind="new">
+      <span class="item-link">Cisco Systems, Inc. &mdash; Cisco Nexus 9000 MACsec Series Switches Running NX-OS 10.4</span>
+      <span class="item-meta">2026-09-16</span>
+    </div>
+    
+    <div class="item-sub">PKG_SSH_V1.0, MOD_MACSEC_V1.0, CPP_ND_V3.0E</div>
     
     
     
-    <p class="no-change">No changes detected. <span class="last-active">(last: 2026-09-18)</span></p>
+    
+    
+    
   </div>
 </div>
 
   <!-- NIAP In-Evaluation -->
-<div class="card " id="sec-niap-inevaluation" data-has-changes="0">
+<div class="card card-new" id="sec-niap-inevaluation" data-has-changes="2">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>NIAP In-Evaluation Products</span>
-    <span class="card-count">45 active</span>
+    <span class="card-count">2 changes</span>
     </span>
   </div>
-  <div class="card-body collapsed">
+  <div class="card-body ">
     
     
+    <div class="sub-hdr sub-removed">Left Evaluation (2)</div>
     
-    <p class="no-change">No evaluation changes detected. 45 products currently in evaluation.</p>
+    <div class="item-row" data-source="niap-inevaluation" data-kind="removed">
+      <span class="item-link">Cisco Systems, Inc. -- Cisco Nexus 9000 MACsec Series Switches Running NX-OS 10.4</span>
+      <span class="item-meta">Completed or Withdrawn</span>
+    </div>
+    
+    <div class="item-row" data-source="niap-inevaluation" data-kind="removed">
+      <span class="item-link">Getac Technology Corp. -- Getac Devices on Android 15</span>
+      <span class="item-meta">Completed or Withdrawn</span>
+    </div>
+    
+    
     
   </div>
 </div>
@@ -422,17 +444,36 @@
 </div>
 
   <!-- NIAP PCL — All Certifications -->
-<div class="card " id="sec-niap-pcl" data-has-changes="0">
+<div class="card card-new" id="sec-niap-pcl" data-has-changes="2">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>NIAP PCL — All Certifications</span>
-    <span class="card-count">0 changes</span>
+    <span class="card-count">2 changes</span>
     </span>
   </div>
-  <div class="card-body collapsed">
+  <div class="card-body ">
+    
+    <div class="sub-hdr sub-new">New Certifications (2)</div>
+    
+    <div class="item-row" data-source="niap-pcl" data-kind="new">
+      <span class="item-link">Cisco Systems, Inc. -- Cisco Nexus 9000 MACsec Series Switches Running NX-OS 10.4</span>
+      <span class="item-meta">2026-09-16</span>
+    </div>
+    
+    <div class="item-sub">PKG_SSH_V1.0, MOD_MACSEC_V1.0, CPP_ND_V3.0E</div>
+    
+    
+    <div class="item-row" data-source="niap-pcl" data-kind="new">
+      <span class="item-link">Getac Technology Corp. -- Getac Devices on Android 15</span>
+      <span class="item-meta">2026-09-11</span>
+    </div>
+    
+    <div class="item-sub">MOD_BT_V1.0, PKG_TLS_V1.1, MOD_WLANC_v1.0, PP_MDF_V3.3</div>
     
     
     
-    <p class="no-change">No changes detected. <span class="last-active">(last: 2026-09-18)</span></p>
+    
+    
+    
   </div>
 </div>
 
@@ -589,16 +630,34 @@
 <div class="section-group">
   <div class="section-label">CCTL</div>
   <!-- CCTL Updates -->
-<div class="card " id="sec-cctl" data-has-changes="0">
+<div class="card card-new" id="sec-cctl" data-has-changes="1">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>CCTL Updates</span>
-    <span class="card-count">0 new items</span>
+    <span class="card-count">1 new item</span>
     </span>
     <span class="toggle-icon collapsed">▼</span>
   </div>
-  <div class="card-body collapsed">
+  <div class="card-body ">
     
-    <p class="no-change">No new items.</p>
+    
+    <div class="lab-row">
+      <div class="lab-hdr" onclick="toggleLab(this)">
+        <span class="lab-name">Lightship Security</span>
+        <span class="lab-cnt">1 item</span>
+        <span class="lab-toggle">▼</span>
+      </div>
+      <div class="lab-body collapsed">
+        
+        <div class="item-row" data-source="cctl" data-kind="new">
+          <a class="item-link" href="https://lightshipsec.com/niaps-accelerated-pqc-transition-policy-letter-33/" target="_blank">NIAP’s Accelerated PQC Transition (Policy Letter 33)</a>
+          <span class="item-meta">Mon, 21 Sep 2026 18:03:48 +0000</span>
+        </div>
+        
+      </div>
+    </div>
+    
+    
+    
   </div>
 </div>
 </div>      
@@ -620,16 +679,23 @@
           </div>
         </div>
         <!-- EUCC Certificates -->
-        <div class="card " id="sec-eucc-certs" data-has-changes="0">
+        <div class="card card-new" id="sec-eucc-certs" data-has-changes="1">
           <div class="card-hdr" onclick="toggleCard(this)">
             <span>EUCC Certified Products</span>
-            <span class="card-count">0 new items</span>
-            <span class="toggle-icon">&#9658;</span>
+            <span class="card-count">1 new item</span>
+            <span class="toggle-icon">&#9660;</span>
           </div>
-          <div class="card-body collapsed">
+          <div class="card-body ">
             
             
-            <p class="no-change">No new EUCC certified products.</p>
+            
+            <div class="item-row" data-source="eucc" data-kind="new">
+              <a class="item-link" href="https://certification.enisa.europa.eu/certificates/eucc-3087-2026-000016-i-00_en" target="_blank">IFX_CCI_00006Ah,IFX_CCI_00006Bh, IFX_CCI_00006Ch S12</a>
+              <span class="item-meta"></span>
+            </div>
+            
+            
+            
           </div>
         </div>
       </div>
@@ -641,7 +707,7 @@
 <div class="card card-new" id="sec-history" data-has-changes="1">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>Change History</span>
-    <span class="card-count">20 events</span>
+    <span class="card-count">22 events</span>
     <span class="toggle-icon">▼</span>
   </div>
   <div class="card-body">
@@ -659,6 +725,28 @@
       div>
     <div class="timeline" id="history-timeline">
     
+      
+      <div class="tl-entry" data-cat="cisco_cert">
+        <div class="tl-date">2026-09-22</div>
+        <div class="tl-body">
+          <div class="tl-title">
+            <span class="tl-badge new">new</span>
+            <a href="https://www.niap-ccevs.org/products/11683" target="_blank">Cisco Systems, Inc. — Cisco Nexus 9000 MACsec Series Switches Running NX-OS 10.4</a>
+          </div>
+          <div class="tl-detail">Certified 2026-09-16 · Gossamer Security Solutions · PKG_SSH_V1.0, MOD_MACSEC_V1.0, CPP_ND_V3.0E</div>
+        </div>
+      </div>
+      
+      <div class="tl-entry" data-cat="pcl_cert">
+        <div class="tl-date">2026-09-22</div>
+        <div class="tl-body">
+          <div class="tl-title">
+            <span class="tl-badge new">new</span>
+            <a href="https://www.niap-ccevs.org/products/11705" target="_blank">Getac Technology Corp. — Getac Devices on Android 15</a>
+          </div>
+          <div class="tl-detail">Certified 2026-09-11 · Gossamer Security Solutions · MOD_BT_V1.0, PKG_TLS_V1.1, MOD_WLANC_v1.0, PP_MDF_V3.3</div>
+        </div>
+      </div>
       
       <div class="tl-entry" data-cat="pcl_cert">
         <div class="tl-date">2026-09-18</div>
@@ -890,7 +978,7 @@
 </div><!-- /main-content -->
 <footer>
   <span>CC Pulse &middot; Auto-refreshes daily (01:00 EST) &middot; NIAP, CSfC, CC Portal, NATO NIAPCL, EUCC / ENISA</span>
-  <span>Last run: 2026-09-21 07:41 ET</span>
+  <span>Last run: 2026-09-22 06:45 ET</span>
 </footer>
 
 <script>
