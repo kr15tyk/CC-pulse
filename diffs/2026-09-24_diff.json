@@ -1,0 +1,387 @@
+{
+  "period_start": "2026-09-23T10:36:00.227579+00:00",
+  "period_end": "2026-09-24T10:55:25.871249+00:00",
+  "niap": {
+    "pps": {
+      "added": [
+        {
+          "pp_id": 544,
+          "pp_short_name": "CPP_HCD_V2.0",
+          "pp_name": "collaborative Protection Profile for Hardcopy Devices Version 2.0",
+          "tech_type": "Multi Function Device",
+          "status": "Publishing",
+          "pp_date": "2026-09-23T00:00:00Z",
+          "sunset_date": null,
+          "pp_sponsor_id": "HCD iTC",
+          "pp_transition": null,
+          "cc_version": "CC:2022"
+        }
+      ],
+      "removed": [],
+      "sunset_changes": [],
+      "status_changes": [],
+      "revised": [],
+      "content_changes": []
+    },
+    "tds": {
+      "added": [],
+      "removed": []
+    },
+    "cisco_ndcpp": {
+      "added": [],
+      "removed": [],
+      "newly_archived": []
+    },
+    "pcl_all": {
+      "added": [],
+      "removed": [],
+      "newly_archived": [
+        {
+          "active_maintenances": [],
+          "am_sort": "2026-09-23T00:00:00Z",
+          "assigned_lab_name": "Lightship Security, Inc.",
+          "certification_date": "2024-09-23T00:00:00Z",
+          "from_cc_portal": true,
+          "product_id": "2024.1259",
+          "product_name": "Lexmark MX532, MX632, CX532 and CX635 Multi-Function Printers with Firmware Version 222.037",
+          "protection_profiles": [
+            {
+              "pp_id": 483,
+              "pp_name": "collaborative Protection Profile for Hardcopy Devices Version 1.0E",
+              "pp_short_name": "CPP_HCD_V1.0E"
+            }
+          ],
+          "status_sort": "Archived",
+          "submitting_country_id_code": "CA",
+          "submitting_country_id_name": "Canada",
+          "sunset_date": "2029-09-23T00:00:00Z",
+          "tech_types": [
+            "Multi-Function Devices"
+          ],
+          "vendor_id_name": "Lexmark International, Inc.",
+          "v_id": "2024.1259",
+          "kicked_off_date": null
+        }
+      ]
+    },
+    "in_evaluation": {
+      "added": [],
+      "removed": [],
+      "current_count": 43
+    },
+    "news": {
+      "added": [],
+      "revised": [],
+      "deactivated": [],
+      "reactivated": [],
+      "removed": []
+    },
+    "events": {
+      "added": [],
+      "revised": [],
+      "deactivated": [],
+      "reactivated": [],
+      "removed": []
+    },
+    "policies": {
+      "added": [],
+      "revised": [],
+      "archived": [],
+      "reactivated": [],
+      "removed": []
+    }
+  },
+  "cc_portal": {
+    "news": {
+      "added": []
+    },
+    "pps": {
+      "added": []
+    },
+    "products": {
+      "added": []
+    }
+  },
+  "cctl_labs": {},
+  "csfc": {
+    "pages": {},
+    "selection_links": {},
+    "documents": {
+      "added": [],
+      "removed": [],
+      "updated": []
+    },
+    "feeds": {}
+  },
+  "cc_crypto": {
+    "pages": {
+      "publications": {
+        "added": [],
+        "removed": [
+          {
+            "text": "Management of code disclosure and software IP reuse, v1.2",
+            "href": "https://www.sogis.eu/documents/cc/domains/sc/JIL-Management-Of-Code-Disclosure-And-Sofware-IP-Reuse-v1.2.pdf"
+          },
+          {
+            "text": "Assurance Continuity - Practical Cases for Smart Cards and similar devices, v1.1",
+            "href": "https://sogis.eu/documents/cc/domains/sc/JIL-Assurance-Continuity-Practical-Cases-for-Smart-Cards-and-similar-devices-v1-1.pdf"
+          },
+          {
+            "text": "Biometric card - Guidelines, v1.1",
+            "href": "https://sogis.eu/documents/cc/domains/sc/JIL-Biometric_Card_Guidelines_v1.1.pdf"
+          }
+        ]
+      }
+    }
+  },
+  "nato": {
+    "pages": {},
+    "cisco_added": [],
+    "cisco_removed": [],
+    "baseline_reset": false
+  },
+  "eucc": {
+    "pages": {},
+    "cisco_added": [],
+    "cisco_removed": [],
+    "baseline_reset": false
+  },
+  "nd_itc": {
+    "nit_rfis": {
+      "added": [],
+      "status_changes": [],
+      "revised": [],
+      "newly_archived": []
+    },
+    "awl": {
+      "added": [],
+      "removed": [],
+      "version_changes": [],
+      "list_updates": []
+    },
+    "baseline_reset": false,
+    "collection_failure": false
+  },
+  "ietf_cnsa": {
+    "added": [],
+    "removed": [],
+    "updated": [],
+    "rfc9846_adoption": []
+  },
+  "ieee_pqc": {
+    "added": [],
+    "removed": [],
+    "updated": []
+  },
+  "source_health": {
+    "niap": {
+      "label": "NIAP",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "PCL products",
+          "observed": 1762,
+          "minimum": 50
+        },
+        {
+          "name": "Protection Profiles",
+          "observed": 272,
+          "minimum": 10
+        },
+        {
+          "name": "PQC PP file-version records",
+          "observed": 13,
+          "minimum": 1,
+          "required_for_diff_baseline": false
+        },
+        {
+          "name": "PQC PP full-content hashes",
+          "observed": 7,
+          "minimum": 1,
+          "required_for_diff_baseline": false
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-09-24T10:55:25.871249+00:00",
+      "subcollections": {
+        "news": {
+          "label": "News announcements",
+          "status": "healthy",
+          "observed": 357,
+          "consecutive_failures": 0,
+          "using_last_known_good": false
+        },
+        "events": {
+          "label": "Events",
+          "status": "healthy",
+          "observed": 0,
+          "consecutive_failures": 0,
+          "using_last_known_good": false
+        },
+        "policies": {
+          "label": "Policy letters",
+          "status": "healthy",
+          "observed": 40,
+          "consecutive_failures": 0,
+          "using_last_known_good": false
+        }
+      }
+    },
+    "cc_portal": {
+      "label": "CC Portal",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "portal records",
+          "observed": 180,
+          "minimum": 1
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-09-24T10:55:25.871249+00:00"
+    },
+    "cctl_labs": {
+      "label": "CCTL Labs",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "lab feed items",
+          "observed": 19,
+          "minimum": 1
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-09-24T10:55:25.871249+00:00"
+    },
+    "csfc": {
+      "label": "CSfC",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "APL items",
+          "observed": 118,
+          "minimum": 5
+        },
+        {
+          "name": "announcements",
+          "observed": 8,
+          "minimum": 1
+        },
+        {
+          "name": "tracked capability packages",
+          "observed": 5,
+          "minimum": 5,
+          "required_for_diff_baseline": false
+        },
+        {
+          "name": "capability-package hashes",
+          "observed": 5,
+          "minimum": 5,
+          "required_for_diff_baseline": false
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-09-24T10:55:25.871249+00:00"
+    },
+    "cc_crypto": {
+      "label": "CC Crypto",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "publications",
+          "observed": 118,
+          "minimum": 5
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-09-24T10:55:25.871249+00:00"
+    },
+    "nato": {
+      "label": "NATO NIAPCL",
+      "status": "healthy",
+      "mode": "manual",
+      "checks": [],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "detail": "manual baseline (40 Cisco product(s)); updated via the NATO capture GitHub issue workflow",
+      "checked_at": "2026-09-24T10:55:25.871249+00:00"
+    },
+    "eucc": {
+      "label": "EUCC / ENISA",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "certificates",
+          "observed": 50,
+          "minimum": 2
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-09-24T10:55:25.871249+00:00"
+    },
+    "nd_itc": {
+      "label": "ND-iTC",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "NIT RFIs",
+          "observed": 32,
+          "minimum": 5
+        },
+        {
+          "name": "Allowed-With entries",
+          "observed": 28,
+          "minimum": 1
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-09-24T10:55:25.871249+00:00"
+    },
+    "ietf_cnsa": {
+      "label": "IETF CNSA 2.0",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "CNSA profile/RFC records",
+          "observed": 5,
+          "minimum": 5
+        },
+        {
+          "name": "CNSA full-text hashes",
+          "observed": 5,
+          "minimum": 5
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-09-24T10:55:25.871249+00:00"
+    },
+    "ieee_pqc": {
+      "label": "IEEE 802.11bt",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "P802.11bt project records",
+          "observed": 1,
+          "minimum": 1
+        },
+        {
+          "name": "P802.11bt timeline hashes",
+          "observed": 1,
+          "minimum": 1
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-09-24T10:55:25.871249+00:00"
+    }
+  },
+  "alerts": []
+}
