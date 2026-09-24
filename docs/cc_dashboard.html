@@ -179,7 +179,7 @@
   <span class="nav-title">CC Pulse Dashboard</span>
   <span class="nav-spacer"></span>
   <div class="ham-wrap">
-    <span class="nav-meta">Last run: 2026-09-23 06:36 ET</span>
+    <span class="nav-meta">Last run: 2026-09-24 06:55 ET</span>
     <button class="ham-btn" id="ham-btn" onclick="toggleHamMenu()" aria-expanded="false" aria-haspopup="true" title="Open menu">&#9776;</button>
     <div class="ham-menu" id="ham-menu" role="menu">
       <a class="ham-item" href="https://kr15tyk.github.io/CC-pulse/cc_dashboard.html" role="menuitem"><span class="ham-icon">&#127968;</span>Home</a>
@@ -263,11 +263,11 @@
 <div class="sticky-top">
   <div class="trend-bar">
     <div class="stat"><a href="#sec-niap-pp" onclick="navigateTo('sec-niap-pp');return false;">
-      <div class="stat-num ">0</div>
+      <div class="stat-num active-num">2</div>
       <div class="stat-lbl">NIAP Changes</div>
     </a></div>
     <div class="stat"><a href="#sec-csfc" onclick="navigateTo('sec-csfc');return false;">
-      <div class="stat-num active-num">1</div>
+      <div class="stat-num ">0</div>
       <div class="stat-lbl">CSfC Selection Updates</div>
     </a></div>
     <div class="stat"><a href="#sec-cc-portal" onclick="navigateTo('sec-cc-portal');return false;">
@@ -283,15 +283,15 @@
       <div class="stat-lbl">CCTL Updates</div>
     </a></div>
     <div class="stat"><a href="#sec-eucc-req" onclick="navigateTo('sec-eucc-req');return false;">
-      <div class="stat-num active-num">1</div>
+      <div class="stat-num ">0</div>
       <div class="stat-lbl">EUCC Changes</div>
     </a></div>
     <div class="stat"><a href="#sec-ietf-cnsa" onclick="navigateTo('sec-ietf-cnsa');return false;">
-      <div class="stat-num active-num">1</div>
+      <div class="stat-num ">0</div>
       <div class="stat-lbl">CNSA / PQC Standards</div>
     </a></div>
     <div class="stat"><a href="#sec-alerts" onclick="navigateTo('sec-alerts');return false;">
-      <div class="stat-num alert-num">1</div>
+      <div class="stat-num ">0</div>
       <div class="stat-lbl">Alerts</div>
     </a></div>
   </div>
@@ -317,28 +317,6 @@
       
 <!-- Alerts -->
 
-<div class="section-group">
-<div class="card card-alert" id="sec-alerts">
-  <div class="card-hdr" onclick="toggleCard(this)">
-    <span>Alerts</span>
-    <span class="card-count">1 alert</span>
-    <span class="toggle-icon">&#9660;</span>
-  </div>
-  <div class="card-body">
-    <div class="alert-monitoring">FIPS 186-4, FIPS 186-5, NDcPP, CPP_ND, TLS 1.3, SSH, PP-Module_VPN, PP-Module_WLAN, CNSA 2.0, ML-KEM, ML-DSA, SLH-DSA, post-quantum, RFC 9846, 802.11bt, labgram, valgram, emergency, CSfC, Commercial Solutions for Classified, CSfC APL, CSfC component selections, NSA CSfC, NATO NIAPC, NIAPCL, EUCC, ENISA, CCDB-018, Crypto Catalog, cryptography working group, Specification of Functional Requirements for Cryptography, FCS_CKM, FCS_COP, FCS_RBG</div>
-    
-        <div class="item-row alert-item" data-alert-key="IEEE 802.11bt-P802.11bt_Post-Quantum_Cryptography" data-tab="us">
-          
-          <a class="item-link" href="https://www.ieee802.org/11/Reports/802.11_Timelines.htm" target="_blank">IEEE 802.11bt: P802.11bt Post-Quantum Cryptography</a>
-          
-          <span class="item-meta">updated &middot; PQC, 802.11bt</span>
-          <div class="item-sub">IEEE 802.11bt milestone/status changed</div>
-          <button class="dismiss-btn" onclick="dismissAlert(this)" title="Mark as seen">&#10003; Seen</button>
-        </div>
-        
-  </div>
-</div>
-
 <div class="tab-nav" id="region-tabs">
         <button class="tab-btn active" data-tab="us" onclick="switchTab(this)">&#127482;&#127480; US (NIAP / CSfC)</button>
         <button class="tab-btn" data-tab="intl" onclick="switchTab(this)">&#127760; International</button>
@@ -362,7 +340,7 @@
     
     
     
-    <p class="no-change">No changes detected. <span class="last-active">(last: 2026-09-22)</span></p>
+    <p class="no-change">No changes detected. <span class="last-active">(last: 2026-09-24)</span></p>
   </div>
 </div>
 
@@ -444,36 +422,55 @@
 </div>
 
   <!-- NIAP PCL — All Certifications -->
-<div class="card " id="sec-niap-pcl" data-has-changes="0">
+<div class="card card-new" id="sec-niap-pcl" data-has-changes="1">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>NIAP PCL — All Certifications</span>
-    <span class="card-count">0 changes</span>
+    <span class="card-count">1 change</span>
     </span>
   </div>
-  <div class="card-body collapsed">
+  <div class="card-body ">
+    
+    
+    <div class="sub-hdr sub-updated">Newly Archived (1)</div>
+    
+    <div class="item-row" data-source="niap-pcl" data-kind="archived">
+      <span class="item-link">Lexmark International, Inc. -- Lexmark MX532, MX632, CX532 and CX635 Multi-Function Printers with Firmware Version 222.037</span>
+      <span class="item-meta">Archived</span>
+    </div>
+    
+    <div class="item-sub">CPP_HCD_V1.0E</div>
     
     
     
-    <p class="no-change">No changes detected. <span class="last-active">(last: 2026-09-22)</span></p>
+    
+    
   </div>
 </div>
 
   <!-- NIAP PPs -->
-<div class="card " id="sec-niap-pp" data-has-changes="0">
+<div class="card card-new" id="sec-niap-pp" data-has-changes="1">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>NIAP Protection Profiles</span>
-    <span class="card-count">0 changes</span>
+    <span class="card-count">1 change</span>
     </span>
-    <span class="toggle-icon">&#9658;</span>
+    <span class="toggle-icon">&#9660;</span>
   </div>
-  <div class="card-body collapsed">
+  <div class="card-body ">
+    
+    <div class="sub-hdr sub-new">New PPs (1)</div>
+    
+    <div class="item-row" data-source="niap-pp" data-kind="new">
+      <a class="item-link" href="https://www.niap-ccevs.org/Profile/PP.cfm?id=544" target="_blank">CPP_HCD_V2.0</a>
+      <span class="item-meta">Multi Function Device &middot; 2026-09-23T00:00:00Z</span>
+    </div>
     
     
     
     
     
     
-    <p class="no-change">No changes detected.</p>
+    
+    
   </div>
 </div>
 
@@ -488,7 +485,7 @@
   <div class="card-body collapsed">
     
     
-    <p class="no-change">No changes detected. <span class="last-active">(last: 2026-09-17)</span></p>
+    <p class="no-change">No changes detected.</p>
   </div>
 </div>
 </div>
@@ -497,25 +494,14 @@
 <div class="section-group">
   <div class="section-label">CSfC</div>
   <!-- CSfC Components, Announcements, and Selection Documents -->
-<div class="card card-updated" id="sec-csfc" data-has-changes="1">
+<div class="card " id="sec-csfc" data-has-changes="0">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>CSfC Components &amp; Announcements</span>
-    <span class="card-count">1 update</span>
-    <span class="toggle-icon">&#9660;</span>
+    <span class="card-count">0 updates</span>
+    <span class="toggle-icon">&#9658;</span>
   </div>
-  <div class="card-body ">
+  <div class="card-body collapsed">
     
-    
-      
-        
-        
-        <div class="item-row" data-source="csfc" data-kind="removed">
-          <a class="item-link" href="https://www.niap-ccevs.org/Products/11397" target="_blank">Traffic Filtering Firewall | Juniper | vSRX3.0 | Junos OS 22.2R2 | NIAP Validation Completed (at Acumen) | 2024.01.22 | </a>
-          <span class="item-meta">component removed</span>
-        </div>
-        
-        
-      
     
     
       
@@ -524,7 +510,7 @@
     
       
     
-    
+    <p class="no-change">No changes detected. <span class="last-active">(last: 2026-09-23)</span></p>
   </div>
 </div>
 </div>
@@ -550,26 +536,21 @@
     </div>
   </div>
 
-  <div class="card card-updated" id="sec-ieee-pqc" data-has-changes="1">
+  <div class="card " id="sec-ieee-pqc" data-has-changes="0">
     <div class="card-hdr" onclick="toggleCard(this)">
       <span>IEEE 802.11bt Post-Quantum Cryptography</span>
-      <span class="card-count">1 update</span>
-      <span class="toggle-icon">&#9660;</span>
+      <span class="card-count">0 updates</span>
+      <span class="toggle-icon">&#9658;</span>
     </div>
-    <div class="card-body ">
+    <div class="card-body collapsed">
       
         
       
         
       
         
-        <div class="item-row" data-source="ieee-pqc" data-kind="updated">
-          <a class="item-link" href="https://www.ieee802.org/11/Reports/802.11_Timelines.htm" target="_blank">P802.11bt &mdash; Post-Quantum Cryptography</a>
-          <span class="item-meta">status/timeline updated</span>
-        </div>
-        
       
-      
+      <p class="no-change">No changes detected.</p>
     </div>
   </div>
 </div>
@@ -585,6 +566,8 @@
     <span class="toggle-icon">&#9658;</span>
   </div>
   <div class="card-body collapsed">
+    
+      
     
     <p class="no-change">No changes detected.</p>
   </div>
@@ -658,23 +641,16 @@
           </div>
         </div>
         <!-- EUCC Certificates -->
-        <div class="card card-new" id="sec-eucc-certs" data-has-changes="1">
+        <div class="card " id="sec-eucc-certs" data-has-changes="0">
           <div class="card-hdr" onclick="toggleCard(this)">
             <span>EUCC Certified Products</span>
-            <span class="card-count">1 new item</span>
-            <span class="toggle-icon">&#9660;</span>
+            <span class="card-count">0 new items</span>
+            <span class="toggle-icon">&#9658;</span>
           </div>
-          <div class="card-body ">
+          <div class="card-body collapsed">
             
             
-            
-            <div class="item-row" data-source="eucc" data-kind="new">
-              <a class="item-link" href="https://certification.enisa.europa.eu/certificates/eucc-3100-2026-000001-r-01_en" target="_blank">MF0AES(H)x0, NT2H2xy1G and NT2H2xy1S, release B0</a>
-              <span class="item-meta"></span>
-            </div>
-            
-            
-            
+            <p class="no-change">No new EUCC certified products.</p>
           </div>
         </div>
       </div>
@@ -686,7 +662,7 @@
 <div class="card card-new" id="sec-history" data-has-changes="1">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>Change History</span>
-    <span class="card-count">24 events</span>
+    <span class="card-count">25 events</span>
     <span class="toggle-icon">▼</span>
   </div>
   <div class="card-body">
@@ -704,6 +680,17 @@
       div>
     <div class="timeline" id="history-timeline">
     
+      
+      <div class="tl-entry" data-cat="pp_new">
+        <div class="tl-date">2026-09-24</div>
+        <div class="tl-body">
+          <div class="tl-title">
+            <span class="tl-badge new">new</span>
+            <a href="https://www.niap-ccevs.org/Profile/PP.cfm?id=544" target="_blank">New PP: CPP_HCD_V2.0</a>
+          </div>
+          <div class="tl-detail">collaborative Protection Profile for Hardcopy Devices Version 2.0</div>
+        </div>
+      </div>
       
       <div class="tl-entry" data-cat="csfc_change">
         <div class="tl-date">2026-09-23</div>
@@ -979,7 +966,7 @@
 </div><!-- /main-content -->
 <footer>
   <span>CC Pulse &middot; Auto-refreshes daily (01:00 EST) &middot; NIAP, CSfC, CC Portal, NATO NIAPCL, EUCC / ENISA</span>
-  <span>Last run: 2026-09-23 06:36 ET</span>
+  <span>Last run: 2026-09-24 06:55 ET</span>
 </footer>
 
 <script>
