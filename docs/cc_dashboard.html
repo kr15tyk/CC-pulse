@@ -179,7 +179,7 @@
   <span class="nav-title">CC Pulse Dashboard</span>
   <span class="nav-spacer"></span>
   <div class="ham-wrap">
-    <span class="nav-meta">Last run: 2026-09-25 06:57 ET</span>
+    <span class="nav-meta">Last run: 2026-09-26 06:38 ET</span>
     <button class="ham-btn" id="ham-btn" onclick="toggleHamMenu()" aria-expanded="false" aria-haspopup="true" title="Open menu">&#9776;</button>
     <div class="ham-menu" id="ham-menu" role="menu">
       <a class="ham-item" href="https://kr15tyk.github.io/CC-pulse/cc_dashboard.html" role="menuitem"><span class="ham-icon">&#127968;</span>Home</a>
@@ -263,7 +263,7 @@
 <div class="sticky-top">
   <div class="trend-bar">
     <div class="stat"><a href="#sec-niap-pp" onclick="navigateTo('sec-niap-pp');return false;">
-      <div class="stat-num ">0</div>
+      <div class="stat-num active-num">3</div>
       <div class="stat-lbl">NIAP Changes</div>
     </a></div>
     <div class="stat"><a href="#sec-csfc" onclick="navigateTo('sec-csfc');return false;">
@@ -340,7 +340,7 @@
     
     
     
-    <p class="no-change">No changes detected. <span class="last-active">(last: 2026-09-24)</span></p>
+    <p class="no-change">No changes detected. <span class="last-active">(last: 2026-09-26)</span></p>
   </div>
 </div>
 
@@ -399,14 +399,24 @@
 </div>
 
   <!-- NIAP policy letters -->
-<div class="card " id="sec-niap-policies" data-has-changes="0">
+<div class="card card-new" id="sec-niap-policies" data-has-changes="1">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>NIAP Policy Letters</span>
-    <span class="card-count">0 changes</span>
-    <span class="toggle-icon">&#9658;</span>
+    <span class="card-count">1 change</span>
+    <span class="toggle-icon">&#9660;</span>
   </div>
-  <div class="card-body collapsed">
+  <div class="card-body ">
     
+      
+    
+      
+      <div class="sub-hdr sub-updated">Revised (1)</div>
+      
+      <div class="item-row" data-source="niap-policies" data-kind="updated">
+        <a class="item-link" href="https://www.niap-ccevs.org/Policy/policy-ltr-5-update4.pdf" target="_blank">Policy 5 — Applicability and Relationship of NIST Cryptographic Algorithm Validation Program (CAVP) and Cryptographic Module Validation Program (CMVP) to NIAP’s Common Criteria Evaluation and Validation Scheme (CCEVS)</a>
+        <span class="item-meta">2019-12-06</span>
+      </div>
+      
       
     
       
@@ -415,24 +425,41 @@
     
       
     
-      
     
-    <p class="no-change">No policy-letter changes.</p>
   </div>
 </div>
 
   <!-- NIAP PCL — All Certifications -->
-<div class="card " id="sec-niap-pcl" data-has-changes="0">
+<div class="card card-new" id="sec-niap-pcl" data-has-changes="2">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>NIAP PCL — All Certifications</span>
-    <span class="card-count">0 changes</span>
+    <span class="card-count">2 changes</span>
     </span>
   </div>
-  <div class="card-body collapsed">
+  <div class="card-body ">
+    
+    <div class="sub-hdr sub-new">New Certifications (2)</div>
+    
+    <div class="item-row" data-source="niap-pcl" data-kind="new">
+      <span class="item-link">Vertiv Group Corp. -- CYBEX SC Series Secure Micro Switches SC825SFF, SC925SFF, SC845SFF, SC945SFF, SC885SFF, SC985SFF, SCMV245SFF, SC825SFF-B-DP, SC825SFF-B-H, SC925SFF-B-DP, SC925SFF-B-H, SC845SFF-B-DP, SC845SFF-B-H, SC945SFF-B-DP, SC945SFF-B-H, SC885SFF-B-DP, SC885SFF-B-H, SC985SFF-B-DP, SC985SFF-B-H, SCMV245SFF-B-DP, SCMV245SFF-B-H Firmware Version 44044-M7M7</span>
+      <span class="item-meta">2026-08-06</span>
+    </div>
+    
+    <div class="item-sub">PP_PSD_V4.0, MOD_UA_V1.0, MOD_KM_V1.0, MOD_VI_V1.0</div>
+    
+    
+    <div class="item-row" data-source="niap-pcl" data-kind="new">
+      <span class="item-link">HPE Juniper Networking -- Juniper SRX4700, SRX4120 and SRX2300 for Junos OS 25.2R1</span>
+      <span class="item-meta">2026-08-14</span>
+    </div>
+    
+    <div class="item-sub">MOD_CPP_FW_v1.4e, PKG_SSH_V1.0, MOD_IPS_V1.0, MOD_VPNGW_v1.3, CPP_ND_V3.0E</div>
     
     
     
-    <p class="no-change">No changes detected. <span class="last-active">(last: 2026-09-24)</span></p>
+    
+    
+    
   </div>
 </div>
 
@@ -641,7 +668,7 @@
 <div class="card card-new" id="sec-history" data-has-changes="1">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>Change History</span>
-    <span class="card-count">25 events</span>
+    <span class="card-count">27 events</span>
     <span class="toggle-icon">▼</span>
   </div>
   <div class="card-body">
@@ -659,6 +686,39 @@
       div>
     <div class="timeline" id="history-timeline">
     
+      
+      <div class="tl-entry" data-cat="niap_policies">
+        <div class="tl-date">2026-09-26</div>
+        <div class="tl-body">
+          <div class="tl-title">
+            <span class="tl-badge updated">updated</span>
+            <a href="https://www.niap-ccevs.org/Policy/policy-ltr-5-update4.pdf" target="_blank">NIAP Policie revised: Applicability and Relationship of NIST Cryptographic Algorithm Validation Program (CAVP) and Cryptographic Module Validation Program (CMVP) to NIAP’s Common Criteria Evaluation and Validation Scheme (CCEVS)</a>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="tl-entry" data-cat="pcl_cert">
+        <div class="tl-date">2026-09-26</div>
+        <div class="tl-body">
+          <div class="tl-title">
+            <span class="tl-badge new">new</span>
+            <a href="https://www.niap-ccevs.org/products/2026.1265" target="_blank">Vertiv Group Corp. — CYBEX SC Series Secure Micro Switches SC825SFF, SC925SFF, SC845SFF, SC945SFF, SC885SFF, SC985SFF, SCMV245SFF, SC825SFF-B-DP, SC825SFF-B-H, SC925SFF-B-DP, SC925SFF-B-H, SC845SFF-B-DP, SC845SFF-B-H, SC945SFF-B-DP, SC945SFF-B-H, SC885SFF-B-DP, SC885SFF-B-H, SC985SFF-B-DP, SC985SFF-B-H, SCMV245SFF-B-DP, SCMV245SFF-B-H Firmware Version 44044-M7M7</a>
+          </div>
+          <div class="tl-detail">Certified 2026-08-06 · EWA - Canada · PP_PSD_V4.0, MOD_UA_V1.0, MOD_KM_V1.0, MOD_VI_V1.0</div>
+        </div>
+      </div>
+      
+      <div class="tl-entry" data-cat="pcl_cert">
+        <div class="tl-date">2026-09-26</div>
+        <div class="tl-body">
+          <div class="tl-title">
+            <span class="tl-badge new">new</span>
+            <a href="https://www.niap-ccevs.org/products/2026.1268" target="_blank">HPE Juniper Networking — Juniper SRX4700, SRX4120 and SRX2300 for Junos OS 25.2R1</a>
+          </div>
+          <div class="tl-detail">Certified 2026-08-14 · Teron Labs · MOD_CPP_FW_v1.4e, PKG_SSH_V1.0, MOD_IPS_V1.0, MOD_VPNGW_v1.3, CPP_ND_V3.0E</div>
+        </div>
+      </div>
       
       <div class="tl-entry" data-cat="pp_new">
         <div class="tl-date">2026-09-24</div>
@@ -924,17 +984,6 @@
         </div>
       </div>
       
-      <div class="tl-entry" data-cat="eucc_cisco">
-        <div class="tl-date">2026-08-27</div>
-        <div class="tl-body">
-          <div class="tl-title">
-            <span class="tl-badge new">new</span>
-            <a href="https://certification.enisa.europa.eu/certificates/eucc-3110-2026-000001-i-00-5_en" target="_blank">EUCC: Cisco ASR 9000 Series Aggregation Services Routers running IOS-XR 7.11</a>
-          </div>
-          
-        </div>
-      </div>
-      
     
     </div>
   </div>
@@ -945,7 +994,7 @@
 </div><!-- /main-content -->
 <footer>
   <span>CC Pulse &middot; Auto-refreshes daily (01:00 EST) &middot; NIAP, CSfC, CC Portal, NATO NIAPCL, EUCC / ENISA</span>
-  <span>Last run: 2026-09-25 06:57 ET</span>
+  <span>Last run: 2026-09-26 06:38 ET</span>
 </footer>
 
 <script>
