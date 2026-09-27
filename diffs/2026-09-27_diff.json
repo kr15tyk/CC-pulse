@@ -1,6 +1,6 @@
 {
-  "period_start": "2026-08-27T17:12:56.596071+00:00",
-  "period_end": "2026-08-28T17:59:55.409688+00:00",
+  "period_start": "2026-09-26T10:38:02.065484+00:00",
+  "period_end": "2026-09-27T11:10:30.805583+00:00",
   "niap": {
     "pps": {
       "added": [],
@@ -27,7 +27,7 @@
     "in_evaluation": {
       "added": [],
       "removed": [],
-      "current_count": 44
+      "current_count": 43
     },
     "news": {
       "added": [],
@@ -122,33 +122,35 @@
       "checks": [
         {
           "name": "PCL products",
-          "observed": 1757,
+          "observed": 1764,
           "minimum": 50
         },
         {
           "name": "Protection Profiles",
-          "observed": 271,
+          "observed": 272,
           "minimum": 10
         },
         {
           "name": "PQC PP file-version records",
           "observed": 13,
-          "minimum": 1
+          "minimum": 1,
+          "required_for_diff_baseline": false
         },
         {
           "name": "PQC PP full-content hashes",
           "observed": 7,
-          "minimum": 1
+          "minimum": 1,
+          "required_for_diff_baseline": false
         }
       ],
       "consecutive_failures": 0,
       "using_last_known_good": false,
-      "checked_at": "2026-08-28T17:59:55.409688+00:00",
+      "checked_at": "2026-09-27T11:10:30.805583+00:00",
       "subcollections": {
         "news": {
           "label": "News announcements",
           "status": "healthy",
-          "observed": 355,
+          "observed": 357,
           "consecutive_failures": 0,
           "using_last_known_good": false
         },
@@ -162,7 +164,7 @@
         "policies": {
           "label": "Policy letters",
           "status": "healthy",
-          "observed": 39,
+          "observed": 40,
           "consecutive_failures": 0,
           "using_last_known_good": false
         }
@@ -180,21 +182,22 @@
       ],
       "consecutive_failures": 0,
       "using_last_known_good": false,
-      "checked_at": "2026-08-28T17:59:55.409688+00:00"
+      "checked_at": "2026-09-27T11:10:30.805583+00:00"
     },
     "cctl_labs": {
       "label": "CCTL Labs",
-      "status": "healthy",
+      "status": "stale",
       "checks": [
         {
           "name": "lab feed items",
-          "observed": 19,
+          "observed": 9,
           "minimum": 1
         }
       ],
-      "consecutive_failures": 0,
-      "using_last_known_good": false,
-      "checked_at": "2026-08-28T17:59:55.409688+00:00"
+      "consecutive_failures": 1,
+      "using_last_known_good": true,
+      "checked_at": "2026-09-27T11:10:30.805583+00:00",
+      "detail": "collection collapse (retained last-known-good): Lightship Security 0/10"
     },
     "csfc": {
       "label": "CSfC",
@@ -202,7 +205,7 @@
       "checks": [
         {
           "name": "APL items",
-          "observed": 123,
+          "observed": 118,
           "minimum": 5
         },
         {
@@ -213,17 +216,19 @@
         {
           "name": "tracked capability packages",
           "observed": 5,
-          "minimum": 5
+          "minimum": 5,
+          "required_for_diff_baseline": false
         },
         {
           "name": "capability-package hashes",
           "observed": 5,
-          "minimum": 5
+          "minimum": 5,
+          "required_for_diff_baseline": false
         }
       ],
       "consecutive_failures": 0,
       "using_last_known_good": false,
-      "checked_at": "2026-08-28T17:59:55.409688+00:00"
+      "checked_at": "2026-09-27T11:10:30.805583+00:00"
     },
     "cc_crypto": {
       "label": "CC Crypto",
@@ -231,13 +236,13 @@
       "checks": [
         {
           "name": "publications",
-          "observed": 121,
+          "observed": 118,
           "minimum": 5
         }
       ],
       "consecutive_failures": 0,
       "using_last_known_good": false,
-      "checked_at": "2026-08-28T17:59:55.409688+00:00"
+      "checked_at": "2026-09-27T11:10:30.805583+00:00"
     },
     "nato": {
       "label": "NATO NIAPCL",
@@ -247,7 +252,7 @@
       "consecutive_failures": 0,
       "using_last_known_good": false,
       "detail": "manual baseline (40 Cisco product(s)); updated via the NATO capture GitHub issue workflow",
-      "checked_at": "2026-08-28T17:59:55.409688+00:00"
+      "checked_at": "2026-09-27T11:10:30.805583+00:00"
     },
     "eucc": {
       "label": "EUCC / ENISA",
@@ -261,7 +266,7 @@
       ],
       "consecutive_failures": 0,
       "using_last_known_good": false,
-      "checked_at": "2026-08-28T17:59:55.409688+00:00"
+      "checked_at": "2026-09-27T11:10:30.805583+00:00"
     },
     "nd_itc": {
       "label": "ND-iTC",
@@ -274,13 +279,13 @@
         },
         {
           "name": "Allowed-With entries",
-          "observed": 22,
+          "observed": 28,
           "minimum": 1
         }
       ],
       "consecutive_failures": 0,
       "using_last_known_good": false,
-      "checked_at": "2026-08-28T17:59:55.409688+00:00"
+      "checked_at": "2026-09-27T11:10:30.805583+00:00"
     },
     "ietf_cnsa": {
       "label": "IETF CNSA 2.0",
@@ -299,7 +304,7 @@
       ],
       "consecutive_failures": 0,
       "using_last_known_good": false,
-      "checked_at": "2026-08-28T17:59:55.409688+00:00"
+      "checked_at": "2026-09-27T11:10:30.805583+00:00"
     },
     "ieee_pqc": {
       "label": "IEEE 802.11bt",
@@ -318,7 +323,7 @@
       ],
       "consecutive_failures": 0,
       "using_last_known_good": false,
-      "checked_at": "2026-08-28T17:59:55.409688+00:00"
+      "checked_at": "2026-09-27T11:10:30.805583+00:00"
     }
   },
   "alerts": []
