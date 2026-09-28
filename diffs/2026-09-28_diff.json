@@ -1,6 +1,6 @@
 {
-  "period_start": "2026-08-28T17:59:55.409688+00:00",
-  "period_end": "2026-08-29T12:06:33.692863+00:00",
+  "period_start": "2026-09-27T11:10:30.805583+00:00",
+  "period_end": "2026-09-28T12:36:54.223786+00:00",
   "niap": {
     "pps": {
       "added": [],
@@ -22,39 +22,12 @@
     "pcl_all": {
       "added": [],
       "removed": [],
-      "newly_archived": [
-        {
-          "active_maintenances": [],
-          "am_sort": "2026-08-28T00:00:00Z",
-          "assigned_lab_name": "Lightship Security, Inc.",
-          "certification_date": "2024-08-28T00:00:00Z",
-          "from_cc_portal": true,
-          "product_id": "2024.1227",
-          "product_name": "Xerox\u00ae AltaLink\u2122 C8130, C8135, C8145, C8155, C8170, B8145, B8155 and B8170 with SSD",
-          "protection_profiles": [
-            {
-              "pp_id": 317,
-              "pp_name": "Protection Profile for Hardcopy Devices Version 1.0",
-              "pp_short_name": "PP_HCD_V1.0"
-            }
-          ],
-          "status_sort": "Archived",
-          "submitting_country_id_code": "CA",
-          "submitting_country_id_name": "Canada",
-          "sunset_date": "2029-08-28T00:00:00Z",
-          "tech_types": [
-            "Multi-Function Devices"
-          ],
-          "vendor_id_name": "Xerox Corporation",
-          "v_id": "2024.1227",
-          "kicked_off_date": null
-        }
-      ]
+      "newly_archived": []
     },
     "in_evaluation": {
       "added": [],
       "removed": [],
-      "current_count": 44
+      "current_count": 43
     },
     "news": {
       "added": [],
@@ -110,9 +83,52 @@
     "baseline_reset": false
   },
   "eucc": {
-    "pages": {},
+    "pages": {
+      "certificates": {
+        "added": [
+          {
+            "name": "Swissbit Cloud SMAERS",
+            "text": "Swissbit Cloud SMAERS | 25 September 2026 | Security Module application for Electronic Record-keeping Systems",
+            "href": "https://certification.enisa.europa.eu/certificates/eucc-3206-2026-000002-i-00_en",
+            "cert_date": "2026-09-25T12:00:00Z",
+            "description": "Security Module application for Electronic Record-keeping Systems"
+          },
+          {
+            "name": "Swissbit Cloud CSPL",
+            "text": "Swissbit Cloud CSPL | 25 September 2026 | Cryptographic Service Provider Light (CSPLight)",
+            "href": "https://certification.enisa.europa.eu/certificates/eucc-3206-2026-000001-i-00_en",
+            "cert_date": "2026-09-25T12:00:00Z",
+            "description": "Cryptographic Service Provider Light (CSPLight)"
+          }
+        ],
+        "removed": [
+          {
+            "name": "Cisco ASR 9000 Series Aggregation Services Routers running IOS-XR 7.11",
+            "text": "Cisco ASR 9000 Series Aggregation Services Routers running IOS-XR 7.11 | 28 April 2026 | The Cisco Cisco ASR 9000 Series Aggregation Services Routers running IOS-XR 7.11, (ASR9K) is a scalable carrier-class router, which is designed for redundancy, high security and availability, packaging, power, and other requirements needed by service providers. The ASR9K is designed to provide conti",
+            "href": "https://certification.enisa.europa.eu/certificates/eucc-3110-2026-2500100-01_en",
+            "cert_date": "2026-04-28T12:00:00Z",
+            "description": "The Cisco Cisco ASR 9000 Series Aggregation Services Routers running IOS-XR 7.11, (ASR9K) is a scalable carrier-class router, which is designed for redundancy, high security and availability, packaging, power, and other requirements needed by service providers. The ASR9K is designed to provide conti"
+          },
+          {
+            "name": "Waste container identification and data integrity solution",
+            "text": "Waste container identification and data integrity solution | 28 April 2026 | The Distromel Waste Container Identification System is a component of a Waste Bin Identification System (WBIS) that ensures the reliable identification of waste containers and the integrity of collection data. It comprises an RFID tag attached to eac.",
+            "href": "https://certification.enisa.europa.eu/certificates/eucc-3095-2026-000001-i-00_en",
+            "cert_date": "2026-04-28T12:00:00Z",
+            "description": "The Distromel Waste Container Identification System is a component of a Waste Bin Identification System (WBIS) that ensures the reliable identification of waste containers and the integrity of collection data. It comprises an RFID tag attached to eac."
+          }
+        ]
+      }
+    },
     "cisco_added": [],
-    "cisco_removed": [],
+    "cisco_removed": [
+      {
+        "name": "Cisco ASR 9000 Series Aggregation Services Routers running IOS-XR 7.11",
+        "text": "Cisco ASR 9000 Series Aggregation Services Routers running IOS-XR 7.11 | 28 April 2026 | The Cisco Cisco ASR 9000 Series Aggregation Services Routers running IOS-XR 7.11, (ASR9K) is a scalable carrier-class router, which is designed for redundancy, high security and availability, packaging, power, and other requirements needed by service providers. The ASR9K is designed to provide conti",
+        "href": "https://certification.enisa.europa.eu/certificates/eucc-3110-2026-2500100-01_en",
+        "cert_date": "2026-04-28T12:00:00Z",
+        "description": "The Cisco Cisco ASR 9000 Series Aggregation Services Routers running IOS-XR 7.11, (ASR9K) is a scalable carrier-class router, which is designed for redundancy, high security and availability, packaging, power, and other requirements needed by service providers. The ASR9K is designed to provide conti"
+      }
+    ],
     "baseline_reset": false
   },
   "nd_itc": {
@@ -149,33 +165,35 @@
       "checks": [
         {
           "name": "PCL products",
-          "observed": 1757,
+          "observed": 1764,
           "minimum": 50
         },
         {
           "name": "Protection Profiles",
-          "observed": 271,
+          "observed": 272,
           "minimum": 10
         },
         {
           "name": "PQC PP file-version records",
           "observed": 13,
-          "minimum": 1
+          "minimum": 1,
+          "required_for_diff_baseline": false
         },
         {
           "name": "PQC PP full-content hashes",
           "observed": 7,
-          "minimum": 1
+          "minimum": 1,
+          "required_for_diff_baseline": false
         }
       ],
       "consecutive_failures": 0,
       "using_last_known_good": false,
-      "checked_at": "2026-08-29T12:06:33.692863+00:00",
+      "checked_at": "2026-09-28T12:36:54.223786+00:00",
       "subcollections": {
         "news": {
           "label": "News announcements",
           "status": "healthy",
-          "observed": 355,
+          "observed": 357,
           "consecutive_failures": 0,
           "using_last_known_good": false
         },
@@ -189,7 +207,7 @@
         "policies": {
           "label": "Policy letters",
           "status": "healthy",
-          "observed": 39,
+          "observed": 40,
           "consecutive_failures": 0,
           "using_last_known_good": false
         }
@@ -207,7 +225,7 @@
       ],
       "consecutive_failures": 0,
       "using_last_known_good": false,
-      "checked_at": "2026-08-29T12:06:33.692863+00:00"
+      "checked_at": "2026-09-28T12:36:54.223786+00:00"
     },
     "cctl_labs": {
       "label": "CCTL Labs",
@@ -221,7 +239,7 @@
       ],
       "consecutive_failures": 0,
       "using_last_known_good": false,
-      "checked_at": "2026-08-29T12:06:33.692863+00:00"
+      "checked_at": "2026-09-28T12:36:54.223786+00:00"
     },
     "csfc": {
       "label": "CSfC",
@@ -229,7 +247,7 @@
       "checks": [
         {
           "name": "APL items",
-          "observed": 123,
+          "observed": 118,
           "minimum": 5
         },
         {
@@ -240,17 +258,19 @@
         {
           "name": "tracked capability packages",
           "observed": 5,
-          "minimum": 5
+          "minimum": 5,
+          "required_for_diff_baseline": false
         },
         {
           "name": "capability-package hashes",
           "observed": 5,
-          "minimum": 5
+          "minimum": 5,
+          "required_for_diff_baseline": false
         }
       ],
       "consecutive_failures": 0,
       "using_last_known_good": false,
-      "checked_at": "2026-08-29T12:06:33.692863+00:00"
+      "checked_at": "2026-09-28T12:36:54.223786+00:00"
     },
     "cc_crypto": {
       "label": "CC Crypto",
@@ -258,13 +278,13 @@
       "checks": [
         {
           "name": "publications",
-          "observed": 121,
+          "observed": 118,
           "minimum": 5
         }
       ],
       "consecutive_failures": 0,
       "using_last_known_good": false,
-      "checked_at": "2026-08-29T12:06:33.692863+00:00"
+      "checked_at": "2026-09-28T12:36:54.223786+00:00"
     },
     "nato": {
       "label": "NATO NIAPCL",
@@ -274,7 +294,7 @@
       "consecutive_failures": 0,
       "using_last_known_good": false,
       "detail": "manual baseline (40 Cisco product(s)); updated via the NATO capture GitHub issue workflow",
-      "checked_at": "2026-08-29T12:06:33.692863+00:00"
+      "checked_at": "2026-09-28T12:36:54.223786+00:00"
     },
     "eucc": {
       "label": "EUCC / ENISA",
@@ -288,7 +308,7 @@
       ],
       "consecutive_failures": 0,
       "using_last_known_good": false,
-      "checked_at": "2026-08-29T12:06:33.692863+00:00"
+      "checked_at": "2026-09-28T12:36:54.223786+00:00"
     },
     "nd_itc": {
       "label": "ND-iTC",
@@ -301,13 +321,13 @@
         },
         {
           "name": "Allowed-With entries",
-          "observed": 22,
+          "observed": 28,
           "minimum": 1
         }
       ],
       "consecutive_failures": 0,
       "using_last_known_good": false,
-      "checked_at": "2026-08-29T12:06:33.692863+00:00"
+      "checked_at": "2026-09-28T12:36:54.223786+00:00"
     },
     "ietf_cnsa": {
       "label": "IETF CNSA 2.0",
@@ -326,7 +346,7 @@
       ],
       "consecutive_failures": 0,
       "using_last_known_good": false,
-      "checked_at": "2026-08-29T12:06:33.692863+00:00"
+      "checked_at": "2026-09-28T12:36:54.223786+00:00"
     },
     "ieee_pqc": {
       "label": "IEEE 802.11bt",
@@ -345,7 +365,7 @@
       ],
       "consecutive_failures": 0,
       "using_last_known_good": false,
-      "checked_at": "2026-08-29T12:06:33.692863+00:00"
+      "checked_at": "2026-09-28T12:36:54.223786+00:00"
     }
   },
   "alerts": []
