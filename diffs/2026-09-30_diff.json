@@ -1,6 +1,6 @@
 {
-  "period_start": "2026-08-30T11:01:46.874563+00:00",
-  "period_end": "2026-08-31T12:23:51.377606+00:00",
+  "period_start": "2026-09-29T11:57:55.373863+00:00",
+  "period_end": "2026-09-30T11:44:46.689922+00:00",
   "niap": {
     "pps": {
       "added": [],
@@ -27,7 +27,7 @@
     "in_evaluation": {
       "added": [],
       "removed": [],
-      "current_count": 44
+      "current_count": 43
     },
     "news": {
       "added": [],
@@ -83,42 +83,7 @@
     "baseline_reset": false
   },
   "eucc": {
-    "pages": {
-      "certificates": {
-        "added": [
-          {
-            "name": "ArcMC and SmartConnectors",
-            "text": "ArcMC and SmartConnectors | 27 April 2026 | The ArcSight Management Center (ARcMC) is a a centralized management software tool that supports security policy configuration, deployment maintenance, and monitoring. It provides a single management interface to administer ArcMC managed nodes, including Loggers, SmartConnectors, Event Brokers, and",
-            "href": "https://certification.enisa.europa.eu/certificates/eucc-3135-2026-000001-i-00_en",
-            "cert_date": "2026-04-27T12:00:00Z",
-            "description": "The ArcSight Management Center (ARcMC) is a a centralized management software tool that supports security policy configuration, deployment maintenance, and monitoring. It provides a single management interface to administer ArcMC managed nodes, including Loggers, SmartConnectors, Event Brokers, and"
-          },
-          {
-            "name": "Infineon Technologies AG Smartcard IC IFX_CCI_000011h IFX_CCI_00001Bh IFX_CCI_00001Eh IFX_CCI_000025h G12",
-            "text": "Infineon Technologies AG Smartcard IC IFX_CCI_000011h IFX_CCI_00001Bh IFX_CCI_00001Eh IFX_CCI_000025h G12 | 27 April 2026 | Infineon Technologies AG Smartcard IC IFX_CCI_000011h IFX_CCI_00001Bh IFX_CCI_00001Eh IFX_CCI_000025h G12",
-            "href": "https://certification.enisa.europa.eu/certificates/eucc-3087-2026-000001-i-00-1_en",
-            "cert_date": "2026-04-27T12:00:00Z",
-            "description": "Infineon Technologies AG Smartcard IC IFX_CCI_000011h IFX_CCI_00001Bh IFX_CCI_00001Eh IFX_CCI_000025h G12"
-          }
-        ],
-        "removed": [
-          {
-            "name": "ST33J2M0",
-            "text": "ST33J2M0 | 27 April 2026 | STMicroelectronics' ST33J2M0 (C05) is a microcontroller for smart cards (ID, banking, transport, etc.).",
-            "href": "https://certification.enisa.europa.eu/certificates/eucc-3090-2026-000001-i-00-20_en",
-            "cert_date": "2026-04-27T12:00:00Z",
-            "description": "STMicroelectronics' ST33J2M0 (C05) is a microcontroller for smart cards (ID, banking, transport, etc.)."
-          },
-          {
-            "name": "ST33J2M0 including optional cryptographic library NESLIB",
-            "text": "ST33J2M0 including optional cryptographic library NESLIB | 27 April 2026 | STMicroelectronics' ST33J2M0 including optional cryptographic library NESLIB (F03) is a microcontroller for smart cards (ID, banking, transport, etc.).",
-            "href": "https://certification.enisa.europa.eu/certificates/eucc-3090-2026-000001-i-00-21_en",
-            "cert_date": "2026-04-27T12:00:00Z",
-            "description": "STMicroelectronics' ST33J2M0 including optional cryptographic library NESLIB (F03) is a microcontroller for smart cards (ID, banking, transport, etc.)."
-          }
-        ]
-      }
-    },
+    "pages": {},
     "cisco_added": [],
     "cisco_removed": [],
     "baseline_reset": false
@@ -157,12 +122,12 @@
       "checks": [
         {
           "name": "PCL products",
-          "observed": 1757,
+          "observed": 1764,
           "minimum": 50
         },
         {
           "name": "Protection Profiles",
-          "observed": 271,
+          "observed": 272,
           "minimum": 10
         },
         {
@@ -180,12 +145,12 @@
       ],
       "consecutive_failures": 0,
       "using_last_known_good": false,
-      "checked_at": "2026-08-31T12:23:51.377606+00:00",
+      "checked_at": "2026-09-30T11:44:46.689922+00:00",
       "subcollections": {
         "news": {
           "label": "News announcements",
           "status": "healthy",
-          "observed": 355,
+          "observed": 357,
           "consecutive_failures": 0,
           "using_last_known_good": false
         },
@@ -199,7 +164,7 @@
         "policies": {
           "label": "Policy letters",
           "status": "healthy",
-          "observed": 39,
+          "observed": 40,
           "consecutive_failures": 0,
           "using_last_known_good": false
         }
@@ -217,7 +182,7 @@
       ],
       "consecutive_failures": 0,
       "using_last_known_good": false,
-      "checked_at": "2026-08-31T12:23:51.377606+00:00"
+      "checked_at": "2026-09-30T11:44:46.689922+00:00"
     },
     "cctl_labs": {
       "label": "CCTL Labs",
@@ -231,7 +196,7 @@
       ],
       "consecutive_failures": 0,
       "using_last_known_good": false,
-      "checked_at": "2026-08-31T12:23:51.377606+00:00"
+      "checked_at": "2026-09-30T11:44:46.689922+00:00"
     },
     "csfc": {
       "label": "CSfC",
@@ -239,7 +204,7 @@
       "checks": [
         {
           "name": "APL items",
-          "observed": 123,
+          "observed": 118,
           "minimum": 5
         },
         {
@@ -262,7 +227,7 @@
       ],
       "consecutive_failures": 0,
       "using_last_known_good": false,
-      "checked_at": "2026-08-31T12:23:51.377606+00:00"
+      "checked_at": "2026-09-30T11:44:46.689922+00:00"
     },
     "cc_crypto": {
       "label": "CC Crypto",
@@ -270,13 +235,13 @@
       "checks": [
         {
           "name": "publications",
-          "observed": 121,
+          "observed": 118,
           "minimum": 5
         }
       ],
       "consecutive_failures": 0,
       "using_last_known_good": false,
-      "checked_at": "2026-08-31T12:23:51.377606+00:00"
+      "checked_at": "2026-09-30T11:44:46.689922+00:00"
     },
     "nato": {
       "label": "NATO NIAPCL",
@@ -286,7 +251,7 @@
       "consecutive_failures": 0,
       "using_last_known_good": false,
       "detail": "manual baseline (40 Cisco product(s)); updated via the NATO capture GitHub issue workflow",
-      "checked_at": "2026-08-31T12:23:51.377606+00:00"
+      "checked_at": "2026-09-30T11:44:46.689922+00:00"
     },
     "eucc": {
       "label": "EUCC / ENISA",
@@ -300,7 +265,7 @@
       ],
       "consecutive_failures": 0,
       "using_last_known_good": false,
-      "checked_at": "2026-08-31T12:23:51.377606+00:00"
+      "checked_at": "2026-09-30T11:44:46.689922+00:00"
     },
     "nd_itc": {
       "label": "ND-iTC",
@@ -313,13 +278,13 @@
         },
         {
           "name": "Allowed-With entries",
-          "observed": 22,
+          "observed": 28,
           "minimum": 1
         }
       ],
       "consecutive_failures": 0,
       "using_last_known_good": false,
-      "checked_at": "2026-08-31T12:23:51.377606+00:00"
+      "checked_at": "2026-09-30T11:44:46.689922+00:00"
     },
     "ietf_cnsa": {
       "label": "IETF CNSA 2.0",
@@ -338,7 +303,7 @@
       ],
       "consecutive_failures": 0,
       "using_last_known_good": false,
-      "checked_at": "2026-08-31T12:23:51.377606+00:00"
+      "checked_at": "2026-09-30T11:44:46.689922+00:00"
     },
     "ieee_pqc": {
       "label": "IEEE 802.11bt",
@@ -357,7 +322,7 @@
       ],
       "consecutive_failures": 0,
       "using_last_known_good": false,
-      "checked_at": "2026-08-31T12:23:51.377606+00:00"
+      "checked_at": "2026-09-30T11:44:46.689922+00:00"
     }
   },
   "alerts": []
