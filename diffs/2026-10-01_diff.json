@@ -1,0 +1,501 @@
+{
+  "period_start": "2026-09-30T11:44:46.689922+00:00",
+  "period_end": "2026-10-01T12:13:38.512598+00:00",
+  "niap": {
+    "pps": {
+      "added": [],
+      "removed": [],
+      "sunset_changes": [],
+      "status_changes": [],
+      "revised": [],
+      "content_changes": []
+    },
+    "tds": {
+      "added": [],
+      "removed": []
+    },
+    "cisco_ndcpp": {
+      "added": [],
+      "removed": [],
+      "newly_archived": []
+    },
+    "pcl_all": {
+      "added": [],
+      "removed": [],
+      "newly_archived": []
+    },
+    "in_evaluation": {
+      "added": [],
+      "removed": [],
+      "current_count": 43
+    },
+    "news": {
+      "added": [],
+      "revised": [],
+      "deactivated": [],
+      "reactivated": [],
+      "removed": []
+    },
+    "events": {
+      "added": [],
+      "revised": [],
+      "deactivated": [],
+      "reactivated": [],
+      "removed": []
+    },
+    "policies": {
+      "added": [],
+      "revised": [],
+      "archived": [],
+      "reactivated": [],
+      "removed": []
+    }
+  },
+  "cc_portal": {
+    "news": {
+      "added": []
+    },
+    "pps": {
+      "added": []
+    },
+    "products": {
+      "added": []
+    }
+  },
+  "cctl_labs": {
+    "atsec": [
+      {
+        "title": "atsec at ICCC 2026",
+        "link": "https://www.atsec.com/atsec-at-iccc-2026/",
+        "published": "",
+        "id": "https://www.atsec.com/atsec-at-iccc-2026/"
+      }
+    ]
+  },
+  "csfc": {
+    "pages": {},
+    "selection_links": {},
+    "documents": {
+      "added": [],
+      "removed": [],
+      "updated": []
+    },
+    "feeds": {
+      "NSA Cybersecurity Advisories": [
+        {
+          "title": "STEM Fest 2026: Signaling the Future",
+          "link": "https://www.nsa.gov/Press-Room/News-Highlights/Article/Article/4595671/stem-fest-2026-signaling-the-future/",
+          "summary": "<p>Join the National Cryptologic Museum for the 12th Annual STEM Fest! Dive into a world of discovery where science, technology, engineering, and math come to life!</p>\n<br />\n<img alt=\"Advertisement for STEMFEST 2026\" src=\"https://media.defense.gov/2026/Sep/10/2003995007/150/150/0/260910-D-AB123-1001.PNG\" /> <br />",
+          "published": "Thu, 10 Sep 2026 16:37:00 GMT",
+          "id": "https://www.nsa.gov/Press-Room/News-Highlights/Article/Article/4595671/stem-fest-2026-signaling-the-future/",
+          "_category": "NEWS"
+        },
+        {
+          "title": "Defending American Information; US Communications Security Policy since 1945",
+          "link": "https://www.nsa.gov/Press-Room/News-Highlights/Article/Article/4545295/defending-american-information-us-communications-security-policy-since-1945/",
+          "summary": "<p>Since the end of World War II, the United States has contended with the growing vulnerabilities and capabilities of an increasingly interconnected world. Maintaining the security and confidentiality of government communications has been a joint effort since 1945, and the fact that it is addressed through the President indicates an understanding of how critical information security is. In another sense, it also stands as an example of the interplay between communications intelligence and security. The US came out of World War II with a deep and lasting appreciation for the value of signals intelligence, and a subsequent understanding of the need to secure our own. More recently, the US government has had to grapple with the reality that communications and information security &ndash; captured together under the term cybersecurity &ndash; is a distinct national security issue.</p>\n<br />\n<img alt=\"NSA Wordmark Test\" src=\"https://media.defense.gov/2023/Jan/24/2003149190/150/150/0/230124-D-IM742-1235.PNG\" /> <br />",
+          "published": "Wed, 24 Jun 2026 13:41:00 GMT",
+          "id": "https://www.nsa.gov/Press-Room/News-Highlights/Article/Article/4545295/defending-american-information-us-communications-security-policy-since-1945/",
+          "_category": "POLICY"
+        },
+        {
+          "title": "Five Eyes Cyber Security Agencies Statement",
+          "link": "https://www.nsa.gov/Press-Room/News-Highlights/Article/Article/4523810/five-eyes-cyber-security-agencies-statement/",
+          "summary": "<p>As the leaders of the Five Eyes cyber security agencies, we are united in our call to action: the evolving landscape of artificial intelligence (AI) is rapidly transforming cyber risk, and we must act swiftly to remain ahead.</p>\n<br />\n<img alt=\"NSA Wordmark Test\" src=\"https://media.defense.gov/2023/Jan/24/2003149190/150/150/0/230124-D-IM742-1235.PNG\" /> <br />",
+          "published": "Mon, 22 Jun 2026 13:29:00 GMT",
+          "id": "https://www.nsa.gov/Press-Room/News-Highlights/Article/Article/4523810/five-eyes-cyber-security-agencies-statement/",
+          "_category": "NEWS"
+        },
+        {
+          "title": "New Temporary Exhibit Takes Visitors \u201cBehind the Fenceline\u201d",
+          "link": "https://www.nsa.gov/Press-Room/News-Highlights/Article/Article/4499608/new-temporary-exhibit-takes-visitors-behind-the-fenceline/",
+          "summary": "<p>We&rsquo;ve all heard the nickname, &quot;No Such Agency.&quot; The NSA has been shrouded in mystery since its inception, sometimes overshadowed by its more famous siblings, the FBI and CIA. But many people in the public ask, &ldquo;What exactly does the NSA do?&rdquo;<br />\n<br />\nThis one-of-a-kind exhibit uses artifacts gathered from the Agency&rsquo;s spaces to take people, &ldquo;Behind the Fenceline.&rdquo;</p>\n<br />\n<img alt=\"NCM250\" src=\"https://media.defense.gov/2026/May/22/2003937098/150/150/0/260522-D-AB123-1002.JPG\" /> <br />",
+          "published": "Fri, 22 May 2026 17:20:00 GMT",
+          "id": "https://www.nsa.gov/Press-Room/News-Highlights/Article/Article/4499608/new-temporary-exhibit-takes-visitors-behind-the-fenceline/",
+          "_category": "NEWS"
+        },
+        {
+          "title": "Decoding a Nation: 250 Years of American Secrets",
+          "link": "https://www.nsa.gov/Press-Room/News-Highlights/Article/Article/4499510/decoding-a-nation-250-years-of-american-secrets/",
+          "summary": "<p>Now on display, &nbsp;the National Cryptologic Museum is highlighting the unlocking of secrets for 250 Years.</p>\n<br />\n<img alt=\"NCM250\" src=\"https://media.defense.gov/2026/May/22/2003937097/150/150/0/260522-D-AB123-1001.JPG\" /> <br />",
+          "published": "Fri, 22 May 2026 17:00:00 GMT",
+          "id": "https://www.nsa.gov/Press-Room/News-Highlights/Article/Article/4499510/decoding-a-nation-250-years-of-american-secrets/",
+          "_category": "NEWS"
+        },
+        {
+          "title": "NSA mourns the loss of former Deputy Director Barbara McNamara",
+          "link": "https://www.nsa.gov/Press-Room/News-Highlights/Article/Article/4388948/nsa-mourns-the-loss-of-former-deputy-director-barbara-mcnamara/",
+          "summary": "<a href=\"https://www.nsa.gov/History/Cryptologic-History/Historical-Figures/Historical-Figures-View/Article/2446996/barbara-a-mcnamara/\">Barbara McNamara</a>, who served as NSA deputy director from 1997 to 2000 as part of a long and distinguished career at the Agency, passed away Saturday at age 83.<br />\n<img alt=\"Portrait of Barbara A. McNamara\" src=\"https://media.defense.gov/2021/Jul/14/2002762685/150/150/0/180903-D-IM742-2199.JPG\" /> <br />",
+          "published": "Sat, 24 Jan 2026 00:30:00 GMT",
+          "id": "https://www.nsa.gov/Press-Room/News-Highlights/Article/Article/4388948/nsa-mourns-the-loss-of-former-deputy-director-barbara-mcnamara/",
+          "_category": "NEWS"
+        },
+        {
+          "title": "Toying with Secrets at the National Cryptologic Museum",
+          "link": "https://www.nsa.gov/Press-Room/News-Highlights/Article/Article/3946210/toying-with-secrets-at-the-national-cryptologic-museum/",
+          "summary": "<p>From Baby Boomers to Generation Z, the action-packed world of comics has stitched generations together. From huddling around the radio to Little Orphan Annie&rsquo;s adventures to starting Saturday with Batman&rsquo;s caped crusades, these captivating tales have woven themselves into our lives.</p>\n<br />\n<img alt=\"Display Case with Cryptologic Toys\" src=\"https://media.defense.gov/2025/Dec/16/2003843534/150/150/0/251216-D-AB123-0001.JPG\" /> <br />",
+          "published": "Tue, 16 Dec 2025 21:30:00 GMT",
+          "id": "https://www.nsa.gov/Press-Room/News-Highlights/Article/Article/3946210/toying-with-secrets-at-the-national-cryptologic-museum/",
+          "_category": "NEWS"
+        },
+        {
+          "title": "NSA mourns the loss of former Director Lt Gen Kenneth Minihan",
+          "link": "https://www.nsa.gov/Press-Room/News-Highlights/Article/Article/4338284/nsa-mourns-the-loss-of-former-director-lt-gen-kenneth-minihan/",
+          "summary": "<p>Earlier this month Lt Gen Minihan passed away at age 81, nearly six years to the day from when he was inducted into <a href=\"https://www.nsa.gov/History/Cryptologic-History/Historical-Figures/#honor\" target=\"_blank\">NSA's Cryptologic Hall of Honor</a>.</p>\n<br />\n<img alt=\"Lt Gen Kenneth A. Minihan, USAF, NSA Director February 1996 - March 1999\" src=\"https://media.defense.gov/2019/May/31/2002138944/150/150/0/190531-D-IM742-1073.JPG\" /> <br />",
+          "published": "Thu, 20 Nov 2025 13:36:06 GMT",
+          "id": "https://www.nsa.gov/Press-Room/News-Highlights/Article/Article/4338284/nsa-mourns-the-loss-of-former-director-lt-gen-kenneth-minihan/",
+          "_category": "NEWS"
+        },
+        {
+          "title": "Message from NSA Acting Deputy Director Sheila Thomas: Return from Furlough",
+          "link": "https://www.nsa.gov/Press-Room/News-Highlights/Article/Article/4329932/message-from-nsa-acting-deputy-director-sheila-thomas-return-from-furlough/",
+          "summary": "<p>We are grateful the Government is now open and are looking forward to having all of our workforce back full time. We missed you!&nbsp;</p>\n<br />\n<img alt=\"National Security Agency Seal\" src=\"https://media.defense.gov/2025/Aug/22/2003786383/150/150/0/250822-D-IM742-2025.PNG\" /> <br />",
+          "published": "Thu, 13 Nov 2025 04:23:00 GMT",
+          "id": "https://www.nsa.gov/Press-Room/News-Highlights/Article/Article/4329932/message-from-nsa-acting-deputy-director-sheila-thomas-return-from-furlough/",
+          "_category": "NEWS"
+        },
+        {
+          "title": "NSA Awards Authors of Assessment of Trustworthiness in GPT Models",
+          "link": "https://www.nsa.gov/Press-Room/News-Highlights/Article/Article/3990748/nsa-awards-authors-of-assessment-of-trustworthiness-in-gpt-models/",
+          "summary": "The National Security Agency (NSA) Research Directorate recently selected &ldquo;<a href=\"https://arxiv.org/abs/2306.11698\">Decoding Trust: Comprehensive Assessment of Trustworthiness in GPT Models</a>,&rdquo; as the winner of its 12th Annual Best Scientific Cybersecurity Paper Competition.<br />\n<img alt=\"A gold trophy with the &quot;Science of Security&quot; logo is filled with lightbulbs representing ideas. One stands above the rest and is lit up, signifying the winning idea. To the right of this image the text says &quot;12th Annual Best Scientific Cybersecurity Paper Competition&quot; followed by the logos for the National Security Agency and Science of Security.\" src=\"https://media.defense.gov/2024/Dec/09/2003602818/150/150/0/241209-D-IM742-1020.PNG\" /> <br />",
+          "published": "Tue, 10 Dec 2024 19:15:00 GMT",
+          "id": "https://www.nsa.gov/Press-Room/News-Highlights/Article/Article/3990748/nsa-awards-authors-of-assessment-of-trustworthiness-in-gpt-models/",
+          "_category": "NEWS"
+        },
+        {
+          "title": "U.S. Military Academy honored at White House for winning NSA\u2019s 2024 Cyber Exercise",
+          "link": "https://www.nsa.gov/Press-Room/News-Highlights/Article/Article/3984761/us-military-academy-honored-at-white-house-for-winning-nsas-2024-cyber-exercise/",
+          "summary": "<p>Feelings of pride, accomplishment, and excitement came over West Point cadets in the Indian Treaty Room of the Eisenhower Executive Office Building on Nov. 15, 2024 as The Honorable Harry Coker Jr., National Cyber Director, stepped to the podium.</p>\n<br />\n<img alt=\"U.S. Military Academy honored at White House for winning NSA\u2019s 2024 Cyber Exercise\" src=\"https://media.defense.gov/2024/Dec/04/2003598271/150/150/0/241204-D-IM742-3344.JPG\" /> <br />",
+          "published": "Wed, 04 Dec 2024 18:53:00 GMT",
+          "id": "https://www.nsa.gov/Press-Room/News-Highlights/Article/Article/3984761/us-military-academy-honored-at-white-house-for-winning-nsas-2024-cyber-exercise/",
+          "_category": "NEWS"
+        },
+        {
+          "title": "How the Need for Direct Cryptologic Military Support Helped Establish NSA\u2019s Cryptologic Centers",
+          "link": "https://www.nsa.gov/Press-Room/News-Highlights/Article/Article/3966105/how-the-need-for-direct-cryptologic-military-support-helped-establish-nsas-cryp/",
+          "summary": "<p>As a combat support agency for the U.S. Department of Defense (DoD), <a href=\"http://www.nsa.gov/about/locations/\" target=\"_blank\">the National Security Agency/Central Security Service (NSA/CSS) has centers across the country</a> to provide support to the DoD and U.S. military personnel around the world.</p>\n<br />\n<img alt=\"NSA Georgia\" src=\"https://media.defense.gov/2023/Feb/08/2003158039/150/150/0/230208-D-IM742-1235.JPG\" /> <br />",
+          "published": "Fri, 15 Nov 2024 15:52:52 GMT",
+          "id": "https://www.nsa.gov/Press-Room/News-Highlights/Article/Article/3966105/how-the-need-for-direct-cryptologic-military-support-helped-establish-nsas-cryp/",
+          "_category": "NEWS"
+        },
+        {
+          "title": "NSA Inducts Five Innovators into Cryptologic Hall of Honor",
+          "link": "https://www.nsa.gov/Press-Room/News-Highlights/Article/Article/3953681/nsa-inducts-five-innovators-into-cryptologic-hall-of-honor/",
+          "summary": "<p>The National Security Agency's (NSA) Center for Cryptologic History is pleased to announce the induction of five major cryptologic figures into the&nbsp;<a href=\"https://www.nsa.gov/History/Cryptologic-History/Historical-Figures/#honor\" target=\"_blank\">Cryptologic Hall of Honor</a>.</p>\n<br />\n<img alt=\"NSA Cryptologic Hall of Honor Display\" src=\"https://media.defense.gov/2024/Nov/06/2003579429/150/150/0/241106-D-IM742-2024.JPG\" /> <br />",
+          "published": "Thu, 07 Nov 2024 16:00:00 GMT",
+          "id": "https://www.nsa.gov/Press-Room/News-Highlights/Article/Article/3953681/nsa-inducts-five-innovators-into-cryptologic-hall-of-honor/",
+          "_category": "NEWS"
+        },
+        {
+          "title": "NSA/CSS Donates Two Tractor Trailers of Food in Feds Feed Families Campaign",
+          "link": "https://www.nsa.gov/Press-Room/News-Highlights/Article/Article/3939076/nsacss-donates-two-tractor-trailers-of-food-in-feds-feed-families-campaign/",
+          "summary": "<p>National Security Agency/Central Security Service (NSA/CSS)&nbsp;affiliates across the Enterprise helped raise 136,472 pounds of food in this year&rsquo;s Feds Feed Families (FFF) Summer Food Drive.</p>\n<br />\n<img alt=\"A woman carries items to a large box filled with donations, while behind her another woman takes items out of a white car. Several other women stand watching near a tent with a large stuffed unicorn seated in a chair beside them.\" src=\"https://media.defense.gov/2024/Oct/17/2003566848/150/150/0/241017-D-IM742-1111.JPG\" /> <br />",
+          "published": "Thu, 17 Oct 2024 18:00:00 GMT",
+          "id": "https://www.nsa.gov/Press-Room/News-Highlights/Article/Article/3939076/nsacss-donates-two-tractor-trailers-of-food-in-feds-feed-families-campaign/",
+          "_category": "NEWS"
+        },
+        {
+          "title": "STEM Fest: Engineering Ideas Into Reality",
+          "link": "https://www.nsa.gov/Press-Room/News-Highlights/Article/Article/3918349/stem-fest-engineering-ideas-into-reality/",
+          "summary": "<p>Join the National Cryptologic Museum for <a href=\"https://media.defense.gov/2024/Sep/26/2003554407/-1/-1/0/STEM%20FLYER%20SAVE%20THE%20DATE.PDF\" target=\"_blank\">the 10<sup>th</sup> Annual STEM Fest</a>! Explore a world of discovery where science, technology, engineering and math come together!</p>\n<br />\n<img alt=\"National Cryptologic Museum Logo\" src=\"https://media.defense.gov/2022/Sep/28/2003086716/150/150/0/220928-D-IM742-1234.JPG\" /> <br />",
+          "published": "Thu, 26 Sep 2024 17:08:33 GMT",
+          "id": "https://www.nsa.gov/Press-Room/News-Highlights/Article/Article/3918349/stem-fest-engineering-ideas-into-reality/",
+          "_category": "NEWS"
+        },
+        {
+          "title": "\u201cRemember Why You\u2019re Here\u201d: Mother of 9/11 Victim Visits Morrison Center Memorial",
+          "link": "https://www.nsa.gov/Press-Room/News-Highlights/Article/Article/3812589/remember-why-youre-here-mother-of-911-victim-visits-morrison-center-memorial/",
+          "summary": "\u201cIt shows you how fragile life is,\u201d mother of Flight 93\u2019s youngest victim said with tear-filled eyes at the sight of her 20-year old daughter\u2019s photo and purse on display at the 9/11 memorial in the lobby of the Morrison Center on NSA/CSS Washington\u2019s East Campus.<br />\n<img alt=\"A display case showing a photo and the purse of Deora Bodley, killed as a passenger on Flight 93 on September 11, 2001.\" src=\"https://media.defense.gov/2024/Jun/20/2003489084/150/150/0/240620-D-IM742-1111.JPG\" /> <br />",
+          "published": "Thu, 20 Jun 2024 19:26:00 GMT",
+          "id": "https://www.nsa.gov/Press-Room/News-Highlights/Article/Article/3812589/remember-why-youre-here-mother-of-911-victim-visits-morrison-center-memorial/",
+          "_category": "NEWS"
+        },
+        {
+          "title": "History Today, June 6: The role of signals intelligence or 'ULTRA' on D-Day",
+          "link": "https://www.nsa.gov/Press-Room/News-Highlights/Article/Article/3790238/history-today-june-6-the-role-of-signals-intelligence-or-ultra-on-d-day/",
+          "summary": "The term D-Day was a shorthand expression first used in World War I to denote the date an operation was to be launched. In the earlier war, officers also used H-HOUR and M-MINUTE, but these were seldom used in World War II. Because of the scope of the 1944 operation and the momentous stakes, in common parlance, \u201cD-Day\u201d has come to refer primarily to the landings in Normandy.\n<br />\n<img alt=\"U.S. Soldiers disembark a landing craft under heavy fire off the coast of Normandy, France, June 6, 1944. (Photo Credit: National Archives U.S. Coast Guard Collection)\" src=\"https://media.defense.gov/2024/Jun/04/2003478139/150/150/0/440606-D-IM472-1540.JPG\" /> <br />",
+          "published": "Thu, 06 Jun 2024 12:00:00 GMT",
+          "id": "https://www.nsa.gov/Press-Room/News-Highlights/Article/Article/3790238/history-today-june-6-the-role-of-signals-intelligence-or-ultra-on-d-day/",
+          "_category": "NEWS"
+        },
+        {
+          "title": "NSA and Universities Partnering to Advance Cybersecurity Research",
+          "link": "https://www.nsa.gov/Press-Room/News-Highlights/Article/Article/3796389/nsa-and-universities-partnering-to-advance-cybersecurity-research/",
+          "summary": "NSA Research invited leading university research institutions across the country to the National Cryptologic Museum for a day-long event to tackle the ongoing challenge of securing critical cyber systems.\n<br />\n<img alt=\"Rita Bush, chief of the Laboratory for Advanced Cybersecurity Research, delivers opening remarks.\" src=\"https://media.defense.gov/2024/Jun/04/2003478426/150/150/0/240604-D-IM742-2024.JPG\" /> <br />",
+          "published": "Tue, 04 Jun 2024 19:27:13 GMT",
+          "id": "https://www.nsa.gov/Press-Room/News-Highlights/Article/Article/3796389/nsa-and-universities-partnering-to-advance-cybersecurity-research/",
+          "_category": "NEWS"
+        },
+        {
+          "title": "Small Industry Contractors Share How NSA Gives Them a Boost",
+          "link": "https://www.nsa.gov/Press-Room/News-Highlights/Article/Article/3774721/small-industry-contractors-share-how-nsa-gives-them-a-boost/",
+          "summary": "NSA's new Cybersecurity Collaboration Center (CCC) offers no-cost cybersecurity services, and businesses are signing up in growing numbers, according to CCC Chief Morgan Adamski: &ldquo;Companies see the value not just for their bottom line, but also for national security.&rdquo;<br />\n<img alt=\"Silver balloons reading 1000 against a bright red backdrop\" src=\"https://media.defense.gov/2024/May/14/2003464082/150/150/0/240514-D-IM742-3512.PNG\" /> <br />",
+          "published": "Wed, 15 May 2024 14:29:00 GMT",
+          "id": "https://www.nsa.gov/Press-Room/News-Highlights/Article/Article/3774721/small-industry-contractors-share-how-nsa-gives-them-a-boost/",
+          "_category": "NEWS"
+        },
+        {
+          "title": "U.S. Military Academy Wins First Place at the 2024 NSA Cyber Exercise",
+          "link": "https://www.nsa.gov/Press-Room/News-Highlights/Article/Article/3773513/us-military-academy-wins-first-place-at-the-2024-nsa-cyber-exercise/",
+          "summary": "After months of preparation and three days of elaborate and challenging cyber operations, the U.S. Military Academy has emerged as the champion of the sixth annual NSA Cyber Exercise (NCX).<br />\n<img alt=\"A mid-size trophy with a wooden base, ten small plaques, and a golden eagle on top\" src=\"https://media.defense.gov/2024/May/13/2003463195/150/150/0/240513-D-IM742-2116.JPG\" /> <br />",
+          "published": "Mon, 13 May 2024 18:40:00 GMT",
+          "id": "https://www.nsa.gov/Press-Room/News-Highlights/Article/Article/3773513/us-military-academy-wins-first-place-at-the-2024-nsa-cyber-exercise/",
+          "_category": "NEWS"
+        }
+      ]
+    }
+  },
+  "cc_crypto": {
+    "pages": {}
+  },
+  "nato": {
+    "pages": {},
+    "cisco_added": [],
+    "cisco_removed": [],
+    "baseline_reset": false
+  },
+  "eucc": {
+    "pages": {},
+    "cisco_added": [],
+    "cisco_removed": [],
+    "baseline_reset": false
+  },
+  "nd_itc": {
+    "nit_rfis": {
+      "added": [],
+      "status_changes": [],
+      "revised": [],
+      "newly_archived": []
+    },
+    "awl": {
+      "added": [],
+      "removed": [],
+      "version_changes": [],
+      "list_updates": []
+    },
+    "baseline_reset": false,
+    "collection_failure": false
+  },
+  "ietf_cnsa": {
+    "added": [],
+    "removed": [],
+    "updated": [],
+    "rfc9846_adoption": []
+  },
+  "ieee_pqc": {
+    "added": [],
+    "removed": [],
+    "updated": []
+  },
+  "source_health": {
+    "niap": {
+      "label": "NIAP",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "PCL products",
+          "observed": 1764,
+          "minimum": 50
+        },
+        {
+          "name": "Protection Profiles",
+          "observed": 272,
+          "minimum": 10
+        },
+        {
+          "name": "PQC PP file-version records",
+          "observed": 13,
+          "minimum": 1,
+          "required_for_diff_baseline": false
+        },
+        {
+          "name": "PQC PP full-content hashes",
+          "observed": 7,
+          "minimum": 1,
+          "required_for_diff_baseline": false
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-10-01T12:13:38.512598+00:00",
+      "subcollections": {
+        "news": {
+          "label": "News announcements",
+          "status": "healthy",
+          "observed": 357,
+          "consecutive_failures": 0,
+          "using_last_known_good": false
+        },
+        "events": {
+          "label": "Events",
+          "status": "healthy",
+          "observed": 0,
+          "consecutive_failures": 0,
+          "using_last_known_good": false
+        },
+        "policies": {
+          "label": "Policy letters",
+          "status": "healthy",
+          "observed": 40,
+          "consecutive_failures": 0,
+          "using_last_known_good": false
+        }
+      }
+    },
+    "cc_portal": {
+      "label": "CC Portal",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "portal records",
+          "observed": 180,
+          "minimum": 1
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-10-01T12:13:38.512598+00:00"
+    },
+    "cctl_labs": {
+      "label": "CCTL Labs",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "lab feed items",
+          "observed": 19,
+          "minimum": 1
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-10-01T12:13:38.512598+00:00"
+    },
+    "csfc": {
+      "label": "CSfC",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "APL items",
+          "observed": 118,
+          "minimum": 5
+        },
+        {
+          "name": "announcements",
+          "observed": 8,
+          "minimum": 1
+        },
+        {
+          "name": "tracked capability packages",
+          "observed": 5,
+          "minimum": 5,
+          "required_for_diff_baseline": false
+        },
+        {
+          "name": "capability-package hashes",
+          "observed": 5,
+          "minimum": 5,
+          "required_for_diff_baseline": false
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-10-01T12:13:38.512598+00:00"
+    },
+    "cc_crypto": {
+      "label": "CC Crypto",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "publications",
+          "observed": 118,
+          "minimum": 5
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-10-01T12:13:38.512598+00:00"
+    },
+    "nato": {
+      "label": "NATO NIAPCL",
+      "status": "healthy",
+      "mode": "manual",
+      "checks": [],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "detail": "manual baseline (40 Cisco product(s)); updated via the NATO capture GitHub issue workflow",
+      "checked_at": "2026-10-01T12:13:38.512598+00:00"
+    },
+    "eucc": {
+      "label": "EUCC / ENISA",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "certificates",
+          "observed": 50,
+          "minimum": 2
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-10-01T12:13:38.512598+00:00"
+    },
+    "nd_itc": {
+      "label": "ND-iTC",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "NIT RFIs",
+          "observed": 32,
+          "minimum": 5
+        },
+        {
+          "name": "Allowed-With entries",
+          "observed": 28,
+          "minimum": 1
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-10-01T12:13:38.512598+00:00"
+    },
+    "ietf_cnsa": {
+      "label": "IETF CNSA 2.0",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "CNSA profile/RFC records",
+          "observed": 5,
+          "minimum": 5
+        },
+        {
+          "name": "CNSA full-text hashes",
+          "observed": 5,
+          "minimum": 5
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-10-01T12:13:38.512598+00:00"
+    },
+    "ieee_pqc": {
+      "label": "IEEE 802.11bt",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "P802.11bt project records",
+          "observed": 1,
+          "minimum": 1
+        },
+        {
+          "name": "P802.11bt timeline hashes",
+          "observed": 1,
+          "minimum": 1
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-10-01T12:13:38.512598+00:00"
+    }
+  },
+  "alerts": []
+}
