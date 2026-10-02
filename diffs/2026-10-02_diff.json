@@ -1,6 +1,6 @@
 {
-  "period_start": "2026-09-01T10:56:15.787417+00:00",
-  "period_end": "2026-09-02T10:22:49.801529+00:00",
+  "period_start": "2026-10-01T12:13:38.512598+00:00",
+  "period_end": "2026-10-02T11:43:09.548447+00:00",
   "niap": {
     "pps": {
       "added": [],
@@ -27,7 +27,7 @@
     "in_evaluation": {
       "added": [],
       "removed": [],
-      "current_count": 44
+      "current_count": 43
     },
     "news": {
       "added": [],
@@ -83,28 +83,7 @@
     "baseline_reset": false
   },
   "eucc": {
-    "pages": {
-      "certificates": {
-        "added": [
-          {
-            "name": "TactiGuard PG",
-            "text": "TactiGuard PG | 22 June 2026 | The TOE is a Software for Data Transfer and Content Filtering. It is used to separate a system into sub-systems with different classification level. A higher classified sub-system might need to exchange information with lower or non-classified subsystems and requires a security mechanism with high a",
-            "href": "https://certification.enisa.europa.eu/certificates/eucc-3087-2026-000007-i-00_en",
-            "cert_date": "2026-06-22T12:00:00Z",
-            "description": "The TOE is a Software for Data Transfer and Content Filtering. It is used to separate a system into sub-systems with different classification level. A higher classified sub-system might need to exchange information with lower or non-classified subsystems and requires a security mechanism with high a"
-          }
-        ],
-        "removed": [
-          {
-            "name": "TactiGuard PG",
-            "text": "TactiGuard PG | 18 July 2026 | The TOE is a Software for Data Transfer and Content Filtering. It is used to separate a system into sub-systems with different classification level. A higher classified sub-system might need to exchange information with lower or non-classified subsystems and requires a security mechanism with high a",
-            "href": "https://certification.enisa.europa.eu/certificates/eucc-3087-2026-000007-i-00_en",
-            "cert_date": "2026-07-18T12:00:00Z",
-            "description": "The TOE is a Software for Data Transfer and Content Filtering. It is used to separate a system into sub-systems with different classification level. A higher classified sub-system might need to exchange information with lower or non-classified subsystems and requires a security mechanism with high a"
-          }
-        ]
-      }
-    },
+    "pages": {},
     "cisco_added": [],
     "cisco_removed": [],
     "baseline_reset": false
@@ -143,17 +122,17 @@
       "checks": [
         {
           "name": "PCL products",
-          "observed": 1757,
+          "observed": 1764,
           "minimum": 50
         },
         {
           "name": "Protection Profiles",
-          "observed": 271,
+          "observed": 272,
           "minimum": 10
         },
         {
           "name": "PQC PP file-version records",
-          "observed": 13,
+          "observed": 11,
           "minimum": 1,
           "required_for_diff_baseline": false
         },
@@ -166,12 +145,12 @@
       ],
       "consecutive_failures": 0,
       "using_last_known_good": false,
-      "checked_at": "2026-09-02T10:22:49.801529+00:00",
+      "checked_at": "2026-10-02T11:43:09.548447+00:00",
       "subcollections": {
         "news": {
           "label": "News announcements",
           "status": "healthy",
-          "observed": 356,
+          "observed": 357,
           "consecutive_failures": 0,
           "using_last_known_good": false
         },
@@ -203,22 +182,21 @@
       ],
       "consecutive_failures": 0,
       "using_last_known_good": false,
-      "checked_at": "2026-09-02T10:22:49.801529+00:00"
+      "checked_at": "2026-10-02T11:43:09.548447+00:00"
     },
     "cctl_labs": {
       "label": "CCTL Labs",
-      "status": "stale",
+      "status": "healthy",
       "checks": [
         {
           "name": "lab feed items",
-          "observed": 9,
+          "observed": 19,
           "minimum": 1
         }
       ],
-      "consecutive_failures": 1,
-      "using_last_known_good": true,
-      "checked_at": "2026-09-02T10:22:49.801529+00:00",
-      "detail": "collection collapse (retained last-known-good): Lightship Security 0/10"
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-10-02T11:43:09.548447+00:00"
     },
     "csfc": {
       "label": "CSfC",
@@ -226,7 +204,7 @@
       "checks": [
         {
           "name": "APL items",
-          "observed": 123,
+          "observed": 118,
           "minimum": 5
         },
         {
@@ -249,7 +227,7 @@
       ],
       "consecutive_failures": 0,
       "using_last_known_good": false,
-      "checked_at": "2026-09-02T10:22:49.801529+00:00"
+      "checked_at": "2026-10-02T11:43:09.548447+00:00"
     },
     "cc_crypto": {
       "label": "CC Crypto",
@@ -257,13 +235,13 @@
       "checks": [
         {
           "name": "publications",
-          "observed": 121,
+          "observed": 118,
           "minimum": 5
         }
       ],
       "consecutive_failures": 0,
       "using_last_known_good": false,
-      "checked_at": "2026-09-02T10:22:49.801529+00:00"
+      "checked_at": "2026-10-02T11:43:09.548447+00:00"
     },
     "nato": {
       "label": "NATO NIAPCL",
@@ -273,7 +251,7 @@
       "consecutive_failures": 0,
       "using_last_known_good": false,
       "detail": "manual baseline (40 Cisco product(s)); updated via the NATO capture GitHub issue workflow",
-      "checked_at": "2026-09-02T10:22:49.801529+00:00"
+      "checked_at": "2026-10-02T11:43:09.548447+00:00"
     },
     "eucc": {
       "label": "EUCC / ENISA",
@@ -287,7 +265,7 @@
       ],
       "consecutive_failures": 0,
       "using_last_known_good": false,
-      "checked_at": "2026-09-02T10:22:49.801529+00:00"
+      "checked_at": "2026-10-02T11:43:09.548447+00:00"
     },
     "nd_itc": {
       "label": "ND-iTC",
@@ -300,13 +278,13 @@
         },
         {
           "name": "Allowed-With entries",
-          "observed": 22,
+          "observed": 28,
           "minimum": 1
         }
       ],
       "consecutive_failures": 0,
       "using_last_known_good": false,
-      "checked_at": "2026-09-02T10:22:49.801529+00:00"
+      "checked_at": "2026-10-02T11:43:09.548447+00:00"
     },
     "ietf_cnsa": {
       "label": "IETF CNSA 2.0",
@@ -325,7 +303,7 @@
       ],
       "consecutive_failures": 0,
       "using_last_known_good": false,
-      "checked_at": "2026-09-02T10:22:49.801529+00:00"
+      "checked_at": "2026-10-02T11:43:09.548447+00:00"
     },
     "ieee_pqc": {
       "label": "IEEE 802.11bt",
@@ -344,7 +322,7 @@
       ],
       "consecutive_failures": 0,
       "using_last_known_good": false,
-      "checked_at": "2026-09-02T10:22:49.801529+00:00"
+      "checked_at": "2026-10-02T11:43:09.548447+00:00"
     }
   },
   "alerts": []
