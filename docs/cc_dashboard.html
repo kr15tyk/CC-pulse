@@ -179,7 +179,7 @@
   <span class="nav-title">CC Pulse Dashboard</span>
   <span class="nav-spacer"></span>
   <div class="ham-wrap">
-    <span class="nav-meta">Last run: 2026-10-02 07:43 ET</span>
+    <span class="nav-meta">Last run: 2026-10-03 06:57 ET</span>
     <button class="ham-btn" id="ham-btn" onclick="toggleHamMenu()" aria-expanded="false" aria-haspopup="true" title="Open menu">&#9776;</button>
     <div class="ham-menu" id="ham-menu" role="menu">
       <a class="ham-item" href="https://kr15tyk.github.io/CC-pulse/cc_dashboard.html" role="menuitem"><span class="ham-icon">&#127968;</span>Home</a>
@@ -267,7 +267,7 @@
       <div class="stat-lbl">NIAP Changes</div>
     </a></div>
     <div class="stat"><a href="#sec-csfc" onclick="navigateTo('sec-csfc');return false;">
-      <div class="stat-num ">0</div>
+      <div class="stat-num active-num">3</div>
       <div class="stat-lbl">CSfC Selection Updates</div>
     </a></div>
     <div class="stat"><a href="#sec-cc-portal" onclick="navigateTo('sec-cc-portal');return false;">
@@ -291,7 +291,7 @@
       <div class="stat-lbl">CNSA / PQC Standards</div>
     </a></div>
     <div class="stat"><a href="#sec-alerts" onclick="navigateTo('sec-alerts');return false;">
-      <div class="stat-num ">0</div>
+      <div class="stat-num alert-num">2</div>
       <div class="stat-lbl">Alerts</div>
     </a></div>
   </div>
@@ -317,6 +317,37 @@
       
 <!-- Alerts -->
 
+<div class="section-group">
+<div class="card card-alert" id="sec-alerts">
+  <div class="card-hdr" onclick="toggleCard(this)">
+    <span>Alerts</span>
+    <span class="card-count">2 alerts</span>
+    <span class="toggle-icon">&#9660;</span>
+  </div>
+  <div class="card-body">
+    <div class="alert-monitoring">FIPS 186-4, FIPS 186-5, NDcPP, CPP_ND, TLS 1.3, SSH, PP-Module_VPN, PP-Module_WLAN, CNSA 2.0, ML-KEM, ML-DSA, SLH-DSA, post-quantum, RFC 9846, 802.11bt, labgram, valgram, emergency, CSfC, Commercial Solutions for Classified, CSfC APL, CSfC component selections, NSA CSfC, NATO NIAPC, NIAPCL, EUCC, ENISA, CCDB-018, Crypto Catalog, cryptography working group, Specification of Functional Requirements for Cryptography, FCS_CKM, FCS_COP, FCS_RBG</div>
+    
+        <div class="item-row alert-item" data-alert-key="CSfC Components List-WLAN_Access_System_|_Cisco_|_Cisco_Catalyst_9800_Series_Wireless_Controllers_and_Access_Points_running_IOS-XE_17.6 _(Cis…" data-tab="us">
+          
+          <a class="item-link" href="https://www.nsa.gov/Resources/Commercial-Solutions-for-Classified-Program/Components-List/" target="_blank">CSfC Components List: WLAN Access System | Cisco | Cisco Catalyst 9800 Series Wireless Controllers and Access Points running IOS-XE 17.6  (Cis…</a>
+          
+          <span class="item-meta">removed &middot; cisco</span>
+          <div class="item-sub">Item removed from CSfC apl page</div>
+          <button class="dismiss-btn" onclick="dismissAlert(this)" title="Mark as seen">&#10003; Seen</button>
+        </div>
+        
+        <div class="item-row alert-item" data-alert-key="CSfC Components List-MACSEC_Ethernet_Encryption_Devices_|_Cisco_|_Catalyst_9200CX/9300X/9300LM/9500X_Series_Switches_running_IOS-XE_17.12_(_C…" data-tab="us">
+          
+          <a class="item-link" href="https://www.nsa.gov/Resources/Commercial-Solutions-for-Classified-Program/Components-List/" target="_blank">CSfC Components List: MACSEC Ethernet Encryption Devices | Cisco | Catalyst 9200CX/9300X/9300LM/9500X Series Switches running IOS-XE 17.12 ( C…</a>
+          
+          <span class="item-meta">removed &middot; cisco</span>
+          <div class="item-sub">Item removed from CSfC apl page</div>
+          <button class="dismiss-btn" onclick="dismissAlert(this)" title="Mark as seen">&#10003; Seen</button>
+        </div>
+        
+  </div>
+</div>
+
 <div class="tab-nav" id="region-tabs">
         <button class="tab-btn active" data-tab="us" onclick="switchTab(this)">&#127482;&#127480; US (NIAP / CSfC)</button>
         <button class="tab-btn" data-tab="intl" onclick="switchTab(this)">&#127760; International</button>
@@ -340,7 +371,7 @@
     
     
     
-    <p class="no-change">No changes detected. <span class="last-active">(last: 2026-09-26)</span></p>
+    <p class="no-change">No changes detected.</p>
   </div>
 </div>
 
@@ -432,7 +463,7 @@
     
     
     
-    <p class="no-change">No changes detected. <span class="last-active">(last: 2026-09-26)</span></p>
+    <p class="no-change">No changes detected.</p>
   </div>
 </div>
 
@@ -475,14 +506,35 @@
 <div class="section-group">
   <div class="section-label">CSfC</div>
   <!-- CSfC Components, Announcements, and Selection Documents -->
-<div class="card " id="sec-csfc" data-has-changes="0">
+<div class="card card-updated" id="sec-csfc" data-has-changes="3">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>CSfC Components &amp; Announcements</span>
-    <span class="card-count">0 updates</span>
-    <span class="toggle-icon">&#9658;</span>
+    <span class="card-count">3 updates</span>
+    <span class="toggle-icon">&#9660;</span>
   </div>
-  <div class="card-body collapsed">
+  <div class="card-body ">
     
+    
+      
+        
+        <div class="item-row" data-source="csfc" data-kind="new">
+          <a class="item-link" href="https://www.niap-ccevs.org/products/international-product/2024.1087" target="_blank">MACSEC Ethernet Encryption Devices | HPE Juniper | Juniper Networks running Junos OS 22.3R1 for ACX5448-M, EX4400-24T, EX4400-24P, EX4400-24MP, EX4400-48T, EX4400-48P, EX4400-48F, EX4400-48MP, QFX5120-YM, as detailed in VID 2024.1087 | Junos OS 22.3R1 | NIAP Validation Completed (at Teron Labs) | 2024.04.12 | Certification extended - Maintenance Update completed on 2026.03.02</a>
+          <span class="item-meta">component added</span>
+        </div>
+        
+        
+        <div class="item-row" data-source="csfc" data-kind="removed">
+          <a class="item-link" href="https://www.niap-ccevs.org/Product/CompliantCC.cfm?CCID=2023.1065" target="_blank">WLAN Access System | Cisco | Cisco Catalyst 9800 Series Wireless Controllers and Access Points running IOS-XE 17.6  (Cisco 9800-80-K9 Wireless Controller, Cisco 9800-40-K9 Wireless Controller, Cisco 9800-L Wireless Controller: C9800-L-F-K9, C98000L-C-K9 with Cisco Catalyst 9130 Series Wifi 6 Access Points (x=regulatory domain): C9130AXI-x, C9130AXE-x, C1930AXE-STA-x, Cisco Catalyst 9120 Series Wi-fi 6 Access Points (x= regulatory domain): C9120AXI-x, C9120AXE-x, C9120AXP-x, Cisco Catalyst 9115 Series Wi-fi 6 Access Points (x= regulatory domain): C9115AXI-x, C9115AXE-x Cisco Catalyst 9105 Series Wi-fi Access Points (x=regulatory domain): C9105AXI-x, C9105AXW-x, C9105AXIT-x, C9105AXWT-x | IOS-XE 17.6 | NIAP Validation Completed (at Lightship Security) | 2023.03.20 | </a>
+          <span class="item-meta">component removed</span>
+        </div>
+        
+        <div class="item-row" data-source="csfc" data-kind="removed">
+          <a class="item-link" href="https://www.niap-ccevs.org/products/11464" target="_blank">MACSEC Ethernet Encryption Devices | Cisco | Catalyst 9200CX/9300X/9300LM/9500X Series Switches running IOS-XE 17.12 ( C9200CX-12T-2X2G, C9200CX-12P-2X2G, C9200CX-8P-2X2G, C9200CX-8UXG-2X, C9300X-48HX, C9300X-48TX, C9300X-NM-4C, C9300X-NM-8M, C9300X-NM-2C, C9300X-NM-8Y, C9300X-12Y, C9300X-24Y, C9300X-48HXN, C9300X-24HX, C9300LM-24U, C9300LM-48UX, C9300LM-48T, C9300LM-48U, C9500X-28C8D,C9500X-60L4D) | IOS-XE 17.12 | NIAP Validation Completed (at Gossamer) | 2024.09.17 | </a>
+          <span class="item-meta">component removed</span>
+        </div>
+        
+        
+      
     
     
       
@@ -491,7 +543,7 @@
     
       
     
-    <p class="no-change">No changes detected.</p>
+    
   </div>
 </div>
 </div>
@@ -641,7 +693,7 @@
 <div class="card card-new" id="sec-history" data-has-changes="1">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>Change History</span>
-    <span class="card-count">25 events</span>
+    <span class="card-count">28 events</span>
     <span class="toggle-icon">▼</span>
   </div>
   <div class="card-body">
@@ -659,6 +711,39 @@
       div>
     <div class="timeline" id="history-timeline">
     
+      
+      <div class="tl-entry" data-cat="csfc_change">
+        <div class="tl-date">2026-10-03</div>
+        <div class="tl-body">
+          <div class="tl-title">
+            <span class="tl-badge new">new</span>
+            <a href="https://www.niap-ccevs.org/products/international-product/2024.1087" target="_blank">CSfC Component: MACSEC Ethernet Encryption Devices | HPE Juniper | Juniper Networks running Juno</a>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="tl-entry" data-cat="csfc_change">
+        <div class="tl-date">2026-10-03</div>
+        <div class="tl-body">
+          <div class="tl-title">
+            <span class="tl-badge removed">removed</span>
+            <a href="https://www.niap-ccevs.org/Product/CompliantCC.cfm?CCID=2023.1065" target="_blank">CSfC Component: WLAN Access System | Cisco | Cisco Catalyst 9800 Series Wireless Controllers and</a>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="tl-entry" data-cat="csfc_change">
+        <div class="tl-date">2026-10-03</div>
+        <div class="tl-body">
+          <div class="tl-title">
+            <span class="tl-badge removed">removed</span>
+            <a href="https://www.niap-ccevs.org/products/11464" target="_blank">CSfC Component: MACSEC Ethernet Encryption Devices | Cisco | Catalyst 9200CX/9300X/9300LM/9500X </a>
+          </div>
+          
+        </div>
+      </div>
       
       <div class="tl-entry" data-cat="niap_policies">
         <div class="tl-date">2026-09-26</div>
@@ -945,7 +1030,7 @@
 </div><!-- /main-content -->
 <footer>
   <span>CC Pulse &middot; Auto-refreshes daily (01:00 EST) &middot; NIAP, CSfC, CC Portal, NATO NIAPCL, EUCC / ENISA</span>
-  <span>Last run: 2026-10-02 07:43 ET</span>
+  <span>Last run: 2026-10-03 06:57 ET</span>
 </footer>
 
 <script>
