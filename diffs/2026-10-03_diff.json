@@ -1,0 +1,390 @@
+{
+  "period_start": "2026-10-02T11:43:09.548447+00:00",
+  "period_end": "2026-10-03T10:57:07.498958+00:00",
+  "niap": {
+    "pps": {
+      "added": [],
+      "removed": [],
+      "sunset_changes": [],
+      "status_changes": [],
+      "revised": [],
+      "content_changes": []
+    },
+    "tds": {
+      "added": [],
+      "removed": []
+    },
+    "cisco_ndcpp": {
+      "added": [],
+      "removed": [],
+      "newly_archived": []
+    },
+    "pcl_all": {
+      "added": [],
+      "removed": [],
+      "newly_archived": []
+    },
+    "in_evaluation": {
+      "added": [],
+      "removed": [],
+      "current_count": 43
+    },
+    "news": {
+      "added": [],
+      "revised": [],
+      "deactivated": [],
+      "reactivated": [],
+      "removed": []
+    },
+    "events": {
+      "added": [],
+      "revised": [],
+      "deactivated": [],
+      "reactivated": [],
+      "removed": []
+    },
+    "policies": {
+      "added": [],
+      "revised": [],
+      "archived": [],
+      "reactivated": [],
+      "removed": []
+    }
+  },
+  "cc_portal": {
+    "news": {
+      "added": []
+    },
+    "pps": {
+      "added": []
+    },
+    "products": {
+      "added": []
+    }
+  },
+  "cctl_labs": {},
+  "csfc": {
+    "pages": {
+      "apl": {
+        "added": [
+          {
+            "name": "Juniper Networks running Junos OS 22.3R1 for ACX5448-M, EX4400-24T, EX4400-24P, EX4400-24MP, EX4400-48T, EX4400-48P, EX4400-48F, EX4400-48MP, QFX5120-YM, as detailed in VID 2024.1087",
+            "type": "MACSEC Ethernet Encryption Devices",
+            "vendor": "HPE Juniper",
+            "link": "https://www.niap-ccevs.org/products/international-product/2024.1087",
+            "href": "https://www.niap-ccevs.org/products/international-product/2024.1087",
+            "raw_text": "MACSEC Ethernet Encryption Devices | HPE Juniper | Juniper Networks running Junos OS 22.3R1 for ACX5448-M, EX4400-24T, EX4400-24P, EX4400-24MP, EX4400-48T, EX4400-48P, EX4400-48F, EX4400-48MP, QFX5120-YM, as detailed in VID 2024.1087 | Junos OS 22.3R1 | NIAP Validation Completed (at Teron Labs) | 2024.04.12 | Certification extended - Maintenance Update completed on 2026.03.02",
+            "text": "MACSEC Ethernet Encryption Devices | HPE Juniper | Juniper Networks running Junos OS 22.3R1 for ACX5448-M, EX4400-24T, EX4400-24P, EX4400-24MP, EX4400-48T, EX4400-48P, EX4400-48F, EX4400-48MP, QFX5120-YM, as detailed in VID 2024.1087 | Junos OS 22.3R1 | NIAP Validation Completed (at Teron Labs) | 2024.04.12 | Certification extended - Maintenance Update completed on 2026.03.02",
+            "content_sha256": "0861bec629bbb091453c9554a9935005806c50105a9592fab28569b69ce18182"
+          }
+        ],
+        "removed": [
+          {
+            "name": "Cisco Catalyst 9800 Series Wireless Controllers and Access Points running IOS-XE 17.6\u00a0 (Cisco 9800-80-K9 Wireless Controller, Cisco 9800-40-K9 Wireless Controller, Cisco 9800-L Wireless Controller: C9800-L-F-K9, C98000L-C-K9 with Cisco Catalyst 9130 Series Wifi 6 Access Points (x=regulatory domain): C9130AXI-x, C9130AXE-x, C1930AXE-STA-x, Cisco Catalyst 9120 Series Wi-fi 6 Access Points (x= regulatory domain): C9120AXI-x, C9120AXE-x, C9120AXP-x, Cisco Catalyst 9115 Series Wi-fi 6 Access Points (x= regulatory domain): C9115AXI-x, C9115AXE-x Cisco Catalyst 9105 Series Wi-fi Access Points (x=regulatory domain): C9105AXI-x, C9105AXW-x, C9105AXIT-x, C9105AXWT-x",
+            "type": "WLAN Access System",
+            "vendor": "Cisco",
+            "link": "https://www.niap-ccevs.org/Product/CompliantCC.cfm?CCID=2023.1065",
+            "href": "https://www.niap-ccevs.org/Product/CompliantCC.cfm?CCID=2023.1065",
+            "raw_text": "WLAN Access System | Cisco | Cisco Catalyst 9800 Series Wireless Controllers and Access Points running IOS-XE 17.6\u00a0 (Cisco 9800-80-K9 Wireless Controller, Cisco 9800-40-K9 Wireless Controller, Cisco 9800-L Wireless Controller: C9800-L-F-K9, C98000L-C-K9 with Cisco Catalyst 9130 Series Wifi 6 Access Points (x=regulatory domain): C9130AXI-x, C9130AXE-x, C1930AXE-STA-x, Cisco Catalyst 9120 Series Wi-fi 6 Access Points (x= regulatory domain): C9120AXI-x, C9120AXE-x, C9120AXP-x, Cisco Catalyst 9115 Series Wi-fi 6 Access Points (x= regulatory domain): C9115AXI-x, C9115AXE-x Cisco Catalyst 9105 Series Wi-fi Access Points (x=regulatory domain): C9105AXI-x, C9105AXW-x, C9105AXIT-x, C9105AXWT-x | IOS-XE 17.6 | NIAP Validation Completed (at Lightship Security) | 2023.03.20 | ",
+            "text": "WLAN Access System | Cisco | Cisco Catalyst 9800 Series Wireless Controllers and Access Points running IOS-XE 17.6\u00a0 (Cisco 9800-80-K9 Wireless Controller, Cisco 9800-40-K9 Wireless Controller, Cisco 9800-L Wireless Controller: C9800-L-F-K9, C98000L-C-K9 with Cisco Catalyst 9130 Series Wifi 6 Access Points (x=regulatory domain): C9130AXI-x, C9130AXE-x, C1930AXE-STA-x, Cisco Catalyst 9120 Series Wi-fi 6 Access Points (x= regulatory domain): C9120AXI-x, C9120AXE-x, C9120AXP-x, Cisco Catalyst 9115 Series Wi-fi 6 Access Points (x= regulatory domain): C9115AXI-x, C9115AXE-x Cisco Catalyst 9105 Series Wi-fi Access Points (x=regulatory domain): C9105AXI-x, C9105AXW-x, C9105AXIT-x, C9105AXWT-x | IOS-XE 17.6 | NIAP Validation Completed (at Lightship Security) | 2023.03.20 | ",
+            "content_sha256": "4c5b65f5bcd180c0f1ed7b86b58851b04b86af4e52bfe266a344c5e0b5c1ca49"
+          },
+          {
+            "name": "Catalyst 9200CX/9300X/9300LM/9500X Series Switches running IOS-XE 17.12 ( C9200CX-12T-2X2G, C9200CX-12P-2X2G, C9200CX-8P-2X2G, C9200CX-8UXG-2X, C9300X-48HX, C9300X-48TX, C9300X-NM-4C, C9300X-NM-8M, C9300X-NM-2C, C9300X-NM-8Y, C9300X-12Y, C9300X-24Y, C9300X-48HXN, C9300X-24HX, C9300LM-24U, C9300LM-48UX, C9300LM-48T, C9300LM-48U, C9500X-28C8D,C9500X-60L4D)",
+            "type": "MACSEC Ethernet Encryption Devices",
+            "vendor": "Cisco",
+            "link": "https://www.niap-ccevs.org/products/11464",
+            "href": "https://www.niap-ccevs.org/products/11464",
+            "raw_text": "MACSEC Ethernet Encryption Devices | Cisco | Catalyst 9200CX/9300X/9300LM/9500X Series Switches running IOS-XE 17.12 ( C9200CX-12T-2X2G, C9200CX-12P-2X2G, C9200CX-8P-2X2G, C9200CX-8UXG-2X, C9300X-48HX, C9300X-48TX, C9300X-NM-4C, C9300X-NM-8M, C9300X-NM-2C, C9300X-NM-8Y, C9300X-12Y, C9300X-24Y, C9300X-48HXN, C9300X-24HX, C9300LM-24U, C9300LM-48UX, C9300LM-48T, C9300LM-48U, C9500X-28C8D,C9500X-60L4D) | IOS-XE 17.12 | NIAP Validation Completed (at Gossamer) | 2024.09.17 | ",
+            "text": "MACSEC Ethernet Encryption Devices | Cisco | Catalyst 9200CX/9300X/9300LM/9500X Series Switches running IOS-XE 17.12 ( C9200CX-12T-2X2G, C9200CX-12P-2X2G, C9200CX-8P-2X2G, C9200CX-8UXG-2X, C9300X-48HX, C9300X-48TX, C9300X-NM-4C, C9300X-NM-8M, C9300X-NM-2C, C9300X-NM-8Y, C9300X-12Y, C9300X-24Y, C9300X-48HXN, C9300X-24HX, C9300LM-24U, C9300LM-48UX, C9300LM-48T, C9300LM-48U, C9500X-28C8D,C9500X-60L4D) | IOS-XE 17.12 | NIAP Validation Completed (at Gossamer) | 2024.09.17 | ",
+            "content_sha256": "0a537e4446e46c3a8e8cfa4642d554664d519f2e7bdbbf2da583e82b02a73d63"
+          }
+        ],
+        "updated": []
+      }
+    },
+    "selection_links": {},
+    "documents": {
+      "added": [],
+      "removed": [],
+      "updated": []
+    },
+    "feeds": {}
+  },
+  "cc_crypto": {
+    "pages": {}
+  },
+  "nato": {
+    "pages": {},
+    "cisco_added": [],
+    "cisco_removed": [],
+    "baseline_reset": false
+  },
+  "eucc": {
+    "pages": {},
+    "cisco_added": [],
+    "cisco_removed": [],
+    "baseline_reset": false
+  },
+  "nd_itc": {
+    "nit_rfis": {
+      "added": [],
+      "status_changes": [],
+      "revised": [],
+      "newly_archived": []
+    },
+    "awl": {
+      "added": [],
+      "removed": [],
+      "version_changes": [],
+      "list_updates": []
+    },
+    "baseline_reset": false,
+    "collection_failure": false
+  },
+  "ietf_cnsa": {
+    "added": [],
+    "removed": [],
+    "updated": [],
+    "rfc9846_adoption": []
+  },
+  "ieee_pqc": {
+    "added": [],
+    "removed": [],
+    "updated": []
+  },
+  "source_health": {
+    "niap": {
+      "label": "NIAP",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "PCL products",
+          "observed": 1764,
+          "minimum": 50
+        },
+        {
+          "name": "Protection Profiles",
+          "observed": 272,
+          "minimum": 10
+        },
+        {
+          "name": "PQC PP file-version records",
+          "observed": 11,
+          "minimum": 1,
+          "required_for_diff_baseline": false
+        },
+        {
+          "name": "PQC PP full-content hashes",
+          "observed": 7,
+          "minimum": 1,
+          "required_for_diff_baseline": false
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-10-03T10:57:07.498958+00:00",
+      "subcollections": {
+        "news": {
+          "label": "News announcements",
+          "status": "healthy",
+          "observed": 357,
+          "consecutive_failures": 0,
+          "using_last_known_good": false
+        },
+        "events": {
+          "label": "Events",
+          "status": "healthy",
+          "observed": 0,
+          "consecutive_failures": 0,
+          "using_last_known_good": false
+        },
+        "policies": {
+          "label": "Policy letters",
+          "status": "healthy",
+          "observed": 40,
+          "consecutive_failures": 0,
+          "using_last_known_good": false
+        }
+      }
+    },
+    "cc_portal": {
+      "label": "CC Portal",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "portal records",
+          "observed": 180,
+          "minimum": 1
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-10-03T10:57:07.498958+00:00"
+    },
+    "cctl_labs": {
+      "label": "CCTL Labs",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "lab feed items",
+          "observed": 19,
+          "minimum": 1
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-10-03T10:57:07.498958+00:00"
+    },
+    "csfc": {
+      "label": "CSfC",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "APL items",
+          "observed": 117,
+          "minimum": 5
+        },
+        {
+          "name": "announcements",
+          "observed": 8,
+          "minimum": 1
+        },
+        {
+          "name": "tracked capability packages",
+          "observed": 5,
+          "minimum": 5,
+          "required_for_diff_baseline": false
+        },
+        {
+          "name": "capability-package hashes",
+          "observed": 5,
+          "minimum": 5,
+          "required_for_diff_baseline": false
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-10-03T10:57:07.498958+00:00"
+    },
+    "cc_crypto": {
+      "label": "CC Crypto",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "publications",
+          "observed": 118,
+          "minimum": 5
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-10-03T10:57:07.498958+00:00"
+    },
+    "nato": {
+      "label": "NATO NIAPCL",
+      "status": "healthy",
+      "mode": "manual",
+      "checks": [],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "detail": "manual baseline (40 Cisco product(s)); updated via the NATO capture GitHub issue workflow",
+      "checked_at": "2026-10-03T10:57:07.498958+00:00"
+    },
+    "eucc": {
+      "label": "EUCC / ENISA",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "certificates",
+          "observed": 50,
+          "minimum": 2
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-10-03T10:57:07.498958+00:00"
+    },
+    "nd_itc": {
+      "label": "ND-iTC",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "NIT RFIs",
+          "observed": 32,
+          "minimum": 5
+        },
+        {
+          "name": "Allowed-With entries",
+          "observed": 28,
+          "minimum": 1
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-10-03T10:57:07.498958+00:00"
+    },
+    "ietf_cnsa": {
+      "label": "IETF CNSA 2.0",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "CNSA profile/RFC records",
+          "observed": 5,
+          "minimum": 5
+        },
+        {
+          "name": "CNSA full-text hashes",
+          "observed": 5,
+          "minimum": 5
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-10-03T10:57:07.498958+00:00"
+    },
+    "ieee_pqc": {
+      "label": "IEEE 802.11bt",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "P802.11bt project records",
+          "observed": 1,
+          "minimum": 1
+        },
+        {
+          "name": "P802.11bt timeline hashes",
+          "observed": 1,
+          "minimum": 1
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-10-03T10:57:07.498958+00:00"
+    }
+  },
+  "alerts": [
+    {
+      "source": "CSfC Components List",
+      "kind": "removed",
+      "title": "WLAN Access System | Cisco | Cisco Catalyst 9800 Series Wireless Controllers and Access Points running IOS-XE 17.6\u00a0 (Cis\u2026",
+      "url": "https://www.nsa.gov/Resources/Commercial-Solutions-for-Classified-Program/Components-List/",
+      "detail": "Item removed from CSfC apl page",
+      "matched_keywords": [
+        "cisco"
+      ],
+      "tab": "us"
+    },
+    {
+      "source": "CSfC Components List",
+      "kind": "removed",
+      "title": "MACSEC Ethernet Encryption Devices | Cisco | Catalyst 9200CX/9300X/9300LM/9500X Series Switches running IOS-XE 17.12 ( C\u2026",
+      "url": "https://www.nsa.gov/Resources/Commercial-Solutions-for-Classified-Program/Components-List/",
+      "detail": "Item removed from CSfC apl page",
+      "matched_keywords": [
+        "cisco"
+      ],
+      "tab": "us"
+    }
+  ]
+}
