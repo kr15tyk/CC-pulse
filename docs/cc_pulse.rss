@@ -2,10 +2,6 @@
 <rss version="2.0"><channel>
 <title>CC Pulse</title>
 <link>https://kr15tyk.github.io/CC-pulse/cc_dashboard.html</link>
-<description>Common Criteria monitoring - 2026-10-03 06:57 ET</description>
-<item><title>CSfC Component Added: MACSEC Ethernet Encryption Devices | HPE Juniper | Juniper Networks running Juno</title><link>https://www.niap-ccevs.org/products/international-product/2024.1087</link><description>CSfC apl item added.</description></item>
-<item><title>CSfC Component Removed: WLAN Access System | Cisco | Cisco Catalyst 9800 Series Wireless Controllers and</title><link>https://www.niap-ccevs.org/Product/CompliantCC.cfm?CCID=2023.1065</link><description>CSfC apl item removed.</description></item>
-<item><title>CSfC Component Removed: MACSEC Ethernet Encryption Devices | Cisco | Catalyst 9200CX/9300X/9300LM/9500X </title><link>https://www.niap-ccevs.org/products/11464</link><description>CSfC apl item removed.</description></item>
-<item><title>ALERT: CSfC Components List – WLAN Access System | Cisco | Cisco Catalyst 9800 Series Wireless Controllers and Access Points running IOS-XE 17.6  (Cis…</title><link>https://kr15tyk.github.io/CC-pulse/cc_dashboard.html</link><description>Kind: removed | Keywords: cisco</description></item>
-<item><title>ALERT: CSfC Components List – MACSEC Ethernet Encryption Devices | Cisco | Catalyst 9200CX/9300X/9300LM/9500X Series Switches running IOS-XE 17.12 ( C…</title><link>https://kr15tyk.github.io/CC-pulse/cc_dashboard.html</link><description>Kind: removed | Keywords: cisco</description></item>
+<description>Common Criteria monitoring - 2026-10-04 07:38 ET</description>
+
 </channel></rss>
