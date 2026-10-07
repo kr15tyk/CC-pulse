@@ -1,6 +1,6 @@
 {
-  "period_start": "2026-09-06T10:04:36.012735+00:00",
-  "period_end": "2026-09-07T11:17:45.527035+00:00",
+  "period_start": "2026-10-06T12:34:52.013359+00:00",
+  "period_end": "2026-10-07T12:27:45.643454+00:00",
   "niap": {
     "pps": {
       "added": [],
@@ -20,14 +20,78 @@
       "newly_archived": []
     },
     "pcl_all": {
-      "added": [],
+      "added": [
+        {
+          "active_maintenances": [],
+          "am_sort": "2028-09-30T00:00:00Z",
+          "assigned_lab_name": "Booz Allen Hamilton Common Criteria Testing Laboratory",
+          "certification_date": "2026-09-30T00:00:00Z",
+          "from_cc_portal": false,
+          "product_id": 11687,
+          "product_name": "Gigamon GigaVUE Visibility Appliances",
+          "protection_profiles": [
+            {
+              "pp_id": 459,
+              "pp_name": "Functional Package for SSH Version 1.0",
+              "pp_short_name": "PKG_SSH_V1.0"
+            },
+            {
+              "pp_id": 482,
+              "pp_name": "collaborative Protection Profile for Network Devices Version 3.0e",
+              "pp_short_name": "CPP_ND_V3.0E"
+            }
+          ],
+          "status_sort": "Certified",
+          "submitting_country_id_code": "US",
+          "submitting_country_id_name": "United States",
+          "sunset_date": null,
+          "tech_types": [
+            "Network Device"
+          ],
+          "vendor_id_name": "Gigamon Inc",
+          "v_id": 11687,
+          "kicked_off_date": "2026-04-15T11:20:53.474000Z"
+        }
+      ],
       "removed": [],
       "newly_archived": []
     },
     "in_evaluation": {
       "added": [],
-      "removed": [],
-      "current_count": 44
+      "removed": [
+        {
+          "active_maintenances": [],
+          "am_sort": null,
+          "assigned_lab_name": "Booz Allen Hamilton Common Criteria Testing Laboratory",
+          "certification_date": null,
+          "from_cc_portal": false,
+          "product_id": 11687,
+          "product_name": "Gigamon GigaVUE Visibility Appliances",
+          "protection_profiles": [
+            {
+              "pp_id": 459,
+              "pp_name": "Functional Package for SSH Version 1.0",
+              "pp_short_name": "PKG_SSH_V1.0"
+            },
+            {
+              "pp_id": 482,
+              "pp_name": "collaborative Protection Profile for Network Devices Version 3.0e",
+              "pp_short_name": "CPP_ND_V3.0E"
+            }
+          ],
+          "status_sort": "In Progress",
+          "submitting_country_id_code": "US",
+          "submitting_country_id_name": "United States",
+          "sunset_date": null,
+          "tech_types": [
+            "Network Device"
+          ],
+          "vendor_id_name": "Gigamon Inc",
+          "v_id": 11687,
+          "kicked_off_date": "2026-04-15T11:20:53.474000Z"
+        }
+      ],
+      "current_count": 42
     },
     "news": {
       "added": [],
@@ -83,7 +147,28 @@
     "baseline_reset": false
   },
   "eucc": {
-    "pages": {},
+    "pages": {
+      "certificates": {
+        "added": [
+          {
+            "name": "Smarty IQ-LTE",
+            "text": "Smarty IQ-LTE | 28 September 2026 | The Target of Evaluation (TOE) is the Smart Meter Gateway (SMGW) Smarty IQ-LTE Version 1.5.",
+            "href": "https://certification.enisa.europa.eu/certificates/eucc-3087-2026-000017-i-00_en",
+            "cert_date": "2026-09-28T12:00:00Z",
+            "description": "The Target of Evaluation (TOE) is the Smart Meter Gateway (SMGW) Smarty IQ-LTE Version 1.5."
+          }
+        ],
+        "removed": [
+          {
+            "name": "ID-A v1.0 on ID-One Cosmo X",
+            "text": "ID-A v1.0 on ID-One Cosmo X | 4 May 2026 | The product is a smart card with an embedded software compliant to IAS ECC v21 specification, and a secure microcontroller with contact and contactless interfaces.",
+            "href": "https://certification.enisa.europa.eu/certificates/eucc-3090-2026-000024-i-00_en",
+            "cert_date": "2026-05-04T12:00:00Z",
+            "description": "The product is a smart card with an embedded software compliant to IAS ECC v21 specification, and a secure microcontroller with contact and contactless interfaces."
+          }
+        ]
+      }
+    },
     "cisco_added": [],
     "cisco_removed": [],
     "baseline_reset": false
@@ -122,17 +207,17 @@
       "checks": [
         {
           "name": "PCL products",
-          "observed": 1757,
+          "observed": 1765,
           "minimum": 50
         },
         {
           "name": "Protection Profiles",
-          "observed": 271,
+          "observed": 272,
           "minimum": 10
         },
         {
           "name": "PQC PP file-version records",
-          "observed": 13,
+          "observed": 11,
           "minimum": 1,
           "required_for_diff_baseline": false
         },
@@ -145,12 +230,12 @@
       ],
       "consecutive_failures": 0,
       "using_last_known_good": false,
-      "checked_at": "2026-09-07T11:17:45.527035+00:00",
+      "checked_at": "2026-10-07T12:27:45.643454+00:00",
       "subcollections": {
         "news": {
           "label": "News announcements",
           "status": "healthy",
-          "observed": 356,
+          "observed": 357,
           "consecutive_failures": 0,
           "using_last_known_good": false
         },
@@ -182,7 +267,7 @@
       ],
       "consecutive_failures": 0,
       "using_last_known_good": false,
-      "checked_at": "2026-09-07T11:17:45.527035+00:00"
+      "checked_at": "2026-10-07T12:27:45.643454+00:00"
     },
     "cctl_labs": {
       "label": "CCTL Labs",
@@ -196,7 +281,7 @@
       ],
       "consecutive_failures": 0,
       "using_last_known_good": false,
-      "checked_at": "2026-09-07T11:17:45.527035+00:00"
+      "checked_at": "2026-10-07T12:27:45.643454+00:00"
     },
     "csfc": {
       "label": "CSfC",
@@ -204,7 +289,7 @@
       "checks": [
         {
           "name": "APL items",
-          "observed": 123,
+          "observed": 117,
           "minimum": 5
         },
         {
@@ -227,7 +312,7 @@
       ],
       "consecutive_failures": 0,
       "using_last_known_good": false,
-      "checked_at": "2026-09-07T11:17:45.527035+00:00"
+      "checked_at": "2026-10-07T12:27:45.643454+00:00"
     },
     "cc_crypto": {
       "label": "CC Crypto",
@@ -235,13 +320,13 @@
       "checks": [
         {
           "name": "publications",
-          "observed": 121,
+          "observed": 118,
           "minimum": 5
         }
       ],
       "consecutive_failures": 0,
       "using_last_known_good": false,
-      "checked_at": "2026-09-07T11:17:45.527035+00:00"
+      "checked_at": "2026-10-07T12:27:45.643454+00:00"
     },
     "nato": {
       "label": "NATO NIAPCL",
@@ -251,7 +336,7 @@
       "consecutive_failures": 0,
       "using_last_known_good": false,
       "detail": "manual baseline (40 Cisco product(s)); updated via the NATO capture GitHub issue workflow",
-      "checked_at": "2026-09-07T11:17:45.527035+00:00"
+      "checked_at": "2026-10-07T12:27:45.643454+00:00"
     },
     "eucc": {
       "label": "EUCC / ENISA",
@@ -265,7 +350,7 @@
       ],
       "consecutive_failures": 0,
       "using_last_known_good": false,
-      "checked_at": "2026-09-07T11:17:45.527035+00:00"
+      "checked_at": "2026-10-07T12:27:45.643454+00:00"
     },
     "nd_itc": {
       "label": "ND-iTC",
@@ -278,13 +363,13 @@
         },
         {
           "name": "Allowed-With entries",
-          "observed": 22,
+          "observed": 28,
           "minimum": 1
         }
       ],
       "consecutive_failures": 0,
       "using_last_known_good": false,
-      "checked_at": "2026-09-07T11:17:45.527035+00:00"
+      "checked_at": "2026-10-07T12:27:45.643454+00:00"
     },
     "ietf_cnsa": {
       "label": "IETF CNSA 2.0",
@@ -303,7 +388,7 @@
       ],
       "consecutive_failures": 0,
       "using_last_known_good": false,
-      "checked_at": "2026-09-07T11:17:45.527035+00:00"
+      "checked_at": "2026-10-07T12:27:45.643454+00:00"
     },
     "ieee_pqc": {
       "label": "IEEE 802.11bt",
@@ -322,7 +407,7 @@
       ],
       "consecutive_failures": 0,
       "using_last_known_good": false,
-      "checked_at": "2026-09-07T11:17:45.527035+00:00"
+      "checked_at": "2026-10-07T12:27:45.643454+00:00"
     }
   },
   "alerts": []
