@@ -179,7 +179,7 @@
   <span class="nav-title">CC Pulse Dashboard</span>
   <span class="nav-spacer"></span>
   <div class="ham-wrap">
-    <span class="nav-meta">Last run: 2026-10-06 08:34 ET</span>
+    <span class="nav-meta">Last run: 2026-10-07 08:27 ET</span>
     <button class="ham-btn" id="ham-btn" onclick="toggleHamMenu()" aria-expanded="false" aria-haspopup="true" title="Open menu">&#9776;</button>
     <div class="ham-menu" id="ham-menu" role="menu">
       <a class="ham-item" href="https://kr15tyk.github.io/CC-pulse/cc_dashboard.html" role="menuitem"><span class="ham-icon">&#127968;</span>Home</a>
@@ -263,7 +263,7 @@
 <div class="sticky-top">
   <div class="trend-bar">
     <div class="stat"><a href="#sec-niap-pp" onclick="navigateTo('sec-niap-pp');return false;">
-      <div class="stat-num active-num">1</div>
+      <div class="stat-num active-num">2</div>
       <div class="stat-lbl">NIAP Changes</div>
     </a></div>
     <div class="stat"><a href="#sec-csfc" onclick="navigateTo('sec-csfc');return false;">
@@ -283,7 +283,7 @@
       <div class="stat-lbl">CCTL Updates</div>
     </a></div>
     <div class="stat"><a href="#sec-eucc-req" onclick="navigateTo('sec-eucc-req');return false;">
-      <div class="stat-num ">0</div>
+      <div class="stat-num active-num">1</div>
       <div class="stat-lbl">EUCC Changes</div>
     </a></div>
     <div class="stat"><a href="#sec-ietf-cnsa" onclick="navigateTo('sec-ietf-cnsa');return false;">
@@ -340,7 +340,7 @@
     
     
     
-    <p class="no-change">No changes detected. <span class="last-active">(last: 2026-10-05)</span></p>
+    <p class="no-change">No changes detected. <span class="last-active">(last: 2026-10-07)</span></p>
   </div>
 </div>
 
@@ -353,16 +353,13 @@
   </div>
   <div class="card-body ">
     
-    <div class="sub-hdr sub-new">Newly In Evaluation (1)</div>
     
-    <div class="item-row" data-source="niap-inevaluation" data-kind="new">
-      <span class="item-link">Cisco Systems, Inc. -- Cisco Catalyst 9300X/9400X Series Switches 17.18</span>
-      <span class="item-meta">Gossamer Security Solutions</span>
+    <div class="sub-hdr sub-removed">Left Evaluation (1)</div>
+    
+    <div class="item-row" data-source="niap-inevaluation" data-kind="removed">
+      <span class="item-link">Gigamon Inc -- Gigamon GigaVUE Visibility Appliances</span>
+      <span class="item-meta">Completed or Withdrawn</span>
     </div>
-    
-    <div class="item-sub">Network Device, Network Encryption</div>
-    
-    
     
     
     
@@ -431,17 +428,28 @@
 </div>
 
   <!-- NIAP PCL — All Certifications -->
-<div class="card " id="sec-niap-pcl" data-has-changes="0">
+<div class="card card-new" id="sec-niap-pcl" data-has-changes="1">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>NIAP PCL — All Certifications</span>
-    <span class="card-count">0 changes</span>
+    <span class="card-count">1 change</span>
     </span>
   </div>
-  <div class="card-body collapsed">
+  <div class="card-body ">
+    
+    <div class="sub-hdr sub-new">New Certifications (1)</div>
+    
+    <div class="item-row" data-source="niap-pcl" data-kind="new">
+      <span class="item-link">Gigamon Inc -- Gigamon GigaVUE Visibility Appliances</span>
+      <span class="item-meta">2026-09-30</span>
+    </div>
+    
+    <div class="item-sub">PKG_SSH_V1.0, CPP_ND_V3.0E</div>
     
     
     
-    <p class="no-change">No changes detected. <span class="last-active">(last: 2026-10-05)</span></p>
+    
+    
+    
   </div>
 </div>
 
@@ -629,16 +637,23 @@
           </div>
         </div>
         <!-- EUCC Certificates -->
-        <div class="card " id="sec-eucc-certs" data-has-changes="0">
+        <div class="card card-new" id="sec-eucc-certs" data-has-changes="1">
           <div class="card-hdr" onclick="toggleCard(this)">
             <span>EUCC Certified Products</span>
-            <span class="card-count">0 new items</span>
-            <span class="toggle-icon">&#9658;</span>
+            <span class="card-count">1 new item</span>
+            <span class="toggle-icon">&#9660;</span>
           </div>
-          <div class="card-body collapsed">
+          <div class="card-body ">
             
             
-            <p class="no-change">No new EUCC certified products.</p>
+            
+            <div class="item-row" data-source="eucc" data-kind="new">
+              <a class="item-link" href="https://certification.enisa.europa.eu/certificates/eucc-3087-2026-000017-i-00_en" target="_blank">Smarty IQ-LTE</a>
+              <span class="item-meta"></span>
+            </div>
+            
+            
+            
           </div>
         </div>
       </div>
@@ -650,7 +665,7 @@
 <div class="card card-new" id="sec-history" data-has-changes="1">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>Change History</span>
-    <span class="card-count">28 events</span>
+    <span class="card-count">29 events</span>
     <span class="toggle-icon">▼</span>
   </div>
   <div class="card-body">
@@ -668,6 +683,17 @@
       div>
     <div class="timeline" id="history-timeline">
     
+      
+      <div class="tl-entry" data-cat="pcl_cert">
+        <div class="tl-date">2026-10-07</div>
+        <div class="tl-body">
+          <div class="tl-title">
+            <span class="tl-badge new">new</span>
+            <a href="https://www.niap-ccevs.org/products/11687" target="_blank">Gigamon Inc — Gigamon GigaVUE Visibility Appliances</a>
+          </div>
+          <div class="tl-detail">Certified 2026-09-30 · Booz Allen Hamilton Common Criteria Testing Laboratory · PKG_SSH_V1.0, CPP_ND_V3.0E</div>
+        </div>
+      </div>
       
       <div class="tl-entry" data-cat="pcl_cert">
         <div class="tl-date">2026-10-05</div>
@@ -987,7 +1013,7 @@
 </div><!-- /main-content -->
 <footer>
   <span>CC Pulse &middot; Auto-refreshes daily (01:00 EST) &middot; NIAP, CSfC, CC Portal, NATO NIAPCL, EUCC / ENISA</span>
-  <span>Last run: 2026-10-06 08:34 ET</span>
+  <span>Last run: 2026-10-07 08:27 ET</span>
 </footer>
 
 <script>
