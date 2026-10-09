@@ -1,6 +1,6 @@
 {
-  "period_start": "2026-09-08T10:25:30.573281+00:00",
-  "period_end": "2026-09-09T10:35:24.043544+00:00",
+  "period_start": "2026-10-08T12:37:10.646527+00:00",
+  "period_end": "2026-10-09T12:25:38.437178+00:00",
   "niap": {
     "pps": {
       "added": [],
@@ -22,12 +22,65 @@
     "pcl_all": {
       "added": [],
       "removed": [],
-      "newly_archived": []
+      "newly_archived": [
+        {
+          "active_maintenances": [],
+          "am_sort": "2026-10-09T00:00:00Z",
+          "assigned_lab_name": "Leidos Common Criteria Testing Laboratory",
+          "certification_date": "2024-10-09T00:00:00Z",
+          "from_cc_portal": false,
+          "product_id": 11471,
+          "product_name": "Crestron DigitalMedia NVX\u00aeAV-over-IP v7.1",
+          "protection_profiles": [
+            {
+              "pp_id": 447,
+              "pp_name": "collaborative Protection Profile for Network Devices Version 2.2e",
+              "pp_short_name": "CPP_ND_V2.2E"
+            }
+          ],
+          "status_sort": "Archived",
+          "submitting_country_id_code": "US",
+          "submitting_country_id_name": "United States",
+          "sunset_date": null,
+          "tech_types": [
+            "Network Device"
+          ],
+          "vendor_id_name": "Crestron Electronics, Inc",
+          "v_id": 11471,
+          "kicked_off_date": "2024-04-23T00:00:00Z"
+        },
+        {
+          "active_maintenances": [],
+          "am_sort": "2026-10-08T00:00:00Z",
+          "assigned_lab_name": "Lightship Security, Inc.",
+          "certification_date": "2024-10-08T00:00:00Z",
+          "from_cc_portal": true,
+          "product_id": "2024.1295",
+          "product_name": "RICOH Pro C5300S/C5310S, version JE-1.20-H",
+          "protection_profiles": [
+            {
+              "pp_id": 317,
+              "pp_name": "Protection Profile for Hardcopy Devices Version 1.0",
+              "pp_short_name": "PP_HCD_V1.0"
+            }
+          ],
+          "status_sort": "Archived",
+          "submitting_country_id_code": "CA",
+          "submitting_country_id_name": "Canada",
+          "sunset_date": "2029-10-08T00:00:00Z",
+          "tech_types": [
+            "Multi-Function Devices"
+          ],
+          "vendor_id_name": "Ricoh Company, Ltd.",
+          "v_id": "2024.1295",
+          "kicked_off_date": null
+        }
+      ]
     },
     "in_evaluation": {
       "added": [],
       "removed": [],
-      "current_count": 44
+      "current_count": 42
     },
     "news": {
       "added": [],
@@ -65,31 +118,18 @@
   "cctl_labs": {},
   "csfc": {
     "pages": {
-      "apl": {
+      "cap_packages": {
         "added": [],
-        "removed": [
+        "removed": [],
+        "updated": [
           {
-            "name": "Zebra Devices on Android 13",
-            "type": "End User Device / Mobile Platform",
-            "vendor": "Zebra Technologies",
-            "link": "https://www.niap-ccevs.org/products/11486",
-            "href": "https://www.niap-ccevs.org/products/11486",
-            "raw_text": "End User Device / Mobile Platform | Zebra Technologies | Zebra Devices on Android 13 | Android 13 | NIAP Validation Completed (at Gossamer) | 2024.08.08 | ",
-            "text": "End User Device / Mobile Platform | Zebra Technologies | Zebra Devices on Android 13 | Android 13 | NIAP Validation Completed (at Gossamer) | 2024.08.08 | ",
-            "content_sha256": "e0e19800897bcaccbb455bb94b2f7fb5a5ea2ca0347777c9834e0879ad14a1c5"
-          },
-          {
-            "name": "Catalyst 9300/9300L/9400/9500/9600 Series Switches running IOS-XE 17.12 ( C9300L-48T-4G, C9300L-24T-4G, C9300L-24P-4G, C9300L-48P-4G, C9300L-24T-4X, C9300L-48T-4X, C9300L-24P-4X, C9300L-48P-4X, C9300L-48PF-4G, C9300L-48PF-4X, C9300L-24UXG-4X, C9300L-24UXG-2Q, C9300L-48UXG-4X, C9300L-48UXG-2Q, C9407R, C9404R , C9410R, C9400-SUP-1, C9400-SUP-1XL, C9400-SUP-1XL-Y, C9400-LC-48T, C9400-LC-24S, C9400-LC-48S, C9400-LC-24XS, C9400-LC-48P, C9400-LC-48U, C9400-LC-48UX, C9400-LC-48H, C9500-16X, C9500-32C, C9500-32QC, C9500-24Y4C, C9500-48Y4C, C9500-NM-8X, C9500-NM-2Q, C9606R, C9600-SUP-1, C9600-LC-24C,C9600-LC-48YL, C9600-LC-48TX, C9600-LC-24S)",
-            "type": "MACSEC Ethernet Encryption Devices",
-            "vendor": "Cisco",
-            "link": "https://www.niap-ccevs.org/products/11463",
-            "href": "https://www.niap-ccevs.org/products/11463",
-            "raw_text": "MACSEC Ethernet Encryption Devices | Cisco | Catalyst 9300/9300L/9400/9500/9600 Series Switches running IOS-XE 17.12 ( C9300L-48T-4G, C9300L-24T-4G, C9300L-24P-4G, C9300L-48P-4G, C9300L-24T-4X, C9300L-48T-4X, C9300L-24P-4X, C9300L-48P-4X, C9300L-48PF-4G, C9300L-48PF-4X, C9300L-24UXG-4X, C9300L-24UXG-2Q, C9300L-48UXG-4X, C9300L-48UXG-2Q, C9407R, C9404R , C9410R, C9400-SUP-1, C9400-SUP-1XL, C9400-SUP-1XL-Y, C9400-LC-48T, C9400-LC-24S, C9400-LC-48S, C9400-LC-24XS, C9400-LC-48P, C9400-LC-48U, C9400-LC-48UX, C9400-LC-48H, C9500-16X, C9500-32C, C9500-32QC, C9500-24Y4C, C9500-48Y4C, C9500-NM-8X, C9500-NM-2Q, C9606R, C9600-SUP-1, C9600-LC-24C,C9600-LC-48YL, C9600-LC-48TX, C9600-LC-24S) | IOS-XE 17.12 | NIAP Validation Completed (at Gossamer) | 2024.08.20 | ",
-            "text": "MACSEC Ethernet Encryption Devices | Cisco | Catalyst 9300/9300L/9400/9500/9600 Series Switches running IOS-XE 17.12 ( C9300L-48T-4G, C9300L-24T-4G, C9300L-24P-4G, C9300L-48P-4G, C9300L-24T-4X, C9300L-48T-4X, C9300L-24P-4X, C9300L-48P-4X, C9300L-48PF-4G, C9300L-48PF-4X, C9300L-24UXG-4X, C9300L-24UXG-2Q, C9300L-48UXG-4X, C9300L-48UXG-2Q, C9407R, C9404R , C9410R, C9400-SUP-1, C9400-SUP-1XL, C9400-SUP-1XL-Y, C9400-LC-48T, C9400-LC-24S, C9400-LC-48S, C9400-LC-24XS, C9400-LC-48P, C9400-LC-48U, C9400-LC-48UX, C9400-LC-48H, C9500-16X, C9500-32C, C9500-32QC, C9500-24Y4C, C9500-48Y4C, C9500-NM-8X, C9500-NM-2Q, C9606R, C9600-SUP-1, C9600-LC-24C,C9600-LC-48YL, C9600-LC-48TX, C9600-LC-24S) | IOS-XE 17.12 | NIAP Validation Completed (at Gossamer) | 2024.08.20 | ",
-            "content_sha256": "5c19a77e22e1717c73e40f6e1e3bf3cb994920d9655dfbfa99e47f2642decf11"
+            "text": "EUD Composition Guidance Addendum 2.0 Draft 1.0 The CSfC EUD Composition Guidance Addendum 2.0 Draft 1.0 defines requirements and guidance for implementing hardware separated EUDs within MA, CWLAN, and DAR CPs.\u00a0 The following portions of these CPs will be updated by this addendum:\u00a0 EUD provisioning, multiple security-level requirements, incorporating Retransmission Device Protection Profile requirements, Dedicated Outer (device) requirements and different deployment options for hardware separated EUDs.\u00a0 This document is currently a draft document that is subject to change; any changes to this addendum will result in updates to all CSfC CPs which deal with EUDs. Download: EUD Composition Guidance Addendum 2.0 Draft 1.0 Please send comments to the Wi-Fi@nsa.gov alias. Download: EUD Composition Addendum 2.0 Draft 1.0 Comment Matrix _______________________________________________________________________________________________________________________________________________________________",
+            "href": "https://www.nsa.gov/Portals/75/documents/CSfC CP Updates 2026/(U) CSfC EUD Composition Guidance Addendum 2.0 Draft 1.0.pdf?ver=-e2rjuN2v7EA11eATR0raw%3d%3d",
+            "content_sha256": "185df47961e662df9000fdc314d9c3401797c9cd4cbf83d295c2095c6faba655",
+            "_old_text": "EUD Composition Guidance Addendum 2.0 Draft 1.0 The CSfC EUD Composition Guidance Addendum 2.0 Draft 1.0 defines requirements and guidance for implementing hardware separated EUDs within MA, CWLAN, and DAR CPs.\u00a0 The following portions of these CPs will be updated by this addendum:\u00a0 EUD provisioning, multiple security-level requirements, incorporating Retransmission Device Protection Profile requirements, Dedicated Outer (device) requirements and different deployment options for hardware separated EUDs.\u00a0 This document is currently a draft document that is subject to change; any changes to this addendum will result in updates to all CSfC CPs which deal with EUDs. Download: EUD Composition Guidance Addendum 2.0 Draft 1.0 Please send comments to the Wi-Fi@nsa.gov alias. Download: EUD Composition Addendum 2.0 Draft 1.0 Comment Matrix Tactical Capability Package The Tactical Capability Package Version 1.0.0, dated 1 July 2024, has been approved by the Deputy National Manager (DNM) for Nation",
+            "_old_content_sha256": "4d4a08f0cd4191fa65e87cb5015acc7513be6523fcd39c39fbcbe6412408668e"
           }
-        ],
-        "updated": []
+        ]
       }
     },
     "selection_links": {},
@@ -149,17 +189,17 @@
       "checks": [
         {
           "name": "PCL products",
-          "observed": 1757,
+          "observed": 1765,
           "minimum": 50
         },
         {
           "name": "Protection Profiles",
-          "observed": 271,
+          "observed": 272,
           "minimum": 10
         },
         {
           "name": "PQC PP file-version records",
-          "observed": 13,
+          "observed": 11,
           "minimum": 1,
           "required_for_diff_baseline": false
         },
@@ -172,12 +212,12 @@
       ],
       "consecutive_failures": 0,
       "using_last_known_good": false,
-      "checked_at": "2026-09-09T10:35:24.043544+00:00",
+      "checked_at": "2026-10-09T12:25:38.437178+00:00",
       "subcollections": {
         "news": {
           "label": "News announcements",
           "status": "healthy",
-          "observed": 356,
+          "observed": 357,
           "consecutive_failures": 0,
           "using_last_known_good": false
         },
@@ -209,7 +249,7 @@
       ],
       "consecutive_failures": 0,
       "using_last_known_good": false,
-      "checked_at": "2026-09-09T10:35:24.043544+00:00"
+      "checked_at": "2026-10-09T12:25:38.437178+00:00"
     },
     "cctl_labs": {
       "label": "CCTL Labs",
@@ -223,7 +263,7 @@
       ],
       "consecutive_failures": 0,
       "using_last_known_good": false,
-      "checked_at": "2026-09-09T10:35:24.043544+00:00"
+      "checked_at": "2026-10-09T12:25:38.437178+00:00"
     },
     "csfc": {
       "label": "CSfC",
@@ -231,7 +271,7 @@
       "checks": [
         {
           "name": "APL items",
-          "observed": 121,
+          "observed": 117,
           "minimum": 5
         },
         {
@@ -254,7 +294,7 @@
       ],
       "consecutive_failures": 0,
       "using_last_known_good": false,
-      "checked_at": "2026-09-09T10:35:24.043544+00:00"
+      "checked_at": "2026-10-09T12:25:38.437178+00:00"
     },
     "cc_crypto": {
       "label": "CC Crypto",
@@ -262,13 +302,13 @@
       "checks": [
         {
           "name": "publications",
-          "observed": 121,
+          "observed": 118,
           "minimum": 5
         }
       ],
       "consecutive_failures": 0,
       "using_last_known_good": false,
-      "checked_at": "2026-09-09T10:35:24.043544+00:00"
+      "checked_at": "2026-10-09T12:25:38.437178+00:00"
     },
     "nato": {
       "label": "NATO NIAPCL",
@@ -278,7 +318,7 @@
       "consecutive_failures": 0,
       "using_last_known_good": false,
       "detail": "manual baseline (40 Cisco product(s)); updated via the NATO capture GitHub issue workflow",
-      "checked_at": "2026-09-09T10:35:24.043544+00:00"
+      "checked_at": "2026-10-09T12:25:38.437178+00:00"
     },
     "eucc": {
       "label": "EUCC / ENISA",
@@ -292,7 +332,7 @@
       ],
       "consecutive_failures": 0,
       "using_last_known_good": false,
-      "checked_at": "2026-09-09T10:35:24.043544+00:00"
+      "checked_at": "2026-10-09T12:25:38.437178+00:00"
     },
     "nd_itc": {
       "label": "ND-iTC",
@@ -305,13 +345,13 @@
         },
         {
           "name": "Allowed-With entries",
-          "observed": 22,
+          "observed": 28,
           "minimum": 1
         }
       ],
       "consecutive_failures": 0,
       "using_last_known_good": false,
-      "checked_at": "2026-09-09T10:35:24.043544+00:00"
+      "checked_at": "2026-10-09T12:25:38.437178+00:00"
     },
     "ietf_cnsa": {
       "label": "IETF CNSA 2.0",
@@ -330,7 +370,7 @@
       ],
       "consecutive_failures": 0,
       "using_last_known_good": false,
-      "checked_at": "2026-09-09T10:35:24.043544+00:00"
+      "checked_at": "2026-10-09T12:25:38.437178+00:00"
     },
     "ieee_pqc": {
       "label": "IEEE 802.11bt",
@@ -349,18 +389,18 @@
       ],
       "consecutive_failures": 0,
       "using_last_known_good": false,
-      "checked_at": "2026-09-09T10:35:24.043544+00:00"
+      "checked_at": "2026-10-09T12:25:38.437178+00:00"
     }
   },
   "alerts": [
     {
-      "source": "CSfC Components List",
-      "kind": "removed",
-      "title": "MACSEC Ethernet Encryption Devices | Cisco | Catalyst 9300/9300L/9400/9500/9600 Series Switches running IOS-XE 17.12 ( C\u2026",
-      "url": "https://www.nsa.gov/Resources/Commercial-Solutions-for-Classified-Program/Components-List/",
-      "detail": "Item removed from CSfC apl page",
+      "source": "CSfC: cap_packages",
+      "kind": "updated",
+      "title": "EUD Composition Guidance Addendum 2.0 Draft 1.0 The CSfC EUD Composition Guidance Addendum 2.0 Draft 1.0 defines require\u2026",
+      "url": "https://www.nsa.gov/Portals/75/documents/CSfC CP Updates 2026/(U) CSfC EUD Composition Guidance Addendum 2.0 Draft 1.0.pdf?ver=-e2rjuN2v7EA11eATR0raw%3d%3d",
+      "detail": "Listing updated on CSfC cap packages page",
       "matched_keywords": [
-        "cisco"
+        "CSfC"
       ],
       "tab": "us"
     }
