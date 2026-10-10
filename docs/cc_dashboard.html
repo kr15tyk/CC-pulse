@@ -179,7 +179,7 @@
   <span class="nav-title">CC Pulse Dashboard</span>
   <span class="nav-spacer"></span>
   <div class="ham-wrap">
-    <span class="nav-meta">Last run: 2026-10-09 08:25 ET</span>
+    <span class="nav-meta">Last run: 2026-10-10 07:43 ET</span>
     <button class="ham-btn" id="ham-btn" onclick="toggleHamMenu()" aria-expanded="false" aria-haspopup="true" title="Open menu">&#9776;</button>
     <div class="ham-menu" id="ham-menu" role="menu">
       <a class="ham-item" href="https://kr15tyk.github.io/CC-pulse/cc_dashboard.html" role="menuitem"><span class="ham-icon">&#127968;</span>Home</a>
@@ -263,7 +263,7 @@
 <div class="sticky-top">
   <div class="trend-bar">
     <div class="stat"><a href="#sec-niap-pp" onclick="navigateTo('sec-niap-pp');return false;">
-      <div class="stat-num active-num">2</div>
+      <div class="stat-num active-num">4</div>
       <div class="stat-lbl">NIAP Changes</div>
     </a></div>
     <div class="stat"><a href="#sec-csfc" onclick="navigateTo('sec-csfc');return false;">
@@ -291,7 +291,7 @@
       <div class="stat-lbl">CNSA / PQC Standards</div>
     </a></div>
     <div class="stat"><a href="#sec-alerts" onclick="navigateTo('sec-alerts');return false;">
-      <div class="stat-num alert-num">1</div>
+      <div class="stat-num ">0</div>
       <div class="stat-lbl">Alerts</div>
     </a></div>
   </div>
@@ -317,28 +317,6 @@
       
 <!-- Alerts -->
 
-<div class="section-group">
-<div class="card card-alert" id="sec-alerts">
-  <div class="card-hdr" onclick="toggleCard(this)">
-    <span>Alerts</span>
-    <span class="card-count">1 alert</span>
-    <span class="toggle-icon">&#9660;</span>
-  </div>
-  <div class="card-body">
-    <div class="alert-monitoring">FIPS 186-4, FIPS 186-5, NDcPP, CPP_ND, TLS 1.3, SSH, PP-Module_VPN, PP-Module_WLAN, CNSA 2.0, ML-KEM, ML-DSA, SLH-DSA, post-quantum, RFC 9846, 802.11bt, labgram, valgram, emergency, CSfC, Commercial Solutions for Classified, CSfC APL, CSfC component selections, NSA CSfC, NATO NIAPC, NIAPCL, EUCC, ENISA, CCDB-018, Crypto Catalog, cryptography working group, Specification of Functional Requirements for Cryptography, FCS_CKM, FCS_COP, FCS_RBG</div>
-    
-        <div class="item-row alert-item" data-alert-key="CSfC: cap_packages-EUD_Composition_Guidance_Addendum_2.0_Draft_1.0_The_CSfC_EUD_Composition_Guidance_Addendum_2.0_Draft_1.0_defines_require…" data-tab="us">
-          
-          <a class="item-link" href="https://www.nsa.gov/Portals/75/documents/CSfC CP Updates 2026/(U) CSfC EUD Composition Guidance Addendum 2.0 Draft 1.0.pdf?ver=-e2rjuN2v7EA11eATR0raw%3d%3d" target="_blank">CSfC: cap_packages: EUD Composition Guidance Addendum 2.0 Draft 1.0 The CSfC EUD Composition Guidance Addendum 2.0 Draft 1.0 defines require…</a>
-          
-          <span class="item-meta">updated &middot; CSfC</span>
-          <div class="item-sub">Listing updated on CSfC cap packages page</div>
-          <button class="dismiss-btn" onclick="dismissAlert(this)" title="Mark as seen">&#10003; Seen</button>
-        </div>
-        
-  </div>
-</div>
-
 <div class="tab-nav" id="region-tabs">
         <button class="tab-btn active" data-tab="us" onclick="switchTab(this)">&#127482;&#127480; US (NIAP / CSfC)</button>
         <button class="tab-btn" data-tab="intl" onclick="switchTab(this)">&#127760; International</button>
@@ -362,7 +340,7 @@
     
     
     
-    <p class="no-change">No changes detected. <span class="last-active">(last: 2026-10-09)</span></p>
+    <p class="no-change">No changes detected. <span class="last-active">(last: 2026-10-10)</span></p>
   </div>
 </div>
 
@@ -444,27 +422,43 @@
 </div>
 
   <!-- NIAP PCL — All Certifications -->
-<div class="card card-new" id="sec-niap-pcl" data-has-changes="2">
+<div class="card card-new" id="sec-niap-pcl" data-has-changes="4">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>NIAP PCL — All Certifications</span>
-    <span class="card-count">2 changes</span>
+    <span class="card-count">4 changes</span>
     </span>
   </div>
   <div class="card-body ">
     
     
-    <div class="sub-hdr sub-updated">Newly Archived (2)</div>
+    <div class="sub-hdr sub-updated">Newly Archived (4)</div>
     
     <div class="item-row" data-source="niap-pcl" data-kind="archived">
-      <span class="item-link">Crestron Electronics, Inc -- Crestron DigitalMedia NVX®AV-over-IP v7.1</span>
+      <span class="item-link">Oracle Corporation -- Oracle Identity Governance 12c</span>
       <span class="item-meta">Archived</span>
     </div>
     
-    <div class="item-sub">CPP_ND_V2.2E</div>
+    <div class="item-sub">PP_ESM_ICM_V2.1</div>
     
     
     <div class="item-row" data-source="niap-pcl" data-kind="archived">
-      <span class="item-link">Ricoh Company, Ltd. -- RICOH Pro C5300S/C5310S, version JE-1.20-H</span>
+      <span class="item-link">Ricoh Company, Ltd. -- RICOH IM 550/600/600SR, version E-1.20-H</span>
+      <span class="item-meta">Archived</span>
+    </div>
+    
+    <div class="item-sub">PP_HCD_V1.0</div>
+    
+    
+    <div class="item-row" data-source="niap-pcl" data-kind="archived">
+      <span class="item-link">Ricoh Company, Ltd. -- RICOH IM C300/C300F/C400F/C400SRF/C400SRFG, version JE-1.20-H</span>
+      <span class="item-meta">Archived</span>
+    </div>
+    
+    <div class="item-sub">PP_HCD_V1.0</div>
+    
+    
+    <div class="item-row" data-source="niap-pcl" data-kind="archived">
+      <span class="item-link">Ricoh Company, Ltd. -- RICOH IM C6500/C8000, version JE-1.20-H</span>
       <span class="item-meta">Archived</span>
     </div>
     
@@ -525,8 +519,6 @@
   <div class="card-body collapsed">
     
     
-      
-    
     
       
     
@@ -534,7 +526,7 @@
     
       
     
-    <p class="no-change">No changes detected. <span class="last-active">(last: 2026-10-03)</span></p>
+    <p class="no-change">No changes detected.</p>
   </div>
 </div>
 </div>
@@ -684,7 +676,7 @@
 <div class="card card-new" id="sec-history" data-has-changes="1">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>Change History</span>
-    <span class="card-count">26 events</span>
+    <span class="card-count">25 events</span>
     <span class="toggle-icon">▼</span>
   </div>
   <div class="card-body">
@@ -978,17 +970,6 @@
         </div>
       </div>
       
-      <div class="tl-entry" data-cat="pcl_cert">
-        <div class="tl-date">2026-09-10</div>
-        <div class="tl-body">
-          <div class="tl-title">
-            <span class="tl-badge new">new</span>
-            <a href="https://www.niap-ccevs.org/products/11688" target="_blank">Extreme Networks, Inc. — Extreme Networks Switching Engine version 33.4.100</a>
-          </div>
-          <div class="tl-detail">Certified 2026-09-02 · Gossamer Security Solutions · PKG_SSH_V1.0, CPP_ND_V3.0E</div>
-        </div>
-      </div>
-      
     
     </div>
   </div>
@@ -999,7 +980,7 @@
 </div><!-- /main-content -->
 <footer>
   <span>CC Pulse &middot; Auto-refreshes daily (01:00 EST) &middot; NIAP, CSfC, CC Portal, NATO NIAPCL, EUCC / ENISA</span>
-  <span>Last run: 2026-10-09 08:25 ET</span>
+  <span>Last run: 2026-10-10 07:43 ET</span>
 </footer>
 
 <script>
