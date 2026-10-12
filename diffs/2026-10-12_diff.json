@@ -1,6 +1,6 @@
 {
-  "period_start": "2026-09-11T10:24:22.467529+00:00",
-  "period_end": "2026-09-12T09:54:57.879894+00:00",
+  "period_start": "2026-10-11T11:56:42.680582+00:00",
+  "period_end": "2026-10-12T14:07:39.196992+00:00",
   "niap": {
     "pps": {
       "added": [],
@@ -17,99 +17,20 @@
     "cisco_ndcpp": {
       "added": [],
       "removed": [],
-      "newly_archived": [
-        {
-          "active_maintenances": [],
-          "am_sort": "2026-09-12T00:00:00Z",
-          "assigned_lab_name": "Gossamer Security Solutions",
-          "certification_date": "2024-09-12T00:00:00Z",
-          "from_cc_portal": false,
-          "product_id": 11490,
-          "product_name": "Cisco Catalyst Industrial Ethernet  3100 (IE3100) Rugged Series Switches  running IOS-XE 17.12",
-          "protection_profiles": [
-            {
-              "pp_id": 447,
-              "pp_name": "collaborative Protection Profile for Network Devices Version 2.2e",
-              "pp_short_name": "CPP_ND_V2.2E"
-            }
-          ],
-          "status_sort": "Archived",
-          "submitting_country_id_code": "US",
-          "submitting_country_id_name": "United States",
-          "sunset_date": null,
-          "tech_types": [
-            "Network Device"
-          ],
-          "vendor_id_name": "Cisco Systems, Inc.",
-          "v_id": 11490,
-          "kicked_off_date": "2024-06-03T00:00:00Z"
-        }
-      ]
+      "newly_archived": []
     },
     "pcl_all": {
-      "added": [
-        {
-          "active_maintenances": [],
-          "am_sort": "2028-07-16T00:00:00Z",
-          "assigned_lab_name": "Teron Labs",
-          "certification_date": "2026-07-16T00:00:00Z",
-          "from_cc_portal": true,
-          "product_id": "2026.1244",
-          "product_name": "Juniper Junos OS 24.4R2\u2013S3 for SRX380",
-          "protection_profiles": [
-            {
-              "pp_id": 448,
-              "pp_name": "collaborative Protection Profile Module for Stateful Traffic Filter Firewalls v1.4 + Errata 20200625",
-              "pp_short_name": "MOD_CPP_FW_v1.4e"
-            },
-            {
-              "pp_id": 459,
-              "pp_name": "Functional Package for SSH Version 1.0",
-              "pp_short_name": "PKG_SSH_V1.0"
-            },
-            {
-              "pp_id": 460,
-              "pp_name": "PP-Module for Intrusion Prevention Systems (IPS), Version 1.0",
-              "pp_short_name": "MOD_IPS_V1.0"
-            },
-            {
-              "pp_id": 480,
-              "pp_name": "PP-Module for MACsec Ethernet Encryption Version 1.0",
-              "pp_short_name": "MOD_MACSEC_V1.0"
-            },
-            {
-              "pp_id": 481,
-              "pp_name": "PP-Module for Virtual Private Network (VPN) Gateways Version 1.3",
-              "pp_short_name": "MOD_VPNGW_v1.3"
-            },
-            {
-              "pp_id": 482,
-              "pp_name": "collaborative Protection Profile for Network Devices Version 3.0e",
-              "pp_short_name": "CPP_ND_V3.0E"
-            }
-          ],
-          "status_sort": "Certified",
-          "submitting_country_id_code": "AU",
-          "submitting_country_id_name": "Australia",
-          "sunset_date": "2031-07-16T00:00:00Z",
-          "tech_types": [
-            "Network and Network-Related Devices and Systems"
-          ],
-          "vendor_id_name": "Juniper Networks, Inc.",
-          "v_id": "2026.1244",
-          "kicked_off_date": null
-        }
-      ],
+      "added": [],
       "removed": [],
       "newly_archived": [
         {
           "active_maintenances": [],
-          "am_sort": "2026-09-12T00:00:00Z",
-          "assigned_lab_name": "Gossamer Security Solutions",
-          "certification_date": "2024-09-12T00:00:00Z",
-          "from_cc_portal": false,
-          "product_id": 11490,
-          "product_name": "Cisco Catalyst Industrial Ethernet  3100 (IE3100) Rugged Series Switches  running IOS-XE 17.12",
+          "am_sort": "2026-10-11T00:00:00Z",
+          "assigned_lab_name": "atsec information security AB",
+          "certification_date": "2024-10-11T00:00:00Z",
+          "from_cc_portal": true,
+          "product_id": "2024.1266",
+          "product_name": "F5 BIG-IP 17.1.0.1 including APM",
           "protection_profiles": [
             {
               "pp_id": 447,
@@ -118,44 +39,150 @@
             }
           ],
           "status_sort": "Archived",
+          "submitting_country_id_code": "SE",
+          "submitting_country_id_name": "Sweden",
+          "sunset_date": "2029-10-11T00:00:00Z",
+          "tech_types": [
+            "Network and Network-Related Devices and Systems"
+          ],
+          "vendor_id_name": "F5, Inc.",
+          "v_id": "2024.1266",
+          "kicked_off_date": null
+        },
+        {
+          "active_maintenances": [],
+          "am_sort": "2026-10-11T00:00:00Z",
+          "assigned_lab_name": "Lightship Security, Inc.",
+          "certification_date": "2024-10-11T00:00:00Z",
+          "from_cc_portal": true,
+          "product_id": "2024.1274",
+          "product_name": "Lexmark MS632, CS632 Single Function Printers with Firmware Version 222.037",
+          "protection_profiles": [
+            {
+              "pp_id": 483,
+              "pp_name": "collaborative Protection Profile for Hardcopy Devices Version 1.0E",
+              "pp_short_name": "CPP_HCD_V1.0E"
+            }
+          ],
+          "status_sort": "Archived",
+          "submitting_country_id_code": "CA",
+          "submitting_country_id_name": "Canada",
+          "sunset_date": "2029-10-11T00:00:00Z",
+          "tech_types": [
+            "Multi-Function Devices"
+          ],
+          "vendor_id_name": "Lexmark International, Inc.",
+          "v_id": "2024.1274",
+          "kicked_off_date": null
+        },
+        {
+          "active_maintenances": [
+            {
+              "maintenance_id": 1614,
+              "title": "Tenable Security Center 6.2.2",
+              "completion_date": "2025-11-25T00:00:00+00:00"
+            }
+          ],
+          "am_sort": "2026-10-12T00:00:00Z",
+          "assigned_lab_name": "Leidos Common Criteria Testing Laboratory",
+          "certification_date": "2023-10-12T00:00:00Z",
+          "from_cc_portal": false,
+          "product_id": 11374,
+          "product_name": "Tenable Security Center 6.2.0",
+          "protection_profiles": [
+            {
+              "pp_id": 439,
+              "pp_name": "Functional Package for TLS Version 1.1",
+              "pp_short_name": "PKG_TLS_V1.1"
+            },
+            {
+              "pp_id": 462,
+              "pp_name": "Protection Profile for Application Software Version 1.4",
+              "pp_short_name": "PP_APP_v1.4"
+            }
+          ],
+          "status_sort": "Archived",
           "submitting_country_id_code": "US",
           "submitting_country_id_name": "United States",
-          "sunset_date": null,
+          "sunset_date": "2025-10-12T00:00:00Z",
           "tech_types": [
-            "Network Device"
+            "Application Software"
           ],
-          "vendor_id_name": "Cisco Systems, Inc.",
-          "v_id": 11490,
-          "kicked_off_date": "2024-06-03T00:00:00Z"
+          "vendor_id_name": "Tenable, Inc",
+          "v_id": 11374,
+          "kicked_off_date": "2023-04-19T00:00:00Z"
+        },
+        {
+          "active_maintenances": [],
+          "am_sort": "2026-10-11T00:00:00Z",
+          "assigned_lab_name": "atsec information security AB",
+          "certification_date": "2024-10-11T00:00:00Z",
+          "from_cc_portal": true,
+          "product_id": "2024.1265",
+          "product_name": "F5 BIG-IP 17.1.0.1 including AFM",
+          "protection_profiles": [
+            {
+              "pp_id": 447,
+              "pp_name": "collaborative Protection Profile for Network Devices Version 2.2e",
+              "pp_short_name": "CPP_ND_V2.2E"
+            },
+            {
+              "pp_id": 448,
+              "pp_name": "collaborative Protection Profile Module for Stateful Traffic Filter Firewalls v1.4 + Errata 20200625",
+              "pp_short_name": "MOD_CPP_FW_v1.4e"
+            }
+          ],
+          "status_sort": "Archived",
+          "submitting_country_id_code": "SE",
+          "submitting_country_id_name": "Sweden",
+          "sunset_date": "2029-10-11T00:00:00Z",
+          "tech_types": [
+            "Network and Network-Related Devices and Systems"
+          ],
+          "vendor_id_name": "F5, Inc.",
+          "v_id": "2024.1265",
+          "kicked_off_date": null
+        },
+        {
+          "active_maintenances": [],
+          "am_sort": "2026-10-11T00:00:00Z",
+          "assigned_lab_name": "atsec information security AB",
+          "certification_date": "2024-10-11T00:00:00Z",
+          "from_cc_portal": true,
+          "product_id": "2024.1271",
+          "product_name": "F5 BIG-IP 17.1.0.1 including SSLO",
+          "protection_profiles": [
+            {
+              "pp_id": 447,
+              "pp_name": "collaborative Protection Profile for Network Devices Version 2.2e",
+              "pp_short_name": "CPP_ND_V2.2E"
+            },
+            {
+              "pp_id": 477,
+              "pp_name": "PP-Module for SSL/TLS Inspection Proxy Version 1.1",
+              "pp_short_name": "MOD_STIP_V1.1"
+            }
+          ],
+          "status_sort": "Archived",
+          "submitting_country_id_code": "SE",
+          "submitting_country_id_name": "Sweden",
+          "sunset_date": "2029-10-11T00:00:00Z",
+          "tech_types": [
+            "Network and Network-Related Devices and Systems"
+          ],
+          "vendor_id_name": "F5, Inc.",
+          "v_id": "2024.1271",
+          "kicked_off_date": null
         }
       ]
     },
     "in_evaluation": {
       "added": [],
       "removed": [],
-      "current_count": 45
+      "current_count": 42
     },
     "news": {
-      "added": [
-        {
-          "id": 3431,
-          "title": "Call for Participants in the Certificate Authority Technical Community and Kick-off Announcement",
-          "announcement": "<p>The National Information Assurance Partnership/Common Criteria Evaluation and Validation Scheme (NIAP/CCEVS) is pleased to invite interested parties to be part of a Technical Community (TC) for the update of the Protection Profile for Certificate Authority (CA), Version 3.0.</p>\r\n<p>The purpose of this update is to:</p>\r\n<ul type=\"disc\">\r\n<li>Transition to the latest version of the Common Criteria, CC:2022;</li>\r\n<li>Align with the X.509 Functional Package;</li>\r\n<li>Modernize requirements; and</li>\r\n<li>Incorporate applicable Technical Decisions (TDs).</li>\r\n</ul>\r\n<p>The CA TC kick-off meeting will be held on <strong>Thursday, October 15th, from 1300-1400 EDT</strong>. A meeting invitation will be sent to the TC alias.</p>\r\n<p>Additional Information:</p>\r\n<p>- All interested parties should apply to the CA TC by navigating to the <a href=\"https://www.niap-ccevs.org/technical-communities\">Technical Communities page</a>&nbsp;on the NIAP website and click \"Become A US Technical Community Participant\".</p>\r\n<p>- If you are already a member of the CA TC, there is no need to re-apply.</p>\r\n<p>&nbsp;</p>\r\n<p>Thank you for your interest and we look forward to your participation.</p>",
-          "types": "1",
-          "subject": null,
-          "posted": "2026-09-11T10:32:11.500000Z",
-          "begins": null,
-          "expires": null,
-          "link": "https://www.niap-ccevs.org/technical-communities",
-          "venue": null,
-          "location": null,
-          "entrydate": "2026-09-11T10:32:11.500000Z",
-          "moddate": null,
-          "active": true,
-          "_category": "NEWS",
-          "_change_kind": "added"
-        }
-      ],
+      "added": [],
       "revised": [],
       "deactivated": [],
       "reactivated": [],
@@ -247,17 +274,17 @@
       "checks": [
         {
           "name": "PCL products",
-          "observed": 1761,
+          "observed": 1765,
           "minimum": 50
         },
         {
           "name": "Protection Profiles",
-          "observed": 271,
+          "observed": 272,
           "minimum": 10
         },
         {
           "name": "PQC PP file-version records",
-          "observed": 13,
+          "observed": 11,
           "minimum": 1,
           "required_for_diff_baseline": false
         },
@@ -270,7 +297,7 @@
       ],
       "consecutive_failures": 0,
       "using_last_known_good": false,
-      "checked_at": "2026-09-12T09:54:57.879894+00:00",
+      "checked_at": "2026-10-12T14:07:39.196992+00:00",
       "subcollections": {
         "news": {
           "label": "News announcements",
@@ -307,7 +334,7 @@
       ],
       "consecutive_failures": 0,
       "using_last_known_good": false,
-      "checked_at": "2026-09-12T09:54:57.879894+00:00"
+      "checked_at": "2026-10-12T14:07:39.196992+00:00"
     },
     "cctl_labs": {
       "label": "CCTL Labs",
@@ -321,7 +348,7 @@
       ],
       "consecutive_failures": 0,
       "using_last_known_good": false,
-      "checked_at": "2026-09-12T09:54:57.879894+00:00"
+      "checked_at": "2026-10-12T14:07:39.196992+00:00"
     },
     "csfc": {
       "label": "CSfC",
@@ -329,7 +356,7 @@
       "checks": [
         {
           "name": "APL items",
-          "observed": 121,
+          "observed": 117,
           "minimum": 5
         },
         {
@@ -352,7 +379,7 @@
       ],
       "consecutive_failures": 0,
       "using_last_known_good": false,
-      "checked_at": "2026-09-12T09:54:57.879894+00:00"
+      "checked_at": "2026-10-12T14:07:39.196992+00:00"
     },
     "cc_crypto": {
       "label": "CC Crypto",
@@ -360,13 +387,13 @@
       "checks": [
         {
           "name": "publications",
-          "observed": 121,
+          "observed": 118,
           "minimum": 5
         }
       ],
       "consecutive_failures": 0,
       "using_last_known_good": false,
-      "checked_at": "2026-09-12T09:54:57.879894+00:00"
+      "checked_at": "2026-10-12T14:07:39.196992+00:00"
     },
     "nato": {
       "label": "NATO NIAPCL",
@@ -376,7 +403,7 @@
       "consecutive_failures": 0,
       "using_last_known_good": false,
       "detail": "manual baseline (40 Cisco product(s)); updated via the NATO capture GitHub issue workflow",
-      "checked_at": "2026-09-12T09:54:57.879894+00:00"
+      "checked_at": "2026-10-12T14:07:39.196992+00:00"
     },
     "eucc": {
       "label": "EUCC / ENISA",
@@ -390,7 +417,7 @@
       ],
       "consecutive_failures": 0,
       "using_last_known_good": false,
-      "checked_at": "2026-09-12T09:54:57.879894+00:00"
+      "checked_at": "2026-10-12T14:07:39.196992+00:00"
     },
     "nd_itc": {
       "label": "ND-iTC",
@@ -403,13 +430,13 @@
         },
         {
           "name": "Allowed-With entries",
-          "observed": 22,
+          "observed": 28,
           "minimum": 1
         }
       ],
       "consecutive_failures": 0,
       "using_last_known_good": false,
-      "checked_at": "2026-09-12T09:54:57.879894+00:00"
+      "checked_at": "2026-10-12T14:07:39.196992+00:00"
     },
     "ietf_cnsa": {
       "label": "IETF CNSA 2.0",
@@ -428,7 +455,7 @@
       ],
       "consecutive_failures": 0,
       "using_last_known_good": false,
-      "checked_at": "2026-09-12T09:54:57.879894+00:00"
+      "checked_at": "2026-10-12T14:07:39.196992+00:00"
     },
     "ieee_pqc": {
       "label": "IEEE 802.11bt",
@@ -447,7 +474,7 @@
       ],
       "consecutive_failures": 0,
       "using_last_known_good": false,
-      "checked_at": "2026-09-12T09:54:57.879894+00:00"
+      "checked_at": "2026-10-12T14:07:39.196992+00:00"
     }
   },
   "alerts": []
