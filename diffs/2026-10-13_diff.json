@@ -1,6 +1,6 @@
 {
-  "period_start": "2026-09-12T09:54:57.879894+00:00",
-  "period_end": "2026-09-13T10:55:18.222092+00:00",
+  "period_start": "2026-10-12T14:07:39.196992+00:00",
+  "period_end": "2026-10-13T13:19:56.435701+00:00",
   "niap": {
     "pps": {
       "added": [],
@@ -17,71 +17,17 @@
     "cisco_ndcpp": {
       "added": [],
       "removed": [],
-      "newly_archived": [
-        {
-          "active_maintenances": [],
-          "am_sort": "2026-09-13T00:00:00Z",
-          "assigned_lab_name": "Lightship Security USA, Inc.",
-          "certification_date": "2024-09-13T00:00:00Z",
-          "from_cc_portal": false,
-          "product_id": 11420,
-          "product_name": "Cisco Email Security Appliance with AsyncOS 15.5",
-          "protection_profiles": [
-            {
-              "pp_id": 447,
-              "pp_name": "collaborative Protection Profile for Network Devices Version 2.2e",
-              "pp_short_name": "CPP_ND_V2.2E"
-            }
-          ],
-          "status_sort": "Archived",
-          "submitting_country_id_code": "US",
-          "submitting_country_id_name": "United States",
-          "sunset_date": null,
-          "tech_types": [
-            "Network Device"
-          ],
-          "vendor_id_name": "Cisco Systems, Inc.",
-          "v_id": 11420,
-          "kicked_off_date": "2024-03-19T00:00:00Z"
-        }
-      ]
+      "newly_archived": []
     },
     "pcl_all": {
       "added": [],
       "removed": [],
-      "newly_archived": [
-        {
-          "active_maintenances": [],
-          "am_sort": "2026-09-13T00:00:00Z",
-          "assigned_lab_name": "Lightship Security USA, Inc.",
-          "certification_date": "2024-09-13T00:00:00Z",
-          "from_cc_portal": false,
-          "product_id": 11420,
-          "product_name": "Cisco Email Security Appliance with AsyncOS 15.5",
-          "protection_profiles": [
-            {
-              "pp_id": 447,
-              "pp_name": "collaborative Protection Profile for Network Devices Version 2.2e",
-              "pp_short_name": "CPP_ND_V2.2E"
-            }
-          ],
-          "status_sort": "Archived",
-          "submitting_country_id_code": "US",
-          "submitting_country_id_name": "United States",
-          "sunset_date": null,
-          "tech_types": [
-            "Network Device"
-          ],
-          "vendor_id_name": "Cisco Systems, Inc.",
-          "v_id": 11420,
-          "kicked_off_date": "2024-03-19T00:00:00Z"
-        }
-      ]
+      "newly_archived": []
     },
     "in_evaluation": {
       "added": [],
       "removed": [],
-      "current_count": 45
+      "current_count": 42
     },
     "news": {
       "added": [],
@@ -176,17 +122,17 @@
       "checks": [
         {
           "name": "PCL products",
-          "observed": 1761,
+          "observed": 1765,
           "minimum": 50
         },
         {
           "name": "Protection Profiles",
-          "observed": 271,
+          "observed": 272,
           "minimum": 10
         },
         {
           "name": "PQC PP file-version records",
-          "observed": 13,
+          "observed": 11,
           "minimum": 1,
           "required_for_diff_baseline": false
         },
@@ -199,7 +145,7 @@
       ],
       "consecutive_failures": 0,
       "using_last_known_good": false,
-      "checked_at": "2026-09-13T10:55:18.222092+00:00",
+      "checked_at": "2026-10-13T13:19:56.435701+00:00",
       "subcollections": {
         "news": {
           "label": "News announcements",
@@ -236,7 +182,7 @@
       ],
       "consecutive_failures": 0,
       "using_last_known_good": false,
-      "checked_at": "2026-09-13T10:55:18.222092+00:00"
+      "checked_at": "2026-10-13T13:19:56.435701+00:00"
     },
     "cctl_labs": {
       "label": "CCTL Labs",
@@ -250,7 +196,7 @@
       ],
       "consecutive_failures": 0,
       "using_last_known_good": false,
-      "checked_at": "2026-09-13T10:55:18.222092+00:00"
+      "checked_at": "2026-10-13T13:19:56.435701+00:00"
     },
     "csfc": {
       "label": "CSfC",
@@ -258,7 +204,7 @@
       "checks": [
         {
           "name": "APL items",
-          "observed": 121,
+          "observed": 117,
           "minimum": 5
         },
         {
@@ -281,7 +227,7 @@
       ],
       "consecutive_failures": 0,
       "using_last_known_good": false,
-      "checked_at": "2026-09-13T10:55:18.222092+00:00"
+      "checked_at": "2026-10-13T13:19:56.435701+00:00"
     },
     "cc_crypto": {
       "label": "CC Crypto",
@@ -289,13 +235,13 @@
       "checks": [
         {
           "name": "publications",
-          "observed": 121,
+          "observed": 118,
           "minimum": 5
         }
       ],
       "consecutive_failures": 0,
       "using_last_known_good": false,
-      "checked_at": "2026-09-13T10:55:18.222092+00:00"
+      "checked_at": "2026-10-13T13:19:56.435701+00:00"
     },
     "nato": {
       "label": "NATO NIAPCL",
@@ -305,7 +251,7 @@
       "consecutive_failures": 0,
       "using_last_known_good": false,
       "detail": "manual baseline (40 Cisco product(s)); updated via the NATO capture GitHub issue workflow",
-      "checked_at": "2026-09-13T10:55:18.222092+00:00"
+      "checked_at": "2026-10-13T13:19:56.435701+00:00"
     },
     "eucc": {
       "label": "EUCC / ENISA",
@@ -319,7 +265,7 @@
       ],
       "consecutive_failures": 0,
       "using_last_known_good": false,
-      "checked_at": "2026-09-13T10:55:18.222092+00:00"
+      "checked_at": "2026-10-13T13:19:56.435701+00:00"
     },
     "nd_itc": {
       "label": "ND-iTC",
@@ -332,13 +278,13 @@
         },
         {
           "name": "Allowed-With entries",
-          "observed": 22,
+          "observed": 28,
           "minimum": 1
         }
       ],
       "consecutive_failures": 0,
       "using_last_known_good": false,
-      "checked_at": "2026-09-13T10:55:18.222092+00:00"
+      "checked_at": "2026-10-13T13:19:56.435701+00:00"
     },
     "ietf_cnsa": {
       "label": "IETF CNSA 2.0",
@@ -357,7 +303,7 @@
       ],
       "consecutive_failures": 0,
       "using_last_known_good": false,
-      "checked_at": "2026-09-13T10:55:18.222092+00:00"
+      "checked_at": "2026-10-13T13:19:56.435701+00:00"
     },
     "ieee_pqc": {
       "label": "IEEE 802.11bt",
@@ -376,7 +322,7 @@
       ],
       "consecutive_failures": 0,
       "using_last_known_good": false,
-      "checked_at": "2026-09-13T10:55:18.222092+00:00"
+      "checked_at": "2026-10-13T13:19:56.435701+00:00"
     }
   },
   "alerts": []
