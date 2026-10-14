@@ -2,6 +2,7 @@
 <rss version="2.0"><channel>
 <title>CC Pulse</title>
 <link>https://kr15tyk.github.io/CC-pulse/cc_dashboard.html</link>
-<description>Common Criteria monitoring - 2026-10-13 09:19 ET</description>
-
+<description>Common Criteria monitoring - 2026-10-14 06:59 ET</description>
+<item><title>CSfC Component Removed: MACSEC Ethernet Encryption Devices | HPE Juniper | Juniper Networks running Juno</title><link>https://www.niap-ccevs.org/products/international-product/2024.1087</link><description>CSfC apl item removed.</description></item>
+<item><title>ALERT: CSfC: cap_packages – EUD Composition Guidance Addendum 2.0 Draft 1.0 The CSfC EUD Composition Guidance Addendum 2.0 Draft 1.0 defines require…</title><link>https://kr15tyk.github.io/CC-pulse/cc_dashboard.html</link><description>Kind: updated | Keywords: CSfC</description></item>
 </channel></rss>
