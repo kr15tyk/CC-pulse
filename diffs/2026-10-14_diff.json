@@ -1,0 +1,447 @@
+{
+  "period_start": "2026-10-13T13:19:56.435701+00:00",
+  "period_end": "2026-10-14T10:59:38.717728+00:00",
+  "niap": {
+    "pps": {
+      "added": [],
+      "removed": [],
+      "sunset_changes": [],
+      "status_changes": [],
+      "revised": [],
+      "content_changes": []
+    },
+    "tds": {
+      "added": [],
+      "removed": []
+    },
+    "cisco_ndcpp": {
+      "added": [],
+      "removed": [],
+      "newly_archived": []
+    },
+    "pcl_all": {
+      "added": [
+        {
+          "active_maintenances": [],
+          "am_sort": "2028-10-05T00:00:00Z",
+          "assigned_lab_name": "Gossamer Security Solutions",
+          "certification_date": "2026-10-05T00:00:00Z",
+          "from_cc_portal": false,
+          "product_id": 11722,
+          "product_name": "Palo Alto Networks SD-WAN Instant-On Network (ION) Devices ION 1200, ION 1200-S, ION 3200, ION 5200, ION 9200, vION, and Controller running 6.5",
+          "protection_profiles": [
+            {
+              "pp_id": 459,
+              "pp_name": "Functional Package for SSH Version 1.0",
+              "pp_short_name": "PKG_SSH_V1.0"
+            },
+            {
+              "pp_id": 482,
+              "pp_name": "collaborative Protection Profile for Network Devices Version 3.0e",
+              "pp_short_name": "CPP_ND_V3.0E"
+            }
+          ],
+          "status_sort": "Certified",
+          "submitting_country_id_code": "US",
+          "submitting_country_id_name": "United States",
+          "sunset_date": null,
+          "tech_types": [
+            "Network Device"
+          ],
+          "vendor_id_name": "Palo Alto Networks, Inc.",
+          "v_id": 11722,
+          "kicked_off_date": "2026-07-27T14:17:31.186000Z"
+        }
+      ],
+      "removed": [],
+      "newly_archived": []
+    },
+    "in_evaluation": {
+      "added": [],
+      "removed": [
+        {
+          "active_maintenances": [],
+          "am_sort": null,
+          "assigned_lab_name": "Gossamer Security Solutions",
+          "certification_date": null,
+          "from_cc_portal": false,
+          "product_id": 11722,
+          "product_name": "Palo Alto Networks SD-WAN Instant-On Network (ION) Devices ION 1200, ION 1200-S, ION 3200, ION 5200, ION 9200, vION, and Controller running 6.5",
+          "protection_profiles": [
+            {
+              "pp_id": 459,
+              "pp_name": "Functional Package for SSH Version 1.0",
+              "pp_short_name": "PKG_SSH_V1.0"
+            },
+            {
+              "pp_id": 482,
+              "pp_name": "collaborative Protection Profile for Network Devices Version 3.0e",
+              "pp_short_name": "CPP_ND_V3.0E"
+            }
+          ],
+          "status_sort": "In Progress",
+          "submitting_country_id_code": "US",
+          "submitting_country_id_name": "United States",
+          "sunset_date": null,
+          "tech_types": [
+            "Network Device"
+          ],
+          "vendor_id_name": "Palo Alto Networks, Inc.",
+          "v_id": 11722,
+          "kicked_off_date": "2026-07-27T14:17:31.186000Z"
+        }
+      ],
+      "current_count": 41
+    },
+    "news": {
+      "added": [],
+      "revised": [],
+      "deactivated": [],
+      "reactivated": [],
+      "removed": []
+    },
+    "events": {
+      "added": [],
+      "revised": [],
+      "deactivated": [],
+      "reactivated": [],
+      "removed": []
+    },
+    "policies": {
+      "added": [],
+      "revised": [],
+      "archived": [],
+      "reactivated": [],
+      "removed": []
+    }
+  },
+  "cc_portal": {
+    "news": {
+      "added": []
+    },
+    "pps": {
+      "added": []
+    },
+    "products": {
+      "added": []
+    }
+  },
+  "cctl_labs": {},
+  "csfc": {
+    "pages": {
+      "cap_packages": {
+        "added": [],
+        "removed": [],
+        "updated": [
+          {
+            "text": "EUD Composition Guidance Addendum 2.0 Draft 1.0 The CSfC EUD Composition Guidance Addendum 2.0 Draft 1.0 defines requirements and guidance for implementing hardware separated EUDs within MA, CWLAN, and DAR CPs.\u00a0 The following portions of these CPs will be updated by this addendum:\u00a0 EUD provisioning, multiple security-level requirements, incorporating Retransmission Device Protection Profile requirements, Dedicated Outer (device) requirements and different deployment options for hardware separated EUDs.\u00a0 This document is currently a draft document that is subject to change; any changes to this addendum will result in updates to all CSfC CPs which deal with EUDs. Download: EUD Composition Guidance Addendum 2.0 Draft 1.0 Please send comments to the Wi-Fi@nsa.gov alias. Download: EUD Composition Addendum 2.0 Draft 1.0 Comment Matrix _____________________________________________________________________________________________________________________________________________________ Tactical ",
+            "href": "https://www.nsa.gov/Portals/75/documents/CSfC CP Updates 2026/(U) CSfC EUD Composition Guidance Addendum 2.0 Draft 1.0.pdf?ver=-e2rjuN2v7EA11eATR0raw%3d%3d",
+            "content_sha256": "f996acef30d0b1cd6fdd1ab349a63322301476742f27b0451ef895de08ba927b",
+            "_old_text": "EUD Composition Guidance Addendum 2.0 Draft 1.0 The CSfC EUD Composition Guidance Addendum 2.0 Draft 1.0 defines requirements and guidance for implementing hardware separated EUDs within MA, CWLAN, and DAR CPs.\u00a0 The following portions of these CPs will be updated by this addendum:\u00a0 EUD provisioning, multiple security-level requirements, incorporating Retransmission Device Protection Profile requirements, Dedicated Outer (device) requirements and different deployment options for hardware separated EUDs.\u00a0 This document is currently a draft document that is subject to change; any changes to this addendum will result in updates to all CSfC CPs which deal with EUDs. Download: EUD Composition Guidance Addendum 2.0 Draft 1.0 Please send comments to the Wi-Fi@nsa.gov alias. Download: EUD Composition Addendum 2.0 Draft 1.0 Comment Matrix _______________________________________________________________________________________________________________________________________________________________",
+            "_old_content_sha256": "185df47961e662df9000fdc314d9c3401797c9cd4cbf83d295c2095c6faba655"
+          }
+        ]
+      },
+      "apl": {
+        "added": [],
+        "removed": [
+          {
+            "name": "Juniper Networks running Junos OS 22.3R1 for ACX5448-M, EX4400-24T, EX4400-24P, EX4400-24MP, EX4400-48T, EX4400-48P, EX4400-48F, EX4400-48MP, QFX5120-YM, as detailed in VID 2024.1087",
+            "type": "MACSEC Ethernet Encryption Devices",
+            "vendor": "HPE Juniper",
+            "link": "https://www.niap-ccevs.org/products/international-product/2024.1087",
+            "href": "https://www.niap-ccevs.org/products/international-product/2024.1087",
+            "raw_text": "MACSEC Ethernet Encryption Devices | HPE Juniper | Juniper Networks running Junos OS 22.3R1 for ACX5448-M, EX4400-24T, EX4400-24P, EX4400-24MP, EX4400-48T, EX4400-48P, EX4400-48F, EX4400-48MP, QFX5120-YM, as detailed in VID 2024.1087 | Junos OS 22.3R1 | NIAP Validation Completed (at Teron Labs) | 2024.04.12 | Certification extended - Maintenance Update completed on 2026.03.02",
+            "text": "MACSEC Ethernet Encryption Devices | HPE Juniper | Juniper Networks running Junos OS 22.3R1 for ACX5448-M, EX4400-24T, EX4400-24P, EX4400-24MP, EX4400-48T, EX4400-48P, EX4400-48F, EX4400-48MP, QFX5120-YM, as detailed in VID 2024.1087 | Junos OS 22.3R1 | NIAP Validation Completed (at Teron Labs) | 2024.04.12 | Certification extended - Maintenance Update completed on 2026.03.02",
+            "content_sha256": "0861bec629bbb091453c9554a9935005806c50105a9592fab28569b69ce18182"
+          }
+        ],
+        "updated": [
+          {
+            "name": "CertAgent/Dhuma",
+            "type": "Certification\u00a0Authority",
+            "vendor": "Information Security Corporation",
+            "link": "https://www.niap-ccevs.org/products/11457",
+            "href": "https://www.niap-ccevs.org/products/11457",
+            "raw_text": "Certification\u00a0Authority | Information Security Corporation | CertAgent/Dhuma | v8.0, Patch Level 0.7 | NIAP Evaluation Completed (at Leidos) | 2024.09.03 | Certification Extended -\u00a0Maintenance Update completed on 2025.12.17",
+            "text": "Certification\u00a0Authority | Information Security Corporation | CertAgent/Dhuma | v8.0, Patch Level 0.7 | NIAP Evaluation Completed (at Leidos) | 2024.09.03 | Certification Extended -\u00a0Maintenance Update completed on 2025.12.17",
+            "content_sha256": "41768b6ef860719183ad408dcdaebe528c848136069156954e23fd937146ee2a",
+            "_old_text": "Certification\u00a0Authority | Information Security Corporation | CertAgent/Dhuma | v8.0, Patch Level 0.6 | NIAP Evaluation Completed (at Leidos) | 2024.09.03 | Certification Extended -\u00a0Maintenance Update completed on 2025.12.17"
+          }
+        ]
+      }
+    },
+    "selection_links": {},
+    "documents": {
+      "added": [],
+      "removed": [],
+      "updated": []
+    },
+    "feeds": {}
+  },
+  "cc_crypto": {
+    "pages": {}
+  },
+  "nato": {
+    "pages": {},
+    "cisco_added": [],
+    "cisco_removed": [],
+    "baseline_reset": false
+  },
+  "eucc": {
+    "pages": {},
+    "cisco_added": [],
+    "cisco_removed": [],
+    "baseline_reset": false
+  },
+  "nd_itc": {
+    "nit_rfis": {
+      "added": [],
+      "status_changes": [],
+      "revised": [],
+      "newly_archived": []
+    },
+    "awl": {
+      "added": [],
+      "removed": [],
+      "version_changes": [],
+      "list_updates": []
+    },
+    "baseline_reset": false,
+    "collection_failure": false
+  },
+  "ietf_cnsa": {
+    "added": [],
+    "removed": [],
+    "updated": [],
+    "rfc9846_adoption": []
+  },
+  "ieee_pqc": {
+    "added": [],
+    "removed": [],
+    "updated": []
+  },
+  "source_health": {
+    "niap": {
+      "label": "NIAP",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "PCL products",
+          "observed": 1765,
+          "minimum": 50
+        },
+        {
+          "name": "Protection Profiles",
+          "observed": 272,
+          "minimum": 10
+        },
+        {
+          "name": "PQC PP file-version records",
+          "observed": 11,
+          "minimum": 1,
+          "required_for_diff_baseline": false
+        },
+        {
+          "name": "PQC PP full-content hashes",
+          "observed": 7,
+          "minimum": 1,
+          "required_for_diff_baseline": false
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-10-14T10:59:38.717728+00:00",
+      "subcollections": {
+        "news": {
+          "label": "News announcements",
+          "status": "healthy",
+          "observed": 357,
+          "consecutive_failures": 0,
+          "using_last_known_good": false
+        },
+        "events": {
+          "label": "Events",
+          "status": "healthy",
+          "observed": 0,
+          "consecutive_failures": 0,
+          "using_last_known_good": false
+        },
+        "policies": {
+          "label": "Policy letters",
+          "status": "healthy",
+          "observed": 40,
+          "consecutive_failures": 0,
+          "using_last_known_good": false
+        }
+      }
+    },
+    "cc_portal": {
+      "label": "CC Portal",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "portal records",
+          "observed": 180,
+          "minimum": 1
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-10-14T10:59:38.717728+00:00"
+    },
+    "cctl_labs": {
+      "label": "CCTL Labs",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "lab feed items",
+          "observed": 19,
+          "minimum": 1
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-10-14T10:59:38.717728+00:00"
+    },
+    "csfc": {
+      "label": "CSfC",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "APL items",
+          "observed": 116,
+          "minimum": 5
+        },
+        {
+          "name": "announcements",
+          "observed": 8,
+          "minimum": 1
+        },
+        {
+          "name": "tracked capability packages",
+          "observed": 5,
+          "minimum": 5,
+          "required_for_diff_baseline": false
+        },
+        {
+          "name": "capability-package hashes",
+          "observed": 5,
+          "minimum": 5,
+          "required_for_diff_baseline": false
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-10-14T10:59:38.717728+00:00"
+    },
+    "cc_crypto": {
+      "label": "CC Crypto",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "publications",
+          "observed": 118,
+          "minimum": 5
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-10-14T10:59:38.717728+00:00"
+    },
+    "nato": {
+      "label": "NATO NIAPCL",
+      "status": "healthy",
+      "mode": "manual",
+      "checks": [],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "detail": "manual baseline (40 Cisco product(s)); updated via the NATO capture GitHub issue workflow",
+      "checked_at": "2026-10-14T10:59:38.717728+00:00"
+    },
+    "eucc": {
+      "label": "EUCC / ENISA",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "certificates",
+          "observed": 50,
+          "minimum": 2
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-10-14T10:59:38.717728+00:00"
+    },
+    "nd_itc": {
+      "label": "ND-iTC",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "NIT RFIs",
+          "observed": 32,
+          "minimum": 5
+        },
+        {
+          "name": "Allowed-With entries",
+          "observed": 28,
+          "minimum": 1
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-10-14T10:59:38.717728+00:00"
+    },
+    "ietf_cnsa": {
+      "label": "IETF CNSA 2.0",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "CNSA profile/RFC records",
+          "observed": 5,
+          "minimum": 5
+        },
+        {
+          "name": "CNSA full-text hashes",
+          "observed": 5,
+          "minimum": 5
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-10-14T10:59:38.717728+00:00"
+    },
+    "ieee_pqc": {
+      "label": "IEEE 802.11bt",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "P802.11bt project records",
+          "observed": 1,
+          "minimum": 1
+        },
+        {
+          "name": "P802.11bt timeline hashes",
+          "observed": 1,
+          "minimum": 1
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-10-14T10:59:38.717728+00:00"
+    }
+  },
+  "alerts": [
+    {
+      "source": "CSfC: cap_packages",
+      "kind": "updated",
+      "title": "EUD Composition Guidance Addendum 2.0 Draft 1.0 The CSfC EUD Composition Guidance Addendum 2.0 Draft 1.0 defines require\u2026",
+      "url": "https://www.nsa.gov/Portals/75/documents/CSfC CP Updates 2026/(U) CSfC EUD Composition Guidance Addendum 2.0 Draft 1.0.pdf?ver=-e2rjuN2v7EA11eATR0raw%3d%3d",
+      "detail": "Listing updated on CSfC cap packages page",
+      "matched_keywords": [
+        "CSfC"
+      ],
+      "tab": "us"
+    }
+  ]
+}
