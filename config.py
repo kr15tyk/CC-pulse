@@ -60,6 +60,9 @@ SANITY_MIN_PPS = 10
 SANITY_MIN_CSFC_APL = 5
 SANITY_MIN_CSFC_ANNOUNCEMENTS = 1
 SANITY_MIN_CC_CRYPTO_PUBS = 5
+SANITY_MIN_CC_PORTAL_NEWS = 50
+SANITY_MIN_CC_PORTAL_PPS = 100
+SANITY_MIN_CC_PORTAL_PRODUCTS = 500
 
 # -- Per-collection collapse guard ------------------------------------------
 # A domain can pass its representative sanity check (e.g. NIAP PCL is fine)
@@ -120,6 +123,8 @@ CC_PORTAL_PAGES = {
     "publications": "/cc/index.cfm",
 }
 CC_PORTAL_RSS = "https://www.commoncriteriaportal.org/rss/pps.xml"
+CC_PORTAL_EMBEDDED_JSON_MAX_CHARS = 20 * 1024 * 1024
+RSS_FEED_MAX_BYTES = 2 * 1024 * 1024
 
 # -- CCTL Lab Feeds ---------------------------------------------------------
 CCTL_LABS = [
@@ -222,9 +227,9 @@ CSFC_PAGES = {
 CSFC_PRODUCT_LIST_URL = "https://www.nsa.gov/Resources/Commercial-Solutions-for-Classified-Program/Components-List/"  # CSfC APL: confirmed correct (Components List = approved CC-evaluated products for CSfC)
 
 CSFC_FEEDS = [
-    {"name": "NSA Cybersecurity Advisories", "rss": "https://www.nsa.gov/DesktopModules/ArticleCS/RSS.ashx?ContentType=1&Site=1282&max=20", "scrape": False},
-    {"name": "CISA Alerts", "rss": "https://www.cisa.gov/cybersecurity-advisories/all.xml", "scrape": False},
-    {"name": "DISA STIGs & APL News", "rss": None, "url": "https://public.cyber.mil/stigs/", "scrape": True},
+    {"name": "NSA Cybersecurity Advisories", "rss": "https://www.nsa.gov/DesktopModules/ArticleCS/RSS.ashx?ContentType=1&Site=1282&max=20", "scrape": False, "minimum": 1},
+    {"name": "CISA Alerts", "rss": "https://www.cisa.gov/cybersecurity-advisories/all.xml", "scrape": False, "minimum": 1},
+    {"name": "DISA STIGs & APL News", "rss": None, "url": "https://public.cyber.mil/stigs/", "scrape": True, "minimum": 1},
 ]
 
 CSFC_APL_COMPONENT_KEYWORDS = {
@@ -310,6 +315,8 @@ EUCC_TIER1_KEYWORDS = [
 
 # Sanity minimum: EUCC certificates page should have some entries
 SANITY_MIN_EUCC_CERTS = 2
+EUCC_CONTINUITY_MIN_BASELINE = 10
+EUCC_MIN_IDENTITY_OVERLAP = 0.70
 
 # =============================================================
 # ND-iTC (Network Device iTC) Monitoring — nd-itc.github.io

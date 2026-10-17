@@ -25,6 +25,12 @@ _cfg.SANITY_MIN_PPS = 10
 _cfg.SANITY_MIN_CSFC_APL = 5
 _cfg.SANITY_MIN_CSFC_ANNOUNCEMENTS = 1
 _cfg.SANITY_MIN_CC_CRYPTO_PUBS = 5
+_cfg.SANITY_MIN_CC_PORTAL_NEWS = 1
+_cfg.SANITY_MIN_CC_PORTAL_PPS = 1
+_cfg.SANITY_MIN_CC_PORTAL_PRODUCTS = 1
+_cfg.CC_PORTAL_BASE = "https://www.commoncriteriaportal.org"
+_cfg.CC_PORTAL_EMBEDDED_JSON_MAX_CHARS = 20 * 1024 * 1024
+_cfg.RSS_FEED_MAX_BYTES = 2 * 1024 * 1024
 _cfg.CSFC_BASE = "https://www.nsa.gov"
 _cfg.CSFC_PAGES = {
     "home": "/csfc/",
@@ -260,6 +266,100 @@ class TestGetHtml:
         assert fallback.call_args.kwargs["impersonate"] == "chrome"
         browser_response.raise_for_status.assert_called_once()
 
+
+# ===========================================================================
+# Session-backed RSS parsing and CC Portal embedded JSON
+# ===========================================================================
+
+class TestRssHealth:
+
+    def test_rss_is_parsed_from_bounded_session_bytes(self):
+        payload = b"""<?xml version="1.0"?><rss version="2.0"><channel>
+        <title>CISA</title><item><title>Alert One</title>
+        <link>https://www.cisa.gov/one</link><guid>one</guid></item>
+        </channel></rss>"""
+        fetched = {
+            "content": payload,
+            "url": "https://www.cisa.gov/cybersecurity-advisories/all.xml",
+            "sha256": "abc123",
+        }
+        parsed_feed = MagicMock()
+        parsed_feed.entries = [{
+            "title": "Alert One", "link": "https://www.cisa.gov/one", "id": "one"
+        }]
+        parsed_feed.get.side_effect = lambda key, default=None: {
+            "bozo": False,
+        }.get(key, default)
+        with patch.object(collector, "_fetch_fixed_source", return_value=fetched) as fetch:
+            with patch.object(collector.feedparser, "parse", return_value=parsed_feed) as parse:
+                items, health = collector._get_rss(fetched["url"])
+
+        assert [item["title"] for item in items] == ["Alert One"]
+        assert health["success"] is True
+        assert health["complete"] is True
+        assert health["observed"] == 1
+        assert fetch.call_args.kwargs["max_bytes"] == _cfg.RSS_FEED_MAX_BYTES
+        parse.assert_called_once_with(payload)
+
+    def test_non_https_feed_is_rejected_before_fetch(self):
+        with patch.object(collector, "_fetch_fixed_source") as fetch:
+            items, health = collector._get_rss("http://example.test/feed.xml")
+
+        assert items == []
+        assert health["success"] is False
+        fetch.assert_not_called()
+
+
+class TestCcPortalEmbeddedJson:
+
+    def test_parses_pp_list_with_explicit_stable_identity(self):
+        script = MagicMock()
+        script.string = """var ppList = [{
+          "PPID": 548, "ID": "2026.0010", "Abbr": "BSI-CC-PP-0105-V4-2026",
+          "Name": "Security &amp; Records", "Version": "3.0.2",
+          "PDF_PP": "Protection Profile.pdf", "Issue_Date": "2026-06-01"
+        }];"""
+        soup = MagicMock()
+        soup.find_all.return_value = [script]
+
+        records = collector.parsecc_pps(soup)
+
+        assert records[0]["id"] == "BSI-CC-PP-0105-V4-2026"
+        assert records[0]["portal_id"] == "2026.0010"
+        assert records[0]["internal_id"] == "548"
+        assert records[0]["title"] == "Security & Records"
+        assert records[0]["link"].endswith("Protection%20Profile.pdf")
+
+    def test_parses_product_list_and_normalizes_fields(self):
+        script = MagicMock()
+        script.string = """const productList = [{
+          "id": "2026.0123", "name": "Secure Router", "vendor_name": "Vendor A",
+          "certified": "2026-08-01", "pdf_cert": "report.pdf",
+          "scheme_name": "BSI", "category_name": "Network Devices"
+        }];"""
+        soup = MagicMock()
+        soup.find_all.return_value = [script]
+
+        records = collector.parsecc_products(soup)
+
+        assert records == [{
+            "id": "2026.0123", "product_id": "2026.0123",
+            "title": "Secure Router", "name": "Secure Router", "text": "Secure Router",
+            "vendor": "Vendor A", "scheme": "BSI", "category": "Network Devices",
+            "eal": "", "certificate_date": "2026-08-01", "archive_date": "",
+            "link": "https://www.commoncriteriaportal.org/nfs/ccpfiles/files/epfiles/report.pdf",
+            "certificate_link": "https://www.commoncriteriaportal.org/nfs/ccpfiles/files/epfiles/report.pdf",
+            "security_target_link": "", "vendor_url": "",
+        }]
+
+    def test_non_json_javascript_is_not_executed(self):
+        script = MagicMock()
+        script.string = "var productList = doSomethingDangerous();"
+        soup = MagicMock()
+        soup.find_all.return_value = [script]
+
+        assert collector.parsecc_products(soup) == []
+
 # ===========================================================================
 # collect_csfc — fix #24: APL page fetched once, soup reused
 # ===========================================================================
@@ -319,6 +419,31 @@ class TestCollectCsfc:
     def test_scrape_csfc_page_from_soup_handles_none(self):
         result = collector._scrape_csfc_page_from_soup(None)
         assert result == []
+
+    def test_records_health_for_every_configured_feed(self):
+        mock_soup = MagicMock()
+        mock_soup.find.return_value = None
+        mock_soup.find_all.return_value = []
+        feeds = [{
+            "name": "CISA Alerts",
+            "rss": "https://www.cisa.gov/cybersecurity-advisories/all.xml",
+            "scrape": False,
+            "minimum": 1,
+        }]
+        feed_health = {
+            "success": True, "complete": True, "observed": 1, "detail": ""
+        }
+        with patch.object(_cfg, "CSFC_FEEDS", feeds):
+            with patch.object(collector, "get_html", return_value=mock_soup):
+                with patch.object(
+                    collector,
+                    "_get_rss",
+                    return_value=([{"title": "Alert One", "id": "one"}], feed_health),
+                ):
+                    result = collector.collect_csfc()
+
+        assert result["feeds"]["CISA Alerts"][0]["id"] == "one"
+        assert result["_feed_health"]["CISA Alerts"] == feed_health
 
 
 # ===========================================================================
