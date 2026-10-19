@@ -1,6 +1,6 @@
 {
-  "period_start": "2026-09-18T10:23:28.363620+00:00",
-  "period_end": "2026-09-19T10:07:23.247034+00:00",
+  "period_start": "2026-10-18T10:12:41.310237+00:00",
+  "period_end": "2026-10-19T11:48:06.932851+00:00",
   "niap": {
     "pps": {
       "added": [],
@@ -27,7 +27,7 @@
     "in_evaluation": {
       "added": [],
       "removed": [],
-      "current_count": 45
+      "current_count": 39
     },
     "news": {
       "added": [],
@@ -122,17 +122,17 @@
       "checks": [
         {
           "name": "PCL products",
-          "observed": 1762,
+          "observed": 1765,
           "minimum": 50
         },
         {
           "name": "Protection Profiles",
-          "observed": 271,
+          "observed": 272,
           "minimum": 10
         },
         {
           "name": "PQC PP file-version records",
-          "observed": 13,
+          "observed": 11,
           "minimum": 1,
           "required_for_diff_baseline": false
         },
@@ -145,7 +145,7 @@
       ],
       "consecutive_failures": 0,
       "using_last_known_good": false,
-      "checked_at": "2026-09-19T10:07:23.247034+00:00",
+      "checked_at": "2026-10-19T11:48:06.932851+00:00",
       "subcollections": {
         "news": {
           "label": "News announcements",
@@ -182,7 +182,7 @@
       ],
       "consecutive_failures": 0,
       "using_last_known_good": false,
-      "checked_at": "2026-09-19T10:07:23.247034+00:00"
+      "checked_at": "2026-10-19T11:48:06.932851+00:00"
     },
     "cctl_labs": {
       "label": "CCTL Labs",
@@ -196,7 +196,7 @@
       ],
       "consecutive_failures": 0,
       "using_last_known_good": false,
-      "checked_at": "2026-09-19T10:07:23.247034+00:00"
+      "checked_at": "2026-10-19T11:48:06.932851+00:00"
     },
     "csfc": {
       "label": "CSfC",
@@ -204,7 +204,7 @@
       "checks": [
         {
           "name": "APL items",
-          "observed": 121,
+          "observed": 116,
           "minimum": 5
         },
         {
@@ -227,7 +227,7 @@
       ],
       "consecutive_failures": 0,
       "using_last_known_good": false,
-      "checked_at": "2026-09-19T10:07:23.247034+00:00"
+      "checked_at": "2026-10-19T11:48:06.932851+00:00"
     },
     "cc_crypto": {
       "label": "CC Crypto",
@@ -235,13 +235,13 @@
       "checks": [
         {
           "name": "publications",
-          "observed": 121,
+          "observed": 118,
           "minimum": 5
         }
       ],
       "consecutive_failures": 0,
       "using_last_known_good": false,
-      "checked_at": "2026-09-19T10:07:23.247034+00:00"
+      "checked_at": "2026-10-19T11:48:06.932851+00:00"
     },
     "nato": {
       "label": "NATO NIAPCL",
@@ -251,7 +251,7 @@
       "consecutive_failures": 0,
       "using_last_known_good": false,
       "detail": "manual baseline (40 Cisco product(s)); updated via the NATO capture GitHub issue workflow",
-      "checked_at": "2026-09-19T10:07:23.247034+00:00"
+      "checked_at": "2026-10-19T11:48:06.932851+00:00"
     },
     "eucc": {
       "label": "EUCC / ENISA",
@@ -265,7 +265,7 @@
       ],
       "consecutive_failures": 0,
       "using_last_known_good": false,
-      "checked_at": "2026-09-19T10:07:23.247034+00:00"
+      "checked_at": "2026-10-19T11:48:06.932851+00:00"
     },
     "nd_itc": {
       "label": "ND-iTC",
@@ -284,7 +284,7 @@
       ],
       "consecutive_failures": 0,
       "using_last_known_good": false,
-      "checked_at": "2026-09-19T10:07:23.247034+00:00"
+      "checked_at": "2026-10-19T11:48:06.932851+00:00"
     },
     "ietf_cnsa": {
       "label": "IETF CNSA 2.0",
@@ -303,7 +303,7 @@
       ],
       "consecutive_failures": 0,
       "using_last_known_good": false,
-      "checked_at": "2026-09-19T10:07:23.247034+00:00"
+      "checked_at": "2026-10-19T11:48:06.932851+00:00"
     },
     "ieee_pqc": {
       "label": "IEEE 802.11bt",
@@ -322,7 +322,7 @@
       ],
       "consecutive_failures": 0,
       "using_last_known_good": false,
-      "checked_at": "2026-09-19T10:07:23.247034+00:00"
+      "checked_at": "2026-10-19T11:48:06.932851+00:00"
     }
   },
   "alerts": []
