@@ -2,8 +2,6 @@
 <rss version="2.0"><channel>
 <title>CC Pulse</title>
 <link>https://kr15tyk.github.io/CC-pulse/cc_dashboard.html</link>
-<description>Common Criteria monitoring - 2026-10-20 06:47 ET</description>
-<item><title>NIAP Policie revised: Cloud SaaS Evaluations</title><link>https://www.niap-ccevs.org/Policy/policy-ltr-32_updated 21Oct2026.pdf</link><description>2025-02-01T00:00:00Z</description></item>
-<item><title>CSfC Component Added: Software Full Drive Encryption | Galleon | Embedded Computing Software Encryptio</title><link>https://www.niap-ccevs.org/Products/11654</link><description>CSfC apl item added.</description></item>
-<item><title>CSfC Component Added: ​Note: Products that only fulfill Authorization Acquisition (AA) OR the Encrypti</title><link>https://www.niap-ccevs.org/Products/11655</link><description>CSfC apl item added.</description></item>
+<description>Common Criteria monitoring - 2026-10-21 06:59 ET</description>
+<item><title>NIAP New added: NIAP Policy #32 Cloud Based Evaluations updated</title><link>https://www.niap-ccevs.org/announcements</link><description>2026-10-20T08:22:38.514000Z</description></item>
 </channel></rss>
