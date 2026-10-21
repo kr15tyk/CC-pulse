@@ -1,6 +1,6 @@
 {
-  "period_start": "2026-09-20T10:25:05.690373+00:00",
-  "period_end": "2026-09-21T11:41:41.485440+00:00",
+  "period_start": "2026-10-20T10:47:26.005435+00:00",
+  "period_end": "2026-10-21T10:59:48.297792+00:00",
   "niap": {
     "pps": {
       "added": [],
@@ -25,12 +25,58 @@
       "newly_archived": []
     },
     "in_evaluation": {
-      "added": [],
+      "added": [
+        {
+          "active_maintenances": [],
+          "am_sort": null,
+          "assigned_lab_name": "Lightship Security USA, Inc.",
+          "certification_date": null,
+          "from_cc_portal": false,
+          "product_id": 11719,
+          "product_name": "NetApp Storage Encryption (NSE) Running ONTAP 9.18.1",
+          "protection_profiles": [
+            {
+              "pp_id": 437,
+              "pp_name": "collaborative Protection Profile for Full Drive Encryption - Authorization Acquisition Version 2.0 + Errata 20190201",
+              "pp_short_name": "CPP_FDE_AA_V2.0E"
+            }
+          ],
+          "status_sort": "In Progress",
+          "submitting_country_id_code": "US",
+          "submitting_country_id_name": "United States",
+          "sunset_date": null,
+          "tech_types": [
+            "Encrypted Storage"
+          ],
+          "vendor_id_name": "NetApp, Inc.",
+          "v_id": 11719,
+          "kicked_off_date": "2026-10-20T10:13:02.929000Z"
+        }
+      ],
       "removed": [],
-      "current_count": 45
+      "current_count": 42
     },
     "news": {
-      "added": [],
+      "added": [
+        {
+          "id": 3432,
+          "title": "NIAP Policy #32 Cloud Based Evaluations updated",
+          "announcement": "<p><span data-teams=\"true\">Effective October 21, 2026, NIAP has updated Policy Letter #32 to clarify requirements for cloud-based evaluations, including documentation needed before an evaluation begins and DoD Impact Level 5 (IL5) authorization. Vendors and Common Criteria Testing Laboratories (CCTLs) should review the updated policy to understand these changes and avoid potential delays.</span></p>",
+          "types": "1",
+          "subject": null,
+          "posted": "2026-10-20T08:22:38.514000Z",
+          "begins": null,
+          "expires": "2028-10-20T00:00:00Z",
+          "link": null,
+          "venue": null,
+          "location": null,
+          "entrydate": "2026-10-20T08:22:38.514000Z",
+          "moddate": null,
+          "active": true,
+          "_category": "POLICY",
+          "_change_kind": "added"
+        }
+      ],
       "revised": [],
       "deactivated": [],
       "reactivated": [],
@@ -122,17 +168,17 @@
       "checks": [
         {
           "name": "PCL products",
-          "observed": 1762,
+          "observed": 1769,
           "minimum": 50
         },
         {
           "name": "Protection Profiles",
-          "observed": 271,
+          "observed": 272,
           "minimum": 10
         },
         {
           "name": "PQC PP file-version records",
-          "observed": 13,
+          "observed": 11,
           "minimum": 1,
           "required_for_diff_baseline": false
         },
@@ -145,12 +191,12 @@
       ],
       "consecutive_failures": 0,
       "using_last_known_good": false,
-      "checked_at": "2026-09-21T11:41:41.485440+00:00",
+      "checked_at": "2026-10-21T10:59:48.297792+00:00",
       "subcollections": {
         "news": {
           "label": "News announcements",
           "status": "healthy",
-          "observed": 357,
+          "observed": 358,
           "consecutive_failures": 0,
           "using_last_known_good": false
         },
@@ -182,7 +228,7 @@
       ],
       "consecutive_failures": 0,
       "using_last_known_good": false,
-      "checked_at": "2026-09-21T11:41:41.485440+00:00"
+      "checked_at": "2026-10-21T10:59:48.297792+00:00"
     },
     "cctl_labs": {
       "label": "CCTL Labs",
@@ -196,7 +242,7 @@
       ],
       "consecutive_failures": 0,
       "using_last_known_good": false,
-      "checked_at": "2026-09-21T11:41:41.485440+00:00"
+      "checked_at": "2026-10-21T10:59:48.297792+00:00"
     },
     "csfc": {
       "label": "CSfC",
@@ -204,7 +250,7 @@
       "checks": [
         {
           "name": "APL items",
-          "observed": 121,
+          "observed": 118,
           "minimum": 5
         },
         {
@@ -227,7 +273,7 @@
       ],
       "consecutive_failures": 0,
       "using_last_known_good": false,
-      "checked_at": "2026-09-21T11:41:41.485440+00:00"
+      "checked_at": "2026-10-21T10:59:48.297792+00:00"
     },
     "cc_crypto": {
       "label": "CC Crypto",
@@ -235,13 +281,13 @@
       "checks": [
         {
           "name": "publications",
-          "observed": 121,
+          "observed": 118,
           "minimum": 5
         }
       ],
       "consecutive_failures": 0,
       "using_last_known_good": false,
-      "checked_at": "2026-09-21T11:41:41.485440+00:00"
+      "checked_at": "2026-10-21T10:59:48.297792+00:00"
     },
     "nato": {
       "label": "NATO NIAPCL",
@@ -251,7 +297,7 @@
       "consecutive_failures": 0,
       "using_last_known_good": false,
       "detail": "manual baseline (40 Cisco product(s)); updated via the NATO capture GitHub issue workflow",
-      "checked_at": "2026-09-21T11:41:41.485440+00:00"
+      "checked_at": "2026-10-21T10:59:48.297792+00:00"
     },
     "eucc": {
       "label": "EUCC / ENISA",
@@ -265,7 +311,7 @@
       ],
       "consecutive_failures": 0,
       "using_last_known_good": false,
-      "checked_at": "2026-09-21T11:41:41.485440+00:00"
+      "checked_at": "2026-10-21T10:59:48.297792+00:00"
     },
     "nd_itc": {
       "label": "ND-iTC",
@@ -284,7 +330,7 @@
       ],
       "consecutive_failures": 0,
       "using_last_known_good": false,
-      "checked_at": "2026-09-21T11:41:41.485440+00:00"
+      "checked_at": "2026-10-21T10:59:48.297792+00:00"
     },
     "ietf_cnsa": {
       "label": "IETF CNSA 2.0",
@@ -303,7 +349,7 @@
       ],
       "consecutive_failures": 0,
       "using_last_known_good": false,
-      "checked_at": "2026-09-21T11:41:41.485440+00:00"
+      "checked_at": "2026-10-21T10:59:48.297792+00:00"
     },
     "ieee_pqc": {
       "label": "IEEE 802.11bt",
@@ -322,7 +368,7 @@
       ],
       "consecutive_failures": 0,
       "using_last_known_good": false,
-      "checked_at": "2026-09-21T11:41:41.485440+00:00"
+      "checked_at": "2026-10-21T10:59:48.297792+00:00"
     }
   },
   "alerts": []
