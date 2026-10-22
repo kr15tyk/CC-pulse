@@ -14,6 +14,7 @@ Features:
 
 import hashlib
 import copy
+import html
 import json
 import logging
 import re
@@ -109,11 +110,48 @@ def get_html(url, timeout=30):
     return result
 
 def get_rss(url):
-    def _parse(u, **kw):
-        feed = feedparser.parse(u)
-        if feed.get("bozo") and not feed.entries:
+    return _get_rss(url)[0]
+
+
+def _get_rss(url: str) -> tuple[list[dict], dict]:
+    """Fetch and parse an HTTPS RSS/Atom feed with explicit health metadata.
+
+    ``feedparser.parse(url)`` uses its own network client, bypassing the
+    browser-like session headers used by the rest of CC Pulse. CISA currently
+    rejects that path with malformed block-page XML. Fetching bounded bytes
+    through ``SESSION`` first keeps networking behavior consistent and makes
+    feed failures observable instead of silently returning an empty list.
+    """
+    parsed = urlsplit(url)
+    host = (parsed.hostname or "").lower()
+    if parsed.scheme != "https" or not host:
+        return [], {
+            "success": False,
+            "complete": False,
+            "observed": 0,
+            "detail": "feed URL must use HTTPS",
+        }
+    allowed_hosts = {host}
+    if host.startswith("www."):
+        allowed_hosts.add(host[4:])
+    else:
+        allowed_hosts.add(f"www.{host}")
+    max_bytes = getattr(config, "RSS_FEED_MAX_BYTES", 2 * 1024 * 1024)
+    if not isinstance(max_bytes, int) or max_bytes <= 0:
+        max_bytes = 2 * 1024 * 1024
+
+    def _parse(target: str) -> tuple[list[dict], dict]:
+        fetched = _fetch_fixed_source(
+            target,
+            allowed_hosts=allowed_hosts,
+            max_bytes=max_bytes,
+            accept="application/atom+xml,application/rss+xml,application/xml,text/xml;q=0.9,*/*;q=0.1",
+        )
+        feed = feedparser.parse(fetched["content"])
+        bozo = bool(feed.get("bozo"))
+        if bozo and not feed.entries:
             raise ValueError(f"feedparser bozo error: {feed.get('bozo_exception')}")
-        return [
+        items = [
             {
                 "title":     e.get("title", ""),
                 "link":      e.get("link", ""),
@@ -123,8 +161,27 @@ def get_rss(url):
             }
             for e in feed.entries
         ]
+        return items, {
+            "success": True,
+            "complete": not bozo,
+            "observed": len(items),
+            "detail": (
+                f"feed parsed with warning: {feed.get('bozo_exception')}"
+                if bozo else ""
+            ),
+            "url": fetched["url"],
+            "sha256": fetched["sha256"],
+        }
+
     result = _fetch_with_retry(_parse, url)
-    return result if result is not None else []
+    if result is None:
+        return [], {
+            "success": False,
+            "complete": False,
+            "observed": 0,
+            "detail": "feed fetch or parse failed after retries",
+        }
+    return result
 
 
 def _fetch_fixed_source(
@@ -713,35 +770,114 @@ def parsecc_news(soup):
             items.append({"text": text, "link": href})
     return items
 
+
+def _clean_portal_value(value) -> str:
+    """Normalize one display value from CC Portal's embedded JSON."""
+    if value is None:
+        return ""
+    return re.sub(r"\s+", " ", html.unescape(str(value))).strip()
+
+
+def _extract_cc_portal_json(soup, variable_name: str) -> list[dict]:
+    """Decode one allow-listed JavaScript JSON array from a portal page.
+
+    The portal renders PP and product tables client-side from ``ppList`` and
+    ``productList``. The values are JSON, so use the standard decoder at the
+    exact variable assignment; never execute page JavaScript.
+    """
+    allowed = {"ppList", "productList"}
+    if variable_name not in allowed or not soup:
+        return []
+    max_chars = getattr(config, "CC_PORTAL_EMBEDDED_JSON_MAX_CHARS", 20 * 1024 * 1024)
+    if not isinstance(max_chars, int) or max_chars <= 0:
+        max_chars = 20 * 1024 * 1024
+    assignment = re.compile(
+        rf"\b(?:var|let|const)\s+{re.escape(variable_name)}\s*=\s*"
+    )
+    decoder = json.JSONDecoder()
+    for script in soup.find_all("script"):
+        source = script.string or script.get_text() or ""
+        if not source or len(source) > max_chars:
+            continue
+        match = assignment.search(source)
+        if not match:
+            continue
+        try:
+            value, _ = decoder.raw_decode(source, match.end())
+        except (TypeError, ValueError, json.JSONDecodeError) as exc:
+            log.warning("[CC Portal] Could not decode %s: %s", variable_name, exc)
+            return []
+        if not isinstance(value, list) or any(not isinstance(item, dict) for item in value):
+            log.warning("[CC Portal] %s was not a list of records", variable_name)
+            return []
+        return value
+    log.warning("[CC Portal] Embedded %s assignment was not found", variable_name)
+    return []
+
+
+def _cc_portal_file_url(folder: str, filename) -> str:
+    filename = _clean_portal_value(filename)
+    if not filename:
+        return ""
+    encoded = quote(filename, safe="/%")
+    return f"{config.CC_PORTAL_BASE}/nfs/ccpfiles/files/{folder}/{encoded}"
+
+
 def parsecc_pps(soup):
     rows = []
-    if not soup:
-        return rows
-    table = soup.find("table")
-    if not table:
-        return rows
-    headers = [th.get_text(strip=True) for th in table.find_all("th")]
-    for tr in table.find_all("tr")[1:]:
-        cells = [td.get_text(strip=True) for td in tr.find_all("td")]
-        if cells:
-            row = dict(zip(headers, cells))
-            link = tr.find("a")
-            row["_link"] = link["href"] if link and link.get("href") else ""
-            rows.append(row)
+    for source in _extract_cc_portal_json(soup, "ppList"):
+        portal_id = _clean_portal_value(source.get("ID"))
+        internal_id = _clean_portal_value(source.get("PPID"))
+        pp_id = _clean_portal_value(source.get("Abbr")) or portal_id or internal_id
+        title = _clean_portal_value(source.get("Name"))
+        if not pp_id or not title:
+            continue
+        rows.append({
+            "id": pp_id,
+            "pp_id": pp_id,
+            "portal_id": portal_id,
+            "internal_id": internal_id,
+            "title": title,
+            "text": title,
+            "abbr": _clean_portal_value(source.get("Abbr")),
+            "version": _clean_portal_value(source.get("Version")),
+            "scheme": _clean_portal_value(source.get("Scheme")),
+            "eal": _clean_portal_value(source.get("eal_name") or source.get("EAL")),
+            "issue_date": _clean_portal_value(source.get("Issue_Date")),
+            "entry_date": _clean_portal_value(source.get("EntryDate")),
+            "archived": source.get("Archived"),
+            "link": _cc_portal_file_url("ppfiles", source.get("PDF_PP")),
+            "certificate_link": _cc_portal_file_url("ppfiles", source.get("PDF_Cert")),
+            "supporting_document_link": _cc_portal_file_url("ppfiles", source.get("PDF_SD")),
+        })
     return rows
 
 def parsecc_products(soup):
     rows = []
-    if not soup:
-        return rows
-    table = soup.find("table")
-    if not table:
-        return rows
-    headers = [th.get_text(strip=True) for th in table.find_all("th")]
-    for tr in table.find_all("tr")[1:]:
-        cells = [td.get_text(strip=True) for td in tr.find_all("td")]
-        if cells:
-            rows.append(dict(zip(headers, cells)))
+    for source in _extract_cc_portal_json(soup, "productList"):
+        product_id = _clean_portal_value(source.get("id"))
+        title = _clean_portal_value(source.get("name"))
+        if not product_id or not title:
+            continue
+        certificate_link = _cc_portal_file_url("epfiles", source.get("pdf_cert"))
+        security_target_link = _cc_portal_file_url("epfiles", source.get("pdf_st"))
+        rows.append({
+            "id": product_id,
+            "product_id": product_id,
+            "title": title,
+            "name": title,
+            "text": title,
+            "vendor": _clean_portal_value(source.get("vendor_name")),
+            "scheme": _clean_portal_value(source.get("scheme_name") or source.get("scheme")),
+            "category": _clean_portal_value(source.get("category_name")),
+            "eal": _clean_portal_value(source.get("eal_name") or source.get("eal")),
+            "certificate_date": _clean_portal_value(source.get("certified")),
+            "archive_date": _clean_portal_value(source.get("archived")),
+            "link": certificate_link or security_target_link,
+            "certificate_link": certificate_link,
+            "security_target_link": security_target_link,
+            "vendor_url": _clean_portal_value(source.get("www")),
+        })
     return rows
 
 def parsecc_communities(soup):
@@ -783,11 +919,17 @@ def collect_cc_portal():
 
 
 # ── CCTL Labs ─────────────────────────────────────────────────────────────────
-def scrapelab_items(url):
+def scrapelab_items(url, *, with_health: bool = False):
     """Generic scraper — extracts headlines/links from a lab page."""
     soup = get_html(url)
     if not soup:
-        return []
+        health = {
+            "success": False,
+            "complete": False,
+            "observed": 0,
+            "detail": "page fetch failed",
+        }
+        return ([], health) if with_health else []
     items = []
     for tag in soup.find_all(["h2", "h3", "h4", "article"]):
         a = tag.find("a") if tag.name != "a" else tag
@@ -801,7 +943,14 @@ def scrapelab_items(url):
                 "published": "",
                 "id":        href or a.get_text(strip=True),
             })
-    return items[:20]
+    items = items[:20]
+    health = {
+        "success": True,
+        "complete": True,
+        "observed": len(items),
+        "detail": "" if items else "page returned no recognizable items",
+    }
+    return (items, health) if with_health else items
 
 def collect_cctl_labs():
     """Collect CCTL lab blog/news items.
@@ -873,6 +1022,23 @@ def validate_snapshot(snapshot):
             f"(minimum expected: {config.SANITY_MIN_PPS}). "
             "Snapshot rejected — possible fetch failure."
         )
+
+    cc_portal = snapshot.get("cc_portal", {})
+    for label, key, minimum_name, default in (
+        ("news", "news", "SANITY_MIN_CC_PORTAL_NEWS", 50),
+        ("Protection Profiles", "pps", "SANITY_MIN_CC_PORTAL_PPS", 100),
+        ("certified products", "products", "SANITY_MIN_CC_PORTAL_PRODUCTS", 500),
+    ):
+        minimum = getattr(config, minimum_name, default)
+        if not isinstance(minimum, int):
+            minimum = default
+        observed = len(cc_portal.get(key, []))
+        if observed < minimum:
+            log.warning(
+                "CC Portal %s returned only %d items (minimum expected: %d). "
+                "Snapshot kept but source health will retain last-known-good.",
+                label, observed, minimum,
+            )
 
     # Warn-only checks — external sites that may legitimately be slow/blocked
     csfc_apl_count = len(snapshot.get("csfc", {}).get("pages", {}).get("apl", []))
@@ -1803,6 +1969,7 @@ def collect_csfc() -> dict:
         "selection_links": {},
         "documents": {},
         "feeds": {},
+        "_feed_health": {},
     }
 
     # Warm up the session on the NSA base domain to pick up any required
@@ -1850,12 +2017,19 @@ def collect_csfc() -> dict:
         name = feed["name"]
         log.debug("  [CSfC] Feed: %s...", name)
         if feed.get("rss"):
-            items = get_rss(feed["rss"])
+            items, health = _get_rss(feed["rss"])
         elif feed.get("scrape") and feed.get("url"):
-            items = scrapelab_items(feed["url"])
+            items, health = scrapelab_items(feed["url"], with_health=True)
         else:
             items = []
+            health = {
+                "success": False,
+                "complete": False,
+                "observed": 0,
+                "detail": "feed has no configured collector",
+            }
         data["feeds"][name] = items
+        data["_feed_health"][name] = health
         log.debug("    -> %d items", len(items))
 
     apl_count = len(data["pages"].get("apl", []))
