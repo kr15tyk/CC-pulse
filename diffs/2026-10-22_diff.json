@@ -1,6 +1,6 @@
 {
-  "period_start": "2026-09-21T11:41:41.485440+00:00",
-  "period_end": "2026-09-22T10:45:55.599772+00:00",
+  "period_start": "2026-10-21T10:59:48.297792+00:00",
+  "period_end": "2026-10-22T10:58:24.029605+00:00",
   "niap": {
     "pps": {
       "added": [],
@@ -15,46 +15,7 @@
       "removed": []
     },
     "cisco_ndcpp": {
-      "added": [
-        {
-          "active_maintenances": [],
-          "am_sort": "2028-09-16T00:00:00Z",
-          "assigned_lab_name": "Gossamer Security Solutions",
-          "certification_date": "2026-09-16T00:00:00Z",
-          "from_cc_portal": false,
-          "product_id": 11683,
-          "product_name": "Cisco Nexus 9000 MACsec Series Switches Running NX-OS 10.4",
-          "protection_profiles": [
-            {
-              "pp_id": 459,
-              "pp_name": "Functional Package for SSH Version 1.0",
-              "pp_short_name": "PKG_SSH_V1.0"
-            },
-            {
-              "pp_id": 480,
-              "pp_name": "PP-Module for MACsec Ethernet Encryption Version 1.0",
-              "pp_short_name": "MOD_MACSEC_V1.0"
-            },
-            {
-              "pp_id": 482,
-              "pp_name": "collaborative Protection Profile for Network Devices Version 3.0e",
-              "pp_short_name": "CPP_ND_V3.0E"
-            }
-          ],
-          "status_sort": "Certified",
-          "submitting_country_id_code": "US",
-          "submitting_country_id_name": "United States",
-          "sunset_date": null,
-          "tech_types": [
-            "Network Device",
-            "Network Encryption",
-            "Remote Access"
-          ],
-          "vendor_id_name": "Cisco Systems, Inc.",
-          "v_id": 11683,
-          "kicked_off_date": "2026-04-08T11:15:53.054000Z"
-        }
-      ],
+      "added": [],
       "removed": [],
       "newly_archived": []
     },
@@ -62,22 +23,17 @@
       "added": [
         {
           "active_maintenances": [],
-          "am_sort": "2028-09-16T00:00:00Z",
-          "assigned_lab_name": "Gossamer Security Solutions",
-          "certification_date": "2026-09-16T00:00:00Z",
+          "am_sort": "2028-09-28T00:00:00Z",
+          "assigned_lab_name": "Acumen Security",
+          "certification_date": "2026-09-28T00:00:00Z",
           "from_cc_portal": false,
-          "product_id": 11683,
-          "product_name": "Cisco Nexus 9000 MACsec Series Switches Running NX-OS 10.4",
+          "product_id": 11710,
+          "product_name": "Alcatel-Lucent Enterprise OmniAccess Stellar Wireless Access Points with AWOS 5.0",
           "protection_profiles": [
             {
-              "pp_id": 459,
-              "pp_name": "Functional Package for SSH Version 1.0",
-              "pp_short_name": "PKG_SSH_V1.0"
-            },
-            {
-              "pp_id": 480,
-              "pp_name": "PP-Module for MACsec Ethernet Encryption Version 1.0",
-              "pp_short_name": "MOD_MACSEC_V1.0"
+              "pp_id": 464,
+              "pp_name": "PP-Module for Wireless Local Area Network (WLAN) Access System Version 1.0",
+              "pp_short_name": "MOD_WLAN_AS_v1.0"
             },
             {
               "pp_id": 482,
@@ -91,41 +47,35 @@
           "sunset_date": null,
           "tech_types": [
             "Network Device",
-            "Network Encryption",
-            "Remote Access"
+            "Wireless LAN"
           ],
-          "vendor_id_name": "Cisco Systems, Inc.",
-          "v_id": 11683,
-          "kicked_off_date": "2026-04-08T11:15:53.054000Z"
+          "vendor_id_name": "ALE USA Inc",
+          "v_id": 11710,
+          "kicked_off_date": "2026-07-06T13:22:09.659000Z"
         },
         {
           "active_maintenances": [],
-          "am_sort": "2028-09-11T00:00:00Z",
-          "assigned_lab_name": "Gossamer Security Solutions",
-          "certification_date": "2026-09-11T00:00:00Z",
+          "am_sort": "2028-09-29T00:00:00Z",
+          "assigned_lab_name": "Booz Allen Hamilton Common Criteria Testing Laboratory",
+          "certification_date": "2026-10-14T00:00:00Z",
           "from_cc_portal": false,
-          "product_id": 11705,
-          "product_name": "Getac Devices on Android 15",
+          "product_id": 11692,
+          "product_name": "Carbon Black Endpoint Detection and Response (EDR) System",
           "protection_profiles": [
             {
-              "pp_id": 425,
-              "pp_name": "PP-Module for Bluetooth Version 1.0",
-              "pp_short_name": "MOD_BT_V1.0"
+              "pp_id": 430,
+              "pp_name": "PP-Module for Endpoint Detection and Response Version 1.0",
+              "pp_short_name": "MOD_EDR_V1.0"
             },
             {
-              "pp_id": 439,
-              "pp_name": "Functional Package for TLS Version 1.1",
-              "pp_short_name": "PKG_TLS_V1.1"
+              "pp_id": 431,
+              "pp_name": "PP-Module for Host Agent Version 1.0",
+              "pp_short_name": "MOD_HA_V1.0"
             },
             {
-              "pp_id": 463,
-              "pp_name": "PP-Module for Wireless Local Area Network (WLAN) Client Version 1.0",
-              "pp_short_name": "MOD_WLANC_v1.0"
-            },
-            {
-              "pp_id": 468,
-              "pp_name": "Protection Profile for Mobile Device Fundamentals Version 3.3",
-              "pp_short_name": "PP_MDF_V3.3"
+              "pp_id": 462,
+              "pp_name": "Protection Profile for Application Software Version 1.4",
+              "pp_short_name": "PP_APP_v1.4"
             }
           ],
           "status_sort": "Certified",
@@ -133,15 +83,73 @@
           "submitting_country_id_name": "United States",
           "sunset_date": null,
           "tech_types": [
-            "Mobility"
+            "Application Software"
           ],
-          "vendor_id_name": "Getac Technology Corp.",
-          "v_id": 11705,
-          "kicked_off_date": "2026-06-15T14:24:44.273000Z"
+          "vendor_id_name": "Broadcom",
+          "v_id": 11692,
+          "kicked_off_date": "2026-04-30T12:29:44.141000Z"
         }
       ],
       "removed": [],
-      "newly_archived": []
+      "newly_archived": [
+        {
+          "active_maintenances": [],
+          "am_sort": "2026-10-22T00:00:00Z",
+          "assigned_lab_name": "Acumen Security",
+          "certification_date": "2021-10-22T00:00:00Z",
+          "from_cc_portal": false,
+          "product_id": 11145,
+          "product_name": "Vertiv CYBEX\u2122 SCMDR0001 Multi-Domain Smart Card Reader Firmware Version 40040-0E7",
+          "protection_profiles": [
+            {
+              "pp_id": 412,
+              "pp_name": "Protection Profile for Peripheral Sharing Device Version 4.0",
+              "pp_short_name": "PP_PSD_V4.0"
+            },
+            {
+              "pp_id": 434,
+              "pp_name": "PP-Module for User Authentication Devices Version 1.0",
+              "pp_short_name": "MOD_UA_V1.0"
+            }
+          ],
+          "status_sort": "Archived",
+          "submitting_country_id_code": "US",
+          "submitting_country_id_name": "United States",
+          "sunset_date": "2026-10-22T00:00:00Z",
+          "tech_types": [
+            "Sharing Switch"
+          ],
+          "vendor_id_name": "Vertiv IT Systems",
+          "v_id": 11145,
+          "kicked_off_date": "2021-04-28T00:00:00Z"
+        },
+        {
+          "active_maintenances": [],
+          "am_sort": "2026-10-21T00:00:00Z",
+          "assigned_lab_name": "atsec information security S.r.l (Rome site)",
+          "certification_date": "2024-10-21T00:00:00Z",
+          "from_cc_portal": true,
+          "product_id": "2024.1282",
+          "product_name": "IBM z/OS Version 2 Release 5",
+          "protection_profiles": [
+            {
+              "pp_id": 469,
+              "pp_name": "Protection Profile for General Purpose Operating Systems Version 4.3",
+              "pp_short_name": "PP_OS_V4.3"
+            }
+          ],
+          "status_sort": "Archived",
+          "submitting_country_id_code": "IT",
+          "submitting_country_id_name": "Italy",
+          "sunset_date": "2029-10-21T00:00:00Z",
+          "tech_types": [
+            "Operating Systems"
+          ],
+          "vendor_id_name": "IBM Corporation",
+          "v_id": "2024.1282",
+          "kicked_off_date": null
+        }
+      ]
     },
     "in_evaluation": {
       "added": [],
@@ -149,21 +157,52 @@
         {
           "active_maintenances": [],
           "am_sort": null,
-          "assigned_lab_name": "Gossamer Security Solutions",
+          "assigned_lab_name": "Booz Allen Hamilton Common Criteria Testing Laboratory",
           "certification_date": null,
           "from_cc_portal": false,
-          "product_id": 11683,
-          "product_name": "Cisco Nexus 9000 MACsec Series Switches Running NX-OS 10.4",
+          "product_id": 11692,
+          "product_name": "Carbon Black Endpoint Detection and Response (EDR) System",
           "protection_profiles": [
             {
-              "pp_id": 459,
-              "pp_name": "Functional Package for SSH Version 1.0",
-              "pp_short_name": "PKG_SSH_V1.0"
+              "pp_id": 430,
+              "pp_name": "PP-Module for Endpoint Detection and Response Version 1.0",
+              "pp_short_name": "MOD_EDR_V1.0"
             },
             {
-              "pp_id": 480,
-              "pp_name": "PP-Module for MACsec Ethernet Encryption Version 1.0",
-              "pp_short_name": "MOD_MACSEC_V1.0"
+              "pp_id": 431,
+              "pp_name": "PP-Module for Host Agent Version 1.0",
+              "pp_short_name": "MOD_HA_V1.0"
+            },
+            {
+              "pp_id": 462,
+              "pp_name": "Protection Profile for Application Software Version 1.4",
+              "pp_short_name": "PP_APP_v1.4"
+            }
+          ],
+          "status_sort": "In Progress",
+          "submitting_country_id_code": "US",
+          "submitting_country_id_name": "United States",
+          "sunset_date": null,
+          "tech_types": [
+            "Application Software"
+          ],
+          "vendor_id_name": "Broadcom",
+          "v_id": 11692,
+          "kicked_off_date": "2026-04-30T12:29:44.141000Z"
+        },
+        {
+          "active_maintenances": [],
+          "am_sort": null,
+          "assigned_lab_name": "Acumen Security",
+          "certification_date": null,
+          "from_cc_portal": false,
+          "product_id": 11710,
+          "product_name": "Alcatel-Lucent Enterprise OmniAccess Stellar Wireless Access Points with AWOS 5.0",
+          "protection_profiles": [
+            {
+              "pp_id": 464,
+              "pp_name": "PP-Module for Wireless Local Area Network (WLAN) Access System Version 1.0",
+              "pp_short_name": "MOD_WLAN_AS_v1.0"
             },
             {
               "pp_id": 482,
@@ -177,56 +216,14 @@
           "sunset_date": null,
           "tech_types": [
             "Network Device",
-            "Network Encryption",
-            "Remote Access"
+            "Wireless LAN"
           ],
-          "vendor_id_name": "Cisco Systems, Inc.",
-          "v_id": 11683,
-          "kicked_off_date": "2026-04-08T11:15:53.054000Z"
-        },
-        {
-          "active_maintenances": [],
-          "am_sort": null,
-          "assigned_lab_name": "Gossamer Security Solutions",
-          "certification_date": null,
-          "from_cc_portal": false,
-          "product_id": 11705,
-          "product_name": "Getac Devices on Android 15",
-          "protection_profiles": [
-            {
-              "pp_id": 425,
-              "pp_name": "PP-Module for Bluetooth Version 1.0",
-              "pp_short_name": "MOD_BT_V1.0"
-            },
-            {
-              "pp_id": 439,
-              "pp_name": "Functional Package for TLS Version 1.1",
-              "pp_short_name": "PKG_TLS_V1.1"
-            },
-            {
-              "pp_id": 463,
-              "pp_name": "PP-Module for Wireless Local Area Network (WLAN) Client Version 1.0",
-              "pp_short_name": "MOD_WLANC_v1.0"
-            },
-            {
-              "pp_id": 468,
-              "pp_name": "Protection Profile for Mobile Device Fundamentals Version 3.3",
-              "pp_short_name": "PP_MDF_V3.3"
-            }
-          ],
-          "status_sort": "In Progress",
-          "submitting_country_id_code": "US",
-          "submitting_country_id_name": "United States",
-          "sunset_date": null,
-          "tech_types": [
-            "Mobility"
-          ],
-          "vendor_id_name": "Getac Technology Corp.",
-          "v_id": 11705,
-          "kicked_off_date": "2026-06-15T14:24:44.273000Z"
+          "vendor_id_name": "ALE USA Inc",
+          "v_id": 11710,
+          "kicked_off_date": "2026-07-06T13:22:09.659000Z"
         }
       ],
-      "current_count": 43
+      "current_count": 40
     },
     "news": {
       "added": [],
@@ -261,17 +258,7 @@
       "added": []
     }
   },
-  "cctl_labs": {
-    "Lightship Security": [
-      {
-        "title": "NIAP\u2019s Accelerated PQC Transition (Policy Letter 33)",
-        "link": "https://lightshipsec.com/niaps-accelerated-pqc-transition-policy-letter-33/",
-        "summary": "NIAP has published Policy Letter #33, setting certification deadlines for the transition to post-quantum cryptography (PQC). The policy affects products entering NIAP evaluation, products seeking placement on the Product Compliant List (PCL), and products already certified by NIAP or a ... <div><a class=\"more-link\" href=\"https://lightshipsec.com/niaps-accelerated-pqc-transition-policy-letter-33/\">Read More</a></div>",
-        "published": "Mon, 21 Sep 2026 18:03:48 +0000",
-        "id": "https://lightshipsec.com/?p=4376"
-      }
-    ]
-  },
+  "cctl_labs": {},
   "csfc": {
     "pages": {},
     "selection_links": {},
@@ -292,28 +279,7 @@
     "baseline_reset": false
   },
   "eucc": {
-    "pages": {
-      "certificates": {
-        "added": [
-          {
-            "name": "IFX_CCI_00006Ah,IFX_CCI_00006Bh, IFX_CCI_00006Ch S12",
-            "text": "IFX_CCI_00006Ah,IFX_CCI_00006Bh, IFX_CCI_00006Ch S12 | 26 August 2026 | The TOE provides a platform for an operating system and application software used requiring a high level of resistance against attackers",
-            "href": "https://certification.enisa.europa.eu/certificates/eucc-3087-2026-000016-i-00_en",
-            "cert_date": "2026-08-26T12:00:00Z",
-            "description": "The TOE provides a platform for an operating system and application software used requiring a high level of resistance against attackers"
-          }
-        ],
-        "removed": [
-          {
-            "name": "Infineon Technologies AG Smartcard IC IFX_CCI_000011h IFX_CCI_00001Bh IFX_CCI_00001Eh IFX_CCI_000025h G12",
-            "text": "Infineon Technologies AG Smartcard IC IFX_CCI_000011h IFX_CCI_00001Bh IFX_CCI_00001Eh IFX_CCI_000025h G12 | 27 April 2026 | Infineon Technologies AG Smartcard IC IFX_CCI_000011h IFX_CCI_00001Bh IFX_CCI_00001Eh IFX_CCI_000025h G12",
-            "href": "https://certification.enisa.europa.eu/certificates/eucc-3087-2026-000001-i-00_en",
-            "cert_date": "2026-04-27T12:00:00Z",
-            "description": "Infineon Technologies AG Smartcard IC IFX_CCI_000011h IFX_CCI_00001Bh IFX_CCI_00001Eh IFX_CCI_000025h G12"
-          }
-        ]
-      }
-    },
+    "pages": {},
     "cisco_added": [],
     "cisco_removed": [],
     "baseline_reset": false
@@ -352,17 +318,17 @@
       "checks": [
         {
           "name": "PCL products",
-          "observed": 1762,
+          "observed": 1769,
           "minimum": 50
         },
         {
           "name": "Protection Profiles",
-          "observed": 271,
+          "observed": 272,
           "minimum": 10
         },
         {
           "name": "PQC PP file-version records",
-          "observed": 13,
+          "observed": 11,
           "minimum": 1,
           "required_for_diff_baseline": false
         },
@@ -375,12 +341,12 @@
       ],
       "consecutive_failures": 0,
       "using_last_known_good": false,
-      "checked_at": "2026-09-22T10:45:55.599772+00:00",
+      "checked_at": "2026-10-22T10:58:24.029605+00:00",
       "subcollections": {
         "news": {
           "label": "News announcements",
           "status": "healthy",
-          "observed": 357,
+          "observed": 358,
           "consecutive_failures": 0,
           "using_last_known_good": false
         },
@@ -412,7 +378,7 @@
       ],
       "consecutive_failures": 0,
       "using_last_known_good": false,
-      "checked_at": "2026-09-22T10:45:55.599772+00:00"
+      "checked_at": "2026-10-22T10:58:24.029605+00:00"
     },
     "cctl_labs": {
       "label": "CCTL Labs",
@@ -426,7 +392,7 @@
       ],
       "consecutive_failures": 0,
       "using_last_known_good": false,
-      "checked_at": "2026-09-22T10:45:55.599772+00:00"
+      "checked_at": "2026-10-22T10:58:24.029605+00:00"
     },
     "csfc": {
       "label": "CSfC",
@@ -434,7 +400,7 @@
       "checks": [
         {
           "name": "APL items",
-          "observed": 121,
+          "observed": 118,
           "minimum": 5
         },
         {
@@ -457,7 +423,7 @@
       ],
       "consecutive_failures": 0,
       "using_last_known_good": false,
-      "checked_at": "2026-09-22T10:45:55.599772+00:00"
+      "checked_at": "2026-10-22T10:58:24.029605+00:00"
     },
     "cc_crypto": {
       "label": "CC Crypto",
@@ -465,13 +431,13 @@
       "checks": [
         {
           "name": "publications",
-          "observed": 121,
+          "observed": 118,
           "minimum": 5
         }
       ],
       "consecutive_failures": 0,
       "using_last_known_good": false,
-      "checked_at": "2026-09-22T10:45:55.599772+00:00"
+      "checked_at": "2026-10-22T10:58:24.029605+00:00"
     },
     "nato": {
       "label": "NATO NIAPCL",
@@ -481,7 +447,7 @@
       "consecutive_failures": 0,
       "using_last_known_good": false,
       "detail": "manual baseline (40 Cisco product(s)); updated via the NATO capture GitHub issue workflow",
-      "checked_at": "2026-09-22T10:45:55.599772+00:00"
+      "checked_at": "2026-10-22T10:58:24.029605+00:00"
     },
     "eucc": {
       "label": "EUCC / ENISA",
@@ -495,7 +461,7 @@
       ],
       "consecutive_failures": 0,
       "using_last_known_good": false,
-      "checked_at": "2026-09-22T10:45:55.599772+00:00"
+      "checked_at": "2026-10-22T10:58:24.029605+00:00"
     },
     "nd_itc": {
       "label": "ND-iTC",
@@ -514,7 +480,7 @@
       ],
       "consecutive_failures": 0,
       "using_last_known_good": false,
-      "checked_at": "2026-09-22T10:45:55.599772+00:00"
+      "checked_at": "2026-10-22T10:58:24.029605+00:00"
     },
     "ietf_cnsa": {
       "label": "IETF CNSA 2.0",
@@ -533,7 +499,7 @@
       ],
       "consecutive_failures": 0,
       "using_last_known_good": false,
-      "checked_at": "2026-09-22T10:45:55.599772+00:00"
+      "checked_at": "2026-10-22T10:58:24.029605+00:00"
     },
     "ieee_pqc": {
       "label": "IEEE 802.11bt",
@@ -552,7 +518,7 @@
       ],
       "consecutive_failures": 0,
       "using_last_known_good": false,
-      "checked_at": "2026-09-22T10:45:55.599772+00:00"
+      "checked_at": "2026-10-22T10:58:24.029605+00:00"
     }
   },
   "alerts": []
