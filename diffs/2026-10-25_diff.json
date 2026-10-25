@@ -1,6 +1,6 @@
 {
-  "period_start": "2026-09-24T10:55:25.871249+00:00",
-  "period_end": "2026-09-25T10:57:05.322374+00:00",
+  "period_start": "2026-10-24T10:06:31.584562+00:00",
+  "period_end": "2026-10-25T10:35:39.691628+00:00",
   "niap": {
     "pps": {
       "added": [],
@@ -22,12 +22,65 @@
     "pcl_all": {
       "added": [],
       "removed": [],
-      "newly_archived": []
+      "newly_archived": [
+        {
+          "active_maintenances": [],
+          "am_sort": "2026-10-24T00:00:00Z",
+          "assigned_lab_name": "ECSEC Laboratory Inc. Evaluation Center",
+          "certification_date": "2024-10-24T00:00:00Z",
+          "from_cc_portal": true,
+          "product_id": "2024.1332",
+          "product_name": "KONICA MINOLTA bizhub C551i/bizhub C451i/bizhub C361i/bizhub C301i/bizhub C251i/bizhub C336DNi/bizhub C330DNi/bizhub C325DNi with FK-514,  DEVELOP ineo+ 551i/ineo+ 451i/ineo+ 361i/ineo+ 301i/ineo+ 251i with FK-514 G00-R6",
+          "protection_profiles": [
+            {
+              "pp_id": 317,
+              "pp_name": "Protection Profile for Hardcopy Devices Version 1.0",
+              "pp_short_name": "PP_HCD_V1.0"
+            }
+          ],
+          "status_sort": "Archived",
+          "submitting_country_id_code": "JP",
+          "submitting_country_id_name": "Japan",
+          "sunset_date": "2029-10-24T00:00:00Z",
+          "tech_types": [
+            "Multi-Function Devices"
+          ],
+          "vendor_id_name": "KONICA MINOLTA, INC.",
+          "v_id": "2024.1332",
+          "kicked_off_date": null
+        },
+        {
+          "active_maintenances": [],
+          "am_sort": "2026-10-24T00:00:00Z",
+          "assigned_lab_name": "ECSEC Laboratory Inc. Evaluation Center",
+          "certification_date": "2024-10-24T00:00:00Z",
+          "from_cc_portal": true,
+          "product_id": "2024.1331",
+          "product_name": "KONICA MINOLTA bizhub 651i/bizhub 551i/bizhub 451i/bizhub 361i/bizhub 301i with FK-514,  DEVELOP ineo 651i/ineo 551i/ineo 451i/ineo 361i/ineo 301i with FK-514 G00-R6",
+          "protection_profiles": [
+            {
+              "pp_id": 317,
+              "pp_name": "Protection Profile for Hardcopy Devices Version 1.0",
+              "pp_short_name": "PP_HCD_V1.0"
+            }
+          ],
+          "status_sort": "Archived",
+          "submitting_country_id_code": "JP",
+          "submitting_country_id_name": "Japan",
+          "sunset_date": "2029-10-24T00:00:00Z",
+          "tech_types": [
+            "Multi-Function Devices"
+          ],
+          "vendor_id_name": "KONICA MINOLTA, INC.",
+          "v_id": "2024.1331",
+          "kicked_off_date": null
+        }
+      ]
     },
     "in_evaluation": {
       "added": [],
       "removed": [],
-      "current_count": 43
+      "current_count": 39
     },
     "news": {
       "added": [],
@@ -122,7 +175,7 @@
       "checks": [
         {
           "name": "PCL products",
-          "observed": 1762,
+          "observed": 1769,
           "minimum": 50
         },
         {
@@ -132,7 +185,7 @@
         },
         {
           "name": "PQC PP file-version records",
-          "observed": 13,
+          "observed": 11,
           "minimum": 1,
           "required_for_diff_baseline": false
         },
@@ -145,12 +198,12 @@
       ],
       "consecutive_failures": 0,
       "using_last_known_good": false,
-      "checked_at": "2026-09-25T10:57:05.322374+00:00",
+      "checked_at": "2026-10-25T10:35:39.691628+00:00",
       "subcollections": {
         "news": {
           "label": "News announcements",
           "status": "healthy",
-          "observed": 357,
+          "observed": 358,
           "consecutive_failures": 0,
           "using_last_known_good": false
         },
@@ -182,7 +235,7 @@
       ],
       "consecutive_failures": 0,
       "using_last_known_good": false,
-      "checked_at": "2026-09-25T10:57:05.322374+00:00"
+      "checked_at": "2026-10-25T10:35:39.691628+00:00"
     },
     "cctl_labs": {
       "label": "CCTL Labs",
@@ -196,7 +249,7 @@
       ],
       "consecutive_failures": 0,
       "using_last_known_good": false,
-      "checked_at": "2026-09-25T10:57:05.322374+00:00"
+      "checked_at": "2026-10-25T10:35:39.691628+00:00"
     },
     "csfc": {
       "label": "CSfC",
@@ -227,7 +280,7 @@
       ],
       "consecutive_failures": 0,
       "using_last_known_good": false,
-      "checked_at": "2026-09-25T10:57:05.322374+00:00"
+      "checked_at": "2026-10-25T10:35:39.691628+00:00"
     },
     "cc_crypto": {
       "label": "CC Crypto",
@@ -241,7 +294,7 @@
       ],
       "consecutive_failures": 0,
       "using_last_known_good": false,
-      "checked_at": "2026-09-25T10:57:05.322374+00:00"
+      "checked_at": "2026-10-25T10:35:39.691628+00:00"
     },
     "nato": {
       "label": "NATO NIAPCL",
@@ -251,7 +304,7 @@
       "consecutive_failures": 0,
       "using_last_known_good": false,
       "detail": "manual baseline (40 Cisco product(s)); updated via the NATO capture GitHub issue workflow",
-      "checked_at": "2026-09-25T10:57:05.322374+00:00"
+      "checked_at": "2026-10-25T10:35:39.691628+00:00"
     },
     "eucc": {
       "label": "EUCC / ENISA",
@@ -265,7 +318,7 @@
       ],
       "consecutive_failures": 0,
       "using_last_known_good": false,
-      "checked_at": "2026-09-25T10:57:05.322374+00:00"
+      "checked_at": "2026-10-25T10:35:39.691628+00:00"
     },
     "nd_itc": {
       "label": "ND-iTC",
@@ -284,7 +337,7 @@
       ],
       "consecutive_failures": 0,
       "using_last_known_good": false,
-      "checked_at": "2026-09-25T10:57:05.322374+00:00"
+      "checked_at": "2026-10-25T10:35:39.691628+00:00"
     },
     "ietf_cnsa": {
       "label": "IETF CNSA 2.0",
@@ -303,26 +356,27 @@
       ],
       "consecutive_failures": 0,
       "using_last_known_good": false,
-      "checked_at": "2026-09-25T10:57:05.322374+00:00"
+      "checked_at": "2026-10-25T10:35:39.691628+00:00"
     },
     "ieee_pqc": {
       "label": "IEEE 802.11bt",
-      "status": "healthy",
+      "status": "stale",
       "checks": [
         {
           "name": "P802.11bt project records",
-          "observed": 1,
+          "observed": 0,
           "minimum": 1
         },
         {
           "name": "P802.11bt timeline hashes",
-          "observed": 1,
+          "observed": 0,
           "minimum": 1
         }
       ],
-      "consecutive_failures": 0,
-      "using_last_known_good": false,
-      "checked_at": "2026-09-25T10:57:05.322374+00:00"
+      "consecutive_failures": 1,
+      "using_last_known_good": true,
+      "detail": "P802.11bt project records 0/1; P802.11bt timeline hashes 0/1",
+      "checked_at": "2026-10-25T10:35:39.691628+00:00"
     }
   },
   "alerts": []
