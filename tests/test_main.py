@@ -32,6 +32,9 @@ _cfg.SANITY_MIN_PPS = 10
 _cfg.SANITY_MIN_CSFC_APL = 5
 _cfg.SANITY_MIN_CSFC_ANNOUNCEMENTS = 1
 _cfg.SANITY_MIN_CC_CRYPTO_PUBS = 5
+_cfg.SANITY_MIN_CC_PORTAL_NEWS = 1
+_cfg.SANITY_MIN_CC_PORTAL_PPS = 1
+_cfg.SANITY_MIN_CC_PORTAL_PRODUCTS = 1
 _cfg.SANITY_MIN_NIAP_NEWS = 1
 _cfg.SANITY_MIN_NIAP_POLICIES = 1
 _cfg.SANITY_MIN_NIAP_PQC_PP_FILES = 1
@@ -43,6 +46,9 @@ _cfg.SANITY_MIN_IETF_CNSA_DOCUMENTS = 5
 _cfg.SANITY_MIN_IEEE_PQC_RECORDS = 1
 _cfg.SANITY_MIN_CSFC_PQC_DOCUMENTS = 5
 _cfg.COLLAPSE_MIN_BASELINE = 8
+_cfg.EUCC_CONTINUITY_MIN_BASELINE = 10
+_cfg.EUCC_MIN_IDENTITY_OVERLAP = 0.70
+_cfg.CSFC_FEEDS = []
 for _mod in (
     "config", "collector", "differ", "dashboard", "emailer",
     "requests", "feedparser", "bs4",
@@ -160,7 +166,11 @@ def _healthy_snapshot():
                 for i in range(10)
             ],
         },
-        "cc_portal": {"news": [{"id": 1}], "pps": [], "products": []},
+        "cc_portal": {
+            "news": [{"id": 1}],
+            "pps": [{"id": "PP-1", "title": "Profile"}],
+            "products": [{"id": "PRODUCT-1", "title": "Product"}],
+        },
         "cctl_labs": {"Test Lab": [{"title": "post"}]},
         "csfc": {"pages": {
             "apl": [{"text": str(i)} for i in range(5)],
@@ -503,6 +513,170 @@ class TestSourceHealth:
 
         assert snapshot["source_health"]["ietf_cnsa"]["status"] == "failed"
         assert "CNSA full-text hashes" in snapshot["source_health"]["ietf_cnsa"]["detail"]
+
+    def test_cc_portal_subcollections_are_checked_independently(self):
+        snapshot = _healthy_snapshot()
+        snapshot["cc_portal"]["pps"] = []
+
+        main._apply_source_health(snapshot)
+
+        health = snapshot["source_health"]["cc_portal"]
+        assert health["status"] == "failed"
+        assert "Protection Profiles 0/1" in health["detail"]
+
+    def test_cc_portal_parser_rollout_baselines_only_new_inventory(self):
+        old = _healthy_snapshot()
+        old["source_health"] = {
+            "cc_portal": {"status": "healthy", "using_last_known_good": False}
+        }
+        old["cc_portal"] = {
+            "news": [{"text": "Old news"}],
+            "pps": [],
+            "products": [{"id": "legacy"}],
+        }
+        new = copy.deepcopy(old)
+        new["cc_portal"] = {
+            "news": [{"text": "Old news"}, {"text": "New news"}],
+            "pps": [{"id": "PP-1"}, {"id": "PP-2"}],
+            "products": [{"id": "P-1"}, {"id": "P-2"}],
+        }
+
+        with patch.object(_cfg, "SANITY_MIN_CC_PORTAL_PPS", 2):
+            with patch.object(_cfg, "SANITY_MIN_CC_PORTAL_PRODUCTS", 2):
+                baseline = main._diff_baseline_with_recoveries(old, new)
+
+        assert baseline["cc_portal"]["pps"] == new["cc_portal"]["pps"]
+        assert baseline["cc_portal"]["products"] == new["cc_portal"]["products"]
+        assert baseline["cc_portal"]["news"] == old["cc_portal"]["news"]
+
+    def test_failed_csfc_feed_retains_only_its_last_known_good(self):
+        feeds = [
+            {"name": "NSA", "rss": "https://www.nsa.gov/feed", "minimum": 1},
+            {"name": "CISA", "rss": "https://www.cisa.gov/feed", "minimum": 1},
+        ]
+        prior = _healthy_snapshot()
+        prior["csfc"].update({
+            "feeds": {
+                "NSA": [{"id": "nsa-old"}],
+                "CISA": [{"id": "cisa-old"}],
+            },
+            "_feed_health": {
+                "NSA": {"success": True, "complete": True, "observed": 1},
+                "CISA": {"success": True, "complete": True, "observed": 1},
+            },
+        })
+        with patch.object(_cfg, "CSFC_FEEDS", feeds):
+            main._apply_source_health(prior)
+            current = copy.deepcopy(prior)
+            current["csfc"]["pages"]["apl"].append({"text": "new APL row"})
+            current["csfc"]["feeds"]["NSA"] = [{"id": "nsa-new"}]
+            current["csfc"]["feeds"]["CISA"] = []
+            current["csfc"]["_feed_health"] = {
+                "NSA": {"success": True, "complete": True, "observed": 1},
+                "CISA": {
+                    "success": False, "complete": False, "observed": 0,
+                    "detail": "malformed response",
+                },
+            }
+
+            main._apply_source_health(current, prior)
+
+        health = current["source_health"]["csfc"]
+        assert health["status"] == "healthy"
+        assert health["auxiliary_status"] == "degraded"
+        assert set(health["subcollections"]) == {"NSA", "CISA"}
+        assert health["subcollections"]["CISA"]["status"] == "stale"
+        assert current["csfc"]["feeds"]["CISA"] == prior["csfc"]["feeds"]["CISA"]
+        assert current["csfc"]["feeds"]["NSA"] == [{"id": "nsa-new"}]
+        assert current["csfc"]["pages"]["apl"][-1]["text"] == "new APL row"
+
+    def test_first_healthy_csfc_feed_is_baselined_without_hiding_apl_change(self):
+        feeds = [{
+            "name": "CISA", "rss": "https://www.cisa.gov/feed", "minimum": 1
+        }]
+        old = _healthy_snapshot()
+        old["csfc"]["feeds"] = {"CISA": []}
+        old["source_health"] = {"csfc": {"status": "healthy"}}
+        new = copy.deepcopy(old)
+        new["csfc"]["pages"]["apl"].append({"text": "new APL component"})
+        new["csfc"]["feeds"]["CISA"] = [{"id": f"alert-{i}"} for i in range(30)]
+        new["source_health"] = {
+            "csfc": {
+                "status": "healthy",
+                "subcollections": {
+                    "CISA": {"status": "healthy", "using_last_known_good": False}
+                },
+            },
+        }
+
+        with patch.object(_cfg, "CSFC_FEEDS", feeds):
+            baseline = main._diff_baseline_with_recoveries(old, new)
+
+        assert baseline["csfc"]["feeds"]["CISA"] == new["csfc"]["feeds"]["CISA"]
+        assert baseline["csfc"]["pages"]["apl"] == old["csfc"]["pages"]["apl"]
+
+    def test_eucc_low_identity_overlap_retains_certificate_baseline(self):
+        prior = _healthy_snapshot()
+        prior_certs = [
+            {"name": f"EUCC-{i}", "cert_date": "2026-01-01", "href": f"https://old/{i}"}
+            for i in range(20)
+        ]
+        prior["eucc"] = {"pages": {"certificates": prior_certs}, "cisco_certs": []}
+        main._apply_source_health(prior)
+        current = copy.deepcopy(prior)
+        current["eucc"]["pages"]["certificates"] = [
+            *copy.deepcopy(prior_certs[:5]),
+            *[
+                {"name": f"NEW-{i}", "cert_date": "2026-08-01", "href": f"https://new/{i}"}
+                for i in range(15)
+            ],
+        ]
+        current["eucc"]["pages"]["requirements"] = [{"text": "Current scheme news"}]
+
+        main._apply_source_health(current, prior)
+
+        health = current["source_health"]["eucc"]
+        assert health["status"] == "stale"
+        assert health["continuity"]["overlap"] == 5
+        assert current["eucc"]["pages"]["certificates"] == prior_certs
+        assert current["eucc"]["pages"]["requirements"] == [{"text": "Current scheme news"}]
+
+    def test_eucc_url_churn_with_same_metadata_is_healthy(self):
+        prior = _healthy_snapshot()
+        prior_certs = [
+            {"name": f"EUCC-{i}", "cert_date": "2026-01-01", "href": f"https://old/{i}"}
+            for i in range(20)
+        ]
+        prior["eucc"] = {"pages": {"certificates": prior_certs}}
+        main._apply_source_health(prior)
+        current = copy.deepcopy(prior)
+        current["eucc"]["pages"]["certificates"] = [
+            {**record, "href": record["href"].replace("https://old/", "https://new/")}
+            for record in prior_certs
+        ]
+
+        main._apply_source_health(current, prior)
+
+        health = current["source_health"]["eucc"]
+        assert health["status"] == "healthy"
+        assert health["continuity"]["overlap"] == 20
+        assert current["eucc"]["pages"]["certificates"][0]["href"].startswith("https://new/")
+
+    def test_eucc_small_high_overlap_shrink_is_healthy(self):
+        prior = _healthy_snapshot()
+        prior_certs = [
+            {"name": f"EUCC-{i}", "cert_date": "2026-01-01", "href": f"https://old/{i}"}
+            for i in range(20)
+        ]
+        prior["eucc"] = {"pages": {"certificates": prior_certs}}
+        main._apply_source_health(prior)
+        current = copy.deepcopy(prior)
+        current["eucc"]["pages"]["certificates"] = copy.deepcopy(prior_certs[:18])
+
+        main._apply_source_health(current, prior)
+
+        assert current["source_health"]["eucc"]["status"] == "healthy"
+        assert len(current["eucc"]["pages"]["certificates"]) == 18
 
     def test_third_failure_triggers_operational_notification(self):
         _cfg.DRY_RUN = False
