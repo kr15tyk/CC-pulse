@@ -1,6 +1,6 @@
 {
-  "period_start": "2026-09-27T11:10:30.805583+00:00",
-  "period_end": "2026-09-28T12:36:54.223786+00:00",
+  "period_start": "2026-10-27T11:24:04.252870+00:00",
+  "period_end": "2026-10-28T11:57:25.939903+00:00",
   "niap": {
     "pps": {
       "added": [],
@@ -20,14 +20,88 @@
       "newly_archived": []
     },
     "pcl_all": {
-      "added": [],
+      "added": [
+        {
+          "active_maintenances": [],
+          "am_sort": "2031-10-12T00:00:00Z",
+          "assigned_lab_name": "Acumen Security",
+          "certification_date": "2026-10-12T00:00:00Z",
+          "from_cc_portal": false,
+          "product_id": 11709,
+          "product_name": "High Sec Labs SK41D-4TR KVM",
+          "protection_profiles": [
+            {
+              "pp_id": 412,
+              "pp_name": "Protection Profile for Peripheral Sharing Device Version 4.0",
+              "pp_short_name": "PP_PSD_V4.0"
+            },
+            {
+              "pp_id": 435,
+              "pp_name": "PP-Module for Keyboard/Mouse Devices Version 1.0",
+              "pp_short_name": "MOD_KM_V1.0"
+            },
+            {
+              "pp_id": 436,
+              "pp_name": "PP-Module for Video/Display Devices Version 1.0",
+              "pp_short_name": "MOD_VI_V1.0"
+            }
+          ],
+          "status_sort": "Certified",
+          "submitting_country_id_code": "US",
+          "submitting_country_id_name": "United States",
+          "sunset_date": null,
+          "tech_types": [
+            "Peripheral Switch"
+          ],
+          "vendor_id_name": "High Sec Labs, Inc.",
+          "v_id": 11709,
+          "kicked_off_date": "2026-06-09T11:07:24Z"
+        }
+      ],
       "removed": [],
       "newly_archived": []
     },
     "in_evaluation": {
       "added": [],
-      "removed": [],
-      "current_count": 43
+      "removed": [
+        {
+          "active_maintenances": [],
+          "am_sort": "2031-10-12T00:00:00Z",
+          "assigned_lab_name": "Acumen Security",
+          "certification_date": "2026-10-12T00:00:00Z",
+          "from_cc_portal": false,
+          "product_id": 11709,
+          "product_name": "High Sec Labs SK41D-4TR KVM",
+          "protection_profiles": [
+            {
+              "pp_id": 412,
+              "pp_name": "Protection Profile for Peripheral Sharing Device Version 4.0",
+              "pp_short_name": "PP_PSD_V4.0"
+            },
+            {
+              "pp_id": 435,
+              "pp_name": "PP-Module for Keyboard/Mouse Devices Version 1.0",
+              "pp_short_name": "MOD_KM_V1.0"
+            },
+            {
+              "pp_id": 436,
+              "pp_name": "PP-Module for Video/Display Devices Version 1.0",
+              "pp_short_name": "MOD_VI_V1.0"
+            }
+          ],
+          "status_sort": "In Progress",
+          "submitting_country_id_code": "US",
+          "submitting_country_id_name": "United States",
+          "sunset_date": null,
+          "tech_types": [
+            "Peripheral Switch"
+          ],
+          "vendor_id_name": "High Sec Labs, Inc.",
+          "v_id": 11709,
+          "kicked_off_date": "2026-06-09T11:07:24Z"
+        }
+      ],
+      "current_count": 37
     },
     "news": {
       "added": [],
@@ -83,52 +157,9 @@
     "baseline_reset": false
   },
   "eucc": {
-    "pages": {
-      "certificates": {
-        "added": [
-          {
-            "name": "Swissbit Cloud SMAERS",
-            "text": "Swissbit Cloud SMAERS | 25 September 2026 | Security Module application for Electronic Record-keeping Systems",
-            "href": "https://certification.enisa.europa.eu/certificates/eucc-3206-2026-000002-i-00_en",
-            "cert_date": "2026-09-25T12:00:00Z",
-            "description": "Security Module application for Electronic Record-keeping Systems"
-          },
-          {
-            "name": "Swissbit Cloud CSPL",
-            "text": "Swissbit Cloud CSPL | 25 September 2026 | Cryptographic Service Provider Light (CSPLight)",
-            "href": "https://certification.enisa.europa.eu/certificates/eucc-3206-2026-000001-i-00_en",
-            "cert_date": "2026-09-25T12:00:00Z",
-            "description": "Cryptographic Service Provider Light (CSPLight)"
-          }
-        ],
-        "removed": [
-          {
-            "name": "Cisco ASR 9000 Series Aggregation Services Routers running IOS-XR 7.11",
-            "text": "Cisco ASR 9000 Series Aggregation Services Routers running IOS-XR 7.11 | 28 April 2026 | The Cisco Cisco ASR 9000 Series Aggregation Services Routers running IOS-XR 7.11, (ASR9K) is a scalable carrier-class router, which is designed for redundancy, high security and availability, packaging, power, and other requirements needed by service providers. The ASR9K is designed to provide conti",
-            "href": "https://certification.enisa.europa.eu/certificates/eucc-3110-2026-2500100-01_en",
-            "cert_date": "2026-04-28T12:00:00Z",
-            "description": "The Cisco Cisco ASR 9000 Series Aggregation Services Routers running IOS-XR 7.11, (ASR9K) is a scalable carrier-class router, which is designed for redundancy, high security and availability, packaging, power, and other requirements needed by service providers. The ASR9K is designed to provide conti"
-          },
-          {
-            "name": "Waste container identification and data integrity solution",
-            "text": "Waste container identification and data integrity solution | 28 April 2026 | The Distromel Waste Container Identification System is a component of a Waste Bin Identification System (WBIS) that ensures the reliable identification of waste containers and the integrity of collection data. It comprises an RFID tag attached to eac.",
-            "href": "https://certification.enisa.europa.eu/certificates/eucc-3095-2026-000001-i-00_en",
-            "cert_date": "2026-04-28T12:00:00Z",
-            "description": "The Distromel Waste Container Identification System is a component of a Waste Bin Identification System (WBIS) that ensures the reliable identification of waste containers and the integrity of collection data. It comprises an RFID tag attached to eac."
-          }
-        ]
-      }
-    },
+    "pages": {},
     "cisco_added": [],
-    "cisco_removed": [
-      {
-        "name": "Cisco ASR 9000 Series Aggregation Services Routers running IOS-XR 7.11",
-        "text": "Cisco ASR 9000 Series Aggregation Services Routers running IOS-XR 7.11 | 28 April 2026 | The Cisco Cisco ASR 9000 Series Aggregation Services Routers running IOS-XR 7.11, (ASR9K) is a scalable carrier-class router, which is designed for redundancy, high security and availability, packaging, power, and other requirements needed by service providers. The ASR9K is designed to provide conti",
-        "href": "https://certification.enisa.europa.eu/certificates/eucc-3110-2026-2500100-01_en",
-        "cert_date": "2026-04-28T12:00:00Z",
-        "description": "The Cisco Cisco ASR 9000 Series Aggregation Services Routers running IOS-XR 7.11, (ASR9K) is a scalable carrier-class router, which is designed for redundancy, high security and availability, packaging, power, and other requirements needed by service providers. The ASR9K is designed to provide conti"
-      }
-    ],
+    "cisco_removed": [],
     "baseline_reset": false
   },
   "nd_itc": {
@@ -150,7 +181,66 @@
   "ietf_cnsa": {
     "added": [],
     "removed": [],
-    "updated": [],
+    "updated": [
+      {
+        "name": "draft-becker-cnsa2-ssh-profile",
+        "title": "Commercial National Security Algorithm (CNSA) Suite 2.0 Profile for SSH",
+        "revision": "06",
+        "expires": "2027-04-30T18:08:08Z",
+        "updated_at": "2026-10-27T18:08:08Z",
+        "rfc_number": null,
+        "document_url": "https://datatracker.ietf.org/doc/draft-becker-cnsa2-ssh-profile/",
+        "text_url": "https://www.ietf.org/archive/id/draft-becker-cnsa2-ssh-profile-06.txt",
+        "content_sha256": "8450ffac39bf35f23f64728d30de1d9cd31fbeb7ca4ff661aeda3897b0eb8517",
+        "content_size": 31919,
+        "content_etag": "\"6ae0e6cd-7caf\"",
+        "content_last_modified": "Tue, 27 Oct 2026 18:00:45 GMT",
+        "states": [
+          {
+            "type": "draft",
+            "slug": "active",
+            "name": "Active"
+          },
+          {
+            "type": "draft-iana-review",
+            "slug": "changed",
+            "name": "Version Changed - Review Needed"
+          },
+          {
+            "type": "draft-iesg",
+            "slug": "idexists",
+            "name": "I-D Exists"
+          },
+          {
+            "type": "draft-stream-ise",
+            "slug": "ise-rev",
+            "name": "In ISE Review"
+          }
+        ],
+        "workflow_state": "In ISE Review",
+        "references_rfc8446": false,
+        "references_rfc9846": false,
+        "cnsa_markers": [
+          "CNSA 2.0",
+          "LMS",
+          "ML-DSA",
+          "ML-KEM",
+          "XMSS",
+          "post-quantum"
+        ],
+        "relations": [],
+        "changed_fields": [
+          "revision",
+          "expires",
+          "states",
+          "content_sha256"
+        ],
+        "old_revision": "05",
+        "old_workflow_state": "In ISE Review",
+        "old_expires": "2027-01-22T13:20:31Z",
+        "old_content_sha256": "f7f9b563d2cfd73a88b07a9e1cfbc3a518c30948432eab6bd3fed62dc2b24f18"
+      }
+    ],
     "rfc9846_adoption": []
   },
   "ieee_pqc": {
@@ -165,7 +255,7 @@
       "checks": [
         {
           "name": "PCL products",
-          "observed": 1764,
+          "observed": 1769,
           "minimum": 50
         },
         {
@@ -175,7 +265,7 @@
         },
         {
           "name": "PQC PP file-version records",
-          "observed": 13,
+          "observed": 11,
           "minimum": 1,
           "required_for_diff_baseline": false
         },
@@ -188,12 +278,12 @@
       ],
       "consecutive_failures": 0,
       "using_last_known_good": false,
-      "checked_at": "2026-09-28T12:36:54.223786+00:00",
+      "checked_at": "2026-10-28T11:57:25.939903+00:00",
       "subcollections": {
         "news": {
           "label": "News announcements",
           "status": "healthy",
-          "observed": 357,
+          "observed": 358,
           "consecutive_failures": 0,
           "using_last_known_good": false
         },
@@ -225,7 +315,7 @@
       ],
       "consecutive_failures": 0,
       "using_last_known_good": false,
-      "checked_at": "2026-09-28T12:36:54.223786+00:00"
+      "checked_at": "2026-10-28T11:57:25.939903+00:00"
     },
     "cctl_labs": {
       "label": "CCTL Labs",
@@ -239,7 +329,7 @@
       ],
       "consecutive_failures": 0,
       "using_last_known_good": false,
-      "checked_at": "2026-09-28T12:36:54.223786+00:00"
+      "checked_at": "2026-10-28T11:57:25.939903+00:00"
     },
     "csfc": {
       "label": "CSfC",
@@ -270,7 +360,7 @@
       ],
       "consecutive_failures": 0,
       "using_last_known_good": false,
-      "checked_at": "2026-09-28T12:36:54.223786+00:00"
+      "checked_at": "2026-10-28T11:57:25.939903+00:00"
     },
     "cc_crypto": {
       "label": "CC Crypto",
@@ -284,7 +374,7 @@
       ],
       "consecutive_failures": 0,
       "using_last_known_good": false,
-      "checked_at": "2026-09-28T12:36:54.223786+00:00"
+      "checked_at": "2026-10-28T11:57:25.939903+00:00"
     },
     "nato": {
       "label": "NATO NIAPCL",
@@ -294,7 +384,7 @@
       "consecutive_failures": 0,
       "using_last_known_good": false,
       "detail": "manual baseline (40 Cisco product(s)); updated via the NATO capture GitHub issue workflow",
-      "checked_at": "2026-09-28T12:36:54.223786+00:00"
+      "checked_at": "2026-10-28T11:57:25.939903+00:00"
     },
     "eucc": {
       "label": "EUCC / ENISA",
@@ -308,7 +398,7 @@
       ],
       "consecutive_failures": 0,
       "using_last_known_good": false,
-      "checked_at": "2026-09-28T12:36:54.223786+00:00"
+      "checked_at": "2026-10-28T11:57:25.939903+00:00"
     },
     "nd_itc": {
       "label": "ND-iTC",
@@ -327,7 +417,7 @@
       ],
       "consecutive_failures": 0,
       "using_last_known_good": false,
-      "checked_at": "2026-09-28T12:36:54.223786+00:00"
+      "checked_at": "2026-10-28T11:57:25.939903+00:00"
     },
     "ietf_cnsa": {
       "label": "IETF CNSA 2.0",
@@ -346,27 +436,41 @@
       ],
       "consecutive_failures": 0,
       "using_last_known_good": false,
-      "checked_at": "2026-09-28T12:36:54.223786+00:00"
+      "checked_at": "2026-10-28T11:57:25.939903+00:00"
     },
     "ieee_pqc": {
       "label": "IEEE 802.11bt",
-      "status": "healthy",
+      "status": "stale",
       "checks": [
         {
           "name": "P802.11bt project records",
-          "observed": 1,
+          "observed": 0,
           "minimum": 1
         },
         {
           "name": "P802.11bt timeline hashes",
-          "observed": 1,
+          "observed": 0,
           "minimum": 1
         }
       ],
-      "consecutive_failures": 0,
-      "using_last_known_good": false,
-      "checked_at": "2026-09-28T12:36:54.223786+00:00"
+      "consecutive_failures": 1,
+      "using_last_known_good": true,
+      "detail": "P802.11bt project records 0/1; P802.11bt timeline hashes 0/1",
+      "checked_at": "2026-10-28T11:57:25.939903+00:00"
     }
   },
-  "alerts": []
+  "alerts": [
+    {
+      "source": "IETF CNSA",
+      "kind": "updated",
+      "title": "Commercial National Security Algorithm (CNSA) Suite 2.0 Profile for SSH",
+      "url": "https://datatracker.ietf.org/doc/draft-becker-cnsa2-ssh-profile/",
+      "detail": "IETF CNSA profile metadata or full text changed: revision, expires, states, content_sha256",
+      "matched_keywords": [
+        "CNSA",
+        "PQC"
+      ],
+      "tab": "us"
+    }
+  ]
 }
