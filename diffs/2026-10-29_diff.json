@@ -1,6 +1,6 @@
 {
-  "period_start": "2026-09-28T12:36:54.223786+00:00",
-  "period_end": "2026-09-29T11:57:55.373863+00:00",
+  "period_start": "2026-10-28T11:57:25.939903+00:00",
+  "period_end": "2026-10-29T12:06:04.116250+00:00",
   "niap": {
     "pps": {
       "added": [],
@@ -27,7 +27,7 @@
     "in_evaluation": {
       "added": [],
       "removed": [],
-      "current_count": 43
+      "current_count": 37
     },
     "news": {
       "added": [],
@@ -62,16 +62,7 @@
       "added": []
     }
   },
-  "cctl_labs": {
-    "atsec": [
-      {
-        "title": "From the Forum to the Future: atsec Sponsors the 30th CCUF Workshop in Rome",
-        "link": "https://www.atsec.com/from-the-forum-to-the-future-atsec-sponsors-the-30th-ccuf-workshop-in-rome/",
-        "published": "",
-        "id": "https://www.atsec.com/from-the-forum-to-the-future-atsec-sponsors-the-30th-ccuf-workshop-in-rome/"
-      }
-    ]
-  },
+  "cctl_labs": {},
   "csfc": {
     "pages": {},
     "selection_links": {},
@@ -122,7 +113,30 @@
   "ieee_pqc": {
     "added": [],
     "removed": [],
-    "updated": []
+    "updated": [
+      {
+        "project": "P802.11bt",
+        "title": "Post-Quantum Cryptography",
+        "draft": "D1.10",
+        "timeline_url": "https://www.ieee802.org/11/Reports/802.11_Timelines.htm",
+        "status_url": "https://www.ieee802.org/11/",
+        "timeline_text": "IEEE Std P802.11bt A Post Quantum Cryptography TGbt PDF D1.10 802.11mf 802.11bn 802.11bp 802.11bq 802.11br Actual 2025-09-10 [2029-12-31] D1.0 2026-09-03 89%",
+        "status_text": "TGbt (Post-Quantum Cryptography): Passed WG initial ballot on D1.0 with 651 comments received. Around 1/3 of the comments were resolved in September. The WG approved making the draft available for sale.",
+        "timeline_sha256": "5154126669b446dbd555777c1805cae199b7845c948b47974a95e7ed3c42ceea",
+        "status_sha256": "f827cd7d86cfb854af47b179437cf0905b17f070211168d8d0f09ac41ffa4728",
+        "dates": [
+          "2025-09-10",
+          "2026-09-03",
+          "2029-12-31"
+        ],
+        "changed_fields": [
+          "draft",
+          "timeline_sha256"
+        ],
+        "old_draft": "D1.00",
+        "old_status_text": "TGbt (Post-Quantum Cryptography): Passed WG initial ballot on D1.0 with 651 comments received. Around 1/3 of the comments were resolved in September. The WG approved making the draft available for sale."
+      }
+    ]
   },
   "source_health": {
     "niap": {
@@ -131,7 +145,7 @@
       "checks": [
         {
           "name": "PCL products",
-          "observed": 1764,
+          "observed": 1769,
           "minimum": 50
         },
         {
@@ -141,7 +155,7 @@
         },
         {
           "name": "PQC PP file-version records",
-          "observed": 13,
+          "observed": 11,
           "minimum": 1,
           "required_for_diff_baseline": false
         },
@@ -154,12 +168,12 @@
       ],
       "consecutive_failures": 0,
       "using_last_known_good": false,
-      "checked_at": "2026-09-29T11:57:55.373863+00:00",
+      "checked_at": "2026-10-29T12:06:04.116250+00:00",
       "subcollections": {
         "news": {
           "label": "News announcements",
           "status": "healthy",
-          "observed": 357,
+          "observed": 358,
           "consecutive_failures": 0,
           "using_last_known_good": false
         },
@@ -191,22 +205,21 @@
       ],
       "consecutive_failures": 0,
       "using_last_known_good": false,
-      "checked_at": "2026-09-29T11:57:55.373863+00:00"
+      "checked_at": "2026-10-29T12:06:04.116250+00:00"
     },
     "cctl_labs": {
       "label": "CCTL Labs",
-      "status": "stale",
+      "status": "healthy",
       "checks": [
         {
           "name": "lab feed items",
-          "observed": 9,
+          "observed": 19,
           "minimum": 1
         }
       ],
-      "consecutive_failures": 1,
-      "using_last_known_good": true,
-      "checked_at": "2026-09-29T11:57:55.373863+00:00",
-      "detail": "collection collapse (retained last-known-good): Lightship Security 0/10"
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-10-29T12:06:04.116250+00:00"
     },
     "csfc": {
       "label": "CSfC",
@@ -237,7 +250,7 @@
       ],
       "consecutive_failures": 0,
       "using_last_known_good": false,
-      "checked_at": "2026-09-29T11:57:55.373863+00:00"
+      "checked_at": "2026-10-29T12:06:04.116250+00:00"
     },
     "cc_crypto": {
       "label": "CC Crypto",
@@ -251,7 +264,7 @@
       ],
       "consecutive_failures": 0,
       "using_last_known_good": false,
-      "checked_at": "2026-09-29T11:57:55.373863+00:00"
+      "checked_at": "2026-10-29T12:06:04.116250+00:00"
     },
     "nato": {
       "label": "NATO NIAPCL",
@@ -261,7 +274,7 @@
       "consecutive_failures": 0,
       "using_last_known_good": false,
       "detail": "manual baseline (40 Cisco product(s)); updated via the NATO capture GitHub issue workflow",
-      "checked_at": "2026-09-29T11:57:55.373863+00:00"
+      "checked_at": "2026-10-29T12:06:04.116250+00:00"
     },
     "eucc": {
       "label": "EUCC / ENISA",
@@ -275,7 +288,7 @@
       ],
       "consecutive_failures": 0,
       "using_last_known_good": false,
-      "checked_at": "2026-09-29T11:57:55.373863+00:00"
+      "checked_at": "2026-10-29T12:06:04.116250+00:00"
     },
     "nd_itc": {
       "label": "ND-iTC",
@@ -294,7 +307,7 @@
       ],
       "consecutive_failures": 0,
       "using_last_known_good": false,
-      "checked_at": "2026-09-29T11:57:55.373863+00:00"
+      "checked_at": "2026-10-29T12:06:04.116250+00:00"
     },
     "ietf_cnsa": {
       "label": "IETF CNSA 2.0",
@@ -313,7 +326,7 @@
       ],
       "consecutive_failures": 0,
       "using_last_known_good": false,
-      "checked_at": "2026-09-29T11:57:55.373863+00:00"
+      "checked_at": "2026-10-29T12:06:04.116250+00:00"
     },
     "ieee_pqc": {
       "label": "IEEE 802.11bt",
@@ -332,8 +345,21 @@
       ],
       "consecutive_failures": 0,
       "using_last_known_good": false,
-      "checked_at": "2026-09-29T11:57:55.373863+00:00"
+      "checked_at": "2026-10-29T12:06:04.116250+00:00"
     }
   },
-  "alerts": []
+  "alerts": [
+    {
+      "source": "IEEE 802.11bt",
+      "kind": "updated",
+      "title": "P802.11bt Post-Quantum Cryptography",
+      "url": "https://www.ieee802.org/11/Reports/802.11_Timelines.htm",
+      "detail": "IEEE 802.11bt milestone/status changed \u00b7 draft D1.00 \u2192 D1.10",
+      "matched_keywords": [
+        "PQC",
+        "802.11bt"
+      ],
+      "tab": "us"
+    }
+  ]
 }
