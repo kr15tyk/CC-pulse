@@ -179,7 +179,7 @@
   <span class="nav-title">CC Pulse Dashboard</span>
   <span class="nav-spacer"></span>
   <div class="ham-wrap">
-    <span class="nav-meta">Last run: 2026-10-29 08:06 ET</span>
+    <span class="nav-meta">Last run: 2026-10-30 07:58 ET</span>
     <button class="ham-btn" id="ham-btn" onclick="toggleHamMenu()" aria-expanded="false" aria-haspopup="true" title="Open menu">&#9776;</button>
     <div class="ham-menu" id="ham-menu" role="menu">
       <a class="ham-item" href="https://kr15tyk.github.io/CC-pulse/cc_dashboard.html" role="menuitem"><span class="ham-icon">&#127968;</span>Home</a>
@@ -263,7 +263,7 @@
 <div class="sticky-top">
   <div class="trend-bar">
     <div class="stat"><a href="#sec-niap-pp" onclick="navigateTo('sec-niap-pp');return false;">
-      <div class="stat-num ">0</div>
+      <div class="stat-num active-num">4</div>
       <div class="stat-lbl">NIAP Changes</div>
     </a></div>
     <div class="stat"><a href="#sec-csfc" onclick="navigateTo('sec-csfc');return false;">
@@ -287,11 +287,11 @@
       <div class="stat-lbl">EUCC Changes</div>
     </a></div>
     <div class="stat"><a href="#sec-ietf-cnsa" onclick="navigateTo('sec-ietf-cnsa');return false;">
-      <div class="stat-num active-num">1</div>
+      <div class="stat-num ">0</div>
       <div class="stat-lbl">CNSA / PQC Standards</div>
     </a></div>
     <div class="stat"><a href="#sec-alerts" onclick="navigateTo('sec-alerts');return false;">
-      <div class="stat-num alert-num">1</div>
+      <div class="stat-num alert-num">2</div>
       <div class="stat-lbl">Alerts</div>
     </a></div>
   </div>
@@ -321,18 +321,27 @@
 <div class="card card-alert" id="sec-alerts">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>Alerts</span>
-    <span class="card-count">1 alert</span>
+    <span class="card-count">2 alerts</span>
     <span class="toggle-icon">&#9660;</span>
   </div>
   <div class="card-body">
     <div class="alert-monitoring">FIPS 186-4, FIPS 186-5, NDcPP, CPP_ND, TLS 1.3, SSH, PP-Module_VPN, PP-Module_WLAN, CNSA 2.0, ML-KEM, ML-DSA, SLH-DSA, post-quantum, RFC 9846, 802.11bt, labgram, valgram, emergency, CSfC, Commercial Solutions for Classified, CSfC APL, CSfC component selections, NSA CSfC, NATO NIAPC, NIAPCL, EUCC, ENISA, CCDB-018, Crypto Catalog, cryptography working group, Specification of Functional Requirements for Cryptography, FCS_CKM, FCS_COP, FCS_RBG</div>
     
-        <div class="item-row alert-item" data-alert-key="IEEE 802.11bt-P802.11bt_Post-Quantum_Cryptography" data-tab="us">
+        <div class="item-row alert-item" data-alert-key="NIAP TD-Updates_to_FCS_CKM.1/WPA_and_FCS_CKM.2/GTK_Tests_for_MOD_WLAN_AS" data-tab="us">
           
-          <a class="item-link" href="https://www.ieee802.org/11/Reports/802.11_Timelines.htm" target="_blank">IEEE 802.11bt: P802.11bt Post-Quantum Cryptography</a>
+          <a class="item-link" href="https://www.niap-ccevs.org/technical-decisions/TD1059" target="_blank">NIAP TD: Updates to FCS_CKM.1/WPA and FCS_CKM.2/GTK Tests for MOD_WLAN_AS</a>
           
-          <span class="item-meta">updated &middot; PQC, 802.11bt</span>
-          <div class="item-sub">IEEE 802.11bt milestone/status changed · draft D1.00 → D1.10</div>
+          <span class="item-meta">new &middot; FCS_CKM</span>
+          <div class="item-sub">TD1059</div>
+          <button class="dismiss-btn" onclick="dismissAlert(this)" title="Mark as seen">&#10003; Seen</button>
+        </div>
+        
+        <div class="item-row alert-item" data-alert-key="NIAP TD-Updates_to_FCS_CKM.1/WPA_and_FCS_CKM.2/GTK_Tests_for_MOD_WLANC" data-tab="us">
+          
+          <a class="item-link" href="https://www.niap-ccevs.org/technical-decisions/TD1060" target="_blank">NIAP TD: Updates to FCS_CKM.1/WPA and FCS_CKM.2/GTK Tests for MOD_WLANC</a>
+          
+          <span class="item-meta">new &middot; FCS_CKM</span>
+          <div class="item-sub">TD1060</div>
           <button class="dismiss-btn" onclick="dismissAlert(this)" title="Mark as seen">&#10003; Seen</button>
         </div>
         
@@ -362,22 +371,28 @@
     
     
     
-    <p class="no-change">No changes detected. <span class="last-active">(last: 2026-10-28)</span></p>
+    <p class="no-change">No changes detected. <span class="last-active">(last: 2026-10-30)</span></p>
   </div>
 </div>
 
   <!-- NIAP In-Evaluation -->
-<div class="card " id="sec-niap-inevaluation" data-has-changes="0">
+<div class="card card-new" id="sec-niap-inevaluation" data-has-changes="1">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>NIAP In-Evaluation Products</span>
-    <span class="card-count">37 active</span>
+    <span class="card-count">1 change</span>
     </span>
   </div>
-  <div class="card-body collapsed">
+  <div class="card-body ">
     
     
+    <div class="sub-hdr sub-removed">Left Evaluation (1)</div>
     
-    <p class="no-change">No evaluation changes detected. 37 products currently in evaluation.</p>
+    <div class="item-row" data-source="niap-inevaluation" data-kind="removed">
+      <span class="item-link">Palo Alto Networks, Inc. -- Palo Alto Networks Cortex XSOAR Server 6.14</span>
+      <span class="item-meta">Completed or Withdrawn</span>
+    </div>
+    
+    
     
   </div>
 </div>
@@ -444,17 +459,28 @@
 </div>
 
   <!-- NIAP PCL — All Certifications -->
-<div class="card " id="sec-niap-pcl" data-has-changes="0">
+<div class="card card-new" id="sec-niap-pcl" data-has-changes="1">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>NIAP PCL — All Certifications</span>
-    <span class="card-count">0 changes</span>
+    <span class="card-count">1 change</span>
     </span>
   </div>
-  <div class="card-body collapsed">
+  <div class="card-body ">
+    
+    <div class="sub-hdr sub-new">New Certifications (1)</div>
+    
+    <div class="item-row" data-source="niap-pcl" data-kind="new">
+      <span class="item-link">Palo Alto Networks, Inc. -- Palo Alto Networks Cortex XSOAR Server 6.14</span>
+      <span class="item-meta">2026-10-26</span>
+    </div>
+    
+    <div class="item-sub">PKG_X509_v1.0, PP_APP_v2.0, PKG_TLS_V2.1</div>
     
     
     
-    <p class="no-change">No changes detected. <span class="last-active">(last: 2026-10-28)</span></p>
+    
+    
+    
   </div>
 </div>
 
@@ -478,17 +504,36 @@
 </div>
 
   <!-- NIAP TDs -->
-<div class="card " id="sec-niap-td" data-has-changes="0">
+<div class="card card-new" id="sec-niap-td" data-has-changes="2">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>NIAP Technical Decisions</span>
-    <span class="card-count">0 changes</span>
+    <span class="card-count">2 changes</span>
     </span>
-    <span class="toggle-icon">&#9658;</span>
+    <span class="toggle-icon">&#9660;</span>
   </div>
-  <div class="card-body collapsed">
+  <div class="card-body ">
+    
+    <div class="sub-hdr sub-new">New TDs (2)</div>
+    
+    <div class="item-row" data-source="niap-td" data-kind="new">
+      <a class="item-link" href="https://www.niap-ccevs.org/technical-decisions/TD1059" target="_blank">TD1059 &mdash; Updates to FCS_CKM.1/WPA and FCS_CKM.2/GTK Tests for MOD_WLAN_AS</a>
+      <span class="item-meta">2026-10-29</span>
+    </div>
+    
+    <div class="item-sub">Applies to: MOD_WLAN_AS_v1.0</div>
     
     
-    <p class="no-change">No changes detected.</p>
+    <div class="item-row" data-source="niap-td" data-kind="new">
+      <a class="item-link" href="https://www.niap-ccevs.org/technical-decisions/TD1060" target="_blank">TD1060 &mdash; Updates to FCS_CKM.1/WPA and FCS_CKM.2/GTK Tests for MOD_WLANC</a>
+      <span class="item-meta">2026-10-29</span>
+    </div>
+    
+    <div class="item-sub">Applies to: MOD_WLANC_v1.0</div>
+    
+    
+    
+    
+    
   </div>
 </div>
 </div>
@@ -539,26 +584,21 @@
     </div>
   </div>
 
-  <div class="card card-updated" id="sec-ieee-pqc" data-has-changes="1">
+  <div class="card " id="sec-ieee-pqc" data-has-changes="0">
     <div class="card-hdr" onclick="toggleCard(this)">
       <span>IEEE 802.11bt Post-Quantum Cryptography</span>
-      <span class="card-count">1 update</span>
-      <span class="toggle-icon">&#9660;</span>
+      <span class="card-count">0 updates</span>
+      <span class="toggle-icon">&#9658;</span>
     </div>
-    <div class="card-body ">
+    <div class="card-body collapsed">
       
         
       
         
       
         
-        <div class="item-row" data-source="ieee-pqc" data-kind="updated">
-          <a class="item-link" href="https://www.ieee802.org/11/Reports/802.11_Timelines.htm" target="_blank">P802.11bt &mdash; Post-Quantum Cryptography</a>
-          <span class="item-meta">D1.00 &rarr; D1.10</span>
-        </div>
-        
       
-      
+      <p class="no-change">No changes detected.</p>
     </div>
   </div>
 </div>
@@ -668,7 +708,7 @@
 <div class="card card-new" id="sec-history" data-has-changes="1">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>Change History</span>
-    <span class="card-count">26 events</span>
+    <span class="card-count">29 events</span>
     <span class="toggle-icon">▼</span>
   </div>
   <div class="card-body">
@@ -686,6 +726,39 @@
       div>
     <div class="timeline" id="history-timeline">
     
+      
+      <div class="tl-entry" data-cat="td_new">
+        <div class="tl-date">2026-10-30</div>
+        <div class="tl-body">
+          <div class="tl-title">
+            <span class="tl-badge new">new</span>
+            <a href="https://www.niap-ccevs.org/technical-decisions/TD1059" target="_blank">New TD: TD1059</a>
+          </div>
+          <div class="tl-detail">Updates to FCS_CKM.1/WPA and FCS_CKM.2/GTK Tests for MOD_WLAN_AS</div>
+        </div>
+      </div>
+      
+      <div class="tl-entry" data-cat="td_new">
+        <div class="tl-date">2026-10-30</div>
+        <div class="tl-body">
+          <div class="tl-title">
+            <span class="tl-badge new">new</span>
+            <a href="https://www.niap-ccevs.org/technical-decisions/TD1060" target="_blank">New TD: TD1060</a>
+          </div>
+          <div class="tl-detail">Updates to FCS_CKM.1/WPA and FCS_CKM.2/GTK Tests for MOD_WLANC</div>
+        </div>
+      </div>
+      
+      <div class="tl-entry" data-cat="pcl_cert">
+        <div class="tl-date">2026-10-30</div>
+        <div class="tl-body">
+          <div class="tl-title">
+            <span class="tl-badge new">new</span>
+            <a href="https://www.niap-ccevs.org/products/11715" target="_blank">Palo Alto Networks, Inc. — Palo Alto Networks Cortex XSOAR Server 6.14</a>
+          </div>
+          <div class="tl-detail">Certified 2026-10-26 · Gossamer Security Solutions · PKG_X509_v1.0, PP_APP_v2.0, PKG_TLS_V2.1</div>
+        </div>
+      </div>
       
       <div class="tl-entry" data-cat="pp_new">
         <div class="tl-date">2026-10-29</div>
@@ -983,7 +1056,7 @@
 </div><!-- /main-content -->
 <footer>
   <span>CC Pulse &middot; Auto-refreshes daily (01:00 EST) &middot; NIAP, CSfC, CC Portal, NATO NIAPCL, EUCC / ENISA</span>
-  <span>Last run: 2026-10-29 08:06 ET</span>
+  <span>Last run: 2026-10-30 07:58 ET</span>
 </footer>
 
 <script>
