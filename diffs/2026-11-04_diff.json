@@ -1,0 +1,543 @@
+{
+  "period_start": "2026-11-03T13:26:29.487941+00:00",
+  "period_end": "2026-11-04T13:37:31.154867+00:00",
+  "niap": {
+    "pps": {
+      "added": [],
+      "removed": [],
+      "sunset_changes": [],
+      "status_changes": [],
+      "revised": [],
+      "content_changes": []
+    },
+    "tds": {
+      "added": [],
+      "removed": []
+    },
+    "cisco_ndcpp": {
+      "added": [],
+      "removed": [],
+      "newly_archived": []
+    },
+    "pcl_all": {
+      "added": [
+        {
+          "active_maintenances": [],
+          "am_sort": "2028-10-28T00:00:00Z",
+          "assigned_lab_name": "Gossamer Security Solutions",
+          "certification_date": "2026-10-28T00:00:00Z",
+          "from_cc_portal": false,
+          "product_id": 11711,
+          "product_name": "Samsung Electronics Co., Ltd. Samsung Galaxy Devices on Android 16 - Spring",
+          "protection_profiles": [
+            {
+              "pp_id": 425,
+              "pp_name": "PP-Module for Bluetooth Version 1.0",
+              "pp_short_name": "MOD_BT_V1.0"
+            },
+            {
+              "pp_id": 439,
+              "pp_name": "Functional Package for TLS Version 1.1",
+              "pp_short_name": "PKG_TLS_V1.1"
+            },
+            {
+              "pp_id": 463,
+              "pp_name": "PP-Module for Wireless Local Area Network (WLAN) Client Version 1.0",
+              "pp_short_name": "MOD_WLANC_v1.0"
+            },
+            {
+              "pp_id": 468,
+              "pp_name": "Protection Profile for Mobile Device Fundamentals Version 3.3",
+              "pp_short_name": "PP_MDF_V3.3"
+            },
+            {
+              "pp_id": 476,
+              "pp_name": "collaborative Protection Profile Module for Biometric enrolment and verification - for unlocking the device v1.1",
+              "pp_short_name": "MOD_CPP_BIO_V1.1"
+            },
+            {
+              "pp_id": 487,
+              "pp_name": "PP-Module for VPN Client, Version 2.5",
+              "pp_short_name": "MOD_VPNC_V2.5"
+            }
+          ],
+          "status_sort": "Certified",
+          "submitting_country_id_code": "US",
+          "submitting_country_id_name": "United States",
+          "sunset_date": null,
+          "tech_types": [
+            "Mobility"
+          ],
+          "vendor_id_name": "Samsung Electronics Co., Ltd.",
+          "v_id": 11711,
+          "kicked_off_date": "2026-06-12T14:09:38.845000Z"
+        }
+      ],
+      "removed": [],
+      "newly_archived": []
+    },
+    "in_evaluation": {
+      "added": [],
+      "removed": [
+        {
+          "active_maintenances": [],
+          "am_sort": null,
+          "assigned_lab_name": "Gossamer Security Solutions",
+          "certification_date": null,
+          "from_cc_portal": false,
+          "product_id": 11711,
+          "product_name": "Samsung Electronics Co., Ltd. Samsung Galaxy Devices on Android 16 - Spring",
+          "protection_profiles": [
+            {
+              "pp_id": 425,
+              "pp_name": "PP-Module for Bluetooth Version 1.0",
+              "pp_short_name": "MOD_BT_V1.0"
+            },
+            {
+              "pp_id": 439,
+              "pp_name": "Functional Package for TLS Version 1.1",
+              "pp_short_name": "PKG_TLS_V1.1"
+            },
+            {
+              "pp_id": 463,
+              "pp_name": "PP-Module for Wireless Local Area Network (WLAN) Client Version 1.0",
+              "pp_short_name": "MOD_WLANC_v1.0"
+            },
+            {
+              "pp_id": 468,
+              "pp_name": "Protection Profile for Mobile Device Fundamentals Version 3.3",
+              "pp_short_name": "PP_MDF_V3.3"
+            },
+            {
+              "pp_id": 476,
+              "pp_name": "collaborative Protection Profile Module for Biometric enrolment and verification - for unlocking the device v1.1",
+              "pp_short_name": "MOD_CPP_BIO_V1.1"
+            },
+            {
+              "pp_id": 487,
+              "pp_name": "PP-Module for VPN Client, Version 2.5",
+              "pp_short_name": "MOD_VPNC_V2.5"
+            }
+          ],
+          "status_sort": "In Progress",
+          "submitting_country_id_code": "US",
+          "submitting_country_id_name": "United States",
+          "sunset_date": null,
+          "tech_types": [
+            "Mobility"
+          ],
+          "vendor_id_name": "Samsung Electronics Co., Ltd.",
+          "v_id": 11711,
+          "kicked_off_date": "2026-06-12T14:09:38.845000Z"
+        }
+      ],
+      "current_count": 35
+    },
+    "news": {
+      "added": [],
+      "revised": [],
+      "deactivated": [],
+      "reactivated": [],
+      "removed": []
+    },
+    "events": {
+      "added": [],
+      "revised": [],
+      "deactivated": [],
+      "reactivated": [],
+      "removed": []
+    },
+    "policies": {
+      "added": [],
+      "revised": [],
+      "archived": [],
+      "reactivated": [],
+      "removed": []
+    }
+  },
+  "cc_portal": {
+    "news": {
+      "added": []
+    },
+    "pps": {
+      "added": []
+    },
+    "products": {
+      "added": []
+    }
+  },
+  "cctl_labs": {},
+  "csfc": {
+    "pages": {},
+    "selection_links": {},
+    "documents": {
+      "added": [],
+      "removed": [],
+      "updated": []
+    },
+    "feeds": {
+      "CISA Alerts": [
+        {
+          "title": "Subnet Solutions PowerSYSTEM Center",
+          "link": "https://www.cisa.gov/news-events/ics-advisories/icsa-26-307-01",
+          "summary": "<p><a href=\"https://github.com/cisagov/CSAF/blob/develop/csaf_files/OT/white/2026/icsa-26-307-01.json\"><strong>View CSAF</strong></a></p>\n<h2>Summary</h2>\n<p><strong>Successful exploitation of these vulnerabilities could allow an attacker to execute unauthorized SQL commands and gain access to unauthorized resources.</strong></p>\n<p>The following versions of Subnet Solutions PowerSYSTEM Center are affected:</p>\n<ul>\n<li>PowerSYSTEM Center 2020 &lt;=5.29.x (CVE-2026-63017)</li>\n<li>PowerSYSTEM Center 2024 &gt;=6.0.x|&lt;=6.2.x (CVE-2026-63017, CVE-2026-63774)</li>\n<li>PowerSYSTEM Center 2026 &gt;=7.0.x|&lt;=7.1.x (CVE-2026-63017, CVE-2026-63774)</li>\n</ul>\n<div class=\"csaf-table\">\n<table class=\"tablesaw tablesaw-stack\">\n<thead>\n<tr>\n<th>CVSS</th>\n<th>Vendor</th>\n<th>Equipment</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>v3 9</td>\n<td>Subnet Solutions</td>\n<td>PowerSYSTEM Center</td>\n</tr>\n</tbody>\n</table>\n<table class=\"tablesaw tablesaw-stack\">\n<thead>\n<tr>\n<th>2 Vulnerabilities</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>Incorrect Authorization, Improper Neutralization of Special Elements used in an SQL Command ('SQL Injection')</td>\n</tr>\n</tbody>\n</table>\n</div>\n<h3>Background</h3>\n<ul>\n<li><strong>Critical Infrastructure Sectors: </strong>Critical Manufacturing, Energy</li>\n<li><strong>Countries/Areas Deployed: </strong>Worldwide</li>\n<li><strong>Company Headquarters Location: </strong>Canada</li>\n</ul>\n<hr />\n<h2>Vulnerabilities</h2>\n<div class=\"icsa-etb-toggle-wrapper\"><a class=\"icsa-etb-toggle-all\" href=\"https://www.cisa.gov/\">Expand All +</a></div>\n<div class=\"c-expandable-textbox icsa-etb\">\n<div class=\"c-expandable-textbox__title\">CVE-2026-63017</div>\n<div class=\"c-expandable-textbox__body\">Incorrect authorization in PowerSYSTEM Center allows a low-privileged, authenticated user to access resources normally limited to administrators.</div>\n<div class=\"c-expandable-textbox-morebutton-wrapper\"><a class=\"c-expandable-textbox-morebutton\" href=\"https://www.cisa.gov/\">Read More</a></div>\n<div class=\"c-expandable-textbox__body2\">\n<h4>3 Affected Products</h4>\n<hr />\n<h5>Subnet Solutions PowerSYSTEM Center 2024 &gt;=6.0.x|&lt;=6.2.x</h5>\n<div>\n<p>Product Status: known_affected</p>\n</div>\n<h6>Remediations</h6>\n<div>\n<p><strong>Mitigation</strong><br />For users who are currently using PowerSYSTEM Center 2024, Subnet Solutions recommends users upgrade to PowerSYSTEM Center 2026 Update 1.1. For assistance in upgrading, users should contact the Subnet Solutions System Integration team or customer support team at (403) 270-8885 or by email at support@subnet.com. If unable to update to the latest version, Subnet Solutions recommends users monitor user activity records to ensure users are following acceptable usage policies of the application. Subnet Solutions also recommends disabling PowerSYSTEM Center Client Access Server users' ability to access the browser's F12 Developer Tools.</p>\n</div>\n<hr />\n<h5>Subnet Solutions PowerSYSTEM Center 2020 &lt;=5.29.x</h5>\n<div>\n<p>Product Status: known_affected</p>\n</div>\n<h6>Remediations</h6>\n<div>\n<p><strong>Mitigation</strong><br />Subnet Solutions recommends users update to PowerSYSTEM Center 2020 Update 30. For assistance in upgrading, users should contact the Subnet Solutions System Integration team or customer support team at (403) 270-8885 or by email at support@subnet.com. If unable to update to the latest version, Subnet Solutions recommends users monitor user activity records to ensure users are following acceptable usage policies of the application. Subnet Solutions also recommends disabling PowerSYSTEM Center Client Access Server users' ability to access the browser's F12 Developer Tools.</p>\n</div>\n<hr />\n<h5>Subnet Solutions PowerSYSTEM Center 2026 &gt;=7.0.x|&lt;=7.1.x</h5>\n<div>\n<p>Product Status: known_affected</p>\n</div>\n<h6>Remediations</h6>\n<div>\n<p><strong>Mitigation</strong><br />Subnet Solutions recommends users update to PowerSYSTEM Center 2026 Update 1.1. For assistance in upgrading, users should contact the Subnet Solutions System Integration team or customer support team at (403) 270-8885 or by email at support@subnet.com. If unable to update to the latest version, Subnet Solutions recommends users monitor user activity records to ensure users are following acceptable usage policies of the application. Subnet Solutions also recommends disabling PowerSYSTEM Center Client Access Server users' ability to access the browser's F12 Developer Tools.</p>\n</div>\n<hr />\n<h6>Additional Metrics</h6>\n<p><strong>Relevant CWE:</strong> <a href=\"https://cwe.mitre.org/data/definitions/863.html\">CWE-863 Incorrect Authorization</a></p>\n<div class=\"csaf-table csaf-metrics-table\">\n<table class=\"tablesaw tablesaw-stack\">\n<thead>\n<tr>\n<th>CVSS Version</th>\n<th>Base Score</th>\n<th>Base Severity</th>\n<th>Vector String</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>3.1</td>\n<td>9</td>\n<td>CRITICAL</td>\n<td><a href=\"https://www.first.org/cvss/calculator/3.1#CVSS:3.1/AV:A/AC:L/PR:L/UI:N/S:C/C:H/I:H/A:H\">CVSS:3.1/AV:A/AC:L/PR:L/UI:N/S:C/C:H/I:H/A:H</a></td>\n</tr>\n<tr>\n<td>4.0</td>\n<td>9.4</td>\n<td>CRITICAL</td>\n<td><a href=\"https://www.first.org/cvss/calculator/4.0#CVSS:4.0/AV:A/AC:L/AT:N/PR:L/UI:N/VC:H/VI:H/VA:H/SC:H/SI:H/SA:H\">CVSS:4.0/AV:A/AC:L/AT:N/PR:L/UI:N/VC:H/VI:H/VA:H/SC:H/SI:H/SA:H</a></td>\n</tr>\n</tbody>\n</table>\n</div>\n<hr />\n<p><a href=\"https://www.cve.org/CVERecord?id=CVE-2026-63017\">View CVE Details</a></p>\n</div>\n</div>\n<div class=\"c-expandable-textbox icsa-etb\">\n<div class=\"c-expandable-textbox__title\">CVE-2026-63774</div>\n<div class=\"c-expandable-textbox__body\">Insufficient input validation in the PowerSYSTEM Center report designer allows an authenticated user to execute unauthorized SQL commands.</div>\n<div class=\"c-expandable-textbox-morebutton-wrapper\"><a class=\"c-expandable-textbox-morebutton\" href=\"https://www.cisa.gov/\">Read More</a></div>\n<div class=\"c-expandable-textbox__body2\">\n<h4>5 Affected Products</h4>\n<hr />\n<h5>Subnet Solutions PowerSYSTEM Center 2024 &gt;=6.0.x|&lt;=6.2.x</h5>\n<div>\n<p>Product Status: known_affected</p>\n</div>\n<h6>Remediations</h6>\n<div>\n<p><strong>Mitigation</strong><br />For users who are currently using PowerSYSTEM Center 2024, Subnet Solutions recommends users upgrade to PowerSYSTEM Center 2026 Update 1.1. For assistance in upgrading, users should contact the Subnet Solutions System Integration team or customer support team at (403) 270-8885 or by email at support@subnet.com. If unable to update to the latest version, Subnet Solutions recommends users disable user access to the report designer.</p>\n</div>\n<hr />\n<h5>Subnet Solutions PowerSYSTEM Center 2020 &lt;=5.29.x</h5>\n<div>\n<p>Product Status: known_affected</p>\n</div>\n<h6>Remediations</h6>\n<hr />\n<h5>Subnet Solutions PowerSYSTEM Center 2026 &gt;=7.0.x|&lt;=7.1.x</h5>\n<div>\n<p>Product Status: known_affected</p>\n</div>\n<h6>Remediations</h6>\n<div>\n<p><strong>Mitigation</strong><br />Subnet Solutions recommends users update to PowerSYSTEM Center 2026 Update 1.1. For assistance in upgrading, users should contact the Subnet Solutions System Integration team or customer support team at (403) 270-8885 or by email at support@subnet.com. If unable to update to the latest version, Subnet Solutions recommends users disable user access to the report designer.</p>\n</div>\n<hr />\n<h5>Subnet Solutions PowerSYSTEM Center 2024 &gt;=6.0.x|&lt;=6.2.x</h5>\n<div>\n<p>Product Status: known_affected</p>\n</div>\n<h6>Remediations</h6>\n<div>\n<p><strong>Mitigation</strong><br />For users who are currently using PowerSYSTEM Center 2024, Subnet Solutions recommends users upgrade to PowerSYSTEM Center 2026 Update 1.1. For assistance in upgrading, users should contact the Subnet Solutions System Integration team or customer support team at (403) 270-8885 or by email at support@subnet.com. If unable to update to the latest version, Subnet Solutions recommends users disable user access to the report designer.</p>\n</div>\n<hr />\n<h5>Subnet Solutions PowerSYSTEM Center 2026 &gt;=7.0.x|&lt;=7.1.x</h5>\n<div>\n<p>Product Status: known_affected</p>\n</div>\n<h6>Remediations</h6>\n<div>\n<p><strong>Mitigation</strong><br />Subnet Solutions recommends users update to PowerSYSTEM Center 2026 Update 1.1. For assistance in upgrading, users should contact the Subnet Solutions System Integration team or customer support team at (403) 270-8885 or by email at support@subnet.com. If unable to update to the latest version, Subnet Solutions recommends users disable user access to the report designer.</p>\n</div>\n<hr />\n<h6>Additional Metrics</h6>\n<p><strong>Relevant CWE:</strong> <a href=\"https://cwe.mitre.org/data/definitions/89.html\">CWE-89 Improper Neutralization of Special Elements used in an SQL Command ('SQL Injection')</a></p>\n<div class=\"csaf-table csaf-metrics-table\">\n<table class=\"tablesaw tablesaw-stack\">\n<thead>\n<tr>\n<th>CVSS Version</th>\n<th>Base Score</th>\n<th>Base Severity</th>\n<th>Vector String</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>3.1</td>\n<td>9</td>\n<td>CRITICAL</td>\n<td><a href=\"https://www.first.org/cvss/calculator/3.1#CVSS:3.1/AV:A/AC:L/PR:L/UI:N/S:C/C:H/I:H/A:H\">CVSS:3.1/AV:A/AC:L/PR:L/UI:N/S:C/C:H/I:H/A:H</a></td>\n</tr>\n<tr>\n<td>4.0</td>\n<td>9.4</td>\n<td>CRITICAL</td>\n<td><a href=\"https://www.first.org/cvss/calculator/4.0#CVSS:4.0/AV:A/AC:L/AT:N/PR:L/UI:N/VC:H/VI:H/VA:H/SC:H/SI:H/SA:H\">CVSS:4.0/AV:A/AC:L/AT:N/PR:L/UI:N/VC:H/VI:H/VA:H/SC:H/SI:H/SA:H</a></td>\n</tr>\n</tbody>\n</table>\n</div>\n<hr />\n<p><a href=\"https://www.cve.org/CVERecord?id=CVE-2026-63774\">View CVE Details</a></p>\n</div>\n</div>\n<hr />\n<h2>Acknowledgments</h2>\n<ul>\n<li>Chinmay Patel of Digital Boundary Group reported these vulnerabilities to CISA.</li>\n<li>Subnet Solutions reported these vulnerabilities to CISA.</li>\n</ul>\n<hr />\n<h2>Recommended Practices</h2>\n<p>CISA recommends users take defensive measures to minimize the risk of exploitation of these vulnerabilities.</p>\n<ul type=\"disc\">\n<li>Minimize network exposure for all control system devices and/or systems, ensuring they are <a href=\"https://www.cisa.gov/uscert/ics/alerts/ICS-ALERT-10-301-01\">not accessible from the internet</a>.</li>\n<li>Locate control system networks and remote devices behind firewalls and isolating them from business networks.</li>\n<li>When remote access is required, use more secure methods, such as Virtual Private Networks (VPNs), recognizing VPNs may have vulnerabilities and should be updated to the most current version available. Also recognize VPN is only as secure as the connected devices.</li>\n</ul>\n<p>CISA reminds organizations to perform proper impact analysis and risk assessment prior to deploying defensive measures.</p>\n<p>CISA also provides a section for <a href=\"https://www.cisa.gov/resources-tools/resources/ics-recommended-practices\">control systems security recommended practices</a> on the ICS webpage on <a href=\"https://www.cisa.gov/topics/industrial-control-systems\">cisa.gov/ics</a>. Several CISA products detailing cyber defense best practices are available for reading and download, including <a href=\"https://www.cisa.gov/sites/default/files/recommended_practices/NCCIC_ICS-CERT_Defense_in_Depth_2016_S508C.pdf\">Improving Industrial Control Systems Cybersecurity with Defense-in-Depth Strategies</a>.</p>\n<p>CISA encourages organizations to implement recommended cybersecurity strategies for <a href=\"https://www.cisa.gov/sites/default/files/publications/Cybersecurity_Best_Practices_for_Industrial_Control_Systems.pdf\">proactive defense of ICS assets</a>.</p>\n<p>Additional mitigation guidance and recommended practices are publicly available on the ICS webpage at <a href=\"https://www.cisa.gov/topics/industrial-control-systems\">cisa.gov/ics</a> in the technical information paper, <a href=\"https://www.cisa.gov/news-events/news/targeted-cyber-intrusion-detection-and-mitigation-strategies-update-b\">ICS-TIP-12-146-01B--Targeted Cyber Intrusion Detection and Mitigation Strategies</a>.</p>\n<p>Organizations observing suspected malicious activity should follow established internal procedures and report findings to CISA for tracking and correlation against other incidents.</p>\n<p>CISA also recommends users take the following measures to protect themselves from social engineering attacks:</p>\n<ul type=\"disc\">\n<li>Do not click web links or open attachments in unsolicited email messages.</li>\n<li>Refer to <a href=\"https://www.cisa.gov/secure-our-world/teach-employees-avoid-phishing\">Recognizing and Avoiding Email Scams</a> for more information on avoiding email scams.</li>\n<li>Refer to <a href=\"https://www.cisa.gov/news-events/news/avoiding-social-engineering-and-phishing-attacks\">Avoiding Social Engineering and Phishing Attacks</a> for more information on social engineering attacks.</li>\n</ul>\n<p>No known public exploitation specifically targeting these vulnerabilities has been reported to CISA at this time. These vulnerabilities are not exploitable remotely.</p>\n<hr />\n<h2>Revision History</h2>\n<ul>\n<li><strong>Initial Release Date: </strong>2026-11-03</li>\n</ul>\n<table class=\"tablesaw tablesaw-stack\">\n<thead>\n<tr>\n<th>Date</th>\n<th>Revision</th>\n<th>Summary</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>2026-11-03</td>\n<td>1</td>\n<td>Initial Publication</td>\n</tr>\n</tbody>\n</table>\n<hr />\n<h2>Legal Notice and Terms of Use</h2>",
+          "published": "Tue, 03 Nov 26 12:00:00 +0000",
+          "id": "/node/25742",
+          "_category": "NEWS"
+        },
+        {
+          "title": "CISA Adds One Known Exploited Vulnerability to Catalog",
+          "link": "https://www.cisa.gov/news-events/alerts/2026/11/03/cisa-adds-one-known-exploited-vulnerability-catalog",
+          "summary": "<p>CISA has added one new vulnerability to its&nbsp;<a href=\"https://www.cisa.gov/known-exploited-vulnerabilities-catalog\">Known Exploited Vulnerabilities (KEV) Catalog</a>, based on evidence of active exploitation.</p>\n<ul type=\"disc\">\n<li><a href=\"https://www.cve.org/CVERecord?id=CVE-2026-119977\" target=\"_blank\">CVE-2026-119977</a> WordPress Core Time-of-check Time-of-use (TOCTOU) Race Condition Vulnerability</li>\n</ul>\n<p>This type of vulnerability is a frequent attack vector for malicious cyber actors and poses significant risks to the federal enterprise.</p>\n<p><a href=\"https://www.cisa.gov/news-events/directives/bod-26-04-implementation-guidance-prioritizing-security-updates-based-risk\">Binding Operational Directive (BOD) 26-04: Prioritizing Security Updates Based on Risk</a> establishes vulnerability management requirements for Federal Civilian Executive Branch (FCEB) agencies. BOD 26-04 reinforces the importance of the KEV Catalog and requires federal agencies to prioritize rapid remediation of high-risk vulnerabilities, specifically those identified by Common Vulnerabilities and Exposures (CVEs) listed in CISA\u2019s KEV Catalog on publicly exposed assets that grant total control of the asset post-exploitation, while deferring action for lower-risk vulnerabilities. BOD 26-04 further establishes basic expectations for when agencies must check whether threat actors compromised the system before the patch was applied.</p>\n<p>While BOD 26-04 applies only to FCEB agencies, CISA encourages all organizations to adopt risk-based vulnerability management and prioritize remediation of&nbsp;<a href=\"https://www.cisa.gov/known-exploited-vulnerabilities-catalog\">KEV Catalog vulnerabilities</a>. CISA will continue to add vulnerabilities to the catalog that meet the&nbsp;<a href=\"https://www.cisa.gov/known-exploited-vulnerabilities\">specified criteria</a>.</p>\n<p>Aware of an exploited vulnerability not currently listed in the KEV Catalog? Submit it for potential addition through CISA\u2019s&nbsp;<a href=\"https://cisasurvey.gov1.qualtrics.com/jfe/form/SV_1Zwu52kgK2OYf3w\" target=\"_blank\">KEV Nomination Form</a>. Potential KEV additions must have a CVE ID, evidence of exploitation, and clear mitigation guidance.</p>",
+          "published": "Tue, 03 Nov 26 12:00:00 +0000",
+          "id": "/node/25747",
+          "_category": "CISA"
+        },
+        {
+          "title": "Siemens SIMATIC S7 Webserver API",
+          "link": "https://www.cisa.gov/news-events/ics-advisories/icsa-26-295-10",
+          "summary": "<p><a href=\"https://github.com/cisagov/CSAF/blob/develop/csaf_files/OT/white/2026/icsa-26-295-10.json\"><strong>View CSAF</strong></a></p>\n<h2>Summary</h2>\n<p><strong>.NET Client Library for SIMATIC S7 Webserver API contains multiple vulnerabilities that could allow an attacker to obtain sensitive information or write arbitrary files outside the intended download directory. Siemens has released a new version for .NET Client Library for SIMATIC S7 Webserver API and recommends to update to the latest version.</strong></p>\n<p>The following versions of Siemens SIMATIC S7 Webserver API are affected:</p>\n<ul>\n<li>.NET Client Library for SIMATIC S7 Webserver API vers:intdot/&lt;3.3.61, vers:intdot/&lt;3.3.62 (CVE-2026-85114, CVE-2026-85115)</li>\n</ul>\n<div class=\"csaf-table\">\n<table class=\"tablesaw tablesaw-stack\">\n<thead>\n<tr>\n<th>CVSS</th>\n<th>Vendor</th>\n<th>Equipment</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>v3 7.5</td>\n<td>Siemens</td>\n<td>.NET Client Library for SIMATIC S7 Webserver API</td>\n</tr>\n</tbody>\n</table>\n<table class=\"tablesaw tablesaw-stack\">\n<thead>\n<tr>\n<th>2 Vulnerabilities</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>Improper Limitation of a Pathname to a Restricted Directory ('Path Traversal'), Generation of Error Message Containing Sensitive Information</td>\n</tr>\n</tbody>\n</table>\n</div>\n<h3>Background</h3>\n<ul>\n<li><strong>Critical Infrastructure Sectors: </strong>Critical Manufacturing, Transportation Systems, Energy, Healthcare and Public Health, Financial Services, Government Services and Facilities</li>\n<li><strong>Countries/Areas Deployed: </strong>Worldwide</li>\n<li><strong>Company Headquarters Location: </strong>Germany</li>\n</ul>\n<hr />\n<h2>Vulnerabilities</h2>\n<div class=\"icsa-etb-toggle-wrapper\"><a class=\"icsa-etb-toggle-all\" href=\"https://www.cisa.gov/\">Expand All +</a></div>\n<div class=\"c-expandable-textbox icsa-etb\">\n<div class=\"c-expandable-textbox__title\">CVE-2026-85114</div>\n<div class=\"c-expandable-textbox__body\">Affected applications do not properly validate filenames received from remote servers during ticket downloads. This could allow an attacker who can manipulate the ticket response to write arbitrary files outside the intended download directory and, when overwriting is enabled, replace existing files accessible to the application.</div>\n<div class=\"c-expandable-textbox-morebutton-wrapper\"><a class=\"c-expandable-textbox-morebutton\" href=\"https://www.cisa.gov/\">Read More</a></div>\n<div class=\"c-expandable-textbox__body2\">\n<h4>1 Affected Product</h4>\n<hr />\n<h5>.NET Client Library for SIMATIC S7 Webserver API &lt; V3.3.61</h5>\n<div>\n<p>Product Status: known_affected</p>\n</div>\n<h6>Remediations</h6>\n<div>\n<p><strong>Vendor fix</strong><br />Update to V3.3.61 or later version</p>\n</div>\n<hr />\n<h6>Additional Metrics</h6>\n<p><strong>Relevant CWE:</strong> <a href=\"https://cwe.mitre.org/data/definitions/22.html\">CWE-22 Improper Limitation of a Pathname to a Restricted Directory ('Path Traversal')</a></p>\n<div class=\"csaf-table csaf-metrics-table\">\n<table class=\"tablesaw tablesaw-stack\">\n<thead>\n<tr>\n<th>CVSS Version</th>\n<th>Base Score</th>\n<th>Base Severity</th>\n<th>Vector String</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>3.1</td>\n<td>7.5</td>\n<td>HIGH</td>\n<td><a href=\"https://www.first.org/cvss/calculator/3.1#CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:H/A:N\">CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:H/A:N</a></td>\n</tr>\n</tbody>\n</table>\n</div>\n<hr />\n<p><a href=\"https://www.cve.org/CVERecord?id=CVE-2026-85114\">View CVE Details</a></p>\n</div>\n</div>\n<div class=\"c-expandable-textbox icsa-etb\">\n<div class=\"c-expandable-textbox__title\">CVE-2026-85115</div>\n<div class=\"c-expandable-textbox__body\">Affected applications do not properly redact PLC restore passwords from HTTP error exception messages. This could allow an attacker with access to logs or other diagnostic output to obtain the plaintext restore password and potentially perform unauthorized operations on the PLC.</div>\n<div class=\"c-expandable-textbox-morebutton-wrapper\"><a class=\"c-expandable-textbox-morebutton\" href=\"https://www.cisa.gov/\">Read More</a></div>\n<div class=\"c-expandable-textbox__body2\">\n<h4>2 Affected Products</h4>\n<hr />\n<h5>.NET Client Library for SIMATIC S7 Webserver API &lt; V3.3.61</h5>\n<div>\n<p>Product Status: known_affected</p>\n</div>\n<h6>Remediations</h6>\n<hr />\n<h5>.NET Client Library for SIMATIC S7 Webserver API &lt; V3.3.62</h5>\n<div>\n<p>Product Status: known_affected</p>\n</div>\n<h6>Remediations</h6>\n<div>\n<p><strong>Vendor fix</strong><br />Update to V3.3.62 or later version</p>\n</div>\n<hr />\n<h6>Additional Metrics</h6>\n<p><strong>Relevant CWE:</strong> <a href=\"https://cwe.mitre.org/data/definitions/209.html\">CWE-209 Generation of Error Message Containing Sensitive Information</a></p>\n<div class=\"csaf-table csaf-metrics-table\">\n<table class=\"tablesaw tablesaw-stack\">\n<thead>\n<tr>\n<th>CVSS Version</th>\n<th>Base Score</th>\n<th>Base Severity</th>\n<th>Vector String</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>3.1</td>\n<td>5.5</td>\n<td>MEDIUM</td>\n<td><a href=\"https://www.first.org/cvss/calculator/3.1#CVSS:3.1/AV:L/AC:L/PR:L/UI:N/S:U/C:H/I:N/A:N\">CVSS:3.1/AV:L/AC:L/PR:L/UI:N/S:U/C:H/I:N/A:N</a></td>\n</tr>\n</tbody>\n</table>\n</div>\n<hr />\n<p><a href=\"https://www.cve.org/CVERecord?id=CVE-2026-85115\">View CVE Details</a></p>\n</div>\n</div>\n<hr />\n<h2>Acknowledgments</h2>\n<ul>\n<li>Siemens ProductCERT reported these vulnerabilities to CISA.</li>\n</ul>\n<hr />\n<h2>General Recommendations</h2>\n<p>As a general security measure, Siemens strongly recommends to protect network access to devices with appropriate mechanisms. In order to operate the devices in a protected IT environment, Siemens recommends to configure the environment according to Siemens' operational guidelines for Industrial Security (Download: https://www.siemens.com/cert/operational-guidelines-industrial-security), and to follow the recommendations in the product manuals. Additional information on Industrial Security by Siemens can be found at: https://www.siemens.com/industrialsecurity</p>\n<hr />\n<h2>Additional Resources</h2>\n<p>For further inquiries on security vulnerabilities in Siemens products and solutions, please contact the Siemens ProductCERT: https://www.siemens.com/cert/advisories</p>\n<hr />\n<h2>Terms of Use</h2>\n<p>The use of Siemens Security Advisories is subject to the terms and conditions listed on: https://www.siemens.com/productcert/terms-of-use.</p>\n<hr />\n<h2>Recommended Practices</h2>\n<p>CISA recommends users take defensive measures to minimize the risk of exploitation of these vulnerabilities.</p>\n<ul type=\"disc\">\n<li>Minimize network exposure for all control system devices and/or systems, ensuring they are <a href=\"https://www.cisa.gov/uscert/ics/alerts/ICS-ALERT-10-301-01\">not accessible from the internet</a>.</li>\n<li>Locate control system networks and remote devices behind firewalls and isolating them from business networks.</li>\n<li>When remote access is required, use more secure methods, such as Virtual Private Networks (VPNs), recognizing VPNs may have vulnerabilities and should be updated to the most current version available. Also recognize VPN is only as secure as the connected devices.</li>\n</ul>\n<p>CISA reminds organizations to perform proper impact analysis and risk assessment prior to deploying defensive measures.</p>\n<p>CISA also provides a section for <a href=\"https://www.cisa.gov/resources-tools/resources/ics-recommended-practices\">control systems security recommended practices</a> on the ICS webpage on <a href=\"https://www.cisa.gov/topics/industrial-control-systems\">cisa.gov/ics</a>. Several CISA products detailing cyber defense best practices are available for reading and download, including <a href=\"https://www.cisa.gov/sites/default/files/recommended_practices/NCCIC_ICS-CERT_Defense_in_Depth_2016_S508C.pdf\">Improving Industrial Control Systems Cybersecurity with Defense-in-Depth Strategies</a>.</p>\n<p>CISA encourages organizations to implement recommended cybersecurity strategies for <a href=\"https://www.cisa.gov/sites/default/files/publications/Cybersecurity_Best_Practices_for_Industrial_Control_Systems.pdf\">proactive defense of ICS assets</a>.</p>\n<p>Additional mitigation guidance and recommended practices are publicly available on the ICS webpage at <a href=\"https://www.cisa.gov/topics/industrial-control-systems\">cisa.gov/ics</a> in the technical information paper, <a href=\"https://www.cisa.gov/news-events/news/targeted-cyber-intrusion-detection-and-mitigation-strategies-update-b\">ICS-TIP-12-146-01B--Targeted Cyber Intrusion Detection and Mitigation Strategies</a>.</p>\n<p>Organizations observing suspected malicious activity should follow established internal procedures and report findings to CISA for tracking and correlation against other incidents.</p>\n<hr />\n<h2>Advisory Conversion Disclaimer</h2>\n<p>This ICSA is a verbatim republication of Siemens ProductCERT SSA-390352 from a direct conversion of the vendor's Common Security Advisory Framework (CSAF) advisory. This is republished to CISA's website as a means of increasing visibility and is provided \"as-is\" for informational purposes only. CISA is not responsible for the editorial or technical accuracy of republished advisories and provides no warranties of any kind regarding any information contained within this advisory. Further, CISA does not endorse any commercial product or service. Please contact Siemens ProductCERT directly for any questions regarding this advisory.</p>\n<h2>Revision History</h2>\n<ul>\n<li><strong>Initial Release Date: </strong>2026-10-13</li>\n</ul>\n<table class=\"tablesaw tablesaw-stack\">\n<thead>\n<tr>\n<th>Date</th>\n<th>Revision</th>\n<th>Summary</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>2026-10-13</td>\n<td>1</td>\n<td>Publication Date</td>\n</tr>\n<tr>\n<td>2026-10-22</td>\n<td>2</td>\n<td>Initial CISA Republication of Siemens ProductCERT SSA-390352 advisory</td>\n</tr>\n</tbody>\n</table>\n<hr />\n<h2>Legal Notice and Terms of Use</h2>",
+          "published": "Thu, 22 Oct 26 12:00:00 +0000",
+          "id": "/node/25694",
+          "_category": "NEWS"
+        }
+      ]
+    }
+  },
+  "cc_crypto": {
+    "pages": {}
+  },
+  "nato": {
+    "pages": {},
+    "cisco_added": [],
+    "cisco_removed": [],
+    "baseline_reset": false
+  },
+  "eucc": {
+    "pages": {},
+    "cisco_added": [],
+    "cisco_removed": [],
+    "baseline_reset": false
+  },
+  "nd_itc": {
+    "nit_rfis": {
+      "added": [],
+      "status_changes": [],
+      "revised": [],
+      "newly_archived": []
+    },
+    "awl": {
+      "added": [],
+      "removed": [],
+      "version_changes": [],
+      "list_updates": []
+    },
+    "baseline_reset": false,
+    "collection_failure": false
+  },
+  "ietf_cnsa": {
+    "added": [],
+    "removed": [],
+    "updated": [
+      {
+        "name": "draft-jenkins-cnsa2-pkix-profile",
+        "title": "Commercial National Security Algorithm (CNSA) Suite 2.0 Profile for Certificates and Certificate Revocation Lists",
+        "revision": "07",
+        "expires": "2027-05-07T17:56:18Z",
+        "updated_at": "2026-11-03T23:26:01Z",
+        "rfc_number": null,
+        "document_url": "https://datatracker.ietf.org/doc/draft-jenkins-cnsa2-pkix-profile/",
+        "text_url": "https://www.ietf.org/archive/id/draft-jenkins-cnsa2-pkix-profile-07.txt",
+        "content_sha256": "7a42a11684a39544cc7b64b95bbaba7e4efda6b5edba3f4288879ae3f90b02da",
+        "content_size": 23724,
+        "content_etag": "\"6aea2042-5cac\"",
+        "content_last_modified": "Tue, 03 Nov 2026 17:56:18 GMT",
+        "states": [
+          {
+            "type": "draft",
+            "slug": "active",
+            "name": "Active"
+          },
+          {
+            "type": "draft-iana-action",
+            "slug": "noic",
+            "name": "No IANA Actions"
+          },
+          {
+            "type": "draft-iana-review",
+            "slug": "changed",
+            "name": "Version Changed - Review Needed"
+          },
+          {
+            "type": "draft-iesg",
+            "slug": "idexists",
+            "name": "I-D Exists"
+          },
+          {
+            "type": "draft-rfceditor",
+            "slug": "blocked",
+            "name": "Blocked"
+          },
+          {
+            "type": "draft-stream-ise",
+            "slug": "rfc-edit",
+            "name": "Sent to the RFC Editor"
+          }
+        ],
+        "workflow_state": "Sent to the RFC Editor",
+        "references_rfc8446": false,
+        "references_rfc9846": false,
+        "cnsa_markers": [
+          "CNSA 2.0",
+          "LMS",
+          "ML-DSA",
+          "ML-KEM",
+          "XMSS",
+          "post-quantum"
+        ],
+        "relations": [],
+        "changed_fields": [
+          "revision",
+          "expires",
+          "workflow_state",
+          "states",
+          "content_sha256"
+        ],
+        "old_revision": "06",
+        "old_workflow_state": "In ISE Review",
+        "old_expires": "2027-05-03T13:14:28Z",
+        "old_content_sha256": "154879cc69d8a6054196b034b53ebfff7750d078150e792ef35ece7cf1c40032"
+      }
+    ],
+    "rfc9846_adoption": []
+  },
+  "ieee_pqc": {
+    "added": [],
+    "removed": [],
+    "updated": []
+  },
+  "source_health": {
+    "niap": {
+      "label": "NIAP",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "PCL products",
+          "observed": 1770,
+          "minimum": 50
+        },
+        {
+          "name": "Protection Profiles",
+          "observed": 272,
+          "minimum": 10
+        },
+        {
+          "name": "PQC PP file-version records",
+          "observed": 11,
+          "minimum": 1,
+          "required_for_diff_baseline": false
+        },
+        {
+          "name": "PQC PP full-content hashes",
+          "observed": 7,
+          "minimum": 1,
+          "required_for_diff_baseline": false
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-11-04T13:37:31.154867+00:00",
+      "subcollections": {
+        "news": {
+          "label": "News announcements",
+          "status": "healthy",
+          "observed": 359,
+          "consecutive_failures": 0,
+          "using_last_known_good": false
+        },
+        "events": {
+          "label": "Events",
+          "status": "healthy",
+          "observed": 0,
+          "consecutive_failures": 0,
+          "using_last_known_good": false
+        },
+        "policies": {
+          "label": "Policy letters",
+          "status": "healthy",
+          "observed": 40,
+          "consecutive_failures": 0,
+          "using_last_known_good": false
+        }
+      }
+    },
+    "cc_portal": {
+      "label": "CC Portal",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "portal records",
+          "observed": 180,
+          "minimum": 1
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-11-04T13:37:31.154867+00:00"
+    },
+    "cctl_labs": {
+      "label": "CCTL Labs",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "lab feed items",
+          "observed": 19,
+          "minimum": 1
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-11-04T13:37:31.154867+00:00"
+    },
+    "csfc": {
+      "label": "CSfC",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "APL items",
+          "observed": 118,
+          "minimum": 5
+        },
+        {
+          "name": "announcements",
+          "observed": 8,
+          "minimum": 1
+        },
+        {
+          "name": "tracked capability packages",
+          "observed": 5,
+          "minimum": 5,
+          "required_for_diff_baseline": false
+        },
+        {
+          "name": "capability-package hashes",
+          "observed": 5,
+          "minimum": 5,
+          "required_for_diff_baseline": false
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-11-04T13:37:31.154867+00:00"
+    },
+    "cc_crypto": {
+      "label": "CC Crypto",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "publications",
+          "observed": 118,
+          "minimum": 5
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-11-04T13:37:31.154867+00:00"
+    },
+    "nato": {
+      "label": "NATO NIAPCL",
+      "status": "healthy",
+      "mode": "manual",
+      "checks": [],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "detail": "manual baseline (40 Cisco product(s)); updated via the NATO capture GitHub issue workflow",
+      "checked_at": "2026-11-04T13:37:31.154867+00:00"
+    },
+    "eucc": {
+      "label": "EUCC / ENISA",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "certificates",
+          "observed": 50,
+          "minimum": 2
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-11-04T13:37:31.154867+00:00"
+    },
+    "nd_itc": {
+      "label": "ND-iTC",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "NIT RFIs",
+          "observed": 32,
+          "minimum": 5
+        },
+        {
+          "name": "Allowed-With entries",
+          "observed": 28,
+          "minimum": 1
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-11-04T13:37:31.154867+00:00"
+    },
+    "ietf_cnsa": {
+      "label": "IETF CNSA 2.0",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "CNSA profile/RFC records",
+          "observed": 5,
+          "minimum": 5
+        },
+        {
+          "name": "CNSA full-text hashes",
+          "observed": 5,
+          "minimum": 5
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-11-04T13:37:31.154867+00:00"
+    },
+    "ieee_pqc": {
+      "label": "IEEE 802.11bt",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "P802.11bt project records",
+          "observed": 1,
+          "minimum": 1
+        },
+        {
+          "name": "P802.11bt timeline hashes",
+          "observed": 1,
+          "minimum": 1
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-11-04T13:37:31.154867+00:00"
+    }
+  },
+  "alerts": [
+    {
+      "source": "IETF CNSA",
+      "kind": "updated",
+      "title": "Commercial National Security Algorithm (CNSA) Suite 2.0 Profile for Certificates and Certificate Revocation Lists",
+      "url": "https://datatracker.ietf.org/doc/draft-jenkins-cnsa2-pkix-profile/",
+      "detail": "IETF CNSA profile metadata or full text changed: revision, expires, workflow_state, states, content_sha256",
+      "matched_keywords": [
+        "CNSA",
+        "PQC"
+      ],
+      "tab": "us"
+    }
+  ]
+}
