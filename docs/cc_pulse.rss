@@ -2,6 +2,7 @@
 <rss version="2.0"><channel>
 <title>CC Pulse</title>
 <link>https://kr15tyk.github.io/CC-pulse/cc_dashboard.html</link>
-<description>Common Criteria monitoring - 2026-11-03 08:26 ET</description>
-<item><title>NIAP New added: NIAP Policy #17 - CONTINUOUS MONITORING</title><link>https://www.niap-ccevs.org/labgrams/127</link><description>2026-11-02T16:57:31.629000Z</description></item>
+<description>Common Criteria monitoring - 2026-11-04 08:37 ET</description>
+<item><title>IETF CNSA Updated: Commercial National Security Algorithm (CNSA) Suite 2.0 Profile for Certificates and Certificate Revocation Lists</title><link>https://datatracker.ietf.org/doc/draft-jenkins-cnsa2-pkix-profile/</link><description>revision, expires, workflow_state, states, content_sha256</description></item>
+<item><title>ALERT: IETF CNSA – Commercial National Security Algorithm (CNSA) Suite 2.0 Profile for Certificates and Certificate Revocation Lists</title><link>https://kr15tyk.github.io/CC-pulse/cc_dashboard.html</link><description>Kind: updated | Keywords: CNSA, PQC</description></item>
 </channel></rss>
