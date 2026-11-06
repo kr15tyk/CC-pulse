@@ -2,9 +2,6 @@
 <rss version="2.0"><channel>
 <title>CC Pulse</title>
 <link>https://kr15tyk.github.io/CC-pulse/cc_dashboard.html</link>
-<description>Common Criteria monitoring - 2026-11-05 08:50 ET</description>
-<item><title>IETF CNSA Updated: Commercial National Security Algorithm (CNSA) Suite 2.0 Profile for IPsec</title><link>https://datatracker.ietf.org/doc/draft-guthrie-cnsa2-ipsec-profile/</link><description>states</description></item>
-<item><title>IETF CNSA Updated: Commercial National Security Algorithm (CNSA) Suite 2.0 Profile for SSH</title><link>https://datatracker.ietf.org/doc/draft-becker-cnsa2-ssh-profile/</link><description>workflow_state, states</description></item>
-<item><title>ALERT: IETF CNSA – Commercial National Security Algorithm (CNSA) Suite 2.0 Profile for IPsec</title><link>https://kr15tyk.github.io/CC-pulse/cc_dashboard.html</link><description>Kind: updated | Keywords: CNSA, PQC</description></item>
-<item><title>ALERT: IETF CNSA – Commercial National Security Algorithm (CNSA) Suite 2.0 Profile for SSH</title><link>https://kr15tyk.github.io/CC-pulse/cc_dashboard.html</link><description>Kind: updated | Keywords: CNSA, PQC</description></item>
+<description>Common Criteria monitoring - 2026-11-06 08:35 ET</description>
+
 </channel></rss>

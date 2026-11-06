@@ -179,7 +179,7 @@
   <span class="nav-title">CC Pulse Dashboard</span>
   <span class="nav-spacer"></span>
   <div class="ham-wrap">
-    <span class="nav-meta">Last run: 2026-11-05 08:50 ET</span>
+    <span class="nav-meta">Last run: 2026-11-06 08:35 ET</span>
     <button class="ham-btn" id="ham-btn" onclick="toggleHamMenu()" aria-expanded="false" aria-haspopup="true" title="Open menu">&#9776;</button>
     <div class="ham-menu" id="ham-menu" role="menu">
       <a class="ham-item" href="https://kr15tyk.github.io/CC-pulse/cc_dashboard.html" role="menuitem"><span class="ham-icon">&#127968;</span>Home</a>
@@ -263,7 +263,7 @@
 <div class="sticky-top">
   <div class="trend-bar">
     <div class="stat"><a href="#sec-niap-pp" onclick="navigateTo('sec-niap-pp');return false;">
-      <div class="stat-num active-num">4</div>
+      <div class="stat-num ">0</div>
       <div class="stat-lbl">NIAP Changes</div>
     </a></div>
     <div class="stat"><a href="#sec-csfc" onclick="navigateTo('sec-csfc');return false;">
@@ -283,15 +283,15 @@
       <div class="stat-lbl">CCTL Updates</div>
     </a></div>
     <div class="stat"><a href="#sec-eucc-req" onclick="navigateTo('sec-eucc-req');return false;">
-      <div class="stat-num active-num">1</div>
+      <div class="stat-num ">0</div>
       <div class="stat-lbl">EUCC Changes</div>
     </a></div>
     <div class="stat"><a href="#sec-ietf-cnsa" onclick="navigateTo('sec-ietf-cnsa');return false;">
-      <div class="stat-num active-num">2</div>
+      <div class="stat-num ">0</div>
       <div class="stat-lbl">CNSA / PQC Standards</div>
     </a></div>
     <div class="stat"><a href="#sec-alerts" onclick="navigateTo('sec-alerts');return false;">
-      <div class="stat-num alert-num">2</div>
+      <div class="stat-num ">0</div>
       <div class="stat-lbl">Alerts</div>
     </a></div>
   </div>
@@ -316,37 +316,6 @@
       
       
 <!-- Alerts -->
-
-<div class="section-group">
-<div class="card card-alert" id="sec-alerts">
-  <div class="card-hdr" onclick="toggleCard(this)">
-    <span>Alerts</span>
-    <span class="card-count">2 alerts</span>
-    <span class="toggle-icon">&#9660;</span>
-  </div>
-  <div class="card-body">
-    <div class="alert-monitoring">FIPS 186-4, FIPS 186-5, NDcPP, CPP_ND, TLS 1.3, SSH, PP-Module_VPN, PP-Module_WLAN, CNSA 2.0, ML-KEM, ML-DSA, SLH-DSA, post-quantum, RFC 9846, 802.11bt, labgram, valgram, emergency, CSfC, Commercial Solutions for Classified, CSfC APL, CSfC component selections, NSA CSfC, NATO NIAPC, NIAPCL, EUCC, ENISA, CCDB-018, Crypto Catalog, cryptography working group, Specification of Functional Requirements for Cryptography, FCS_CKM, FCS_COP, FCS_RBG</div>
-    
-        <div class="item-row alert-item" data-alert-key="IETF CNSA-Commercial_National_Security_Algorithm_(CNSA)_Suite_2.0_Profile_for_IPsec" data-tab="us">
-          
-          <a class="item-link" href="https://datatracker.ietf.org/doc/draft-guthrie-cnsa2-ipsec-profile/" target="_blank">IETF CNSA: Commercial National Security Algorithm (CNSA) Suite 2.0 Profile for IPsec</a>
-          
-          <span class="item-meta">updated &middot; CNSA, PQC</span>
-          <div class="item-sub">IETF CNSA profile metadata or full text changed: states</div>
-          <button class="dismiss-btn" onclick="dismissAlert(this)" title="Mark as seen">&#10003; Seen</button>
-        </div>
-        
-        <div class="item-row alert-item" data-alert-key="IETF CNSA-Commercial_National_Security_Algorithm_(CNSA)_Suite_2.0_Profile_for_SSH" data-tab="us">
-          
-          <a class="item-link" href="https://datatracker.ietf.org/doc/draft-becker-cnsa2-ssh-profile/" target="_blank">IETF CNSA: Commercial National Security Algorithm (CNSA) Suite 2.0 Profile for SSH</a>
-          
-          <span class="item-meta">updated &middot; CNSA, PQC</span>
-          <div class="item-sub">IETF CNSA profile metadata or full text changed: workflow_state, states</div>
-          <button class="dismiss-btn" onclick="dismissAlert(this)" title="Mark as seen">&#10003; Seen</button>
-        </div>
-        
-  </div>
-</div>
 
 <div class="tab-nav" id="region-tabs">
         <button class="tab-btn active" data-tab="us" onclick="switchTab(this)">&#127482;&#127480; US (NIAP / CSfC)</button>
@@ -376,34 +345,17 @@
 </div>
 
   <!-- NIAP In-Evaluation -->
-<div class="card card-new" id="sec-niap-inevaluation" data-has-changes="2">
+<div class="card " id="sec-niap-inevaluation" data-has-changes="0">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>NIAP In-Evaluation Products</span>
-    <span class="card-count">2 changes</span>
+    <span class="card-count">35 active</span>
     </span>
   </div>
-  <div class="card-body ">
-    
-    <div class="sub-hdr sub-new">Newly In Evaluation (1)</div>
-    
-    <div class="item-row" data-source="niap-inevaluation" data-kind="new">
-      <span class="item-link">Fortinet, Inc. -- Fortinet FortiAnalyzer 7.6</span>
-      <span class="item-meta">Lightship Security USA, Inc.</span>
-    </div>
-    
-    <div class="item-sub">Network Device</div>
+  <div class="card-body collapsed">
     
     
     
-    
-    <div class="sub-hdr sub-removed">Left Evaluation (1)</div>
-    
-    <div class="item-row" data-source="niap-inevaluation" data-kind="removed">
-      <span class="item-link">CAE Inc. -- MPIC2 v4.3</span>
-      <span class="item-meta">Completed or Withdrawn</span>
-    </div>
-    
-    
+    <p class="no-change">No evaluation changes detected. 35 products currently in evaluation.</p>
     
   </div>
 </div>
@@ -470,39 +422,17 @@
 </div>
 
   <!-- NIAP PCL — All Certifications -->
-<div class="card card-new" id="sec-niap-pcl" data-has-changes="2">
+<div class="card " id="sec-niap-pcl" data-has-changes="0">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>NIAP PCL — All Certifications</span>
-    <span class="card-count">2 changes</span>
+    <span class="card-count">0 changes</span>
     </span>
   </div>
-  <div class="card-body ">
-    
-    <div class="sub-hdr sub-new">New Certifications (1)</div>
-    
-    <div class="item-row" data-source="niap-pcl" data-kind="new">
-      <span class="item-link">CAE Inc. -- MPIC2 v4.3</span>
-      <span class="item-meta">2026-10-29</span>
-    </div>
-    
-    <div class="item-sub">PKG_SSH_V1.0, CPP_ND_V3.0E</div>
+  <div class="card-body collapsed">
     
     
     
-    
-    <div class="sub-hdr sub-updated">Newly Archived (1)</div>
-    
-    <div class="item-row" data-source="niap-pcl" data-kind="archived">
-      <span class="item-link">Curtiss-Wright Defense Solutions -- Curtiss-Wright Defense Solutions XMC NVMe Encryptor version 1.0.0</span>
-      <span class="item-meta">Archived</span>
-    </div>
-    
-    <div class="item-sub">CPP_FDE_AA_V2.0E, CPP_FDE_EE_V2.0E</div>
-    
-    
-    
-    
-    
+    <p class="no-change">No changes detected. <span class="last-active">(last: 2026-11-05)</span></p>
   </div>
 </div>
 
@@ -536,7 +466,7 @@
   <div class="card-body collapsed">
     
     
-    <p class="no-change">No changes detected. <span class="last-active">(last: 2026-10-30)</span></p>
+    <p class="no-change">No changes detected.</p>
   </div>
 </div>
 </div>
@@ -568,32 +498,22 @@
 
 <div class="section-group">
   <div class="section-label">CNSA 2.0 &amp; Post-Quantum Standards</div>
-  <div class="card card-updated" id="sec-ietf-cnsa" data-has-changes="2">
+  <div class="card " id="sec-ietf-cnsa" data-has-changes="0">
     <div class="card-hdr" onclick="toggleCard(this)">
       <span>IETF CNSA 2.0 Profiles</span>
-      <span class="card-count">2 updates</span>
-      <span class="toggle-icon">&#9660;</span>
+      <span class="card-count">0 updates</span>
+      <span class="toggle-icon">&#9658;</span>
     </div>
-    <div class="card-body ">
+    <div class="card-body collapsed">
       
         
       
         
       
         
-        <div class="item-row" data-source="ietf-cnsa" data-kind="updated">
-          <a class="item-link" href="https://datatracker.ietf.org/doc/draft-guthrie-cnsa2-ipsec-profile/" target="_blank">Commercial National Security Algorithm (CNSA) Suite 2.0 Profile for IPsec</a>
-          <span class="item-meta">Sent to the RFC Editor</span>
-        </div>
-        
-        <div class="item-row" data-source="ietf-cnsa" data-kind="updated">
-          <a class="item-link" href="https://datatracker.ietf.org/doc/draft-becker-cnsa2-ssh-profile/" target="_blank">Commercial National Security Algorithm (CNSA) Suite 2.0 Profile for SSH</a>
-          <span class="item-meta">Sent to the RFC Editor</span>
-        </div>
-        
       
       
-      
+      <p class="no-change">No changes detected.</p>
     </div>
   </div>
 
@@ -700,23 +620,16 @@
           </div>
         </div>
         <!-- EUCC Certificates -->
-        <div class="card card-new" id="sec-eucc-certs" data-has-changes="1">
+        <div class="card " id="sec-eucc-certs" data-has-changes="0">
           <div class="card-hdr" onclick="toggleCard(this)">
             <span>EUCC Certified Products</span>
-            <span class="card-count">1 new item</span>
-            <span class="toggle-icon">&#9660;</span>
+            <span class="card-count">0 new items</span>
+            <span class="toggle-icon">&#9658;</span>
           </div>
-          <div class="card-body ">
+          <div class="card-body collapsed">
             
             
-            
-            <div class="item-row" data-source="eucc" data-kind="new">
-              <a class="item-link" href="https://certification.enisa.europa.eu/certificates/eucc-3087-2026-000019-i-00_en" target="_blank">IFX_CCI_000007h</a>
-              <span class="item-meta"></span>
-            </div>
-            
-            
-            
+            <p class="no-change">No new EUCC certified products.</p>
           </div>
         </div>
       </div>
@@ -728,7 +641,7 @@
 <div class="card card-new" id="sec-history" data-has-changes="1">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>Change History</span>
-    <span class="card-count">36 events</span>
+    <span class="card-count">35 events</span>
     <span class="toggle-icon">▼</span>
   </div>
   <div class="card-body">
@@ -1132,17 +1045,6 @@
         </div>
       </div>
       
-      <div class="tl-entry" data-cat="pcl_cert">
-        <div class="tl-date">2026-10-07</div>
-        <div class="tl-body">
-          <div class="tl-title">
-            <span class="tl-badge new">new</span>
-            <a href="https://www.niap-ccevs.org/products/11687" target="_blank">Gigamon Inc — Gigamon GigaVUE Visibility Appliances</a>
-          </div>
-          <div class="tl-detail">Certified 2026-09-30 · Booz Allen Hamilton Common Criteria Testing Laboratory · PKG_SSH_V1.0, CPP_ND_V3.0E</div>
-        </div>
-      </div>
-      
     
     </div>
   </div>
@@ -1153,7 +1055,7 @@
 </div><!-- /main-content -->
 <footer>
   <span>CC Pulse &middot; Auto-refreshes daily (01:00 EST) &middot; NIAP, CSfC, CC Portal, NATO NIAPCL, EUCC / ENISA</span>
-  <span>Last run: 2026-11-05 08:50 ET</span>
+  <span>Last run: 2026-11-06 08:35 ET</span>
 </footer>
 
 <script>
