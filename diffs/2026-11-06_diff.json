@@ -1,0 +1,364 @@
+{
+  "period_start": "2026-11-05T13:50:50.516487+00:00",
+  "period_end": "2026-11-06T13:35:16.207249+00:00",
+  "niap": {
+    "pps": {
+      "added": [],
+      "removed": [],
+      "sunset_changes": [],
+      "status_changes": [],
+      "revised": [],
+      "content_changes": []
+    },
+    "tds": {
+      "added": [],
+      "removed": []
+    },
+    "cisco_ndcpp": {
+      "added": [],
+      "removed": [],
+      "newly_archived": []
+    },
+    "pcl_all": {
+      "added": [],
+      "removed": [],
+      "newly_archived": []
+    },
+    "in_evaluation": {
+      "added": [],
+      "removed": [],
+      "current_count": 35
+    },
+    "news": {
+      "added": [],
+      "revised": [],
+      "deactivated": [],
+      "reactivated": [],
+      "removed": []
+    },
+    "events": {
+      "added": [],
+      "revised": [],
+      "deactivated": [],
+      "reactivated": [],
+      "removed": []
+    },
+    "policies": {
+      "added": [],
+      "revised": [],
+      "archived": [],
+      "reactivated": [],
+      "removed": []
+    }
+  },
+  "cc_portal": {
+    "news": {
+      "added": []
+    },
+    "pps": {
+      "added": []
+    },
+    "products": {
+      "added": []
+    }
+  },
+  "cctl_labs": {},
+  "csfc": {
+    "pages": {},
+    "selection_links": {},
+    "documents": {
+      "added": [],
+      "removed": [],
+      "updated": []
+    },
+    "feeds": {
+      "CISA Alerts": [
+        {
+          "title": "Post-Quantum Questions to Ask Your Vendors",
+          "link": "https://www.cisa.gov/resources-tools/resources/post-quantum-questions-ask-your-vendors",
+          "summary": "<p>CISA, the Australian Signals Directorate\u2019s Australian Cyber Security Centre (ASD\u2019s ACSC) and the National Security Agency (NSA) released joint guidance and an accompanying quick-reference list to help organizations assess vendor readiness for transitioning to post-quantum cryptography (PQC). As quantum computing advances, widely used public-key cryptography will become vulnerable to compromise from cryptographically relevant quantum computers (CRQCs). To protect their systems and data, organizations must plan for and transition to PQC\u2014which includes algorithms capable of withstanding both classical computing and quantum-enabled threats\u2014before CRQCs become available.&nbsp;</p>\n<p>Many organizations rely on third-party vendors for managed services, cloud capabilities, and other cryptography-dependent products and services. Cryptography is also embedded in systems and devices that are difficult to update, tied to long asset lifecycles, and require vendor support or replacement\u2014such as industrial control systems and Internet of Things (IoT) devices. Reliance on vendors means that effective PQC transition depends on vendor readiness, and early, structured engagement with these vendors is critical to planning efforts.&nbsp;</p>\n<p>Organizations can use the vendor-neutral questions outlined in this guidance to determine whether a vendor understands quantum-related risks, maintains transparency over its cryptographic implementations, and supports a secure, cost-effective and timely transition to PQC.&nbsp;</p>\n<p>Visit CISA\u2019s <a href=\"https://www.cisa.gov/topics/risk-management/quantum\">PQC Initiative page</a> for additional resources.</p>",
+          "published": "Thu, 05 Nov 26 12:00:00 +0000",
+          "id": "/node/25746",
+          "_category": "NEWS"
+        },
+        {
+          "title": "US Government Partners Urge Hardening Industrial Refrigeration and Cold Chain Monitoring Systems",
+          "link": "https://www.cisa.gov/resources-tools/resources/us-government-partners-urge-hardening-industrial-refrigeration-and-cold-chain-monitoring-systems",
+          "summary": "<h2><strong>Overview</strong></h2>\n<p>The Cybersecurity and Infrastructure Security Agency (CISA), Federal Bureau of Investigation (FBI), Health and Human Services (HHS), U.S. Department of Agriculture (USDA), and the Department of Transportation (DoT)\u2014hereafter referred to as \u201cthe authoring organizations\u201d\u2014are aware of malicious cyber activity targeting industrial refrigeration and cold chain monitoring systems globally. Organizations in the <a href=\"https://www.cisa.gov/topics/critical-infrastructure-security-and-resilience/critical-infrastructure-sectors/healthcare-and-public-health-sector\" title=\"Healthcare and Public Health\">Healthcare and Public Health</a>, <a href=\"https://www.cisa.gov/topics/critical-infrastructure-security-and-resilience/critical-infrastructure-sectors/chemical-sector\" title=\"Chemical\">Chemical</a>, <a href=\"https://www.cisa.gov/topics/critical-infrastructure-security-and-resilience/critical-infrastructure-sectors/food-and-agriculture-sector\" title=\"Food and Agriculture\">Food and Agriculture</a>, and <a href=\"https://www.cisa.gov/topics/critical-infrastructure-security-and-resilience/critical-infrastructure-sectors/transportation-systems-sector\" title=\"Transportation Systems\">Transportation Systems</a> Sectors widely use these systems, including in refrigerated transport services, for automated and remote monitoring of temperatures, continuous temperature logging, defrost cycle management, and energy optimization.</p>\n<p>The authoring organizations urge owners and operators to defend against this activity by using strong authentication, keeping systems updated, identifying any systems that are accessible from the internet, removing unnecessary remote access, and securing any necessary remote access.</p>\n<h2><strong>Threat</strong></h2>\n<p>The authoring organizations are aware of malicious cyber actors targeting electronic temperature controllers and commercial refrigeration controllers in retail grocery and cold storage facilities. The actors may exploit vulnerabilities or weaknesses in unpatched or internet-accessible controllers to remotely alter settings and force units into continuous heating and defrost cycles, which can cause widespread inventory loss and equipment hazards.</p>\n<p>Specifically, the actors may exploit these flaws through multiple vectors:</p>\n<ul type=\"square\">\n<li>Authentication bypass;</li>\n<li>Arbitrary code injection; and</li>\n<li>Weak configurations.</li>\n</ul>\n<p>Upon successful exploitation of the flaws, the actors could achieve the following effects:</p>\n<ul type=\"square\">\n<li>Change of temperature, which could:<br />\n<ul type=\"circle\">\n<li>Affect the service life of the system;</li>\n<li>Create a fire hazard;</li>\n<li>Cause loss of inventory; or</li>\n<li>Indirectly harm consumers if products are consumed after unsafe storage.</li>\n</ul>\n</li>\n<li>Loss of visibility into current temperatures (a denial-of-view condition).</li>\n</ul>\n<h2><strong>Mitigations</strong></h2>\n<p>The authoring organizations urge owners and operators to immediately take the following actions. These mitigations align with the <a href=\"https://www.cisa.gov/cross-sector-cybersecurity-performance-goals\" title=\"Cross-Sector Cybersecurity Performance Goals (CPGs)\">Cross-Sector Cybersecurity Performance Goals (CPGs)</a>, developed by CISA and the National Institute of Standards and Technology (NIST). The CPGs provide a minimum set of practices and protections that CISA and NIST recommend all organizations implement:</p>\n<ul type=\"square\">\n<li><strong>Eliminate public internet exposure</strong>: Do not expose control system devices and/or systems, particularly controller panels, to the internet [<a href=\"https://www.cisa.gov/cybersecurity-performance-goals-2-0-cpg-2-0#SecureInternetFacingDevices3S\" title=\"CPG 3.S\">CPG 3.S</a>]. Should remote access be necessary, protect it by using a firewall or edge device and updating it to the latest version to reduce security vulnerabilities. See CISA\u2019s <a href=\"https://www.cisa.gov/resources-tools/resources/exposure-reduction\" title=\"Internet Exposure Reduction Guidance\">Internet Exposure Reduction Guidance</a> and <a href=\"https://www.cisa.gov/topics/cybersecurity-best-practices/edge-device-security\" title=\"Defend the Edge: The Critical Importance of Edge Device Security\">Defend the Edge: The Critical Importance of Edge Device Security</a> for additional guidance on securing edge devices.</li>\n<li><strong>Isolate operational technology (OT) devices</strong>: Create a dedicated OT virtual local area network (VLAN) to separate OT devices from business networks [<a href=\"https://www.cisa.gov/cybersecurity-performance-goals-2-0-cpg-2-0#ImplementLogicalPhysicalNetworkSegmentation3I\" title=\"CPG 3.I\">CPG 3.I</a>].</li>\n<li><strong>Enforce credential security</strong>: Change default passwords [<a href=\"https://www.cisa.gov/cybersecurity-performance-goals-2-0-cpg-2-0#ChangingDefaultPasswords3A\" title=\"CPG 3.A\">CPG 3.A</a>], strengthen passwords, and implement strong password policies [<a href=\"https://www.cisa.gov/cybersecurity-performance-goals-2-0-cpg-2-0#EstablishMinimumPasswordStrength3B\" title=\"CPG 3.B\">CPG 3.B</a>]. Further, implement phishing-resistant multifactor authentication wherever feasible [<a href=\"https://www.cisa.gov/cybersecurity-performance-goals-2-0-cpg-2-0#ImplementMultifactorAuthentication3F\" title=\"CPG 3.F\">CPG 3.F</a>].</li>\n<li><strong>Apply patches</strong>: Keep device firmware up to date and establish a structured lifecycle management process to identify, retire, and replace legacy devices that are at end of life (EOL) and no longer supported by the manufacturer [<a href=\"https://www.cisa.gov/cybersecurity-performance-goals-2-0-cpg-2-0#ManageOrganizationalAssets2A\" title=\"CPG 2.A\">CPG 2.A</a>, <a href=\"https://www.cisa.gov/cybersecurity-performance-goals-2-0-cpg-2-0#MitigateKnownVulnerabilities2B\" title=\"2.B\">2.B</a>]. See CISA\u2019s <a href=\"https://www.cisa.gov/news-events/directives/bod-26-04-implementation-guidance-prioritizing-security-updates-based-risk\" title=\"BOD 26-04: Prioritizing Security Updates Based on Risk\">BOD 26-04: Implementation Guidance for Prioritizing Security Updates Based on Risk</a> and <a href=\"https://www.cisa.gov/news-events/directives/bod-26-02-mitigating-risk-end-support-edge-devices\">BOD 26-02: Mitigating Risk From End-of-Support Edge Devices</a> for additional guidance.</li>\n<li><strong>Restrict access</strong>: Define and maintain device and IP address allowlisting, limiting access to only those devices and IP addresses authorized to make changes [<a href=\"https://www.cisa.gov/cybersecurity-performance-goals-2-0-cpg-2-0#ImplementthePrinciplesofLeastPrivilege3H\" title=\"CPG 3.H\">CPG 3.H</a>].</li>\n<li><strong>Have reliable backups</strong>: Maintain current backups offsite and offline and test them [<a href=\"https://www.cisa.gov/cybersecurity-performance-goals-2-0-cpg-2-0#MaintainSystemBackupsRestorationAbility3O\" title=\"CPG 3.O\">CPG 3.O</a>].</li>\n<li><strong>Monitor and report</strong>: Enable logging [<a href=\"https://www.cisa.gov/cybersecurity-performance-goals-2-0-cpg-2-0#MaintainLogCollectionStorage3Q\" title=\"CPG 3.Q\">CPG 3.Q</a>] and regularly review logs for unexpected activity.<br />\n<ul type=\"circle\">\n<li>For OT assets where logs are non-standard or not available, collect network traffic and communications between the assets.</li>\n</ul>\n</li>\n<li><strong>Review setpoint ranges</strong>: Define and maintain reasonable setpoint limits for devices operating downstream of controllers to stay within safe ranges and establish alerting for deviations.</li>\n</ul>\n<h2><strong>Resources</strong></h2>\n<p>The authoring organizations strongly urge industrial refrigeration and cold chain monitoring system owners and operators to secure remote access to their OT systems. To strengthen system security, owners and operators should review the following resources and implement recommended mitigations:</p>\n<ul type=\"square\">\n<li>CISA: <a href=\"https://www.cisa.gov/resources-tools/resources/primary-mitigations-reduce-cyber-threats-operational-technology\" title=\"Primary Mitigations to Reduce Cyber Threats to Operational Technology\">Primary Mitigations to Reduce Cyber Threats to Operational Technology</a></li>\n<li>CISA: <a href=\"https://www.cisa.gov/topics/cybersecurity-best-practices/edge-device-security\" title=\"Defend the Edge: The Critical Importance of Edge Device Security\">Defend the Edge: The Critical Importance of Edge Device Security</a></li>\n<li>CISA: <a href=\"https://www.cisa.gov/resources-tools/resources/exposure-reduction\" title=\"Internet Exposure Reduction Guidance\">Internet Exposure Reduction Guidance</a></li>\n<li>United Kingdom\u2019s National Cyber Security Centre and Partners:&nbsp;<a href=\"https://www.cisa.gov/resources-tools/resources/secure-connectivity-principles-operational-technology-ot\" title=\"Secure Connectivity Principles for Operational Technology\">Secure Connectivity Principles for OT</a></li>\n</ul>\n<h2><strong>Contact Information</strong></h2>\n<p>The authoring organizations recommend U.S. organizations report suspicious or criminal activity related to information provided in this fact sheet:</p>\n<ul type=\"square\">\n<li>Contact <strong>CISA </strong>via CISA\u2019s 24/7 Operations Center at <a href=\"mailto:contact@cisa.dhs.gov\">contact@cisa.dhs.gov</a> or 1-844-Say-CISA (1-844-729-2472). For more information on reporting a cyber incident, refer to CISA\u2019s <a href=\"https://www.cisa.gov/topics/cyber-threats-and-advisories/information-sharing/cyber-incident-reporting-critical-infrastructure-act-2022-circia/voluntary-cyber-incident-reporting\" title=\"Voluntary Cyber Incident Reporting\">Voluntary Cyber Incident Reporting</a> web page. File a claim with <strong>FBI\u2019s </strong><a href=\"https://ic3.gov/\" target=\"_blank\" title=\"Internet Crime Complaint Center (IC3)\">Internet Crime Complaint Center (IC3)</a> or contact your local <a href=\"https://www.fbi.gov/contact-us/field-offices\" target=\"_blank\" title=\"FBI field office\">FBI field office</a>. When available, please include the following information regarding the incident:<br />\n<ul type=\"circle\">\n<li>Date, time, and location of the incident;</li>\n<li>Type of activity;</li>\n<li>Number of people affected;</li>\n<li>Type of equipment used for the activity; and</li>\n<li>Name of the submitting company or organization, and a designated point of contact.</li>\n</ul>\n</li>\n<li>Contact <strong>HHS</strong> via&nbsp;<a href=\"mailto:HHSCyber@hhs.gov\">HHSCyber@hhs.gov</a> or the HHS 24/7 Operations Center at 202-619-7800 for assistance mitigating potential disruptions to the delivery of healthcare resulting from health and medical supply chain impacts.</li>\n</ul>\n<h2><strong>Disclaimer</strong></h2>\n<p>The information in this report is being provided \u201cas is\u201d for informational purposes only. The authoring organizations do not endorse any commercial entity, product, company, or service, including any entities, products, or services linked within this document. Any reference to specific commercial entities, products, processes, or services by service mark, trademark, manufacturer, or otherwise, does not constitute or imply endorsement, recommendation, or favor by the authoring organizations.</p>\n<p>&nbsp;</p>",
+          "published": "Thu, 05 Nov 26 12:00:00 +0000",
+          "id": "/node/25744",
+          "_category": "NEWS"
+        },
+        {
+          "title": "CISA Adds One Known Exploited Vulnerability to Catalog",
+          "link": "https://www.cisa.gov/news-events/alerts/2026/11/04/cisa-adds-one-known-exploited-vulnerability-catalog",
+          "summary": "<p>CISA has added one new vulnerability to its&nbsp;<a href=\"https://www.cisa.gov/known-exploited-vulnerabilities-catalog\">Known Exploited Vulnerabilities (KEV) Catalog</a>, based on evidence of active exploitation.</p>\n<ul type=\"disc\">\n<li><a href=\"https://www.cve.org/CVERecord?id=CVE-2024-27834\" target=\"_blank\">CVE-2024-27834</a> Apple Multiple Products Improper Authentication Vulnerability</li>\n</ul>\n<p>This type of vulnerability is a frequent attack vector for malicious cyber actors and poses significant risks to the federal enterprise.</p>\n<p><a href=\"https://www.cisa.gov/news-events/directives/bod-26-04-implementation-guidance-prioritizing-security-updates-based-risk\">Binding Operational Directive (BOD) 26-04: Prioritizing Security Updates Based on Risk</a> establishes vulnerability management requirements for Federal Civilian Executive Branch (FCEB) agencies. BOD 26-04 reinforces the importance of the KEV Catalog and requires federal agencies to prioritize rapid remediation of high-risk vulnerabilities, specifically those identified by Common Vulnerabilities and Exposures (CVEs) listed in CISA\u2019s KEV Catalog on publicly exposed assets that grant total control of the asset post-exploitation, while deferring action for lower-risk vulnerabilities. BOD 26-04 further establishes basic expectations for when agencies must check whether threat actors compromised the system before the patch was applied.</p>\n<p>While BOD 26-04 applies only to FCEB agencies, CISA encourages all organizations to adopt risk-based vulnerability management and prioritize remediation of&nbsp;<a href=\"https://www.cisa.gov/known-exploited-vulnerabilities-catalog\">KEV Catalog vulnerabilities</a>. CISA will continue to add vulnerabilities to the catalog that meet the&nbsp;<a href=\"https://www.cisa.gov/known-exploited-vulnerabilities\">specified criteria</a>.</p>\n<p>Aware of an exploited vulnerability not currently listed in the KEV Catalog? Submit it for potential addition through CISA\u2019s&nbsp;<a href=\"https://cisasurvey.gov1.qualtrics.com/jfe/form/SV_1Zwu52kgK2OYf3w\" target=\"_blank\">KEV Nomination Form</a>. Potential KEV additions must have a CVE ID, evidence of exploitation, and clear mitigation guidance.</p>",
+          "published": "Wed, 04 Nov 26 12:00:00 +0000",
+          "id": "/node/25749",
+          "_category": "CISA"
+        },
+        {
+          "title": "Siemens SIMATIC S7-1500 TM MFP",
+          "link": "https://www.cisa.gov/news-events/ics-advisories/icsa-26-295-16",
+          "summary": "<p><a href=\"https://github.com/cisagov/CSAF/blob/develop/csaf_files/OT/white/2026/icsa-26-295-16.json\"><strong>View CSAF</strong></a></p>\n<h2>Summary</h2>\n<p><strong>Multiple vulnerabilities have been identified in the additional GNU/Linux subsystem of the SIMATIC S7-1500 TM MFP V1.1.1. Siemens is preparing fixes and recommends specific mitigations for products where fixes are not or not yet available.</strong></p>\n<p>The following versions of Siemens SIMATIC S7-1500 TM MFP are affected:</p>\n<ul>\n<li>SIMATIC S7-1500 TM MFP - GNU/Linux subsystem vers:all/*&nbsp;</li>\n</ul>\n<div class=\"csaf-table\">\n<table class=\"tablesaw tablesaw-stack\">\n<thead>\n<tr>\n<th>CVSS</th>\n<th>Vendor</th>\n<th>Equipment</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>v3 10</td>\n<td>Siemens</td>\n<td>SIMATIC S7-1500 TM MFP - GNU/Linux subsystem</td>\n</tr>\n</tbody>\n</table>\n<table class=\"tablesaw tablesaw-stack\">\n<thead>\n<tr>\n<th>377 Vulnerabilities</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>Access of Uninitialized Pointer, Buffer Copy without Checking Size of Input ('Classic Buffer Overflow'), Deadlock, Detection of Error Condition Without Action, Double Free, Expired Pointer Dereference, Heap-based Buffer Overflow, Improper Control of Resource Identifiers ('Resource Injection'), Improper Control of a Resource Through its Lifetime, Improper Handling of Length Parameter Inconsistency, Improper Handling of Missing Special Element, Improper Handling of Structural Elements, Improper Input Validation, Improper Locking, Improper Resource Locking, Improper Restriction of Operations within the Bounds of a Memory Buffer, Improper Update of Reference Count, Improper Validation of Array Index, Improper Validation of Consistency within Input, Improper Validation of Specified Index, Position, or Offset in Input, Improper Validation of Specified Quantity in Input, Improper Validation of Specified Type of Input, Incorrect Synchronization, Integer Overflow or Wraparound, Integer Underflow (Wrap or Wraparound), Loop with Unreachable Exit Condition ('Infinite Loop'), Missing Default Case in Multiple Condition Expression, Missing Initialization of Resource, Missing Lock Check, Missing Release of Memory after Effective Lifetime, Missing Release of Resource after Effective Lifetime, Multiple Locks of a Critical Resource, NULL Pointer Dereference, Operation on a Resource after Expiration or Release, Out-of-bounds Read, Out-of-bounds Write, Plaintext Storage of a Password, Release of Invalid Pointer or Reference, Return of Wrong Status Code, Signal Handler Race Condition, Time-of-check Time-of-use (TOCTOU) Race Condition, Unchecked Return Value, Use After Free, Use of Incorrect Operator, Use of Uninitialized Resource, Write-what-where Condition</td>\n</tr>\n</tbody>\n</table>\n</div>\n<h3>Background</h3>\n<ul>\n<li><strong>Critical Infrastructure Sectors: </strong>Critical Manufacturing, Transportation Systems, Energy, Healthcare and Public Health, Financial Services, Government Services and Facilities</li>\n<li><strong>Countries/Areas Deployed: </strong>Worldwide</li>\n<li><strong>Company Headquarters Location: </strong>Germany</li>\n</ul>\n<hr />\n<h2>Vulnerabilities</h2>\n<div class=\"icsa-etb-toggle-wrapper\"><a class=\"icsa-etb-toggle-all\" href=\"https://www.cisa.gov/\">Expand All +</a></div>\n<div class=\"c-expandable-textbox icsa-etb\">\n<div class=\"c-expandable-textbox__title\">CVE-2023-52927</div>\n<div class=\"c-expandable-textbox__body\">In the Linux kernel, the following vulnerability has been resolved: netfilter: allow exp not to be removed in nf_ct_find_expectation Currently nf_conntrack_in() calling nf_ct_find_expectation() will remove the exp from the hash table. However, in some scenario, we expect the exp not to be removed when the created ct will not be confirmed, like in OVS and TC conntrack in the following patches. This patch allows exp not to be removed by setting IPS_CONFIRMED in the status of the tmpl.</div>\n<div class=\"c-expandable-textbox-morebutton-wrapper\"><a class=\"c-expandable-textbox-morebutton\" href=\"https://www.cisa.gov/\">Read More</a></div>\n<div class=\"c-expandable-textbox__body2\">\n<h4>1 Affected Product</h4>\n<hr />\n<h5>SIMATIC S7-1500 TM MFP - GNU/Linux subsystem</h5>\n<div>\n<p>Product Status: known_affected</p>\n</div>\n<h6>Remediations</h6>\n<div>\n<p><strong>Mitigation</strong><br />Limit access to the interactive shell of the additional GNU/Linux subssytem to trusted personnel only.</p>\n</div>\n<div>\n<p><strong>Mitigation</strong><br />Only build and run applications from trusted sources.</p>\n</div>\n<div>\n<p><strong>None available</strong><br />Currently no fix is available</p>\n</div>\n<hr />\n<h6>Additional Metrics</h6>\n<p><strong>Relevant CWE:</strong> <a href=\"https://cwe.mitre.org/data/definitions/20.html\">CWE-20 Improper Input Validation</a></p>\n<div class=\"csaf-table csaf-metrics-table\">\n<table class=\"tablesaw tablesaw-stack\">\n<thead>\n<tr>\n<th>CVSS Version</th>\n<th>Base Score</th>\n<th>Base Severity</th>\n<th>Vector String</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>3.1</td>\n<td>7.8</td>\n<td>HIGH</td>\n<td><a href=\"https://www.first.org/cvss/calculator/3.1#CVSS:3.1/AV:L/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H\">CVSS:3.1/AV:L/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H</a></td>\n</tr>\n</tbody>\n</table>\n</div>\n<hr />\n<p><a href=\"https://www.cve.org/CVERecord?id=CVE-2023-52927\">View CVE Details</a></p>\n</div>\n</div>\n<ul type=\"disc\">\n<li>CVE-2023-52927</li>\n<li>CVE-2023-53292</li>\n<li>CVE-2023-54271</li>\n<li>CVE-2024-26982</li>\n<li>CVE-2024-36922</li>\n<li>CVE-2024-40945</li>\n<li>CVE-2024-47809</li>\n<li>CVE-2024-49998</li>\n<li>CVE-2024-53166</li>\n<li>CVE-2024-56647</li>\n<li>CVE-2024-56657</li>\n<li>CVE-2024-56719</li>\n<li>CVE-2024-57977</li>\n<li>CVE-2024-57979</li>\n<li>CVE-2024-57980</li>\n<li>CVE-2024-57981</li>\n<li>CVE-2024-57986</li>\n<li>CVE-2024-57993</li>\n<li>CVE-2024-57996</li>\n<li>CVE-2024-58002</li>\n<li>CVE-2024-58005</li>\n<li>CVE-2024-58009</li>\n<li>CVE-2024-58013</li>\n<li>CVE-2024-58014</li>\n<li>CVE-2024-58017</li>\n<li>CVE-2024-58020</li>\n<li>CVE-2024-58058</li>\n<li>CVE-2024-58061</li>\n<li>CVE-2024-58063</li>\n<li>CVE-2024-58068</li>\n<li>CVE-2024-58071</li>\n<li>CVE-2024-58072</li>\n<li>CVE-2024-58077</li>\n<li>CVE-2024-58079</li>\n<li>CVE-2024-58083</li>\n<li>CVE-2025-21682</li>\n<li>CVE-2025-21700</li>\n<li>CVE-2025-21702</li>\n<li>CVE-2025-21703</li>\n<li>CVE-2025-21704</li>\n<li>CVE-2025-21705</li>\n<li>CVE-2025-21706</li>\n<li>CVE-2025-21707</li>\n<li>CVE-2025-21708</li>\n<li>CVE-2025-21716</li>\n<li>CVE-2025-21719</li>\n<li>CVE-2025-21724</li>\n<li>CVE-2025-21725</li>\n<li>CVE-2025-21726</li>\n<li>CVE-2025-21727</li>\n<li>CVE-2025-21728</li>\n<li>CVE-2025-21731</li>\n<li>CVE-2025-21735</li>\n<li>CVE-2025-21738</li>\n<li>CVE-2025-21744</li>\n<li>CVE-2025-21745</li>\n<li>CVE-2025-21753</li>\n<li>CVE-2025-21756</li>\n<li>CVE-2025-21758</li>\n<li>CVE-2025-21760</li>\n<li>CVE-2025-21761</li>\n<li>CVE-2025-21762</li>\n<li>CVE-2025-21763</li>\n<li>CVE-2025-21764</li>\n<li>CVE-2025-21765</li>\n<li>CVE-2025-21766</li>\n<li>CVE-2025-21767</li>\n<li>CVE-2025-21776</li>\n<li>CVE-2025-21779</li>\n<li>CVE-2025-21787</li>\n<li>CVE-2025-21790</li>\n<li>CVE-2025-21791</li>\n<li>CVE-2025-21795</li>\n<li>CVE-2025-21796</li>\n<li>CVE-2025-21806</li>\n<li>CVE-2025-21814</li>\n<li>CVE-2025-21830</li>\n<li>CVE-2025-21832</li>\n<li>CVE-2025-21835</li>\n<li>CVE-2025-21838</li>\n<li>CVE-2025-21844</li>\n<li>CVE-2025-21846</li>\n<li>CVE-2025-21858</li>\n<li>CVE-2025-21859</li>\n<li>CVE-2025-21862</li>\n<li>CVE-2025-21863</li>\n<li>CVE-2025-21864</li>\n<li>CVE-2025-21865</li>\n<li>CVE-2025-22105</li>\n<li>CVE-2025-23131</li>\n<li>CVE-2025-38105</li>\n<li>CVE-2025-38162</li>\n<li>CVE-2025-38192</li>\n<li>CVE-2025-38250</li>\n<li>CVE-2025-38584</li>\n<li>CVE-2025-38704</li>\n<li>CVE-2025-39748</li>\n<li>CVE-2025-39863</li>\n<li>CVE-2025-39997</li>\n<li>CVE-2025-40135</li>\n<li>CVE-2025-68206</li>\n<li>CVE-2025-68239</li>\n<li>CVE-2025-68265</li>\n<li>CVE-2026-23066</li>\n<li>CVE-2026-23100</li>\n<li>CVE-2026-23113</li>\n<li>CVE-2026-23141</li>\n<li>CVE-2026-23154</li>\n<li>CVE-2026-23157</li>\n<li>CVE-2026-23204</li>\n<li>CVE-2026-23231</li>\n<li>CVE-2026-23245</li>\n<li>CVE-2026-23253</li>\n<li>CVE-2026-23255</li>\n<li>CVE-2026-23270</li>\n<li>CVE-2026-23271</li>\n<li>CVE-2026-23272</li>\n<li>CVE-2026-23273</li>\n<li>CVE-2026-23274</li>\n<li>CVE-2026-23277</li>\n<li>CVE-2026-23278</li>\n<li>CVE-2026-23279</li>\n<li>CVE-2026-23281</li>\n<li>CVE-2026-23290</li>\n<li>CVE-2026-23291</li>\n<li>CVE-2026-23292</li>\n<li>CVE-2026-23296</li>\n<li>CVE-2026-23300</li>\n<li>CVE-2026-23302</li>\n<li>CVE-2026-23303</li>\n<li>CVE-2026-23304</li>\n<li>CVE-2026-23310</li>\n<li>CVE-2026-23312</li>\n<li>CVE-2026-23315</li>\n<li>CVE-2026-23317</li>\n<li>CVE-2026-23318</li>\n<li>CVE-2026-23319</li>\n<li>CVE-2026-23321</li>\n<li>CVE-2026-23336</li>\n<li>CVE-2026-23339</li>\n<li>CVE-2026-23340</li>\n<li>CVE-2026-23343</li>\n<li>CVE-2026-23351</li>\n<li>CVE-2026-23352</li>\n<li>CVE-2026-23356</li>\n<li>CVE-2026-23357</li>\n<li>CVE-2026-23359</li>\n<li>CVE-2026-23364</li>\n<li>CVE-2026-23365</li>\n<li>CVE-2026-23367</li>\n<li>CVE-2026-23368</li>\n<li>CVE-2026-23370</li>\n<li>CVE-2026-23372</li>\n<li>CVE-2026-23378</li>\n<li>CVE-2026-23379</li>\n<li>CVE-2026-23381</li>\n<li>CVE-2026-23382</li>\n<li>CVE-2026-23388</li>\n<li>CVE-2026-23389</li>\n<li>CVE-2026-23391</li>\n<li>CVE-2026-23392</li>\n<li>CVE-2026-23395</li>\n<li>CVE-2026-23396</li>\n<li>CVE-2026-23397</li>\n<li>CVE-2026-23398</li>\n<li>CVE-2026-23399</li>\n<li>CVE-2026-23442</li>\n<li>CVE-2026-23444</li>\n<li>CVE-2026-31407</li>\n<li>CVE-2026-31449</li>\n<li>CVE-2026-31451</li>\n<li>CVE-2026-31488</li>\n<li>CVE-2026-31500</li>\n<li>CVE-2026-31532</li>\n<li>CVE-2026-31580</li>\n<li>CVE-2026-31583</li>\n<li>CVE-2026-31586</li>\n<li>CVE-2026-31611</li>\n<li>CVE-2026-31612</li>\n<li>CVE-2026-31613</li>\n<li>CVE-2026-31617</li>\n<li>CVE-2026-31622</li>\n<li>CVE-2026-31624</li>\n<li>CVE-2026-31625</li>\n<li>CVE-2026-31629</li>\n<li>CVE-2026-31630</li>\n<li>CVE-2026-31637</li>\n<li>CVE-2026-31642</li>\n<li>CVE-2026-31673</li>\n<li>CVE-2026-31676</li>\n<li>CVE-2026-31681</li>\n<li>CVE-2026-31685</li>\n<li>CVE-2026-31694</li>\n<li>CVE-2026-31696</li>\n<li>CVE-2026-31697</li>\n<li>CVE-2026-31698</li>\n<li>CVE-2026-31699</li>\n<li>CVE-2026-31700</li>\n<li>CVE-2026-31704</li>\n<li>CVE-2026-31705</li>\n<li>CVE-2026-31708</li>\n<li>CVE-2026-31709</li>\n<li>CVE-2026-31711</li>\n<li>CVE-2026-31712</li>\n<li>CVE-2026-43052</li>\n<li>CVE-2026-43071</li>\n<li>CVE-2026-43074</li>\n<li>CVE-2026-43080</li>\n<li>CVE-2026-43085</li>\n<li>CVE-2026-43089</li>\n<li>CVE-2026-43093</li>\n<li>CVE-2026-43094</li>\n<li>CVE-2026-43099</li>\n<li>CVE-2026-43110</li>\n<li>CVE-2026-43111</li>\n<li>CVE-2026-43112</li>\n<li>CVE-2026-43114</li>\n<li>CVE-2026-43116</li>\n<li>CVE-2026-43117</li>\n<li>CVE-2026-43303</li>\n<li>CVE-2026-43350</li>\n<li>CVE-2026-43421</li>\n<li>CVE-2026-43492</li>\n<li>CVE-2026-43493</li>\n<li>CVE-2026-43496</li>\n<li>CVE-2026-43499</li>\n<li>CVE-2026-43502</li>\n<li>CVE-2026-43503</li>\n<li>CVE-2026-45834</li>\n<li>CVE-2026-45835</li>\n<li>CVE-2026-45836</li>\n<li>CVE-2026-45838</li>\n<li>CVE-2026-45839</li>\n<li>CVE-2026-45840</li>\n<li>CVE-2026-45841</li>\n<li>CVE-2026-45842</li>\n<li>CVE-2026-45843</li>\n<li>CVE-2026-45844</li>\n<li>CVE-2026-45850</li>\n<li>CVE-2026-45991</li>\n<li>CVE-2026-45997</li>\n<li>CVE-2026-46003</li>\n<li>CVE-2026-46015</li>\n<li>CVE-2026-46018</li>\n<li>CVE-2026-46021</li>\n<li>CVE-2026-46022</li>\n<li>CVE-2026-46023</li>\n<li>CVE-2026-46026</li>\n<li>CVE-2026-46033</li>\n<li>CVE-2026-46037</li>\n<li>CVE-2026-46038</li>\n<li>CVE-2026-46040</li>\n<li>CVE-2026-46044</li>\n<li>CVE-2026-46046</li>\n<li>CVE-2026-46047</li>\n<li>CVE-2026-46050</li>\n<li>CVE-2026-46051</li>\n<li>CVE-2026-46056</li>\n<li>CVE-2026-46064</li>\n<li>CVE-2026-46065</li>\n<li>CVE-2026-46069</li>\n<li>CVE-2026-46070</li>\n<li>CVE-2026-46083</li>\n<li>CVE-2026-46086</li>\n<li>CVE-2026-46088</li>\n<li>CVE-2026-46092</li>\n<li>CVE-2026-46099</li>\n<li>CVE-2026-46101</li>\n<li>CVE-2026-46102</li>\n<li>CVE-2026-46107</li>\n<li>CVE-2026-46110</li>\n<li>CVE-2026-46113</li>\n<li>CVE-2026-46116</li>\n<li>CVE-2026-46120</li>\n<li>CVE-2026-46122</li>\n<li>CVE-2026-46124</li>\n<li>CVE-2026-46125</li>\n<li>CVE-2026-46128</li>\n<li>CVE-2026-46136</li>\n<li>CVE-2026-46137</li>\n<li>CVE-2026-46146</li>\n<li>CVE-2026-46149</li>\n<li>CVE-2026-46150</li>\n<li>CVE-2026-46151</li>\n<li>CVE-2026-46159</li>\n<li>CVE-2026-46161</li>\n<li>CVE-2026-46163</li>\n<li>CVE-2026-46165</li>\n<li>CVE-2026-46167</li>\n<li>CVE-2026-46168</li>\n<li>CVE-2026-46172</li>\n<li>CVE-2026-46173</li>\n<li>CVE-2026-46177</li>\n<li>CVE-2026-46180</li>\n<li>CVE-2026-46185</li>\n<li>CVE-2026-46187</li>\n<li>CVE-2026-46190</li>\n<li>CVE-2026-46191</li>\n<li>CVE-2026-46193</li>\n<li>CVE-2026-46195</li>\n<li>CVE-2026-46196</li>\n<li>CVE-2026-46209</li>\n<li>CVE-2026-46214</li>\n<li>CVE-2026-46227</li>\n<li>CVE-2026-46234</li>\n<li>CVE-2026-46243</li>\n<li>CVE-2026-46275</li>\n<li>CVE-2026-46294</li>\n<li>CVE-2026-46303</li>\n<li>CVE-2026-46304</li>\n<li>CVE-2026-46306</li>\n<li>CVE-2026-46307</li>\n<li>CVE-2026-46320</li>\n<li>CVE-2026-46321</li>\n<li>CVE-2026-46322</li>\n<li>CVE-2026-46323</li>\n<li>CVE-2026-46331</li>\n<li>CVE-2026-52909</li>\n<li>CVE-2026-52910</li>\n<li>CVE-2026-52917</li>\n<li>CVE-2026-52918</li>\n<li>CVE-2026-52923</li>\n<li>CVE-2026-52928</li>\n<li>CVE-2026-52929</li>\n<li>CVE-2026-52930</li>\n<li>CVE-2026-52942</li>\n<li>CVE-2026-52943</li>\n<li>CVE-2026-52946</li>\n<li>CVE-2026-52947</li>\n<li>CVE-2026-52948</li>\n<li>CVE-2026-53080</li>\n<li>CVE-2026-53131</li>\n<li>CVE-2026-53146</li>\n<li>CVE-2026-53147</li>\n<li>CVE-2026-53148</li>\n<li>CVE-2026-53149</li>\n<li>CVE-2026-53150</li>\n<li>CVE-2026-53167</li>\n<li>CVE-2026-53168</li>\n<li>CVE-2026-53177</li>\n<li>CVE-2026-53181</li>\n<li>CVE-2026-53183</li>\n<li>CVE-2026-53184</li>\n<li>CVE-2026-53192</li>\n<li>CVE-2026-53198</li>\n<li>CVE-2026-53208</li>\n<li>CVE-2026-53212</li>\n<li>CVE-2026-53218</li>\n<li>CVE-2026-53219</li>\n<li>CVE-2026-53221</li>\n<li>CVE-2026-53225</li>\n<li>CVE-2026-53227</li>\n<li>CVE-2026-53228</li>\n<li>CVE-2026-53236</li>\n<li>CVE-2026-53239</li>\n<li>CVE-2026-53242</li>\n<li>CVE-2026-53245</li>\n<li>CVE-2026-53249</li>\n<li>CVE-2026-53253</li>\n<li>CVE-2026-53254</li>\n<li>CVE-2026-53255</li>\n<li>CVE-2026-53256</li>\n<li>CVE-2026-53263</li>\n<li>CVE-2026-53264</li>\n<li>CVE-2026-53265</li>\n<li>CVE-2026-53268</li>\n<li>CVE-2026-53269</li>\n<li>CVE-2026-53275</li>\n<li>CVE-2026-53325</li>\n<li>CVE-2026-53337</li>\n<li>CVE-2026-53349</li>\n<li>CVE-2026-53350</li>\n<li>CVE-2026-53352</li>\n<li>CVE-2026-53356</li>\n<li>CVE-2026-53358</li>\n<li>CVE-2026-53362</li>\n<li>CVE-2026-64560</li>\n</ul>\n<hr />\n<h2>Acknowledgments</h2>\n<ul>\n<li>Siemens ProductCERT reported these vulnerabilities to CISA.</li>\n</ul>\n<hr />\n<h2>General Recommendations</h2>\n<p>As a general security measure, Siemens strongly recommends to protect network access to devices with appropriate mechanisms. In order to operate the devices in a protected IT environment, Siemens recommends to configure the environment according to Siemens' operational guidelines for Industrial Security (Download: https://www.siemens.com/cert/operational-guidelines-industrial-security), and to follow the recommendations in the product manuals. Additional information on Industrial Security by Siemens can be found at: https://www.siemens.com/industrialsecurity</p>\n<hr />\n<h2>Additional Resources</h2>\n<p>For further inquiries on security vulnerabilities in Siemens products and solutions, please contact the Siemens ProductCERT: https://www.siemens.com/cert/advisories</p>\n<hr />\n<h2>Terms of Use</h2>\n<p>The use of Siemens Security Advisories is subject to the terms and conditions listed on: https://www.siemens.com/productcert/terms-of-use.</p>\n<hr />\n<h2>Recommended Practices</h2>\n<p>CISA recommends users take defensive measures to minimize the risk of exploitation of these vulnerabilities.</p>\n<ul type=\"disc\">\n<li>Minimize network exposure for all control system devices and/or systems, ensuring they are <a href=\"https://www.cisa.gov/uscert/ics/alerts/ICS-ALERT-10-301-01\">not accessible from the internet</a>.</li>\n<li>Locate control system networks and remote devices behind firewalls and isolating them from business networks.</li>\n<li>When remote access is required, use more secure methods, such as Virtual Private Networks (VPNs), recognizing VPNs may have vulnerabilities and should be updated to the most current version available. Also recognize VPN is only as secure as the connected devices.</li>\n</ul>\n<p>CISA reminds organizations to perform proper impact analysis and risk assessment prior to deploying defensive measures.</p>\n<p>CISA also provides a section for <a href=\"https://www.cisa.gov/resources-tools/resources/ics-recommended-practices\">control systems security recommended practices</a> on the ICS webpage on <a href=\"https://www.cisa.gov/topics/industrial-control-systems\">cisa.gov/ics</a>. Several CISA products detailing cyber defense best practices are available for reading and download, including <a href=\"https://www.cisa.gov/sites/default/files/recommended_practices/NCCIC_ICS-CERT_Defense_in_Depth_2016_S508C.pdf\">Improving Industrial Control Systems Cybersecurity with Defense-in-Depth Strategies</a>.</p>\n<p>CISA encourages organizations to implement recommended cybersecurity strategies for <a href=\"https://www.cisa.gov/sites/default/files/publications/Cybersecurity_Best_Practices_for_Industrial_Control_Systems.pdf\">proactive defense of ICS assets</a>.</p>\n<p>Additional mitigation guidance and recommended practices are publicly available on the ICS webpage at <a href=\"https://www.cisa.gov/topics/industrial-control-systems\">cisa.gov/ics</a> in the technical information paper, <a href=\"https://www.cisa.gov/news-events/news/targeted-cyber-intrusion-detection-and-mitigation-strategies-update-b\">ICS-TIP-12-146-01B--Targeted Cyber Intrusion Detection and Mitigation Strategies</a>.</p>\n<p>Organizations observing suspected malicious activity should follow established internal procedures and report findings to CISA for tracking and correlation against other incidents.</p>\n<hr />\n<h2>Advisory Conversion Disclaimer</h2>\n<p>This ICSA is a verbatim republication of Siemens ProductCERT SSA-784472 from a direct conversion of the vendor's Common Security Advisory Framework (CSAF) advisory. This is republished to CISA's website as a means of increasing visibility and is provided \"as-is\" for informational purposes only. CISA is not responsible for the editorial or technical accuracy of republished advisories and provides no warranties of any kind regarding any information contained within this advisory. Further, CISA does not endorse any commercial product or service. Please contact Siemens ProductCERT directly for any questions regarding this advisory.</p>\n<h2>Revision History</h2>\n<ul>\n<li><strong>Initial Release Date: </strong>2026-10-13</li>\n</ul>\n<table class=\"tablesaw tablesaw-stack\">\n<thead>\n<tr>\n<th>Date</th>\n<th>Revision</th>\n<th>Summary</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>2026-10-13</td>\n<td>1</td>\n<td>Publication Date</td>\n</tr>\n<tr>\n<td>2026-10-22</td>\n<td>2</td>\n<td>Initial CISA Republication of Siemens ProductCERT SSA-784472 advisory</td>\n</tr>\n</tbody>\n</table>\n<hr />\n<h2>Legal Notice and Terms of Use</h2>",
+          "published": "Thu, 22 Oct 26 12:00:00 +0000",
+          "id": "/node/25702",
+          "_category": "NEWS"
+        }
+      ]
+    }
+  },
+  "cc_crypto": {
+    "pages": {}
+  },
+  "nato": {
+    "pages": {},
+    "cisco_added": [],
+    "cisco_removed": [],
+    "baseline_reset": false
+  },
+  "eucc": {
+    "pages": {},
+    "cisco_added": [],
+    "cisco_removed": [],
+    "baseline_reset": false
+  },
+  "nd_itc": {
+    "nit_rfis": {
+      "added": [],
+      "status_changes": [],
+      "revised": [],
+      "newly_archived": []
+    },
+    "awl": {
+      "added": [],
+      "removed": [],
+      "version_changes": [],
+      "list_updates": []
+    },
+    "baseline_reset": false,
+    "collection_failure": false
+  },
+  "ietf_cnsa": {
+    "added": [],
+    "removed": [],
+    "updated": [],
+    "rfc9846_adoption": []
+  },
+  "ieee_pqc": {
+    "added": [],
+    "removed": [],
+    "updated": []
+  },
+  "source_health": {
+    "niap": {
+      "label": "NIAP",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "PCL products",
+          "observed": 1771,
+          "minimum": 50
+        },
+        {
+          "name": "Protection Profiles",
+          "observed": 272,
+          "minimum": 10
+        },
+        {
+          "name": "PQC PP file-version records",
+          "observed": 11,
+          "minimum": 1,
+          "required_for_diff_baseline": false
+        },
+        {
+          "name": "PQC PP full-content hashes",
+          "observed": 7,
+          "minimum": 1,
+          "required_for_diff_baseline": false
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-11-06T13:35:16.207249+00:00",
+      "subcollections": {
+        "news": {
+          "label": "News announcements",
+          "status": "healthy",
+          "observed": 359,
+          "consecutive_failures": 0,
+          "using_last_known_good": false
+        },
+        "events": {
+          "label": "Events",
+          "status": "healthy",
+          "observed": 0,
+          "consecutive_failures": 0,
+          "using_last_known_good": false
+        },
+        "policies": {
+          "label": "Policy letters",
+          "status": "healthy",
+          "observed": 40,
+          "consecutive_failures": 0,
+          "using_last_known_good": false
+        }
+      }
+    },
+    "cc_portal": {
+      "label": "CC Portal",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "portal records",
+          "observed": 180,
+          "minimum": 1
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-11-06T13:35:16.207249+00:00"
+    },
+    "cctl_labs": {
+      "label": "CCTL Labs",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "lab feed items",
+          "observed": 19,
+          "minimum": 1
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-11-06T13:35:16.207249+00:00"
+    },
+    "csfc": {
+      "label": "CSfC",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "APL items",
+          "observed": 118,
+          "minimum": 5
+        },
+        {
+          "name": "announcements",
+          "observed": 8,
+          "minimum": 1
+        },
+        {
+          "name": "tracked capability packages",
+          "observed": 5,
+          "minimum": 5,
+          "required_for_diff_baseline": false
+        },
+        {
+          "name": "capability-package hashes",
+          "observed": 5,
+          "minimum": 5,
+          "required_for_diff_baseline": false
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-11-06T13:35:16.207249+00:00"
+    },
+    "cc_crypto": {
+      "label": "CC Crypto",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "publications",
+          "observed": 118,
+          "minimum": 5
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-11-06T13:35:16.207249+00:00"
+    },
+    "nato": {
+      "label": "NATO NIAPCL",
+      "status": "healthy",
+      "mode": "manual",
+      "checks": [],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "detail": "manual baseline (40 Cisco product(s)); updated via the NATO capture GitHub issue workflow",
+      "checked_at": "2026-11-06T13:35:16.207249+00:00"
+    },
+    "eucc": {
+      "label": "EUCC / ENISA",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "certificates",
+          "observed": 50,
+          "minimum": 2
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-11-06T13:35:16.207249+00:00"
+    },
+    "nd_itc": {
+      "label": "ND-iTC",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "NIT RFIs",
+          "observed": 32,
+          "minimum": 5
+        },
+        {
+          "name": "Allowed-With entries",
+          "observed": 28,
+          "minimum": 1
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-11-06T13:35:16.207249+00:00"
+    },
+    "ietf_cnsa": {
+      "label": "IETF CNSA 2.0",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "CNSA profile/RFC records",
+          "observed": 5,
+          "minimum": 5
+        },
+        {
+          "name": "CNSA full-text hashes",
+          "observed": 5,
+          "minimum": 5
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-11-06T13:35:16.207249+00:00"
+    },
+    "ieee_pqc": {
+      "label": "IEEE 802.11bt",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "P802.11bt project records",
+          "observed": 1,
+          "minimum": 1
+        },
+        {
+          "name": "P802.11bt timeline hashes",
+          "observed": 1,
+          "minimum": 1
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-11-06T13:35:16.207249+00:00"
+    }
+  },
+  "alerts": []
+}
