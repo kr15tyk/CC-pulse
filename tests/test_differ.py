@@ -709,6 +709,46 @@ class TestDiffCsfcApl:
         assert len(result["removed"]) == 1
         assert result["updated"] == []
 
+    def test_same_niap_product_in_new_component_role_is_added(self):
+        """A NIAP validation can legitimately occupy multiple CSfC roles."""
+        old = [{
+            "href": "https://www.niap-ccevs.org/Products/11664?source=csfc",
+            "type": "End User Device / Mobile Platform",
+            "text": "Samsung Galaxy Devices Android 16",
+        }]
+        new = [
+            dict(old[0]),
+            {
+                "href": "https://www.niap-ccevs.org/products/international-product/11664",
+                "type": "IPsec\u00a0 VPN Client",
+                "text": "Samsung Galaxy Devices Android 16",
+            },
+        ]
+
+        result = differ._diff_csfc_apl(old, new)
+
+        assert result["removed"] == []
+        assert result["updated"] == []
+        assert [item["type"] for item in result["added"]] == ["IPsec\u00a0 VPN Client"]
+
+    def test_same_product_and_role_wording_change_is_updated(self):
+        old = [{
+            "href": "https://www.niap-ccevs.org/Products/11664",
+            "type": "IPsec VPN Client",
+            "text": "Samsung Android 16, certified July",
+        }]
+        new = [{
+            "href": "https://www.niap-ccevs.org/products/international-product/11664/",
+            "type": "  IPsec   VPN Client ",
+            "text": "Samsung Android 16 (certified July)",
+        }]
+
+        result = differ._diff_csfc_apl(old, new)
+
+        assert result["added"] == []
+        assert result["removed"] == []
+        assert len(result["updated"]) == 1
+
 
 # ===========================================================================
 # diff_csfc -- routes the "apl" page through _diff_csfc_apl(); other CSfC
