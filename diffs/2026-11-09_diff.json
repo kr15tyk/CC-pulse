@@ -1,6 +1,6 @@
 {
-  "period_start": "2026-10-09T12:25:38.437178+00:00",
-  "period_end": "2026-10-10T11:43:57.278593+00:00",
+  "period_start": "2026-11-08T12:35:41.743416+00:00",
+  "period_end": "2026-11-09T14:53:45.499276+00:00",
   "niap": {
     "pps": {
       "added": [],
@@ -20,49 +20,49 @@
       "newly_archived": []
     },
     "pcl_all": {
-      "added": [],
+      "added": [
+        {
+          "active_maintenances": [],
+          "am_sort": "2031-09-28T00:00:00Z",
+          "assigned_lab_name": "EWA - Canada",
+          "certification_date": "2026-09-28T00:00:00Z",
+          "from_cc_portal": true,
+          "product_id": "2026.1319",
+          "product_name": "High Sec Labs RS20N-4 and RS40N-4 Secure Multi-Domain Smart Card Reader Firmware Version 40040-0E7",
+          "protection_profiles": [
+            {
+              "pp_id": 412,
+              "pp_name": "Protection Profile for Peripheral Sharing Device Version 4.0",
+              "pp_short_name": "PP_PSD_V4.0"
+            },
+            {
+              "pp_id": 434,
+              "pp_name": "PP-Module for User Authentication Devices Version 1.0",
+              "pp_short_name": "MOD_UA_V1.0"
+            }
+          ],
+          "status_sort": "Certified",
+          "submitting_country_id_code": "CA",
+          "submitting_country_id_name": "Canada",
+          "sunset_date": "2031-09-28T00:00:00Z",
+          "tech_types": [
+            "Other Devices and Systems"
+          ],
+          "vendor_id_name": "High Security Labs Ltd.",
+          "v_id": "2026.1319",
+          "kicked_off_date": null
+        }
+      ],
       "removed": [],
       "newly_archived": [
         {
-          "active_maintenances": [
-            {
-              "maintenance_id": 1753,
-              "title": "Oracle Identity Governance 12c, Build 12.2.1.4, with patch 38477295",
-              "completion_date": "2026-01-15T00:00:00+00:00"
-            }
-          ],
-          "am_sort": "2026-10-09T00:00:00Z",
-          "assigned_lab_name": "Lightship Security",
-          "certification_date": "2024-10-09T00:00:00Z",
-          "from_cc_portal": true,
-          "product_id": "2024.1278",
-          "product_name": "Oracle Identity Governance 12c",
-          "protection_profiles": [
-            {
-              "pp_id": 346,
-              "pp_name": "Protection Profile for Enterprise Security Management - Identity and Credential Management Version 2.1",
-              "pp_short_name": "PP_ESM_ICM_V2.1"
-            }
-          ],
-          "status_sort": "Archived",
-          "submitting_country_id_code": "CA",
-          "submitting_country_id_name": "Canada",
-          "sunset_date": "2029-10-09T00:00:00Z",
-          "tech_types": [
-            "Access Control Devices and Systems"
-          ],
-          "vendor_id_name": "Oracle Corporation",
-          "v_id": "2024.1278",
-          "kicked_off_date": null
-        },
-        {
           "active_maintenances": [],
-          "am_sort": "2026-10-09T00:00:00Z",
-          "assigned_lab_name": "Lightship Security, Inc.",
-          "certification_date": "2024-10-09T00:00:00Z",
+          "am_sort": "2026-11-08T00:00:00Z",
+          "assigned_lab_name": "atsec information security AB",
+          "certification_date": "2024-11-08T00:00:00Z",
           "from_cc_portal": true,
-          "product_id": "2024.1294",
-          "product_name": "RICOH IM 550/600/600SR, version E-1.20-H",
+          "product_id": "2024.1307",
+          "product_name": "HP Color LaserJet Enterprise 5700, HP Color LaserJet Enterprise 6700/6701, HP Color LaserJet Enterprise X55745, HP Color LaserJet Enterprise X65455/X65465",
           "protection_profiles": [
             {
               "pp_id": 317,
@@ -71,66 +71,14 @@
             }
           ],
           "status_sort": "Archived",
-          "submitting_country_id_code": "CA",
-          "submitting_country_id_name": "Canada",
-          "sunset_date": "2029-10-09T00:00:00Z",
+          "submitting_country_id_code": "SE",
+          "submitting_country_id_name": "Sweden",
+          "sunset_date": "2029-11-08T00:00:00Z",
           "tech_types": [
             "Multi-Function Devices"
           ],
-          "vendor_id_name": "Ricoh Company, Ltd.",
-          "v_id": "2024.1294",
-          "kicked_off_date": null
-        },
-        {
-          "active_maintenances": [],
-          "am_sort": "2026-10-09T00:00:00Z",
-          "assigned_lab_name": "Lightship Security, Inc.",
-          "certification_date": "2024-10-09T00:00:00Z",
-          "from_cc_portal": true,
-          "product_id": "2024.1293",
-          "product_name": "RICOH IM C300/C300F/C400F/C400SRF/C400SRFG, version JE-1.20-H",
-          "protection_profiles": [
-            {
-              "pp_id": 317,
-              "pp_name": "Protection Profile for Hardcopy Devices Version 1.0",
-              "pp_short_name": "PP_HCD_V1.0"
-            }
-          ],
-          "status_sort": "Archived",
-          "submitting_country_id_code": "CA",
-          "submitting_country_id_name": "Canada",
-          "sunset_date": "2029-10-09T00:00:00Z",
-          "tech_types": [
-            "Multi-Function Devices"
-          ],
-          "vendor_id_name": "Ricoh Company, Ltd.",
-          "v_id": "2024.1293",
-          "kicked_off_date": null
-        },
-        {
-          "active_maintenances": [],
-          "am_sort": "2026-10-09T00:00:00Z",
-          "assigned_lab_name": "Lightship Security, Inc.",
-          "certification_date": "2024-10-09T00:00:00Z",
-          "from_cc_portal": true,
-          "product_id": "2024.1279",
-          "product_name": "RICOH IM C6500/C8000, version JE-1.20-H",
-          "protection_profiles": [
-            {
-              "pp_id": 317,
-              "pp_name": "Protection Profile for Hardcopy Devices Version 1.0",
-              "pp_short_name": "PP_HCD_V1.0"
-            }
-          ],
-          "status_sort": "Archived",
-          "submitting_country_id_code": "CA",
-          "submitting_country_id_name": "Canada",
-          "sunset_date": "2029-10-09T00:00:00Z",
-          "tech_types": [
-            "Multi-Function Devices"
-          ],
-          "vendor_id_name": "Ricoh Company, Ltd.",
-          "v_id": "2024.1279",
+          "vendor_id_name": "HP Inc.",
+          "v_id": "2024.1307",
           "kicked_off_date": null
         }
       ]
@@ -138,7 +86,7 @@
     "in_evaluation": {
       "added": [],
       "removed": [],
-      "current_count": 42
+      "current_count": 36
     },
     "news": {
       "added": [],
@@ -233,7 +181,7 @@
       "checks": [
         {
           "name": "PCL products",
-          "observed": 1765,
+          "observed": 1773,
           "minimum": 50
         },
         {
@@ -256,12 +204,12 @@
       ],
       "consecutive_failures": 0,
       "using_last_known_good": false,
-      "checked_at": "2026-10-10T11:43:57.278593+00:00",
+      "checked_at": "2026-11-09T14:53:45.499276+00:00",
       "subcollections": {
         "news": {
           "label": "News announcements",
           "status": "healthy",
-          "observed": 357,
+          "observed": 359,
           "consecutive_failures": 0,
           "using_last_known_good": false
         },
@@ -293,7 +241,7 @@
       ],
       "consecutive_failures": 0,
       "using_last_known_good": false,
-      "checked_at": "2026-10-10T11:43:57.278593+00:00"
+      "checked_at": "2026-11-09T14:53:45.499276+00:00"
     },
     "cctl_labs": {
       "label": "CCTL Labs",
@@ -307,7 +255,7 @@
       ],
       "consecutive_failures": 0,
       "using_last_known_good": false,
-      "checked_at": "2026-10-10T11:43:57.278593+00:00"
+      "checked_at": "2026-11-09T14:53:45.499276+00:00"
     },
     "csfc": {
       "label": "CSfC",
@@ -315,7 +263,7 @@
       "checks": [
         {
           "name": "APL items",
-          "observed": 117,
+          "observed": 118,
           "minimum": 5
         },
         {
@@ -338,7 +286,7 @@
       ],
       "consecutive_failures": 0,
       "using_last_known_good": false,
-      "checked_at": "2026-10-10T11:43:57.278593+00:00"
+      "checked_at": "2026-11-09T14:53:45.499276+00:00"
     },
     "cc_crypto": {
       "label": "CC Crypto",
@@ -352,7 +300,7 @@
       ],
       "consecutive_failures": 0,
       "using_last_known_good": false,
-      "checked_at": "2026-10-10T11:43:57.278593+00:00"
+      "checked_at": "2026-11-09T14:53:45.499276+00:00"
     },
     "nato": {
       "label": "NATO NIAPCL",
@@ -362,7 +310,7 @@
       "consecutive_failures": 0,
       "using_last_known_good": false,
       "detail": "manual baseline (40 Cisco product(s)); updated via the NATO capture GitHub issue workflow",
-      "checked_at": "2026-10-10T11:43:57.278593+00:00"
+      "checked_at": "2026-11-09T14:53:45.499276+00:00"
     },
     "eucc": {
       "label": "EUCC / ENISA",
@@ -376,7 +324,7 @@
       ],
       "consecutive_failures": 0,
       "using_last_known_good": false,
-      "checked_at": "2026-10-10T11:43:57.278593+00:00"
+      "checked_at": "2026-11-09T14:53:45.499276+00:00"
     },
     "nd_itc": {
       "label": "ND-iTC",
@@ -395,7 +343,7 @@
       ],
       "consecutive_failures": 0,
       "using_last_known_good": false,
-      "checked_at": "2026-10-10T11:43:57.278593+00:00"
+      "checked_at": "2026-11-09T14:53:45.499276+00:00"
     },
     "ietf_cnsa": {
       "label": "IETF CNSA 2.0",
@@ -414,7 +362,7 @@
       ],
       "consecutive_failures": 0,
       "using_last_known_good": false,
-      "checked_at": "2026-10-10T11:43:57.278593+00:00"
+      "checked_at": "2026-11-09T14:53:45.499276+00:00"
     },
     "ieee_pqc": {
       "label": "IEEE 802.11bt",
@@ -433,7 +381,7 @@
       ],
       "consecutive_failures": 0,
       "using_last_known_good": false,
-      "checked_at": "2026-10-10T11:43:57.278593+00:00"
+      "checked_at": "2026-11-09T14:53:45.499276+00:00"
     }
   },
   "alerts": []
