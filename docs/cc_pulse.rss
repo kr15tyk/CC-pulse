@@ -2,6 +2,8 @@
 <rss version="2.0"><channel>
 <title>CC Pulse</title>
 <link>https://kr15tyk.github.io/CC-pulse/cc_dashboard.html</link>
-<description>Common Criteria monitoring - 2026-11-09 09:53 ET</description>
-
+<description>Common Criteria monitoring - 2026-11-10 09:06 ET</description>
+<item><title>NIAP New added: NIAP Postings Delay...PLEASE READ</title><link>https://www.niap-ccevs.org/announcements</link><description>2026-11-10T01:24:49.360000Z</description></item>
+<item><title>IETF CNSA Updated: Commercial National Security Algorithm (CNSA) Suite 2.0 Profile for SSH</title><link>https://datatracker.ietf.org/doc/draft-becker-cnsa2-ssh-profile/</link><description>states</description></item>
+<item><title>ALERT: IETF CNSA – Commercial National Security Algorithm (CNSA) Suite 2.0 Profile for SSH</title><link>https://kr15tyk.github.io/CC-pulse/cc_dashboard.html</link><description>Kind: updated | Keywords: CNSA, PQC</description></item>
 </channel></rss>
