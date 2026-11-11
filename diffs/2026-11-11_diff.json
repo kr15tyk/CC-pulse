@@ -1,0 +1,728 @@
+{
+  "period_start": "2026-11-10T14:06:10.612142+00:00",
+  "period_end": "2026-11-11T13:22:53.160129+00:00",
+  "niap": {
+    "pps": {
+      "added": [],
+      "removed": [],
+      "sunset_changes": [],
+      "status_changes": [],
+      "revised": [],
+      "content_changes": []
+    },
+    "tds": {
+      "added": [
+        {
+          "td_id": 1069,
+          "identifier": "TD1069",
+          "title": "Addition of CNSA 2.0 Algorithms to TLS Functional Package",
+          "protection_profile": [
+            {
+              "pp_id": 519,
+              "pp_name": "Functional Package for Transport Layer Security (TLS) Version 2.1",
+              "pp_common_name": "Functional Package for Transport Layer Security (TLS) Version 2.1",
+              "cc_version": "CC:2022",
+              "mr_version": null,
+              "pp_date": "2025-09-03T00:00:00Z",
+              "entrydate": "2025-09-03T12:25:21.558000Z",
+              "tech_type": "Network Encryption",
+              "pp_sponsor_id": "NIAP",
+              "community_id": null,
+              "status": "Publishing",
+              "sunset_date": null,
+              "pp_overview": "<p style=\"margin-top: 0in; background: white; margin-right: 0in; margin-left: 0in; font-size: 12pt; font-family: 'Times New Roman', serif;\"><span style=\"font-family: Arial, sans-serif; color: #212529;\">Transport Layer Security (TLS) and the closely-related Datagram TLS (DTLS) are cryptographic protocols designed to provide communications security over IP networks.&nbsp;The primary goal of the TLS protocol is to provide confidentiality and integrity of data transmitted between two communicating endpoints, as well as authentication of at least the server endpoint.</span></p>\r\n<p style=\"margin-top: 0in; background: rgb(255, 255, 253); margin-right: 0in; margin-left: 0in; font-size: 12pt; font-family: 'Times New Roman', serif;\"><span style=\"font-family: Arial, sans-serif; color: #000006;\">This \"Functional Package for Transport Layer Security\" (short name \"TLS-PKG\") defines functional requirements for the implementation of the Transport Layer Security (TLS) and Datagram TLS (DTLS) protocols.&nbsp;The requirements are intended to improve the security of products by enabling their evaluation.</span></p>",
+              "security_evaluation_summary": "<p style=\"margin-top: 0in; background: white; margin-right: 0in; margin-left: 0in; font-size: 12pt; font-family: 'Times New Roman', serif;\"><span style=\"font-family: Arial, sans-serif; color: #212529;\">The Target of Evaluation (TOE) in this Package is a product which acts as a TLS client or server, or both.&nbsp;This Package describes the security functionality of TLS in terms of CC.</span></p>\r\n<p style=\"margin: 0in 0in 1rem; background: white; box-sizing: border-box; font-variant-ligatures: normal; text-align: start; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; font-size: 12pt; font-family: 'Times New Roman', serif;\"><span style=\"font-family: Arial, sans-serif; color: #212529;\">The contents of this Package must be appropriately combined with a PP or PP-Module. When this Package is instantiated by a PP or PP-Module, the Package must include selection-based requirements in accordance with the selections or assignments indicated in the PP or PP-Module.</span></p>",
+              "environmental_strengths": "",
+              "pp_priority": null,
+              "created_on": null,
+              "removed_on": null,
+              "archived": false,
+              "assurance_maintenance": null,
+              "pp_estcompletion": null,
+              "pp_estcompletiondate": null,
+              "pp_transition": "2026-01-01T00:00:00Z",
+              "revised_on": null,
+              "pp_short_name": "PKG_TLS_V2.1",
+              "dod_compliant": false,
+              "csfceligible": true,
+              "constraint": null,
+              "predecessor_id": 465,
+              "successor_id": null,
+              "creator": 504,
+              "remover": null,
+              "editor": null
+            }
+          ],
+          "sunset_protection_profile": [],
+          "related_to": "FCS_DTLSC_EXT.1.3, FCS_DTLSC_EXT.1.4, FCS_DTLSS_EXT.1.4, FCS_TLSC_EXT.1.3, FCS_TLSC_EXT.1.4, FCS_TLSS_EXT.1.4",
+          "publication_date": "2026-11-10T09:45:53.153000Z",
+          "removed_on": null,
+          "status": "Published"
+        }
+      ],
+      "removed": []
+    },
+    "cisco_ndcpp": {
+      "added": [],
+      "removed": [],
+      "newly_archived": []
+    },
+    "pcl_all": {
+      "added": [
+        {
+          "active_maintenances": [],
+          "am_sort": "2028-09-25T00:00:00Z",
+          "assigned_lab_name": "Lightship Security USA, Inc.",
+          "certification_date": "2026-10-15T00:00:00Z",
+          "from_cc_portal": false,
+          "product_id": 11686,
+          "product_name": "DIGISTOR TCG OPAL SSC FIPS SSD Series, Firmware Version SCQM15.A / ECQM15.A",
+          "protection_profiles": [
+            {
+              "pp_id": 438,
+              "pp_name": "collaborative Protection Profile for Full Drive Encryption - Encryption Engine Version 2.0 + Errata 20190201",
+              "pp_short_name": "CPP_FDE_EE_V2.0E"
+            }
+          ],
+          "status_sort": "Certified",
+          "submitting_country_id_code": "US",
+          "submitting_country_id_name": "United States",
+          "sunset_date": null,
+          "tech_types": [
+            "Encrypted Storage"
+          ],
+          "vendor_id_name": "DigiStor",
+          "v_id": 11686,
+          "kicked_off_date": "2026-07-06T17:25:40.034000Z"
+        },
+        {
+          "active_maintenances": [],
+          "am_sort": "2028-10-01T00:00:00Z",
+          "assigned_lab_name": "Gossamer Security Solutions",
+          "certification_date": "2026-11-09T00:00:00Z",
+          "from_cc_portal": false,
+          "product_id": 11706,
+          "product_name": "Zebra 4490/5430/6490 Devices on Android 15",
+          "protection_profiles": [
+            {
+              "pp_id": 425,
+              "pp_name": "PP-Module for Bluetooth Version 1.0",
+              "pp_short_name": "MOD_BT_V1.0"
+            },
+            {
+              "pp_id": 439,
+              "pp_name": "Functional Package for TLS Version 1.1",
+              "pp_short_name": "PKG_TLS_V1.1"
+            },
+            {
+              "pp_id": 463,
+              "pp_name": "PP-Module for Wireless Local Area Network (WLAN) Client Version 1.0",
+              "pp_short_name": "MOD_WLANC_v1.0"
+            },
+            {
+              "pp_id": 468,
+              "pp_name": "Protection Profile for Mobile Device Fundamentals Version 3.3",
+              "pp_short_name": "PP_MDF_V3.3"
+            }
+          ],
+          "status_sort": "Certified",
+          "submitting_country_id_code": "US",
+          "submitting_country_id_name": "United States",
+          "sunset_date": null,
+          "tech_types": [
+            "Mobility"
+          ],
+          "vendor_id_name": "Zebra Technologies Corporation",
+          "v_id": 11706,
+          "kicked_off_date": "2026-06-10T09:59:44.817000Z"
+        }
+      ],
+      "removed": [],
+      "newly_archived": []
+    },
+    "in_evaluation": {
+      "added": [
+        {
+          "active_maintenances": [],
+          "am_sort": null,
+          "assigned_lab_name": "Gossamer Security Solutions",
+          "certification_date": null,
+          "from_cc_portal": false,
+          "product_id": 11745,
+          "product_name": "Cisco Identity Services Engine (ISE) V3.5",
+          "protection_profiles": [
+            {
+              "pp_id": 459,
+              "pp_name": "Functional Package for SSH Version 1.0",
+              "pp_short_name": "PKG_SSH_V1.0"
+            },
+            {
+              "pp_id": 470,
+              "pp_name": "PP-Module for Authentication Servers Version 1.0",
+              "pp_short_name": "MOD_AUTHSVR_V1.0"
+            },
+            {
+              "pp_id": 482,
+              "pp_name": "collaborative Protection Profile for Network Devices Version 3.0e",
+              "pp_short_name": "CPP_ND_V3.0E"
+            }
+          ],
+          "status_sort": "In Progress",
+          "submitting_country_id_code": "US",
+          "submitting_country_id_name": "United States",
+          "sunset_date": null,
+          "tech_types": [
+            "Network Device"
+          ],
+          "vendor_id_name": "Cisco Systems, Inc.",
+          "v_id": 11745,
+          "kicked_off_date": "2026-11-10T14:34:19.349000Z"
+        }
+      ],
+      "removed": [
+        {
+          "active_maintenances": [],
+          "am_sort": null,
+          "assigned_lab_name": "Lightship Security USA, Inc.",
+          "certification_date": null,
+          "from_cc_portal": false,
+          "product_id": 11686,
+          "product_name": "DIGISTOR TCG OPAL SSC FIPS SSD Series, Firmware Version SCQM15.A / ECQM15.A",
+          "protection_profiles": [
+            {
+              "pp_id": 438,
+              "pp_name": "collaborative Protection Profile for Full Drive Encryption - Encryption Engine Version 2.0 + Errata 20190201",
+              "pp_short_name": "CPP_FDE_EE_V2.0E"
+            }
+          ],
+          "status_sort": "In Progress",
+          "submitting_country_id_code": "US",
+          "submitting_country_id_name": "United States",
+          "sunset_date": null,
+          "tech_types": [
+            "Encrypted Storage"
+          ],
+          "vendor_id_name": "DigiStor",
+          "v_id": 11686,
+          "kicked_off_date": "2026-07-06T17:25:40.034000Z"
+        },
+        {
+          "active_maintenances": [],
+          "am_sort": null,
+          "assigned_lab_name": "Gossamer Security Solutions",
+          "certification_date": null,
+          "from_cc_portal": false,
+          "product_id": 11706,
+          "product_name": "Zebra 4490/5430/6490 Devices on Android 15",
+          "protection_profiles": [
+            {
+              "pp_id": 425,
+              "pp_name": "PP-Module for Bluetooth Version 1.0",
+              "pp_short_name": "MOD_BT_V1.0"
+            },
+            {
+              "pp_id": 439,
+              "pp_name": "Functional Package for TLS Version 1.1",
+              "pp_short_name": "PKG_TLS_V1.1"
+            },
+            {
+              "pp_id": 463,
+              "pp_name": "PP-Module for Wireless Local Area Network (WLAN) Client Version 1.0",
+              "pp_short_name": "MOD_WLANC_v1.0"
+            },
+            {
+              "pp_id": 468,
+              "pp_name": "Protection Profile for Mobile Device Fundamentals Version 3.3",
+              "pp_short_name": "PP_MDF_V3.3"
+            }
+          ],
+          "status_sort": "In Progress",
+          "submitting_country_id_code": "US",
+          "submitting_country_id_name": "United States",
+          "sunset_date": null,
+          "tech_types": [
+            "Mobility"
+          ],
+          "vendor_id_name": "Zebra Technologies Corporation",
+          "v_id": 11706,
+          "kicked_off_date": "2026-06-10T09:59:44.817000Z"
+        }
+      ],
+      "current_count": 34
+    },
+    "news": {
+      "added": [],
+      "revised": [],
+      "deactivated": [],
+      "reactivated": [],
+      "removed": []
+    },
+    "events": {
+      "added": [],
+      "revised": [],
+      "deactivated": [],
+      "reactivated": [],
+      "removed": []
+    },
+    "policies": {
+      "added": [],
+      "revised": [],
+      "archived": [],
+      "reactivated": [],
+      "removed": []
+    }
+  },
+  "cc_portal": {
+    "news": {
+      "added": []
+    },
+    "pps": {
+      "added": []
+    },
+    "products": {
+      "added": []
+    }
+  },
+  "cctl_labs": {
+    "atsec": [
+      {
+        "title": "100+ FIPS Certificates in a Single Year: A Milestone Worth Celebrating!",
+        "link": "https://www.atsec.com/100-fips-certs-in-one-year/",
+        "published": "",
+        "id": "https://www.atsec.com/100-fips-certs-in-one-year/"
+      }
+    ]
+  },
+  "csfc": {
+    "pages": {
+      "apl": {
+        "added": [
+          {
+            "name": "Juniper Networks EX4400 Series, as detailed in VID 11622",
+            "type": "MACSEC Ethernet Encryption Devices",
+            "vendor": "HPE Juniper",
+            "link": "https://www.niap-ccevs.org/products/11622",
+            "href": "https://www.niap-ccevs.org/products/11622",
+            "raw_text": "MACSEC Ethernet Encryption Devices | HPE Juniper | Juniper Networks EX4400 Series, as detailed in VID 11622 | JunOS 24.2R2 | NIAP Validation Completed (at\u00a0Lightship Security) | 2026.06.01 | ",
+            "text": "MACSEC Ethernet Encryption Devices | HPE Juniper | Juniper Networks EX4400 Series, as detailed in VID 11622 | JunOS 24.2R2 | NIAP Validation Completed (at\u00a0Lightship Security) | 2026.06.01 | ",
+            "content_sha256": "d13b4fa8890081e10ad90e51a66657050a13d96500862f1107f5e29f40c07dbf"
+          },
+          {
+            "name": "Identity Services Engine (ISE), as detailed in VID 11517",
+            "type": "Authentication Server",
+            "vendor": "Cisco",
+            "link": "https://www.niap-ccevs.org/products/11517",
+            "href": "https://www.niap-ccevs.org/products/11517",
+            "raw_text": "Authentication Server | Cisco | Identity Services Engine (ISE), as detailed in VID 11517 | v3.3 | NIAP Evaluation Completed (at Gossamer) | 2025.04.22 | CSfC solution owners should deploy virtual Cisco ISE\u00a0v3.3\u00a0on ESXi 8.0 (VID 11533) and submit a deviation request for the applicable NIAP-evaluated configuration Product Selection Capability Package requirement",
+            "text": "Authentication Server | Cisco | Identity Services Engine (ISE), as detailed in VID 11517 | v3.3 | NIAP Evaluation Completed (at Gossamer) | 2025.04.22 | CSfC solution owners should deploy virtual Cisco ISE\u00a0v3.3\u00a0on ESXi 8.0 (VID 11533) and submit a deviation request for the applicable NIAP-evaluated configuration Product Selection Capability Package requirement",
+            "content_sha256": "4cd0b55f18b2c0ece4ce5100d42d1caae20f1710bf297ad52b70fdd11a56c862"
+          }
+        ],
+        "removed": [
+          {
+            "name": "Junos OS 22.2R1 for SRX Series (SRX300, SRX320, SRX340, SRX345, SRX345-DUAL-AC, SRX1500, SRX4100, SRX4200, SRX4600, SRX5400, SRX5600, SRX5800)",
+            "type": "Traffic Filtering Firewall",
+            "vendor": "Juniper",
+            "link": "https://www.niap-ccevs.org/products/international-product/2023.1324",
+            "href": "https://www.niap-ccevs.org/products/international-product/2023.1324",
+            "raw_text": "Traffic Filtering Firewall | Juniper | Junos OS 22.2R1 for SRX Series (SRX300, SRX320, SRX340, SRX345, SRX345-DUAL-AC, SRX1500, SRX4100, SRX4200, SRX4600, SRX5400, SRX5600, SRX5800) | 22.2R1 | NIAP Validation Completed (at Teron Labs ) | 2023.10.13 | ",
+            "text": "Traffic Filtering Firewall | Juniper | Junos OS 22.2R1 for SRX Series (SRX300, SRX320, SRX340, SRX345, SRX345-DUAL-AC, SRX1500, SRX4100, SRX4200, SRX4600, SRX5400, SRX5600, SRX5800) | 22.2R1 | NIAP Validation Completed (at Teron Labs ) | 2023.10.13 | ",
+            "content_sha256": "751cface8d9d5370ea318e2120e937cfb12a69d3478e6bcd4ee1d603a474e3e0"
+          },
+          {
+            "name": "HSR10 CSFC Software Encryption Layer",
+            "type": "Software Full Drive Encryption",
+            "vendor": "Curtiss Wright Defense Solutions",
+            "link": "https://www.niap-ccevs.org/products/11506",
+            "href": "https://www.niap-ccevs.org/products/11506",
+            "raw_text": "Software Full Drive Encryption | Curtiss Wright Defense Solutions | HSR10 CSFC Software Encryption Layer | v1.1.0 | NIAP Validation Completed (at Gossamer) | 2024.11.01 | AA and EE",
+            "text": "Software Full Drive Encryption | Curtiss Wright Defense Solutions | HSR10 CSFC Software Encryption Layer | v1.1.0 | NIAP Validation Completed (at Gossamer) | 2024.11.01 | AA and EE",
+            "content_sha256": "83d28ba2e52bca35c2dfde099994edede95f6ec07dbb855c40d8f1258f937879"
+          }
+        ],
+        "updated": [
+          {
+            "name": "CertAgent/Dhuma",
+            "type": "Certificate Authority",
+            "vendor": "Information Security Corporation",
+            "link": "https://www.niap-ccevs.org/products/11457",
+            "href": "https://www.niap-ccevs.org/products/11457",
+            "raw_text": "Certificate Authority | Information Security Corporation | CertAgent/Dhuma | v8.0, Patch Level 0.7 | NIAP Evaluation Completed (at Leidos) | 2024.09.03 | Certification Extended -\u00a0Maintenance Update completed on 2025.12.17",
+            "text": "Certificate Authority | Information Security Corporation | CertAgent/Dhuma | v8.0, Patch Level 0.7 | NIAP Evaluation Completed (at Leidos) | 2024.09.03 | Certification Extended -\u00a0Maintenance Update completed on 2025.12.17",
+            "content_sha256": "02e33165cda8d1821157336d6a61e7be71b56b87dada18ac701905c25d198685",
+            "_old_text": "Certification\u00a0Authority | Information Security Corporation | CertAgent/Dhuma | v8.0, Patch Level 0.7 | NIAP Evaluation Completed (at Leidos) | 2024.09.03 | Certification Extended -\u00a0Maintenance Update completed on 2025.12.17"
+          },
+          {
+            "name": "Certificate System, as detailed in VID 11468",
+            "type": "Certificate Authority",
+            "vendor": "Red Hat",
+            "link": "https://www.niap-ccevs.org/products/11468",
+            "href": "https://www.niap-ccevs.org/products/11468",
+            "raw_text": "Certificate Authority | Red Hat | Certificate System, as detailed in VID 11468 | v10.4 | NIAP Evaluation Completed (at Gossamer) | 2024.08.23 | ",
+            "text": "Certificate Authority | Red Hat | Certificate System, as detailed in VID 11468 | v10.4 | NIAP Evaluation Completed (at Gossamer) | 2024.08.23 | ",
+            "content_sha256": "547cae7c4a1d6996e0abff729b0dc4c028d62c177a7d97c3ac0a44547f31af65",
+            "_old_text": "Certification\u00a0Authority | Red Hat | Certificate System, as detailed in VID 11468 | v10.4 | NIAP Evaluation Completed (at Gossamer) | 2024.08.23 | "
+          },
+          {
+            "name": "EJBCA Enterprise, as detailed in VID 11530",
+            "type": "Certificate Authority",
+            "vendor": "Keyfactor",
+            "link": "https://www.niap-ccevs.org/products/11530",
+            "href": "https://www.niap-ccevs.org/products/11530",
+            "raw_text": "Certificate Authority | Keyfactor | EJBCA Enterprise, as detailed in VID 11530 | v9.3.3 | NIAP Evaluation Completed (at DEKRA Cybersecurity) | 2026.01.23 | ",
+            "text": "Certificate Authority | Keyfactor | EJBCA Enterprise, as detailed in VID 11530 | v9.3.3 | NIAP Evaluation Completed (at DEKRA Cybersecurity) | 2026.01.23 | ",
+            "content_sha256": "e5a75678c8f1275e3a648b0002b322c5f89f1c119c4c468a384d0802aaea1f29",
+            "_old_text": "Certification\u00a0Authority | Keyfactor | EJBCA Enterprise, as detailed in VID 11530 | v9.3.3 | NIAP Evaluation Completed (at DEKRA Cybersecurity) | 2026.01.23 | "
+          }
+        ]
+      }
+    },
+    "selection_links": {
+      "Certification\u00a0Authority": {
+        "changed": true,
+        "old_href": "https://www.nsa.gov/portals/75/documents/resources/everyone/csfc/components-list/selections/certificate-authorities.pdf",
+        "new_href": ""
+      },
+      "Certificate Authority": {
+        "changed": true,
+        "old_href": "",
+        "new_href": "https://www.nsa.gov/portals/75/documents/resources/everyone/csfc/components-list/selections/certificate-authorities.pdf"
+      }
+    },
+    "documents": {
+      "added": [],
+      "removed": [],
+      "updated": []
+    },
+    "feeds": {
+      "CISA Alerts": [
+        {
+          "title": "CISA Adds Six Known Exploited Vulnerabilities to Catalog",
+          "link": "https://www.cisa.gov/news-events/alerts/2026/11/10/cisa-adds-six-known-exploited-vulnerabilities-catalog",
+          "summary": "<p>CISA has added six new vulnerabilities to its <a href=\"https://www.cisa.gov/known-exploited-vulnerabilities-catalog\">Known Exploited Vulnerabilities (KEV) Catalog</a>, based on evidence of active exploitation.</p>\n<ul>\n<li><a href=\"https://www.cve.org/CVERecord?id=CVE-2026-20320\" target=\"_blank\">CVE-2026-20320</a> Cisco BroadWorks Improper Restriction of XML External Entity Reference Vulnerability&nbsp;</li>\n<li><a href=\"https://www.cve.org/CVERecord?id=CVE-2026-111560\" target=\"_blank\">CVE-2026-111560</a> Barracuda Networks Multiple Products OS Command Injection Vulnerability&nbsp;</li>\n<li><a href=\"https://www.cve.org/CVERecord?id=CVE-2026-111793\" target=\"_blank\">CVE-2026-111793</a> Openwave Messaging Limited Webtop Media Transcoder Incorrect Resource Transfer Between Spheres Vulnerability&nbsp;</li>\n<li><a href=\"https://www.cve.org/CVERecord?id=CVE-2026-116606\" target=\"_blank\">CVE-2026-116606</a> Barracuda Networks Email Security Gateway (ESG) Authentication Bypass Using an Alternate Path or Channel Vulnerability&nbsp;</li>\n<li><a href=\"https://www.cve.org/CVERecord?id=CVE-2026-124194\" target=\"_blank\">CVE-2026-124194</a> Microsoft Office Outlook Missing User Interaction for Potentially Unsafe Action Vulnerability&nbsp;</li>\n<li><a href=\"https://www.cve.org/CVERecord?id=CVE-2026-125350\" target=\"_blank\">CVE-2026-125350</a> Google Chromium Use-After-Free Vulnerability&nbsp;</li>\n</ul>\n<p>These types of vulnerabilities are a frequent attack vector for malicious cyber actors and pose significant risks to the federal enterprise.</p>\n<p><a href=\"https://www.cisa.gov/news-events/directives/bod-26-04-implementation-guidance-prioritizing-security-updates-based-risk\">Binding Operational Directive (BOD) 26-04: Prioritizing Security Updates Based on Risk</a> establishes vulnerability management requirements for Federal Civilian Executive Branch (FCEB) agencies. BOD 26-04 reinforces the importance of the KEV Catalog and requires federal agencies to prioritize rapid remediation of high-risk vulnerabilities, specifically those identified by Common Vulnerabilities and Exposures (CVEs) listed in CISA\u2019s KEV Catalog on publicly exposed assets that grant total control of the asset post-exploitation, while deferring action for lower-risk vulnerabilities. BOD 26-04 further establishes basic expectations for when agencies must check whether threat actors compromised the system before the patch was applied.</p>\n<p>While BOD 26-04 applies only to FCEB agencies, CISA encourages all organizations to adopt risk-based vulnerability management and prioritize remediation of <a href=\"https://www.cisa.gov/known-exploited-vulnerabilities-catalog\">KEV Catalog vulnerabilities</a>. CISA will continue to add vulnerabilities to the catalog that meet the <a href=\"https://www.cisa.gov/known-exploited-vulnerabilities-catalog/reducing-significant-risk-known-exploited-vulnerabilities\">specified criteria</a>.</p>\n<p>Aware of an exploited vulnerability not currently listed in the KEV Catalog? Submit it for potential addition through CISA\u2019s <a class=\"ext\" href=\"https://cisasurvey.gov1.qualtrics.com/jfe/form/SV_1Zwu52kgK2OYf3w\" target=\"_blank\">KEV Nomination Form</a>. Potential KEV additions must have a CVE ID, evidence of exploitation, and clear mitigation guidance.&nbsp;</p>",
+          "published": "Tue, 10 Nov 26 12:00:00 +0000",
+          "id": "/node/25787",
+          "_category": "CISA"
+        },
+        {
+          "title": "Siemens SENTRON 3NA COM Fuse",
+          "link": "https://www.cisa.gov/news-events/ics-advisories/icsa-26-295-05",
+          "summary": "<p><a href=\"https://github.com/cisagov/CSAF/blob/develop/csaf_files/OT/white/2026/icsa-26-295-05.json\"><strong>View CSAF</strong></a></p>\n<h2>Summary</h2>\n<p><strong>SENTRON 3NA COM Fuse contains a Denial-of-Service vulnerability. Improper handling of a network management message could allow an attacker to trigger a denial-of-service (DoS) condition. Successful exploitation may require the affected network to be re-established to restore normal operation.</strong></p>\n<p>The following versions of Siemens SENTRON 3NA COM Fuse are affected:</p>\n<ul>\n<li>SENTRON 3NA COM Fuse vers:intdot/&lt;5.2 (CVE-2024-7322)</li>\n</ul>\n<div class=\"csaf-table\">\n<table class=\"tablesaw tablesaw-stack\">\n<thead>\n<tr>\n<th>CVSS</th>\n<th>Vendor</th>\n<th>Equipment</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>v3 5.8</td>\n<td>Siemens</td>\n<td>SENTRON 3NA COM Fuse</td>\n</tr>\n</tbody>\n</table>\n<table class=\"tablesaw tablesaw-stack\">\n<thead>\n<tr>\n<th>1 Vulnerability</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>Improper Verification of Source of a Communication Channel</td>\n</tr>\n</tbody>\n</table>\n</div>\n<h3>Background</h3>\n<ul>\n<li><strong>Critical Infrastructure Sectors: </strong>Critical Manufacturing, Transportation Systems, Energy, Healthcare and Public Health, Financial Services, Government Services and Facilities</li>\n<li><strong>Countries/Areas Deployed: </strong>Worldwide</li>\n<li><strong>Company Headquarters Location: </strong>Germany</li>\n</ul>\n<hr />\n<h2>Vulnerabilities</h2>\n<div class=\"c-expandable-textbox icsa-etb\">\n<div class=\"c-expandable-textbox__title\">CVE-2024-7322</div>\n<div class=\"c-expandable-textbox__body\">A ZigBee coordinator, router, or end device may change their node ID when an unsolicited encrypted rejoin response is received, this change&nbsp;in node ID causes Denial of Service (DoS). To recover from this DoS, the network must be re-established</div>\n<div class=\"c-expandable-textbox-morebutton-wrapper\"><a class=\"c-expandable-textbox-morebutton\" href=\"https://www.cisa.gov/\">Read More</a></div>\n<div class=\"c-expandable-textbox__body2\">\n<h4>1 Affected Product</h4>\n<hr />\n<h5>SENTRON 3NA COM Fuse &lt; V5.2</h5>\n<div>\n<p>Product Status: known_affected</p>\n</div>\n<h6>Remediations</h6>\n<div>\n<p><strong>Vendor fix</strong><br />Update to V5.2 or later version</p>\n</div>\n<hr />\n<h6>Additional Metrics</h6>\n<p><strong>Relevant CWE:</strong> <a href=\"https://cwe.mitre.org/data/definitions/940.html\">CWE-940 Improper Verification of Source of a Communication Channel</a></p>\n<div class=\"csaf-table csaf-metrics-table\">\n<table class=\"tablesaw tablesaw-stack\">\n<thead>\n<tr>\n<th>CVSS Version</th>\n<th>Base Score</th>\n<th>Base Severity</th>\n<th>Vector String</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>3.1</td>\n<td>5.8</td>\n<td>MEDIUM</td>\n<td><a href=\"https://www.first.org/cvss/calculator/3.1#CVSS:3.1/AV:N/AC:H/PR:H/UI:N/S:C/C:N/I:N/A:H\">CVSS:3.1/AV:N/AC:H/PR:H/UI:N/S:C/C:N/I:N/A:H</a></td>\n</tr>\n</tbody>\n</table>\n</div>\n<hr />\n<p><a href=\"https://www.cve.org/CVERecord?id=CVE-2024-7322\">View CVE Details</a></p>\n</div>\n</div>\n<hr />\n<h2>Acknowledgments</h2>\n<ul>\n<li>Siemens ProductCERT reported this vulnerability to CISA.</li>\n</ul>\n<hr />\n<h2>General Recommendations</h2>\n<p>As a general security measure, Siemens strongly recommends to protect network access to devices with appropriate mechanisms. In order to operate the devices in a protected IT environment, Siemens recommends to configure the environment according to Siemens' operational guidelines for Industrial Security (Download: https://www.siemens.com/cert/operational-guidelines-industrial-security), and to follow the recommendations in the product manuals. Additional information on Industrial Security by Siemens can be found at: https://www.siemens.com/industrialsecurity</p>\n<hr />\n<h2>Additional Resources</h2>\n<p>For further inquiries on security vulnerabilities in Siemens products and solutions, please contact the Siemens ProductCERT: https://www.siemens.com/cert/advisories</p>\n<hr />\n<h2>Terms of Use</h2>\n<p>The use of Siemens Security Advisories is subject to the terms and conditions listed on: https://www.siemens.com/productcert/terms-of-use.</p>\n<hr />\n<h2>Recommended Practices</h2>\n<p>CISA recommends users take defensive measures to minimize the risk of exploitation of these vulnerabilities.</p>\n<ul type=\"disc\">\n<li>Minimize network exposure for all control system devices and/or systems, ensuring they are <a href=\"https://www.cisa.gov/uscert/ics/alerts/ICS-ALERT-10-301-01\">not accessible from the internet</a>.</li>\n<li>Locate control system networks and remote devices behind firewalls and isolating them from business networks.</li>\n<li>When remote access is required, use more secure methods, such as Virtual Private Networks (VPNs), recognizing VPNs may have vulnerabilities and should be updated to the most current version available. Also recognize VPN is only as secure as the connected devices.</li>\n</ul>\n<p>CISA reminds organizations to perform proper impact analysis and risk assessment prior to deploying defensive measures.</p>\n<p>CISA also provides a section for <a href=\"https://www.cisa.gov/resources-tools/resources/ics-recommended-practices\">control systems security recommended practices</a> on the ICS webpage on <a href=\"https://www.cisa.gov/topics/industrial-control-systems\">cisa.gov/ics</a>. Several CISA products detailing cyber defense best practices are available for reading and download, including <a href=\"https://www.cisa.gov/sites/default/files/recommended_practices/NCCIC_ICS-CERT_Defense_in_Depth_2016_S508C.pdf\">Improving Industrial Control Systems Cybersecurity with Defense-in-Depth Strategies</a>.</p>\n<p>CISA encourages organizations to implement recommended cybersecurity strategies for <a href=\"https://www.cisa.gov/sites/default/files/publications/Cybersecurity_Best_Practices_for_Industrial_Control_Systems.pdf\">proactive defense of ICS assets</a>.</p>\n<p>Additional mitigation guidance and recommended practices are publicly available on the ICS webpage at <a href=\"https://www.cisa.gov/topics/industrial-control-systems\">cisa.gov/ics</a> in the technical information paper, <a href=\"https://www.cisa.gov/news-events/news/targeted-cyber-intrusion-detection-and-mitigation-strategies-update-b\">ICS-TIP-12-146-01B--Targeted Cyber Intrusion Detection and Mitigation Strategies</a>.</p>\n<p>Organizations observing suspected malicious activity should follow established internal procedures and report findings to CISA for tracking and correlation against other incidents.</p>\n<hr />\n<h2>Advisory Conversion Disclaimer</h2>\n<p>This ICSA is a verbatim republication of Siemens ProductCERT SSA-099819 from a direct conversion of the vendor's Common Security Advisory Framework (CSAF) advisory. This is republished to CISA's website as a means of increasing visibility and is provided \"as-is\" for informational purposes only. CISA is not responsible for the editorial or technical accuracy of republished advisories and provides no warranties of any kind regarding any information contained within this advisory. Further, CISA does not endorse any commercial product or service. Please contact Siemens ProductCERT directly for any questions regarding this advisory.</p>\n<h2>Revision History</h2>\n<ul>\n<li><strong>Initial Release Date: </strong>2026-10-13</li>\n</ul>\n<table class=\"tablesaw tablesaw-stack\">\n<thead>\n<tr>\n<th>Date</th>\n<th>Revision</th>\n<th>Summary</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>2026-10-13</td>\n<td>1</td>\n<td>Publication Date</td>\n</tr>\n<tr>\n<td>2026-10-22</td>\n<td>2</td>\n<td>Initial CISA Republication of Siemens ProductCERT SSA-099819 advisory</td>\n</tr>\n</tbody>\n</table>\n<hr />\n<h2>Legal Notice and Terms of Use</h2>",
+          "published": "Thu, 22 Oct 26 12:00:00 +0000",
+          "id": "/node/25688",
+          "_category": "NEWS"
+        }
+      ]
+    }
+  },
+  "cc_crypto": {
+    "pages": {}
+  },
+  "nato": {
+    "pages": {},
+    "cisco_added": [],
+    "cisco_removed": [],
+    "baseline_reset": false
+  },
+  "eucc": {
+    "pages": {},
+    "cisco_added": [],
+    "cisco_removed": [],
+    "baseline_reset": false
+  },
+  "nd_itc": {
+    "nit_rfis": {
+      "added": [],
+      "status_changes": [],
+      "revised": [],
+      "newly_archived": []
+    },
+    "awl": {
+      "added": [],
+      "removed": [],
+      "version_changes": [],
+      "list_updates": []
+    },
+    "baseline_reset": false,
+    "collection_failure": false
+  },
+  "ietf_cnsa": {
+    "added": [],
+    "removed": [],
+    "updated": [],
+    "rfc9846_adoption": []
+  },
+  "ieee_pqc": {
+    "added": [],
+    "removed": [],
+    "updated": []
+  },
+  "source_health": {
+    "niap": {
+      "label": "NIAP",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "PCL products",
+          "observed": 1773,
+          "minimum": 50
+        },
+        {
+          "name": "Protection Profiles",
+          "observed": 272,
+          "minimum": 10
+        },
+        {
+          "name": "PQC PP file-version records",
+          "observed": 11,
+          "minimum": 1,
+          "required_for_diff_baseline": false
+        },
+        {
+          "name": "PQC PP full-content hashes",
+          "observed": 7,
+          "minimum": 1,
+          "required_for_diff_baseline": false
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-11-11T13:22:53.160129+00:00",
+      "subcollections": {
+        "news": {
+          "label": "News announcements",
+          "status": "healthy",
+          "observed": 360,
+          "consecutive_failures": 0,
+          "using_last_known_good": false
+        },
+        "events": {
+          "label": "Events",
+          "status": "healthy",
+          "observed": 0,
+          "consecutive_failures": 0,
+          "using_last_known_good": false
+        },
+        "policies": {
+          "label": "Policy letters",
+          "status": "healthy",
+          "observed": 40,
+          "consecutive_failures": 0,
+          "using_last_known_good": false
+        }
+      }
+    },
+    "cc_portal": {
+      "label": "CC Portal",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "portal records",
+          "observed": 180,
+          "minimum": 1
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-11-11T13:22:53.160129+00:00"
+    },
+    "cctl_labs": {
+      "label": "CCTL Labs",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "lab feed items",
+          "observed": 19,
+          "minimum": 1
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-11-11T13:22:53.160129+00:00"
+    },
+    "csfc": {
+      "label": "CSfC",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "APL items",
+          "observed": 116,
+          "minimum": 5
+        },
+        {
+          "name": "announcements",
+          "observed": 8,
+          "minimum": 1
+        },
+        {
+          "name": "tracked capability packages",
+          "observed": 5,
+          "minimum": 5,
+          "required_for_diff_baseline": false
+        },
+        {
+          "name": "capability-package hashes",
+          "observed": 5,
+          "minimum": 5,
+          "required_for_diff_baseline": false
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-11-11T13:22:53.160129+00:00"
+    },
+    "cc_crypto": {
+      "label": "CC Crypto",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "publications",
+          "observed": 118,
+          "minimum": 5
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-11-11T13:22:53.160129+00:00"
+    },
+    "nato": {
+      "label": "NATO NIAPCL",
+      "status": "healthy",
+      "mode": "manual",
+      "checks": [],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "detail": "manual baseline (40 Cisco product(s)); updated via the NATO capture GitHub issue workflow",
+      "checked_at": "2026-11-11T13:22:53.160129+00:00"
+    },
+    "eucc": {
+      "label": "EUCC / ENISA",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "certificates",
+          "observed": 50,
+          "minimum": 2
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-11-11T13:22:53.160129+00:00"
+    },
+    "nd_itc": {
+      "label": "ND-iTC",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "NIT RFIs",
+          "observed": 32,
+          "minimum": 5
+        },
+        {
+          "name": "Allowed-With entries",
+          "observed": 28,
+          "minimum": 1
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-11-11T13:22:53.160129+00:00"
+    },
+    "ietf_cnsa": {
+      "label": "IETF CNSA 2.0",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "CNSA profile/RFC records",
+          "observed": 5,
+          "minimum": 5
+        },
+        {
+          "name": "CNSA full-text hashes",
+          "observed": 5,
+          "minimum": 5
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-11-11T13:22:53.160129+00:00"
+    },
+    "ieee_pqc": {
+      "label": "IEEE 802.11bt",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "P802.11bt project records",
+          "observed": 1,
+          "minimum": 1
+        },
+        {
+          "name": "P802.11bt timeline hashes",
+          "observed": 1,
+          "minimum": 1
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-11-11T13:22:53.160129+00:00"
+    }
+  },
+  "alerts": [
+    {
+      "source": "NIAP TD",
+      "kind": "new",
+      "title": "Addition of CNSA 2.0 Algorithms to TLS Functional Package",
+      "url": "https://www.niap-ccevs.org/technical-decisions/TD1069",
+      "detail": "TD1069",
+      "matched_keywords": [
+        "CNSA 2.0"
+      ],
+      "tab": "us"
+    },
+    {
+      "source": "CSfC Component Selections",
+      "kind": "updated",
+      "title": "Certification\u00a0Authority",
+      "url": "https://www.nsa.gov/portals/75/documents/resources/everyone/csfc/components-list/selections/certificate-authorities.pdf",
+      "detail": "NSA removed the component selection document for this role",
+      "matched_keywords": [
+        "CSfC"
+      ],
+      "tab": "us"
+    },
+    {
+      "source": "CSfC Component Selections",
+      "kind": "updated",
+      "title": "Certificate Authority",
+      "url": "https://www.nsa.gov/portals/75/documents/resources/everyone/csfc/components-list/selections/certificate-authorities.pdf",
+      "detail": "NSA added a new component selection document for this role",
+      "matched_keywords": [
+        "CSfC"
+      ],
+      "tab": "us"
+    },
+    {
+      "source": "CSfC Components List",
+      "kind": "new_cert",
+      "title": "Authentication Server | Cisco | Identity Services Engine (ISE), as detailed in VID 11517 | v3.3 | NIAP Evaluation Comple\u2026",
+      "url": "https://www.nsa.gov/Resources/Commercial-Solutions-for-Classified-Program/Components-List/",
+      "detail": "New item on CSfC apl page",
+      "matched_keywords": [
+        "CSfC",
+        "cisco"
+      ],
+      "tab": "us"
+    },
+    {
+      "source": "CSfC Components List",
+      "kind": "removed",
+      "title": "Software Full Drive Encryption | Curtiss Wright Defense Solutions | HSR10 CSFC Software Encryption Layer | v1.1.0 | NIAP\u2026",
+      "url": "https://www.nsa.gov/Resources/Commercial-Solutions-for-Classified-Program/Components-List/",
+      "detail": "Item removed from CSfC apl page",
+      "matched_keywords": [
+        "CSfC"
+      ],
+      "tab": "us"
+    }
+  ]
+}
