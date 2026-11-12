@@ -2,18 +2,6 @@
 <rss version="2.0"><channel>
 <title>CC Pulse</title>
 <link>https://kr15tyk.github.io/CC-pulse/cc_dashboard.html</link>
-<description>Common Criteria monitoring - 2026-11-11 08:22 ET</description>
-<item><title>New TD: TD1069</title><link>https://www.niap-ccevs.org/</link><description></description></item>
-<item><title>[atsec] 100+ FIPS Certificates in a Single Year: A Milestone Worth Celebrating!</title><link>https://www.atsec.com/100-fips-certs-in-one-year/</link><description></description></item>
-<item><title>CSfC Selection Updated: Certification Authority</title><link>https://www.nsa.gov/portals/75/documents/resources/everyone/csfc/components-list/selections/certificate-authorities.pdf</link><description>Component selection document updated.</description></item>
-<item><title>CSfC Selection Updated: Certificate Authority</title><link>https://www.nsa.gov/portals/75/documents/resources/everyone/csfc/components-list/selections/certificate-authorities.pdf</link><description>Component selection document updated.</description></item>
-<item><title>CSfC Component Added: MACSEC Ethernet Encryption Devices | HPE Juniper | Juniper Networks EX4400 Serie</title><link>https://www.niap-ccevs.org/products/11622</link><description>CSfC apl item added.</description></item>
-<item><title>CSfC Component Added: Authentication Server | Cisco | Identity Services Engine (ISE), as detailed in V</title><link>https://www.niap-ccevs.org/products/11517</link><description>CSfC apl item added.</description></item>
-<item><title>CSfC Component Removed: Traffic Filtering Firewall | Juniper | Junos OS 22.2R1 for SRX Series (SRX300, S</title><link>https://www.niap-ccevs.org/products/international-product/2023.1324</link><description>CSfC apl item removed.</description></item>
-<item><title>CSfC Component Removed: Software Full Drive Encryption | Curtiss Wright Defense Solutions | HSR10 CSFC S</title><link>https://www.niap-ccevs.org/products/11506</link><description>CSfC apl item removed.</description></item>
-<item><title>ALERT: NIAP TD – Addition of CNSA 2.0 Algorithms to TLS Functional Package</title><link>https://kr15tyk.github.io/CC-pulse/cc_dashboard.html</link><description>Kind: new | Keywords: CNSA 2.0</description></item>
-<item><title>ALERT: CSfC Component Selections – Certification Authority</title><link>https://kr15tyk.github.io/CC-pulse/cc_dashboard.html</link><description>Kind: updated | Keywords: CSfC</description></item>
-<item><title>ALERT: CSfC Component Selections – Certificate Authority</title><link>https://kr15tyk.github.io/CC-pulse/cc_dashboard.html</link><description>Kind: updated | Keywords: CSfC</description></item>
-<item><title>ALERT: CSfC Components List – Authentication Server | Cisco | Identity Services Engine (ISE), as detailed in VID 11517 | v3.3 | NIAP Evaluation Comple…</title><link>https://kr15tyk.github.io/CC-pulse/cc_dashboard.html</link><description>Kind: new_cert | Keywords: CSfC, cisco</description></item>
-<item><title>ALERT: CSfC Components List – Software Full Drive Encryption | Curtiss Wright Defense Solutions | HSR10 CSFC Software Encryption Layer | v1.1.0 | NIAP…</title><link>https://kr15tyk.github.io/CC-pulse/cc_dashboard.html</link><description>Kind: removed | Keywords: CSfC</description></item>
+<description>Common Criteria monitoring - 2026-11-12 09:27 ET</description>
+
 </channel></rss>
