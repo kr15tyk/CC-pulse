@@ -1,0 +1,503 @@
+{
+  "period_start": "2026-11-13T13:45:37.623785+00:00",
+  "period_end": "2026-11-14T12:49:42.953658+00:00",
+  "niap": {
+    "pps": {
+      "added": [],
+      "removed": [],
+      "sunset_changes": [],
+      "status_changes": [],
+      "revised": [],
+      "content_changes": []
+    },
+    "tds": {
+      "added": [],
+      "removed": []
+    },
+    "cisco_ndcpp": {
+      "added": [],
+      "removed": [],
+      "newly_archived": [
+        {
+          "active_maintenances": [],
+          "am_sort": "2026-11-14T00:00:00Z",
+          "assigned_lab_name": "Gossamer Security Solutions",
+          "certification_date": "2024-11-14T00:00:00Z",
+          "from_cc_portal": false,
+          "product_id": 11495,
+          "product_name": "Cisco ASA 9.20 on Firepower 1000 Series",
+          "protection_profiles": [
+            {
+              "pp_id": 447,
+              "pp_name": "collaborative Protection Profile for Network Devices Version 2.2e",
+              "pp_short_name": "CPP_ND_V2.2E"
+            },
+            {
+              "pp_id": 448,
+              "pp_name": "collaborative Protection Profile Module for Stateful Traffic Filter Firewalls v1.4 + Errata 20200625",
+              "pp_short_name": "MOD_CPP_FW_v1.4e"
+            },
+            {
+              "pp_id": 481,
+              "pp_name": "PP-Module for Virtual Private Network (VPN) Gateways Version 1.3",
+              "pp_short_name": "MOD_VPNGW_v1.3"
+            }
+          ],
+          "status_sort": "Archived",
+          "submitting_country_id_code": "US",
+          "submitting_country_id_name": "United States",
+          "sunset_date": null,
+          "tech_types": [
+            "Firewall",
+            " Network Device",
+            " Virtual Private Network"
+          ],
+          "vendor_id_name": "Cisco Systems, Inc.",
+          "v_id": 11495,
+          "kicked_off_date": "2024-08-26T09:37:10.854000Z"
+        },
+        {
+          "active_maintenances": [],
+          "am_sort": "2026-11-14T00:00:00Z",
+          "assigned_lab_name": "Gossamer Security Solutions",
+          "certification_date": "2024-11-14T00:00:00Z",
+          "from_cc_portal": false,
+          "product_id": 11494,
+          "product_name": "Cisco ASA 9.20 on Firepower 2100 Series",
+          "protection_profiles": [
+            {
+              "pp_id": 447,
+              "pp_name": "collaborative Protection Profile for Network Devices Version 2.2e",
+              "pp_short_name": "CPP_ND_V2.2E"
+            },
+            {
+              "pp_id": 448,
+              "pp_name": "collaborative Protection Profile Module for Stateful Traffic Filter Firewalls v1.4 + Errata 20200625",
+              "pp_short_name": "MOD_CPP_FW_v1.4e"
+            },
+            {
+              "pp_id": 481,
+              "pp_name": "PP-Module for Virtual Private Network (VPN) Gateways Version 1.3",
+              "pp_short_name": "MOD_VPNGW_v1.3"
+            }
+          ],
+          "status_sort": "Archived",
+          "submitting_country_id_code": "US",
+          "submitting_country_id_name": "United States",
+          "sunset_date": null,
+          "tech_types": [
+            "Firewall",
+            " Network Device",
+            " Virtual Private Network"
+          ],
+          "vendor_id_name": "Cisco Systems, Inc.",
+          "v_id": 11494,
+          "kicked_off_date": "2024-08-13T11:58:48.155000Z"
+        }
+      ]
+    },
+    "pcl_all": {
+      "added": [],
+      "removed": [],
+      "newly_archived": [
+        {
+          "active_maintenances": [],
+          "am_sort": "2026-11-14T00:00:00Z",
+          "assigned_lab_name": "Gossamer Security Solutions",
+          "certification_date": "2024-11-14T00:00:00Z",
+          "from_cc_portal": false,
+          "product_id": 11495,
+          "product_name": "Cisco ASA 9.20 on Firepower 1000 Series",
+          "protection_profiles": [
+            {
+              "pp_id": 447,
+              "pp_name": "collaborative Protection Profile for Network Devices Version 2.2e",
+              "pp_short_name": "CPP_ND_V2.2E"
+            },
+            {
+              "pp_id": 448,
+              "pp_name": "collaborative Protection Profile Module for Stateful Traffic Filter Firewalls v1.4 + Errata 20200625",
+              "pp_short_name": "MOD_CPP_FW_v1.4e"
+            },
+            {
+              "pp_id": 481,
+              "pp_name": "PP-Module for Virtual Private Network (VPN) Gateways Version 1.3",
+              "pp_short_name": "MOD_VPNGW_v1.3"
+            }
+          ],
+          "status_sort": "Archived",
+          "submitting_country_id_code": "US",
+          "submitting_country_id_name": "United States",
+          "sunset_date": null,
+          "tech_types": [
+            "Firewall",
+            " Network Device",
+            " Virtual Private Network"
+          ],
+          "vendor_id_name": "Cisco Systems, Inc.",
+          "v_id": 11495,
+          "kicked_off_date": "2024-08-26T09:37:10.854000Z"
+        },
+        {
+          "active_maintenances": [],
+          "am_sort": "2026-11-14T00:00:00Z",
+          "assigned_lab_name": "Gossamer Security Solutions",
+          "certification_date": "2024-11-14T00:00:00Z",
+          "from_cc_portal": false,
+          "product_id": 11494,
+          "product_name": "Cisco ASA 9.20 on Firepower 2100 Series",
+          "protection_profiles": [
+            {
+              "pp_id": 447,
+              "pp_name": "collaborative Protection Profile for Network Devices Version 2.2e",
+              "pp_short_name": "CPP_ND_V2.2E"
+            },
+            {
+              "pp_id": 448,
+              "pp_name": "collaborative Protection Profile Module for Stateful Traffic Filter Firewalls v1.4 + Errata 20200625",
+              "pp_short_name": "MOD_CPP_FW_v1.4e"
+            },
+            {
+              "pp_id": 481,
+              "pp_name": "PP-Module for Virtual Private Network (VPN) Gateways Version 1.3",
+              "pp_short_name": "MOD_VPNGW_v1.3"
+            }
+          ],
+          "status_sort": "Archived",
+          "submitting_country_id_code": "US",
+          "submitting_country_id_name": "United States",
+          "sunset_date": null,
+          "tech_types": [
+            "Firewall",
+            " Network Device",
+            " Virtual Private Network"
+          ],
+          "vendor_id_name": "Cisco Systems, Inc.",
+          "v_id": 11494,
+          "kicked_off_date": "2024-08-13T11:58:48.155000Z"
+        }
+      ]
+    },
+    "in_evaluation": {
+      "added": [],
+      "removed": [],
+      "current_count": 34
+    },
+    "news": {
+      "added": [],
+      "revised": [],
+      "deactivated": [],
+      "reactivated": [],
+      "removed": []
+    },
+    "events": {
+      "added": [],
+      "revised": [],
+      "deactivated": [],
+      "reactivated": [],
+      "removed": []
+    },
+    "policies": {
+      "added": [],
+      "revised": [],
+      "archived": [],
+      "reactivated": [],
+      "removed": []
+    }
+  },
+  "cc_portal": {
+    "news": {
+      "added": []
+    },
+    "pps": {
+      "added": []
+    },
+    "products": {
+      "added": []
+    }
+  },
+  "cctl_labs": {
+    "atsec": [
+      {
+        "title": "Capturing Memories, Charting the Future: atsec at the PCI SSC Asia-Pacific Community Meeting",
+        "link": "https://www.atsec.com/capturing-memories-charting-the-future/",
+        "published": "",
+        "id": "https://www.atsec.com/capturing-memories-charting-the-future/"
+      }
+    ]
+  },
+  "csfc": {
+    "pages": {},
+    "selection_links": {},
+    "documents": {
+      "added": [],
+      "removed": [],
+      "updated": []
+    },
+    "feeds": {
+      "CISA Alerts": [
+        {
+          "title": "CISA Adds Two Known Exploited Vulnerabilities to Catalog",
+          "link": "https://www.cisa.gov/news-events/alerts/2026/11/13/cisa-adds-two-known-exploited-vulnerabilities-catalog",
+          "summary": "<div class=\"OutlineElement Ltr SCXW1462417 BCX8\">\n<p>CISA has added two new vulnerabilities to its <a class=\"Hyperlink SCXW1462417 BCX8\" href=\"https://www.cisa.gov/known-exploited-vulnerabilities-catalog\" rel=\"noreferrer noopener\"><u>Known Exploited Vulnerabilities (KEV) Catalog</u></a>, based on evidence of active exploitation.</p>\n</div>\n<div class=\"ListContainerWrapper SCXW1462417 BCX8\">\n<ul type=\"disc\">\n<li><a class=\"Hyperlink SCXW1462417 BCX8\" href=\"https://www.cve.org/CVERecord?id=CVE-2026-114713\" rel=\"noreferrer noopener\" target=\"_blank\"><u>CVE-2026-114713</u></a> UnrealIRCd Improper Neutralization of Delimiters Vulnerability</li>\n</ul>\n</div>\n<div class=\"ListContainerWrapper SCXW1462417 BCX8\">\n<ul type=\"disc\">\n<li><a class=\"Hyperlink SCXW1462417 BCX8\" href=\"https://www.cve.org/CVERecord?id=CVE-2026-123039\" rel=\"noreferrer noopener\" target=\"_blank\"><u>CVE-2026-123039</u></a> Check Point Multiple Products Incorrect Permission Assignment for Critical Resource Vulnerability</li>\n</ul>\n</div>\n<div class=\"OutlineElement Ltr SCXW1462417 BCX8\">\n<p>These types of vulnerabilities are a frequent attack vector for malicious cyber actors and pose significant risks to the federal enterprise.</p>\n</div>\n<div class=\"OutlineElement Ltr SCXW1462417 BCX8\">\n<p><a class=\"Hyperlink SCXW1462417 BCX8\" href=\"https://www.cisa.gov/news-events/directives/bod-26-04-implementation-guidance-prioritizing-security-updates-based-risk\" rel=\"noreferrer noopener\"><u>Binding Operational Directive (BOD) 26-04: Prioritizing Security Updates Based on Risk</u></a> establishes vulnerability management requirements for Federal Civilian Executive Branch (FCEB) agencies. BOD 26-04 reinforces the importance of the KEV Catalog and requires federal agencies to prioritize rapid remediation of high-risk vulnerabilities, specifically those identified by Common Vulnerabilities and Exposures (CVEs) listed in CISA\u2019s KEV Catalog on publicly exposed assets that grant total control of the asset post-exploitation, while deferring action for lower-risk vulnerabilities. BOD 26-04 further establishes basic expectations for when agencies must check whether threat actors compromised the system before the patch was applied.</p>\n</div>\n<div class=\"OutlineElement Ltr SCXW1462417 BCX8\">\n<p>While BOD 26-04 applies only to FCEB agencies, CISA encourages all organizations to adopt risk-based vulnerability management and prioritize remediation of <a class=\"Hyperlink SCXW1462417 BCX8\" href=\"https://www.cisa.gov/known-exploited-vulnerabilities-catalog\" rel=\"noreferrer noopener\"><u>KEV Catalog vulnerabilities</u></a>. CISA will continue to add vulnerabilities to the catalog that meet the <a class=\"Hyperlink SCXW1462417 BCX8\" href=\"https://www.cisa.gov/known-exploited-vulnerabilities\" rel=\"noreferrer noopener\"><u>specified criteria</u></a>.</p>\n</div>\n<div class=\"OutlineElement Ltr SCXW1462417 BCX8\">\n<p>Aware of an exploited vulnerability not currently listed in the KEV Catalog? Submit it for potential addition through CISA\u2019s <a class=\"Hyperlink SCXW1462417 BCX8\" href=\"https://cisasurvey.gov1.qualtrics.com/jfe/form/SV_1Zwu52kgK2OYf3w\" rel=\"noreferrer noopener\" target=\"_blank\"><u>KEV Nomination Form</u></a>. Potential KEV additions must have a CVE ID, evidence of exploitation, and clear mitigation guidance.</p>\n</div>",
+          "published": "Fri, 13 Nov 26 12:00:00 +0000",
+          "id": "/node/25796",
+          "_category": "CISA"
+        }
+      ]
+    }
+  },
+  "cc_crypto": {
+    "pages": {}
+  },
+  "nato": {
+    "pages": {},
+    "cisco_added": [],
+    "cisco_removed": [],
+    "baseline_reset": false
+  },
+  "eucc": {
+    "pages": {},
+    "cisco_added": [],
+    "cisco_removed": [],
+    "baseline_reset": false
+  },
+  "nd_itc": {
+    "nit_rfis": {
+      "added": [],
+      "status_changes": [],
+      "revised": [],
+      "newly_archived": []
+    },
+    "awl": {
+      "added": [],
+      "removed": [],
+      "version_changes": [],
+      "list_updates": []
+    },
+    "baseline_reset": false,
+    "collection_failure": false
+  },
+  "ietf_cnsa": {
+    "added": [],
+    "removed": [],
+    "updated": [],
+    "rfc9846_adoption": []
+  },
+  "ieee_pqc": {
+    "added": [],
+    "removed": [],
+    "updated": []
+  },
+  "source_health": {
+    "niap": {
+      "label": "NIAP",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "PCL products",
+          "observed": 1773,
+          "minimum": 50
+        },
+        {
+          "name": "Protection Profiles",
+          "observed": 272,
+          "minimum": 10
+        },
+        {
+          "name": "PQC PP file-version records",
+          "observed": 11,
+          "minimum": 1,
+          "required_for_diff_baseline": false
+        },
+        {
+          "name": "PQC PP full-content hashes",
+          "observed": 7,
+          "minimum": 1,
+          "required_for_diff_baseline": false
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-11-14T12:49:42.953658+00:00",
+      "subcollections": {
+        "news": {
+          "label": "News announcements",
+          "status": "healthy",
+          "observed": 360,
+          "consecutive_failures": 0,
+          "using_last_known_good": false
+        },
+        "events": {
+          "label": "Events",
+          "status": "healthy",
+          "observed": 0,
+          "consecutive_failures": 0,
+          "using_last_known_good": false
+        },
+        "policies": {
+          "label": "Policy letters",
+          "status": "healthy",
+          "observed": 40,
+          "consecutive_failures": 0,
+          "using_last_known_good": false
+        }
+      }
+    },
+    "cc_portal": {
+      "label": "CC Portal",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "portal records",
+          "observed": 180,
+          "minimum": 1
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-11-14T12:49:42.953658+00:00"
+    },
+    "cctl_labs": {
+      "label": "CCTL Labs",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "lab feed items",
+          "observed": 19,
+          "minimum": 1
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-11-14T12:49:42.953658+00:00"
+    },
+    "csfc": {
+      "label": "CSfC",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "APL items",
+          "observed": 116,
+          "minimum": 5
+        },
+        {
+          "name": "announcements",
+          "observed": 8,
+          "minimum": 1
+        },
+        {
+          "name": "tracked capability packages",
+          "observed": 5,
+          "minimum": 5,
+          "required_for_diff_baseline": false
+        },
+        {
+          "name": "capability-package hashes",
+          "observed": 5,
+          "minimum": 5,
+          "required_for_diff_baseline": false
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-11-14T12:49:42.953658+00:00"
+    },
+    "cc_crypto": {
+      "label": "CC Crypto",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "publications",
+          "observed": 118,
+          "minimum": 5
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-11-14T12:49:42.953658+00:00"
+    },
+    "nato": {
+      "label": "NATO NIAPCL",
+      "status": "healthy",
+      "mode": "manual",
+      "checks": [],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "detail": "manual baseline (40 Cisco product(s)); updated via the NATO capture GitHub issue workflow",
+      "checked_at": "2026-11-14T12:49:42.953658+00:00"
+    },
+    "eucc": {
+      "label": "EUCC / ENISA",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "certificates",
+          "observed": 50,
+          "minimum": 2
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-11-14T12:49:42.953658+00:00"
+    },
+    "nd_itc": {
+      "label": "ND-iTC",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "NIT RFIs",
+          "observed": 32,
+          "minimum": 5
+        },
+        {
+          "name": "Allowed-With entries",
+          "observed": 28,
+          "minimum": 1
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-11-14T12:49:42.953658+00:00"
+    },
+    "ietf_cnsa": {
+      "label": "IETF CNSA 2.0",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "CNSA profile/RFC records",
+          "observed": 5,
+          "minimum": 5
+        },
+        {
+          "name": "CNSA full-text hashes",
+          "observed": 5,
+          "minimum": 5
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-11-14T12:49:42.953658+00:00"
+    },
+    "ieee_pqc": {
+      "label": "IEEE 802.11bt",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "P802.11bt project records",
+          "observed": 1,
+          "minimum": 1
+        },
+        {
+          "name": "P802.11bt timeline hashes",
+          "observed": 1,
+          "minimum": 1
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-11-14T12:49:42.953658+00:00"
+    }
+  },
+  "alerts": []
+}
