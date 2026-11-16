@@ -1,6 +1,6 @@
 {
-  "period_start": "2026-10-16T10:28:32.963543+00:00",
-  "period_end": "2026-10-17T09:59:44.053268+00:00",
+  "period_start": "2026-11-15T13:17:00.054056+00:00",
+  "period_end": "2026-11-16T14:29:32.099772+00:00",
   "niap": {
     "pps": {
       "added": [],
@@ -27,7 +27,7 @@
     "in_evaluation": {
       "added": [],
       "removed": [],
-      "current_count": 39
+      "current_count": 34
     },
     "news": {
       "added": [],
@@ -122,7 +122,7 @@
       "checks": [
         {
           "name": "PCL products",
-          "observed": 1765,
+          "observed": 1773,
           "minimum": 50
         },
         {
@@ -145,12 +145,12 @@
       ],
       "consecutive_failures": 0,
       "using_last_known_good": false,
-      "checked_at": "2026-10-17T09:59:44.053268+00:00",
+      "checked_at": "2026-11-16T14:29:32.099772+00:00",
       "subcollections": {
         "news": {
           "label": "News announcements",
           "status": "healthy",
-          "observed": 357,
+          "observed": 360,
           "consecutive_failures": 0,
           "using_last_known_good": false
         },
@@ -182,7 +182,7 @@
       ],
       "consecutive_failures": 0,
       "using_last_known_good": false,
-      "checked_at": "2026-10-17T09:59:44.053268+00:00"
+      "checked_at": "2026-11-16T14:29:32.099772+00:00"
     },
     "cctl_labs": {
       "label": "CCTL Labs",
@@ -196,7 +196,7 @@
       ],
       "consecutive_failures": 0,
       "using_last_known_good": false,
-      "checked_at": "2026-10-17T09:59:44.053268+00:00"
+      "checked_at": "2026-11-16T14:29:32.099772+00:00"
     },
     "csfc": {
       "label": "CSfC",
@@ -227,7 +227,7 @@
       ],
       "consecutive_failures": 0,
       "using_last_known_good": false,
-      "checked_at": "2026-10-17T09:59:44.053268+00:00"
+      "checked_at": "2026-11-16T14:29:32.099772+00:00"
     },
     "cc_crypto": {
       "label": "CC Crypto",
@@ -241,7 +241,7 @@
       ],
       "consecutive_failures": 0,
       "using_last_known_good": false,
-      "checked_at": "2026-10-17T09:59:44.053268+00:00"
+      "checked_at": "2026-11-16T14:29:32.099772+00:00"
     },
     "nato": {
       "label": "NATO NIAPCL",
@@ -251,7 +251,7 @@
       "consecutive_failures": 0,
       "using_last_known_good": false,
       "detail": "manual baseline (40 Cisco product(s)); updated via the NATO capture GitHub issue workflow",
-      "checked_at": "2026-10-17T09:59:44.053268+00:00"
+      "checked_at": "2026-11-16T14:29:32.099772+00:00"
     },
     "eucc": {
       "label": "EUCC / ENISA",
@@ -265,7 +265,7 @@
       ],
       "consecutive_failures": 0,
       "using_last_known_good": false,
-      "checked_at": "2026-10-17T09:59:44.053268+00:00"
+      "checked_at": "2026-11-16T14:29:32.099772+00:00"
     },
     "nd_itc": {
       "label": "ND-iTC",
@@ -284,7 +284,7 @@
       ],
       "consecutive_failures": 0,
       "using_last_known_good": false,
-      "checked_at": "2026-10-17T09:59:44.053268+00:00"
+      "checked_at": "2026-11-16T14:29:32.099772+00:00"
     },
     "ietf_cnsa": {
       "label": "IETF CNSA 2.0",
@@ -303,7 +303,7 @@
       ],
       "consecutive_failures": 0,
       "using_last_known_good": false,
-      "checked_at": "2026-10-17T09:59:44.053268+00:00"
+      "checked_at": "2026-11-16T14:29:32.099772+00:00"
     },
     "ieee_pqc": {
       "label": "IEEE 802.11bt",
@@ -322,7 +322,7 @@
       ],
       "consecutive_failures": 0,
       "using_last_known_good": false,
-      "checked_at": "2026-10-17T09:59:44.053268+00:00"
+      "checked_at": "2026-11-16T14:29:32.099772+00:00"
     }
   },
   "alerts": []
