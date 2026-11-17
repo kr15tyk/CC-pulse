@@ -1,0 +1,584 @@
+{
+  "period_start": "2026-11-16T14:29:32.099772+00:00",
+  "period_end": "2026-11-17T15:20:49.096176+00:00",
+  "niap": {
+    "pps": {
+      "added": [],
+      "removed": [],
+      "sunset_changes": [],
+      "status_changes": [],
+      "revised": [],
+      "content_changes": []
+    },
+    "tds": {
+      "added": [],
+      "removed": []
+    },
+    "cisco_ndcpp": {
+      "added": [],
+      "removed": [],
+      "newly_archived": []
+    },
+    "pcl_all": {
+      "added": [],
+      "removed": [],
+      "newly_archived": []
+    },
+    "in_evaluation": {
+      "added": [],
+      "removed": [],
+      "current_count": 34
+    },
+    "news": {
+      "added": [],
+      "revised": [],
+      "deactivated": [],
+      "reactivated": [],
+      "removed": []
+    },
+    "events": {
+      "added": [],
+      "revised": [],
+      "deactivated": [],
+      "reactivated": [],
+      "removed": []
+    },
+    "policies": {
+      "added": [],
+      "revised": [],
+      "archived": [],
+      "reactivated": [],
+      "removed": []
+    }
+  },
+  "cc_portal": {
+    "news": {
+      "added": []
+    },
+    "pps": {
+      "added": []
+    },
+    "products": {
+      "added": []
+    }
+  },
+  "cctl_labs": {},
+  "csfc": {
+    "pages": {},
+    "selection_links": {},
+    "documents": {
+      "added": [],
+      "removed": [],
+      "updated": []
+    },
+    "feeds": {}
+  },
+  "cc_crypto": {
+    "pages": {}
+  },
+  "nato": {
+    "pages": {},
+    "cisco_added": [],
+    "cisco_removed": [],
+    "baseline_reset": false
+  },
+  "eucc": {
+    "pages": {
+      "certificates": {
+        "added": [
+          {
+            "name": "ST33G1M2",
+            "text": "ST33G1M2 | 23 October 2026 | The product evaluated is \u00abST33G1M2, D04 \u00bb developed by STMICROELECTRONICS.",
+            "href": "https://certification.enisa.europa.eu/certificates/eucc-3090-2026-000076-i-00_en",
+            "cert_date": "2026-10-23T12:00:00Z",
+            "description": "The product evaluated is \u00abST33G1M2, D04 \u00bb developed by STMICROELECTRONICS."
+          },
+          {
+            "name": "ST33G1M2A1, including optional library NesLib & optional library SFM",
+            "text": "ST33G1M2A1, including optional library NesLib & optional library SFM | 23 October 2026 | The product evaluated is \u00ab ST33G1M2A1, including optional library NesLib & optional library SFM, C06 \u00bb d\u00e9velopp\u00e9 par STMICROELECTRONICS \u00bb developed by STMICROELECTRONICS.",
+            "href": "https://certification.enisa.europa.eu/certificates/eucc-3090-2026-000075-i-00_en",
+            "cert_date": "2026-10-23T12:00:00Z",
+            "description": "The product evaluated is \u00ab ST33G1M2A1, including optional library NesLib & optional library SFM, C06 \u00bb d\u00e9velopp\u00e9 par STMICROELECTRONICS \u00bb developed by STMICROELECTRONICS."
+          },
+          {
+            "name": "ST33G1M2A & ST33G1M2M",
+            "text": "ST33G1M2A & ST33G1M2M | 23 October 2026 | The product evaluated is \u00abST33G1M2A & ST33G1M2M, D04 \u00bb developed by STMICROELECTRONICS.",
+            "href": "https://certification.enisa.europa.eu/certificates/eucc-3090-2026-000073-i-00_en",
+            "cert_date": "2026-10-23T12:00:00Z",
+            "description": "The product evaluated is \u00abST33G1M2A & ST33G1M2M, D04 \u00bb developed by STMICROELECTRONICS."
+          },
+          {
+            "name": "ST33G1M2A & ST33G1M2M including optional cryptographic library NesLib",
+            "text": "ST33G1M2A & ST33G1M2M including optional cryptographic library NesLib | 23 October 2026 | The product evaluated is \u00abST33G1M2A & ST33G1M2M including optional cryptographic library NesLib, C05 \u00bb developed by STMICROELECTRONICS.",
+            "href": "https://certification.enisa.europa.eu/certificates/eucc-3090-2026-000074-i-00_en",
+            "cert_date": "2026-10-23T12:00:00Z",
+            "description": "The product evaluated is \u00abST33G1M2A & ST33G1M2M including optional cryptographic library NesLib, C05 \u00bb developed by STMICROELECTRONICS."
+          },
+          {
+            "name": "S3NSN6H",
+            "text": "S3NSN6H | 28 September 2026 | \"The product evaluated is \u00abS3NSN6H, S3NSN6H_20260630 \u00bb developed by SAMSUNG ELECTRONICS CO. LTD..\"",
+            "href": "https://certification.enisa.europa.eu/certificates/eucc-3090-2026-000055-i-00_en",
+            "cert_date": "2026-09-28T12:00:00Z",
+            "description": "\"The product evaluated is \u00abS3NSN6H, S3NSN6H_20260630 \u00bb developed by SAMSUNG ELECTRONICS CO. LTD..\""
+          },
+          {
+            "name": "ChipDoc v4.2 on JCOP 4.5 P71 in SSCD configuration",
+            "text": "ChipDoc v4.2 on JCOP 4.5 P71 in SSCD configuration | 13 September 2026 | The product evaluated is \u00ab ChipDoc v4.2 on JCOP 4.5 P71 in SSCD configuration, Version 4.2.0.52 \u00bb developed by NXP SEMICONDUCTORS.",
+            "href": "https://certification.enisa.europa.eu/certificates/eucc-3090-2026-000070-i-00_en",
+            "cert_date": "2026-09-13T12:00:00Z",
+            "description": "The product evaluated is \u00ab ChipDoc v4.2 on JCOP 4.5 P71 in SSCD configuration, Version 4.2.0.52 \u00bb developed by NXP SEMICONDUCTORS."
+          },
+          {
+            "name": "S3D384C/S3D352C/S3D300C/S3D264C/S3D232C/ S3K384C",
+            "text": "S3D384C/S3D352C/S3D300C/S3D264C/S3D232C/ S3K384C | 13 September 2026 | The product evaluated is \u00abS3D384C/S3D352C/S3D300C/S3D264C/S3D232C/ S3K384C, S3D384C_20260630 \u00bb developed by SAMSUNG ELECTRONICS CO. LTD.",
+            "href": "https://certification.enisa.europa.eu/certificates/eucc-3090-2026-000080-i-00_en",
+            "cert_date": "2026-09-13T12:00:00Z",
+            "description": "The product evaluated is \u00abS3D384C/S3D352C/S3D300C/S3D264C/S3D232C/ S3K384C, S3D384C_20260630 \u00bb developed by SAMSUNG ELECTRONICS CO. LTD."
+          },
+          {
+            "name": "S3D384E/S3D352E/S3D300E/S3D264E/S3D232E/ S3K384E",
+            "text": "S3D384E/S3D352E/S3D300E/S3D264E/S3D232E/ S3K384E | 13 September 2026 | The product evaluated is \u00abS3D384E/S3D352E/S3D300E/S3D264E/S3D232E/ S3K384E, S3D384E_20260730 \u00bb developed by SAMSUNG ELECTRONICS CO. LTD.",
+            "href": "https://certification.enisa.europa.eu/certificates/eucc-3090-2026-000084-i-00_en",
+            "cert_date": "2026-09-13T12:00:00Z",
+            "description": "The product evaluated is \u00abS3D384E/S3D352E/S3D300E/S3D264E/S3D232E/ S3K384E, S3D384E_20260730 \u00bb developed by SAMSUNG ELECTRONICS CO. LTD."
+          },
+          {
+            "name": "ChipDoc v4.2 on JCOP 4.5 P71 in ICAO BAC configuration",
+            "text": "ChipDoc v4.2 on JCOP 4.5 P71 in ICAO BAC configuration | 13 September 2026 | The product evaluated is \u00ab ChipDoc v4.2 on JCOP 4.5 P71 in ICAO BAC configuration, Version 4.2.0.52 \u00bb developed by NXP SEMICONDUCTORS.",
+            "href": "https://certification.enisa.europa.eu/certificates/eucc-3090-2026-000071-i-00_en",
+            "cert_date": "2026-09-13T12:00:00Z",
+            "description": "The product evaluated is \u00ab ChipDoc v4.2 on JCOP 4.5 P71 in ICAO BAC configuration, Version 4.2.0.52 \u00bb developed by NXP SEMICONDUCTORS."
+          },
+          {
+            "name": "ChipDoc v4.2 on JCOP 4.5 P71 in ICAO EAC(1&2) with PACE",
+            "text": "ChipDoc v4.2 on JCOP 4.5 P71 in ICAO EAC(1&2) with PACE | 12 September 2026 | The product evaluated is \u00ab ChipDoc v4.2 on JCOP 4.5 P71 in ICAO EAC(1&2) with PACE, Version 4.2.0.52 \u00bb developed by NXP SEMICONDUCTORS.",
+            "href": "https://certification.enisa.europa.eu/certificates/eucc-3090-2026-000072-i-00_en",
+            "cert_date": "2026-09-12T12:00:00Z",
+            "description": "The product evaluated is \u00ab ChipDoc v4.2 on JCOP 4.5 P71 in ICAO EAC(1&2) with PACE, Version 4.2.0.52 \u00bb developed by NXP SEMICONDUCTORS."
+          },
+          {
+            "name": "S3NSEN6",
+            "text": "S3NSEN6 | 27 August 2026 | The product evaluated is \u00abS3NSEN6, S3NSEN6_20260630 \u00bb developed by SAMSUNG ELECTRONICS CO. LTD..",
+            "href": "https://certification.enisa.europa.eu/certificates/eucc-3090-2026-000054-i-00_en",
+            "cert_date": "2026-08-27T12:00:00Z",
+            "description": "The product evaluated is \u00abS3NSEN6, S3NSEN6_20260630 \u00bb developed by SAMSUNG ELECTRONICS CO. LTD.."
+          },
+          {
+            "name": "Vitale 2 on ID-One Cosmo X\u00b2",
+            "text": "Vitale 2 on ID-One Cosmo X\u00b2 | 24 August 2026 | The product evaluated is \u00abVitale 2 on ID-One Cosmo X\u00b2, version 1 \u00bb developed by IN SMART IDENTITY. This product offers an electronic seal service through the VITALE2 application.",
+            "href": "https://certification.enisa.europa.eu/certificates/eucc-3090-2026-000062-i-00_en",
+            "cert_date": "2026-08-24T12:00:00Z",
+            "description": "The product evaluated is \u00abVitale 2 on ID-One Cosmo X\u00b2, version 1 \u00bb developed by IN SMART IDENTITY. This product offers an electronic seal service through the VITALE2 application."
+          }
+        ],
+        "removed": [
+          {
+            "name": "CombICAO Applet v2.2 in EAC configuration on ID-ONE Cosmo V9.1",
+            "text": "CombICAO Applet v2.2 in EAC configuration on ID-ONE Cosmo V9.1 | 8 June 2026 | The evaluated product implements electronic travel document functions in accordance with the specifications of the International Civil Aviation Organization (ICAO).",
+            "href": "https://certification.enisa.europa.eu/certificates/eucc-3090-2026-000065-i-00_en",
+            "cert_date": "2026-06-08T12:00:00Z",
+            "description": "The evaluated product implements electronic travel document functions in accordance with the specifications of the International Civil Aviation Organization (ICAO)."
+          },
+          {
+            "name": "CombICAO Applet v3 in EAC with PACE configuration for French ID on ID-One Cosmo X",
+            "text": "CombICAO Applet v3 in EAC with PACE configuration for French ID on ID-One Cosmo X | 4 June 2026 | The evaluated product implements electronic travel document functions in accordance with the specifications of the International Civil Aviation Organization (ICAO).",
+            "href": "https://certification.enisa.europa.eu/certificates/eucc-3090-2026-000047-i-00_en",
+            "cert_date": "2026-06-04T12:00:00Z",
+            "description": "The evaluated product implements electronic travel document functions in accordance with the specifications of the International Civil Aviation Organization (ICAO)."
+          },
+          {
+            "name": "CombICAO Applet v3 in EAC with PACE configuration on ID-One Cosmo X",
+            "text": "CombICAO Applet v3 in EAC with PACE configuration on ID-One Cosmo X | 4 June 2026 | The evaluated product implements electronic travel document functions in accordance with the specifications of the International Civil Aviation Organization (ICAO).",
+            "href": "https://certification.enisa.europa.eu/certificates/eucc-3090-2026-000046-i-00_en",
+            "cert_date": "2026-06-04T12:00:00Z",
+            "description": "The evaluated product implements electronic travel document functions in accordance with the specifications of the International Civil Aviation Organization (ICAO)."
+          },
+          {
+            "name": "CombICAO Applet v3 in EAC configuration on ID-One Cosmo X",
+            "text": "CombICAO Applet v3 in EAC configuration on ID-One Cosmo X | 4 June 2026 | The evaluated product implements electronic travel document functions in accordance with the specifications of the International Civil Aviation Organization (ICAO).",
+            "href": "https://certification.enisa.europa.eu/certificates/eucc-3090-2026-000045-i-00_en",
+            "cert_date": "2026-06-04T12:00:00Z",
+            "description": "The evaluated product implements electronic travel document functions in accordance with the specifications of the International Civil Aviation Organization (ICAO)."
+          },
+          {
+            "name": "CombICAO Applet v3 in SSCD configuration on ID-One Cosmo X",
+            "text": "CombICAO Applet v3 in SSCD configuration on ID-One Cosmo X | 4 June 2026 | The product evaluated is a smart card that can be used in both contact and contactless modes. It is intended to be used as a secure signature creation device (SSCD).",
+            "href": "https://certification.enisa.europa.eu/certificates/eucc-3090-2026-000048-i-00_en",
+            "cert_date": "2026-06-04T12:00:00Z",
+            "description": "The product evaluated is a smart card that can be used in both contact and contactless modes. It is intended to be used as a secure signature creation device (SSCD)."
+          },
+          {
+            "name": "CombICAO Applet v3 in BAC and CA configuration on ID-One Cosmo X",
+            "text": "CombICAO Applet v3 in BAC and CA configuration on ID-One Cosmo X | 1 June 2026 | The product evaluated implements electronic travel document functions in accordance with the specifications of the International Civil Aviation Organization (ICAO).",
+            "href": "https://certification.enisa.europa.eu/certificates/eucc-3090-2026-000049-i-00_en",
+            "cert_date": "2026-06-01T12:00:00Z",
+            "description": "The product evaluated implements electronic travel document functions in accordance with the specifications of the International Civil Aviation Organization (ICAO)."
+          },
+          {
+            "name": "PP SMAERS",
+            "text": "PP SMAERS | 1 June 2026 | The Common Criteria Protection Profile Security Module Application for Electronic Recordkeeping Systems describes a TOE type a security module application implemented as software running on the CSP platform or as device. The TOE is a security module application as part of the security module of cert",
+            "href": "https://certification.enisa.europa.eu/certificates/eucc-3087-2026-pp-000006-i-00_en",
+            "cert_date": "2026-06-01T12:00:00Z",
+            "description": "The Common Criteria Protection Profile Security Module Application for Electronic Recordkeeping Systems describes a TOE type a security module application implemented as software running on the CSP platform or as device. The TOE is a security module application as part of the security module of cert"
+          },
+          {
+            "name": "CombICAO Applet v2.2 in EAC with PACE configuration for French ID on ID-ONE Cosmo V9.1",
+            "text": "CombICAO Applet v2.2 in EAC with PACE configuration for French ID on ID-ONE Cosmo V9.1 | 27 May 2026 | The evaluated product implements electronic travel document functions in accordance with the specifications of the International Civil Aviation Organization (ICAO).",
+            "href": "https://certification.enisa.europa.eu/certificates/eucc-3090-2026-000037-i-00_en",
+            "cert_date": "2026-05-27T12:00:00Z",
+            "description": "The evaluated product implements electronic travel document functions in accordance with the specifications of the International Civil Aviation Organization (ICAO)."
+          },
+          {
+            "name": "CombICAO Applet v2.2 in EAC with PACE configuration on ID-ONE Cosmo V9.1",
+            "text": "CombICAO Applet v2.2 in EAC with PACE configuration on ID-ONE Cosmo V9.1 | 27 May 2026 | The evaluated product implements electronic travel document functions in accordance with the specifications of the International Civil Aviation Organization (ICAO).",
+            "href": "https://certification.enisa.europa.eu/certificates/eucc-3090-2026-000036-i-00_en",
+            "cert_date": "2026-05-27T12:00:00Z",
+            "description": "The evaluated product implements electronic travel document functions in accordance with the specifications of the International Civil Aviation Organization (ICAO)."
+          },
+          {
+            "name": "CombICAO Applet v2.2 in SSCD configuration on ID-ONE Cosmo V9.1",
+            "text": "CombICAO Applet v2.2 in SSCD configuration on ID-ONE Cosmo V9.1 | 27 May 2026 | The product evaluated is a smart card that can be used in both contact and contactless modes. It is intended to be used as a secure signature creation device (SSCD).",
+            "href": "https://certification.enisa.europa.eu/certificates/eucc-3090-2026-000038-i-00_en",
+            "cert_date": "2026-05-27T12:00:00Z",
+            "description": "The product evaluated is a smart card that can be used in both contact and contactless modes. It is intended to be used as a secure signature creation device (SSCD)."
+          },
+          {
+            "name": "CombICAO Applet v2.1 and v2.2 in SSCD configuration on ID-ONE Cosmo V9.2",
+            "text": "CombICAO Applet v2.1 and v2.2 in SSCD configuration on ID-ONE Cosmo V9.2 | 26 May 2026 | The product evaluated is a smart card that can be used in both contact and contactless modes. It is intended to be used as a secure signature creation device (SSCD).",
+            "href": "https://certification.enisa.europa.eu/certificates/eucc-3090-2026-000001-i-00-2_en",
+            "cert_date": "2026-05-26T12:00:00Z",
+            "description": "The product evaluated is a smart card that can be used in both contact and contactless modes. It is intended to be used as a secure signature creation device (SSCD)."
+          },
+          {
+            "name": "CombICAO Applet v2.1 and v2.2 in BAC and CA configuration on ID-ONE Cosmo V9.2",
+            "text": "CombICAO Applet v2.1 and v2.2 in BAC and CA configuration on ID-ONE Cosmo V9.2 | 26 May 2026 | The product evaluated implements electronic travel document functions in accordance with the specifications of the International Civil Aviation Organization (ICAO).",
+            "href": "https://certification.enisa.europa.eu/certificates/eucc-3090-2026-000001-i-00-3_en",
+            "cert_date": "2026-05-26T12:00:00Z",
+            "description": "The product evaluated implements electronic travel document functions in accordance with the specifications of the International Civil Aviation Organization (ICAO)."
+          }
+        ]
+      }
+    },
+    "cisco_added": [],
+    "cisco_removed": [],
+    "baseline_reset": false
+  },
+  "nd_itc": {
+    "nit_rfis": {
+      "added": [],
+      "status_changes": [],
+      "revised": [],
+      "newly_archived": []
+    },
+    "awl": {
+      "added": [],
+      "removed": [],
+      "version_changes": [],
+      "list_updates": []
+    },
+    "baseline_reset": false,
+    "collection_failure": false
+  },
+  "ietf_cnsa": {
+    "added": [],
+    "removed": [],
+    "updated": [
+      {
+        "name": "draft-becker-cnsa2-ssh-profile",
+        "title": "Commercial National Security Algorithm (CNSA) Suite 2.0 Profile for SSH",
+        "revision": "07",
+        "expires": "2027-05-03T17:08:51Z",
+        "updated_at": "2026-11-17T14:13:06Z",
+        "rfc_number": null,
+        "document_url": "https://datatracker.ietf.org/doc/draft-becker-cnsa2-ssh-profile/",
+        "text_url": "https://www.ietf.org/archive/id/draft-becker-cnsa2-ssh-profile-07.txt",
+        "content_sha256": "d8828afae35849466bcb750c024d103bc1e6adde68a67e4e91ab86e9842e429e",
+        "content_size": 31919,
+        "content_etag": "\"6ae4cf11-7caf\"",
+        "content_last_modified": "Fri, 30 Oct 2026 17:08:33 GMT",
+        "states": [
+          {
+            "type": "draft",
+            "slug": "active",
+            "name": "Active"
+          },
+          {
+            "type": "draft-iana-action",
+            "slug": "noic",
+            "name": "No IANA Actions"
+          },
+          {
+            "type": "draft-iana-review",
+            "slug": "changed",
+            "name": "Version Changed - Review Needed"
+          },
+          {
+            "type": "draft-iesg",
+            "slug": "idexists",
+            "name": "I-D Exists"
+          },
+          {
+            "type": "draft-rfceditor",
+            "slug": "blocked",
+            "name": "Blocked"
+          },
+          {
+            "type": "draft-stream-ise",
+            "slug": "rfc-edit",
+            "name": "Sent to the RFC Editor"
+          }
+        ],
+        "workflow_state": "Sent to the RFC Editor",
+        "references_rfc8446": false,
+        "references_rfc9846": false,
+        "cnsa_markers": [
+          "CNSA 2.0",
+          "LMS",
+          "ML-DSA",
+          "ML-KEM",
+          "XMSS",
+          "post-quantum"
+        ],
+        "relations": [],
+        "changed_fields": [
+          "states"
+        ],
+        "old_revision": "07",
+        "old_workflow_state": "Sent to the RFC Editor",
+        "old_expires": "2027-05-03T17:08:51Z",
+        "old_content_sha256": "d8828afae35849466bcb750c024d103bc1e6adde68a67e4e91ab86e9842e429e"
+      }
+    ],
+    "rfc9846_adoption": []
+  },
+  "ieee_pqc": {
+    "added": [],
+    "removed": [],
+    "updated": []
+  },
+  "source_health": {
+    "niap": {
+      "label": "NIAP",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "PCL products",
+          "observed": 1773,
+          "minimum": 50
+        },
+        {
+          "name": "Protection Profiles",
+          "observed": 272,
+          "minimum": 10
+        },
+        {
+          "name": "PQC PP file-version records",
+          "observed": 11,
+          "minimum": 1,
+          "required_for_diff_baseline": false
+        },
+        {
+          "name": "PQC PP full-content hashes",
+          "observed": 7,
+          "minimum": 1,
+          "required_for_diff_baseline": false
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-11-17T15:20:49.096176+00:00",
+      "subcollections": {
+        "news": {
+          "label": "News announcements",
+          "status": "healthy",
+          "observed": 360,
+          "consecutive_failures": 0,
+          "using_last_known_good": false
+        },
+        "events": {
+          "label": "Events",
+          "status": "healthy",
+          "observed": 0,
+          "consecutive_failures": 0,
+          "using_last_known_good": false
+        },
+        "policies": {
+          "label": "Policy letters",
+          "status": "healthy",
+          "observed": 40,
+          "consecutive_failures": 0,
+          "using_last_known_good": false
+        }
+      }
+    },
+    "cc_portal": {
+      "label": "CC Portal",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "portal records",
+          "observed": 180,
+          "minimum": 1
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-11-17T15:20:49.096176+00:00"
+    },
+    "cctl_labs": {
+      "label": "CCTL Labs",
+      "status": "stale",
+      "checks": [
+        {
+          "name": "lab feed items",
+          "observed": 9,
+          "minimum": 1
+        }
+      ],
+      "consecutive_failures": 1,
+      "using_last_known_good": true,
+      "checked_at": "2026-11-17T15:20:49.096176+00:00",
+      "detail": "collection collapse (retained last-known-good): Lightship Security 0/10"
+    },
+    "csfc": {
+      "label": "CSfC",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "APL items",
+          "observed": 116,
+          "minimum": 5
+        },
+        {
+          "name": "announcements",
+          "observed": 8,
+          "minimum": 1
+        },
+        {
+          "name": "tracked capability packages",
+          "observed": 5,
+          "minimum": 5,
+          "required_for_diff_baseline": false
+        },
+        {
+          "name": "capability-package hashes",
+          "observed": 5,
+          "minimum": 5,
+          "required_for_diff_baseline": false
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-11-17T15:20:49.096176+00:00"
+    },
+    "cc_crypto": {
+      "label": "CC Crypto",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "publications",
+          "observed": 118,
+          "minimum": 5
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-11-17T15:20:49.096176+00:00"
+    },
+    "nato": {
+      "label": "NATO NIAPCL",
+      "status": "healthy",
+      "mode": "manual",
+      "checks": [],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "detail": "manual baseline (40 Cisco product(s)); updated via the NATO capture GitHub issue workflow",
+      "checked_at": "2026-11-17T15:20:49.096176+00:00"
+    },
+    "eucc": {
+      "label": "EUCC / ENISA",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "certificates",
+          "observed": 50,
+          "minimum": 2
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-11-17T15:20:49.096176+00:00"
+    },
+    "nd_itc": {
+      "label": "ND-iTC",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "NIT RFIs",
+          "observed": 32,
+          "minimum": 5
+        },
+        {
+          "name": "Allowed-With entries",
+          "observed": 28,
+          "minimum": 1
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-11-17T15:20:49.096176+00:00"
+    },
+    "ietf_cnsa": {
+      "label": "IETF CNSA 2.0",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "CNSA profile/RFC records",
+          "observed": 5,
+          "minimum": 5
+        },
+        {
+          "name": "CNSA full-text hashes",
+          "observed": 5,
+          "minimum": 5
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-11-17T15:20:49.096176+00:00"
+    },
+    "ieee_pqc": {
+      "label": "IEEE 802.11bt",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "P802.11bt project records",
+          "observed": 1,
+          "minimum": 1
+        },
+        {
+          "name": "P802.11bt timeline hashes",
+          "observed": 1,
+          "minimum": 1
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-11-17T15:20:49.096176+00:00"
+    }
+  },
+  "alerts": [
+    {
+      "source": "IETF CNSA",
+      "kind": "updated",
+      "title": "Commercial National Security Algorithm (CNSA) Suite 2.0 Profile for SSH",
+      "url": "https://datatracker.ietf.org/doc/draft-becker-cnsa2-ssh-profile/",
+      "detail": "IETF CNSA profile metadata or full text changed: states",
+      "matched_keywords": [
+        "CNSA",
+        "PQC"
+      ],
+      "tab": "us"
+    }
+  ]
+}
