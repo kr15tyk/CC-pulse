@@ -2,7 +2,7 @@
 <rss version="2.0"><channel>
 <title>CC Pulse</title>
 <link>https://kr15tyk.github.io/CC-pulse/cc_dashboard.html</link>
-<description>Common Criteria monitoring - 2026-11-17 10:20 ET</description>
-<item><title>IETF CNSA Updated: Commercial National Security Algorithm (CNSA) Suite 2.0 Profile for SSH</title><link>https://datatracker.ietf.org/doc/draft-becker-cnsa2-ssh-profile/</link><description>states</description></item>
-<item><title>ALERT: IETF CNSA – Commercial National Security Algorithm (CNSA) Suite 2.0 Profile for SSH</title><link>https://kr15tyk.github.io/CC-pulse/cc_dashboard.html</link><description>Kind: updated | Keywords: CNSA, PQC</description></item>
+<description>Common Criteria monitoring - 2026-11-18 09:56 ET</description>
+<item><title>IEEE 802.11bt Updated: D1.10</title><link>https://www.ieee802.org/11/Reports/802.11_Timelines.htm</link><description>Group Updates Working Group » Session reports and minutes External liaisons Project timelines Telecons Ballot Information » Completed WG Ballots Completed SA Ballots Task Groups » TGmf - Maintenance revision TGbi - Enhanced Privacy Protection (EPP) TGbn - Ultra High Reliability (UHR) TGbp - Ambient Power Communications (AMP) TGbq - Integrated mmWave (IMMW) TGbr - Enhanced Light Communications (ELC) TGbt - Post-Quantum Cryptography (PQC) Standing Committees/Ad-hoc Groups » Artificial Intelligence/Machine Learning (AIML) SC Coexistence SC Wireless Next Generation (WNG) SC Study Groups/Topic Interest Groups » Unified Channel Model (UCM) TIG AI Offload (AIO) SG Wireless Intelligent Networking (WIN) SG Inactive Task Groups » Task Group B Corrigendum 1 TGd - Additional Regulatory Domains TGe - Quality of Service TGF - Inter Access Point Protocol TGg - Higher Rate Extensions in the 2.4 GHz Band TGh - Spectrum Managed 802.11a TGi - Enhanced Security TGj - 4.9 GHz – 5 GHz Operation in Japan TGk</description></item>
+<item><title>ALERT: IEEE 802.11bt – P802.11bt Post-Quantum Cryptography</title><link>https://kr15tyk.github.io/CC-pulse/cc_dashboard.html</link><description>Kind: updated | Keywords: PQC, 802.11bt</description></item>
 </channel></rss>
