@@ -1126,8 +1126,8 @@ DASHBOARD_TEMPLATE = """
     <div class="sub-hdr sub-new">New Certified Products ({{ diff.cc_portal.products.added | length }})</div>
     {% for prod in diff.cc_portal.products.added %}
     <div class="item-row" data-source="cc-portal" data-kind="new">
-      <span class="item-link">{{ prod }}</span>
-      <span class="item-meta"></span>
+      <a class="item-link" href="{{ (prod.link or prod.certificate_link or 'https://www.commoncriteriaportal.org/products/') | safe_url }}" target="_blank">{{ prod.title or prod.name or prod.text or prod }}</a>
+      <span class="item-meta">{{ prod.vendor or '' }}{% if prod.certificate_date %} · {{ prod.certificate_date }}{% endif %}</span>
     </div>
     {% endfor %}
     {% endif %}
