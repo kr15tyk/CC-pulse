@@ -228,6 +228,93 @@ def _apply_niap_subcollection_health(
     return result
 
 
+def _apply_csfc_feed_health(
+    new_snapshot: dict,
+    prior_snapshot: dict,
+) -> dict[str, dict]:
+    """Validate each configured CSfC auxiliary feed independently.
+
+    A broken CISA or DISA feed must be visible without freezing a healthy APL
+    collection. Failed feeds selectively retain their own last-known-good
+    records and accumulate independent failure counters for escalation.
+    """
+    new_csfc = new_snapshot.setdefault("csfc", {})
+    metadata = new_csfc.get("_feed_health")
+    if not isinstance(metadata, dict):
+        return {}
+    new_feeds = new_csfc.setdefault("feeds", {})
+    prior_csfc = prior_snapshot.get("csfc", {})
+    prior_feeds = prior_csfc.get("feeds", {})
+    prior_subhealth = (
+        prior_snapshot.get("source_health", {})
+        .get("csfc", {})
+        .get("subcollections", {})
+    )
+    result: dict[str, dict] = {}
+
+    configured_feeds = getattr(config, "CSFC_FEEDS", [])
+    if not isinstance(configured_feeds, (list, tuple)):
+        return {}
+    for feed in configured_feeds:
+        if not isinstance(feed, dict) or not feed.get("name"):
+            continue
+        name = str(feed["name"])
+        minimum = feed.get("minimum", 1)
+        if not isinstance(minimum, int) or minimum < 0:
+            minimum = 1
+        current_items = new_feeds.get(name, [])
+        prior_items = prior_feeds.get(name, [])
+        observed = len(current_items) if isinstance(current_items, list) else 0
+        prior_count = len(prior_items) if isinstance(prior_items, list) else 0
+        meta = metadata.get(name, {}) if isinstance(metadata.get(name), dict) else {}
+        successful = meta.get("success") is True and meta.get("complete", True) is True
+        current_ok = successful and observed >= minimum
+
+        if current_ok:
+            result[name] = {
+                "label": name,
+                "status": "healthy",
+                "observed": observed,
+                "consecutive_failures": 0,
+                "using_last_known_good": False,
+            }
+            continue
+
+        previous = prior_subhealth.get(name, {})
+        previous_failures = (
+            previous.get("consecutive_failures", 0)
+            if previous.get("status") in ("stale", "failed") else 0
+        )
+        has_last_known_good = (
+            previous.get("status") == "healthy"
+            or previous.get("using_last_known_good") is True
+            or prior_count >= max(1, minimum)
+        )
+        if has_last_known_good:
+            new_feeds[name] = copy.deepcopy(prior_items)
+        reasons = []
+        if not successful:
+            reasons.append(meta.get("detail") or "request failed or was incomplete")
+        if observed < minimum:
+            reasons.append(f"returned {observed}; minimum expected {minimum}")
+        result[name] = {
+            "label": name,
+            "status": "stale" if has_last_known_good else "failed",
+            "observed": observed,
+            "consecutive_failures": previous_failures + 1,
+            "using_last_known_good": has_last_known_good,
+            "detail": "; ".join(reasons),
+        }
+        log.warning(
+            "[Health] CSfC feed %s is %s (failure #%d): %s",
+            name,
+            result[name]["status"],
+            result[name]["consecutive_failures"],
+            result[name]["detail"],
+        )
+    return result
+
+
 def _source_health_checks(snapshot: dict) -> dict[str, list[dict]]:
     """Return the minimum viable collection checks for every source domain.
 
@@ -263,9 +350,12 @@ def _source_health_checks(snapshot: dict) -> dict[str, list[dict]]:
              "required_for_diff_baseline": False},
         ],
         "cc_portal": [
-            {"name": "portal records", "observed": sum(
-                len(cc_portal.get(key, [])) for key in ("news", "pps", "products")
-            ), "minimum": 1},
+            {"name": "news", "observed": len(cc_portal.get("news", [])),
+             "minimum": _config_minimum("SANITY_MIN_CC_PORTAL_NEWS", 50)},
+            {"name": "Protection Profiles", "observed": len(cc_portal.get("pps", [])),
+             "minimum": _config_minimum("SANITY_MIN_CC_PORTAL_PPS", 100)},
+            {"name": "certified products", "observed": len(cc_portal.get("products", [])),
+             "minimum": _config_minimum("SANITY_MIN_CC_PORTAL_PRODUCTS", 500)},
         ],
         "cctl_labs": [
             {"name": "lab feed items", "observed": sum(
@@ -456,6 +546,99 @@ def _apply_collection_collapse_guard(
         )
 
 
+def _eucc_record_metadata_key(record: dict) -> str:
+    name = re.sub(r"\s+", " ", str(record.get("name") or "")).strip().casefold()
+    cert_date = re.sub(
+        r"\s+", " ", str(record.get("cert_date") or "")
+    ).strip().casefold()
+    return f"{name}|{cert_date}" if name and cert_date else ""
+
+
+def _eucc_identity_overlap(old_records: list, new_records: list) -> int:
+    """Count one-to-one EUCC matches by URL or product/date metadata."""
+    unmatched_new = set(range(len(new_records)))
+    overlap = 0
+    for old in old_records:
+        if not isinstance(old, dict):
+            continue
+        old_url = str(old.get("href") or "").strip()
+        old_metadata = _eucc_record_metadata_key(old)
+        for index in tuple(unmatched_new):
+            new = new_records[index]
+            if not isinstance(new, dict):
+                continue
+            same_url = bool(old_url and old_url == str(new.get("href") or "").strip())
+            same_metadata = bool(
+                old_metadata and old_metadata == _eucc_record_metadata_key(new)
+            )
+            if same_url or same_metadata:
+                unmatched_new.remove(index)
+                overlap += 1
+                break
+    return overlap
+
+
+def _apply_eucc_continuity_guard(
+    new_snapshot: dict,
+    prior_snapshot: dict,
+    source_health: dict[str, dict],
+) -> None:
+    """Reject same-count EUCC re-key/churn that count checks cannot see."""
+    health = source_health.get("eucc", {})
+    if health.get("status") != "healthy":
+        return
+    old_eucc = prior_snapshot.get("eucc", {})
+    new_eucc = new_snapshot.get("eucc", {})
+    old_records = old_eucc.get("pages", {}).get("certificates", [])
+    new_records = new_eucc.get("pages", {}).get("certificates", [])
+    if not isinstance(old_records, list) or not isinstance(new_records, list):
+        return
+    minimum = _config_minimum("EUCC_CONTINUITY_MIN_BASELINE", 10)
+    denominator = min(len(old_records), len(new_records))
+    if len(old_records) < minimum or denominator == 0:
+        return
+    configured_threshold = getattr(config, "EUCC_MIN_IDENTITY_OVERLAP", 0.70)
+    threshold = (
+        float(configured_threshold)
+        if isinstance(configured_threshold, (int, float))
+        and not isinstance(configured_threshold, bool)
+        and 0 <= configured_threshold <= 1
+        else 0.70
+    )
+    overlap = _eucc_identity_overlap(old_records, new_records)
+    ratio = overlap / denominator
+    health["continuity"] = {
+        "overlap": overlap,
+        "compared": denominator,
+        "ratio": round(ratio, 4),
+        "minimum_ratio": threshold,
+    }
+    if ratio >= threshold:
+        return
+
+    # Retain only the suspect certificate subcollection. Current requirements
+    # and scheme-news data remain available for normal diffing.
+    new_eucc.setdefault("pages", {})["certificates"] = copy.deepcopy(old_records)
+    if "cisco_certs" in old_eucc:
+        new_eucc["cisco_certs"] = copy.deepcopy(old_eucc.get("cisco_certs", []))
+    previous = prior_snapshot.get("source_health", {}).get("eucc", {})
+    previous_failures = (
+        previous.get("consecutive_failures", 0)
+        if previous.get("status") in ("stale", "failed") else 0
+    )
+    detail = (
+        f"certificate identity overlap {overlap}/{denominator} "
+        f"({ratio:.0%}) below {threshold:.0%}; retained last-known-good certificates"
+    )
+    health.update({
+        "status": "stale",
+        "consecutive_failures": previous_failures + 1,
+        "using_last_known_good": True,
+        "detail": detail,
+    })
+    log.warning("[Health] EUCC degraded to stale: %s", detail)
+
+
 def _apply_source_health(
     new_snapshot: dict,
     prior_snapshot: dict | None = None,
@@ -471,6 +654,9 @@ def _apply_source_health(
     collection_errors = collection_errors or set()
     prior_snapshot = prior_snapshot or {}
     niap_subcollections = _apply_niap_subcollection_health(
+        new_snapshot, prior_snapshot
+    )
+    csfc_subcollections = _apply_csfc_feed_health(
         new_snapshot, prior_snapshot
     )
     current_checks = _source_health_checks(new_snapshot)
@@ -595,7 +781,24 @@ def _apply_source_health(
             source_health[domain]["detail"],
         )
 
+    if csfc_subcollections:
+        csfc_health = source_health.get("csfc", {})
+        csfc_health["subcollections"] = csfc_subcollections
+        degraded_feeds = [
+            health["label"] for health in csfc_subcollections.values()
+            if health.get("status") != "healthy"
+        ]
+        if degraded_feeds:
+            csfc_health["auxiliary_status"] = "degraded"
+            auxiliary_detail = "auxiliary feed failures: " + ", ".join(degraded_feeds)
+            existing_detail = csfc_health.get("detail")
+            csfc_health["detail"] = (
+                f"{existing_detail}; {auxiliary_detail}"
+                if existing_detail else auxiliary_detail
+            )
+
     _apply_collection_collapse_guard(new_snapshot, prior_snapshot, source_health)
+    _apply_eucc_continuity_guard(new_snapshot, prior_snapshot, source_health)
     new_snapshot["source_health"] = source_health
     return new_snapshot
 
@@ -645,6 +848,75 @@ def _diff_baseline_with_recoveries(old_snapshot: dict, new_snapshot: dict) -> di
             "[Health] %s produced its first healthy collection; baselining without alerts.",
             domain,
         )
+
+    # CC Portal moved from empty server-rendered tables to embedded JSON
+    # parsing. Baseline only the newly populated subcollections so hundreds of
+    # historical PPs/products do not appear as fresh certifications, while
+    # unrelated portal news changes still diff against the prior snapshot.
+    old_portal = old_snapshot.get("cc_portal", {})
+    new_portal = new_snapshot.get("cc_portal", {})
+    for key, minimum_name, default in (
+        ("pps", "SANITY_MIN_CC_PORTAL_PPS", 100),
+        ("products", "SANITY_MIN_CC_PORTAL_PRODUCTS", 500),
+    ):
+        old_items = old_portal.get(key, [])
+        new_items = new_portal.get(key, [])
+        minimum = _config_minimum(minimum_name, default)
+        if (
+            isinstance(old_items, list)
+            and isinstance(new_items, list)
+            and len(old_items) < minimum <= len(new_items)
+        ):
+            baseline.setdefault("cc_portal", {})[key] = copy.deepcopy(new_items)
+            log.info(
+                "[Health] CC Portal %s parser produced its first complete "
+                "collection; baselining without alerts.",
+                key,
+            )
+
+    # Likewise, establish each newly repaired CSfC auxiliary feed once. This
+    # prevents the first successful CISA fetch after a collector-client fix
+    # from looking like 30 newly published advisories. A feed with retained
+    # last-known-good data is not baselined, so outage-period changes survive.
+    old_csfc = old_snapshot.get("csfc", {})
+    new_csfc = new_snapshot.get("csfc", {})
+    old_csfc_health = (
+        old_snapshot.get("source_health", {}).get("csfc", {}).get("subcollections", {})
+    )
+    new_csfc_health = (
+        new_snapshot.get("source_health", {}).get("csfc", {}).get("subcollections", {})
+    )
+    configured_feeds = getattr(config, "CSFC_FEEDS", [])
+    if isinstance(configured_feeds, (list, tuple)):
+        for feed in configured_feeds:
+            if not isinstance(feed, dict) or not feed.get("name"):
+                continue
+            name = str(feed["name"])
+            minimum = feed.get("minimum", 1)
+            if not isinstance(minimum, int) or minimum < 0:
+                minimum = 1
+            old_items = old_csfc.get("feeds", {}).get(name, [])
+            old_feed_health = old_csfc_health.get(name, {})
+            new_feed_health = new_csfc_health.get(name, {})
+            no_trustworthy_baseline = (
+                not isinstance(old_items, list)
+                or len(old_items) < minimum
+            ) and not (
+                old_feed_health.get("status") == "healthy"
+                or old_feed_health.get("using_last_known_good") is True
+            )
+            if (
+                no_trustworthy_baseline
+                and new_feed_health.get("status") == "healthy"
+            ):
+                baseline.setdefault("csfc", {}).setdefault("feeds", {})[name] = (
+                    copy.deepcopy(new_csfc.get("feeds", {}).get(name, []))
+                )
+                log.info(
+                    "[Health] CSfC feed %s produced its first healthy collection; "
+                    "baselining without alerts.",
+                    name,
+                )
 
     # Baseline a newly introduced NIAP subcollection once. A recovery that
     # already has retained last-known-good data is intentionally *not*
