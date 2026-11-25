@@ -1,6 +1,6 @@
 {
-  "period_start": "2026-10-25T10:35:39.691628+00:00",
-  "period_end": "2026-10-26T12:03:58.551336+00:00",
+  "period_start": "2026-11-24T16:50:11.771420+00:00",
+  "period_end": "2026-11-25T16:37:56.691669+00:00",
   "niap": {
     "pps": {
       "added": [],
@@ -27,7 +27,7 @@
     "in_evaluation": {
       "added": [],
       "removed": [],
-      "current_count": 39
+      "current_count": 35
     },
     "news": {
       "added": [],
@@ -71,7 +71,18 @@
       "removed": [],
       "updated": []
     },
-    "feeds": {}
+    "feeds": {
+      "CISA Alerts": [
+        {
+          "title": "CISA Adds Three Known Exploited Vulnerabilities to Catalog",
+          "link": "https://www.cisa.gov/news-events/alerts/2026/11/24/cisa-adds-three-known-exploited-vulnerabilities-catalog",
+          "summary": "<div class=\"OutlineElement Ltr SCXW1462417 BCX8\">\n<p>CISA has added three new vulnerabilities to its <a class=\"Hyperlink SCXW1462417 BCX8\" href=\"https://www.cisa.gov/known-exploited-vulnerabilities-catalog\" rel=\"noreferrer noopener\"><u>Known Exploited Vulnerabilities (KEV) Catalog</u></a>, based on evidence of active exploitation.</p>\n<ul>\n<li>\n<div class=\"ListContainerWrapper SCXW85334591 BCX8\">\n<p><a href=\"https://www.cve.org/CVERecord?id=CVE-2026-131914\" target=\"_blank\"><u>CVE-2026-131914</u></a> Idunno AntiCsrf Deserialization of Untrusted Data Vulnerability&nbsp;</p>\n</div>\n</li>\n<li>\n<div class=\"ListContainerWrapper SCXW85334591 BCX8\">\n<p><a href=\"https://www.cve.org/CVERecord?id=CVE-2026-132165\" target=\"_blank\"><u>CVE-2026-132165</u></a> Drupal Core Remote Code Execution Vulnerability&nbsp;</p>\n</div>\n</li>\n<li>\n<div class=\"ListContainerWrapper SCXW85334591 BCX8\">\n<p><a href=\"https://www.cve.org/CVERecord?id=CVE-2026-132224\" rel=\"noreferrer noopener\" target=\"_blank\"><u>CVE-2026-132224</u></a> Optimizely Web Experimentation External Control of Critical State Data Vulnerability&nbsp;</p>\n</div>\n</li>\n</ul>\n</div>\n<div class=\"OutlineElement Ltr SCXW1462417 BCX8\">\n<p>These types of vulnerabilities are a frequent attack vector for malicious cyber actors and pose significant risks to the federal enterprise.</p>\n</div>\n<div class=\"OutlineElement Ltr SCXW1462417 BCX8\">\n<p><a class=\"Hyperlink SCXW1462417 BCX8\" href=\"https://www.cisa.gov/news-events/directives/bod-26-04-implementation-guidance-prioritizing-security-updates-based-risk\" rel=\"noreferrer noopener\"><u>Binding Operational Directive (BOD) 26-04: Prioritizing Security Updates Based on Risk</u></a> establishes vulnerability management requirements for Federal Civilian Executive Branch (FCEB) agencies. BOD 26-04 reinforces the importance of the KEV Catalog and requires federal agencies to prioritize rapid remediation of high-risk vulnerabilities, specifically those identified by Common Vulnerabilities and Exposures (CVEs) listed in CISA\u2019s KEV Catalog on publicly exposed assets that grant total control of the asset post-exploitation, while deferring action for lower-risk vulnerabilities. BOD 26-04 further establishes basic expectations for when agencies must check whether threat actors compromised the system before the patch was applied.</p>\n</div>\n<div class=\"OutlineElement Ltr SCXW1462417 BCX8\">\n<p>While BOD 26-04 applies only to FCEB agencies, CISA encourages all organizations to adopt risk-based vulnerability management and prioritize remediation of <a class=\"Hyperlink SCXW1462417 BCX8\" href=\"https://www.cisa.gov/known-exploited-vulnerabilities-catalog\" rel=\"noreferrer noopener\"><u>KEV Catalog vulnerabilities</u></a>. CISA will continue to add vulnerabilities to the catalog that meet the <a class=\"Hyperlink SCXW1462417 BCX8\" href=\"https://www.cisa.gov/known-exploited-vulnerabilities\" rel=\"noreferrer noopener\"><u>specified criteria</u></a>.</p>\n</div>\n<div class=\"OutlineElement Ltr SCXW1462417 BCX8\">\n<p>Aware of an exploited vulnerability not currently listed in the KEV Catalog? Submit it for potential addition through CISA\u2019s <a class=\"Hyperlink SCXW1462417 BCX8\" href=\"https://cisasurvey.gov1.qualtrics.com/jfe/form/SV_1Zwu52kgK2OYf3w\" rel=\"noreferrer noopener\" target=\"_blank\"><u>KEV Nomination Form</u></a>. Potential KEV additions must have a CVE ID, evidence of exploitation, and clear mitigation guidance.</p>\n</div>",
+          "published": "Tue, 24 Nov 26 12:00:00 +0000",
+          "id": "/node/25848",
+          "_category": "CISA"
+        }
+      ]
+    }
   },
   "cc_crypto": {
     "pages": {}
@@ -122,7 +133,7 @@
       "checks": [
         {
           "name": "PCL products",
-          "observed": 1769,
+          "observed": 1774,
           "minimum": 50
         },
         {
@@ -145,12 +156,12 @@
       ],
       "consecutive_failures": 0,
       "using_last_known_good": false,
-      "checked_at": "2026-10-26T12:03:58.551336+00:00",
+      "checked_at": "2026-11-25T16:37:56.691669+00:00",
       "subcollections": {
         "news": {
           "label": "News announcements",
           "status": "healthy",
-          "observed": 358,
+          "observed": 360,
           "consecutive_failures": 0,
           "using_last_known_good": false
         },
@@ -182,7 +193,7 @@
       ],
       "consecutive_failures": 0,
       "using_last_known_good": false,
-      "checked_at": "2026-10-26T12:03:58.551336+00:00"
+      "checked_at": "2026-11-25T16:37:56.691669+00:00"
     },
     "cctl_labs": {
       "label": "CCTL Labs",
@@ -196,7 +207,7 @@
       ],
       "consecutive_failures": 0,
       "using_last_known_good": false,
-      "checked_at": "2026-10-26T12:03:58.551336+00:00"
+      "checked_at": "2026-11-25T16:37:56.691669+00:00"
     },
     "csfc": {
       "label": "CSfC",
@@ -204,7 +215,7 @@
       "checks": [
         {
           "name": "APL items",
-          "observed": 118,
+          "observed": 116,
           "minimum": 5
         },
         {
@@ -227,7 +238,7 @@
       ],
       "consecutive_failures": 0,
       "using_last_known_good": false,
-      "checked_at": "2026-10-26T12:03:58.551336+00:00"
+      "checked_at": "2026-11-25T16:37:56.691669+00:00"
     },
     "cc_crypto": {
       "label": "CC Crypto",
@@ -241,7 +252,7 @@
       ],
       "consecutive_failures": 0,
       "using_last_known_good": false,
-      "checked_at": "2026-10-26T12:03:58.551336+00:00"
+      "checked_at": "2026-11-25T16:37:56.691669+00:00"
     },
     "nato": {
       "label": "NATO NIAPCL",
@@ -251,7 +262,7 @@
       "consecutive_failures": 0,
       "using_last_known_good": false,
       "detail": "manual baseline (40 Cisco product(s)); updated via the NATO capture GitHub issue workflow",
-      "checked_at": "2026-10-26T12:03:58.551336+00:00"
+      "checked_at": "2026-11-25T16:37:56.691669+00:00"
     },
     "eucc": {
       "label": "EUCC / ENISA",
@@ -265,7 +276,7 @@
       ],
       "consecutive_failures": 0,
       "using_last_known_good": false,
-      "checked_at": "2026-10-26T12:03:58.551336+00:00"
+      "checked_at": "2026-11-25T16:37:56.691669+00:00"
     },
     "nd_itc": {
       "label": "ND-iTC",
@@ -284,7 +295,7 @@
       ],
       "consecutive_failures": 0,
       "using_last_known_good": false,
-      "checked_at": "2026-10-26T12:03:58.551336+00:00"
+      "checked_at": "2026-11-25T16:37:56.691669+00:00"
     },
     "ietf_cnsa": {
       "label": "IETF CNSA 2.0",
@@ -303,7 +314,7 @@
       ],
       "consecutive_failures": 0,
       "using_last_known_good": false,
-      "checked_at": "2026-10-26T12:03:58.551336+00:00"
+      "checked_at": "2026-11-25T16:37:56.691669+00:00"
     },
     "ieee_pqc": {
       "label": "IEEE 802.11bt",
@@ -322,7 +333,7 @@
       ],
       "consecutive_failures": 0,
       "using_last_known_good": false,
-      "checked_at": "2026-10-26T12:03:58.551336+00:00"
+      "checked_at": "2026-11-25T16:37:56.691669+00:00"
     }
   },
   "alerts": []
