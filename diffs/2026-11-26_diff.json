@@ -1,0 +1,458 @@
+{
+  "period_start": "2026-11-25T16:37:56.691669+00:00",
+  "period_end": "2026-11-26T16:10:30.945498+00:00",
+  "niap": {
+    "pps": {
+      "added": [],
+      "removed": [],
+      "sunset_changes": [],
+      "status_changes": [],
+      "revised": [],
+      "content_changes": []
+    },
+    "tds": {
+      "added": [],
+      "removed": []
+    },
+    "cisco_ndcpp": {
+      "added": [],
+      "removed": [],
+      "newly_archived": []
+    },
+    "pcl_all": {
+      "added": [],
+      "removed": [],
+      "newly_archived": []
+    },
+    "in_evaluation": {
+      "added": [],
+      "removed": [],
+      "current_count": 35
+    },
+    "news": {
+      "added": [],
+      "revised": [],
+      "deactivated": [],
+      "reactivated": [],
+      "removed": []
+    },
+    "events": {
+      "added": [],
+      "revised": [],
+      "deactivated": [],
+      "reactivated": [],
+      "removed": []
+    },
+    "policies": {
+      "added": [],
+      "revised": [],
+      "archived": [],
+      "reactivated": [],
+      "removed": []
+    }
+  },
+  "cc_portal": {
+    "news": {
+      "added": []
+    },
+    "pps": {
+      "added": []
+    },
+    "products": {
+      "added": []
+    }
+  },
+  "cctl_labs": {},
+  "csfc": {
+    "pages": {
+      "cap_packages": {
+        "added": [
+          {
+            "text": "Download the Continuous Monitoring Annex V2.0.0 . Contact the Continuous Monitoring Team . Applicable Forms: NSA provides downloadable resources for assistance with the CSfC process. To request a copy of the Compliance Checklist Workbook, please contact csfc@nsa.gov . Download: Continuous Monitoring Requirements Annex v2.0.0 Requirements Mapping to NIST SP 800-53 Security Controls .",
+            "href": "https://www.nsa.gov/Portals/75/documents/CSfC CP Updates 2026/(U) Approved Continuous Monitoring Annex v2.0.0 - 22 Sept 2026.pdf?ver=rQOJ1_6U0RV_-0Ztm-K5pQ%3d%3d",
+            "content_sha256": "e3c63decd0800bc39ac309cadea51533caa09b8fd61018f591645ac1037bd891"
+          },
+          {
+            "text": "The CSfC Continuous Monitoring Annex 2.0.0 defines requirements and guidance for implementing continuous monitoring solutions within Mobile Access, Campus WLAN, and Multi-Site Connectivity Capability Packages.\u00a0 The following portions of the Annex have been added as part of the 2.0 update: Dedicated Outer VPN monitoring requirements, MDM requirements as an alternative to EUD monitoring, Virtual EUD monitoring requirements, and Zero Trust concepts. This update also clarified the monitoring Data review period.",
+            "href": "",
+            "content_sha256": "997db6f1b9b8eb2e63016f9be99273b38a9b80f92d8a7f0334a1f1bd7a89444c"
+          }
+        ],
+        "removed": [
+          {
+            "text": "Download the Continuous Monitoring Annex V1.1.0 . Contact the Continuous Monitoring Team . Applicable Forms: NSA provides downloadable resources for assistance with the CSfC process. To request a copy of the Compliance Checklist Workbook, please contact csfc@nsa.gov . Download: Continuous Monitoring Requirements Annex v1.1.0 Requirements Mapping to NIST SP 800-53 Security Controls .",
+            "href": "https://www.nsa.gov/Portals/75/documents/resources/everyone/csfc/capability-packages/(U) Approved Continuous Monitoring Annex v1_1_0 - 2 March 23.pdf?ver=DTH7ErwKqOYB5K4bhGzYUg%3d%3d",
+            "content_sha256": "1b0ad1231ad9a43f965f63c6b0234103e27e70ec705788e98ecbf42a72b0a51c"
+          },
+          {
+            "text": "The Continuous Monitoring (CM) Annex Version 1.1.0, dated 02\u00a0March 2023, has been approved by the Deputy National Manager (DNM) for National Security Systems to provide guidance for the collection and analysis of network and security data to enable continuous monitoring within a deployed CSfC solution.\u00a0 CM is implemented as part of a holistic, risk management and defense-in-depth information security strategy integrated into CSfC architectures.",
+            "href": "",
+            "content_sha256": "fd4b9ea4f86b5d1c411cff42b1a144eda22845b2cb60167841769b78aa1d7a8e"
+          }
+        ]
+      },
+      "apl": {
+        "added": [
+          {
+            "name": "Mobility Edge Mobile Computer CT47",
+            "type": "End User Device / Mobile Platform",
+            "vendor": "Honeywell",
+            "link": "https://www.niap-ccevs.org/products/11553",
+            "href": "https://www.niap-ccevs.org/products/11553",
+            "raw_text": "End User Device / Mobile Platform | Honeywell | Mobility Edge Mobile Computer CT47 | Android 13 | NIAP Validation Completed (at Gossamer) | 2025.04.07 | ",
+            "text": "End User Device / Mobile Platform | Honeywell | Mobility Edge Mobile Computer CT47 | Android 13 | NIAP Validation Completed (at Gossamer) | 2025.04.07 | ",
+            "content_sha256": "159d5e7ef3329d7ccbb4a57336cafb3065ce0d0d9238930c8bfbe12e39ee8ce0"
+          },
+          {
+            "name": "Ivanti Endpoint Manager Mobile (EPMM)",
+            "type": "MDM",
+            "vendor": "Ivanti",
+            "link": "https://www.niap-ccevs.org/Products/11566",
+            "href": "https://www.niap-ccevs.org/Products/11566",
+            "raw_text": "MDM | Ivanti | Ivanti Endpoint Manager Mobile (EPMM) | System 12 | NIAP Validation Completed (at Acumen) | 2025.10.15 | ",
+            "text": "MDM | Ivanti | Ivanti Endpoint Manager Mobile (EPMM) | System 12 | NIAP Validation Completed (at Acumen) | 2025.10.15 | ",
+            "content_sha256": "011c873fe5438074823d1535617f098c334c3629a0cd66ac1a3d88fe4a79da5b"
+          },
+          {
+            "name": "Zebra Devices (SD660, SM6375, QCM6490, QCM4490) on Android 14, as detailed in\u00a0VID 11631\u00a0[to find component on NIAP, use (mistaken VID)\u00a011632 in URL to find correct TOE of VID 11631]",
+            "type": "End User Device / Mobile Platform",
+            "vendor": "Zebra Technologies",
+            "link": "https://www.niap-ccevs.org/products/11632",
+            "href": "https://www.niap-ccevs.org/products/11632",
+            "raw_text": "End User Device / Mobile Platform | Zebra Technologies | Zebra Devices (SD660, SM6375, QCM6490, QCM4490) on Android 14, as detailed in\u00a0VID 11631\u00a0[to find component on NIAP, use (mistaken VID)\u00a011632 in URL to find correct TOE of VID 11631] | Android 14 | NIAP Validation Completed (at Gossamer) | 2025.10.09 | ",
+            "text": "End User Device / Mobile Platform | Zebra Technologies | Zebra Devices (SD660, SM6375, QCM6490, QCM4490) on Android 14, as detailed in\u00a0VID 11631\u00a0[to find component on NIAP, use (mistaken VID)\u00a011632 in URL to find correct TOE of VID 11631] | Android 14 | NIAP Validation Completed (at Gossamer) | 2025.10.09 | ",
+            "content_sha256": "b16fa3a267325c01aa286c463d79c4e44ea557c4242b1d3fb3ad122f3cc9ecb5"
+          },
+          {
+            "name": "Mobility Edge Mobile Computer SDM660, as detailed in VID 11552",
+            "type": "End User Device / Mobile Platform",
+            "vendor": "Honeywell",
+            "link": "https://www.niap-ccevs.org/products/11552",
+            "href": "https://www.niap-ccevs.org/products/11552",
+            "raw_text": "End User Device / Mobile Platform | Honeywell | Mobility Edge Mobile Computer SDM660, as detailed in VID 11552 | Android 13 | NIAP Validation Completed (at Gossamer) | 2025.04.08 | ",
+            "text": "End User Device / Mobile Platform | Honeywell | Mobility Edge Mobile Computer SDM660, as detailed in VID 11552 | Android 13 | NIAP Validation Completed (at Gossamer) | 2025.04.08 | ",
+            "content_sha256": "633db4565370ebfe3cce1fd8032965c0833c79d7f0ddc5cf2fa2d73893b458a9"
+          }
+        ],
+        "removed": [],
+        "updated": []
+      }
+    },
+    "selection_links": {},
+    "documents": {
+      "added": [],
+      "removed": [],
+      "updated": []
+    },
+    "feeds": {
+      "CISA Alerts": [
+        {
+          "title": "CISA Adds 10 Known Exploited Vulnerabilities to Catalog",
+          "link": "https://www.cisa.gov/news-events/alerts/2026/11/25/cisa-adds-10-known-exploited-vulnerabilities-catalog",
+          "summary": "<div class=\"OutlineElement Ltr SCXW1462417 BCX8\">\n<p>CISA has added 10 new vulnerabilities to its <a class=\"Hyperlink SCXW1462417 BCX8\" href=\"https://www.cisa.gov/known-exploited-vulnerabilities-catalog\" rel=\"noreferrer noopener\"><u>Known Exploited Vulnerabilities (KEV) Catalog</u></a>, based on evidence of active exploitation.</p>\n<ul>\n<li><a href=\"https://www.cve.org/CVERecord?id=CVE-2023-25914\" target=\"_blank\">CVE-2023-25914</a> Danfoss AK-SM 800A Series Path Traversal Vulnerability</li>\n<li><a href=\"https://www.cve.org/CVERecord?id=CVE-2023-25915\" target=\"_blank\">CVE-2023-25915</a> Danfoss AK-SM 800A Series Improper Input Validation Vulnerability&nbsp;</li>\n<li><a href=\"https://www.cve.org/CVERecord?id=CVE-2025-41450\" target=\"_blank\">CVE-2025-41450</a> Danfoss AK-SM 800A Series Improper Authentication Vulnerability&nbsp;</li>\n<li><a href=\"https://www.cve.org/CVERecord?id=CVE-2026-103406\" target=\"_blank\">CVE-2026-103406</a> Hewlett Packard Enterprise (HPE) Juniper Session Smart Conductor and Session Smart Router OS Command Injection Vulnerability&nbsp;</li>\n<li><a href=\"https://www.cve.org/CVERecord?id=CVE-2026-133275\" target=\"_blank\">CVE-2026-133275</a> Mitel MiCollab Unrestricted Upload of File with Dangerous Type Vulnerability&nbsp;</li>\n<li><a href=\"https://www.cve.org/CVERecord?id=CVE-2026-133303\" target=\"_blank\">CVE-2026-133303</a> Mitel MiCollab XML Injection Vulnerability&nbsp;</li>\n<li><a href=\"https://www.cve.org/CVERecord?id=CVE-2026-133311\" target=\"_blank\">CVE-2026-133311</a> Mitel MiCollab Weak Authentication Vulnerability&nbsp;</li>\n<li><a href=\"https://www.cve.org/CVERecord?id=CVE-2026-133323\" target=\"_blank\">CVE-2026-133323</a> Mitel MiCollab OS Command Injection Vulnerability&nbsp;</li>\n<li><a href=\"https://www.cve.org/CVERecord?id=CVE-2026-133324\" target=\"_blank\">CVE-2026-133324</a> Mitel MiCollab Not Failing Securely Vulnerability&nbsp;</li>\n<li><a href=\"https://www.cve.org/CVERecord?id=CVE-2026-133469\" target=\"_blank\">CVE-2026-133469</a> Vates Xen Orchestra Improper Validation of Specified Type of Input Vulnerability&nbsp;</li>\n</ul>\n</div>\n<div class=\"OutlineElement Ltr SCXW1462417 BCX8\">\n<p>These types of vulnerabilities are a frequent attack vector for malicious cyber actors and pose significant risks to the federal enterprise.</p>\n</div>\n<div class=\"OutlineElement Ltr SCXW1462417 BCX8\">\n<p><a class=\"Hyperlink SCXW1462417 BCX8\" href=\"https://www.cisa.gov/news-events/directives/bod-26-04-implementation-guidance-prioritizing-security-updates-based-risk\" rel=\"noreferrer noopener\"><u>Binding Operational Directive (BOD) 26-04: Prioritizing Security Updates Based on Risk</u></a> establishes vulnerability management requirements for Federal Civilian Executive Branch (FCEB) agencies. BOD 26-04 reinforces the importance of the KEV Catalog and requires federal agencies to prioritize rapid remediation of high-risk vulnerabilities, specifically those identified by Common Vulnerabilities and Exposures (CVEs) listed in CISA\u2019s KEV Catalog on publicly exposed assets that grant total control of the asset post-exploitation, while deferring action for lower-risk vulnerabilities. BOD 26-04 further establishes basic expectations for when agencies must check whether threat actors compromised the system before the patch was applied.</p>\n</div>\n<div class=\"OutlineElement Ltr SCXW1462417 BCX8\">\n<p>While BOD 26-04 applies only to FCEB agencies, CISA encourages all organizations to adopt risk-based vulnerability management and prioritize remediation of <a class=\"Hyperlink SCXW1462417 BCX8\" href=\"https://www.cisa.gov/known-exploited-vulnerabilities-catalog\" rel=\"noreferrer noopener\"><u>KEV Catalog vulnerabilities</u></a>. CISA will continue to add vulnerabilities to the catalog that meet the <a class=\"Hyperlink SCXW1462417 BCX8\" href=\"https://www.cisa.gov/known-exploited-vulnerabilities\" rel=\"noreferrer noopener\"><u>specified criteria</u></a>.</p>\n</div>\n<div class=\"OutlineElement Ltr SCXW1462417 BCX8\">\n<p>Aware of an exploited vulnerability not currently listed in the KEV Catalog? Submit it for potential addition through CISA\u2019s <a class=\"Hyperlink SCXW1462417 BCX8\" href=\"https://cisasurvey.gov1.qualtrics.com/jfe/form/SV_1Zwu52kgK2OYf3w\" rel=\"noreferrer noopener\" target=\"_blank\"><u>KEV Nomination Form</u></a>. Potential KEV additions must have a CVE ID, evidence of exploitation, and clear mitigation guidance.&nbsp;</p>\n</div>",
+          "published": "Wed, 25 Nov 26 12:00:00 +0000",
+          "id": "/node/25859",
+          "_category": "CISA"
+        }
+      ]
+    }
+  },
+  "cc_crypto": {
+    "pages": {}
+  },
+  "nato": {
+    "pages": {},
+    "cisco_added": [],
+    "cisco_removed": [],
+    "baseline_reset": false
+  },
+  "eucc": {
+    "pages": {},
+    "cisco_added": [],
+    "cisco_removed": [],
+    "baseline_reset": false
+  },
+  "nd_itc": {
+    "nit_rfis": {
+      "added": [],
+      "status_changes": [],
+      "revised": [],
+      "newly_archived": []
+    },
+    "awl": {
+      "added": [],
+      "removed": [],
+      "version_changes": [],
+      "list_updates": []
+    },
+    "baseline_reset": false,
+    "collection_failure": false
+  },
+  "ietf_cnsa": {
+    "added": [],
+    "removed": [],
+    "updated": [],
+    "rfc9846_adoption": []
+  },
+  "ieee_pqc": {
+    "added": [],
+    "removed": [],
+    "updated": []
+  },
+  "source_health": {
+    "niap": {
+      "label": "NIAP",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "PCL products",
+          "observed": 1774,
+          "minimum": 50
+        },
+        {
+          "name": "Protection Profiles",
+          "observed": 272,
+          "minimum": 10
+        },
+        {
+          "name": "PQC PP file-version records",
+          "observed": 11,
+          "minimum": 1,
+          "required_for_diff_baseline": false
+        },
+        {
+          "name": "PQC PP full-content hashes",
+          "observed": 7,
+          "minimum": 1,
+          "required_for_diff_baseline": false
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-11-26T16:10:30.945498+00:00",
+      "subcollections": {
+        "news": {
+          "label": "News announcements",
+          "status": "healthy",
+          "observed": 360,
+          "consecutive_failures": 0,
+          "using_last_known_good": false
+        },
+        "events": {
+          "label": "Events",
+          "status": "healthy",
+          "observed": 0,
+          "consecutive_failures": 0,
+          "using_last_known_good": false
+        },
+        "policies": {
+          "label": "Policy letters",
+          "status": "healthy",
+          "observed": 40,
+          "consecutive_failures": 0,
+          "using_last_known_good": false
+        }
+      }
+    },
+    "cc_portal": {
+      "label": "CC Portal",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "portal records",
+          "observed": 180,
+          "minimum": 1
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-11-26T16:10:30.945498+00:00"
+    },
+    "cctl_labs": {
+      "label": "CCTL Labs",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "lab feed items",
+          "observed": 19,
+          "minimum": 1
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-11-26T16:10:30.945498+00:00"
+    },
+    "csfc": {
+      "label": "CSfC",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "APL items",
+          "observed": 120,
+          "minimum": 5
+        },
+        {
+          "name": "announcements",
+          "observed": 8,
+          "minimum": 1
+        },
+        {
+          "name": "tracked capability packages",
+          "observed": 5,
+          "minimum": 5,
+          "required_for_diff_baseline": false
+        },
+        {
+          "name": "capability-package hashes",
+          "observed": 5,
+          "minimum": 5,
+          "required_for_diff_baseline": false
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-11-26T16:10:30.945498+00:00"
+    },
+    "cc_crypto": {
+      "label": "CC Crypto",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "publications",
+          "observed": 118,
+          "minimum": 5
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-11-26T16:10:30.945498+00:00"
+    },
+    "nato": {
+      "label": "NATO NIAPCL",
+      "status": "healthy",
+      "mode": "manual",
+      "checks": [],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "detail": "manual baseline (40 Cisco product(s)); updated via the NATO capture GitHub issue workflow",
+      "checked_at": "2026-11-26T16:10:30.945498+00:00"
+    },
+    "eucc": {
+      "label": "EUCC / ENISA",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "certificates",
+          "observed": 50,
+          "minimum": 2
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-11-26T16:10:30.945498+00:00"
+    },
+    "nd_itc": {
+      "label": "ND-iTC",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "NIT RFIs",
+          "observed": 32,
+          "minimum": 5
+        },
+        {
+          "name": "Allowed-With entries",
+          "observed": 28,
+          "minimum": 1
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-11-26T16:10:30.945498+00:00"
+    },
+    "ietf_cnsa": {
+      "label": "IETF CNSA 2.0",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "CNSA profile/RFC records",
+          "observed": 5,
+          "minimum": 5
+        },
+        {
+          "name": "CNSA full-text hashes",
+          "observed": 5,
+          "minimum": 5
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-11-26T16:10:30.945498+00:00"
+    },
+    "ieee_pqc": {
+      "label": "IEEE 802.11bt",
+      "status": "healthy",
+      "checks": [
+        {
+          "name": "P802.11bt project records",
+          "observed": 1,
+          "minimum": 1
+        },
+        {
+          "name": "P802.11bt timeline hashes",
+          "observed": 1,
+          "minimum": 1
+        }
+      ],
+      "consecutive_failures": 0,
+      "using_last_known_good": false,
+      "checked_at": "2026-11-26T16:10:30.945498+00:00"
+    }
+  },
+  "alerts": [
+    {
+      "source": "CSfC: cap_packages",
+      "kind": "new",
+      "title": "Download the Continuous Monitoring Annex V2.0.0 . Contact the Continuous Monitoring Team . Applicable Forms: NSA provide\u2026",
+      "url": "https://www.nsa.gov/Portals/75/documents/CSfC CP Updates 2026/(U) Approved Continuous Monitoring Annex v2.0.0 - 22 Sept 2026.pdf?ver=rQOJ1_6U0RV_-0Ztm-K5pQ%3d%3d",
+      "detail": "New item on CSfC cap packages page",
+      "matched_keywords": [
+        "CSfC"
+      ],
+      "tab": "us"
+    },
+    {
+      "source": "CSfC: cap_packages",
+      "kind": "new",
+      "title": "The CSfC Continuous Monitoring Annex 2.0.0 defines requirements and guidance for implementing continuous monitoring solu\u2026",
+      "url": "https://www.nsa.gov/Resources/Commercial-Solutions-for-Classified-Program/Capability-Packages/",
+      "detail": "New item on CSfC cap packages page",
+      "matched_keywords": [
+        "CSfC"
+      ],
+      "tab": "us"
+    },
+    {
+      "source": "CSfC: cap_packages",
+      "kind": "removed",
+      "title": "Download the Continuous Monitoring Annex V1.1.0 . Contact the Continuous Monitoring Team . Applicable Forms: NSA provide\u2026",
+      "url": "https://www.nsa.gov/Portals/75/documents/resources/everyone/csfc/capability-packages/(U) Approved Continuous Monitoring Annex v1_1_0 - 2 March 23.pdf?ver=DTH7ErwKqOYB5K4bhGzYUg%3d%3d",
+      "detail": "Item removed from CSfC cap packages page",
+      "matched_keywords": [
+        "CSfC"
+      ],
+      "tab": "us"
+    },
+    {
+      "source": "CSfC: cap_packages",
+      "kind": "removed",
+      "title": "The Continuous Monitoring (CM) Annex Version 1.1.0, dated 02\u00a0March 2023, has been approved by the Deputy National Manage\u2026",
+      "url": "https://www.nsa.gov/Resources/Commercial-Solutions-for-Classified-Program/Capability-Packages/",
+      "detail": "Item removed from CSfC cap packages page",
+      "matched_keywords": [
+        "CSfC"
+      ],
+      "tab": "us"
+    }
+  ]
+}
