@@ -2,13 +2,6 @@
 <rss version="2.0"><channel>
 <title>CC Pulse</title>
 <link>https://kr15tyk.github.io/CC-pulse/cc_dashboard.html</link>
-<description>Common Criteria monitoring - 2026-11-26 11:10 ET</description>
-<item><title>CSfC Component Added: End User Device / Mobile Platform | Honeywell | Mobility Edge Mobile Computer CT</title><link>https://www.niap-ccevs.org/products/11553</link><description>CSfC apl item added.</description></item>
-<item><title>CSfC Component Added: MDM | Ivanti | Ivanti Endpoint Manager Mobile (EPMM) | System 12 | NIAP Validati</title><link>https://www.niap-ccevs.org/Products/11566</link><description>CSfC apl item added.</description></item>
-<item><title>CSfC Component Added: End User Device / Mobile Platform | Zebra Technologies | Zebra Devices (SD660, S</title><link>https://www.niap-ccevs.org/products/11632</link><description>CSfC apl item added.</description></item>
-<item><title>CSfC Component Added: End User Device / Mobile Platform | Honeywell | Mobility Edge Mobile Computer SD</title><link>https://www.niap-ccevs.org/products/11552</link><description>CSfC apl item added.</description></item>
-<item><title>ALERT: CSfC: cap_packages – Download the Continuous Monitoring Annex V2.0.0 . Contact the Continuous Monitoring Team . Applicable Forms: NSA provide…</title><link>https://kr15tyk.github.io/CC-pulse/cc_dashboard.html</link><description>Kind: new | Keywords: CSfC</description></item>
-<item><title>ALERT: CSfC: cap_packages – The CSfC Continuous Monitoring Annex 2.0.0 defines requirements and guidance for implementing continuous monitoring solu…</title><link>https://kr15tyk.github.io/CC-pulse/cc_dashboard.html</link><description>Kind: new | Keywords: CSfC</description></item>
-<item><title>ALERT: CSfC: cap_packages – Download the Continuous Monitoring Annex V1.1.0 . Contact the Continuous Monitoring Team . Applicable Forms: NSA provide…</title><link>https://kr15tyk.github.io/CC-pulse/cc_dashboard.html</link><description>Kind: removed | Keywords: CSfC</description></item>
-<item><title>ALERT: CSfC: cap_packages – The Continuous Monitoring (CM) Annex Version 1.1.0, dated 02 March 2023, has been approved by the Deputy National Manage…</title><link>https://kr15tyk.github.io/CC-pulse/cc_dashboard.html</link><description>Kind: removed | Keywords: CSfC</description></item>
+<description>Common Criteria monitoring - 2026-11-27 10:57 ET</description>
+
 </channel></rss>

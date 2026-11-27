@@ -179,7 +179,7 @@
   <span class="nav-title">CC Pulse Dashboard</span>
   <span class="nav-spacer"></span>
   <div class="ham-wrap">
-    <span class="nav-meta">Last run: 2026-11-26 11:10 ET</span>
+    <span class="nav-meta">Last run: 2026-11-27 10:57 ET</span>
     <button class="ham-btn" id="ham-btn" onclick="toggleHamMenu()" aria-expanded="false" aria-haspopup="true" title="Open menu">&#9776;</button>
     <div class="ham-menu" id="ham-menu" role="menu">
       <a class="ham-item" href="https://kr15tyk.github.io/CC-pulse/cc_dashboard.html" role="menuitem"><span class="ham-icon">&#127968;</span>Home</a>
@@ -263,11 +263,11 @@
 <div class="sticky-top">
   <div class="trend-bar">
     <div class="stat"><a href="#sec-niap-pp" onclick="navigateTo('sec-niap-pp');return false;">
-      <div class="stat-num ">0</div>
+      <div class="stat-num active-num">1</div>
       <div class="stat-lbl">NIAP Changes</div>
     </a></div>
     <div class="stat"><a href="#sec-csfc" onclick="navigateTo('sec-csfc');return false;">
-      <div class="stat-num active-num">4</div>
+      <div class="stat-num ">0</div>
       <div class="stat-lbl">CSfC Selection Updates</div>
     </a></div>
     <div class="stat"><a href="#sec-cc-portal" onclick="navigateTo('sec-cc-portal');return false;">
@@ -291,7 +291,7 @@
       <div class="stat-lbl">CNSA / PQC Standards</div>
     </a></div>
     <div class="stat"><a href="#sec-alerts" onclick="navigateTo('sec-alerts');return false;">
-      <div class="stat-num alert-num">4</div>
+      <div class="stat-num ">0</div>
       <div class="stat-lbl">Alerts</div>
     </a></div>
   </div>
@@ -317,55 +317,6 @@
       
 <!-- Alerts -->
 
-<div class="section-group">
-<div class="card card-alert" id="sec-alerts">
-  <div class="card-hdr" onclick="toggleCard(this)">
-    <span>Alerts</span>
-    <span class="card-count">4 alerts</span>
-    <span class="toggle-icon">&#9660;</span>
-  </div>
-  <div class="card-body">
-    <div class="alert-monitoring">FIPS 186-4, FIPS 186-5, NDcPP, CPP_ND, TLS 1.3, SSH, PP-Module_VPN, PP-Module_WLAN, CNSA 2.0, ML-KEM, ML-DSA, SLH-DSA, post-quantum, RFC 9846, 802.11bt, labgram, valgram, emergency, CSfC, Commercial Solutions for Classified, CSfC APL, CSfC component selections, NSA CSfC, NATO NIAPC, NIAPCL, EUCC, ENISA, CCDB-018, Crypto Catalog, cryptography working group, Specification of Functional Requirements for Cryptography, FCS_CKM, FCS_COP, FCS_RBG</div>
-    
-        <div class="item-row alert-item" data-alert-key="CSfC: cap_packages-Download_the_Continuous_Monitoring_Annex_V2.0.0_._Contact_the_Continuous_Monitoring_Team_._Applicable_Forms:_NSA_provide…" data-tab="us">
-          
-          <a class="item-link" href="https://www.nsa.gov/Portals/75/documents/CSfC CP Updates 2026/(U) Approved Continuous Monitoring Annex v2.0.0 - 22 Sept 2026.pdf?ver=rQOJ1_6U0RV_-0Ztm-K5pQ%3d%3d" target="_blank">CSfC: cap_packages: Download the Continuous Monitoring Annex V2.0.0 . Contact the Continuous Monitoring Team . Applicable Forms: NSA provide…</a>
-          
-          <span class="item-meta">new &middot; CSfC</span>
-          <div class="item-sub">New item on CSfC cap packages page</div>
-          <button class="dismiss-btn" onclick="dismissAlert(this)" title="Mark as seen">&#10003; Seen</button>
-        </div>
-        
-        <div class="item-row alert-item" data-alert-key="CSfC: cap_packages-The_CSfC_Continuous_Monitoring_Annex_2.0.0_defines_requirements_and_guidance_for_implementing_continuous_monitoring_solu…" data-tab="us">
-          
-          <a class="item-link" href="https://www.nsa.gov/Resources/Commercial-Solutions-for-Classified-Program/Capability-Packages/" target="_blank">CSfC: cap_packages: The CSfC Continuous Monitoring Annex 2.0.0 defines requirements and guidance for implementing continuous monitoring solu…</a>
-          
-          <span class="item-meta">new &middot; CSfC</span>
-          <div class="item-sub">New item on CSfC cap packages page</div>
-          <button class="dismiss-btn" onclick="dismissAlert(this)" title="Mark as seen">&#10003; Seen</button>
-        </div>
-        
-        <div class="item-row alert-item" data-alert-key="CSfC: cap_packages-Download_the_Continuous_Monitoring_Annex_V1.1.0_._Contact_the_Continuous_Monitoring_Team_._Applicable_Forms:_NSA_provide…" data-tab="us">
-          
-          <a class="item-link" href="https://www.nsa.gov/Portals/75/documents/resources/everyone/csfc/capability-packages/(U) Approved Continuous Monitoring Annex v1_1_0 - 2 March 23.pdf?ver=DTH7ErwKqOYB5K4bhGzYUg%3d%3d" target="_blank">CSfC: cap_packages: Download the Continuous Monitoring Annex V1.1.0 . Contact the Continuous Monitoring Team . Applicable Forms: NSA provide…</a>
-          
-          <span class="item-meta">removed &middot; CSfC</span>
-          <div class="item-sub">Item removed from CSfC cap packages page</div>
-          <button class="dismiss-btn" onclick="dismissAlert(this)" title="Mark as seen">&#10003; Seen</button>
-        </div>
-        
-        <div class="item-row alert-item" data-alert-key="CSfC: cap_packages-The_Continuous_Monitoring_(CM)_Annex_Version_1.1.0,_dated_02 March_2023,_has_been_approved_by_the_Deputy_National_Manage…" data-tab="us">
-          
-          <a class="item-link" href="https://www.nsa.gov/Resources/Commercial-Solutions-for-Classified-Program/Capability-Packages/" target="_blank">CSfC: cap_packages: The Continuous Monitoring (CM) Annex Version 1.1.0, dated 02 March 2023, has been approved by the Deputy National Manage…</a>
-          
-          <span class="item-meta">removed &middot; CSfC</span>
-          <div class="item-sub">Item removed from CSfC cap packages page</div>
-          <button class="dismiss-btn" onclick="dismissAlert(this)" title="Mark as seen">&#10003; Seen</button>
-        </div>
-        
-  </div>
-</div>
-
 <div class="tab-nav" id="region-tabs">
         <button class="tab-btn active" data-tab="us" onclick="switchTab(this)">&#127482;&#127480; US (NIAP / CSfC)</button>
         <button class="tab-btn" data-tab="intl" onclick="switchTab(this)">&#127760; International</button>
@@ -389,7 +340,7 @@
     
     
     
-    <p class="no-change">No changes detected. <span class="last-active">(last: 2026-11-22)</span></p>
+    <p class="no-change">No changes detected. <span class="last-active">(last: 2026-11-27)</span></p>
   </div>
 </div>
 
@@ -471,17 +422,28 @@
 </div>
 
   <!-- NIAP PCL — All Certifications -->
-<div class="card " id="sec-niap-pcl" data-has-changes="0">
+<div class="card card-new" id="sec-niap-pcl" data-has-changes="1">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>NIAP PCL — All Certifications</span>
-    <span class="card-count">0 changes</span>
+    <span class="card-count">1 change</span>
     </span>
   </div>
-  <div class="card-body collapsed">
+  <div class="card-body ">
+    
+    
+    <div class="sub-hdr sub-updated">Newly Archived (1)</div>
+    
+    <div class="item-row" data-source="niap-pcl" data-kind="archived">
+      <span class="item-link">Samsung Electronics Co., Ltd. -- Samsung Knox File Encryption 1.6.0 - Fall</span>
+      <span class="item-meta">Archived</span>
+    </div>
+    
+    <div class="item-sub">MOD_FE_V1.0, PP_APP_v1.4</div>
     
     
     
-    <p class="no-change">No changes detected. <span class="last-active">(last: 2026-11-22)</span></p>
+    
+    
   </div>
 </div>
 
@@ -524,42 +486,14 @@
 <div class="section-group">
   <div class="section-label">CSfC</div>
   <!-- CSfC Components, Announcements, and Selection Documents -->
-<div class="card card-updated" id="sec-csfc" data-has-changes="4">
+<div class="card " id="sec-csfc" data-has-changes="0">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>CSfC Components &amp; Announcements</span>
-    <span class="card-count">4 updates</span>
-    <span class="toggle-icon">&#9660;</span>
+    <span class="card-count">0 updates</span>
+    <span class="toggle-icon">&#9658;</span>
   </div>
-  <div class="card-body ">
+  <div class="card-body collapsed">
     
-    
-      
-    
-      
-        
-        <div class="item-row" data-source="csfc" data-kind="new">
-          <a class="item-link" href="https://www.niap-ccevs.org/products/11553" target="_blank">End User Device / Mobile Platform | Honeywell | Mobility Edge Mobile Computer CT47 | Android 13 | NIAP Validation Completed (at Gossamer) | 2025.04.07 | </a>
-          <span class="item-meta">component added</span>
-        </div>
-        
-        <div class="item-row" data-source="csfc" data-kind="new">
-          <a class="item-link" href="https://www.niap-ccevs.org/Products/11566" target="_blank">MDM | Ivanti | Ivanti Endpoint Manager Mobile (EPMM) | System 12 | NIAP Validation Completed (at Acumen) | 2025.10.15 | </a>
-          <span class="item-meta">component added</span>
-        </div>
-        
-        <div class="item-row" data-source="csfc" data-kind="new">
-          <a class="item-link" href="https://www.niap-ccevs.org/products/11632" target="_blank">End User Device / Mobile Platform | Zebra Technologies | Zebra Devices (SD660, SM6375, QCM6490, QCM4490) on Android 14, as detailed in VID 11631 [to find component on NIAP, use (mistaken VID) 11632 in URL to find correct TOE of VID 11631] | Android 14 | NIAP Validation Completed (at Gossamer) | 2025.10.09 | </a>
-          <span class="item-meta">component added</span>
-        </div>
-        
-        <div class="item-row" data-source="csfc" data-kind="new">
-          <a class="item-link" href="https://www.niap-ccevs.org/products/11552" target="_blank">End User Device / Mobile Platform | Honeywell | Mobility Edge Mobile Computer SDM660, as detailed in VID 11552 | Android 13 | NIAP Validation Completed (at Gossamer) | 2025.04.08 | </a>
-          <span class="item-meta">component added</span>
-        </div>
-        
-        
-        
-      
     
     
       
@@ -568,7 +502,7 @@
     
       
     
-    
+    <p class="no-change">No changes detected. <span class="last-active">(last: 2026-11-26)</span></p>
   </div>
 </div>
 </div>
@@ -718,7 +652,7 @@
 <div class="card card-new" id="sec-history" data-has-changes="1">
   <div class="card-hdr" onclick="toggleCard(this)">
     <span>Change History</span>
-    <span class="card-count">46 events</span>
+    <span class="card-count">44 events</span>
     <span class="toggle-icon">▼</span>
   </div>
   <div class="card-body">
@@ -1221,28 +1155,6 @@
         </div>
       </div>
       
-      <div class="tl-entry" data-cat="pcl_cert">
-        <div class="tl-date">2026-10-28</div>
-        <div class="tl-body">
-          <div class="tl-title">
-            <span class="tl-badge new">new</span>
-            <a href="https://www.niap-ccevs.org/products/11709" target="_blank">High Sec Labs, Inc. — High Sec Labs SK41D-4TR KVM</a>
-          </div>
-          <div class="tl-detail">Certified 2026-10-12 · Acumen Security · PP_PSD_V4.0, MOD_KM_V1.0, MOD_VI_V1.0</div>
-        </div>
-      </div>
-      
-      <div class="tl-entry" data-cat="pp_new">
-        <div class="tl-date">2026-10-28</div>
-        <div class="tl-body">
-          <div class="tl-title">
-            <span class="tl-badge updated">updated</span>
-            <a href="https://datatracker.ietf.org/doc/draft-becker-cnsa2-ssh-profile/" target="_blank">IETF CNSA updated: Commercial National Security Algorithm (CNSA) Suite 2.0 Profile for SSH</a>
-          </div>
-          <div class="tl-detail">revision, expires, states, content_sha256</div>
-        </div>
-      </div>
-      
     
     </div>
   </div>
@@ -1253,7 +1165,7 @@
 </div><!-- /main-content -->
 <footer>
   <span>CC Pulse &middot; Auto-refreshes daily (01:00 EST) &middot; NIAP, CSfC, CC Portal, NATO NIAPCL, EUCC / ENISA</span>
-  <span>Last run: 2026-11-26 11:10 ET</span>
+  <span>Last run: 2026-11-27 10:57 ET</span>
 </footer>
 
 <script>
